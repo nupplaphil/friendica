@@ -2,6 +2,7 @@
 
 namespace Friendica\Content;
 
+use Exception;
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
 use Friendica\Object\Pager;
@@ -14,6 +15,12 @@ use Friendica\Util\Strings;
  */
 class RenderedPager extends Pager
 {
+	/**
+	 * Limits the amount of pages for a full rendering
+	 * @var integer
+	 */
+	const DEFAULT_PAGE_LIMIT = 4;
+
 	/**
 	 * @var string
 	 */
@@ -94,7 +101,7 @@ class RenderedPager extends Pager
 	 * @param integer $itemCount The number of displayed items on the page
 	 *
 	 * @return string HTML string of the pager
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 * @throws Exception
 	 */
 	public function renderMinimal($itemCount)
 	{
@@ -105,12 +112,12 @@ class RenderedPager extends Pager
 			'prev'  => [
 				'url'   => Strings::ensureQueryParameter($this->baseQueryString . '&page=' . ($this->getPage() - 1)),
 				'text'  => L10n::t('newer'),
-				'class' => 'previous' . ($this->getPage() == 1 ? ' disabled' : '')
+				'class' => 'previous' . ($this->getPage() <= 1 ? ' disabled' : '')
 			],
 			'next'  => [
 				'url'   => Strings::ensureQueryParameter($this->baseQueryString . '&page=' . ($this->getPage() + 1)),
 				'text'  => L10n::t('older'),
-				'class' => 'next' . ($displayedItemCount < $this->getItemsPerPage() ? ' disabled' : '')
+				'class' => 'next' . ($displayedItemCount <= ($this->getItemsPerPage() * $this->getPage()) ? ' disabled' : '')
 			]
 		];
 
@@ -138,7 +145,7 @@ class RenderedPager extends Pager
 	 * @param integer $itemCount The total number of items including those note displayed on the page
 	 *
 	 * @return string HTML string of the pager
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 * @throws Exception
 	 */
 	public function renderFull($itemCount)
 	{
@@ -166,8 +173,8 @@ class RenderedPager extends Pager
 
 			// Limit the number of displayed page number buttons.
 			if ($numpages > 8) {
-				$numstart = (($this->getPage() > 4) ? ($this->getPage() - 4) : 1);
-				$numstop  = (($this->getPage() > ($numpages - 7)) ? $numpages : ($numstart + 8));
+				$numstart = (($this->getPage() > self::DEFAULT_PAGE_LIMIT) ? ($this->getPage() - self::DEFAULT_PAGE_LIMIT) : 1);
+				$numstop  = (($this->getPage() > ($numpages - (self::DEFAULT_PAGE_LIMIT * 2) - 1)) ? $numpages : ($numstart + (self::DEFAULT_PAGE_LIMIT * 2)));
 			}
 
 			$pages = [];

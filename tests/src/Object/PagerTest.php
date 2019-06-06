@@ -3,9 +3,9 @@
 namespace Friendica\Test\src\Object;
 
 use Friendica\Object\Pager;
-use Friendica\Test\MockedTest;
+use PHPUnit\Framework\TestCase;
 
-class PagerTest extends MockedTest
+class PagerTest extends TestCase
 {
 	public function dataPager()
 	{
