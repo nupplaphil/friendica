@@ -4,72 +4,45 @@ namespace Friendica\Content;
 
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
+use Friendica\Object\Pager;
 use Friendica\Util\Strings;
 
 /**
- * The Pager has two very different output, Minimal and Full, see renderMinimal() and renderFull() for more details.
+ * The Rendering Pager has two very different output, Minimal and Full, see renderMinimal() and renderFull() for more details.
  *
  * @author Hypolite Petovan <mrpetovan@gmail.com>
  */
-class Pager
+class RenderedPager extends Pager
 {
-	/**
-	 * @var integer
-	 */
-	private $page = 1;
-	/**
-	 * @var integer
-	 */
-	private $itemsPerPage = 50;
-
 	/**
 	 * @var string
 	 */
 	private $baseQueryString = '';
 
 	/**
-	 * Instantiates a new Pager with the base parameters.
+	 * {@inheritDoc}
 	 *
-	 * Guesses the page number from the GET parameter 'page'.
-	 *
-	 * @param string  $queryString  The query string of the current page
-	 * @param integer $itemsPerPage An optional number of items per page to override the default value
+	 * @param string $queryString The query string of the current page
 	 */
-	public function __construct($queryString, $itemsPerPage = 50)
+	public function __construct(string $queryString, $page = 1, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE)
 	{
+		parent::__construct($page, $itemsPerPage);
 		$this->setQueryString($queryString);
-		$this->setItemsPerPage($itemsPerPage);
-		$this->setPage(defaults($_GET, 'page', 1));
 	}
 
 	/**
-	 * Returns the start offset for a LIMIT clause. Starts at 0.
+	 * Creates a new Pager for rendering based on a available pager
 	 *
-	 * @return integer
-	 */
-	public function getStart()
-	{
-		return max(0, ($this->page * $this->itemsPerPage) - $this->itemsPerPage);
-	}
-
-	/**
-	 * Returns the number of items per page
+	 * @hint useful in case you got a native pager, but additionally want to render this pager
 	 *
-	 * @return integer
-	 */
-	public function getItemsPerPage()
-	{
-		return $this->itemsPerPage;
-	}
-
-	/**
-	 * Returns the current page number
+	 * @param string $queryString
+	 * @param Pager  $pager
 	 *
-	 * @return int
+	 * @return RenderedPager
 	 */
-	public function getPage()
+	public static function createByPager(string $queryString, Pager $pager)
 	{
-		return $this->page;
+		return new RenderedPager($queryString, $pager->getPage(), $pager->getItemsPerPage());
 	}
 
 	/**
@@ -78,32 +51,12 @@ class Pager
 	 * Warning: this isn't the same value as passed to the constructor.
 	 * See setQueryString() for the inventory of transformations
 	 *
-	 * @see setBaseQuery()
 	 * @return string
+	 * @see setBaseQuery()
 	 */
 	public function getBaseQueryString()
 	{
 		return Strings::ensureQueryParameter($this->baseQueryString);
-	}
-
-	/**
-	 * Sets the number of items per page, 1 minimum.
-	 *
-	 * @param integer $itemsPerPage
-	 */
-	public function setItemsPerPage($itemsPerPage)
-	{
-		$this->itemsPerPage = max(1, intval($itemsPerPage));
-	}
-
-	/**
-	 * Sets the current page number. Starts at 1.
-	 *
-	 * @param integer $page
-	 */
-	public function setPage($page)
-	{
-		$this->page = max(1, intval($page));
 	}
 
 	/**
@@ -139,6 +92,7 @@ class Pager
 	 * $html = $pager->renderMinimal(count($items));
 	 *
 	 * @param integer $itemCount The number of displayed items on the page
+	 *
 	 * @return string HTML string of the pager
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -156,7 +110,7 @@ class Pager
 			'next'  => [
 				'url'   => Strings::ensureQueryParameter($this->baseQueryString . '&page=' . ($this->getPage() + 1)),
 				'text'  => L10n::t('older'),
-				'class' =>  'next' . ($displayedItemCount < $this->getItemsPerPage() ? ' disabled' : '')
+				'class' => 'next' . ($displayedItemCount < $this->getItemsPerPage() ? ' disabled' : '')
 			]
 		];
 
@@ -182,6 +136,7 @@ class Pager
 	 * $html = $pager->renderFull();
 	 *
 	 * @param integer $itemCount The total number of items including those note displayed on the page
+	 *
 	 * @return string HTML string of the pager
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -198,7 +153,7 @@ class Pager
 				'text'  => L10n::t('first'),
 				'class' => $this->getPage() == 1 ? 'disabled' : ''
 			];
-			$data['prev'] = [
+			$data['prev']  = [
 				'url'   => Strings::ensureQueryParameter($this->baseQueryString . '&page=' . ($this->getPage() - 1)),
 				'text'  => L10n::t('prev'),
 				'class' => $this->getPage() == 1 ? 'disabled' : ''
@@ -207,12 +162,12 @@ class Pager
 			$numpages = $totalItemCount / $this->getItemsPerPage();
 
 			$numstart = 1;
-			$numstop = $numpages;
+			$numstop  = $numpages;
 
 			// Limit the number of displayed page number buttons.
 			if ($numpages > 8) {
 				$numstart = (($this->getPage() > 4) ? ($this->getPage() - 4) : 1);
-				$numstop = (($this->getPage() > ($numpages - 7)) ? $numpages : ($numstart + 8));
+				$numstop  = (($this->getPage() > ($numpages - 7)) ? $numpages : ($numstart + 8));
 			}
 
 			$pages = [];
@@ -251,7 +206,7 @@ class Pager
 
 			$data['pages'] = $pages;
 
-			$lastpage = (($numpages > intval($numpages)) ? intval($numpages)+1 : $numpages);
+			$lastpage = (($numpages > intval($numpages)) ? intval($numpages) + 1 : $numpages);
 
 			$data['next'] = [
 				'url'   => Strings::ensureQueryParameter($this->baseQueryString . '&page=' . ($this->getPage() + 1)),
