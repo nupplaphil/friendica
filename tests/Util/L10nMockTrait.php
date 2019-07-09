@@ -10,7 +10,7 @@ trait L10nMockTrait
 	/**
 	 * @var MockInterface The interface for L10n mocks
 	 */
-	private $l10nMock;
+	private static $l10nMock;
 
 	/**
 	 * Mocking the 'L10n::t()' method
@@ -19,10 +19,13 @@ trait L10nMockTrait
 	 * @param null|int $times How often will it get called
 	 * @param null|string $return Either an return (string) or null for return the input
 	 */
-	public function mockL10nT($input = null, $times = null, $return = null)
+	public static function mockL10nT($input = null, $times = null, $return = null)
 	{
-		if (!isset($this->l10nMock)) {
-			$this->l10nMock = \Mockery::mock('alias:' . L10n::class);
+		if (!isset(self::$l10nMock)) {
+			self::$l10nMock = \Mockery::mock('alias:' . L10n::class);
+
+			self::$l10nMock->shouldReceive('init')
+			               ->andReturn(true);
 		}
 
 		$with = isset($input) ? $input : \Mockery::any();
@@ -30,13 +33,13 @@ trait L10nMockTrait
 		$return = isset($return) ? $return : $with;
 
 		if ($return instanceof \Mockery\Matcher\Any) {
-			$this->l10nMock
+			self::$l10nMock
 				->shouldReceive('t')
 				->with($with)
 				->times($times)
 				->andReturnUsing(function($arg) { return $arg; });
 		} else {
-			$this->l10nMock
+			self::$l10nMock
 				->shouldReceive('t')
 				->with($with)
 				->times($times)

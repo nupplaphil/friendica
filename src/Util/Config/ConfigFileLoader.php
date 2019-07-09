@@ -16,15 +16,9 @@ use Friendica\Core\Config\Cache\IConfigCache;
  */
 class ConfigFileLoader extends ConfigFileManager
 {
-	/**
-	 * @var App\Mode
-	 */
-	private $appMode;
-
-	public function __construct($baseDir, App\Mode $mode)
+	public function __construct($baseDir)
 	{
 		parent::__construct($baseDir);
-		$this->appMode = $mode;
 	}
 
 	/**
@@ -34,11 +28,10 @@ class ConfigFileLoader extends ConfigFileManager
 	 * expected local.config.php
 	 *
 	 * @param IConfigCache $config The config cache to load to
-	 * @param bool         $raw    Setup the raw config format
 	 *
 	 * @throws \Exception
 	 */
-	public function setupCache(IConfigCache $config, $raw = false)
+	public function setupCache(IConfigCache $config)
 	{
 		$config->load($this->loadCoreConfig('defaults'));
 		$config->load($this->loadCoreConfig('settings'));
@@ -48,8 +41,8 @@ class ConfigFileLoader extends ConfigFileManager
 
 		$config->load($this->loadCoreConfig('local'), true);
 
-		// In case of install mode, add the found basepath (because there isn't a basepath set yet
-		if (!$raw && ($this->appMode->isInstall() || empty($config->get('system', 'basepath')))) {
+		// In case of missing basepath, add the default one
+		if (empty($config->get('system', 'basepath'))) {
 			// Setting at least the basepath we know
 			$config->set('system', 'basepath', $this->baseDir);
 		}

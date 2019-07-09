@@ -5,6 +5,7 @@
 
 namespace Friendica\Test\src;
 
+use Friendica\App;
 use Friendica\BaseObject;
 use Friendica\Test\Util\AppMockTrait;
 use Friendica\Test\Util\VFSTrait;
@@ -15,26 +16,16 @@ use PHPUnit\Framework\TestCase;
  */
 class BaseObjectTest extends TestCase
 {
-	use VFSTrait;
-	use AppMockTrait;
-
-	/**
-	 * @var BaseObject
-	 */
-	private $baseObject;
-
 	/**
 	 * Test the setApp() and getApp() function.
 	 * @return void
 	 */
 	public function testGetSetApp()
 	{
-		$baseObject = new BaseObject();
-		$this->setUpVfsDir();
-		$this->mockApp($this->root);
+		$app = \Mockery::mock(App::class);
 
-		$baseObject->setApp($this->app);
-		$this->assertEquals($this->app, $baseObject->getApp());
+		BaseObject::setApp($app);
+		$this->assertEquals($app, BaseObject::getApp());
 	}
 
 	/**

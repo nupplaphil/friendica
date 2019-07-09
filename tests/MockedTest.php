@@ -2,6 +2,7 @@
 
 namespace Friendica\Test;
 
+use Friendica\Test\Util\L10nMockTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -9,6 +10,15 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class MockedTest extends TestCase
 {
+	use L10nMockTrait;
+
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+
+		self::mockL10nT();
+	}
+
 	protected function tearDown()
 	{
 		\Mockery::close();

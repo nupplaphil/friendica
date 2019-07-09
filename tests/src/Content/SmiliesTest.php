@@ -8,29 +8,34 @@
 
 namespace Friendica\Test\src\Content;
 
+use Friendica\App;
+use Friendica\BaseObject;
 use Friendica\Content\Smilies;
+use Friendica\Core\Config;
+use Friendica\Core\Config\Adapter\IConfigAdapter;
+use Friendica\Core\Config\Cache\ConfigCache;
 use Friendica\Test\MockedTest;
-use Friendica\Test\Util\AppMockTrait;
-use Friendica\Test\Util\L10nMockTrait;
-use Friendica\Test\Util\VFSTrait;
 
 class SmiliesTest extends MockedTest
 {
-	use VFSTrait;
-	use AppMockTrait;
-	use L10nMockTrait;
-
 	protected function setUp()
 	{
 		parent::setUp();
-		$this->setUpVfsDir();
-		$this->mockApp($this->root);
-		$this->app->videowidth = 425;
-		$this->app->videoheight = 350;
-		$this->configMock->shouldReceive('get')
+
+		$app = \Mockery::mock(App::class);
+		BaseObject::setApp($app);
+
+		$configMock = \Mockery::mock(ConfigCache::class);
+		$adapter = \Mockery::mock(IConfigAdapter::class);
+		$adapter->shouldReceive('isConnected')->andReturn(false);
+		Config::init(new Config\Configuration($configMock, $adapter));
+
+		$app->videowidth = 425;
+		$app->videoheight = 350;
+		$configMock->shouldReceive('get')
 			->with('system', 'no_smilies')
 			->andReturn(false);
-		$this->configMock->shouldReceive('get')
+		$configMock->shouldReceive('get')
 			->with(false, 'system', 'no_smilies')
 			->andReturn(false);
 	}

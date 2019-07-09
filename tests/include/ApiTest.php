@@ -50,13 +50,13 @@ class ApiTest extends DatabaseTest
 	public function setUp()
 	{
 		$basePath = BasePath::create(dirname(__DIR__) . '/../');
-		$mode = new App\Mode($basePath);
-		$router = new App\Router();
-		$configLoader = new ConfigFileLoader($basePath, $mode);
+		$configLoader = new ConfigFileLoader($basePath);
 		$configCache = Factory\ConfigFactory::createCache($configLoader);
 		$profiler = Factory\ProfilerFactory::create($configCache);
 		$database = Factory\DBFactory::init($configCache, $profiler, $_SERVER);
 		$config = Factory\ConfigFactory::createConfig($configCache);
+		$router = new App\Router();
+		$mode = new App\Mode($database, $configCache);
 		Factory\ConfigFactory::createPConfig($configCache);
 		$logger = Factory\LoggerFactory::create('test', $database, $config, $profiler);
 		$baseUrl = new BaseURL($config, $_SERVER);

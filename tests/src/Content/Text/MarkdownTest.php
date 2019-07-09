@@ -2,21 +2,23 @@
 
 namespace Friendica\Test\src\Content\Text;
 
+use Friendica\App;
+use Friendica\BaseObject;
 use Friendica\Content\Text\Markdown;
 use Friendica\Test\MockedTest;
-use Friendica\Test\Util\AppMockTrait;
-use Friendica\Test\Util\VFSTrait;
+use Friendica\Util\Profiler;
 
 class MarkdownTest extends MockedTest
 {
-	use VFSTrait;
-	use AppMockTrait;
-
 	protected function setUp()
 	{
 		parent::setUp();
-		$this->setUpVfsDir();
-		$this->mockApp($this->root);
+
+		$app = \Mockery::mock(App::class);
+		BaseObject::setApp($app);
+
+		$profiler = new Profiler();
+		$app->shouldReceive('getProfiler')->andReturn($profiler);
 	}
 
 	public function dataMarkdown()

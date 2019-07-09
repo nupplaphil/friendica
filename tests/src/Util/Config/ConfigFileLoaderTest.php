@@ -2,31 +2,21 @@
 
 namespace Friendica\Test\src\Util\Config;
 
-use Friendica\App;
 use Friendica\Core\Config\Cache\ConfigCache;
 use Friendica\Test\MockedTest;
 use Friendica\Test\Util\VFSTrait;
 use Friendica\Util\Config\ConfigFileLoader;
-use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
 
 class ConfigFileLoaderTest extends MockedTest
 {
 	use VFSTrait;
 
-	/**
-	 * @var App\Mode|MockInterface
-	 */
-	private $mode;
-
 	protected function setUp()
 	{
 		parent::setUp();
 
 		$this->setUpVfsDir();
-
-		$this->mode = \Mockery::mock(App\Mode::class);
-		$this->mode->shouldReceive('isInstall')->andReturn(true);
 	}
 
 	/**
@@ -34,8 +24,8 @@ class ConfigFileLoaderTest extends MockedTest
 	 */
 	public function testLoadConfigFiles()
 	{
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
-		$configCache = new ConfigCache();
+		$configFileLoader = new ConfigFileLoader($this->root->url());
+		$configCache      = new ConfigCache();
 
 		$configFileLoader->setupCache($configCache);
 
@@ -44,6 +34,7 @@ class ConfigFileLoaderTest extends MockedTest
 
 	/**
 	 * Test the loadConfigFiles() method with a wrong local.config.php
+	 *
 	 * @expectedException \Exception
 	 * @expectedExceptionMessageRegExp /Error loading config file \w+/
 	 */
@@ -52,11 +43,11 @@ class ConfigFileLoaderTest extends MockedTest
 		$this->delConfigFile('local.config.php');
 
 		vfsStream::newFile('local.config.php')
-			->at($this->root->getChild('config'))
-			->setContent('<?php return true;');
+		         ->at($this->root->getChild('config'))
+		         ->setContent('<?php return true;');
 
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
-		$configCache = new ConfigCache();
+		$configFileLoader = new ConfigFileLoader($this->root->url());
+		$configCache      = new ConfigCache();
 
 		$configFileLoader->setupCache($configCache);
 	}
@@ -69,18 +60,18 @@ class ConfigFileLoaderTest extends MockedTest
 		$this->delConfigFile('local.config.php');
 
 		$file = dirname(__DIR__) . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'datasets' . DIRECTORY_SEPARATOR .
-			'config' . DIRECTORY_SEPARATOR .
-			'local.config.php';
+		        '..' . DIRECTORY_SEPARATOR .
+		        '..' . DIRECTORY_SEPARATOR .
+		        'datasets' . DIRECTORY_SEPARATOR .
+		        'config' . DIRECTORY_SEPARATOR .
+		        'local.config.php';
 
 		vfsStream::newFile('local.config.php')
-			->at($this->root->getChild('config'))
-			->setContent(file_get_contents($file));
+		         ->at($this->root->getChild('config'))
+		         ->setContent(file_get_contents($file));
 
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
-		$configCache = new ConfigCache();
+		$configFileLoader = new ConfigFileLoader($this->root->url());
+		$configCache      = new ConfigCache();
 
 		$configFileLoader->setupCache($configCache);
 
@@ -101,18 +92,18 @@ class ConfigFileLoaderTest extends MockedTest
 		$this->delConfigFile('local.config.php');
 
 		$file = dirname(__DIR__) . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'datasets' . DIRECTORY_SEPARATOR .
-			'config' . DIRECTORY_SEPARATOR .
-			'local.ini.php';
+		        '..' . DIRECTORY_SEPARATOR .
+		        '..' . DIRECTORY_SEPARATOR .
+		        'datasets' . DIRECTORY_SEPARATOR .
+		        'config' . DIRECTORY_SEPARATOR .
+		        'local.ini.php';
 
 		vfsStream::newFile('local.ini.php')
-			->at($this->root->getChild('config'))
-			->setContent(file_get_contents($file));
+		         ->at($this->root->getChild('config'))
+		         ->setContent(file_get_contents($file));
 
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
-		$configCache = new ConfigCache();
+		$configFileLoader = new ConfigFileLoader($this->root->url());
+		$configCache      = new ConfigCache();
 
 		$configFileLoader->setupCache($configCache);
 
@@ -132,18 +123,18 @@ class ConfigFileLoaderTest extends MockedTest
 		$this->delConfigFile('local.config.php');
 
 		$file = dirname(__DIR__) . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'datasets' . DIRECTORY_SEPARATOR .
-			'config' . DIRECTORY_SEPARATOR .
-			'.htconfig.php';
+		        '..' . DIRECTORY_SEPARATOR .
+		        '..' . DIRECTORY_SEPARATOR .
+		        'datasets' . DIRECTORY_SEPARATOR .
+		        'config' . DIRECTORY_SEPARATOR .
+		        '.htconfig.php';
 
 		vfsStream::newFile('.htconfig.php')
-			->at($this->root)
-			->setContent(file_get_contents($file));
+		         ->at($this->root)
+		         ->setContent(file_get_contents($file));
 
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
-		$configCache = new ConfigCache();
+		$configFileLoader = new ConfigFileLoader($this->root->url());
+		$configCache      = new ConfigCache();
 
 		$configFileLoader->setupCache($configCache);
 
@@ -181,17 +172,17 @@ class ConfigFileLoaderTest extends MockedTest
 		vfsStream::create($structure, $this->root);
 
 		$file = dirname(__DIR__) . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'..' . DIRECTORY_SEPARATOR .
-			'datasets' . DIRECTORY_SEPARATOR .
-			'config' . DIRECTORY_SEPARATOR .
-			'local.config.php';
+		        '..' . DIRECTORY_SEPARATOR .
+		        '..' . DIRECTORY_SEPARATOR .
+		        'datasets' . DIRECTORY_SEPARATOR .
+		        'config' . DIRECTORY_SEPARATOR .
+		        'local.config.php';
 
 		vfsStream::newFile('test.config.php')
-			->at($this->root->getChild('addon')->getChild('test')->getChild('config'))
-			->setContent(file_get_contents($file));
+		         ->at($this->root->getChild('addon')->getChild('test')->getChild('config'))
+		         ->setContent(file_get_contents($file));
 
-		$configFileLoader = new ConfigFileLoader($this->root->url(), $this->mode);
+		$configFileLoader = new ConfigFileLoader($this->root->url());
 
 		$conf = $configFileLoader->loadAddonConfig('test');
 

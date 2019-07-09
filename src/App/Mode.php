@@ -2,8 +2,8 @@
 
 namespace Friendica\App;
 
-use Friendica\Core\Config;
-use Friendica\Database\DBA;
+use Friendica\Core\Config\Cache\ConfigCache;
+use Friendica\Database\Database;
 
 /**
  * Mode of the current Friendica Node
@@ -24,13 +24,19 @@ class Mode
 	private $mode;
 
 	/**
-	 * @var string the basepath of the application
+	 * @var ConfigCache The configuration (config file)
 	 */
-	private $basepath;
+	private $configCache;
 
-	public function __construct($basepath = '')
+	/**
+	 * @var Database The database connection
+	 */
+	private $dba;
+
+	public function __construct(Database $dba, ConfigCache $configCache)
 	{
-		$this->basepath = $basepath;
+		$this->dba = $dba;
+		$this->configCache = $configCache;
 		$this->mode = 0;
 	}
 
@@ -41,38 +47,34 @@ class Mode
 	 * - App::MODE_MAINTENANCE: The maintenance mode has been set
 	 * - App::MODE_NORMAL     : Normal run with all features enabled
 	 *
-	 * @param string $basepath the Basepath of the Application
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function determine($basepath = null)
+	public function determine()
 	{
-		if (!empty($basepath)) {
-			$this->basepath = $basepath;
-		}
-
 		$this->mode = 0;
 
-		if (!file_exists($this->basepath . '/config/local.config.php')
-			&& !file_exists($this->basepath . '/config/local.ini.php')
-			&& !file_exists($this->basepath . '/.htconfig.php')) {
+		if (!$this->configCache->get('database', 'hostname') ||
+		    !$this->configCache->get('database', 'username') ||
+		    !$this->configCache->get('database', 'database')) {
 			return;
 		}
 
 		$this->mode |= Mode::LOCALCONFIGPRESENT;
 
-		if (!DBA::connected()) {
+		if (!$this->dba->connected()) {
 			return;
 		}
 
 		$this->mode |= Mode::DBAVAILABLE;
 
-		if (DBA::fetchFirst("SHOW TABLES LIKE 'config'") === false) {
+		if ($this->dba->fetchFirst("SHOW TABLES LIKE 'config'") === false) {
 			return;
 		}
 
 		$this->mode |= Mode::DBCONFIGAVAILABLE;
 
-		if (Config::get('system', 'maintenance')) {
+		if ($this->configCache->get('system', 'maintenance') ||
+			!empty($this->dba->selectFirst('config', ['v'], ['cat' => 'system', 'k' => 'maintenance'])['v'])) {
 			return;
 		}
 

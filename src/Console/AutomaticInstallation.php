@@ -108,7 +108,7 @@ HELP;
 			}
 
 			//reload the config cache
-			$loader = new ConfigFileLoader($a->getBasePath(), $a->getMode());
+			$loader = new ConfigFileLoader($a->getBasePath());
 			$loader->setupCache($configCache);
 
 		} else {

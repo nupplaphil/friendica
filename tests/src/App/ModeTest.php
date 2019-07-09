@@ -3,39 +3,39 @@
 namespace Friendica\Test\src\App;
 
 use Friendica\App\Mode;
-use Friendica\Core\Config;
+use Friendica\Core\Config\Cache\ConfigCache;
+use Friendica\Database\Database;
 use Friendica\Test\MockedTest;
-use Friendica\Test\Util\DBAMockTrait;
-use Friendica\Test\Util\VFSTrait;
+use Mockery\MockInterface;
 
 class ModeTest extends MockedTest
 {
-	use VFSTrait;
-	use DBAMockTrait;
+	/** @var Database|MockInterface */
+	private $dba;
+	/** @var ConfigCache|MockInterface */
+	private $configCache;
 
 	public function setUp()
 	{
 		parent::setUp();
 
-		$this->setUpVfsDir();
+		$this->dba         = \Mockery::mock(Database::class);
+		$this->configCache = \Mockery::mock(ConfigCache::class);
+
 	}
 
 	public function testItEmpty()
 	{
-		$mode = new Mode($this->root->url());
+		$mode = new Mode($this->dba, $this->configCache);
 		$this->assertTrue($mode->isInstall());
 		$this->assertFalse($mode->isNormal());
 	}
 
 	public function testWithoutConfig()
 	{
-		$mode = new Mode($this->root->url());
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(null)->once();
 
-		$this->assertTrue($this->root->hasChild('config/local.config.php'));
-
-		$this->delConfigFile('local.config.php');
-
-		$this->assertFalse($this->root->hasChild('config/local.config.php'));
+		$mode = new Mode($this->dba, $this->configCache);
 
 		$mode->determine();
 
@@ -45,15 +45,13 @@ class ModeTest extends MockedTest
 		$this->assertFalse($mode->has(Mode::LOCALCONFIGPRESENT));
 	}
 
-	/**
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
 	public function testWithoutDatabase()
 	{
-		$this->mockConnected(false, 1);
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(true);
+		$this->dba->shouldReceive('connected')->andReturn(false)->once();
 
-		$mode = new Mode($this->root->url());
+		$mode = new Mode($this->dba, $this->configCache);
+
 		$mode->determine();
 
 		$this->assertFalse($mode->isNormal());
@@ -63,16 +61,16 @@ class ModeTest extends MockedTest
 		$this->assertFalse($mode->has(Mode::DBAVAILABLE));
 	}
 
-	/**
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
 	public function testWithoutDatabaseSetup()
 	{
-		$this->mockConnected(true, 1);
-		$this->mockFetchFirst('SHOW TABLES LIKE \'config\'', false, 1);
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(true);
+		$this->dba->shouldReceive('connected')->andReturn(true)->once();
+		$this->dba->shouldReceive('fetchFirst')
+		          ->with('SHOW TABLES LIKE \'config\'')
+		          ->andReturn(false)->once();
 
-		$mode = new Mode($this->root->url());
+		$mode = new Mode($this->dba, $this->configCache);
+
 		$mode->determine();
 
 		$this->assertFalse($mode->isNormal());
@@ -81,25 +79,16 @@ class ModeTest extends MockedTest
 		$this->assertTrue($mode->has(Mode::LOCALCONFIGPRESENT));
 	}
 
-	/**
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
-	public function testWithMaintenanceMode()
+	public function testWithMaintenanceModeCache()
 	{
-		$this->mockConnected(true, 1);
-		$this->mockFetchFirst('SHOW TABLES LIKE \'config\'', true, 1);
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(true);
+		$this->dba->shouldReceive('connected')->andReturn(true)->once();
+		$this->dba->shouldReceive('fetchFirst')
+		          ->with('SHOW TABLES LIKE \'config\'')
+		          ->andReturn(true)->once();
+		$this->configCache->shouldReceive('get')->with('system', 'maintenance')->andReturn(true)->once();
 
-		$config = \Mockery::mock(Config\Configuration::class);
-		$config
-			->shouldReceive('get')
-			->with('system', 'maintenance', null, false)
-			->andReturn(true)
-			->once();
-		// Initialize empty Config
-		Config::init($config);
-
-		$mode = new Mode($this->root->url());
+		$mode = new Mode($this->dba, $this->configCache);
 		$mode->determine();
 
 		$this->assertFalse($mode->isNormal());
@@ -109,25 +98,41 @@ class ModeTest extends MockedTest
 		$this->assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
 	}
 
-	/**
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
+	public function testWithMaintenanceModeDB()
+	{
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(true);
+		$this->dba->shouldReceive('connected')->andReturn(true)->once();
+		$this->dba->shouldReceive('fetchFirst')
+		          ->with('SHOW TABLES LIKE \'config\'')
+		          ->andReturn(true)->once();
+		$this->configCache->shouldReceive('get')->with('system', 'maintenance')->andReturn(false)->once();
+		$this->dba->shouldReceive('selectFirst')
+		          ->with('config', ['v'], ['cat' => 'system', 'k' => 'maintenance'])
+		          ->andReturn(['v' => '1'])->once();
+
+		$mode = new Mode($this->dba, $this->configCache);
+		$mode->determine();
+
+		$this->assertFalse($mode->isNormal());
+		$this->assertFalse($mode->isInstall());
+
+		$this->assertTrue($mode->has(Mode::DBCONFIGAVAILABLE));
+		$this->assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
+	}
+
 	public function testNormalMode()
 	{
-		$this->mockConnected(true, 1);
-		$this->mockFetchFirst('SHOW TABLES LIKE \'config\'', true, 1);
+		$this->configCache->shouldReceive('get')->with('database', \Mockery::any())->andReturn(true);
+		$this->dba->shouldReceive('connected')->andReturn(true)->once();
+		$this->dba->shouldReceive('fetchFirst')
+		          ->with('SHOW TABLES LIKE \'config\'')
+		          ->andReturn(true)->once();
+		$this->configCache->shouldReceive('get')->with('system', 'maintenance')->andReturn(false)->once();
+		$this->dba->shouldReceive('selectFirst')
+		          ->with('config', ['v'], ['cat' => 'system', 'k' => 'maintenance'])
+		          ->andReturn(['v' => '0'])->once();
 
-		$config = \Mockery::mock(Config\Configuration::class);
-		$config
-			->shouldReceive('get')
-			->with('system', 'maintenance', null, false)
-			->andReturn(false)
-			->once();
-		// Initialize empty Config
-		Config::init($config);
-
-		$mode = new Mode($this->root->url());
+		$mode = new Mode($this->dba, $this->configCache);
 		$mode->determine();
 
 		$this->assertTrue($mode->isNormal());

@@ -2,45 +2,45 @@
 
 namespace Friendica\Test\src\Content\Text;
 
+use Friendica\App;
+use Friendica\BaseObject;
 use Friendica\Content\Text\BBCode;
+use Friendica\Core\Config;
 use Friendica\Test\MockedTest;
-use Friendica\Test\Util\AppMockTrait;
-use Friendica\Test\Util\L10nMockTrait;
-use Friendica\Test\Util\VFSTrait;
 
-/**
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
- */
 class BBCodeTest extends MockedTest
 {
-	use VFSTrait;
-	use AppMockTrait;
-	use L10nMockTrait;
-
 	protected function setUp()
 	{
 		parent::setUp();
-		$this->setUpVfsDir();
-		$this->mockApp($this->root);
-		$this->app->videowidth = 425;
-		$this->app->videoheight = 350;
-		$this->configMock->shouldReceive('get')
+
+		$app = \Mockery::mock(App::class);
+		BaseObject::setApp($app);
+		$configMock = \Mockery::mock(Config\Cache\ConfigCache::class);
+		$adapter = \Mockery::mock(Config\Adapter\IConfigAdapter::class);
+		$adapter->shouldReceive('isConnected')->andReturn(false);
+		Config::init(new Config\Configuration($configMock, $adapter));
+
+		$app->videowidth = 425;
+		$app->videoheight = 350;
+		$app->shouldReceive('getBaseURL')
+		          ->andReturn('friendica.local');
+
+		$configMock->shouldReceive('get')
 			->with('system', 'remove_multiplicated_lines')
 			->andReturn(false);
-		$this->configMock->shouldReceive('get')
+		$configMock->shouldReceive('get')
 			->with('system', 'no_oembed')
 			->andReturn(false);
-		$this->configMock->shouldReceive('get')
+		$configMock->shouldReceive('get')
 			->with('system', 'allowed_link_protocols')
 			->andReturn(null);
-		$this->configMock->shouldReceive('get')
+		$configMock->shouldReceive('get')
 			->with('system', 'itemcache_duration')
 			->andReturn(-1);
-		$this->configMock->shouldReceive('get')
+		$configMock->shouldReceive('get')
 			->with('system', 'url')
 			->andReturn('friendica.local');
-		$this->mockL10nT();
 	}
 
 	public function dataLinks()
