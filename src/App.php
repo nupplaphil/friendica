@@ -574,13 +574,11 @@ class App
 	}
 
 	/**
-	 * @brief Checks if the site is called via a backend process
+	 * Checks if the site is called via a backend process
 	 *
-	 * This isn't a perfect solution. But we need this check very early.
-	 * So we cannot wait until the modules are loaded.
-	 *
-	 * @param Module $module
-	 * @return bool
+	 * @param Module $module The pre-loaded module (just name, not class!)
+
+	 * @return bool True, if the call is a backend call
 	 */
 	private function checkBackend(Module $module)
 	{
