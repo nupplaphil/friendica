@@ -1,19 +1,20 @@
 kind: pipeline
 name: php7-mysql
 
-services:
+steps:
     - name: db
       image: mysql
-      environment:
+	  detach: true
+	  environment:
           MYSQL_USERNAME: friendica
           MYSQL_PASSWORD: friendica
           MYSQL_DATABASE: friendica
           MYSQL_ADMIN_PASSWORD: friendica
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
-steps:
     - name: seed-db
       image: mysql
+      group: init
       commands:
           # Ensure db node is still running
           - ping -c1 db
@@ -23,11 +24,13 @@ steps:
 
     - name: install
       image: composer
+      group: init
       commands:
           - composer install
 
     - name: test
       image: php:7
+      group: test
       environment:
         MYSQL_USERNAME: friendica
         MYSQL_PASSWORD: friendica
