@@ -7,7 +7,7 @@ steps:
   commands:
     - NOCOVERAGE=true ./autotest.sh
 
-service:
+services:
 - name: cache
   image: redis
 - name: mysql
