@@ -85,7 +85,7 @@ function execute_tests {
         echo "Initialize test data..."
         mysql -u "$DATABASEUSER" -pfriendica < friendica_test_data.sql
       else
-        DATABASEHOST=db
+        DATABASEHOST=mysql
       fi
     fi
 
