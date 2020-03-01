@@ -19,9 +19,7 @@
  *
  */
 
-namespace Friendica\Network\Fetch;
-
-use Friendica\Network\IResponse;
+namespace Friendica\Network;
 
 /**
  * Interface for fetching results of URLs

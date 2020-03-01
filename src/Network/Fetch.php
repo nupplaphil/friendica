@@ -24,7 +24,6 @@ namespace Friendica\Network;
 use Friendica\App;
 use Friendica\Core\Config\IConfig;
 use Friendica\Core\System;
-use Friendica\Network\Fetch\IFetch;
 use Friendica\Util\Network;
 use Friendica\Util\Profiler;
 use Psr\Log\LoggerInterface;
