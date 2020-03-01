@@ -26,6 +26,7 @@ use Friendica\Core\Logger;
 use Friendica\DI;
 use Friendica\Model\User;
 use Friendica\Model\APContact;
+use Friendica\Network\Fetch;
 
 /**
  * Implements HTTP Signatures per draft-cavage-http-signatures-07.
@@ -463,7 +464,7 @@ class HTTPSignature
 		$curl_opts = $opts;
 		$curl_opts['header'] = $headers;
 
-		$curlResult = Network::curl($request, false, $curl_opts);
+		$curlResult = Fetch::curl($request, false, $curl_opts);
 		$return_code = $curlResult->getReturnCode();
 
 		Logger::log('Fetched for user ' . $uid . ' from ' . $request . ' returned ' . $return_code, Logger::DEBUG);

@@ -21,6 +21,7 @@
 
 namespace Friendica\Core;
 
+use Friendica\Network\Fetch;
 use Friendica\Util\Network;
 
 /**
@@ -123,7 +124,7 @@ class Protocol
 		if (preg_match('=https?://(.*)/user/(.*)=ism', $profile_url, $matches)) {
 			$statusnet_host = $matches[1];
 			$statusnet_user = $matches[2];
-			$UserData = Network::fetchUrl('http://' . $statusnet_host . '/api/users/show.json?user_id=' . $statusnet_user);
+			$UserData = Fetch::fetchUrl('http://' . $statusnet_host . '/api/users/show.json?user_id=' . $statusnet_user);
 			$user = json_decode($UserData);
 			if ($user) {
 				$matches[2] = $user->screen_name;
