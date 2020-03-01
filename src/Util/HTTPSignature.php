@@ -21,12 +21,11 @@
 
 namespace Friendica\Util;
 
-use Friendica\Database\DBA;
 use Friendica\Core\Logger;
+use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Model\User;
 use Friendica\Model\APContact;
-use Friendica\Network\Fetch;
+use Friendica\Model\User;
 
 /**
  * Implements HTTP Signatures per draft-cavage-http-signatures-07.
@@ -464,7 +463,7 @@ class HTTPSignature
 		$curl_opts = $opts;
 		$curl_opts['header'] = $headers;
 
-		$curlResult = Fetch::curl($request, false, $curl_opts);
+		$curlResult = DI::fetch()->curl($request, false, $curl_opts);
 		$return_code = $curlResult->getReturnCode();
 
 		Logger::log('Fetched for user ' . $uid . ' from ' . $request . ' returned ' . $return_code, Logger::DEBUG);

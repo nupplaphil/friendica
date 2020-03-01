@@ -30,9 +30,7 @@ use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\GContact;
 use Friendica\Model\GServer;
-use Friendica\Network\Fetch;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Network;
 use Friendica\Util\Strings;
 
 /**
@@ -104,7 +102,7 @@ class PortableContact
 
 		Logger::log('load: ' . $url, Logger::DEBUG);
 
-		$fetchresult = Fetch::fetchUrlFull($url);
+		$fetchresult = DI::fetch()->urlFull($url);
 		$s = $fetchresult->getBody();
 
 		Logger::log('load: returns ' . $s, Logger::DATA);
@@ -252,7 +250,7 @@ class PortableContact
 	 */
 	private static function fetchServerlist($poco)
 	{
-		$curlResult = Fetch::curl($poco . "/@server");
+		$curlResult = DI::fetch()->curl($poco . "/@server");
 
 		if (!$curlResult->isSuccess()) {
 			return;
@@ -292,7 +290,7 @@ class PortableContact
 
 		Logger::info("Fetch all users from the server " . $server["url"]);
 
-		$curlResult = Fetch::curl($url);
+		$curlResult = DI::fetch()->curl($url);
 
 		if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 			$data = json_decode($curlResult->getBody(), true);
@@ -315,7 +313,7 @@ class PortableContact
 
 				$success = false;
 
-				$curlResult = Fetch::curl($url);
+				$curlResult = DI::fetch()->curl($url);
 
 				if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 					Logger::info("Fetch all global contacts from the server " . $server["nurl"]);
@@ -373,7 +371,7 @@ class PortableContact
 				// Fetch all contacts from a given user from the other server
 				$url = $server['poco'] . '/' . $username . '/?fields=displayName,urls,photos,updated,network,aboutMe,currentLocation,tags,contactType,generation';
 
-				$curlResult = Fetch::curl($url);
+				$curlResult = DI::fetch()->curl($url);
 
 				if ($curlResult->isSuccess()) {
 					$data = json_decode($curlResult->getBody(), true);

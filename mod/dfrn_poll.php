@@ -21,11 +21,10 @@
 
 use Friendica\App;
 use Friendica\Core\Logger;
-use Friendica\Core\System;
 use Friendica\Core\Session;
+use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Network\Fetch;
 use Friendica\Protocol\DFRN;
 use Friendica\Protocol\OStatus;
 use Friendica\Util\Network;
@@ -116,7 +115,7 @@ function dfrn_poll_init(App $a)
 		);
 
 		if (DBA::isResult($r)) {
-			$s = Fetch::fetchUrl($r[0]['poll'] . '?dfrn_id=' . $my_id . '&type=profile-check');
+			$s = DI::fetch()->url($r[0]['poll'] . '?dfrn_id=' . $my_id . '&type=profile-check');
 
 			Logger::log("dfrn_poll: old profile returns " . $s, Logger::DATA);
 
@@ -500,12 +499,12 @@ function dfrn_poll_content(App $a)
 
 			// URL reply
 			if ($dfrn_version < 2.2) {
-				$s = Fetch::fetchUrl($r[0]['poll']
-				                     . '?dfrn_id=' . $encrypted_id
-				                     . '&type=profile-check'
-				                     . '&dfrn_version=' . DFRN_PROTOCOL_VERSION
-				                     . '&challenge=' . $challenge
-				                     . '&sec=' . $sec
+				$s = DI::fetch()->url($r[0]['poll']
+				                . '?dfrn_id=' . $encrypted_id
+				                . '&type=profile-check'
+				                . '&dfrn_version=' . DFRN_PROTOCOL_VERSION
+				                . '&challenge=' . $challenge
+				                . '&sec=' . $sec
 				);
 			} else {
 				$s = Network::post($r[0]['poll'], [

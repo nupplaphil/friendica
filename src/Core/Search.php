@@ -25,12 +25,10 @@ use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Model\GContact;
-use Friendica\Network\Fetch;
 use Friendica\Network\HTTPException;
 use Friendica\Network\Probe;
 use Friendica\Object\Search\ContactResult;
 use Friendica\Object\Search\ResultList;
-use Friendica\Protocol\PortableContact;
 use Friendica\Util\Network;
 use Friendica\Util\Strings;
 
@@ -130,7 +128,7 @@ class Search
 			$searchUrl .= '&page=' . $page;
 		}
 
-		$resultJson = Fetch::fetchUrl($searchUrl, false, 0, 'application/json');
+		$resultJson = DI::fetch()->url($searchUrl, false, 0, 'application/json');
 
 		$results = json_decode($resultJson, true);
 
@@ -291,7 +289,7 @@ class Search
 			$return = GContact::searchByName($search, $mode);
 		} else {
 			$p = $page > 1 ? 'p=' . $page : '';
-			$curlResult = Fetch::curl(self::getGlobalDirectory() . '/search/people?' . $p . '&q=' . urlencode($search), false, ['accept_content' => 'application/json']);
+			$curlResult = DI::fetch()->curl(self::getGlobalDirectory() . '/search/people?' . $p . '&q=' . urlencode($search), false, ['accept_content' => 'application/json']);
 			if ($curlResult->isSuccess()) {
 				$searchResult = json_decode($curlResult->getBody(), true);
 				if (!empty($searchResult['profiles'])) {

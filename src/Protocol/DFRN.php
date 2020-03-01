@@ -42,7 +42,6 @@ use Friendica\Model\Notify\Type;
 use Friendica\Model\PermissionSet;
 use Friendica\Model\Profile;
 use Friendica\Model\User;
-use Friendica\Network\Fetch;
 use Friendica\Network\Probe;
 use Friendica\Util\Crypto;
 use Friendica\Util\DateTimeFormat;
@@ -1220,7 +1219,7 @@ class DFRN
 
 		Logger::log('dfrn_deliver: ' . $url);
 
-		$curlResult = Fetch::curl($url);
+		$curlResult = DI::fetch()->curl($url);
 
 		if ($curlResult->isTimeout()) {
 			return -2; // timed out

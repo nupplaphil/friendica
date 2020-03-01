@@ -34,9 +34,7 @@ use Friendica\Model\GServer;
 use Friendica\Model\Nodeinfo;
 use Friendica\Model\Photo;
 use Friendica\Model\User;
-use Friendica\Network\Fetch;
 use Friendica\Network\Probe;
-use Friendica\Util\Network;
 use Friendica\Util\Proxy as ProxyUtils;
 use Friendica\Util\Strings;
 
@@ -64,7 +62,7 @@ class CronJobs
 				// Now trying to register
 				$url = 'http://the-federation.info/register/' . DI::baseUrl()->getHostname();
 				Logger::debug('Check registering url', ['url' => $url]);
-				$ret = Fetch::fetchUrl($url);
+				$ret = DI::fetch()->url($url);
 				Logger::debug('Check registering answer', ['answer' => $ret]);
 				Logger::info('cron_end');
 				break;

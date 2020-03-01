@@ -26,16 +26,14 @@ use DOMXPath;
 use Exception;
 use Friendica\Core\Logger;
 use Friendica\Core\Protocol;
-use Friendica\Core\System;
 use Friendica\Core\Search;
+use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Network\Fetch;
 use Friendica\Network\Probe;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Protocol\PortableContact;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Network;
 use Friendica\Util\Strings;
 
 /**
@@ -525,7 +523,7 @@ class GContact
 		$done[] = DI::baseUrl() . '/poco';
 
 		if (strlen(DI::config()->get('system', 'directory'))) {
-			$x = Fetch::fetchUrl(Search::getGlobalDirectory() . '/pubsites');
+			$x = DI::fetch()->url(Search::getGlobalDirectory() . '/pubsites');
 			if (!empty($x)) {
 				$j = json_decode($x);
 				if (!empty($j->entries)) {
@@ -834,7 +832,7 @@ class GContact
 			return false;
 		}
 
-		$curlResult = Fetch::curl($gserver['noscrape'] . '/' . $data['nick']);
+		$curlResult = DI::fetch()->curl($gserver['noscrape'] . '/' . $data['nick']);
 
 		if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 			$noscrape = json_decode($curlResult->getBody(), true);
@@ -916,7 +914,7 @@ class GContact
 	private static function updateFromFeed(array $data)
 	{
 		// Search for the newest entry in the feed
-		$curlResult = Fetch::curl($data['poll']);
+		$curlResult = DI::fetch()->curl($data['poll']);
 		if (!$curlResult->isSuccess()) {
 			$fields = ['last_failure' => DateTimeFormat::utcNow()];
 			DBA::update('gcontact', $fields, ['nurl' => Strings::normaliseLink($data['url'])]);
@@ -1193,7 +1191,7 @@ class GContact
 
 		$url = $server . '/main/statistics';
 
-		$curlResult = Fetch::curl($url);
+		$curlResult = DI::fetch()->curl($url);
 		if (!$curlResult->isSuccess()) {
 			return false;
 		}

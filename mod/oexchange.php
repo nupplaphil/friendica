@@ -23,8 +23,6 @@ use Friendica\App;
 use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Module\Security\Login;
-use Friendica\Network\Fetch;
-use Friendica\Util\Network;
 use Friendica\Util\Strings;
 
 function oexchange_init(App $a) {
@@ -59,7 +57,7 @@ function oexchange_content(App $a) {
 	$tags = ((!empty($_REQUEST['tags']))
 		? '&tags=' . urlencode(Strings::escapeTags(trim($_REQUEST['tags']))) : '');
 
-	$s = Fetch::fetchUrl(DI::baseUrl() . '/parse_url?url=' . $url . $title . $description . $tags);
+	$s = DI::fetch()->url(DI::baseUrl() . '/parse_url?url=' . $url . $title . $description . $tags);
 
 	if (!strlen($s)) {
 		return;

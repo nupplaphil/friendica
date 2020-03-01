@@ -21,9 +21,6 @@
 
 namespace Friendica\Core;
 
-use Friendica\Network\Fetch;
-use Friendica\Util\Network;
-
 /**
  * Manage compatibility with federated networks
  */
@@ -124,7 +121,7 @@ class Protocol
 		if (preg_match('=https?://(.*)/user/(.*)=ism', $profile_url, $matches)) {
 			$statusnet_host = $matches[1];
 			$statusnet_user = $matches[2];
-			$UserData = Fetch::fetchUrl('http://' . $statusnet_host . '/api/users/show.json?user_id=' . $statusnet_user);
+			$UserData = DI::fetch()->url('http://' . $statusnet_host . '/api/users/show.json?user_id=' . $statusnet_user);
 			$user = json_decode($UserData);
 			if ($user) {
 				$matches[2] = $user->screen_name;

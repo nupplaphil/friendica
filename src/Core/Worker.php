@@ -25,9 +25,7 @@ use Friendica\Core;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Process;
-use Friendica\Network\Fetch;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Network;
 
 /**
  * Contains the class for the worker background job processing
@@ -993,7 +991,7 @@ class Worker
 		}
 
 		$url = DI::baseUrl() . '/worker';
-		Fetch::fetchUrl($url, false, 1);
+		DI::fetch()->url($url, false, 1);
 	}
 
 	/**

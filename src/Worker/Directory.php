@@ -26,8 +26,6 @@ use Friendica\Core\Logger;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Network\Fetch;
-use Friendica\Util\Network;
 
 /**
  * Sends updated profile data to the directory
@@ -55,7 +53,7 @@ class Directory
 
 		Logger::log('Updating directory: ' . $arr['url'], Logger::DEBUG);
 		if (strlen($arr['url'])) {
-			Fetch::fetchUrl($dir . '?url=' . bin2hex($arr['url']));
+			DI::fetch()->url($dir . '?url=' . bin2hex($arr['url']));
 		}
 
 		return;

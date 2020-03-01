@@ -37,7 +37,6 @@ namespace Friendica\Util;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\User;
-use Friendica\Network\Fetch;
 
 class ExAuth
 {
@@ -182,7 +181,7 @@ class ExAuth
 
 		$url = ($ssl ? 'https' : 'http') . '://' . $host . '/noscrape/' . $user;
 
-		$curlResult = Fetch::curl($url);
+		$curlResult = DI::fetch()->curl($url);
 
 		if (!$curlResult->isSuccess()) {
 			return false;

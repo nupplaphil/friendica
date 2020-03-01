@@ -24,56 +24,54 @@ namespace Friendica\Network;
 use Friendica\Core\Logger;
 use Friendica\Core\System;
 use Friendica\DI;
+use Friendica\Network\Fetch\IFetch;
 use Friendica\Util\Network;
 
-class Fetch
+class Fetch implements IFetch
 {
-
 	/**
-	 * Curl wrapper
+	 * {@inheritDoc}
 	 *
-	 * If binary flag is true, return binary results.
-	 * Set the cookiejar argument to a string (e.g. "/tmp/friendica-cookies.txt")
-	 * to preserve cookies from one request to the next.
+	 * @param int $redirects The recursion counter for internal use - default 0
 	 *
-	 * @param string  $url            URL to fetch
-	 * @param bool    $binary         default false
-	 *                                TRUE if asked to return binary results (file download)
-	 * @param int     $timeout        Timeout in seconds, default system config value or 60 seconds
-	 * @param string  $accept_content supply Accept: header with 'accept_content' as the value
-	 * @param string  $cookiejar      Path to cookie jar file
-	 * @param int     $redirects      The recursion counter for internal use - default 0
-	 *
-	 * @return string The fetched content
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function fetchUrl(string $url, bool $binary = false, int $timeout = 0, string $accept_content = '', string $cookiejar = '', int &$redirects = 0)
+	public function url(string $url, bool $binary = false, int $timeout = 0, string $accept_content = '', string $cookiejar = '', int &$redirects = 0)
 	{
-		$ret = self::fetchUrlFull($url, $binary, $timeout, $accept_content, $cookiejar, $redirects);
+		$ret = $this->urlFull($url, $binary, $timeout, $accept_content, $cookiejar, $redirects);
 
 		return $ret->getBody();
 	}
 
 	/**
-	 * fetches an URL.
+	 * {@inheritDoc}
 	 *
-	 * @param string  $url       URL to fetch
-	 * @param bool    $binary    default false
-	 *                           TRUE if asked to return binary results (file download)
-	 * @param array   $opts      (optional parameters) assoziative array with:
-	 *                           'accept_content' => supply Accept: header with 'accept_content' as the value
-	 *                           'timeout' => int Timeout in seconds, default system config value or 60 seconds
-	 *                           'http_auth' => username:password
-	 *                           'novalidate' => do not validate SSL certs, default is to validate using our CA list
-	 *                           'nobody' => only return the header
-	 *                           'cookiejar' => path to cookie jar file
-	 *                           'header' => header array
-	 * @param int     $redirects The recursion counter for internal use - default 0
+	 * @param int $redirects The recursion counter for internal use - default 0
 	 *
-	 * @return CurlResult
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function curl(string $url, bool $binary = false, array $opts = [], int &$redirects = 0)
+	public function urlFull(string $url, bool $binary = false, int $timeout = 0, string $accept_content = '', string $cookiejar = '', int &$redirects = 0)
+	{
+		return $this->curl(
+			$url,
+			$binary,
+			[
+				'timeout'        => $timeout,
+				'accept_content' => $accept_content,
+				'cookiejar'      => $cookiejar
+			],
+			$redirects
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param int $redirects The recursion counter for internal use - default 0
+	 *
+	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 */
+	public function curl(string $url, bool $binary = false, array $opts = [], int &$redirects = 0)
 	{
 		$stamp1 = microtime(true);
 
@@ -218,36 +216,5 @@ class Fetch
 		DI::profiler()->saveTimestamp($stamp1, 'network', System::callstack());
 
 		return $curlResponse;
-	}
-
-	/**
-	 * Curl wrapper with array of return values.
-	 *
-	 * Inner workings and parameters are the same as @ref fetchUrl but returns an array with
-	 * all the information collected during the fetch.
-	 *
-	 * @param string  $url            URL to fetch
-	 * @param bool    $binary         default false
-	 *                                TRUE if asked to return binary results (file download)
-	 * @param int     $timeout        Timeout in seconds, default system config value or 60 seconds
-	 * @param string  $accept_content supply Accept: header with 'accept_content' as the value
-	 * @param string  $cookiejar      Path to cookie jar file
-	 * @param int     $redirects      The recursion counter for internal use - default 0
-	 *
-	 * @return CurlResult With all relevant information, 'body' contains the actual fetched content.
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 */
-	public static function fetchUrlFull(string $url, bool $binary = false, int $timeout = 0, string $accept_content = '', string $cookiejar = '', int &$redirects = 0)
-	{
-		return self::curl(
-			$url,
-			$binary,
-			[
-				'timeout'        => $timeout,
-				'accept_content' => $accept_content,
-				'cookiejar'      => $cookiejar
-			],
-			$redirects
-		);
 	}
 }

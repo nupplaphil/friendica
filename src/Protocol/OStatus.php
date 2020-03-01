@@ -36,11 +36,9 @@ use Friendica\Model\Conversation;
 use Friendica\Model\GContact;
 use Friendica\Model\Item;
 use Friendica\Model\User;
-use Friendica\Network\Fetch;
 use Friendica\Network\Probe;
 use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Images;
-use Friendica\Util\Network;
 use Friendica\Util\Proxy as ProxyUtils;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
@@ -757,7 +755,7 @@ class OStatus
 
 		self::$conv_list[$conversation] = true;
 
-		$curlResult = Fetch::curl($conversation, false, ['accept_content' => 'application/atom+xml, text/html']);
+		$curlResult = DI::fetch()->curl($conversation, false, ['accept_content' => 'application/atom+xml, text/html']);
 
 		if (!$curlResult->isSuccess()) {
 			return;
@@ -786,7 +784,7 @@ class OStatus
 					}
 				}
 				if ($file != '') {
-					$conversation_atom = Fetch::curl($attribute['href']);
+					$conversation_atom = DI::fetch()->curl($attribute['href']);
 
 					if ($conversation_atom->isSuccess()) {
 						$xml = $conversation_atom->getBody();
@@ -903,7 +901,7 @@ class OStatus
 			return;
 		}
 
-		$curlResult = Fetch::curl($self);
+		$curlResult = DI::fetch()->curl($self);
 
 		if (!$curlResult->isSuccess()) {
 			return;
@@ -950,7 +948,7 @@ class OStatus
 		}
 
 		$stored = false;
-		$curlResult = Fetch::curl($related, false, ['accept_content' => 'application/atom+xml, text/html']);
+		$curlResult = DI::fetch()->curl($related, false, ['accept_content' => 'application/atom+xml, text/html']);
 
 		if (!$curlResult->isSuccess()) {
 			return;
@@ -981,7 +979,7 @@ class OStatus
 					}
 				}
 				if ($atom_file != '') {
-					$curlResult = Fetch::curl($atom_file);
+					$curlResult = DI::fetch()->curl($atom_file);
 
 					if ($curlResult->isSuccess()) {
 						Logger::log('Fetched XML for URI ' . $related_uri, Logger::DEBUG);
@@ -993,7 +991,7 @@ class OStatus
 
 		// Workaround for older GNU Social servers
 		if (($xml == '') && strstr($related, '/notice/')) {
-			$curlResult = Fetch::curl(str_replace('/notice/', '/api/statuses/show/', $related) . '.atom');
+			$curlResult = DI::fetch()->curl(str_replace('/notice/', '/api/statuses/show/', $related) . '.atom');
 
 			if ($curlResult->isSuccess()) {
 				Logger::log('GNU Social workaround to fetch XML for URI ' . $related_uri, Logger::DEBUG);
@@ -1004,7 +1002,7 @@ class OStatus
 		// Even more worse workaround for GNU Social ;-)
 		if ($xml == '') {
 			$related_guess = OStatus::convertHref($related_uri);
-			$curlResult = Fetch::curl(str_replace('/notice/', '/api/statuses/show/', $related_guess) . '.atom');
+			$curlResult = DI::fetch()->curl(str_replace('/notice/', '/api/statuses/show/', $related_guess) . '.atom');
 
 			if ($curlResult->isSuccess()) {
 				Logger::log('GNU Social workaround 2 to fetch XML for URI ' . $related_uri, Logger::DEBUG);

@@ -22,7 +22,6 @@
 namespace Friendica\Protocol;
 
 use Friendica\Core\Logger;
-use Friendica\Network\Fetch;
 use Friendica\Network\Probe;
 use Friendica\Util\Crypto;
 use Friendica\Util\Network;
@@ -73,7 +72,7 @@ class Salmon
 						$ret[$x] = substr($ret[$x], 5);
 					}
 				} elseif (Strings::normaliseLink($ret[$x]) == 'http://') {
-					$ret[$x] = Fetch::fetchUrl($ret[$x]);
+					$ret[$x] = DI::fetch()->url($ret[$x]);
 				}
 			}
 		}

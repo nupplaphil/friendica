@@ -316,6 +316,18 @@ abstract class DI
 	}
 
 	//
+	// "Network" namespace instances
+	//
+
+	/**
+	 * @return Network\Fetch\IFetch
+	 */
+	public static function fetch()
+	{
+		return self::$dice->create(Network\Fetch\IFetch::class);
+	}
+
+	//
 	// "Repository" namespace
 	//
 
