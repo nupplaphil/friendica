@@ -21,7 +21,7 @@
 
 namespace Friendica\Network\Fetch;
 
-use Friendica\Network\CurlResult;
+use Friendica\Network\IResponse;
 
 /**
  * Interface for fetching results of URLs
@@ -59,7 +59,7 @@ interface IFetch
 	 * @param string $accept_content  supply Accept: header with 'accept_content' as the value
 	 * @param string $cookiejar       Path to cookie jar file
 	 *
-	 * @return CurlResult With all relevant information, 'body' contains the actual fetched content.
+	 * @return IResponse With all relevant information, 'body' contains the actual fetched content.
 	 */
 	public function urlFull(string $url, bool $binary = false, int $timeout = 0, string $accept_content = '', string $cookiejar = '');
 
@@ -78,7 +78,7 @@ interface IFetch
 	 *                           'cookiejar' => path to cookie jar file
 	 *                           'header' => header array
 	 *
-	 * @return CurlResult
+	 * @return IResponse
 	 */
 	public function curl(string $url, bool $binary = false, array $opts = []);
 }

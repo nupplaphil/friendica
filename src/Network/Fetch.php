@@ -96,7 +96,7 @@ class Fetch implements IFetch
 
 		if (strlen($url) > 1000) {
 			$this->logger->info('URL is longer than 1000 characters.', ['callstack' => System::callstack(20)]);
-			return CurlResult::createErrorCurl(substr($url, 0, 200));
+			return CurlResult::createErrorCurl($this->logger, substr($url, 0, 200));
 		}
 
 		$parts2     = [];
@@ -114,13 +114,13 @@ class Fetch implements IFetch
 
 		if (Network::isUrlBlocked($url)) {
 			$this->logger->debug('The domain of is blocked.', ['domain' => $url]);
-			return CurlResult::createErrorCurl($url);
+			return CurlResult::createErrorCurl($this->logger, $url);
 		}
 
 		$ch = @curl_init($url);
 
 		if (($redirects > 8) || (!$ch)) {
-			return CurlResult::createErrorCurl($url);
+			return CurlResult::createErrorCurl($this->logger, $url);
 		}
 
 		@curl_setopt($ch, CURLOPT_HEADER, true);
@@ -219,13 +219,15 @@ class Fetch implements IFetch
 			$curl_info = @curl_getinfo($ch);
 		}
 
-		$curlResponse = new CurlResult($url, $s, $curl_info, curl_errno($ch), curl_error($ch));
+		$curlResponse = new CurlResult($this->logger, $url, $s, $curl_info, curl_errno($ch), curl_error($ch));
 
-		if ($curlResponse->isRedirectUrl()) {
+		$redirectUrl = Network::getRedirectUrl($curlResponse);
+
+		if (!empty($redirectUrl)) {
 			$redirects++;
-			$this->logger->notice('curl: redirect.', ['url' => $url, 'to' => $curlResponse->getRedirectUrl()]);
+			$this->logger->notice('curl: redirect.', ['url' => $url, 'to' => $redirectUrl]);
 			@curl_close($ch);
-			return self::curl($curlResponse->getRedirectUrl(), $binary, $opts, $redirects);
+			return self::curl($redirectUrl, $binary, $opts, $redirects);
 		}
 
 		@curl_close($ch);

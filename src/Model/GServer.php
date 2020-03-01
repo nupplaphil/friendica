@@ -29,7 +29,7 @@ use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Module\Register;
-use Friendica\Network\CurlResult;
+use Friendica\Network\IResponse;
 use Friendica\Network\Probe;
 use Friendica\Protocol\Diaspora;
 use Friendica\Protocol\PortableContact;
@@ -465,14 +465,15 @@ class GServer
 	/**
 	 * Detect server type by using the nodeinfo data
 	 *
-	 * @param string     $url        address of the server
-	 * @param CurlResult $curlResult
+	 * @param string    $url        address of the server
+	 * @param IResponse $response
+	 *
 	 * @return array Server data
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	private static function fetchNodeinfo(string $url, CurlResult $curlResult)
+	private static function fetchNodeinfo(string $url, IResponse $response)
 	{
-		$nodeinfo = json_decode($curlResult->getBody(), true);
+		$nodeinfo = json_decode($response->getBody(), true);
 
 		if (!is_array($nodeinfo) || empty($nodeinfo['links'])) {
 			return [];

@@ -25,7 +25,7 @@ namespace Friendica\Core;
 use Dice\Dice;
 use Friendica\Core\Config\Cache;
 use Friendica\DI;
-use Friendica\Network\CurlResult;
+use Friendica\Network\IResponse;
 use Friendica\Test\MockedTest;
 use Friendica\Test\Util\VFSTrait;
 use Friendica\Util\Network;
@@ -293,12 +293,12 @@ class InstallerTest extends MockedTest
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
 
 		// Mocking the CURL Response
-		$curlResult = \Mockery::mock(CurlResult::class);
+		$curlResult = \Mockery::mock(IResponse::class);
 		$curlResult
 			->shouldReceive('getReturnCode')
 			->andReturn('404');
 		$curlResult
-			->shouldReceive('getRedirectUrl')
+			->shouldReceive('getUrl')
 			->andReturn('');
 		$curlResult
 			->shouldReceive('getError')
@@ -334,15 +334,15 @@ class InstallerTest extends MockedTest
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
 
 		// Mocking the failed CURL Response
-		$curlResultF = \Mockery::mock(CurlResult::class);
+		$curlResultF = \Mockery::mock(IResponse::class);
 		$curlResultF
-			->shouldReceive('getReturnCode')
+			->shouldReceive('getStatusCode')
 			->andReturn('404');
 
 		// Mocking the working CURL Response
-		$curlResultW = \Mockery::mock(CurlResult::class);
+		$curlResultW = \Mockery::mock(IResponse::class);
 		$curlResultW
-			->shouldReceive('getReturnCode')
+			->shouldReceive('getStatusCode')
 			->andReturn('204');
 
 		// Mocking the CURL Request

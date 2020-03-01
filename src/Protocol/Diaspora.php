@@ -3171,7 +3171,7 @@ class Diaspora
 			$content_type = (($public_batch) ? "application/magic-envelope+xml" : "application/json");
 
 			$postResult = Network::post($dest_url."/", $envelope, ["Content-Type: ".$content_type]);
-			$return_code = $postResult->getReturnCode();
+			$return_code = $postResult->getStatusCode();
 		} else {
 			Logger::log("test_mode");
 			return 200;

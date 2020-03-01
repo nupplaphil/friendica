@@ -319,7 +319,7 @@ class HTTPSignature
 		$headers[] = 'Content-Type: application/activity+json';
 
 		$postResult = Network::post($target, $content, $headers);
-		$return_code = $postResult->getReturnCode();
+		$return_code = $postResult->getStatusCode();
 
 		Logger::log('Transmit to ' . $target . ' returned ' . $return_code, Logger::DEBUG);
 
@@ -464,7 +464,7 @@ class HTTPSignature
 		$curl_opts['header'] = $headers;
 
 		$curlResult = DI::fetch()->curl($request, false, $curl_opts);
-		$return_code = $curlResult->getReturnCode();
+		$return_code = $curlResult->getStatusCode();
 
 		Logger::log('Fetched for user ' . $uid . ' from ' . $request . ' returned ' . $return_code, Logger::DEBUG);
 

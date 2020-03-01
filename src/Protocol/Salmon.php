@@ -160,7 +160,7 @@ class Salmon
 			'Content-length: ' . strlen($salmon)
 		]);
 
-		$return_code = $postResult->getReturnCode();
+		$return_code = $postResult->getStatusCode();
 
 		// check for success, e.g. 2xx
 
@@ -184,7 +184,7 @@ class Salmon
 				'Content-type: application/magic-envelope+xml',
 				'Content-length: ' . strlen($salmon)
 			]);
-			$return_code = $postResult->getReturnCode();
+			$return_code = $postResult->getStatusCode();
 		}
 
 		if ($return_code > 299) {
@@ -206,7 +206,7 @@ class Salmon
 			$postResult = Network::post($url, $salmon, [
 				'Content-type: application/magic-envelope+xml',
 				'Content-length: ' . strlen($salmon)]);
-			$return_code = $postResult->getReturnCode();
+			$return_code = $postResult->getStatusCode();
 		}
 
 		Logger::log('slapper for '.$url.' returned ' . $return_code);
@@ -215,7 +215,7 @@ class Salmon
 			return -1;
 		}
 
-		if (($return_code == 503) && (stristr($postResult->getHeader(), 'retry-after'))) {
+		if (($return_code == 503) && $postResult->hasHeader('retry-after')) {
 			return -1;
 		}
 

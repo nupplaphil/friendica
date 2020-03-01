@@ -28,6 +28,7 @@ use Friendica\Database\Database;
 use Friendica\Database\DBStructure;
 use Friendica\DI;
 use Friendica\Util\Images;
+use Friendica\Util\Network;
 use Friendica\Util\Strings;
 
 /**
@@ -550,16 +551,16 @@ class Installer
 			$fetchResult = DI::fetch()->urlFull($baseurl . "/install/testrewrite");
 
 			$url = Strings::normaliseLink($baseurl . "/install/testrewrite");
-			if ($fetchResult->getReturnCode() != 204) {
+			if ($fetchResult->getStatusCode() != 204) {
 				$fetchResult = DI::fetch()->urlFull($url);
 			}
 
-			if ($fetchResult->getReturnCode() != 204) {
+			if ($fetchResult->getStatusCode() != 204) {
 				$status = false;
 				$help = DI::l10n()->t('Url rewrite in .htaccess is not working. Make sure you copied .htaccess-dist to .htaccess.');
 				$error_msg = [];
 				$error_msg['head'] = DI::l10n()->t('Error message from Curl when fetching');
-				$error_msg['url'] = $fetchResult->getRedirectUrl();
+				$error_msg['url'] = Network::getRedirectUrl($fetchResult) ?? $fetchResult->getUrl();
 				$error_msg['msg'] = $fetchResult->getError();
 			}
 

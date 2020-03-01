@@ -295,7 +295,7 @@ class OnePoll
 		}
 
 		$handshake_xml = $curlResult->getBody();
-		$html_code = $curlResult->getReturnCode();
+		$html_code = $curlResult->getStatusCode();
 
 		Logger::log('handshake with url ' . $url . ' returns xml: ' . $handshake_xml, Logger::DATA);
 

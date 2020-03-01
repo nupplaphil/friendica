@@ -69,7 +69,7 @@ class PubSubPublish
 		Logger::log('POST ' . print_r($headers, true) . "\n" . $params, Logger::DATA);
 
 		$postResult = Network::post($subscriber['callback_url'], $params, $headers);
-		$ret = $postResult->getReturnCode();
+		$ret = $postResult->getStatusCode();
 
 		if ($ret >= 200 && $ret <= 299) {
 			Logger::log('Successfully pushed to ' . $subscriber['callback_url']);

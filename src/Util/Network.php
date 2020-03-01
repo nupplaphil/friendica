@@ -28,6 +28,7 @@ use Friendica\Core\Logger;
 use Friendica\Core\System;
 use Friendica\DI;
 use Friendica\Network\CurlResult;
+use Friendica\Network\IResponse;
 
 class Network
 {
@@ -41,7 +42,7 @@ class Network
 	 * @param int     $redirects Recursion counter for internal use - default = 0
 	 * @param int     $timeout   The timeout in seconds, default system config value or 60 seconds
 	 *
-	 * @return CurlResult The content
+	 * @return IResponse The content
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
 	public static function post(string $url, $params, array $headers = [], int $timeout = 0, int &$redirects = 0)
@@ -50,13 +51,13 @@ class Network
 
 		if (self::isUrlBlocked($url)) {
 			Logger::log('post_url: domain of ' . $url . ' is blocked', Logger::DATA);
-			return CurlResult::createErrorCurl($url);
+			return CurlResult::createErrorCurl(DI::logger(), $url);
 		}
 
 		$ch = curl_init($url);
 
 		if (($redirects > 8) || (!$ch)) {
-			return CurlResult::createErrorCurl($url);
+			return CurlResult::createErrorCurl(DI::logger(), $url);
 		}
 
 		Logger::log('post_url: start ' . $url, Logger::DATA);
@@ -107,13 +108,15 @@ class Network
 
 		$curl_info = curl_getinfo($ch);
 
-		$curlResponse = new CurlResult($url, $s, $curl_info, curl_errno($ch), curl_error($ch));
+		$curlResponse = new CurlResult(DI::logger(), $url, $s, $curl_info, curl_errno($ch), curl_error($ch));
 
-		if ($curlResponse->isRedirectUrl()) {
+		$redirectUrl = self::getRedirectUrl($curlResponse);
+
+		if (!empty($redirectUrl)) {
 			$redirects++;
-			Logger::log('post_url: redirect ' . $url . ' to ' . $curlResponse->getRedirectUrl());
+			Logger::log('post_url: redirect ' . $url . ' to ' . $redirectUrl);
 			curl_close($ch);
-			return self::post($curlResponse->getRedirectUrl(), $params, $headers, $redirects, $timeout);
+			return self::post($redirectUrl, $params, $headers, $redirects, $timeout);
 		}
 
 		curl_close($ch);
@@ -121,7 +124,7 @@ class Network
 		DI::profiler()->saveTimestamp($stamp1, 'network', System::callstack());
 
 		// Very old versions of Lighttpd don't like the "Expect" header, so we remove it when needed
-		if ($curlResponse->getReturnCode() == 417) {
+		if ($curlResponse->getStatusCode() == 417) {
 			$redirects++;
 
 			if (empty($headers)) {
@@ -685,5 +688,45 @@ class Network
 		$parsed['query'] = http_build_query($params);
 
 		return self::unparseURL($parsed);
+	}
+
+	public static function getRedirectUrl(IResponse $response)
+	{
+		if ($response->getStatusCode()  == 301 || $response->getStatusCode() == 302 ||
+		    $response->getStatusCode() == 303 || $response->getStatusCode() == 307) {
+			$redirect_parts = parse_url($response->getInfo()['redirect_url'] ?? '');
+			if (empty($redirect_parts)) {
+				$redirect_parts = [];
+			}
+
+			if ($response->hasHeader('Location') || $response->hasHeader('URI')) {
+				$url = $response->getHeaderLine('Location');
+				if (empty($url)) {
+					$url = $response->getHeaderLine('URI');
+				}
+				$redirect_parts2 = parse_url($url);
+				if (!empty($redirect_parts2)) {
+					$redirect_parts = array_merge($redirect_parts, $redirect_parts2);
+				}
+			}
+
+			$parts = parse_url($response->getUrl() ?? '');
+			if (empty($parts)) {
+				$parts = [];
+			}
+
+			/// @todo Checking the corresponding RFC which parts of a redirect can be ommitted.
+			$components = ['scheme', 'host', 'path', 'query', 'fragment'];
+			foreach ($components as $component) {
+				if (empty($redirect_parts[$component]) && !empty($parts[$component])) {
+					$redirect_parts[$component] = $parts[$component];
+				}
+			}
+
+			return Network::unparseURL($redirect_parts);
+
+		} else {
+			return '';
+		}
 	}
 }

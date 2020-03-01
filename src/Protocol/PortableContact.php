@@ -107,9 +107,9 @@ class PortableContact
 
 		Logger::log('load: returns ' . $s, Logger::DATA);
 
-		Logger::log('load: return code: ' . $fetchresult->getReturnCode(), Logger::DEBUG);
+		Logger::log('load: return code: ' . $fetchresult->getStatusCode(), Logger::DEBUG);
 
-		if (($fetchresult->getReturnCode() > 299) || (! $s)) {
+		if (($fetchresult->getStatusCode() > 299) || (! $s)) {
 			return;
 		}
 

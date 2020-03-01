@@ -187,7 +187,7 @@ class ExAuth
 			return false;
 		}
 
-		if ($curlResult->getReturnCode() != 200) {
+		if ($curlResult->getStatusCode() != 200) {
 			return false;
 		}
 

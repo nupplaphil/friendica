@@ -1227,7 +1227,7 @@ class DFRN
 
 		$xml = $curlResult->getBody();
 
-		$curl_stat = $curlResult->getReturnCode();
+		$curl_stat = $curlResult->getStatusCode();
 		if (empty($curl_stat)) {
 			return -3; // timed out
 		}
@@ -1374,12 +1374,12 @@ class DFRN
 
 		Logger::log('dfrn_deliver: ' . "RECEIVED: " . $xml, Logger::DATA);
 
-		$curl_stat = $postResult->getReturnCode();
+		$curl_stat = $postResult->getStatusCode();
 		if (empty($curl_stat) || empty($xml)) {
 			return -9; // timed out
 		}
 
-		if (($curl_stat == 503) && stristr($postResult->getHeader(), 'retry-after')) {
+		if (($curl_stat == 503) && $postResult->hasHeader('retry-after')) {
 			return -10;
 		}
 
@@ -1468,13 +1468,13 @@ class DFRN
 		$postResult = Network::post($dest_url, $envelope, ["Content-Type: ".$content_type]);
 		$xml = $postResult->getBody();
 
-		$curl_stat = $postResult->getReturnCode();
+		$curl_stat = $postResult->getStatusCode();
 		if (empty($curl_stat) || empty($xml)) {
 			Logger::log('Empty answer from ' . $contact['id'] . ' - ' . $dest_url);
 			return -9; // timed out
 		}
 
-		if (($curl_stat == 503) && (stristr($postResult->getHeader(), 'retry-after'))) {
+		if (($curl_stat == 503) && $postResult->hasHeader('retry-after')) {
 			return -10;
 		}
 

@@ -56,7 +56,7 @@ class CurlResultTest extends TestCase
 		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
 
 
-		$curlResult = new CurlResult('https://test.local', $header . $body, [
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code' => 200,
 			'content_type' => 'text/html; charset=utf-8',
 			'url' => 'https://test.local'
@@ -64,40 +64,9 @@ class CurlResultTest extends TestCase
 
 		$this->assertTrue($curlResult->isSuccess());
 		$this->assertFalse($curlResult->isTimeout());
-		$this->assertFalse($curlResult->isRedirectUrl());
-		$this->assertSame($header, $curlResult->getHeader());
 		$this->assertSame($body, $curlResult->getBody());
 		$this->assertSame('text/html; charset=utf-8', $curlResult->getContentType());
 		$this->assertSame('https://test.local', $curlResult->getUrl());
-		$this->assertSame('https://test.local', $curlResult->getRedirectUrl());
-	}
-
-	/**
-	 * @small
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
-	public function testRedirect()
-	{
-		$header = file_get_contents(__DIR__ . '/../../datasets/curl/about.head');
-		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
-
-
-		$curlResult = new CurlResult('https://test.local/test/it', $header . $body, [
-			'http_code' => 301,
-			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local/test/it',
-			'redirect_url' => 'https://test.other'
-		]);
-
-		$this->assertTrue($curlResult->isSuccess());
-		$this->assertFalse($curlResult->isTimeout());
-		$this->assertTrue($curlResult->isRedirectUrl());
-		$this->assertSame($header, $curlResult->getHeader());
-		$this->assertSame($body, $curlResult->getBody());
-		$this->assertSame('text/html; charset=utf-8', $curlResult->getContentType());
-		$this->assertSame('https://test.local/test/it', $curlResult->getUrl());
-		$this->assertSame('https://test.other/test/it', $curlResult->getRedirectUrl());
 	}
 
 	/**
@@ -109,7 +78,7 @@ class CurlResultTest extends TestCase
 		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
 
 
-		$curlResult = new CurlResult('https://test.local/test/it', $header . $body, [
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local/test/it', $header . $body, [
 			'http_code' => 500,
 			'content_type' => 'text/html; charset=utf-8',
 			'url' => 'https://test.local/test/it',
@@ -118,39 +87,9 @@ class CurlResultTest extends TestCase
 
 		$this->assertFalse($curlResult->isSuccess());
 		$this->assertTrue($curlResult->isTimeout());
-		$this->assertFalse($curlResult->isRedirectUrl());
-		$this->assertSame($header, $curlResult->getHeader());
 		$this->assertSame($body, $curlResult->getBody());
 		$this->assertSame('text/html; charset=utf-8', $curlResult->getContentType());
-		$this->assertSame('https://test.local/test/it', $curlResult->getRedirectUrl());
 		$this->assertSame('Tested error', $curlResult->getError());
-	}
-
-	/**
-	 * @small
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
-	public function testRedirectHeader()
-	{
-		$header = file_get_contents(__DIR__ . '/../../datasets/curl/about.redirect');
-		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
-
-
-		$curlResult = new CurlResult('https://test.local/test/it?key=value', $header . $body, [
-			'http_code' => 301,
-			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local/test/it?key=value',
-		]);
-
-		$this->assertTrue($curlResult->isSuccess());
-		$this->assertFalse($curlResult->isTimeout());
-		$this->assertTrue($curlResult->isRedirectUrl());
-		$this->assertSame($header, $curlResult->getHeader());
-		$this->assertSame($body, $curlResult->getBody());
-		$this->assertSame('text/html; charset=utf-8', $curlResult->getContentType());
-		$this->assertSame('https://test.local/test/it?key=value', $curlResult->getUrl());
-		$this->assertSame('https://test.other/some/?key=value', $curlResult->getRedirectUrl());
 	}
 
 	/**
@@ -161,13 +100,13 @@ class CurlResultTest extends TestCase
 		$header = file_get_contents(__DIR__ . '/../../datasets/curl/about.head');
 		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
 
-		$curlResult = new CurlResult('https://test.local', $header . $body, [
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code' => 200,
 			'content_type' => 'text/html; charset=utf-8',
 			'url' => 'https://test.local'
 		]);
-		$this->assertTrue($curlResult->inHeader('vary'));
-		$this->assertFalse($curlResult->inHeader('wrongHeader'));
+		$this->assertTrue($curlResult->hasHeader('vary'));
+		$this->assertFalse($curlResult->hasHeader('wrongHeader'));
 	}
 
 	 /**
@@ -178,13 +117,13 @@ class CurlResultTest extends TestCase
 		$header = file_get_contents(__DIR__ . '/../../datasets/curl/about.head');
 		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
 
-		$curlResult = new CurlResult('https://test.local', $header . $body, [
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code' => 200,
 			'content_type' => 'text/html; charset=utf-8',
 			'url' => 'https://test.local'
 		]);
 
-		$headers = $curlResult->getHeaderArray();
+		$headers = $curlResult->getHeaders();
 
 		$this->assertNotEmpty($headers);
 		$this->assertArrayHasKey('vary', $headers);
@@ -198,13 +137,13 @@ class CurlResultTest extends TestCase
 		$header = file_get_contents(__DIR__ . '/../../datasets/curl/about.head');
 		$body = file_get_contents(__DIR__ . '/../../datasets/curl/about.body');
 
-		$curlResult = new CurlResult('https://test.local', $header . $body, [
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code' => 200,
 			'content_type' => 'text/html; charset=utf-8',
 			'url' => 'https://test.local'
 		]);
 
-		$this->assertNotEmpty($curlResult->getHeader());
-		$this->assertEmpty($curlResult->getHeader('wrongHeader'));
+		$this->assertNotEmpty($curlResult->getHeaders());
+		$this->assertEmpty($curlResult->getHeaderLine('wrongHeader'));
 	}
 }

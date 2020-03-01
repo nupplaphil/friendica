@@ -325,7 +325,7 @@ function subscribe_to_hub($url, array $importer, array $contact, $hubmode = 'sub
 
 	$postResult = Network::post($url, $params);
 
-	Logger::log('subscribe_to_hub: returns: ' . $postResult->getReturnCode(), Logger::DEBUG);
+	Logger::log('subscribe_to_hub: returns: ' . $postResult->getStatusCode(), Logger::DEBUG);
 
 	return;
 

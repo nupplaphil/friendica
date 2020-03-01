@@ -133,7 +133,7 @@ function pubsubhubbub_init(App $a) {
 
 		$fetchResult = DI::fetch()->urlFull($hub_callback . $separator . $params);
 		$body = $fetchResult->getBody();
-		$ret = $fetchResult->getReturnCode();
+		$ret = $fetchResult->getStatusCode();
 
 		// give up if the HTTP return code wasn't a success (2xx)
 		if ($ret < 200 || $ret > 299) {
