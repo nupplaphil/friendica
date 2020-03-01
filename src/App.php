@@ -23,12 +23,12 @@ namespace Friendica;
 
 use Exception;
 use Friendica\App\Arguments;
-use Friendica\App\BaseURL;
 use Friendica\App\Authentication;
+use Friendica\App\BaseURL;
 use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
-use Friendica\Core\PConfig\IPConfig;
 use Friendica\Core\L10n;
+use Friendica\Core\PConfig\IPConfig;
 use Friendica\Core\System;
 use Friendica\Core\Theme;
 use Friendica\Database\Database;
@@ -238,22 +238,6 @@ class App
 		if ($this->timezone) {
 			date_default_timezone_set($this->timezone);
 		}
-	}
-
-	/**
-	 * Returns the current UserAgent as a String
-	 *
-	 * @return string the UserAgent as a String
-	 * @throws HTTPException\InternalServerErrorException
-	 */
-	public function getUserAgent()
-	{
-		return
-			FRIENDICA_PLATFORM . " '" .
-			FRIENDICA_CODENAME . "' " .
-			FRIENDICA_VERSION . '-' .
-			DB_UPDATE_VERSION . '; ' .
-			$this->baseURL->get();
 	}
 
 	/**

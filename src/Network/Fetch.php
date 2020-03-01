@@ -40,13 +40,9 @@ class Fetch implements IFetch
 	/** @var Profiler */
 	private $profiler;
 
-	public function __construct(App $app, LoggerInterface $logger, IConfig $config, Profiler $profiler)
+	public function __construct(App\BaseURL $baseURL, LoggerInterface $logger, IConfig $config, Profiler $profiler)
 	{
-		try {
-			$this->userAgent = $app->getUserAgent();
-		} catch (HTTPException\InternalServerErrorException $e) {
-			$logger->warning('Couldn\'t initialize user Agent');
-		}
+		$this->userAgent = $baseURL->getUserAgent();
 		$this->logger   = $logger;
 		$this->config   = $config;
 		$this->profiler = $profiler;

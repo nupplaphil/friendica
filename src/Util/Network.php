@@ -53,7 +53,6 @@ class Network
 			return CurlResult::createErrorCurl($url);
 		}
 
-		$a = DI::app();
 		$ch = curl_init($url);
 
 		if (($redirects > 8) || (!$ch)) {
@@ -66,7 +65,7 @@ class Network
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-		curl_setopt($ch, CURLOPT_USERAGENT, $a->getUserAgent());
+		curl_setopt($ch, CURLOPT_USERAGENT, DI::baseUrl()->getUserAgent());
 
 		if (DI::config()->get('system', 'ipv4_resolve', false)) {
 			curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
@@ -422,8 +421,6 @@ class Network
 	 */
 	public static function finalUrl(string $url, int $depth = 1, bool $fetchbody = false)
 	{
-		$a = DI::app();
-
 		$url = self::stripTrackingQueryParams($url);
 
 		if ($depth > 10) {
@@ -440,7 +437,7 @@ class Network
 		curl_setopt($ch, CURLOPT_NOBODY, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, $a->getUserAgent());
+		curl_setopt($ch, CURLOPT_USERAGENT, DI::baseUrl()->getUserAgent());
 
 		curl_exec($ch);
 		$curl_info = @curl_getinfo($ch);
@@ -484,7 +481,7 @@ class Network
 		curl_setopt($ch, CURLOPT_NOBODY, 0);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, $a->getUserAgent());
+		curl_setopt($ch, CURLOPT_USERAGENT, DI::baseUrl()->getUserAgent());
 
 		$body = curl_exec($ch);
 		curl_close($ch);

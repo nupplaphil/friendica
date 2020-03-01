@@ -1086,14 +1086,13 @@ class BBCode
 		$text = DI::cache()->get($cache_key);
 
 		if (is_null($text)) {
-			$a = DI::app();
 
 			$stamp1 = microtime(true);
 
 			$ch = @curl_init($match[1]);
 			@curl_setopt($ch, CURLOPT_NOBODY, true);
 			@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			@curl_setopt($ch, CURLOPT_USERAGENT, $a->getUserAgent());
+			@curl_setopt($ch, CURLOPT_USERAGENT, DI::baseUrl()->getUserAgent());
 			@curl_exec($ch);
 			$curl_info = @curl_getinfo($ch);
 
@@ -1142,8 +1141,6 @@ class BBCode
 
 	private static function cleanPictureLinksCallback($match)
 	{
-		$a = DI::app();
-
 		// When the picture link is the own photo path then we can avoid fetching the link
 		$own_photo_url = preg_quote(Strings::normaliseLink(DI::baseUrl()->get()) . '/photos/');
 		if (preg_match('|' . $own_photo_url . '.*?/image/|', Strings::normaliseLink($match[1]))) {
@@ -1167,7 +1164,7 @@ class BBCode
 		$ch = @curl_init($match[1]);
 		@curl_setopt($ch, CURLOPT_NOBODY, true);
 		@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		@curl_setopt($ch, CURLOPT_USERAGENT, $a->getUserAgent());
+		@curl_setopt($ch, CURLOPT_USERAGENT, DI::baseUrl()->getUserAgent());
 		@curl_exec($ch);
 		$curl_info = @curl_getinfo($ch);
 

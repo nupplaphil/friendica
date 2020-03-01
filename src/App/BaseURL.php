@@ -23,9 +23,9 @@ namespace Friendica\App;
 
 use Friendica\Core\Config\IConfig;
 use Friendica\Core\System;
+use Friendica\Network\HTTPException;
 use Friendica\Util\Network;
 use Friendica\Util\Strings;
-use Friendica\Network\HTTPException;
 
 /**
  * A class which checks and contains the basic
@@ -461,5 +461,20 @@ class BaseURL
 	public function __toString()
 	{
 		return $this->get();
+	}
+
+	/**
+	 * Returns the current UserAgent as a String
+	 *
+	 * @return string the UserAgent as a String
+	 */
+	public function getUserAgent()
+	{
+		return
+			FRIENDICA_PLATFORM . " '" .
+			FRIENDICA_CODENAME . "' " .
+			FRIENDICA_VERSION . '-' .
+			DB_UPDATE_VERSION . '; ' .
+			$this->get();
 	}
 }
