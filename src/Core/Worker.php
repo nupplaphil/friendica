@@ -991,7 +991,7 @@ class Worker
 		}
 
 		$url = DI::baseUrl() . '/worker';
-		DI::fetch()->url($url, false, 1);
+		DI::request()->url($url, false, 1);
 	}
 
 	/**

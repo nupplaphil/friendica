@@ -22,9 +22,9 @@
 namespace Friendica\Network;
 
 /**
- * Interface for fetching results of URLs
+ * Interface for fetching or posting data
  */
-interface IFetch
+interface IRequest
 {
 	/**
 	 * Curl wrapper
@@ -79,4 +79,16 @@ interface IFetch
 	 * @return IResponse
 	 */
 	public function curl(string $url, bool $binary = false, array $opts = []);
+
+	/**
+	 * Send POST request to $url
+	 *
+	 * @param string  $url       URL to post
+	 * @param mixed   $params    array of POST variables
+	 * @param array   $headers   HTTP headers
+	 * @param int     $timeout   The timeout in seconds, default system config value or 60 seconds
+	 *
+	 * @return IResponse The content
+	 */
+	public function post(string $url, $params, array $headers = [], int $timeout = 0);
 }

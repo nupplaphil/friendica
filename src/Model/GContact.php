@@ -523,7 +523,7 @@ class GContact
 		$done[] = DI::baseUrl() . '/poco';
 
 		if (strlen(DI::config()->get('system', 'directory'))) {
-			$x = DI::fetch()->url(Search::getGlobalDirectory() . '/pubsites');
+			$x = DI::request()->url(Search::getGlobalDirectory() . '/pubsites');
 			if (!empty($x)) {
 				$j = json_decode($x);
 				if (!empty($j->entries)) {
@@ -832,7 +832,7 @@ class GContact
 			return false;
 		}
 
-		$curlResult = DI::fetch()->curl($gserver['noscrape'] . '/' . $data['nick']);
+		$curlResult = DI::request()->curl($gserver['noscrape'] . '/' . $data['nick']);
 
 		if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 			$noscrape = json_decode($curlResult->getBody(), true);
@@ -914,7 +914,7 @@ class GContact
 	private static function updateFromFeed(array $data)
 	{
 		// Search for the newest entry in the feed
-		$curlResult = DI::fetch()->curl($data['poll']);
+		$curlResult = DI::request()->curl($data['poll']);
 		if (!$curlResult->isSuccess()) {
 			$fields = ['last_failure' => DateTimeFormat::utcNow()];
 			DBA::update('gcontact', $fields, ['nurl' => Strings::normaliseLink($data['url'])]);
@@ -1191,7 +1191,7 @@ class GContact
 
 		$url = $server . '/main/statistics';
 
-		$curlResult = DI::fetch()->curl($url);
+		$curlResult = DI::request()->curl($url);
 		if (!$curlResult->isSuccess()) {
 			return false;
 		}

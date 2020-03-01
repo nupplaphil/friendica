@@ -33,7 +33,6 @@ use Friendica\Protocol\ActivityPub;
 use Friendica\Protocol\Email;
 use Friendica\Protocol\PortableContact;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Network;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
 
@@ -284,7 +283,7 @@ class OnePoll
 			. '&type=data&last_update=' . $last_update
 			. '&perm=' . $perm;
 
-		$curlResult = DI::fetch()->curl($url);
+		$curlResult = DI::request()->curl($url);
 
 		if (!$curlResult->isSuccess() && ($curlResult->getErrorNumber() == CURLE_OPERATION_TIMEDOUT)) {
 			// set the last-update so we don't keep polling
@@ -398,7 +397,7 @@ class OnePoll
 		$postvars['dfrn_version'] = DFRN_PROTOCOL_VERSION;
 		$postvars['perm'] = 'rw';
 
-		return Network::post($contact['poll'], $postvars)->getBody();
+		return DI::request()->post($contact['poll'], $postvars)->getBody();
 	}
 
 	/**
@@ -437,7 +436,7 @@ class OnePoll
 		}
 
 		$cookiejar = tempnam(get_temppath(), 'cookiejar-onepoll-');
-		$curlResult = DI::fetch()->curl($contact['poll'], false, ['cookiejar' => $cookiejar]);
+		$curlResult = DI::request()->curl($contact['poll'], false, ['cookiejar' => $cookiejar]);
 		unlink($cookiejar);
 
 		if ($curlResult->isTimeout()) {

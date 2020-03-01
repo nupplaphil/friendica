@@ -28,7 +28,7 @@ use Friendica\Util\Network;
 use Friendica\Util\Profiler;
 use Psr\Log\LoggerInterface;
 
-class Fetch implements IFetch
+class Request implements IRequest
 {
 	/** @var string */
 	private $userAgent = '';
@@ -232,6 +232,111 @@ class Fetch implements IFetch
 		@curl_close($ch);
 
 		$this->profiler->saveTimestamp($stamp1, 'network', System::callstack());
+
+		return $curlResponse;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param int     $timeout   The timeout in seconds, default system config value or 60 seconds
+	 *
+	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 */
+	public function post(string $url, $params, array $headers = [], int $timeout = 0, int &$redirects = 0)
+	{
+		$stamp1 = microtime(true);
+
+		if (Network::isUrlBlocked($url)) {
+			$this->logger->notice('Domain is blocked.', ['url' => $url]);
+			return CurlResult::createErrorCurl($this->logger, $url);
+		}
+
+		$ch = curl_init($url);
+
+		if (($redirects > 8) || (!$ch)) {
+			return CurlResult::createErrorCurl($this->logger, $url);
+		}
+
+		$this->logger->debug('Start.', ['url' => $url]);
+
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
+
+		if ($this->config->get('system', 'ipv4_resolve', false)) {
+			curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+		}
+
+		if (intval($timeout)) {
+			curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+		} else {
+			$curl_time = $this->config->get('system', 'curl_timeout', 60);
+			curl_setopt($ch, CURLOPT_TIMEOUT, intval($curl_time));
+		}
+
+		if (!empty($headers)) {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		}
+
+		$check_cert = $this->config->get('system', 'verifyssl');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, (($check_cert) ? true : false));
+
+		if ($check_cert) {
+			@curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+		}
+
+		$proxy = $this->config->get('system', 'proxy');
+
+		if (strlen($proxy)) {
+			curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
+			curl_setopt($ch, CURLOPT_PROXY, $proxy);
+			$proxyuser = $this->config->get('system', 'proxyuser');
+			if (strlen($proxyuser)) {
+				curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyuser);
+			}
+		}
+
+		// don't let curl abort the entire application
+		// if it throws any errors.
+
+		$s = @curl_exec($ch);
+
+		$curl_info = curl_getinfo($ch);
+
+		$curlResponse = new CurlResult($this->logger, $url, $s, $curl_info, curl_errno($ch), curl_error($ch));
+
+		$redirectUrl = Network::getRedirectUrl($curlResponse);
+
+		if (!empty($redirectUrl)) {
+			$redirects++;
+			$this->logger->notice('Redirect.', ['url' => $url, 'to' => $redirectUrl]);
+			curl_close($ch);
+			return self::post($redirectUrl, $params, $headers, $redirects, $timeout);
+		}
+
+		curl_close($ch);
+
+		$this->profiler->saveTimestamp($stamp1, 'network', System::callstack());
+
+		// Very old versions of Lighttpd don't like the "Expect" header, so we remove it when needed
+		if ($curlResponse->getStatusCode() == 417) {
+			$redirects++;
+
+			if (empty($headers)) {
+				$headers = ['Expect:'];
+			} else {
+				if (!in_array('Expect:', $headers)) {
+					array_push($headers, 'Expect:');
+				}
+			}
+			$this->logger->info('Server responds with 417, applying workaround', ['url' => $url]);
+			return self::post($url, $params, $headers, $redirects, $timeout);
+		}
+
+		$this->logger->debug('End.', ['url' => $url]);
 
 		return $curlResponse;
 	}

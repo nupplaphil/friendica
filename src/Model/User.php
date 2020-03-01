@@ -836,7 +836,7 @@ class User
 			$photo_failure = false;
 
 			$filename = basename($photo);
-			$img_str = DI::fetch()->url($photo, true);
+			$img_str = DI::request()->url($photo, true);
 			// guess mimetype from headers or filename
 			$type = Images::guessType($photo, true);
 

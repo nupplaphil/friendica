@@ -209,18 +209,18 @@ return [
 			['start', [], Dice::CHAIN_CALL],
 		],
 	],
-	Cookie::class         => [
+	Cookie::class           => [
 		'constructParams' => [
 			$_SERVER, $_COOKIE
 		],
 	],
-	IStorage::class       => [
+	IStorage::class         => [
 		'instanceOf' => StorageManager::class,
 		'call' => [
 			['getBackend', [], Dice::CHAIN_CALL],
 		],
 	],
-	Network\IFetch::class => [
-		'instanceOf' => Network\Fetch::class,
+	Network\IRequest::class => [
+		'instanceOf' => Network\Request::class,
 	]
 ];

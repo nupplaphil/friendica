@@ -62,7 +62,7 @@ class CronJobs
 				// Now trying to register
 				$url = 'http://the-federation.info/register/' . DI::baseUrl()->getHostname();
 				Logger::debug('Check registering url', ['url' => $url]);
-				$ret = DI::fetch()->url($url);
+				$ret = DI::request()->url($url);
 				Logger::debug('Check registering answer', ['answer' => $ret]);
 				Logger::info('cron_end');
 				break;

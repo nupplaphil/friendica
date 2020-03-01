@@ -208,7 +208,7 @@ class GServer
 
 		// When a nodeinfo is present, we don't need to dig further
 		$xrd_timeout = DI::config()->get('system', 'xrd_timeout');
-		$curlResult = DI::fetch()->curl($url . '/.well-known/nodeinfo', false, ['timeout' => $xrd_timeout]);
+		$curlResult = DI::request()->curl($url . '/.well-known/nodeinfo', false, ['timeout' => $xrd_timeout]);
 		if ($curlResult->isTimeout()) {
 			DBA::update('gserver', ['last_failure' => DateTimeFormat::utcNow()], ['nurl' => Strings::normaliseLink($url)]);
 			return false;
@@ -226,7 +226,7 @@ class GServer
 		if (empty($nodeinfo['network']) || in_array($nodeinfo['network'], [Protocol::DFRN, Protocol::ZOT])) {
 			// Fetch the landing page, possibly it reveals some data
 			if (empty($nodeinfo['network'])) {
-				$curlResult = DI::fetch()->curl($url, false, ['timeout' => $xrd_timeout]);
+				$curlResult = DI::request()->curl($url, false, ['timeout' => $xrd_timeout]);
 				if ($curlResult->isSuccess()) {
 					$serverdata = self::analyseRootHeader($curlResult, $serverdata);
 					$serverdata = self::analyseRootBody($curlResult, $serverdata, $url);
@@ -343,7 +343,7 @@ class GServer
 	{
 		Logger::info('Discover relay data', ['server' => $server_url]);
 
-		$curlResult = DI::fetch()->curl($server_url . '/.well-known/x-social-relay');
+		$curlResult = DI::request()->curl($server_url . '/.well-known/x-social-relay');
 		if (!$curlResult->isSuccess()) {
 			return;
 		}
@@ -415,7 +415,7 @@ class GServer
 	 */
 	private static function fetchStatistics(string $url)
 	{
-		$curlResult = DI::fetch()->curl($url . '/statistics.json');
+		$curlResult = DI::request()->curl($url . '/statistics.json');
 		if (!$curlResult->isSuccess()) {
 			return [];
 		}
@@ -522,7 +522,7 @@ class GServer
 	 */
 	private static function parseNodeinfo1(string $nodeinfo_url)
 	{
-		$curlResult = DI::fetch()->curl($nodeinfo_url);
+		$curlResult = DI::request()->curl($nodeinfo_url);
 
 		if (!$curlResult->isSuccess()) {
 			return [];
@@ -600,7 +600,7 @@ class GServer
 	 */
 	private static function parseNodeinfo2(string $nodeinfo_url)
 	{
-		$curlResult = DI::fetch()->curl($nodeinfo_url);
+		$curlResult = DI::request()->curl($nodeinfo_url);
 		if (!$curlResult->isSuccess()) {
 			return [];
 		}
@@ -678,7 +678,7 @@ class GServer
 	 */
 	private static function fetchSiteinfo(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/siteinfo.json');
+		$curlResult = DI::request()->curl($url . '/siteinfo.json');
 		if (!$curlResult->isSuccess()) {
 			return $serverdata;
 		}
@@ -743,7 +743,7 @@ class GServer
 	private static function validHostMeta(string $url)
 	{
 		$xrd_timeout = DI::config()->get('system', 'xrd_timeout');
-		$curlResult = DI::fetch()->curl($url . '/.well-known/host-meta', false, ['timeout' => $xrd_timeout]);
+		$curlResult = DI::request()->curl($url . '/.well-known/host-meta', false, ['timeout' => $xrd_timeout]);
 		if (!$curlResult->isSuccess()) {
 			return false;
 		}
@@ -839,7 +839,7 @@ class GServer
 	{
 		$serverdata['poco'] = '';
 
-		$curlResult = DI::fetch()->curl($url . '/poco');
+		$curlResult = DI::request()->curl($url . '/poco');
 		if (!$curlResult->isSuccess()) {
 			return $serverdata;
 		}
@@ -869,7 +869,7 @@ class GServer
 	 */
 	public static function checkMastodonDirectory(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/api/v1/directory?limit=1');
+		$curlResult = DI::request()->curl($url . '/api/v1/directory?limit=1');
 		if (!$curlResult->isSuccess()) {
 			return $serverdata;
 		}
@@ -896,7 +896,7 @@ class GServer
 	 */
 	private static function detectNextcloud(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/status.php');
+		$curlResult = DI::request()->curl($url . '/status.php');
 
 		if (!$curlResult->isSuccess() || ($curlResult->getBody() == '')) {
 			return $serverdata;
@@ -926,7 +926,7 @@ class GServer
 	 */
 	private static function detectMastodonAlikes(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/api/v1/instance');
+		$curlResult = DI::request()->curl($url . '/api/v1/instance');
 
 		if (!$curlResult->isSuccess() || ($curlResult->getBody() == '')) {
 			return $serverdata;
@@ -988,7 +988,7 @@ class GServer
 	 */
 	private static function detectHubzilla(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/api/statusnet/config.json');
+		$curlResult = DI::request()->curl($url . '/api/statusnet/config.json');
 		if (!$curlResult->isSuccess() || ($curlResult->getBody() == '')) {
 			return $serverdata;
 		}
@@ -1081,7 +1081,7 @@ class GServer
 	private static function detectGNUSocial(string $url, array $serverdata)
 	{
 		// Test for GNU Social
-		$curlResult = DI::fetch()->curl($url . '/api/gnusocial/version.json');
+		$curlResult = DI::request()->curl($url . '/api/gnusocial/version.json');
 		if ($curlResult->isSuccess() && ($curlResult->getBody() != '{"error":"not implemented"}') &&
 			($curlResult->getBody() != '') && (strlen($curlResult->getBody()) < 30)) {
 			$serverdata['platform'] = 'gnusocial';
@@ -1094,7 +1094,7 @@ class GServer
 		}
 
 		// Test for Statusnet
-		$curlResult = DI::fetch()->curl($url . '/api/statusnet/version.json');
+		$curlResult = DI::request()->curl($url . '/api/statusnet/version.json');
 		if ($curlResult->isSuccess() && ($curlResult->getBody() != '{"error":"not implemented"}') &&
 			($curlResult->getBody() != '') && (strlen($curlResult->getBody()) < 30)) {
 
@@ -1126,9 +1126,9 @@ class GServer
 	 */
 	private static function detectFriendica(string $url, array $serverdata)
 	{
-		$curlResult = DI::fetch()->curl($url . '/friendica/json');
+		$curlResult = DI::request()->curl($url . '/friendica/json');
 		if (!$curlResult->isSuccess()) {
-			$curlResult = DI::fetch()->curl($url . '/friendika/json');
+			$curlResult = DI::request()->curl($url . '/friendika/json');
 		}
 
 		if (!$curlResult->isSuccess()) {
@@ -1415,7 +1415,7 @@ class GServer
 		}
 
 		// Discover federated servers
-		$curlResult = DI::fetch()->url("http://the-federation.info/pods.json");
+		$curlResult = DI::request()->url("http://the-federation.info/pods.json");
 
 		if (!empty($curlResult)) {
 			$servers = json_decode($curlResult, true);
@@ -1433,7 +1433,7 @@ class GServer
 		if (!empty($accesstoken)) {
 			$api = 'https://instances.social/api/1.0/instances/list?count=0';
 			$header = ['Authorization: Bearer '.$accesstoken];
-			$curlResult = DI::fetch()->curl($api, false, ['headers' => $header]);
+			$curlResult = DI::request()->curl($api, false, ['headers' => $header]);
 
 			if ($curlResult->isSuccess()) {
 				$servers = json_decode($curlResult->getBody(), true);

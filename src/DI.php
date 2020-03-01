@@ -320,11 +320,11 @@ abstract class DI
 	//
 
 	/**
-	 * @return \Friendica\Network\IFetch
+	 * @return \Friendica\Network\IRequest
 	 */
-	public static function fetch()
+	public static function request()
 	{
-		return self::$dice->create(Network\IFetch::class);
+		return self::$dice->create(Network\IRequest::class);
 	}
 
 	//

@@ -30,7 +30,6 @@ use Friendica\Model\Item;
 use Friendica\Protocol\DFRN;
 use Friendica\Protocol\Feed;
 use Friendica\Protocol\OStatus;
-use Friendica\Util\Network;
 use Friendica\Util\ParseUrl;
 use Friendica\Util\Strings;
 
@@ -323,7 +322,7 @@ function subscribe_to_hub($url, array $importer, array $contact, $hubmode = 'sub
 		DBA::update('contact', ['hub-verify' => $verify_token], ['id' => $contact['id']]);
 	}
 
-	$postResult = Network::post($url, $params);
+	$postResult = DI::request()->post($url, $params);
 
 	Logger::log('subscribe_to_hub: returns: ' . $postResult->getStatusCode(), Logger::DEBUG);
 

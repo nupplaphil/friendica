@@ -167,7 +167,7 @@ class Images
 			return $data;
 		}
 
-		$img_str = DI::fetch()->url($url, true, 4);
+		$img_str = DI::request()->url($url, true, 4);
 
 		if (!$img_str) {
 			return [];

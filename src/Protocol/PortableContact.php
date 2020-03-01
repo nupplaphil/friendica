@@ -102,7 +102,7 @@ class PortableContact
 
 		Logger::log('load: ' . $url, Logger::DEBUG);
 
-		$fetchresult = DI::fetch()->urlFull($url);
+		$fetchresult = DI::request()->urlFull($url);
 		$s = $fetchresult->getBody();
 
 		Logger::log('load: returns ' . $s, Logger::DATA);
@@ -250,7 +250,7 @@ class PortableContact
 	 */
 	private static function fetchServerlist($poco)
 	{
-		$curlResult = DI::fetch()->curl($poco . "/@server");
+		$curlResult = DI::request()->curl($poco . "/@server");
 
 		if (!$curlResult->isSuccess()) {
 			return;
@@ -290,7 +290,7 @@ class PortableContact
 
 		Logger::info("Fetch all users from the server " . $server["url"]);
 
-		$curlResult = DI::fetch()->curl($url);
+		$curlResult = DI::request()->curl($url);
 
 		if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 			$data = json_decode($curlResult->getBody(), true);
@@ -313,7 +313,7 @@ class PortableContact
 
 				$success = false;
 
-				$curlResult = DI::fetch()->curl($url);
+				$curlResult = DI::request()->curl($url);
 
 				if ($curlResult->isSuccess() && !empty($curlResult->getBody())) {
 					Logger::info("Fetch all global contacts from the server " . $server["nurl"]);
@@ -371,7 +371,7 @@ class PortableContact
 				// Fetch all contacts from a given user from the other server
 				$url = $server['poco'] . '/' . $username . '/?fields=displayName,urls,photos,updated,network,aboutMe,currentLocation,tags,contactType,generation';
 
-				$curlResult = DI::fetch()->curl($url);
+				$curlResult = DI::request()->curl($url);
 
 				if ($curlResult->isSuccess()) {
 					$data = json_decode($curlResult->getBody(), true);

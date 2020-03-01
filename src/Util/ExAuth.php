@@ -181,7 +181,7 @@ class ExAuth
 
 		$url = ($ssl ? 'https' : 'http') . '://' . $host . '/noscrape/' . $user;
 
-		$curlResult = DI::fetch()->curl($url);
+		$curlResult = DI::request()->curl($url);
 
 		if (!$curlResult->isSuccess()) {
 			return false;
