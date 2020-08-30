@@ -32,26 +32,31 @@ class ConfigFactory
 {
 	/**
 	 * @param ConfigFileLoader $loader The Config Cache loader (INI/config/.htconfig)
+	 * @param array            $server The $_SERVER variables
 	 *
-	 * @return Cache
+	 * @return Config\IConfigCache
 	 *
 	 * @throws Exception
 	 */
-	public function createCache(ConfigFileLoader $loader)
+	public function createCache(ConfigFileLoader $loader, array $server = [])
 	{
 		$configCache = new Cache();
 		$loader->setupCache($configCache);
+
+		if ((bool)$configCache->get('system', 'config_env_variables')) {
+			$configCache = new Config\EnvCache($configCache, $server);
+		}
 
 		return $configCache;
 	}
 
 	/**
-	 * @param Cache       $configCache The config cache of this adapter
-	 * @param ConfigModel $configModel The configuration model
+	 * @param Config\IConfigCache $configCache The config cache of this adapter
+	 * @param ConfigModel         $configModel The configuration model
 	 *
 	 * @return Config\IConfig
 	 */
-	public function createConfig(Cache $configCache, ConfigModel $configModel)
+	public function createConfig(Config\IConfigCache $configCache, ConfigModel $configModel)
 	{
 		if ($configCache->get('system', 'config_adapter') === 'preload') {
 			$configuration = new Config\PreloadConfig($configCache, $configModel);
@@ -64,13 +69,13 @@ class ConfigFactory
 	}
 
 	/**
-	 * @param Cache                         $configCache  The config cache
+	 * @param Config\IConfigCache           $configCache  The config cache
 	 * @param \Friendica\Core\PConfig\Cache $pConfigCache The personal config cache
 	 * @param PConfigModel                  $configModel  The configuration model
 	 *
 	 * @return \Friendica\Core\PConfig\IPConfig
 	 */
-	public function createPConfig(Cache $configCache, \Friendica\Core\PConfig\Cache $pConfigCache, PConfigModel $configModel)
+	public function createPConfig(Config\IConfigCache $configCache, \Friendica\Core\PConfig\Cache $pConfigCache, PConfigModel $configModel)
 	{
 		if ($configCache->get('system', 'config_adapter') === 'preload') {
 			$configuration = new \Friendica\Core\PConfig\PreloadPConfig($pConfigCache, $configModel);

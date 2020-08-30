@@ -456,7 +456,7 @@ class InstallerTest extends MockedTest
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
 
 		$install = new Installer();
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('set')->with('config', 'php_path', \Mockery::any())->once();
 		$configCache->shouldReceive('set')->with('system', 'basepath', '/test/')->once();
 

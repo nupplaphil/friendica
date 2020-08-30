@@ -25,6 +25,7 @@ use Dice\Dice;
 use Friendica\App;
 use Friendica\Console\AutomaticInstallation;
 use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\Installer;
 use Friendica\Core\L10n;
 use Friendica\Core\Logger;
@@ -56,7 +57,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTest
 	private $assertFileDb;
 
 	/**
-	 * @var Cache The configuration cache to check after each test
+	 * @var IConfigCache The configuration cache to check after each test
 	 */
 	private $configCache;
 

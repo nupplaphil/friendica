@@ -21,8 +21,8 @@
 
 namespace Friendica\Core;
 
-use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Model;
 
 /**
@@ -34,7 +34,7 @@ use Friendica\Model;
 abstract class BaseConfig implements IConfig
 {
 	/**
-	 * @var Cache
+	 * @var IConfigCache
 	 */
 	protected $configCache;
 
@@ -44,10 +44,10 @@ abstract class BaseConfig implements IConfig
 	protected $configModel;
 
 	/**
-	 * @param Cache $configCache The configuration cache (based on the config-files)
-	 * @param Model\Config\Config          $configModel The configuration model
+	 * @param IConfigCache         $configCache The configuration cache (based on the config-files)
+	 * @param Model\Config\Config  $configModel The configuration model
 	 */
-	public function __construct(Cache $configCache, Model\Config\Config $configModel)
+	public function __construct(IConfigCache $configCache, Model\Config\Config $configModel)
 	{
 		$this->configCache = $configCache;
 		$this->configModel = $configModel;

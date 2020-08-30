@@ -25,8 +25,8 @@ use Exception;
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
 use Friendica\App\Authentication;
-use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\PConfig\IPConfig;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
@@ -139,7 +139,7 @@ class App
 	/**
 	 * Returns the current config cache of this node
 	 *
-	 * @return Cache
+	 * @return IConfigCache
 	 */
 	public function getConfigCache()
 	{

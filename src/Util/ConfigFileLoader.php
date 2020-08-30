@@ -23,10 +23,10 @@ namespace Friendica\Util;
 
 use Exception;
 use Friendica\Core\Addon;
-use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 
 /**
- * The ConfigFileLoader loads config-files and stores them in a ConfigCache ( @see Cache )
+ * The ConfigFileLoader loads config-files and stores them in a ConfigCache ( @see IConfigCache )
  *
  * It is capable of loading the following config files:
  * - *.config.php   (current)
@@ -96,12 +96,12 @@ class ConfigFileLoader
 	 * First loads the default value for all the configuration keys, then the legacy configuration files, then the
 	 * expected local.config.php
 	 *
-	 * @param Cache $config The config cache to load to
-	 * @param bool  $raw    Setup the raw config format
+	 * @param IConfigCache $config The config cache to load to
+	 * @param bool         $raw    Setup the raw config format
 	 *
 	 * @throws Exception
 	 */
-	public function setupCache(Cache $config, $raw = false)
+	public function setupCache(IConfigCache $config, $raw = false)
 	{
 		// Load static config files first, the order is important
 		$config->load($this->loadStaticConfig('defaults'));
@@ -147,13 +147,13 @@ class ConfigFileLoader
 	/**
 	 * Tries to load the specified core-configuration into the config cache.
 	 *
-	 * @param Cache $config The Config cache
+	 * @param IConfigCache $config The Config cache
 	 *
 	 * @return array The config array (empty if no config found)
 	 *
 	 * @throws Exception if the configuration file isn't readable
 	 */
-	private function loadCoreConfig(Cache $config)
+	private function loadCoreConfig(IConfigCache $config)
 	{
 		// try to load legacy ini-files first
 		foreach ($this->getConfigFiles(true) as $configFile) {

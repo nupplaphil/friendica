@@ -22,7 +22,7 @@
 namespace Friendica\App;
 
 use Detection\MobileDetect;
-use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Database\Database;
 use Friendica\Util\BasePath;
 
@@ -84,7 +84,7 @@ class Mode
 	 *
 	 * @throws \Exception
 	 */
-	public function determine(BasePath $basepath, Database $database, Cache $configCache)
+	public function determine(BasePath $basepath, Database $database, IConfigCache $configCache)
 	{
 		$mode = 0;
 

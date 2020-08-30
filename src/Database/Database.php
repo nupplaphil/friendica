@@ -22,7 +22,7 @@
 namespace Friendica\Database;
 
 use Exception;
-use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\System;
 use Friendica\DI;
 use Friendica\Network\HTTPException\InternalServerErrorException;
@@ -44,7 +44,7 @@ class Database
 	protected $connected = false;
 
 	/**
-	 * @var Cache
+	 * @var IConfigCache
 	 */
 	protected $configCache;
 	/**
@@ -68,7 +68,7 @@ class Database
 	protected $testmode       = false;
 	private $relation       = [];
 
-	public function __construct(Cache $configCache, Profiler $profiler, LoggerInterface $logger, array $server = [])
+	public function __construct(IConfigCache $configCache, Profiler $profiler, LoggerInterface $logger, array $server = [])
 	{
 		// We are storing these values for being able to perform a reconnect
 		$this->configCache   = $configCache;

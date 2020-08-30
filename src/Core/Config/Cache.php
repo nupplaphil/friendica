@@ -28,7 +28,7 @@ use ParagonIE\HiddenString\HiddenString;
  * Initial, all *.config.php files are loaded into this cache with the
  * ConfigFileLoader ( @see ConfigFileLoader )
  */
-class Cache
+class Cache implements IConfigCache
 {
 	/**
 	 * @var array
@@ -51,11 +51,7 @@ class Cache
 	}
 
 	/**
-	 * Tries to load the specified configuration array into the config array.
-	 * Doesn't overwrite previously set values by default to prevent default config files to supersede DB Config.
-	 *
-	 * @param array $config
-	 * @param bool  $overwrite Force value overwrite if the config key already exists
+	 * {@inheritDoc}
 	 */
 	public function load(array $config, bool $overwrite = false)
 	{
@@ -80,12 +76,7 @@ class Cache
 	}
 
 	/**
-	 * Gets a value from the config cache.
-	 *
-	 * @param string $cat Config category
-	 * @param string $key Config key
-	 *
-	 * @return null|mixed Returns the value of the Config entry or null if not set
+	 * {@inheritDoc}
 	 */
 	public function get(string $cat, string $key = null)
 	{
@@ -113,13 +104,7 @@ class Cache
 	}
 
 	/**
-	 * Sets a value in the config cache. Accepts raw output from the config table
-	 *
-	 * @param string $cat   Config category
-	 * @param string $key   Config key
-	 * @param mixed  $value Value to set
-	 *
-	 * @return bool True, if the value is set
+	 * {@inheritDoc}
 	 */
 	public function set(string $cat, string $key, $value)
 	{
@@ -138,12 +123,7 @@ class Cache
 	}
 
 	/**
-	 * Deletes a value from the config cache.
-	 *
-	 * @param string $cat Config category
-	 * @param string $key Config key
-	 *
-	 * @return bool true, if deleted
+	 * {@inheritDoc}
 	 */
 	public function delete(string $cat, string $key)
 	{
@@ -159,9 +139,7 @@ class Cache
 	}
 
 	/**
-	 * Returns the whole configuration
-	 *
-	 * @return array The configuration
+	 * {@inheritDoc}
 	 */
 	public function getAll()
 	{
@@ -169,11 +147,7 @@ class Cache
 	}
 
 	/**
-	 * Returns an array with missing categories/Keys
-	 *
-	 * @param array $config The array to check
-	 *
-	 * @return array
+	 * {@inheritDoc}
 	 */
 	public function keyDiff(array $config)
 	{

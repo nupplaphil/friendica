@@ -78,10 +78,10 @@ return [
 			[Dice::INSTANCE => '$basepath'],
 		],
 	],
-	Config\Cache::class          => [
+	Config\IConfigCache::class          => [
 		'instanceOf' => Factory\ConfigFactory::class,
 		'call'       => [
-			['createCache', [], Dice::CHAIN_CALL],
+			['createCache', [$_SERVER], Dice::CHAIN_CALL],
 		],
 	],
 	App\Mode::class              => [

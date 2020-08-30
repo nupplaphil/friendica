@@ -21,8 +21,8 @@
 
 namespace Friendica\Util;
 
-use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\System;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -76,9 +76,9 @@ class Profiler implements ContainerInterface
 	}
 
 	/**
-	 * @param Cache $configCache The configuration cache
+	 * @param IConfigCache $configCache The configuration cache
 	 */
-	public function __construct(Cache $configCache)
+	public function __construct(IConfigCache $configCache)
 	{
 		$this->enabled = $configCache->get('system', 'profiler');
 		$this->rendertime = $configCache->get('rendertime', 'callstack');

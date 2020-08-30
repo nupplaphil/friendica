@@ -25,6 +25,8 @@
  *
  */
 
+use Friendica\Core\Config\EnvCache;
+
 return [
 	'database' => [
 		// host (String)
@@ -133,6 +135,18 @@ return [
 		// config_adapter (jit|preload)
 		// Allow to switch the configuration adapter to improve performances at the cost of memory consumption.
 		'config_adapter' => 'jit',
+
+		// config_env_variables (Boolean)
+		// If set to true, Env variables with a specific prefix can override config settings
+		'config_env_variables' => false,
+
+		// config_env_variables_prefix (String)
+		// The prefix for environment variables, which are possible to override config settings
+		'config_env_variables_prefix' => EnvCache::DEFAULT_PREFIX,
+
+		// config_env_variables_split (String)
+		// The splitting characters between category and key
+		'config_env_variables_split' => EnvCache::ENV_SPLIT,
 
 		// curl_range_bytes (Integer)
 		// Maximum number of bytes that should be fetched. Default is 0, which mean "no limit".

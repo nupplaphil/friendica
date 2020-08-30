@@ -25,7 +25,7 @@ use Asika\SimpleConsole\Console;
 use Friendica\App;
 use Friendica\App\BaseURL;
 use Friendica\Core\Config\IConfig;
-use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\Installer;
 use Friendica\Core\Theme;
 use Friendica\Database\Database;
@@ -37,7 +37,7 @@ class AutomaticInstallation extends Console
 {
 	/** @var App\Mode */
 	private $appMode;
-	/** @var Cache */
+	/** @var IConfigCache */
 	private $configCache;
 	/** @var IConfig */
 	private $config;
@@ -99,7 +99,7 @@ Examples
 HELP;
 	}
 
-	public function __construct(App\Mode $appMode, Cache $configCache, IConfig $config, Database $dba, array $argv = null)
+	public function __construct(App\Mode $appMode, IConfigCache $configCache, IConfig $config, Database $dba, array $argv = null)
 	{
 		parent::__construct($argv);
 
@@ -251,13 +251,13 @@ HELP;
 	}
 
 	/**
-	 * @param Installer $installer   The Installer instance
-	 * @param Cache     $configCache The config cache
+	 * @param Installer    $installer   The Installer instance
+	 * @param IConfigCache $configCache The config cache
 	 *
 	 * @return bool true if checks were successfully, otherwise false
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	private function runBasicChecks(Installer $installer, Cache $configCache)
+	private function runBasicChecks(Installer $installer, IConfigCache  $configCache)
 	{
 		$checked = true;
 

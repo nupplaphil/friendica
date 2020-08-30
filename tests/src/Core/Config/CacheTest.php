@@ -22,6 +22,7 @@
 namespace Friendica\Test\src\Core\Config;
 
 use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Test\MockedTest;
 use ParagonIE\HiddenString\HiddenString;
 
@@ -48,7 +49,7 @@ class CacheTest extends MockedTest
 		];
 	}
 
-	private function assertConfigValues($data, Cache $configCache)
+	private function assertConfigValues($data, IConfigCache $configCache)
 	{
 		foreach ($data as $cat => $values) {
 			foreach ($values as $key => $value) {

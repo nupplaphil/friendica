@@ -21,6 +21,7 @@
 
 namespace Friendica\Test\src\Core\Config;
 
+use Friendica\Console\Config;
 use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
 use Friendica\Model\Config\Config as ConfigModel;
@@ -254,7 +255,7 @@ abstract class ConfigTest extends MockedTest
 	public function testCacheLoadDouble(array $data1, array $data2, array $expect)
 	{
 		$this->testedConfig = $this->getInstance();
-		$this->assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		$this->assertInstanceOf(Config::class, $this->testedConfig->getCache());
 
 		foreach ($data1 as $cat => $data) {
 			$this->testedConfig->load($cat);
@@ -415,7 +416,7 @@ abstract class ConfigTest extends MockedTest
 		                  ->once();
 
 		$this->testedConfig = $this->getInstance();
-		$this->assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		$this->assertInstanceOf(Config::class, $this->testedConfig->getCache());
 
 		// directly set the value to the cache
 		$this->testedConfig->getCache()->set('test', 'it', 'now');

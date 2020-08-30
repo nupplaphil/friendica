@@ -23,6 +23,7 @@ namespace Friendica\Test\src\Util;
 
 use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Test\MockedTest;
 use Friendica\Util\Profiler;
 use Mockery\MockInterface;
@@ -47,7 +48,7 @@ class ProfilerTest extends MockedTest
 	 */
 	public function testSetUp()
 	{
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('get')
 		            ->withAnyArgs()
 		            ->andReturn(true)
@@ -122,7 +123,7 @@ class ProfilerTest extends MockedTest
 	 */
 	public function testSaveTimestamp($timestamp, $name, array $functions)
 	{
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('get')
 		            ->withAnyArgs()
 		            ->andReturn(true)
@@ -143,7 +144,7 @@ class ProfilerTest extends MockedTest
 	 */
 	public function testReset($timestamp, $name, array $functions)
 	{
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('get')
 		            ->withAnyArgs()
 		            ->andReturn(true)
@@ -206,7 +207,7 @@ class ProfilerTest extends MockedTest
 			->shouldReceive('info')
 			->once();
 
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('get')
 		            ->withAnyArgs()
 		            ->andReturn(true)
@@ -237,7 +238,7 @@ class ProfilerTest extends MockedTest
 	 */
 	public function testEnableDisable()
 	{
-		$configCache = \Mockery::mock(Cache::class);
+		$configCache = \Mockery::mock(IConfigCache::class);
 		$configCache->shouldReceive('get')
 		            ->with('system', 'profiler')
 		            ->andReturn(true)

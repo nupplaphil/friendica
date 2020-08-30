@@ -84,7 +84,7 @@ interface IConfig
 	/**
 	 * Returns the Config Cache
 	 *
-	 * @return Cache
+	 * @return IConfigCache
 	 */
 	function getCache();
 }

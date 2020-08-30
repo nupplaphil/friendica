@@ -8,6 +8,7 @@ namespace Friendica\Test;
 use Dice\Dice;
 use Friendica\Core\Config\Cache;
 use Friendica\Core\Config\IConfig;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\Core\Session;
 use Friendica\Core\Session\ISession;
 use Friendica\Database\Database;
@@ -37,7 +38,7 @@ abstract class FixtureTest extends DatabaseTest
 		DI::init($this->dice);
 
 		/** @var IConfig $config */
-		$configCache = $this->dice->create(Cache::class);
+		$configCache = $this->dice->create(IConfigCache::class);
 		$configCache->set('database', 'disable_pdo', true);
 
 		/** @var Database $dba */
