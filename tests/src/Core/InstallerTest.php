@@ -24,6 +24,7 @@ namespace Friendica\Core;
 
 use Dice\Dice;
 use Friendica\Core\Config\Cache;
+use Friendica\Core\Config\IConfigCache;
 use Friendica\DI;
 use Friendica\Network\CurlResult;
 use Friendica\Network\IHTTPRequest;
