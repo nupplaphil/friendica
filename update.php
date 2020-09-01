@@ -747,4 +747,17 @@ function pre_update_1365()
 		return Update::FAILED;
 	}
 
+	return Update::SUCCESS;
+}
+
+function update_1366()
+{
+	$node = new \Friendica\Util\Node(new \Psr\Log\NullLogger(), $_SERVER);
+	$hostname = $node->getHostname();
+
+	if (!DBA::update('locks', ['hostname' => $hostname], [])) {
+		return Update::FAILED;
+	}
+
+	return Update::SUCCESS;
 }
