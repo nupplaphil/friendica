@@ -60,7 +60,7 @@ class RedisCacheLockTest extends LockTest
 
 		try {
 			$cache = new RedisCache($host, $configMock);
-			$lock = new CacheLock($cache, $this->hostname);
+			$lock = new CacheLock($cache, $this->hostId);
 		} catch (\Exception $e) {
 			$this->markTestSkipped('Redis is not available');
 		}
