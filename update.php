@@ -750,12 +750,18 @@ function pre_update_1365()
 	return Update::SUCCESS;
 }
 
-function update_1366()
+function pre_update_1368()
 {
-	$node = new \Friendica\Util\Node(new \Psr\Log\NullLogger(), $_SERVER);
-	$hostname = $node->getHostname();
+	DBA::e("ALTER TABLE IF EXISTS `host` TO `" . \Friendica\Model\Host::TABLE . "`;");
 
-	if (!DBA::update('locks', ['hostname' => $hostname], [])) {
+	return Update::SUCCESS;
+}
+
+function update_1368()
+{
+	$host = new \Friendica\Model\Host(DI::dba(), new \Psr\Log\NullLogger(), $_SERVER);
+
+	if (!DBA::update('locks', ['hostid' => $host->getId()], ['hostid IS NULL'])) {
 		return Update::FAILED;
 	}
 
