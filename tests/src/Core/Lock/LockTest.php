@@ -31,7 +31,7 @@ abstract class LockTest extends MockedTest
 	protected $startTime = 1417011228;
 
 	/** @var string the test host */
-	protected $hostname = 'test.host';
+	protected $hostId = 20;
 
 	/**
 	 * @var \Friendica\Core\Lock\ILock
@@ -159,6 +159,8 @@ abstract class LockTest extends MockedTest
 		$this->assertTrue($this->instance->isLocked('nice'));
 
 		$locks = $this->instance->getLocks();
+
+		print_r($locks);
 
 		$this->assertContains('foo', $locks);
 		$this->assertContains('bar', $locks);
