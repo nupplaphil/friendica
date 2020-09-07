@@ -19,14 +19,11 @@
  *
  */
 
-namespace Friendica\Model;
+namespace Friendica\Collection;
 
-use Friendica\BaseModel;
+use Friendica\BaseCollection;
 
-/**
- * @property string name
- */
-class Host extends BaseModel
+class Hosts extends BaseCollection
 {
 
 }
