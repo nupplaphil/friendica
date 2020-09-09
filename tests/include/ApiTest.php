@@ -412,7 +412,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path';
 		$_GET['callback']          = 'callback_name';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
@@ -440,7 +440,7 @@ class ApiTest extends FixtureTest
 		];
 
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -476,7 +476,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -516,7 +516,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path.json';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path.json';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -542,7 +542,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path.xml';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path.xml';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -568,7 +568,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path.rss';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path.rss';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -595,7 +595,7 @@ class ApiTest extends FixtureTest
 			}
 		];
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path.atom';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path.atom';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -617,7 +617,7 @@ class ApiTest extends FixtureTest
 		global $API;
 		$API['api_path'] = ['method' => 'method'];
 
-		$_SERVER['QUERY_STRING'] = 'q=api_path';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
@@ -642,7 +642,7 @@ class ApiTest extends FixtureTest
 		];
 		$_SESSION['authenticated'] = false;
 		$_SERVER['REQUEST_METHOD'] = 'method';
-		$_SERVER['QUERY_STRING'] = 'q=api_path';
+		$_SERVER['QUERY_STRING'] = 'pagename=api_path';
 
 		$args = DI::args()->determine($_SERVER, $_GET);
 
