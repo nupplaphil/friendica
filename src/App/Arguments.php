@@ -56,7 +56,7 @@ class Arguments
 	}
 
 	/**
-	 * @return string The whole query string of this call
+	 * @return string The whole query string of this call with url-encoded query parameters
 	 */
 	public function getQueryString()
 	{
@@ -121,50 +121,27 @@ class Arguments
 	 */
 	public function determine(array $server, array $get)
 	{
-		$queryString = '';
-
-		if (!empty($server['QUERY_STRING']) && strpos($server['QUERY_STRING'], 'pagename=') === 0) {
-			$queryString = urldecode(substr($server['QUERY_STRING'], 9));
-		} elseif (!empty($server['QUERY_STRING']) && strpos($server['QUERY_STRING'], 'q=') === 0) {
-			$queryString = urldecode(substr($server['QUERY_STRING'], 2));
-		}
-
-		// eventually strip ZRL
-		$queryString = $this->stripZRLs($queryString);
-
-		// eventually strip OWT
-		$queryString = $this->stripQueryParam($queryString, 'owt');
-
 		// removing trailing / - maybe a nginx problem
-		$queryString = ltrim($queryString, '/');
+		$server['QUERY_STRING'] = ltrim($server['QUERY_STRING'] ?? '', '/');
+
+		$queryParameters = [];
+		parse_str($server['QUERY_STRING'], $queryParameters);
 
 		if (!empty($get['pagename'])) {
 			$command = trim($get['pagename'], '/\\');
+		} elseif (!empty($queryParameters['pagename'])) {
+			$command = trim($queryParameters['pagename'], '/\\');
 		} elseif (!empty($get['q'])) {
+			// Legacy page name parameter, now conflicts with the search query parameter
 			$command = trim($get['q'], '/\\');
 		} else {
 			$command = Module::DEFAULT;
 		}
 
-
-		// fix query_string
-		if (!empty($command)) {
-			$queryString = str_replace(
-				$command . '&',
-				$command . '?',
-				$queryString
-			);
-		}
-
-		// unix style "homedir"
-		if (substr($command, 0, 1) === '~') {
-			$command = 'profile/' . substr($command, 1);
-		}
-
-		// Diaspora style profile url
-		if (substr($command, 0, 2) === 'u/') {
-			$command = 'profile/' . substr($command, 2);
-		}
+		// Remove generated and one-time use parameters
+		unset($queryParameters['pagename']);
+		unset($queryParameters['zrl']);
+		unset($queryParameters['owt']);
 
 		/*
 		 * Break the URL path into C style argc/argv style arguments for our
@@ -182,32 +159,8 @@ class Arguments
 		$argv = explode('/', $command);
 		$argc = count($argv);
 
+		$queryString = $command . ($queryParameters ? '?' . http_build_query($queryParameters) : '');
 
 		return new Arguments($queryString, $command, $argv, $argc);
-	}
-
-	/**
-	 * Strip zrl parameter from a string.
-	 *
-	 * @param string $queryString The input string.
-	 *
-	 * @return string The zrl.
-	 */
-	public function stripZRLs(string $queryString)
-	{
-		return preg_replace('/[?&]zrl=(.*?)(&|$)/ism', '$2', $queryString);
-	}
-
-	/**
-	 * Strip query parameter from a string.
-	 *
-	 * @param string $queryString The input string.
-	 * @param string $param
-	 *
-	 * @return string The query parameter.
-	 */
-	public function stripQueryParam(string $queryString, string $param)
-	{
-		return preg_replace('/[?&]' . $param . '=(.*?)(&|$)/ism', '$2', $queryString);
 	}
 }
