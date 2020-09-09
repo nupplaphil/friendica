@@ -495,7 +495,7 @@ class ApiTest extends FixtureTest
 	public function testApiCallWithUninplementedApi()
 	{
 		$this->assertEquals(
-			'{"status":{"error":"Not Implemented","code":"501 Not Implemented","request":""}}',
+			'{"status":{"error":"Not Implemented","code":"501 Not Implemented","request":"home"}}',
 			api_call($this->app)
 		);
 	}
@@ -661,7 +661,7 @@ class ApiTest extends FixtureTest
 	public function testApiErrorWithJson()
 	{
 		$this->assertEquals(
-			'{"status":{"error":"error_message","code":"200 OK","request":""}}',
+			'{"status":{"error":"error_message","code":"200 OK","request":"home"}}',
 			api_error('json', new HTTPException\OKException('error_message'), DI::args())
 		);
 	}
@@ -681,7 +681,7 @@ class ApiTest extends FixtureTest
 			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
 			'  <error>error_message</error>' . "\n" .
 			'  <code>200 OK</code>' . "\n" .
-			'  <request/>' . "\n" .
+			'  <request>home</request>' . "\n" .
 			'</status>' . "\n",
 			api_error('xml', new HTTPException\OKException('error_message'), DI::args())
 		);
@@ -702,7 +702,7 @@ class ApiTest extends FixtureTest
 			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
 			'  <error>error_message</error>' . "\n" .
 			'  <code>200 OK</code>' . "\n" .
-			'  <request/>' . "\n" .
+			'  <request>home</request>' . "\n" .
 			'</status>' . "\n",
 			api_error('rss', new HTTPException\OKException('error_message'), DI::args())
 		);
@@ -723,7 +723,7 @@ class ApiTest extends FixtureTest
 			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
 			'  <error>error_message</error>' . "\n" .
 			'  <code>200 OK</code>' . "\n" .
-			'  <request/>' . "\n" .
+			'  <request>home</request>' . "\n" .
 			'</status>' . "\n",
 			api_error('atom', new HTTPException\OKException('error_message'), DI::args())
 		);
