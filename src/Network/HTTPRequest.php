@@ -215,11 +215,9 @@ class HTTPRequest implements IHTTPRequest
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @param int $redirects The recursion counter for internal use - default 0
-	 *
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function post(string $url, $params, array $headers = [], int $timeout = 0, int &$redirects = 0)
+	public function post(string $url, $params, array $headers = [], int $timeout = 0)
 	{
 		$stamp1 = microtime(true);
 
@@ -228,93 +226,88 @@ class HTTPRequest implements IHTTPRequest
 			return CurlResult::createErrorCurl($url);
 		}
 
-		$ch = curl_init($url);
-
-		if (($redirects > 8) || (!$ch)) {
-			return CurlResult::createErrorCurl($url);
-		}
+		$curlOptions = [];
 
 		$this->logger->debug('Post_url: start.', ['url' => $url]);
 
-		curl_setopt($ch, CURLOPT_HEADER, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-		curl_setopt($ch, CURLOPT_USERAGENT, $this->getUserAgent());
+		$curlOptions[CURLOPT_HEADER] = true;
+		$curlOptions[CURLOPT_RETURNTRANSFER] = true;
+		$curlOptions[CURLOPT_POST] = 1;
+		$curlOptions[CURLOPT_POSTFIELDS] = $params;
+		$curlOptions[CURLOPT_USERAGENT] = $this->getUserAgent();
 
 		if ($this->config->get('system', 'ipv4_resolve', false)) {
-			curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+			$curlOptions[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
 		}
 
-		@curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		$curlOptions[CURLOPT_CONNECTTIMEOUT] = 10;
 
 		if (intval($timeout)) {
-			curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+			$curlOptions[CURLOPT_TIMEOUT] = $timeout;
 		} else {
 			$curl_time = $this->config->get('system', 'curl_timeout', 60);
-			curl_setopt($ch, CURLOPT_TIMEOUT, intval($curl_time));
+			$curlOptions[CURLOPT_TIMEOUT] = intval($curl_time);
 		}
 
 		if (!empty($headers)) {
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			$curlOptions[CURLOPT_HTTPHEADER] = $headers;
 		}
 
 		$check_cert = $this->config->get('system', 'verifyssl');
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, (($check_cert) ? true : false));
+		$curlOptions[CURLOPT_SSL_VERIFYPEER] = $check_cert ? true : false;
 
 		if ($check_cert) {
-			@curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+			$curlOptions[CURLOPT_SSL_VERIFYHOST] = 2;
 		}
 
 		$proxy = $this->config->get('system', 'proxy');
 
 		if (!empty($proxy)) {
-			curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
-			curl_setopt($ch, CURLOPT_PROXY, $proxy);
+			$curlOptions[CURLOPT_HTTPPROXYTUNNEL] = 1;
+			$curlOptions[CURLOPT_PROXY] = $proxy;
 			$proxyuser = $this->config->get('system', 'proxyuser');
 			if (!empty($proxyuser)) {
-				curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyuser);
+				$curlOptions[CURLOPT_PROXYUSERPWD] = $proxyuser;
 			}
 		}
 
-		// don't let curl abort the entire application
-		// if it throws any errors.
+		$onRedirect = function(
+			RequestInterface $request,
+			ResponseInterface $response,
+			UriInterface $uri
+		) {
+			$this->logger->notice('Post redirect.', ['url' => $request->getUri(), 'to' => $uri]);
+			if (Network::isRedirectBlocked((string)$uri)) {
+				throw new RequestException('URL for redirect is blocked.', $request, $response);
+			}
+		};
 
-		$s = @curl_exec($ch);
+		try {
+			$client = new Client([
+				'allow_redirect' => [
+					'max' => 8,
+					'on_redirect' => $onRedirect,
+					'track_redirect' => true,
+					'strict' => true,
+					'referer' => true,
+				],
+				'curl' => $curlOptions
+			]);
 
-		$curl_info = curl_getinfo($ch);
-
-		$curlResponse = new CurlResult($url, $s, $curl_info, curl_errno($ch), curl_error($ch));
-
-		if (!Network::isRedirectBlocked($url) && $curlResponse->isRedirectUrl()) {
-			$redirects++;
-			$this->logger->info('Post redirect.', ['url' => $url, 'to' => $curlResponse->getRedirectUrl()]);
-			curl_close($ch);
-			return $this->post($curlResponse->getRedirectUrl(), $params, $headers, $redirects, $timeout);
-		}
-
-		curl_close($ch);
-
-		$this->profiler->saveTimestamp($stamp1, 'network');
-
-		// Very old versions of Lighttpd don't like the "Expect" header, so we remove it when needed
-		if ($curlResponse->getReturnCode() == 417) {
-			$redirects++;
-
-			if (empty($headers)) {
-				$headers = ['Expect:'];
+			$response = $client->get($url);
+			return new GuzzleResponse($response, $url);
+		} catch (TransferException $exception) {
+			if ($exception instanceof RequestException &&
+				$exception->hasResponse()) {
+				return new GuzzleResponse($exception->getResponse(), $url, $exception->getCode(), $exception->getMessage());
 			} else {
-				if (!in_array('Expect:', $headers)) {
-					array_push($headers, 'Expect:');
-				}
+				return new CurlResult($url, '', ['http_code' => $exception->getCode()], $exception->getCode(), $exception->getMessage());
 			}
-			$this->logger->info('Server responds with 417, applying workaround', ['url' => $url]);
-			return $this->post($url, $params, $headers, $redirects, $timeout);
+		} finally {
+			$this->logger->debug('Post_url: End.', ['url' => $url]);
+
+			$this->profiler->saveTimestamp($stamp1, 'network');
 		}
-
-		$this->logger->debug('Post_url: End.', ['url' => $url]);
-
-		return $curlResponse;
 	}
 
 	/**
