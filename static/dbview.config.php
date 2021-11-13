@@ -1041,10 +1041,14 @@
 	"workerqueue-view" => [
 		"fields" => [
 			"pid" => ["process", "pid"],
+			"hostname" => ["process", "hostname"],
 			"priority" => ["workerqueue", "priority"],
 		],
 		"query" => "FROM `process`
-			INNER JOIN `workerqueue` ON `workerqueue`.`pid` = `process`.`pid`
+			INNER JOIN `workerqueue` ON (
+				`workerqueue`.`pid` = `process`.`pid` AND 
+				`workerqueue`.`hostname` = `process`.`hostname`
+			)
 			WHERE NOT `workerqueue`.`done`"
 	],
 	"profile_field-view" => [

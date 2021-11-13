@@ -14,6 +14,7 @@ Fields
 | priority  | Task priority                                           | tinyint unsigned | NO   |     | 0                   |                |
 | created   | Creation date                                           | datetime         | NO   |     | 0001-01-01 00:00:00 |                |
 | pid       | Process id of the worker                                | int unsigned     | NO   |     | 0                   |                |
+| hostname  | Hostname of the worker                                  | varchar(32)      | NO   |     |                     |                |
 | executed  | Execution date                                          | datetime         | NO   |     | 0001-01-01 00:00:00 |                |
 | next_try  | Next retrial date                                       | datetime         | NO   |     | 0001-01-01 00:00:00 |                |
 | retrial   | Retrial counter                                         | tinyint          | NO   |     | 0                   |                |
@@ -22,17 +23,17 @@ Fields
 Indexes
 ------------
 
-| Name                          | Fields                           |
-| ----------------------------- | -------------------------------- |
-| PRIMARY                       | id                               |
-| command                       | command                          |
-| done_command_parameter        | done, command, parameter(64)     |
-| done_executed                 | done, executed                   |
-| done_priority_retrial_created | done, priority, retrial, created |
-| done_priority_next_try        | done, priority, next_try         |
-| done_pid_next_try             | done, pid, next_try              |
-| done_pid_retrial              | done, pid, retrial               |
-| done_pid_priority_created     | done, pid, priority, created     |
+| Name                               | Fields                                 |
+| ---------------------------------- | -------------------------------------- |
+| PRIMARY                            | id                                     |
+| command                            | command                                |
+| done_command_parameter             | done, command, parameter(64)           |
+| done_executed                      | done, executed                         |
+| done_priority_retrial_created      | done, priority, retrial, created       |
+| done_priority_next_try             | done, priority, next_try               |
+| done_pid_hostname_next_try         | done, pid, hostname, next_try          |
+| done_pid_hostname_retrial          | done, pid, hostname, retrial           |
+| done_pid_hostname_priority_created | done, pid, hostname, priority, created |
 
 
 Return to [database documentation](help/database)

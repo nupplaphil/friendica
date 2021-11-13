@@ -1,6 +1,6 @@
 -- ------------------------------------------
 -- Friendica 2021.12-dev (Siberian Iris)
--- DB_UPDATE_VERSION 1443
+-- DB_UPDATE_VERSION 1444
 -- ------------------------------------------
 
 
@@ -505,6 +505,7 @@ CREATE TABLE IF NOT EXISTS `workerqueue` (
 	`priority` tinyint unsigned NOT NULL DEFAULT 0 COMMENT 'Task priority',
 	`created` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT 'Creation date',
 	`pid` int unsigned NOT NULL DEFAULT 0 COMMENT 'Process id of the worker',
+	`hostname` varchar(32) NOT NULL DEFAULT '' COMMENT 'Hostname of the worker',
 	`executed` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT 'Execution date',
 	`next_try` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT 'Next retrial date',
 	`retrial` tinyint NOT NULL DEFAULT 0 COMMENT 'Retrial counter',
@@ -515,9 +516,9 @@ CREATE TABLE IF NOT EXISTS `workerqueue` (
 	 INDEX `done_executed` (`done`,`executed`),
 	 INDEX `done_priority_retrial_created` (`done`,`priority`,`retrial`,`created`),
 	 INDEX `done_priority_next_try` (`done`,`priority`,`next_try`),
-	 INDEX `done_pid_next_try` (`done`,`pid`,`next_try`),
-	 INDEX `done_pid_retrial` (`done`,`pid`,`retrial`),
-	 INDEX `done_pid_priority_created` (`done`,`pid`,`priority`,`created`)
+	 INDEX `done_pid_hostname_next_try` (`done`,`pid`,`hostname`,`next_try`),
+	 INDEX `done_pid_hostname_retrial` (`done`,`pid`,`hostname`,`retrial`),
+	 INDEX `done_pid_hostname_priority_created` (`done`,`pid`,`hostname`,`priority`,`created`)
 ) DEFAULT COLLATE utf8mb4_general_ci COMMENT='Background tasks queue entries';
 
 --
@@ -2575,9 +2576,13 @@ CREATE VIEW `tag-search-view` AS SELECT
 DROP VIEW IF EXISTS `workerqueue-view`;
 CREATE VIEW `workerqueue-view` AS SELECT 
 	`process`.`pid` AS `pid`,
+	`process`.`hostname` AS `hostname`,
 	`workerqueue`.`priority` AS `priority`
 	FROM `process`
-			INNER JOIN `workerqueue` ON `workerqueue`.`pid` = `process`.`pid`
+			INNER JOIN `workerqueue` ON (
+				`workerqueue`.`pid` = `process`.`pid` AND 
+				`workerqueue`.`hostname` = `process`.`hostname`
+			)
 			WHERE NOT `workerqueue`.`done`;
 
 --
