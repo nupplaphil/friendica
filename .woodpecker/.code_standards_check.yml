@@ -29,5 +29,5 @@ pipeline:
   check:
     image: friendicaci/php-cs
     commands:
-      - export CHANGED_FILES="$(git diff --name-status ${DRONE_COMMIT_BEFORE}..${DRONE_COMMIT_AFTER} | grep ^A | cut -f2)"
+      - export CHANGED_FILES="$(git diff --name-status ${CI_PREV_COMMIT_SHA}..${CI_COMMIT_SHA} | grep ^A | cut -f2)"
       - /check-php-cs.sh
