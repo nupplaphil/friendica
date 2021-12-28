@@ -9,7 +9,7 @@ depends_on:
   - database_checks
   - messages.po_check
 
-branches: [ develop, 20*-rc ]
+branches: [ develop, '*-rc' ]
 
 pipeline:
   restore_cache:
