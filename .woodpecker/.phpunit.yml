@@ -30,6 +30,8 @@ pipeline:
       - export COMPOSER_HOME=.composer
       - ./bin/composer.phar validate
       - ./bin/composer.phar install --prefer-dist
+    volumes:
+      - /etc/hosts:/etc/hosts
   rebuild_cache:
     image: meltwater/drone-cache:dev
     settings:
