@@ -7,8 +7,6 @@ depends_on:
   - phpunit
   - code_standards_check
 
-branches: [ stable ]
-
 pipeline:
   restore_cache:
     image: meltwater/drone-cache:dev
@@ -23,6 +21,7 @@ pipeline:
       - /tmp/drone-cache:/tmp/cache
     when:
       repo: friendica/friendica
+      branch: stable
       event: tag
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   composer_install:
@@ -57,6 +56,7 @@ pipeline:
       - sha256sum "$ARTIFACT"
     when:
       repo: friendica/friendica
+      branch: stable
       event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   sign_artifacts:
@@ -73,6 +73,7 @@ pipeline:
       detach_sign: true
     when:
       repo: friendica/friendica
+      branch: stable
       event: tag
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   upload_artifacts:
@@ -108,5 +109,6 @@ pipeline:
       - rm drone.key
     when:
       repo: friendica/friendica
+      branch: stable
       event: tag
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
