@@ -9,7 +9,7 @@ depends_on:
   - database_checks
   - messages.po_check
 
-branches: [ develop, '*-rc' ]
+#branches: [ develop, '*-rc' ]
 
 pipeline:
   restore_cache:
@@ -24,8 +24,8 @@ pipeline:
     volumes:
       - /tmp/drone-cache:/tmp/cache
     when:
-      repo: friendica/friendica
-      event: push
+      #repo: friendica/friendica
+      #event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   composer_install:
     image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
@@ -34,8 +34,8 @@ pipeline:
       - composer validate
       - composer install --no-dev --optimize-autoloader
     when:
-      repo: friendica/friendica
-      event: push
+      #repo: friendica/friendica
+      #event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   create_artifacts:
     image: debian
@@ -58,8 +58,8 @@ pipeline:
       - cat "$ARTIFACT.sum256"
       - sha256sum "$ARTIFACT"
     when:
-      repo: friendica/friendica
-      event: push
+      #repo: friendica/friendica
+      #event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   sign_artifacts:
     image: plugins/gpgsign
@@ -74,8 +74,8 @@ pipeline:
         - build/*.sum256
       detach_sign: true
     when:
-      repo: friendica/friendica
-      event: push
+      #repo: friendica/friendica
+      #event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
   upload_artifacts:
     image: alpine
@@ -109,6 +109,6 @@ pipeline:
         "
       - rm drone.key
     when:
-      repo: friendica/friendica
-      event: push
+      #repo: friendica/friendica
+      #event: push
       instance: releaser.ci.friendi.ca # This prevents executing this pipeline at other servers than ci.friendi.ca
