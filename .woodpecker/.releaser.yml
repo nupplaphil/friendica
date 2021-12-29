@@ -6,8 +6,6 @@ matrix:
 depends_on:
   - phpunit
   - code_standards_check
-  - database_checks
-  - messages.po_check
 
 branches: [ stable ]
 
