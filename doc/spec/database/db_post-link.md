@@ -1,0 +1,34 @@
+---
+title: post-link
+tags:
+  - database
+  - table
+  - developer
+---
+# Table post-link
+
+Post related external links
+
+## Fields
+
+| Field    | Description                                               | Type           | Null | Key | Default | Extra          |
+| -------- | --------------------------------------------------------- | -------------- | ---- | --- | ------- | -------------- |
+| id       | sequential ID                                             | int unsigned   | NO   | PRI | NULL    | auto_increment |
+| uri-id   | Id of the item-uri table entry that contains the item uri | int unsigned   | NO   |     | NULL    |                |
+| url      | External URL                                              | varbinary(511) | NO   |     | NULL    |                |
+| mimetype |                                                           | varchar(60)    | YES  |     | NULL    |                |
+
+## Indexes
+
+| Name       | Fields              |
+| ---------- | ------------------- |
+| PRIMARY    | id                  |
+| uri-id-url | UNIQUE, uri-id, url |
+
+## Foreign Keys
+
+| Field  | Target Table                           | Target Field |
+| ------ | -------------------------------------- | ------------ |
+| uri-id | [item-uri](/spec/database/db_item-uri) | id           |
+
+Return to [database documentation](/spec/database/)
