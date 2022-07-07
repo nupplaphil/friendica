@@ -30,6 +30,9 @@ use Friendica\Network\HTTPException\ServiceUnavailableException;
  */
 class DocWriter
 {
+	/** @var string the relativ path to the database specification */
+	const DOC_PATH_PREFIX = '/spec/database/';
+
 	/**
 	 * Creates all database definitions as Markdown fields and create the mkdoc config file.
 	 *
@@ -41,8 +44,29 @@ class DocWriter
 	 */
 	public static function writeDbDefinition(DbaDefinition $definition, string $basePath)
 	{
+		$table_header = [
+			[
+				'name'    => 'Table',
+				'comment' => 'Comment',
+			],
+			[
+				'name'    => '-',
+				'comment' => '-',
+			]
+		];
+
 		$tables = [];
+
+		$tables_length = [
+			'name'    => 5,
+			'comment' => 7
+		];
+
+		$table_names = [];
+
 		foreach ($definition->getAll() as $name => $definition) {
+			$table_names[] = $name;
+
 			$indexes = [
 				[
 					'name'   => 'Name',
@@ -54,20 +78,47 @@ class DocWriter
 				]
 			];
 
-			$lengths = ['name' => 4, 'fields' => 6];
+			$lengths = [
+				'name'   => 6,
+				'fields' => 8
+			];
 			foreach ($definition['indexes'] as $key => $value) {
-				$fieldlist         = implode(', ', $value);
-				$indexes[]         = ['name' => $key, 'fields' => $fieldlist];
-				$lengths['name']   = max($lengths['name'], strlen($key));
-				$lengths['fields'] = max($lengths['fields'], strlen($fieldlist));
+				$fieldlist = implode(', ', $value);
+				$index     = [
+					'name'   => $key,
+					'fields' => $fieldlist,
+				];
+
+				foreach ($index as $fieldName => $fieldvalue) {
+					$lengths[$fieldName] = max($lengths[$fieldName] ?? 0, strlen($fieldvalue));
+				}
+				$indexes[] = $index;
 			}
 
 			array_walk_recursive($indexes, function (&$value, $key) use ($lengths) {
 				$value = str_pad($value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 
-			$foreign = [];
-			$fields  = [
+			$foreign = [
+				[
+					'field'       => 'Field',
+					'targettable' => 'Target Table',
+					'targetfield' => 'Target Field',
+				],
+				[
+					'field'       => '-',
+					'targettable' => '-',
+					'targetfield' => '-',
+				]
+			];
+			$lengths_foreign = [
+				'field'       => 5,
+				'targettable' => 12,
+				'targetfield' => 12,
+			];
+			$has_foreign = false;
+
+			$fields = [
 				[
 					'name'    => 'Field',
 					'comment' => 'Description',
@@ -96,15 +147,17 @@ class DocWriter
 				'default' => 7,
 				'extra'   => 5,
 			];
+
 			foreach ($definition['fields'] as $key => $value) {
-				$field            = [];
-				$field['name']    = $key;
-				$field['comment'] = $value['comment'] ?? '';
-				$field['type']    = $value['type'];
-				$field['null']    = ($value['not null'] ?? false) ? 'NO' : 'YES';
-				$field['primary'] = ($value['primary'] ?? false) ? 'PRI' : '';
-				$field['default'] = $value['default'] ?? 'NULL';
-				$field['extra']   = $value['extra']   ?? '';
+				$field = [
+					'name'    => $key,
+					'comment' => $value['comment'] ?? '',
+					'type'    => $value['type'],
+					'null'    => ($value['not null'] ?? false) ? 'NO' : 'YES',
+					'primary' => ($value['primary'] ?? false) ? 'PRI' : '',
+					'default' => $value['default'] ?? 'NULL',
+					'extra'   => $value['extra'] ?? '',
+				];
 
 				foreach ($field as $fieldName => $fieldvalue) {
 					$lengths[$fieldName] = max($lengths[$fieldName] ?? 0, strlen($fieldvalue));
@@ -112,11 +165,20 @@ class DocWriter
 				$fields[] = $field;
 
 				if (!empty($value['foreign'])) {
-					$foreign[] = [
+					$has_foreign = true;
+
+					$foreign_table = array_keys($value['foreign'])[0];
+					$foreign_entry = [
 						'field'       => $key,
-						'targettable' => array_keys($value['foreign'])[0],
-						'targetfield' => array_values($value['foreign'])[0]
+						'targettable' => sprintf("[%s](%sdb_%s)", $foreign_table, static::DOC_PATH_PREFIX, $foreign_table),
+						'targetfield' => array_values($value['foreign'])[0],
 					];
+
+					foreach ($foreign_entry as $fieldName => $fieldvalue) {
+						$lengths_foreign[$fieldName] = max($lengths_foreign[$fieldName] ?? 0, strlen($fieldvalue));
+					}
+
+					$foreign[] = $foreign_entry;
 				}
 			}
 
@@ -124,22 +186,52 @@ class DocWriter
 				$value = str_pad($value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 
-			$tables[] = ['name' => $name, 'comment' => $definition['comment']];
-			$content  = Renderer::replaceMacros(Renderer::getMarkupTemplate('structure.tpl'), [
-				'$name'    => $name,
-				'$comment' => $definition['comment'],
-				'$fields'  => $fields,
-				'$indexes' => $indexes,
-				'$foreign' => $foreign,
+			array_walk_recursive($foreign, function (&$value, $key) use ($lengths_foreign) {
+				$value = str_pad($value, $lengths_foreign[$key], $value === '-' ? '-' : ' ');
+			});
+
+			$table = [
+				'name'    => sprintf("[%s](%sdb_%s)", $name, static::DOC_PATH_PREFIX, $name),
+				'comment' => $definition['comment'],
+			];
+
+			foreach ($table as $fieldName => $fieldvalue) {
+				$tables_length[$fieldName] = max($tables_length[$fieldName] ?? 0, strlen($fieldvalue));
+			}
+
+			$tables[] = $table;
+
+			$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('structure.tpl'), [
+				'$name'        => $name,
+				'$comment'     => $definition['comment'],
+				'$fields'      => $fields,
+				'$indexes'     => $indexes,
+				'$has_foreign' => $has_foreign,
+				'$foreign'     => $foreign,
 			]);
-			$filename = $basePath . '/doc/database/db_' . $name . '.md';
+			$filename = $basePath . '/doc' . static::DOC_PATH_PREFIX . '/db_' . $name . '.md';
 			file_put_contents($filename, $content);
 		}
 		asort($tables);
+
+		$tables = array_merge($table_header, $tables);
+
+		array_walk_recursive($tables, function (&$value, $key) use ($tables_length) {
+			$value = str_pad($value, $tables_length[$key], $value === '-' ? '-' : ' ');
+		});
+
 		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('tables.tpl'), [
 			'$tables' => $tables,
 		]);
-		$filename = $basePath . '/doc/database.md';
+		$filename = $basePath . '/doc' . static::DOC_PATH_PREFIX . '/index.md';
+		file_put_contents($filename, $content);
+
+		asort($table_names);
+
+		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('mkdocs.yml.tpl'), [
+			'$tables' => $table_names,
+		]);
+		$filename = $basePath . '/mkdocs.yml';
 		file_put_contents($filename, $content);
 	}
 }

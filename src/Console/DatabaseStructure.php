@@ -135,7 +135,6 @@ HELP;
 				$output = ob_get_clean();
 				break;
 			case "dumpsql":
-				DocWriter::writeDbDefinition($this->dbaDefinition, $this->basePath);
 				$output = DbaDefinitionSqlWriter::create($this->dbaDefinition);
 				$output .= ViewDefinitionSqlWriter::create($this->viewDefinition);
 				break;

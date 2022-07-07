@@ -44,32 +44,39 @@ class Console extends \Asika\SimpleConsole\Console
 Usage: bin/console [--version] [-h|--help|-?] <command> [<args>] [-v]
 
 Commands:
-	addon                  Addon management
-	cache                  Manage node cache
-	config                 Edit site config
+  	help                   Show help about a command, e.g (bin/console help config)
+  
+  node management
+	user                   User management
 	contact                Contact management
-	createdoxygen          Generate Doxygen headers
-	dbstructure            Do database updates
-	docbloxerrorchecker    Check the file tree for DocBlox errors
-	extract                Generate translation string file for the Friendica project (deprecated)
 	globalcommunityblock   Block remote profile from interacting with this node
 	globalcommunitysilence Silence a profile from the global community page
 	archivecontact         Archive a contact when you know that it isn't existing anymore
-	help                   Show help about a command, e.g (bin/console help config)
-	autoinstall            Starts automatic installation of friendica based on values from htconfig.php
-	lock                   Edit site locks
-	maintenance            Set maintenance mode for this node
-	movetoavatarcache      Move cached avatars to the file based avatar cache
 	mergecontacts          Merge duplicated contact entries
-	user                   User management
+	serverblock            Manage blocked servers
+	relay                  Manage ActivityPub relay servers
+	lock                   Edit site locks
+	cache                  Manage node cache
+  
+  node configuration
+	autoinstall            Starts automatic installation of friendica based on values from htconfig.php
+	dbstructure            Do database updates
+	config                 Edit site config
+	maintenance            Set maintenance mode for this node
+	postupdate             Execute pending post update scripts (can last days)
+	addon                  Addon management
+	storage                Manage storage backend
+	movetoavatarcache      Move cached avatars to the file based avatar cache
+	relocate               Update node base URL
+	
+  developer
+	createdoxygen          Generate Doxygen headers
+	createdocumentation    Generate the Friendica documentation
+	docbloxerrorchecker    Check the file tree for DocBlox errors
+	extract                Generate translation string file for the Friendica project (deprecated)
 	php2po                 Generate a messages.po file from a strings.php file
 	po2php                 Generate a strings.php file from a messages.po file
 	typo                   Checks for parse errors in Friendica files
-	postupdate             Execute pending post update scripts (can last days)
-	relocate               Update node base URL
-	serverblock            Manage blocked servers
-	storage                Manage storage backend
-	relay                  Manage ActivityPub relay servers
 
 Options:
 	-h|--help|-? Show help information
@@ -86,6 +93,7 @@ HELP;
 		'config'                 => Friendica\Console\Config::class,
 		'contact'                => Friendica\Console\Contact::class,
 		'createdoxygen'          => Friendica\Console\CreateDoxygen::class,
+		'createdocumentation'    => Friendica\Console\CreateDoc::class,
 		'docbloxerrorchecker'    => Friendica\Console\DocBloxErrorChecker::class,
 		'dbstructure'            => Friendica\Console\DatabaseStructure::class,
 		'extract'                => Friendica\Console\Extract::class,
