@@ -44,6 +44,10 @@ class DocWriter
 	 */
 	public static function writeDbDefinition(DbaDefinition $definition, string $basePath)
 	{
+		if (!empty($branch) && substr($branch, -1) !== '/') {
+			$branch .= '/';
+		}
+
 		$table_header = [
 			[
 				'name'    => 'Table',
@@ -170,7 +174,7 @@ class DocWriter
 					$foreign_table = array_keys($value['foreign'])[0];
 					$foreign_entry = [
 						'field'       => $key,
-						'targettable' => sprintf("[%s](%sdb_%s)", $foreign_table, static::DOC_PATH_PREFIX, $foreign_table),
+						'targettable' => sprintf("[%s](./db_%s.md)", $foreign_table, $foreign_table),
 						'targetfield' => array_values($value['foreign'])[0],
 					];
 
@@ -191,7 +195,7 @@ class DocWriter
 			});
 
 			$table = [
-				'name'    => sprintf("[%s](%sdb_%s)", $name, static::DOC_PATH_PREFIX, $name),
+				'name'    => sprintf("[%s](./db_%s.md)", $name, $name),
 				'comment' => $definition['comment'],
 			];
 
@@ -201,7 +205,7 @@ class DocWriter
 
 			$tables[] = $table;
 
-			$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('structure.tpl'), [
+			$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('doc/structure.tpl'), [
 				'$name'        => $name,
 				'$comment'     => $definition['comment'],
 				'$fields'      => $fields,
@@ -220,7 +224,7 @@ class DocWriter
 			$value = str_pad($value, $tables_length[$key], $value === '-' ? '-' : ' ');
 		});
 
-		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('tables.tpl'), [
+		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('doc/tables.tpl'), [
 			'$tables' => $tables,
 		]);
 		$filename = $basePath . '/doc' . static::DOC_PATH_PREFIX . '/index.md';
@@ -228,7 +232,7 @@ class DocWriter
 
 		asort($table_names);
 
-		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('mkdocs.yml.tpl'), [
+		$content = Renderer::replaceMacros(Renderer::getMarkupTemplate('doc/mkdocs.yml.tpl'), [
 			'$tables' => $table_names,
 		]);
 		$filename = $basePath . '/mkdocs.yml';

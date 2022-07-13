@@ -28,9 +28,9 @@ Contact relations
 
 ## Foreign Keys
 
-| Field        | Target Table                         | Target Field |
-| ------------ | ------------------------------------ | ------------ |
-| cid          | [contact](/spec/database/db_contact) | id           |
-| relation-cid | [contact](/spec/database/db_contact) | id           |
+| Field        | Target Table               | Target Field |
+| ------------ | -------------------------- | ------------ |
+| cid          | [contact](./db_contact.md) | id           |
+| relation-cid | [contact](./db_contact.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

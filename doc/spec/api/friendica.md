@@ -1,23 +1,26 @@
+---
+title: Friendica
+tags:
+  - specification
+  - api
+---
 # Friendica API
-
-* [Home](help)
-  * [Using the APIs](help/api)
 
 ## Overview
 
 Friendica provides the following specific endpoints.
 
-Authentication is the same as described in [Using the APIs](help/api#Authentication).
+Authentication is the same as described in [Using the APIs](./index.md#Authentication).
 
 ## Entities
 
-These endpoints uses the [Friendica API entities](help/API-Entities).
+These endpoints use the [Friendica API entities](./entities.md).
 
 ## Endpoints
 
 ### GET api/friendica/events
 
-Returns a list of [Event](help/API-Entities#Event) entities for the current logged in user.
+Returns a list of [Event](./entities.md#Event) entities for the current logged-in user.
 
 #### Parameters
 
@@ -26,7 +29,7 @@ Returns a list of [Event](help/API-Entities#Event) entities for the current logg
 
 ### GET api/externalprofile/show
 
-Returns a [Contact](help/API-Entities#Contact) entity for the provided profile URL.
+Returns a [Contact](./entities.md#Contact) entity for the provided profile URL.
 
 #### Parameters
 
@@ -34,7 +37,7 @@ Returns a [Contact](help/API-Entities#Contact) entity for the provided profile U
 
 ### GET api/statuses/public_timeline
 
-Returns a list of public [Items](help/API-Entities#Item) posted on this node.
+Returns a list of public [Items](./entities.md#Item) posted on this node.
 Equivalent of the local community page.
 
 #### Parameters
@@ -53,7 +56,7 @@ Equivalent of the local community page.
 
 ### GET api/statuses/networkpublic_timeline
 
-Returns a list of public [Items](help/API-Entities#Item) this node is aware of.
+Returns a list of public [Items](./entities.md#Item) this node is aware of.
 Equivalent of the global community page.
 
 #### Parameters
@@ -180,7 +183,7 @@ Deprecated Twitter received direct message list endpoint.
 
 ### GET api/direct_messages/all
 
-Returns all [Private Messages](help/API-Entities#Private+message).
+Returns all [Private Messages](./entities.md#private-message).
 
 #### Parameters
 
@@ -193,7 +196,7 @@ Returns all [Private Messages](help/API-Entities#Private+message).
 
 ### GET api/direct_messages/conversation
 
-Returns all replies of a single private message conversation. Returns [Private Messages](help/API-Entities#Private+message)
+Returns all replies of a single private message conversation. Returns [Private Messages](./entities.md#private-message)
 
 #### Parameters
 
@@ -207,7 +210,7 @@ Returns all replies of a single private message conversation. Returns [Private M
 
 ### GET api/direct_messages/sent
 
-Deprecated Twitter sent direct message list endpoint. Returns [Private Messages](help/API-Entities#Private+message).
+Deprecated Twitter sent direct message list endpoint. Returns [Private Messages](./entities.md#private-message).
 
 #### Parameters
 
@@ -274,7 +277,7 @@ On error:
 
 ### GET api/friendica/direct_messages_search (GET; AUTH)
 
-Returns [Private Messages](help/API-Entities#Private+message) matching the provided search string.
+Returns [Private Messages](./entities.md#Private+message) matching the provided search string.
 
 #### Parameters
 
@@ -311,7 +314,7 @@ Array of:
 
 * `name`: name of the group
 * `gid`: id of the group
-* `user`: array of [Contacts](help/API-Entities#Contact)
+* `user`: array of [Contacts](./entities.md#contact)
 
 ### POST api/friendica/group_create
 
@@ -327,7 +330,7 @@ JSON data as Array like the result of [GET api/friendica/group_show](#GET+api%2F
 
 * `gid`
 * `name`
-* List of [Contacts](help/API-Entities#Contact)
+* List of [Contacts](./entities.md#contact)
 
 #### Return values
 
@@ -354,7 +357,7 @@ JSON data as array like the result of [GET api/friendica/group_show](#GET+api%2F
 
 * `gid`
 * `name`
-* List of [Contacts](help/API-Entities#Contact)
+* List of [Contacts](./entities.md#contact)
 
 #### Return values
 
@@ -389,7 +392,7 @@ Array of:
 
 ### GET api/friendica/notifications
 
-Return last 50 [Notifications](help/API-Entities#Notification) for the current user, ordered by date with unseen item on top.
+Return last 50 [Notifications](./entities.md#notification) for the current user, ordered by date with unseen item on top.
 
 #### Parameters
 
@@ -405,7 +408,7 @@ Set notification as seen.
 
 #### Return values
 
-If the note is linked to an item, returns an [Item](help/API-Entities#Item).
+If the note is linked to an item, returns an [Item](./entities.md#item).
 
 Otherwise, a success status is returned:
 
@@ -415,7 +418,7 @@ Otherwise, a success status is returned:
 
 ### GET api/friendica/photo
 
-Returns a [Photo](help/API-Entities#Photo).
+Returns a [Photo](./entities.md#photo).
 
 #### Parameters
 
@@ -436,7 +439,7 @@ possibile scale value are:
 * 5: Profile image at 80x80
 * 6: Profile image at 48x48
 
-An image used as profile image has only scale 4-6, other images only 0-3
+An image used as profile image has only scaled 4-6, other images only 0-3
 
 #### Return values
 
@@ -489,7 +492,7 @@ xml:
 
 ### GET api/friendica/photos/list
 
-Returns the API user's [Photo List Items](help/API-Entities#Photo+List+Item).
+Returns the API user's [Photo List Items](./entities.md#photo-list-item).
 
 #### Return values
 
@@ -531,7 +534,7 @@ Alias of [`api/friendica/photo/update`](#POST+api%2Ffriendica%2Fphoto%2Fupdate)
 Saves data for the scales 0-2 to database (see above for scale description).
 Call adds non-public entries to items table to enable authenticated contacts to comment/like the photo.
 Client should pay attention to the fact that updated access rights are not transferred to the contacts. i.e. public photos remain publicly visible if they have been commented/liked before setting visibility back to a limited group.
-Currently it is best to inform user that updating rights is not the right way to do this, and offer a solution to add photo as a new photo with the new rights instead.
+Currently, it is best to inform user that updating rights is not the right way to do this, and offer a solution to add photo as a new photo with the new rights instead.
 
 #### Parameters
 
@@ -541,7 +544,7 @@ Currently it is best to inform user that updating rights is not the right way to
 * `album`: name of the album to be deleted (always necessary)
 * `album_new` (optional): can be used to change the album of a single photo if photo_id is specified
 * `allow_cid`/`allow_gid`/`deny_cid`/`deny_gid` (optional):
-    - on create: empty string or omitting = public photo, specify in format ```<x><y><z>``` for private photo
+    - on create: empty string or omitting = public photo, specify in format ```<x><y><z>```for private photo
 	- on update: keys need to be present with empty values for changing a private photo to public
 
 #### Return values
@@ -654,7 +657,7 @@ On error:
 
 ### GET api/friendica/profile/show
 
-Returns the [Profile](help/API-Entities#Profile) data of the authenticated user.
+Returns the [Profile](./entities.md#profile) data of the authenticated user.
 
 #### Return values
 

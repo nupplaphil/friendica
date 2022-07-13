@@ -57,9 +57,9 @@ photo storage
 
 ## Foreign Keys
 
-| Field      | Target Table                         | Target Field |
-| ---------- | ------------------------------------ | ------------ |
-| uid        | [user](/spec/database/db_user)       | uid          |
-| contact-id | [contact](/spec/database/db_contact) | id           |
+| Field      | Target Table               | Target Field |
+| ---------- | -------------------------- | ------------ |
+| uid        | [user](./db_user.md)       | uid          |
+| contact-id | [contact](./db_contact.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

@@ -44,10 +44,10 @@ User specific public contact data
 
 ## Foreign Keys
 
-| Field  | Target Table                           | Target Field |
-| ------ | -------------------------------------- | ------------ |
-| cid    | [contact](/spec/database/db_contact)   | id           |
-| uid    | [user](/spec/database/db_user)         | uid          |
-| uri-id | [item-uri](/spec/database/db_item-uri) | id           |
+| Field  | Target Table                 | Target Field |
+| ------ | ---------------------------- | ------------ |
+| cid    | [contact](./db_contact.md)   | id           |
+| uid    | [user](./db_user.md)         | uid          |
+| uri-id | [item-uri](./db_item-uri.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

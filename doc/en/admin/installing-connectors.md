@@ -1,89 +1,84 @@
-Installing Connectors (Twitter/GNU Social)
-==================================================
-
-* [Home](help)
-
-
-Friendica uses addons to provide connectivity to some networks, such as Twitter.
-
-There is also a addon to post through to an existing account on a GNU Social service.
-You only need this to post to an already existing GNU Social account, but not to communicate with GNU Social members in general.
-
-All three addons require an account on the target network.
-In addition you (or typically the server administrator) will need to obtain an API key to provide authenticated access to your Friendica server.
-
-Site Configuration
 ---
-
-Addons must be installed by the site administrator before they can be used.
-This is accomplished through the site administration panel.
-
-Each of the connectors also requires an "API key" from the service you wish to connect with.
-Some addons allow you to enter this information in the site administration pages, while others may require you to edit your configuration file (config/local.config.php).
-The ways to obtain these keys vary between the services, but they all require an existing account on the target service.
-Once installed, these API keys can usually be shared by all site members.
-
-The details of configuring each service follow (much of this information comes directly from the addon source files):
-
-Twitter Addon for Friendica
+title: Konnektoren installieren
+tags:
+  - admin
+  - connector
 ---
+# Konnektoren installieren (Twitter/GNU Social)
+
+Friendica nutzt Erweiterung, um die Verbindung zu anderen Netzwerken wie Twitter oder App.net zu gewährleisten.
+
+Es gibt außerdem eine Erweiterung, um über einen bestehenden GNU Social-Account diesen Service zu nutzen.
+Du brauchst diese Erweiterung aber nicht, um mit GNU Social-Mitgliedern von Friendica aus zu kommunizieren - es sei denn, du wünschst es, über einen existierenden Account einen Beitrag zu schreiben.
+
+Alle drei Erweiterungen benötigen einen Account im gewünschten Netzwerk.
+Zusätzlich musst du (bzw. der Administrator der Seite) einen API-Schlüssel holen, um einen authentifizierten Zugriff zu deinem Friendica-Server herstellen zu lassen.
+
+## Seitenkonfiguration
+
+Erweiterung müssen vom Administrator installiert werden, bevor sie genutzt werden können.
+Dieses kann über das Administrationsmenü erstellt werden.
+
+Jeder der Konnektoren benötigt zudem einen API-Schlüssel vom Service, der verbunden werden soll.
+Einige Erweiterungen erlaube es, diese Informationen auf den Administrationsseiten einzustellen, wohingegen andere eine direkte Bearbeitung der Konfigurationsdatei "config/local.config.php" erfordern.
+Der Weg, um diese Schlüssel zu erhalten, variiert stark, jedoch brauchen fast alle einen bestehenden Account im gewünschten Service.
+Einmal installiert, können diese Schlüssel von allen Seitennutzern genutzt werden.
+
+Im Folgenden findest du die Einstellungen für die verschiedenen Services (viele dieser Informationen kommen direkt aus den Quelldateien der Erweiterung):
+
+
+## Twitter Erweiterung für Friendica
 
 * Author: Tobias Diekershoff
 * tobias.diekershoff@gmx.net
-* License: 3-clause BSD license
+* License:3-clause BSD license
 
-### Configuration
-To use this addon you need a OAuth Consumer key pair (key & secret).
-You can get it from [Twitter](https://twitter.com/apps).
+Konfiguration:
+Um diese Erweiterung zu nutzen, benötigst du einen OAuth Consumer-Schlüsselpaar (Schlüssel und Geheimnis), das du auf der Seite [https://twitter.com/apps](https://twitter.com/apps) erhalten kannst
 
-Register your Friendica site as "Client" application with "Read & Write" access.
-We do not need "Twitter as login".
-When you've registered the app you get a key pair with an OAuth Consumer key and a secret key for your application/site.
-Add this key pair to your config/local.config.php:
+Registriere deine Friendica-Seite als "Client"-Anwendung mit "Read&Write"-Zugriff. Wir benötigen "Twitter als Login" nicht. Sobald du deine Anwendung installiert hast, erhältst du das Schlüsselpaar für deine Seite.
 
-	[twitter]
-	consumerkey = your consumer_key here
-	consumersecret = your consumer_secret here
+Trage dieses Schlüsselpaar in deine globale `config/local.config.php`-Datei ein.
 
-After this, your users can configure their Twitter account settings from "Settings -> Connector Settings".
+```ini
+[twitter]
+consumerkey = your consumer_key here
+consumersecret = your consumer_secret here
+```
 
-### More documentation
+Anschließend kann der Nutzer deiner Seite die Twitter-Einstellungen selbst eintragen: "Einstellungen -> Connector Einstellungen".
 
-Find the author's documentation here: [http://diekershoff.homeunix.net/redmine/wiki/friendikaplugin/Twitter_Plugin](http://diekershoff.homeunix.net/redmine/wiki/friendikaplugin/Twitter_Plugin)
-
-
-GNU Social Addon for Friendica
----
+## GNU Social Erweiterung für Friendica
 
 * Author: Tobias Diekershoff
 * tobias.diekershoff@gmx.net
-* License: 3-clause BSD license
+* License:3-clause BSD license
 
-### Configuration
+Konfiguration
 
-When the addon is activated the user has to acquire the following in order to connect to the GNU Social account of choice.
+Wenn das Add-on aktiv ist, muss der Nutzer die folgenden Einstellungen vornehmen, um sich mit dem GNU Social-Account seiner Wahl zu verbinden.
 
-* The base URL for the GNU Social API, for quitter.se this is https://quitter.se/api/
-* OAuth Consumer key & secret
+* Die Basis-URL des GNU Social-API; für quitter.se ist es https://quitter.se/api/
+* OAuth Consumer key & Geheimnis
 
-To get the OAuth Consumer key pair the user has to
+Um das OAuth-Schlüsselpaar zu erhalten, muss der Nutzer
 
-1 ask her Friendica admin if a pair already exists or
-2 has to register the Friendica server as a client application on the GNU Social server.
+(a) seinen Friendica-Admin fragen, ob bereits ein Schlüsselpaar existiert oder
+(b) einen Friendica-Server als Anwendung auf dem GNU Social-Server anmelden.
 
-This can be done from the account settings under "Settings -> Connections -> Register an OAuth client application -> Register a new application" on the GNU Social server.
+Dies kann über Einstellungen --> Connections --> "Register an OAuth client application" -> "Register a new application" auf dem GNU Social-Server durchgeführt werden.
 
-During the registration of the OAuth client remember the following:
+Während der Registrierung des OAuth-Clients ist Folgendes zu beachten:
 
-* Application names must be unique on the GNU Social site, so we recommend a Name of 'friendica-nnnn', replace 'nnnn' with a random number or your website name.
-* there is no callback url
-* register a desktop client
-* with read & write access
-* the Source URL should be the URL of your Friendica server
+* Der Anwendungsname muss auf der GNU Social-Seite einzigartig sein, daher empfehlen wir einen Namen wie `friendica-nnnn`, ersetze dabei `nnnn` mit einer frei gewählten Nummer oder deinem Webseitennamen.
+* es gibt keine Callback-URL
+* Registriere einen Desktop-Client
+* stelle Lese- und Schreibrechte ein
+* die Quell-URL sollte die URL deines Friendica-Servers sein
 
-After the required credentials for the application are stored in the configuration you have to actually connect your Friendica account with GNU Social.
-This is done from the Settings -> Connector Settings page.
-Follow the Sign in with GNU Social button, allow access and then copy the security code into the box provided.
-Friendica will then try to acquire the final OAuth credentials from the API.
+Sobald die benötigten Daten gespeichert sind, musst du deinen Friendica-Account mit GNU Social verbinden.
+Das kannst du über Einstellungen --> Connector-Einstellungen durchführen.
+Folge dem "Einloggen mit GNU Social"-Button, erlaube den Zugriff und kopiere den Sicherheitscode in die entsprechende Box.
+Friendica wird dann versuchen, die abschließende OAuth-Einstellungen über die API zu beziehen.
 
-If successful, the addon settings will allow you to select to post your public messages to your GNU Social account (have a look behind the little lock symbol beneath the status "editor" on your Home or Network pages).
+Wenn es geklappt hat, kannst du in den Einstellungen festlegen, ob deine öffentlichen Nachrichten automatisch in deinem GNU Social-Account erscheinen soll (achte hierbei auf das kleine Schloss-Symbol im Status-Editor)

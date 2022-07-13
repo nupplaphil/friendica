@@ -1,7 +1,11 @@
-Friendica Addon/Entwicklung
-==============
-
-* [Zur Startseite der Hilfe](help)
+---
+title: Addons
+tags:
+  - develop
+  - addons
+  - hooks
+---
+# Friendica Addon Entwicklung
 
 Bitte schau dir das Beispiel-Addon "randplace" für ein funktionierendes Beispiel für manche der hier aufgeführten Funktionen an.
 Das Facebook-Addon bietet ein Beispiel dafür, die "addon"- und "module"-Funktion gemeinsam zu integrieren.
@@ -17,32 +21,42 @@ Zukünftige Extensions werden möglicherweise "Setup" und "Entfernen" anbieten.
 
 Addons sollten einen Kommentarblock mit den folgenden vier Parametern enthalten:
 
-    /*
-     * Name: My Great Addon
-     * Description: This is what my addon does. It's really cool.
-     * Version: 1.0
-     * Author: John Q. Public <john@myfriendicasite.com>
-     */
+```php
+<? php
+/*
+ * Name: My Great Addon
+ * Description: This is what my addon does. It's really cool.
+ * Version: 1.0
+ * Author: John Q. Public <john@myfriendicasite.com>
+ */
+```
 
 Registriere deine Addon-Hooks während der Installation.
 
-    \Friendica\Core\Hook::register($hookname, $file, $function);
+```php
+<? php
 
-$hookname ist ein String und entspricht einem bekannten Friendica-Hook.
+\Friendica\Core\Hook::register($hookname, $file, $function);
+```
 
-$file steht für den Pfadnamen, der relativ zum Top-Level-Friendicaverzeichnis liegt.
-Das *sollte* "addon/addon_name/addon_name.php' sein.
+`$hookname` ist ein String und entspricht einem bekannten Friendica-Hook.
+
+$file steht für den Pfadnamen, der relativ zum Top-Level-Friendica-Verzeichnis liegt.
+Das *sollte* `addon/addon_name/addon_name.php` sein.
 
 $function ist ein String und der Name der Funktion, die ausgeführt wird, wenn der Hook aufgerufen wird.
 
-Argumente
----
+## Argumente
 
 Deine Hook-Callback-Funktion wird mit mindestens einem und bis zu zwei Argumenten aufgerufen
 
-    function myhook_function(App $a, &$b) {
+```php
+<? php
 
-    }
+function myhook_function(App $a, &$b) {
+
+}
+```
 
 Wenn du Änderungen an den aufgerufenen Daten vornehmen willst, musst du diese als Referenzvariable (mit "&") während der Funktionsdeklaration deklarieren.
 
@@ -53,17 +67,16 @@ $b kann frei benannt werden.
 Diese Information ist speziell auf den Hook bezogen, der aktuell bearbeitet wird, und beinhaltet normalerweise Daten, die du sofort nutzen, anzeigen oder bearbeiten kannst.
 Achte darauf, diese mit "&" zu deklarieren, wenn du sie bearbeiten willst.
 
+## Module
 
-Module
----
-
-Addons können auch als "Module" agieren und alle Seitenanfragen für eine bestimte URL abfangen.
+Addons können auch als "Module" agieren und alle Seitenanfragen für eine bestimmte URL abfangen.
 Um ein Addon als Modul zu nutzen, ist es nötig, die Funktion "addon_name_module()" zu definieren, die keine Argumente benötigt und nichts weiter machen muss.
 
 Wenn diese Funktion existiert, wirst du nun alle Seitenanfragen für "http://example.com/addon_name" erhalten - mit allen URL-Komponenten als zusätzliche Argumente.
 Diese werden in das App\Arguments Objekt geparst.
 So würde `http://example.com/addon/arg1/arg2` dies ergeben:
 ```php
+<? php
 DI::args()->getArgc(); // = 3
 DI::args()->get(0); // = 'addon'
 DI::args()->get(1); // = 'arg1'
@@ -72,11 +85,9 @@ DI::args()->get(2); // = 'arg2'
 
 Deine Modulfunktionen umfassen oft die Funktion addon_name_content(App $a), welche den Seiteninhalt definiert und zurückgibt.
 Sie können auch addon_name_post(App $a) umfassen, welches vor der content-Funktion aufgerufen wird und normalerweise die Resultate der POST-Formulare handhabt.
-Du kannst ebenso addon_name_init(App $a) nutzen, was oft frühzeitig aufgerufen wird und das Modul initialisert.
+Du kannst ebenso addon_name_init(App $a) nutzen, was oft frühzeitig aufgerufen wird und das Modul initialisiert.
 
-
-Derzeitige Hooks
----
+## Derzeitige Hooks
 
 **'authenticate'** - wird aufgerufen, wenn sich der User einloggt.
     $b ist ein Array
@@ -96,15 +107,15 @@ Derzeitige Hooks
 
 **'post_local'** - wird aufgerufen, wenn der Statusbeitrag oder ein Kommentar im lokalen System eingetragen wird.
     $b ist das Item-Array der Information, die in der Datenbank hinterlegt wird.
-        {Bitte beachte: der Seiteninhalt ist bbcode - nicht HTML)
+        {Bitte beachte: Der Seiteninhalt ist bbcode - nicht HTML)
 
 **'post_local_end'** - wird aufgerufen, wenn ein lokaler Statusbeitrag oder Kommentar im lokalen System gespeichert wird.
     $b ist das Item-Array einer Information, die gerade in der Datenbank gespeichert wurden.
-        {Bitte beachte: der Seiteninhalt ist bbcode - nicht HTML)
+        {Bitte beachte: Der Seiteninhalt ist bbcode - nicht HTML)
 
 **'post_remote'** - wird aufgerufen, wenn ein Beitrag aus einer anderen Quelle empfangen wird. Dies kann auch genutzt werden, um lokale Aktivitäten oder systemgenerierte Nachrichten zu veröffentlichen/posten.
     $b ist das Item-Array einer Information, die in der Datenbank und im Item gespeichert ist.
-        {Bitte beachte: der Seiteninhalt ist bbcode - nicht HTML)
+        {Bitte beachte: Der Seiteninhalt ist bbcode - nicht HTML)
 
 **'addon_settings'** - wird aufgerufen, wenn die HTML-Ausgabe der Addon-Einstellungsseite generiert wird.
     $b ist die HTML-Ausgabe (String) der Addon-Einstellungsseite vor dem finalen "</form>"-Tag.
@@ -180,11 +191,10 @@ Derzeitige Hooks
         'url' => generierte URL (String) des Avatars
 
 **'nav_info'**
- - wird aufgerufen nachdem in include/nav,php der Inhalt des Navigations Menüs erzeugt wurde.
- - $b ist ein Array, das $nav wiederspiegelt.
+ - wird aufgerufen, nachdem in `include/nav.php` der Inhalt des Navigationsmenüs erzeugt wurde.
+ - $b ist ein Array, das $nav widerspiegelt.
 
-Komplette Liste der Hook-Callbacks
----
+## Komplette Liste der Hook-Callbacks
 
 Eine komplette Liste aller Hook-Callbacks mit den zugehörigen Dateien (am 01-Apr-2018 generiert): Bitte schau in die Quellcodes für Details zu Hooks, die oben nicht dokumentiert sind.
 

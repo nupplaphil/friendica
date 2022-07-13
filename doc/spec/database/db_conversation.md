@@ -31,4 +31,4 @@ Raw data and structure information for messages
 | received         | received         |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

@@ -11,7 +11,7 @@ tags:
 **Dieses Dokument wurde im November 2016 aktualisiert.
 SSL-Verschlüsselung ist sicherheitskritisch.
 Das bedeutet, dass sich die empfohlenen Einstellungen schnell verändern.
-Halte deine Installation auf dem aktuellen Stand und verlasse dich nicht darauf, dass dieses Dokument genau so schnell aktualisiert wird, wie sich Technologien verändern!**
+Halte deine Installation auf dem aktuellen Stand und verlasse dich nicht darauf, dass dieses Dokument genauso schnell aktualisiert wird, wie sich Technologien verändern!**
 
 ## Einleitung
 
@@ -45,14 +45,13 @@ Sie installieren es für dich oder haben in der Weboberfläche eine einfache Upl
 Um Geld zu sparen, kann es sich lohnen, dort auch nachzufragen, ob sie ein anderes Zertifikat, das du selbst beschaffst, für dich installieren würden.
 Wenn ja, dann lies weiter.
 
-
 ## Let's encrypt
 
 Wenn du einen eigenen Server betreibst und den Nameserver kontrollierst, könnte auch die Initiative "Let's encrypt" interessant für dich werden.
-Sie bietet nicht nur freie SSL Zertifikate sondern auch einen automatisierten Prozess zum Erneuern der Zertifikate.
-Um letsencrypt Zertifikate verwenden zu können, musst du dir einen Client auf deinem Server installieren.
-Eine Anleitung zum offiziellen Client findet du [hier](https://certbot.eff.org/).
-Falls du dir andere Clients anschauen willst, kannst du einen Blick in diese [Liste von alternativen letsencrypt Clients](https://letsencrypt.org/docs/client-options/).
+Sie bietet nicht nur freie SSL Zertifikate, sondern auch einen automatisierten Prozess zum Erneuern der Zertifikate.
+Um LetsEncrypt Zertifikate verwenden zu können, musst du dir einen Client auf deinem Server installieren.
+Eine Anleitung zum offiziellen Client findest du [hier](https://certbot.eff.org/).
+Falls du dir andere Clients anschauen willst, kannst du einen Blick in diese [Liste von alternativen LetsEncrypt Clients](https://letsencrypt.org/docs/client-options/).
 
 ## Webserver-Einstellungen
 
@@ -61,28 +60,30 @@ Dort findest du Empfehlungen, die auf [verschiedene Webserver](https://wiki.mozi
 
 ## Teste deine SSL-Einstellungen
 
-Wenn du fertig bist, kannst du auf der Testseite [SSL-Labs](https://www.ssllabs.com/ssltest/) prüfen lassen, ob Du alles richtig gemacht hast.
+Wenn du fertig bist, kannst du auf der Testseite [SSL-Labs](https://www.ssllabs.com/ssltest/) prüfen lassen, ob du alles richtig gemacht hast.
 
 ## Friendica Konfigurieren
 
-Wenn du deine Friendica Instanz über https erreichen kannst solltest du ein paar Einstellungen vornehmen um sicher zu stellen, dass deine Nutzer ausschließlich über https zugreifen können.
+Wenn du deine Friendica Instanz über https erreichen kannst, solltest du ein paar Einstellungen vornehmen, um sicherzustellen, dass deine Nutzer ausschließlich über https zugreifen können.
 
 ### Webserver-Umleitungen
 
 Dies ist der einfachste Weg den Zugriff für die ganze Webseite abzusichern.
-Jedes Mal wenn ein Nutzer Friendica aufruft wird er permanent vom Webserver auf die abgesicherte Seite umgeleitet.
+Jedes Mal, wenn ein Nutzer Friendica aufruft wird er permanent vom Webserver auf die abgesicherte Seite umgeleitet.
 
 Wenn du den Apache Webserver verwendest, aktiviere die Module rewrite und ssl (bei einem Shared-Hosting Prider sollte dies bereits der Fall sein):
 
-        sudo a2enmod rewrite ssl
+```sh
+sudo a2enmod rewrite ssl
+```
 
-und füge die folgenden Zeilen zur .htaccess Datei im Wurzelverzeichnis deiner Friendica Instanz hinzu:
+und füge die folgenden Zeilen zur `.htaccess` Datei im Wurzelverzeichnis deiner Friendica Instanz hinzu:
 
         RewriteEngine On
         RewriteCond %{SERVER_PORT} 80
         RewriteRule ^(.*)$ https://your.friendica.domain/$1 [R=301,L]
 
-(Dank an [url=https://github.com/AlfredSK]AlfredSK[/url]).
+(Dank an [AlfredSK](https://github.com/AlfredSK).
 
 Bei nginx solltest du deinen Server folgendermaßen konfigurieren ([documentation](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)):
 
@@ -98,4 +99,4 @@ Im Admin-Panel gibt es drei Einstellungen, die SSL betreffen:
 
 1. **Regeln für SSL Links**: Diese Einstellung betrifft wie Friendica interne Links erzeugt. Wenn deine SSL Installation erfolgreich war, empfehlen wir die Einstellung "SSL für alle Links erzwingen".
 2. **Erzwinge SSL**: Mit dieser Einstellung werden alle externen Links auf HTTPS gesetzt. Dies kann bei Mixed-Content Problemen helfen, allerdings unterstützen noch nicht alle Webseiten HTTPS. Benutzung auf eigene Gefahr.
-3. **SSL überprüfen**: Wenn diese Einstellung aktiv ist, wird Friendica nicht mehr mit Instanzen interagieren, die über ein selbst signiertes Zertifikat verfügen. Da selbst signierte Zertifikate ein Hinweis auf Man-in-the.Middle Angriffe sein können, empfehlen wir dies zu tun.
+3. **SSL überprüfen**: Wenn diese Einstellung aktiv ist, wird Friendica nicht mehr mit Instanzen interagieren, die über ein selbst signiertes Zertifikat verfügen. Da selbst signierte Zertifikate ein Hinweis auf Man-in-the. Middle Angriffe sein können, empfehlen wir dies zu tun.

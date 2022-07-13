@@ -1,19 +1,23 @@
+---
+title: Mastodon
+tags:
+  - specification
+  - api
+  - mastodon
+---
 # Mastodon API
-
-* [Home](help)
-  * [Using the APIs](help/api)
 
 ## Overview
 
 Friendica provides the following endpoints defined in [the official Mastodon API reference](https://docs.joinmastodon.org/api/).
 
-Authentication is the same as described in [Using the APIs](help/api#Authentication).
+Authentication is the same as described in [Using the APIs](./index.md#authentication).
 
 ## Clients
 
 ### Supported apps
 
-For supported apps please have a look at the [FAQ](help/FAQ#clients)
+For supported apps please have a look at the [FAQ](../../user/faq.md#what-friendica-clients-can-i-use)
 
 ### Unsupported apps
 
@@ -24,7 +28,7 @@ For supported apps please have a look at the [FAQ](help/FAQ#clients)
 
 #### iOS
 
-- [Mast](https://github.com/Beesitech/Mast) Doesn't accept the entered instance name. Claims that it is invalid (Message is: "Not a valid instance (may be closed or dead)")
+- [Mast](https://github.com/Beesitech/Mast) Doesn't accept the entered instance name. Claims that it is invalid (Message is: "Not a valid instance (maybe closed or dead)")
 - [Toot!](https://apps.apple.com/app/toot/id1229021451)
 
 ## Entities
@@ -105,7 +109,7 @@ These endpoints use the [Mastodon API entities](https://docs.joinmastodon.org/en
 - [`GET /api/v1/scheduled_statuses/:id`](https://docs.joinmastodon.org/methods/statuses/scheduled_statuses/)
 - [`GET /api/v1/search`](https://docs.joinmastodon.org/methods/search/)
 - [`POST /api/v1/statuses`](https://docs.joinmastodon.org/methods/statuses/)
-    - Additionally to the static values `public`, `unlisted` and `private`, the `visibility` parameter can contain a numeric value with a group id.
+    - Additionally, to the static values `public`, `unlisted` and `private`, the `visibility` parameter can contain a numeric value with a group id.
 - [`GET /api/v1/statuses/:id`](https://docs.joinmastodon.org/methods/statuses/)
 - [`DELETE /api/v1/statuses/:id`](https://docs.joinmastodon.org/methods/statuses/)
 - [`GET /api/v1/statuses/:id/card`](https://docs.joinmastodon.org/methods/statuses/)
@@ -134,7 +138,7 @@ These endpoints use the [Mastodon API entities](https://docs.joinmastodon.org/en
 
 ## Currently unimplemented endpoints
 
-These emdpoints are planned to be implemented somewhere in the future.
+These endpoints are planned to be implemented somewhere in the future.
 
 - [`PATCH /api/v1/accounts/update_credentials`](https://docs.joinmastodon.org/methods/accounts/)
 - [`POST /api/v1/accounts/:id/remove_from_followers`](https://github.com/mastodon/mastodon/pull/16864)

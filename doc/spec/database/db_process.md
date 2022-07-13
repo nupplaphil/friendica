@@ -26,4 +26,4 @@ Currently running system processes
 | command | command       |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

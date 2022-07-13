@@ -33,9 +33,9 @@ friend suggestion stuff
 
 ## Foreign Keys
 
-| Field | Target Table                         | Target Field |
-| ----- | ------------------------------------ | ------------ |
-| uid   | [user](/spec/database/db_user)       | uid          |
-| cid   | [contact](/spec/database/db_contact) | id           |
+| Field | Target Table               | Target Field |
+| ----- | -------------------------- | ------------ |
+| uid   | [user](./db_user.md)       | uid          |
+| cid   | [contact](./db_contact.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

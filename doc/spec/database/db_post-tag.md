@@ -28,10 +28,10 @@ post relation to tags
 
 ## Foreign Keys
 
-| Field  | Target Table                           | Target Field |
-| ------ | -------------------------------------- | ------------ |
-| uri-id | [item-uri](/spec/database/db_item-uri) | id           |
-| tid    | [tag](/spec/database/db_tag)           | id           |
-| cid    | [contact](/spec/database/db_contact)   | id           |
+| Field  | Target Table                 | Target Field |
+| ------ | ---------------------------- | ------------ |
+| uri-id | [item-uri](./db_item-uri.md) | id           |
+| tid    | [tag](./db_tag.md)           | id           |
+| cid    | [contact](./db_contact.md)   | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

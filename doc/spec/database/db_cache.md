@@ -26,4 +26,4 @@ Stores temporary data
 | k_expires | k, expires |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

@@ -49,7 +49,7 @@ Description
 	Generate the whole documentation of Friendica based on the dbstructure 
 
 Commands
-    execute Executes the generation 
+    createMkDocs Executes the generation of the mkdocs.yml file
     
 Options
     -h|--help|-? Show help information
@@ -80,12 +80,8 @@ HELP;
 			return 0;
 		}
 
-		if (count($this->args) > 1) {
-			throw new \Asika\SimpleConsole\CommandArgsException('Too many arguments');
-		}
-
 		switch ($this->getArgument(0)) {
-			case "execute":
+			case "createMkDocs":
 				DocWriter::writeDbDefinition($this->dbaDefinition, $this->basePath);
 				$this->out('documentation created.');
 				return 0;

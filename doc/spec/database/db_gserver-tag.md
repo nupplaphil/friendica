@@ -25,8 +25,8 @@ Tags that the server has subscribed
 
 ## Foreign Keys
 
-| Field      | Target Table                         | Target Field |
-| ---------- | ------------------------------------ | ------------ |
-| gserver-id | [gserver](/spec/database/db_gserver) | id           |
+| Field      | Target Table               | Target Field |
+| ---------- | -------------------------- | ------------ |
+| gserver-id | [gserver](./db_gserver.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

@@ -62,8 +62,6 @@ Wenn du einen Apache-Webserver nutzt, aktiviere bitte die folgenden Module:
 
 ### Cache-Control
 
-**Beschreibung**
-
 Dieses Modul weist den Client an, den Inhalt statischer Dateien zu speichern, um diese nicht immer wieder neu laden zu müssen.
 
 Aktiviere das Modul `mod_expires`, indem du `a2enmod expires` als root eingibst.
@@ -76,18 +74,15 @@ Weitere Informationen findest du hier: http://httpd.apache.org/docs/2.2/mod/mod_
 
 ### Compress content
 
-**Beschreibung**
-
 Dieses Modul komprimiert den Datenverkehr (Traffic) zwischen dem Webserver und dem Client.
 
 Aktiviere das Modul `mod_deflate` durch die Eingabe `a2enmod deflate` als root.
 
 Weitere Informationen findest du hier: http://httpd.apache.org/docs/2.2/mod/mod_deflate.html
 
-
 ### PHP
 
-**FCGI**
+#### FCGI
 
 Wenn du Apache nutzt, dann denk darüber nach, FCGI zu nutzen. 
 Wenn du eine Debian-basierte Distribution nutzt, dann wirst du die Pakete `php5-cgi` und `libapache2-mod-fcgid` benötigen.

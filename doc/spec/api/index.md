@@ -1,15 +1,19 @@
+---
+title: Usage
+tags:
+  - specification
+  - api
+---
 # Using the APIs
 
 <!-- markdownlint-disable MD010 MD013 MD024 -->
 
-* [Home](help)
-
 Friendica offers multiple API endpoints to interface with third-party applications:
 
-- [Twitter](help/API-Twitter)
-- [Mastodon](help/API-Mastodon)
-- [Friendica-specific](help/API-Friendica)
-- [GNU Social](help/API-GNU-Social)
+- [Twitter](./twitter.md)
+- [Mastodon](./mastodon.md)
+- [Friendica-specific](./friendica.md)
+- [GNU Social](./gnu-social.md)
 
 ## Usage
 
@@ -29,7 +33,7 @@ Usually:
 
 * 400 Bad Request: if parameters are missing or items can't be found
 * 403 Forbidden: if the authenticated user is missing
-* 405 Method Not Allowed: if API was called with an invalid method, eg. GET when API require POST
+* 405 Method Not Allowed: if API was called with an invalid method, e.g. GET when API require POST
 * 501 Not Implemented: if the requested API doesn't exist
 * 500 Internal Server Error: on other error conditions
 
@@ -59,7 +63,7 @@ xml:
 
 ### BASH / cURL
 
-```bash
+```sh
 /usr/bin/curl -u USER:PASS https://YOUR.FRIENDICA.TLD/api/statuses/update.xml -d source="some source id" -d status="the status you want to post"
 ```
 

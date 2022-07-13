@@ -26,4 +26,4 @@ URI and GUID for items
 | guid    | guid        |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

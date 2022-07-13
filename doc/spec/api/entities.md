@@ -1,8 +1,11 @@
+---
+title: Entities
+tags:
+  - specification
+  - api
+  - entities
+---
 # Friendica API entities
-
-* [Home](help)
-  * [Using the APIs](help/api)
-
 
 ## Activities
 
@@ -18,31 +21,31 @@
 
 <tr>
 <td><code>like</code></td>
-<td>List of <a href="help/API-Entities#Contact">Contacts</a></td>
+<td>List of [Contacts](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>dislike</code></td>
-<td>List of <a href="help/API-Entities#Contact">Contacts</a></td>
+<td>List of [Contacts](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>attendyes</code></td>
-<td>List of <a href="help/API-Entities#Contact">Contacts</a></td>
+<td>List of [Contacts](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>attendno</code></td>
-<td>List of <a href="help/API-Entities#Contact">Contacts</a></td>
+<td>List of [Contacts](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>attendmaybe</code></td>
-<td>List of <a href="help/API-Entities#Contact">Contacts</a></td>
+<td>List of [Contacts](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
@@ -330,31 +333,31 @@ Ex: Wed May 23 06:01:13 +0000 2007
 
 <tr>
 <td><code>hashtags</code></td>
-<td>List of <a href="help/API-Entities#Hashtag">Hashtags</a></td>
+<td>List of [Hashtags](./entities.md#hashtag)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>symbols</code></td>
-<td>List of <a href="help/API-Entities#Symbol">Symbols</a></td>
+<td>List of [Symbols](./entities.md#symbol)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>urls</code></td>
-<td>List of <a href="help/API-Entities#URL">URLs</a></td>
+<td>List of [URLs](./entities.md#url)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>user_mentions</code></td>
-<td>List of <a href="help/API-Entities#User+Mention">User mentions</a></td>
+<td>List of [User mentions](./entities.md#user+mention)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>media</code></td>
-<td>List of <a href="help/API-Entities#Media">Medias</a></td>
+<td>List of [Medias](./entities.md#media)</td>
 <td align="center">No</td>
 </tr>
 
@@ -570,13 +573,13 @@ Ex: Wed May 23 06:01:13 +0000 2007
 
 <tr>
 <td><code>user</code></td>
-<td><a href="help/API-Entities#Contact">Contact</a></td>
+<td>[Contact](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>friendica_author</code></td>
-<td><a href="help/API-Entities#Contact">Contact</a></td>
+<td>[Contact](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
@@ -584,7 +587,7 @@ Ex: Wed May 23 06:01:13 +0000 2007
 <td><code>friendica_owner</code></td>
 <td>
  
-<a href="help/API-Entities#Contact">Contact</a></td>
+[Contact](./entities.md#contact)</td>
 <td align="center">No</td>
 </tr>
 
@@ -614,7 +617,7 @@ Ex: Wed May 23 06:01:13 +0000 2007
 
 <tr>
 <td><code>friendica_activities</code></td>
-<td><a href="help/API-Entities#Activities">Activities</a></td>
+<td>[Activities](./entities.md#activities)</td>
 <td align="center">No</td>
 </tr>
 
@@ -632,13 +635,13 @@ Ex: Wed May 23 06:01:13 +0000 2007
 
 <tr>
 <td><code>attachments</code></td>
-<td>List of <a href="help/API-Entities#Attachment">Attachments</a></td>
+<td>List of [Attachments](./entities.md#attachment)</td>
 <td align="center">Yes</td>
 </tr>
 
 <tr>
 <td><code>entities</code></td>
-<td><a href="help/API-Entities#Entities">Entities</a></td>
+<td>[Entities](./entities.md#entities)</td>
 <td align="center">Yes</td>
 </tr>
 
@@ -721,7 +724,7 @@ Identical to [the Twitter Media Object](https://developer.twitter.com/en/docs/tw
 
 <tr>
 <td><code>sizes</code></td>
-<td><a href="help/API-Entities#Sizes">Sizes</a></td>
+<td>[Sizes](./entities.md#sizes)</td>
 <td align="center">No</td>
 </tr>
 
@@ -1021,13 +1024,13 @@ Mutually exclusive with <code>link</code>.
 
 <tr>
 <td><code>friendica_activities</code></td>
-<td><a href="help/API-Entities#Activities">Activities</a></td>
+<td>[Activities](./entities.md#activities)</td>
 <td></td>
 </tr>
 
 <tr>
 <td><code>friendica_comments</code></td>
-<td>List of <a href="help/API-Entities#Item">Items</a></td>
+<td>List of [Items](./entities.md#item)</td>
 <td></td>
 </tr>
 
@@ -1159,13 +1162,13 @@ Mutually exclusive with <code>link</code>.
 
 <tr>
 <td><code>sender</code></td>
-<td><a href="help/API-Entities#Contact">Contact</a></td>
+<td>[Contact](./entities.md#contact)</td>
 <td></td>
 </tr>
 
 <tr>
 <td><code>recipient</code></td>
-<td><a href="help/API-Entities#Contact">Contact</a></td>
+<td>[Contact](./entities.md#contact)</td>
 <td></td>
 </tr>
 
@@ -1370,25 +1373,25 @@ Mutually exclusive with <code>link</code>.
 
 <tr>
 <td><code>medium</code></td>
-<td><a href="help/API-Entities#Size">Size</a></td>
+<td>[Size](./entities.md#size)</td>
 <td align="center">No</td>
 </tr>
 
 <tr>
 <td><code>large</code></td>
-<td><a href="help/API-Entities#Size">Size</a></td>
+<td>[Size](./entities.md#size)</td>
 <td align="center">Yes</td>
 </tr>
 
 <tr>
 <td><code>thumb</code></td>
-<td><a href="help/API-Entities#Size">Size</a></td>
+<td>[Size](./entities.md#size)</td>
 <td align="center">Yes</td>
 </tr>
 
 <tr>
 <td><code>small</code></td>
-<td><a href="help/API-Entities#Size">Size</a></td>
+<td>[Size](./entities.md#size)</td>
 <td align="center">Yes</td>
 </tr>
 

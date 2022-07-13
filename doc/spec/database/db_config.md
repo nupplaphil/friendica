@@ -26,4 +26,4 @@ main configuration storage
 | cat_k   | UNIQUE, cat, k |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

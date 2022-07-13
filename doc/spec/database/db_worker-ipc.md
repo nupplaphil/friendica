@@ -23,4 +23,4 @@ Inter process communication between the frontend and the worker
 | PRIMARY | key      |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

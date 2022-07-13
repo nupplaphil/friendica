@@ -1,6 +1,9 @@
+---
+title: Settings
+tags:
+  - admin
+---
 # Settings
-
-* [Home](help)
 
 If you are the admin of a Friendica node, you have access to the **Admin Panel** where you can configure your Friendica node.
 
@@ -23,15 +26,15 @@ The list is linked, so you can have quick access to the Addon settings.
 And finally you are informed about the version of Friendica you have installed.
 If you contact the developers with a bug or problem, please also mention the version of your node.
 
-The admin panel is separated into subsections accessible from the side bar of the panel.
+The admin panel is separated into subsections accessible from the sidebar of the panel.
 
 ## Site
 
 This section of the admin panel contains the main configuration of your Friendica node.
-It is separated into several sub-section beginning with the basic settings at the top, advancing towards the bottom of the page.
+It is separated into several subsection beginning with the basic settings at the top, advancing towards the bottom of the page.
 
 Most configuration options have a help text in the admin panel.
-Therefore this document does not yet cover all the options
+Therefore, this document does not yet cover all the options
 
 ### Basic Settings
 
@@ -47,8 +50,8 @@ This option will set the default language for the node.
 It is used as fall back setting should Friendica fail to recognize the visitors preferences and can be overwritten by user settings.
 
 The Friendica community offers some translations.
-Some more complete then others.
-See [this help page](/help/translations) for more information about the translation process.
+Some more complete than others.
+See [this help page](../../developer/translations.md) for more information about the translation process.
 
 #### System Theme
 
@@ -57,15 +60,15 @@ This can be over-ridden by user profiles.
 Default theme is `vier` at the moment.
 
 You may also want to set a special theme for mobile interfaces.
-Which may or may not be necessary depending of the mobile friendliness of the desktop theme you have chosen.
+Which may or may not be necessary depending on the mobile friendliness of the desktop theme you have chosen.
 The `vier` theme for instance is mobile friendly.
 
 ### Registration
 
 #### Register policy
 
-With this drop down selector you can set the nodes registration policy.
-You can chose between the following modes:
+With this dropdown selector you can set the nodes' registration policy.
+You can choose between the following modes:
 
 * **open**: Everybody can register a new account and start using it right away.
 * **requires approval**: Everybody can register a new account, but the admin has to approve it before it can be used.
@@ -73,8 +76,8 @@ You can chose between the following modes:
 
 ##### Invitation based registry
 
-Additionally to the setting in the admin panel, you can decide if registrations are only possible using an invitation code or not.
-To enable invitation based registration, you have to set the `invitation_only` setting to `true` in the `system` section of the [config/local.config.php](/help/Config) file.
+Additionally, to the setting in the admin panel, you can decide if registrations are only possible using an invitation code or not.
+To enable invitation based registration, you have to set the `invitation_only` setting to `true` in the `system` section of the [config/local.config.php](../../admin/config.md) file.
 If you want to use this method, the registration policy has to be set to either *open* or *requires approval*.
 
 #### Check Full Names
@@ -94,9 +97,9 @@ Default is false.
 
 The ability to create "Pages" requires a person to register more than once.
 Your site configuration can block registration (or require approval to register).
-By default, logged in users can register additional accounts for use as pages.
+By default, logged-in users can register additional accounts for use as pages.
 These will still require approval if the registration policy is set to *require approval*
-You may prohibit logged in users from creating additional accounts by setting *block multiple registrations* to true.
+You may prohibit logged-in users from creating additional accounts by setting *block multiple registrations* to true.
 Default is false.
 
 ### File upload
@@ -104,17 +107,17 @@ Default is false.
 #### File storage backend
 
 Set the backend used by Friendica to store uploaded file data.
-Two storage backends are avaiable with Friendica:
+Two storage backends are available with Friendica:
 
 - **Database** : Data is stored in a dedicated table in database (`storage`)
 - **Filesystem** : Data is stored as file on the filesystem.
 
-More storage backends can be avaiable from third-party addons.
+More storage backends can be available from third-party addons.
 If you use those, please refer to the documentation of those addons for further information.
 
 Default value is 'Database (legacy)': it's the legacy way used to store data directly in database.
 
-Existing data can be moved to the current active backend using the ['storage move' console command](help/tools)
+Existing data can be moved to the current active backend using the ['storage move' console command](../../admin/tools.md)
 
 If selected backend has configurable options, new fields are shown here.
 
@@ -125,7 +128,6 @@ The base path where Filesystem storage backend saves data.
 For maximum security, this path should be outside the folder tree served by the web server: this way files can't be downloaded bypassing the privacy checks.
 
 Default value is `storage`, that is the `storage` folder in Friendica code root folder.
-
 
 #### Maximum Image Size
 
@@ -142,7 +144,7 @@ This allows a private community to be completely isolated from the global networ
 
 #### Force Publish
 
-By default, each user can choose on their Settings page whether or not to have their profile published in the site directory.
+By default, each user can choose on their Settings page whether to have their profile published in the site directory.
 This setting forces all profiles on this site to be listed in the site directory and there is no option provided to the user to change it.
 Default is false.
 
@@ -171,7 +173,7 @@ Comma separated list of domains which are allowed to establish friendships with 
 Wildcards are accepted.
 By default, any (valid) domain may establish friendships with this site.
 
-This is useful if you want to setup a closed network for educational groups, cooperatives and similar communities that don't want to communicate with the rest of the network.
+This is useful if you want to set up a closed network for educational groups, cooperatives and similar communities that don't want to communicate with the rest of the network.
 
 #### Allowed Email Domains
 
@@ -197,7 +199,7 @@ If you are running a node with explicit content, you can announce this with this
 When checked an information flag will be set in the published information about your node.
 (Should *Publish Server Information* be enabled.)
 
-Additionally a note will be displayed on the registration page for new users.
+Additionally, a note will be displayed on the registration page for new users.
 
 ### Advanced
 
@@ -215,18 +217,18 @@ Set to 0 for unlimited (not recommended).
 
 #### Verify SSL Certificates
 
-By default Friendica allows SSL communication between websites that have "self-signed" SSL certificates.
+By default, Friendica allows SSL communication between websites that have "self-signed" SSL certificates.
 For the widest compatibility with browsers and other networks we do not recommend using self-signed certificates, but we will not prevent you from using them.
 SSL encrypts all the data transmitted between sites (and to your browser).
 This allows you to have completely encrypted communications, and also protect your login session from hijacking.
 Self-signed certificates can be generated for free, without paying top-dollar for a website SSL certificate.
-However these aren't looked upon favourably in the security community because they can be subject to so-called "man-in-the-middle" attacks.
+However, these aren't looked upon favourably in the security community because they can be subject to so-called "man-in-the-middle" attacks.
 If you wish, you can turn on strict certificate checking.
 This will mean you cannot connect (at all) to self-signed SSL sites.
 
 #### Check upstream version
 
-If this option is enabled your Friendica node will check the upstream version once per day from the github repository.
+If this option is enabled your Friendica node will check the upstream version once per day from the GitHub repository.
 You can select if the stable version or the development version should be checked out.
 If there is a new version published, you will get notified in the admin panel summary page.
 
@@ -249,7 +251,7 @@ To guarantee that important tasks are executed even though the system has a lot 
 
 This section of the panel let the admin control the users registered on the node.
 
-If you have selected "Requires approval" for the *Register policy* in the general nodes configuration, new registrations will be listed at the top of the page.
+If you have selected "Requires approval" for the *Register policy* in the general nodes' configuration, new registrations will be listed at the top of the page.
 There the admin can then approve or disapprove the request.
 
 Below the new registration block the current accounts on the Friendica node are listed.
@@ -257,7 +259,7 @@ You can sort the user list by name, email, registration date, date of last login
 Here the admin can also block/unblock users from accessing the node or delete the accounts entirely.
 
 In the last section of the page admins can create new accounts on the node.
-The password for the new account will be send by email to the chosen email address.
+The password for the new account will be sent by email to the chosen email address.
 
 ## Addons
 
@@ -271,8 +273,8 @@ To simplify this process there is a button at the top of the page to reload all 
 
 ## Themes
 
-The Themes section of the admin panel works similar to the Addons section but let you control the themes on your Friendica node.
-Each theme has a dedicated subpage showing the current status, some information about the theme and a screen-shot of the Friendica interface using the theme.
+The Themes' section of the admin panel works similar to the Addons section but let you control the themes on your Friendica node.
+Each theme has a dedicated subpage showing the current status, some information about the theme and a screenshot of the Friendica interface using the theme.
 Should the theme offer special settings, admins can set a global default value here.
 
 You can activate and deactivate themes on their dedicated sub-pages thus making them available for the users of the node.
@@ -305,7 +307,7 @@ Friendica will not queue messages for all time but will sort out *dead* nodes au
 ## Server Blocklist
 
 This page allows to block all communications (inbound and outbound) with a specific domain name.
-Each blocked domain entry requires a reason that will be displayed on the [friendica](/friendica) page.
+Each blocked domain entry requires a reason that will be displayed on the friendica (`/friendica`) page.
 Matching is exact, blocking a domain doesn't block subdomains.
 
 ## Federation Statistics
@@ -317,13 +319,13 @@ These numbers are not complete and only contain nodes from networks Friendica fe
 
 Using this page an admin can delete postings and eventually associated discussion threads from their Friendica node.
 To do so, they need to know the GUID of the posting.
-This can be found on the `/display` page of the posting, it is the last part of the URL displayed in the browsers navigation bar.
+This can be found on the `/display` page of the posting, it is the last part of the URL displayed in the browsers' navigation bar.
 You can get to the `/display` page by following the *Link to source*.
 
 ## Addon Features
 
-Some of the addons you can install for your Friendica node have settings which have to be set by the admin.
-All those addons will be listed in this area of the admin panels side bar with their names.
+Some addons you can install for your Friendica node have settings which have to be set by the admin.
+All those addons will be listed in this area of the admin panels sidebar with their names.
 
 ## Logs
 
@@ -347,19 +349,22 @@ You should set up some kind of [log rotation](https://en.wikipedia.org/wiki/Log_
 
 **Known Issues**: The filename ``friendica.log`` can cause problems depending on your server configuration (see [issue 2209](https://github.com/friendica/friendica/issues/2209)).
 
-By default PHP warnings and error messages are suppressed.
+By default, PHP warnings and error messages are suppressed.
 If you want to enable those, you have to activate them in the ``config/local.config.php`` file.
 Use the following settings to redirect PHP errors to a file.
 
 Config:
 
-	error_reporting(E_ERROR | E_WARNING | E_PARSE );
-	ini_set('error_log','php.out');
-	ini_set('log_errors','1');
-	ini_set('display_errors', '0');
+```php
+<?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE );
+ini_set('error_log','php.out');
+ini_set('log_errors','1');
+ini_set('display_errors', '0');
+```
 
-This will put all PHP errors in the file php.out (which must be writeable by the webserver).
-Undeclared variables are occasionally referenced in the program and therefore we do not recommend using `E_NOTICE` or `E_ALL`.
+This will put all PHP errors in the file `php.out` (which must be writeable by the webserver).
+Undeclared variables are occasionally referenced in the program, and therefore we do not recommend using `E_NOTICE` or `E_ALL`.
 The vast majority of issues reported at these levels are completely harmless.
 Please report to the developers any errors you encounter in the logs using the recommended settings above.
 They generally indicate issues which need to be resolved.
@@ -377,40 +382,46 @@ With the second tool *check webfinger* you can request information about the thi
 
 # Exceptions to the rule
 
-There are four exceptions to the rule, that all the config will be read from the data base.
-These are the data base settings, the admin account settings, the path of PHP and information about an eventual installation of the node in a sub-directory of the (sub)domain.
+There are four exceptions to the rule, that all the config will be read from the database.
+These are the database settings, the admin account settings, the path of PHP and information about an eventual installation of the node in a subdirectory of the (sub)domain.
 
 ## DB Settings
 
-With the following settings, you specify the data base server, the username and password for Friendica and the database to use.
+With the following settings, you specify the database server, the username and password for Friendica and the database to use.
 
-	'database' => [
-		'hostname' => 'localhost',
-		'username' => 'mysqlusername',
-		'password' => 'mysqlpassword',
-		'database' => 'mysqldatabasename',
-		'charset' => 'utf8mb4',
-	],
+```php
+'database' => [
+	'hostname' => 'localhost',
+	'username' => 'mysqlusername',
+	'password' => 'mysqlpassword',
+	'database' => 'mysqldatabasename',
+	'charset' => 'utf8mb4',
+],
+```
 
 ## Admin users
 
 You can set one, or more, accounts to be *Admin*.
-By default this will be the one account you create during the installation process.
+By default, this will be the one account you create during the installation process.
 But you can expand the list of email addresses by any used email address you want.
 Registration of new accounts with a listed email address is not possible.
 
-	'config' => [
-		'admin_email' => 'you@example.com, buddy@example.com',
-	],
+```php
+'config' => [
+	'admin_email' => 'you@example.com, buddy@example.com',
+],
+```
 
 ## PHP Path
 
 Some of Friendica's processes are running in the background.
 For this you need to specify the path to the PHP binary to be used.
 
-	'config' => [
-		'php_path' => '/usr/bin/php',
-	],
+```php
+'config' => [
+	'php_path' => '/usr/bin/php',
+],
+```
 
 ## Subdirectory configuration
 
@@ -418,11 +429,12 @@ It is possible to install Friendica into a subdirectory of your web server.
 We strongly discourage you from doing so, as this will break federation to other networks (e.g. Diaspora, GNU Social, Hubzilla)
 Say you have a subdirectory for tests and put Friendica into a further subdirectory, the config would be:
 
-	'system' => [
-		'urlpath' => 'tests/friendica',
-	],
+```php
+'system' => [
+	'urlpath' => 'tests/friendica',
+],
+```
 
 ## Other exceptions
 
-Furthermore there are some experimental settings, you can read-up in the [Config values that can only be set in config/local.config.php](help/Config) section of the documentation.
-
+Furthermore, there are some experimental settings, you can read-up in the [Config values that can only be set in config/local.config.php](../../admin/config.md) section of the documentation.

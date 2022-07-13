@@ -28,4 +28,4 @@ addon hook registry
 | hook_file_function | UNIQUE, hook, file, function |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

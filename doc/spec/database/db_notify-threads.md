@@ -31,10 +31,10 @@ tags:
 
 ## Foreign Keys
 
-| Field                | Target Table                           | Target Field |
-| -------------------- | -------------------------------------- | ------------ |
-| notify-id            | [notify](/spec/database/db_notify)     | id           |
-| master-parent-uri-id | [item-uri](/spec/database/db_item-uri) | id           |
-| receiver-uid         | [user](/spec/database/db_user)         | uid          |
+| Field                | Target Table                 | Target Field |
+| -------------------- | ---------------------------- | ------------ |
+| notify-id            | [notify](./db_notify.md)     | id           |
+| master-parent-uri-id | [item-uri](./db_item-uri.md) | id           |
+| receiver-uid         | [user](./db_user.md)         | uid          |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

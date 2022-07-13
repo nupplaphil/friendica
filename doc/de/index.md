@@ -6,68 +6,65 @@ authors:
   - Philipp
 date: 2022-07-02
 ---
-Friendica - Dokumentation und Ressourcen
-=====================================
+# Friendica - Dokumentation und Ressourcen
 
-**Inhalte**
+## Inhalte
 
 * Allgemeine Funktionen - Erste Schritte
-	* [Account - Basics](help/Account-Basics)
-	* [Schnellstart für neue Benutzer](help/Quick-Start-guide)
-	* [Beiträge erstellen](help/Text_editor)
-	* [Referenz der BBCode Elemente](help/BBCode)
-	* [Beiträge kommentieren, einordnen und löschen](help/Text_comment)
-	* [Referenz der Accesskeys](help/Accesskeys)
-    * [Veranstaltungen](help/events)
+	* [Account - Basics](user/account-basics.md)
+	* [Schnellstart für neue Benutzer](user/quick-start/guide.md)
+	* [Beiträge erstellen](user/text-editor.md)
+	* [Referenz der BBCode Elemente](user/bbcode.md)
+	* [Beiträge kommentieren, einordnen und löschen](user/text-comment.md)
+	* [Referenz der Accesskeys](../user/accesskeys.md)
+    * [Veranstaltungen](user/events.md)
 * Du und andere Nutzer
-	* [Konnektoren (Connectors)](help/Connectors)
-	* [Freunde finden](help/Making-Friends)
-	* [Gruppen und Privatsphäre](help/Groups-and-Privacy)
-	* [Tags und Erwähnungen](help/Tags-and-Mentions)
-	* [Community-Foren](help/Forums)
-	* [Chats](help/Chats)
+	* [Konnektoren (Connectors)](user/connectors.md)
+	* [Freunde finden](user/making-friends.md)
+	* [Gruppen und Privatsphäre](user/groups-and-privacy.md)
+	* [Tags und Erwähnungen](user/tags-and-mentions.md)
+	* [Community-Foren](user/forums.md)
+	* [Chats](user/chats.md)
 * Weiterführende Informationen
-	* [Account umziehen](help/Move-Account)
-	* [Export / Import gefolgter Kontakte](help/Export-Import-Contacts)
-	* [Account löschen](help/Remove-Account)
-	* [Bugs und Probleme](help/Bugs-and-Issues)
-	* [Häufig gestellte Fragen (FAQ)](help/FAQ)
+    * [Account umziehen](user/move-account.md)
+    * [Export / Import gefolgter Kontakte](user/export-import-contacts.md)
+    * [Account löschen](user/remove-account.md)
+    * [Bugs und Probleme](bugs-and-issues.md)
+    * [Häufig gestellte Fragen (FAQ)](user/faq.md)
 
-**Dokumentation für Administratoren**
+## Dokumentation für Administratoren
 
-* [Installation](help/Install)
-* [Update](help/Update) (EN)
-* [Konfigurationen & Admin-Panel](help/Settings)
-* [Addons](help/Addons)
-* [Konnektoren (Connectors) installieren (Twitter/GNU Social)](help/Installing-Connectors)
-* [Installation eines ejabberd Servers (XMPP-Chat) mit synchronisierten Anmeldedaten](help/install-ejabberd) (EN)
-* [Betreibe deine Seite mit einem SSL-Zertifikat](help/SSL)
-* [Konfigurationswerte, die nur in der config/local.config.php gesetzt werden können](help/Config) (EN)
-* [Performance verbessern](help/Improve-Performance)
-* [Administration Werkzeuge](help/tools) (EN)
-* [Admin FAQ](help/FAQ-admin)
+* [Installation](admin/install.md)
+* [Update](../admin/update.md) (EN)
+* [Konfigurationen & Admin-Panel](admin/settings.md)
+* [Konnektoren (Connectors) installieren (Twitter/GNU Social)](../admin/installing-connectors.md)
+* [Installation eines ejabberd Servers (XMPP-Chat) mit synchronisierten Anmeldedaten](../admin/install-ejabberd.md) (EN)
+* [Betreibe deine Seite mit einem SSL-Zertifikat](admin/ssl.md)
+* [Konfigurationswerte, die nur in der config/local.config.php gesetzt werden können](../admin/config.md) (EN)
+* [Performance verbessern](admin/improve-performance.md)
+* [Administration Werkzeuge](../admin/tools.md) (EN)
+* [Admin FAQ](admin/faq.md)
 
-**Dokumentation für Entwickler**
+## Dokumentation für Entwickler
 
-* [Entwickler](help/Developers)
-* [Where to get started?](help/Developers-Intro) (EN)
-* [Help on Github](help/Github)
-* [Help on Vagrant](help/Vagrant)
-* [How to translate Friendica](help/translations) (EN)
-* [Bugs and Issues](help/Bugs-and-Issues)
-* [Addon Development](help/Addons)
-* [Theme Development](help/themes)
-* [Smarty 3 Templates](help/smarty3-templates)
-* [Protokoll Dokumentation](help/Protocol) (EN)
-* [Datenbank-Schema](help/database)
-* [Class Autoloading](help/autoloader) (EN)
-* [Using Composer](help/Composer) (EN)
-* [Code-Referenz (mit doxygen generiert - setzt Cookies)](doc/html/)
-* [API Dokumentation](help/api) (EN)
-* [Translation of Friendica](help/translations) (EN)
-* [Run tests](help/Tests) (EN)
+* [Addons](developer/addons.md)
+* [Where to get started?](developer/index.md)
+* [Help on Github](../developer/github.md) (EN)
+* [Help on Vagrant](../developer/vagrant.md) (EN)
+* [How to translate Friendica](../developer/translations.md) (EN)
+* [Bugs and Issues](bugs-and-issues.md)
+* [Theme Development](../developer/themes.md) (EN)
+* [Smarty 3 Templates](../developer/smarty3-templates.md) (EN)
+* [Protokoll Dokumentation](../spec/protocol/protocol.md) (EN)
+* [Datenbank-Schema](../spec/database/index.md) (EN)
+* [Class Autoloading](../developer/autoloader.md) (EN)
+* [Using Composer](../developer/composer.md) (EN)
+* [Code-Referenz (mit doxygen generiert - setzt Cookies)](/html/)
+* [API Dokumentation](../spec/api/index.md) (EN)
+* [Translation of Friendica](../developer/translations.md) (EN)
+* [Run tests](../developer/tests.md) (EN)
 
-**Externe Ressourcen**
+## Externe Ressourcen
 
 * [Haupt-Webseite](https://friendi.ca)
 * Support Kanäle
@@ -77,8 +74,3 @@ Friendica - Dokumentation und Ressourcen
     * XMPP/Jabber MUC: support(at)forum.friendi.ca
     * IRC: #friendica auf [libera.chat](https://web.libera.chat/?channels=#friendica)
     * Matrix: [#friendi.ca](https://matrix.to/#/#friendi.ca:matrix.org) oder [#friendica-en](https://matrix.to/#/#friendica-en:matrix.org) auf matrix.org
-
-**Über diese Seite**
-
-* [Seite/Friendica-Version](friendica)
-* [Mitwirkenden bei Friendica](credits)

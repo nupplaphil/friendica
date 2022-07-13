@@ -23,4 +23,4 @@ Data stored by Database storage backend
 | PRIMARY | id       |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

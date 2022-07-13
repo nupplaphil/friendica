@@ -45,7 +45,7 @@ Sie wird verwendet, wenn es Friendica nicht gelingt die Spracheinstellungen des 
 Nutzer können diese Auswahl in den Einstellungen des Benutzerkontos überschreiben.
 
 Die Friendica Gemeinschaft bietet einige Übersetzungen an, von denen einige mehr andere weniger komplett sind.
-Mehr Informationen zum Übersetzungsprozess von Friendica findest du [auf dieser Seite](/developer/translations/) der Dokumentation.
+Mehr Informationen zum Übersetzungsprozess von Friendica findest du [auf dieser Seite](../../developer/translations.md) der Dokumentation.
 
 #### Systemweites Theme
 
@@ -70,7 +70,7 @@ Dabei kannst du zwischen den folgenden Optionen wählen:
 ##### Einladungen
 
 Zusätzlich zu den oben genannten Möglichkeiten kann die Registrierung eines neuen Nutzerkontos an eine Einladung durch einen bestehenden Nutzer gekoppelt werden.
-Hierzu muss in der [config/local.config.php](/admin/config/) Datei die Option `invitation_only` aktiviert und als Registrierungsmethode entweder *Offen* oder *Bedarf der Zustimmung* gewählt werden.
+Hierzu muss in der [config/local.config.php](../../admin/config.md) Datei die Option `invitation_only` aktiviert und als Registrierungsmethode entweder *Offen* oder *Bedarf der Zustimmung* gewählt werden.
 
 #### Namen auf Vollständigkeit überprüfen
 
@@ -110,7 +110,7 @@ Falls ein solches verwendet wird, sei an dieser Stelle nur auf deren Dokumentati
 Die Grundeinstellung ist 'Datenbank (legacy)': Dies ist die alte Methode von Friendica Daten direkt in der Datenbank abzulegen.
 
 Bestehende Daten können zum aktuell ausgewählten Backend verschoben werden.
-Hierfür kann der ['storage move'](/admin/tools/) Befehl der Friendica Konsole verwendet werden.
+Hierfür kann der ['storage move'](../../admin/tools.md) Befehl der Friendica Konsole verwendet werden.
 
 Sollte das ausgewählte Speicher-Backand zusätzliche Konfigurationsparameter besitzen, werden nach der Auswahl des Backends hier weitere Felder angezeigt.
 
@@ -275,7 +275,7 @@ In diesem Bereich des Adminpanels kannst du die Grundeinstellungen für diese Fe
 
 ## DB Updates
 
-Wenn sich die Datenbankstruktur Friendicas ändert werden die Änderungen automatisch angewandt.
+Wenn sich die Datenbankstruktur Friendicas ändert, werden die Änderungen automatisch angewandt.
 Solltest du den Verdacht haben, dass eine Aktualisierung fehlgeschlagen ist, kannst du in diesem Bereich des Adminpanels den Status der Aktualisierungen überprüfen.
 
 ## Warteschlange Inspizieren
@@ -296,7 +296,7 @@ Nach einiger Zeit werden Knoten als inaktiv identifiziert und Nachrichten an Nut
 ## Server Blockliste
 
 Auf dieser Seite des Adminpanels können Administratoren einer Friendica-Instanz die komplette Kommunikation (eingehend und ausgehend) mit bestimmten Domains unterbinden.
-Für jede dieser Blockierungen muss ein Grund angegeben werden, welcher auf der Informationsseite [friendica](/friendica) angezeigt wird.
+Für jede dieser Blockierungen muss ein Grund angegeben werden, welcher auf der Informationsseite `https://your-site.info/friendica` angezeigt wird.
 Der Abgleich der Domainnamen ist exakt, Subdomains werden nicht automatisch ebenfalls blockiert.
 
 ## Federation Statistik
@@ -339,10 +339,13 @@ Du solltest deshalb einen Dienst zur [log rotation](https://en.wikipedia.org/wik
 Normalerweise werden Fehler- und Warnmeldungen von PHP unterdrückt.
 Wenn du sie aktivieren willst, musst du folgendes in der `config/local.config.php` Datei eintragen um die Meldungen in die Datei `php.out` zu speichern
 
-	error_reporting(E_ERROR | E_WARNING | E_PARSE );
-	ini_set('error_log','php.out');
-	ini_set('log_errors','1');
-	ini_set('display_errors', '0');
+```php
+<?php 
+error_reporting(E_ERROR | E_WARNING | E_PARSE );
+ini_set('error_log','php.out');
+ini_set('log_errors','1');
+ini_set('display_errors', '0');
+```
 
 Die Datei `php.out` muss vom Webserver schreibbar sein und sollte ebenfalls außerhalb der Webverzeichnisse liegen.
 Es kommt gelegentlich vor, dass nicht deklarierte Variablen referenziert werden, deshalb raten wir davon ab `E_NOTICE` oder `E_ALL` zu verwenden.
@@ -371,21 +374,25 @@ Dies sind die Datenbank Einstellungen, die Administrator Accounts, der PHP Pfad 
 
 Mit den folgenden Einstellungen kannst du die Zugriffsdaten für den Datenbankserver festlegen.
 
-	'database' => [
-		'hostname' => 'localhost',
-		'username' => 'mysqlusername',
-		'password' => 'mysqlpassword',
-		'database' => 'mysqldatabasename',
-		'charset' => 'utf8mb4',
-	],
+```php
+'database' => [
+	'hostname' => 'localhost',
+	'username' => 'mysqlusername',
+	'password' => 'mysqlpassword',
+	'database' => 'mysqldatabasename',
+	'charset' => 'utf8mb4',
+],
+```
 
 Sollten alle der folgenden Environment-Variablen gesetzt sein, wird Friendica diese anstatt der vorher konfigurierten Werte nutzen.
 
-	MYSQL_HOST
-	MYSQL_PORT
-	MYSQL_USERNAME
-	MYSQL_PASSWORD
-	MYSQL_DATABASE
+```env
+MYSQL_HOST
+MYSQL_PORT
+MYSQL_USERNAME
+MYSQL_PASSWORD
+MYSQL_DATABASE
+```
 
 ## Administratoren
 
@@ -394,18 +401,22 @@ Normalerweise trifft dies auf den ersten Account zu, der nach der Installation a
 Die Liste der E-Mail-Adressen kann aber einfach erweitert werden.
 Mit keiner der angegebenen E-Mail-Adressen können weitere Accounts registriert werden.
 
-	'config' => [
-		'admin_email' => 'you@example.com, buddy@example.com',
-	],
+```php
+'config' => [
+	'admin_email' => 'you@example.com, buddy@example.com',
+],
+```
 
 ## PHP Pfad
 
 Einige Prozesse von Friendica laufen im Hintergrund.
 Für diese Prozesse muss der Pfad zu der PHP Version gesetzt sein, die verwendet werden soll.
 
-	'config' => [
-		'php_path' => '/usr/bin/php',
-	],
+```php
+'config' => [
+	'php_path' => '/usr/bin/php',
+],
+```
 
 ## Unterverzeichnis Konfiguration
 
@@ -413,11 +424,13 @@ Man kann Friendica in ein Unterverzeichnis des Webservers installieren.
 Wir raten allerdings dringen davon ab, da es die Interoperabilität mit anderen Netzwerken (z.B. Diaspora, GNU Social, Hubzilla) verhindert.
 Mal angenommen, du hast ein Unterverzeichnis tests und willst Friendica in ein weiteres Unterverzeichnis installieren, dann lautet die Konfiguration hierfür:
 
-	'system' => [
-		'urlpath' => 'tests/friendica',
-	],
+```php
+'system' => [
+	'urlpath' => 'tests/friendica',
+],
+```
 
 ## Weitere Ausnahmen
 
 Es gibt noch einige experimentelle Einstellungen, die nur in der ``config/local.config.php`` Datei konfiguriert werden können.
-Im [Konfigurationswerte, die nur in der config/local.config.php gesetzt werden können (EN)](/admin/config/) Artikel kannst du mehr darüber erfahren.
+Im [Konfigurationswerte, die nur in der config/local.config.php gesetzt werden können (EN)](../../admin/config.md) Artikel kannst du mehr darüber erfahren.

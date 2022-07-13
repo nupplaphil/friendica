@@ -27,4 +27,4 @@ tags:
 | name_expires | name, expires |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

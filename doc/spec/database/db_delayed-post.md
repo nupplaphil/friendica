@@ -29,9 +29,9 @@ Posts that are about to be distributed at a later time
 
 ## Foreign Keys
 
-| Field | Target Table                                 | Target Field |
-| ----- | -------------------------------------------- | ------------ |
-| uid   | [user](/spec/database/db_user)               | uid          |
-| wid   | [workerqueue](/spec/database/db_workerqueue) | id           |
+| Field | Target Table                       | Target Field |
+| ----- | ---------------------------------- | ------------ |
+| uid   | [user](./db_user.md)               | uid          |
+| wid   | [workerqueue](./db_workerqueue.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

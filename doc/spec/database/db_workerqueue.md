@@ -39,4 +39,4 @@ Background tasks queue entries
 | done_pid_priority_created     | done, pid, priority, created     |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

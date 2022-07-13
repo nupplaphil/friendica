@@ -1,0 +1,46 @@
+#depends_on:
+#  - phpunit
+#  - code_standards_check
+
+# This prevents executing this pipeline at other servers than ci.friendi.ca
+labels:
+  type: releaser
+  location: friendica
+
+pipeline:
+  restore_cache:
+    image: meltwater/drone-cache:dev
+    settings:
+      backend: "filesystem"
+      restore: true
+      cache_key: "{{ .Repo.Name }}_php7.4_{{ arch }}_{{ os }}"
+      archive_format: "gzip"
+      mount:
+        - '.composer'
+    volumes:
+      - /tmp/drone-cache:/tmp/cache
+  composer_install:
+    image: friendicaci/php7.4:php7.4.18
+    commands:
+      - export COMPOSER_HOME=.composer
+      - ./bin/composer.phar validate
+      - ./bin/composer.phar install --no-dev --optimize-autoloader
+    volumes:
+      - /etc/hosts:/etc/hosts
+  update_makefiles:
+    image: friendicaci/php7.4:php7.4.18
+
+    commands:
+      - ./bin/console createdocumentation createMkDocs
+  create_documentation:
+    image: friendicaci/mkdocs
+    commands:
+      - mkdocs build -d help
+  publish:
+    image: alpine
+    commands:
+      - mkdir -p /tmp/friendica_docs/${CI_COMMIT_BRANCH}
+      - rm -fr /tmp/friendica_docs/${CI_COMMIT_BRANCH}/*
+      - cp -fr ./help/* /tmp/friendica_docs/${CI_COMMIT_BRANCH}/
+    volumes:
+      - docs:/tmp/friendica_docs

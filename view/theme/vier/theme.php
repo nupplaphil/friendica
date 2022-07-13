@@ -217,7 +217,7 @@ function vier_community_info()
 			$r[$index]["url"] = Contact::magicLink($helper["url"]);
 		}
 
-		$r[] = ["url" => "help/Quick-Start-guide", "name" => DI::l10n()->t("Quick Start")];
+		$r[] = ["url" => "help/user/quick-start/guide/", "name" => DI::l10n()->t("Quick Start")];
 
 		$tpl = Renderer::getMarkupTemplate('ch_helpers.tpl');
 

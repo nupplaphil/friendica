@@ -33,9 +33,9 @@ Custom profile fields
 
 ## Foreign Keys
 
-| Field | Target Table                                     | Target Field |
-| ----- | ------------------------------------------------ | ------------ |
-| uid   | [user](/spec/database/db_user)                   | uid          |
-| psid  | [permissionset](/spec/database/db_permissionset) | id           |
+| Field | Target Table                           | Target Field |
+| ----- | -------------------------------------- | ------------ |
+| uid   | [user](./db_user.md)                   | uid          |
+| psid  | [permissionset](./db_permissionset.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

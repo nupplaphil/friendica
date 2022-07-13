@@ -33,4 +33,4 @@ OAuth application
 | client_id | UNIQUE, client_id |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

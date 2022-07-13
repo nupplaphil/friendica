@@ -1,21 +1,25 @@
+---
+title: Twitter
+tags:
+  - specification
+  - api
+  - twitter
+---
 # Twitter API
-
-* [Home](help)
-  * [Using the APIs](help/api)
 
 ## Overview
 
 Friendica provides the following endpoints defined in the [official Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index).
 
-Authentication is the same as described in [Using the APIs](help/api#Authentication).
+Authentication is the same as described in [Using the APIs](./index.md#authentication).
 
 ## Entities
 
-These endpoints use the [Friendica API entities](help/API-Entities).
+These endpoints use the [Friendica API entities](./entities.md).
 
 ## Different behaviour
 
-* `screen_name`: The nick name in Friendica is only unique in each network but not for all networks. The users are searched in the following priority: Friendica, StatusNet/GNU Social, Diaspora, pump.io, Twitter. If no contact was found by this way, then the first contact is taken.
+* `screen_name`: The nickname in Friendica is only unique in each network but not for all networks. The users are searched in the following priority: Friendica, StatusNet/GNU Social, Diaspora, pump.io, Twitter. If no contact was found by this way, then the first contact is taken.
 * `include_entities`: Default is "false". If set to "true" then the plain text is formatted so that links are having descriptions.
 
 ## Friendica-specific return values
@@ -169,11 +173,7 @@ These endpoints use the [Friendica API entities](help/API-Entities).
         - `screen_name` trumps `user_id` if both are provided (undocumented Twitter behavior).
         - Will succeed but return an empty array for users hiding their contact lists.
 
-
 - [POST api/friendships/destroy](https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy)
-
-
-
 
 ## Non-implemented endpoints
 

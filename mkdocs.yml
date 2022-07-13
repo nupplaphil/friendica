@@ -18,7 +18,7 @@
 
 # Project information
 site_name: Friendica documentation
-site_url: https://friendi.ca/
+site_url: https://friendi.ca
 site_author: The Friendica project
 site_description: >-
   Friendica is a decentralised communications platform that integrates social communication.
@@ -90,6 +90,9 @@ plugins:
           'Bugs and Issues': 'Bugs und Probleme'
           Configuration: Konfiguration
           Third Party: Dritthersteller
+          'First Steps': Erste Schritte
+          'You and other users': Du mit anderen Nutzer
+          'Further information': Weiterführende Informationen
 
 extra:
   homepage: https://friendi.ca
@@ -110,11 +113,11 @@ nav:
       - First Steps:
         - user/account-basics.md
         - Quick Start:
-          - user/quick-start/quick-start-guide.md
-          - user/quick-start/quick-start-network.md
-          - user/quick-start/quick-start-groupsandpages.md
-          - user/quick-start/quick-start-makingnewfriends.md
-          - user/quick-start/quick-start-andfinally.md
+          - user/quick-start/guide.md
+          - user/quick-start/network.md
+          - user/quick-start/groups-and-pages.md
+          - user/quick-start/making-new-friends.md
+          - user/quick-start/finally.md
         - user/text-editor.md
         - user/bbcode.md
         - user/text-comment.md
@@ -148,7 +151,7 @@ nav:
       - Third Party:
         - admin/installing-connectors.md
         - admin/install-ejabberd.md
-      - admin/faq-admin.md
+      - admin/faq.md
     - Developer:
         - developer/index.md
         - Set Up:
@@ -165,6 +168,7 @@ nav:
           - developer/composer.md
           - developer/how-to-move-classes-to-src.md
           - developer/tests.md
+          - developer/autoloader.md
         - Specification:
           - API:
             - spec/api/index.md
@@ -172,7 +176,7 @@ nav:
             - spec/api/friendica.md
             - spec/api/mastodon.md
             - spec/api/twitter.md
-            - spec/api/gnu-Social.md
+            - spec/api/gnu-social.md
           - Database:
             - spec/database/index.md
             - spec/database/db_2fa_app_specific_password.md

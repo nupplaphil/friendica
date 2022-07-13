@@ -53,12 +53,12 @@ private messages
 
 ## Foreign Keys
 
-| Field         | Target Table                           | Target Field |
-| ------------- | -------------------------------------- | ------------ |
-| uid           | [user](/spec/database/db_user)         | uid          |
-| author-id     | [contact](/spec/database/db_contact)   | id           |
-| uri-id        | [item-uri](/spec/database/db_item-uri) | id           |
-| parent-uri-id | [item-uri](/spec/database/db_item-uri) | id           |
-| thr-parent-id | [item-uri](/spec/database/db_item-uri) | id           |
+| Field         | Target Table                 | Target Field |
+| ------------- | ---------------------------- | ------------ |
+| uid           | [user](./db_user.md)         | uid          |
+| author-id     | [contact](./db_contact.md)   | id           |
+| uri-id        | [item-uri](./db_item-uri.md) | id           |
+| parent-uri-id | [item-uri](./db_item-uri.md) | id           |
+| thr-parent-id | [item-uri](./db_item-uri.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

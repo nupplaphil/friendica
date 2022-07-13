@@ -29,8 +29,8 @@ Store OpenWebAuth token to verify contacts
 
 ## Foreign Keys
 
-| Field | Target Table                   | Target Field |
-| ----- | ------------------------------ | ------------ |
-| uid   | [user](/spec/database/db_user) | uid          |
+| Field | Target Table         | Target Field |
+| ----- | -------------------- | ------------ |
+| uid   | [user](./db_user.md) | uid          |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

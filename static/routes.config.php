@@ -430,7 +430,6 @@ return [
 		'/{group:\d+}/{command:add|remove}/{contact:\d+}'    => [Module\Group::class, [R::GET, R::POST]],
 	],
 	'/hashtag'                    => [Module\Hashtag::class,           [R::GET]],
-	'/help[/{doc:.+}]'            => [Module\Help::class,              [R::GET]],
 	'/home'                       => [Module\Home::class,              [R::GET]],
 	'/hcard/{profile}[/{action}]' => [Module\HCard::class,             [R::GET]],
 	'/inbox[/{nickname}]'         => [Module\ActivityPub\Inbox::class, [R::GET, R::POST]],

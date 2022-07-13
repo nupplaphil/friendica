@@ -1,37 +1,39 @@
-Chats
-=====
+---
+title: Chats
+tags:
+  - user
+---
+# Chats
 
-* [Zur Startseite der Hilfe](help)
-
-Du hast derzeit zwei Möglichkeiten, einen Chat auf Deiner Friendica-Seite zu betreiben
+du hast derzeit zwei Möglichkeiten, einen Chat auf deiner Friendica-Seite zu betreiben
 
 * IRC - Internet Relay Chat
 * Jappix
 
 ## IRC Addon
 
-Sobald das Addon aktiviert ist, kannst Du den Chat unter [deineSeite.de/irc](../irc) finden.
-Beachte aber, dass dieser Chat auch ohne Anmeldung auf Deiner Seite zugänglich ist und somit auch Fremde diesen Chat mitnutzen können.
+Sobald das Addon aktiviert ist, kannst du den Chat unter `https://deineSeite.de/irc` finden.
+Beachte aber, dass dieser Chat auch ohne Anmeldung auf deiner Seite zugänglich ist und somit auch Fremde diesen Chat mitnutzen können.
 
-Wenn Du dem Link folgst, dann kommst Du zum Anmeldefenster des IR-Chats.
-Wähle nun einen Spitznamen (Nickname) und wähle einen Raum aus, in dem Du chatten willst.
-Hier kannst Du jeden Namen eingeben.
+Wenn du dem Link folgst, dann kommst du zum Anmeldefenster des IR-Chats.
+Wähle nun einen Spitznamen (Nickname) und wähle einen Raum aus, in dem du chatten willst.
+Hier kannst du jeden Namen eingeben.
 Es kann also auch #tollerChatdessenNamenurichkenne sein.
-Gib als nächstes noch die Captchas ein, um zu zeigen, dass es sich bei Dir um einen Menschen handelt und klicke auf "Connect".
+Gib als Nächstes noch die Captchas ein, um zu zeigen, dass es sich bei dir um einen Menschen handelt und klicke auf "Connect".
 
-Im nächsten Fenster siehst Du zunächst viel Text beim Verbindungsaufbau, der allerdings für Dich nicht weiter von Bedeutung ist.
+Im nächsten Fenster siehst du zunächst viel Text beim Verbindungsaufbau, der allerdings für dich nicht weiter von Bedeutung ist.
 Anschließend öffnet sich das Chat-Fenster.
-In den ersten Zeilen wird Dir Dein Name und Deine aktuelle IP-Adresse angezeigt.
-Rechts im Fenster siehst Du alle Teilnehmer des Chats.
-Unten hast Du ein Eingabefeld, um Beiträge zu schreiben.
+In den ersten Zeilen wird dir dein Name und deine aktuelle IP-Adresse angezeigt.
+Rechts im Fenster siehst du alle Teilnehmer des Chats.
+Unten hast du ein Eingabefeld, um Beiträge zu schreiben.
 
-Weiter Informationen zu IRC findest Du zum Beispiel auf <a href="http://wiki.ubuntuusers.de/IRC" target="_blank" rel="noopener noreferrer">ubuntuusers.de</a>, in <a href="https://de.wikipedia.org/wiki/Internet_Relay_Chat" target="_blank" rel="noopener noreferrer">Wikipedia</a> oder bei <a href="http://www.irchelp.org/" target="_blank" rel="noopener noreferrer">icrhelp.org</a> (in Englisch).
+Weiter Informationen zu IRC findest du zum Beispiel auf <a href="http://wiki.ubuntuusers.de/IRC" target="_blank" rel="noopener noreferrer">ubuntuusers.de</a>, in <a href="https://de.wikipedia.org/wiki/Internet_Relay_Chat" target="_blank" rel="noopener noreferrer">Wikipedia</a> oder bei <a href="http://www.irchelp.org/" target="_blank" rel="noopener noreferrer">icrhelp.org</a> (in Englisch).
 
 ## Jappix Mini
 
 Das Jappix Mini Addon erlaubt das Erstellen einer Chatbox für Jabber/XMPP-Kontakte.
 Ein Jabber/XMPP Account sollte vor der Installation bereits vorhanden sein.
-Die ausführliche Anleitung dazu und eine Kontrolle, ob Du nicht sogar schon über Deinen E-Mail Anbieter einen Jabber-Account hast, findest Du unter <a href="http://einfachjabber.de" target="_blank" rel="noopener noreferrer">einfachjabber.de</a>.
+Die ausführliche Anleitung dazu und eine Kontrolle, ob du nicht sogar schon über deinen E-Mail-Anbieter einen Jabber-Account hast, findest du unter <a href="http://einfachjabber.de" target="_blank" rel="noopener noreferrer">einfachjabber.de</a>.
 
 Einige Server zum Anmelden eines neuen Accounts:
 
@@ -40,42 +42,43 @@ Einige Server zum Anmelden eines neuen Accounts:
 * [http://www.jabber.de](http://www.jabber.de)
 * oder die Auswahl von [http://xmpp.net](http://xmpp.net) nutzen.
 
-**1. Grundsätzliches**
+## 1. Grundsätzliches
 
-Als erstes musst Du die aktuellste Version herunterladen:
+Als Erstes musst du die aktuellste Version herunterladen:
 
 Per Git:
-<p style="font-family: courier; background-color: #CCCCCC; margin-left:25px; width: 450px;">
-cd /var/www/&lt;Pfad zu Deiner friendica-Installation&gt;/addon; git pull
-</p>
+```sh
+cd /var/www/<Pfad zu deiner friendica-Installation>/addon
+git pull
+```
 
 oder als normaler Download von hier: https://github.com/friendica/friendica-addons/blob/stable/jappixmini.tgz (auf „view raw“ klicken)
 
-Entpacke diese Datei (ggf. den entpackten Ordner in „jappixmini“ umbenennen) und lade sowohl den entpackten Ordner komplett als auch die .tgz Datei in den Addon Ordner Deiner Friendica Installation hoch.
+Entpacke diese Datei (ggf. den entpackten Ordner in „jappixmini“ umbenennen) und lade sowohl den entpackten Ordner komplett als auch die .tgz Datei in den Addon Ordner deiner Friendica Installation hoch.
 
 Nach dem Upload gehts in den Friendica Adminbereich und dort zu den Addons.
 Aktiviere das Jappixmini Addon und gehe anschließend über die Addons Seitenleiste (dort wo auch die Twitter-, Impressums-, GNU Social-, usw. Einstellungen gemacht werden) zu den Jappix Grundeinstellungen.
 
 Setze hier den Haken zur Aktivierung des BOSH Proxys.
-Weiter gehts in den Einstellungen Deines Friendica Accounts.
+Weiter gehts in den Einstellungen deines Friendica Accounts.
 
-2. Einstellungen
+## 2. Einstellungen
 
-Gehe bitte zu den Addon-Einstellungen in Deinen Konto-Einstellungen (Account Settings).
+Gehe bitte zu den Addon-Einstellungen in deinen Konto-Einstellungen (Account Settings).
 Scrolle ein Stück hinunter bis zu den Jappix Mini Addon settings.
 
 Aktiviere hier zuerst das Addon.
 
-Trage nun Deinen Jabber/XMPP Namen ein, ebenfalls die entsprechende Domain bzw. den Server (ohne http, also zb einfach so: jappix.com).
-Um das JavaScript Applet zum Chatten im Browser verwenden zu können, benötigst du einen BOSH Proxy.
+Trage nun deinen Jabber/XMPP Namen ein, ebenfalls die entsprechende Domain bzw. den Server (ohne http, also z. B. einfach so: jappix.com).
+Um das JavaScript zum Chatten im Browser verwenden zu können, benötigst du einen BOSH Proxy.
 Entweder betreibst du deinen eigenen (s. Dokumentation deines XMPP Servers) oder du verwendest einen öffentlichen BOSH Proxy.
 Beachte aber, dass der Betreiber dieses Proxies den kompletten Datenverkehr über den Proxy mitlesen kann.
 Siehe dazu auch die „Configuration Help“ unter den Eingabefeldern.
-Gebe danach noch Dein Passwort an, und damit ist eigentlich schon fast alles geschafft.
-Die weiteren Einstellmöglichkeiten bleiben Dir überlassen, sind also optional.
+Gebe danach noch dein Passwort an, und damit ist eigentlich schon fast alles geschafft.
+Die weiteren Einstellmöglichkeiten bleiben dir überlassen, sind also optional.
 Jetzt noch auf „senden“ klicken und fertig.
 
-Deine Chatbox sollte jetzt irgendwo unten rechts im Browserfenster „kleben“.
-Falls Du manuell Kontakte hinzufügen möchtest, einfach den „Add Contact“-Knopf nutzen.
+deine Chatbox sollte jetzt irgendwo unten rechts im Browserfenster „kleben“.
+Falls du manuell Kontakte hinzufügen möchtest, einfach den „Add Contact“-Knopf nutzen.
 
 Viel Spass beim Chatten!

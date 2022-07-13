@@ -23,8 +23,7 @@ Bevor du anfängst: suche dir einen Domain- oder Subdomainnamen für deinen Serv
 Dinge verändern sich und einige deiner Freunde haben möglicherweise Probleme, mit dir zu kommunizieren.
 Wir planen, diese Einschränkung in einer zukünftigen Version zu beheben.
 
-
-## Requirements
+## Anforderungen
 
 * Apache mit einer aktiverten mod-rewrite-Funktion und dem Eintrag "Options All", so dass du die lokale .htaccess-Datei nutzen kannst
 * PHP  7.3+ (PHP 8 wird noch nicht komplett unterstützt)
@@ -54,7 +53,7 @@ Wenn du die Möglichkeit hierzu hast, empfehlen wir dir `git` zu nutzen, um die 
 Das macht die Aktualisierung wesentlich einfacher.
 Der Linux-Code, mit dem man die Dateien direkt in ein Verzeichnis wie "meinewebseite" kopiert, ist
 
-``` shell
+```sh
 git clone https://github.com/friendica/friendica.git -b stable mywebsite
 cd mywebsite
 bin/composer.phar install
@@ -62,26 +61,26 @@ bin/composer.phar install
 
 Stelle sicher, dass der Ordner `view/smarty3` existiert and von dem Webserver-Benutzer beschreibbar ist
 
-``` shell
+```sh
 mkdir view/smarty3
 chmod 775 view/smarty3
 ```
 
 Falls Add-ons installiert werden sollen: Gehe in den Friendica-Ordner
 
-``` shell
+```sh
 cd mywebsite
 ```
 
 Und die Addon Repository klonst:
 
-``` shell
+```sh
 git clone https://github.com/friendica/friendica-addons.git -b stable addon
 ```
 
 Um das Addon-Verzeichnis aktuell zu halten, solltest du in diesem Pfad ein `git pull`-Befehl eintragen
 
-``` shell
+```sh
 cd meinewebseite/addon
 git pull
 ```
@@ -91,7 +90,7 @@ Wenn du den Verzeichnispfad auf deinen Webserver kopierst, dann stelle sicher, d
 Wenn du die Entwickler Version von Friendica verwenden möchtest, kannst du auf den develop Branch im git Repository wechseln.
 Dies tust du mit den folgenden Befehlen
 
-``` shell
+```sh
 git checkout develop
 bin/composer.phar install
 cd addon
@@ -111,7 +110,7 @@ Mit neueren Versionen von MySQL (5.7.17+) musst du den `sql_mode` zu `''` (blank
 Benutze diese Einstellung, wenn der Installer nicht in der Lage ist, die Tabellen aufgrund eines Timestamp-Format-Problems zu erstellen.
 Falls dem so ist, finde den `[mysqld]` Bereich in deiner `my.conf` Datei und füge diese Zeile hinzu:
 
-``` ini
+```ini
 sql_mode = ''
 ```
 
@@ -146,13 +145,13 @@ Dabei ist jedoch darauf zu achten, dass etwaige Optionen immer die zugehörigen 
 
 Für mehr Informationen kannst du diese Option verwenden:
 
-``` shell
+```sh
 bin/console autoinstall -v
 ```
 
 Falls du alle optionalen Checks ausführen lassen möchtest, benutze diese Option:
 
-``` shell
+```sh
 bin/console autoinstall -a
 ```
 
@@ -167,7 +166,7 @@ Für diese Variante muss ein Konfigurationsdatei bereits vor der Installation fe
 
 Gehe im Anschluss in den Friendica-Hauptordner und führe den Kommandozeilen Befehl aus:
 
-``` shell
+```sh
 bin/console autoinstall -f <prepared.config.php>
 ```
 
@@ -179,7 +178,7 @@ Es existieren Zwei Arten von Umgebungsvariablen in Friendica:
 
 Umgebungsvariablen können auch durch adäquate Optionen (z.B. `--dbhost <hostname>`)übersteuert werden.
 
-**Datenbank Einstellungen**
+##### Datenbank Einstellungen
 
 Nur wenn die Option `--savedb` gesetzt ist, werden diese Umgebungsvariablen auch in `config/local.config.php` gespeichert!
 
@@ -190,7 +189,7 @@ Nur wenn die Option `--savedb` gesetzt ist, werden diese Umgebungsvariablen auch
 -	`MYSQL_PASSWORD` Das Passwort der MySQL/MariaDB Datenbanklogins
 -	`MYSQL_DATABASE` Der Name der MySQL/MariaDB Datenbank
 
-**Friendica Einstellungen**
+##### Friendica Einstellungen
 
 Diese Umgebungsvariablen können nicht während des normalen Friendica Betriebs verwendet werden.
 Sie werden stattdessen direkt in `config/local.config.php` gespeichert.
@@ -202,7 +201,7 @@ Sie werden stattdessen direkt in `config/local.config.php` gespeichert.
 
 Gehe im Anschluss in den Friendica-Hauptordner und führe den Kommandozeilen Befehl aus:
 
-``` shell
+```sh
 bin/console autoinstall [--savedb]
 ```
     
@@ -222,7 +221,7 @@ Alle Optionen werden in `config/local.config.php` gespeichert und überschreiben
 
 Gehe in den Friendica-Hauptordner und führe den Kommandozeilen Befehl aus:
 
-``` shell
+```sh
 bin/console autoinstall [options]
 ```
 
@@ -231,7 +230,7 @@ bin/console autoinstall [options]
 Erstelle einen Cron job oder einen regelmäßigen Task, um den Poller alle 5-10 Minuten im Hintergrund ablaufen zu lassen.
 Beispiel:
 
-``` shell
+```sh
 cd /base/directory; /path/to/php bin/worker.php
 ```
 

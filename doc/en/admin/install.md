@@ -1,7 +1,12 @@
+---
+title: Installation
+tags:
+  - admin
+  - install
+---
 # Friendica Installation
 
-
-We've tried very hard to ensure that Friendica will run on commodity hosting platforms - such as those used to host Wordpress blogs and Drupal websites.
+We've tried very hard to ensure that Friendica will run on commodity hosting platforms - such as those used to host WordPress blogs and Drupal websites.
 We offer a manual and an automatic installation.
 But be aware that Friendica is more than a simple web application.
 
@@ -12,7 +17,7 @@ This kind of functionality requires a bit more of the host system than the typic
 Not every PHP/MySQL hosting provider will be able to support Friendica.
 Many will.
 
-But **please** review the [requirements](#Requirements) and confirm these with your hosting provider prior to installation.
+But **please** review the requirements and confirm these with your hosting provider prior to installation.
 
 ## Support
 If you encounter installation issues, please let us know via the [helper](http://forum.friendi.ca/profile/helpers) or the [developer](https://forum.friendi.ca/profile/developers) forum or [file an issue](https://github.com/friendica/friendica/issues).
@@ -36,7 +41,7 @@ Due to the large variety of operating systems and PHP platforms in existence we 
     If you cannot set up your own email server, you can use the [phpmailer](https://github.com/friendica/friendica-addons/tree/develop/phpmailer) addon and use a remote SMTP server.
 * MySQL 5.6+ or an equivalent alternative for MySQL (MariaDB, Percona Server etc.)
 * ability to schedule jobs with cron (Linux/Mac) or Scheduled Tasks (Windows)
-* installation into a top-level domain or sub-domain (without a directory/path component in the URL) is RECOMMENDED. Directory paths will not be as convenient to use and have not been thoroughly tested. This is REQUIRED if you wish to communicate with the Diaspora network.
+* installation into a top-level domain or subdomain (without a directory/path component in the URL) is RECOMMENDED. Directory paths will not be as convenient to use and have not been thoroughly tested. This is REQUIRED if you wish to communicate with the Diaspora network.
 
 **If your hosting provider doesn't allow Unix shell access, you might have trouble getting everything to work.**
 
@@ -117,7 +122,7 @@ Then use the following script using the password you just generated:
 
 Friendica needs the permission to create and delete fields and tables in its own database.
 
-Please check the [troubleshooting](#Troubleshooting) section if running on MySQL 5.7.17 or newer.
+Please check the troubleshooting section if running on MySQL 5.7.17 or newer.
 
 ### Option A: Run the installer
 
@@ -138,7 +143,7 @@ Registration errors should all be recoverable automatically.
 If you get any *critical* failure at this point, it generally indicates the database was not installed correctly.
 You might wish to move/rename `config/local.config.php` to another name and empty (called 'dropping') the database tables, so that you can start fresh.
 
-### Option B: Run the automatic install script
+### Option B: Run the automatic installation script
 
 You have the following options to automatically install Friendica:
 -	creating a prepared config file (f.e. `prepared.config.php`)
@@ -163,7 +168,7 @@ If you wish to include all optional checks, use `-a` like this statement:
 
 #### B.1: Config file
 
-You can use a prepared config file like [local-sample.config.php](/config/local-sample.config.php).
+You can use a prepared config file like "local-sample.config.php".
 
 Navigate to the main Friendica directory and execute the following command:
 
@@ -175,7 +180,7 @@ There are two types of environment variables.
 -	those you can use in normal mode too (Currently just **database credentials**)
 -	those you can only use during installation (because Friendica will normally ignore it)
 
-You can use the options during installation too and skip some of the environment variables.
+You can use the options during installation too and skip some environment variables.
 
 **Database credentials**
 
@@ -190,7 +195,7 @@ if you don't use the option `--savedb` during installation, the DB credentials w
 
 **Friendica settings**
 
-This variables wont be used at normal Friendica runtime.
+These variables won't be used at normal Friendica runtime.
 Instead, they get saved into `config/local.config.php`. 
 
 -	`FRIENDICA_URL_PATH` The URL path of Friendica (f.e. '/friendica')
@@ -224,7 +229,7 @@ Navigate to the main Friendica directory and execute the following command:
 
 ### Prepare .htaccess file
 
-Copy `.htaccess-dist` to `.htaccess` (be careful under Windows) to have working mod-rewrite again. If you have installed Friendica into a sub directory, like */friendica/* set this path in `RewriteBase` accordingly.
+Copy `.htaccess-dist` to `.htaccess` (be careful under Windows) to have working mod-rewrite again. If you have installed Friendica into a subdirectory, like */friendica/* set this path in `RewriteBase` accordingly.
 
 Example:
 
@@ -297,8 +302,8 @@ This could be achieved by a cronjob.
 
 ### (RECOMMENDED) Logging & Log Rotation
 
-At this point it is recommended that you set up logging and logrotation.
-To do so please visit [Settings](help/Settings) and search the 'Logs' section for more information.
+At this point it is recommended that you set up logging and logrotate.
+To do so please visit [Settings](./settings.md) and search the 'Logs' section for more information.
 
 ### (RECOMMENDED) Set up a backup plan
 
@@ -342,7 +347,7 @@ You might remove the line "Options -Indexes" from the `.htaccess` file if you ar
 Also check your file permissions. Your website and all contents must generally be world-readable.
 
 It is likely that your web server reported the source of the problem in its error log files.
-Please review these system error logs to determine what caused the problem.
+Please review these system error logs to determine what caused the issue.
 Often this will need to be resolved with your hosting provider or (if self-hosted) your web server configuration.
 
 ### 400 and 4xx "File not found" errors
@@ -350,7 +355,7 @@ Often this will need to be resolved with your hosting provider or (if self-hoste
 First check your file permissions.
 Your website and all contents must generally be world-readable.
 
-Ensure that mod-rewite is installed and working, and that your `.htaccess` file
+Ensure that mod-rewrite is installed and working, and that your `.htaccess` file
 is being used. To verify the latter, create a file `test.out` containing the
 word "test" in the top directory of Friendica, make it world readable and point
 your web browser to
@@ -431,7 +436,7 @@ provided by one of our members.
 >     (attacker 'REMOTE_ADDR not set', file '/var/www/friendica/friendica/boot.php',
 >     line 1341)
 > 
-> After a while I noticed, that `bin/worker.php` calls further PHP script via `proc_open`.
+> After a while I noticed, that `bin/worker.php` calls further PHP scripts via `proc_open`.
 > These scripts themselves also use `proc_open` and fail, because they are NOT
 > called with `-d suhosin.executor.func.blacklist=none`.
 > 
@@ -478,7 +483,7 @@ See `RLimitMEM`, `RLimitCPU`, `RLimitNPROC`, `StartServers`, `ServerLimit`, `Max
 
 ### Error uploading even small image files
 
-You tried to upload an image up to 100kB and it failed.
+You tried to upload an image up to 100kB, and it failed.
 
 You may not have the ownership or file mode set correctly if you are using the file system storage backend.
 

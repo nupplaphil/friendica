@@ -36,11 +36,11 @@ Thread related data
 
 ## Foreign Keys
 
-| Field     | Target Table                           | Target Field |
-| --------- | -------------------------------------- | ------------ |
-| uri-id    | [item-uri](/spec/database/db_item-uri) | id           |
-| owner-id  | [contact](/spec/database/db_contact)   | id           |
-| author-id | [contact](/spec/database/db_contact)   | id           |
-| causer-id | [contact](/spec/database/db_contact)   | id           |
+| Field     | Target Table                 | Target Field |
+| --------- | ---------------------------- | ------------ |
+| uri-id    | [item-uri](./db_item-uri.md) | id           |
+| owner-id  | [contact](./db_contact.md)   | id           |
+| author-id | [contact](./db_contact.md)   | id           |
+| causer-id | [contact](./db_contact.md)   | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

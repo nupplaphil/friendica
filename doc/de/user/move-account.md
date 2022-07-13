@@ -1,17 +1,18 @@
-Accounts Umziehen
-=================
-
-* [Zur Startseite der Hilfe](help)
-
+---
+title: Accounts umziehen
+tags:
+  - user
+---
+# Accounts Umziehen
 
 ! **Dies ist ein experimentelles Feature**
 
-**Wie man einen Account von einem Server zu einem anderen umzieht.**
+## Wie man einen Account von einem Server zu einem anderen umzieht.
 
-Unter "Einstellungen" -> "[Persönliche Daten exportieren](uexport)" aufrufen.
+Unter "Einstellungen" -> "Persönliche Daten exportieren" aufrufen.
 "Account exportieren" anklicken und die Daten speichern.
 Diese Datei enthält Details über dich, deine Kontakte, Gruppen und persönliche Einstellungen. 
-Außerdem enthält sie deinen geheimen Schlüssel mit dem du dich deinen Kontakten gegenüber ausweist.
+Außerdem enthält sie deinen geheimen Schlüssel, mit dem du dich deinen Kontakten gegenüber ausweist.
 
 **Speichere diese Datei an einem sicheren Ort**!
 
@@ -24,11 +25,11 @@ Hier kann dies nur der Administrator selber durchführen.
 Lege auf dem neuen Server auf keinen Fall einen gleichnamigen Account an!
 uimport muss anstelle des Registrierens verwendet werden.
 
-Wähle die gesicherte Account Datei aus und klicke "Importieren".
+Wähle die gesicherte Account-Datei aus und klicke "Importieren".
 
 Friendica wird nun deinen Account auf dem neuen Server wiederherstellen, mit all deinen Friendica Kontakten und Gruppen. 
 An deine Friendica Kontakte wird außerdem eine Nachricht gesendet um sie über deine neue Adresse zu informieren.
-Wenn deine Kontakte ihren Account auf einem aktuellen Server haben werden deine Kontaktdetails automatisch aktualisiert.
+Wenn deine Kontakte ihren Account auf einem aktuellen Server haben, werden deine Kontaktdetails automatisch aktualisiert.
 
 Neuere Diaspora Server unterstützen ebenfalls eine Umzugsbenachrichtigung.
 

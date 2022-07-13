@@ -30,4 +30,4 @@ cache for 'parse_url' queries
 | expires | expires                    |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

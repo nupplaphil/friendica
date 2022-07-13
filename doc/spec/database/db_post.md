@@ -47,15 +47,15 @@ Structure for all posts
 
 ## Foreign Keys
 
-| Field         | Target Table                           | Target Field |
-| ------------- | -------------------------------------- | ------------ |
-| uri-id        | [item-uri](/spec/database/db_item-uri) | id           |
-| parent-uri-id | [item-uri](/spec/database/db_item-uri) | id           |
-| thr-parent-id | [item-uri](/spec/database/db_item-uri) | id           |
-| external-id   | [item-uri](/spec/database/db_item-uri) | id           |
-| owner-id      | [contact](/spec/database/db_contact)   | id           |
-| author-id     | [contact](/spec/database/db_contact)   | id           |
-| causer-id     | [contact](/spec/database/db_contact)   | id           |
-| vid           | [verb](/spec/database/db_verb)         | id           |
+| Field         | Target Table                 | Target Field |
+| ------------- | ---------------------------- | ------------ |
+| uri-id        | [item-uri](./db_item-uri.md) | id           |
+| parent-uri-id | [item-uri](./db_item-uri.md) | id           |
+| thr-parent-id | [item-uri](./db_item-uri.md) | id           |
+| external-id   | [item-uri](./db_item-uri.md) | id           |
+| owner-id      | [contact](./db_contact.md)   | id           |
+| author-id     | [contact](./db_contact.md)   | id           |
+| causer-id     | [contact](./db_contact.md)   | id           |
+| vid           | [verb](./db_verb.md)         | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

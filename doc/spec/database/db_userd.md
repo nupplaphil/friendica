@@ -24,4 +24,4 @@ Deleted usernames
 | username | username(32) |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

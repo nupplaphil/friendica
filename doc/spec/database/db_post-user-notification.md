@@ -26,9 +26,9 @@ User post notifications
 
 ## Foreign Keys
 
-| Field  | Target Table                           | Target Field |
-| ------ | -------------------------------------- | ------------ |
-| uri-id | [item-uri](/spec/database/db_item-uri) | id           |
-| uid    | [user](/spec/database/db_user)         | uid          |
+| Field  | Target Table                 | Target Field |
+| ------ | ---------------------------- | ------------ |
+| uri-id | [item-uri](./db_item-uri.md) | id           |
+| uid    | [user](./db_user.md)         | uid          |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

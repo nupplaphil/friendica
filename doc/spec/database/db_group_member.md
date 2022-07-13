@@ -27,9 +27,9 @@ privacy groups, member info
 
 ## Foreign Keys
 
-| Field      | Target Table                         | Target Field |
-| ---------- | ------------------------------------ | ------------ |
-| gid        | [group](/spec/database/db_group)     | id           |
-| contact-id | [contact](/spec/database/db_contact) | id           |
+| Field      | Target Table               | Target Field |
+| ---------- | -------------------------- | ------------ |
+| gid        | [group](./db_group.md)     | id           |
+| contact-id | [contact](./db_contact.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

@@ -26,4 +26,4 @@ cache for OEmbed queries
 | created | created       |
 
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

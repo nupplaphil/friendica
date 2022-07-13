@@ -59,15 +59,15 @@ Thread related data per user
 
 ## Foreign Keys
 
-| Field        | Target Table                                     | Target Field |
-| ------------ | ------------------------------------------------ | ------------ |
-| uri-id       | [item-uri](/spec/database/db_item-uri)           | id           |
-| owner-id     | [contact](/spec/database/db_contact)             | id           |
-| author-id    | [contact](/spec/database/db_contact)             | id           |
-| causer-id    | [contact](/spec/database/db_contact)             | id           |
-| uid          | [user](/spec/database/db_user)                   | uid          |
-| contact-id   | [contact](/spec/database/db_contact)             | id           |
-| psid         | [permissionset](/spec/database/db_permissionset) | id           |
-| post-user-id | [post-user](/spec/database/db_post-user)         | id           |
+| Field        | Target Table                           | Target Field |
+| ------------ | -------------------------------------- | ------------ |
+| uri-id       | [item-uri](./db_item-uri.md)           | id           |
+| owner-id     | [contact](./db_contact.md)             | id           |
+| author-id    | [contact](./db_contact.md)             | id           |
+| causer-id    | [contact](./db_contact.md)             | id           |
+| uid          | [user](./db_user.md)                   | uid          |
+| contact-id   | [contact](./db_contact.md)             | id           |
+| psid         | [permissionset](./db_permissionset.md) | id           |
+| post-user-id | [post-user](./db_post-user.md)         | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

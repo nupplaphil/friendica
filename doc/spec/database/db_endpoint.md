@@ -26,8 +26,8 @@ ActivityPub endpoints - used in the ActivityPub implementation
 
 ## Foreign Keys
 
-| Field        | Target Table                           | Target Field |
-| ------------ | -------------------------------------- | ------------ |
-| owner-uri-id | [item-uri](/spec/database/db_item-uri) | id           |
+| Field        | Target Table                 | Target Field |
+| ------------ | ---------------------------- | ------------ |
+| owner-uri-id | [item-uri](./db_item-uri.md) | id           |
 
-Return to [database documentation](/spec/database/)
+Return to [database documentation](./index.md)

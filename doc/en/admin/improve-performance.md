@@ -1,18 +1,20 @@
-How to improve the performance of a Friendica site
-==============
-
-* [Home](help)
+---
+title: Improve Performance
+tags:
+  - admin
+  - performance
+---
+# How to improve the performance of a Friendica site
 
 Feel free to ask in the [Friendica support forum](https://forum.friendi.ca/profile/helpers) if you need some clarification about the following instructions or if you need help in any other way.
 
-System configuration
---------
+## System configuration
 
 Please go to /admin/site/ on your system and change the following values:
 
     Set "JPEG image quality" to 50.
 
-This value reduces the data that is send from the server to the client. 50 is a value that doesn't influences image quality too much.
+This value reduces the data that is sent from the server to the client. 50 is a value that doesn't influence image quality too much.
 
     Set "OStatus conversation completion interval" to "never".
 
@@ -22,8 +24,7 @@ If you have many OStatus contacts then completing of conversations can take some
 
 When using MyISAM (default) or InnoDB on MariaDB 10 this speeds up search.
 
-Addons
---------
+## Addons
 
 Active the following addons:
 
@@ -47,15 +48,14 @@ They show your performance problems.
     Others: Everything else :)
     Total: The sum of all above values
 
-Apache Webserver
---------
+## Apache Webserver
 
 The following Apache modules are recommended:
 
 ### Cache-Control
 
 This module tells the client to cache the content of static files so that they aren't fetched with every request.
-Enable the module "mod_expires" by typing in "a2enmod expires" as root.
+Enable the module `mod_expires` by typing in `a2enmod expires` as root.
 Please add the following lines to your site configuration in the "directory" context.
 
 	ExpiresActive on ExpiresDefault "access plus 1 week"
@@ -65,17 +65,16 @@ Also see the Apache [2.2](http://httpd.apache.org/docs/2.2/mod/mod_expires.html)
 ### Compress content
 
 This module compresses the traffic between the web server and the client.
-Enable the module "mod_deflate" by typing in "a2enmod deflate" as root.
+Enable the module `mod_deflate` by typing in `a2enmod deflate` as root.
 
 Also see the Apache [2.2](http://httpd.apache.org/docs/2.2/mod/mod_deflate.html) / [2.4](https://httpd.apache.org/docs/2.4/mod/mod_deflate.html) documentation.
 
-PHP
---------
+## PHP
 
 ### FCGI
 
 When using Apache think about using FCGI.
-In a Debian-based distribution you will need to install the packages named "php5-cgi" and "libapache2-mod-fcgid".
+In a Debian-based distribution you will need to install the packages named `php5-cgi` and `libapache2-mod-fcgid`.
 
 Please refer to external documentation for a more detailed explanation how to set up a system based upon FCGI.
 
