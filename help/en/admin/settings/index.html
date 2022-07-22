@@ -1,0 +1,4338 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Friendica is a decentralised communications platform that integrates social communication. Our platform links to independent social projects and corporate services.">
+      
+      
+        <meta name="author" content="The Friendica project">
+      
+      
+        <link rel="canonical" href="https://friendi.ca/en/admin/settings/">
+      
+      <link rel="icon" href="../../../img/friendica-32.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+    
+    
+      
+        <title>Settings - Friendica documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#settings" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://friendi.ca" title="Friendica documentation" class="md-header__button md-logo" aria-label="Friendica documentation" data-md-component="logo">
+      
+  <img src="../../../img/friendica.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Friendica documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Settings
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../admin/settings/" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="../../../de/admin/settings/" hreflang="de" class="md-select__link">
+                    Deutsch
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/friendica/friendica" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    friendica/friendica
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../" class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../user/account-basics/" class="md-tabs__link">
+        User
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link md-tabs__link--active">
+        Admin
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../developer/" class="md-tabs__link">
+        Developer
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../bugs-and-issues/" class="md-tabs__link">
+      Bugs and Issues
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://friendi.ca" title="Friendica documentation" class="md-nav__button md-logo" aria-label="Friendica documentation" data-md-component="logo">
+      
+  <img src="../../../img/friendica.svg" alt="logo">
+
+    </a>
+    Friendica documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/friendica/friendica" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    friendica/friendica
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          User
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          First Steps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="First Steps" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          First Steps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/account-basics/" class="md-nav__link">
+        Account Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_2" type="checkbox" id="__nav_2_1_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_2">
+          Quick Start
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quick Start" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Quick Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quick-start/guide/" class="md-nav__link">
+        Start
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quick-start/network/" class="md-nav__link">
+        Network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quick-start/groups-and-pages/" class="md-nav__link">
+        Groups & Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quick-start/making-new-friends/" class="md-nav__link">
+        Making new friends
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quick-start/finally/" class="md-nav__link">
+        Finally
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/text-editor/" class="md-nav__link">
+        Text editor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/bbcode/" class="md-nav__link">
+        BBCode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/text-comment/" class="md-nav__link">
+        Comments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/accesskeys/" class="md-nav__link">
+        Accesskeys
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/events/" class="md-nav__link">
+        Events
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/keyboard-shortcuts/" class="md-nav__link">
+        Shortcuts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          You and other users
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="You and other users" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          You and other users
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/connectors/" class="md-nav__link">
+        Connectors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/making-friends/" class="md-nav__link">
+        Making friends
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/groups-and-privacy/" class="md-nav__link">
+        Groups & Privacy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/tags-and-mentions/" class="md-nav__link">
+        Tags & Mentions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/forums/" class="md-nav__link">
+        Forums
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/chats/" class="md-nav__link">
+        Chats
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Further information
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Further information" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Further information
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/move-account/" class="md-nav__link">
+        Move account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/export-import-contacts/" class="md-nav__link">
+        Import / Export Contacts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/remove-account/" class="md-nav__link">
+        Remove account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/two-factor-authentication/" class="md-nav__link">
+        2FA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Admin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Admin" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Admin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../update/" class="md-nav__link">
+        Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate/" class="md-nav__link">
+        Migrate
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Configuration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Configuration" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Settings
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Settings
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queues" class="md-nav__link">
+    Queues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-information" class="md-nav__link">
+    Additional information
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site" class="md-nav__link">
+    Site
+  </a>
+  
+    <nav class="md-nav" aria-label="Site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-settings" class="md-nav__link">
+    Basic Settings
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bannerlogo" class="md-nav__link">
+    Banner/Logo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language" class="md-nav__link">
+    Language
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-theme" class="md-nav__link">
+    System Theme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    Registration
+  </a>
+  
+    <nav class="md-nav" aria-label="Registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-policy" class="md-nav__link">
+    Register policy
+  </a>
+  
+    <nav class="md-nav" aria-label="Register policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invitation-based-registry" class="md-nav__link">
+    Invitation based registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-full-names" class="md-nav__link">
+    Check Full Names
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openid" class="md-nav__link">
+    OpenID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-registrations" class="md-nav__link">
+    Multiple Registrations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-upload" class="md-nav__link">
+    File upload
+  </a>
+  
+    <nav class="md-nav" aria-label="File upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-storage-backend" class="md-nav__link">
+    File storage backend
+  </a>
+  
+    <nav class="md-nav" aria-label="File storage backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filesystem-storage-base-path" class="md-nav__link">
+    Filesystem: Storage base path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-image-size" class="md-nav__link">
+    Maximum Image Size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies" class="md-nav__link">
+    Policies
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-directory" class="md-nav__link">
+    Global Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-publish" class="md-nav__link">
+    Force Publish
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-public" class="md-nav__link">
+    Block Public
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-pages-for-visitors" class="md-nav__link">
+    Community pages for Visitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowed-friend-domains" class="md-nav__link">
+    Allowed Friend Domains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowed-email-domains" class="md-nav__link">
+    Allowed Email Domains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-users-to-set-remote_self" class="md-nav__link">
+    Allow Users to set remote_self
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-content" class="md-nav__link">
+    Explicit Content
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced" class="md-nav__link">
+    Advanced
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proxy-configuration-settings" class="md-nav__link">
+    Proxy Configuration Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-timeout" class="md-nav__link">
+    Network Timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-ssl-certificates" class="md-nav__link">
+    Verify SSL Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-upstream-version" class="md-nav__link">
+    Check upstream version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-discovered-contact-directory" class="md-nav__link">
+    Auto Discovered Contact Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker" class="md-nav__link">
+    Worker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relocate" class="md-nav__link">
+    Relocate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addons" class="md-nav__link">
+    Addons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#themes" class="md-nav__link">
+    Themes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-features" class="md-nav__link">
+    Additional Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#db-updates" class="md-nav__link">
+    DB Updates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-queue" class="md-nav__link">
+    Inspect Queue
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-blocklist" class="md-nav__link">
+    Server Blocklist
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#federation-statistics" class="md-nav__link">
+    Federation Statistics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-item" class="md-nav__link">
+    Delete Item
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addon-features" class="md-nav__link">
+    Addon Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    Logs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostics" class="md-nav__link">
+    Diagnostics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/" class="md-nav__link">
+        Config Values
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        SSL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../improve-performance/" class="md-nav__link">
+        Improve Performance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Third Party
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Third Party" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Third Party
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-connectors/" class="md-nav__link">
+        Connectors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-ejabberd/" class="md-nav__link">
+        Install ejabberd
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Developer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Developer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/" class="md-nav__link">
+        Get Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          Set Up
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Set Up" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Set Up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/github/" class="md-nav__link">
+        GitHub
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/vagrant/" class="md-nav__link">
+        Vagrant
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          Code structure
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code structure" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code structure
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/domain-driven-design/" class="md-nav__link">
+        DDD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/addons/" class="md-nav__link">
+        Addons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/themes/" class="md-nav__link">
+        Themes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/smarty3-templates/" class="md-nav__link">
+        Smarty3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/addon-storage-backend/" class="md-nav__link">
+        Addon Storage Backend
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          How To
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="How To" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          How To
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/translations/" class="md-nav__link">
+        Translations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/composer/" class="md-nav__link">
+        Composer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/how-to-move-classes-to-src/" class="md-nav__link">
+        src Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/tests/" class="md-nav__link">
+        Tests
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/autoloader/" class="md-nav__link">
+        Autoloader
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5">
+          Specification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specification" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Specification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5_1" type="checkbox" id="__nav_4_5_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5_1">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/entities/" class="md-nav__link">
+        Entities
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/friendica/" class="md-nav__link">
+        Friendica
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/mastodon/" class="md-nav__link">
+        Mastodon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/twitter/" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/api/gnu-social/" class="md-nav__link">
+        GNU Social
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5_2" type="checkbox" id="__nav_4_5_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5_2">
+          Database
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Database" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Database
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/" class="md-nav__link">
+        Database Tables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_2fa_app_specific_password/" class="md-nav__link">
+        2fa_app_specific_password
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_2fa_recovery_codes/" class="md-nav__link">
+        2fa_recovery_codes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_2fa_trusted_browser/" class="md-nav__link">
+        2fa_trusted_browser
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_addon/" class="md-nav__link">
+        addon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_apcontact/" class="md-nav__link">
+        apcontact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_application/" class="md-nav__link">
+        application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_application-marker/" class="md-nav__link">
+        application-marker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_application-token/" class="md-nav__link">
+        application-token
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_attach/" class="md-nav__link">
+        attach
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_cache/" class="md-nav__link">
+        cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_config/" class="md-nav__link">
+        config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_contact/" class="md-nav__link">
+        contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_contact-relation/" class="md-nav__link">
+        contact-relation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_conv/" class="md-nav__link">
+        conv
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_conversation/" class="md-nav__link">
+        conversation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_delayed-post/" class="md-nav__link">
+        delayed-post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_diaspora-interaction/" class="md-nav__link">
+        diaspora-interaction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_endpoint/" class="md-nav__link">
+        endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_event/" class="md-nav__link">
+        event
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_fcontact/" class="md-nav__link">
+        fcontact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_fsuggest/" class="md-nav__link">
+        fsuggest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_group/" class="md-nav__link">
+        group
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_group_member/" class="md-nav__link">
+        group_member
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_gserver/" class="md-nav__link">
+        gserver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_gserver-tag/" class="md-nav__link">
+        gserver-tag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_hook/" class="md-nav__link">
+        hook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_inbox-status/" class="md-nav__link">
+        inbox-status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_intro/" class="md-nav__link">
+        intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_item-uri/" class="md-nav__link">
+        item-uri
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_locks/" class="md-nav__link">
+        locks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_mail/" class="md-nav__link">
+        mail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_mailacct/" class="md-nav__link">
+        mailacct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_manage/" class="md-nav__link">
+        manage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_notification/" class="md-nav__link">
+        notification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_notify/" class="md-nav__link">
+        notify
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_notify-threads/" class="md-nav__link">
+        notify-threads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_oembed/" class="md-nav__link">
+        oembed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_openwebauth-token/" class="md-nav__link">
+        openwebauth-token
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_parsed_url/" class="md-nav__link">
+        parsed_url
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_pconfig/" class="md-nav__link">
+        pconfig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_permissionset/" class="md-nav__link">
+        permissionset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_photo/" class="md-nav__link">
+        photo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post/" class="md-nav__link">
+        post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-category/" class="md-nav__link">
+        post-category
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-collection/" class="md-nav__link">
+        post-collection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-content/" class="md-nav__link">
+        post-content
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-delivery/" class="md-nav__link">
+        post-delivery
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-delivery-data/" class="md-nav__link">
+        post-delivery-data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-history/" class="md-nav__link">
+        post-history
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-link/" class="md-nav__link">
+        post-link
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-media/" class="md-nav__link">
+        post-media
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-question/" class="md-nav__link">
+        post-question
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-question-option/" class="md-nav__link">
+        post-question-option
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-tag/" class="md-nav__link">
+        post-tag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-thread/" class="md-nav__link">
+        post-thread
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-thread-user/" class="md-nav__link">
+        post-thread-user
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-user/" class="md-nav__link">
+        post-user
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_post-user-notification/" class="md-nav__link">
+        post-user-notification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_process/" class="md-nav__link">
+        process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_profile/" class="md-nav__link">
+        profile
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_profile_field/" class="md-nav__link">
+        profile_field
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_push_subscriber/" class="md-nav__link">
+        push_subscriber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_register/" class="md-nav__link">
+        register
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_search/" class="md-nav__link">
+        search
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_session/" class="md-nav__link">
+        session
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_subscription/" class="md-nav__link">
+        subscription
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_tag/" class="md-nav__link">
+        tag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_user/" class="md-nav__link">
+        user
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_user-contact/" class="md-nav__link">
+        user-contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_userd/" class="md-nav__link">
+        userd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_verb/" class="md-nav__link">
+        verb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_worker-ipc/" class="md-nav__link">
+        worker-ipc
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/database/db_workerqueue/" class="md-nav__link">
+        workerqueue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5_3" type="checkbox" id="__nav_4_5_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5_3">
+          Protocol
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Protocol" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/protocol/protocol/" class="md-nav__link">
+        Protocols
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/protocol/message-flow/" class="md-nav__link">
+        Message Flow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bugs-and-issues/" class="md-nav__link">
+        Bugs and Issues
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queues" class="md-nav__link">
+    Queues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-information" class="md-nav__link">
+    Additional information
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site" class="md-nav__link">
+    Site
+  </a>
+  
+    <nav class="md-nav" aria-label="Site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-settings" class="md-nav__link">
+    Basic Settings
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bannerlogo" class="md-nav__link">
+    Banner/Logo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language" class="md-nav__link">
+    Language
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-theme" class="md-nav__link">
+    System Theme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    Registration
+  </a>
+  
+    <nav class="md-nav" aria-label="Registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-policy" class="md-nav__link">
+    Register policy
+  </a>
+  
+    <nav class="md-nav" aria-label="Register policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invitation-based-registry" class="md-nav__link">
+    Invitation based registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-full-names" class="md-nav__link">
+    Check Full Names
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openid" class="md-nav__link">
+    OpenID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-registrations" class="md-nav__link">
+    Multiple Registrations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-upload" class="md-nav__link">
+    File upload
+  </a>
+  
+    <nav class="md-nav" aria-label="File upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-storage-backend" class="md-nav__link">
+    File storage backend
+  </a>
+  
+    <nav class="md-nav" aria-label="File storage backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filesystem-storage-base-path" class="md-nav__link">
+    Filesystem: Storage base path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-image-size" class="md-nav__link">
+    Maximum Image Size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies" class="md-nav__link">
+    Policies
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-directory" class="md-nav__link">
+    Global Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-publish" class="md-nav__link">
+    Force Publish
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-public" class="md-nav__link">
+    Block Public
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-pages-for-visitors" class="md-nav__link">
+    Community pages for Visitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowed-friend-domains" class="md-nav__link">
+    Allowed Friend Domains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowed-email-domains" class="md-nav__link">
+    Allowed Email Domains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-users-to-set-remote_self" class="md-nav__link">
+    Allow Users to set remote_self
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-content" class="md-nav__link">
+    Explicit Content
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced" class="md-nav__link">
+    Advanced
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proxy-configuration-settings" class="md-nav__link">
+    Proxy Configuration Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-timeout" class="md-nav__link">
+    Network Timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-ssl-certificates" class="md-nav__link">
+    Verify SSL Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-upstream-version" class="md-nav__link">
+    Check upstream version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-discovered-contact-directory" class="md-nav__link">
+    Auto Discovered Contact Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker" class="md-nav__link">
+    Worker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relocate" class="md-nav__link">
+    Relocate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addons" class="md-nav__link">
+    Addons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#themes" class="md-nav__link">
+    Themes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-features" class="md-nav__link">
+    Additional Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#db-updates" class="md-nav__link">
+    DB Updates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-queue" class="md-nav__link">
+    Inspect Queue
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-blocklist" class="md-nav__link">
+    Server Blocklist
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#federation-statistics" class="md-nav__link">
+    Federation Statistics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-item" class="md-nav__link">
+    Delete Item
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addon-features" class="md-nav__link">
+    Addon Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    Logs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostics" class="md-nav__link">
+    Diagnostics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/friendica/friendica/edit/develop/doc/en/admin/settings.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  
+
+  <nav class="md-tags" >
+    
+      
+        <span class="md-tag">admin</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">#</a></h1>
+<p>If you are the admin of a Friendica node, you have access to the <strong>Admin Panel</strong> where you can configure your Friendica node.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>In the main page of the admin panel you will see an information summary about your node.</p>
+<h3 id="queues">Queues<a class="headerlink" href="#queues" title="Permanent link">#</a></h3>
+<p>The three numbers shown are respectively:
+- The retry queue: These outgoing messages couldn't be received by the remote host, and will be resent at longer intervals before being dropped entirely after 30 days.
+- The deferred queue: These internal tasks failed and will be retried at most 14 times.
+- The task queue: These internal tasks are queued for execution during the next background worker run.</p>
+<h3 id="additional-information">Additional information<a class="headerlink" href="#additional-information" title="Permanent link">#</a></h3>
+<p>Then you get an overview of the accounts on your node, which can be moderated in the "Users" section of the panel.
+As well as an overview of the currently active addons.
+The list is linked, so you can have quick access to the Addon settings.
+And finally you are informed about the version of Friendica you have installed.
+If you contact the developers with a bug or problem, please also mention the version of your node.</p>
+<p>The admin panel is separated into subsections accessible from the sidebar of the panel.</p>
+<h2 id="site">Site<a class="headerlink" href="#site" title="Permanent link">#</a></h2>
+<p>This section of the admin panel contains the main configuration of your Friendica node.
+It is separated into several subsection beginning with the basic settings at the top, advancing towards the bottom of the page.</p>
+<p>Most configuration options have a help text in the admin panel.
+Therefore, this document does not yet cover all the options</p>
+<h3 id="basic-settings">Basic Settings<a class="headerlink" href="#basic-settings" title="Permanent link">#</a></h3>
+<h4 id="bannerlogo">Banner/Logo<a class="headerlink" href="#bannerlogo" title="Permanent link">#</a></h4>
+<p>Set the content for the site banner.
+The default logo is the Friendica logo and name.
+You may wish to provide HTML/CSS to style and/or position this content, as it may not be themed by default.</p>
+<h4 id="language">Language<a class="headerlink" href="#language" title="Permanent link">#</a></h4>
+<p>This option will set the default language for the node.
+It is used as fall back setting should Friendica fail to recognize the visitors preferences and can be overwritten by user settings.</p>
+<p>The Friendica community offers some translations.
+Some more complete than others.
+See <a href="../../developer/translations/">this help page</a> for more information about the translation process.</p>
+<h4 id="system-theme">System Theme<a class="headerlink" href="#system-theme" title="Permanent link">#</a></h4>
+<p>Choose a theme to be the default system theme.
+This can be over-ridden by user profiles.
+Default theme is <code>vier</code> at the moment.</p>
+<p>You may also want to set a special theme for mobile interfaces.
+Which may or may not be necessary depending on the mobile friendliness of the desktop theme you have chosen.
+The <code>vier</code> theme for instance is mobile friendly.</p>
+<h3 id="registration">Registration<a class="headerlink" href="#registration" title="Permanent link">#</a></h3>
+<h4 id="register-policy">Register policy<a class="headerlink" href="#register-policy" title="Permanent link">#</a></h4>
+<p>With this dropdown selector you can set the nodes' registration policy.
+You can choose between the following modes:</p>
+<ul>
+<li><strong>open</strong>: Everybody can register a new account and start using it right away.</li>
+<li><strong>requires approval</strong>: Everybody can register a new account, but the admin has to approve it before it can be used.</li>
+<li><strong>closed</strong>: No new registrations are possible.</li>
+</ul>
+<h5 id="invitation-based-registry">Invitation based registry<a class="headerlink" href="#invitation-based-registry" title="Permanent link">#</a></h5>
+<p>Additionally, to the setting in the admin panel, you can decide if registrations are only possible using an invitation code or not.
+To enable invitation based registration, you have to set the <code>invitation_only</code> setting to <code>true</code> in the <code>system</code> section of the <a href="../config/">config/local.config.php</a> file.
+If you want to use this method, the registration policy has to be set to either <em>open</em> or <em>requires approval</em>.</p>
+<h4 id="check-full-names">Check Full Names<a class="headerlink" href="#check-full-names" title="Permanent link">#</a></h4>
+<p>You may find a lot of spammers trying to register on your site.
+During testing we discovered that since these registrations were automatic, the "Full Name" field was often set to just an account name with no space between first and last name.
+If you would like to support people with only one name as their full name, you may change this setting to true.
+Default is false.</p>
+<h4 id="openid">OpenID<a class="headerlink" href="#openid" title="Permanent link">#</a></h4>
+<p>By default, OpenID may be used for both registration and logins.
+If you do not wish to make OpenID facilities available on your system (at all), set 'no_openid' to true.
+Default is false.</p>
+<h4 id="multiple-registrations">Multiple Registrations<a class="headerlink" href="#multiple-registrations" title="Permanent link">#</a></h4>
+<p>The ability to create "Pages" requires a person to register more than once.
+Your site configuration can block registration (or require approval to register).
+By default, logged-in users can register additional accounts for use as pages.
+These will still require approval if the registration policy is set to <em>require approval</em>
+You may prohibit logged-in users from creating additional accounts by setting <em>block multiple registrations</em> to true.
+Default is false.</p>
+<h3 id="file-upload">File upload<a class="headerlink" href="#file-upload" title="Permanent link">#</a></h3>
+<h4 id="file-storage-backend">File storage backend<a class="headerlink" href="#file-storage-backend" title="Permanent link">#</a></h4>
+<p>Set the backend used by Friendica to store uploaded file data.
+Two storage backends are available with Friendica:</p>
+<ul>
+<li><strong>Database</strong> : Data is stored in a dedicated table in database (<code>storage</code>)</li>
+<li><strong>Filesystem</strong> : Data is stored as file on the filesystem.</li>
+</ul>
+<p>More storage backends can be available from third-party addons.
+If you use those, please refer to the documentation of those addons for further information.</p>
+<p>Default value is 'Database (legacy)': it's the legacy way used to store data directly in database.</p>
+<p>Existing data can be moved to the current active backend using the <a href="../tools/">'storage move' console command</a></p>
+<p>If selected backend has configurable options, new fields are shown here.</p>
+<h5 id="filesystem-storage-base-path">Filesystem: Storage base path<a class="headerlink" href="#filesystem-storage-base-path" title="Permanent link">#</a></h5>
+<p>The base path where Filesystem storage backend saves data.</p>
+<p>For maximum security, this path should be outside the folder tree served by the web server: this way files can't be downloaded bypassing the privacy checks.</p>
+<p>Default value is <code>storage</code>, that is the <code>storage</code> folder in Friendica code root folder.</p>
+<h4 id="maximum-image-size">Maximum Image Size<a class="headerlink" href="#maximum-image-size" title="Permanent link">#</a></h4>
+<p>Maximum size in bytes of uploaded images.
+The default is set to 0, which means no limits.</p>
+<h3 id="policies">Policies<a class="headerlink" href="#policies" title="Permanent link">#</a></h3>
+<h4 id="global-directory">Global Directory<a class="headerlink" href="#global-directory" title="Permanent link">#</a></h4>
+<p>This configures the URL to update the global directory, and is supplied in the default configuration.
+The undocumented part is that if this is not set, the global directory is completely unavailable to the application.
+This allows a private community to be completely isolated from the global network.</p>
+<h4 id="force-publish">Force Publish<a class="headerlink" href="#force-publish" title="Permanent link">#</a></h4>
+<p>By default, each user can choose on their Settings page whether to have their profile published in the site directory.
+This setting forces all profiles on this site to be listed in the site directory and there is no option provided to the user to change it.
+Default is false.</p>
+<h4 id="block-public">Block Public<a class="headerlink" href="#block-public" title="Permanent link">#</a></h4>
+<p>Set to true to block public access to all otherwise public personal pages on this site unless you are currently logged in.
+This blocks the viewing of profiles, friends, photos, the site directory and search pages to unauthorised persons.
+A side effect is that entries from this site will not appear in the global directory.
+We recommend specifically disabling that also (setting is described elsewhere on this page).
+Note: this is specifically for sites that desire to be "standalone" and do not wish to be connected to any other Friendica sites.
+Unauthorised persons will also not be able to request friendship with site members.
+Default is false.
+Available in version 2.2 or greater.</p>
+<h4 id="community-pages-for-visitors">Community pages for Visitors<a class="headerlink" href="#community-pages-for-visitors" title="Permanent link">#</a></h4>
+<p>The community pages show all public postings, separated by their origin being local or the entire network.
+With this setting you can select which community pages will be shown to visitors of your Friendica node.
+Your local users will always have access to both pages.</p>
+<p><strong>Note</strong>: Several settings, like users hiding their contacts from the public will prevent the postings to show up on the global community page.</p>
+<h4 id="allowed-friend-domains">Allowed Friend Domains<a class="headerlink" href="#allowed-friend-domains" title="Permanent link">#</a></h4>
+<p>Comma separated list of domains which are allowed to establish friendships with this site.
+Wildcards are accepted.
+By default, any (valid) domain may establish friendships with this site.</p>
+<p>This is useful if you want to set up a closed network for educational groups, cooperatives and similar communities that don't want to communicate with the rest of the network.</p>
+<h4 id="allowed-email-domains">Allowed Email Domains<a class="headerlink" href="#allowed-email-domains" title="Permanent link">#</a></h4>
+<p>Comma separated list of domains which are allowed in email addresses for registrations to this site.
+This can lockout those who are not part of this organisation from registering here.
+Wildcards are accepted.
+By default, any (valid) email address is allowed in registrations.</p>
+<h4 id="allow-users-to-set-remote_self">Allow Users to set remote_self<a class="headerlink" href="#allow-users-to-set-remote_self" title="Permanent link">#</a></h4>
+<p>If you enable the <code>Allow Users to set remote_self</code> users can select Atom feeds from their contact list being their <em>remote self</em> in the contact settings.
+Which means that postings by the remote self are automatically reposted by Friendica in their names.</p>
+<p>This feature can be used to let the user mirror e.g. blog postings into their Friendica postings.
+It is disabled by default, as it causes additional load on the server and may be misused to distribute SPAM.</p>
+<p>As admin of the node you can also set this flag directly in the database.
+Before doing so, you should be sure you know what you do and have a backup of the database.</p>
+<h4 id="explicit-content">Explicit Content<a class="headerlink" href="#explicit-content" title="Permanent link">#</a></h4>
+<p>If you are running a node with explicit content, you can announce this with this option.
+When checked an information flag will be set in the published information about your node.
+(Should <em>Publish Server Information</em> be enabled.)</p>
+<p>Additionally, a note will be displayed on the registration page for new users.</p>
+<h3 id="advanced">Advanced<a class="headerlink" href="#advanced" title="Permanent link">#</a></h3>
+<h4 id="proxy-configuration-settings">Proxy Configuration Settings<a class="headerlink" href="#proxy-configuration-settings" title="Permanent link">#</a></h4>
+<p>If your site uses a proxy to connect to the internet, you may use these settings to communicate with the outside world.
+The outside world still needs to be able to see your website, or this will not be very useful.</p>
+<h4 id="network-timeout">Network Timeout<a class="headerlink" href="#network-timeout" title="Permanent link">#</a></h4>
+<p>How long to wait on a network communication before timing out.
+Value is in seconds.
+Default is 60 seconds.
+Set to 0 for unlimited (not recommended).</p>
+<h4 id="verify-ssl-certificates">Verify SSL Certificates<a class="headerlink" href="#verify-ssl-certificates" title="Permanent link">#</a></h4>
+<p>By default, Friendica allows SSL communication between websites that have "self-signed" SSL certificates.
+For the widest compatibility with browsers and other networks we do not recommend using self-signed certificates, but we will not prevent you from using them.
+SSL encrypts all the data transmitted between sites (and to your browser).
+This allows you to have completely encrypted communications, and also protect your login session from hijacking.
+Self-signed certificates can be generated for free, without paying top-dollar for a website SSL certificate.
+However, these aren't looked upon favourably in the security community because they can be subject to so-called "man-in-the-middle" attacks.
+If you wish, you can turn on strict certificate checking.
+This will mean you cannot connect (at all) to self-signed SSL sites.</p>
+<h4 id="check-upstream-version">Check upstream version<a class="headerlink" href="#check-upstream-version" title="Permanent link">#</a></h4>
+<p>If this option is enabled your Friendica node will check the upstream version once per day from the GitHub repository.
+You can select if the stable version or the development version should be checked out.
+If there is a new version published, you will get notified in the admin panel summary page.</p>
+<h3 id="auto-discovered-contact-directory">Auto Discovered Contact Directory<a class="headerlink" href="#auto-discovered-contact-directory" title="Permanent link">#</a></h3>
+<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">#</a></h3>
+<h3 id="worker">Worker<a class="headerlink" href="#worker" title="Permanent link">#</a></h3>
+<p>This section allows you to configure the background process that is triggered by the <code>cron</code> job that was created during the installation.
+The process does check the available system resources before creating a new worker for a task.
+Because of this, it may happen that the maximum number of worker processes you allow will not be reached.</p>
+<p>The tasks for the background process have priorities.
+To guarantee that important tasks are executed even though the system has a lot of work to do, it is useful to enable the <em>fastlane</em>.</p>
+<h3 id="relocate">Relocate<a class="headerlink" href="#relocate" title="Permanent link">#</a></h3>
+<h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">#</a></h2>
+<p>This section of the panel let the admin control the users registered on the node.</p>
+<p>If you have selected "Requires approval" for the <em>Register policy</em> in the general nodes' configuration, new registrations will be listed at the top of the page.
+There the admin can then approve or disapprove the request.</p>
+<p>Below the new registration block the current accounts on the Friendica node are listed.
+You can sort the user list by name, email, registration date, date of last login, date of last posting and the account type.
+Here the admin can also block/unblock users from accessing the node or delete the accounts entirely.</p>
+<p>In the last section of the page admins can create new accounts on the node.
+The password for the new account will be sent by email to the chosen email address.</p>
+<h2 id="addons">Addons<a class="headerlink" href="#addons" title="Permanent link">#</a></h2>
+<p>This page is for selecting and configuration of extensions for Friendica which have to be placed into the <code>/addon</code> subdirectory of your Friendica installation.
+You are presented with a long list of available addons.
+The name of each addon is linked to a separate page for that addon which offers more information and configuration possibilities.
+Also shown is the version of the addon and an indicator if the addon is currently active or not.</p>
+<p>When you update your node and the addons they may have to be reloaded.
+To simplify this process there is a button at the top of the page to reload all active Addons.</p>
+<h2 id="themes">Themes<a class="headerlink" href="#themes" title="Permanent link">#</a></h2>
+<p>The Themes' section of the admin panel works similar to the Addons section but let you control the themes on your Friendica node.
+Each theme has a dedicated subpage showing the current status, some information about the theme and a screenshot of the Friendica interface using the theme.
+Should the theme offer special settings, admins can set a global default value here.</p>
+<p>You can activate and deactivate themes on their dedicated sub-pages thus making them available for the users of the node.
+To select a default theme for the Friendica node, see the <em>Site</em> section of the admin panel.</p>
+<h2 id="additional-features">Additional Features<a class="headerlink" href="#additional-features" title="Permanent link">#</a></h2>
+<p>There are several optional features in Friendica like the <em>dislike</em> button.
+In this section of the admin panel you can select a default setting for your node and eventually fix it, so users cannot change the setting anymore.</p>
+<h2 id="db-updates">DB Updates<a class="headerlink" href="#db-updates" title="Permanent link">#</a></h2>
+<p>Should the database structure of Friendica change, it will apply the changes automatically.
+In case you are suspecting the update might not have worked, you can use this section of the admin panel to check the situation.</p>
+<h2 id="inspect-queue">Inspect Queue<a class="headerlink" href="#inspect-queue" title="Permanent link">#</a></h2>
+<p>In the admin panel summary there are two numbers for the message queues.
+The second number represents messages which could not be delivered and are queued for later retry.
+If this number goes sky-rocking you might ask yourself which recipient is not receiving.</p>
+<p>Behind the inspect queue section of the admin panel you will find a list of the messages that could not be delivered.
+The listing is sorted by the recipient name so identifying potential broken communication lines should be simple.
+These lines might be broken for various reasons.
+The receiving end might be off-line, there might be a high system load and so on.</p>
+<p>Don't panic!
+Friendica will not queue messages for all time but will sort out <em>dead</em> nodes automatically after a while and remove messages from the queue then.</p>
+<h2 id="server-blocklist">Server Blocklist<a class="headerlink" href="#server-blocklist" title="Permanent link">#</a></h2>
+<p>This page allows to block all communications (inbound and outbound) with a specific domain name.
+Each blocked domain entry requires a reason that will be displayed on the friendica (<code>/friendica</code>) page.
+Matching is exact, blocking a domain doesn't block subdomains.</p>
+<h2 id="federation-statistics">Federation Statistics<a class="headerlink" href="#federation-statistics" title="Permanent link">#</a></h2>
+<p>The federation statistics page gives you a short summery of the nodes/servers/pods of the decentralized social network federation your node knows.
+These numbers are not complete and only contain nodes from networks Friendica federates directly with.</p>
+<h2 id="delete-item">Delete Item<a class="headerlink" href="#delete-item" title="Permanent link">#</a></h2>
+<p>Using this page an admin can delete postings and eventually associated discussion threads from their Friendica node.
+To do so, they need to know the GUID of the posting.
+This can be found on the <code>/display</code> page of the posting, it is the last part of the URL displayed in the browsers' navigation bar.
+You can get to the <code>/display</code> page by following the <em>Link to source</em>.</p>
+<h2 id="addon-features">Addon Features<a class="headerlink" href="#addon-features" title="Permanent link">#</a></h2>
+<p>Some addons you can install for your Friendica node have settings which have to be set by the admin.
+All those addons will be listed in this area of the admin panels sidebar with their names.</p>
+<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">#</a></h2>
+<p>The log section of the admin panel is separated into two pages.
+On the first, following the "log" link, you can configure how much Friendica shall log.
+And on the second you can read the log.</p>
+<p>You should not place your logs into any directory that is accessible from the web.
+If you have to, and you are using the default configuration from Apache, you should choose a name for the logfile ending in <code>.log</code> or <code>.out</code>.
+Should you use another web server, please make sure that you have the correct access rules in place so that your log files are not accessible.</p>
+<p>There are five different log levels: Normal, Trace, Debug, Data and All.
+Specifying different verbosity of information and data written out to the log file.
+Normally you should not need to log at all.
+The <em>DEBUG</em> level will show a good deal of information about system activity but will not include detailed data.
+In the <em>ALL</em> level Friendica will log everything to the file.
+But due to the volume of information we recommend only enabling this when you are tracking down a specific problem.</p>
+<p><strong>The amount of data can grow the filesize of the logfile quickly</strong>.
+You should set up some kind of <a href="https://en.wikipedia.org/wiki/Log_rotation">log rotation</a> to keep the log file from growing too big.</p>
+<p><strong>Known Issues</strong>: The filename <code>friendica.log</code> can cause problems depending on your server configuration (see <a href="https://github.com/friendica/friendica/issues/2209">issue 2209</a>).</p>
+<p>By default, PHP warnings and error messages are suppressed.
+If you want to enable those, you have to activate them in the <code>config/local.config.php</code> file.
+Use the following settings to redirect PHP errors to a file.</p>
+<p>Config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">error_reporting</span><span class="p">(</span><span class="k">E_ERROR</span> <span class="o">|</span> <span class="k">E_WARNING</span> <span class="o">|</span> <span class="k">E_PARSE</span> <span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;error_log&#39;</span><span class="p">,</span><span class="s1">&#39;php.out&#39;</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;log_errors&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">);</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;display_errors&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>This will put all PHP errors in the file <code>php.out</code> (which must be writeable by the webserver).
+Undeclared variables are occasionally referenced in the program, and therefore we do not recommend using <code>E_NOTICE</code> or <code>E_ALL</code>.
+The vast majority of issues reported at these levels are completely harmless.
+Please report to the developers any errors you encounter in the logs using the recommended settings above.
+They generally indicate issues which need to be resolved.</p>
+<p>If you encounter a blank (white) page when using the application, view the PHP logs - as this almost always indicates an error has occurred.</p>
+<h2 id="diagnostics">Diagnostics<a class="headerlink" href="#diagnostics" title="Permanent link">#</a></h2>
+<p>In this section of the admin panel you find two tools to investigate what Friendica sees for certain resources.
+These tools can help to clarify communication problems.</p>
+<p>For the <em>probe address</em> Friendica will display information for the address provided.</p>
+<p>With the second tool <em>check webfinger</em> you can request information about the thing identified by a webfinger (<code>someone@example.com</code>).</p>
+<h1 id="exceptions-to-the-rule">Exceptions to the rule<a class="headerlink" href="#exceptions-to-the-rule" title="Permanent link">#</a></h1>
+<p>There are four exceptions to the rule, that all the config will be read from the database.
+These are the database settings, the admin account settings, the path of PHP and information about an eventual installation of the node in a subdirectory of the (sub)domain.</p>
+<h2 id="db-settings">DB Settings<a class="headerlink" href="#db-settings" title="Permanent link">#</a></h2>
+<p>With the following settings, you specify the database server, the username and password for Friendica and the database to use.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="x">&#39;database&#39; =&gt; [</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="x">    &#39;hostname&#39; =&gt; &#39;localhost&#39;,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="x">    &#39;username&#39; =&gt; &#39;mysqlusername&#39;,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="x">    &#39;password&#39; =&gt; &#39;mysqlpassword&#39;,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="x">    &#39;database&#39; =&gt; &#39;mysqldatabasename&#39;,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="x">    &#39;charset&#39; =&gt; &#39;utf8mb4&#39;,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="x">],</span>
+</code></pre></div>
+<h2 id="admin-users">Admin users<a class="headerlink" href="#admin-users" title="Permanent link">#</a></h2>
+<p>You can set one, or more, accounts to be <em>Admin</em>.
+By default, this will be the one account you create during the installation process.
+But you can expand the list of email addresses by any used email address you want.
+Registration of new accounts with a listed email address is not possible.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="x">&#39;config&#39; =&gt; [</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="x">    &#39;admin_email&#39; =&gt; &#39;you@example.com, buddy@example.com&#39;,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="x">],</span>
+</code></pre></div>
+<h2 id="php-path">PHP Path<a class="headerlink" href="#php-path" title="Permanent link">#</a></h2>
+<p>Some of Friendica's processes are running in the background.
+For this you need to specify the path to the PHP binary to be used.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="x">&#39;config&#39; =&gt; [</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="x">    &#39;php_path&#39; =&gt; &#39;/usr/bin/php&#39;,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="x">],</span>
+</code></pre></div>
+<h2 id="subdirectory-configuration">Subdirectory configuration<a class="headerlink" href="#subdirectory-configuration" title="Permanent link">#</a></h2>
+<p>It is possible to install Friendica into a subdirectory of your web server.
+We strongly discourage you from doing so, as this will break federation to other networks (e.g. Diaspora, GNU Social, Hubzilla)
+Say you have a subdirectory for tests and put Friendica into a further subdirectory, the config would be:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="x">&#39;system&#39; =&gt; [</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="x">    &#39;urlpath&#39; =&gt; &#39;tests/friendica&#39;,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="x">],</span>
+</code></pre></div>
+<h2 id="other-exceptions">Other exceptions<a class="headerlink" href="#other-exceptions" title="Permanent link">#</a></h2>
+<p>Furthermore, there are some experimental settings, you can read-up in the <a href="../config/">Config values that can only be set in config/local.config.php</a> section of the documentation.</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../migrate/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migrate" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Migrate
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../config/" class="md-footer__link md-footer__link--next" aria-label="Next: Config Values" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Config Values
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010-2022, the Friendica project
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>

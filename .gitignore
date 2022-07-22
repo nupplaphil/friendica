@@ -18,7 +18,6 @@ robots.txt
 #ignore documentation, it should be newly built
 /doc/api
 /doc/cache
-/help
 
 #ignore reports, should be generated with every build
 report/
