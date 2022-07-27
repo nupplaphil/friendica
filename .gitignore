@@ -15,10 +15,6 @@ robots.txt
 /config/local.ini.php
 /config/addon.ini.php
 
-#ignore documentation, it should be newly built
-/doc/api
-/doc/cache
-
 #ignore reports, should be generated with every build
 report/
 
@@ -71,6 +67,9 @@ venv/
 #ignore addons directory
 /addons
 /addon
+
+#ignore help directory
+/help
 
 #ignore base .htaccess
 /.htaccess
