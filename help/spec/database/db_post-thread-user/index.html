@@ -1926,6 +1926,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_4_5_2">
@@ -2312,6 +2316,34 @@
     <li class="md-nav__item">
       <a href="../db_hook/" class="md-nav__link">
         hook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db_inbox-entry/" class="md-nav__link">
+        inbox-entry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db_inbox-entry-receiver/" class="md-nav__link">
+        inbox-entry-receiver
       </a>
     </li>
   
@@ -3257,6 +3289,15 @@
 <td></td>
 </tr>
 <tr>
+<td>conversation-id</td>
+<td>Id of the item-uri table entry that contains the conversation uri</td>
+<td>int unsigned</td>
+<td>YES</td>
+<td></td>
+<td>NULL</td>
+<td></td>
+</tr>
+<tr>
 <td>owner-id</td>
 <td>Item owner</td>
 <td>int unsigned</td>
@@ -3474,6 +3515,10 @@
 <td>uri-id</td>
 </tr>
 <tr>
+<td>conversation-id</td>
+<td>conversation-id</td>
+</tr>
+<tr>
 <td>owner-id</td>
 <td>owner-id</td>
 </tr>
@@ -3539,6 +3584,11 @@
 <tbody>
 <tr>
 <td>uri-id</td>
+<td><a href="../db_item-uri/">item-uri</a></td>
+<td>id</td>
+</tr>
+<tr>
+<td>conversation-id</td>
 <td><a href="../db_item-uri/">item-uri</a></td>
 <td>id</td>
 </tr>

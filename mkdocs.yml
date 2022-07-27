@@ -205,6 +205,8 @@ nav:
             - spec/database/db_gserver.md
             - spec/database/db_gserver-tag.md
             - spec/database/db_hook.md
+            - spec/database/db_inbox-entry.md
+            - spec/database/db_inbox-entry-receiver.md
             - spec/database/db_inbox-status.md
             - spec/database/db_intro.md
             - spec/database/db_item-uri.md

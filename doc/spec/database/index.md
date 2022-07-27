@@ -28,6 +28,8 @@
 | [gserver-tag](./db_gserver-tag.md)                             | Tags that the server has subscribed                                      |
 | [gserver](./db_gserver.md)                                     | Global servers                                                           |
 | [hook](./db_hook.md)                                           | addon hook registry                                                      |
+| [inbox-entry-receiver](./db_inbox-entry-receiver.md)           | Receiver for the incoming activity                                       |
+| [inbox-entry](./db_inbox-entry.md)                             | Incoming activity                                                        |
 | [inbox-status](./db_inbox-status.md)                           | Status of ActivityPub inboxes                                            |
 | [intro](./db_intro.md)                                         |                                                                          |
 | [item-uri](./db_item-uri.md)                                   | URI and GUID for items                                                   |

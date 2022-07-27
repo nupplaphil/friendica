@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
          <loc>https://friendi.ca/admin/config/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/config/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/config/"/>
@@ -10,7 +10,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/install-ejabberd/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/install-ejabberd/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/install-ejabberd/"/>
@@ -18,7 +18,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/installing-connectors/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/installing-connectors/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/installing-connectors/"/>
@@ -26,7 +26,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/migrate/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/migrate/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/migrate/"/>
@@ -34,7 +34,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/tools/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/tools/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/tools/"/>
@@ -42,7 +42,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/update/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/update/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/update/"/>
@@ -50,7 +50,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/"/>
@@ -58,7 +58,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/addon-storage-backend/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/addon-storage-backend/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/addon-storage-backend/"/>
@@ -66,7 +66,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/addons/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/addons/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/addons/"/>
@@ -74,7 +74,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/autoloader/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/autoloader/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/autoloader/"/>
@@ -82,7 +82,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/composer/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/composer/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/composer/"/>
@@ -90,7 +90,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/domain-driven-design/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/domain-driven-design/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/domain-driven-design/"/>
@@ -98,7 +98,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/github/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/github/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/github/"/>
@@ -106,7 +106,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/how-to-move-classes-to-src/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/how-to-move-classes-to-src/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/how-to-move-classes-to-src/"/>
@@ -114,7 +114,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/smarty3-templates/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/smarty3-templates/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/smarty3-templates/"/>
@@ -122,7 +122,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/tests/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/tests/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/tests/"/>
@@ -130,7 +130,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/themes/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/themes/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/themes/"/>
@@ -138,7 +138,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/translations/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/translations/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/translations/"/>
@@ -146,7 +146,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/developer/vagrant/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/vagrant/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/vagrant/"/>
@@ -154,7 +154,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/"/>
@@ -162,7 +162,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/bugs-and-issues/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/bugs-and-issues/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/bugs-and-issues/"/>
@@ -170,7 +170,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/faq/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/faq/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/faq/"/>
@@ -178,7 +178,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/improve-performance/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/improve-performance/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/improve-performance/"/>
@@ -186,7 +186,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/install/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/install/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/install/"/>
@@ -194,7 +194,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/settings/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/settings/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/settings/"/>
@@ -202,7 +202,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/admin/ssl/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/ssl/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/ssl/"/>
@@ -210,7 +210,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/"/>
@@ -218,7 +218,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/entities/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/entities/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/entities/"/>
@@ -226,7 +226,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/friendica/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/friendica/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/friendica/"/>
@@ -234,7 +234,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/gnu-social/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/gnu-social/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/gnu-social/"/>
@@ -242,7 +242,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/mastodon/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/mastodon/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/mastodon/"/>
@@ -250,7 +250,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/api/twitter/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/api/twitter/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/api/twitter/"/>
@@ -258,7 +258,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/"/>
@@ -266,7 +266,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_2fa_app_specific_password/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_2fa_app_specific_password/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_2fa_app_specific_password/"/>
@@ -274,7 +274,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_2fa_recovery_codes/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_2fa_recovery_codes/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_2fa_recovery_codes/"/>
@@ -282,7 +282,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_2fa_trusted_browser/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_2fa_trusted_browser/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_2fa_trusted_browser/"/>
@@ -290,7 +290,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_addon/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_addon/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_addon/"/>
@@ -298,7 +298,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_apcontact/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_apcontact/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_apcontact/"/>
@@ -306,7 +306,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_application-marker/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_application-marker/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_application-marker/"/>
@@ -314,7 +314,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_application-token/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_application-token/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_application-token/"/>
@@ -322,7 +322,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_application/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_application/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_application/"/>
@@ -330,7 +330,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_attach/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_attach/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_attach/"/>
@@ -338,7 +338,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_cache/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_cache/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_cache/"/>
@@ -346,7 +346,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_config/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_config/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_config/"/>
@@ -354,7 +354,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_contact-relation/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_contact-relation/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_contact-relation/"/>
@@ -362,7 +362,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_contact/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_contact/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_contact/"/>
@@ -370,7 +370,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_conv/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_conv/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_conv/"/>
@@ -378,7 +378,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_conversation/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_conversation/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_conversation/"/>
@@ -386,7 +386,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_delayed-post/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_delayed-post/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_delayed-post/"/>
@@ -394,7 +394,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_diaspora-interaction/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_diaspora-interaction/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_diaspora-interaction/"/>
@@ -402,7 +402,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_endpoint/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_endpoint/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_endpoint/"/>
@@ -410,7 +410,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_event/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_event/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_event/"/>
@@ -418,7 +418,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_fcontact/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_fcontact/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_fcontact/"/>
@@ -426,7 +426,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_fsuggest/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_fsuggest/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_fsuggest/"/>
@@ -434,7 +434,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_group/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_group/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_group/"/>
@@ -442,7 +442,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_group_member/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_group_member/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_group_member/"/>
@@ -450,7 +450,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_gserver-tag/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_gserver-tag/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_gserver-tag/"/>
@@ -458,7 +458,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_gserver/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_gserver/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_gserver/"/>
@@ -466,15 +466,31 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_hook/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_hook/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_hook/"/>
          
     </url>
     <url>
+         <loc>https://friendi.ca/spec/database/db_inbox-entry-receiver/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_inbox-entry-receiver/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_inbox-entry-receiver/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/spec/database/db_inbox-entry/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_inbox-entry/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_inbox-entry/"/>
+         
+    </url>
+    <url>
          <loc>https://friendi.ca/spec/database/db_inbox-status/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_inbox-status/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_inbox-status/"/>
@@ -482,7 +498,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_intro/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_intro/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_intro/"/>
@@ -490,7 +506,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_item-uri/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_item-uri/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_item-uri/"/>
@@ -498,7 +514,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_locks/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_locks/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_locks/"/>
@@ -506,7 +522,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_mail/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_mail/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_mail/"/>
@@ -514,7 +530,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_mailacct/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_mailacct/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_mailacct/"/>
@@ -522,7 +538,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_manage/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_manage/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_manage/"/>
@@ -530,7 +546,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_notification/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_notification/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_notification/"/>
@@ -538,7 +554,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_notify-threads/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_notify-threads/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_notify-threads/"/>
@@ -546,7 +562,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_notify/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_notify/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_notify/"/>
@@ -554,7 +570,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_oembed/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_oembed/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_oembed/"/>
@@ -562,7 +578,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_openwebauth-token/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_openwebauth-token/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_openwebauth-token/"/>
@@ -570,7 +586,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_parsed_url/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_parsed_url/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_parsed_url/"/>
@@ -578,7 +594,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_pconfig/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_pconfig/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_pconfig/"/>
@@ -586,7 +602,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_permissionset/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_permissionset/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_permissionset/"/>
@@ -594,7 +610,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_photo/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_photo/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_photo/"/>
@@ -602,7 +618,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-category/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-category/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-category/"/>
@@ -610,7 +626,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-collection/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-collection/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-collection/"/>
@@ -618,7 +634,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-content/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-content/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-content/"/>
@@ -626,7 +642,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-delivery-data/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-delivery-data/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-delivery-data/"/>
@@ -634,7 +650,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-delivery/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-delivery/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-delivery/"/>
@@ -642,7 +658,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-history/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-history/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-history/"/>
@@ -650,7 +666,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-link/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-link/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-link/"/>
@@ -658,7 +674,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-media/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-media/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-media/"/>
@@ -666,7 +682,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-question-option/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-question-option/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-question-option/"/>
@@ -674,7 +690,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-question/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-question/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-question/"/>
@@ -682,7 +698,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-tag/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-tag/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-tag/"/>
@@ -690,7 +706,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-thread-user/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-thread-user/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-thread-user/"/>
@@ -698,7 +714,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-thread/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-thread/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-thread/"/>
@@ -706,7 +722,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-user-notification/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-user-notification/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-user-notification/"/>
@@ -714,7 +730,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post-user/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post-user/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post-user/"/>
@@ -722,7 +738,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_post/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_post/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_post/"/>
@@ -730,7 +746,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_process/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_process/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_process/"/>
@@ -738,7 +754,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_profile/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_profile/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_profile/"/>
@@ -746,7 +762,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_profile_field/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_profile_field/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_profile_field/"/>
@@ -754,7 +770,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_push_subscriber/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_push_subscriber/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_push_subscriber/"/>
@@ -762,7 +778,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_register/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_register/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_register/"/>
@@ -770,7 +786,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_search/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_search/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_search/"/>
@@ -778,7 +794,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_session/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_session/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_session/"/>
@@ -786,7 +802,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_storage/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_storage/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_storage/"/>
@@ -794,7 +810,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_subscription/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_subscription/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_subscription/"/>
@@ -802,7 +818,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_tag/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_tag/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_tag/"/>
@@ -810,7 +826,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_user-contact/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_user-contact/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_user-contact/"/>
@@ -818,7 +834,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_user/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_user/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_user/"/>
@@ -826,7 +842,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_userd/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_userd/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_userd/"/>
@@ -834,7 +850,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_verb/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_verb/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_verb/"/>
@@ -842,7 +858,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_worker-ipc/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_worker-ipc/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_worker-ipc/"/>
@@ -850,7 +866,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/database/db_workerqueue/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/database/db_workerqueue/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/database/db_workerqueue/"/>
@@ -858,7 +874,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/protocol/message-flow/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/protocol/message-flow/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/protocol/message-flow/"/>
@@ -866,7 +882,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/spec/protocol/protocol/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/spec/protocol/protocol/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/spec/protocol/protocol/"/>
@@ -874,7 +890,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/accesskeys/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/accesskeys/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/accesskeys/"/>
@@ -882,7 +898,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/account-basics/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/account-basics/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/account-basics/"/>
@@ -890,7 +906,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/bbcode/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/bbcode/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/bbcode/"/>
@@ -898,7 +914,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/chats/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/chats/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/chats/"/>
@@ -906,7 +922,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/connectors/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/connectors/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/connectors/"/>
@@ -914,7 +930,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/events/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/events/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/events/"/>
@@ -922,7 +938,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/export-import-contacts/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/export-import-contacts/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/export-import-contacts/"/>
@@ -930,7 +946,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/faq/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/faq/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/faq/"/>
@@ -938,7 +954,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/forums/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/forums/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/forums/"/>
@@ -946,7 +962,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/groups-and-privacy/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/groups-and-privacy/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/groups-and-privacy/"/>
@@ -954,7 +970,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/keyboard-shortcuts/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/keyboard-shortcuts/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/keyboard-shortcuts/"/>
@@ -962,7 +978,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/making-friends/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/making-friends/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/making-friends/"/>
@@ -970,7 +986,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/move-account/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/move-account/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/move-account/"/>
@@ -978,7 +994,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/remove-account/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/remove-account/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/remove-account/"/>
@@ -986,7 +1002,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/tags-and-mentions/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/tags-and-mentions/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/tags-and-mentions/"/>
@@ -994,7 +1010,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/text-comment/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-comment/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-comment/"/>
@@ -1002,7 +1018,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/text-editor/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-editor/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-editor/"/>
@@ -1010,7 +1026,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/two-factor-authentication/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/two-factor-authentication/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/two-factor-authentication/"/>
@@ -1018,7 +1034,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/quick-start/finally/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/finally/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/finally/"/>
@@ -1026,7 +1042,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/quick-start/groups-and-pages/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/groups-and-pages/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/groups-and-pages/"/>
@@ -1034,7 +1050,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/quick-start/guide/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/guide/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/guide/"/>
@@ -1042,7 +1058,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/quick-start/making-new-friends/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/making-new-friends/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/making-new-friends/"/>
@@ -1050,7 +1066,7 @@
     </url>
     <url>
          <loc>https://friendi.ca/user/quick-start/network/</loc>
-         <lastmod>2022-07-22</lastmod>
+         <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/network/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/network/"/>

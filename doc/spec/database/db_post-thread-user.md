@@ -11,31 +11,32 @@ Thread related data per user
 
 ## Fields
 
-| Field        | Description                                                                                             | Type               | Null | Key | Default             | Extra |
-| ------------ | ------------------------------------------------------------------------------------------------------- | ------------------ | ---- | --- | ------------------- | ----- |
-| uri-id       | Id of the item-uri table entry that contains the item uri                                               | int unsigned       | NO   | PRI | NULL                |       |
-| owner-id     | Item owner                                                                                              | int unsigned       | NO   |     | 0                   |       |
-| author-id    | Item author                                                                                             | int unsigned       | NO   |     | 0                   |       |
-| causer-id    | Link to the contact table with uid=0 of the contact that caused the item creation                       | int unsigned       | YES  |     | NULL                |       |
-| network      |                                                                                                         | char(4)            | NO   |     |                     |       |
-| created      |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
-| received     |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
-| changed      | Date that something in the conversation changed, indicating clients should fetch the conversation again | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
-| commented    |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
-| uid          | Owner id which owns this copy of the item                                                               | mediumint unsigned | NO   | PRI | 0                   |       |
-| pinned       | deprecated                                                                                              | boolean            | NO   |     | 0                   |       |
-| starred      |                                                                                                         | boolean            | NO   |     | 0                   |       |
-| ignored      | Ignore updates for this thread                                                                          | boolean            | NO   |     | 0                   |       |
-| wall         | This item was posted to the wall of uid                                                                 | boolean            | NO   |     | 0                   |       |
-| mention      |                                                                                                         | boolean            | NO   |     | 0                   |       |
-| pubmail      |                                                                                                         | boolean            | NO   |     | 0                   |       |
-| forum_mode   | Deprecated                                                                                              | tinyint unsigned   | NO   |     | 0                   |       |
-| contact-id   | contact.id                                                                                              | int unsigned       | NO   |     | 0                   |       |
-| unseen       | post has not been seen                                                                                  | boolean            | NO   |     | 1                   |       |
-| hidden       | Marker to hide the post from the user                                                                   | boolean            | NO   |     | 0                   |       |
-| origin       | item originated at this site                                                                            | boolean            | NO   |     | 0                   |       |
-| psid         | ID of the permission set of this post                                                                   | int unsigned       | YES  |     | NULL                |       |
-| post-user-id | Id of the post-user table                                                                               | int unsigned       | YES  |     | NULL                |       |
+| Field           | Description                                                                                             | Type               | Null | Key | Default             | Extra |
+| --------------- | ------------------------------------------------------------------------------------------------------- | ------------------ | ---- | --- | ------------------- | ----- |
+| uri-id          | Id of the item-uri table entry that contains the item uri                                               | int unsigned       | NO   | PRI | NULL                |       |
+| conversation-id | Id of the item-uri table entry that contains the conversation uri                                       | int unsigned       | YES  |     | NULL                |       |
+| owner-id        | Item owner                                                                                              | int unsigned       | NO   |     | 0                   |       |
+| author-id       | Item author                                                                                             | int unsigned       | NO   |     | 0                   |       |
+| causer-id       | Link to the contact table with uid=0 of the contact that caused the item creation                       | int unsigned       | YES  |     | NULL                |       |
+| network         |                                                                                                         | char(4)            | NO   |     |                     |       |
+| created         |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
+| received        |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
+| changed         | Date that something in the conversation changed, indicating clients should fetch the conversation again | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
+| commented       |                                                                                                         | datetime           | NO   |     | 0001-01-01 00:00:00 |       |
+| uid             | Owner id which owns this copy of the item                                                               | mediumint unsigned | NO   | PRI | 0                   |       |
+| pinned          | deprecated                                                                                              | boolean            | NO   |     | 0                   |       |
+| starred         |                                                                                                         | boolean            | NO   |     | 0                   |       |
+| ignored         | Ignore updates for this thread                                                                          | boolean            | NO   |     | 0                   |       |
+| wall            | This item was posted to the wall of uid                                                                 | boolean            | NO   |     | 0                   |       |
+| mention         |                                                                                                         | boolean            | NO   |     | 0                   |       |
+| pubmail         |                                                                                                         | boolean            | NO   |     | 0                   |       |
+| forum_mode      | Deprecated                                                                                              | tinyint unsigned   | NO   |     | 0                   |       |
+| contact-id      | contact.id                                                                                              | int unsigned       | NO   |     | 0                   |       |
+| unseen          | post has not been seen                                                                                  | boolean            | NO   |     | 1                   |       |
+| hidden          | Marker to hide the post from the user                                                                   | boolean            | NO   |     | 0                   |       |
+| origin          | item originated at this site                                                                            | boolean            | NO   |     | 0                   |       |
+| psid            | ID of the permission set of this post                                                                   | int unsigned       | YES  |     | NULL                |       |
+| post-user-id    | Id of the post-user table                                                                               | int unsigned       | YES  |     | NULL                |       |
 
 ## Indexes
 
@@ -43,6 +44,7 @@ Thread related data per user
 | ----------------- | ------------------- |
 | PRIMARY           | uid, uri-id         |
 | uri-id            | uri-id              |
+| conversation-id   | conversation-id     |
 | owner-id          | owner-id            |
 | author-id         | author-id           |
 | causer-id         | causer-id           |
@@ -59,15 +61,16 @@ Thread related data per user
 
 ## Foreign Keys
 
-| Field        | Target Table                           | Target Field |
-| ------------ | -------------------------------------- | ------------ |
-| uri-id       | [item-uri](./db_item-uri.md)           | id           |
-| owner-id     | [contact](./db_contact.md)             | id           |
-| author-id    | [contact](./db_contact.md)             | id           |
-| causer-id    | [contact](./db_contact.md)             | id           |
-| uid          | [user](./db_user.md)                   | uid          |
-| contact-id   | [contact](./db_contact.md)             | id           |
-| psid         | [permissionset](./db_permissionset.md) | id           |
-| post-user-id | [post-user](./db_post-user.md)         | id           |
+| Field           | Target Table                           | Target Field |
+| --------------- | -------------------------------------- | ------------ |
+| uri-id          | [item-uri](./db_item-uri.md)           | id           |
+| conversation-id | [item-uri](./db_item-uri.md)           | id           |
+| owner-id        | [contact](./db_contact.md)             | id           |
+| author-id       | [contact](./db_contact.md)             | id           |
+| causer-id       | [contact](./db_contact.md)             | id           |
+| uid             | [user](./db_user.md)                   | uid          |
+| contact-id      | [contact](./db_contact.md)             | id           |
+| psid            | [permissionset](./db_permissionset.md) | id           |
+| post-user-id    | [post-user](./db_post-user.md)         | id           |
 
 Return to [database documentation](./index.md)
