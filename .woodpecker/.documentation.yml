@@ -12,6 +12,7 @@ pipeline:
     image: alpine/git
     commands:
       - git clone https://ci.friendica.ca/nupplaPhil/help.git help
+      - cd help
       - git checkout -b {CI_COMMIT_BRANCH}
   restore_cache:
     image: meltwater/drone-cache:dev
