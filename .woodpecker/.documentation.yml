@@ -13,7 +13,7 @@ pipeline:
     commands:
       - git clone https://git.friendi.ca/nupplaPhil/help.git help
       - cd help
-      - git checkout -b {CI_COMMIT_BRANCH}
+      - git checkout -b ${CI_COMMIT_BRANCH}
     volumes:
       - /etc/hosts:/etc/hosts
   restore_cache:
