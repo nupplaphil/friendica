@@ -11,7 +11,7 @@ pipeline:
   clone_friendica_help:
     image: alpine/git
     commands:
-      - git clone https://git.friendica.ca/nupplaPhil/help.git help
+      - git clone https://git.friendi.ca/nupplaPhil/help.git help
       - cd help
       - git checkout -b {CI_COMMIT_BRANCH}
     volumes:
@@ -55,7 +55,7 @@ pipeline:
       - cd help/
       - git add .
       - git commit -m "${CI_COMMIT_LINK}"
-      - git push https://$HELP_USERNAME:$HELP_PASSWORD@git.friendica.ca/nupplaPhil/help.git --all
+      - git push https://$HELP_USERNAME:$HELP_PASSWORD@git.friendi.ca/nupplaPhil/help.git --all
     volumes:
       - /etc/hosts:/etc/hosts
   publish:
