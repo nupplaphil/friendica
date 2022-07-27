@@ -67,8 +67,8 @@ theme:
     - toc.follow
     # - toc.integrate
 
-  logo: img/friendica.svg
-  favicon: img/friendica-32.png
+  logo: assets/images/friendica.svg
+  favicon: assets/images/friendica-32.png
 plugins:
   - search
   - tags
@@ -96,6 +96,9 @@ plugins:
 
 extra:
   homepage: https://friendi.ca
+
+extra_css:
+  - assets/stylesheets/friendica.css
 
 markdown_extensions:
   - pymdownx.highlight:
