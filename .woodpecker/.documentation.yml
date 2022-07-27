@@ -8,6 +8,11 @@ labels:
   location: friendica
 
 pipeline:
+  clone_friendica_help:
+    image: alpine/git
+    commands:
+      - git clone https://ci.friendica.ca/nupplaPhil/help.git help
+      - git checkout -b {CI_COMMIT_BRANCH}
   restore_cache:
     image: meltwater/drone-cache:dev
     settings:
@@ -29,13 +34,25 @@ pipeline:
       - /etc/hosts:/etc/hosts
   update_makefiles:
     image: friendicaci/php7.4:php7.4.18
-
     commands:
       - ./bin/console createdocumentation createMkDocs
   create_documentation:
     image: friendicaci/mkdocs
     commands:
+      - rm -fr help/*
       - mkdocs build -d help
+  commit:
+    image: alpine/git
+    secrets:
+      - source: help-username
+        target: help_username
+      - source: help-password
+        target: help_password
+    commands:
+      - cd help/
+      - git add .
+      - git commit -m "${CI_COMMIT_LINK}"
+      - git push https://$HELP_USERNAME:$HELP_PASSWORD@ci.friendica.ca/nupplaPhil/help.git --all
   publish:
     image: alpine
     commands:
