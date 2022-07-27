@@ -53,6 +53,8 @@ pipeline:
         target: help_password
     commands:
       - cd help/
+      - git config --global user.email "robot@friendi.ca"
+      - git config --global user.name "Friendica Robot"
       - git add .
       - git commit -m "${CI_COMMIT_LINK}"
       - git push https://$HELP_USERNAME:$HELP_PASSWORD@git.friendi.ca/nupplaPhil/help.git --all
