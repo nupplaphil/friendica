@@ -14,6 +14,8 @@ pipeline:
       - git clone https://git.friendica.ca/nupplaPhil/help.git help
       - cd help
       - git checkout -b {CI_COMMIT_BRANCH}
+    volumes:
+      - /etc/hosts:/etc/hosts
   restore_cache:
     image: meltwater/drone-cache:dev
     settings:
@@ -54,6 +56,8 @@ pipeline:
       - git add .
       - git commit -m "${CI_COMMIT_LINK}"
       - git push https://$HELP_USERNAME:$HELP_PASSWORD@git.friendica.ca/nupplaPhil/help.git --all
+    volumes:
+      - /etc/hosts:/etc/hosts
   publish:
     image: alpine
     commands:
