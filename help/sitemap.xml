@@ -49,27 +49,11 @@
          
     </url>
     <url>
-         <loc>https://friendi.ca/developer/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/"/>
-         
-    </url>
-    <url>
          <loc>https://friendi.ca/developer/addon-storage-backend/</loc>
          <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/addon-storage-backend/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/addon-storage-backend/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/developer/addons/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/addons/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/addons/"/>
          
     </url>
     <url>
@@ -206,6 +190,174 @@
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/admin/ssl/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/admin/ssl/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/developer/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/developer/addons/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/developer/addons/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/developer/addons/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/account-basics/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/account-basics/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/account-basics/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/bbcode/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/bbcode/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/bbcode/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/chats/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/chats/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/chats/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/connectors/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/connectors/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/connectors/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/events/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/events/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/events/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/export-import-contacts/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/export-import-contacts/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/export-import-contacts/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/faq/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/faq/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/faq/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/forums/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/forums/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/forums/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/groups-and-privacy/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/groups-and-privacy/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/groups-and-privacy/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/move-account/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/move-account/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/move-account/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/remove-account/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/remove-account/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/remove-account/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/tags-and-mentions/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/tags-and-mentions/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/tags-and-mentions/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/text-comment/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-comment/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-comment/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/text-editor/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-editor/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-editor/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/quick-start/finally/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/finally/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/finally/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/quick-start/groups-and-pages/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/groups-and-pages/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/groups-and-pages/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/quick-start/guide/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/guide/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/guide/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/quick-start/making-new-friends/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/making-new-friends/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/making-new-friends/"/>
+         
+    </url>
+    <url>
+         <loc>https://friendi.ca/user/quick-start/network/</loc>
+         <lastmod>2022-07-27</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/network/"/>
+         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/network/"/>
          
     </url>
     <url>
@@ -897,78 +1049,6 @@
          
     </url>
     <url>
-         <loc>https://friendi.ca/user/account-basics/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/account-basics/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/account-basics/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/bbcode/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/bbcode/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/bbcode/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/chats/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/chats/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/chats/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/connectors/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/connectors/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/connectors/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/events/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/events/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/events/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/export-import-contacts/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/export-import-contacts/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/export-import-contacts/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/faq/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/faq/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/faq/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/forums/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/forums/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/forums/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/groups-and-privacy/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/groups-and-privacy/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/groups-and-privacy/"/>
-         
-    </url>
-    <url>
          <loc>https://friendi.ca/user/keyboard-shortcuts/</loc>
          <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
@@ -985,91 +1065,11 @@
          
     </url>
     <url>
-         <loc>https://friendi.ca/user/move-account/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/move-account/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/move-account/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/remove-account/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/remove-account/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/remove-account/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/tags-and-mentions/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/tags-and-mentions/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/tags-and-mentions/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/text-comment/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-comment/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-comment/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/text-editor/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/text-editor/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/text-editor/"/>
-         
-    </url>
-    <url>
          <loc>https://friendi.ca/user/two-factor-authentication/</loc>
          <lastmod>2022-07-27</lastmod>
          <changefreq>daily</changefreq>
          <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/two-factor-authentication/"/>
          <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/two-factor-authentication/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/quick-start/finally/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/finally/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/finally/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/quick-start/groups-and-pages/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/groups-and-pages/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/groups-and-pages/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/quick-start/guide/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/guide/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/guide/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/quick-start/making-new-friends/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/making-new-friends/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/making-new-friends/"/>
-         
-    </url>
-    <url>
-         <loc>https://friendi.ca/user/quick-start/network/</loc>
-         <lastmod>2022-07-27</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://friendi.ca/en/user/quick-start/network/"/>
-         <xhtml:link rel="alternate" hreflang="de" href="https://friendi.ca/de/user/quick-start/network/"/>
          
     </url>
 </urlset>
