@@ -3725,16 +3725,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v4.1.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "9e0536de18b53ba193364291ef0303b0ab9903e1"
+                "reference": "ffa2b81a8e354a49fd8a2f24742dc9dc399e8007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/9e0536de18b53ba193364291ef0303b0ab9903e1",
-                "reference": "9e0536de18b53ba193364291ef0303b0ab9903e1",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/ffa2b81a8e354a49fd8a2f24742dc9dc399e8007",
+                "reference": "ffa2b81a8e354a49fd8a2f24742dc9dc399e8007",
                 "shasum": ""
             },
             "require": {
@@ -3782,7 +3782,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2022-02-06T20:34:27+00:00"
+            "time": "2022-09-14T10:59:01+00:00"
         },
         {
             "name": "spomky-labs/base64url",
