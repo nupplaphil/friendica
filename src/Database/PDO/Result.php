@@ -13,11 +13,14 @@ class Result extends AbstractDBResult implements IDatabaseResult
 	protected $statement;
 	/** @var int */
 	protected $affectedRows;
+	/** @var callable */
+	protected $castRowsFunction;
 
-	public function __construct(PDOStatement $statement)
+	public function __construct(PDOStatement $statement, callable $castRowsFunction)
 	{
-		$this->statement    = $statement;
-		$this->affectedRows = $statement->rowCount();
+		$this->statement        = $statement;
+		$this->affectedRows     = $statement->rowCount();
+		$this->castRowsFunction = $castRowsFunction;
 	}
 
 	public function getColumnCount(): int
@@ -32,7 +35,7 @@ class Result extends AbstractDBResult implements IDatabaseResult
 
 	public function fetch(): array
 	{
-		return $this->statement->fetch(PDO::FETCH_ASSOC);
+		return call_user_func($this->castRowsFunction, $this->statement->fetch(PDO::FETCH_ASSOC));
 	}
 
 	public function close(): bool

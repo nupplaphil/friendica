@@ -8,10 +8,10 @@ use PDO;
 
 class Lock implements IDatabaseLock
 {
-	/** @var Connection */
+	/** @var Driver */
 	protected $connection;
 
-	public function __construct(Connection $connection)
+	public function __construct(Driver $connection)
 	{
 		if (!extension_loaded('ext-pdo')) {
 			throw new \RuntimeException('PDO extension is not installed');
@@ -22,16 +22,16 @@ class Lock implements IDatabaseLock
 
 	public function lock(string $table): bool
 	{
-		$this->connection->BLA("SET autocommit=0");
+		$this->connection->write("SET autocommit=0");
 		$pdoEmulatePrepare = $this->connection->getConnection()->getAttribute(PDO::ATTR_EMULATE_PREPARES);
 		$this->connection->getConnection()->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
-		$success = $this->connection->BLA("LOCK TABLES " . DatabaseUtils::buildTableString([$table]) . " WRITE");
+		$success = $this->connection->write("LOCK TABLES " . DatabaseUtils::buildTableString([$table]) . " WRITE");
 
 		$this->connection->getConnection()->setAttribute(PDO::ATTR_EMULATE_PREPARES, $pdoEmulatePrepare);
 
 		if (!$success) {
-			$this->connection->BLA("SET autocommit=1");
+			$this->connection->write("SET autocommit=1");
 		} else {
 			$this->connection->setTransaction(true);
 		}
@@ -47,10 +47,10 @@ class Lock implements IDatabaseLock
 		$pdoEmulatePrepare = $this->connection->getConnection()->getAttribute(PDO::ATTR_EMULATE_PREPARES);
 		$this->connection->getConnection()->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
-		$success = $this->connection->BLA("UNLOCK LOCK TABLES");
+		$success = $this->connection->write("UNLOCK LOCK TABLES");
 
 		$this->connection->getConnection()->setAttribute(PDO::ATTR_EMULATE_PREPARES, $pdoEmulatePrepare);
-		$this->connection->BLA("SET autocommit=1");
+		$this->connection->write("SET autocommit=1");
 
 		$this->connection->setTransaction(false);
 

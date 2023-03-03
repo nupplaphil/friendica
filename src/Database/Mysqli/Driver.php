@@ -3,15 +3,39 @@
 namespace Friendica\Database\Mysqli;
 
 use Friendica\Core\System;
-use Friendica\Database\AbstractDBConnection;
+use Friendica\Database\AbstractDBDriver;
 use mysqli;
+use ParagonIE\HiddenString\HiddenString;
 
-class Connection extends AbstractDBConnection
+class Driver extends AbstractDBDriver
 {
 	const TYPE = 'mysqli';
 
 	/** @var mysqli */
 	protected $connection;
+
+	protected function connectInternal(string $host, int $port, string $user, HiddenString $password, string $database, string $charset, string $socket): bool
+	{
+		if ($socket) {
+			$this->connection = @new mysqli(null, $user, (string)$password, $database, null, $socket);
+		} elseif ($port > 0) {
+			$this->connection = @new mysqli($host, $user, (string)$password, $database, $port);
+		} else {
+			$this->connection = @new mysqli($host, $user, (string)$password, $database);
+		}
+
+		if (!mysqli_connect_errno()) {
+			$this->connected = true;
+
+			if ($charset) {
+				$this->connection->set_charset($charset);
+			}
+		} else {
+			$this->connected = false;
+		}
+
+		return $this->connected;
+	}
 
 	public function getConnection(): mysqli
 	{
@@ -86,7 +110,7 @@ class Connection extends AbstractDBConnection
 		return $this->serverInfo;
 	}
 
-	protected function executeInternal(string $sql, array $arguments = [], bool $withCallstack = false)
+	protected function executeInternal(string $sql, array $parameters = [], bool $withCallstack = false)
 	{
 		// There are SQL statements that cannot be executed with a prepared statement
 		$parts           = explode(' ', $sql);
@@ -98,8 +122,8 @@ class Connection extends AbstractDBConnection
 		}
 
 		// The fallback routine is called as well when there are no arguments
-		if (!$can_be_prepared || (count($arguments) == 0)) {
-			$result = $this->connection->query($this->replaceParameters($sql, $arguments));
+		if (!$can_be_prepared || (count($parameters) == 0)) {
+			$result = $this->connection->query($this->replaceParameters($sql, $parameters));
 			if ($this->connection->errno) {
 				return Error::fromConnection($this->connection);
 			} else {
@@ -115,20 +139,20 @@ class Connection extends AbstractDBConnection
 
 		$paramTypes = '';
 		$values      = [];
-		foreach (array_keys($arguments) as $param) {
-			if (is_int($arguments[$param])) {
+		foreach (array_keys($parameters) as $parameter) {
+			if (is_int($parameters[$parameter])) {
 				$paramTypes .= 'i';
-			} elseif (is_float($arguments[$param])) {
+			} elseif (is_float($parameters[$parameter])) {
 				$paramTypes .= 'd';
-			} elseif (is_string($arguments[$param])) {
+			} elseif (is_string($parameters[$parameter])) {
 				$paramTypes .= 's';
-			} elseif (is_object($arguments[$param]) && method_exists($arguments[$param], '__toString')) {
-				$paramTypes  .= 's';
-				$arguments[$param] = (string)$arguments[$param];
+			} elseif (is_object($parameters[$parameter]) && method_exists($parameters[$parameter], '__toString')) {
+				$paramTypes         .= 's';
+				$parameters[$parameter] = (string)$parameters[$parameter];
 			} else {
 				$paramTypes .= 'b';
 			}
-			$values[] = &$arguments[$param];
+			$values[] = &$parameters[$parameter];
 		}
 
 		if (count($values) > 0) {

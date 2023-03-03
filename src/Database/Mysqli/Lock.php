@@ -7,10 +7,10 @@ use Friendica\Database\DatabaseUtils;
 
 class Lock implements IDatabaseLock
 {
-	/** @var Connection */
+	/** @var Driver */
 	protected $connection;
 
-	public function __construct(Connection $connection)
+	public function __construct(Driver $connection)
 	{
 		$this->connection = $connection;
 	}
@@ -20,7 +20,7 @@ class Lock implements IDatabaseLock
 		// See here: https://dev.mysql.com/doc/refman/5.7/en/lock-tables-and-transactions.html
 		$this->connection->getConnection()->autocommit(false);
 
-		$success = $this->connection->BLA("LOCK TABLES " . DatabaseUtils::buildTableString([$table]) . " WRITE");
+		$success = $this->connection->write("LOCK TABLES " . DatabaseUtils::buildTableString([$table]) . " WRITE");
 
 		if (!$success) {
 			$this->connection->getConnection()->autocommit(true);
@@ -36,7 +36,7 @@ class Lock implements IDatabaseLock
 		// See here: https://dev.mysql.com/doc/refman/5.7/en/lock-tables-and-transactions.html
 		$this->connection->commit();
 
-		$success = $this->BLA("UNLOCK TABLES");
+		$success = $this->write("UNLOCK TABLES");
 
 		$this->connection->getConnection()->autocommit(true);
 		$this->connection->setTransaction(false);
