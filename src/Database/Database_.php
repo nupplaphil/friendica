@@ -224,7 +224,7 @@ class Database_ implements IDatabase
 
 		$sql = "SELECT COUNT(" . $expression . ") AS `count` FROM " . $table_string . $condition_string;
 
-		$row = $this->driver->fetchFirst($sql, $condition);
+		$row = $this->driver->fetchFirst($sql, ...$condition);
 
 		if (!isset($row['count'])) {
 			return 0;

@@ -21,7 +21,7 @@ interface IDatabaseDriver
 	 *
 	 * @throws DatabaseException in case of unexpected connection loss or unexpected database failures
 	 */
-	public function read(string $sql, array $parameters = []);
+	public function read(string $sql, ...$parameters );
 
 	/**
 	 * Executes a prepared statement like UPDATE or INSERT that doesn't return data
@@ -29,13 +29,13 @@ interface IDatabaseDriver
 	 * Please use DBA::delete, DBA::insert, DBA::update, ... instead
 	 *
 	 * @param string $sql           SQL statement
-	 * @param array  $parameters optional parameters for the SQL statement
+	 * @param mixed  ...$parameters optional parameters for the SQL statement
 	 *
 	 * @return bool Was the query successful? False is returned only if an error occurred
 	 *
 	 * @throws DatabaseException
 	 */
-	public function write(string $sql, array $parameters = []): bool;
+	public function write(string $sql, ...$parameters): bool;
 
 	/**
 	 * Replaces the ? placeholders with the parameters in the $args array
@@ -88,12 +88,12 @@ interface IDatabaseDriver
 	 * Fetches the first row
 	 *
 	 * @param string $sql SQL statement
-	 * @param array  $parameters The parameters that are to replace the ? placeholders
+	 * @param mixed  ...$parameters The parameters that are to replace the ? placeholders
 	 *
 	 * @return array|bool first row of query or false on failure
 	 * @throws DatabaseException
 	 */
-	public function fetchFirst(string $sql, array $parameters = []);
+	public function fetchFirst(string $sql, ...$parameters);
 
 	/**
 	 * Fetch a database variable

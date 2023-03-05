@@ -93,7 +93,7 @@ class Driver extends AbstractDBDriver implements IDatabaseDriver
 	}
 
 	/**
-	 * Checks, if the table definition cache is high enough for
+	 * Checks, if the table definition cache is high enough
 	 *
 	 * @return bool|null true/false if the definition cache is high enough, null if it couldn't get determined
 	 *

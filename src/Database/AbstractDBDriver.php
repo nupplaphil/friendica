@@ -19,8 +19,26 @@ abstract class AbstractDBDriver implements IDatabaseDriver
 	protected $config;
 	protected $inTransaction = false;
 
+	/**
+	 * @param string $sql
+	 * @param array  $parameters
+	 * @param bool   $withCallstack
+	 *
+	 * @return IDatabaseResult|IDatabaseError
+	 */
 	abstract protected function executeInternal(string $sql, array $parameters = [], bool $withCallstack = false);
 
+	/**
+	 * @param string       $host
+	 * @param int          $port
+	 * @param string       $user
+	 * @param HiddenString $password
+	 * @param string       $database
+	 * @param string       $charset
+	 * @param string       $socket
+	 *
+	 * @return bool
+	 */
 	abstract protected function connectInternal(string $host, int $port, string $user, HiddenString $password, string $database, string $charset, string $socket): bool;
 
 	public function __construct(ReadOnlyFileConfig $config)
@@ -141,7 +159,7 @@ abstract class AbstractDBDriver implements IDatabaseDriver
 	/** {@inheritDoc} */
 	public function fetchFirst(string $sql, ...$parameters)
 	{
-		$stmt = $this->read($sql, ...$parameters);
+		$stmt = $this->read($sql, $parameters);
 
 		if (is_bool($stmt)) {
 			$returnValue = $stmt;
@@ -170,10 +188,50 @@ abstract class AbstractDBDriver implements IDatabaseDriver
 	}
 
 	/** {@inheritDoc} */
-	public function read(string $sql, array $parameters = [], bool $retry = true)
+	public function read(string $sql, ...$parameters)
+	{
+		return $this->readInternal($sql, $parameters);
+	}
+
+
+	/** {@inheritDoc} */
+	public function write(string $sql, ...$parameters): bool
+	{
+		// In a case of a deadlock we are repeating the query 20 times
+		$timeout = 20;
+
+		do {
+			$result = $this->readInternal($sql, $parameters, false);
+
+			if ($result instanceof IDatabaseResult) {
+				$result->close();
+				return true;
+			}
+
+		} while (($result instanceof IDatabaseError) && ($result->getErrorNumber() === 1213) && (--$timeout > 0));
+
+		// On a lost connection we simply throw an exception.
+		// A reconnect like in $this->read could be dangerous with modifications
+		if ($result->getErrorNumber() == 2006) {
+			throw new DatabaseException($result->getError(), $result->getErrorNumber(), $this->replaceParameters($sql, $parameters));
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param string $sql
+	 * @param array  $parameters
+	 * @param bool   $retry
+	 *
+	 * @return IDatabaseError|IDatabaseResult
+	 *
+	 * @throws DatabaseException
+	 */
+	protected function readInternal(string $sql, array $parameters = [], bool $retry = true)
 	{
 		if (!$this->connected) {
-			return false;
+			throw new DatabaseException('Database not connected.', 500, $this->replaceParameters($sql, $parameters));
 		}
 
 		if (!isset($this->connection)) {
@@ -210,31 +268,6 @@ abstract class AbstractDBDriver implements IDatabaseDriver
 		}
 
 		return $result;
-	}
-
-	/** {@inheritDoc} */
-	public function write(string $sql, array $parameters = []): bool
-	{
-		// In a case of a deadlock we are repeating the query 20 times
-		$timeout = 20;
-
-		do {
-			$result = $this->read($sql, $parameters, false);
-
-			if ($result instanceof IDatabaseResult) {
-				$result->close();
-				return true;
-			}
-
-		} while (($result instanceof IDatabaseError) && ($result->getErrorNumber() === 1213) && (--$timeout > 0));
-
-		// On a lost connection we simply throw an exception.
-		// A reconnect like in $this->read could be dangerous with modifications
-		if ($result->getErrorNumber() == 2006) {
-			throw new DatabaseException($result->getError(), $result->getErrorNumber(), $this->replaceParameters($sql, $parameters));
-		}
-
-		return false;
 	}
 
 	/**
