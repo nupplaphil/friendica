@@ -31,6 +31,10 @@
 	margin-left: 10px;
 }
 
+.hovercard .thumbnail {
+	margin-bottom: 0px;
+}
+
 .hovercard.bottom {
 	margin-top: 10px;
 }
@@ -251,20 +255,8 @@
 	text-decoration: none;
 }
 
-.hovercard.right > .arrow {
-	border-right-color: rgba(0, 0, 0, 0.05);
-}
-
-.hovercard.left > .arrow {
-	border-left-color: rgba(0, 0, 0, 0.05);
-}
-
 .hovercard.bottom > .arrow {
-	border-bottom-color: rgba(0, 0, 0, 0.05);
-}
-
-.hovercard.top > .arrow {
-	border-top-color: rgba(0, 0, 0, 0.05);
+	border-color: rgba(0, 0, 0, 0.05);
 }
 
 .advance-hovercard + .hovercard {
@@ -316,11 +308,7 @@
 	list-style-type: none;
 	width: 100%;
 	display: block;
-	padding: 0.3em 0 1em;
-}
-
-.hover-card-content .profile-details {
-	font-size: 13px;
+	padding: 0.3em 0 0.3em;
 }
 
 .hover-card-content .profile-addr {
@@ -329,12 +317,14 @@
 	text-overflow: ellipsis;
 }
 
-.hover-card-actions {
+.hover-card-actions, .hover-card-actions-connection {
 	display: flex;
+	gap: 5px;
+	flex-wrap: wrap;
 }
 
-.hover-card-actions-connection {
-	margin-left: 10px;
+.hover-card-actions {
+	margin-bottom: 5px;
 }
 
 .hovercard .hovercard-content .hover-card-actions a.btn {
