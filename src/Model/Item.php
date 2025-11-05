@@ -3689,8 +3689,8 @@ class Item
 			$ret = [
 				'href'       => "display/" . $item['guid'],
 				'orig'       => "display/" . $item['guid'],
-				'title'      => DI::l10n()->t('View on separate page'),
-				'orig_title' => DI::l10n()->t('View on separate page'),
+				'title'      => DI::l10n()->t('View related post'),
+				'orig_title' => DI::l10n()->t('View related post'),
 			];
 
 			if (!empty($plink) && ($item['private'] == self::PRIVATE)) {

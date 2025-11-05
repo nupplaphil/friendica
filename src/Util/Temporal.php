@@ -196,6 +196,20 @@ class Temporal
 	}
 
 	/**
+	 * Returns a help text containing the current time zone and how to change it
+	 *
+	 * @return string A help text containing the current time zone and how to change it
+	 */
+	public static function timeZoneHelper()
+	{
+		return DI::l10n()->t(
+			'Time zone: <strong>%s</strong> <a href="%s">Change in Settings</a>',
+			str_replace('_', ' ', DI::appHelper()->getTimeZone()) . ' (GMT ' . DateTimeFormat::localNow('P') . ')',
+			DI::baseUrl() . '/settings',
+		);
+	}
+
+	/**
 	 * Returns a datetime selector.
 	 *
 	 * @param DateTime $minDate     Minimum date
@@ -226,6 +240,7 @@ class Temporal
 		string $minfrom = '',
 		string $maxfrom = '',
 		bool $required = false,
+		bool $show_tip = true
 	): string {
 		// First day of the week (0 = Sunday)
 		$firstDay = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'calendar', 'first_day_of_week') ?: 0;
@@ -266,11 +281,7 @@ class Temporal
 				$id,
 				$label,
 				$input_text,
-				DI::l10n()->t(
-					'Time zone: <strong>%s</strong> <a href="%s">Change in Settings</a>',
-					str_replace('_', ' ', DI::appHelper()->getTimeZone()) . ' (GMT ' . DateTimeFormat::localNow('P') . ')',
-					DI::baseUrl() . '/settings',
-				),
+				$show_tip ? self::timeZoneHelper() : '',
 				$required ? '*' : '',
 				'placeholder="' . $readable_format . '"',
 			],

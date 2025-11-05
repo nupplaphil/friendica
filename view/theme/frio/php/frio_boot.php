@@ -71,7 +71,6 @@ function get_modalpage_list()
 	$modalpages = [
 		'message/new',
 		'settings/oauth/add',
-		'calendar/event/new',
 		//		'fbrowser/image/'
 	];
 
