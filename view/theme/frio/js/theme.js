@@ -443,7 +443,7 @@ $(document).ready(function () {
 		$('.button-browser-share').hide();
 	}
 
-	// initiale autosize for the textareas
+	// initialize autosize for the textareas
 	autosize($("textarea.text-autosize"));
 });
 
