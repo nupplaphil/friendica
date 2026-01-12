@@ -217,14 +217,15 @@ function frio_remote_nav(array &$nav_info): void
 			// user menu
 			$nav_info['nav']['usermenu'][] = [$server_url . '/profile/' . $remoteUser['nick'], DI::l10n()->t('Posts'), '', DI::l10n()->t('My posts')];
 			$nav_info['nav']['usermenu'][] = [$server_url . '/profile/' . $remoteUser['nick'] . '/photos', DI::l10n()->t('Photos'), '', DI::l10n()->t('My photos')];
-			$nav_info['nav']['usermenu'][] = [$server_url . '/profile/' . $remoteUser['nick'] . '/media', DI::l10n()->t('Media posts'), '', DI::l10n()->t('My posts containing media')];
 			$nav_info['nav']['usermenu'][] = [$server_url . '/calendar/', DI::l10n()->t('Calendar'), '', DI::l10n()->t('Your calendar')];
 
 			// navbar links
-			$nav_info['nav']['network']  = [$server_url . '/network', DI::l10n()->t('Network'), '', DI::l10n()->t('Conversations from your friends')];
+			// "Back" is exclusively visible when remote visiting another instance
+			$nav_info['nav']['back']     = [$server_url, DI::l10n()->t('Back home'), '', DI::l10n()->t('Back to my instance')];
+			$nav_info['nav']['network']  = [$server_url . '/network', DI::l10n()->t('Home'), '', DI::l10n()->t('Home')];
 			$nav_info['nav']['calendar'] = [$server_url . '/calendar', DI::l10n()->t('Calendar'), '', DI::l10n()->t('Calendar')];
-			$nav_info['nav']['messages'] = [$server_url . '/message', DI::l10n()->t('Messages'), '', DI::l10n()->t('Private mail')];
-			$nav_info['nav']['settings'] = [$server_url . '/settings', DI::l10n()->t('Settings'), '', DI::l10n()->t('Account settings')];
+			$nav_info['nav']['messages'] = [$server_url . '/message', DI::l10n()->t('Messages'), '', DI::l10n()->t('Messages')];
+			$nav_info['nav']['settings'] = [$server_url . '/settings', DI::l10n()->t('Settings'), '', DI::l10n()->t('Settings')];
 			$nav_info['nav']['contacts'] = [$server_url . '/contact', DI::l10n()->t('Contacts'), '', DI::l10n()->t('Manage/edit friends and contacts')];
 			$nav_info['nav']['sitename'] = DI::config()->get('config', 'sitename');
 		}
