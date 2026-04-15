@@ -17,7 +17,7 @@ return \Rector\Config\RectorConfig::configure()
 		__DIR__ . '/view',
 	])
 	->withIndent("\t", 4)
-	->withPhpVersion(80200)
+	->withPhpVersion(70400)
 	// ->withTypeCoverageLevel(0)
 	// ->withDeadCodeLevel(0)
 	// ->withCodeQualityLevel(0)
