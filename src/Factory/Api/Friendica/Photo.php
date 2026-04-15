@@ -80,7 +80,7 @@ class Photo extends BaseFactory
 				$data['links'][$photo['scale'] . ':link']['@attributes'] = [
 					'type'  => $data['type'],
 					'scale' => $photo['scale'],
-					'href'  => $link
+					'href'  => $link,
 				];
 			} else {
 				$data['link'][$id] = $link;
@@ -137,10 +137,10 @@ class Photo extends BaseFactory
 			$data['friendica_comments'] = $comments;
 
 			// include info if rights on photo and rights on item are mismatching
-			$data['rights_mismatch'] = $data['allow_cid'] != $item['allow_cid'] ||
-				$data['deny_cid'] != $item['deny_cid'] ||
-				$data['allow_gid'] != $item['allow_gid'] ||
-				$data['deny_gid'] != $item['deny_gid'];
+			$data['rights_mismatch'] = $data['allow_cid'] != $item['allow_cid']
+				|| $data['deny_cid'] != $item['deny_cid']
+				|| $data['allow_gid'] != $item['allow_gid']
+				|| $data['deny_gid'] != $item['deny_gid'];
 		} elseif ($with_posts) {
 			$data['friendica_activities'] = [];
 			$data['friendica_comments']   = [];
