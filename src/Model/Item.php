@@ -3539,7 +3539,7 @@ class Item
 			$percent = 0;
 		}
 
-		return (!empty($media->description) && (($media->name == $media->description) || ($percent > 95) || (strpos($content, $media->description) !== false)));
+		return (!empty($media->description) && (($media->name == $media->description) || ($percent > 95) || (strpos($content, (string) $media->description) !== false)));
 	}
 
 	/**

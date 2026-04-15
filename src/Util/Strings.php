@@ -156,7 +156,7 @@ class Strings
 	{
 		if ($network != '') {
 			if ($url != '') {
-				$gsid         = $gsid ?? ContactSelector::getServerIdForProfile($url);
+				$gsid ??= ContactSelector::getServerIdForProfile($url);
 				$network_name = '<a href="' . $url . '">' . ContactSelector::networkToName($network, '', $gsid) . '</a>';
 			} else {
 				$network_name = ContactSelector::networkToName($network);
