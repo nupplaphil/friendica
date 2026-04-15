@@ -449,7 +449,7 @@ class BBCode
 	 * @return string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function convertAttachmentFromPostMedia(PostMedia $media, int $simplehtml = self::INTERNAL, int $uriid = 0, int $preview_mode = self::PREVIEW_AUTO, bool $embed = false, bool $hide_description): string
+	public static function convertAttachmentFromPostMedia(PostMedia $media, int $simplehtml, int $uriid, int $preview_mode, bool $embed, bool $hide_description): string
 	{
 		DI::profiler()->startRecording('rendering');
 

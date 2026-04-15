@@ -62,7 +62,7 @@ class Notes extends BaseProfile
 	 * @param IManageConfigValues $config
 	 * @param Conversation $conversation
 	 */
-	public function __construct(AppHelper $appHelper, UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters = [], Mode $mode, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, Conversation $conversation)
+	public function __construct(AppHelper $appHelper, UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters, Mode $mode, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, Conversation $conversation)
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->appHelper    = $appHelper;

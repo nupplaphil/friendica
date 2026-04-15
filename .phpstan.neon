@@ -32,21 +32,6 @@ parameters:
 
     ignoreErrors:
         -
-            # Ignore missing GdImage class in PHP <= 7.4
-            message: '(^Property .+ has unknown class GdImage as its type\.$)'
-            path: src
-
-        -
-            # Ignore missing IMAP\Connection class in PHP <= 8.0
-            message: '(^Method .+ has invalid return type IMAP\\Connection\.$)'
-            path: src
-
-        -
-            # Ignore missing IMAP\Connection class in PHP <= 8.0
-            message: '(^Parameter .+ has invalid type IMAP\\Connection\.$)'
-            path: src
-
-        -
             # #Fixme: Ignore type mismatch of BaseRepository::$factory in child classes
             message: '#^PHPDoc type Friendica\\.+ of property Friendica\\.+\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
             identifier: property.phpDocType

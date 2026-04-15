@@ -540,7 +540,7 @@ class Strings
 		}
 
 		$last      = strtolower($shorthand[strlen($shorthand) - 1]);
-		$shorthand = substr($shorthand, 0, -1);
+		$shorthand = (int) substr($shorthand, 0, -1);
 
 		switch ($last) {
 			case 'g':
