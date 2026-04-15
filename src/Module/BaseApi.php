@@ -473,7 +473,7 @@ class BaseApi extends BaseModule
 		}
 	}
 
-	public static function getContactIDForSearchterm(string $screen_name = null, string $profileurl = null, int $cid = null, int $uid)
+	public static function getContactIDForSearchterm(?string $screen_name, ?string $profileurl, ?int $cid, int $uid)
 	{
 		if (!empty($cid)) {
 			return $cid;

@@ -200,8 +200,8 @@ class Temporal
 	 *
 	 * @param DateTime $minDate     Minimum date
 	 * @param DateTime $maxDate     Maximum date
-	 * @param DateTime $defaultDate Default date
-	 * @param          $label
+	 * @param DateTime|null $defaultDate Default date
+	 * @param string   $label
 	 * @param string   $id          Id and name of datetimepicker (defaults to "datetimepicker")
 	 * @param bool     $pickdate    true to show date picker (default)
 	 * @param bool     $picktime    true to show time picker (default)
@@ -218,8 +218,8 @@ class Temporal
 	public static function getDateTimeField(
 		DateTime $minDate,
 		DateTime $maxDate,
-		DateTime $defaultDate = null,
-		$label,
+		?DateTime $defaultDate,
+		string $label,
 		string $id = 'datetimepicker',
 		bool $pickdate = true,
 		bool $picktime = true,
