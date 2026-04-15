@@ -170,7 +170,7 @@ class Network extends Timeline
 		);
 
 		$o           = '';
-		$widgetorder = json_decode($this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
+		$widgetorder = json_decode((string) $this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
 
 		if (empty($widgetorder)) {
 			$widgetorder = [
