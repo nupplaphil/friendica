@@ -93,8 +93,8 @@ class DbaDefinitionSqlWriter
 
 		$sql = implode(",\n\t", $sql_rows);
 
-		$sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (\n\t", static::escape($tableName)) . $sql .
-			   "\n)" . $engine . " DEFAULT COLLATE utf8mb4_general_ci" . $comment;
+		$sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (\n\t", static::escape($tableName)) . $sql
+			   . "\n)" . $engine . " DEFAULT COLLATE utf8mb4_general_ci" . $comment;
 		return $sql . ";\n\n";
 	}
 

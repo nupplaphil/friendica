@@ -65,7 +65,7 @@ class Theme
 			'version'      => "",
 			'credits'      => "",
 			'experimental' => file_exists("view/theme/$theme/experimental"),
-			'unsupported'  => file_exists("view/theme/$theme/unsupported")
+			'unsupported'  => file_exists("view/theme/$theme/unsupported"),
 		];
 
 		if (!is_file("view/theme/$theme/theme.php")) {

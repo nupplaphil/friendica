@@ -30,7 +30,7 @@ class SpoolPost
 						continue;
 					}
 
-					$fullfile = $path."/".$file;
+					$fullfile = $path . "/" . $file;
 
 					// We don't care about directories either
 					if (filetype($fullfile) != "file") {

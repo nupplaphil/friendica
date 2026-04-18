@@ -63,7 +63,7 @@ class RobotsTxt
 			$curlResult = $this->httpClient->get(
 				$robotsUrl,
 				HttpClientAccept::TEXT,
-				[HttpClientOptions::REQUEST => HttpClientRequest::SERVERINFO]
+				[HttpClientOptions::REQUEST => HttpClientRequest::SERVERINFO],
 			);
 
 			if (!$curlResult->isSuccess()) {

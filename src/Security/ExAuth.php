@@ -94,7 +94,7 @@ class ExAuth
 		$this->dba     = $dba;
 		$this->baseURL = $baseURL;
 
-		$this->bDebug = (int)$config->get('jabber', 'debug');
+		$this->bDebug = (int) $config->get('jabber', 'debug');
 
 		openlog('auth_ejabberd', LOG_PID, LOG_USER);
 
@@ -283,9 +283,9 @@ class ExAuth
 			} catch (HTTPException\ForbiddenException $ex) {
 				// User exists, authentication failed
 				$this->writeLog(LOG_INFO, 'check against alternate password for ' . $sUser . '@' . $aCommand[2]);
-				$aUser = User::getByNickname($sUser, ['uid']);
+				$aUser     = User::getByNickname($sUser, ['uid']);
 				$sPassword = $this->pConfig->get($aUser['uid'], 'xmpp', 'password', null, true);
-				$Error = ($aCommand[3] != $sPassword);
+				$Error     = ($aCommand[3] != $sPassword);
 			} catch (\Throwable $ex) {
 				// User doesn't exist and any other failure case
 				$this->writeLog(LOG_WARNING, $ex->getMessage() . ': ' . $sUser);

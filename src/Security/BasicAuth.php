@@ -43,7 +43,7 @@ class BasicAuth
 			self::$current_user_id = self::getUserIdByAuth($login);
 		}
 
-		return (int)self::$current_user_id;
+		return (int) self::$current_user_id;
 	}
 
 	public static function setCurrentUserID(int $uid = null)

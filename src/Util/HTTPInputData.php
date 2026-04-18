@@ -181,7 +181,7 @@ class HTTPInputData
 			'type'     => $contentType,
 			'tmp_name' => $tmpnam,
 			'error'    => $error,
-			'size'     => filesize($tmpnam)
+			'size'     => filesize($tmpnam),
 		];
 	}
 

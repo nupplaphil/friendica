@@ -83,7 +83,7 @@ class Markdown
 
 				return $matches[1] . '<a href="' . $data['url'] . '">' . $name . '</a>';
 			},
-			$text
+			$text,
 		);
 	}
 

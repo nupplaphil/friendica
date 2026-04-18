@@ -26,36 +26,36 @@ use Friendica\Util\Strings;
  */
 class Tag
 {
-	const UNKNOWN = 0;
-	const HASHTAG = 1;
-	const MENTION = 2;
+	public const UNKNOWN = 0;
+	public const HASHTAG = 1;
+	public const MENTION = 2;
 	/**
 	 * An implicit mention is a mention in a comment body that is redundant with the threading information.
 	 */
-	const IMPLICIT_MENTION = 8;
+	public const IMPLICIT_MENTION = 8;
 	/**
 	 * An exclusive mention transmits the post only to the target account without transmitting it to the followers, usually a group.
 	 */
-	const EXCLUSIVE_MENTION = 9;
+	public const EXCLUSIVE_MENTION = 9;
 
-	const TO         = 10;
-	const CC         = 11;
-	const BTO        = 12;
-	const BCC        = 13;
-	const AUDIENCE   = 14;
-	const ATTRIBUTED = 15;
+	public const TO         = 10;
+	public const CC         = 11;
+	public const BTO        = 12;
+	public const BCC        = 13;
+	public const AUDIENCE   = 14;
+	public const ATTRIBUTED = 15;
 
-	const CAN_ANNOUNCE = 20;
-	const CAN_LIKE     = 21;
-	const CAN_REPLY    = 22;
-	const CAN_QUOTE    = 23;
+	public const CAN_ANNOUNCE = 20;
+	public const CAN_LIKE     = 21;
+	public const CAN_REPLY    = 22;
+	public const CAN_QUOTE    = 23;
 
-	const ACCOUNT             = 1;
-	const GENERAL_COLLECTION  = 2;
-	const FOLLOWER_COLLECTION = 3;
-	const PUBLIC_COLLECTION   = 4;
+	public const ACCOUNT             = 1;
+	public const GENERAL_COLLECTION  = 2;
+	public const FOLLOWER_COLLECTION = 3;
+	public const PUBLIC_COLLECTION   = 4;
 
-	const TAG_CHARACTER = [
+	public const TAG_CHARACTER = [
 		self::HASHTAG           => '#',
 		self::MENTION           => '@',
 		self::EXCLUSIVE_MENTION => '!',
@@ -540,7 +540,7 @@ class Tag
 		$taglist = DBA::select(
 			'tag-view',
 			['type', 'name', 'url', 'cid'],
-			['uri-id' => $item['uri-id'], 'type' => [self::HASHTAG, self::MENTION, self::EXCLUSIVE_MENTION, self::IMPLICIT_MENTION]]
+			['uri-id' => $item['uri-id'], 'type' => [self::HASHTAG, self::MENTION, self::EXCLUSIVE_MENTION, self::IMPLICIT_MENTION]],
 		);
 		while ($tag = DBA::fetch($taglist)) {
 			if ($tag['url'] == '') {
@@ -626,7 +626,7 @@ class Tag
 
 		$params = [
 			'order' => ['uri-id' => true],
-			'limit' => [$start, $limit]
+			'limit' => [$start, $limit],
 		];
 
 		$tags = DBA::select('tag-search-view', ['uri-id'], $condition, $params);
@@ -693,7 +693,7 @@ class Tag
 		$post = Post::selectFirstThread(
 			['uri-id'],
 			["`uid` = ? AND `received` < ?", 0, DateTimeFormat::utc('now - ' . $period . ' hour')],
-			['order' => ['received' => true]]
+			['order' => ['received' => true]],
 		);
 
 		if (empty($post['uri-id'])) {
@@ -710,7 +710,7 @@ class Tag
 			Item::PUBLIC,
 			0,
 			$post['uri-id'],
-			$limit
+			$limit,
 		);
 
 		if (DBA::isResult($tagsStmt)) {
@@ -755,7 +755,7 @@ class Tag
 		$post = Post::selectFirstThread(
 			['uri-id'],
 			["`uid` = ? AND `received` < ?", 0, DateTimeFormat::utc('now - ' . $period . ' hour')],
-			['order' => ['received' => true]]
+			['order' => ['received' => true]],
 		);
 		if (empty($post['uri-id'])) {
 			return [];
@@ -770,7 +770,7 @@ class Tag
 			GROUP BY `term` ORDER BY `authors` DESC, `score` DESC LIMIT ?",
 			Item::PUBLIC,
 			$post['uri-id'],
-			$limit
+			$limit,
 		);
 
 		if (DBA::isResult($tagsStmt)) {

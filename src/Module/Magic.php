@@ -146,7 +146,7 @@ class Magic extends BaseModule
 		$header = HTTPSignature::createSig(
 			$header,
 			$owner['prvkey'],
-			'acct:' . $owner['addr']
+			'acct:' . $owner['addr'],
 		);
 
 		$this->logger->info('Fetch from remote system', ['openwebauth' => $openwebauth, 'headers' => $header]);

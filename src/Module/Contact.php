@@ -30,12 +30,12 @@ use Friendica\Worker\UpdateContact;
  */
 class Contact extends BaseModule
 {
-	const TAB_CONVERSATIONS = 1;
-	const TAB_POSTS         = 2;
-	const TAB_PROFILE       = 3;
-	const TAB_CONTACTS      = 4;
-	const TAB_ADVANCED      = 5;
-	const TAB_MEDIA         = 6;
+	public const TAB_CONVERSATIONS = 1;
+	public const TAB_POSTS         = 2;
+	public const TAB_PROFILE       = 3;
+	public const TAB_CONTACTS      = 4;
+	public const TAB_ADVANCED      = 5;
+	public const TAB_MEDIA         = 6;
 
 	private static function batchActions()
 	{
@@ -523,7 +523,7 @@ class Contact extends BaseModule
 				'sel'       => (($active_tab == self::TAB_CONTACTS) ? 'active' : ''),
 				'title'     => DI::l10n()->t('View all known contacts'),
 				'id'        => 'contacts-tab',
-				'accesskey' => 't'
+				'accesskey' => 't',
 			],
 		];
 
@@ -534,7 +534,7 @@ class Contact extends BaseModule
 				'sel'       => (($active_tab == self::TAB_ADVANCED) ? 'active' : ''),
 				'title'     => DI::l10n()->t('Advanced Contact Settings'),
 				'id'        => 'advanced-tab',
-				'accesskey' => 'r'
+				'accesskey' => 'r',
 			];
 		}
 

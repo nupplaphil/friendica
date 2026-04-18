@@ -119,9 +119,7 @@ abstract class BaseModule implements ICanHandleRequests
 	 * @param string[] $request The $_REQUEST content
 	 * @return void
 	 */
-	protected function delete(array $request = [])
-	{
-	}
+	protected function delete(array $request = []) {}
 
 	/**
 	 * Module PATCH method to process submitted data
@@ -132,9 +130,7 @@ abstract class BaseModule implements ICanHandleRequests
 	 * @param string[] $request The $_REQUEST content
 	 * @return void
 	 */
-	protected function patch(array $request = [])
-	{
-	}
+	protected function patch(array $request = []) {}
 
 	/**
 	 * Module POST method to process submitted data
@@ -159,9 +155,7 @@ abstract class BaseModule implements ICanHandleRequests
 	 * @param string[] $request The $_REQUEST content
 	 * @return void
 	 */
-	protected function put(array $request = [])
-	{
-	}
+	protected function put(array $request = []) {}
 
 	/**
 	 * Module GET method to process submitted data
@@ -172,9 +166,7 @@ abstract class BaseModule implements ICanHandleRequests
 	 * @param string[] $request The $_REQUEST content
 	 * @return void
 	 */
-	protected function get(array $request = [])
-	{
-	}
+	protected function get(array $request = []) {}
 
 	/**
 	 * {@inheritDoc}
@@ -252,9 +244,9 @@ abstract class BaseModule implements ICanHandleRequests
 		} catch (HTTPException $e) {
 			// In case of System::externalRedirects(), we don't want to prettyprint the exception
 			// just redirect to the new location
-			if (($e instanceof HTTPException\FoundException) ||
-				($e instanceof HTTPException\MovedPermanentlyException) ||
-				($e instanceof HTTPException\TemporaryRedirectException)) {
+			if (($e instanceof HTTPException\FoundException)
+				|| ($e instanceof HTTPException\MovedPermanentlyException)
+				|| ($e instanceof HTTPException\TemporaryRedirectException)) {
 				throw $e;
 			}
 
@@ -310,7 +302,7 @@ abstract class BaseModule implements ICanHandleRequests
 	public function getRequestValue(array $input, string $parameter, $default = null, $minimal_value = null, $maximum_value = null)
 	{
 		if (is_string($default)) {
-			$value = (string)($input[$parameter] ?? $default);
+			$value = (string) ($input[$parameter] ?? $default);
 		} elseif (is_int($default)) {
 			$value = filter_var($input[$parameter] ?? $default, FILTER_VALIDATE_INT);
 			if (!is_null($minimal_value)) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2010-2024, the Friendica project
  * SPDX-FileCopyrightText: 2010-2024 the Friendica project
@@ -249,7 +250,7 @@ function frio_display_item(&$arr)
 			'menu'   => 'follow_thread',
 			'title'  => DI::l10n()->t('Follow Thread'),
 			'action' => 'doFollowThread(' . $arr['item']['id'] . ');',
-			'href'   => '#'
+			'href'   => '#',
 		];
 	}
 	$arr['output']['follow_thread'] = $followThread;
@@ -266,7 +267,7 @@ function frio_display_item(&$arr)
 			'menu'   => 'complete_thread',
 			'title'  => DI::l10n()->t('Complete Thread'),
 			'action' => 'doCompleteThread(' . $arr['item']['uri-id'] . ');',
-			'href'   => '#'
+			'href'   => '#',
 		];
 	}
 	$arr['output']['complete_thread'] = $completeThread;

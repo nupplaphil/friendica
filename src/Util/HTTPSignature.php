@@ -53,7 +53,7 @@ class HTTPSignature
 		$result    = [
 			'signer'        => '',
 			'header_signed' => false,
-			'header_valid'  => false
+			'header_valid'  => false,
 		];
 
 		// Decide if $data arrived via controller submission or curl.
@@ -282,7 +282,7 @@ class HTTPSignature
 			'Date'           => $date,
 			'Content-Length' => $content_length,
 			'Digest'         => $digest,
-			'Host'           => $host
+			'Host'           => $host,
 		];
 
 		$signed_data = "(request-target): post " . $path . "\ndate: " . $date . "\ncontent-length: " . $content_length . "\ndigest: " . $digest . "\nhost: " . $host;

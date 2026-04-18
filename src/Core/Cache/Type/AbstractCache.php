@@ -14,7 +14,7 @@ use Friendica\Core\Cache\Capability\ICanCache;
  */
 abstract class AbstractCache implements ICanCache
 {
-	const NAME = '';
+	public const NAME = '';
 
 	/**
 	 * @var string The hostname

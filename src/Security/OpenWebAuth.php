@@ -134,7 +134,7 @@ class OpenWebAuth
 
 		$arr = [
 			'visitor' => $visitor,
-			'url'     => DI::args()->getQueryString()
+			'url'     => DI::args()->getQueryString(),
 		];
 		/**
 		 * @hooks magic_auth_success

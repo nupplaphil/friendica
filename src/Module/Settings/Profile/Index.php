@@ -69,7 +69,7 @@ class Index extends BaseSettings
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 

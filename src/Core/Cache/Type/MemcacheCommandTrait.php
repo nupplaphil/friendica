@@ -47,9 +47,9 @@ trait MemcacheCommandTrait
 		$keys   = [];
 
 		foreach ($lines as $line) {
-			if (preg_match("/STAT items:([\d]+):number ([\d]+)/", $line, $matches) &&
-				isset($matches[1]) &&
-				!in_array($matches[1], $keys)) {
+			if (preg_match("/STAT items:([\d]+):number ([\d]+)/", $line, $matches)
+				&& isset($matches[1])
+				&& !in_array($matches[1], $keys)) {
 				$string = $this->sendMemcacheCommand("stats cachedump " . $matches[1] . " " . $matches[2]);
 				preg_match_all("/ITEM (.*?) /", $string, $matches);
 				$keys = array_merge($keys, $matches[1]);

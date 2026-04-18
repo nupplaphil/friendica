@@ -354,7 +354,7 @@ class App
 		Profiler $profiler,
 		EventDispatcherInterface $eventDispatcher,
 		AppHelper $appHelper,
-		AddonHelper $addonHelper
+		AddonHelper $addonHelper,
 	): void {
 		if ($config->get('system', 'ini_max_execution_time') !== false) {
 			set_time_limit((int) $config->get('system', 'ini_max_execution_time'));
@@ -431,7 +431,7 @@ class App
 		AddonHelper $addonHelper,
 		ModuleHTTPException $httpException,
 		float $start_time,
-		ServerRequestInterface $request
+		ServerRequestInterface $request,
 	) {
 		$this->mode->setExecutor(Mode::INDEX);
 

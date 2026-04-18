@@ -32,9 +32,9 @@ use Friendica\Util\Strings;
  */
 class Relay
 {
-	const SCOPE_NONE = '';
-	const SCOPE_ALL  = 'all';
-	const SCOPE_TAGS = 'tags';
+	public const SCOPE_NONE = '';
+	public const SCOPE_ALL  = 'all';
+	public const SCOPE_TAGS = 'tags';
 
 	/**
 	 * Check if a post is wanted
@@ -379,7 +379,7 @@ class Relay
 		return DBA::selectToArray(
 			'apcontact',
 			$fields,
-			["`type` IN (?, ?) AND `url` IN (SELECT `url` FROM `contact` WHERE `uid` = ? AND `rel` = ?)", 'Application', 'Service', 0, Contact::FRIEND]
+			["`type` IN (?, ?) AND `url` IN (SELECT `url` FROM `contact` WHERE `uid` = ? AND `rel` = ?)", 'Application', 'Service', 0, Contact::FRIEND],
 		);
 	}
 
