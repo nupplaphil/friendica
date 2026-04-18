@@ -24,8 +24,8 @@ class Maintenance extends BaseModule
 	{
 		$reason = DI::config()->get('system', 'maintenance_reason') ?? '';
 
-		if ((substr(Strings::normaliseLink($reason), 0, 7) === 'http://') ||
-			(substr(Strings::normaliseLink($reason), 0, 8) === 'https://')) {
+		if ((str_starts_with(Strings::normaliseLink($reason), 'http://')) ||
+			(str_starts_with(Strings::normaliseLink($reason), 'https://'))) {
 			System::externalRedirect($reason, 307);
 		}
 

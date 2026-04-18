@@ -307,7 +307,7 @@ class Profile extends BaseModule
 		}
 
 		$url = ContactModel::magicLinkByContact($contact);
-		if (strpos($url, 'contact/redir/') === 0) {
+		if (str_starts_with($url, 'contact/redir/')) {
 			$sparkle = ' class="sparkle" ';
 		} else {
 			$sparkle = '';

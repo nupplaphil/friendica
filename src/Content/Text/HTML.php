@@ -551,7 +551,7 @@ class HTML
 				$ignore = false;
 			}
 
-			$ignore = $ignore || strpos($treffer[1], '#') === 0;
+			$ignore = $ignore || str_starts_with($treffer[1], '#');
 
 			if (!$ignore) {
 				$urls[$treffer[1]] = $treffer[1];
@@ -821,7 +821,7 @@ class HTML
 
 		if ($redirect) {
 			$url = Contact::magicLinkByContact($contact);
-			if (strpos($url, 'contact/redir/') === 0) {
+			if (str_starts_with($url, 'contact/redir/')) {
 				$sparkle = ' sparkle';
 			}
 		}
@@ -857,7 +857,7 @@ class HTML
 	{
 		$mode = 'text';
 
-		if (strpos($s, '#') === 0) {
+		if (str_starts_with($s, '#')) {
 			$mode = 'tag';
 		}
 		$action_text = DI::l10n()->t('Save search');
@@ -1102,7 +1102,7 @@ class HTML
 		}
 
 		$html = trim($dom->saveHTML());
-		if (substr($html, 0, 6) == '<span>' && substr($html, -7) == '</span>') {
+		if (str_starts_with($html, '<span>') && substr($html, -7) == '</span>') {
 			$html = substr($html, 6, -7);
 		}
 

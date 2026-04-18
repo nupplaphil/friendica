@@ -812,7 +812,7 @@ class Media
 		$media = self::setModified($media, $curlResult->getHeader('Last-Modified')[0] ?? '');
 
 		foreach (explode("\n", $curlResult->getBodyString() ?? '') as $line) {
-			if (strpos(trim($line), '#EXT-X-STREAM-INF') === 0) {
+			if (str_starts_with(trim($line), '#EXT-X-STREAM-INF')) {
 				if (preg_match('/RESOLUTION=([\d]+)x([\d]+)/', $line, $matches)) {
 					$resolutions[$matches[1]] = [(int) $matches[1], (int) $matches[2]];
 				}

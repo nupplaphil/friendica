@@ -35,7 +35,7 @@ class Features extends BaseSettings
 	{
 		BaseSettings::checkFormSecurityTokenRedirectOnError('/settings/features', 'settings_features');
 		foreach ($request as $k => $v) {
-			if (strpos($k, 'feature_') === 0) {
+			if (str_starts_with($k, 'feature_')) {
 				$key = substr($k, 8);
 				if ($key == 'widgetorder') { // not boolean, stringified array
 					$this->pConfig->set($this->session->getLocalUserId(), 'feature', 'widgetorder', $v);

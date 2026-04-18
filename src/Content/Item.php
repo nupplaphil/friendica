@@ -392,7 +392,7 @@ class Item
 			'alias'   => $item['author-alias'],
 		];
 		$profile_link = Contact::magicLinkByContact($author, Contact::getProfileLink($author));
-		if (strpos($profile_link, 'contact/redir/') === 0) {
+		if (str_starts_with($profile_link, 'contact/redir/')) {
 			$status_link  = $profile_link . '?' . http_build_query(['url' => $item['author-link'] . '/status']);
 			$photos_link  = $profile_link . '?' . http_build_query(['url' => $item['author-link'] . '/photos']);
 			$profile_link = $profile_link . '?' . http_build_query(['url' => $item['author-link'] . '/profile']);
@@ -471,7 +471,7 @@ class Item
 
 		$o = '';
 		foreach ($menu as $k => $v) {
-			if (strpos($v, 'javascript:') === 0) {
+			if (str_starts_with($v, 'javascript:')) {
 				$v = substr($v, 11);
 				$o .= '<li role="menuitem"><a onclick="' . $v . '">' . $k . '</a></li>' . PHP_EOL;
 			} elseif ($v) {

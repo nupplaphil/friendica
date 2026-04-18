@@ -213,7 +213,7 @@ class Router
 			is_array($config) &&
 			is_string(array_keys($config)[0]) &&
 			// This entry should NOT be a BaseModule
-			(substr(array_keys($config)[0], 0, strlen('Friendica\Module')) !== 'Friendica\Module') &&
+			(!str_starts_with(array_keys($config)[0], 'Friendica\Module')) &&
 			// The second argument is an array (another routes)
 			is_array(array_values($config)[0]);
 	}
@@ -231,7 +231,7 @@ class Router
 			// The config array should at least have one entry
 			!empty($config[0]) &&
 			// This entry should be a BaseModule
-			(substr($config[0], 0, strlen('Friendica\Module')) === 'Friendica\Module') &&
+			(str_starts_with($config[0], 'Friendica\Module')) &&
 			// Either there is no other argument
 			(empty($config[1]) ||
 			 // Or the second argument is an array (HTTP-Methods)

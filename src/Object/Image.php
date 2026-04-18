@@ -57,7 +57,7 @@ class Image
 
 		if (Images::isSupportedMimeType($type)) {
 			$this->originType = $this->outputType = Images::getImageTypeByMimeType($type);
-		} elseif (($type == '') || substr($type, 0, 6) == 'image/' || substr($type, 0, 12) == ' application/') {
+		} elseif (($type == '') || str_starts_with($type, 'image/') || substr($type, 0, 12) == ' application/') {
 			$this->originType = IMAGETYPE_UNKNOWN;
 			$this->outputType = IMAGETYPE_WEBP;
 			DI::logger()->debug('Unhandled image mime type, use WebP instead', ['type' => $type, 'filename' => $filename, 'size' => strlen($data)]);

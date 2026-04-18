@@ -355,8 +355,8 @@ class OnePoll
 					$datarray['created'] = DateTimeFormat::utc($meta->date);
 
 					// Is it a reply?
-					$reply = ((substr(strtolower($datarray['title']), 0, 3) == 're:') ||
-						(substr(strtolower($datarray['title']), 0, 3) == 're-') ||
+					$reply = ((str_starts_with(strtolower($datarray['title']), 're:')) ||
+						(str_starts_with(strtolower($datarray['title']), 're-')) ||
 						($raw_refs != ''));
 
 					// Remove Reply-signs in the subject

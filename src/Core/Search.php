@@ -210,7 +210,7 @@ class Search
 			return [];
 		}
 
-		if (substr($search, 0, 1) === '@') {
+		if (str_starts_with($search, '@')) {
 			$search = substr($search, 1);
 		}
 
@@ -275,7 +275,7 @@ class Search
 	 */
 	public static function getSearchPath(string $search): string
 	{
-		if (substr($search, 0, 1) == '#') {
+		if (str_starts_with($search, '#')) {
 			return 'search?tag=' . urlencode(substr($search, 1));
 		} else {
 			return 'search?q=' . urlencode($search);

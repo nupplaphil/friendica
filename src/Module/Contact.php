@@ -44,7 +44,7 @@ class Contact extends BaseModule
 		}
 
 		$redirectUrl = $_POST['command'] ?? '';
-		if (substr($redirectUrl, 0, 7) != 'contact') {
+		if (!str_starts_with($redirectUrl, 'contact')) {
 			$redirectUrl = 'contact';
 		}
 		if (!empty($_POST['parameter'])) {
@@ -591,7 +591,7 @@ class Contact extends BaseModule
 
 		$url = Model\Contact::magicLinkByContact($contact);
 
-		if (strpos($url, 'contact/redir/') === 0) {
+		if (str_starts_with($url, 'contact/redir/')) {
 			$sparkle = ' class="sparkle" ';
 		} else {
 			$sparkle = '';

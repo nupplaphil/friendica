@@ -2071,7 +2071,7 @@ class Item
 			);
 
 			foreach ($tags as $tag) {
-				if ((strpos($tag, '#') !== 0) || strpos($tag, '[url=') || strlen($tag) < 2 || $tag[1] == '#') {
+				if ((!str_starts_with($tag, '#')) || strpos($tag, '[url=') || strlen($tag) < 2 || $tag[1] == '#') {
 					continue;
 				}
 

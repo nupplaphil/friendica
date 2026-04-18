@@ -164,6 +164,6 @@ class Attachment extends BaseFactory
 
 	public function isAttach(string $id): bool
 	{
-		return substr($id, 0, 7) == 'attach:';
+		return str_starts_with($id, 'attach:');
 	}
 }

@@ -168,9 +168,9 @@ class ApiResponse extends Response
 			$item = ($item ? 'true' : 'false');
 		}
 
-		if (substr($key, 0, 10) == 'statusnet_') {
+		if (str_starts_with($key, 'statusnet_')) {
 			$key = 'statusnet:' . substr($key, 10);
-		} elseif (substr($key, 0, 10) == 'friendica_') {
+		} elseif (str_starts_with($key, 'friendica_')) {
 			$key = 'friendica:' . substr($key, 10);
 		}
 		return true;

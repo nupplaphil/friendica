@@ -85,7 +85,7 @@ abstract class AbstractCache implements ICanCache
 			$result = [];
 
 			foreach ($keys as $key) {
-				if (strpos($key, $prefix) === 0) {
+				if (str_starts_with($key, $prefix)) {
 					array_push($result, $key);
 				}
 			}

@@ -305,7 +305,7 @@ class DBStructure
 					} else {
 						$new_index_definition = "__NOT_SET__";
 					}
-					if ($current_index_definition != $new_index_definition && substr($indexName, 0, 6) != 'local_') {
+					if ($current_index_definition != $new_index_definition && !str_starts_with($indexName, 'local_')) {
 						$sql2 = DbaDefinitionSqlWriter::dropIndex($indexName);
 						if ($sql3 == "") {
 							$sql3 = "ALTER" . $ignore . " TABLE `" . $name . "` " . $sql2;

@@ -77,7 +77,7 @@ class OAuth
 			$authorization = $_SERVER['REDIRECT_REMOTE_USER'] ?? '';
 		}
 
-		if (substr($authorization, 0, 7) != 'Bearer ') {
+		if (!str_starts_with($authorization, 'Bearer ')) {
 			return [];
 		}
 

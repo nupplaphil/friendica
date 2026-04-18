@@ -1822,7 +1822,7 @@ class BBCode
 		$text = preg_replace_callback(
 			"/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism",
 			function ($matches) use ($simple_html, $uriid) {
-				if (strpos($matches[3], "data:image/") === 0) {
+				if (str_starts_with($matches[3], "data:image/")) {
 					return $matches[0];
 				}
 
@@ -1855,7 +1855,7 @@ class BBCode
 		$text = preg_replace_callback(
 			"/\[[iz]mg\](.*?)\[\/[iz]mg\]/ism",
 			function ($matches) use ($simple_html, $uriid) {
-				if (strpos($matches[1], "data:image/") === 0) {
+				if (str_starts_with($matches[1], "data:image/")) {
 					return $matches[0];
 				}
 

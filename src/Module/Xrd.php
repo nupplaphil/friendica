@@ -48,7 +48,7 @@ class Xrd extends BaseModule
 			$host = parse_url($uri, PHP_URL_HOST);
 		} elseif (preg_match('/^[[:alpha:]][[:alnum:]+-.]+:/', $uri)) {
 			$local = str_replace('acct:', '', $uri);
-			if (substr($local, 0, 2) == '//') {
+			if (str_starts_with($local, '//')) {
 				$local = substr($local, 2);
 			}
 

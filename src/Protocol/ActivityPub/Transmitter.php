@@ -1263,7 +1263,7 @@ class Transmitter
 		$reshared = false;
 
 		// Only check for a reshare, if it is a real reshare and no quoted reshare
-		if (strpos($item['body'], '[share') === 0) {
+		if (str_starts_with($item['body'], '[share')) {
 			$announce = self::getAnnounceArray($item);
 			$reshared = !empty($announce);
 		}

@@ -346,7 +346,7 @@ class ParseUrl
 				$path    = $meta_tag['content'];
 				$content = '';
 				foreach (explode(';', $path) as $value) {
-					if (substr(strtolower($value), 0, 4) == 'url=') {
+					if (str_starts_with(strtolower($value), 'url=')) {
 						$content = substr($value, 4);
 					}
 				}
@@ -827,7 +827,7 @@ class ParseUrl
 		}
 
 		if (!empty($urlarr['path'])) {
-			if (strpos($urlarr['path'], '/') !== 0) {
+			if (!str_starts_with($urlarr['path'], '/')) {
 				$complete .= '/';
 			}
 
@@ -1695,7 +1695,7 @@ class ParseUrl
 			return $siteinfo;
 		}
 
-		if (strpos($data['html'], '&lt;') === 0) {
+		if (str_starts_with($data['html'], '&lt;')) {
 			$data['html'] = html_entity_decode($data['html']);
 		}
 

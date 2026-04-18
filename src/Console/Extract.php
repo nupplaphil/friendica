@@ -88,7 +88,7 @@ HELP;
 					$match_arr = preg_split('/(?<=[\'"])\s*,/', $long_match);
 					$match     = $match_arr[0];
 					if (!in_array($match, $arr)) {
-						if (substr($match, 0, 1) == '$') {
+						if (str_starts_with($match, '$')) {
 							continue;
 						}
 
@@ -102,7 +102,7 @@ HELP;
 				foreach ($matchestt[1] as $match) {
 					$matchtkns = preg_split("|[ \t\r\n]*,[ \t\r\n]*|", $match);
 					if (count($matchtkns) == 3 && !in_array($matchtkns[0], $arr)) {
-						if (substr($matchtkns[1], 0, 1) == '$') {
+						if (str_starts_with($matchtkns[1], '$')) {
 							continue;
 						}
 

@@ -412,7 +412,7 @@ final class ATProtocol
 	private function getDidByWellknown(string $handle): string
 	{
 		$curlResult = $this->httpClient->get('http://' . $handle . '/.well-known/atproto-did');
-		if ($curlResult->isSuccess() && substr($curlResult->getBodyString(), 0, 4) == 'did:') {
+		if ($curlResult->isSuccess() && str_starts_with($curlResult->getBodyString(), 'did:')) {
 			$did = $curlResult->getBodyString();
 			if (!$this->isValidDid($did, $handle)) {
 				$this->logger->notice('Invalid DID', ['handle' => $handle, 'did' => $did]);
@@ -437,7 +437,7 @@ final class ATProtocol
 			return '';
 		}
 		foreach ($records as $record) {
-			if (!empty($record['txt']) && substr($record['txt'], 0, 4) == 'did=') {
+			if (!empty($record['txt']) && str_starts_with($record['txt'], 'did=')) {
 				$did = substr($record['txt'], 4);
 				if (!$this->isValidDid($did, $handle)) {
 					$this->logger->notice('Invalid DID', ['handle' => $handle, 'did' => $did]);

@@ -320,7 +320,7 @@ class Profile
 		if (!$local_user_is_self) {
 			if (!$visitor_is_authenticated) {
 				// Remote follow is only available for local profiles
-				if (!empty($profile['nickname']) && strpos($profile_url, (string) DI::baseUrl()) === 0) {
+				if (!empty($profile['nickname']) && str_starts_with($profile_url, (string) DI::baseUrl())) {
 					$follow_link = 'profile/' . $profile['nickname'] . '/remote_follow';
 				}
 			} else {

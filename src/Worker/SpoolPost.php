@@ -25,7 +25,7 @@ class SpoolPost
 				while (($file = readdir($dh)) !== false) {
 
 					// It is not named like a spool file, so we don't care.
-					if (substr($file, 0, 5) != "item-") {
+					if (!str_starts_with($file, "item-")) {
 						DI::logger()->info('Spool file does not start with "item-"', ['file' => $file]);
 						continue;
 					}

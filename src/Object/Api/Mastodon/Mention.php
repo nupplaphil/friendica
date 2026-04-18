@@ -42,7 +42,7 @@ class Mention extends BaseDataTransferObject
 
 		if (!empty($contact)) {
 			$this->acct =
-				strpos($contact['url'], $baseUrl . '/') === 0 ?
+				str_starts_with($contact['url'], $baseUrl . '/') ?
 					$contact['nick'] :
 					$contact['addr'];
 

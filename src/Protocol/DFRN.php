@@ -637,7 +637,7 @@ class DFRN
 		}
 
 		if ($r->link) {
-			if (substr($r->link, 0, 1) == '<') {
+			if (str_starts_with($r->link, '<')) {
 				if (strstr($r->link, '&') && (! strstr($r->link, '&amp;'))) {
 					$r->link = str_replace('&', '&amp;', $r->link);
 				}

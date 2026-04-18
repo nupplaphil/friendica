@@ -100,7 +100,7 @@ class Tag
 				return;
 			}
 
-			if ((substr($url, 0, 7) == 'https//') || (substr($url, 0, 6) == 'http//')) {
+			if ((str_starts_with($url, 'https//')) || (str_starts_with($url, 'http//'))) {
 				DI::logger()->notice('Wrong scheme in url', ['url' => $url]);
 			}
 

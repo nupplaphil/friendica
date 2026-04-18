@@ -263,10 +263,10 @@ class APContact
 
 		if (!empty($ims)) {
 			foreach ($ims as $link) {
-				if (substr($link, 0, 5) == 'xmpp:') {
+				if (str_starts_with($link, 'xmpp:')) {
 					$apcontact['xmpp'] = substr($link, 5);
 				}
-				if (substr($link, 0, 7) == 'matrix:') {
+				if (str_starts_with($link, 'matrix:')) {
 					$apcontact['matrix'] = substr($link, 7);
 				}
 			}

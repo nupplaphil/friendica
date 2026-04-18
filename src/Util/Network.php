@@ -52,7 +52,7 @@ class Network
 			return false;
 		}
 
-		if (substr($url, 0, 4) != 'http') {
+		if (!str_starts_with($url, 'http')) {
 			$url = 'http://' . $url;
 		}
 

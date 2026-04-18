@@ -178,7 +178,7 @@ HELP;
 	private static function parse(string $string, &$node)
 	{
 		// Removes extra outward parentheses
-		if (strpos($string, '(') === 0 && strrpos($string, ')') === strlen($string) - 1) {
+		if (str_starts_with($string, '(') && strrpos($string, ')') === strlen($string) - 1) {
 			$string = (string) substr($string, 1, -1);
 		}
 

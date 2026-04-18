@@ -617,9 +617,9 @@ class Email
 		foreach ($arrbody as $i => $line) {
 			$currquotelevel = 0;
 			$currline       = $line;
-			while ((strlen($currline) > 0) && ((substr($currline, 0, 1) == '>')
-				|| (substr($currline, 0, 1) == ' '))) {
-				if (substr($currline, 0, 1) == '>') {
+			while ((strlen($currline) > 0) && ((str_starts_with($currline, '>'))
+				|| (str_starts_with($currline, ' ')))) {
+				if (str_starts_with($currline, '>')) {
 					$currquotelevel++;
 				}
 
@@ -628,9 +628,9 @@ class Email
 
 			$quotelevel = 0;
 			$nextline   = trim($arrbody[$i + 1] ?? '');
-			while ((strlen($nextline) > 0) && ((substr($nextline, 0, 1) == '>')
-				|| (substr($nextline, 0, 1) == ' '))) {
-				if (substr($nextline, 0, 1) == '>') {
+			while ((strlen($nextline) > 0) && ((str_starts_with($nextline, '>'))
+				|| (str_starts_with($nextline, ' ')))) {
+				if (str_starts_with($nextline, '>')) {
 					$quotelevel++;
 				}
 
@@ -642,8 +642,8 @@ class Email
 					$lines[$lineno] .= ' ';
 				}
 
-				while ((strlen($line) > 0) && ((substr($line, 0, 1) == '>')
-					|| (substr($line, 0, 1) == ' '))) {
+				while ((strlen($line) > 0) && ((str_starts_with($line, '>'))
+					|| (str_starts_with($line, ' ')))) {
 
 					$line = ltrim(substr($line, 1));
 				}
@@ -670,9 +670,9 @@ class Email
 			$quotelevel = 0;
 			$quoteline  = $arrbody[$i];
 
-			while ((strlen($quoteline) > 0) and ((substr($quoteline, 0, 1) == '>')
-				|| (substr($quoteline, 0, 1) == ' '))) {
-				if (substr($quoteline, 0, 1) == '>') {
+			while ((strlen($quoteline) > 0) and ((str_starts_with($quoteline, '>'))
+				|| (str_starts_with($quoteline, ' ')))) {
+				if (str_starts_with($quoteline, '>')) {
 					$quotelevel++;
 				}
 

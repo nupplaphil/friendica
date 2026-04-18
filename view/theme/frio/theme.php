@@ -114,7 +114,7 @@ function frio_item_photo_links(&$body_info)
 function frio_item_photo_menu(&$arr)
 {
 	foreach ($arr['menu'] as $k => $v) {
-		if (strpos($v, 'message/new/') === 0) {
+		if (str_starts_with($v, 'message/new/')) {
 			$v               = 'javascript:addToModal(\'' . $v . '\'); return false;';
 			$arr['menu'][$k] = $v;
 		}

@@ -62,7 +62,7 @@ class HTTPSignature
 		$headers['(request-target)'] = strtolower(DI::args()->getMethod()) . ' ' . $_SERVER['REQUEST_URI'];
 
 		foreach ($_SERVER as $k => $v) {
-			if (strpos($k, 'HTTP_') === 0) {
+			if (str_starts_with($k, 'HTTP_')) {
 				$field = str_replace('_', '-', strtolower(substr($k, 5)));
 
 				$headers[$field] = $v;
@@ -645,7 +645,7 @@ class HTTPSignature
 
 		// Now add every http header
 		foreach ($http_headers as $k => $v) {
-			if (strpos($k, 'HTTP_') === 0) {
+			if (str_starts_with($k, 'HTTP_')) {
 				$field = str_replace('_', '-', strtolower(substr($k, 5)));
 
 				$headers[$field] = $v;

@@ -1711,12 +1711,12 @@ class Database
 				continue;
 			}
 
-			if ((substr($types[$field], 0, 7) == 'tinyint') || (substr($types[$field], 0, 8) == 'smallint')
-				|| (substr($types[$field], 0, 9) == 'mediumint') || (substr($types[$field], 0, 3) == 'int')
-				|| (substr($types[$field], 0, 6) == 'bigint') || (substr($types[$field], 0, 7) == 'boolean')) {
+			if ((str_starts_with($types[$field], 'tinyint')) || (str_starts_with($types[$field], 'smallint'))
+				|| (str_starts_with($types[$field], 'mediumint')) || (str_starts_with($types[$field], 'int'))
+				|| (str_starts_with($types[$field], 'bigint')) || (str_starts_with($types[$field], 'boolean'))) {
 				$fields[$field] = (int) $content;
 			}
-			if ((substr($types[$field], 0, 5) == 'float') || (substr($types[$field], 0, 6) == 'double')) {
+			if ((str_starts_with($types[$field], 'float')) || (str_starts_with($types[$field], 'double'))) {
 				$fields[$field] = (float) $content;
 			}
 		}

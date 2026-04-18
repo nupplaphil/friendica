@@ -182,28 +182,28 @@ abstract class BaseModule implements ICanHandleRequests
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
-		if (substr($this->args->getQueryString(), 0, 12) == '.well-known/') {
+		if (str_starts_with($this->args->getQueryString(), '.well-known/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
 			$this->response->setHeader('*', 'Access-Control-Allow-Headers');
 			$this->response->setHeader(Router::GET, 'Access-Control-Allow-Methods');
 			$this->response->setHeader('false', 'Access-Control-Allow-Credentials');
-		} elseif (substr($this->args->getQueryString(), 0, 9) == 'nodeinfo/') {
+		} elseif (str_starts_with($this->args->getQueryString(), 'nodeinfo/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
 			$this->response->setHeader('*', 'Access-Control-Allow-Headers');
 			$this->response->setHeader(Router::GET, 'Access-Control-Allow-Methods');
 			$this->response->setHeader('false', 'Access-Control-Allow-Credentials');
-		} elseif (substr($this->args->getQueryString(), 0, 8) == 'profile/') {
+		} elseif (str_starts_with($this->args->getQueryString(), 'profile/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
 			$this->response->setHeader('*', 'Access-Control-Allow-Headers');
 			$this->response->setHeader(Router::GET, 'Access-Control-Allow-Methods');
 			$this->response->setHeader('false', 'Access-Control-Allow-Credentials');
-		} elseif (substr($this->args->getQueryString(), 0, 4) == 'api/') {
+		} elseif (str_starts_with($this->args->getQueryString(), 'api/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
 			$this->response->setHeader('*', 'Access-Control-Allow-Headers');
 			$this->response->setHeader(implode(',', Router::ALLOWED_METHODS), 'Access-Control-Allow-Methods');
 			$this->response->setHeader('false', 'Access-Control-Allow-Credentials');
 			$this->response->setHeader('Link', 'Access-Control-Expose-Headers');
-		} elseif (substr($this->args->getQueryString(), 0, 11) == 'oauth/token') {
+		} elseif (str_starts_with($this->args->getQueryString(), 'oauth/token')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
 			$this->response->setHeader('*', 'Access-Control-Allow-Headers');
 			$this->response->setHeader(Router::POST, 'Access-Control-Allow-Methods');

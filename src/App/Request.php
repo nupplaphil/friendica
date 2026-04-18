@@ -136,7 +136,7 @@ class Request
 						$IP = trim($IP);
 
 						// remove brackets from IPv6 addresses
-						if (strpos($IP, '[') === 0 && substr($IP, -1) === ']') {
+						if (str_starts_with($IP, '[') && substr($IP, -1) === ']') {
 							$IP = substr($IP, 1, -1);
 						}
 

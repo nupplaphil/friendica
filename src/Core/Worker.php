@@ -294,7 +294,7 @@ class Worker
 
 		$file = realpath($file);
 
-		if (strpos($file, (string) getcwd()) !== 0) {
+		if (!str_starts_with($file, (string) getcwd())) {
 			return false;
 		}
 
@@ -307,7 +307,7 @@ class Worker
 			return false;
 		}
 
-		return (strpos($file, 'addon/') === 0);
+		return (str_starts_with($file, 'addon/'));
 	}
 
 	/**

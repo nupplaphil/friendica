@@ -159,7 +159,7 @@ class HTTPInputData
 			$error = UPLOAD_ERR_CANT_WRITE;
 		} else {
 			$lastLine = null;
-			while (($chunk = fgets($stream, 8096)) !== false && strpos($chunk, $boundary) !== 0) {
+			while (($chunk = fgets($stream, 8096)) !== false && !str_starts_with($chunk, $boundary)) {
 				if ($lastLine !== null) {
 					if (!fwrite($fileHandle, $lastLine)) {
 						$error = UPLOAD_ERR_CANT_WRITE;
@@ -190,7 +190,7 @@ class HTTPInputData
 		$fullValue = '';
 		$lastLine  = null;
 
-		while (($chunk = fgets($stream)) !== false && strpos($chunk, $boundary) !== 0) {
+		while (($chunk = fgets($stream)) !== false && !str_starts_with($chunk, $boundary)) {
 			if ($lastLine !== null) {
 				$fullValue .= $lastLine;
 			}

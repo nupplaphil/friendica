@@ -66,9 +66,9 @@ class ListTimeline extends BaseApi
 			'friendica_order' => TimelineOrderByTypes::ID, // Sort order options (defaults to ID)
 		], $request);
 
-		if (substr($this->parameters['id'], 0, 6) == 'group:') {
+		if (str_starts_with($this->parameters['id'], 'group:')) {
 			$items = $this->getStatusesForGroup($uid, $request);
-		} elseif (substr($this->parameters['id'], 0, 8) == 'channel:') {
+		} elseif (str_starts_with($this->parameters['id'], 'channel:')) {
 			$items = $this->getStatusesForChannel($uid, $request);
 		} else {
 			$items = $this->getStatusesForCircle($uid, $request);

@@ -109,7 +109,7 @@ class Index extends BaseSettings
 				$ignore_year = false;
 			}
 
-			if (strpos($dob, '0000-') === 0 || strpos($dob, '0001-') === 0) {
+			if (str_starts_with($dob, '0000-') || str_starts_with($dob, '0001-')) {
 				$ignore_year = true;
 				$dob         = substr($dob, 5);
 			}
@@ -138,7 +138,7 @@ class Index extends BaseSettings
 		$xmpp         = $this->cleanInput(trim($request['xmpp']));
 		$matrix       = $this->cleanInput(trim($request['matrix']));
 		$homepage     = $this->cleanInput(trim($request['homepage']));
-		if ((strpos($homepage, 'http') !== 0) && (strlen($homepage))) {
+		if ((!str_starts_with($homepage, 'http')) && (strlen($homepage))) {
 			// neither http nor https in URL, add them
 			$homepage = 'http://' . $homepage;
 		}

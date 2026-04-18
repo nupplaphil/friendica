@@ -79,7 +79,7 @@ class Proxy
 	 */
 	public static function isLocalImage(string $url): bool
 	{
-		if (substr($url, 0, 1) == '/') {
+		if (str_starts_with($url, '/')) {
 			return true;
 		}
 
@@ -123,7 +123,7 @@ class Proxy
 		// if the picture seems to be from another picture cache then take the original source
 		$queryvar = self::parseQuery($matches[2]);
 
-		if (!empty($queryvar['url']) && substr($queryvar['url'], 0, 4) == 'http') {
+		if (!empty($queryvar['url']) && str_starts_with($queryvar['url'], 'http')) {
 			$matches[2] = urldecode($queryvar['url']);
 		}
 

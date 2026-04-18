@@ -50,11 +50,11 @@ class BaseSearch extends BaseModule
 		$header  = '';
 		$results = new ResultList();
 
-		if (strpos($search, '@') === 0) {
+		if (str_starts_with($search, '@')) {
 			$search = trim(substr($search, 1));
 			$type   = Search::TYPE_PEOPLE;
 			$header = DI::l10n()->t('People Search - %s', $search);
-		} elseif (strpos($search, '!') === 0) {
+		} elseif (str_starts_with($search, '!')) {
 			$search = trim(substr($search, 1));
 			$type   = Search::TYPE_GROUP;
 			$header = DI::l10n()->t('Group Search - %s', $search);

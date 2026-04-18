@@ -271,7 +271,7 @@ class OAuthRequest
 		}
 
 		foreach ($this->parameters as $k => $v) {
-			if (substr($k, 0, 5) != "oauth") {
+			if (!str_starts_with($k, "oauth")) {
 				continue;
 			}
 			if (is_array($v)) {

@@ -33,7 +33,7 @@ class Markdown
 		$MarkdownParser->hard_wrap          = $hardwrap;
 		$MarkdownParser->hashtag_protection = true;
 		$MarkdownParser->url_filter_func    = function ($url) use ($baseuri) {
-			if (!empty($baseuri) && strpos($url, '#') === 0) {
+			if (!empty($baseuri) && str_starts_with($url, '#')) {
 				$url = ltrim($baseuri, '/') . $url;
 			}
 			return  $url;

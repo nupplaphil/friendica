@@ -871,13 +871,13 @@ class Probe
 					$data['url'] = $alias;
 				} elseif (Network::isValidHttpUrl($alias) && !Strings::compareLink($alias, $data['url'])) {
 					$data['alias'] = $alias;
-				} elseif (substr($alias, 0, 5) == 'acct:') {
+				} elseif (str_starts_with($alias, 'acct:')) {
 					$data['addr'] = substr($alias, 5);
 				}
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (substr($webfinger['subject'], 0, 5) == 'acct:')) {
+		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
 			$data['addr'] = substr($webfinger['subject'], 5);
 		}
 
@@ -1055,13 +1055,13 @@ class Probe
 			foreach ($webfinger['aliases'] as $alias) {
 				if (Network::isValidHttpUrl($alias) && !Strings::compareLink($alias, $data['url'])) {
 					$data['alias'] = $alias;
-				} elseif (substr($alias, 0, 5) == 'acct:') {
+				} elseif (str_starts_with($alias, 'acct:')) {
 					$data['addr'] = substr($alias, 5);
 				}
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (substr($webfinger['subject'], 0, 5) == 'acct:')) {
+		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
 			$data['addr'] = substr($webfinger['subject'], 5);
 		}
 
