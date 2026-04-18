@@ -196,7 +196,7 @@ class XML
 		$xml_element_copy = '';
 		if (!is_string($xml_element)
 			&& !is_array($xml_element)
-			&& ($xml_element::class == 'SimpleXMLElement')
+			&& ($xml_element instanceof SimpleXMLElement)
 		) {
 			$xml_element_copy = $xml_element;
 			$xml_element      = get_object_vars($xml_element);
