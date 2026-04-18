@@ -14,12 +14,12 @@ class Conversation
 	 * It currently is stored in the "protocol" field for legacy reasons.
 	 */
 	const PARCEL_ACTIVITYPUB        = 0;
-	const PARCEL_DFRN               = 1; // Deprecated
+	const PARCEL_DFRN               = 1; // @deprecated
 	const PARCEL_DIASPORA           = 2;
-	const PARCEL_SALMON             = 3; // @deprecated since version 2024.09
-	const PARCEL_FEED               = 4; // Deprecated
-	const PARCEL_SPLIT_CONVERSATION = 6; // @deprecated since version 2022.09
-	const PARCEL_LEGACY_DFRN        = 7; // @deprecated since version 2021.09
+	const PARCEL_SALMON             = 3; // @deprecated 2024.09 since version 2024.09
+	const PARCEL_FEED               = 4; // @deprecated
+	const PARCEL_SPLIT_CONVERSATION = 6; // @deprecated 2022.09 since version 2022.09
+	const PARCEL_LEGACY_DFRN        = 7; // @deprecated 2021.09 since version 2021.09
 	const PARCEL_DIASPORA_DFRN      = 8;
 	const PARCEL_LOCAL_DFRN         = 9;
 	const PARCEL_DIRECT             = 10;

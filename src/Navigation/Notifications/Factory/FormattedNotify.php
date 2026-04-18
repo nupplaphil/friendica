@@ -38,7 +38,7 @@ use Psr\Log\LoggerInterface;
  * - home
  * - personal
  *
- * @deprecated since 2022.05 Use \Friendica\Navigation\Notifications\Factory\FormattedNotification instead
+ * @deprecated 2022.05 Use \Friendica\Navigation\Notifications\Factory\FormattedNotification instead
  */
 class FormattedNotify extends BaseFactory
 {

@@ -327,7 +327,7 @@ class System
 	 * @param mixed  $status
 	 * @param string $message
 	 * @throws \Exception
-	 * @deprecated since 2023.09 Use BaseModule->httpExit() instead
+	 * @deprecated 2023.09 Use BaseModule->httpExit() instead
 	 */
 	public static function xmlExit($status, string $message = '')
 	{
@@ -351,7 +351,7 @@ class System
 	 * @param string  $message  Error message. Optional.
 	 * @param string  $content  Response body. Optional.
 	 * @throws \Exception
-	 * @deprecated since 2023.09 Use BaseModule->httpError instead
+	 * @deprecated 2023.09 Use BaseModule->httpError instead
 	 */
 	public static function httpError($httpCode, $message = '', $content = '')
 	{

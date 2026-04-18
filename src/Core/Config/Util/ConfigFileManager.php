@@ -237,7 +237,7 @@ class ConfigFileManager
 	 *
 	 * @return array The configuration array (empty if no config found)
 	 *
-	 * @deprecated since version 2018.09
+	 * @deprecated 2018.09 since version 2018.09
 	 */
 	private function loadLegacyConfig(string $name = ''): array
 	{
@@ -312,7 +312,7 @@ class ConfigFileManager
 	 *
 	 * @return array The configuration array
 	 * @throws ConfigFileException
-	 * @deprecated since version 2018.12
+	 * @deprecated 2018.12 since version 2018.12
 	 */
 	private function loadINIConfigFile(string $filepath): array
 	{

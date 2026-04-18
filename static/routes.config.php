@@ -83,8 +83,7 @@ $apiRoutes = [
 		'/circle_delete[.{extension:json|xml|rss|atom}]'           => [Module\Api\Friendica\Circle\Delete::class,          [        R::POST]],
 		'/circle_update[.{extension:json|xml|rss|atom}]'           => [Module\Api\Friendica\Circle\Update::class,          [        R::POST]],
 
-		// Backward compatibility
-		// @deprecated
+		// @deprecated Keep for Backward compatibility
 		'/group_show[.{extension:json|xml|rss|atom}]'   => [Module\Api\Friendica\Circle\Show::class,            [R::GET         ]],
 		'/group_create[.{extension:json|xml|rss|atom}]' => [Module\Api\Friendica\Circle\Create::class,          [        R::POST]],
 		'/group_delete[.{extension:json|xml|rss|atom}]' => [Module\Api\Friendica\Circle\Delete::class,          [        R::POST]],

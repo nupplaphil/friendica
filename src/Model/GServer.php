@@ -517,7 +517,7 @@ class GServer
 	 *
 	 * @return string cleaned URL
 	 * @throws Exception
-	 * @deprecated since 2023.03 Use cleanUri instead
+	 * @deprecated 2023.03 Use cleanUri instead
 	 */
 	public static function cleanURL(string $dirtyUrl): string
 	{

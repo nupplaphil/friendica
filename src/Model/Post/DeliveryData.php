@@ -27,9 +27,9 @@ class DeliveryData
 
 	const ACTIVITYPUB = 1;
 	const DFRN = 2;
-	const LEGACY_DFRN = 3; // @deprecated since version 2021.09
+	const LEGACY_DFRN = 3; // @deprecated 2021.09 since version 2021.09
 	const DIASPORA = 4;
-	const OSTATUS = 5; // @deprecated since version 2024.09
+	const OSTATUS = 5; // @deprecated 2024.09 since version 2024.09
 	const MAIL = 6;
 
 	/**

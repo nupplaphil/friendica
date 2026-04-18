@@ -13,7 +13,7 @@ use Friendica\Content\Text\BBCode;
 use GuzzleHttp\Psr7\Uri;
 
 /**
- * @deprecated since 2022.05 Use \Friendica\Navigation\Notifications\Factory\Notification instead
+ * @deprecated 2022.05 Use \Friendica\Navigation\Notifications\Factory\Notification instead
  */
 class Notify extends BaseFactory implements ICanCreateFromTableRow
 {

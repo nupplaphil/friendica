@@ -1690,7 +1690,7 @@ class BBCode
 		$text = preg_replace("(\[style=(.*?)\](.*?)\[\/style\])ism", '<span style="$1">$2</span>', $text);
 
 		// Check for CSS classes
-		// @deprecated since 2021.12, left for backward-compatibility reasons
+		// @deprecated 2021.12 left for backward-compatibility reasons
 		$text = preg_replace("(\[class=(.*?)\](.*?)\[\/class\])ism", '<span class="$1">$2</span>', $text);
 		// Add HTML new lines
 		$text = str_replace("\n\n", '</p><p>', $text);
