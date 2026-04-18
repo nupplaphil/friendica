@@ -68,7 +68,7 @@ class Direct extends BaseApi
 				self::setBoundaries($mail['uri-id']);
 				$statuses[] = DI::mstdnStatus()->createFromMailId($mail['id']);
 			}
-		} catch (NotFoundException $e) {
+		} catch (NotFoundException) {
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 

@@ -152,7 +152,7 @@ class Friendica extends BaseModule
 				header('Access-Control-Allow-Origin: *');
 				header('Cache-Control: max-age=23200, stale-while-revalidate=23200');
 				$this->jsonExit($data, 'application/activity+json');
-			} catch (HTTPException\NotFoundException $e) {
+			} catch (HTTPException\NotFoundException) {
 				$this->jsonError(404, ['error' => 'Record not found']);
 			}
 		}

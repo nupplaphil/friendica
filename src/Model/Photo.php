@@ -256,7 +256,7 @@ class Photo
 			$backendClass = DI::storageManager()->getByName($photo['backend-class'] ?? '');
 
 			return $backendClass->get($photo['backend-ref'] ?? '');
-		} catch (InvalidClassStorageException $storageException) {
+		} catch (InvalidClassStorageException) {
 			try {
 				// legacy data storage in "data" column
 				$i = self::selectFirst(['data'], ['id' => $photo['id']]);
@@ -448,7 +448,7 @@ class Photo
 				$storage = DI::storage();
 			}
 			$backend_ref = $storage->put($img_str, $backend_ref);
-		} catch (InvalidClassStorageException $storageException) {
+		} catch (InvalidClassStorageException) {
 			$data = $img_str;
 		}
 
@@ -546,7 +546,7 @@ class Photo
 				try {
 					$backend_class         = DI::storageManager()->getWritableStorageByName($photo['backend-class'] ?? '');
 					$fields['backend-ref'] = $backend_class->put($image->asString(), $photo['backend-ref']);
-				} catch (InvalidClassStorageException $storageException) {
+				} catch (InvalidClassStorageException) {
 					$fields['data'] = $image->asString();
 				}
 			}

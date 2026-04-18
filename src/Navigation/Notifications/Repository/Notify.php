@@ -594,7 +594,7 @@ class Notify extends BaseRepository
 			$Notify = $this->factory->createFromParams($params, $itemlink, $item_id, $uri_id, $parent_id, $parent_uri_id);
 			try {
 				$Notify = $this->save($Notify);
-			} catch (Exception\NotificationCreationInterceptedException $e) {
+			} catch (Exception\NotificationCreationInterceptedException) {
 				// Notification insertion can be intercepted by an addon registering the 'enotify_store' hook
 				return false;
 			}

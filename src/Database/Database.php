@@ -171,7 +171,7 @@ class Database
 				$this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $this->pdo_emulate_prepares);
 				$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 				$this->connected = true;
-			} catch (PDOException $e) {
+			} catch (PDOException) {
 				$this->connected = false;
 			}
 		}

@@ -106,7 +106,7 @@ class ParsedLogLine
 		}
 		try {
 			$d = json_decode($this->data, true, 512, JSON_THROW_ON_ERROR);
-		} catch (\JsonException $e) {
+		} catch (\JsonException) {
 			// try to find next { in $str and move string before to 'message'
 
 			$pos = strpos($this->data, '{', 1);

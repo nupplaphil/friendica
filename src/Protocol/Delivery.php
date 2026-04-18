@@ -59,7 +59,7 @@ class Delivery
 		} elseif ($cmd == self::SUGGESTION) {
 			try {
 				$target_item = DI::fsuggest()->selectOneById($post_uriid)->toArray();
-			} catch (FriendSuggestNotFoundException $e) {
+			} catch (FriendSuggestNotFoundException) {
 				DI::logger()->info('Cannot find FriendSuggestion', ['id' => $post_uriid]);
 				return true;
 			}

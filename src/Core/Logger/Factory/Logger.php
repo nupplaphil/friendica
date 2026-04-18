@@ -49,7 +49,7 @@ class Logger
 			} else {
 				return $logger;
 			}
-		} catch (Throwable $e) {
+		} catch (Throwable) {
 			// No logger ...
 			return new NullLogger();
 		}

@@ -64,7 +64,7 @@ final class DelegatingLoggerFactory implements LoggerFactory
 
 		try {
 			$logger = $factory->createLogger($logLevel, $logChannel);
-		} catch (\Throwable $th) {
+		} catch (\Throwable) {
 			return new NullLogger();
 		}
 

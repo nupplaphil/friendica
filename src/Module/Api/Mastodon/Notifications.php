@@ -34,7 +34,7 @@ class Notifications extends BaseApi
 			try {
 				$notification = DI::notification()->selectOneForUser($uid, ['id' => $id]);
 				$this->jsonExit(DI::mstdnNotification()->createFromNotification($notification));
-			} catch (\Exception $e) {
+			} catch (\Exception) {
 				$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 			}
 		}
@@ -133,7 +133,7 @@ class Notifications extends BaseApi
 				try {
 					$mstdnNotifications[] = DI::mstdnNotification()->createFromNotification($Notification);
 					self::setBoundaries($Notification->id);
-				} catch (\Exception $e) {
+				} catch (\Exception) {
 					// Skip this notification
 				}
 			}

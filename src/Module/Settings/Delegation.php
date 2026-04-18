@@ -57,7 +57,7 @@ class Delegation extends BaseSettings
 				$parent_uid = (int)$parent_uid;
 				User::getIdFromPasswordAuthentication($parent_uid, $parent_password);
 				$this->systemMessages->addInfo($this->t('Delegation successfully granted.'));
-			} catch (\Exception $ex) {
+			} catch (\Exception) {
 				$this->systemMessages->addNotice($this->t('Parent user not found, unavailable or password doesn\'t match.'));
 				return;
 			}

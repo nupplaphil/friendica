@@ -63,7 +63,7 @@ class View extends BaseAdmin
 					->withLimit(self::LIMIT)
 					->withFilters($filters)
 					->withSearch($search);
-			} catch (\Exception $e) {
+			} catch (\Exception) {
 				$error = DI::l10n()->t('Couldn\'t open <strong>%1$s</strong> log file.<br/>Check to see if file %1$s is readable.', $f);
 			}
 		}

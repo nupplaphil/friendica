@@ -385,10 +385,10 @@ class StorageManager
 					$source = $this->getWritableStorageByName($resource['backend-class'] ?? '');
 					$this->logger->info('Get data from old backend.', ['oldBackend' => $source, 'oldReference' => $sourceRef]);
 					$data = $source->get($sourceRef);
-				} catch (InvalidClassStorageException $exception) {
+				} catch (InvalidClassStorageException) {
 					$this->logger->info('Get data from DB resource field.', ['oldReference' => $sourceRef]);
 					$data = $resource['data'];
-				} catch (ReferenceStorageException $exception) {
+				} catch (ReferenceStorageException) {
 					$this->logger->info('Invalid source reference.', ['oldBackend' => $source, 'oldReference' => $sourceRef]);
 					continue;
 				}

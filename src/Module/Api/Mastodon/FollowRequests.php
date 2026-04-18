@@ -93,7 +93,7 @@ class FollowRequests extends BaseApi
 				$return[] = DI::mstdnAccount()->createFromContactId($introduction->cid, $introduction->uid);
 			} catch (HTTPException\InternalServerErrorException
 				| HTTPException\NotFoundException
-				| \ImagickException $exception) {
+				| \ImagickException) {
 				DI::intro()->delete($introduction);
 				unset($introductions[$key]);
 			}

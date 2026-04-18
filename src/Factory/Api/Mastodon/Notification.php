@@ -50,7 +50,7 @@ class Notification extends BaseFactory
 		if ($Notification->targetUriId) {
 			try {
 				$status = $this->mstdnStatusFactory->createFromUriId($Notification->targetUriId, $Notification->uid);
-			} catch (\Exception $exception) {
+			} catch (\Exception) {
 				$status = null;
 			}
 		} else {

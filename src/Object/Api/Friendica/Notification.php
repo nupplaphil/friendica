@@ -91,7 +91,7 @@ class Notification extends BaseDataTransferObject
 
 		try {
 			$this->msg_plain = explode("\n", trim(HTML::toPlaintext($this->msg_html, 0)))[0];
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			$this->msg_plain = '';
 		}
 	}

@@ -156,7 +156,7 @@ class Attach
 			$backendClass = DI::storageManager()->getByName($item['backend-class'] ?? '');
 			$backendRef   = $item['backend-ref'];
 			return $backendClass->get($backendRef);
-		} catch (InvalidClassStorageException $storageException) {
+		} catch (InvalidClassStorageException) {
 			// legacy data storage in 'data' column
 			$i = self::selectFirst(['data'], ['id' => $item['id']]);
 			if ($i === false) {

@@ -228,7 +228,7 @@ class Follow extends BaseModule
 					$this->baseUrl->redirect('display/' . $item['guid']);
 				}
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			return;
 		}
 	}

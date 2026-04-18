@@ -952,7 +952,7 @@ class DFRN
 
 			try {
 				$pubkey = DI::dsprContact()->getByAddr(WebFingerUri::fromString($contact['addr']))->pubKey;
-			} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+			} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 				DI::logger()->notice('Unable to find contact details for ' . $contact['id'] . ' - ' . $contact['addr']);
 				return -22;
 			}
@@ -1204,7 +1204,7 @@ class DFRN
 				if ($birthday_date > new \DateTime()) {
 					$poco["bdyear"] = $birthday_date->format("Y");
 				}
-			} catch (\Exception $e) {
+			} catch (\Exception) {
 				// Invalid birthday
 			}
 

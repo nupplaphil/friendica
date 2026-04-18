@@ -95,7 +95,7 @@ class ExtendedPDO extends PDO
 			$this->_transactionDepth = 0;
 			try {
 				return parent::rollBack();
-			} catch (PDOException $e) {
+			} catch (PDOException) {
 				// this shouldn't happen, but it does ...
 			}
 		} else {

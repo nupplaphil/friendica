@@ -31,7 +31,7 @@ class Read extends BaseApi
 
 		try {
 			$this->jsonExit(DI::mstdnConversation()->createFromConvId($this->parameters['id'])->toArray());
-		} catch (NotFoundException $e) {
+		} catch (NotFoundException) {
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 	}

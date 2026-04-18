@@ -90,7 +90,7 @@ class SignOut extends BaseModule
 
 				$this->baseUrl->redirect();
 			}
-		} catch (TwoFactor\Exception\TrustedBrowserNotFoundException $exception) {
+		} catch (TwoFactor\Exception\TrustedBrowserNotFoundException) {
 			$this->cookie->clear();
 			$this->session->clear();
 

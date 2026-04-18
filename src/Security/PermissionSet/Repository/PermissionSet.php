@@ -201,7 +201,7 @@ class PermissionSet extends BaseRepository
 
 		try {
 			return $this->selectOne($this->convertToTableRow($permissionSet));
-		} catch (NotFoundException $exception) {
+		} catch (NotFoundException) {
 			return $this->save($permissionSet);
 		} catch (Exception $exception) {
 			throw new PermissionSetPersistenceException(sprintf('Cannot select PermissionSet %d', $permissionSet->id ?? 0), $exception);

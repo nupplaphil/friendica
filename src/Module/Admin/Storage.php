@@ -27,7 +27,7 @@ class Storage extends BaseAdmin
 		try {
 			/** @var ICanConfigureStorage|false $newStorageConfig */
 			$newStorageConfig = DI::storageManager()->getConfigurationByName($storagebackend);
-		} catch (InvalidClassStorageException $storageException) {
+		} catch (InvalidClassStorageException) {
 			DI::sysmsg()->addNotice(DI::l10n()->t('Storage backend, %s is invalid.', $storagebackend));
 			DI::baseUrl()->redirect('admin/storage');
 		}
@@ -68,7 +68,7 @@ class Storage extends BaseAdmin
 				if (!DI::storageManager()->setBackend($newstorage)) {
 					DI::sysmsg()->addNotice(DI::l10n()->t('Invalid storage backend setting value.'));
 				}
-			} catch (InvalidClassStorageException $storageException) {
+			} catch (InvalidClassStorageException) {
 				DI::sysmsg()->addNotice(DI::l10n()->t('Invalid storage backend setting value.'));
 			}
 		}

@@ -88,7 +88,7 @@ class HTTPException
 			try {
 				$tpl     = Renderer::getMarkupTemplate('http_status.tpl');
 				$content = Renderer::replaceMacros($tpl, $vars);
-			} catch (Throwable $th) {
+			} catch (Throwable) {
 				$vars = array_map('htmlentities', $vars);
 				$content = "<h1>{$vars['$title']}</h1><p>{$vars['$message']}</p>";
 				if ($this->isSiteAdmin) {

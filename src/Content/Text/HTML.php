@@ -1058,7 +1058,7 @@ class HTML
 			if (isset($mediaType->parameters['charset'])) {
 				return strtolower($mediaType->parameters['charset']);
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 		}
 
 		return null;

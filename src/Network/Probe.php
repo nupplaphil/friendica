@@ -1711,7 +1711,7 @@ class Probe
 					],
 				],
 			];
-		} catch (Exception $e) {
+		} catch (Exception) {
 			// Default values for nonexistent targets
 			$data = [
 				'name'  => $url, 'nick' => $url, 'url' => $url, 'network' => Protocol::PHANTOM,

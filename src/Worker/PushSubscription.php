@@ -41,7 +41,7 @@ class PushSubscription
 
 		try {
 			$notification = DI::notification()->selectOneById($nid);
-		} catch (NotFoundException $e) {
+		} catch (NotFoundException) {
 			DI::logger()->info('Notification not found', ['notification' => $nid]);
 			return;
 		}

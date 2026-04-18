@@ -348,7 +348,7 @@ class UserNotification
 		try {
 			$notification = DI::notification()->save($notification);
 			Subscription::pushByNotification($notification);
-		} catch (Exception $e) {
+		} catch (Exception) {
 
 		}
 	}
@@ -373,7 +373,7 @@ class UserNotification
 			$notification = DI::notification()->save($notification);
 			Subscription::pushByNotification($notification);
 			return true;
-		} catch (Exception $e) {
+		} catch (Exception) {
 			return false;
 		}
 	}

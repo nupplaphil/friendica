@@ -152,7 +152,7 @@ class DateTimeFormat
 
 		try {
 			$to_obj = new DateTimeZone($tz_to);
-		} catch (Exception $e) {
+		} catch (Exception) {
 			$to_obj = new DateTimeZone('UTC');
 		}
 
@@ -223,7 +223,7 @@ class DateTimeFormat
 
 		try {
 			$now = new DateTime();
-		} catch (\Throwable $t) {
+		} catch (\Throwable) {
 			return false;
 		}
 

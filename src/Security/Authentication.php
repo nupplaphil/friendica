@@ -260,7 +260,7 @@ class Authentication
 				[],
 				['uid' => User::getIdFromPasswordAuthentication($username, $password, false, true)],
 			);
-		} catch (Exception $e) {
+		} catch (Exception) {
 			$this->logger->warning('authenticate: failed login attempt', ['action' => 'login', 'username' => $username, 'ip' => $this->remoteAddress]);
 			DI::sysmsg()->addNotice($this->l10n->t('Login failed. Please check your credentials.'));
 			$this->baseUrl->redirect();
@@ -444,7 +444,7 @@ class Authentication
 					// Invalid trusted cookie value, removing it
 					$this->cookie->unset('trusted');
 				}
-			} catch (\Throwable $e) {
+			} catch (\Throwable) {
 				// Local trusted browser record was probably removed by the user, we carry on with 2FA
 			}
 		}

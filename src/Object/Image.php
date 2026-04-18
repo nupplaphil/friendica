@@ -294,7 +294,7 @@ class Image implements \Stringable
 				/* Clean it */
 				$this->image = $this->image->deconstructImages();
 				return $this->image;
-			} catch (Exception $e) {
+			} catch (Exception) {
 				return false;
 			}
 		}
@@ -598,7 +598,7 @@ class Image implements \Stringable
 				// to allow very tall images to be constrained only horizontally.
 				try {
 					$this->image->scaleImage($dest_width, $dest_height);
-				} catch (Exception $e) {
+				} catch (Exception) {
 					// Imagick couldn't use the data
 					return false;
 				}
@@ -721,7 +721,7 @@ class Image implements \Stringable
 				/* Clean it */
 				$this->image = $this->image->deconstructImages();
 				return $this->image->getImagesBlob();
-			} catch (Exception $e) {
+			} catch (Exception) {
 				return false;
 			}
 		}
@@ -787,7 +787,7 @@ class Image implements \Stringable
 				if ($image->isImagick()) {
 					try {
 						$colors = $image->image->getImagePixelColor($x, $y)->getColor();
-					} catch (\Exception $exception) {
+					} catch (\Exception) {
 						return '';
 					}
 					$row[] = [$colors['r'], $colors['g'], $colors['b']];

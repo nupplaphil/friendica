@@ -59,7 +59,7 @@ class Import extends \Friendica\Module\BaseModeration
 		if (isset($request['page_blocklist_upload'])) {
 			try {
 				$this->blocklist = $this->localBlocklist::extractFromCSVFile($_FILES['listfile']['tmp_name']);
-			} catch (\Throwable $e) {
+			} catch (\Throwable) {
 				$this->systemMessages->addNotice($this->t('Error importing pattern file'));
 				return;
 			}
