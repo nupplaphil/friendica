@@ -46,7 +46,7 @@ final class AddonManagerHelper implements AddonHelper
 		IManageConfigValues $config,
 		ICanCache $cache,
 		LoggerInterface $logger,
-		Profiler $profiler
+		Profiler $profiler,
 	) {
 		$this->addonPath = $addonPath;
 		$this->database  = $database;

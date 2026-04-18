@@ -270,7 +270,7 @@ class System
 					continue;
 				}
 				$classparts  = explode("\\", $func['class']);
-				$callstack[] = array_pop($classparts).'::'.$func['function'] . (isset($func['line']) ? ' (' . $func['line'] . ')' : '');
+				$callstack[] = array_pop($classparts) . '::' . $func['function'] . (isset($func['line']) ? ' (' . $func['line'] . ')' : '');
 			} elseif (!in_array($func['function'], $ignore)) {
 				$func['database'] = ($func['function'] == 'q');
 				$callstack[]      = $func['function'] . (isset($func['line']) ? ' (' . $func['line'] . ')' : '');
@@ -298,8 +298,8 @@ class System
 				"HTTP/%s %s %s",
 				$response->getProtocolVersion(),
 				$response->getStatusCode(),
-				$response->getReasonPhrase()
-			)
+				$response->getReasonPhrase(),
+			),
 		);
 
 		foreach ($response->getHeaders() as $key => $header) {
@@ -502,14 +502,14 @@ class System
 			'average5'  => $load_arr[1],
 			'average15' => $load_arr[2],
 			'runnable'  => 0,
-			'scheduled' => 0
+			'scheduled' => 0,
 		];
 
 		if ($get_processes && @is_readable('/proc/loadavg')) {
 			$content = @file_get_contents('/proc/loadavg');
 			if (!empty($content) && preg_match("#([.\d]+)\s([.\d]+)\s([.\d]+)\s(\d+)/(\d+)#", $content, $matches)) {
-				$load['runnable']  = (float)$matches[4];
-				$load['scheduled'] = (float)$matches[5];
+				$load['runnable']  = (float) $matches[4];
+				$load['scheduled'] = (float) $matches[5];
 			}
 		}
 
@@ -725,7 +725,7 @@ class System
 					if ($numeric_id) {
 						$rules[++$id] = $line;
 					} else {
-						$rules[] = ['id' => (string)++$id, 'text' => $line];
+						$rules[] = ['id' => (string) ++$id, 'text' => $line];
 					}
 				}
 			}

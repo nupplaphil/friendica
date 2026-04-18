@@ -16,11 +16,11 @@ use Friendica\BaseDataTransferObject;
  */
 class FormattedNotify extends BaseDataTransferObject
 {
-	const SYSTEM   = 'system';
-	const PERSONAL = 'personal';
-	const NETWORK  = 'network';
-	const INTRO    = 'intro';
-	const HOME     = 'home';
+	public const SYSTEM   = 'system';
+	public const PERSONAL = 'personal';
+	public const NETWORK  = 'network';
+	public const INTRO    = 'intro';
+	public const HOME     = 'home';
 
 	/** @var string */
 	protected $label = '';
