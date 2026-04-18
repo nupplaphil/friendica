@@ -328,7 +328,7 @@ abstract class BaseModule implements ICanHandleRequests
 				$value = min(filter_var($maximum_value, FILTER_VALIDATE_FLOAT), $value);
 			}
 		} elseif (is_array($default)) {
-			$value = filter_var($input[$parameter] ?? $default, FILTER_DEFAULT, ['flags' => FILTER_FORCE_ARRAY]);
+			$value = filter_var($input[$parameter] ?? $default, FILTER_UNSAFE_RAW, ['flags' => FILTER_FORCE_ARRAY]);
 		} elseif (is_bool($default)) {
 			$value = filter_var($input[$parameter] ?? $default, FILTER_VALIDATE_BOOLEAN);
 		} elseif (is_null($default)) {

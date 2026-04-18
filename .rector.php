@@ -22,7 +22,7 @@ return \Rector\Config\RectorConfig::configure()
 	// ->withDeadCodeLevel(0)
 	// ->withCodeQualityLevel(0)
 	->withSets([
-		\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_80,
+		\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
 	])
 	->withSkip([
 		\Rector\Php56\Rector\FuncCall\PowToExpRector::class,

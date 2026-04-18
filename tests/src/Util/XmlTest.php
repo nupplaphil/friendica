@@ -47,6 +47,5 @@ class XmlTest extends TestCase
 			[['tag' => 'TEXT', 'type' => 'complete', 'level' => 1, 'value' => $tag]],
 			$values
 		);
-		xml_parser_free($xml_parser);
 	}
 }

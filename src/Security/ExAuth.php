@@ -333,7 +333,6 @@ class ExAuth
 		curl_exec($ch);
 		$curl_info = @curl_getinfo($ch);
 		$http_code = $curl_info['http_code'];
-		curl_close($ch);
 
 		$this->writeLog(LOG_INFO, 'external auth for ' . $user . '@' . $host . ' returned ' . $http_code);
 

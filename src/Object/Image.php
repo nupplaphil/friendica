@@ -140,9 +140,6 @@ class Image
 				$this->image->destroy();
 				return;
 			}
-			if (is_resource($this->image)) {
-				imagedestroy($this->image);
-			}
 		}
 	}
 
@@ -620,10 +617,6 @@ class Image
 
 			imagecopyresampled($dest, $this->image, 0, 0, 0, 0, $dest_width, $dest_height, $this->width, $this->height);
 
-			if ($this->image) {
-				imagedestroy($this->image);
-			}
-
 			$this->image  = $dest;
 			$this->width  = imagesx($this->image);
 			$this->height = imagesy($this->image);
@@ -687,9 +680,7 @@ class Image
 			imagefill($dest, 0, 0, imagecolorallocatealpha($dest, 0, 0, 0, 127)); // fill with alpha
 		}
 		imagecopyresampled($dest, $this->image, 0, 0, $x, $y, $max, $max, $w, $h);
-		if ($this->image) {
-			imagedestroy($this->image);
-		}
+
 		$this->image  = $dest;
 		$this->width  = imagesx($this->image);
 		$this->height = imagesy($this->image);
