@@ -57,7 +57,7 @@ class BaseSettings extends BaseModule
 	{
 		$tpl = Renderer::getMarkupTemplate('settings/head.tpl');
 		$this->page['htmlhead'] .= Renderer::replaceMacros($tpl, [
-			'$ispublic' => $this->t('everybody')
+			'$ispublic' => $this->t('everybody'),
 		]);
 
 		$tabs = [];
@@ -70,22 +70,22 @@ class BaseSettings extends BaseModule
 		];
 
 		$tabs[] = [
-			'label'     => $this->t('Two-factor authentication'),
-			'url'       => 'settings/2fa',
-			'selected'  => in_array(static::class, [
+			'label'    => $this->t('Two-factor authentication'),
+			'url'      => 'settings/2fa',
+			'selected' => in_array(static::class, [
 				Settings\TwoFactor\AppSpecific::class,
 				Settings\TwoFactor\Index::class,
 				Settings\TwoFactor\Recovery::class,
 				Settings\TwoFactor\Trusted::class,
-				Settings\TwoFactor\Verify::class
+				Settings\TwoFactor\Verify::class,
 			]) ? 'active' : '',
 			'accesskey' => '2',
 		];
 
 		$tabs[] = [
-			'label'     => $this->t('Profile'),
-			'url'       => 'settings/profile',
-			'selected'  => in_array(static::class, [
+			'label'    => $this->t('Profile'),
+			'url'      => 'settings/profile',
+			'selected' => in_array(static::class, [
 				Settings\Profile\Index::class,
 				Settings\Profile\Photo\Crop::class,
 				Settings\Profile\Photo\Index::class,
