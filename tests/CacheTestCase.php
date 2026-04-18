@@ -234,7 +234,7 @@ abstract class CacheTestCase extends MockedTestCase
 
 	public function testGetName()
 	{
-		if (defined(get_class($this->instance) . '::NAME')) {
+		if (defined($this->instance::class . '::NAME')) {
 			self::assertEquals($this->instance::NAME, $this->instance->getName());
 		} else {
 			self::expectNotToPerformAssertions();

@@ -2575,7 +2575,7 @@ class Diaspora
 	private static function storePhotoAsMedia(int $uriid, $photo)
 	{
 		// @TODO Need to find object type, roland@f.haeder.net
-		DI::logger()->debug('photo=' . get_class($photo));
+		DI::logger()->debug('photo=' . $photo::class);
 		$data = [
 			'uri-id'      => $uriid,
 			'type'        => Post\Media::IMAGE,

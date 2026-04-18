@@ -569,7 +569,7 @@ class Worker
 			try {
 				call_user_func_array(sprintf('Friendica\Worker\%s::execute', $funcname), $argv);
 			} catch (\Throwable $e) {
-				DI::logger()->error('Uncaught exception in worker method execution', ['class' => get_class($e), 'message' => $e->getMessage(), 'code' => $e->getCode(), 'file' => $e->getFile() . ':' . $e->getLine(), 'trace' => $e->getTraceAsString(), 'previous' => $e->getPrevious()]);
+				DI::logger()->error('Uncaught exception in worker method execution', ['class' => $e::class, 'message' => $e->getMessage(), 'code' => $e->getCode(), 'file' => $e->getFile() . ':' . $e->getLine(), 'trace' => $e->getTraceAsString(), 'previous' => $e->getPrevious()]);
 				Worker::defer();
 			}
 		} else {

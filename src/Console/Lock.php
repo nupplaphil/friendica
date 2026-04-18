@@ -85,7 +85,7 @@ HELP;
 
 		if ($this->getOption('v')) {
 			$this->out('Lock Driver Name: ' . $this->lock->getName());
-			$this->out('Lock Driver Class: ' . get_class($this->lock));
+			$this->out('Lock Driver Class: ' . $this->lock::class);
 		}
 
 		switch ($this->getArgument(0)) {

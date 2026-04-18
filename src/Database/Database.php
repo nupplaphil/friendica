@@ -955,7 +955,7 @@ class Database
 				}
 				break;
 			case self::MYSQLI:
-				if (get_class($stmt) == 'mysqli_result') {
+				if ($stmt::class == 'mysqli_result') {
 					$columns = $stmt->fetch_assoc() ?? false;
 					break;
 				}
