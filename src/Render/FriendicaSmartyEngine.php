@@ -92,7 +92,7 @@ final class FriendicaSmartyEngine extends TemplateEngine
 	public function getTemplateFile(string $file, string $subDir = '')
 	{
 		// Make sure $root ends with a slash /
-		if ($subDir !== '' && substr($subDir, -1, 1) !== '/') {
+		if ($subDir !== '' && !str_ends_with($subDir, '/')) {
 			$subDir = $subDir . '/';
 		}
 

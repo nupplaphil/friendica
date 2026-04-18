@@ -361,7 +361,7 @@ class Network
 				}
 			}
 
-			if (substr($url, -1, 1) == '?') {
+			if (str_ends_with($url, '?')) {
 				$url = substr($url, 0, -1);
 			}
 		}

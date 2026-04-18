@@ -472,7 +472,7 @@ class DBStructure
 
 					if ($field_definition['Collation'] != $parameters['Collation']) {
 						$sql2 = DbaDefinitionSqlWriter::modifyTableField($fieldName, $parameters);
-						if (($sql3 == "") || (substr($sql3, -2, 2) == "; ")) {
+						if (($sql3 == "") || (str_ends_with($sql3, "; "))) {
 							$sql3 .= "ALTER" . $ignore . " TABLE `" . $name . "` " . $sql2;
 						} else {
 							$sql3 .= ", " . $sql2;
@@ -482,7 +482,7 @@ class DBStructure
 			}
 
 			if ($sql3 != "") {
-				if (substr($sql3, -2, 2) != "; ") {
+				if (!str_ends_with($sql3, "; ")) {
 					$sql3 .= ";";
 				}
 

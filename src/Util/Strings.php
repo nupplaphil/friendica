@@ -360,7 +360,7 @@ class Strings
 	 */
 	public static function endsWith(string $string, string $end): bool
 	{
-		return (substr_compare($string, $end, -strlen($end)) === 0);
+		return (str_ends_with($string, $end));
 	}
 
 	/**

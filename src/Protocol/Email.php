@@ -638,7 +638,7 @@ class Email
 			}
 
 			if (!empty($lines[$lineno])) {
-				if (substr($lines[$lineno], -1) != ' ') {
+				if (!str_ends_with($lines[$lineno], ' ')) {
 					$lines[$lineno] .= ' ';
 				}
 
@@ -652,7 +652,7 @@ class Email
 			}
 
 			$lines[$lineno] .= $line;
-			if (((substr($line, -1, 1) != ' '))
+			if (((!str_ends_with($line, ' ')))
 				|| ($quotelevel != $currquotelevel)) {
 				$lineno++;
 			}

@@ -67,7 +67,7 @@ HELP;
 		$Iterator = new \RecursiveDirectoryIterator('src');
 
 		foreach (new \RecursiveIteratorIterator($Iterator) as $file) {
-			if (substr($file, -4) === '.php') {
+			if (str_ends_with($file, '.php')) {
 				$this->checkFile($php_path, $file);
 			}
 		}
@@ -79,7 +79,7 @@ HELP;
 		$Iterator = new \RecursiveDirectoryIterator('tests');
 
 		foreach (new \RecursiveIteratorIterator($Iterator) as $file) {
-			if (substr($file, -4) === '.php') {
+			if (str_ends_with($file, '.php')) {
 				$this->checkFile($php_path, $file);
 			}
 		}

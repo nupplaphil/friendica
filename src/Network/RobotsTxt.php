@@ -183,7 +183,7 @@ class RobotsTxt
 	 */
 	private function pathMatches(string $path, string $rule): bool
 	{
-		if (substr_compare($rule, '*', -strlen('*')) === 0) {
+		if (str_ends_with($rule, '*')) {
 			$rule = substr($rule, 0, -1);
 			return str_starts_with($path, $rule);
 		}

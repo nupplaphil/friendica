@@ -2418,7 +2418,7 @@ class BBCode
 						continue;
 					}
 
-					if (substr($match, -1, 1) === '.') {
+					if (str_ends_with($match, '.')) {
 						$ret[] = substr($match, 0, -1);
 					} else {
 						$ret[] = $match;

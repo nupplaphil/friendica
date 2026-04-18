@@ -976,7 +976,7 @@ class Feed
 			$body = substr($body, 0, strlen($title));
 		}
 
-		if (($title != $body) && (substr($title, -3) == '...')) {
+		if (($title != $body) && (str_ends_with($title, '...'))) {
 			$pos = strrpos($title, '...');
 			if ($pos > 0) {
 				$title = substr($title, 0, $pos);

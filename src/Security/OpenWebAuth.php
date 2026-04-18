@@ -222,7 +222,7 @@ class OpenWebAuth
 		if (!strpos($url, '/profile/') && !$force) {
 			return $url;
 		}
-		if ($force && substr($url, -1, 1) !== '/') {
+		if ($force && !str_ends_with($url, '/')) {
 			$url = $url . '/';
 		}
 

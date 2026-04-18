@@ -1375,7 +1375,7 @@ class GServer
 				$server['version'] = preg_replace('=(.+)-(.{4,})=ism', '$1', $server['version']);
 
 				// qoto advertises itself as Mastodon
-				if (($server['platform'] == 'mastodon') && substr($nodeinfo['software']['version'], -5) == '-qoto') {
+				if (($server['platform'] == 'mastodon') && str_ends_with($nodeinfo['software']['version'], '-qoto')) {
 					$server['platform'] = 'qoto';
 				}
 
