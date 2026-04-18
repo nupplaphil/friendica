@@ -118,7 +118,7 @@ class Network extends Timeline
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct(
 			$channel,
