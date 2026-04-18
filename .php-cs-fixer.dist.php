@@ -56,16 +56,6 @@ return $config
 		'no_unused_imports'           => true,
 		'single_import_per_statement' => true,
 		'ternary_operator_spaces'     => false,
-		'trailing_comma_in_multiline' => [
-			'after_heredoc' => true,
-			'elements'      => [
-				'arguments',
-				'array_destructuring',
-				'arrays',
-				// 'match', /* activate `match` after PHP 7.4 support is dropped */
-				// 'parameters', /* activate `arguments` after PHP 7.4 support is dropped */
-			],
-		],
 	])
 	->setFinder($finder)
 	->setIndent("\t");
