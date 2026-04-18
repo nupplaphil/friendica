@@ -14,7 +14,7 @@ namespace Friendica\Protocol\HTTP;
  * @property-read string $subType
  * @property-read string $parameters
  */
-final class MediaType
+final class MediaType implements \Stringable
 {
 	public const DQUOTE = '"';
 	public const DIGIT  = '0-9';

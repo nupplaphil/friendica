@@ -178,9 +178,9 @@ class Email implements IEmail
 	/**
 	 * @inheritDoc
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
-		return json_encode($this->toArray());
+		return (string) json_encode($this->toArray());
 	}
 
 	/**

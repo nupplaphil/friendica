@@ -7,7 +7,7 @@
 
 namespace Friendica\Security\OAuth1;
 
-class OAuthToken
+class OAuthToken implements \Stringable
 {
 	// access tokens and request tokens
 	public $key;
@@ -42,8 +42,8 @@ class OAuthToken
 			   OAuthUtil::urlencode_rfc3986($this->secret);
 	}
 
-	function __toString()
+	function __toString(): string
 	{
-		return $this->to_string();
+		return (string) $this->to_string();
 	}
 }

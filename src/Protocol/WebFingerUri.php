@@ -9,7 +9,7 @@ namespace Friendica\Protocol;
 
 use GuzzleHttp\Psr7\Uri;
 
-class WebFingerUri
+class WebFingerUri implements \Stringable
 {
 	/**
 	 * @var string

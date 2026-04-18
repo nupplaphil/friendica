@@ -23,7 +23,7 @@ use kornrunner\Blurhash\Blurhash;
 /**
  * Class to handle images
  */
-class Image
+class Image implements \Stringable
 {
 	/** @var GdImage|Imagick|resource */
 	private $image;

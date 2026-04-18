@@ -18,7 +18,7 @@ use Friendica\BaseEntity;
  * @property-read string $subtype
  * @property-read array $parameters
  */
-class MimeType extends BaseEntity
+class MimeType extends BaseEntity implements \Stringable
 {
 	/** @var string */
 	protected $type;
