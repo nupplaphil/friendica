@@ -28,7 +28,7 @@ Due to the large variety of operating systems and PHP platforms in existence we 
 ### Requirements
 
 * Apache with `mod_rewrite` enabled and "[AllowOverride All](https://httpd.apache.org/docs/2.4/mod/core.html#allowoverride)" so you can use a local `.htaccess` file
-* PHP 7.4+
+* PHP 8.2+
   * PHP *command line* access with register_argc_argv set to true in the php.ini file
   * Curl, GD, GMP, PDO, mbstring, MySQLi, xml, zip, Intl, IDN and OpenSSL extensions
   * The POSIX module of PHP needs to be activated (e.g. [RHEL, CentOS](http://www.bigsoft.co.uk/blog/index.php/2014/12/08/posix-php-commands-not-working-under-centos-7) have disabled it)
