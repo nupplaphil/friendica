@@ -32,6 +32,7 @@ $config = new PhpCsFixer\Config();
 return $config
 	->setRules([
 		'@PER-CS3x0'              => true,
+		'@PER-CS3x0:risky'        => true,
 		'align_multiline_comment' => true,
 		'binary_operator_spaces'  => [
 			'default'   => 'single_space',
@@ -57,5 +58,6 @@ return $config
 		'single_import_per_statement' => true,
 		'ternary_operator_spaces'     => false,
 	])
+	->setRiskyAllowed(true)
 	->setFinder($finder)
 	->setIndent("\t");
