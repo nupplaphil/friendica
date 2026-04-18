@@ -71,7 +71,7 @@ class DiasporaContact extends BaseRepository
 	{
 		try {
 			return $this->selectOne(['url' => (string) $uri]);
-		} catch (NotFoundException $e) {
+		} catch (NotFoundException) {
 		}
 
 		try {

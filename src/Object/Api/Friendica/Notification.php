@@ -85,7 +85,7 @@ class Notification extends BaseDataTransferObject
 
 		try {
 			$this->msg_html = BBCode::convertForUriId($notify->uriId, $this->msg, BBCode::EXTERNAL);
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			$this->msg_html = '';
 		}
 

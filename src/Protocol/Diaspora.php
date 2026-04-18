@@ -2317,7 +2317,7 @@ class Diaspora
 		$created_at = DateTimeFormat::utc(XML::unescape($data->created_at));
 		try {
 			$root_author = WebFingerUri::fromString(XML::unescape($data->root_author));
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			return false;
 		}
 
