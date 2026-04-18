@@ -258,7 +258,7 @@ class Installer
 		if ($passed) {
 			$cmd = "$phppath -v";
 			$result = trim(shell_exec($cmd));
-			$passed2 = (strpos($result, "(cli)") !== false);
+			$passed2 = (str_contains($result, "(cli)"));
 			[$result] = explode("\n", $result);
 			$help = "";
 			if (!$passed2) {

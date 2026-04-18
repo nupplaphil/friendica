@@ -329,7 +329,7 @@ class APContact
 		$apcontact['pubkey'] = null;
 		if (!empty($compacted['w3id:publicKey'])) {
 			$apcontact['pubkey'] = trim(JsonLD::fetchElement($compacted['w3id:publicKey'], 'w3id:publicKeyPem', '@value') ?? '');
-			if (strpos($apcontact['pubkey'], 'RSA ') !== false) {
+			if (str_contains($apcontact['pubkey'], 'RSA ')) {
 				$apcontact['pubkey'] = Crypto::rsaToPem($apcontact['pubkey']);
 			}
 		}

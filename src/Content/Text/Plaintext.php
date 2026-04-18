@@ -196,11 +196,11 @@ class Plaintext
 		if ($limit > 0) {
 			// Reduce multiple spaces
 			// When posted to a network with limited space, we try to gain space where possible
-			while (strpos($msg, '  ') !== false) {
+			while (str_contains($msg, '  ')) {
 				$msg = str_replace('  ', ' ', $msg);
 			}
 
-			if (!in_array($link, ['', $item['plink']]) && ($post['type'] != 'photo') && (strpos($complete_msg, (string) $link) === false)) {
+			if (!in_array($link, ['', $item['plink']]) && ($post['type'] != 'photo') && (!str_contains($complete_msg, (string) $link))) {
 				$complete_msg .= "\n" . $link;
 			}
 
@@ -217,7 +217,7 @@ class Plaintext
 				} elseif (!isset($post['url'])) {
 					$limit       = $limit - self::URL_LENGTH;
 					$post['url'] = $item['plink'];
-				} elseif (strpos($item['body'], '[share') !== false) {
+				} elseif (str_contains($item['body'], '[share')) {
 					$post['url'] = $item['plink'];
 				} elseif (DI::pConfig()->get($item['uid'], 'system', 'no_intelligent_shortening')) {
 					$post['url'] = $item['plink'];

@@ -193,7 +193,7 @@ class DbaDefinitionSqlWriter
 		}
 
 		if (isset($parameters['default'])) {
-			if (strpos(strtolower($parameters['type']), 'int') !== false) {
+			if (str_contains(strtolower($parameters['type']), 'int')) {
 				$fieldstruct .= ' DEFAULT ' . $parameters['default'];
 			} else {
 				$fieldstruct .= " DEFAULT '" . $parameters['default'] . "'";

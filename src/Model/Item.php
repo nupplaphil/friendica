@@ -3138,7 +3138,7 @@ class Item
 		$s = self::addQuestions($item, $s);
 
 		// Map.
-		if (strpos($s, '<div class="map">') !== false && !empty($item['coord'])) {
+		if (str_contains($s, '<div class="map">') && !empty($item['coord'])) {
 			$x = Map::byCoordinates(trim($item['coord']));
 			if ($x) {
 				$s = preg_replace('/\<div class\=\"map\"\>/', '$0' . $x, $s);
@@ -3539,7 +3539,7 @@ class Item
 			$percent = 0;
 		}
 
-		return (!empty($media->description) && (($media->name == $media->description) || ($percent > 95) || (strpos($content, (string) $media->description) !== false)));
+		return (!empty($media->description) && (($media->name == $media->description) || ($percent > 95) || (str_contains($content, (string) $media->description))));
 	}
 
 	/**

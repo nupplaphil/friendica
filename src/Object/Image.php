@@ -120,11 +120,11 @@ class Image
 		if (!isset($header['Webp']) || strtoupper($header['Webp']) !== 'WEBP') {
 			return false;
 		}
-		if (!isset($header['Vp']) || strpos(strtoupper($header['Vp']), 'VP8') === false) {
+		if (!isset($header['Vp']) || !str_contains(strtoupper($header['Vp']), 'VP8')) {
 			return false;
 		}
 
-		return strpos(strtoupper($header['Chunk']), 'ANIM') !== false || strpos(strtoupper($header['Chunk']), 'ANMF') !== false;
+		return str_contains(strtoupper($header['Chunk']), 'ANIM') || str_contains(strtoupper($header['Chunk']), 'ANMF');
 	}
 
 	/**

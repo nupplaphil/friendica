@@ -119,7 +119,7 @@ class Relay
 
 				// We check with "strpos" for performance issues. Only when this is true, the regular expression check is used
 				// RegExp is taken from here: https://medium.com/@shiba1014/regex-word-boundaries-with-unicode-207794f6e7ed
-				if ((strpos($content, $tag) !== false) && preg_match('/(?<=[\s,.:;"\']|^)' . preg_quote($tag, '/') . '(?=[\s,.:;"\']|$)/', $content)) {
+				if ((str_contains($content, $tag)) && preg_match('/(?<=[\s,.:;"\']|^)' . preg_quote($tag, '/') . '(?=[\s,.:;"\']|$)/', $content)) {
 					DI::logger()->info('Subscribed hashtag found in content - accepted', ['hashtag' => $tag, 'network' => $network, 'url' => $url, 'causer' => $causer]);
 					return true;
 				}

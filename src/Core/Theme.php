@@ -82,7 +82,7 @@ class Theme
 			$comment_lines = explode("\n", $matches[0]);
 			foreach ($comment_lines as $comment_line) {
 				$comment_line = trim($comment_line, "\t\n\r */");
-				if (strpos($comment_line, ':') !== false) {
+				if (str_contains($comment_line, ':')) {
 					[$key, $value] = array_map("trim", explode(":", $comment_line, 2));
 					$key           = strtolower($key);
 					if ($key == "author") {

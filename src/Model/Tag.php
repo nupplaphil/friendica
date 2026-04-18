@@ -318,7 +318,7 @@ class Tag
 		$shared = DI::contentItem()->getSharedPost($item, ['uri-id']);
 
 		// Search for hashtags in the shared body (but only if hashtags are wanted)
-		if (!empty($shared) && (strpos($tags, self::TAG_CHARACTER[self::HASHTAG]) !== false)) {
+		if (!empty($shared) && (str_contains($tags, self::TAG_CHARACTER[self::HASHTAG]))) {
 			foreach (self::getByURIId($shared['post']['uri-id'], [self::HASHTAG]) as $tag) {
 				self::store($item['uri-id'], $tag['type'], $tag['name'], $tag['url']);
 			}

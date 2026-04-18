@@ -312,7 +312,7 @@ class Strings
 	 */
 	public static function ensureQueryParameter(string $uri): string
 	{
-		if (strpos($uri, '?') === false && ($pos = strpos($uri, '&')) !== false) {
+		if (!str_contains($uri, '?') && ($pos = strpos($uri, '&')) !== false) {
 			$uri = substr($uri, 0, $pos) . '?' . substr($uri, $pos + 1);
 		}
 

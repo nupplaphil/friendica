@@ -36,12 +36,12 @@ class HTTPInputData
 		$content_type = array_shift($content_parts);
 
 		foreach ($content_parts as $part) {
-			if (strpos($part, 'boundary') !== false) {
+			if (str_contains($part, 'boundary')) {
 				$part = explode('=', $part, 2);
 				if (!empty($part[1])) {
 					$boundary = '--' . $part[1];
 				}
-			} elseif (strpos($part, 'charset') !== false) {
+			} elseif (str_contains($part, 'charset')) {
 				$part = explode('=', $part, 2);
 				if (!empty($part[1])) {
 					$encoding = $part[1];
@@ -111,7 +111,7 @@ class HTTPInputData
 		$headers = [];
 
 		foreach (explode("\r\n", $raw_headers) as $header) {
-			if (strpos($header, ':') === false) {
+			if (!str_contains($header, ':')) {
 				continue;
 			}
 			[$name, $value] = explode(':', $header, 2);
@@ -206,7 +206,7 @@ class HTTPInputData
 			$encoding = '';
 
 			foreach (explode(';', $headers['content-type']) as $part) {
-				if (strpos($part, 'charset') !== false) {
+				if (str_contains($part, 'charset')) {
 					$part = explode($part, '=', 2);
 					if (isset($part[1])) {
 						$encoding = $part[1];

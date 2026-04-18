@@ -485,7 +485,7 @@ class App
 				// Only continue when the given profile link seems valid.
 				// Valid profile links contain a path with "/profile/" and no query parameters
 				if ((parse_url($queryVars['zrl'], PHP_URL_QUERY) == '')
-					&& strpos(parse_url($queryVars['zrl'], PHP_URL_PATH) ?? '', '/profile/') !== false) {
+					&& str_contains(parse_url($queryVars['zrl'], PHP_URL_PATH) ?? '', '/profile/')) {
 					$this->auth->setUnauthenticatedVisitor($queryVars['zrl']);
 					OpenWebAuth::zrlInit();
 				} else {

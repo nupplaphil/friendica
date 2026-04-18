@@ -94,7 +94,7 @@ class SerializeUtil
 					if ('"' !== substr($data, -2, 1)) {
 						return false;
 					}
-				} elseif (false === strpos($data, '"')) {
+				} elseif (!str_contains($data, '"')) {
 					return false;
 				}
 			// Or else fall through.

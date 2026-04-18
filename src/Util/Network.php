@@ -48,7 +48,7 @@ class Network
 		}
 
 		// no naked subdomains (allow localhost for tests)
-		if (strpos($url, '.') === false && strpos($url, '/localhost/') === false) {
+		if (!str_contains($url, '.') && !str_contains($url, '/localhost/')) {
 			return false;
 		}
 
@@ -590,7 +590,7 @@ class Network
 			preg_match('/^(?:W\/")?([^"]+)"?$/i', $etag, $result);
 			$etagTrimmed = $result[1];
 			// Lazy exact ETag match, could check weak/strong ETags
-			$flag_not_modified = $if_none_match == '*' || strpos($if_none_match, $etagTrimmed) !== false;
+			$flag_not_modified = $if_none_match == '*' || str_contains($if_none_match, $etagTrimmed);
 		}
 
 		if ($if_modified_since && (!$if_none_match || $flag_not_modified)) {

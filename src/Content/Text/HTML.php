@@ -534,20 +534,20 @@ class HTML
 				"//plus.google.com/", "//twitter.com/",
 			];
 			foreach ($list as $listitem) {
-				if (strpos($treffer[1], $listitem) !== false) {
+				if (str_contains($treffer[1], $listitem)) {
 					$ignore = true;
 				}
 			}
 
-			if ((strpos($treffer[1], "//twitter.com/") !== false) && (strpos($treffer[1], "/status/") !== false)) {
+			if ((str_contains($treffer[1], "//twitter.com/")) && (str_contains($treffer[1], "/status/"))) {
 				$ignore = false;
 			}
 
-			if ((strpos($treffer[1], "//plus.google.com/") !== false) && (strpos($treffer[1], "/posts") !== false)) {
+			if ((str_contains($treffer[1], "//plus.google.com/")) && (str_contains($treffer[1], "/posts"))) {
 				$ignore = false;
 			}
 
-			if ((strpos($treffer[1], "//plus.google.com/") !== false) && (strpos($treffer[1], "/photos") !== false)) {
+			if ((str_contains($treffer[1], "//plus.google.com/")) && (str_contains($treffer[1], "/photos"))) {
 				$ignore = false;
 			}
 
@@ -660,7 +660,7 @@ class HTML
 
 		if (!$compact && ($message != '')) {
 			foreach ($urls as $id => $url) {
-				if ($url != '' && strpos($message, (string) $url) === false) {
+				if ($url != '' && !str_contains($message, (string) $url)) {
 					$message .= "\n" . $url . ' ';
 				}
 			}
@@ -999,11 +999,11 @@ class HTML
 	 */
 	public static function xpathQuote(string $value): string
 	{
-		if (false === strpos($value, '"')) {
+		if (!str_contains($value, '"')) {
 			return '"' . $value . '"';
 		}
 
-		if (false === strpos($value, "'")) {
+		if (!str_contains($value, "'")) {
 			return "'" . $value . "'";
 		}
 

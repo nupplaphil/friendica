@@ -96,7 +96,7 @@ class Event
 				. '</span></div>' . "\r\n";
 
 			// Include a map of the location if the [map] BBCode is used.
-			if (strpos($event['location'], "[map") !== false) {
+			if (str_contains($event['location'], "[map")) {
 				$map = Map::byLocation($event['location'], $simple);
 				if ($map !== $event['location']) {
 					$o .= $map;
@@ -977,7 +977,7 @@ class Event
 		$location = ['name' => $s];
 
 		// Map tag with location name - e.g. [map]Paris[/map].
-		if (strpos($s, '[/map]') !== false) {
+		if (str_contains($s, '[/map]')) {
 			$found = preg_match("/\[map\](.*?)\[\/map\]/ism", $s, $match);
 			if (intval($found) > 0 && array_key_exists(1, $match)) {
 				$location['address'] = $match[1];
@@ -985,7 +985,7 @@ class Event
 				$location['name'] = str_replace($match[0], "", $s);
 			}
 			// Map tag with coordinates - e.g. [map=48.864716,2.349014].
-		} elseif (strpos($s, '[map=') !== false) {
+		} elseif (str_contains($s, '[map=')) {
 			$found = preg_match("/\[map=(.*?)\]/ism", $s, $match);
 			if (intval($found) > 0 && array_key_exists(1, $match)) {
 				$location['coordinates'] = $match[1];

@@ -233,11 +233,11 @@ class Circle
 				$user['def_gid'] = 0;
 				$change          = true;
 			}
-			if (strpos($user['allow_gid'], '<' . $gid . '>') !== false) {
+			if (str_contains($user['allow_gid'], '<' . $gid . '>')) {
 				$user['allow_gid'] = str_replace('<' . $gid . '>', '', $user['allow_gid']);
 				$change            = true;
 			}
-			if (strpos($user['deny_gid'], '<' . $gid . '>') !== false) {
+			if (str_contains($user['deny_gid'], '<' . $gid . '>')) {
 				$user['deny_gid'] = str_replace('<' . $gid . '>', '', $user['deny_gid']);
 				$change           = true;
 			}

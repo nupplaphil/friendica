@@ -76,7 +76,7 @@ class Search extends BaseApi
 			}
 		}
 
-		if ((empty($request['type']) || ($request['type'] == 'hashtags')) && (strpos($request['q'], '@') == false)) {
+		if ((empty($request['type']) || ($request['type'] == 'hashtags')) && (!str_contains($request['q'], '@'))) {
 			$result['hashtags'] = $this->searchHashtags($request['q'], $request['exclude_unreviewed'], $limit, $request['offset'], $this->parameters['version']);
 		}
 

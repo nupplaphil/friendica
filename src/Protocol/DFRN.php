@@ -1003,7 +1003,7 @@ class DFRN
 			return -10;
 		}
 
-		if (strpos($xml, '<?xml') === false) {
+		if (!str_contains($xml, '<?xml')) {
 			DI::logger()->notice('No valid XML returned from ' . $contact['id'] . ' - ' . $dest_url);
 			DI::logger()->debug('Returned XML: ' . $xml);
 			return 3;

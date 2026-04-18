@@ -1575,7 +1575,7 @@ class ParseUrl
 		foreach ($schemes as $scheme => $provider_url) {
 			$regex = str_replace(['.', '?', '*'], ['\.', '\?', '.*'], $scheme);
 			if (preg_match('~' . $regex . '~i', $url)) {
-				$oembed = $provider_url . (strpos($provider_url, '?') === false ? '?' : '&') . 'url=' . urlencode($url);
+				$oembed = $provider_url . (!str_contains($provider_url, '?') ? '?' : '&') . 'url=' . urlencode($url);
 				DI::logger()->debug('Found oEmbed provider from oembed.com list', ['url' => $url, 'oembed' => $oembed]);
 				return $oembed;
 			}

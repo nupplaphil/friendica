@@ -1078,7 +1078,7 @@ class GServer
 		}
 
 		// Some AP enabled systems return activity data that we don't expect here.
-		if (strpos($curlResult->getContentType(), 'application/activity+json') !== false) {
+		if (str_contains($curlResult->getContentType(), 'application/activity+json')) {
 			return $serverdata;
 		}
 
@@ -1976,15 +1976,15 @@ class GServer
 
 	private static function detectMastodonForks(array $serverdata): array
 	{
-		if (strpos($serverdata['version'], 'glitch') !== false) {
+		if (str_contains($serverdata['version'], 'glitch')) {
 			$serverdata['platform'] = 'glitchsoc';
 		}
 
-		if (strpos($serverdata['version'], 'chuckya') !== false) {
+		if (str_contains($serverdata['version'], 'chuckya')) {
 			$serverdata['platform'] = 'chuckya';
 		}
 
-		if (strpos($serverdata['version'], 'sakura') !== false) {
+		if (str_contains($serverdata['version'], 'sakura')) {
 			$serverdata['platform'] = 'sakura';
 		}
 

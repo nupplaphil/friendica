@@ -3205,7 +3205,7 @@ class Contact
 			if (empty($ret['url'])) {
 				$result['message'] .= DI::l10n()->t('No browser URL could be matched to this address.') . '<br />';
 			}
-			if (strpos($ret['url'], '@') !== false) {
+			if (str_contains($ret['url'], '@')) {
 				$result['message'] .= DI::l10n()->t('Unable to match @-style Identity Address with a known protocol or email contact.') . '<br />';
 				$result['message'] .= DI::l10n()->t('Use mailto: in front of address to force email check.') . '<br />';
 			}

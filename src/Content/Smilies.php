@@ -157,7 +157,7 @@ class Smilies
 
 		$normalized = BBCode::performWithEscapedTags($text, ['code'], function ($text) use (&$emojis) {
 			return BBCode::performWithEscapedTags($text, ['noparse', 'nobb', 'pre'], function ($text) use (&$emojis) {
-				if (strpos($text, '[nosmile]') !== false || self::noSmilies()) {
+				if (str_contains($text, '[nosmile]') || self::noSmilies()) {
 					return $text;
 				}
 				$smilies    = self::getList();

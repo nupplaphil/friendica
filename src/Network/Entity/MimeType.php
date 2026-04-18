@@ -38,9 +38,9 @@ class MimeType extends BaseEntity
 	{
 		$parameters = array_map(function (string $attribute, string $value) {
 			if (
-				strpos($value, '"') !== false ||
-				strpos($value, '\\') !== false ||
-				strpos($value, "\r") !== false
+				str_contains($value, '"') ||
+				str_contains($value, '\\') ||
+				str_contains($value, "\r")
 			) {
 				$value = '"' . str_replace(['\\', '"', "\r"], ['\\\\', '\\"', "\\\r"], $value) . '"';
 			}

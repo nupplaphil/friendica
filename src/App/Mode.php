@@ -151,7 +151,7 @@ class Mode
 	public function determineRunMode(bool $isBackend, array $server, Arguments $args, MobileDetect $mobileDetect): Mode
 	{
 		foreach (self::BACKEND_CONTENT_TYPES as $type) {
-			if (strpos(strtolower($server['HTTP_ACCEPT'] ?? ''), $type) !== false) {
+			if (str_contains(strtolower($server['HTTP_ACCEPT'] ?? ''), $type)) {
 				$isBackend = true;
 			}
 		}

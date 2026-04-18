@@ -70,7 +70,7 @@ class BasicAuth
 
 		// Support for known clients that doesn't send a source name
 		if (empty($source) && !empty($_SERVER['HTTP_USER_AGENT'])) {
-			if (strpos($_SERVER['HTTP_USER_AGENT'], "Twidere") !== false) {
+			if (str_contains($_SERVER['HTTP_USER_AGENT'], "Twidere")) {
 				$source = 'Twidere';
 			}
 
