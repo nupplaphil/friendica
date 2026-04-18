@@ -73,7 +73,7 @@ class Notifications extends BaseApi
 				$condition,
 				["(`vid` != ? OR `type` != ? OR NOT `actor-id` IN (SELECT `id` FROM `contact` WHERE `pending`))",
 					Verb::getID(Activity::FOLLOW),
-					Post\UserNotification::TYPE_NONE]
+					Post\UserNotification::TYPE_NONE],
 			);
 		}
 
@@ -82,7 +82,7 @@ class Notifications extends BaseApi
 				$condition,
 				["(`vid` != ? OR `type` != ? OR NOT `actor-id` IN (SELECT `id` FROM `contact` WHERE NOT `pending`))",
 					Verb::getID(Activity::FOLLOW),
-					Post\UserNotification::TYPE_NONE]
+					Post\UserNotification::TYPE_NONE],
 			);
 		}
 
@@ -90,7 +90,7 @@ class Notifications extends BaseApi
 			$condition = DBA::mergeConditions($condition, [
 				"(NOT `vid` IN (?, ?) OR NOT `type` IN (?, ?))",
 				Verb::getID(Activity::LIKE), Verb::getID(Activity::DISLIKE),
-				Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_THREAD_COMMENT
+				Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_THREAD_COMMENT,
 			]);
 		}
 
@@ -98,7 +98,7 @@ class Notifications extends BaseApi
 			$condition = DBA::mergeConditions($condition, [
 				"(NOT `vid` IN (?) OR NOT `type` IN (?, ?))",
 				Verb::getID(Activity::ANNOUNCE),
-				Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_THREAD_COMMENT
+				Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_THREAD_COMMENT,
 			]);
 		}
 
@@ -126,7 +126,7 @@ class Notifications extends BaseApi
 				$params,
 				$request['min_id'] ?: $request['since_id'],
 				$request['max_id'],
-				min($request['limit'], 30)
+				min($request['limit'], 30),
 			);
 
 			foreach ($Notifications as $Notification) {

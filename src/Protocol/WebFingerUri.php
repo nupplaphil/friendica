@@ -73,8 +73,8 @@ class WebFingerUri implements \Stringable
 	public function getFullHost(): string
 	{
 		return $this->host
-			. ($this->port ? ':' . $this->port : '') .
-			($this->path ?: '');
+			. ($this->port ? ':' . $this->port : '')
+			. ($this->path ?: '');
 	}
 
 	public function getLongForm(): string

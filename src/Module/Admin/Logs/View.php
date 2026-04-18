@@ -15,7 +15,7 @@ use Psr\Log\LogLevel;
 
 class View extends BaseAdmin
 {
-	const LIMIT = 500;
+	public const LIMIT = 500;
 
 	protected function content(array $request = []): string
 	{

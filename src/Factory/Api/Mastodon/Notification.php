@@ -80,11 +80,11 @@ class Notification extends BaseFactory
 			}
 
 			$type = $contact['pending'] ? MstdnNotification::TYPE_INTRODUCTION : MstdnNotification::TYPE_FOLLOW;
-		} elseif (($Notification->verb == Activity::ANNOUNCE) &&
-			in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
+		} elseif (($Notification->verb == Activity::ANNOUNCE)
+			&& in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
 			$type = MstdnNotification::TYPE_RESHARE;
-		} elseif (in_array($Notification->verb, [Activity::LIKE, Activity::DISLIKE]) &&
-			in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
+		} elseif (in_array($Notification->verb, [Activity::LIKE, Activity::DISLIKE])
+			&& in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
 			$type = MstdnNotification::TYPE_LIKE;
 		} elseif ($Notification->type === Post\UserNotification::TYPE_SHARED) {
 			$type = MstdnNotification::TYPE_POST;
@@ -93,7 +93,7 @@ class Notification extends BaseFactory
 			Post\UserNotification::TYPE_IMPLICIT_TAGGED,
 			Post\UserNotification::TYPE_DIRECT_COMMENT,
 			Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT,
-			Post\UserNotification::TYPE_THREAD_COMMENT
+			Post\UserNotification::TYPE_THREAD_COMMENT,
 		])) {
 			$type = MstdnNotification::TYPE_MENTION;
 		} else {

@@ -97,7 +97,7 @@ class Authentication
 		IHandleUserSessions $session,
 		IManagePersonalConfigValues $pConfig,
 		AppHelper $appHelper,
-		Request $request
+		Request $request,
 	) {
 		$this->config        = $config;
 		$this->mode          = $mode;

@@ -32,15 +32,15 @@ use Friendica\Util\Strings;
  */
 class Photo
 {
-	const CONTACT_PHOTOS = 'Contact Photos';
-	const PROFILE_PHOTOS = 'Profile Photos';
-	const BANNER_PHOTOS  = 'Banner Photos';
+	public const CONTACT_PHOTOS = 'Contact Photos';
+	public const PROFILE_PHOTOS = 'Profile Photos';
+	public const BANNER_PHOTOS  = 'Banner Photos';
 
-	const DEFAULT        = 0;
-	const USER_AVATAR    = 10;
-	const USER_BANNER    = 11;
-	const CONTACT_AVATAR = 20;
-	const CONTACT_BANNER = 21;
+	public const DEFAULT        = 0;
+	public const USER_AVATAR    = 10;
+	public const USER_BANNER    = 11;
+	public const CONTACT_AVATAR = 20;
+	public const CONTACT_BANNER = 21;
 
 	/**
 	 * Select rows from the photo table and returns them as array
@@ -151,7 +151,7 @@ class Photo
 
 		$uid = $r['uid'];
 
-		$accessible = $uid ? (bool)DI::pConfig()->get($uid, 'system', 'accessible-photos', false) : false;
+		$accessible = $uid ? (bool) DI::pConfig()->get($uid, 'system', 'accessible-photos', false) : false;
 
 		if (!empty($visitor_uid) && ($uid == $visitor_uid)) {
 			$sql_acl = '';
@@ -181,8 +181,8 @@ class Photo
 				"SELECT DISTINCT(`album`) AS `album` FROM `photo` WHERE `uid` = ? AND NOT `photo-type` IN (?, ?)",
 				$uid,
 				static::CONTACT_AVATAR,
-				static::CONTACT_BANNER
-			)
+				static::CONTACT_BANNER,
+			),
 		);
 
 		return array_column($photos, 'album');
@@ -202,7 +202,7 @@ class Photo
 		$values = [
 			$uid,
 			Photo::CONTACT_AVATAR,
-			Photo::CONTACT_BANNER
+			Photo::CONTACT_BANNER,
 		];
 
 		if (!empty($album)) {
@@ -220,8 +220,8 @@ class Photo
 					min(`scale`) AS `hiq`, max(`scale`) AS `loq`, MIN(`desc`) AS `desc`, MIN(`created`) AS `created`
 					FROM `photo` WHERE `uid` = ? AND NOT `photo-type` IN (?, ?) $sqlExtra
 					GROUP BY `resource-id` $sqlExtra2",
-				$values
-			)
+				$values,
+			),
 		);
 	}
 
@@ -442,7 +442,7 @@ class Photo
 
 		try {
 			if (DBA::isResult($existing_photo)) {
-				$backend_ref = (string)$existing_photo['backend-ref'];
+				$backend_ref = (string) $existing_photo['backend-ref'];
 				$storage     = DI::storageManager()->getWritableStorageByName($existing_photo['backend-class'] ?? '');
 			} else {
 				$storage = DI::storage();
@@ -476,8 +476,8 @@ class Photo
 			'deny_cid'      => $deny_cid,
 			'deny_gid'      => $deny_gid,
 			'desc'          => $desc,
-			'backend-class' => (string)$storage,
-			'backend-ref'   => $backend_ref
+			'backend-class' => (string) $storage,
+			'backend-ref'   => $backend_ref,
 		];
 
 		$fields = DI::dbaDefinition()->truncateFieldsForTable('photo', $fields);
@@ -575,7 +575,7 @@ class Photo
 		$photo = DBA::selectFirst(
 			'photo',
 			['resource-id'],
-			['uid' => $uid, 'contact-id' => $cid, 'scale' => 4, 'photo-type' => self::CONTACT_AVATAR]
+			['uid' => $uid, 'contact-id' => $cid, 'scale' => 4, 'photo-type' => self::CONTACT_AVATAR],
 		);
 		if (!empty($photo['resource-id'])) {
 			$resource_id = $photo['resource-id'];
@@ -683,7 +683,7 @@ class Photo
 		$photo = DBA::selectFirst(
 			'photo',
 			['blurhash'],
-			['uid' => $uid, 'contact-id' => $cid, 'scale' => 4, 'photo-type' => self::CONTACT_AVATAR]
+			['uid' => $uid, 'contact-id' => $cid, 'scale' => 4, 'photo-type' => self::CONTACT_AVATAR],
 		);
 
 		return [$image_url, $thumb, $micro, $photo['blurhash']];
@@ -722,7 +722,7 @@ class Photo
 		}
 
 		if (count($parts) == 1) {
-			return (float)$parts[0];
+			return (float) $parts[0];
 		}
 
 		return floatval($parts[0]) / floatval($parts[1]);
@@ -761,7 +761,7 @@ class Photo
 					$uid,
 					self::DEFAULT,
 					$banner_type,
-					$avatar_type
+					$avatar_type,
 				));
 			} else {
 				// This query doesn't do the count and is much faster
@@ -773,7 +773,7 @@ class Photo
 					$uid,
 					self::DEFAULT,
 					$banner_type,
-					$avatar_type
+					$avatar_type,
 				));
 			}
 			DI::cache()->set($key, $albums, Duration::DAY);
@@ -866,7 +866,7 @@ class Photo
 
 			$condition = [
 				'allow_cid'   => $srch, 'allow_gid' => '', 'deny_cid' => '', 'deny_gid' => '',
-				'resource-id' => $image_rid, 'uid' => $uid
+				'resource-id' => $image_rid, 'uid' => $uid,
 			];
 			if (!self::exists($condition)) {
 				$photo = self::selectFirst(['allow_cid', 'allow_gid', 'deny_cid', 'deny_gid', 'uid'], ['resource-id' => $image_rid]);
@@ -908,7 +908,7 @@ class Photo
 		$fields = [
 			'allow_cid'  => $str_contact_allow, 'allow_gid' => $str_circle_allow,
 			'deny_cid'   => $str_contact_deny, 'deny_gid' => $str_circle_deny,
-			'accessible' => (bool)DI::pConfig()->get($uid, 'system', 'accessible-photos', false)
+			'accessible' => (bool) DI::pConfig()->get($uid, 'system', 'accessible-photos', false),
 		];
 
 		$condition = ['resource-id' => $image_rid, 'uid' => $uid];
@@ -924,7 +924,7 @@ class Photo
 	 */
 	public static function getResourceData(string $name): array
 	{
-		$guid = str_replace([Strings::normaliseLink((string)DI::baseUrl()), '/photo/'], '', Strings::normaliseLink($name));
+		$guid = str_replace([Strings::normaliseLink((string) DI::baseUrl()), '/photo/'], '', Strings::normaliseLink($name));
 
 		if (parse_url($guid, PHP_URL_SCHEME)) {
 			return [];
@@ -954,7 +954,7 @@ class Photo
 	public static function isLocal(string $name): bool
 	{
 		// @TODO Maybe a proper check here on true condition?
-		return (bool)self::getIdForName($name);
+		return (bool) self::getIdForName($name);
 	}
 
 	/**
@@ -986,7 +986,7 @@ class Photo
 	 */
 	public static function isLocalPage(string $name): bool
 	{
-		$guid = str_replace(Strings::normaliseLink((string)DI::baseUrl()), '', Strings::normaliseLink($name));
+		$guid = str_replace(Strings::normaliseLink((string) DI::baseUrl()), '', Strings::normaliseLink($name));
 		$guid = preg_replace("=/photos/.*/image/(.*)=ism", '$1', $guid);
 		if (empty($guid)) {
 			return false;

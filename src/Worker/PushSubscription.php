@@ -82,7 +82,7 @@ class PushSubscription
 			'endpoint'        => $subscription['endpoint'],
 			'keys'            => [
 				'p256dh' => $subscription['pubkey'],
-				'auth'   => $subscription['secret']
+				'auth'   => $subscription['secret'],
 			],
 		]);
 
