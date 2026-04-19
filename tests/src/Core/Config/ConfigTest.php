@@ -555,7 +555,7 @@ class ConfigTest extends DatabaseTestCase
 		$config = $this->getInstance();
 
 		$config->set('test', 'it', $value);
-		self:self::assertEquals($assertion, $config->get('test', 'it'));
+		self::assertEquals($assertion, $config->get('test', 'it'));
 	}
 
 	public function dataEnv(): array
