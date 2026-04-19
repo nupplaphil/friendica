@@ -264,7 +264,12 @@ xQIDAQAB
 
 		$this->httpRequestHandler->push($history);
 
-		self::assertArraySubset($assertInfos, Probe::uri($uri, '', 0));
+		$result = Probe::uri($uri, '', 0);
+
+		foreach ($assertInfos as $key => $value) {
+			self::assertArrayHasKey($key, $result);
+			self::assertEquals($value, $result[$key]);
+		}
 
 		// Iterate over the requests and responses
 		foreach ($container as $transaction) {
