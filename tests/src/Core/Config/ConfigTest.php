@@ -43,7 +43,7 @@ class ConfigTest extends DatabaseTestCase
 		self::assertNotEmpty($result);
 		self::assertArrayHasKey($cat, $result);
 
-		foreach($data as $key => $value) {
+		foreach ($data as $key => $value) {
 			self::assertEquals($value, $result[$cat][$key], sprintf('Pointer: `%s.%s`', $cat, $key));
 		}
 	}
@@ -60,7 +60,7 @@ class ConfigTest extends DatabaseTestCase
 			$this->root->url(),
 			$this->root->url() . '/addon',
 			$this->root->url() . '/config',
-			$this->root->url() . '/static'
+			$this->root->url() . '/static',
 		);
 	}
 
@@ -111,7 +111,7 @@ class ConfigTest extends DatabaseTestCase
 				'possibleCats' => [
 					'system',
 					'config',
-					'other'
+					'other',
 				],
 				'load' => [
 					'system',
@@ -122,7 +122,7 @@ class ConfigTest extends DatabaseTestCase
 				'possibleCats' => [
 					'system',
 					'config',
-					'other'
+					'other',
 				],
 				'load' => [
 					'other',
@@ -133,7 +133,7 @@ class ConfigTest extends DatabaseTestCase
 				'possibleCats' => [
 					'system',
 					'config',
-					'other'
+					'other',
 				],
 				'load' => [
 					'config',
@@ -144,12 +144,12 @@ class ConfigTest extends DatabaseTestCase
 				'possibleCats' => [
 					'system',
 					'config',
-					'other'
+					'other',
 				],
 				'load' => [
 					'system',
 					'config',
-					'other'
+					'other',
 				],
 			],
 		];
@@ -254,7 +254,7 @@ class ConfigTest extends DatabaseTestCase
 					'config' => [
 						'key45' => 45,
 						'key52' => true,
-					]
+					],
 				],
 				'expect' => [
 					'other' => [
@@ -618,7 +618,7 @@ class ConfigTest extends DatabaseTestCase
 			$this->root->url() . '/addon',
 			$this->root->url() . '/config',
 			$this->root->url() . '/static',
-			$server
+			$server,
 		);
 		$configFileManager->setupCache($this->configCache);
 		$config = new DatabaseConfig($this->getDbInstance(), $this->configCache);

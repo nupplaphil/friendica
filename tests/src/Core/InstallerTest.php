@@ -47,8 +47,8 @@ class InstallerTest extends MockedTestCase
 		$this->dice = $this->dice->addRules(include __DIR__ . '/../../../static/dependencies.config.php');
 
 		$this->dice->shouldReceive('create')
-		           ->with(L10n::class)
-		           ->andReturn($this->l10nMock);
+				   ->with(L10n::class)
+				   ->andReturn($this->l10nMock);
 
 		DI::init($this->dice, true);
 	}
@@ -106,11 +106,11 @@ class InstallerTest extends MockedTestCase
 	private function assertCheckExist($position, $title, $help, $status, $required, $assertionArray)
 	{
 		$exptected = [
-			'title' => $title,
-			'status' => $status,
-			'required' => $required,
+			'title'     => $title,
+			'status'    => $status,
+			'required'  => $required,
 			'error_msg' => null,
-			'help' => $help,
+			'help'      => $help,
 		];
 
 		self::assertArrayHasKey($position, $assertionArray);
@@ -121,7 +121,7 @@ class InstallerTest extends MockedTestCase
 	{
 		return [
 			'openssl_pkey_new does not exist' => ['openssl_pkey_new', false],
-			'openssl_pkey_new does exists' => ['openssl_pkey_new', true],
+			'openssl_pkey_new does exists'    => ['openssl_pkey_new', true],
 		];
 	}
 
@@ -133,7 +133,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckKeys($function, $expected)
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) use ($function, $expected) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) use ($function, $expected) {
 			if ($function_name === $function) {
 				return $expected;
 			}
@@ -152,7 +152,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutIntlChar()
 	{
 		$class_exists = $this->getFunctionMock('Friendica\Core', 'class_exists');
-		$class_exists->expects($this->any())->willReturnCallback(function($class_name) {
+		$class_exists->expects($this->any())->willReturnCallback(function ($class_name) {
 			if ($class_name === 'IntlChar') {
 				return false;
 			}
@@ -163,12 +163,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(2,
+		self::assertCheckExist(
+			2,
 			'IntlChar PHP module',
 			'Error: The IntlChar module is not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -177,7 +179,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutCurlInit()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'curl_init') {
 				return false;
 			}
@@ -188,12 +190,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(4,
+		self::assertCheckExist(
+			4,
 			'libCurl PHP module',
 			'Error: libCURL PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -202,7 +206,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutImagecreateformjpeg()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'imagecreatefromjpeg') {
 				return false;
 			}
@@ -213,12 +217,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(5,
+		self::assertCheckExist(
+			5,
 			'GD graphics PHP module',
 			'Error: GD graphics PHP module with JPEG support required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -227,7 +233,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutOpensslpublicencrypt()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'openssl_public_encrypt') {
 				return false;
 			}
@@ -238,12 +244,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(6,
+		self::assertCheckExist(
+			6,
 			'OpenSSL PHP module',
 			'Error: openssl PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -252,7 +260,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutMbStrlen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'mb_strlen') {
 				return false;
 			}
@@ -263,12 +271,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(7,
+		self::assertCheckExist(
+			7,
 			'mb_string PHP module',
 			'Error: mb_string PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -277,7 +287,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutIconvStrlen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'iconv_strlen') {
 				return false;
 			}
@@ -288,12 +298,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(8,
+		self::assertCheckExist(
+			8,
 			'iconv PHP module',
 			'Error: iconv PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -302,7 +314,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutPosixkill()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'posix_kill') {
 				return false;
 			}
@@ -313,12 +325,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(9,
+		self::assertCheckExist(
+			9,
 			'POSIX PHP module',
 			'Error: POSIX PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -327,7 +341,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutProcOpen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'proc_open') {
 				return false;
 			}
@@ -338,12 +352,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(10,
+		self::assertCheckExist(
+			10,
 			'Program execution functions',
 			'Error: Program execution functions (proc_open) required but not enabled.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -352,7 +368,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutJsonEncode()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'json_encode') {
 				return false;
 			}
@@ -363,12 +379,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(11,
+		self::assertCheckExist(
+			11,
 			'JSON PHP module',
 			'Error: JSON PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -377,7 +395,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutFinfoOpen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'finfo_open') {
 				return false;
 			}
@@ -388,12 +406,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(12,
+		self::assertCheckExist(
+			12,
 			'File Information PHP module',
 			'Error: File Information PHP module required but not installed.',
 			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -402,7 +422,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctionsWithoutGmpStrval()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'gmp_strval') {
 				return false;
 			}
@@ -413,12 +433,14 @@ class InstallerTest extends MockedTestCase
 
 		$install = new Installer();
 		self::assertFalse($install->checkFunctions());
-		self::assertCheckExist(13,
+		self::assertCheckExist(
+			13,
 			'GNU Multiple Precision PHP module',
 			'Error: GNU Multiple Precision PHP module required but not installed.',
-		false,
+			false,
 			true,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -427,7 +449,7 @@ class InstallerTest extends MockedTestCase
 	public function testCheckFunctions()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if (in_array(
 				$function_name,
 				[
@@ -440,7 +462,7 @@ class InstallerTest extends MockedTestCase
 					'json_encode',
 					'finfo_open',
 					'gmp_strval',
-				]
+				],
 			)) {
 				return true;
 			}
@@ -480,7 +502,7 @@ class InstallerTest extends MockedTestCase
 	{
 		// Mocking that we can use CURL
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'curl_init') {
 				return true;
 			}
@@ -513,8 +535,8 @@ class InstallerTest extends MockedTestCase
 			->andReturn($IHTTPResult);
 
 		$this->dice->shouldReceive('create')
-		     ->with(ICanSendHttpRequests::class)
-		     ->andReturn($networkMock);
+			 ->with(ICanSendHttpRequests::class)
+			 ->andReturn($networkMock);
 
 		DI::init($this->dice, true);
 
@@ -531,7 +553,7 @@ class InstallerTest extends MockedTestCase
 	{
 		// Mocking that we can use CURL
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
-		$function_exists->expects($this->any())->willReturnCallback(function($function_name) {
+		$function_exists->expects($this->any())->willReturnCallback(function ($function_name) {
 			if ($function_name === 'curl_init') {
 				return true;
 			}
@@ -564,8 +586,8 @@ class InstallerTest extends MockedTestCase
 			->andReturn($IHTTPResultW);
 
 		$this->dice->shouldReceive('create')
-		           ->with(ICanSendHttpRequests::class)
-		           ->andReturn($networkMock);
+				   ->with(ICanSendHttpRequests::class)
+				   ->andReturn($networkMock);
 
 		DI::init($this->dice, true);
 
@@ -577,7 +599,7 @@ class InstallerTest extends MockedTestCase
 	public function testImagickNotInstalled()
 	{
 		$class_exists = $this->getFunctionMock('Friendica\Core', 'class_exists');
-		$class_exists->expects($this->any())->willReturnCallback(function($class_name) {
+		$class_exists->expects($this->any())->willReturnCallback(function ($class_name) {
 			if ($class_name === 'Imagick') {
 				return false;
 			}
@@ -589,12 +611,14 @@ class InstallerTest extends MockedTestCase
 
 		// even there is no supported type, Imagick should return true (because it is not required)
 		self::assertTrue($install->checkImagick());
-		self::assertCheckExist(0,
+		self::assertCheckExist(
+			0,
 			'ImageMagick PHP extension is not installed',
 			'',
 			false,
 			false,
-			$install->getChecks());
+			$install->getChecks(),
+		);
 	}
 
 	/**
@@ -605,7 +629,7 @@ class InstallerTest extends MockedTestCase
 	{
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
 
-		$install = new Installer();
+		$install     = new Installer();
 		$configCache = Mockery::mock(Cache::class);
 		$configCache->shouldReceive('set')->with('config', 'php_path', Mockery::any())->once();
 		$configCache->shouldReceive('set')->with('system', 'basepath', '/test/')->once();
