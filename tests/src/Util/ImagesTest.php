@@ -7,7 +7,6 @@
 
 namespace Friendica\Test\src\Util;
 
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Friendica\Test\DiceHttpMockHandlerTrait;
 use Friendica\Test\MockedTestCase;
 use Friendica\Util\Images;
@@ -17,7 +16,6 @@ use GuzzleHttp\Psr7\Response;
 class ImagesTest extends MockedTestCase
 {
 	use DiceHttpMockHandlerTrait;
-	use ArraySubsetAsserts;
 
 	protected function setUp(): void
 	{
@@ -80,7 +78,14 @@ class ImagesTest extends MockedTestCase
 			new Response(200, $headers, $data),
 		]));
 
-		self::assertArraySubset($assertion, Images::getInfoFromURL($url));
+		$result = Images::getInfoFromURL($url);
+
+		self::assertIsArray($result);
+
+		foreach ($assertion as $key => $value) {
+			self::assertArrayHasKey($key, $result);
+			self::assertEquals($value, $result[$key]);
+		}
 	}
 
 	public function dataScalingDimensions()
@@ -180,6 +185,13 @@ class ImagesTest extends MockedTestCase
 	 */
 	public function testGetScalingDimensions(int $width, int $height, int $max, array $assertion)
 	{
-		self::assertArraySubset($assertion, Images::getScalingDimensions($width, $height, $max));
+		$result = Images::getScalingDimensions($width, $height, $max);
+
+		self::assertIsArray($result);
+
+		foreach ($assertion as $key => $value) {
+			self::assertArrayHasKey($key, $result);
+			self::assertEquals($value, $result[$key]);
+		}
 	}
 }
