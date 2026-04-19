@@ -18,7 +18,7 @@ class WorkerLoggerTest extends TestCase
 		self::assertMatchesRegularExpression('/^[a-zA-Z0-9]{' . WorkerLogger::WORKER_ID_LENGTH . '}+$/', $uid);
 	}
 
-	public function dataTest()
+	public static function dataTest(): array
 	{
 		return [
 			'info' => [
