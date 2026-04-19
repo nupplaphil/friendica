@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
 		bootstrap="bootstrap.php"
-		verbose="true"
+		colors="true"
 		timeoutForSmallTests="900"
 		timeoutForMediumTests="900"
 		timeoutForLargeTests="900"
-		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+		cacheDirectory="./.phpunit.result.cache"
+		executionOrder="depends,defects"
+		requireCoverageMetadata="false"
+		beStrictAboutCoverageMetadata="true"
+		beStrictAboutOutputDuringTests="true"
+		displayDetailsOnPhpunitDeprecations="true"
+		failOnPhpunitDeprecation="true"
+		failOnRisky="true"
+		failOnWarning="true"
+>
+
 	<testsuites>
 		<testsuite name="friendica">
 			<directory suffix="Test.php">functional/</directory>
@@ -17,10 +28,10 @@
 			<directory suffix="Test.php">Unit/</directory>
 		</testsuite>
 	</testsuites>
-	<!-- Filters for Code Coverage -->
-	<coverage>
+
+	<source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
 		<include>
-			<directory suffix=".php">..</directory>
+			<directory>../</directory>
 		</include>
 		<exclude>
 			<directory suffix=".php">../config/</directory>
@@ -32,5 +43,5 @@
 			<directory suffix=".php">../view/</directory>
 			<directory suffix=".php">../vendor/</directory>
 		</exclude>
-	</coverage>
+	</source>
 </phpunit>
