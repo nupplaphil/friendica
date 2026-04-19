@@ -8,7 +8,6 @@
 namespace Friendica\Test\src\Core;
 
 use Dice\Dice;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Installer;
 use Friendica\Core\L10n;
@@ -24,7 +23,6 @@ use phpmock\phpunit\PHPMock;
 class InstallerTest extends MockedTestCase
 {
 	use VFSTrait;
-	use ArraySubsetAsserts;
 	use PHPMock;
 
 	/**
@@ -107,15 +105,16 @@ class InstallerTest extends MockedTestCase
 
 	private function assertCheckExist($position, $title, $help, $status, $required, $assertionArray)
 	{
-		$subSet = [$position => [
+		$exptected = [
 			'title' => $title,
 			'status' => $status,
 			'required' => $required,
 			'error_msg' => null,
-			'help' => $help]
+			'help' => $help,
 		];
 
-		self::assertArraySubset($subSet, $assertionArray, false, "expected subset: " . PHP_EOL . print_r($subSet, true) . PHP_EOL . "current subset: " . print_r($assertionArray, true));
+		self::assertArrayHasKey($position, $assertionArray);
+		self::assertEquals($exptected, $assertionArray[$position]);
 	}
 
 	public static function getCheckKeysData(): array
