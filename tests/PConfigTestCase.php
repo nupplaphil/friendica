@@ -7,7 +7,6 @@
 
 namespace Friendica\Test;
 
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Friendica\Core\PConfig\Type\AbstractPConfigValues;
 use Friendica\Core\PConfig\Repository\PConfig as PConfigModel;
 use Friendica\Core\PConfig\ValueObject\Cache;
@@ -16,8 +15,6 @@ use Mockery\MockInterface;
 
 abstract class PConfigTestCase extends MockedTestCase
 {
-	use ArraySubsetAsserts;
-
 	/** @var PConfigModel|MockInterface */
 	protected $configModel;
 
@@ -41,7 +38,10 @@ abstract class PConfigTestCase extends MockedTestCase
 		self::assertNotEmpty($result);
 		self::assertArrayHasKey($uid, $result);
 		self::assertArrayHasKey($cat, $result[$uid]);
-		self::assertArraySubset($data, $result[$uid][$cat]);
+
+		foreach($data as $key => $value) {
+			self::assertSame($value, $result[$uid][$cat][$key], sprintf('Pointer: `%s.%s.%s`', $uid, $cat, $key));
+		}
 	}
 
 
