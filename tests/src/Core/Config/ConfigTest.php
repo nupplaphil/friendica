@@ -7,7 +7,6 @@
 
 namespace Friendica\Test\src\Core\Config;
 
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Config\Model\DatabaseConfig;
 use Friendica\Core\Config\Model\ReadOnlyFileConfig;
@@ -19,7 +18,6 @@ use Friendica\Test\Util\VFSTrait;
 
 class ConfigTest extends DatabaseTestCase
 {
-	use ArraySubsetAsserts;
 	use VFSTrait;
 	use CreateDatabaseTrait;
 
@@ -44,7 +42,10 @@ class ConfigTest extends DatabaseTestCase
 
 		self::assertNotEmpty($result);
 		self::assertArrayHasKey($cat, $result);
-		self::assertArraySubset($data, $result[$cat]);
+
+		foreach($data as $key => $value) {
+			self::assertEquals($value, $result[$cat][$key], sprintf('Pointer: `%s.%s`', $cat, $key));
+		}
 	}
 
 
