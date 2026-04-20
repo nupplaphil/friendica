@@ -163,7 +163,7 @@ class Register extends BaseModule
 		$which_types = $_GET['type'] ?? '';
 		/* tailor options based on type param */		
 		if (!empty($which_types)){
-			if ($which_types == Register::PUBGROUP || $which_types == Register::RESGROUP || $which_type == Register::PRIGROUP){
+			if ($which_types == Register::PUBGROUP || $which_types == Register::RESGROUP || $which_types == Register::PRIGROUP){
 				$acct_list = [
 					Register::PUBGROUP	=> DI::l10n()->t('Public Group'),
 					Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
