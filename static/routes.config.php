@@ -657,7 +657,7 @@ return [
 
 	'/network' => [
 		'[/{content}]'                                                   => [Module\Conversation\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Conversation\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Conversation\Network::class, [R::GET]],
 		'/circle/{circle_id:\d+}'                                        => [Module\Conversation\Network::class, [R::GET]],
 	],
 
@@ -672,7 +672,7 @@ return [
 
 	'/ping_network' => [
 		'[/]'                                                            => [Module\Ping\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Ping\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Ping\Network::class, [R::GET]],
 		'/group/{contact_id:\d+}'                                        => [Module\Ping\Network::class, [R::GET]],
 		'/circle/{circle_id:\d+}'                                        => [Module\Ping\Network::class, [R::GET]],
 	],
@@ -686,7 +686,7 @@ return [
 
 	'/update_network' => [
 		'[/]'                                                            => [Module\Update\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Update\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Update\Network::class, [R::GET]],
 		'/group/{contact_id:\d+}'                                        => [Module\Update\Network::class, [R::GET]],
 		'/circle/{circle_id:\d+}'                                        => [Module\Update\Network::class, [R::GET]],
 	],
