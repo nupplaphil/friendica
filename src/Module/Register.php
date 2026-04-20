@@ -35,7 +35,16 @@ class Register extends BaseModule
 	const CLOSED  = 0;
 	const APPROVE = 1;
 	const OPEN    = 2;
-
+	/** account types for drop-down **/
+	const PERSONAL = "personal";
+	const SOAPBOX  = "soapbox";
+	const LOVEALL  = "loveall";
+	const ORGPAGE  = "page";
+	const NEWSPAGE = "newspage";
+	const PUBGROUP = "group";
+	const RESGROUP = "group-restricted";
+	const PRIGROUP = "group-private";
+	
 	/** @var Tos */
 	protected $tos;
 
@@ -109,6 +118,8 @@ class Register extends BaseModule
 		$nickname   = $_REQUEST['nickname']   ?? '';
 		$photo      = $_REQUEST['photo']      ?? '';
 		$invite_id  = $_REQUEST['invite_id']  ?? '';
+		
+		$which_types = $_GET['type'] ?? '';
 
 		if (DI::userSession()->getLocalUserId() || DI::config()->get('system', 'no_openid')) {
 			$fillwith = '';
@@ -133,6 +144,54 @@ class Register extends BaseModule
 				'$str_no'       => DI::l10n()->t('No'),
 			]);
 		}
+
+		/* ACCOUNT TYPE SELECT */
+		$acct_list = [	// value => label
+			Register::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
+			Register::SOAPBOX	=> DI::l10n()->t('Soap-Box (auto-approve Follow requests)'),
+			Register::LOVEALL	=> DI::l10n()->t('Love-All (auto-approve Friend requests)'),
+			Register::ORGPAGE	=> DI::l10n()->t('Organization Page'),
+			Register::NEWSPAGE	=> DI::l10n()->t('News Page'),
+			Register::PUBGROUP	=> DI::l10n()->t('Public Group'),
+			Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
+			Register::PRIGROUP	=> DI::l10n()->t('Private Group')
+		];
+		$selected = '';
+		/* get any URL params */	
+		$which_types = $_GET['type'] ?? '';
+		/* tailor options based on type param */		
+		if (!empty($which_types)){
+			if ($which_types == Register::PUBGROUP || $which_types == Register::RESGROUP || $which_type == Register::PRIGROUP){
+				$acct_list = [
+					Register::PUBGROUP	=> DI::l10n()->t('Public Group'),
+					Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
+					Register::PRIGROUP	=> DI::l10n()->t('Private Group')				
+				];
+			}
+			if ($which_types == Register::ORGPAGE || $which_types == Register::NEWSPAGE){
+				$acct_list = [
+					Register::ORGPAGE	=> DI::l10n()->t('Organization Page'),
+					Register::NEWSPAGE	=> DI::l10n()->t('News Page'),				
+				];
+			}
+			if ($which_types == Register::PERSONAL || $which_types == Register::SOAPBOX || $which_types == Register::LOVEALL){
+				$acct_list = [
+					Register::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
+					Register::SOAPBOX	=> DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
+					Register::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),	
+				];				
+			}
+			/* select the option (if it is not valid it just won't select anything) */
+			$selected = $which_types;
+		}
+		/* build Select array */
+		$acct_type = [
+			'0'	=> 'register_type', // id
+			'1'	=> DI::l10n()->t('Account type:'),	//label
+			'2'	=> $selected,
+			'3'	=> DI::l10n()->t('You can change the account type later. (<a href="'.DI::baseUrl().'/help/user/accounts-groups-pages" target="_blank">Account type help</a>)'), // tip
+			'4'	=> $acct_list
+		];
 
 		$ask_password = !DBA::count('contact');
 
@@ -190,7 +249,8 @@ class Register extends BaseModule
 			'$explicit_content'      => DI::config()->get('system', 'explicit_content', false),
 			'$explicit_content_note' => DI::l10n()->t('Note: This node explicitly contains adult content'),
 			'$additional'            => !empty(DI::userSession()->getLocalUserId()),
-			'$parent_password'       => ['parent_password', DI::l10n()->t('Parent Password:'), '', DI::l10n()->t('Please enter the password of the parent account to legitimize your request.')]
+			'$parent_password'       => ['parent_password', DI::l10n()->t('Parent Password:'), '', DI::l10n()->t('Please enter the password of the parent account to legitimize your request.')],
+			'$acct_type'             => $acct_type
 
 		]);
 
@@ -333,7 +393,50 @@ class Register extends BaseModule
 		}
 
 		if ($additional_account) {
-			DBA::update('user', ['parent-uid' => DI::userSession()->getLocalUserId()], ['uid' => $user['uid']]);
+			if (!empty($arr['register_type'])){
+				switch($arr['register_type']){
+					case Register::PERSONAL:
+						$acct_type = 0;
+						$acct_flag = 0;
+						break;
+					case Register::SOAPBOX:
+						$acct_type = 0;
+						$acct_flag = 1;
+						break;
+					case Register::LOVEALL:
+						$acct_type = 0;
+						$acct_flag = 3;
+						break;
+					case Register::ORGPAGE:
+						$acct_type = 1;
+						$acct_flag = 1;
+						break;
+					case Register::NEWSPAGE:
+						$acct_type = 2;
+						$acct_flag = 1;
+						break;
+					case Register::PUBGROUP:
+						$acct_type = 3;
+						$acct_flag = 2;
+						break;
+					case Register::RESGROUP:
+						$acct_type = 3;
+						$acct_flag = 6;
+						break;
+					case Register::PRIGROUP:
+						$acct_type = 3;
+						$acct_flag = 5;
+						break;
+					default:
+						$acct_type = 0;
+						$acct_flag = 0;
+				};
+			} else {
+				$acct_type = 0;
+				$acct_flag = 0;
+			}
+			
+			DBA::update('user', ['parent-uid' => DI::userSession()->getLocalUserId(), 'account-type' => $acct_type, 'page-flags' => $acct_flag], ['uid' => $user['uid']]);
 			DI::sysmsg()->addInfo(DI::l10n()->t('The additional account was created.'));
 			DI::baseUrl()->redirect('delegation');
 		}
