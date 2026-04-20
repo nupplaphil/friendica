@@ -145,6 +145,8 @@ class Register extends BaseModule
 			]);
 		}
 
+		$regbutton_label = DI::l10n()->t('Register Account');
+
 		/* ACCOUNT TYPE SELECT */
 		$acct_list = [	// value => label
 			Register::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
@@ -167,12 +169,14 @@ class Register extends BaseModule
 					Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
 					Register::PRIGROUP	=> DI::l10n()->t('Private Group')				
 				];
+				$regbutton_label = DI::l10n()->t('Register Group');
 			}
 			if ($which_types == Register::ORGPAGE || $which_types == Register::NEWSPAGE){
 				$acct_list = [
 					Register::ORGPAGE	=> DI::l10n()->t('Organization Page'),
 					Register::NEWSPAGE	=> DI::l10n()->t('News Page'),				
 				];
+				$regbutton_label = DI::l10n()->t('Register Page');
 			}
 			if ($which_types == Register::PERSONAL || $which_types == Register::SOAPBOX || $which_types == Register::LOVEALL){
 				$acct_list = [
@@ -234,7 +238,7 @@ class Register extends BaseModule
 			'$nicklabel'             => DI::l10n()->t('Choose a nickname: '),
 			'$photo'                 => $photo,
 			'$publish'               => $profile_publish,
-			'$regbutt'               => DI::l10n()->t('Register'),
+			'$regbutt'               => $regbutton_label,
 			'$username'              => $username,
 			'$email'                 => $email,
 			'$nickname'              => $nickname,
