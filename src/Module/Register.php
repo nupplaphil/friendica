@@ -32,9 +32,9 @@ use Psr\Log\LoggerInterface;
  */
 class Register extends BaseModule
 {
-	const CLOSED  = 0;
-	const APPROVE = 1;
-	const OPEN    = 2;
+	public const CLOSED  = 0;
+	public const APPROVE = 1;
+	public const OPEN    = 2;
 
 	/** @var Tos */
 	protected $tos;
@@ -140,40 +140,40 @@ class Register extends BaseModule
 
 		/* ACCOUNT TYPE SELECT */
 		$acct_list = [	// value => label
-			User::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
-			User::SOAPBOX	=> DI::l10n()->t('Soap-Box (auto-approve Follow requests)'),
-			User::LOVEALL	=> DI::l10n()->t('Love-All (auto-approve Friend requests)'),
-			User::ORGPAGE	=> DI::l10n()->t('Organization Page'),
-			User::NEWSPAGE	=> DI::l10n()->t('News Page'),
-			User::PUBGROUP	=> DI::l10n()->t('Public Group'),
-			User::RESGROUP	=> DI::l10n()->t('Restricted Group'),
-			User::PRIGROUP	=> DI::l10n()->t('Private Group')
+			User::PERSONAL => DI::l10n()->t('Personal (standard account)'),
+			User::SOAPBOX  => DI::l10n()->t('Soap-Box (auto-approve Follow requests)'),
+			User::LOVEALL  => DI::l10n()->t('Love-All (auto-approve Friend requests)'),
+			User::ORGPAGE  => DI::l10n()->t('Organization Page'),
+			User::NEWSPAGE => DI::l10n()->t('News Page'),
+			User::PUBGROUP => DI::l10n()->t('Public Group'),
+			User::RESGROUP => DI::l10n()->t('Restricted Group'),
+			User::PRIGROUP => DI::l10n()->t('Private Group'),
 		];
 		$selected = '';
 		/* get any URL params */
 		$which_types = $_GET['type'] ?? '';
 		/* tailor options based on type param */
-		if (!empty($which_types)){
-			if ($which_types == User::PUBGROUP || $which_types == User::RESGROUP || $which_types == User::PRIGROUP){
+		if (!empty($which_types)) {
+			if ($which_types == User::PUBGROUP || $which_types == User::RESGROUP || $which_types == User::PRIGROUP) {
 				$acct_list = [
-					User::PUBGROUP	=> DI::l10n()->t('Public Group'),
-					User::RESGROUP	=> DI::l10n()->t('Restricted Group'),
-					User::PRIGROUP	=> DI::l10n()->t('Private Group')
+					User::PUBGROUP => DI::l10n()->t('Public Group'),
+					User::RESGROUP => DI::l10n()->t('Restricted Group'),
+					User::PRIGROUP => DI::l10n()->t('Private Group'),
 				];
 				$regbutton_label = DI::l10n()->t('Create Group');
 			}
-			if ($which_types == User::ORGPAGE || $which_types == User::NEWSPAGE){
+			if ($which_types == User::ORGPAGE || $which_types == User::NEWSPAGE) {
 				$acct_list = [
-					User::ORGPAGE	=> DI::l10n()->t('Organization Page'),
-					User::NEWSPAGE	=> DI::l10n()->t('News Page'),
+					User::ORGPAGE  => DI::l10n()->t('Organization Page'),
+					User::NEWSPAGE => DI::l10n()->t('News Page'),
 				];
 				$regbutton_label = DI::l10n()->t('Create Page');
 			}
-			if ($which_types == User::PERSONAL || $which_types == User::SOAPBOX || $which_types == User::LOVEALL){
+			if ($which_types == User::PERSONAL || $which_types == User::SOAPBOX || $which_types == User::LOVEALL) {
 				$acct_list = [
-					User::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
-					User::SOAPBOX	=> DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
-					User::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),
+					User::PERSONAL => DI::l10n()->t('Personal (standard account)'),
+					User::SOAPBOX  => DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
+					User::LOVEALL  => DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),
 				];
 			}
 			/* select the option (if it is not valid it just won't select anything) */
@@ -245,7 +245,7 @@ class Register extends BaseModule
 			'$explicit_content_note' => DI::l10n()->t('Note: This node explicitly contains adult content'),
 			'$additional'            => !empty(DI::userSession()->getLocalUserId()),
 			'$parent_password'       => ['parent_password', DI::l10n()->t('Parent Password:'), '', DI::l10n()->t('Please enter the password of the parent account to legitimize your request.')],
-			'$acct_type'             => $acct_type
+			'$acct_type'             => $acct_type,
 
 		]);
 
@@ -380,7 +380,7 @@ class Register extends BaseModule
 
 		$user = $result['user'];
 
-		$base_url = (string)DI::baseUrl();
+		$base_url = (string) DI::baseUrl();
 
 		if ($netpublish && self::getPolicy() !== self::APPROVE) {
 			$url = $base_url . '/profile/' . $user['nickname'];
@@ -388,8 +388,8 @@ class Register extends BaseModule
 		}
 
 		if ($additional_account) {
-			if (!empty($arr['register_type'])){
-				switch($arr['register_type']){
+			if (!empty($arr['register_type'])) {
+				switch ($arr['register_type']) {
 					case User::PERSONAL:
 						$acct_type = User::ACCOUNT_TYPE_PERSON;
 						$acct_flag = User::PAGE_FLAGS_NORMAL;
@@ -453,7 +453,7 @@ class Register extends BaseModule
 					$user,
 					DI::config()->get('config', 'sitename'),
 					$base_url,
-					$result['password']
+					$result['password'],
 				);
 
 				if ($res) {
@@ -467,8 +467,8 @@ class Register extends BaseModule
 						DI::l10n()->t(
 							'Failed to send email message. Here your accout details:<br> login: %s<br> password: %s<br><br>You can change your password after login.',
 							$user['email'],
-							$result['password']
-						)
+							$result['password'],
+						),
 					);
 				}
 			} else {
@@ -516,7 +516,7 @@ class Register extends BaseModule
 				$user,
 				DI::config()->get('config', 'sitename'),
 				$base_url,
-				$result['password']
+				$result['password'],
 			);
 
 			DI::sysmsg()->addInfo(DI::l10n()->t('Your registration is pending approval by the site owner.'));
@@ -537,7 +537,7 @@ class Register extends BaseModule
 				'source_nick'               => $user['nickname'],
 				'source_link'               => DI::baseUrl() . '/moderation/users/',
 				'source_photo'              => User::getAvatarUrl($user, Proxy::SIZE_THUMB),
-				'show_in_notification_page' => false
+				'show_in_notification_page' => false,
 			]);
 		}
 	}

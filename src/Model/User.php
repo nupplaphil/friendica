@@ -94,13 +94,13 @@ class User
 	 * @}
 	 */
 
-	 /**
-	  * Account type value strings
-	  *
-	  * Used for drop-down select option values
-	  * so as to not expose the database values
-	  * @{
-	  */
+	/**
+	 * Account type value strings
+	 *
+	 * Used for drop-down select option values
+	 * so as to not expose the database values
+	 * @{
+	 */
 	public const PERSONAL = "personal";
 	public const SOAPBOX  = "soapbox";
 	public const LOVEALL  = "loveall";
@@ -112,7 +112,7 @@ class User
 	/**
 	 * @}
 	 */
-	
+
 	private static $owner;
 
 	/**
