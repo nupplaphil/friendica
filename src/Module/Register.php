@@ -35,15 +35,6 @@ class Register extends BaseModule
 	const CLOSED  = 0;
 	const APPROVE = 1;
 	const OPEN    = 2;
-	/** account types for drop-down **/
-	const PERSONAL = "personal";
-	const SOAPBOX  = "soapbox";
-	const LOVEALL  = "loveall";
-	const ORGPAGE  = "page";
-	const NEWSPAGE = "newspage";
-	const PUBGROUP = "group";
-	const RESGROUP = "group-restricted";
-	const PRIGROUP = "group-private";
 	
 	/** @var Tos */
 	protected $tos;
@@ -145,44 +136,44 @@ class Register extends BaseModule
 			]);
 		}
 
-		$regbutton_label = DI::l10n()->t('Register Account');
+		$regbutton_label = DI::l10n()->t('Create Account');
 
 		/* ACCOUNT TYPE SELECT */
 		$acct_list = [	// value => label
-			Register::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
-			Register::SOAPBOX	=> DI::l10n()->t('Soap-Box (auto-approve Follow requests)'),
-			Register::LOVEALL	=> DI::l10n()->t('Love-All (auto-approve Friend requests)'),
-			Register::ORGPAGE	=> DI::l10n()->t('Organization Page'),
-			Register::NEWSPAGE	=> DI::l10n()->t('News Page'),
-			Register::PUBGROUP	=> DI::l10n()->t('Public Group'),
-			Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
-			Register::PRIGROUP	=> DI::l10n()->t('Private Group')
+			User::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
+			User::SOAPBOX	=> DI::l10n()->t('Soap-Box (auto-approve Follow requests)'),
+			User::LOVEALL	=> DI::l10n()->t('Love-All (auto-approve Friend requests)'),
+			User::ORGPAGE	=> DI::l10n()->t('Organization Page'),
+			User::NEWSPAGE	=> DI::l10n()->t('News Page'),
+			User::PUBGROUP	=> DI::l10n()->t('Public Group'),
+			User::RESGROUP	=> DI::l10n()->t('Restricted Group'),
+			User::PRIGROUP	=> DI::l10n()->t('Private Group')
 		];
 		$selected = '';
 		/* get any URL params */	
 		$which_types = $_GET['type'] ?? '';
 		/* tailor options based on type param */		
 		if (!empty($which_types)){
-			if ($which_types == Register::PUBGROUP || $which_types == Register::RESGROUP || $which_types == Register::PRIGROUP){
+			if ($which_types == User::PUBGROUP || $which_types == User::RESGROUP || $which_types == User::PRIGROUP){
 				$acct_list = [
-					Register::PUBGROUP	=> DI::l10n()->t('Public Group'),
-					Register::RESGROUP	=> DI::l10n()->t('Restricted Group'),
-					Register::PRIGROUP	=> DI::l10n()->t('Private Group')				
+					User::PUBGROUP	=> DI::l10n()->t('Public Group'),
+					User::RESGROUP	=> DI::l10n()->t('Restricted Group'),
+					User::PRIGROUP	=> DI::l10n()->t('Private Group')				
 				];
-				$regbutton_label = DI::l10n()->t('Register Group');
+				$regbutton_label = DI::l10n()->t('Create Group');
 			}
-			if ($which_types == Register::ORGPAGE || $which_types == Register::NEWSPAGE){
+			if ($which_types == User::ORGPAGE || $which_types == User::NEWSPAGE){
 				$acct_list = [
-					Register::ORGPAGE	=> DI::l10n()->t('Organization Page'),
-					Register::NEWSPAGE	=> DI::l10n()->t('News Page'),				
+					User::ORGPAGE	=> DI::l10n()->t('Organization Page'),
+					User::NEWSPAGE	=> DI::l10n()->t('News Page'),				
 				];
-				$regbutton_label = DI::l10n()->t('Register Page');
+				$regbutton_label = DI::l10n()->t('Create Page');
 			}
-			if ($which_types == Register::PERSONAL || $which_types == Register::SOAPBOX || $which_types == Register::LOVEALL){
+			if ($which_types == User::PERSONAL || $which_types == User::SOAPBOX || $which_types == User::LOVEALL){
 				$acct_list = [
-					Register::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
-					Register::SOAPBOX	=> DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
-					Register::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),	
+					User::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
+					User::SOAPBOX	=> DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
+					User::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),	
 				];				
 			}
 			/* select the option (if it is not valid it just won't select anything) */
@@ -399,45 +390,45 @@ class Register extends BaseModule
 		if ($additional_account) {
 			if (!empty($arr['register_type'])){
 				switch($arr['register_type']){
-					case Register::PERSONAL:
-						$acct_type = 0;
-						$acct_flag = 0;
+					case User::PERSONAL:
+						$acct_type = User::ACCOUNT_TYPE_PERSON;
+						$acct_flag = User::PAGE_FLAGS_NORMAL;
 						break;
-					case Register::SOAPBOX:
-						$acct_type = 0;
-						$acct_flag = 1;
+					case User::SOAPBOX:
+						$acct_type = User::ACCOUNT_TYPE_PERSON;
+						$acct_flag = User::PAGE_FLAGS_SOAPBOX;
 						break;
-					case Register::LOVEALL:
-						$acct_type = 0;
-						$acct_flag = 3;
+					case User::LOVEALL:
+						$acct_type = User::ACCOUNT_TYPE_PERSON;
+						$acct_flag = User::PAGE_FLAGS_FREELOVE;
 						break;
-					case Register::ORGPAGE:
-						$acct_type = 1;
-						$acct_flag = 1;
+					case User::ORGPAGE:
+						$acct_type = User::ACCOUNT_TYPE_ORGANISATION;
+						$acct_flag = User::PAGE_FLAGS_SOAPBOX;
 						break;
-					case Register::NEWSPAGE:
-						$acct_type = 2;
-						$acct_flag = 1;
+					case User::NEWSPAGE:
+						$acct_type = User::ACCOUNT_TYPE_NEWS;
+						$acct_flag = User::PAGE_FLAGS_SOAPBOX;
 						break;
-					case Register::PUBGROUP:
-						$acct_type = 3;
-						$acct_flag = 2;
+					case User::PUBGROUP:
+						$acct_type = User::ACCOUNT_TYPE_COMMUNITY;
+						$acct_flag = User::PAGE_FLAGS_COMMUNITY;
 						break;
-					case Register::RESGROUP:
-						$acct_type = 3;
-						$acct_flag = 6;
+					case User::RESGROUP:
+						$acct_type = User::ACCOUNT_TYPE_COMMUNITY;
+						$acct_flag = User::PAGE_FLAGS_COMM_MAN;
 						break;
-					case Register::PRIGROUP:
-						$acct_type = 3;
-						$acct_flag = 5;
+					case User::PRIGROUP:
+						$acct_type = User::ACCOUNT_TYPE_COMMUNITY;
+						$acct_flag = User::PAGE_FLAGS_PRVGROUP;
 						break;
 					default:
-						$acct_type = 0;
-						$acct_flag = 0;
+						$acct_type = User::ACCOUNT_TYPE_PERSON;
+						$acct_flag = User::PAGE_FLAGS_NORMAL;
 				};
 			} else {
-				$acct_type = 0;
-				$acct_flag = 0;
+				$acct_type = User::ACCOUNT_TYPE_PERSON;
+				$acct_flag = User::PAGE_FLAGS_NORMAL;
 			}
 			
 			DBA::update('user', ['parent-uid' => DI::userSession()->getLocalUserId(), 'account-type' => $acct_type, 'page-flags' => $acct_flag], ['uid' => $user['uid']]);
