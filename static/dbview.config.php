@@ -175,6 +175,7 @@ return [
 			AND (NOT `contact`.`readonly` AND NOT `contact`.`blocked` AND NOT `contact`.`pending`)
 			AND (`post-thread-user`.`hidden` IS NULL OR NOT `post-thread-user`.`hidden`)
 			AND NOT `authorcontact`.`blocked` AND NOT `ownercontact`.`blocked`
+			AND NOT `authorcontact`.`unsearchable` AND NOT `ownercontact`.`unsearchable`
 			AND NOT EXISTS(SELECT `cid`  FROM `user-contact` WHERE `uid` = `post-thread-user`.`uid` AND `cid` IN (`authorcontact`.`id`, `ownercontact`.`id`) AND (`blocked` OR `ignored` OR `is-blocked`))
 			AND NOT EXISTS(SELECT `gsid` FROM `user-gserver` WHERE `uid` = `post-thread-user`.`uid` AND `gsid` IN (`authorcontact`.`gsid`, `ownercontact`.`gsid`) AND `ignored`)",
 	],
@@ -343,6 +344,7 @@ return [
 			AND (NOT `contact`.`readonly` AND NOT `contact`.`blocked` AND NOT `contact`.`pending`)
 			AND (`post-thread-user`.`hidden` IS NULL OR NOT `post-thread-user`.`hidden`)
 			AND NOT `authorcontact`.`blocked` AND NOT `ownercontact`.`blocked`
+			AND NOT `authorcontact`.`unsearchable` AND NOT `ownercontact`.`unsearchable`
 			AND NOT EXISTS(SELECT `cid`  FROM `user-contact` WHERE `uid` = `post-thread-user`.`uid` AND `cid` IN (`authorcontact`.`id`, `ownercontact`.`id`) AND (`blocked` OR `ignored` OR `is-blocked`))
 			AND NOT EXISTS(SELECT `gsid` FROM `user-gserver` WHERE `uid` = `post-thread-user`.`uid` AND `gsid` IN (`authorcontact`.`gsid`, `ownercontact`.`gsid`) AND `ignored`)",
 	],

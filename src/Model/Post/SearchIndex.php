@@ -12,6 +12,7 @@ use Friendica\Core\Protocol;
 use Friendica\Database\Database;
 use Friendica\Database\DBA;
 use Friendica\DI;
+use Friendica\Model\Contact;
 use Friendica\Model\Item;
 use Friendica\Model\Post;
 use Friendica\Util\DateTimeFormat;
@@ -34,6 +35,10 @@ class SearchIndex
 
 		$item = Post::selectFirstPost(['created', 'owner-id', 'private', 'language', 'network', 'title', 'content-warning', 'body', 'quote-uri-id'], ['uri-id' => $uri_id]);
 		if (empty($item)) {
+			return;
+		}
+
+		if (Contact::exists(['unsearchable' => false])) {
 			return;
 		}
 
