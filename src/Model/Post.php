@@ -201,6 +201,28 @@ class Post
 	}
 
 	/**
+	 * Retrieve a single record from the post-origin-view view and returns it in an associative array
+	 *
+	 * @return bool|array
+	 * @throws \Exception
+	 * @see   DBA::select
+	 */
+	public static function selectOriginFirst(array $fields = [], array $condition = [], array $params = [])
+	{
+		$params['limit'] = 1;
+
+		$result = self::selectOrigin($fields, $condition, $params);
+
+		if (is_bool($result)) {
+			return $result;
+		} else {
+			$row = self::fetch($result);
+			DBA::close($result);
+			return $row;
+		}
+	}
+
+	/**
 	 * Retrieve a single record from the post-user-view view and returns it in an associative array
 	 * When the requested record is a reshare activity, the system fetches the reshared original post.
 	 * Otherwise the function reacts similar to selectFirst

@@ -459,7 +459,7 @@ return [
 		],
 
 		// minimum_posting_interval (Integer)
-		// Minimum interval between two feed posts per user
+		// Minimum interval in minutes between two feed posts per user
 		'minimum_posting_interval' => 0,
 
 		// no_count (Boolean)

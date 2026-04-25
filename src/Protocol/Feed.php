@@ -294,12 +294,14 @@ class Feed
 		$creation_dates = $processed['creation_dates'];
 
 		if (!empty($postings)) {
-			$min_posting = DI::config()->get('system', 'minimum_posting_interval', 0);
-			$total       = count($postings);
+			$system_min_posting = DI::config()->get('system', 'minimum_posting_interval');
+			$user_min_posting   = DI::pConfig()->get($importer['uid'], 'system', 'minimum_posting_interval', 0, true);
+			$min_posting        = max($system_min_posting, $user_min_posting) * 60;
+			$total              = count($postings);
 			if ($total > 1) {
 				// Posts shouldn't be delayed more than a day
 				$interval = min(1440, self::getPollInterval($contact));
-				$delay    = max(round(($interval * 60) / $total), 60 * $min_posting);
+				$delay    = max(round(($interval * 60) / $total), $min_posting);
 				DI::logger()->info('Got posting delay', ['delay' => $delay, 'interval' => $interval, 'items' => $total, 'cid' => $contact['id'], 'url' => $contact['url']]);
 			} else {
 				$delay = 0;
@@ -316,7 +318,7 @@ class Feed
 				}
 
 				$last_publish = DI::pConfig()->get($posting['item']['uid'], 'system', 'last_publish', 0, true);
-				$next_publish = max($last_publish + (60 * $min_posting), time());
+				$next_publish = max($last_publish + $min_posting, time());
 				if ($publish_time < $next_publish) {
 					$publish_time = $next_publish;
 				}

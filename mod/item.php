@@ -300,18 +300,25 @@ function item_process(array $post, array $request, bool $preview, string $return
 	unset($post['self']);
 	unset($post['api_source']);
 
+	$scheduled_at = '';
 	if (!empty($request['scheduled_at'])) {
 		$scheduled_at = DateTimeFormat::convert($request['scheduled_at'], 'UTC', DI::appHelper()->getTimeZone());
-		if ($scheduled_at > DateTimeFormat::utcNow()) {
-			unset($post['created']);
-			unset($post['edited']);
-			unset($post['commented']);
-			unset($post['received']);
-			unset($post['changed']);
+	} else {
+		$scheduled_at = DI::contentItem()->getAutomaticScheduledAt($post['uid']);
+	}
 
-			Post\Delayed::add($post['uri'], $post, Worker::PRIORITY_HIGH, Post\Delayed::PREPARED_NO_HOOK, $scheduled_at);
-			item_post_return(DI::baseUrl(), $return_path);
+	if ($scheduled_at > DateTimeFormat::utcNow()) {
+		unset($post['created']);
+		unset($post['edited']);
+		unset($post['commented']);
+		unset($post['received']);
+		unset($post['changed']);
+
+		$id = Post\Delayed::add($post['uri'], $post, Worker::PRIORITY_HIGH, Post\Delayed::PREPARED_NO_HOOK, $scheduled_at);
+		if ($id && empty($request['scheduled_at'])) {
+			DI::contentItem()->setAutomaticScheduledAt($post['uid'], $scheduled_at);
 		}
+		item_post_return(DI::baseUrl(), $return_path);
 	}
 
 	if (!empty($post['cancel'])) {

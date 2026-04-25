@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.04-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-26 10:26+0200\n"
+"POT-Creation-Date: 2026-04-28 04:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,13 +38,13 @@ msgstr ""
 msgid "Empty post discarded."
 msgstr ""
 
-#: mod/item.php:442 src/Module/Admin/Themes/Details.php:31
+#: mod/item.php:449 src/Module/Admin/Themes/Details.php:31
 #: src/Module/Admin/Themes/Index.php:51 src/Module/Debug/ItemBody.php:34
 #: src/Module/Debug/ItemBody.php:42 src/Module/Item/Feed.php:66
 msgid "Item not found."
 msgstr ""
 
-#: mod/item.php:466 mod/message.php:56 mod/message.php:102 mod/photos.php:117
+#: mod/item.php:473 mod/message.php:56 mod/message.php:102 mod/photos.php:117
 #: mod/photos.php:418 src/Model/Event.php:510 src/Module/Attach.php:40
 #: src/Module/BaseApi.php:91 src/Module/BaseNotifications.php:83
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
@@ -434,7 +434,7 @@ msgstr ""
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
 #: src/Module/Moderation/Users/Index.php:100
-#: src/Module/Settings/Connectors.php:226
+#: src/Module/Settings/Connectors.php:229
 #: src/Module/Settings/Server/Index.php:96
 msgid "Delete"
 msgstr ""
@@ -1679,7 +1679,7 @@ msgstr ""
 msgid "Find groups to join"
 msgstr ""
 
-#: src/Content/Item.php:336 src/Model/Item.php:2857
+#: src/Content/Item.php:336 src/Model/Item.php:2861
 msgid "event"
 msgstr ""
 
@@ -1687,7 +1687,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#: src/Content/Item.php:345 src/Model/Item.php:2859
+#: src/Content/Item.php:345 src/Model/Item.php:2863
 #: src/Module/Post/Tag/Add.php:112
 msgid "photo"
 msgstr ""
@@ -1772,21 +1772,21 @@ msgstr ""
 msgid "Unable to fetch user."
 msgstr ""
 
-#: src/Content/Item.php:1351 src/Core/L10n.php:480
+#: src/Content/Item.php:1411 src/Core/L10n.php:480
 msgid "Undetermined"
 msgstr ""
 
-#: src/Content/Item.php:1358
+#: src/Content/Item.php:1418
 #, php-format
 msgid "%s (%s - %s): %s"
 msgstr ""
 
-#: src/Content/Item.php:1360
+#: src/Content/Item.php:1420
 #, php-format
 msgid "%s (%s): %s"
 msgstr ""
 
-#: src/Content/Item.php:1363
+#: src/Content/Item.php:1423
 #, php-format
 msgid ""
 "Detected languages in this post:\n"
@@ -2005,7 +2005,7 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-#: src/Content/Nav.php:312 src/Module/Settings/Connectors.php:226
+#: src/Content/Nav.php:312 src/Module/Settings/Connectors.php:229
 msgid "Mark as read"
 msgstr ""
 
@@ -2106,8 +2106,8 @@ msgstr ""
 msgid "<a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a> %3$s"
 msgstr ""
 
-#: src/Content/Text/BBCode.php:950 src/Model/Item.php:3705
-#: src/Model/Item.php:3711 src/Model/Item.php:3712
+#: src/Content/Text/BBCode.php:950 src/Model/Item.php:3709
+#: src/Model/Item.php:3715 src/Model/Item.php:3716
 msgid "Link to source"
 msgstr ""
 
@@ -3221,84 +3221,84 @@ msgstr ""
 msgid "Happy Birthday %s"
 msgstr ""
 
-#: src/Model/Item.php:2861
+#: src/Model/Item.php:2865
 msgid "activity"
 msgstr ""
 
-#: src/Model/Item.php:2863
+#: src/Model/Item.php:2867
 msgid "comment"
 msgstr ""
 
-#: src/Model/Item.php:2866 src/Module/Post/Tag/Add.php:112
+#: src/Model/Item.php:2870 src/Module/Post/Tag/Add.php:112
 msgid "post"
-msgstr ""
-
-#: src/Model/Item.php:3058
-#, php-format
-msgid "%s is blocked"
-msgstr ""
-
-#: src/Model/Item.php:3060
-#, php-format
-msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3062
 #, php-format
-msgid "Content from %s is collapsed"
+msgid "%s is blocked"
+msgstr ""
+
+#: src/Model/Item.php:3064
+#, php-format
+msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3066
+#, php-format
+msgid "Content from %s is collapsed"
+msgstr ""
+
+#: src/Model/Item.php:3070
 msgid "Sensitive content"
 msgstr ""
 
-#: src/Model/Item.php:3573
+#: src/Model/Item.php:3577
 msgid "bytes"
 msgstr ""
 
-#: src/Model/Item.php:3607
+#: src/Model/Item.php:3611
 #, php-format
 msgid "The media in this post is not displayed to visitors. To view it, please go to the <a href=\"%s\">original post</a>."
 msgstr ""
 
-#: src/Model/Item.php:3609
+#: src/Model/Item.php:3613
 msgid "The media in this post is not displayed to visitors. To view it, please log in."
 msgstr ""
 
-#: src/Model/Item.php:3634
+#: src/Model/Item.php:3638
 #, php-format
 msgid "%2$s (%3$d%%, %1$d vote)"
 msgid_plural "%2$s (%3$d%%, %1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3636
+#: src/Model/Item.php:3640
 #, php-format
 msgid "%2$s (%1$d vote)"
 msgid_plural "%2$s (%1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3641
+#: src/Model/Item.php:3645
 #, php-format
 msgid "%d voter. Poll end: %s"
 msgid_plural "%d voters. Poll end: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3643
+#: src/Model/Item.php:3647
 #, php-format
 msgid "%d voter."
 msgid_plural "%d voters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3645
+#: src/Model/Item.php:3649
 #, php-format
 msgid "Poll end: %s"
 msgstr ""
 
-#: src/Model/Item.php:3688 src/Model/Item.php:3689
+#: src/Model/Item.php:3692 src/Model/Item.php:3693
 msgid "View on separate page"
 msgstr ""
 
@@ -3751,8 +3751,8 @@ msgstr ""
 #: src/Module/Admin/Addons/Index.php:85 src/Module/Admin/Features.php:69
 #: src/Module/Admin/Logs/Settings.php:76 src/Module/Admin/Site.php:460
 #: src/Module/Admin/Themes/Index.php:105 src/Module/Admin/Tos.php:72
-#: src/Module/Settings/Addons.php:64 src/Module/Settings/Connectors.php:143
-#: src/Module/Settings/Connectors.php:228
+#: src/Module/Settings/Addons.php:64 src/Module/Settings/Connectors.php:145
+#: src/Module/Settings/Connectors.php:231
 #: src/Module/Settings/ContactImport.php:111
 #: src/Module/Settings/Delegation.php:179 src/Module/Settings/Display.php:426
 #: src/Module/Settings/Features.php:90
@@ -5660,7 +5660,7 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-#: src/Module/BaseSettings.php:120 src/Module/Settings/Connectors.php:189
+#: src/Module/BaseSettings.php:120 src/Module/Settings/Connectors.php:191
 msgid "Social Networks"
 msgstr ""
 
@@ -8583,19 +8583,19 @@ msgid "No contacts."
 msgstr ""
 
 #: src/Module/Profile/Conversations.php:96 src/Module/Profile/Profile.php:357
-#: src/Protocol/Feed.php:1105
+#: src/Protocol/Feed.php:1107
 #, php-format
 msgid "%s's posts"
 msgstr ""
 
 #: src/Module/Profile/Conversations.php:97 src/Module/Profile/Profile.php:358
-#: src/Protocol/Feed.php:1108
+#: src/Protocol/Feed.php:1110
 #, php-format
 msgid "%s's comments"
 msgstr ""
 
 #: src/Module/Profile/Conversations.php:98 src/Module/Profile/Profile.php:359
-#: src/Protocol/Feed.php:1101
+#: src/Protocol/Feed.php:1103
 #, php-format
 msgid "%s's timeline"
 msgstr ""
@@ -9707,175 +9707,183 @@ msgstr ""
 msgid "Delete entry from the channel list?"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:107
+#: src/Module/Settings/Connectors.php:108
 msgid "Failed to connect with email account using the settings provided."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:149
-#: src/Module/Settings/Connectors.php:150
+#: src/Module/Settings/Connectors.php:151
+#: src/Module/Settings/Connectors.php:152
 msgid "Diaspora (Socialhome, Hubzilla)"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:149
+#: src/Module/Settings/Connectors.php:151
 #, php-format
 msgid "Built-in support for %s connectivity is enabled"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:150
+#: src/Module/Settings/Connectors.php:152
 #, php-format
 msgid "Built-in support for %s connectivity is disabled"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:161
+#: src/Module/Settings/Connectors.php:163
 msgid "Email access is disabled on this site."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:176
-#: src/Module/Settings/Connectors.php:226
+#: src/Module/Settings/Connectors.php:178
+#: src/Module/Settings/Connectors.php:229
 msgid "None"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:180
+#: src/Module/Settings/Connectors.php:182
 msgid "Default (Mastodon will display the title and a link to the post)"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:181
+#: src/Module/Settings/Connectors.php:183
 msgid "Use the summary (Mastodon and some others will treat it as content warning)"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:182
+#: src/Module/Settings/Connectors.php:184
 msgid "Embed the title in the body"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:193
+#: src/Module/Settings/Connectors.php:195
 msgid "General Social Media Settings"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:196
+#: src/Module/Settings/Connectors.php:198
 msgid "Followed content scope"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:198
+#: src/Module/Settings/Connectors.php:200
 msgid "By default, conversations in which your follows participated but didn't start will be shown in your timeline. You can turn this behavior off, or expand it to the conversations in which your follows liked a post."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:200
+#: src/Module/Settings/Connectors.php:202
 msgid "Only conversations my follows started"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:201
+#: src/Module/Settings/Connectors.php:203
 msgid "Conversations my follows started or commented on (default)"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:202
+#: src/Module/Settings/Connectors.php:204
 msgid "Any conversation my follows interacted with, including likes"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:205
+#: src/Module/Settings/Connectors.php:207
 msgid "Collapse sensitive posts"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:205
+#: src/Module/Settings/Connectors.php:207
 msgid "If a post is marked as \"sensitive\", it will be displayed in a collapsed state, if this option is enabled."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:206
+#: src/Module/Settings/Connectors.php:208
 msgid "Enable intelligent shortening"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:206
+#: src/Module/Settings/Connectors.php:208
 msgid "Normally the system tries to find the best link to add to shortened posts. If disabled, every shortened post will always point to the original friendica post."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:207
+#: src/Module/Settings/Connectors.php:209
 msgid "Enable simple text shortening"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:207
+#: src/Module/Settings/Connectors.php:209
 msgid "Normally the system shortens posts at the next line feed. If this option is enabled then the system will shorten the text at the maximum character limit."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:208
+#: src/Module/Settings/Connectors.php:210
 msgid "Attach the link title"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:208
+#: src/Module/Settings/Connectors.php:210
 msgid "When activated, the title of the attached link will be added as a title on posts to Diaspora. This is mostly helpful with \"remote-self\" contacts that share feed content."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:209
+#: src/Module/Settings/Connectors.php:211
 msgid "API: Use spoiler field as title"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:209
+#: src/Module/Settings/Connectors.php:211
 msgid "When activated, the \"spoiler_text\" field in the API will be used for the title on standalone posts. When deactivated it will be used for spoiler text. For comments it will always be used for spoiler text."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:210
+#: src/Module/Settings/Connectors.php:212
 msgid "API: Automatically links at the end of the post as attached posts"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:210
+#: src/Module/Settings/Connectors.php:212
 msgid "When activated, added links at the end of the post react the same way as added links in the web interface."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:211
+#: src/Module/Settings/Connectors.php:213
 msgid "Article Mode"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:211
+#: src/Module/Settings/Connectors.php:213
 msgid "Controls how posts with titles are transmitted. Mastodon and its forks don't display the content of these posts if the post is created in the correct (default) way."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:215
+#: src/Module/Settings/Connectors.php:214
+msgid "Minimal Posting Interval"
+msgstr ""
+
+#: src/Module/Settings/Connectors.php:214
+msgid "The minimum interval in minutes between two posts. Default is 0. If enabled, your own posts are automatically delayed by the specified number of seconds."
+msgstr ""
+
+#: src/Module/Settings/Connectors.php:218
 msgid "Email/Mailbox Setup"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:216
+#: src/Module/Settings/Connectors.php:219
 msgid "If you wish to communicate with email contacts using this service (optional), please specify how to connect to your mailbox."
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:217
+#: src/Module/Settings/Connectors.php:220
 msgid "Last successful email check:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:219
+#: src/Module/Settings/Connectors.php:222
 msgid "IMAP server name:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:220
+#: src/Module/Settings/Connectors.php:223
 msgid "IMAP port:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:221
+#: src/Module/Settings/Connectors.php:224
 msgid "Security:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:222
+#: src/Module/Settings/Connectors.php:225
 msgid "Email login name:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:223
+#: src/Module/Settings/Connectors.php:226
 msgid "Email password:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:224
+#: src/Module/Settings/Connectors.php:227
 msgid "Reply-to address:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:225
+#: src/Module/Settings/Connectors.php:228
 msgid "Send public posts to all email contacts:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:226
+#: src/Module/Settings/Connectors.php:229
 msgid "Action after import:"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:226
+#: src/Module/Settings/Connectors.php:229
 msgid "Move to folder"
 msgstr ""
 
-#: src/Module/Settings/Connectors.php:227
+#: src/Module/Settings/Connectors.php:230
 msgid "Move to folder:"
 msgstr ""
 

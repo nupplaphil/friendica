@@ -1020,6 +1020,55 @@ class Item
 		return $post;
 	}
 
+	/**
+	 * Returns the next automatic scheduling timestamp for a user based on the minimum posting interval.
+	 *
+	 * @param int $uid
+	 * @return string UTC date string in MYSQL format or an empty string if no delay is needed
+	 */
+	public function getAutomaticScheduledAt(int $uid): string
+	{
+		$minimum_posting_interval = ($this->pConfig->get($uid, 'system', 'minimum_posting_interval') ?? 0) * 60;
+		if ($minimum_posting_interval <= 0) {
+			return '';
+		}
+
+		$last_publish = $this->pConfig->get($uid, 'system', 'last_publish', 0, true);
+
+		$last_post = Post::selectOriginFirst(['created'], ['uid' => $uid, 'origin' => true], ['order' => ['created' => true]]);
+		if (DBA::isResult($last_post)) {
+			$last_created = strtotime(DateTimeFormat::utc($last_post['created']));
+			if (!empty($last_created)) {
+				$last_publish = max($last_publish, $last_created);
+			}
+		}
+
+		$last_scheduled_post = DBA::selectFirst('delayed-post', ['delayed'], ['uid' => $uid], ['order' => ['delayed' => true]]);
+		if (DBA::isResult($last_scheduled_post)) {
+			$last_scheduled = strtotime(DateTimeFormat::utc($last_scheduled_post['delayed']));
+			if (!empty($last_scheduled)) {
+				$last_publish = max($last_publish, $last_scheduled);
+			}
+		}
+
+		$next_publish = max(time(), $last_publish + $minimum_posting_interval);
+		if ($next_publish <= time()) {
+			return '';
+		}
+
+		return date(DateTimeFormat::MYSQL, $next_publish);
+	}
+
+	public function setAutomaticScheduledAt(int $uid, string $scheduledAt): void
+	{
+		$scheduledTimestamp = strtotime(DateTimeFormat::utc($scheduledAt));
+		if (empty($scheduledTimestamp)) {
+			return;
+		}
+
+		$this->pConfig->set($uid, 'system', 'last_publish', $scheduledTimestamp);
+	}
+
 	public function postProcessPost(array $post, array $recipients = [])
 	{
 		if (!Feature::isEnabled($post['uid'], Feature::EXPLICIT_MENTIONS) && ($post['gravity'] == ItemModel::GRAVITY_COMMENT)) {
