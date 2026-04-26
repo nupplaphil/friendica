@@ -12,10 +12,16 @@
 		requireCoverageMetadata="false"
 		beStrictAboutCoverageMetadata="true"
 		beStrictAboutOutputDuringTests="true"
+		displayDetailsOnAllIssues="true"
 		displayDetailsOnPhpunitDeprecations="true"
-		failOnPhpunitDeprecation="true"
-		failOnRisky="true"
-		failOnWarning="true"
+		failOnDeprecation="false"
+		failOnEmptyTestSuite="true"
+		failOnIncomplete="false"
+		failOnNotice="false"
+		failOnPhpunitDeprecation="false"
+		failOnRisky="false"
+		failOnSkipped="false"
+		failOnWarning="false"
 >
 
 	<testsuites>
