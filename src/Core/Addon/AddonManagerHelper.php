@@ -145,7 +145,7 @@ final class AddonManagerHelper implements AddonHelper
 		try {
 			require_once($addon_file_path);
 		} catch (\Error $th) {
-			// silently fail if addon file could not be loaded
+			return false;
 		}
 
 		if (function_exists($addonId . '_install')) {

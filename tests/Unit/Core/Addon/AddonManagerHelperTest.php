@@ -270,9 +270,16 @@ class AddonManagerHelperTest extends TestCase
 
 	public function testInstallAddonIncludesAddonFile(): void
 	{
+		// We need a unique name for the addon to avoid conflicts
+		// with other tests that may define the same install function.
+		$addonName = __FUNCTION__;
+
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
-			'helloaddon' => [
-				'helloaddon.php' => '<?php throw new \Exception("Addon file loaded");',
+			$addonName => [
+				$addonName . '.php' => <<<PHP
+					<?php
+					function {$addonName}_install()	{}
+					PHP,
 			]
 		]);
 
@@ -285,10 +292,9 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(Profiler::class)
 		);
 
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Addon file loaded');
+		$addonManagerHelper->installAddon($addonName);
 
-		$addonManagerHelper->installAddon('helloaddon');
+		$this->assertTrue(function_exists($addonName . '_install'));
 	}
 
 	public function testInstallAddonCallsInstallFunction(): void
@@ -378,9 +384,16 @@ class AddonManagerHelperTest extends TestCase
 	}
 	public function testUninstallAddonIncludesAddonFile(): void
 	{
+		// We need a unique name for the addon to avoid conflicts
+		// with other tests that may define the same install function.
+		$addonName = __FUNCTION__;
+
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
-			'helloaddon' => [
-				'helloaddon.php' => '<?php throw new \Exception("Addon file loaded");',
+			$addonName => [
+				$addonName . '.php' => <<<PHP
+					<?php
+					function {$addonName}_uninstall()	{}
+					PHP,
 			]
 		]);
 
@@ -393,10 +406,9 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(Profiler::class)
 		);
 
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Addon file loaded');
+		$addonManagerHelper->uninstallAddon($addonName);
 
-		$addonManagerHelper->uninstallAddon('helloaddon');
+		$this->assertTrue(function_exists($addonName . '_uninstall'));
 	}
 
 	public function testUninstallAddonCallsUninstallFunction(): void
