@@ -2861,9 +2861,28 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	margin-top: 14px;
 	display: none;
 }
+#circle-edit-submit-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+}
 #circle-edit-header {
 	display: block;
 }
+
+@media (max-width: 767px) {
+	#circle-edit-form .pull-left,
+	#circle-edit-submit-wrapper {
+		float: none !important;
+	}
+
+	#circle-edit-submit-wrapper {
+		justify-content: flex-start;
+		margin-top: 10px;
+	}
+}
+
 #circle-update-wrapper .contact-photo-overlay {
 	display: none;
 }

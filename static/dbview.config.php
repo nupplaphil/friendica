@@ -127,6 +127,7 @@ return [
 			"contact-contact-type" => ["contact", "contact-type"],
 			"circle-id"            => ["group_member", "gid"],
 			"circle-visible"       => ["group", "visible"],
+			"circle-public"        => ["group", "public"],
 			"circle-deleted"       => ["group", "deleted"],
 			"circle-name"          => ["group", "name"],
 		],

@@ -786,6 +786,7 @@ CREATE TABLE IF NOT EXISTS `group` (
 	`id` int unsigned NOT NULL auto_increment COMMENT 'sequential ID',
 	`uid` mediumint unsigned NOT NULL DEFAULT 0 COMMENT 'Owner User id',
 	`visible` boolean NOT NULL DEFAULT '0' COMMENT '1 indicates the member list is not private',
+	`public` boolean NOT NULL DEFAULT '0' COMMENT '1 indicates the circle is public and can be exported',
 	`deleted` boolean NOT NULL DEFAULT '0' COMMENT '1 indicates the circle has been deleted',
 	`cid` int unsigned COMMENT 'Contact id of group. When this field is filled then the members are synced automatically.',
 	`name` varchar(255) NOT NULL DEFAULT '' COMMENT 'human readable name of circle',
@@ -2265,6 +2266,7 @@ CREATE VIEW `circle-member-view` AS SELECT
 	`contact`.`contact-type` AS `contact-contact-type`,
 	`group_member`.`gid` AS `circle-id`,
 	`group`.`visible` AS `circle-visible`,
+	`group`.`public` AS `circle-public`,
 	`group`.`deleted` AS `circle-deleted`,
 	`group`.`name` AS `circle-name`
 	FROM `group_member`

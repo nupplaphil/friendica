@@ -250,6 +250,27 @@ class Profile extends BaseProfile
 			);
 		}
 
+		$publicCircleLinks = [];
+		$publicCircles     = DBA::selectToArray('group', ['id', 'name'], ['uid' => $profile['uid'], 'deleted' => false, 'public' => true], ['order' => ['name']]);
+		foreach ($publicCircles as $publicCircle) {
+			$publicCircleLinks[] = sprintf(
+				'<a href="%s/profile/%s/circles/%d/download">%s</a>',
+				$this->baseUrl,
+				urlencode($profile['nickname']),
+				(int) $publicCircle['id'],
+				htmlentities($publicCircle['name'], ENT_COMPAT, 'UTF-8', true),
+			);
+		}
+
+		if (!empty($publicCircleLinks)) {
+			$custom_fields += self::buildField(
+				'public_circle_downloads',
+				$this->t('Public circles (CSV):'),
+				implode('<br>', $publicCircleLinks),
+				'aprofile custom',
+			);
+		}
+
 		$tpl = Renderer::getMarkupTemplate('profile/profile.tpl');
 		$o .= Renderer::replaceMacros($tpl, [
 			'$title'                 => $this->t('Profile'),

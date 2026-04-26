@@ -14,6 +14,7 @@
 		<input type='hidden' name='form_security_token' value='{{$form_security_token}}'>
 
 		{{include file="field_input.tpl" field=$gname}}
+		{{include file="field_checkbox.tpl" field=$public}}
 		{{if $drop}}{{$drop nofilter}}{{/if}}
 		<div id="circle-edit-submit-wrapper">
 			<input type="submit" name="submit" value="{{$submit}}">

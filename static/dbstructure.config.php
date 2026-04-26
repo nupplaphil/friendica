@@ -823,6 +823,7 @@ return [
 			"id"      => ["type" => "int unsigned", "not null" => "1", "extra" => "auto_increment", "primary" => "1", "comment" => "sequential ID"],
 			"uid"     => ["type" => "mediumint unsigned", "not null" => "1", "default" => "0", "foreign" => ["user" => "uid"], "comment" => "Owner User id"],
 			"visible" => ["type" => "boolean", "not null" => "1", "default" => "0", "comment" => "1 indicates the member list is not private"],
+			"public"  => ["type" => "boolean", "not null" => "1", "default" => "0", "comment" => "1 indicates the circle is public and can be exported"],
 			"deleted" => ["type" => "boolean", "not null" => "1", "default" => "0", "comment" => "1 indicates the circle has been deleted"],
 			"cid"     => ["type" => "int unsigned", "foreign" => ["contact" => "id"], "comment" => "Contact id of group. When this field is filled then the members are synced automatically."],
 			"name"    => ["type" => "varchar(255)", "not null" => "1", "default" => "", "comment" => "human readable name of circle"],

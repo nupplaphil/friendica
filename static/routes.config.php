@@ -22,6 +22,7 @@ $profileRoutes = [
 	''                                                => [Module\Profile\Index::class,         [R::GET]],
 	'/contacts/common'                                => [Module\Profile\Common::class,        [R::GET]],
 	'/contacts[/{type}]'                              => [Module\Profile\Contacts::class,      [R::GET]],
+	'/circles/{circle_id:\d+}/download'               => [Module\Profile\CircleExport::class,  [R::GET]],
 	'/media'                                          => [Module\Profile\Media::class,         [R::GET]],
 	'/photos'                                         => [Module\Profile\Photos::class,        [R::GET, R::POST]],
 	'/profile'                                        => [Module\Profile\Profile::class,       [R::GET]],

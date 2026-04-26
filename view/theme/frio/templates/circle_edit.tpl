@@ -38,6 +38,7 @@
 
 				<div class="pull-left">
 				{{include file="field_input.tpl" field=$gname label=false}}
+				{{include file="field_checkbox.tpl" field=$public}}
 				</div>
 				<div id="circle-edit-submit-wrapper" class="form-group pull-right">
 					<button class="btn btn-primary btn-small" type="submit" name="submit" value="{{$submit}}">

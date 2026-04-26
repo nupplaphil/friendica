@@ -50,7 +50,7 @@ msgstr ""
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
 #: src/Module/Calendar/Event/Form.php:73 src/Module/Calendar/Export.php:68
 #: src/Module/Calendar/Show.php:71 src/Module/Circle.php:27
-#: src/Module/Circle.php:70 src/Module/Contact/Advanced.php:46
+#: src/Module/Circle.php:76 src/Module/Contact/Advanced.php:46
 #: src/Module/Contact/Follow.php:77 src/Module/Contact/Follow.php:145
 #: src/Module/Contact/MatchInterests.php:73
 #: src/Module/Contact/Suggestions.php:32 src/Module/Contact/Unfollow.php:35
@@ -1545,7 +1545,7 @@ msgid "Network Widgets"
 msgstr ""
 
 #: src/Content/Feature.php:127 src/Content/Widget.php:239
-#: src/Model/Circle.php:587 src/Module/Circle.php:132
+#: src/Model/Circle.php:593 src/Module/Circle.php:138
 #: src/Module/Contact.php:385 src/Module/Welcome.php:63
 msgid "Circles"
 msgstr ""
@@ -1828,7 +1828,7 @@ msgstr ""
 
 #: src/Content/Nav.php:202 src/Module/BaseProfile.php:34
 #: src/Module/BaseSettings.php:86 src/Module/Contact.php:480
-#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:255
+#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:276
 #: src/Module/Welcome.php:44 view/theme/frio/theme.php:219
 msgid "Profile"
 msgstr ""
@@ -2224,7 +2224,7 @@ msgstr ""
 msgid "Relationships"
 msgstr ""
 
-#: src/Content/Widget.php:273 src/Module/Circle.php:293
+#: src/Content/Widget.php:273 src/Module/Circle.php:300
 #: src/Module/Contact.php:329
 msgid "All Contacts"
 msgstr ""
@@ -2371,7 +2371,7 @@ msgstr ""
 msgid "View group"
 msgstr ""
 
-#: src/Core/ACL.php:154 src/Module/Profile/Profile.php:256
+#: src/Core/ACL.php:154 src/Module/Profile/Profile.php:277
 msgid "Yourself"
 msgstr ""
 
@@ -2878,36 +2878,36 @@ msgstr ""
 msgid "A deleted circle with this name was revived. Existing item permissions <strong>may</strong> apply to this circle and any future members. If this is not what you intended, please create another circle with a different name."
 msgstr ""
 
-#: src/Model/Circle.php:530
+#: src/Model/Circle.php:536
 msgid "Everybody"
 msgstr ""
 
-#: src/Model/Circle.php:549
+#: src/Model/Circle.php:555
 msgid "edit"
 msgstr ""
 
-#: src/Model/Circle.php:586
+#: src/Model/Circle.php:592
 msgid "add"
 msgstr ""
 
-#: src/Model/Circle.php:591
+#: src/Model/Circle.php:597
 msgid "Edit circle"
 msgstr ""
 
-#: src/Model/Circle.php:592 src/Module/Circle.php:184
+#: src/Model/Circle.php:598 src/Module/Circle.php:190
 msgid "Contacts not in any circle"
 msgstr ""
 
-#: src/Model/Circle.php:594
+#: src/Model/Circle.php:600
 msgid "Create a new circle"
 msgstr ""
 
-#: src/Model/Circle.php:595 src/Module/Circle.php:167 src/Module/Circle.php:189
-#: src/Module/Circle.php:275
+#: src/Model/Circle.php:601 src/Module/Circle.php:173 src/Module/Circle.php:195
+#: src/Module/Circle.php:281
 msgid "Circle Name: "
 msgstr ""
 
-#: src/Model/Circle.php:596
+#: src/Model/Circle.php:602
 msgid "Edit circles"
 msgstr ""
 
@@ -3328,7 +3328,7 @@ msgstr ""
 msgid "Atom feed"
 msgstr ""
 
-#: src/Model/Profile.php:477 src/Module/Profile/Profile.php:269
+#: src/Model/Profile.php:477 src/Module/Profile/Profile.php:290
 msgid "This website has been verified to belong to the same person."
 msgstr ""
 
@@ -4212,7 +4212,7 @@ msgid "Policies"
 msgstr ""
 
 #: src/Module/Admin/Site.php:465 src/Module/Calendar/Event/Form.php:265
-#: src/Module/Contact.php:523 src/Module/Profile/Profile.php:263
+#: src/Module/Contact.php:523 src/Module/Profile/Profile.php:284
 msgid "Advanced"
 msgstr ""
 
@@ -5813,7 +5813,7 @@ msgstr ""
 msgid "Share this event"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:264 src/Module/Profile/Profile.php:262
+#: src/Module/Calendar/Event/Form.php:264 src/Module/Profile/Profile.php:283
 msgid "Basic"
 msgstr ""
 
@@ -5841,19 +5841,19 @@ msgstr ""
 msgid "Could not create circle."
 msgstr ""
 
-#: src/Module/Circle.php:54 src/Module/Circle.php:202 src/Module/Circle.php:237
+#: src/Module/Circle.php:54 src/Module/Circle.php:208 src/Module/Circle.php:243
 msgid "Circle not found."
 msgstr ""
 
-#: src/Module/Circle.php:60
-msgid "Circle name was not changed."
+#: src/Module/Circle.php:66
+msgid "Circle settings were not changed."
 msgstr ""
 
-#: src/Module/Circle.php:80
+#: src/Module/Circle.php:86
 msgid "Unknown circle."
 msgstr ""
 
-#: src/Module/Circle.php:86 src/Module/Circle.php:95
+#: src/Module/Circle.php:92 src/Module/Circle.php:101
 #: src/Module/Contact/Advanced.php:56 src/Module/Contact/Advanced.php:95
 #: src/Module/Contact/Contacts.php:49 src/Module/Contact/Conversations.php:51
 #: src/Module/Contact/Conversations.php:56
@@ -5867,35 +5867,35 @@ msgstr ""
 msgid "Contact not found."
 msgstr ""
 
-#: src/Module/Circle.php:90 src/Module/Contact/Contacts.php:44
+#: src/Module/Circle.php:96 src/Module/Contact/Contacts.php:44
 msgid "Invalid contact."
 msgstr ""
 
-#: src/Module/Circle.php:99 src/Module/Contact/Revoke.php:56
+#: src/Module/Circle.php:105 src/Module/Contact/Revoke.php:56
 msgid "Contact is deleted."
 msgstr ""
 
-#: src/Module/Circle.php:105
+#: src/Module/Circle.php:111
 msgid "Unable to add the contact to the circle."
 msgstr ""
 
-#: src/Module/Circle.php:108
+#: src/Module/Circle.php:114
 msgid "Contact successfully added to circle."
 msgstr ""
 
-#: src/Module/Circle.php:112
+#: src/Module/Circle.php:118
 msgid "Unable to remove the contact from the circle."
 msgstr ""
 
-#: src/Module/Circle.php:115
+#: src/Module/Circle.php:121
 msgid "Contact successfully removed from circle."
 msgstr ""
 
-#: src/Module/Circle.php:119
+#: src/Module/Circle.php:125
 msgid "Bad request."
 msgstr ""
 
-#: src/Module/Circle.php:159
+#: src/Module/Circle.php:165
 msgid "Save Circle"
 msgstr ""
 
@@ -5904,43 +5904,51 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/Module/Circle.php:166
+#: src/Module/Circle.php:172
 msgid "Create a circle of contacts/friends."
 msgstr ""
 
-#: src/Module/Circle.php:207
+#: src/Module/Circle.php:213
 msgid "Unable to remove circle."
 msgstr ""
 
-#: src/Module/Circle.php:269
+#: src/Module/Circle.php:275
 msgid "Delete Circle"
 msgstr ""
 
-#: src/Module/Circle.php:280
+#: src/Module/Circle.php:282
+msgid "Public circle"
+msgstr ""
+
+#: src/Module/Circle.php:282
+msgid "Public circles can be downloaded by others as CSV files."
+msgstr ""
+
+#: src/Module/Circle.php:287
 msgid "Edit Circle Name"
 msgstr ""
 
-#: src/Module/Circle.php:281
+#: src/Module/Circle.php:288
 msgid "Mark all as read"
 msgstr ""
 
-#: src/Module/Circle.php:291
+#: src/Module/Circle.php:298
 msgid "Members"
 msgstr ""
 
-#: src/Module/Circle.php:294
+#: src/Module/Circle.php:301
 msgid "Circle is empty"
 msgstr ""
 
-#: src/Module/Circle.php:310
+#: src/Module/Circle.php:317
 msgid "Remove contact from circle"
 msgstr ""
 
-#: src/Module/Circle.php:333
+#: src/Module/Circle.php:340
 msgid "Click on a contact to add or remove."
 msgstr ""
 
-#: src/Module/Circle.php:351
+#: src/Module/Circle.php:358
 msgid "Add contact to circle"
 msgstr ""
 
@@ -8590,23 +8598,32 @@ msgstr ""
 msgid "%d more"
 msgstr ""
 
+#: src/Module/Profile/CircleExport.php:45 src/Module/Profile/Profile.php:98
+#: src/Module/Profile/Profile.php:133 src/Module/Profile/Restricted.php:33
+msgid "Profile not found."
+msgstr ""
+
+#: src/Module/Profile/CircleExport.php:54
+msgid "Public circle not found."
+msgstr ""
+
 #: src/Module/Profile/Contacts.php:133
 msgid "No contacts."
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:70 src/Module/Profile/Profile.php:335
+#: src/Module/Profile/Conversations.php:70 src/Module/Profile/Profile.php:356
 #: src/Protocol/Feed.php:1107
 #, php-format
 msgid "%s's posts"
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:71 src/Module/Profile/Profile.php:336
+#: src/Module/Profile/Conversations.php:71 src/Module/Profile/Profile.php:357
 #: src/Protocol/Feed.php:1110
 #, php-format
 msgid "%s's comments"
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:72 src/Module/Profile/Profile.php:337
+#: src/Module/Profile/Conversations.php:72 src/Module/Profile/Profile.php:358
 #: src/Protocol/Feed.php:1103
 #, php-format
 msgid "%s's timeline"
@@ -8641,11 +8658,6 @@ msgstr ""
 
 #: src/Module/Profile/Photos.php:312
 msgid "View Album"
-msgstr ""
-
-#: src/Module/Profile/Profile.php:98 src/Module/Profile/Profile.php:133
-#: src/Module/Profile/Restricted.php:33
-msgid "Profile not found."
 msgstr ""
 
 #: src/Module/Profile/Profile.php:124
@@ -8687,15 +8699,19 @@ msgstr ""
 msgid "Groups:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:260
+#: src/Module/Profile/Profile.php:268
+msgid "Public circles (CSV):"
+msgstr ""
+
+#: src/Module/Profile/Profile.php:281
 msgid "View profile as:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:261
+#: src/Module/Profile/Profile.php:282
 msgid "View as selected profile"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:272
+#: src/Module/Profile/Profile.php:293
 msgid "View as"
 msgstr ""
 

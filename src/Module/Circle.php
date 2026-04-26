@@ -49,15 +49,21 @@ class Circle extends BaseModule
 		if ((DI::args()->getArgc() == 2) && intval(DI::args()->getArgv()[1])) {
 			BaseModule::checkFormSecurityTokenRedirectOnError('/circle', 'circle_edit');
 
-			$circle = DBA::selectFirst('group', ['id', 'name'], ['id' => DI::args()->getArgv()[1], 'uid' => DI::userSession()->getLocalUserId()]);
+			$circle = DBA::selectFirst('group', ['id', 'name', 'public'], ['id' => DI::args()->getArgv()[1], 'uid' => DI::userSession()->getLocalUserId()]);
 			if (!DBA::isResult($circle)) {
 				DI::sysmsg()->addNotice(DI::l10n()->t('Circle not found.'));
 				DI::baseUrl()->redirect('contact');
 			}
-			$circlename = trim($_POST['circle_name']);
-			if (strlen($circlename) && ($circlename != $circle['name'])) {
-				if (!Model\Circle::update($circle['id'], $circlename)) {
-					DI::sysmsg()->addNotice(DI::l10n()->t('Circle name was not changed.'));
+
+			$circlename = trim($request['circle_name'] ?? '');
+			if ($circlename === '') {
+				$circlename = $circle['name'];
+			}
+
+			$public = !empty($request['circle_visible']);
+			if (($circlename != $circle['name']) || ($public != (bool) $circle['public'])) {
+				if (!Model\Circle::update($circle['id'], $circlename, $public)) {
+					DI::sysmsg()->addNotice(DI::l10n()->t('Circle settings were not changed.'));
 				}
 			}
 		}
@@ -232,7 +238,7 @@ class Circle extends BaseModule
 
 		// @TODO: Replace with parameter from router
 		if ((DI::args()->getArgc() > 1) && intval(DI::args()->getArgv()[1])) {
-			$circle = DBA::selectFirst('group', ['id', 'name'], ['id' => DI::args()->getArgv()[1], 'uid' => DI::userSession()->getLocalUserId(), 'deleted' => false]);
+			$circle = DBA::selectFirst('group', ['id', 'name', 'public'], ['id' => DI::args()->getArgv()[1], 'uid' => DI::userSession()->getLocalUserId(), 'deleted' => false]);
 			if (!DBA::isResult($circle)) {
 				DI::sysmsg()->addNotice(DI::l10n()->t('Circle not found.'));
 				DI::baseUrl()->redirect('contact');
@@ -273,6 +279,7 @@ class Circle extends BaseModule
 			$context = $context + [
 				'$title'                        => $circle['name'],
 				'$gname'                        => ['circle_name', DI::l10n()->t('Circle Name: '), $circle['name'], ''],
+				'$public'                       => ['circle_visible', DI::l10n()->t('Public circle'), $circle['public'], DI::l10n()->t('Public circles can be downloaded by others as CSV files.')],
 				'$gid'                          => $circle['id'],
 				'$drop'                         => $drop_txt,
 				'$form_security_token'          => BaseModule::getFormSecurityToken('circle_edit'),
