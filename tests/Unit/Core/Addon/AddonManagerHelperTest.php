@@ -37,7 +37,7 @@ class AddonManagerHelperTest extends TestCase
 					 * Author: Artur Weigandt <dont-mail-me@example.com>
 					 */
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -46,7 +46,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$info = $addonManagerHelper->getAddonInfo('helloaddon');
@@ -64,7 +64,7 @@ class AddonManagerHelperTest extends TestCase
 					<?php
 					// This is not a valid addon comment section
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -73,7 +73,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->expectException(InvalidAddonException::class);
@@ -94,7 +94,7 @@ class AddonManagerHelperTest extends TestCase
 					];
 					PHP,
 				],
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -103,7 +103,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame(['foo' => 'bar'], $addonManagerHelper->getAddonDependencyConfig('helloaddon'));
@@ -112,7 +112,7 @@ class AddonManagerHelperTest extends TestCase
 	public function testGetAddonDependencyConfigWithoutConfigFileReturnsEmptyArray(): void
 	{
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
-			'helloaddon' => []
+			'helloaddon' => [],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -121,7 +121,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame([], $addonManagerHelper->getAddonDependencyConfig('helloaddon'));
@@ -134,7 +134,7 @@ class AddonManagerHelperTest extends TestCase
 				'static' => [
 					'dependencies.config.php' => '<?php return null;',
 				],
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -143,7 +143,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->expectException(AddonInvalidConfigFileException::class);
@@ -170,7 +170,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame([], $addonManagerHelper->getEnabledAddons());
@@ -200,7 +200,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame(['helloaddon'], $addonManagerHelper->getVisibleEnabledAddons());
@@ -228,7 +228,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame(['addonwithadminsettings'], $addonManagerHelper->getEnabledAddonsWithAdminSettings());
@@ -253,7 +253,7 @@ class AddonManagerHelperTest extends TestCase
 			],
 			'.hidden' => [
 				'.hidden.php' => 'This folder should be ignored',
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -262,7 +262,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame(['helloaddon'], $addonManagerHelper->getAvailableAddons());
@@ -280,7 +280,7 @@ class AddonManagerHelperTest extends TestCase
 					<?php
 					function {$addonName}_install()	{}
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -289,7 +289,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->installAddon($addonName);
@@ -312,7 +312,7 @@ class AddonManagerHelperTest extends TestCase
 						throw new \Exception("Addon installed");
 					}
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -321,7 +321,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->expectException(Exception::class);
@@ -335,7 +335,7 @@ class AddonManagerHelperTest extends TestCase
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
 			'helloaddon' => [
 				'helloaddon.php' => '<?php',
-			]
+			],
 		]);
 
 		$root->getChild('helloaddon/helloaddon.php')->lastModified(1234567890);
@@ -344,7 +344,7 @@ class AddonManagerHelperTest extends TestCase
 		$config->expects($this->once())->method('set')->with(
 			'addons',
 			'helloaddon',
-			['last_update' => 1234567890, 'admin' => false]
+			['last_update' => 1234567890, 'admin' => false],
 		);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -353,7 +353,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->installAddon('helloaddon');
@@ -364,7 +364,7 @@ class AddonManagerHelperTest extends TestCase
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
 			'helloaddon' => [
 				'helloaddon.php' => '<?php',
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -373,7 +373,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->assertSame([], $addonManagerHelper->getEnabledAddons());
@@ -394,7 +394,7 @@ class AddonManagerHelperTest extends TestCase
 					<?php
 					function {$addonName}_uninstall()	{}
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -403,7 +403,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->uninstallAddon($addonName);
@@ -426,7 +426,7 @@ class AddonManagerHelperTest extends TestCase
 						throw new \Exception("Addon uninstalled");
 					}
 					PHP,
-			]
+			],
 		]);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -435,7 +435,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$this->expectException(Exception::class);
@@ -449,7 +449,7 @@ class AddonManagerHelperTest extends TestCase
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
 			'helloaddon' => [
 				'helloaddon.php' => '<?php',
-			]
+			],
 		]);
 
 		$database = $this->createMock(Database::class);
@@ -457,7 +457,7 @@ class AddonManagerHelperTest extends TestCase
 			->method('delete')
 			->with(
 				'hook',
-				['`file` LIKE ?', '%/helloaddon/helloaddon.php']
+				['`file` LIKE ?', '%/helloaddon/helloaddon.php'],
 			);
 
 		$addonManagerHelper = new AddonManagerHelper(
@@ -466,7 +466,7 @@ class AddonManagerHelperTest extends TestCase
 			$this->createStub(IManageConfigValues::class),
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->uninstallAddon('helloaddon');
@@ -477,7 +477,7 @@ class AddonManagerHelperTest extends TestCase
 		$root = vfsStream::setup(__FUNCTION__ . '_addons', 0777, [
 			'helloaddon' => [
 				'helloaddon.php' => '<?php',
-			]
+			],
 		]);
 
 		$config = $this->createStub(IManageConfigValues::class);
@@ -494,7 +494,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->loadAddons();
@@ -521,7 +521,7 @@ class AddonManagerHelperTest extends TestCase
 						throw new \Exception("Addon reinstalled");
 					}
 					PHP,
-			]
+			],
 		]);
 
 		$root->getChild($addonName . '/' . $addonName . '.php')->lastModified(1234567890);
@@ -540,7 +540,7 @@ class AddonManagerHelperTest extends TestCase
 			$config,
 			$this->createStub(ICanCache::class),
 			$this->createStub(LoggerInterface::class),
-			$this->createStub(Profiler::class)
+			$this->createStub(Profiler::class),
 		);
 
 		$addonManagerHelper->loadAddons();

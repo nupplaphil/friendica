@@ -48,7 +48,7 @@ class WorkerLoggerTest extends TestCase
 			],
 			'notice' => [
 				'func'    => 'notice',
-				'msg'     => 'Notice' . ' alert' . true . 'with' . '\'strange\'' . 1.24. 'behavior',
+				'msg'     => 'Notice' . ' alert' . true . 'with' . '\'strange\'' . 1.24 . 'behavior',
 				'context' => ['test' => 'it'],
 			],
 			'debug' => [
@@ -145,12 +145,12 @@ class WorkerLoggerTest extends TestCase
 
 		$this->assertSame(
 			['worker_id', 'worker_cmd'],
-			array_keys($workLogger->replaceDefaultContext($newContext))
+			array_keys($workLogger->replaceDefaultContext($newContext)),
 		);
 
 		$this->assertSame(
 			$newContext,
-			$workLogger->replaceDefaultContext([])
+			$workLogger->replaceDefaultContext([]),
 		);
 	}
 }
