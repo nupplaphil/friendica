@@ -19,9 +19,9 @@
 		failOnIncomplete="false"
 		failOnNotice="false"
 		failOnPhpunitDeprecation="false"
-		failOnRisky="false"
+		failOnRisky="true"
 		failOnSkipped="false"
-		failOnWarning="false"
+		failOnWarning="true"
 >
 
 	<testsuites>
