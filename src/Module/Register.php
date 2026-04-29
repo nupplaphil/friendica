@@ -35,7 +35,7 @@ class Register extends BaseModule
 	const CLOSED  = 0;
 	const APPROVE = 1;
 	const OPEN    = 2;
-	
+
 	/** @var Tos */
 	protected $tos;
 
@@ -109,7 +109,7 @@ class Register extends BaseModule
 		$nickname   = $_REQUEST['nickname']   ?? '';
 		$photo      = $_REQUEST['photo']      ?? '';
 		$invite_id  = $_REQUEST['invite_id']  ?? '';
-		
+
 		$which_types = $_GET['type'] ?? '';
 
 		if (DI::userSession()->getLocalUserId() || DI::config()->get('system', 'no_openid')) {
@@ -150,22 +150,22 @@ class Register extends BaseModule
 			User::PRIGROUP	=> DI::l10n()->t('Private Group')
 		];
 		$selected = '';
-		/* get any URL params */	
+		/* get any URL params */
 		$which_types = $_GET['type'] ?? '';
-		/* tailor options based on type param */		
+		/* tailor options based on type param */
 		if (!empty($which_types)){
 			if ($which_types == User::PUBGROUP || $which_types == User::RESGROUP || $which_types == User::PRIGROUP){
 				$acct_list = [
 					User::PUBGROUP	=> DI::l10n()->t('Public Group'),
 					User::RESGROUP	=> DI::l10n()->t('Restricted Group'),
-					User::PRIGROUP	=> DI::l10n()->t('Private Group')				
+					User::PRIGROUP	=> DI::l10n()->t('Private Group')
 				];
 				$regbutton_label = DI::l10n()->t('Create Group');
 			}
 			if ($which_types == User::ORGPAGE || $which_types == User::NEWSPAGE){
 				$acct_list = [
 					User::ORGPAGE	=> DI::l10n()->t('Organization Page'),
-					User::NEWSPAGE	=> DI::l10n()->t('News Page'),				
+					User::NEWSPAGE	=> DI::l10n()->t('News Page'),
 				];
 				$regbutton_label = DI::l10n()->t('Create Page');
 			}
@@ -173,19 +173,19 @@ class Register extends BaseModule
 				$acct_list = [
 					User::PERSONAL	=> DI::l10n()->t('Personal (standard account)'),
 					User::SOAPBOX	=> DI::l10n()->t('Personal Soap-Box (auto-approve Follow requests)'),
-					User::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),	
-				];				
+					User::LOVEALL	=> DI::l10n()->t('Personal Love-All (auto-approve Friend requests)'),
+				];
 			}
 			/* select the option (if it is not valid it just won't select anything) */
 			$selected = $which_types;
 		}
 		/* build Select array */
 		$acct_type = [
-			'0'	=> 'register_type', // id
-			'1'	=> DI::l10n()->t('Account type:'),	//label
-			'2'	=> $selected,
-			'3'	=> DI::l10n()->t('You can change the account type later. (<a href="'.DI::baseUrl().'/help/user/accounts-groups-pages" target="_blank">Account type help</a>)'), // tip
-			'4'	=> $acct_list
+			'register_type', // id
+			DI::l10n()->t('Account type:'),	//label
+			$selected,
+			DI::l10n()->t('You can change the account type later. (<a href="' . DI::baseUrl() . '/help/user/accounts-groups-pages" target="_blank">Account type help</a>)'), // tip
+			$acct_list,
 		];
 
 		$ask_password = !DBA::count('contact');
@@ -430,7 +430,7 @@ class Register extends BaseModule
 				$acct_type = User::ACCOUNT_TYPE_PERSON;
 				$acct_flag = User::PAGE_FLAGS_NORMAL;
 			}
-			
+
 			DBA::update('user', ['parent-uid' => DI::userSession()->getLocalUserId(), 'account-type' => $acct_type, 'page-flags' => $acct_flag], ['uid' => $user['uid']]);
 			DI::sysmsg()->addInfo(DI::l10n()->t('The additional account was created.'));
 			DI::baseUrl()->redirect('delegation');
