@@ -104,8 +104,8 @@ final class LostPass extends BaseModule
 
 			The login details are as follows:
 
-			Site Location:	%2$s
-			Login Name:	%3$s', $resetlink, $this->baseUrl, $user['nickname']));
+			URL: %2$s
+			Username: %3$s', $resetlink, $this->baseUrl, $user['nickname']));
 
 		$email = $this->emailer->newSystemMail()
 			->withMessage($this->l10n->t('Password reset requested at %s', $sitename), $preamble, $body)
@@ -165,7 +165,7 @@ final class LostPass extends BaseModule
 		$o   = Renderer::replaceMacros($tpl, [
 			'$title'  => $this->l10n->t('Forgot your Password?'),
 			'$desc'   => $this->l10n->t('Enter your email address and submit to have your password reset. Then check your email for further instructions.'),
-			'$name'   => $this->l10n->t('Nickname or email'),
+			'$name'   => $this->l10n->t('Username or email'),
 			'$submit' => $this->l10n->t('Reset my password'),
 		]);
 
@@ -208,9 +208,9 @@ final class LostPass extends BaseModule
 			$body = Strings::deindent($this->l10n->t('
 				Your login details are as follows:
 
-				Site Location:	%1$s
-				Login Name:	%2$s
-				Password:	%3$s
+				URL: %1$s
+				Username: %2$s
+				Password: %3$s
 
 				You may change that password from your account settings page after logging in.
 			', $this->baseUrl, $user['nickname'], $new_password));

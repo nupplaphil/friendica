@@ -126,7 +126,7 @@ return [
 		'explicit_content' => false,
 
 		// forbidden_nicknames (Comma-separated list)
-		// Prevents users from registering the specified nicknames on this node.
+		// Prevents users from registering the specified handles on this node.
 		// Default value comprises classic role names from RFC 2142.
 		'forbidden_nicknames' => 'info, marketing, sales, support, abuse, noc, security, postmaster, hostmaster, usenet, news, webmaster, www, uucp, ftp, root, sysop',
 

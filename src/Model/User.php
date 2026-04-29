@@ -549,7 +549,7 @@ class User
 	}
 
 	/**
-	 * Get owner data by nick name
+	 * Get owner data by nickname
 	 *
 	 * @return boolean|array
 	 * @throws Exception
@@ -813,7 +813,7 @@ class User
 	 * User info can be any of the following:
 	 * - User DB object
 	 * - User Id
-	 * - User email or username or nickname
+	 * - User email, name or nickname
 	 * - User array with at least the uid and the hashed password
 	 *
 	 * @param mixed $user_info
@@ -1657,9 +1657,9 @@ class User
 		$body = Strings::deindent(DI::l10n()->t('
 		The login details are as follows:
 
-		Site Location:	%1$s
-		Login Name:		%2$s
-		Password:		%3$s
+		URL: %1$s
+		Username: %2$s
+		Password: %3$s
 
 		You may change your password from your account "Settings" page after logging
 		in.
@@ -1677,12 +1677,12 @@ class User
 		If you are new and do not know anybody here, they may help
 		you to make some new and interesting friends.
 
-		If you ever want to delete your account, you can do so at %1$s/settings/removeme
+		If you ever want to delete your account, you can do so at %5$s
 
 		Thank you and welcome to %4$s.'));
 
 		$preamble = sprintf($preamble, $user['username'], DI::config()->get('config', 'sitename'));
-		$body     = sprintf($body, DI::baseUrl(), $user['nickname'], $result['password'], DI::config()->get('config', 'sitename'));
+		$body     = sprintf($body, DI::baseUrl(), $user['nickname'], $result['password'], DI::config()->get('config', 'sitename'), DI::baseUrl() . '/settings/removeme', );
 
 		$email = DI::emailer()
 			->newSystemMail()
@@ -1708,13 +1708,13 @@ class User
 		$body = Strings::deindent(DI::l10n()->t(
 			'
 			Dear %1$s,
-				Thank you for registering at %2$s. Your account is pending for approval by the administrator.
+			Thank you for registering at %2$s. Your account is pending for approval by the administrator.
 
 			Your login details are as follows:
 
-			Site Location:	%3$s
-			Login Name:		%4$s
-			Password:		%5$s
+			URL: %3$s
+			Username: %4$s
+			Password: %5$s
 		',
 			$user['username'],
 			$sitename,
@@ -1760,9 +1760,9 @@ class User
 			'
 			The login details are as follows:
 
-			Site Location:	%3$s
-			Login Name:		%1$s
-			Password:		%5$s
+			URL: %3$s
+			Username: %1$s
+			Password: %5$s
 
 			You may change your password from your account "Settings" page after logging
 			in.
@@ -1770,17 +1770,17 @@ class User
 			Please take a few moments to review the other account settings on that page.
 
 			You may also wish to add some basic information to your default profile
-			' . "\x28" . 'on the "Profiles" page' . "\x29" . ' so that other people can easily find you.
+			(on the "Profiles" page) so that other people can easily find you.
 
-			We recommend adding a profile photo, adding some profile "keywords" ' . "\x28" . 'very useful
-			in making new friends' . "\x29" . ' - and perhaps what country you live in; if you do not wish
+			We recommend adding a profile photo, adding some profile "keywords" (very useful
+			in making new friends) - and perhaps what country you live in; if you do not wish
 			to be more specific than that.
 
 			We fully respect your right to privacy, and none of these items are necessary.
 			If you are new and do not know anybody here, they may help
 			you to make some new and interesting friends.
 
-			If you ever want to delete your account, you can do so at %3$s/settings/removeme
+			If you ever want to delete your account, you can do so at %6$s
 
 			Thank you and welcome to %2$s.',
 			$user['nickname'],
@@ -1788,6 +1788,7 @@ class User
 			$siteurl,
 			$user['username'],
 			$password,
+			DI::baseUrl() . '/settings/removeme',
 		));
 
 		$email = DI::emailer()

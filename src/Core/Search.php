@@ -33,7 +33,7 @@ class Search
 	public const TYPE_ALL    = 2;
 
 	/**
-	 * Search a user based on his/her profile address
+	 * Search a user based on his/her handle
 	 * pattern: @username@domain.tld
 	 *
 	 * @param string $user The user to search for

@@ -54,10 +54,10 @@ Jeder Kanal wird durch diese Werte definiert:
 Zusätzlich zu der Suche nach Inhalten, gibt es Schlüsselwörter, die in der Volltextsuche genutzt werden können.
 Alternativen werden durch "|" dargestellt.
 
-* from - Verwende "from:nickname" oder "from:nickname@domain.tld" um nach Beiträgen von einem bestimmten Autor zu suchen.
-* to - Verwende "to:nickname" oder "to:nickname@domain.tld" um nach Beiträgen mit dem gegebenen Empfänger zu suchen.
-* group - Verwende "group:nickname" oder "group:nickname@domain.tld" um nach Beiträgen aus der gegebenen Gruppe zu suchen.
-* application | relay - Nutze "application:nickname" oder "application:nickname@domain.tld" um Beiträge zu finden, die von der gegebenen relay application geteilt wurden.
+* from - Verwende "from:username" oder "from:username@domain.tld" um nach Beiträgen von einem bestimmten Autor zu suchen.
+* to - Verwende "to:username" oder "to:username@domain.tld" um nach Beiträgen mit dem gegebenen Empfänger zu suchen.
+* group - Verwende "group:username" oder "group:username@domain.tld" um nach Beiträgen aus der gegebenen Gruppe zu suchen.
+* application | relay - Nutze "application:username" oder "application:username@domain.tld" um Beiträge zu finden, die von der gegebenen relay application geteilt wurden.
 * server - Verwende "server:hostname" um Beiträge von einem bestimmten Server zu suchen. Im Falle eine Gruppen-Postings enthält der Suchtext beides, den Hostname des Gruppen-Servers und den Hostname des Autors.
 * source - Der ActivityPub-Typ der Beitragsquelle. Nutze dies um beispielsweise Gruppenpostings oder Beiträge von Services (aka Bots) ein- oder auszuschließen.
     * source:person - Der Beitrag wurde von einem regulären Nutzerkonto erstellt.

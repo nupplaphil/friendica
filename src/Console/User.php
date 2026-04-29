@@ -197,23 +197,23 @@ HELP;
 		$avatar = $this->getArgument(5);
 
 		if (empty($name)) {
-			$this->out($this->l10n->t('Enter user name: '));
+			$this->out($this->l10n->t('Enter display name: '));
 			$name = CliPrompt::prompt();
 			if (empty($name)) {
-				throw new RuntimeException('A name must be set.');
+				throw new RuntimeException('A display name must be set.');
 			}
 		}
 
 		if (empty($nick)) {
-			$this->out($this->l10n->t('Enter user nickname: '));
+			$this->out($this->l10n->t('Enter username: '));
 			$nick = CliPrompt::prompt();
 			if (empty($nick)) {
-				throw new RuntimeException('A nick name must be set.');
+				throw new RuntimeException('A username must be set.');
 			}
 		}
 
 		if (empty($email)) {
-			$this->out($this->l10n->t('Enter user email address: '));
+			$this->out($this->l10n->t('Enter email address: '));
 			$email = CliPrompt::prompt();
 			if (empty($email)) {
 				throw new RuntimeException('A email address must be set.');
