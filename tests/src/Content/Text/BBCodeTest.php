@@ -214,27 +214,27 @@ class BBCodeTest extends FixtureTestCase
 				'text'         => '[pre]    Spaces[/pre]',
 			],
 			'bug-9611-purify-xss-nobb' => [
-				'expectedHTML' => '<span>dare to move your mouse here</span>',
+				'expectedHtml' => '<span>dare to move your mouse here</span>',
 				'text'         => '[nobb]<span onmouseover="alert(0)">dare to move your mouse here</span>[/nobb]',
 			],
 			'bug-9611-purify-xss-noparse' => [
-				'expectedHTML' => '<span>dare to move your mouse here</span>',
+				'expectedHtml' => '<span>dare to move your mouse here</span>',
 				'text'         => '[noparse]<span onmouseover="alert(0)">dare to move your mouse here</span>[/noparse]',
 			],
 			'bug-9611-purify-xss-attributes' => [
-				'expectedHTML' => '<span>dare to move your mouse here</span>',
+				'expectedHtml' => '<span>dare to move your mouse here</span>',
 				'text'         => '[color="onmouseover=alert(0) style="]dare to move your mouse here[/color]',
 			],
 			'bug-9611-purify-attributes-correct' => [
-				'expectedHTML' => '<span style="color:#FFFFFF;">dare to move your mouse here</span>',
+				'expectedHtml' => '<span style="color:#FFFFFF;">dare to move your mouse here</span>',
 				'text'         => '[color=FFFFFF]dare to move your mouse here[/color]',
 			],
 			'bug-9639-span-classes' => [
-				'expectedHTML' => '<span class="arbitrary classes">Test</span>',
+				'expectedHtml' => '<span class="arbitrary classes">Test</span>',
 				'text'         => '[class=arbitrary classes]Test[/class]',
 			],
 			'bug-10772-duplicated-links' => [
-				'expectedHTML' => 'Jetzt wird mir klar, warum Kapitalisten jedes Mal durchdrehen wenn Marx und das Kapital ins Gespräch kommt. Soziopathen.<br>Karl Marx - Die ursprüngliche Akkumulation<br><a href="https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation" target="_blank" rel="noopener noreferrer">https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation</a><br>#Podcast #Kapitalismus',
+				'expectedHtml' => 'Jetzt wird mir klar, warum Kapitalisten jedes Mal durchdrehen wenn Marx und das Kapital ins Gespräch kommt. Soziopathen.<br>Karl Marx - Die ursprüngliche Akkumulation<br><a href="https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation" target="_blank" rel="noopener noreferrer">https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation</a><br>#Podcast #Kapitalismus',
 				'text'         => "Jetzt wird mir klar, warum Kapitalisten jedes Mal durchdrehen wenn Marx und das Kapital ins Gespräch kommt. Soziopathen.
 Karl Marx - Die ursprüngliche Akkumulation
 [url=https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation]https://wohlstandfueralle.podigee.io/107-urspruengliche-akkumulation[/url]
@@ -244,27 +244,27 @@ Karl Marx - Die ursprüngliche Akkumulation
 				'simpleHtml' => BBCode::TWITTER,
 			],
 			'task-10886-deprecate-class' => [
-				'expectedHTML' => '<span class="mastodon emoji"><img src="https://fedi.underscore.world/emoji/custom/custom/heart_nb.png" alt=":heart_nb:" title=":heart_nb:"></span>',
+				'expectedHtml' => '<span class="mastodon emoji"><img src="https://fedi.underscore.world/emoji/custom/custom/heart_nb.png" alt=":heart_nb:" title=":heart_nb:"></span>',
 				'text'         => '[emoji=https://fedi.underscore.world/emoji/custom/custom/heart_nb.png]:heart_nb:[/emoji]',
 			],
 			'task-12900-multiple-paragraphs' => [
-				'expectedHTML' => '<h3>Header</h3><ul><li>One</li><li>Two</li></ul><p>This is a paragraph<br>with a line feed.</p><p>Second Chapter</p>',
+				'expectedHtml' => '<h3>Header</h3><ul><li>One</li><li>Two</li></ul><p>This is a paragraph<br>with a line feed.</p><p>Second Chapter</p>',
 				'text'         => "[h4]Header[/h4][ul][li]One[li]Two[/ul]\n\nThis is a paragraph\nwith a line feed.\n\nSecond Chapter",
 			],
 			'task-12900-header-with-paragraphs' => [
-				'expectedHTML' => '<h3>Header</h3><p>Some Chapter</p>',
+				'expectedHtml' => '<h3>Header</h3><p>Some Chapter</p>',
 				'text'         => '[h4]Header[/h4]Some Chapter',
 			],
 			'bug-12842-ul-newlines' => [
-				'expectedHTML' => '<p>This is:</p><ul><li>some</li><li>amazing</li><li>list</li></ul>',
+				'expectedHtml' => '<p>This is:</p><ul><li>some</li><li>amazing</li><li>list</li></ul>',
 				'text'         => "This is:\r\n[ul]\r\n[li]some\r\n[li]amazing\r\n[li]list\r\n[/ul]",
 			],
 			'bug-12842-ol-newlines' => [
-				'expectedHTML' => '<p>This is:</p><ol><li>some</li><li>amazing</li><li>list</li></ol>',
+				'expectedHtml' => '<p>This is:</p><ol><li>some</li><li>amazing</li><li>list</li></ol>',
 				'text'         => "This is:\r\n[ol]\r\n[li]some\r\n[li]amazing\r\n[li]list\r\n[/ol]",
 			],
 			'task-12917-tabs-between-linebreaks' => [
-				'expectedHTML' => '<p>Paragraph</p><p>New Paragraph</p>',
+				'expectedHtml' => '<p>Paragraph</p><p>New Paragraph</p>',
 				'text'         => "Paragraph\n\t\nNew Paragraph",
 			],
 		];

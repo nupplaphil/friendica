@@ -38,12 +38,12 @@ class SmiliesTest extends FixtureTestCase
 		return [
 			/** @see https://github.com/friendica/friendica/pull/6933 */
 			'bug-6933-1' => [
-				'data'     => '<code>/</code>',
+				'text'     => '<code>/</code>',
 				'smilies'  => ['texts' => [], 'icons' => []],
 				'expected' => '<code>/</code>',
 			],
 			'bug-6933-2' => [
-				'data'     => '<code>code</code>',
+				'text'     => '<code>code</code>',
 				'smilies'  => ['texts' => [], 'icons' => []],
 				'expected' => '<code>code</code>',
 			],

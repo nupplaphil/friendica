@@ -176,7 +176,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Test the configuration initialization
 	 * @dataProvider dataConfigLoad
 	 */
-	public function testSetUp(array $data)
+	public function testSetUp(array $data, array $possibleCats, array $load)
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 
@@ -195,7 +195,7 @@ class ConfigTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataConfigLoad
 	 */
-	public function testReload(array $data, array $load)
+	public function testReload(array $data, array $possibleCats, array $load)
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 

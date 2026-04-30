@@ -398,7 +398,7 @@ class CacheTest extends MockedTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_hashmap',
+				'category'  => 'test_with_hashmap',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,
@@ -512,7 +512,7 @@ class CacheTest extends MockedTestCase
 	 *
 	 * @dataProvider dataTestCat
 	 */
-	public function testGetCategory($data, string $category, $assertion)
+	public function testGetCategory($data, string $category, array $assertion)
 	{
 		$cache = new Cache($data);
 
@@ -524,7 +524,7 @@ class CacheTest extends MockedTestCase
 	 *
 	 * @dataProvider dataTestCat
 	 */
-	public function testCatMerge($data, string $category)
+	public function testCatMerge($data, string $category, array $assertion)
 	{
 		$cache = new Cache($data);
 
