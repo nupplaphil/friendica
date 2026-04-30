@@ -18,7 +18,7 @@ class AddonLoaderTest extends MockedTestCase
 {
 	use VFSTrait;
 
-	protected $structure = [
+	protected static $structure = [
 		'addon' => [
 			'testaddon1' => [
 				'static' => [],
@@ -30,13 +30,13 @@ class AddonLoaderTest extends MockedTestCase
 		]
 	];
 
-	protected $addons = [
+	protected static $addons = [
 		'testaddon1',
 		'testaddon2',
 		'testaddon3',
 	];
 
-	protected $content = <<<EOF
+	protected static $content = <<<EOF
 <?php
 
 return [
@@ -55,14 +55,14 @@ EOF;
 		$this->setUpVfsDir();
 	}
 
-	public function dataHooks(): array
+	public static function dataHooks(): array
 	{
 		return [
 			'normal' => [
-				'structure' => $this->structure,
-				'enabled'   => $this->addons,
+				'structure' => self::$structure,
+				'enabledAddons'   => self::$addons,
 				'files'     => [
-					'addon/testaddon1/static/hooks.config.php' => $this->content,
+					'addon/testaddon1/static/hooks.config.php' => self::$content,
 				],
 				'assertion' => [
 					\Friendica\Core\Hooks\Capability\BehavioralHookType::STRATEGY => [
@@ -73,11 +73,11 @@ EOF;
 				],
 			],
 			'double' => [
-				'structure' => $this->structure,
-				'enabled'   => $this->addons,
+				'structure' => self::$structure,
+				'enabledAddons'   => self::$addons,
 				'files'     => [
-					'addon/testaddon1/static/hooks.config.php' => $this->content,
-					'addon/testaddon2/static/hooks.config.php' => $this->content,
+					'addon/testaddon1/static/hooks.config.php' => self::$content,
+					'addon/testaddon2/static/hooks.config.php' => self::$content,
 				],
 				'assertion' => [
 					\Friendica\Core\Hooks\Capability\BehavioralHookType::STRATEGY => [
@@ -88,20 +88,20 @@ EOF;
 				],
 			],
 			'wrongName' => [
-				'structure' => $this->structure,
-				'enabled'   => $this->addons,
+				'structure' => self::$structure,
+				'enabledAddons'   => self::$addons,
 				'files'     => [
-					'addon/testaddon1/static/wrong.config.php' => $this->content,
+					'addon/testaddon1/static/wrong.config.php' => self::$content,
 				],
 				'assertion' => [
 				],
 			],
 			'doubleNutOnlyOneEnabled' => [
-				'structure' => $this->structure,
-				'enabled'   => ['testaddon1'],
+				'structure' => self::$structure,
+				'enabledAddons'   => ['testaddon1'],
 				'files'     => [
-					'addon/testaddon1/static/hooks.config.php' => $this->content,
-					'addon/testaddon2/static/hooks.config.php' => $this->content,
+					'addon/testaddon1/static/hooks.config.php' => self::$content,
+					'addon/testaddon2/static/hooks.config.php' => self::$content,
 				],
 				'assertion' => [
 					\Friendica\Core\Hooks\Capability\BehavioralHookType::STRATEGY => [

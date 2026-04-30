@@ -512,7 +512,7 @@ class CacheTest extends MockedTestCase
 	 *
 	 * @dataProvider dataTestCat
 	 */
-	public function testGetCategory($data, string $category, array $assertion)
+	public function testGetCategory($data, string $category, mixed $assertion)
 	{
 		$cache = new Cache($data);
 
@@ -524,7 +524,7 @@ class CacheTest extends MockedTestCase
 	 *
 	 * @dataProvider dataTestCat
 	 */
-	public function testCatMerge($data, string $category, array $assertion)
+	public function testCatMerge($data, string $category, mixed $assertion)
 	{
 		$cache = new Cache($data);
 
