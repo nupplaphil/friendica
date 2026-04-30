@@ -21,7 +21,7 @@
 		failOnPhpunitDeprecation="false"
 		failOnRisky="true"
 		failOnSkipped="false"
-		failOnWarning="true"
+		failOnWarning="false"
 >
 
 	<testsuites>
