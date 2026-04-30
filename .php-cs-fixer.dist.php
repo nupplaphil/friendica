@@ -33,6 +33,7 @@ return $config
 	->setRules([
 		'@PER-CS3x0'              => true,
 		'@PER-CS3x0:risky'        => true,
+		'@PHPUnit10x0Migration:risky' => true,
 		'align_multiline_comment' => true,
 		'binary_operator_spaces'  => [
 			'default'   => 'single_space',

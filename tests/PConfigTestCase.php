@@ -59,7 +59,7 @@ abstract class PConfigTestCase extends MockedTestCase
 	 */
 	abstract public function getInstance();
 
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'string'       => ['uid' => 1, 'data' => 'it'],
@@ -413,7 +413,7 @@ abstract class PConfigTestCase extends MockedTestCase
 		self::assertEmpty($this->testedConfig->getCache()->getAll());
 	}
 
-	public function dataMultiUid()
+	public static function dataMultiUid()
 	{
 		return [
 			'normal' => [

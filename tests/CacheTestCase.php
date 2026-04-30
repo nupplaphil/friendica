@@ -32,7 +32,7 @@ abstract class CacheTestCase extends MockedTestCase
 	 *
 	 * @return array
 	 */
-	public function dataTypesInCache()
+	public static function dataTypesInCache()
 	{
 		return [
 			'string'    => ['data' => 'foobar'],
@@ -51,7 +51,7 @@ abstract class CacheTestCase extends MockedTestCase
 	 *
 	 * @return array
 	 */
-	public function dataSimple()
+	public static function dataSimple()
 	{
 		return [
 			'string' => [
