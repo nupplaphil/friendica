@@ -395,7 +395,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test for empty node.config.php
 	 */
-	public function testEmptyFile()
+	public function testEmptyFile(): void
 	{
 		$this->delConfigFile('node.config.php');
 
@@ -403,12 +403,16 @@ class ConfigFileManagerTest extends MockedTestCase
 				 ->at($this->root->getChild('config'))
 				 ->setContent('');
 
-		$configFileManager = (new Config())->createConfigFileManager(
+		$configFileManager = new ConfigFileManager(
 			$this->root->url(),
 			$this->root->url() . '/addon',
+			$this->root->url() . '/config',
+			$this->root->url() . '/static',
+			[],
 		);
-		$configCache = new Cache();
 
-		$configFileManager->setupCache($configCache);
+		$configFileManager->setupCache(new Cache());
+
+		self::assertStringEqualsFile($this->root->url() . '/config/node.config.php', '');
 	}
 }
