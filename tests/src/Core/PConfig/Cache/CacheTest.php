@@ -11,7 +11,7 @@ use Friendica\Test\MockedTestCase;
 
 class CacheTest extends MockedTestCase
 {
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'normal' => [

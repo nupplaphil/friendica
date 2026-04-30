@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
 
 class FriendSuggestTest extends MockedTestCase
 {
-	public function dataCreate()
+	public static function dataCreate()
 	{
 		return [
 			'default' => [

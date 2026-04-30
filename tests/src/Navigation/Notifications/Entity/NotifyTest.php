@@ -12,7 +12,7 @@ use Friendica\Test\FixtureTestCase;
 
 class NotifyTest extends FixtureTestCase
 {
-	public function dataFormatNotify(): array
+	public static function dataFormatNotify(): array
 	{
 		return [
 			'xss-notify' => [

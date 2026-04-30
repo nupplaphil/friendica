@@ -11,7 +11,7 @@ use Friendica\Protocol\HTTP\MediaType;
 
 class MediaTypeTest extends \PHPUnit\Framework\TestCase
 {
-	public function dataValid(): array
+	public static function dataValid(): array
 	{
 		return [
 			'HTML UTF-8' => [
@@ -65,7 +65,7 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($expected, MediaType::fromContentType($contentType));
 	}
 
-	public function dataInvalid(): array
+	public static function dataInvalid(): array
 	{
 		return [
 			'no slash'                  => ['application'],
@@ -92,7 +92,7 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 		MediaType::fromContentType($contentType);
 	}
 
-	public function dataToString(): array
+	public static function dataToString(): array
 	{
 		return [
 			'HTML UTF-8' => [

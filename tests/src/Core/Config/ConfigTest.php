@@ -73,7 +73,7 @@ class ConfigTest extends DatabaseTestCase
 		return new DatabaseConfig($this->getDbInstance(), $this->configCache);
 	}
 
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'string'       => ['data' => 'it'],
@@ -87,7 +87,7 @@ class ConfigTest extends DatabaseTestCase
 		];
 	}
 
-	public function dataConfigLoad()
+	public static function dataConfigLoad()
 	{
 		$data = [
 			'system' => [
@@ -210,7 +210,7 @@ class ConfigTest extends DatabaseTestCase
 		}
 	}
 
-	public function dataDoubleLoad()
+	public static function dataDoubleLoad()
 	{
 		return [
 			'config' => [
@@ -401,7 +401,7 @@ class ConfigTest extends DatabaseTestCase
 	}
 
 
-	public function dataTestCat()
+	public static function dataTestCat()
 	{
 		return [
 			'test_with_hashmap' => [
@@ -529,7 +529,7 @@ class ConfigTest extends DatabaseTestCase
 		self::assertEquals($assertion, $config->get($category));
 	}
 
-	public function dataSerialized(): array
+	public static function dataSerialized(): array
 	{
 		return [
 			'default' => [
@@ -558,7 +558,7 @@ class ConfigTest extends DatabaseTestCase
 		self::assertEquals($assertion, $config->get('test', 'it'));
 	}
 
-	public function dataEnv(): array
+	public static function dataEnv(): array
 	{
 		$data = [
 			'config' => [

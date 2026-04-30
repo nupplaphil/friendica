@@ -77,7 +77,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		self::assertInstanceOf(IManageKeyValuePairs::class, $instance);
 	}
 
-	public function dataTests(): array
+	public static function dataTests(): array
 	{
 		return [
 			'string'       => ['k' => 'data', 'v' => 'it'],

@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
 
 class BaseURLTest extends MockedTestCase
 {
-	public function dataSystemUrl(): array
+	public static function dataSystemUrl(): array
 	{
 		return [
 			'default' => [
@@ -121,7 +121,7 @@ class BaseURLTest extends MockedTestCase
 		$_SERVER = $origServerGlobal;
 	}
 
-	public function dataRemove(): array
+	public static function dataRemove(): array
 	{
 		return [
 			'same' => [

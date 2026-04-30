@@ -13,7 +13,7 @@ use Psr\Http\Message\UriInterface;
 
 class GServerTest extends \PHPUnit\Framework\TestCase
 {
-	public function dataCleanUri(): array
+	public static function dataCleanUri(): array
 	{
 		return [
 			'full-monty' => [

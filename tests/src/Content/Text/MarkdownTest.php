@@ -13,7 +13,7 @@ use Friendica\Test\FixtureTestCase;
 
 class MarkdownTest extends FixtureTestCase
 {
-	public function dataMarkdown()
+	public static function dataMarkdown()
 	{
 		$inputFiles = glob(__DIR__ . '/../../../datasets/content/text/markdown/*.md');
 
@@ -46,7 +46,7 @@ class MarkdownTest extends FixtureTestCase
 		self::assertEquals($expected, $output);
 	}
 
-	public function dataMarkdownText()
+	public static function dataMarkdownText()
 	{
 		return [
 			'bug-8358-double-decode' => [

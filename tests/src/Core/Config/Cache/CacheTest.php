@@ -14,7 +14,7 @@ use stdClass;
 
 class CacheTest extends MockedTestCase
 {
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'normal' => [
@@ -372,7 +372,7 @@ class CacheTest extends MockedTestCase
 		self::assertEquals('added category', $mergedCache->get('new_category', 'test_23'));
 	}
 
-	public function dataTestCat()
+	public static function dataTestCat()
 	{
 		return [
 			'test_with_hashmap'     => [

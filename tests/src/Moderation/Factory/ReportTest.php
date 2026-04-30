@@ -18,7 +18,7 @@ use Psr\Log\NullLogger;
 
 class ReportTest extends MockedTestCase
 {
-	public function dataCreateFromTableRow(): array
+	public static function dataCreateFromTableRow(): array
 	{
 		$clock = new FrozenClock();
 
@@ -141,7 +141,7 @@ class ReportTest extends MockedTestCase
 		$this->assertEquals($factory->createFromTableRow($row, $posts, $rules), $assertion);
 	}
 
-	public function dataCreateFromReportsRequest(): array
+	public static function dataCreateFromReportsRequest(): array
 	{
 		$clock = new FrozenClock();
 

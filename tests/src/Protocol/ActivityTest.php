@@ -13,7 +13,7 @@ use Friendica\Test\MockedTestCase;
 
 class ActivityTest extends MockedTestCase
 {
-	public function dataMatch()
+	public static function dataMatch()
 	{
 		return [
 			'empty' => [

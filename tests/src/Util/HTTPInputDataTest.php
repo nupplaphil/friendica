@@ -24,7 +24,7 @@ class HTTPInputDataTest extends MockedTestCase
 	 *
 	 * @return array[]
 	 */
-	public function dataStream()
+	public static function dataStream()
 	{
 		return [
 			'multipart' => [

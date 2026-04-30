@@ -51,7 +51,7 @@ class InstanceManagerTest extends MockedTestCase
 		self::assertNotSame($getInstanceA, $getInstanceB);
 	}
 
-	public function dataTests(): array
+	public static function dataTests(): array
 	{
 		return [
 			'only_a' => [

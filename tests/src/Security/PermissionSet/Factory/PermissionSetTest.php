@@ -24,7 +24,7 @@ class PermissionSetTest extends MockedTestCase
 		$this->permissionSet = new PermissionSet(new NullLogger(), new ACLFormatter());
 	}
 
-	public function dataInput()
+	public static function dataInput()
 	{
 		return [
 			'new' => [

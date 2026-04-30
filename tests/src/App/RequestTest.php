@@ -13,7 +13,7 @@ use Friendica\Test\MockedTestCase;
 
 class RequestTest extends MockedTestCase
 {
-	public function dataServerArray(): array
+	public static function dataServerArray(): array
 	{
 		return [
 			'default' => [

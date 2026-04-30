@@ -46,7 +46,7 @@ class ProfilerTest extends MockedTestCase
 	 * A dataset for different profiling settings
 	 * @return array
 	 */
-	public function dataPerformance()
+	public static function dataPerformance()
 	{
 		return [
 			'database' => [
@@ -144,7 +144,7 @@ class ProfilerTest extends MockedTestCase
 		self::assertEquals(0, $profiler->get($name));
 	}
 
-	public function dataBig()
+	public static function dataBig()
 	{
 		return [
 			'big' => [

@@ -33,7 +33,7 @@ class SmiliesTest extends FixtureTestCase
 		Hook::loadHooks();
 	}
 
-	public function dataLinks(): array
+	public static function dataLinks(): array
 	{
 		return [
 			/** @see https://github.com/friendica/friendica/pull/6933 */
@@ -67,7 +67,7 @@ class SmiliesTest extends FixtureTestCase
 		self::assertEquals($expected, $output);
 	}
 
-	public function dataIsEmojiPost(): array
+	public static function dataIsEmojiPost(): array
 	{
 		return [
 			'emoji' => [
@@ -134,7 +134,7 @@ class SmiliesTest extends FixtureTestCase
 		$this->assertEquals($expected, Smilies::isEmojiPost($body));
 	}
 
-	public function dataReplace(): array
+	public static function dataReplace(): array
 	{
 		$data = [
 			'simple-1' => [
@@ -219,7 +219,7 @@ class SmiliesTest extends FixtureTestCase
 		$this->assertStringContainsString($expected, $result);
 	}
 
-	public function dataExtractUsedSmilies(): array
+	public static function dataExtractUsedSmilies(): array
 	{
 		return [
 			'symbols' => [

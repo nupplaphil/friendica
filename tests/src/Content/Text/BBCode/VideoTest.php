@@ -12,7 +12,7 @@ use Friendica\Test\MockedTestCase;
 
 class VideoTest extends MockedTestCase
 {
-	public function dataVideo()
+	public static function dataVideo()
 	{
 		return [
 			'youtube' => [

@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class FileTagTest extends TestCase
 {
-    public function dataArrayToFile()
+    public static function dataArrayToFile()
     {
         return [
             'list-category' => [
@@ -62,7 +62,7 @@ class FileTagTest extends TestCase
         self::assertEquals($file, FileTag::arrayToFile($array, $type));
     }
 
-    public function dataFileToArray()
+    public static function dataFileToArray()
     {
         return [
             'list-category' => [

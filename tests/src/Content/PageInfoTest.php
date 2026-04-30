@@ -11,7 +11,7 @@ use Friendica\Test\DatabaseTestCase;
 
 class PageInfoTest extends DatabaseTestCase
 {
-	public function dataGetRelevantUrlFromBody()
+	public static function dataGetRelevantUrlFromBody()
 	{
 		return [
 			'end-of-content' => [
@@ -76,7 +76,7 @@ class PageInfoTest extends DatabaseTestCase
 		self::assertSame($expected, PageInfoMock::getRelevantUrlFromBody($body, $searchNakedUrls));
 	}
 
-	public function dataStripTrailingUrlFromBody()
+	public static function dataStripTrailingUrlFromBody()
 	{
 		return [
 			'naked-url-append' => [

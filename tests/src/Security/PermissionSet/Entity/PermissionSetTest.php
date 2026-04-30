@@ -12,7 +12,7 @@ use Friendica\Test\MockedTestCase;
 
 class PermissionSetTest extends MockedTestCase
 {
-	public function dateAllowedContacts()
+	public static function dateAllowedContacts()
 	{
 		return [
 			'default' => [

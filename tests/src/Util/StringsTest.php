@@ -84,7 +84,7 @@ class StringsTest extends TestCase
 		);
 	}
 
-	public function dataIsHex()
+	public static function dataIsHex()
 	{
 		return [
 			'validHex' => [
@@ -137,7 +137,7 @@ class StringsTest extends TestCase
 	}
 
 
-	public function dataSubstringReplaceMultiByte()
+	public static function dataSubstringReplaceMultiByte()
 	{
 		return [
 			'issue-8470' => [

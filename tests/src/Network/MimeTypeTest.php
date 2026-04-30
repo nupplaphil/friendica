@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
 
 class MimeTypeTest extends TestCase
 {
-	public function dataCreateFromContentType(): array
+	public static function dataCreateFromContentType(): array
 	{
 		return [
 			'image/jpg' => [
@@ -77,7 +77,7 @@ class MimeTypeTest extends TestCase
 		$this->assertEquals($expected, $factory->createFromContentType($contentType));
 	}
 
-	public function dataToString(): array
+	public static function dataToString(): array
 	{
 		return [
 			'image/jpg' => [
@@ -114,7 +114,7 @@ class MimeTypeTest extends TestCase
 		$this->assertEquals($expected, $mimeType->__toString());
 	}
 
-	public function dataRoundtrip(): array
+	public static function dataRoundtrip(): array
 	{
 		return [
 			['image/jpg'],

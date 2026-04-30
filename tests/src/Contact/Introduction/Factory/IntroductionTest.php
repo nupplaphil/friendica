@@ -13,7 +13,7 @@ use Psr\Log\NullLogger;
 
 class IntroductionTest extends TestCase
 {
-	public function dataRow()
+	public static function dataRow()
 	{
 		return [
 			'default' => [

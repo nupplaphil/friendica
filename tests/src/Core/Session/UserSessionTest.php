@@ -13,7 +13,7 @@ use Friendica\Test\MockedTestCase;
 
 class UserSessionTest extends MockedTestCase
 {
-	public function dataLocalUserId()
+	public static function dataLocalUserId()
 	{
 		return [
 			'standard' => [
@@ -66,7 +66,7 @@ class UserSessionTest extends MockedTestCase
 		$this->markTestSkipped('Needs Contact::getIdForURL testable first');
 	}
 
-	public function dataGetRemoteUserId()
+	public static function dataGetRemoteUserId()
 	{
 		return [
 			'standard' => [
@@ -115,7 +115,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	/// @fixme Add more data when Contact::getIdForUrl is a dynamic class
-	public function dataGetRemoteContactId()
+	public static function dataGetRemoteContactId()
 	{
 		return [
 			'remote_exists' => [
@@ -137,7 +137,7 @@ class UserSessionTest extends MockedTestCase
 		$this->assertEquals($expected, $userSession->getRemoteContactID($uid));
 	}
 
-	public function dataGetUserIdForVisitorContactID()
+	public static function dataGetUserIdForVisitorContactID()
 	{
 		return [
 			'standard' => [
@@ -170,7 +170,7 @@ class UserSessionTest extends MockedTestCase
 		$this->assertSame($expected, $userSession->getUserIDForVisitorContactID($cid));
 	}
 
-	public function dataAuthenticated()
+	public static function dataAuthenticated()
 	{
 		return [
 			'authenticated' => [
@@ -210,7 +210,7 @@ class UserSessionTest extends MockedTestCase
 		$this->assertEquals($expected, $userSession->isAuthenticated());
 	}
 
-	public function dataIsVisitor()
+	public static function dataIsVisitor()
 	{
 		return [
 			'local_user' => [
@@ -257,7 +257,7 @@ class UserSessionTest extends MockedTestCase
 		$this->assertEquals($expected, $userSession->isVisitor());
 	}
 
-	public function dataIsUnauthenticated()
+	public static function dataIsUnauthenticated()
 	{
 		return [
 			'local_user' => [

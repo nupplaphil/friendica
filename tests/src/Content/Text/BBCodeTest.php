@@ -41,7 +41,7 @@ class BBCodeTest extends FixtureTestCase
 		$this->HTMLPurifier = new \HTMLPurifier($config);
 	}
 
-	public function dataLinks()
+	public static function dataLinks()
 	{
 		return [
 			/** @see https://github.com/friendica/friendica/issues/2487 */
@@ -143,7 +143,7 @@ class BBCodeTest extends FixtureTestCase
 		}
 	}
 
-	public function dataBBCodes()
+	public static function dataBBCodes()
 	{
 		return [
 			'bug-7271-condensed-space' => [
@@ -291,7 +291,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expectedHtml, $actual);
 	}
 
-	public function dataBBCodesToMarkdown()
+	public static function dataBBCodesToMarkdown()
 	{
 		return [
 			'bug-7808-gt' => [
@@ -340,7 +340,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataGetTags()
+	public static function dataGetTags()
 	{
 		return [
 			'bug-15076-uri-fragments-require-space-before-tags' => [
@@ -363,7 +363,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataExpandTags()
+	public static function dataExpandTags()
 	{
 		return [
 			'bug-10692-non-word' => [
@@ -390,7 +390,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataExpandVideoLinks(): array
+	public static function dataExpandVideoLinks(): array
 	{
 		return [
 			/** @see https://github.com/friendica/friendica/pull/14940 */
@@ -446,7 +446,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataGetAbstract(): array
+	public static function dataGetAbstract(): array
 	{
 		return [
 			'no-abstract' => [
@@ -517,7 +517,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	}
 
 
-	public function dataStripAbstract(): array
+	public static function dataStripAbstract(): array
 	{
 		return [
 			'no-abstract' => [
@@ -568,7 +568,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataFetchShareAttributes(): array
+	public static function dataFetchShareAttributes(): array
 	{
 		return [
 			'no-tag' => [
@@ -700,7 +700,7 @@ Lucas: For the right price, yes.[/share]',
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataProfileLink(): array
+	public static function dataProfileLink(): array
 	{
 		return [
 			'mention' => [
@@ -723,7 +723,7 @@ Lucas: For the right price, yes.[/share]',
 		self::assertEquals($expected, $actual);
 	}
 
-	public function dataConvertAttachment(): array
+	public static function dataConvertAttachment(): array
 	{
 		return [
 			'player-rich' => [
@@ -826,7 +826,7 @@ Lucas: For the right price, yes.[/share]',
 		self::assertEquals($expected, $actual);
 	}
 
-	public function datasetMentionsToNicknames(): array
+	public static function datasetMentionsToNicknames(): array
 	{
 		return [
 			'issue-15623' => [

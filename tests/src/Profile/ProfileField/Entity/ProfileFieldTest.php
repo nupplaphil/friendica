@@ -37,7 +37,7 @@ class ProfileFieldTest extends MockedTestCase
 		$this->profileFieldFactory     = new ProfileFieldFactory(new NullLogger(), $this->permissionSetFactory);
 	}
 
-	public function dataEntity()
+	public static function dataEntity()
 	{
 		return [
 			'default' => [

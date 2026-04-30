@@ -97,7 +97,7 @@ class StorageManagerTest extends DatabaseTestCase
 		self::assertInstanceOf(StorageManager::class, $storageManager);
 	}
 
-	public function dataStorages()
+	public static function dataStorages()
 	{
 		return [
 			'empty' => [

@@ -19,7 +19,7 @@ class PlaintextTest extends FixtureTestCase
 		parent::setUp();
 	}
 
-	public function dataMessage()
+	public static function dataMessage()
 	{
 		return [
 			'test-1' => [

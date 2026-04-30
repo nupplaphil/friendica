@@ -110,7 +110,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	 *
 	 * @return array the dataset
 	 */
-	public function dataInstaller()
+	public static function dataInstaller()
 	{
 		return [
 			'empty' => [

@@ -57,7 +57,7 @@ class CookieTest extends MockedTestCase
 		self::assertInstanceOf(Cookie::class, $cookie);
 	}
 
-	public function dataGet()
+	public static function dataGet()
 	{
 		return [
 			'default'    => [
@@ -140,7 +140,7 @@ class CookieTest extends MockedTestCase
 		}
 	}
 
-	public function dataCheck()
+	public static function dataCheck()
 	{
 		return [
 			'default'   => [
@@ -187,7 +187,7 @@ class CookieTest extends MockedTestCase
 		self::assertEquals($assertTrue, $cookie->comparePrivateDataHash($assertHash, $password, $userPrivateKey));
 	}
 
-	public function dataSet()
+	public static function dataSet()
 	{
 		return [
 			'default'         => [

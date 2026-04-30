@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ProcessorTest extends TestCase
 {
-	public function dataNormalizeMentionLinks(): array
+	public static function dataNormalizeMentionLinks(): array
 	{
 		return [
 			'one-link-@' => [
@@ -56,7 +56,7 @@ class ProcessorTest extends TestCase
 		$this->assertEquals($expected, ProcessorMock::normalizeMentionLinks($body));
 	}
 
-	public function dataAddMentionLinks(): array
+	public static function dataAddMentionLinks(): array
 	{
 		return [
 			'issue-10603' => [

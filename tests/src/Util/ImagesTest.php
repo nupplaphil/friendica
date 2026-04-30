@@ -31,7 +31,7 @@ class ImagesTest extends MockedTestCase
 		parent::tearDown();
 	}
 
-	public function dataImages()
+	public static function dataImages()
 	{
 		return [
 			'image' => [
@@ -88,7 +88,7 @@ class ImagesTest extends MockedTestCase
 		}
 	}
 
-	public function dataScalingDimensions()
+	public static function dataScalingDimensions()
 	{
 		return [
 			'landscape' => [

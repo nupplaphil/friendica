@@ -12,7 +12,7 @@ use Friendica\Util\DateTimeFormat;
 
 class DateTimeFormatTest extends MockedTestCase
 {
-	public function dataYearMonth()
+	public static function dataYearMonth()
 	{
 		return [
 			'validNormal' => [
@@ -74,7 +74,7 @@ class DateTimeFormatTest extends MockedTestCase
 		self::assertEquals('Wed Oct 10 00:00:00 +0000 1990', DateTimeFormat::utc('1990-10-10', DateTimeFormat::API));
 	}
 
-	public function dataFix(): array
+	public static function dataFix(): array
 	{
 		return [
 			'Mo, 19 Sep 2022 14:51:00 +0200' => [
@@ -201,7 +201,7 @@ class DateTimeFormatTest extends MockedTestCase
 		$this->assertEquals(259200, $now - $date);
 	}
 
-	public function dataConvert()
+	public static function dataConvert()
 	{
 		return [
 			'unix timestamp' => [
@@ -259,7 +259,7 @@ class DateTimeFormatTest extends MockedTestCase
 		$this->assertSame($expected, DateTimeFormat::convert($s, $tz_to, $tz_from, $format));
 	}
 
-	public function dataConvertNow()
+	public static function dataConvertNow()
 	{
 		return [
 			'now missing' => [

@@ -94,7 +94,7 @@ class PermissionSetTest extends FixtureTestCase
 		}
 	}
 
-	public function dataSet()
+	public static function dataSet()
 	{
 		return [
 			'standard' => [

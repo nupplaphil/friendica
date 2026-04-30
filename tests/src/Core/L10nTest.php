@@ -12,7 +12,7 @@ use Friendica\Test\MockedTestCase;
 
 class L10nTest extends MockedTestCase
 {
-	public function dataDetectLanguage()
+	public static function dataDetectLanguage()
 	{
 		return [
 			'empty'   => [

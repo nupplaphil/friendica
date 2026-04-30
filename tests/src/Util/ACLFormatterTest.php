@@ -38,7 +38,7 @@ class ACLFormatterTest extends TestCase
 		return $aclMerged;
 	}
 
-	public function dataExpand()
+	public static function dataExpand()
 	{
 		return [
 			'normal' => [
@@ -123,7 +123,7 @@ class ACLFormatterTest extends TestCase
 		self::assertEmpty($recipients);
 	}
 
-	public function dataAclToString()
+	public static function dataAclToString()
 	{
 		return [
 			'empty'   => [

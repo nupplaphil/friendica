@@ -129,7 +129,7 @@ class ProbeTest extends MockedTestCase
 		}
 	}
 
-	public function dataCleanUri(): array
+	public static function dataCleanUri(): array
 	{
 		return [
 			'@-first' => [
@@ -166,7 +166,7 @@ class ProbeTest extends MockedTestCase
 		self::assertEquals($expected, Probe::cleanURI($uri));
 	}
 
-	public function dataUri(): array
+	public static function dataUri(): array
 	{
 		return [
 			'Artists4Future_Muenchen@climatejustice.global' => [

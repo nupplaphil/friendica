@@ -28,7 +28,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		$this->setUpVfsDir();
 	}
 
-	public function dataHooks(): array
+	public static function dataHooks(): array
 	{
 		return [
 			'normal' => [

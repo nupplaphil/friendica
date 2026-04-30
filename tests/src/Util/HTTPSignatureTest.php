@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HTTPSignatureTest extends TestCase
 {
-	public function dataParseSigned()
+	public static function dataParseSigned()
 	{
 		return [
 			'signed1' => [
@@ -52,7 +52,7 @@ class HTTPSignatureTest extends TestCase
 		];
 	}
 
-	public function dataHeader()
+	public static function dataHeader()
 	{
 		return [
 			'signed' => [

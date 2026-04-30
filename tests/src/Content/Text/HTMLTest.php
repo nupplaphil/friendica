@@ -16,7 +16,7 @@ use Psr\Http\Message\UriInterface;
 
 class HTMLTest extends FixtureTestCase
 {
-	public function dataHTML()
+	public static function dataHTML()
 	{
 		$inputFiles = glob(__DIR__ . '/../../../datasets/content/text/html/*.html');
 
@@ -49,7 +49,7 @@ class HTMLTest extends FixtureTestCase
 		self::assertEquals($expected, $output);
 	}
 
-	public function dataHTMLText()
+	public static function dataHTMLText()
 	{
 		return [
 			'bug-7665-audio-tag' => [
@@ -112,7 +112,7 @@ its surprisingly good",
 		self::assertEquals($expectedBBCode, $actual);
 	}
 
-	public function dataXpathQuote(): array
+	public static function dataXpathQuote(): array
 	{
 		return [
 			'no quotes' => [
@@ -171,7 +171,7 @@ its surprisingly good",
 		$this->assertEquals(1, $result->length);
 	}
 
-	public function dataCheckRelMeLink(): array
+	public static function dataCheckRelMeLink(): array
 	{
 		$aSingleRelValue = new \DOMDocument();
 		$aSingleRelValue->load(__DIR__ . '/../../../datasets/dom/relme/a-single-rel-value.html');
@@ -226,7 +226,7 @@ its surprisingly good",
 		$this->assertTrue(HTML::checkRelMeLink($doc, $meUrl));
 	}
 
-	public function dataCheckRelMeLinkFail(): array
+	public static function dataCheckRelMeLinkFail(): array
 	{
 		$aSingleRelValueFail = new \DOMDocument();
 		$aSingleRelValueFail->load(__DIR__ . '/../../../datasets/dom/relme/a-single-rel-value-fail.html');
@@ -260,7 +260,7 @@ its surprisingly good",
 		$this->assertFalse(HTML::checkRelMeLink($doc, $meUrl));
 	}
 
-	public function dataExtractCharset(): array
+	public static function dataExtractCharset(): array
 	{
 		return [
 			'https://github.com/friendica/friendica/issues/12488#issuecomment-1376002081' => [

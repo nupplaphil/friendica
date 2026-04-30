@@ -39,7 +39,7 @@ class ArgumentsTest extends TestCase
 			$arguments);
 	}
 
-	public function dataArguments()
+	public static function dataArguments()
 	{
 		return [
 			'withPagename'         => [
@@ -212,7 +212,7 @@ class ArgumentsTest extends TestCase
 		self::assertEquals('default', $arguments->get($arguments->getArgc(), 'default'));
 	}
 
-	public function dataStripped()
+	public static function dataStripped()
 	{
 		return [
 			'strippedZRLFirst'  => [
