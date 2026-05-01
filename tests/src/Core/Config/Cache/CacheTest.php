@@ -433,7 +433,7 @@ class CacheTest extends MockedTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_keys',
+				'category'  => 'test_with_keys',
 				'assertion' => [
 					[
 						'last_update' => 1671051565,
@@ -471,7 +471,7 @@ class CacheTest extends MockedTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_inner_array',
+				'category'  => 'test_with_inner_array',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,
@@ -501,7 +501,7 @@ class CacheTest extends MockedTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_null',
+				'category'  => 'test_with_null',
 				'assertion' => null,
 			],
 		];

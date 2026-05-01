@@ -144,7 +144,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testGetByName($name, $valid, $interface, $assert, $assertName)
+	public function testGetByName($name, $valid, $interface, $assert, $assertName, $userBackend)
 	{
 		if (!$valid) {
 			$this->expectException(InvalidClassStorageException::class);
@@ -179,7 +179,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName)
+	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
 	{
 		$storageManager = new StorageManager(
 			$this->database,
@@ -219,7 +219,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testGetBackend($name, $valid, $interface, $assert, $assertName)
+	public function testGetBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			static::markTestSkipped('only works for ICanWriteToStorage');
@@ -245,7 +245,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testPresetBackend($name, $valid, $interface, $assert, $assertName)
+	public function testPresetBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
 	{
 		$this->config->set('storage', 'name', $name);
 		if ($interface !== ICanWriteToStorage::class) {
@@ -360,7 +360,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testMoveStorage($name, $valid, $interface, $assert, $assertName)
+	public function testMoveStorage($name, $valid, $interface, $assert, $assertName, $userBackend)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			self::markTestSkipped("No user backend");
