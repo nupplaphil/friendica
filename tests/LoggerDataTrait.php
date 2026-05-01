@@ -9,7 +9,7 @@ namespace Friendica\Test;
 
 trait LoggerDataTrait
 {
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'emergency' => [

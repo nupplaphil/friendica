@@ -73,7 +73,7 @@ abstract class PConfigTestCase extends MockedTestCase
 		];
 	}
 
-	public function dataConfigLoad()
+	public static function dataConfigLoad()
 	{
 		$data = [
 			'system' => [

@@ -83,7 +83,7 @@ class ConfigTest extends DatabaseTestCase
 			'decimal'      => ['data' => 2.456],
 			'array'        => ['data' => ['1', 2, '3', true, false]],
 			'boolIntTrue'  => ['data' => 1],
-			'boolIntFalse' => ['Data' => 0],
+			'boolIntFalse' => ['data' => 0],
 		];
 	}
 
@@ -427,7 +427,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_hashmap',
+				'category'  => 'test_with_hashmap',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,
@@ -462,7 +462,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_keys',
+				'category'  => 'test_with_keys',
 				'assertion' => [
 					[
 						'last_update' => 1671051565,
@@ -500,7 +500,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_inner_array',
+				'category'  => 'test_with_inner_array',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,

@@ -96,8 +96,8 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	{
 		return [
 			'HTML UTF-8' => [
-				'content-type' => 'text/html; charset=utf-8',
-				'mediaType'    => new MediaType('text', 'html', ['charset' => 'utf-8']),
+				'expected'  => 'text/html; charset=utf-8',
+				'mediaType' => new MediaType('text', 'html', ['charset' => 'utf-8']),
 			],
 			'HTML Northern Europe' => [
 				'expected'  => 'text/html; charset=ISO-8859-4',
