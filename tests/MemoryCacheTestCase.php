@@ -30,7 +30,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	 * @small
 	 * @dataProvider dataSimple
 	 */
-	public function testCompareSet($value1, $value2)
+	public function testCompareSet($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -47,7 +47,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	 * @small
 	 * @dataProvider dataSimple
 	 */
-	public function testNegativeCompareSet($value1, $value2)
+	public function testNegativeCompareSet($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -65,14 +65,14 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	 * @small
 	 * @dataProvider dataSimple
 	 */
-	public function testCompareDelete($data)
+	public function testCompareDelete($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 
-		$this->instance->add('value1', $data);
+		$this->instance->add('value1', $value1);
 		$received = $this->instance->get('value1');
-		self::assertEquals($data, $received, 'Value received from cache not equal to the original');
-		$this->instance->compareDelete('value1', $data);
+		self::assertEquals($value1, $received, 'Value received from cache not equal to the original');
+		$this->instance->compareDelete('value1', $value1);
 		self::assertNull($this->instance->get('value1'), 'Value was not deleted by compareDelete');
 	}
 
@@ -80,17 +80,17 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	 * @small
 	 * @dataProvider dataSimple
 	 */
-	public function testNegativeCompareDelete($data)
+	public function testNegativeCompareDelete($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 
-		$this->instance->add('value1', $data);
+		$this->instance->add('value1', $value1);
 		$received = $this->instance->get('value1');
-		self::assertEquals($data, $received, 'Value received from cache not equal to the original');
+		self::assertEquals($value1, $received, 'Value received from cache not equal to the original');
 		$this->instance->compareDelete('value1', 'wrong');
 		self::assertNotNull($this->instance->get('value1'), 'Value was wrongly compareDeleted');
 
-		$this->instance->compareDelete('value1', $data);
+		$this->instance->compareDelete('value1', $value1);
 		self::assertNull($this->instance->get('value1'), 'Value was wrongly NOT deleted by compareDelete');
 	}
 
@@ -98,7 +98,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	 * @small
 	 * @dataProvider dataSimple
 	 */
-	public function testAdd($value1, $value2)
+	public function testAdd($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 

@@ -62,11 +62,11 @@ class MarkdownTest extends FixtureTestCase
 	 * @dataProvider dataMarkdownText
 	 *
 	 * @param string $expectedBBCode Expected BBCode output
-	 * @param string $html           Markdown text
+	 * @param string $markdown       Markdown text
 	 */
-	public function testToBBCode(string $expectedBBCode, string $html)
+	public function testToBBCode(string $expectedBBCode, string $markdown)
 	{
-		$actual = Markdown::toBBCode($html);
+		$actual = Markdown::toBBCode($markdown);
 
 		self::assertEquals($expectedBBCode, $actual);
 	}

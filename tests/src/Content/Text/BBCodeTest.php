@@ -395,39 +395,39 @@ Karl Marx - Die ursprüngliche Akkumulation
 		return [
 			/** @see https://github.com/friendica/friendica/pull/14940 */
 			'task-14940-youtube-watch-with-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://www.youtube.com/watch?v=hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-watch-without-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://youtube.com/watch?v=hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-shorts-with-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://www.youtube.com/shorts/hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-shorts-without-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://youtube.com/shorts/hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-embed-with-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://www.youtube.com/embed/hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-embed-without-www' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://youtube.com/embed/hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-youtube-mobile' => [
-				'expectedBBCode' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
+				'expected' => '[url=https://www.youtube.com/watch?v=hfwbmTzBFT0]https://www.youtube.com/watch?v=hfwbmTzBFT0[/url]',
 				'text'           => '[youtube]https://m.youtube.com/watch?v=hfwbmTzBFT0[/youtube]',
 			],
 			'task-14940-vimeo' => [
-				'expectedBBCode' => '[url=https://vimeo.com/2345345]https://vimeo.com/2345345[/url]',
+				'expected' => '[url=https://vimeo.com/2345345]https://vimeo.com/2345345[/url]',
 				'text'           => '[vimeo]https://vimeo.com/2345345[/vimeo]',
 			],
 			'task-14940-player-vimeo' => [
-				'expectedBBCode' => '[url=https://vimeo.com/2345345]https://vimeo.com/2345345[/url]',
+				'expected' => '[url=https://vimeo.com/2345345]https://vimeo.com/2345345[/url]',
 				'text'           => '[vimeo]https://player.vimeo.com/video/2345345[/vimeo]',
 			],
 		];

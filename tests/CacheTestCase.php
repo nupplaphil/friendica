@@ -81,7 +81,7 @@ abstract class CacheTestCase extends MockedTestCase
 	 * @param mixed $value1 a first
 	 * @param mixed $value2 a second
 	 */
-	public function testSimple($value1, $value2)
+	public function testSimple($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -203,7 +203,7 @@ abstract class CacheTestCase extends MockedTestCase
 	 *
 	 * @dataProvider dataSimple
 	 */
-	public function testGetAllKeys($value1, $value2, $value3)
+	public function testGetAllKeys($value1, $value2, $value3, $value4)
 	{
 		self::assertTrue($this->instance->set('value1', $value1));
 		self::assertTrue($this->instance->set('value2', $value2));

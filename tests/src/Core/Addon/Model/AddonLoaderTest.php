@@ -148,7 +148,7 @@ EOF;
 		$filename     = 'addon/testaddon1/static/hooks.config.php';
 		$wrongContent = "<?php return 'wrong';";
 
-		vfsStream::create($this->structure)->at($this->root);
+		vfsStream::create(self::$structure)->at($this->root);
 
 		vfsStream::newFile($filename)
 				 ->withContent($wrongContent)
@@ -178,7 +178,7 @@ EOF;
 		$filename     = 'addon/testaddon1/static/hooks.config.php';
 		$wrongContent = "<?php return 'wrong';";
 
-		vfsStream::create($this->structure)->at($this->root);
+		vfsStream::create(self::$structure)->at($this->root);
 
 		vfsStream::newFile($filename)
 				 ->withContent($wrongContent)
