@@ -174,7 +174,7 @@ abstract class PConfigTestCase extends MockedTestCase
 		}
 	}
 
-	public function dataDoubleLoad()
+	public static function dataDoubleLoad()
 	{
 		return [
 			'config' => [

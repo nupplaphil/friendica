@@ -155,7 +155,7 @@ EOF;
 				 ->at($this->root);
 
 		$configArray = [];
-		foreach ($this->addons as $enabledAddon) {
+		foreach (self::$addons as $enabledAddon) {
 			$configArray[$enabledAddon] = ['test' => []];
 		}
 
@@ -185,7 +185,7 @@ EOF;
 				 ->at($this->root);
 
 		$configArray = [];
-		foreach ($this->addons as $enabledAddon) {
+		foreach (self::$addons as $enabledAddon) {
 			$configArray[$enabledAddon] = ['test' => []];
 		}
 
