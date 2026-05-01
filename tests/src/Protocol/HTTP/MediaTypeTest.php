@@ -16,39 +16,39 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 		return [
 			'HTML UTF-8' => [
 				'expected'     => new MediaType('text', 'html', ['charset' => 'utf-8']),
-				'content-type' => 'text/html; charset=utf-8',
+				'contentType'  => 'text/html; charset=utf-8',
 			],
 			'HTML Northern Europe' => [
 				'expected'     => new MediaType('text', 'html', ['charset' => 'ISO-8859-4']),
-				'content-type' => 'text/html; charset=ISO-8859-4',
+				'contentType'  => 'text/html; charset=ISO-8859-4',
 			],
 			'multipart/form-data' => [
 				'expected'     => new MediaType('multipart', 'form-data', ['boundary' => '---------------------------974767299852498929531610575']),
-				'content-type' => 'multipart/form-data; boundary=---------------------------974767299852498929531610575',
+				'contentType'  => 'multipart/form-data; boundary=---------------------------974767299852498929531610575',
 			],
 			'Multiple parameters' => [
 				'expected'     => new MediaType('application', 'octet-stream', ['charset' => 'ISO-8859-4', 'another' => 'parameter']),
-				'content-type' => 'application/octet-stream; charset=ISO-8859-4 ; another=parameter',
+				'contentType'  => 'application/octet-stream; charset=ISO-8859-4 ; another=parameter',
 			],
 			'No parameters' => [
 				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip',
+				'contentType'  => 'application/vnd.adobe.air-application-installer-package+zip',
 			],
 			'No parameters colon' => [
 				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip;',
+				'contentType'  => 'application/vnd.adobe.air-application-installer-package+zip;',
 			],
 			'No parameters space colon' => [
 				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip ;',
+				'contentType'  => 'application/vnd.adobe.air-application-installer-package+zip ;',
 			],
 			'No parameters space colon space' => [
 				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip ; ',
+				'contentType'  => 'application/vnd.adobe.air-application-installer-package+zip ; ',
 			],
 			'Parameter quoted string' => [
 				'expected'     => new MediaType('text', 'html', ['parameter' => 'Quoted string with a space and a "double-quote"']),
-				'content-type' => 'text/html; parameter="Quoted string with a space and a \"double-quote\""',
+				'contentType'  => 'text/html; parameter="Quoted string with a space and a \"double-quote\""',
 			]
 		];
 	}

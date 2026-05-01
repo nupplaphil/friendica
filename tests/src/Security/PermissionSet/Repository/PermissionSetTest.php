@@ -351,7 +351,7 @@ class PermissionSetTest extends FixtureTestCase
 	/**
 	 * @dataProvider dataSet
 	 */
-	public function testSelectContactId(array $group_member, array $inputPermissionSets, array $assertions)
+	public function testSelectContactId(array $group_member, array $permissionSets, array $assertions)
 	{
 		/** @var Database $db */
 		$db = $this->dice->create(Database::class);
@@ -360,7 +360,7 @@ class PermissionSetTest extends FixtureTestCase
 			$db->insert('group_member', $gmember, true);
 		}
 
-		foreach ($inputPermissionSets as $inputPermissionSet) {
+		foreach ($permissionSets as $inputPermissionSet) {
 			$db->insert('permissionset', $inputPermissionSet, true);
 		}
 
@@ -382,16 +382,16 @@ class PermissionSetTest extends FixtureTestCase
 	/**
 	 * @dataProvider dataSet
 	 */
-	public function testSelectOneById(array $group_member, array $inputPermissionSets, array $assertions)
+	public function testSelectOneById(array $group_member, array $permissionSets, array $assertions)
 	{
-		if (count($inputPermissionSets) === 0) {
+		if (count($permissionSets) === 0) {
 			self::markTestSkipped('Nothing to assert.');
 		}
 
 		/** @var Database $db */
 		$db = $this->dice->create(Database::class);
 
-		foreach ($inputPermissionSets as $inputPermissionSet) {
+		foreach ($permissionSets as $inputPermissionSet) {
 			$db->insert('permissionset', $inputPermissionSet);
 			$id = $db->lastInsertId();
 

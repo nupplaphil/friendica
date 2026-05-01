@@ -54,7 +54,7 @@ class MemcachedCacheTest extends MemoryCacheTestCase
 	 * @dataProvider dataSimple
 	 * @doesNotPerformAssertions
 	 */
-	public function testGetAllKeys($value1, $value2, $value3)
+	public function testGetAllKeys($value1, $value2, $value3, $value4)
 	{
 		static::markTestIncomplete('Race condition because of too fast getAllKeys() which uses a workaround');
 	}
