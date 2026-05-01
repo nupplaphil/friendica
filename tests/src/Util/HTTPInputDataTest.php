@@ -28,7 +28,7 @@ class HTTPInputDataTest extends MockedTestCase
 	{
 		return [
 			'multipart' => [
-				'contenttype' => 'multipart/form-data;boundary=43395968-f65c-437e-b536-5b33e3e3c7e5;charset=utf8',
+				'contentType' => 'multipart/form-data;boundary=43395968-f65c-437e-b536-5b33e3e3c7e5;charset=utf8',
 				'input'       => file_get_contents(__DIR__ . '/../../datasets/http/multipart.httpinput'),
 				'expected'    => [
 					'variables' => [
@@ -50,7 +50,7 @@ class HTTPInputDataTest extends MockedTestCase
 				]
 			],
 			'multipart-file' => [
-				'contenttype' => 'multipart/form-data;boundary=6d4d5a40-651a-4468-a62e-5a6ca2bf350d;charset=utf8',
+				'contentType' => 'multipart/form-data;boundary=6d4d5a40-651a-4468-a62e-5a6ca2bf350d;charset=utf8',
 				'input'       => file_get_contents(__DIR__ . '/../../datasets/http/multipart-file.httpinput'),
 				'expected'    => [
 					'variables' => [
@@ -86,7 +86,7 @@ class HTTPInputDataTest extends MockedTestCase
 				]
 			],
 			'form-urlencoded' => [
-				'contenttype' => 'application/x-www-form-urlencoded;charset=utf8',
+				'contentType' => 'application/x-www-form-urlencoded;charset=utf8',
 				'input'       => file_get_contents(__DIR__ . '/../../datasets/http/form-urlencoded.httpinput'),
 				'expected'    => [
 					'variables' => [
@@ -96,7 +96,7 @@ class HTTPInputDataTest extends MockedTestCase
 				]
 			],
 			'form-urlencoded-json' => [
-				'contenttype' => 'application/x-www-form-urlencoded;charset=utf8',
+				'contentType' => 'application/x-www-form-urlencoded;charset=utf8',
 				'input'       => file_get_contents(__DIR__ . '/../../datasets/http/form-urlencoded-json.httpinput'),
 				'expected'    => [
 					'variables' => [

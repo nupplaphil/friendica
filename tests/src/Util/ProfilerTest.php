@@ -128,7 +128,7 @@ class ProfilerTest extends MockedTestCase
 	 * Test the Profiler reset
 	 * @dataProvider dataPerformance
 	 */
-	public function testReset($timestamp, $name)
+	public function testReset($timestamp, $name, array $functions)
 	{
 		$config = \Mockery::mock(IManageConfigValues::class);
 		$config->shouldReceive('get')

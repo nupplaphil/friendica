@@ -19,7 +19,7 @@ class HTTPSignatureTest extends TestCase
 	{
 		return [
 			'signed1' => [
-				'header' => 'keyId="test-key-a", algorithm="hs2019",
+				'signature' => 'keyId="test-key-a", algorithm="hs2019",
        created=1402170695,
        headers="(request-target) (created) host date content-type digest
            content-length",

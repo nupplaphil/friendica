@@ -134,7 +134,6 @@ class StorageManagerTest extends DatabaseTestCase
 				'interface'   => null,
 				'assert'      => null,
 				'assertName'  => '',
-				'userBackend' => false,
 			],
 		];
 	}
@@ -144,7 +143,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testGetByName($name, $valid, $interface, $assert, $assertName, $userBackend)
+	public function testGetByName($name, $valid, $interface, $assert, $assertName)
 	{
 		if (!$valid) {
 			$this->expectException(InvalidClassStorageException::class);
@@ -179,7 +178,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
+	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$storageManager = new StorageManager(
 			$this->database,
@@ -219,7 +218,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testGetBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
+	public function testGetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			static::markTestSkipped('only works for ICanWriteToStorage');
@@ -245,7 +244,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testPresetBackend($name, $valid, $interface, $assert, $assertName, $userBackend)
+	public function testPresetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$this->config->set('storage', 'name', $name);
 		if ($interface !== ICanWriteToStorage::class) {
@@ -360,7 +359,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @dataProvider dataStorages
 	 */
-	public function testMoveStorage($name, $valid, $interface, $assert, $assertName, $userBackend)
+	public function testMoveStorage($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			self::markTestSkipped("No user backend");
