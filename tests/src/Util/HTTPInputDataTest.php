@@ -43,11 +43,11 @@ class HTTPInputDataTest extends MockedTestCase
 							1 => [
 								'name'  => 'variable 2',
 								'value' => 'value 2',
-							]
-						]
+							],
+						],
 					],
-					'files' => []
-				]
+					'files' => [],
+				],
 			],
 			'multipart-file' => [
 				'contentType' => 'multipart/form-data;boundary=6d4d5a40-651a-4468-a62e-5a6ca2bf350d;charset=utf8',
@@ -64,8 +64,8 @@ class HTTPInputDataTest extends MockedTestCase
 							1 => [
 								'name'  => 'variable 2',
 								'value' => 'value 2',
-							]
-						]
+							],
+						],
 					],
 					'files' => [
 						'avatar' => [
@@ -73,17 +73,17 @@ class HTTPInputDataTest extends MockedTestCase
 							'type'     => 'image/png',
 							'tmp_name' => '8ZUCS34Y5XNH',
 							'error'    => 0,
-							'size'     => 349330
+							'size'     => 349330,
 						],
 						'header' => [
 							'name'     => 'V2B6Z1IICGPM',
 							'type'     => 'image/png',
 							'tmp_name' => 'V2B6Z1IICGPM',
 							'error'    => 0,
-							'size'     => 1323635
-						]
-					]
-				]
+							'size'     => 1323635,
+						],
+					],
+				],
 			],
 			'form-urlencoded' => [
 				'contentType' => 'application/x-www-form-urlencoded;charset=utf8',
@@ -92,8 +92,8 @@ class HTTPInputDataTest extends MockedTestCase
 					'variables' => [
 						'title' => 'Test2',
 					],
-					'files' => []
-				]
+					'files' => [],
+				],
 			],
 			'form-urlencoded-json' => [
 				'contentType' => 'application/x-www-form-urlencoded;charset=utf8',
@@ -104,11 +104,11 @@ class HTTPInputDataTest extends MockedTestCase
 						'sensitive'    => false,
 						'status'       => 'Test Status',
 						'visibility'   => 'private',
-						'spoiler_text' => 'Title'
+						'spoiler_text' => 'Title',
 					],
-					'files' => []
-				]
-			]
+					'files' => [],
+				],
+			],
 		];
 	}
 

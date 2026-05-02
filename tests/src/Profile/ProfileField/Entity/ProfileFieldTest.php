@@ -55,7 +55,7 @@ class ProfileFieldTest extends MockedTestCase
 					'deny_cid'  => '<2>',
 					'deny_gid'  => '<3>',
 					'id'        => 2,
-				]
+				],
 			],
 			'withId' => [
 				'uid'           => 23,
@@ -98,7 +98,7 @@ class ProfileFieldTest extends MockedTestCase
 	/**
 	 * @dataProvider dataEntity
 	 */
-	public function testUpdate(int $uid, int $order, int $psid, string $label, string $value, \DateTime $created, \DateTime $edited, array $permissionSet,  $id = null)
+	public function testUpdate(int $uid, int $order, int $psid, string $label, string $value, \DateTime $created, \DateTime $edited, array $permissionSet, $id = null)
 	{
 		$permissionSet = $this->permissionSetFactory->createFromTableRow(['uid' => 2, 'id' => $psid]);
 
@@ -116,7 +116,7 @@ class ProfileFieldTest extends MockedTestCase
 		$permissionSetNew = $this->permissionSetFactory->createFromTableRow([
 			'uid'       => 2,
 			'allow_cid' => '<1>',
-			'id'        => 23
+			'id'        => 23,
 		]);
 
 		$entity->update('updatedValue', 2345, $permissionSetNew);

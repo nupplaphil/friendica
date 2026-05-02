@@ -116,7 +116,7 @@ class BaseURLTest extends MockedTestCase
 
 		$baseUrl = new BaseURL($config, new NullLogger(), $server);
 
-		self::assertEquals($assertion, (string)$baseUrl);
+		self::assertEquals($assertion, (string) $baseUrl);
 
 		$_SERVER = $origServerGlobal;
 	}
@@ -169,7 +169,7 @@ class BaseURLTest extends MockedTestCase
 		$config = new ReadOnlyFileConfig(new Cache([
 			'system' => [
 				'url' => 'https://friendica.local',
-			]
+			],
 		]));
 		$baseUrl = new BaseURL($config, new NullLogger());
 		$baseUrl->redirect('https://friendica.other');

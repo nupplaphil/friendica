@@ -240,22 +240,22 @@ class SmiliesTest extends FixtureTestCase
 			'nosmile' => [
 				'expected'   => [],
 				'body'       => '[nosmile] :like :like',
-				'normalized' => '[nosmile] :like :like'
+				'normalized' => '[nosmile] :like :like',
 			],
 			'in-code' => [
 				'expected'   => [],
 				'body'       => '[code]:like :like :like[/code]',
-				'normalized' => '[code]:like :like :like[/code]'
+				'normalized' => '[code]:like :like :like[/code]',
 			],
 			'~friendica' => [
 				'expected'   => ['friendica'],
 				'body'       => '~friendica',
-				'normalized' => ':friendica:'
+				'normalized' => ':friendica:',
 			],
 			'space' => [
 				'expected'   => ['smileyheart333'],
 				'body'       => ':smiley heart 333:',
-				'normalized' => ':smileyheart333:'
+				'normalized' => ':smileyheart333:',
 			],
 			'substitution-1' => [
 				'expected'   => [],

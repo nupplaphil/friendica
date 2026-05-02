@@ -482,19 +482,19 @@ CONF;
 		$this->mockGetMarkupTemplate('local.config.tpl', 'testTemplate', 1);
 		$this->mockReplaceMacros('testTemplate', Mockery::any(), '', 1);
 
-		self::assertTrue(putenv('MYSQL_HOST='     . $data['database']['hostname']));
-		self::assertTrue(putenv('MYSQL_PORT='     . $data['database']['port']));
+		self::assertTrue(putenv('MYSQL_HOST=' . $data['database']['hostname']));
+		self::assertTrue(putenv('MYSQL_PORT=' . $data['database']['port']));
 		self::assertTrue(putenv('MYSQL_DATABASE=' . $data['database']['database']));
 		self::assertTrue(putenv('MYSQL_USERNAME=' . $data['database']['username']));
 		self::assertTrue(putenv('MYSQL_PASSWORD=' . $data['database']['password']));
 
-		self::assertTrue(putenv('FRIENDICA_HOSTNAME='   . $data['config']['hostname']));
-		self::assertTrue(putenv('FRIENDICA_BASE_PATH='  . $data['system']['basepath']));
-		self::assertTrue(putenv('FRIENDICA_URL='        . $data['system']['url']));
-		self::assertTrue(putenv('FRIENDICA_PHP_PATH='   . $data['config']['php_path']));
+		self::assertTrue(putenv('FRIENDICA_HOSTNAME=' . $data['config']['hostname']));
+		self::assertTrue(putenv('FRIENDICA_BASE_PATH=' . $data['system']['basepath']));
+		self::assertTrue(putenv('FRIENDICA_URL=' . $data['system']['url']));
+		self::assertTrue(putenv('FRIENDICA_PHP_PATH=' . $data['config']['php_path']));
 		self::assertTrue(putenv('FRIENDICA_ADMIN_MAIL=' . $data['config']['admin_email']));
-		self::assertTrue(putenv('FRIENDICA_TZ='         . $data['system']['default_timezone']));
-		self::assertTrue(putenv('FRIENDICA_LANG='       . $data['system']['language']));
+		self::assertTrue(putenv('FRIENDICA_TZ=' . $data['system']['default_timezone']));
+		self::assertTrue(putenv('FRIENDICA_LANG=' . $data['system']['language']));
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 		$console->setOption('savedb', true);
@@ -526,13 +526,13 @@ CONF;
 		self::assertTrue(putenv('MYSQL_USERNAME=' . $data['database']['username']));
 		self::assertTrue(putenv('MYSQL_PASSWORD=' . $data['database']['password']));
 
-		self::assertTrue(putenv('FRIENDICA_HOSTNAME='   . $data['config']['hostname']));
-		self::assertTrue(putenv('FRIENDICA_BASE_PATH='  . $data['system']['basepath']));
-		self::assertTrue(putenv('FRIENDICA_URL='        . $data['system']['url']));
-		self::assertTrue(putenv('FRIENDICA_PHP_PATH='   . $data['config']['php_path']));
+		self::assertTrue(putenv('FRIENDICA_HOSTNAME=' . $data['config']['hostname']));
+		self::assertTrue(putenv('FRIENDICA_BASE_PATH=' . $data['system']['basepath']));
+		self::assertTrue(putenv('FRIENDICA_URL=' . $data['system']['url']));
+		self::assertTrue(putenv('FRIENDICA_PHP_PATH=' . $data['config']['php_path']));
 		self::assertTrue(putenv('FRIENDICA_ADMIN_MAIL=' . $data['config']['admin_email']));
-		self::assertTrue(putenv('FRIENDICA_TZ='         . $data['system']['default_timezone']));
-		self::assertTrue(putenv('FRIENDICA_LANG='       . $data['system']['language']));
+		self::assertTrue(putenv('FRIENDICA_TZ=' . $data['system']['default_timezone']));
+		self::assertTrue(putenv('FRIENDICA_LANG=' . $data['system']['language']));
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 

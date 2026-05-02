@@ -46,7 +46,7 @@ class VideoTest extends MockedTestCase
 			'invalid' => [
 				'input'  => '[video]invalid.link/video.mp4[/video]',
 				'assert' => '[video]invalid.link/video.mp4[/video]',
-			]
+			],
 		];
 	}
 

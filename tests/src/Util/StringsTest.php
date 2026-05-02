@@ -74,13 +74,13 @@ class StringsTest extends TestCase
 	 */
 	public function testEscapeHtml()
 	{
-		$invalidstring='<submit type="button" onclick="alert(\'failed!\');" />';
+		$invalidstring = '<submit type="button" onclick="alert(\'failed!\');" />';
 
 		$escapedString = Strings::escapeHtml($invalidstring);
 
 		self::assertEquals(
 			"&lt;submit type=&quot;button&quot; onclick=&quot;alert('failed!');&quot; /&gt;",
-			$escapedString
+			$escapedString,
 		);
 	}
 
@@ -124,13 +124,13 @@ class StringsTest extends TestCase
 		for ($start = -10; $start <= 10; $start += 5) {
 			self::assertEquals(
 				substr_replace('string', 'replacement', $start),
-				Strings::substringReplace('string', 'replacement', $start)
+				Strings::substringReplace('string', 'replacement', $start),
 			);
 
 			for ($length = -10; $length <= 10; $length += 5) {
 				self::assertEquals(
 					substr_replace('string', 'replacement', $start, $length),
-					Strings::substringReplace('string', 'replacement', $start, $length)
+					Strings::substringReplace('string', 'replacement', $start, $length),
 				);
 			}
 		}
@@ -141,11 +141,11 @@ class StringsTest extends TestCase
 	{
 		return [
 			'issue-8470' => [
-				'expected' => 'Je n’y pense que maintenant (pask ma sonnette ne fonctionne pas) : mettre un gentil mot avec mes coordonnées sur ma porte est le moyen le plus simple de rester en contact si besoin avec mon voisinage direct ! [url=https://www.instagram.com/p/B-UdH2loee1/?igshid=x4aglyju9kva]instagram.com/p/B-UdH2loee1/…[/url] [rest of the post]',
-				'string' => 'Je n’y pense que maintenant (pask ma sonnette ne fonctionne pas) : mettre un gentil mot avec mes coordonnées sur ma porte est le moyen le plus simple de rester en contact si besoin avec mon voisinage direct ! https://t.co/YoBWTHsAAk [rest of the post]',
+				'expected'    => 'Je n’y pense que maintenant (pask ma sonnette ne fonctionne pas) : mettre un gentil mot avec mes coordonnées sur ma porte est le moyen le plus simple de rester en contact si besoin avec mon voisinage direct ! [url=https://www.instagram.com/p/B-UdH2loee1/?igshid=x4aglyju9kva]instagram.com/p/B-UdH2loee1/…[/url] [rest of the post]',
+				'string'      => 'Je n’y pense que maintenant (pask ma sonnette ne fonctionne pas) : mettre un gentil mot avec mes coordonnées sur ma porte est le moyen le plus simple de rester en contact si besoin avec mon voisinage direct ! https://t.co/YoBWTHsAAk [rest of the post]',
 				'replacement' => '[url=https://www.instagram.com/p/B-UdH2loee1/?igshid=x4aglyju9kva]instagram.com/p/B-UdH2loee1/…[/url]',
-				'start' => 209,
-				'length' => 23,
+				'start'       => 209,
+				'length'      => 23,
 			],
 		];
 	}
@@ -170,8 +170,8 @@ class StringsTest extends TestCase
 				$string,
 				$replacement,
 				$start,
-				$length
-			)
+				$length,
+			),
 		);
 	}
 

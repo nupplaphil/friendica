@@ -22,7 +22,7 @@ class MarkdownTest extends FixtureTestCase
 		foreach ($inputFiles as $file) {
 			$data[str_replace('.md', '', $file)] = [
 				'input'    => file_get_contents($file),
-				'expected' => file_get_contents(str_replace('.md', '.html', $file))
+				'expected' => file_get_contents(str_replace('.md', '.html', $file)),
 			];
 		}
 

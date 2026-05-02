@@ -22,7 +22,7 @@ class CookieTest extends MockedTestCase
 	/** @var MockInterface|BaseURL */
 	private $baseUrl;
 
-	const SERVER_ARRAY = ['REMOTE_ADDR' => '1.2.3.4'];
+	public const SERVER_ARRAY = ['REMOTE_ADDR' => '1.2.3.4'];
 
 	protected function setUp(): void
 	{
@@ -51,7 +51,7 @@ class CookieTest extends MockedTestCase
 		$this->config->shouldReceive('get')->with('system', 'auth_cookie_lifetime', Cookie::DEFAULT_EXPIRE)->andReturn('7')->once();
 		$this->config->shouldReceive('get')->with('proxy', 'trusted_proxies', '')->andReturn('')->once();
 
-		$request = new Request($this->config,static::SERVER_ARRAY);
+		$request = new Request($this->config, static::SERVER_ARRAY);
 
 		$cookie = new Cookie($request, $this->config, $this->baseUrl);
 		self::assertInstanceOf(Cookie::class, $cookie);
@@ -60,48 +60,48 @@ class CookieTest extends MockedTestCase
 	public static function dataGet()
 	{
 		return [
-			'default'    => [
+			'default' => [
 				'cookieData' => [
 					Cookie::NAME => json_encode([
 						'uid'  => -1,
 						'hash' => 12345,
 						'ip'   => '127.0.0.1',
-					])
+					]),
 				],
-				'hasValues'  => true,
-				'uid'        => -1,
-				'hash'       => 12345,
-				'ip'         => '127.0.0.1',
+				'hasValues' => true,
+				'uid'       => -1,
+				'hash'      => 12345,
+				'ip'        => '127.0.0.1',
 			],
-			'missing'    => [
+			'missing' => [
 				'cookieData' => [
 
 				],
-				'hasValues'  => false,
-				'uid'        => null,
-				'hash'       => null,
-				'ip'         => null,
+				'hasValues' => false,
+				'uid'       => null,
+				'hash'      => null,
+				'ip'        => null,
 			],
-			'invalid'    => [
+			'invalid' => [
 				'cookieData' => [
 					Cookie::NAME => 'test',
 				],
-				'hasValues'  => false,
-				'uid'        => null,
-				'hash'       => null,
-				'ip'         => null,
+				'hasValues' => false,
+				'uid'       => null,
+				'hash'      => null,
+				'ip'        => null,
 			],
 			'incomplete' => [
 				'cookieData' => [
 					Cookie::NAME => json_encode([
 						'uid'  => -1,
 						'hash' => 12345,
-					])
+					]),
 				],
-				'hasValues'  => true,
-				'uid'        => -1,
-				'hash'       => 12345,
-				'ip'         => null,
+				'hasValues' => true,
+				'uid'       => -1,
+				'hash'      => 12345,
+				'ip'        => null,
 			],
 		];
 	}
@@ -143,7 +143,7 @@ class CookieTest extends MockedTestCase
 	public static function dataCheck()
 	{
 		return [
-			'default'   => [
+			'default' => [
 				'serverPrivateKey' => 'serverkey',
 				'userPrivateKey'   => 'userkey',
 				'password'         => 'test',
@@ -157,13 +157,13 @@ class CookieTest extends MockedTestCase
 				'assertHash'       => '',
 				'assertTrue'       => false,
 			],
-			'invalid'   => [
+			'invalid' => [
 				'serverPrivateKey' => 'serverkey',
 				'userPrivateKey'   => 'bla',
 				'password'         => 'nope',
 				'assertHash'       => 'real wrong!',
 				'assertTrue'       => false,
-			]
+			],
 		];
 	}
 
@@ -190,7 +190,7 @@ class CookieTest extends MockedTestCase
 	public static function dataSet()
 	{
 		return [
-			'default'         => [
+			'default' => [
 				'serverKey'   => 23,
 				'uid'         => 0,
 				'password'    => '234',
@@ -248,7 +248,7 @@ class CookieTest extends MockedTestCase
 		self::assertInstanceOf(Cookie::class, $cookie);
 
 		$cookie->setMultiple([
-			'uid' => $uid,
+			'uid'  => $uid,
 			'hash' => $assertHash,
 		]);
 
@@ -285,7 +285,7 @@ class CookieTest extends MockedTestCase
 	public function testClear()
 	{
 		StaticCookie::$_COOKIE = [
-			Cookie::NAME => 'test'
+			Cookie::NAME => 'test',
 		];
 
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();

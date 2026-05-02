@@ -38,7 +38,7 @@ class PermissionSetTest extends MockedTestCase
 			$allow_cid,
 			$allow_gid,
 			$deny_cid,
-			$deny_gid
+			$deny_gid,
 		);
 
 		$permissionSetNew = $permissionSetOrig->withAllowedContacts($update_cid);

@@ -66,13 +66,13 @@ class ProcessorTest extends TestCase
 					[
 						'type' => 'Mention',
 						'href' => 'https://social.wake.st/users/liaizon',
-						'name' => '@liaizon@social.wake.st'
+						'name' => '@liaizon@social.wake.st',
 					],
 					[
 						'type' => 'Mention',
 						'href' => 'https://friendica.mrpetovan.com/profile/hypolite',
-						'name' => '@hypolite@friendica.mrpetovan.com'
-					]
+						'name' => '@hypolite@friendica.mrpetovan.com',
+					],
 				],
 			],
 			'issue-10617' => [
@@ -82,7 +82,7 @@ class ProcessorTest extends TestCase
 					[
 						'type' => 'Mention',
 						'href' => 'https://mastodon.technology/@sergey_m',
-						'name' => '@sergey_m'
+						'name' => '@sergey_m',
 					],
 				],
 			],

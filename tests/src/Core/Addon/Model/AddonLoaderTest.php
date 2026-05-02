@@ -27,7 +27,7 @@ class AddonLoaderTest extends MockedTestCase
 				'static' => [],
 			],
 			'testaddon3' => [],
-		]
+		],
 	];
 
 	protected static $addons = [
@@ -59,9 +59,9 @@ EOF;
 	{
 		return [
 			'normal' => [
-				'structure' => self::$structure,
-				'enabledAddons'   => self::$addons,
-				'files'     => [
+				'structure'     => self::$structure,
+				'enabledAddons' => self::$addons,
+				'files'         => [
 					'addon/testaddon1/static/hooks.config.php' => self::$content,
 				],
 				'assertion' => [
@@ -73,9 +73,9 @@ EOF;
 				],
 			],
 			'double' => [
-				'structure' => self::$structure,
-				'enabledAddons'   => self::$addons,
-				'files'     => [
+				'structure'     => self::$structure,
+				'enabledAddons' => self::$addons,
+				'files'         => [
 					'addon/testaddon1/static/hooks.config.php' => self::$content,
 					'addon/testaddon2/static/hooks.config.php' => self::$content,
 				],
@@ -88,18 +88,18 @@ EOF;
 				],
 			],
 			'wrongName' => [
-				'structure' => self::$structure,
-				'enabledAddons'   => self::$addons,
-				'files'     => [
+				'structure'     => self::$structure,
+				'enabledAddons' => self::$addons,
+				'files'         => [
 					'addon/testaddon1/static/wrong.config.php' => self::$content,
 				],
 				'assertion' => [
 				],
 			],
 			'doubleNutOnlyOneEnabled' => [
-				'structure' => self::$structure,
-				'enabledAddons'   => ['testaddon1'],
-				'files'     => [
+				'structure'     => self::$structure,
+				'enabledAddons' => ['testaddon1'],
+				'files'         => [
 					'addon/testaddon1/static/hooks.config.php' => self::$content,
 					'addon/testaddon2/static/hooks.config.php' => self::$content,
 				],
@@ -110,7 +110,7 @@ EOF;
 						],
 					],
 				],
-			]
+			],
 		];
 	}
 

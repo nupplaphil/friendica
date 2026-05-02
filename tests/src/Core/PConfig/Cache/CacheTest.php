@@ -27,8 +27,8 @@ class CacheTest extends MockedTestCase
 					'config' => [
 						'a' => 'value',
 					],
-				]
-			]
+				],
+			],
 		];
 	}
 
@@ -126,7 +126,7 @@ class CacheTest extends MockedTestCase
 		$diffConfig = [
 			'fakeCat' => [
 				'fakeKey' => 'value',
-			]
+			],
 		];
 
 		self::assertEquals($diffConfig, $configCache->keyDiff($diffConfig));
@@ -159,7 +159,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => 'supersecure',
 				'username' => 'notsecured',
-			]
+			],
 		]);
 
 		self::assertEquals('supersecure', $configCache->get(1, 'database', 'password'));
@@ -178,7 +178,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => 'supersecure',
 				'username' => 'notsecured',
-			]
+			],
 		]);
 
 		self::assertEquals('supersecure', $configCache->get(1, 'database', 'password'));
@@ -197,7 +197,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => '',
 				'username' => '',
-			]
+			],
 		]);
 
 		self::assertEmpty($configCache->get(1, 'database', 'password'));
@@ -212,7 +212,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => new \stdClass(),
 				'username' => '',
-			]
+			],
 		]);
 
 		self::assertNotEmpty($configCache->get(1, 'database', 'password'));
