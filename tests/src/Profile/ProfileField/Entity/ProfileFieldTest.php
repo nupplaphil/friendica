@@ -93,13 +93,7 @@ class ProfileFieldTest extends MockedTestCase
 		self::assertEquals($id, $entity->id);
 	}
 
-<<<<<<< HEAD
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataEntity')]
-=======
-	/**
-	 * @dataProvider dataEntity
-	 */
->>>>>>> 4cdd98a217 (chore: fix code style in tests)
 	public function testUpdate(int $uid, int $order, int $psid, string $label, string $value, \DateTime $created, \DateTime $edited, array $permissionSet, $id = null)
 	{
 		$permissionSet = $this->permissionSetFactory->createFromTableRow(['uid' => 2, 'id' => $psid]);
