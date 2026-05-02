@@ -803,7 +803,7 @@ class Conversation
 				$row['direction'] = ['direction' => 6, 'title' => $this->l10n->t('Local delivery')];
 				break;
 			case ItemModel::PR_ACTIVITY:
-				$row['direction'] = ['direction' => 2, 'title' => $this->l10n->t('Stored because of your activity (like, comment, star, ...)')];
+				$row['direction'] = ['direction' => 2, 'title' => $this->l10n->t('Stored because of your activity (like, comment, bookmark, ...)')];
 				break;
 			case ItemModel::PR_DISTRIBUTE:
 				$row['direction'] = ['direction' => 6, 'title' => $this->l10n->t('Distributed')];

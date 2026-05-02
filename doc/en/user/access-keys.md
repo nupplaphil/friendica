@@ -81,7 +81,7 @@ For example, for moving to profile page in Firefox, press these three keys simul
 * q - Sort by Creation Date
 * r - Conversation (Posts that mention or involve you)
 * w - New posts
-* m - Favourite Posts
+* m - Bookmark posts
 
 ## ../notifications
 

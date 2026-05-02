@@ -389,8 +389,10 @@ class Post
 				$ignored_thread = PostModel\ThreadUser::getIgnored($item['uri-id'], DI::userSession()->getLocalUserId());
 				if ($item['mention'] || $ignored_thread) {
 					$ignore_thread = [
-						'do'        => DI::l10n()->t('Turn off notifications for this post'),
-						'undo'      => DI::l10n()->t('Turn on notifications for this post'),
+						'do'   => DI::l10n()->t('Turn off notifications for this post'),
+						'undo' => DI::l10n()->t('Turn on notifications for this post'),
+						// NOTE: Toggle is currently unused
+						//'toggle'    => DI::l10n()->t('Toggle notifications for this post'),
 						'classdo'   => $ignored_thread ? 'hidden' : '',
 						'classundo' => $ignored_thread ? '' : 'hidden',
 						'ignored'   => DI::l10n()->t('Notifications turned off for this post'),
@@ -400,8 +402,10 @@ class Post
 				$isstarred = (($item['starred']) ? 'starred' : 'unstarred');
 
 				$star = [
-					'do'        => DI::l10n()->t('Favourite'),
-					'undo'      => DI::l10n()->t('Unfavourite'),
+					'do'   => DI::l10n()->t('Bookmark'),
+					'undo' => DI::l10n()->t('Remove bookmark'),
+					// NOTE: Toggle is currently unused
+					//'toggle'    => DI::l10n()->t('Toggle bookmark status'),
 					'classdo'   => $item['starred'] ? 'hidden' : '',
 					'classundo' => $item['starred'] ? '' : 'hidden',
 					'starred'   => DI::l10n()->t('Starred'),
@@ -412,8 +416,10 @@ class Post
 						$ispinned = ($item['featured'] ? 'pinned' : 'unpinned');
 
 						$pin = [
-							'do'        => DI::l10n()->t('Pin to your wall'),
-							'undo'      => DI::l10n()->t('Unpin from your wall'),
+							'do'   => DI::l10n()->t('Pin to your wall'),
+							'undo' => DI::l10n()->t('Unpin from your wall'),
+							// NOTE: Toggle is currently unused
+							//'toggle'    => DI::l10n()->t('Toggle pin status'),
 							'classdo'   => $item['featured'] ? 'hidden' : '',
 							'classundo' => $item['featured'] ? '' : 'hidden',
 							'pinned'    => DI::l10n()->t('Pinned to your wall'),
@@ -421,7 +427,7 @@ class Post
 					}
 
 					$tagger = [
-						'add'   => DI::l10n()->t('Add tag'),
+						'add'   => DI::l10n()->t('Add tag to post'),
 						'class' => '',
 					];
 				}
