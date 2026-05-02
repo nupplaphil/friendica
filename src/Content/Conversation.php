@@ -676,7 +676,7 @@ class Conversation
 				$item['pagedrop'] = $pagedrop;
 
 				if ($item['gravity'] == ItemModel::GRAVITY_PARENT) {
-					$item_object = new PostObject($item, $this->mode);
+					$item_object = new PostObject($item);
 					$conv->addParent($item_object);
 				}
 			}

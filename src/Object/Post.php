@@ -7,7 +7,6 @@
 
 namespace Friendica\Object;
 
-use Friendica\App\Mode;
 use Friendica\Content\ContactSelector;
 use Friendica\Content\Feature;
 use Friendica\Core\Protocol;
@@ -41,8 +40,6 @@ class Post
 	private $comment_box_template = 'comment_item.tpl';
 	private $toplevel             = false;
 	private $writable             = false;
-	/** @var Mode */
-	protected $mode;
 	/**
 	 * @var Post[]
 	 */
@@ -64,13 +61,11 @@ class Post
 	 * Constructor
 	 *
 	 * @param array $data data array
-	 * @param Mode $mode
 	 * @throws \Exception
 	 */
-	public function __construct(array $data, Mode $mode)
+	public function __construct(array $data)
 	{
 		$this->data = $data;
-		$this->mode = $mode;
 		$this->setTemplate('wall');
 		$this->toplevel = $this->getId() == $this->getDataValue('parent');
 
@@ -107,7 +102,7 @@ class Post
 				}
 
 				$item['pagedrop'] = $data['pagedrop'];
-				$child            = new Post($item, $mode);
+				$child            = new Post($item);
 				$this->addChild($child);
 			}
 		}
@@ -585,7 +580,6 @@ class Post
 			'owner_photo'            => DI::baseUrl()->remove(DI::contentItem()->getOwnerAvatar($item)),
 			'owner_name'             => $this->getOwnerName(),
 			'plink'                  => Item::getPlink($item),
-			'is_mobile'              => $this->mode->isMobile(),
 			'browsershare'           => $browsershare,
 			'edpost'                 => $edpost,
 			'ispinned'               => $ispinned,
