@@ -211,7 +211,7 @@ class Connectors extends BaseSettings
 			'$api_spoiler_title'        => ['api_spoiler_title', $this->t('API: Use spoiler field as title'), $api_spoiler_title, $this->t('When activated, the "spoiler_text" field in the API will be used for the title on standalone posts. When deactivated it will be used for spoiler text. For comments it will always be used for spoiler text.')],
 			'$api_auto_attach'          => ['api_auto_attach', $this->t('API: Automatically links at the end of the post as attached posts'), $api_auto_attach, $this->t('When activated, added links at the end of the post react the same way as added links in the web interface.')],
 			'$article_mode'             => ['article_mode', $this->t('Article Mode'), $article_mode, $this->t("Controls how posts with titles are transmitted. Mastodon and its forks don't display the content of these posts if the post is created in the correct (default) way."), $article_modes],
-			'$minimum_posting_interval' => ['minimum_posting_interval', $this->t('Minimal Posting Interval'), $minimum_posting_interval, $this->t('The minimum interval in minutes between two posts. Default is 0. If enabled, your own posts are automatically delayed by the specified number of seconds.'), false, 'min="0" step="1"', 'number'],
+			'$minimum_posting_interval' => ['minimum_posting_interval', $this->t('Minimal Posting Interval'), $minimum_posting_interval, $this->t('The minimum interval in minutes between two posts. Default is 0. If enabled, your own posts are automatically delayed by the specified number of minutes.'), false, 'min="0" step="1"', 'number'],
 
 			'$connector_settings_forms' => $connector_settings_forms,
 
