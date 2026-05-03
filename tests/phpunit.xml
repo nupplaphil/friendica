@@ -22,7 +22,7 @@
 >
 	<testsuites>
 		<testsuite name="legacy">
-			<directory suffix="Test.php">functional/</directory>
+			<directory suffix="Test.php">Functional/</directory>
 			<directory suffix="Test.php">src/</directory>
 		</testsuite>
 		<testsuite name="unit">
