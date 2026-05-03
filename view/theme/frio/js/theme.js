@@ -526,6 +526,7 @@ function justifyPhotos() {
 }
 
 // Load a js script to the html head.
+// Currently Only used to load browser.js, which could possibly be handled in a better way
 function loadScript(url, callback) {
 	// Check if the script is already in the html head.
 	var oscript = $('head script[src="' + url + '"]');

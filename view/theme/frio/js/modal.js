@@ -206,7 +206,6 @@
 
 		// Initialize the filebrowser
 		if (typeof window.loadScript === "function") {
-			window.loadScript("view/js/ajaxupload.js");
 			window.loadScript("view/theme/frio/js/module/media/browser.js", function () {
 				if (typeof window.Browser !== "undefined" && typeof window.Browser.init === "function") {
 					window.Browser.init(filebrowser.dataset.nickname, filebrowser.dataset.type, match[1]);

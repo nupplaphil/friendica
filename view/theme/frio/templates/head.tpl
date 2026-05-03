@@ -145,6 +145,7 @@
 	{{* own js files *}}
 	<script type="text/javascript" src="view/theme/frio/js/theme.js?v={{$VERSION}}"></script>
 	<script type="text/javascript" src="view/theme/frio/js/modal.js?v={{$VERSION}}"></script>
+	<script type="text/javascript" src="view/js/ajaxupload.js?v={{$VERSION}}"></script>
 	{{if ! $block_public}}
 		<script type="text/javascript" src="view/theme/frio/js/hovercard.js?v={{$VERSION}}"></script>
 	{{/if}}
