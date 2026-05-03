@@ -15,7 +15,7 @@
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right;">&times;</button>
 
-			<a href="/compose" class="btn compose-link" title="{{$compose_link_title}}" aria-label="{{$compose_link_title}}">
+			<a href="/compose" class="btn btn-secondary compose-link" title="{{$compose_link_title}}" aria-label="{{$compose_link_title}}">
 				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 			</a>
 

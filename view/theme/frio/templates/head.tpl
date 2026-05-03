@@ -12,7 +12,6 @@
 <meta name="viewport" content="initial-scale=1.0">
 
 {{* All needed css files - Note: css must be inserted before js files *}}
-<link rel="stylesheet" href="view/global.css?v={{$VERSION}}" type="text/css" media="all" />
 <link rel="stylesheet" href="view/asset/jquery-colorbox/example5/colorbox.css?v={{$VERSION}}"
 	type="text/css" media="screen" />
 <link rel="stylesheet" href="view/asset/jgrowl/jquery.jgrowl.min.css?v={{$VERSION}}"
@@ -59,6 +58,7 @@
 	type="text/css" media="screen" />
 
 {{* own css files *}}
+<link rel="stylesheet" href="view/global.css?v={{$VERSION}}" type="text/css" media="all" />
 <link rel="stylesheet" href="view/theme/frio/css/hovercard.css?v={{$VERSION}}" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="view/theme/frio/css/font-awesome.custom.css?v={{$VERSION}}"
