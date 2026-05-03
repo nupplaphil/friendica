@@ -9,34 +9,50 @@ namespace Friendica\Test\Unit\App;
 
 use Friendica\App\BaseURL;
 use Friendica\Core\Config\Capability\IManageConfigValues;
-use Friendica\Core\Config\Model\ReadOnlyFileConfig;
-use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Network\HTTPException\InternalServerErrorException;
+use PHPUnit\Framework\Attributes\BackupGlobals;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
+use Psr\Log\LoggerInterface;
 
 class BaseURLTest extends TestCase
 {
-	public static function dataSystemUrl(): array
+	public static function provideInputTestData(): array
 	{
 		return [
 			'default' => [
-				'input'     => ['system' => ['url' => 'https://friendica.local',],],
-				'server'    => [],
+				'url'    => 'https://friendica.local',
 				'expect' => 'https://friendica.local',
 			],
 			'subPath' => [
-				'input'     => ['system' => ['url' => 'https://friendica.local/subpath',],],
-				'server'    => [],
+				'url'    => 'https://friendica.local/subpath',
 				'expect' => 'https://friendica.local/subpath',
 			],
-			'empty' => [
-				'input'     => [],
-				'server'    => [],
-				'expect' => 'http://localhost',
-			],
+		];
+	}
+
+	#[\PHPUnit\Framework\Attributes\DataProvider('provideInputTestData')]
+	#[BackupGlobals(true)]
+	public function testDetermineWithConfigReturnsCorrectUrl(string $url, string $expect)
+	{
+		$config = self::createStub(IManageConfigValues::class);
+		$config->method('get')->willReturnCallback(function(string $category, string $key, mixed $default) use($url): mixed {
+			if ($category === 'system' && $key === 'url')
+			{
+				return $url;
+			}
+
+			return $default;
+		});
+
+		$baseUrl = new BaseURL($config, self::createStub(LoggerInterface::class));
+
+		self::assertEquals($expect, (string) $baseUrl);
+	}
+
+	public static function provideServerTestData(): array
+	{
+		return [
 			'serverArrayStandard' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'        => 'on',
 					'HTTP_HOST'    => 'friendica.server',
@@ -47,7 +63,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server',
 			],
 			'serverArraySubPath' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'        => 'on',
 					'HTTP_HOST'    => 'friendica.server',
@@ -58,7 +73,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server/test',
 			],
 			'serverArraySubPath2' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'        => 'on',
 					'HTTP_HOST'    => 'friendica.server',
@@ -69,7 +83,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server/test/it',
 			],
 			'serverArraySubPath3' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'        => 'on',
 					'HTTP_HOST'    => 'friendica.server',
@@ -80,7 +93,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server',
 			],
 			'serverArrayWithoutQueryString1' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'       => 'on',
 					'HTTP_HOST'   => 'friendica.server',
@@ -90,7 +102,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server/test/it/now',
 			],
 			'serverArrayWithoutQueryString2' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'       => 'on',
 					'HTTP_HOST'   => 'friendica.server',
@@ -100,7 +111,6 @@ class BaseURLTest extends TestCase
 				'expect' => 'https://friendica.server',
 			],
 			'serverArrayWithoutQueryString3' => [
-				'input'  => [],
 				'server' => [
 					'HTTPS'       => 'on',
 					'HTTP_HOST'   => 'friendica.server',
@@ -112,72 +122,77 @@ class BaseURLTest extends TestCase
 		];
 	}
 
-	#[\PHPUnit\Framework\Attributes\DataProvider('dataSystemUrl')]
-	public function testDetermine(array $input, array $server, string $expect)
+
+	#[\PHPUnit\Framework\Attributes\DataProvider('provideServerTestData')]
+	#[BackupGlobals(true)]
+	public function testDetermineWithServerArrayReturnsCorrectUrl(array $server, string $expect)
 	{
-		// Fixture for empty test
-		if ($input === [] && $server === [])
-		{
-			$server = ['HTTP_HOST' => 'localhost', 'SERVER_PORT' => 80];
-		}
-
-		$origServerGlobal = $_SERVER;
-
 		$_SERVER = array_merge($_SERVER, $server);
 
-		$config = self::createStub(IManageConfigValues::class);
-		$config->method('get')->willReturnCallback(function(string $category, string $key, mixed $default) use($input): mixed {
-			if (!array_key_exists($category, $input))
-			{
-				return $default;
-			}
-
-			if (!array_key_exists($key, $input[$category]))
-			{
-				return $default;
-			}
-
-			return $input[$category][$key];
-		});
-
-		$baseUrl = new BaseURL($config, new NullLogger(), $server);
+		$baseUrl = new BaseURL(
+			self::createStub(IManageConfigValues::class),
+			self::createStub(LoggerInterface::class),
+			$server,
+		);
 
 		self::assertEquals($expect, (string) $baseUrl);
-
-		$_SERVER = $origServerGlobal;
 	}
 
-	public static function dataRemove(): array
+	#[BackupGlobals(true)]
+	public function testDetermineWithGlobalsReturnsCorrectUrl()
+	{
+		$_SERVER['HTTP_HOST'] = 'localhost';
+		$_SERVER['SERVER_PORT'] = 80;
+
+		$baseUrl = new BaseURL(
+			self::createStub(IManageConfigValues::class),
+			self::createStub(LoggerInterface::class),
+			[],
+		);
+
+		self::assertEquals('http://localhost', (string) $baseUrl);
+	}
+
+	public static function provideRemoveTestData(): array
 	{
 		return [
 			'same' => [
-				'base'      => ['system' => ['url' => 'https://friendica.local',],],
-				'origUrl'   => 'https://friendica.local/test/picture.png',
-				'expect' => 'test/picture.png',
+				'url'     => 'https://friendica.local',
+				'origUrl' => 'https://friendica.local/test/picture.png',
+				'expect'  => 'test/picture.png',
 			],
 			'other' => [
-				'base'      => ['system' => ['url' => 'https://friendica.local',],],
-				'origUrl'   => 'https://friendica.other/test/picture.png',
-				'expect' => 'https://friendica.other/test/picture.png',
+				'url'     => 'https://friendica.local',
+				'origUrl' => 'https://friendica.other/test/picture.png',
+				'expect'  => 'https://friendica.other/test/picture.png',
 			],
 			'samSubPath' => [
-				'base'      => ['system' => ['url' => 'https://friendica.local/test',],],
-				'origUrl'   => 'https://friendica.local/test/picture.png',
-				'expect' => 'picture.png',
+				'url'     => 'https://friendica.local/test',
+				'origUrl' => 'https://friendica.local/test/picture.png',
+				'expect'  => 'picture.png',
 			],
 			'otherSubPath' => [
-				'base'      => ['system' => ['url' => 'https://friendica.local/test',],],
-				'origUrl'   => 'https://friendica.other/test/picture.png',
-				'expect' => 'https://friendica.other/test/picture.png',
+				'url'     => 'https://friendica.local/test',
+				'origUrl' => 'https://friendica.other/test/picture.png',
+				'expect'  => 'https://friendica.other/test/picture.png',
 			],
 		];
 	}
 
-	#[\PHPUnit\Framework\Attributes\DataProvider('dataRemove')]
-	public function testRemove(array $base, string $origUrl, string $expect)
+	#[\PHPUnit\Framework\Attributes\DataProvider('provideRemoveTestData')]
+	public function testRemove(string $url, string $origUrl, string $expect)
 	{
-		$config  = new ReadOnlyFileConfig(new Cache($base));
-		$baseUrl = new BaseURL($config, new NullLogger());
+		$config = self::createStub(IManageConfigValues::class);
+		$config->method('get')->willReturnCallback(function(string $category, string $key, mixed $default) use($url): mixed {
+			if ($category === 'system' && $key === 'url')
+			{
+				return $url;
+			}
+
+			return $default;
+		});
+
+		$baseUrl = new BaseURL($config, self::createStub(LoggerInterface::class));
 
 		self::assertEquals($expect, $baseUrl->remove($origUrl));
 	}
@@ -185,17 +200,17 @@ class BaseURLTest extends TestCase
 	/**
 	 * Test that redirect to external domains fails
 	 */
-	public function testRedirectException()
+	public function testRedirectWithExternalDomainThrowsException()
 	{
+		$config = self::createConfiguredStub(IManageConfigValues::class, [
+			'get' => 'https://friendica.local',
+		]);
+
+		$baseUrl = new BaseURL($config, $this->createStub(LoggerInterface::class));
+
 		self::expectException(InternalServerErrorException::class);
 		self::expectExceptionMessage('https://friendica.other is not a relative path, please use System::externalRedirect');
 
-		$config = new ReadOnlyFileConfig(new Cache([
-			'system' => [
-				'url' => 'https://friendica.local',
-			],
-		]));
-		$baseUrl = new BaseURL($config, new NullLogger());
 		$baseUrl->redirect('https://friendica.other');
 	}
 }
