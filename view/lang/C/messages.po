@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.04-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 04:42+0000\n"
+"POT-Creation-Date: 2026-05-03 18:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9832,7 +9832,7 @@ msgid "Minimal Posting Interval"
 msgstr ""
 
 #: src/Module/Settings/Connectors.php:214
-msgid "The minimum interval in minutes between two posts. Default is 0. If enabled, your own posts are automatically delayed by the specified number of seconds."
+msgid "The minimum interval in minutes between two posts. Default is 0. If enabled, your own posts are automatically delayed by the specified number of minutes."
 msgstr ""
 
 #: src/Module/Settings/Connectors.php:218
