@@ -20,13 +20,19 @@
 	<span id="group-list-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('group-list-sidebar', 'group-list-sidebar-inflated');"
 			aria-expanded="false">
-			<h3>{{$title}}</h3>
+			<h3>
+				<i class="fa fa-users" aria-hidden="true"></i>
+				{{$title}}
+			</h3>
 		</button>
 	</span>
 	<div id="group-list-sidebar" class="widget">
 		<div id="sidebar-group-header" class="sidebar-widget-header">
 			<button class="fakelink" onclick="openCloseWidget('group-list-sidebar', 'group-list-sidebar-inflated');" aria-expanded="true">
-				<h3>{{$title}}</h3>
+				<h3>
+					<i class="fa fa-users" aria-hidden="true"></i>
+					{{$title}}
+				</h3>
 			</button>
 			<a class="pull-right widget-action widget-action-top faded-icon" id="sidebar-new-group"
 				href="{{$new_group_page}}" data-toggle="tooltip" title="{{$create_new_group}}">

@@ -7,13 +7,19 @@
 <nav>
 	<span id="trending-tags-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');" aria-expanded="false">
-			<h3 style="text-align: left;">{{$title}}</h3>
+			<h3>
+				<i class="fa fa-tag" aria-hidden="true"></i>
+				{{$title}}
+			</h3>
 			<small>{{$subtitle}}</small>
 		</button>
 	</span>
 	<div id="trending-tags-sidebar" class="widget">
 		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');">
-			<h3 style="text-align: left;">{{$title}}</h3>
+			<h3>
+					<i class="fa fa-tag" aria-hidden="true"></i>
+				{{$title}}
+			</h3>
 			<small>{{$subtitle}}</small>
 		</button>
 		<ul id="tags-list">

@@ -8,7 +8,7 @@
 <script type="text/javascript" src="view/asset/es-jquery-sortable/source/js/jquery-sortable.js"></script>
 <script>
 	var ispublic = "{{$ispublic nofilter}}";
-	
+
 	// make widget indexing generic
 	function indexList(input,widgets,children){
 		var items = $(widgets).children(children);
@@ -48,7 +48,7 @@
 				$(target).addClass('borderani move-dn');
 				// this is for screen readers to announce action
 				$(target).attr('title','Moved down one space, position '+parseInt(after+1)+' in list');
-				next = $(target).next();				
+				next = $(target).next();
 				$(target).insertAfter( next );
 			}
 		};
@@ -67,21 +67,6 @@
 		// set focus on list item
 		$(target).focus();
 	}
-	
-	// check if icon font is loaded, if not load core stylesheet
-	document.fonts.ready.then((fontFaceSet) => {
-	  const fontFaces = [...fontFaceSet];
-	  var awesomeLoaded = false;
-	  for(var f=0; f < fontFaces.length; f++){
-		if (fontFaces[f]['family'] == '"FontAwesome"' || fontFaces[f]['family'] == '"ForkAwesome"' ||
-			fontFaces[f]['family'] == 'FontAwesome'   || fontFaces[f]['family'] == 'ForkAwesome' ){
-			awesomeLoaded = true;
-		}
-	  }
-	  if (!awesomeLoaded){
-		$('head').append('<link rel="stylesheet" type="text/css" href="'+baseurl+'/view/asset/fork-awesome/css/fork-awesome.css">');
-	  }
-	});
 
 	$(document).ready(function() {
 		$('#contact_allow, #contact_deny, #circle_allow, #circle_deny').change(function() {
@@ -105,8 +90,8 @@
 		});
 		$( function() {
 			// check if primary input is touch
-			if(window.matchMedia("(hover: none) and (pointer: coarse)").matches){ 
-				return; 
+			if(window.matchMedia("(hover: none) and (pointer: coarse)").matches){
+				return;
 			} else if ('ontouchstart' in window){
 				// fallback for older devices
 				return;
@@ -120,7 +105,7 @@
 				containerPath : ".sortable > .field",
 				itemSelector : ".field",
 				placeholder : '<div class="placeholder"></div>',
-				nested: false, 
+				nested: false,
     			onDragStart: function ($item, container, _super, event) {
       				$item.css({
         				height: $item.outerHeight(),
@@ -146,9 +131,9 @@
       					}
       					if ($(".timelines-menu").length > 0){
       						indexList('#menu_timelineorder','.timelines-menu','.field');
-      					} 
+      					}
       				},1000);
-      			}					
+      			}
 			});
 		});
 
@@ -156,7 +141,7 @@
 		indexList('#feature_widgetorder','.network','.field');
 		indexList('#widget_timelineorder','.timelines-widget','.field');
 		indexList('#menu_timelineorder','.timelines-menu','.field');
-		
+
 		// add arrow buttons for touch devices that cannot drag-n-drop or keyboard sort
 		$('.network .field, .timelines-widget .field, .timelines-menu .field').each(function(){
 			$(this).append('<div class="sorter-mvup" onclick="moveListItem(this,\'up\');" aria-hidden="true"></div><div class="sorter-mvdn" onclick="moveListItem(this,\'down\');" aria-hidden="true"></div>');
@@ -170,7 +155,7 @@
 			if (event.which == 40){
 				moveListItem(this,'down');
 			}
-		});	
+		});
 	});
 
 </script>
@@ -237,7 +222,7 @@
 			content: '\f107';
 			font-family: "ForkAwesome","FontAwesome";
 			font-size: 14px;
-			line-height: 24px;	
+			line-height: 24px;
 		}
 	/* motion indicator animations */
 	@keyframes borderflash {
@@ -276,7 +261,7 @@
 			width: 100%;
 			height: 100%;
 			border: 1px solid var(--link-color, blue);
-			animation: aniUp .5s ease 0s 1 normal none; 
+			animation: aniUp .5s ease 0s 1 normal none;
 		}
 		.borderani.move-dn:after {
 			content: '';
