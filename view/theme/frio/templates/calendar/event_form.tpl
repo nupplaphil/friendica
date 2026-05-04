@@ -94,25 +94,25 @@
 					</div>
 
 					<div class="btn-group">
-						<button type="button" class="btn btn-secondary icon bb-url" style="cursor: pointer;" title="{{$edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="desc">
+						<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="desc">
 							<i class="fa fa-link"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon bb-embed" style="cursor: pointer;" title="{{$edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="desc">
+						<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="desc">
 							<i class="fa fa-play"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon underline" style="cursor: pointer;" title="{{$eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="desc">
+						<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="desc">
 							<i class="fa fa-underline"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon italic" style="cursor: pointer;" title="{{$editalic}}" data-role="insert-formatting" data-comment=" " data-bbcode="i" data-id="desc">
+						<button type="button" class="btn btn-default icon italic" style="cursor: pointer;" title="{{$editalic}}" data-role="insert-formatting" data-comment=" " data-bbcode="i" data-id="desc">
 							<i class="fa fa-italic"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon bold" style="cursor: pointer;"  title="{{$edbold}}" data-role="insert-formatting" data-comment=" " data-bbcode="b" data-id="desc">
+						<button type="button" class="btn btn-default icon bold" style="cursor: pointer;"  title="{{$edbold}}" data-role="insert-formatting" data-comment=" " data-bbcode="b" data-id="desc">
 							<i class="fa fa-bold"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon quote" style="cursor: pointer;" title="{{$edquote}}" data-role="insert-formatting" data-comment=" " data-bbcode="quote" data-id="desc">
+						<button type="button" class="btn btn-default icon quote" style="cursor: pointer;" title="{{$edquote}}" data-role="insert-formatting" data-comment=" " data-bbcode="quote" data-id="desc">
 							<i class="fa fa-quote-left"></i>
 						</button>
-						<button type="button" class="btn btn-secondary icon code" style="cursor: pointer;" title="{{$edcode}}" data-role="insert-formatting" data-comment=" " data-bbcode="code" data-id="desc">
+						<button type="button" class="btn btn-default icon code" style="cursor: pointer;" title="{{$edcode}}" data-role="insert-formatting" data-comment=" " data-bbcode="code" data-id="desc">
 							<i class="fa fa-code"></i>
 						</button>
 					</div>

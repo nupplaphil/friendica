@@ -27,13 +27,13 @@
 				</a>
 			{{/if}}
 			{{if $event.copy}}
-				<a class="btn btn-secondary" href="{{$event.copy.0}}">
+				<a class="btn btn-default" href="{{$event.copy.0}}">
 					<i class="fa fa-files-o" aria-hidden="true"></i>
 					{{$event.copy.1}}
 				</a>
 				{{/if}}
 			{{if $event.drop}}
-				<a href="{{$event.drop.0}}" onclick="return confirmDelete();" class="drop-event-link btn btn-secondary">
+				<a href="{{$event.drop.0}}" onclick="return confirmDelete();" class="drop-event-link btn btn-default">
 					<i class="fa fa-trash-o" aria-hidden="true"></i>
 					{{$event.drop.1}}
 				</a>

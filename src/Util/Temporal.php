@@ -240,7 +240,7 @@ class Temporal
 		string $minfrom = '',
 		string $maxfrom = '',
 		bool $required = false,
-		bool $show_tip = true
+		bool $show_tip = true,
 	): string {
 		// First day of the week (0 = Sunday)
 		$firstDay = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'calendar', 'first_day_of_week') ?: 0;
