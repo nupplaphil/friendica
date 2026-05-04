@@ -174,7 +174,8 @@ $(function() {
 	/* insert returned bbcode at cursor position or replace selected text */
 	$('body').on('fbrowser.photo.comment', function(e, filename, bbcode, id) {
 		$.colorbox.close();
-		var textarea = document.getElementById("comment-edit-text-" +id);
+		// Support both receiving an ID postfix appended to comment-edit-id or the full ID
+		var textarea = document.getElementById('comment-edit-text-' + id) || document.getElementById(id);
 		var start = textarea.selectionStart;
 		var end = textarea.selectionEnd;
 		textarea.value = textarea.value.substring(0, start) + bbcode + textarea.value.substring(end, textarea.value.length);
@@ -471,7 +472,9 @@ $(function() {
  * @returns {boolean}
  */
 function insertFormatting(BBCode, id) {
-	let textarea = document.getElementById('comment-edit-text-' + id);
+
+	// Support both receiving an ID postfix appended to comment-edit-id or the full ID
+	let textarea = document.getElementById('comment-edit-text-' + id) || document.getElementById(id);
 
 	if (textarea.value === '') {
 		$(textarea)

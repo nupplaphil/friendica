@@ -8,7 +8,44 @@
 	{{if $field.1}}
 		<label for="id_{{$field.0}}">{{$field.1}}{{if $field.4}} <span class="required" title="{{$field.4}}">*</span>{{/if}}</label>
 	{{/if}}
-		<textarea class="form-control text-autosize" name="{{$field.0}}" id="id_{{$field.0}}" {{if $field.4}}required{{/if}} {{$field.5 nofilter}} aria-describedby="{{$field.0}}_tip">{{$field.2}}</textarea>
+
+	{{if $field.6}} {{* BBCode buttons *}}
+		<div class="comment-icon-list">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default icon bb-img" style="cursor: pointer;" title="{{$edimg}}" data-role="insert-formatting" data-comment=" " data-bbcode="img" data-id="id_{{$field.0}}">
+					<i class="fa fa-picture-o"></i>
+				</button>
+				<button type="button" class="btn btn-default emojis" style="cursor: pointer;" aria-label="{{$edemojis}}" title="{{$edemojis}}">
+					<i class="fa fa-smile-o"></i>
+				</button>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="id_{{$field.0}}">
+					<i class="fa fa-link"></i>
+				</button>
+				<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="id_{{$field.0}}">
+					<i class="fa fa-play"></i>
+				</button>
+				<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="id_{{$field.0}}">
+					<i class="fa fa-underline"></i>
+				</button>
+				<button type="button" class="btn btn-default icon italic" style="cursor: pointer;" title="{{$editalic}}" data-role="insert-formatting" data-comment=" " data-bbcode="i" data-id="id_{{$field.0}}">
+					<i class="fa fa-italic"></i>
+				</button>
+				<button type="button" class="btn btn-default icon bold" style="cursor: pointer;"  title="{{$edbold}}" data-role="insert-formatting" data-comment=" " data-bbcode="b" data-id="id_{{$field.0}}">
+					<i class="fa fa-bold"></i>
+				</button>
+				<button type="button" class="btn btn-default icon quote" style="cursor: pointer;" title="{{$edquote}}" data-role="insert-formatting" data-comment=" " data-bbcode="quote" data-id="id_{{$field.0}}">
+					<i class="fa fa-quote-left"></i>
+				</button>
+				<button type="button" class="btn btn-default icon code" style="cursor: pointer;" title="{{$edcode}}" data-role="insert-formatting" data-comment=" " data-bbcode="code" data-id="id_{{$field.0}}">
+					<i class="fa fa-code"></i>
+				</button>
+			</div>
+		</div>
+	{{/if}}
+	<textarea class="form-control text-autosize emojis-target" name="{{$field.0}}" id="id_{{$field.0}}" {{if $field.4}}required{{/if}} {{$field.5 nofilter}} aria-describedby="{{$field.0}}_tip">{{$field.2}}</textarea>
 	{{if $field.3}}
 		<span class="help-block" id="{{$field.0}}_tip" role="tooltip">{{$field.3 nofilter}}</span>
 	{{/if}}

@@ -302,7 +302,7 @@ class Index extends BaseSettings
 
 			'$nickname'      => $owner['nickname'],
 			'$username'      => ['username', $this->t('Display name:'), $owner['name']],
-			'$about'         => ['about', $this->t('Description:'), $owner['about']],
+			'$about'         => ['about', $this->t('Description:'), $owner['about'], '', '', 'rows="8"', true],
 			'$dob'           => Temporal::getDateofBirthField($owner['dob'], $owner['timezone']),
 			'$address'       => ['address', $this->t('Street Address:'), $owner['address']],
 			'$locality'      => ['locality', $this->t('Locality/City:'), $owner['locality']],
