@@ -92,7 +92,7 @@ class Notes extends BaseProfile
 
 		$o = parent::getTabsHTML('notes', true, $this->userSession->getLocalUserNickname(), false);
 
-		$o .= '<h3>' . $this->l10n->t('Personal notes') . '</h3>';
+		$o .= '<h2>' . $this->l10n->t('Personal notes') . '</h2>';
 
 		$x = [
 			'lockstate' => 'lock',

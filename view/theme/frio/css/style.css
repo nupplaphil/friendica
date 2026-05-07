@@ -40,6 +40,16 @@ body a[name]:not([href]) {
 	visibility: hidden;
 }
 
+/* Undo a global.css change */
+.nav-pills .btn, .fbrowser-content .btn {
+	background-color: transparent;
+}
+
+/* Undo a global.css change */
+#vcard-short-desc .media-heading {
+	line-height: 1.1;
+}
+
 body a:hover,
 .btn-link:hover,
 body a:focus,
