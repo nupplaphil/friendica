@@ -60,7 +60,7 @@ class Event
 			$o .= "<h4>" . DI::l10n()->t('Starts:') . "</h4><p>" . $event_start . "</p>";
 
 			if (!$event['nofinish']) {
-				$o .= "<h4>" . DI::l10n()->t('Finishes:') . "</h4><p>" . $event_end . "</p>";
+				$o .= "<h4>" . DI::l10n()->t('Ends:') . "</h4><p>" . $event_end . "</p>";
 			}
 
 			if (!empty($event['location'])) {
@@ -74,13 +74,13 @@ class Event
 
 		$o .= '<div class="summary event-summary">' . BBCode::convertForUriId($uriid, $event['summary'], $simple) . '</div>' . "\r\n";
 
-		$o .= '<div class="event-start"><span class="event-label">' . DI::l10n()->t('Starts:') . '</span>&nbsp;<span class="dtstart" title="'
+		$o .= '<div class="event-start"><span class="event-label">' . DI::l10n()->t('Starts:') . '</span><br/><span class="dtstart" title="'
 			. DateTimeFormat::local($event['start'], DateTimeFormat::ATOM)
 			. '" >' . $event_start
 			. '</span></div>' . "\r\n";
 
 		if (!$event['nofinish']) {
-			$o .= '<div class="event-end" ><span class="event-label">' . DI::l10n()->t('Finishes:') . '</span>&nbsp;<span class="dtend" title="'
+			$o .= '<div class="event-end" ><span class="event-label">' . DI::l10n()->t('Ends:') . '</span><br/><span class="dtend" title="'
 				. DateTimeFormat::local($event['finish'], DateTimeFormat::ATOM)
 				. '" >' . $event_end
 				. '</span></div>' . "\r\n";
@@ -457,7 +457,7 @@ class Event
 			'noevent' => DI::l10n()->t('No events to display'),
 
 			'dtstart_label'  => DI::l10n()->t('Starts:'),
-			'dtend_label'    => DI::l10n()->t('Finishes:'),
+			'dtend_label'    => DI::l10n()->t('Ends:'),
 			'location_label' => DI::l10n()->t('Location:'),
 		];
 	}
@@ -649,9 +649,9 @@ class Event
 		$copy = null;
 		$drop = null;
 		if (DI::userSession()->getLocalUserId() && DI::userSession()->getLocalUserId() == $event['uid'] && $event['type'] == 'event') {
-			$edit = !$event['cid'] ? ['calendar/event/edit/' . $event['id'], DI::l10n()->t('Edit event'), '', ''] : null;
-			$copy = !$event['cid'] ? ['calendar/event/copy/' . $event['id'], DI::l10n()->t('Duplicate event'), '', ''] : null;
-			$drop = ['calendar/api/delete/' . $event['id'], DI::l10n()->t('Delete event'), '', ''];
+			$edit = !$event['cid'] ? ['calendar/event/edit/' . $event['id'], DI::l10n()->t('Edit'), '', ''] : null;
+			$copy = !$event['cid'] ? ['calendar/event/copy/' . $event['id'], DI::l10n()->t('Duplicate'), '', ''] : null;
+			$drop = ['calendar/api/delete/' . $event['id'], DI::l10n()->t('Delete'), '', ''];
 		}
 
 		$title = strip_tags(BBCode::convertForUriId($event['uri-id'], $event['summary']));
@@ -929,7 +929,7 @@ class Event
 			'$dtstart_title'  => $dtstart_title,
 			'$dtstart_dt'     => $dtstart_dt,
 			'$finish'         => $finish,
-			'$dtend_label'    => DI::l10n()->t('Finishes:'),
+			'$dtend_label'    => DI::l10n()->t('Ends:'),
 			'$dtend_title'    => $dtend_title,
 			'$dtend_dt'       => $dtend_dt,
 			'$month_short'    => $month_short,

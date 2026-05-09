@@ -2563,6 +2563,11 @@ p.wall-item-announce,
 }
 
 .help-block {
+	color: #636363;
+}
+
+/* Darker text color for help-blocks in settings because they're more prevalent and important there */
+.settings-content-wrapper .help-block {
 	color: $font_color_darker;
 }
 
@@ -3017,6 +3022,10 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	color: $link_hover_color;
 	text-decoration: none;
 }
+#event-header {
+	display: flex;
+	justify-content: space-between;
+}
 .event-wrapper .event-owner {
 	margin-bottom: 15px;
 	word-break: break-all;
@@ -3038,9 +3047,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 .event-wrapper .event-buttons {
 	margin-top: 15px;
 }
-#event-form-wrapper {
-	padding-top: 5px;
-}
 #event-edit-form-wrapper {
 	padding-top: 15px;
 }
@@ -3048,7 +3054,7 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	color: $font_color_darker;
 }
 #event-edit-form-wrapper #event-edit-time {
-	padding: 10px 0;
+	padding: 0;
 }
 .event-buttons .plink-event-link {
 	margin-left: 20px;
@@ -3063,7 +3069,7 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	font-size: inherit;
 	color: inherit;
 }
-.modal-body .vevent .event-summary {
+.vevent .event-summary {
 	display: none;
 }
 #event-preview .vevent .event-summary {
@@ -3147,6 +3153,21 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 .event-card .description {
 	margin-top: 10px;
 	box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1) inset;
+}
+#event-edit-time > section  {
+	align-items: flex-start;
+	display: flex;
+	gap: 10px;
+}
+.calendar-content-wrapper h3 {
+	font-size: 20px;
+}
+.share-checkbox > div {
+	display: inline;
+	padding-right: 15px;
+}
+#summary_tip {
+	font-size: 85%; /* Equivalent to the <small> tag */
 }
 /* Photos Pages */
 #photo-photo {
