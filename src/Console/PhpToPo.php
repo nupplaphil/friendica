@@ -232,7 +232,7 @@ HELP;
 		$str = str_replace('"', '\"', $str);
 		$str = str_replace("\t", '\t', $str);
 		$str = str_replace("\n", '\n"' . "\n" . '"', $str);
-		if (strpos($str, "\n") !== false && $str[0] !== '"') {
+		if (str_contains($str, "\n") && $str[0] !== '"') {
 			$str = '"' . "\n" . $str;
 		}
 

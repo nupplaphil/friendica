@@ -133,7 +133,7 @@ final class MediaType
 			$value = '; ' . $key . '=' . (self::isToken($value) ? $value : '"' . addcslashes($value, '"\\') . '"');
 		});
 
-		return $this->type . '/' . $this->subType . implode($parameters);
+		return $this->type . '/' . $this->subType . implode('', $parameters);
 	}
 
 	/**

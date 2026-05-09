@@ -92,7 +92,7 @@ class Introspection implements IHaveCallIntrospections
 
 		if (isset($traceItem['class'])) {
 			foreach ($this->skipClassesPartials as $part) {
-				if (strpos($traceItem['class'], $part) === 0) {
+				if (str_starts_with($traceItem['class'], $part)) {
 					return true;
 				}
 			}

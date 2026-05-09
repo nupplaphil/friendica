@@ -312,7 +312,7 @@ class Strings
 	 */
 	public static function ensureQueryParameter(string $uri): string
 	{
-		if (strpos($uri, '?') === false && ($pos = strpos($uri, '&')) !== false) {
+		if (!str_contains($uri, '?') && ($pos = strpos($uri, '&')) !== false) {
 			$uri = substr($uri, 0, $pos) . '?' . substr($uri, $pos + 1);
 		}
 
@@ -360,7 +360,7 @@ class Strings
 	 */
 	public static function endsWith(string $string, string $end): bool
 	{
-		return (substr_compare($string, $end, -strlen($end)) === 0);
+		return (str_ends_with($string, $end));
 	}
 
 	/**

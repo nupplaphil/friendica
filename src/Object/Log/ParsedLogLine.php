@@ -57,7 +57,7 @@ class ParsedLogLine
 		$logline = str_replace(' [] - {', ' {""} - {', $logline);
 
 
-		if (strstr($logline, ' - {') === false) {
+		if (!str_contains($logline, ' - {')) {
 			// the log line is not well formed
 			$jsonsource = null;
 		} else {

@@ -38,7 +38,7 @@ class Export extends BaseModeration
 			// Prefer addr (user@domain), then alias, then url as fallback
 			$identifier = $contact['url'];
 
-			if (!empty($contact['addr']) && strpos($contact['addr'], '@') !== false) {
+			if (!empty($contact['addr']) && str_contains($contact['addr'], '@')) {
 				$identifier = $contact['addr'];
 			} elseif (!empty($contact['alias'])) {
 				$identifier = $contact['alias'];

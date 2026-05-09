@@ -50,11 +50,11 @@ class BaseSearch extends BaseModule
 		$header  = '';
 		$results = new ResultList();
 
-		if (strpos($search, '@') === 0) {
+		if (str_starts_with($search, '@')) {
 			$search = trim(substr($search, 1));
 			$type   = Search::TYPE_PEOPLE;
 			$header = DI::l10n()->t('People Search - %s', $search);
-		} elseif (strpos($search, '!') === 0) {
+		} elseif (str_starts_with($search, '!')) {
 			$search = trim(substr($search, 1));
 			$type   = Search::TYPE_GROUP;
 			$header = DI::l10n()->t('Group Search - %s', $search);
@@ -67,14 +67,14 @@ class BaseSearch extends BaseModule
 				DI::userSession()->getLocalUserId(),
 				'system',
 				'itemspage_mobile_network',
-				DI::config()->get('system', 'itemspage_network_mobile')
+				DI::config()->get('system', 'itemspage_network_mobile'),
 			);
 		} else {
 			$itemsPerPage = DI::pConfig()->get(
 				DI::userSession()->getLocalUserId(),
 				'system',
 				'itemspage_network',
-				DI::config()->get('system', 'itemspage_network')
+				DI::config()->get('system', 'itemspage_network'),
 			);
 		}
 
@@ -112,7 +112,7 @@ class BaseSearch extends BaseModule
 	{
 		if ($results->getTotal() == 0) {
 			$o = Renderer::replaceMacros(Renderer::getMarkupTemplate('section_title.tpl'), [
-				'$title' => DI::l10n()->t('No results.')
+				'$title' => DI::l10n()->t('No results.'),
 			]);
 			return $o;
 		}
@@ -141,7 +141,7 @@ class BaseSearch extends BaseModule
 			'$filtered' => $filtered ? DI::l10n()->tt(
 				'%d result was filtered out because your node blocks the domain it is registered on. You can review the list of domains your node is currently blocking in the <a href="/friendica">About page</a>.',
 				'%d results were filtered out because your node blocks the domain they are registered on. You can review the list of domains your node is currently blocking in the <a href="/friendica">About page</a>.',
-				$filtered
+				$filtered,
 			) : '',
 			'$contacts' => $entries,
 			'$paginate' => $pager->renderFull($results->getTotal()),

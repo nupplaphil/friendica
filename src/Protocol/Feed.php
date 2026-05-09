@@ -654,7 +654,7 @@ class Feed
 				$data = ParseUrl::getSiteinfoCached($item['plink']);
 				if (!empty($data['text']) && !empty($data['title']) && (mb_strlen($item['body']) < mb_strlen($data['text']))) {
 					// When the fetched page info text is longer than the body, we do try to enhance the body
-					if (!empty($item['body']) && (strpos($data['title'], $item['body']) === false) && (strpos($data['text'], $item['body']) === false)) {
+					if (!empty($item['body']) && (!str_contains($data['title'], $item['body'])) && (!str_contains($data['text'], $item['body']))) {
 						// The body is not part of the fetched page info title or page info text. So we add the text to the body
 						$item['body'] .= "\n\n" . $data['text'];
 					} else {
@@ -976,7 +976,7 @@ class Feed
 			$body = substr($body, 0, strlen($title));
 		}
 
-		if (($title != $body) && (substr($title, -3) == '...')) {
+		if (($title != $body) && (str_ends_with($title, '...'))) {
 			$pos = strrpos($title, '...');
 			if ($pos > 0) {
 				$title = substr($title, 0, $pos);

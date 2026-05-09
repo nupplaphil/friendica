@@ -637,7 +637,7 @@ class DFRN
 		}
 
 		if ($r->link) {
-			if (substr($r->link, 0, 1) == '<') {
+			if (str_starts_with($r->link, '<')) {
 				if (strstr($r->link, '&') && (! strstr($r->link, '&amp;'))) {
 					$r->link = str_replace('&', '&amp;', $r->link);
 				}
@@ -1003,7 +1003,7 @@ class DFRN
 			return -10;
 		}
 
-		if (strpos($xml, '<?xml') === false) {
+		if (!str_contains($xml, '<?xml')) {
 			DI::logger()->notice('No valid XML returned from ' . $contact['id'] . ' - ' . $dest_url);
 			DI::logger()->debug('Returned XML: ' . $xml);
 			return 3;

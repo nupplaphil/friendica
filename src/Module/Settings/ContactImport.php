@@ -72,7 +72,7 @@ class ContactImport extends BaseSettings
 						// or the handle of the account, therefore we check for either
 						// "http" or "@" to be present in the string.
 						// All other fields from the row will be ignored
-						if ((strpos($csvRow[0], '@') !== false) || Network::isValidHttpUrl($csvRow[0])) {
+						if ((str_contains($csvRow[0], '@')) || Network::isValidHttpUrl($csvRow[0])) {
 							AddContact::add(Worker::PRIORITY_MEDIUM, $this->session->getLocalUserId(), trim($csvRow[0], '@'));
 						} else {
 							$this->logger->notice('Invalid account', ['url' => $csvRow[0]]);

@@ -105,11 +105,11 @@ class Index extends BaseSearch
 			return $o;
 		}
 
-		if (strpos($search, '#') === 0) {
+		if (str_starts_with($search, '#')) {
 			$tag    = true;
 			$search = substr($search, 1);
 		} else {
-			if (strpos($search, '@') === 0 || strpos($search, '!') === 0) {
+			if (str_starts_with($search, '@') || str_starts_with($search, '!')) {
 				return self::performContactSearch($search);
 			}
 

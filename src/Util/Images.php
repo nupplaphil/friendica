@@ -213,7 +213,7 @@ class Images
 	 */
 	public static function isSupportedMimeType(string $mimetype): bool
 	{
-		if (substr($mimetype, 0, 6) != 'image/') {
+		if (!str_starts_with($mimetype, 'image/')) {
 			return false;
 		}
 

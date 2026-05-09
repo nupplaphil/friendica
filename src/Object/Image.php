@@ -57,7 +57,7 @@ class Image
 
 		if (Images::isSupportedMimeType($type)) {
 			$this->originType = $this->outputType = Images::getImageTypeByMimeType($type);
-		} elseif (($type == '') || substr($type, 0, 6) == 'image/' || substr($type, 0, 12) == ' application/') {
+		} elseif (($type == '') || str_starts_with($type, 'image/') || substr($type, 0, 12) == ' application/') {
 			$this->originType = IMAGETYPE_UNKNOWN;
 			$this->outputType = IMAGETYPE_WEBP;
 			DI::logger()->debug('Unhandled image mime type, use WebP instead', ['type' => $type, 'filename' => $filename, 'size' => strlen($data)]);
@@ -120,11 +120,11 @@ class Image
 		if (!isset($header['Webp']) || strtoupper($header['Webp']) !== 'WEBP') {
 			return false;
 		}
-		if (!isset($header['Vp']) || strpos(strtoupper($header['Vp']), 'VP8') === false) {
+		if (!isset($header['Vp']) || !str_contains(strtoupper($header['Vp']), 'VP8')) {
 			return false;
 		}
 
-		return strpos(strtoupper($header['Chunk']), 'ANIM') !== false || strpos(strtoupper($header['Chunk']), 'ANMF') !== false;
+		return str_contains(strtoupper($header['Chunk']), 'ANIM') || str_contains(strtoupper($header['Chunk']), 'ANMF');
 	}
 
 	/**
@@ -139,9 +139,6 @@ class Image
 				$this->image->clear();
 				$this->image->destroy();
 				return;
-			}
-			if (is_resource($this->image)) {
-				imagedestroy($this->image);
 			}
 		}
 	}
@@ -620,10 +617,6 @@ class Image
 
 			imagecopyresampled($dest, $this->image, 0, 0, 0, 0, $dest_width, $dest_height, $this->width, $this->height);
 
-			if ($this->image) {
-				imagedestroy($this->image);
-			}
-
 			$this->image  = $dest;
 			$this->width  = imagesx($this->image);
 			$this->height = imagesy($this->image);
@@ -687,9 +680,7 @@ class Image
 			imagefill($dest, 0, 0, imagecolorallocatealpha($dest, 0, 0, 0, 127)); // fill with alpha
 		}
 		imagecopyresampled($dest, $this->image, 0, 0, $x, $y, $max, $max, $w, $h);
-		if ($this->image) {
-			imagedestroy($this->image);
-		}
+
 		$this->image  = $dest;
 		$this->width  = imagesx($this->image);
 		$this->height = imagesy($this->image);

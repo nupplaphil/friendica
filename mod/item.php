@@ -502,7 +502,7 @@ function item_redirect_after_action(array $item, string $returnUrlHex)
 		}
 	} else {
 		// if unknown location or deleting top level post called from display
-		if (empty($return_url) || strpos($return_url, 'display') !== false) {
+		if (empty($return_url) || str_contains($return_url, 'display')) {
 			DI::baseUrl()->redirect('network');
 			//NOTREACHED
 		} else {

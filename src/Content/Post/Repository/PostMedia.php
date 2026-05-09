@@ -518,7 +518,7 @@ class PostMedia extends BaseRepository
 		}
 
 		$html = trim($doc->saveHTML());
-		if (substr($html, 0, 6) == '<span>' && substr($html, -7) == '</span>') {
+		if (str_starts_with($html, '<span>') && str_ends_with($html, '</span>')) {
 			$html = substr($html, 6, -7);
 		}
 		return $html;

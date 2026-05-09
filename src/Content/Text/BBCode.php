@@ -184,7 +184,7 @@ class BBCode
 				$attach_data = self::getAttachmentData($match[0]);
 				if (empty($attach_data['url'])) {
 					return $match[0];
-				} elseif (strpos(str_replace($match[0], '', $body), (string) $attach_data['url']) !== false) {
+				} elseif (str_contains(str_replace($match[0], '', $body), (string) $attach_data['url'])) {
 					return '';
 				} elseif (empty($attach_data['title']) || $no_link_desc) {
 					return " \n[url]" . $attach_data['url'] . "[/url]\n";
@@ -426,7 +426,7 @@ class BBCode
 
 		$data['url'] = Network::sanitizeUrl($data['url']);
 
-		if (((strpos($data['text'], '[img=') !== false) || (strpos($data['text'], '[img]') !== false) || DI::config()->get('system', 'always_show_preview')) && !empty($data['image'])) {
+		if (((str_contains($data['text'], '[img=')) || (str_contains($data['text'], '[img]')) || DI::config()->get('system', 'always_show_preview')) && !empty($data['image'])) {
 			$data['preview'] = $data['image'];
 			$data['image']   = '';
 		}
@@ -1420,7 +1420,7 @@ class BBCode
 		$text = preg_replace_callback(
 			"#\[code(?:=([^\]]*))?\](.*?)\[\/code\]#ism",
 			function ($matches) {
-				if (strpos($matches[2], "\n") !== false) {
+				if (str_contains($matches[2], "\n")) {
 					$return = '<pre><code class="language-' . trim($matches[1]) . '">' . htmlentities(trim($matches[2], "\n\r"), ENT_NOQUOTES, 'UTF-8') . '</code></pre>';
 				} else {
 					$return = '<code>' . htmlentities($matches[2], ENT_NOQUOTES, 'UTF-8') . '</code>';
@@ -1431,7 +1431,7 @@ class BBCode
 			$text,
 		);
 
-		if (strpos($text, '<p>') !== false || strpos($text, '</p>') !== false) {
+		if (str_contains($text, '<p>') || str_contains($text, '</p>')) {
 			$text = '<p>' . $text . '</p>';
 		}
 
@@ -1560,7 +1560,7 @@ class BBCode
 	{
 		// leave open the possibility of [map=something]
 		// this is replaced in Item::prepareBody() which has knowledge of the item location
-		if (strpos($text, '[/map]') !== false) {
+		if (str_contains($text, '[/map]')) {
 			$text = preg_replace_callback(
 				"/\[map\](.*?)\[\/map\]/ism",
 				function ($match) use ($simple_html) {
@@ -1570,7 +1570,7 @@ class BBCode
 			);
 		}
 
-		if (strpos($text, '[map=') !== false) {
+		if (str_contains($text, '[map=')) {
 			$text = preg_replace_callback(
 				"/\[map=(.*?)\]/ism",
 				function ($match) use ($simple_html) {
@@ -1580,7 +1580,7 @@ class BBCode
 			);
 		}
 
-		if (strpos($text, '[map]') !== false) {
+		if (str_contains($text, '[map]')) {
 			$text = preg_replace("/\[map\]/", '<p class="map"></p>', $text);
 		}
 
@@ -1720,10 +1720,10 @@ class BBCode
 		// handle nested lists
 		$endlessloop = 0;
 
-		while ((((strpos($text, "[/list]") !== false) && (strpos($text, "[list") !== false))
-			|| ((strpos($text, "[/ol]") !== false) && (strpos($text, "[ol]") !== false))
-			|| ((strpos($text, "[/ul]") !== false) && (strpos($text, "[ul]") !== false))
-			|| ((strpos($text, "[/li]") !== false) && (strpos($text, "[li]") !== false))) && (++$endlessloop < 20)) {
+		while ((((str_contains($text, "[/list]")) && (str_contains($text, "[list")))
+			|| ((str_contains($text, "[/ol]")) && (str_contains($text, "[ol]")))
+			|| ((str_contains($text, "[/ul]")) && (str_contains($text, "[ul]")))
+			|| ((str_contains($text, "[/li]")) && (str_contains($text, "[li]")))) && (++$endlessloop < 20)) {
 			$text = preg_replace("/\[list\](.*?)\[\/list\]/ism", '</p><ul class="listbullet" style="list-style-type: circle;">$1</ul><p>', $text);
 			$text = preg_replace("/\[list=\](.*?)\[\/list\]/ism", '</p><ul class="listnone" style="list-style-type: none;">$1</ul><p>', $text);
 			$text = preg_replace("/\[list=1\](.*?)\[\/list\]/ism", '</p><ul class="listdecimal" style="list-style-type: decimal;">$1</ul><p>', $text);
@@ -1751,7 +1751,7 @@ class BBCode
 		// Check for [spoiler] text
 		// handle nested quotes
 		$endlessloop = 0;
-		while ((strpos($text, "[/spoiler]") !== false) && (strpos($text, "[spoiler]") !== false) && (++$endlessloop < 20)) {
+		while ((str_contains($text, "[/spoiler]")) && (str_contains($text, "[spoiler]")) && (++$endlessloop < 20)) {
 			$text = preg_replace("/\[spoiler\](.*?)\[\/spoiler\]/ism", $SpoilerLayout, $text);
 		}
 
@@ -1759,7 +1759,7 @@ class BBCode
 
 		// handle nested quotes
 		$endlessloop = 0;
-		while ((strpos($text, "[/spoiler]") !== false) && (strpos($text, "[spoiler=") !== false) && (++$endlessloop < 20)) {
+		while ((str_contains($text, "[/spoiler]")) && (str_contains($text, "[spoiler=")) && (++$endlessloop < 20)) {
 			$text = preg_replace(
 				"/\[spoiler=[\"\']*(.*?)[\"\']*\](.*?)\[\/spoiler\]/ism",
 				'<details class="spoiler"><summary>$1</summary>$2</details>',
@@ -1779,7 +1779,7 @@ class BBCode
 
 	private static function convertSmileysToHtml(string $text, int $simple_html, bool $for_plaintext): string
 	{
-		if (strpos($text, '[nosmile]') !== false) {
+		if (str_contains($text, '[nosmile]')) {
 			$text = str_replace('[nosmile]', '', $text);
 			return $text;
 		}
@@ -1795,7 +1795,7 @@ class BBCode
 		// Check for [quote] text
 		// handle nested quotes
 		$endlessloop = 0;
-		while ((strpos($text, "[/quote]") !== false) && (strpos($text, "[quote]") !== false) && (++$endlessloop < 20)) {
+		while ((str_contains($text, "[/quote]")) && (str_contains($text, "[quote]")) && (++$endlessloop < 20)) {
 			$text = preg_replace("/\[quote\](.*?)\[\/quote\]/ism", "$QuoteLayout", $text);
 		}
 
@@ -1805,7 +1805,7 @@ class BBCode
 
 		// handle nested quotes
 		$endlessloop = 0;
-		while ((strpos($text, "[/quote]") !== false) && (strpos($text, "[quote=") !== false) && (++$endlessloop < 20)) {
+		while ((str_contains($text, "[/quote]")) && (str_contains($text, "[quote=")) && (++$endlessloop < 20)) {
 			$text = preg_replace(
 				"/\[quote=[\"\']*(.*?)[\"\']*\](.*?)\[\/quote\]/ism",
 				"<p><strong class=" . '"author"' . ">" . $t_wrote . "</strong></p><blockquote>$2</blockquote>",
@@ -1822,7 +1822,7 @@ class BBCode
 		$text = preg_replace_callback(
 			"/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism",
 			function ($matches) use ($simple_html, $uriid) {
-				if (strpos($matches[3], "data:image/") === 0) {
+				if (str_starts_with($matches[3], "data:image/")) {
 					return $matches[0];
 				}
 
@@ -1841,7 +1841,7 @@ class BBCode
 				$matches[1] = self::proxyUrl($matches[1], $simple_html, $uriid);
 				$alt        = htmlspecialchars($matches[2], ENT_COMPAT);
 				// Fix for Markdown problems with Diaspora, see issue #12701
-				if (($simple_html != self::DIASPORA) || strpos($matches[2], '"') === false) {
+				if (($simple_html != self::DIASPORA) || !str_contains($matches[2], '"')) {
 					return '<img src="' . $matches[1] . '" alt="' . $alt . '" title="' . $alt . '" class="' . (empty($alt) ? 'empty-description' : 'has-alt-description') . '">';
 				} else {
 					return '<img src="' . $matches[1] . '" alt="' . $alt . '">';
@@ -1855,7 +1855,7 @@ class BBCode
 		$text = preg_replace_callback(
 			"/\[[iz]mg\](.*?)\[\/[iz]mg\]/ism",
 			function ($matches) use ($simple_html, $uriid) {
-				if (strpos($matches[1], "data:image/") === 0) {
+				if (str_starts_with($matches[1], "data:image/")) {
 					return $matches[0];
 				}
 
@@ -2418,7 +2418,7 @@ class BBCode
 						continue;
 					}
 
-					if (substr($match, -1, 1) === '.') {
+					if (str_ends_with($match, '.')) {
 						$ret[] = substr($match, 0, -1);
 					} else {
 						$ret[] = $match;

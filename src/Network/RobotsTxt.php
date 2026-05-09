@@ -63,7 +63,7 @@ class RobotsTxt
 			$curlResult = $this->httpClient->get(
 				$robotsUrl,
 				HttpClientAccept::TEXT,
-				[HttpClientOptions::REQUEST => HttpClientRequest::SERVERINFO]
+				[HttpClientOptions::REQUEST => HttpClientRequest::SERVERINFO],
 			);
 
 			if (!$curlResult->isSuccess()) {
@@ -183,11 +183,11 @@ class RobotsTxt
 	 */
 	private function pathMatches(string $path, string $rule): bool
 	{
-		if (substr_compare($rule, '*', -strlen('*')) === 0) {
+		if (str_ends_with($rule, '*')) {
 			$rule = substr($rule, 0, -1);
-			return strncmp($path, $rule, strlen($rule)) === 0;
+			return str_starts_with($path, $rule);
 		}
 
-		return strncmp($path, $rule, strlen($rule)) === 0;
+		return str_starts_with($path, $rule);
 	}
 }

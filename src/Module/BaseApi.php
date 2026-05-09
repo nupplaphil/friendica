@@ -484,7 +484,7 @@ class BaseApi extends BaseModule
 		}
 
 		if (empty($cid) && !empty($screen_name)) {
-			if (strpos($screen_name, '@') !== false) {
+			if (str_contains($screen_name, '@')) {
 				return Contact::getIdForURL($screen_name, 0, false);
 			}
 

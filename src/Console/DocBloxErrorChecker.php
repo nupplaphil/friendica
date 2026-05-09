@@ -84,7 +84,7 @@ HELP;
 			while ($file = readdir($dh)) {
 				if (is_dir($dir . "/" . $file)) {
 					//add to directory stack
-					if (strpos($file, '.') !== 0) {
+					if (!str_starts_with($file, '.')) {
 						array_push($dirstack, $dir . "/" . $file);
 						$this->out('dir ' . $dir . '/' . $file);
 					}

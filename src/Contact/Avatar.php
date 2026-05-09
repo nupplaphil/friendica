@@ -275,7 +275,7 @@ class Avatar
 
 		if (!file_exists($basepath)) {
 			// We only automatically create the folder when it is in the web root
-			if (strpos($basepath, DI::basePath()) !== 0) {
+			if (!str_starts_with($basepath, DI::basePath())) {
 				DI::logger()->warning('Base directory does not exist', ['directory' => $basepath]);
 				return '';
 			}

@@ -68,27 +68,27 @@ HELP;
 
 				$found = false;
 
-				if (substr($detect, 0, 9) == "function ") {
+				if (str_starts_with($detect, "function ")) {
 					$found = true;
 				}
 
-				if (substr($detect, 0, 19) == "protected function ") {
+				if (str_starts_with($detect, "protected function ")) {
 					$found = true;
 				}
 
-				if (substr($detect, 0, 17) == "private function ") {
+				if (str_starts_with($detect, "private function ")) {
 					$found = true;
 				}
 
-				if (substr($detect, 0, 23) == "public static function ") {
+				if (str_starts_with($detect, "public static function ")) {
 					$found = true;
 				}
 
-				if (substr($detect, 0, 24) == "private static function ") {
+				if (str_starts_with($detect, "private static function ")) {
 					$found = true;
 				}
 
-				if (substr($detect, 0, 10) == "function (") {
+				if (str_starts_with($detect, "function (")) {
 					$found = false;
 				}
 

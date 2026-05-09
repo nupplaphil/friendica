@@ -733,7 +733,7 @@ class User
 			if (AppSpecificPassword::authenticateUser($user['uid'], $password)) {
 				return $user['uid'];
 			}
-		} elseif (strpos($user['password'], '$') === false) {
+		} elseif (!str_contains($user['password'], '$')) {
 			//Legacy hash that has not been replaced by a new hash yet
 			if (self::hashPasswordLegacy($password) === $user['password']) {
 				self::updatePasswordHashed($user['uid'], self::hashPassword($password));
@@ -1293,7 +1293,7 @@ class User
 		$loose_reg = DI::config()->get('system', 'no_regfullname');
 		if (!$loose_reg) {
 			$username = mb_convert_case($username, MB_CASE_TITLE, 'UTF-8');
-			if (strpos($username, ' ') === false) {
+			if (!str_contains($username, ' ')) {
 				throw new Exception(DI::l10n()->t("That doesn't appear to be your full (First Last) name."));
 			}
 		}

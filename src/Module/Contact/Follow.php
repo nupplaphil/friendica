@@ -84,7 +84,7 @@ class Follow extends BaseModule
 		$url = $this->getUrl($request);
 
 		// Issue 6874: Allow remote following from Peertube
-		if (strpos($url, 'acct:') === 0) {
+		if (str_starts_with($url, 'acct:')) {
 			$url = str_replace('acct:', '', $url);
 		}
 

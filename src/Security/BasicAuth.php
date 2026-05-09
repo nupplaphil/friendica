@@ -43,7 +43,7 @@ class BasicAuth
 			self::$current_user_id = self::getUserIdByAuth($login);
 		}
 
-		return (int)self::$current_user_id;
+		return (int) self::$current_user_id;
 	}
 
 	public static function setCurrentUserID(int $uid = null)
@@ -70,7 +70,7 @@ class BasicAuth
 
 		// Support for known clients that doesn't send a source name
 		if (empty($source) && !empty($_SERVER['HTTP_USER_AGENT'])) {
-			if (strpos($_SERVER['HTTP_USER_AGENT'], "Twidere") !== false) {
+			if (str_contains($_SERVER['HTTP_USER_AGENT'], "Twidere")) {
 				$source = 'Twidere';
 			}
 

@@ -534,24 +534,24 @@ class HTML
 				"//plus.google.com/", "//twitter.com/",
 			];
 			foreach ($list as $listitem) {
-				if (strpos($treffer[1], $listitem) !== false) {
+				if (str_contains($treffer[1], $listitem)) {
 					$ignore = true;
 				}
 			}
 
-			if ((strpos($treffer[1], "//twitter.com/") !== false) && (strpos($treffer[1], "/status/") !== false)) {
+			if ((str_contains($treffer[1], "//twitter.com/")) && (str_contains($treffer[1], "/status/"))) {
 				$ignore = false;
 			}
 
-			if ((strpos($treffer[1], "//plus.google.com/") !== false) && (strpos($treffer[1], "/posts") !== false)) {
+			if ((str_contains($treffer[1], "//plus.google.com/")) && (str_contains($treffer[1], "/posts"))) {
 				$ignore = false;
 			}
 
-			if ((strpos($treffer[1], "//plus.google.com/") !== false) && (strpos($treffer[1], "/photos") !== false)) {
+			if ((str_contains($treffer[1], "//plus.google.com/")) && (str_contains($treffer[1], "/photos"))) {
 				$ignore = false;
 			}
 
-			$ignore = $ignore || strpos($treffer[1], '#') === 0;
+			$ignore = $ignore || str_starts_with($treffer[1], '#');
 
 			if (!$ignore) {
 				$urls[$treffer[1]] = $treffer[1];
@@ -660,7 +660,7 @@ class HTML
 
 		if (!$compact && ($message != '')) {
 			foreach ($urls as $id => $url) {
-				if ($url != '' && strpos($message, (string) $url) === false) {
+				if ($url != '' && !str_contains($message, (string) $url)) {
 					$message .= "\n" . $url . ' ';
 				}
 			}
@@ -821,7 +821,7 @@ class HTML
 
 		if ($redirect) {
 			$url = Contact::magicLinkByContact($contact);
-			if (strpos($url, 'contact/redir/') === 0) {
+			if (str_starts_with($url, 'contact/redir/')) {
 				$sparkle = ' sparkle';
 			}
 		}
@@ -857,7 +857,7 @@ class HTML
 	{
 		$mode = 'text';
 
-		if (strpos($s, '#') === 0) {
+		if (str_starts_with($s, '#')) {
 			$mode = 'tag';
 		}
 		$action_text = DI::l10n()->t('Save search');
@@ -999,11 +999,11 @@ class HTML
 	 */
 	public static function xpathQuote(string $value): string
 	{
-		if (false === strpos($value, '"')) {
+		if (!str_contains($value, '"')) {
 			return '"' . $value . '"';
 		}
 
-		if (false === strpos($value, "'")) {
+		if (!str_contains($value, "'")) {
 			return "'" . $value . "'";
 		}
 
@@ -1102,7 +1102,7 @@ class HTML
 		}
 
 		$html = trim($dom->saveHTML());
-		if (substr($html, 0, 6) == '<span>' && substr($html, -7) == '</span>') {
+		if (str_starts_with($html, '<span>') && str_ends_with($html, '</span>')) {
 			$html = substr($html, 6, -7);
 		}
 

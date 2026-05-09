@@ -351,7 +351,7 @@ class Probe
 					}
 					break;
 				case 'robots':
-					if (strpos($content, 'noindex') !== false) {
+					if (str_contains($content, 'noindex')) {
 						return true;
 					}
 					break;
@@ -562,13 +562,13 @@ class Probe
 		}
 
 		$parts = parse_url($uri);
-		if (empty($parts['scheme']) && empty($parts['host']) && (empty($parts['path']) || strpos($parts['path'], '@') === false)) {
+		if (empty($parts['scheme']) && empty($parts['host']) && (empty($parts['path']) || !str_contains($parts['path'], '@'))) {
 			DI::logger()->info('URI was not detectable, probe for AT Protocol now', ['uri' => $uri]);
 			return self::atProtocol($uri);
 		}
 
 		// If the URI starts with "mailto:" then jump directly to the mail detection
-		if (strpos($uri, 'mailto:') !== false) {
+		if (str_contains($uri, 'mailto:')) {
 			$uri = str_replace('mailto:', '', $uri);
 			return self::mail($uri, $uid);
 		}
@@ -871,13 +871,13 @@ class Probe
 					$data['url'] = $alias;
 				} elseif (Network::isValidHttpUrl($alias) && !Strings::compareLink($alias, $data['url'])) {
 					$data['alias'] = $alias;
-				} elseif (substr($alias, 0, 5) == 'acct:') {
+				} elseif (str_starts_with($alias, 'acct:')) {
 					$data['addr'] = substr($alias, 5);
 				}
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (substr($webfinger['subject'], 0, 5) == 'acct:')) {
+		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
 			$data['addr'] = substr($webfinger['subject'], 5);
 		}
 
@@ -1055,13 +1055,13 @@ class Probe
 			foreach ($webfinger['aliases'] as $alias) {
 				if (Network::isValidHttpUrl($alias) && !Strings::compareLink($alias, $data['url'])) {
 					$data['alias'] = $alias;
-				} elseif (substr($alias, 0, 5) == 'acct:') {
+				} elseif (str_starts_with($alias, 'acct:')) {
 					$data['addr'] = substr($alias, 5);
 				}
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (substr($webfinger['subject'], 0, 5) == 'acct:')) {
+		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
 			$data['addr'] = substr($webfinger['subject'], 5);
 		}
 
@@ -1205,7 +1205,7 @@ class Probe
 	{
 		if (parse_url($uri, PHP_URL_SCHEME) == 'did') {
 			$did = $uri;
-		} elseif (parse_url($uri, PHP_URL_PATH) == $uri && strpos($uri, '@') === false) {
+		} elseif (parse_url($uri, PHP_URL_PATH) == $uri && !str_contains($uri, '@')) {
 			$did = DI::atProtocol()->getDid($uri);
 			if (empty($did)) {
 				return [];
@@ -1292,7 +1292,7 @@ class Probe
 		}
 
 		$feed = $curlResult->getBodyString();
-		if (strpos($curlResult->getContentType(), 'xml') !== false) {
+		if (str_contains($curlResult->getContentType(), 'xml')) {
 			$feed_data = Feed::import($feed);
 		}
 

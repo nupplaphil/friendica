@@ -3830,7 +3830,7 @@ class Diaspora
 
 		// Is the name longer than 64 characters? Then cut the rest of it.
 		if (strlen($name) > 64) {
-			if ((strpos($name, ' ') <= 64) && (strpos($name, ' ') !== false)) {
+			if ((strpos($name, ' ') <= 64) && (str_contains($name, ' '))) {
 				$name = trim(substr($name, 0, strrpos(substr($name, 0, 65), ' ')));
 			} else {
 				$name = substr($name, 0, 64);
@@ -3853,7 +3853,7 @@ class Diaspora
 		}
 
 		// Take the first 32 characters if there is no space in the first 32 characters
-		if ((strpos($name, ' ') > 32) || (strpos($name, ' ') === false)) {
+		if ((strpos($name, ' ') > 32) || (!str_contains($name, ' '))) {
 			$first = substr($name, 0, 32);
 			$last  = substr($name, 32);
 			return ['first' => $first, 'last' => $last];

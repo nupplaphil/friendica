@@ -76,7 +76,7 @@ class Search extends BaseApi
 			}
 		}
 
-		if ((empty($request['type']) || ($request['type'] == 'hashtags')) && (strpos($request['q'], '@') == false)) {
+		if ((empty($request['type']) || ($request['type'] == 'hashtags')) && (!str_contains($request['q'], '@'))) {
 			$result['hashtags'] = $this->searchHashtags($request['q'], $request['exclude_unreviewed'], $limit, $request['offset'], $this->parameters['version']);
 		}
 
@@ -168,7 +168,7 @@ class Search extends BaseApi
 	{
 		$params = ['order' => ['uri-id' => true], 'limit' => [$offset, $limit]];
 
-		if (substr($q, 0, 1) == '#') {
+		if (str_starts_with($q, '#')) {
 			$condition = ["`name` = ? AND (`uid` = ? OR (`uid` = ? AND NOT `global`))
 				AND (`network` IN (?, ?, ?) OR (`uid` = ? AND `uid` != ?))",
 				substr($q, 1), 0, $uid, Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA, $uid, 0];

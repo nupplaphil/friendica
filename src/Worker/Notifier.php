@@ -283,7 +283,7 @@ class Notifier
 					if ($public_message && $item['inform']) {
 						$people = explode(',', $item['inform']);
 						foreach ($people as $person) {
-							if (substr($person, 0, 4) === 'cid:') {
+							if (str_starts_with($person, 'cid:')) {
 								$recipients[] = intval(substr($person, 4));
 							}
 						}

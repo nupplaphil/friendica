@@ -1078,7 +1078,7 @@ class GServer
 		}
 
 		// Some AP enabled systems return activity data that we don't expect here.
-		if (strpos($curlResult->getContentType(), 'application/activity+json') !== false) {
+		if (str_contains($curlResult->getContentType(), 'application/activity+json')) {
 			return $serverdata;
 		}
 
@@ -1375,7 +1375,7 @@ class GServer
 				$server['version'] = preg_replace('=(.+)-(.{4,})=ism', '$1', $server['version']);
 
 				// qoto advertises itself as Mastodon
-				if (($server['platform'] == 'mastodon') && substr($nodeinfo['software']['version'], -5) == '-qoto') {
+				if (($server['platform'] == 'mastodon') && str_ends_with($nodeinfo['software']['version'], '-qoto')) {
 					$server['platform'] = 'qoto';
 				}
 
@@ -1976,15 +1976,15 @@ class GServer
 
 	private static function detectMastodonForks(array $serverdata): array
 	{
-		if (strpos($serverdata['version'], 'glitch') !== false) {
+		if (str_contains($serverdata['version'], 'glitch')) {
 			$serverdata['platform'] = 'glitchsoc';
 		}
 
-		if (strpos($serverdata['version'], 'chuckya') !== false) {
+		if (str_contains($serverdata['version'], 'chuckya')) {
 			$serverdata['platform'] = 'chuckya';
 		}
 
-		if (strpos($serverdata['version'], 'sakura') !== false) {
+		if (str_contains($serverdata['version'], 'sakura')) {
 			$serverdata['platform'] = 'sakura';
 		}
 

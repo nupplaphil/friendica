@@ -648,7 +648,7 @@ class Processor
 
 					case 'app.bsky.richtext.facet#mention':
 						$url = $feature->did;
-						if (substr($linktext, 0, 1) == '@') {
+						if (str_starts_with($linktext, '@')) {
 							$prefix .= '@';
 							$linktext = substr($linktext, 1);
 						}

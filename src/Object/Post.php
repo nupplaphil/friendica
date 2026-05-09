@@ -316,7 +316,7 @@ class Post
 			$profile_link = $item['author-link'];
 		}
 
-		if (strpos($profile_link, 'contact/redir/') === 0) {
+		if (str_starts_with($profile_link, 'contact/redir/')) {
 			$sparkle = ' sparkle';
 		}
 

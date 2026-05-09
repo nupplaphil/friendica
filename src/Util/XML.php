@@ -90,7 +90,7 @@ class XML
 				$key = $element_parts[1];
 			}
 
-			if (substr($key, 0, 11) == '@attributes') {
+			if (str_starts_with($key, '@attributes')) {
 				if (!isset($element) || !is_array($value)) {
 					continue;
 				}

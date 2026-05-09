@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2010-2024, the Friendica project
  * SPDX-FileCopyrightText: 2010-2024 the Friendica project
@@ -114,7 +115,7 @@ function frio_item_photo_links(&$body_info)
 function frio_item_photo_menu(&$arr)
 {
 	foreach ($arr['menu'] as $k => $v) {
-		if (strpos($v, 'message/new/') === 0) {
+		if (str_starts_with($v, 'message/new/')) {
 			$v               = 'javascript:addToModal(\'' . $v . '\'); return false;';
 			$arr['menu'][$k] = $v;
 		}
@@ -161,7 +162,7 @@ function frio_contact_photo_menu(&$args)
 	// Add to pm link a new key with the value 'modal'.
 	// Later we can make conditions in the corresponding templates (e.g.
 	// contact/entry.tpl)
-	if (strpos($pmlink, 'message/new/' . $cid) !== false) {
+	if (str_contains($pmlink, 'message/new/' . $cid)) {
 		$args['menu']['pm'][3] = 'modal';
 	}
 }
@@ -249,7 +250,7 @@ function frio_display_item(&$arr)
 			'menu'   => 'follow_thread',
 			'title'  => DI::l10n()->t('Follow Thread'),
 			'action' => 'doFollowThread(' . $arr['item']['id'] . ');',
-			'href'   => '#'
+			'href'   => '#',
 		];
 	}
 	$arr['output']['follow_thread'] = $followThread;
@@ -266,7 +267,7 @@ function frio_display_item(&$arr)
 			'menu'   => 'complete_thread',
 			'title'  => DI::l10n()->t('Complete Thread'),
 			'action' => 'doCompleteThread(' . $arr['item']['uri-id'] . ');',
-			'href'   => '#'
+			'href'   => '#',
 		];
 	}
 	$arr['output']['complete_thread'] = $completeThread;

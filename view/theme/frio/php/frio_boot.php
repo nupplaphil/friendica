@@ -49,7 +49,7 @@ function is_modal()
 	$modalpages = get_modalpage_list();
 
 	foreach ($modalpages as $r => $value) {
-		if (strpos($_REQUEST['pagename'], (string) $value) !== false) {
+		if (str_contains($_REQUEST['pagename'], (string) $value)) {
 			$is_modal = true;
 		}
 	}
@@ -111,7 +111,7 @@ function is_standard_page($pagetitle)
 	$standardpages    = get_standard_page_list();
 
 	foreach ($standardpages as $r => $value) {
-		if (strpos($pagetitle, (string) $value) !== false) {
+		if (str_contains($pagetitle, (string) $value)) {
 			$is_standard_page = true;
 		}
 	}

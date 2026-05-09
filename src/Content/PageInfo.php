@@ -291,7 +291,7 @@ class PageInfo
 
 			// Stripping link labels that include a shortened version of the URL
 			$trimMatch = trim($match[1], '.…');
-			if (!empty($trimMatch) && strpos($url, $trimMatch) !== false) {
+			if (!empty($trimMatch) && str_contains($url, $trimMatch)) {
 				return '';
 			}
 
