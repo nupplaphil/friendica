@@ -6,7 +6,10 @@
   *}}
 
 <nav id="follow-sidebar" class="widget">
-	<h3>{{$connect}}</h3>
+	<h3>
+		<i class="fa fa-user-plus" aria-hidden="true"></i>
+		{{$connect}}
+	</h3>
 
 	<form action="contact/follow" method="post">
 		{{* The input field - For visual consistence we are using a search input field*}}
