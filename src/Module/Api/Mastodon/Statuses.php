@@ -333,14 +333,26 @@ class Statuses extends BaseApi
 			$item = $this->storeMediaIds($request['media_ids'], $item);
 		}
 
+		$scheduled_at = '';
 		if (!empty($request['scheduled_at'])) {
+			$scheduled_at = DateTimeFormat::utc($request['scheduled_at']);
+		} else {
+			$scheduled_at = DI::contentItem()->getAutomaticScheduledAt($uid);
+		}
+
+		if ($scheduled_at > DateTimeFormat::utcNow()) {
 			$item['guid'] = $this->item->guid($item, true);
 			$item['uri']  = Item::newURI($item['guid']);
 
-			$id = Post\Delayed::add($item['uri'], $item, Worker::PRIORITY_HIGH, Post\Delayed::PREPARED, DateTimeFormat::utc($request['scheduled_at']));
+			$id = Post\Delayed::add($item['uri'], $item, Worker::PRIORITY_HIGH, Post\Delayed::PREPARED, $scheduled_at);
 			if (empty($id)) {
 				$this->logAndJsonError(500, $this->errorFactory->InternalError());
 			}
+
+			if (empty($request['scheduled_at'])) {
+				DI::contentItem()->setAutomaticScheduledAt($uid, $scheduled_at);
+			}
+
 			$this->jsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($id, $uid)->toArray());
 		}
 
@@ -433,7 +445,7 @@ class Statuses extends BaseApi
 					'mimetype' => $attach['filetype'],
 					'url'      => DI::baseUrl() . '/attach/' . substr($id, 7),
 					'size'     => $attach['filetype'],
-					'name'     => $attach['filename']
+					'name'     => $attach['filename'],
 				];
 				$item['attachments'][] = $attachment;
 				Attach::setPermissionForId(substr($id, 7), $item['uid'], $item['allow_cid'], $item['allow_gid'], $item['deny_cid'], $item['deny_gid']);
@@ -460,7 +472,7 @@ class Statuses extends BaseApi
 				'name'        => $media[0]['filename'] ?: $media[0]['resource-id'],
 				'description' => $media[0]['desc'] ?? '',
 				'width'       => $media[0]['width'],
-				'height'      => $media[0]['height']
+				'height'      => $media[0]['height'],
 			];
 
 			if (count($media) > 1) {
