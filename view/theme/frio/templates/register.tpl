@@ -76,6 +76,11 @@
 		<div id="register-nickname-end"></div>
 
 		{{if $additional}}
+			<div id="register-type-wrapper" class="form-group">
+				{{include file="field_select.tpl" field=$acct_type}}
+			</div>
+			<div id="register-type-end"></div>	
+			{{assign var="label" value="true"}}
 			{{include file="field_password.tpl" field=$parent_password}}
 		{{/if}}
 

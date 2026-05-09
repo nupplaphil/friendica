@@ -94,6 +94,25 @@ class User
 	 * @}
 	 */
 
+	/**
+	 * Account type value strings
+	 *
+	 * Used for drop-down select option values
+	 * so as to not expose the database values
+	 * @{
+	 */
+	public const PERSONAL = "personal";
+	public const SOAPBOX  = "soapbox";
+	public const LOVEALL  = "loveall";
+	public const ORGPAGE  = "page";
+	public const NEWSPAGE = "newspage";
+	public const PUBGROUP = "group";
+	public const RESGROUP = "group-restricted";
+	public const PRIGROUP = "group-private";
+	/**
+	 * @}
+	 */
+
 	private static $owner;
 
 	/**
