@@ -156,7 +156,7 @@ class Strings
 	{
 		if ($network != '') {
 			if ($url != '') {
-				$gsid         = $gsid ?? ContactSelector::getServerIdForProfile($url);
+				$gsid ??= ContactSelector::getServerIdForProfile($url);
 				$network_name = '<a href="' . $url . '">' . ContactSelector::networkToName($network, '', $gsid) . '</a>';
 			} else {
 				$network_name = ContactSelector::networkToName($network);
@@ -540,7 +540,7 @@ class Strings
 		}
 
 		$last      = strtolower($shorthand[strlen($shorthand) - 1]);
-		$shorthand = substr($shorthand, 0, -1);
+		$shorthand = (int) substr($shorthand, 0, -1);
 
 		switch ($last) {
 			case 'g':

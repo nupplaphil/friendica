@@ -19,7 +19,7 @@ use Friendica\Object\Image;
  */
 class Images
 {
-	// @todo add IMAGETYPE_AVIF once our minimal supported PHP version is 8.1.0
+	// @deprecated PHP80100 add IMAGETYPE_AVIF once our minimal supported PHP version is PHP 8.1
 	public const IMAGETYPES = [IMAGETYPE_WEBP, IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_BMP];
 
 	/**
@@ -31,7 +31,7 @@ class Images
 	public static function getImagickFormatByImageType(int $imagetype): string
 	{
 		$formats = [
-			// @todo add "IMAGETYPE_AVIF => 'AVIF'" once our minimal supported PHP version is 8.1.0
+			// @deprecated PHP80100 add "IMAGETYPE_AVIF => 'AVIF'" once our minimal supported PHP version is PHP 8.1
 			IMAGETYPE_WEBP => 'WEBP',
 			IMAGETYPE_PNG  => 'PNG',
 			IMAGETYPE_JPEG => 'JPEG',
@@ -146,7 +146,7 @@ class Images
 	{
 		$types = [];
 
-		// @todo enable, once our lowest supported PHP version is 8.1.0
+		// @deprecated PHP80100 enable, once our lowest supported PHP version is PHP 8.1
 		//if (imagetypes() & IMG_AVIF) {
 		//	$types[] = image_type_to_mime_type(IMAGETYPE_AVIF);
 		//}

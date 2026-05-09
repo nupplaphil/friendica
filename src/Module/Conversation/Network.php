@@ -118,7 +118,7 @@ class Network extends Timeline
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct(
 			$channel,
@@ -170,7 +170,7 @@ class Network extends Timeline
 		);
 
 		$o           = '';
-		$widgetorder = json_decode($this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
+		$widgetorder = json_decode((string) $this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
 
 		if (empty($widgetorder)) {
 			$widgetorder = [
@@ -344,7 +344,7 @@ class Network extends Timeline
 			$tabs = array_merge($tabs, $this->getTabArray($this->community->getTimelines(true), 'network', 'channel'));
 		}
 
-		$menu_tab_order = json_decode($this->pConfig->get($this->session->getLocalUserId(), 'system', 'menu_timeline_order'));
+		$menu_tab_order = json_decode((string) $this->pConfig->get($this->session->getLocalUserId(), 'system', 'menu_timeline_order'));
 		if (!empty($menu_tab_order)) {
 			$tmp = [];
 			foreach ($menu_tab_order as $order) {

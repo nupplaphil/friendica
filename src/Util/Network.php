@@ -175,7 +175,7 @@ class Network
 	 *
 	 * @return boolean
 	 *
-	 * @deprecated since 2023.03 Use isUriBlocked instead
+	 * @deprecated 2023.03 Use isUriBlocked instead
 	 */
 	public static function isUrlBlocked(string $url): bool
 	{

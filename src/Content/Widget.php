@@ -614,7 +614,7 @@ class Widget
 			}
 		}
 
-		$widget_timelineorder = json_decode(DI::pConfig()->get($uid, 'system', 'widget_timeline_order'));
+		$widget_timelineorder = json_decode((string) DI::pConfig()->get($uid, 'system', 'widget_timeline_order'));
 		if (!empty($widget_timelineorder)) {
 			$tmp = [];
 			foreach ($widget_timelineorder as $order) {

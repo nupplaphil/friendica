@@ -83,8 +83,7 @@ $apiRoutes = [
 		'/circle_delete[.{extension:json|xml|rss|atom}]'           => [Module\Api\Friendica\Circle\Delete::class,          [        R::POST]],
 		'/circle_update[.{extension:json|xml|rss|atom}]'           => [Module\Api\Friendica\Circle\Update::class,          [        R::POST]],
 
-		// Backward compatibility
-		// @deprecated
+		// @deprecated Keep for Backward compatibility
 		'/group_show[.{extension:json|xml|rss|atom}]'   => [Module\Api\Friendica\Circle\Show::class,            [R::GET         ]],
 		'/group_create[.{extension:json|xml|rss|atom}]' => [Module\Api\Friendica\Circle\Create::class,          [        R::POST]],
 		'/group_delete[.{extension:json|xml|rss|atom}]' => [Module\Api\Friendica\Circle\Delete::class,          [        R::POST]],
@@ -657,9 +656,9 @@ return [
 	'/stats/caching' => [Module\StatsCaching::class, [R::GET]],
 
 	'/network' => [
-		'[/{content}]'                                                  => [Module\Conversation\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d-\d\d}]' => [Module\Conversation\Network::class, [R::GET]],
-		'/circle/{circle_id:\d+}'                                       => [Module\Conversation\Network::class, [R::GET]],
+		'[/{content}]'                                                     => [Module\Conversation\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Conversation\Network::class, [R::GET]],
+		'/circle/{circle_id:\d+}'                                          => [Module\Conversation\Network::class, [R::GET]],
 	],
 
 	'/randprof'        => [Module\RandomProfile::class,         [R::GET]],
@@ -672,10 +671,10 @@ return [
 	'/tos'             => [Module\Tos::class,                   [R::GET]],
 
 	'/ping_network' => [
-		'[/]'                                                           => [Module\Ping\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d-\d\d}]' => [Module\Ping\Network::class, [R::GET]],
-		'/group/{contact_id:\d+}'                                       => [Module\Ping\Network::class, [R::GET]],
-		'/circle/{circle_id:\d+}'                                       => [Module\Ping\Network::class, [R::GET]],
+		'[/]'                                                              => [Module\Ping\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Ping\Network::class, [R::GET]],
+		'/group/{contact_id:\d+}'                                          => [Module\Ping\Network::class, [R::GET]],
+		'/circle/{circle_id:\d+}'                                          => [Module\Ping\Network::class, [R::GET]],
 	],
 
 	'/update_channel[/{content}]'   => [Module\Update\Channel::class,        [R::GET]],
@@ -686,10 +685,10 @@ return [
 	'/update_display' => [Module\Update\Display::class, [R::GET]],
 
 	'/update_network' => [
-		'[/]'                                                           => [Module\Update\Network::class, [R::GET]],
-		'/archive/{from:\d\d\d\d-\d\d-\d\d}[/{to:\d\d\d\d\-\d\d-\d\d}]' => [Module\Update\Network::class, [R::GET]],
-		'/group/{contact_id:\d+}'                                       => [Module\Update\Network::class, [R::GET]],
-		'/circle/{circle_id:\d+}'                                       => [Module\Update\Network::class, [R::GET]],
+		'[/]'                                                              => [Module\Update\Network::class, [R::GET]],
+		'/archive/{from:\d\d\d\d\-\d\d\-\d\d}[/{to:\d\d\d\d\-\d\d\-\d\d}]' => [Module\Update\Network::class, [R::GET]],
+		'/group/{contact_id:\d+}'                                          => [Module\Update\Network::class, [R::GET]],
+		'/circle/{circle_id:\d+}'                                          => [Module\Update\Network::class, [R::GET]],
 	],
 
 	'/update_notes'   => [Module\Update\Notes::class,          [R::GET]],
