@@ -12,42 +12,11 @@ use Friendica\App\Arguments;
 use Friendica\App\Mode;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Database\Database;
-use Friendica\Test\MockedTestCase;
-use Friendica\Test\Util\VFSTrait;
-use Friendica\Util\BasePath;
-use Mockery;
-use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\TestCase;
 
-class ModeTest extends MockedTestCase
+class ModeTest extends TestCase
 {
-	use VFSTrait;
-
-	/**
-	 * @var BasePath|MockInterface
-	 */
-	private $basePathMock;
-
-	/**
-	 * @var Database|MockInterface
-	 */
-	private $databaseMock;
-
-	/**
-	 * @var IManageConfigValues|MockInterface
-	 */
-	private $configMock;
-
-	protected function _setUp(): void
-	{
-		parent::setUp();
-
-		$this->setUpVfsDir();
-
-		$this->databaseMock = Mockery::mock(Database::class);
-		$this->configMock   = Mockery::mock(IManageConfigValues::class);
-	}
-
 	public function testMethodsReturnCorrectValuesByDefault()
 	{
 		$mode = new Mode();
