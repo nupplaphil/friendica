@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.04-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 21:17+0200\n"
+"POT-Creation-Date: 2026-05-09 22:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 #: mod/photos.php:418 src/Model/Event.php:510 src/Module/Attach.php:40
 #: src/Module/BaseApi.php:91 src/Module/BaseNotifications.php:83
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
-#: src/Module/Calendar/Event/Form.php:70 src/Module/Calendar/Export.php:68
+#: src/Module/Calendar/Event/Form.php:73 src/Module/Calendar/Export.php:68
 #: src/Module/Calendar/Show.php:71 src/Module/Circle.php:27
 #: src/Module/Circle.php:70 src/Module/Contact/Advanced.php:46
 #: src/Module/Contact/Follow.php:77 src/Module/Contact/Follow.php:145
@@ -83,7 +83,7 @@ msgid "Permission denied."
 msgstr ""
 
 #: mod/message.php:28 mod/message.php:124 src/Content/Nav.php:315
-#: view/theme/frio/theme.php:229
+#: view/theme/frio/theme.php:230
 msgid "Messages"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgid "If you want to add this photo to an album, begin typing its name, and exi
 msgstr ""
 
 #: mod/photos.php:487 mod/photos.php:806 src/Content/Conversation.php:407
-#: src/Module/Calendar/Event/Form.php:245 src/Module/Post/Edit.php:183
+#: src/Module/Calendar/Event/Form.php:266 src/Module/Post/Edit.php:183
 msgid "Permissions"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "New album name: "
 msgstr ""
 
-#: mod/photos.php:577 mod/photos.php:809
+#: mod/photos.php:577 mod/photos.php:809 src/Module/Calendar/Event/Form.php:124
 #: src/Module/Settings/Server/Index.php:98
 msgid "Save changes"
 msgstr ""
@@ -426,11 +426,14 @@ msgstr ""
 msgid "Rotate CCW (left)"
 msgstr ""
 
-#: mod/photos.php:827 src/Object/Post.php:231 src/Object/Post.php:233
+#: mod/photos.php:827 src/Model/Event.php:652
+#: src/Module/Calendar/Event/Show.php:67 src/Object/Post.php:231
+#: src/Object/Post.php:233
 msgid "Edit"
 msgstr ""
 
-#: mod/photos.php:828 src/Content/Conversation.php:1537
+#: mod/photos.php:828 src/Content/Conversation.php:1537 src/Model/Event.php:654
+#: src/Module/Calendar/Event/Show.php:69
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
 #: src/Module/Moderation/Users/Index.php:100
@@ -569,15 +572,15 @@ msgstr ""
 msgid "No system theme config value set."
 msgstr ""
 
-#: src/BaseModule.php:408
+#: src/BaseModule.php:400
 msgid "The form security token was not correct. This probably happened because the form has been opened for too long (>3 hours) before submitting it."
 msgstr ""
 
-#: src/BaseModule.php:435
+#: src/BaseModule.php:427
 msgid "All contacts"
 msgstr ""
 
-#: src/BaseModule.php:440 src/Content/Conversation/Factory/Channel.php:33
+#: src/BaseModule.php:432 src/Content/Conversation/Factory/Channel.php:33
 #: src/Content/Widget.php:263 src/Core/ACL.php:185 src/Module/Contact.php:399
 #: src/Module/Privacy/PermissionTooltip.php:181
 #: src/Module/Privacy/PermissionTooltip.php:203
@@ -585,17 +588,17 @@ msgstr ""
 msgid "Followers"
 msgstr ""
 
-#: src/BaseModule.php:445 src/Content/Widget.php:264 src/Module/Contact.php:402
+#: src/BaseModule.php:437 src/Content/Widget.php:264 src/Module/Contact.php:402
 #: src/Module/Settings/Channels.php:153
 msgid "Following"
 msgstr ""
 
-#: src/BaseModule.php:450 src/Content/Widget.php:265 src/Model/User.php:1428
+#: src/BaseModule.php:442 src/Content/Widget.php:265 src/Model/User.php:1428
 #: src/Module/Contact.php:405
 msgid "Friends"
 msgstr ""
 
-#: src/BaseModule.php:458
+#: src/BaseModule.php:450
 msgid "Common"
 msgstr ""
 
@@ -1187,7 +1190,7 @@ msgstr ""
 msgid "Public post"
 msgstr ""
 
-#: src/Content/Conversation.php:419 src/Module/Calendar/Event/Form.php:240
+#: src/Content/Conversation.php:419 src/Module/Calendar/Event/Form.php:261
 #: src/Module/Item/Compose.php:203 src/Module/Post/Edit.php:165
 #: src/Object/Post.php:1179
 msgid "Preview"
@@ -1697,11 +1700,11 @@ msgstr ""
 msgid "%1$s tagged %2$s's %3$s with %4$s"
 msgstr ""
 
-#: src/Content/Item.php:435 view/theme/frio/theme.php:250
+#: src/Content/Item.php:435 view/theme/frio/theme.php:251
 msgid "Follow Thread"
 msgstr ""
 
-#: src/Content/Item.php:436 view/theme/frio/theme.php:267
+#: src/Content/Item.php:436 view/theme/frio/theme.php:268
 msgid "Complete Thread"
 msgstr ""
 
@@ -1831,11 +1834,11 @@ msgstr ""
 #: src/Content/Nav.php:227 src/Module/BaseProfile.php:34
 #: src/Module/BaseSettings.php:86 src/Module/Contact.php:489
 #: src/Module/Contact/Profile.php:471 src/Module/Profile/Profile.php:277
-#: src/Module/Welcome.php:44 view/theme/frio/theme.php:218
+#: src/Module/Welcome.php:44 view/theme/frio/theme.php:219
 msgid "Profile"
 msgstr ""
 
-#: src/Content/Nav.php:227 view/theme/frio/theme.php:218
+#: src/Content/Nav.php:227 view/theme/frio/theme.php:219
 msgid "Your profile page"
 msgstr ""
 
@@ -1851,11 +1854,11 @@ msgstr ""
 #: src/Content/Nav.php:229 src/Module/BaseProfile.php:50
 #: src/Module/Media/Attachment/Browser.php:67
 #: src/Module/Media/Photo/Browser.php:62 src/Module/Media/Photo/Browser.php:79
-#: view/theme/frio/theme.php:222
+#: view/theme/frio/theme.php:223
 msgid "Photos"
 msgstr ""
 
-#: src/Content/Nav.php:229 view/theme/frio/theme.php:222
+#: src/Content/Nav.php:229 view/theme/frio/theme.php:223
 msgid "Your photos"
 msgstr ""
 
@@ -1863,11 +1866,11 @@ msgstr ""
 #: src/Module/BaseProfile.php:70 src/Module/BaseProfile.php:73
 #: src/Module/BaseProfile.php:81 src/Module/BaseProfile.php:84
 #: src/Module/Calendar/Show.php:113 src/Module/Settings/Display.php:434
-#: view/theme/frio/theme.php:224 view/theme/frio/theme.php:228
+#: view/theme/frio/theme.php:225 view/theme/frio/theme.php:229
 msgid "Calendar"
 msgstr ""
 
-#: src/Content/Nav.php:230 view/theme/frio/theme.php:224
+#: src/Content/Nav.php:230 view/theme/frio/theme.php:225
 msgid "Your calendar"
 msgstr ""
 
@@ -1935,7 +1938,7 @@ msgstr ""
 #: src/Content/Text/HTML.php:880 src/Module/BaseProfile.php:112
 #: src/Module/BaseProfile.php:115 src/Module/Contact.php:181
 #: src/Module/Contact.php:411 src/Module/Contact.php:521
-#: view/theme/frio/theme.php:231
+#: view/theme/frio/theme.php:232
 msgid "Contacts"
 msgstr ""
 
@@ -1974,15 +1977,15 @@ msgstr ""
 msgid "Terms of Service of this Friendica instance"
 msgstr ""
 
-#: src/Content/Nav.php:303 view/theme/frio/theme.php:227
+#: src/Content/Nav.php:303 view/theme/frio/theme.php:228
 msgid "Network"
 msgstr ""
 
-#: src/Content/Nav.php:303 view/theme/frio/theme.php:227
+#: src/Content/Nav.php:303 view/theme/frio/theme.php:228
 msgid "Conversations from your friends"
 msgstr ""
 
-#: src/Content/Nav.php:305 view/theme/frio/theme.php:217
+#: src/Content/Nav.php:305 view/theme/frio/theme.php:218
 msgid "Your posts and conversations"
 msgstr ""
 
@@ -2012,7 +2015,7 @@ msgstr ""
 msgid "Mark all system notifications as seen"
 msgstr ""
 
-#: src/Content/Nav.php:315 view/theme/frio/theme.php:229
+#: src/Content/Nav.php:315 view/theme/frio/theme.php:230
 msgid "Private mail"
 msgstr ""
 
@@ -2035,15 +2038,15 @@ msgstr ""
 #: src/Content/Nav.php:328 src/Module/Admin/Addons/Details.php:140
 #: src/Module/Admin/Themes/Details.php:85 src/Module/BaseAdmin.php:88
 #: src/Module/BaseSettings.php:177 src/Module/Welcome.php:39
-#: view/theme/frio/theme.php:230
+#: view/theme/frio/theme.php:231
 msgid "Settings"
 msgstr ""
 
-#: src/Content/Nav.php:328 view/theme/frio/theme.php:230
+#: src/Content/Nav.php:328 view/theme/frio/theme.php:231
 msgid "Account settings"
 msgstr ""
 
-#: src/Content/Nav.php:330 view/theme/frio/theme.php:231
+#: src/Content/Nav.php:330 view/theme/frio/theme.php:232
 msgid "Manage/edit friends and contacts"
 msgstr ""
 
@@ -2425,108 +2428,108 @@ msgstr ""
 msgid "Connectors"
 msgstr ""
 
-#: src/Core/Installer.php:166
+#: src/Core/Installer.php:165
 msgid "The database configuration file \"config/local.config.php\" could not be written. Please use the enclosed text to create a configuration file in your web server root."
 msgstr ""
 
-#: src/Core/Installer.php:183
+#: src/Core/Installer.php:182
 msgid "You may need to import the file \"database.sql\" manually using phpmyadmin or mysql."
 msgstr ""
 
-#: src/Core/Installer.php:184 src/Module/Install.php:192
+#: src/Core/Installer.php:183 src/Module/Install.php:192
 #: src/Module/Install.php:337
 msgid "Please see the file \"doc/INSTALL.md\"."
 msgstr ""
 
-#: src/Core/Installer.php:245
+#: src/Core/Installer.php:244
 msgid "Could not find a command line version of PHP in the web server PATH."
 msgstr ""
 
-#: src/Core/Installer.php:246
+#: src/Core/Installer.php:245
 msgid "If you don't have a command line version of PHP installed on your server, you will not be able to run the background processing. See <a href='https://github.com/friendica/friendica/blob/stable/doc/Install.md#set-up-the-worker'>'Setup the worker'</a>"
 msgstr ""
 
-#: src/Core/Installer.php:251
+#: src/Core/Installer.php:250
 msgid "PHP executable path"
 msgstr ""
 
-#: src/Core/Installer.php:251
+#: src/Core/Installer.php:250
 msgid "Enter full path to php executable. You can leave this blank to continue the installation."
 msgstr ""
 
-#: src/Core/Installer.php:256
+#: src/Core/Installer.php:255
 msgid "Command line PHP"
 msgstr ""
 
-#: src/Core/Installer.php:265
+#: src/Core/Installer.php:264
 msgid "PHP executable is not the php cli binary (could be cgi-fgci version)"
 msgstr ""
 
-#: src/Core/Installer.php:266
+#: src/Core/Installer.php:265
 msgid "Found PHP version: "
 msgstr ""
 
-#: src/Core/Installer.php:268
+#: src/Core/Installer.php:267
 msgid "PHP cli binary"
 msgstr ""
 
-#: src/Core/Installer.php:281
+#: src/Core/Installer.php:280
 msgid "The command line version of PHP on your system does not have \"register_argc_argv\" enabled."
 msgstr ""
 
-#: src/Core/Installer.php:282
+#: src/Core/Installer.php:281
 msgid "This is required for message delivery to work."
 msgstr ""
 
-#: src/Core/Installer.php:287
+#: src/Core/Installer.php:286
 msgid "PHP register_argc_argv"
 msgstr ""
 
-#: src/Core/Installer.php:319
+#: src/Core/Installer.php:318
 msgid "Error: the \"openssl_pkey_new\" function on this system is not able to generate encryption keys"
 msgstr ""
 
-#: src/Core/Installer.php:320
+#: src/Core/Installer.php:319
 msgid "If running under Windows, please see \"http://www.php.net/manual/en/openssl.installation.php\"."
 msgstr ""
 
-#: src/Core/Installer.php:323
+#: src/Core/Installer.php:322
 msgid "Generate encryption keys"
 msgstr ""
 
-#: src/Core/Installer.php:374
+#: src/Core/Installer.php:373
 msgid "Error: Apache webserver mod-rewrite module is required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:378
+#: src/Core/Installer.php:377
 msgid "Apache mod_rewrite module"
 msgstr ""
 
-#: src/Core/Installer.php:384
+#: src/Core/Installer.php:383
 msgid "Error: PDO or MySQLi PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:388
+#: src/Core/Installer.php:387
 msgid "Error: The MySQL driver for PDO is not installed."
 msgstr ""
 
-#: src/Core/Installer.php:391
+#: src/Core/Installer.php:390
 msgid "PDO or MySQLi PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:397
+#: src/Core/Installer.php:396
 msgid "Error: The IntlChar module is not installed."
 msgstr ""
 
-#: src/Core/Installer.php:400
+#: src/Core/Installer.php:399
 msgid "IntlChar PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:408
+#: src/Core/Installer.php:407
 msgid "Error, XML PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:412
+#: src/Core/Installer.php:411
 msgid "XML PHP module"
 msgstr ""
 
@@ -2538,175 +2541,175 @@ msgstr ""
 msgid "Error: libCURL PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:422
+#: src/Core/Installer.php:423
 msgid "GD graphics PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:423
+#: src/Core/Installer.php:424
 msgid "Error: GD graphics PHP module with JPEG support required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:429
+#: src/Core/Installer.php:431
 msgid "OpenSSL PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:430
+#: src/Core/Installer.php:432
 msgid "Error: openssl PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:436
+#: src/Core/Installer.php:439
 msgid "mb_string PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:437
+#: src/Core/Installer.php:440
 msgid "Error: mb_string PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:443
+#: src/Core/Installer.php:447
 msgid "iconv PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:444
+#: src/Core/Installer.php:448
 msgid "Error: iconv PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:450
+#: src/Core/Installer.php:455
 msgid "POSIX PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:451
+#: src/Core/Installer.php:456
 msgid "Error: POSIX PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:457
+#: src/Core/Installer.php:463
 msgid "Program execution functions"
 msgstr ""
 
-#: src/Core/Installer.php:458
+#: src/Core/Installer.php:464
 msgid "Error: Program execution functions (proc_open) required but not enabled."
 msgstr ""
 
-#: src/Core/Installer.php:464
+#: src/Core/Installer.php:471
 msgid "JSON PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:465
+#: src/Core/Installer.php:472
 msgid "Error: JSON PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:471
+#: src/Core/Installer.php:479
 msgid "File Information PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:472
+#: src/Core/Installer.php:480
 msgid "Error: File Information PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:478
+#: src/Core/Installer.php:487
 msgid "GNU Multiple Precision PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:479
+#: src/Core/Installer.php:488
 msgid "Error: GNU Multiple Precision PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:485
+#: src/Core/Installer.php:495
 msgid "IDN Functions PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:486
+#: src/Core/Installer.php:496
 msgid "Error: IDN Functions PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:509
+#: src/Core/Installer.php:519
 msgid "The web installer needs to be able to create a file called \"local.config.php\" in the \"config\" folder of your web server and it is unable to do so."
 msgstr ""
 
-#: src/Core/Installer.php:510
+#: src/Core/Installer.php:520
 msgid "This is most often a permission setting, as the web server may not be able to write files in your folder - even if you can."
 msgstr ""
 
-#: src/Core/Installer.php:511
+#: src/Core/Installer.php:521
 msgid "At the end of this procedure, we will give you a text to save in a file named local.config.php in your Friendica \"config\" folder."
 msgstr ""
 
-#: src/Core/Installer.php:512
+#: src/Core/Installer.php:522
 msgid "You can alternatively skip this procedure and perform a manual installation. Please see the file \"doc/INSTALL.md\" for instructions."
 msgstr ""
 
-#: src/Core/Installer.php:515
+#: src/Core/Installer.php:525
 msgid "config/local.config.php is writable"
 msgstr ""
 
-#: src/Core/Installer.php:535
+#: src/Core/Installer.php:545
 msgid "Friendica uses the Smarty3 template engine to render its web views. Smarty3 compiles templates to PHP to speed up rendering."
 msgstr ""
 
-#: src/Core/Installer.php:536
+#: src/Core/Installer.php:546
 msgid "In order to store these compiled templates, the web server needs to have write access to the directory view/smarty3/ under the Friendica top level folder."
 msgstr ""
 
-#: src/Core/Installer.php:537
+#: src/Core/Installer.php:547
 msgid "Please ensure that the user that your web server runs as (e.g. www-data) has write access to this folder."
 msgstr ""
 
-#: src/Core/Installer.php:538
+#: src/Core/Installer.php:548
 msgid "Note: as a security measure, you should give the web server write access to view/smarty3/ only--not the template files (.tpl) that it contains."
 msgstr ""
 
-#: src/Core/Installer.php:541
+#: src/Core/Installer.php:551
 msgid "view/smarty3 is writable"
 msgstr ""
 
-#: src/Core/Installer.php:569
+#: src/Core/Installer.php:579
 msgid "Url rewrite in .htaccess seems not working. Make sure you copied .htaccess-dist to .htaccess."
 msgstr ""
 
-#: src/Core/Installer.php:570
+#: src/Core/Installer.php:580
 msgid "In some circumstances (like running inside containers), you can skip this error."
 msgstr ""
 
-#: src/Core/Installer.php:572
+#: src/Core/Installer.php:582
 msgid "Error message from Curl when fetching"
 msgstr ""
 
-#: src/Core/Installer.php:578
+#: src/Core/Installer.php:588
 msgid "Url rewrite is working"
 msgstr ""
 
-#: src/Core/Installer.php:607
+#: src/Core/Installer.php:617
 msgid "The detection of TLS to secure the communication between the browser and the new Friendica server failed."
 msgstr ""
 
-#: src/Core/Installer.php:608
+#: src/Core/Installer.php:618
 msgid "It is highly encouraged to use Friendica only over a secure connection as sensitive information like passwords will be transmitted."
 msgstr ""
 
-#: src/Core/Installer.php:609
+#: src/Core/Installer.php:619
 msgid "Please ensure that the connection to the server is secure."
 msgstr ""
 
-#: src/Core/Installer.php:610
+#: src/Core/Installer.php:620
 msgid "No TLS detected"
 msgstr ""
 
-#: src/Core/Installer.php:612
+#: src/Core/Installer.php:622
 msgid "TLS detected"
 msgstr ""
 
-#: src/Core/Installer.php:629
+#: src/Core/Installer.php:639
 msgid "ImageMagick PHP extension is not installed"
 msgstr ""
 
-#: src/Core/Installer.php:631
+#: src/Core/Installer.php:641
 msgid "ImageMagick PHP extension is installed"
 msgstr ""
 
-#: src/Core/Installer.php:652
+#: src/Core/Installer.php:662
 msgid "Database already in use."
 msgstr ""
 
-#: src/Core/Installer.php:657
+#: src/Core/Installer.php:667
 msgid "Could not connect to database."
 msgstr ""
 
@@ -2998,7 +3001,7 @@ msgstr ""
 
 #: src/Model/Event.php:63 src/Model/Event.php:83 src/Model/Event.php:460
 #: src/Model/Event.php:932
-msgid "Finishes:"
+msgid "Ends:"
 msgstr ""
 
 #: src/Model/Event.php:409
@@ -3154,22 +3157,22 @@ msgid "December"
 msgstr ""
 
 #: src/Model/Event.php:452 src/Module/Calendar/Show.php:117
-#: src/Util/Temporal.php:333
+#: src/Util/Temporal.php:344
 msgid "today"
 msgstr ""
 
 #: src/Model/Event.php:453 src/Module/Calendar/Show.php:118
-#: src/Module/Settings/Display.php:411 src/Util/Temporal.php:343
+#: src/Module/Settings/Display.php:411 src/Util/Temporal.php:354
 msgid "month"
 msgstr ""
 
 #: src/Model/Event.php:454 src/Module/Calendar/Show.php:119
-#: src/Module/Settings/Display.php:412 src/Util/Temporal.php:344
+#: src/Module/Settings/Display.php:412 src/Util/Temporal.php:355
 msgid "week"
 msgstr ""
 
 #: src/Model/Event.php:455 src/Module/Calendar/Show.php:120
-#: src/Module/Settings/Display.php:413 src/Util/Temporal.php:345
+#: src/Module/Settings/Display.php:413 src/Util/Temporal.php:356
 msgid "day"
 msgstr ""
 
@@ -3190,16 +3193,8 @@ msgstr ""
 msgid "l, F j"
 msgstr ""
 
-#: src/Model/Event.php:652 src/Module/Calendar/Event/Form.php:121
-msgid "Edit event"
-msgstr ""
-
-#: src/Model/Event.php:653
-msgid "Duplicate event"
-msgstr ""
-
-#: src/Model/Event.php:654
-msgid "Delete event"
+#: src/Model/Event.php:653 src/Module/Calendar/Event/Show.php:68
+msgid "Duplicate"
 msgstr ""
 
 #: src/Model/Event.php:948 src/Model/Event.php:950
@@ -3298,7 +3293,8 @@ msgid "Poll end: %s"
 msgstr ""
 
 #: src/Model/Item.php:3692 src/Model/Item.php:3693
-msgid "View on separate page"
+#: src/Module/Calendar/Event/Show.php:70
+msgid "View related post"
 msgstr ""
 
 #: src/Model/Mail.php:120
@@ -4020,7 +4016,7 @@ msgstr ""
 msgid "Click to view details"
 msgstr ""
 
-#: src/Module/Admin/Logs/View.php:83 src/Module/Calendar/Event/Form.php:198
+#: src/Module/Admin/Logs/View.php:83
 msgid "Event details"
 msgstr ""
 
@@ -4218,7 +4214,7 @@ msgstr ""
 msgid "Policies"
 msgstr ""
 
-#: src/Module/Admin/Site.php:465 src/Module/Calendar/Event/Form.php:244
+#: src/Module/Admin/Site.php:465 src/Module/Calendar/Event/Form.php:265
 #: src/Module/Contact.php:532 src/Module/Profile/Profile.php:285
 msgid "Advanced"
 msgstr ""
@@ -5595,7 +5591,7 @@ msgid "Conversations started"
 msgstr ""
 
 #: src/Module/BaseProfile.php:58 src/Module/BaseProfile.php:61
-#: src/Module/Contact.php:513 view/theme/frio/theme.php:223
+#: src/Module/Contact.php:513 view/theme/frio/theme.php:224
 msgid "Media"
 msgstr ""
 
@@ -5698,7 +5694,7 @@ msgid "The post was created"
 msgstr ""
 
 #: src/Module/Calendar/Event/API.php:87 src/Module/Calendar/Event/API.php:122
-#: src/Module/Calendar/Event/Form.php:66
+#: src/Module/Calendar/Event/Form.php:67
 msgid "Invalid Request"
 msgstr ""
 
@@ -5718,25 +5714,41 @@ msgstr ""
 msgid "Event title and start time are required."
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:110
+#: src/Module/Calendar/Event/Form.php:113
 msgid "Create event"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:190
-msgid "Can't use BBCode here"
+#: src/Module/Calendar/Event/Form.php:193
+msgid "Formatting is not supported for this field"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:199
+#: src/Module/Calendar/Event/Form.php:196
+msgid "Edit event"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:198
+msgid "New event"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:201
+msgid "Ends"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:208
+msgid "Back to the calendar"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:211
 msgid "Starting date and Title are required."
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:200
-#: src/Module/Calendar/Event/Form.php:205
-msgid "Event starts"
+#: src/Module/Calendar/Event/Form.php:212
+#: src/Module/Calendar/Event/Form.php:217
+msgid "Starts"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:200
-#: src/Module/Calendar/Event/Form.php:229 src/Module/Debug/Probe.php:45
+#: src/Module/Calendar/Event/Form.php:212
+#: src/Module/Calendar/Event/Form.php:248 src/Module/Debug/Probe.php:45
 #: src/Module/Install.php:186 src/Module/Install.php:212
 #: src/Module/Install.php:217 src/Module/Install.php:231
 #: src/Module/Install.php:240 src/Module/Install.php:245
@@ -5759,38 +5771,52 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:214
-#: src/Module/Calendar/Event/Form.php:239
-msgid "End date/time is unknown or irrelevant"
+#: src/Module/Calendar/Event/Form.php:227
+msgid "When does it happen?"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:216
-#: src/Module/Calendar/Event/Form.php:221
-msgid "Event ends"
+#: src/Module/Calendar/Event/Form.php:228
+msgid "Further details"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:229
-#: src/Module/Calendar/Event/Form.php:235
+#: src/Module/Calendar/Event/Form.php:230
+#: src/Module/Calendar/Event/Form.php:260
+msgid "Don't specify ending"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:248
 msgid "Title"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:231 src/Module/Settings/Channels.php:185
+#: src/Module/Calendar/Event/Form.php:250
+#: src/Module/Settings/Profile/Index.php:282
+msgid "Location"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:251
+msgid "Where does it happen?"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:253 src/Module/Settings/Channels.php:185
 #: src/Module/Settings/Channels.php:211 src/Module/Settings/Display.php:471
 #: src/Module/Settings/TwoFactor/AppSpecific.php:123
 msgid "Description"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:233
-#: src/Module/Settings/Profile/Index.php:282
-msgid "Location"
+#: src/Module/Calendar/Event/Form.php:254
+msgid "What are the details?"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:236
-#: src/Module/Calendar/Event/Form.php:237
+#: src/Module/Calendar/Event/Form.php:256
+msgid "Event title"
+msgstr ""
+
+#: src/Module/Calendar/Event/Form.php:257
+#: src/Module/Calendar/Event/Form.php:258
 msgid "Share this event"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:243 src/Module/Profile/Profile.php:284
+#: src/Module/Calendar/Event/Form.php:264 src/Module/Profile/Profile.php:284
 msgid "Basic"
 msgstr ""
 
@@ -6466,7 +6492,7 @@ msgid "Actions"
 msgstr ""
 
 #: src/Module/Contact/Profile.php:469
-#: src/Module/Settings/TwoFactor/Index.php:126 view/theme/frio/theme.php:217
+#: src/Module/Settings/TwoFactor/Index.php:126 view/theme/frio/theme.php:218
 msgid "Status"
 msgstr ""
 
@@ -11988,69 +12014,69 @@ msgstr ""
 msgid "YYYY-MM-DD or MM-DD"
 msgstr ""
 
-#: src/Util/Temporal.php:270
+#: src/Util/Temporal.php:206
 #, php-format
 msgid "Time zone: <strong>%s</strong> <a href=\"%s\">Change in Settings</a>"
 msgstr ""
 
-#: src/Util/Temporal.php:310 src/Util/Temporal.php:319
+#: src/Util/Temporal.php:321 src/Util/Temporal.php:330
 msgid "never"
 msgstr ""
 
-#: src/Util/Temporal.php:333
+#: src/Util/Temporal.php:344
 msgid "less than a second ago"
 msgstr ""
 
-#: src/Util/Temporal.php:342
+#: src/Util/Temporal.php:353
 msgid "year"
 msgstr ""
 
-#: src/Util/Temporal.php:342
+#: src/Util/Temporal.php:353
 msgid "years"
 msgstr ""
 
-#: src/Util/Temporal.php:343
+#: src/Util/Temporal.php:354
 msgid "months"
 msgstr ""
 
-#: src/Util/Temporal.php:344
+#: src/Util/Temporal.php:355
 msgid "weeks"
 msgstr ""
 
-#: src/Util/Temporal.php:345
+#: src/Util/Temporal.php:356
 msgid "days"
 msgstr ""
 
-#: src/Util/Temporal.php:346
+#: src/Util/Temporal.php:357
 msgid "hour"
 msgstr ""
 
-#: src/Util/Temporal.php:346
+#: src/Util/Temporal.php:357
 msgid "hours"
 msgstr ""
 
-#: src/Util/Temporal.php:347
+#: src/Util/Temporal.php:358
 msgid "minute"
 msgstr ""
 
-#: src/Util/Temporal.php:347
+#: src/Util/Temporal.php:358
 msgid "minutes"
 msgstr ""
 
-#: src/Util/Temporal.php:348
+#: src/Util/Temporal.php:359
 msgid "second"
 msgstr ""
 
-#: src/Util/Temporal.php:348
+#: src/Util/Temporal.php:359
 msgid "seconds"
 msgstr ""
 
-#: src/Util/Temporal.php:357
+#: src/Util/Temporal.php:368
 #, php-format
 msgid "in %1$d %2$s"
 msgstr ""
 
-#: src/Util/Temporal.php:359
+#: src/Util/Temporal.php:370
 #, php-format
 msgid "%1$d %2$s ago"
 msgstr ""
@@ -12183,15 +12209,15 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: view/theme/frio/theme.php:199
+#: view/theme/frio/theme.php:200
 msgid "Guest"
 msgstr ""
 
-#: view/theme/frio/theme.php:202
+#: view/theme/frio/theme.php:203
 msgid "Visitor"
 msgstr ""
 
-#: view/theme/frio/theme.php:223
+#: view/theme/frio/theme.php:224
 msgid "Your postings with media"
 msgstr ""
 
