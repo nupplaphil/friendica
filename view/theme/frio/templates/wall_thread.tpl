@@ -407,15 +407,15 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* Available: On your own posts and comments *}}
 				{{if $item.edpost}} {{* edit the posting *}}
 				<li role="menuitem">
-						<a href="javascript:editpost('{{$item.edpost.0}}?mode=none');" title="{{$item.edpost.1}}" class="btn-link navicon pencil"><i class="fa fa-pencil" aria-hidden="true"></i>&ensp;{{$item.edpost.1}}</a>
+						<a href="javascript:editpost('{{$item.edpost.0}}?mode=none');" class="btn-link navicon pencil"><i class="fa fa-pencil" aria-hidden="true"></i>&ensp;{{$item.edpost.1}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On your own posts *}}
 				{{if $item.pin}}
 				<li role="menuitem">
-						<a id="pin-{{$item.id}}" href="javascript:doPin({{$item.id}});" class="btn-link {{$item.pin.classdo}}" title="{{$item.pin.do}}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>&ensp;{{$item.pin.do}}</a>
-						<a id="unpin-{{$item.id}}" href="javascript:doPin({{$item.id}});" class="btn-link {{$item.pin.classundo}}" title="{{$item.pin.undo}}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>&ensp;{{$item.pin.undo}}</a>
+						<a id="pin-{{$item.id}}" href="javascript:doPin({{$item.id}});" class="btn-link {{$item.pin.classdo}}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>&ensp;{{$item.pin.do}}</a>
+						<a id="unpin-{{$item.id}}" href="javascript:doPin({{$item.id}});" class="btn-link {{$item.pin.classundo}}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>&ensp;{{$item.pin.undo}}</a>
 				</li>
 				{{/if}}
 
@@ -423,22 +423,22 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* TODO: This currently creates a duplicate post according to: https://forum.friendi.ca/display/373ebf56-2469-ed09-ccc0-ecd539065051 *}}
 				{{if $item.tagger}} {{* tag the post *}}
 				<li role="menuitem">
-						<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}" title="{{$item.tagger.add}}"><i class="fa fa-tag" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
+						<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}"><i class="fa fa-tag" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On posts made by anyone *}}
 				{{if $item.star}}
 				<li role="menuitem">
-						<a id="star-{{$item.id}}" href="javascript:doStar({{$item.id}});" class="btn-link {{$item.star.classdo}}" title="{{$item.star.do}}"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&ensp;{{$item.star.do}}</a>
-						<a id="unstar-{{$item.id}}" href="javascript:doStar({{$item.id}});" class="btn-link {{$item.star.classundo}}" title="{{$item.star.undo}}"><i class="fa fa-bookmark" aria-hidden="true"></i>&ensp;{{$item.star.undo}}</a>
+						<a id="star-{{$item.id}}" href="javascript:doStar({{$item.id}});" class="btn-link {{$item.star.classdo}}"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&ensp;{{$item.star.do}}</a>
+						<a id="unstar-{{$item.id}}" href="javascript:doStar({{$item.id}});" class="btn-link {{$item.star.classundo}}"><i class="fa fa-bookmark" aria-hidden="true"></i>&ensp;{{$item.star.undo}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On all posts and comments *}}
 				{{if $item.filer}}
 				<li role="menuitem">
-						<a id="filer-{{$item.id}}" href="javascript:itemFiler({{$item.id}});" class="btn-link filer-item filer-icon" title="{{$item.filer}}"><i class="fa fa-folder" aria-hidden="true"></i>&ensp;{{$item.filer}}</a>
+						<a id="filer-{{$item.id}}" href="javascript:itemFiler({{$item.id}});" class="btn-link filer-item filer-icon"><i class="fa fa-folder" aria-hidden="true"></i>&ensp;{{$item.filer}}</a>
 				</li>
 				{{/if}}
 
@@ -456,24 +456,24 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* Identical to unignore in functionality but only seen on posts you haven't liked/commented on - could they be merged? *}}
 				{{if $item.follow_thread}}
 				<li role="menuitem">
-						<a id="follow_thread-{{$item.id}}" href="javascript:{{$item.follow_thread.action}}" class="btn-link" title="{{$item.follow_thread.title}}"><i class="fa fa-bell" aria-hidden="true"></i>&ensp;{{$item.follow_thread.title}}</a>
+						<a id="follow_thread-{{$item.id}}" href="javascript:{{$item.follow_thread.action}}" class="btn-link"><i class="fa fa-bell" aria-hidden="true"></i>&ensp;{{$item.follow_thread.title}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On all posts *}}
 				{{if $item.ignore}}
 				<li role="menuitem">
-						<a id="ignore-{{$item.id}}" href="javascript:doIgnoreThread({{$item.id}});" class="btn-link {{$item.ignore.classdo}}" title="{{$item.ignore.do}}"><i class="fa fa-bell-slash" aria-hidden="true"></i>&ensp;{{$item.ignore.do}}</a>
+						<a id="ignore-{{$item.id}}" href="javascript:doIgnoreThread({{$item.id}});" class="btn-link {{$item.ignore.classdo}}"><i class="fa fa-bell-slash" aria-hidden="true"></i>&ensp;{{$item.ignore.do}}</a>
 				</li>
 				<li role="menuitem">
-						<a id="unignore-{{$item.id}}" href="javascript:doIgnoreThread({{$item.id}});" class="btn-link {{$item.ignore.classundo}}"  title="{{$item.ignore.undo}}"><i class="fa fa-bell" aria-hidden="true"></i>&ensp;{{$item.ignore.undo}}</a>
+						<a id="unignore-{{$item.id}}" href="javascript:doIgnoreThread({{$item.id}});" class="btn-link {{$item.ignore.classundo}}"><i class="fa fa-bell" aria-hidden="true"></i>&ensp;{{$item.ignore.undo}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On posts made by others *}}
 				{{if $item.complete_thread}}
 				<li role="menuitem">
-						<a id="complete_thread-{{$item.id}}" href="javascript:{{$item.complete_thread.action}}" class="btn-link" title="{{$item.complete_thread.title}}"><i class="fa fa-download" aria-hidden="true"></i>&ensp;{{$item.complete_thread.title}}</a>
+						<a id="complete_thread-{{$item.id}}" href="javascript:{{$item.complete_thread.action}}" class="btn-link"><i class="fa fa-download" aria-hidden="true"></i>&ensp;{{$item.complete_thread.title}}</a>
 				</li>
 				{{/if}}
 
@@ -482,21 +482,21 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* Available: On posts made by others *}}
 				{{if $item.collapse}}
 				<li role="menuitem">
-						<a class="btn-link navicon collapse" href="javascript:collapseAuthor('item/collapse/{{$item.id}}', 'item-{{$item.guid}}');" title="{{$item.collapse.label}}"><i class="fa fa-minus-square" aria-hidden="true"></i>&ensp;{{$item.collapse.label}}</a>
+						<a class="btn-link navicon collapse" href="javascript:collapseAuthor('item/collapse/{{$item.id}}', 'item-{{$item.guid}}');"><i class="fa fa-minus-square" aria-hidden="true"></i>&ensp;{{$item.collapse.label}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On posts made by others *}}
 				{{if $item.ignore_author}}
 				<li role="menuitem">
-						<a class="btn-link navicon ignore" href="javascript:ignoreAuthor('item/ignore/{{$item.id}}', 'item-{{$item.guid}}');" title="{{$item.ignore_author.label}}"><i class="fa fa-eye-slash" aria-hidden="true"></i>&ensp;{{$item.ignore_author.label}}</a>
+						<a class="btn-link navicon ignore" href="javascript:ignoreAuthor('item/ignore/{{$item.id}}', 'item-{{$item.guid}}');"><i class="fa fa-eye-slash" aria-hidden="true"></i>&ensp;{{$item.ignore_author.label}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On posts made by others *}}
 				{{if $item.block}}
 				<li role="menuitem">
-						<a class="btn-link navicon block" href="javascript:blockAuthor('item/block/{{$item.id}}', 'item-{{$item.guid}}');" title="{{$item.block.label}}"><i class="fa fa-ban" aria-hidden="true"></i>&ensp;{{$item.block.label}}</a>
+						<a class="btn-link navicon block" href="javascript:blockAuthor('item/block/{{$item.id}}', 'item-{{$item.guid}}');"><i class="fa fa-ban" aria-hidden="true"></i>&ensp;{{$item.block.label}}</a>
 				</li>
 				{{/if}}
 
@@ -507,19 +507,19 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* Available: On posts made by others *}}
 				{{if $item.ignore_server}}
 				<li role="menuitem">
-						<a class="btn-link navicon ignoreServer" href="javascript:ignoreServer('settings/server/{{$item.author_gsid}}/ignore', 'item-{{$item.guid}}');" title="{{$item.ignore_server.label}}"><i class="fa fa-eye-slash" aria-hidden="true"></i>&ensp;{{$item.ignore_server.label}}</a>
+						<a class="btn-link navicon ignoreServer" href="javascript:ignoreServer('settings/server/{{$item.author_gsid}}/ignore', 'item-{{$item.guid}}');"><i class="fa fa-eye-slash" aria-hidden="true"></i>&ensp;{{$item.ignore_server.label}}</a>
 				</li>
 				{{/if}}
 
 				{{* Available: On all posts and comments *}}
 				<li role="menuitem">
-						<a id="searchtext-{{$item.id}}" href="javascript:displaySearchText({{$item.uriid}});" class="btn-link filer-item" title="{{$item.searchtext}}"><i class="fa fa-file-text" aria-hidden="true"></i>&ensp;{{$item.searchtext}}</a>
+						<a id="searchtext-{{$item.id}}" href="javascript:displaySearchText({{$item.uriid}});" class="btn-link filer-item"><i class="fa fa-file-text" aria-hidden="true"></i>&ensp;{{$item.searchtext}}</a>
 				</li>
 
 				{{* Available: On all posts and comments *}}
 				{{if $item.language}}
 				<li role="menuitem">
-						<a id="language-{{$item.id}}" href="javascript:displayLanguage({{$item.uriid}});" class="btn-link filer-item" title="{{$item.language}}"><i class="fa fa-language" aria-hidden="true"></i>&ensp;{{$item.language}}</a>
+						<a id="language-{{$item.id}}" href="javascript:displayLanguage({{$item.uriid}});" class="btn-link filer-item"><i class="fa fa-language" aria-hidden="true"></i>&ensp;{{$item.language}}</a>
 				</li>
 				{{/if}}
 
@@ -533,7 +533,7 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* Available: If you're an admin, on all posts and comments on your instance *}}
 				{{if $item.drop && $item.drop.dropping}}
 				<li role="menuitem">
-						<a class="btn-link navicon delete" href="javascript:dropItem('item/drop/{{$item.id}}', 'item-{{$item.guid}}');" title="{{$item.drop.label}}"><i class="fa fa-trash" aria-hidden="true"></i>&ensp;{{$item.drop.label}}</a>
+						<a class="btn-link navicon delete" href="javascript:dropItem('item/drop/{{$item.id}}', 'item-{{$item.guid}}');"><i class="fa fa-trash" aria-hidden="true"></i>&ensp;{{$item.drop.label}}</a>
 				</li>
 				{{/if}}
 			</ul>

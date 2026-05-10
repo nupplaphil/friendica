@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.04-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-10 01:18+0200\n"
+"POT-Creation-Date: 2026-05-10 10:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1699,8 +1699,7 @@ msgstr ""
 msgid "%1$s tagged %2$s's %3$s with %4$s"
 msgstr ""
 
-#: src/Content/Item.php:435 src/Object/Post.php:393
-#: view/theme/frio/theme.php:251
+#: src/Content/Item.php:435 view/theme/frio/theme.php:251
 msgid "Turn on notifications for this post"
 msgstr ""
 
@@ -11710,7 +11709,7 @@ msgid "Collapse %s"
 msgstr ""
 
 #: src/Object/Post.php:288
-msgid "Report post"
+msgid "Report this post"
 msgstr ""
 
 #: src/Object/Post.php:299
@@ -11730,7 +11729,11 @@ msgid "I might attend"
 msgstr ""
 
 #: src/Object/Post.php:392
-msgid "Turn off notifications for this post"
+msgid "Turn off related notifications"
+msgstr ""
+
+#: src/Object/Post.php:393
+msgid "Turn on related notifications"
 msgstr ""
 
 #: src/Object/Post.php:398

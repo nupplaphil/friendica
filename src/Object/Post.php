@@ -285,7 +285,7 @@ class Post
 				'author_id'  => $item['author-id'],
 			];
 			$report = [
-				'label' => DI::l10n()->t('Report post'),
+				'label' => DI::l10n()->t('Report this post'),
 				'href'  => 'moderation/report/create?' . http_build_query(['cid' => $item['author-id'], 'uri-ids' => [$item['uri-id']]]),
 			];
 			$authorBaseUri = new Uri($item['author-baseurl'] ?? '');
@@ -389,8 +389,8 @@ class Post
 				$ignored_thread = PostModel\ThreadUser::getIgnored($item['uri-id'], DI::userSession()->getLocalUserId());
 				if ($item['mention'] || $ignored_thread) {
 					$ignore_thread = [
-						'do'   => DI::l10n()->t('Turn off notifications for this post'),
-						'undo' => DI::l10n()->t('Turn on notifications for this post'),
+						'do'   => DI::l10n()->t('Turn off related notifications'),
+						'undo' => DI::l10n()->t('Turn on related notifications'),
 						// NOTE: Toggle is currently unused
 						//'toggle'    => DI::l10n()->t('Toggle notifications for this post'),
 						'classdo'   => $ignored_thread ? 'hidden' : '',
