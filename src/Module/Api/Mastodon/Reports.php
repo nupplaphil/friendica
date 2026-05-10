@@ -24,17 +24,9 @@ use Psr\Log\LoggerInterface;
  */
 class Reports extends BaseApi
 {
-	/** @var \Friendica\Moderation\Factory\Report */
-	private $reportFactory;
-	/** @var \Friendica\Moderation\Repository\Report */
-	private $reportRepo;
-
-	public function __construct(\Friendica\Moderation\Repository\Report $reportRepo, \Friendica\Moderation\Factory\Report $reportFactory, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
+	public function __construct(private \Friendica\Moderation\Repository\Report $reportRepo, private \Friendica\Moderation\Factory\Report $reportFactory, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
 	{
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->reportFactory = $reportFactory;
-		$this->reportRepo    = $reportRepo;
 	}
 
 	public function post(array $request = [])

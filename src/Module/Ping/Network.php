@@ -37,13 +37,8 @@ use Psr\Log\LoggerInterface;
 
 class Network extends NetworkModule
 {
-	/**
-	 * @var ICanLock
-	 */
-	private $lock;
-
 	public function __construct(
-		ICanLock $lock,
+		private ICanLock $lock,
 		UserDefinedChannelFactory $userDefinedChannel,
 		NetworkFactory $network,
 		CommunityFactory $community,
@@ -99,8 +94,6 @@ class Network extends NetworkModule
 			$server,
 			$parameters,
 		);
-
-		$this->lock = $lock;
 	}
 
 	protected function rawContent(array $request = [])

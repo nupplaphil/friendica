@@ -25,37 +25,16 @@ use Psr\Log\LoggerInterface;
 
 class Status extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-	/** @var twitterUser entity */
-	private $twitterUser;
-	/** @var Hashtag entity */
-	private $hashtag;
-	/** @var Media entity */
-	private $media;
-	/** @var Url entity */
-	private $url;
-	/** @var Mention entity */
-	private $mention;
-	/** @var Activities entity */
-	private $activities;
-	/** @var Attachment entity */
-	private $attachment;
-	/** @var ContentItem */
-	private $contentItem;
-
-	public function __construct(LoggerInterface $logger, Database $dba, TwitterUser $twitteruser, Hashtag $hashtag, Media $media, Url $url, Mention $mention, Activities $activities, Attachment $attachment, ContentItem $contentItem)
+	public function __construct(LoggerInterface $logger, private Database $dba, /** @var twitterUser entity */
+				private TwitterUser $twitterUser, /** @var Hashtag entity */
+				private Hashtag $hashtag, /** @var Media entity */
+				private Media $media, /** @var Url entity */
+				private Url $url, /** @var Mention entity */
+				private Mention $mention, /** @var Activities entity */
+				private Activities $activities, /** @var Attachment entity */
+				private Attachment $attachment, private ContentItem $contentItem)
 	{
 		parent::__construct($logger);
-		$this->dba         = $dba;
-		$this->twitterUser = $twitteruser;
-		$this->hashtag     = $hashtag;
-		$this->media       = $media;
-		$this->url         = $url;
-		$this->mention     = $mention;
-		$this->activities  = $activities;
-		$this->attachment  = $attachment;
-		$this->contentItem = $contentItem;
 	}
 
 	/**

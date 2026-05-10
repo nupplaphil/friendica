@@ -39,19 +39,11 @@ class Register extends BaseModule
 	/** @var Tos */
 	protected $tos;
 
-	/** @var IHandleUserSessions */
-	private $session;
-
-	private EventDispatcherInterface $eventDispatcher;
-
-	public function __construct(IHandleUserSessions $session, EventDispatcherInterface $eventDispatcher, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, array $server, array $parameters = [])
+	public function __construct(private IHandleUserSessions $session, private EventDispatcherInterface $eventDispatcher, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->tos = new Tos($l10n, $baseUrl, $args, $logger, $profiler, $response, $config, $server, $parameters);
-
-		$this->session         = $session;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	/**

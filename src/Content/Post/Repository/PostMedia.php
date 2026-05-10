@@ -41,14 +41,6 @@ class PostMedia extends BaseRepository
 
 	/** @var PostMediaFactory */
 	protected $factory;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var BaseURL */
-	private $baseURL;
-	/** @var Item */
-	private $item;
 
 	/**
 	 * PostMedia repository constructor.
@@ -61,14 +53,9 @@ class PostMedia extends BaseRepository
 	 * @param BaseURL $baseURL Base URL helper
 	 * @param Item $item Item helper
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, PostMediaFactory $factory, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, BaseURL $baseURL, Item $item)
+	public function __construct(Database $database, LoggerInterface $logger, PostMediaFactory $factory, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, private BaseURL $baseURL, private Item $item)
 	{
 		parent::__construct($database, $logger, $factory);
-
-		$this->baseURL = $baseURL;
-		$this->pConfig = $pConfig;
-		$this->config  = $config;
-		$this->item    = $item;
 	}
 
 	/**

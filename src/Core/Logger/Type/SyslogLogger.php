@@ -58,41 +58,20 @@ class SyslogLogger extends AbstractLogger
 	];
 
 	/**
-	 * Indicates what logging options will be used when generating a log message
-	 * @see http://php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters
-	 */
-	private int $logOpts;
-
-	/**
-	 * Used to specify what type of program is logging the message
-	 * @see http://php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters
-	 */
-	private int $logFacility;
-
-	/**
-	 * The minimum loglevel at which this logger will be triggered
-	 */
-	private int $logLevel;
-
-	/**
 	 * A error message of the current operation
 	 */
 	private string $errorMessage;
 
 	/**
-	 * {@inheritdoc}
-	 *
-	 * @param int $logLevel    The minimum loglevel at which this logger will be triggered
-	 * @param int $logOptions
-	 * @param int $logFacility
-	 */
-	public function __construct(string $channel, IHaveCallIntrospections $introspection, int $logLevel, int $logOptions, int $logFacility)
+				 * {@inheritdoc}
+				 *
+				 * @param int $logLevel    The minimum loglevel at which this logger will be triggered
+				 * @param int $logOpts
+				 * @param int $logFacility
+				 */
+				public function __construct(string $channel, IHaveCallIntrospections $introspection, private int $logLevel, private int $logOpts, private int $logFacility)
 	{
 		parent::__construct($channel, $introspection);
-
-		$this->logOpts     = $logOptions;
-		$this->logFacility = $logFacility;
-		$this->logLevel    = $logLevel;
 	}
 
 	/**

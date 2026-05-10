@@ -20,9 +20,6 @@ use Throwable;
  */
 class ErrorHandler
 {
-	/** @var LoggerInterface */
-	private $logger;
-
 	/** @var ?callable */
 	private $previousExceptionHandler = null;
 	/** @var array<class-string, LogLevel::*> an array of class name to LogLevel::* constant mapping */
@@ -46,10 +43,9 @@ class ErrorHandler
 	/** @var int[] */
 	private static $fatalErrors = [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR];
 
-	public function __construct(LoggerInterface $logger)
-	{
-		$this->logger = $logger;
-	}
+	public function __construct(private LoggerInterface $logger)
+				{
+							}
 
 	/**
 	 * Registers a new ErrorHandler for a given Logger

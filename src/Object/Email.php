@@ -16,49 +16,20 @@ use Friendica\Object\EMail\IEmail;
  */
 class Email implements IEmail
 {
-	/** @var string */
-	private $fromName;
-	/** @var string */
-	private $fromAddress;
-	/** @var string */
-	private $replyTo;
-
-	/** @var string */
-	private $toAddress;
-
-	/** @var string */
-	private $subject;
-	/** @var string|null */
-	private $msgHtml;
-	/** @var string */
-	private $msgText;
-
-	/** @var string[][] */
-	private $additionalMailHeader;
-	/** @var int|null */
-	private $toUid;
-
 	public function __construct(
-		string $fromName,
-		string $fromAddress,
-		string $replyTo,
-		string $toAddress,
-		string $subject,
-		string $msgHtml,
-		string $msgText,
-		array $additionalMailHeader = [],
-		int $toUid = null,
-	) {
-		$this->fromName             = $fromName;
-		$this->fromAddress          = $fromAddress;
-		$this->replyTo              = $replyTo;
-		$this->toAddress            = $toAddress;
-		$this->subject              = $subject;
-		$this->msgHtml              = $msgHtml;
-		$this->msgText              = $msgText;
-		$this->additionalMailHeader = $additionalMailHeader;
-		$this->toUid                = $toUid;
-	}
+								private string $fromName,
+								private string $fromAddress,
+								private string $replyTo,
+								private string $toAddress,
+								private string $subject,
+								private string $msgHtml,
+								private string $msgText,
+								/** @var string[][] */
+								private array $additionalMailHeader = [],
+								private ?int $toUid = null
+							)
+							{
+										}
 
 	/**
 	 * {@inheritDoc}

@@ -25,7 +25,6 @@ class Statistics extends BaseModule
 	protected $config;
 	/** @var IManageKeyValuePairs */
 	protected $keyValue;
-	private AddonHelper $addonHelper;
 
 	public function __construct(
 		L10n $l10n,
@@ -35,7 +34,7 @@ class Statistics extends BaseModule
 		Profiler $profiler,
 		IManageConfigValues $config,
 		IManageKeyValuePairs $keyValue,
-		AddonHelper $addonHelper,
+		private AddonHelper $addonHelper,
 		Response $response,
 		array $server,
 		array $parameters = []
@@ -44,7 +43,6 @@ class Statistics extends BaseModule
 
 		$this->config      = $config;
 		$this->keyValue    = $keyValue;
-		$this->addonHelper = $addonHelper;
 
 		if (!$this->config->get("system", "nodeinfo")) {
 			throw new NotFoundException();

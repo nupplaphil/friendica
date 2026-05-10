@@ -29,14 +29,9 @@ use Psr\Log\LoggerInterface;
 
 class Add extends BaseModeration
 {
-	/** @var DomainPatternBlocklist */
-	private $blocklist;
-
-	public function __construct(DomainPatternBlocklist $blocklist, Page $page, AppHelper $app, SystemMessages $systemMessages, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private DomainPatternBlocklist $blocklist, Page $page, AppHelper $app, SystemMessages $systemMessages, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($page, $app, $systemMessages, $session, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->blocklist = $blocklist;
 	}
 
 	/**

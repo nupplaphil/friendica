@@ -31,20 +31,9 @@ use Psr\Log\LoggerInterface;
  */
 class PortableContacts extends BaseModule
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Database */
-	private $database;
-	/** @var ICanCache */
-	private $cache;
-
-	public function __construct(ICanCache $cache, Database $database, IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private ICanCache $cache, private Database $database, private IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->config   = $config;
-		$this->database = $database;
-		$this->cache    = $cache;
 	}
 
 	protected function rawContent(array $request = [])

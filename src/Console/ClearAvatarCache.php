@@ -21,26 +21,6 @@ class ClearAvatarCache extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Database
-	 */
-	private $dba;
-
-	/**
-	 * @var BaseURL
-	 */
-	private $baseUrl;
-
-	/**
-	 * @var L10n
-	 */
-	private $l10n;
-
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -58,14 +38,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(\Friendica\Database\Database $dba, BaseURL $baseUrl, L10n $l10n, IManageConfigValues $config, array $argv = null)
+	public function __construct(private \Friendica\Database\Database $dba, private BaseURL $baseUrl, private L10n $l10n, private IManageConfigValues $config, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->dba     = $dba;
-		$this->baseUrl = $baseUrl;
-		$this->l10n    = $l10n;
-		$this->config  = $config;
 	}
 
 	protected function doExecute(): int

@@ -25,7 +25,6 @@ class Thread
 	private $mode          = null;
 	private $writable      = false;
 	private $profile_owner = 0;
-	private $preview       = false;
 
 	/**
 	 * Constructor
@@ -35,10 +34,9 @@ class Thread
 	 * @param boolean $writable Override the writable check
 	 * @throws \Exception
 	 */
-	public function __construct($mode, $preview, $writable = false)
+	public function __construct($mode, private $preview, $writable = false)
 	{
 		$this->setMode($mode, $writable);
-		$this->preview = $preview;
 	}
 
 	/**

@@ -68,36 +68,8 @@ class Router
 	 */
 	protected $parameters = [];
 
-	/** @var L10n */
-	private $l10n;
-
-	/** @var ICanCache */
-	private $cache;
-
-	/** @var ICanLock */
-	private $lock;
-
-	/** @var Arguments */
-	private $args;
-
-	/** @var IManageConfigValues */
-	private $config;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	private EventDispatcherInterface $eventDispatcher;
-
-	private AddonHelper $addonHelper;
-
 	/** @var bool */
 	private $isLocalUser;
-
-	/** @var string */
-	private $baseRoutesFilepath;
-
-	/** @var array */
-	private $server;
 
 	/** @var string|null */
 	protected $moduleClass = null;
@@ -114,18 +86,8 @@ class Router
 	 * @param IHandleUserSessions $userSession
 	 * @param RouteCollector|null $routeCollector
 	 */
-	public function __construct(array $server, string $baseRoutesFilepath, L10n $l10n, ICanCache $cache, ICanLock $lock, IManageConfigValues $config, Arguments $args, LoggerInterface $logger, EventDispatcherInterface $eventDispatcher, AddonHelper $addonHelper, IHandleUserSessions $userSession, RouteCollector $routeCollector = null)
+	public function __construct(private array $server, private string $baseRoutesFilepath, private L10n $l10n, private ICanCache $cache, private ICanLock $lock, private IManageConfigValues $config, private Arguments $args, private LoggerInterface $logger, private EventDispatcherInterface $eventDispatcher, private AddonHelper $addonHelper, IHandleUserSessions $userSession, RouteCollector $routeCollector = null)
 	{
-		$this->baseRoutesFilepath = $baseRoutesFilepath;
-		$this->l10n               = $l10n;
-		$this->cache              = $cache;
-		$this->lock               = $lock;
-		$this->args               = $args;
-		$this->config             = $config;
-		$this->server             = $server;
-		$this->logger             = $logger;
-		$this->eventDispatcher    = $eventDispatcher;
-		$this->addonHelper        = $addonHelper;
 		$this->isLocalUser        = !empty($userSession->getLocalUserId());
 
 		$this->routeCollector = $routeCollector ?? new RouteCollector(new Std(), new GroupCountBased());

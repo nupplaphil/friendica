@@ -81,26 +81,12 @@ class L10n
 	 */
 	private $strings = [];
 
-	/**
-	 * @var Database
-	 */
-	private $dba;
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-	private IHandleSessions $session;
-
-	public function __construct(IManageConfigValues $config, Database $dba, IHandleSessions $session, array $server, array $get)
+	public function __construct(private IManageConfigValues $config, private Database $dba, private IHandleSessions $session, array $server, array $get)
 	{
-		$this->dba     = $dba;
-		$this->config  = $config;
-		$this->session = $session;
-
-		$this->loadTranslationTable(L10n::detectLanguage($server, $get, $config->get('system', 'language', self::DEFAULT)));
+		$this->loadTranslationTable(L10n::detectLanguage($server, $get, $this->config->get('system', 'language', self::DEFAULT)));
 		$this->setLocale($server);
-		$this->setSessionVariable($session);
-		$this->setLangFromSession($session);
+		$this->setSessionVariable($this->session);
+		$this->setLangFromSession($this->session);
 	}
 
 	/**

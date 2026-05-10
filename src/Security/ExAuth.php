@@ -57,27 +57,6 @@ class ExAuth
 	private $host;
 
 	/**
-	 * @var App\Mode
-	 */
-	private $appMode;
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-	/**
-	 * @var IManagePersonalConfigValues
-	 */
-	private $pConfig;
-	/**
-	 * @var Database
-	 */
-	private $dba;
-	/**
-	 * @var App\BaseURL
-	 */
-	private $baseURL;
-
-	/**
 	 * @param App\Mode                    $appMode
 	 * @param IManageConfigValues         $config
 	 * @param IManagePersonalConfigValues $pConfig
@@ -86,15 +65,9 @@ class ExAuth
 	 *
 	 * @throws Exception
 	 */
-	public function __construct(App\Mode $appMode, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, Database $dba, App\BaseURL $baseURL)
+	public function __construct(private App\Mode $appMode, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Database $dba, private App\BaseURL $baseURL)
 	{
-		$this->appMode = $appMode;
-		$this->config  = $config;
-		$this->pConfig = $pConfig;
-		$this->dba     = $dba;
-		$this->baseURL = $baseURL;
-
-		$this->bDebug = (int) $config->get('jabber', 'debug');
+		$this->bDebug = (int) $this->config->get('jabber', 'debug');
 
 		openlog('auth_ejabberd', LOG_PID, LOG_USER);
 

@@ -42,26 +42,9 @@ use Psr\Log\LoggerInterface;
  */
 class FormattedNotify extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-	/** @var Repository\Notify */
-	private $notify;
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var IHandleUserSessions */
-	private $userSession;
-
-	public function __construct(LoggerInterface $logger, Database $dba, Repository\Notify $notification, BaseURL $baseUrl, L10n $l10n, IHandleUserSessions $userSession)
+	public function __construct(LoggerInterface $logger, private Database $dba, private Repository\Notify $notify, private BaseURL $baseUrl, private L10n $l10n, private IHandleUserSessions $userSession)
 	{
 		parent::__construct($logger);
-
-		$this->dba         = $dba;
-		$this->notify      = $notification;
-		$this->baseUrl     = $baseUrl;
-		$this->l10n        = $l10n;
-		$this->userSession = $userSession;
 	}
 
 	/**

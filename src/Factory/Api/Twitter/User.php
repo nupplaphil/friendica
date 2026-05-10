@@ -17,13 +17,10 @@ use Psr\Log\LoggerInterface;
 
 class User extends BaseFactory
 {
-	/** @var Status entity */
-	private $status;
-
-	public function __construct(LoggerInterface $logger, Status $status)
+	public function __construct(LoggerInterface $logger, /** @var Status entity */
+				private Status $status)
 	{
 		parent::__construct($logger);
-		$this->status = $status;
 
 	}
 

@@ -16,15 +16,9 @@ final class GServer
 {
 	private string $table_name = 'gserver';
 
-	private Database $db;
-
-	private GServerFactory $factory;
-
-	public function __construct(Database $database, GServerFactory $factory)
-	{
-		$this->db      = $database;
-		$this->factory = $factory;
-	}
+	public function __construct(private Database $db, private GServerFactory $factory)
+				{
+							}
 
 	/**
 	 * @param int $gsid

@@ -19,14 +19,9 @@ use Psr\Log\LoggerInterface;
 
 class Attachment extends BaseFactory
 {
-	/** @var BaseURL */
-	private $baseUrl;
-
-	public function __construct(LoggerInterface $logger, BaseURL $baseURL)
+	public function __construct(LoggerInterface $logger, private BaseURL $baseUrl)
 	{
 		parent::__construct($logger);
-
-		$this->baseUrl = $baseURL;
 	}
 
 	/**

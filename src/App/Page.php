@@ -66,12 +66,6 @@ class Page implements ArrayAccess
 		'section'     => '',
 		'module'      => '',
 	];
-	/**
-	 * @var string The basepath of the page
-	 */
-	private $basePath;
-
-	private EventDispatcherInterface $eventDispatcher;
 
 	private $timestamp = 0;
 	private $method    = '';
@@ -79,13 +73,11 @@ class Page implements ArrayAccess
 	private $command   = '';
 
 	/**
-	 * @param string $basepath The Page basepath
-	 */
-	public function __construct(string $basepath, EventDispatcherInterface $eventDispatcher)
+				 * @param string $basePath The Page basepath
+				 */
+				public function __construct(private string $basePath, private EventDispatcherInterface $eventDispatcher)
 	{
 		$this->timestamp       = microtime(true);
-		$this->basePath        = $basepath;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	public function setLogging(string $method, string $module, string $command)

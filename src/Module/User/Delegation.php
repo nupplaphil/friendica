@@ -33,34 +33,9 @@ use Psr\Log\LoggerInterface;
  */
 class Delegation extends BaseModule
 {
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $db;
-	/** @var Authentication */
-	private $auth;
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var Notify */
-	private $notify;
-	/** @var Introduction */
-	private $intro;
-	/** @var AppHelper */
-	private $appHelper;
-	private EventDispatcherInterface $eventDispatcher;
-
-	public function __construct(EventDispatcherInterface $eventDispatcher, AppHelper $appHelper, Introduction $intro, Notify $notify, SystemMessages $systemMessages, Authentication $auth, Database $db, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Util\Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private EventDispatcherInterface $eventDispatcher, private AppHelper $appHelper, private Introduction $intro, private Notify $notify, private SystemMessages $systemMessages, private Authentication $auth, private Database $db, private IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Util\Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session         = $session;
-		$this->db              = $db;
-		$this->auth            = $auth;
-		$this->systemMessages  = $systemMessages;
-		$this->notify          = $notify;
-		$this->intro           = $intro;
-		$this->appHelper       = $appHelper;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])

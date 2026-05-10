@@ -26,21 +26,9 @@ use Psr\Log\LoggerInterface;
  */
 final class StreamLoggerFactory implements LoggerFactory
 {
-	private IManageConfigValues $config;
-
-	private IHaveCallIntrospections $introspection;
-
-	private FileSystemUtil $fileSystem;
-
-	public function __construct(
-		IManageConfigValues $config,
-		IHaveCallIntrospections $introspection,
-		FileSystemUtil $fileSystem
-	) {
-		$this->config        = $config;
-		$this->introspection = $introspection;
-		$this->fileSystem    = $fileSystem;
-	}
+	public function __construct(private IManageConfigValues $config, private IHaveCallIntrospections $introspection, private FileSystemUtil $fileSystem)
+				{
+							}
 
 	/**
 	 * Creates and returns a PSR-3 Logger instance.

@@ -30,29 +30,13 @@ use Psr\Log\LoggerInterface;
  */
 class Introduction extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var IHandleUserSessions */
-	private $session;
 	/** @var string */
 	private $nick;
 
-	public function __construct(LoggerInterface $logger, Database $dba, BaseURL $baseUrl, L10n $l10n, IManagePersonalConfigValues $pConfig, IHandleUserSessions $session)
+	public function __construct(LoggerInterface $logger, private Database $dba, private BaseURL $baseUrl, private L10n $l10n, private IManagePersonalConfigValues $pConfig, private IHandleUserSessions $session)
 	{
 		parent::__construct($logger);
-
-		$this->dba     = $dba;
-		$this->baseUrl = $baseUrl;
-		$this->l10n    = $l10n;
-		$this->pConfig = $pConfig;
-		$this->session = $session;
-		$this->nick    = $session->getLocalUserNickname() ?? '';
+		$this->nick    = $this->session->getLocalUserNickname() ?? '';
 	}
 
 	/**

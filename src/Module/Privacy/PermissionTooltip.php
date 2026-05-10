@@ -33,20 +33,13 @@ use Psr\Log\LoggerInterface;
  */
 class PermissionTooltip extends BaseModule
 {
-	private Database $dba;
-	private ACLFormatter $aclFormatter;
-	private IHandleUserSessions $session;
-	private IManageConfigValues $config;
-	private PermissionSet $permissionSet;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		PermissionSet $permissionSet,
-		IManageConfigValues $config,
-		IHandleUserSessions $session,
-		ACLFormatter $aclFormatter,
-		Database $dba,
-		EventDispatcherInterface $eventDispatcher,
+		private PermissionSet $permissionSet,
+		private IManageConfigValues $config,
+		private IHandleUserSessions $session,
+		private ACLFormatter $aclFormatter,
+		private Database $dba,
+		private EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -57,13 +50,6 @@ class PermissionTooltip extends BaseModule
 		array $parameters = []
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->dba             = $dba;
-		$this->aclFormatter    = $aclFormatter;
-		$this->session         = $session;
-		$this->config          = $config;
-		$this->permissionSet   = $permissionSet;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function rawContent(array $request = [])

@@ -44,28 +44,14 @@ use Psr\Log\LoggerInterface;
 
 class Profile extends BaseProfile
 {
-	/** @var Database */
-	private $database;
-	/** @var AppHelper */
-	private $appHelper;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Page */
-	private $page;
-	/** @var ProfileField */
-	private $profileField;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		ProfileField $profileField,
-		Page $page,
-		IManageConfigValues $config,
-		IHandleUserSessions $session,
-		AppHelper $appHelper,
-		Database $database,
-		EventDispatcherInterface $eventDispatcher,
+		private ProfileField $profileField,
+		private Page $page,
+		private IManageConfigValues $config,
+		private IHandleUserSessions $session,
+		private AppHelper $appHelper,
+		private Database $database,
+		private EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -76,14 +62,6 @@ class Profile extends BaseProfile
 		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->database        = $database;
-		$this->appHelper       = $appHelper;
-		$this->session         = $session;
-		$this->config          = $config;
-		$this->page            = $page;
-		$this->profileField    = $profileField;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function rawContent(array $request = [])

@@ -25,15 +25,6 @@ abstract class BaseModel extends BaseDataTransferObject
 	protected $logger;
 
 	/**
-	 * Model record abstraction.
-	 * Child classes never have to interact directly with it.
-	 * Please use the magic getter instead.
-	 *
-	 * @var array
-	 */
-	private $data = [];
-
-	/**
 	 * Used to limit/avoid updates if no data was changed.
 	 *
 	 * @var array
@@ -43,12 +34,16 @@ abstract class BaseModel extends BaseDataTransferObject
 	/**
 	 * @param array           $data   Table row attributes
 	 */
-	public function __construct(Database $dba, LoggerInterface $logger, array $data = [])
+	public function __construct(Database $dba, LoggerInterface $logger, /**
+				 * Model record abstraction.
+				 * Child classes never have to interact directly with it.
+				 * Please use the magic getter instead.
+				 */
+				private array $data = [])
 	{
 		$this->dba = $dba;
 		$this->logger = $logger;
-		$this->data = $data;
-		$this->originalData = $data;
+		$this->originalData = $this->data;
 	}
 
 	public function getOriginalData(): array

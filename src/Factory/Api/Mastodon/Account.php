@@ -23,23 +23,9 @@ use Psr\Log\LoggerInterface;
 
 class Account extends BaseFactory
 {
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var ProfileFieldRepository */
-	private $profileFieldRepo;
-	/** @var Field */
-	private $mstdnFieldFactory;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-
-	public function __construct(IManagePersonalConfigValues $pConfig, LoggerInterface $logger, BaseURL $baseURL, ProfileFieldRepository $profileFieldRepo, Field $mstdnFieldFactory)
+	public function __construct(private IManagePersonalConfigValues $pConfig, LoggerInterface $logger, private BaseURL $baseUrl, private ProfileFieldRepository $profileFieldRepo, private Field $mstdnFieldFactory)
 	{
 		parent::__construct($logger);
-
-		$this->baseUrl           = $baseURL;
-		$this->profileFieldRepo  = $profileFieldRepo;
-		$this->mstdnFieldFactory = $mstdnFieldFactory;
-		$this->pConfig           = $pConfig;
 	}
 
 	/**

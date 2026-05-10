@@ -29,29 +29,12 @@ use Psr\Log\LoggerInterface;
  */
 class Upload extends \Friendica\BaseModule
 {
-	/** @var IHandleUserSessions */
-	private $userSession;
-
-	/** @var SystemMessages */
-	private $systemMessages;
-
-	/** @var IManageConfigValues */
-	private $config;
-
 	/** @var bool */
 	private $isJson = false;
 
-	/** @var App\Page */
-	private $page;
-
-	public function __construct(App\Page $page, IManageConfigValues $config, SystemMessages $systemMessages, IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private App\Page $page, private IManageConfigValues $config, private SystemMessages $systemMessages, private IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->userSession    = $userSession;
-		$this->systemMessages = $systemMessages;
-		$this->config         = $config;
-		$this->page           = $page;
 	}
 
 	protected function post(array $request = [])

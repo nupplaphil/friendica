@@ -55,58 +55,29 @@ final class AppLegacy implements AppHelper
 	private $theme_info = [
 	];
 
-	/**
-	 * @var Database The Friendica database connection
-	 */
-	private $database;
-
-	/**
-	 * @var IManageConfigValues The config
-	 */
-	private $config;
-
-	/**
-	 * @var Mode The Mode of the Application
-	 */
-	private $mode;
-
-	/**
-	 * @var BaseURL
-	 */
-	private $baseURL;
-
-	/**
-	 * @var L10n The translator
-	 */
-	private $l10n;
-
-	/**
-	 * @var IManagePersonalConfigValues
-	 */
-	private $pConfig;
-
-	/**
-	 * @var IHandleUserSessions
-	 */
-	private $session;
-
 	public function __construct(
-		Database $database,
-		IManageConfigValues $config,
-		Mode $mode,
-		BaseURL $baseURL,
-		L10n $l10n,
-		IManagePersonalConfigValues $pConfig,
-		IHandleUserSessions $session
-	) {
-		$this->database = $database;
-		$this->config   = $config;
-		$this->mode     = $mode;
-		$this->l10n     = $l10n;
-		$this->baseURL  = $baseURL;
-		$this->pConfig  = $pConfig;
-		$this->session  = $session;
-	}
+								/**
+								 * @var Database The Friendica database connection
+								 */
+								private Database $database,
+								/**
+								 * @var IManageConfigValues The config
+								 */
+								private IManageConfigValues $config,
+								/**
+								 * @var Mode The Mode of the Application
+								 */
+								private Mode $mode,
+								private BaseURL $baseURL,
+								/**
+								 * @var L10n The translator
+								 */
+								private L10n $l10n,
+								private IManagePersonalConfigValues $pConfig,
+								private IHandleUserSessions $session
+							)
+							{
+										}
 
 	/**
 	 * Set the profile owner ID

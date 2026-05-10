@@ -42,7 +42,6 @@ class Stats extends BaseModule
 	protected $logger;
 	/** @var IManageKeyValuePairs */
 	protected $keyValue;
-	private AddonHelper $addonHelper;
 
 	public function __construct(
 		L10n $l10n,
@@ -53,7 +52,7 @@ class Stats extends BaseModule
 		IManageConfigValues $config,
 		IManageKeyValuePairs $keyValue,
 		Database $dba,
-		AddonHelper $addonHelper,
+		private AddonHelper $addonHelper,
 		Response $response,
 		array $server,
 		array $parameters = []
@@ -63,7 +62,6 @@ class Stats extends BaseModule
 		$this->config      = $config;
 		$this->keyValue    = $keyValue;
 		$this->dba         = $dba;
-		$this->addonHelper = $addonHelper;
 	}
 
 	protected function content(array $request = []): string

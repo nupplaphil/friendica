@@ -25,24 +25,15 @@ use Psr\Log\LoggerInterface;
  */
 final class Activity
 {
-	private ActivityRepository $activityRepository;
-	private UserDefinedChannel $channelRepository;
-	private Database $database;
-	private LoggerInterface $logger;
-
 	/**
 	 * ActivityFactory constructor.
 	 *
 	 * @param ActivityRepository $activityRepository
 	 * @param UserDefinedChannel $channelRepository
 	 */
-	public function __construct(ActivityRepository $activityRepository, UserDefinedChannel $channelRepository, Database $database, LoggerInterface $logger)
-	{
-		$this->activityRepository = $activityRepository;
-		$this->channelRepository  = $channelRepository;
-		$this->database           = $database;
-		$this->logger             = $logger;
-	}
+	public function __construct(private ActivityRepository $activityRepository, private UserDefinedChannel $channelRepository, private Database $database, private LoggerInterface $logger)
+				{
+							}
 
 	/**
 	 * Get activities for a user and network.

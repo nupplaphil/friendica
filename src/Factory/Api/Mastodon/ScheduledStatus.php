@@ -19,13 +19,9 @@ use Psr\Log\LoggerInterface;
 
 class ScheduledStatus extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-
-	public function __construct(LoggerInterface $logger, Database $dba)
+	public function __construct(LoggerInterface $logger, private Database $dba)
 	{
 		parent::__construct($logger);
-		$this->dba = $dba;
 	}
 
 	/**

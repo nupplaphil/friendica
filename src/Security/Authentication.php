@@ -37,26 +37,6 @@ use Psr\Log\LoggerInterface;
  */
 class Authentication
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Mode */
-	private $mode;
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var Database */
-	private $dba;
-	/** @var LoggerInterface */
-	private $logger;
-	/** @var Cookie */
-	private $cookie;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var AppHelper */
-	private $appHelper;
 	/** @var string */
 	private $remoteAddress;
 
@@ -87,28 +67,18 @@ class Authentication
 	 * @param Request                     $request
 	 */
 	public function __construct(
-		IManageConfigValues $config,
-		Mode $mode,
-		BaseURL $baseUrl,
-		L10n $l10n,
-		Database $dba,
-		LoggerInterface $logger,
-		Cookie $cookie,
-		IHandleUserSessions $session,
-		IManagePersonalConfigValues $pConfig,
-		AppHelper $appHelper,
+		private IManageConfigValues $config,
+		private Mode $mode,
+		private BaseURL $baseUrl,
+		private L10n $l10n,
+		private Database $dba,
+		private LoggerInterface $logger,
+		private Cookie $cookie,
+		private IHandleUserSessions $session,
+		private IManagePersonalConfigValues $pConfig,
+		private AppHelper $appHelper,
 		Request $request,
 	) {
-		$this->config        = $config;
-		$this->mode          = $mode;
-		$this->baseUrl       = $baseUrl;
-		$this->l10n          = $l10n;
-		$this->dba           = $dba;
-		$this->logger        = $logger;
-		$this->cookie        = $cookie;
-		$this->session       = $session;
-		$this->pConfig       = $pConfig;
-		$this->appHelper     = $appHelper;
 		$this->remoteAddress = $request->getRemoteAddress();
 	}
 

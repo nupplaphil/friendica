@@ -38,11 +38,8 @@ class Instance extends BaseDataTransferObject
 	protected bool $registrations;
 	protected bool $approval_required;
 	protected bool $invites_enabled;
-	protected Configuration $configuration;
-	protected ?Account $contact_account = null;
-	protected array $rules              = [];
 
-	public function __construct(IManageConfigValues $config, BaseURL $baseUrl, Database $database, Configuration $configuration, ?Account $contact_account, array $rules)
+	public function __construct(IManageConfigValues $config, BaseURL $baseUrl, Database $database, protected Configuration $configuration, protected ?Account $contact_account, protected array $rules)
 	{
 		$register_policy = Register::getPolicy();
 
@@ -59,8 +56,5 @@ class Instance extends BaseDataTransferObject
 		$this->registrations     = ($register_policy !== Register::CLOSED);
 		$this->approval_required = ($register_policy === Register::APPROVE);
 		$this->invites_enabled   = false;
-		$this->configuration     = $configuration;
-		$this->contact_account   = $contact_account;
-		$this->rules             = $rules;
 	}
 }

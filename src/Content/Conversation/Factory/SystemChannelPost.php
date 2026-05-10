@@ -35,29 +35,18 @@ use Psr\Log\LoggerInterface;
  */
 final class SystemChannelPost
 {
-	private LoggerInterface $logger;
-	private UserDefinedChannel $channelRepository;
-	private Database $dba;
-	private IManageConfigValues $config;
-	private ActivityFactory $activityFactory;
-
 	/**
-	 * SystemChannelPost constructor.
-	 *
-	 * @param Database $dba Database access object.
-	 * @param UserDefinedChannel $channel Channel repository.
-	 * @param LoggerInterface $logger Logger instance.
-	 * @param IManageConfigValues $config Configuration manager.
-	 * @param ActivityFactory $activityFactory Activity factory.
-	 */
-	public function __construct(Database $dba, UserDefinedChannel $channel, LoggerInterface $logger, IManageConfigValues $config, ActivityFactory $activityFactory)
-	{
-		$this->dba               = $dba;
-		$this->logger            = $logger;
-		$this->channelRepository = $channel;
-		$this->config            = $config;
-		$this->activityFactory   = $activityFactory;
-	}
+				 * SystemChannelPost constructor.
+				 *
+				 * @param Database $dba Database access object.
+				 * @param UserDefinedChannel $channelRepository Channel repository.
+				 * @param LoggerInterface $logger Logger instance.
+				 * @param IManageConfigValues $config Configuration manager.
+				 * @param ActivityFactory $activityFactory Activity factory.
+				 */
+				public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config, private ActivityFactory $activityFactory)
+				{
+							}
 
 	/**
 	 * Add a post to matching system channels for one or many users.

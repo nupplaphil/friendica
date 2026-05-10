@@ -36,14 +36,10 @@ class DiasporaContact extends BaseRepository
 
 	/** @var DiasporaContactFactory */
 	protected $factory;
-	/** @var DbaDefinition */
-	private $definition;
 
-	public function __construct(DbaDefinition $definition, Database $database, LoggerInterface $logger, DiasporaContactFactory $factory)
+	public function __construct(private DbaDefinition $definition, Database $database, LoggerInterface $logger, DiasporaContactFactory $factory)
 	{
 		parent::__construct($database, $logger, $factory);
-
-		$this->definition = $definition;
 	}
 
 	/**

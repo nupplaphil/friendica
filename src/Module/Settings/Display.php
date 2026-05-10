@@ -43,14 +43,6 @@ use Psr\Log\LoggerInterface;
  */
 class Display extends BaseSettings
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var AppHelper */
-	private $appHelper;
-	/** @var SystemMessages */
-	private $systemMessages;
 	/** @var ChannelFactory */
 	protected $channel;
 	/** @var Repository\UserDefinedChannel */
@@ -62,14 +54,9 @@ class Display extends BaseSettings
 	/** @var TimelineFactory */
 	protected $timeline;
 
-	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, NetworkFactory $network, CommunityFactory $community, ChannelFactory $channel, TimelineFactory $timeline, SystemMessages $systemMessages, AppHelper $appHelper, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, IHandleUserSessions $session, Page $page, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, NetworkFactory $network, CommunityFactory $community, ChannelFactory $channel, TimelineFactory $timeline, private SystemMessages $systemMessages, private AppHelper $appHelper, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, IHandleUserSessions $session, Page $page, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->config             = $config;
-		$this->pConfig            = $pConfig;
-		$this->appHelper          = $appHelper;
-		$this->systemMessages     = $systemMessages;
 		$this->timeline           = $timeline;
 		$this->channel            = $channel;
 		$this->community          = $community;

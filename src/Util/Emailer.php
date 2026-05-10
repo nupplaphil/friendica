@@ -24,35 +24,18 @@ use Psr\Log\LoggerInterface;
  */
 class Emailer
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var LoggerInterface */
-	private $logger;
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-
 	/** @var string */
 	private $siteEmailAddress;
 	/** @var string */
 	private $siteEmailName;
 
 	public function __construct(
-		IManageConfigValues $config,
-		IManagePersonalConfigValues $pConfig,
-		BaseURL $baseURL,
-		LoggerInterface $logger,
-		L10n $defaultLang
+		private IManageConfigValues $config,
+		private IManagePersonalConfigValues $pConfig,
+		private BaseURL $baseUrl,
+		private LoggerInterface $logger,
+		private L10n $l10n
 	) {
-		$this->config  = $config;
-		$this->pConfig = $pConfig;
-		$this->logger  = $logger;
-		$this->baseUrl = $baseURL;
-		$this->l10n    = $defaultLang;
-
 		$this->siteEmailAddress = $this->config->get('config', 'sender_email');
 		if (empty($this->siteEmailAddress)) {
 			$hostname = $this->baseUrl->getHost();

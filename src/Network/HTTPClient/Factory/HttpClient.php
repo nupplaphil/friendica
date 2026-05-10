@@ -28,19 +28,9 @@ require_once __DIR__ . '/../../../../static/dbstructure.config.php';
 
 class HttpClient extends BaseFactory
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Profiler */
-	private $profiler;
-	/** @var App\BaseURL */
-	private $baseUrl;
-
-	public function __construct(LoggerInterface $logger, IManageConfigValues $config, Profiler $profiler, App\BaseURL $baseUrl)
+	public function __construct(LoggerInterface $logger, private IManageConfigValues $config, private Profiler $profiler, private App\BaseURL $baseUrl)
 	{
 		parent::__construct($logger);
-		$this->config   = $config;
-		$this->profiler = $profiler;
-		$this->baseUrl  = $baseUrl;
 	}
 
 	/**

@@ -33,12 +33,6 @@ use Psr\Log\LoggerInterface;
  */
 class InstanceV2 extends BaseApi
 {
-	/** @var Database */
-	private $database;
-
-	/** @var IManageConfigValues */
-	private $config;
-
 	/** @var Header */
 	private $contactHeader;
 
@@ -51,16 +45,13 @@ class InstanceV2 extends BaseApi
 		LoggerInterface $logger,
 		Profiler $profiler,
 		ApiResponse $response,
-		Database $database,
-		IManageConfigValues $config,
+		private Database $database,
+		private IManageConfigValues $config,
 		array $server,
 		array $parameters = []
 	) {
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->database      = $database;
-		$this->config        = $config;
-		$this->contactHeader = new Header($config);
+		$this->contactHeader = new Header($this->config);
 	}
 
 	/**

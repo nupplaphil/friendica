@@ -41,16 +41,10 @@ class Acl extends BaseModule
 	const TYPE_PRIVATE_MESSAGE        = 'm';
 	const TYPE_ANY_CONTACT            = 'a';
 
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $database;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		Database $database,
-		IHandleUserSessions $session,
-		EventDispatcherInterface $eventDispatcher,
+		private Database $database,
+		private IHandleUserSessions $session,
+		private EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -61,10 +55,6 @@ class Acl extends BaseModule
 		array $parameters = []
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session         = $session;
-		$this->database        = $database;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])

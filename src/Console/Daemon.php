@@ -29,15 +29,6 @@ use RuntimeException;
  */
 final class Daemon extends Console
 {
-	private Mode $mode;
-	private IManageConfigValues $config;
-	private IManageKeyValuePairs $keyValue;
-	private BasePath $basePath;
-	private System $system;
-	private LoggerInterface $logger;
-	private Database $dba;
-	private SysDaemon $daemon;
-
 	/**
 	 * @param Mode                 $mode
 	 * @param IManageConfigValues  $config
@@ -49,18 +40,9 @@ final class Daemon extends Console
 	 * @param SysDaemon            $daemon
 	 * @param array|null           $argv
 	 */
-	public function __construct(Mode $mode, IManageConfigValues $config, IManageKeyValuePairs $keyValue, BasePath $basePath, System $system, LoggerInterface $logger, Database $dba, SysDaemon $daemon, array $argv = null)
+	public function __construct(private Mode $mode, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private BasePath $basePath, private System $system, private LoggerInterface $logger, private Database $dba, private SysDaemon $daemon, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->mode     = $mode;
-		$this->config   = $config;
-		$this->keyValue = $keyValue;
-		$this->basePath = $basePath;
-		$this->system   = $system;
-		$this->logger   = $logger;
-		$this->dba      = $dba;
-		$this->daemon   = $daemon;
 	}
 
 	protected function getHelp(): string

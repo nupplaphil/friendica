@@ -20,17 +20,11 @@ class Cache
 	private $config = [];
 
 	/**
-	 * @var bool
-	 */
-	private $hidePasswordOutput;
-
-	/**
 	 * @param bool $hidePasswordOutput True, if cache variables should take extra care of password values
 	 */
-	public function __construct(bool $hidePasswordOutput = true)
-	{
-		$this->hidePasswordOutput = $hidePasswordOutput;
-	}
+	public function __construct(private bool $hidePasswordOutput = true)
+				{
+							}
 
 	/**
 	 * Tries to load the specified configuration array into the user specific config array.

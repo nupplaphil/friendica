@@ -36,40 +36,20 @@ final class ATProtocol
 	public const STATUS_PDS_FAIL   = 12;
 	public const STATUS_TOKEN_FAIL = 13;
 
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var Database */
-	private $db;
-
-	/** @var \Friendica\Core\Config\Capability\IManageConfigValues */
-	private $config;
-
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-
-	/** @var ICanSendHttpRequests */
-	private $httpClient;
-
 	private ?int $uid = null;
 
 	/**
-	 * Initialize the AT Protocol service.
-	 *
-	 * @param LoggerInterface $logger
-	 * @param Database $database
-	 * @param IManageConfigValues $config
-	 * @param IManagePersonalConfigValues $pConfig
-	 * @param ICanSendHttpRequests $httpClient
-	 */
-	public function __construct(LoggerInterface $logger, Database $database, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, ICanSendHttpRequests $httpClient)
-	{
-		$this->logger     = $logger;
-		$this->db         = $database;
-		$this->config     = $config;
-		$this->pConfig    = $pConfig;
-		$this->httpClient = $httpClient;
-	}
+				 * Initialize the AT Protocol service.
+				 *
+				 * @param LoggerInterface $logger
+				 * @param Database $db
+				 * @param IManageConfigValues $config
+				 * @param IManagePersonalConfigValues $pConfig
+				 * @param ICanSendHttpRequests $httpClient
+				 */
+				public function __construct(private LoggerInterface $logger, private Database $db, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private ICanSendHttpRequests $httpClient)
+				{
+							}
 
 	/**
 	 * Get the AppView API URL

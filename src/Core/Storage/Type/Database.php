@@ -22,16 +22,12 @@ class Database implements ICanWriteToStorage
 {
 	const NAME = 'Database';
 
-	/** @var DBA */
-	private $dba;
-
 	/**
 	 * @param DBA             $dba
 	 */
-	public function __construct(DBA $dba)
-	{
-		$this->dba = $dba;
-	}
+	public function __construct(private DBA $dba)
+				{
+							}
 
 	/**
 	 * @inheritDoc

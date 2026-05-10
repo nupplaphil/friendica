@@ -27,26 +27,12 @@ use Psr\Log\LoggerInterface;
 class FormattedNavNotification extends BaseFactory
 {
 	private static $contacts = [];
-
-	/** @var Notification */
-	private $notification;
-	/** @var \Friendica\App\BaseURL */
-	private $baseUrl;
-	/** @var \Friendica\Core\L10n */
-	private $l10n;
-	/** @var IHandleUserSessions */
-	private $userSession;
 	/** @var string */
 	private $tpl;
 
-	public function __construct(Notification $notification, \Friendica\App\BaseURL $baseUrl, \Friendica\Core\L10n $l10n, LoggerInterface $logger, IHandleUserSessions $userSession)
+	public function __construct(private Notification $notification, private \Friendica\App\BaseURL $baseUrl, private \Friendica\Core\L10n $l10n, LoggerInterface $logger, private IHandleUserSessions $userSession)
 	{
 		parent::__construct($logger);
-
-		$this->notification = $notification;
-		$this->baseUrl      = $baseUrl;
-		$this->l10n         = $l10n;
-		$this->userSession  = $userSession;
 
 		$this->tpl = Renderer::getMarkupTemplate('notifications/nav/notify.tpl');
 	}

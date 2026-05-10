@@ -22,11 +22,6 @@ class WorkerLogger implements LoggerInterface, DefaultContextLogger
 	const WORKER_ID_LENGTH = 7;
 
 	/**
-	 * @var LoggerInterface The original Logger instance
-	 */
-	private $logger;
-
-	/**
 	 * @var string the current worker ID
 	 */
 	private $workerId;
@@ -43,9 +38,8 @@ class WorkerLogger implements LoggerInterface, DefaultContextLogger
 	 *
 	 * @throws LoggerException
 	 */
-	public function __construct(LoggerInterface $logger)
+	public function __construct(private LoggerInterface $logger)
 	{
-		$this->logger = $logger;
 		try {
 			$this->workerId = Strings::getRandomHex(self::WORKER_ID_LENGTH);
 		} catch (\Exception $exception) {

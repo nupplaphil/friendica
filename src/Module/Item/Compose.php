@@ -39,41 +39,9 @@ use Psr\Log\LoggerInterface;
 
 class Compose extends BaseModule
 {
-	/** @var SystemMessages */
-	private $systemMessages;
-
-	/** @var ACLFormatter */
-	private $ACLFormatter;
-
-	/** @var Page */
-	private $page;
-
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-
-	/** @var IManageConfigValues */
-	private $config;
-
-	/** @var UserSession */
-	private $session;
-
-	/** @var AppHelper */
-	private $appHelper;
-
-	private EventDispatcherInterface $eventDispatcher;
-
-	public function __construct(EventDispatcherInterface $eventDispatcher, AppHelper $appHelper, UserSession $session, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, Page $page, ACLFormatter $ACLFormatter, SystemMessages $systemMessages, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private EventDispatcherInterface $eventDispatcher, private AppHelper $appHelper, private UserSession $session, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Page $page, private ACLFormatter $ACLFormatter, private SystemMessages $systemMessages, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->systemMessages  = $systemMessages;
-		$this->ACLFormatter    = $ACLFormatter;
-		$this->page            = $page;
-		$this->pConfig         = $pConfig;
-		$this->config          = $config;
-		$this->session         = $session;
-		$this->appHelper       = $appHelper;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])

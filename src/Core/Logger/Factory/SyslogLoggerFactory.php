@@ -24,17 +24,9 @@ use Psr\Log\LoggerInterface;
  */
 final class SyslogLoggerFactory implements LoggerFactory
 {
-	private IManageConfigValues $config;
-
-	private IHaveCallIntrospections $introspection;
-
-	public function __construct(
-		IManageConfigValues $config,
-		IHaveCallIntrospections $introspection
-	) {
-		$this->config        = $config;
-		$this->introspection = $introspection;
-	}
+	public function __construct(private IManageConfigValues $config, private IHaveCallIntrospections $introspection)
+				{
+							}
 
 	/**
 	 * Creates and returns a PSR-3 Logger instance.

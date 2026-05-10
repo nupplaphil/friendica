@@ -25,26 +25,9 @@ use Psr\Log\LoggerInterface;
 
 class Notification extends BaseModule
 {
-	/** @var Introduction */
-	private $introductionRepo;
-	/** @var Repository\Notification */
-	private $notificationRepo;
-	/** @var Repository\Notify */
-	private $notifyRepo;
-	/** @var IManagePersonalConfigValues */
-	private $pconfig;
-	/** @var Factory\Notification */
-	private $notificationFactory;
-
-	public function __construct(Introduction $introductionRepo, Repository\Notification $notificationRepo, Factory\Notification $notificationFactory, Repository\Notify $notifyRepo, IManagePersonalConfigValues $pconfig, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private Introduction $introductionRepo, private Repository\Notification $notificationRepo, private Factory\Notification $notificationFactory, private Repository\Notify $notifyRepo, private IManagePersonalConfigValues $pconfig, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->introductionRepo    = $introductionRepo;
-		$this->notificationRepo    = $notificationRepo;
-		$this->notificationFactory = $notificationFactory;
-		$this->notifyRepo          = $notifyRepo;
-		$this->pconfig             = $pconfig;
 	}
 
 	/**

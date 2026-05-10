@@ -27,23 +27,9 @@ use Psr\Log\LoggerInterface;
 
 class Notification extends BaseFactory implements ICanCreateFromTableRow
 {
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var LocalRelationship */
-	private $localRelationshipRepo;
-	/** @var ICanCache */
-	private $cache;
-
-	public function __construct(\Friendica\App\BaseURL $baseUrl, \Friendica\Core\L10n $l10n, \Friendica\Contact\LocalRelationship\Repository\LocalRelationship $localRelationshipRepo, LoggerInterface $logger, ICanCache $cache)
+	public function __construct(private \Friendica\App\BaseURL $baseUrl, private \Friendica\Core\L10n $l10n, private \Friendica\Contact\LocalRelationship\Repository\LocalRelationship $localRelationshipRepo, LoggerInterface $logger, private ICanCache $cache)
 	{
 		parent::__construct($logger);
-
-		$this->baseUrl = $baseUrl;
-		$this->l10n = $l10n;
-		$this->localRelationshipRepo = $localRelationshipRepo;
-		$this->cache = $cache;
 	}
 
 	public function createFromTableRow(array $row): Entity\Notification

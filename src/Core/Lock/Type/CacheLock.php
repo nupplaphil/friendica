@@ -22,19 +22,13 @@ class CacheLock extends AbstractLock
 	public const CACHE_PREFIX = 'lock:';
 
 	/**
-	 * @var ICanCacheInMemory
-	 */
-	private $cache;
-
-	/**
 	 * CacheLock constructor.
 	 *
 	 * @param ICanCacheInMemory $cache The CacheDriver for this type of lock
 	 */
-	public function __construct(ICanCacheInMemory $cache)
-	{
-		$this->cache = $cache;
-	}
+	public function __construct(private ICanCacheInMemory $cache)
+				{
+							}
 
 	/**
 	 * (@inheritdoc)

@@ -34,23 +34,16 @@ use Psr\Log\LoggerInterface;
  */
 class RemoteFollow extends BaseModule
 {
-	/** @var SystemMessages */
-	private $systemMessages;
 	/** @var Page */
 	protected $page;
-	/** @var IHandleUserSessions */
-	private $userSession;
 
 	/** @var array */
 	protected $owner;
 
-	public function __construct(IHandleUserSessions $userSession, SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, App\Page $page, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private IHandleUserSessions $userSession, private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, App\Page $page, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->systemMessages = $systemMessages;
 		$this->page           = $page;
-		$this->userSession    = $userSession;
 
 		$this->owner = User::getOwnerDataByNick($this->parameters['nickname']);
 		if (!$this->owner) {

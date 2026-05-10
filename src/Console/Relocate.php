@@ -17,19 +17,6 @@ class Relocate extends Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-	/**
-	 * @var \Friendica\App\BaseURL
-	 */
-	private $baseUrl;
-	/**
-	 * @var \Friendica\Database\Database
-	 */
-	private $database;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -51,13 +38,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(\Friendica\App\BaseURL $baseUrl, \Friendica\Database\Database $database, IManageConfigValues $config, $argv = null)
+	public function __construct(private \Friendica\App\BaseURL $baseUrl, private \Friendica\Database\Database $database, private IManageConfigValues $config, $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->baseUrl  = $baseUrl;
-		$this->database = $database;
-		$this->config   = $config;
 	}
 
 	protected function doExecute(): int

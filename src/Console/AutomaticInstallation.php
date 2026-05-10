@@ -20,15 +20,6 @@ use RuntimeException;
 
 class AutomaticInstallation extends Console
 {
-	/** @var Mode */
-	private $appMode;
-	/** @var \Friendica\Core\Config\ValueObject\Cache */
-	private $configCache;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Database */
-	private $dba;
-
 	protected function getHelp()
 	{
 		return <<<HELP
@@ -86,14 +77,9 @@ Examples
 HELP;
 	}
 
-	public function __construct(Mode $appMode, Cache $configCache, IManageConfigValues $config, Database $dba, array $argv = null)
+	public function __construct(private Mode $appMode, private Cache $configCache, private IManageConfigValues $config, private Database $dba, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode     = $appMode;
-		$this->configCache = $configCache;
-		$this->config      = $config;
-		$this->dba         = $dba;
 	}
 
 	protected function doExecute(): int

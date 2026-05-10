@@ -52,31 +52,9 @@ class Nav
 	 */
 	private $appMenu = null;
 
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $database;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Router */
-	private $router;
-
-	private EventDispatcherInterface $eventDispatcher;
-
-	public function __construct(BaseURL $baseUrl, L10n $l10n, IHandleUserSessions $session, Database $database, IManageConfigValues $config, Router $router, EventDispatcherInterface $eventDispatcher)
-	{
-		$this->baseUrl         = $baseUrl;
-		$this->l10n            = $l10n;
-		$this->session         = $session;
-		$this->database        = $database;
-		$this->config          = $config;
-		$this->router          = $router;
-		$this->eventDispatcher = $eventDispatcher;
-	}
+	public function __construct(private BaseURL $baseUrl, private L10n $l10n, private IHandleUserSessions $session, private Database $database, private IManageConfigValues $config, private Router $router, private EventDispatcherInterface $eventDispatcher)
+				{
+							}
 
 	/**
 	 * Set a menu item in navbar as selected

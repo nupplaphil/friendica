@@ -56,18 +56,12 @@ class Cache
 	private $delConfig = [];
 
 	/**
-	 * @var bool
-	 */
-	private $hidePasswordOutput;
-
-	/**
 	 * @param array $config             A initial config array
 	 * @param bool  $hidePasswordOutput True, if cache variables should take extra care of password values
 	 * @param int   $source             Sets a source of the initial config values
 	 */
-	public function __construct(array $config = [], bool $hidePasswordOutput = true, int $source = self::SOURCE_DEFAULT)
+	public function __construct(array $config = [], private bool $hidePasswordOutput = true, int $source = self::SOURCE_DEFAULT)
 	{
-		$this->hidePasswordOutput = $hidePasswordOutput;
 		$this->load($config, $source);
 	}
 

@@ -18,17 +18,14 @@ use Friendica\Util\DateTimeFormat;
  */
 final class Activity
 {
-	private Database $dba;
-
 	/**
 	 * ActivityRepository constructor.
 	 *
 	 * @param Database $dba
 	 */
-	public function __construct(Database $dba)
-	{
-		$this->dba = $dba;
-	}
+	public function __construct(private Database $dba)
+				{
+							}
 
 	/**
 	 * Find an activity by uid and network.

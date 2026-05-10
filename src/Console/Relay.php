@@ -23,11 +23,6 @@ class Relay extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Database
-	 */
-	private $dba;
-
 
 	protected function getHelp()
 	{
@@ -56,11 +51,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(\Friendica\Database\Database $dba, array $argv = null)
+	public function __construct(private \Friendica\Database\Database $dba, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->dba = $dba;
 	}
 
 	protected function doExecute(): int

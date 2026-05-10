@@ -31,26 +31,17 @@ use Psr\Log\LoggerInterface;
  */
 final class ChannelPost
 {
-	private LoggerInterface $logger;
-	private UserDefinedChannel $channelRepository;
-	private Database $dba;
-	private IManageConfigValues $config;
-
 	/**
-	 * ChannelPost constructor.
-	 *
-	 * @param Database $dba Database access object.
-	 * @param UserDefinedChannel $channel Channel repository.
-	 * @param LoggerInterface $logger Logger instance.
-	 * @param IManageConfigValues $config Configuration manager.
-	 */
-	public function __construct(Database $dba, UserDefinedChannel $channel, LoggerInterface $logger, IManageConfigValues $config)
-	{
-		$this->dba               = $dba;
-		$this->logger            = $logger;
-		$this->channelRepository = $channel;
-		$this->config            = $config;
-	}
+				 * ChannelPost constructor.
+				 *
+				 * @param Database $dba Database access object.
+				 * @param UserDefinedChannel $channelRepository Channel repository.
+				 * @param LoggerInterface $logger Logger instance.
+				 * @param IManageConfigValues $config Configuration manager.
+				 */
+				public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config)
+				{
+							}
 
 	/**
 	 * Add a post to matching user-defined channels.

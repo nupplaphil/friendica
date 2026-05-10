@@ -26,22 +26,9 @@ use Psr\Log\LoggerInterface;
  */
 class Login extends BaseModule
 {
-	/** @var Authentication */
-	private $auth;
-
-	/** @var IManageConfigValues */
-	private $config;
-
-	/** @var IHandleUserSessions */
-	private $session;
-
-	public function __construct(Authentication $auth, IManageConfigValues $config, IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private Authentication $auth, private IManageConfigValues $config, private IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->auth    = $auth;
-		$this->config  = $config;
-		$this->session = $session;
 	}
 
 	protected function content(array $request = []): string

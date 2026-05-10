@@ -31,11 +31,6 @@ class MemcachedCache extends AbstractCache implements ICanCacheInMemory
 	private $memcached;
 
 	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
 	 * Due to limitations of the INI format, the expected configuration for Memcached servers is the following:
 	 * array {
 	 *   0 => "hostname, port(, weight)",
@@ -49,15 +44,13 @@ class MemcachedCache extends AbstractCache implements ICanCacheInMemory
 	 * @throws InvalidCacheDriverException
 	 * @throws CachePersistenceException
 	 */
-	public function __construct(string $hostname, IManageConfigValues $config, LoggerInterface $logger)
+	public function __construct(string $hostname, IManageConfigValues $config, private LoggerInterface $logger)
 	{
 		if (!class_exists('Memcached', false)) {
 			throw new InvalidCacheDriverException('Memcached class isn\'t available');
 		}
 
 		parent::__construct($hostname);
-
-		$this->logger = $logger;
 
 		$this->memcached = new Memcached();
 

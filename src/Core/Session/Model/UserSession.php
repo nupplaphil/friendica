@@ -17,15 +17,12 @@ use Friendica\Model\User;
  */
 class UserSession implements IHandleUserSessions
 {
-	/** @var IHandleSessions */
-	private $session;
 	/** @var int|bool saves the public Contact ID for later usage */
 	protected $publicContactId = false;
 
-	public function __construct(IHandleSessions $session)
-	{
-		$this->session = $session;
-	}
+	public function __construct(private IHandleSessions $session)
+				{
+							}
 
 	/** {@inheritDoc} */
 	public function getLocalUserId()

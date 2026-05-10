@@ -30,33 +30,26 @@ class Lock
 	 */
 	const DEFAULT_DRIVER = 'default';
 
-	/**
-	 * @var IManageConfigValues The configuration to read parameters out of the config
-	 */
-	private $config;
-
-	/**
-	 * @var Database The database connection in case that the cache is used the dba connection
-	 */
-	private $dba;
-
-	/**
-	 * @var Cache The memory cache driver in case we use it
-	 */
-	private $cacheFactory;
-
-	/**
-	 * @var LoggerInterface The Friendica Logger
-	 */
-	private $logger;
-
-	public function __construct(Cache $cacheFactory, IManageConfigValues $config, Database $dba, LoggerInterface $logger)
-	{
-		$this->cacheFactory = $cacheFactory;
-		$this->config       = $config;
-		$this->dba          = $dba;
-		$this->logger       = $logger;
-	}
+	public function __construct(
+								/**
+								 * @var Cache The memory cache driver in case we use it
+								 */
+								private Cache $cacheFactory,
+								/**
+								 * @var IManageConfigValues The configuration to read parameters out of the config
+								 */
+								private IManageConfigValues $config,
+								/**
+								 * @var Database The database connection in case that the cache is used the dba connection
+								 */
+								private Database $dba,
+								/**
+								 * @var LoggerInterface The Friendica Logger
+								 */
+								private LoggerInterface $logger
+							)
+							{
+										}
 
 	public function create()
 	{

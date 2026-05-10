@@ -30,22 +30,9 @@ use Psr\Log\LoggerInterface;
  */
 class Instance extends BaseApi
 {
-	/** @var Database */
-	private $database;
-
-	/** @var IManageConfigValues */
-	private $config;
-
-	/** @var AccountFactory */
-	private $accountFactory;
-
-	public function __construct(AccountFactory $accountFactory, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, Database $database, IManageConfigValues $config, array $server, array $parameters = [])
+	public function __construct(private AccountFactory $accountFactory, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, private Database $database, private IManageConfigValues $config, array $server, array $parameters = [])
 	{
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->database = $database;
-		$this->config = $config;
-		$this->accountFactory = $accountFactory;
 	}
 
 	/**

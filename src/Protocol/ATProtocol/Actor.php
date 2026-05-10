@@ -24,15 +24,6 @@ use Psr\Log\LoggerInterface;
  */
 class Actor
 {
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var ATProtocol */
-	private $atprotocol;
-
-	/** @var \Friendica\Core\Config\Capability\IManageConfigValues */
-	private $config;
-
 	/**
 	 * Initialize the actor service.
 	 *
@@ -40,12 +31,9 @@ class Actor
 	 * @param ATProtocol $atprotocol
 	 * @param IManageConfigValues $config
 	 */
-	public function __construct(LoggerInterface $logger, ATProtocol $atprotocol, IManageConfigValues $config)
-	{
-		$this->logger     = $logger;
-		$this->atprotocol = $atprotocol;
-		$this->config     = $config;
-	}
+	public function __construct(private LoggerInterface $logger, private ATProtocol $atprotocol, private IManageConfigValues $config)
+				{
+							}
 
 	/**
 	 * Synchronize the contacts (followers, sharers) for the given user

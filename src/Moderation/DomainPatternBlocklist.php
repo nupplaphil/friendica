@@ -16,13 +16,9 @@ use Friendica\Util\Emailer;
 
 class DomainPatternBlocklist
 {
-	/** @var IManageConfigValues */
-	private $config;
-
-	public function __construct(IManageConfigValues $config)
-	{
-		$this->config = $config;
-	}
+	public function __construct(private IManageConfigValues $config)
+				{
+							}
 
 	public function get(): array
 	{

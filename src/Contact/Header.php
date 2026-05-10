@@ -11,13 +11,9 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 
 class Header
 {
-	/** @var IManageConfigValues */
-	private $config;
-
-	public function __construct(IManageConfigValues $config)
-	{
-		$this->config = $config;
-	}
+	public function __construct(private IManageConfigValues $config)
+				{
+							}
 
 	/**
 	 * Returns the Mastodon banner path relative to the Friendica folder.

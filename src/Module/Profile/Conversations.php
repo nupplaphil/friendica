@@ -43,35 +43,9 @@ use Psr\Log\LoggerInterface;
 
 class Conversations extends BaseProfile
 {
-	/** @var AppHelper */
-	private $appHelper;
-	/** @var Page */
-	private $page;
-	/** @var DateTimeFormat */
-	private $dateTimeFormat;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Conversation */
-	private $conversation;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var Mode */
-	private $mode;
-
-	public function __construct(Mode $mode, IManagePersonalConfigValues $pConfig, Conversation $conversation, IHandleUserSessions $session, IManageConfigValues $config, DateTimeFormat $dateTimeFormat, Page $page, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private Mode $mode, private IManagePersonalConfigValues $pConfig, private Conversation $conversation, private IHandleUserSessions $session, private IManageConfigValues $config, private DateTimeFormat $dateTimeFormat, private Page $page, private AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->appHelper      = $appHelper;
-		$this->page           = $page;
-		$this->dateTimeFormat = $dateTimeFormat;
-		$this->config         = $config;
-		$this->session        = $session;
-		$this->conversation   = $conversation;
-		$this->pConfig        = $pConfig;
-		$this->mode           = $mode;
 	}
 
 	protected function content(array $request = []): string

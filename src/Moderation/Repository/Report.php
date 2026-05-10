@@ -25,18 +25,12 @@ final class Report extends \Friendica\BaseRepository
 
 	/** @var ReportFactory */
 	protected $factory;
-	/** @var PostFactory */
-	protected $postFactory;
-	/** @var RuleFactory */
-	protected $ruleFactory;
 
-	public function __construct(Database $database, LoggerInterface $logger, ReportFactory $factory, PostFactory $postFactory, RuleFactory $ruleFactory)
+	public function __construct(Database $database, LoggerInterface $logger, ReportFactory $factory, protected PostFactory $postFactory, protected RuleFactory $ruleFactory)
 	{
 		parent::__construct($database, $logger, $factory);
 
 		$this->factory     = $factory;
-		$this->postFactory = $postFactory;
-		$this->ruleFactory = $ruleFactory;
 	}
 
 	public function selectOneById(int $lastInsertId): ReportEntity

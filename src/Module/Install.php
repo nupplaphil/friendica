@@ -54,23 +54,20 @@ class Install extends BaseModule
 	 */
 	private $currentWizardStep;
 
-	/**
-	 * @var Installer The installer
-	 */
-	private $installer;
-
 	/** @var Cache */
 	protected $configCache;
 	/** @var Mode */
 	protected $mode;
 
-	public function __construct(AppHelper $appHelper, BasePath $basePath, Mode $mode, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, Installer $installer, array $server, array $parameters = [])
+	public function __construct(AppHelper $appHelper, BasePath $basePath, Mode $mode, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, /**
+				 * @var Installer The installer
+				 */
+				private Installer $installer, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->configCache = $appHelper->getConfigCache();
 		$this->mode        = $mode;
-		$this->installer   = $installer;
 
 		if (!$this->mode->isInstall()) {
 			throw new HTTPException\ForbiddenException();

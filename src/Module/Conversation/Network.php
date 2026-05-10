@@ -90,7 +90,6 @@ class Network extends Timeline
 	protected $community;
 	/** @var NetworkFactory */
 	protected $networkFactory;
-	private EventDispatcherInterface $eventDispatcher;
 
 	public function __construct(
 		UserDefinedChannelFactory $userDefinedChannel,
@@ -99,7 +98,7 @@ class Network extends Timeline
 		ChannelFactory $channelFactory,
 		UserDefinedChannel $channel,
 		AppHelper $appHelper,
-		EventDispatcherInterface $eventDispatcher,
+		private EventDispatcherInterface $eventDispatcher,
 		TimelineFactory $timeline,
 		SystemMessages $systemMessages,
 		Mode $mode,
@@ -140,7 +139,6 @@ class Network extends Timeline
 		);
 
 		$this->appHelper          = $appHelper;
-		$this->eventDispatcher    = $eventDispatcher;
 		$this->timeline           = $timeline;
 		$this->systemMessages     = $systemMessages;
 		$this->conversation       = $conversation;

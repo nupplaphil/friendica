@@ -19,9 +19,6 @@ class SampleStorageBackend implements ICanWriteToStorage
 {
 	const NAME = 'Sample Storage';
 
-	/** @var L10n */
-	private $l10n;
-
 	/** @var array */
 	private $options = [
 		'filename' => [
@@ -43,10 +40,9 @@ class SampleStorageBackend implements ICanWriteToStorage
 	 * You can add here every dynamic class as dependency you like and add them to a private field
 	 * Friendica automatically creates these classes and passes them as argument to the constructor
 	 */
-	public function __construct(L10n $l10n)
-	{
-		$this->l10n = $l10n;
-	}
+	public function __construct(private L10n $l10n)
+				{
+							}
 
 	public function get(string $reference): string
 	{

@@ -24,17 +24,9 @@ use Psr\Log\LoggerInterface;
 
 class Contacts extends BaseModule
 {
-	/** @var IHandleUserSessions */
-	private $userSession;
-	/** @var App\Page */
-	private $page;
-
-	public function __construct(App\Page $page, IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private App\Page $page, private IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->userSession = $userSession;
-		$this->page        = $page;
 	}
 
 	protected function content(array $request = []): string

@@ -25,20 +25,9 @@ use Psr\Log\LoggerInterface;
 
 class Redir extends \Friendica\BaseModule
 {
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $database;
-	/** @var AppHelper */
-	private $appHelper;
-
-	public function __construct(AppHelper $appHelper, Database $database, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private AppHelper $appHelper, private Database $database, private IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session    = $session;
-		$this->database   = $database;
-		$this->appHelper  = $appHelper;
 	}
 
 	protected function rawContent(array $request = [])

@@ -32,11 +32,9 @@ abstract class BaseUsers extends BaseModeration
 	/** @var Database */
 	protected $database;
 
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
 		Database $database,
-		EventDispatcherInterface $eventDispatcher,
+		private EventDispatcherInterface $eventDispatcher,
 		Page $page,
 		AppHelper $appHelper,
 		SystemMessages $systemMessages,
@@ -53,7 +51,6 @@ abstract class BaseUsers extends BaseModeration
 		parent::__construct($page, $appHelper, $systemMessages, $session, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->database        = $database;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	/**
