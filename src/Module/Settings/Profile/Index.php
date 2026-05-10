@@ -264,6 +264,21 @@ class Index extends BaseSettings
 			$homepage_help_text = $this->t('To verify your homepage, add a rel="me" link to it, pointing to your profile URL (%s).', $owner['url']);
 		}
 
+		// Title text for the BBCode buttons
+		$bb_l10n = [
+			'edbold'   => $this->t('Bold'),
+			'editalic' => $this->t('Italic'),
+			'eduline'  => $this->t('Underline'),
+			'edembed'  => $this->t('Embed'),
+			'edquote'  => $this->t('Quote'),
+			'edemojis' => $this->t('Add emojis'),
+			'edcode'   => $this->t('Code'),
+			'edimg'    => $this->t('Image'),
+			'edemb'    => $this->t('Image'),
+			'edurl'    => $this->t('Link'),
+			'edattach' => $this->t('Link or Media'),
+		];
+
 		$tpl = Renderer::getMarkupTemplate('settings/profile/index.tpl');
 		$o .= Renderer::replaceMacros($tpl, [
 			'$l10n' => [
@@ -302,7 +317,7 @@ class Index extends BaseSettings
 
 			'$nickname'      => $owner['nickname'],
 			'$username'      => ['username', $this->t('Display name:'), $owner['name']],
-			'$about'         => ['about', $this->t('Description:'), $owner['about'], '', '', 'rows="8"', true],
+			'$about'         => ['about', $this->t('Description:'), $owner['about'], '', '', 'rows="8"', true, $bb_l10n],
 			'$dob'           => Temporal::getDateofBirthField($owner['dob'], $owner['timezone']),
 			'$address'       => ['address', $this->t('Street Address:'), $owner['address']],
 			'$locality'      => ['locality', $this->t('Locality/City:'), $owner['locality']],

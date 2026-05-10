@@ -12,34 +12,34 @@
 	{{if $field.6}} {{* BBCode buttons *}}
 		<div class="comment-icon-list">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default icon bb-img" style="cursor: pointer;" title="{{$edimg}}" data-role="insert-formatting" data-comment=" " data-bbcode="img" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon bb-img" style="cursor: pointer;" title="{{$field.7.edimg}}" data-role="insert-formatting" data-comment=" " data-bbcode="img" data-id="id_{{$field.0}}">
 					<i class="fa fa-picture-o"></i>
 				</button>
-				<button type="button" class="btn btn-default emojis" style="cursor: pointer;" aria-label="{{$edemojis}}" title="{{$edemojis}}">
+				<button type="button" class="btn btn-default emojis" style="cursor: pointer;" aria-label="{{$field.7.edemojis}}" title="{{$edemojis}}">
 					<i class="fa fa-smile-o"></i>
 				</button>
 			</div>
 
 			<div class="btn-group">
-				<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$field.7.edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="id_{{$field.0}}">
 					<i class="fa fa-link"></i>
 				</button>
-				<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$field.7.edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="id_{{$field.0}}">
 					<i class="fa fa-play"></i>
 				</button>
-				<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$field.7.eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="id_{{$field.0}}">
 					<i class="fa fa-underline"></i>
 				</button>
-				<button type="button" class="btn btn-default icon italic" style="cursor: pointer;" title="{{$editalic}}" data-role="insert-formatting" data-comment=" " data-bbcode="i" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon italic" style="cursor: pointer;" title="{{$field.7.editalic}}" data-role="insert-formatting" data-comment=" " data-bbcode="i" data-id="id_{{$field.0}}">
 					<i class="fa fa-italic"></i>
 				</button>
-				<button type="button" class="btn btn-default icon bold" style="cursor: pointer;"  title="{{$edbold}}" data-role="insert-formatting" data-comment=" " data-bbcode="b" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon bold" style="cursor: pointer;"  title="{{$field.7.edbold}}" data-role="insert-formatting" data-comment=" " data-bbcode="b" data-id="id_{{$field.0}}">
 					<i class="fa fa-bold"></i>
 				</button>
-				<button type="button" class="btn btn-default icon quote" style="cursor: pointer;" title="{{$edquote}}" data-role="insert-formatting" data-comment=" " data-bbcode="quote" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon quote" style="cursor: pointer;" title="{{$field.7.edquote}}" data-role="insert-formatting" data-comment=" " data-bbcode="quote" data-id="id_{{$field.0}}">
 					<i class="fa fa-quote-left"></i>
 				</button>
-				<button type="button" class="btn btn-default icon code" style="cursor: pointer;" title="{{$edcode}}" data-role="insert-formatting" data-comment=" " data-bbcode="code" data-id="id_{{$field.0}}">
+				<button type="button" class="btn btn-default icon code" style="cursor: pointer;" title="{{$field.7.edcode}}" data-role="insert-formatting" data-comment=" " data-bbcode="code" data-id="id_{{$field.0}}">
 					<i class="fa fa-code"></i>
 				</button>
 			</div>
