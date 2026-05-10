@@ -432,17 +432,17 @@ class Item
 
 		if ($this->userSession->getLocalUserId()) {
 			$menu = [
-				$this->l10n->t('Follow Thread')                               => $sub_link,
-				$this->l10n->t('Complete Thread')                             => $complete_url,
+				$this->l10n->t('Turn on notifications for this post')         => $sub_link,
+				$this->l10n->t('Fetch more replies')                          => $complete_url,
 				$this->l10n->t('View Status')                                 => $status_link,
 				$this->l10n->t('View Profile')                                => $profile_link,
 				$this->l10n->t('View Photos')                                 => $photos_link,
 				$this->l10n->t('Network Posts')                               => $posts_link,
 				$this->l10n->t('View Contact')                                => $contact_url,
 				$this->l10n->t('Message')                                     => $pm_url,
-				$this->l10n->t('Block')                                       => $block_link,
-				$this->l10n->t('Ignore')                                      => $ignore_link,
 				$this->l10n->t('Collapse')                                    => $collapse_link,
+				$this->l10n->t('Ignore user')                                 => $ignore_link,
+				$this->l10n->t('Block user')                                  => $block_link,
 				$this->l10n->t("Ignore %s server", $authorBaseUri->getHost()) => $ignoreserver_link,
 			];
 

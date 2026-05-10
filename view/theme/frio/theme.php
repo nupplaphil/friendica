@@ -248,7 +248,7 @@ function frio_display_item(&$arr)
 	) {
 		$followThread = [
 			'menu'   => 'follow_thread',
-			'title'  => DI::l10n()->t('Follow Thread'),
+			'title'  => DI::l10n()->t('Turn on notifications for this post'),
 			'action' => 'doFollowThread(' . $arr['item']['id'] . ');',
 			'href'   => '#',
 		];
@@ -265,7 +265,7 @@ function frio_display_item(&$arr)
 	) {
 		$completeThread = [
 			'menu'   => 'complete_thread',
-			'title'  => DI::l10n()->t('Complete Thread'),
+			'title'  => DI::l10n()->t('Fetch more replies'),
 			'action' => 'doCompleteThread(' . $arr['item']['uri-id'] . ');',
 			'href'   => '#',
 		];

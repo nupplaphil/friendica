@@ -228,9 +228,9 @@ class Post
 
 			if (Strings::compareLink(DI::session()->get('my_url'), $item['author-link'])) {
 				if ($item['event-id'] != 0) {
-					$edpost = ['calendar/event/edit/' . $item['event-id'], DI::l10n()->t('Edit')];
+					$edpost = ['calendar/event/edit/' . $item['event-id'], DI::l10n()->t('Edit event')];
 				} else {
-					$edpost = [sprintf('post/%s/edit', $item['id']), DI::l10n()->t('Edit')];
+					$edpost = [sprintf('post/%s/edit', $item['id']), DI::l10n()->t('Edit post')];
 				}
 			}
 			$dropping = in_array($item['uid'], [0, DI::userSession()->getLocalUserId()]);
@@ -250,7 +250,7 @@ class Post
 		$origin = $item['origin'] || $item['parent-origin'];
 
 		if (!empty($item['featured'])) {
-			$pinned = DI::l10n()->t('Pinned item');
+			$pinned = DI::l10n()->t('Pinned to your wall');
 		}
 
 		$drop         = false;
@@ -285,7 +285,7 @@ class Post
 				'author_id'  => $item['author-id'],
 			];
 			$report = [
-				'label' => DI::l10n()->t('Report post'),
+				'label' => DI::l10n()->t('Report this post'),
 				'href'  => 'moderation/report/create?' . http_build_query(['cid' => $item['author-id'], 'uri-ids' => [$item['uri-id']]]),
 			];
 			$authorBaseUri = new Uri($item['author-baseurl'] ?? '');
@@ -389,21 +389,23 @@ class Post
 				$ignored_thread = PostModel\ThreadUser::getIgnored($item['uri-id'], DI::userSession()->getLocalUserId());
 				if ($item['mention'] || $ignored_thread) {
 					$ignore_thread = [
-						'do'        => DI::l10n()->t('Ignore thread'),
-						'undo'      => DI::l10n()->t('Unignore thread'),
-						'toggle'    => DI::l10n()->t('Toggle ignore status'),
+						'do'   => DI::l10n()->t('Turn off related notifications'),
+						'undo' => DI::l10n()->t('Turn on related notifications'),
+						// NOTE: Toggle is currently unused
+						//'toggle'    => DI::l10n()->t('Toggle notifications for this post'),
 						'classdo'   => $ignored_thread ? 'hidden' : '',
 						'classundo' => $ignored_thread ? '' : 'hidden',
-						'ignored'   => DI::l10n()->t('Ignored'),
+						'ignored'   => DI::l10n()->t('Notifications turned off for this post'),
 					];
 				}
 
 				$isstarred = (($item['starred']) ? 'starred' : 'unstarred');
 
 				$star = [
-					'do'        => DI::l10n()->t('Add star'),
-					'undo'      => DI::l10n()->t('Remove star'),
-					'toggle'    => DI::l10n()->t('Toggle star status'),
+					'do'   => DI::l10n()->t('Bookmark'),
+					'undo' => DI::l10n()->t('Remove bookmark'),
+					// NOTE: Toggle is currently unused
+					//'toggle'    => DI::l10n()->t('Toggle bookmark status'),
 					'classdo'   => $item['starred'] ? 'hidden' : '',
 					'classundo' => $item['starred'] ? '' : 'hidden',
 					'starred'   => DI::l10n()->t('Starred'),
@@ -414,17 +416,18 @@ class Post
 						$ispinned = ($item['featured'] ? 'pinned' : 'unpinned');
 
 						$pin = [
-							'do'        => DI::l10n()->t('Pin'),
-							'undo'      => DI::l10n()->t('Unpin'),
-							'toggle'    => DI::l10n()->t('Toggle pin status'),
+							'do'   => DI::l10n()->t('Pin to your wall'),
+							'undo' => DI::l10n()->t('Unpin from your wall'),
+							// NOTE: Toggle is currently unused
+							//'toggle'    => DI::l10n()->t('Toggle pin status'),
 							'classdo'   => $item['featured'] ? 'hidden' : '',
 							'classundo' => $item['featured'] ? '' : 'hidden',
-							'pinned'    => DI::l10n()->t('Pinned'),
+							'pinned'    => DI::l10n()->t('Pinned to your wall'),
 						];
 					}
 
 					$tagger = [
-						'add'   => DI::l10n()->t('Add tag'),
+						'add'   => DI::l10n()->t('Add tag to post'),
 						'class' => '',
 					];
 				}
@@ -435,8 +438,8 @@ class Post
 
 		if ($conv->isWritable()) {
 			if ($likeable) {
-				$buttons['like']    = [DI::l10n()->t("I like this \x28toggle\x29"), DI::l10n()->t('Like')];
-				$buttons['dislike'] = [DI::l10n()->t("I don't like this \x28toggle\x29"), DI::l10n()->t('Dislike')];
+				$buttons['like']    = [DI::l10n()->t("I like this (toggle)"), DI::l10n()->t('Like')];
+				$buttons['dislike'] = [DI::l10n()->t("I don't like this (toggle)"), DI::l10n()->t('Dislike')];
 			}
 			if ($shareable) {
 				$buttons['share'] = [DI::l10n()->t('Quote share this'), DI::l10n()->t('Quote Share')];
