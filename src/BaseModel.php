@@ -29,7 +29,7 @@ abstract class BaseModel extends BaseDataTransferObject
 	 *
 	 * @var array
 	 */
-    private $originalData = [];
+	private $originalData = [];
 
 	/**
 	 * @param array           $data   Table row attributes
@@ -39,10 +39,10 @@ abstract class BaseModel extends BaseDataTransferObject
 				 * Child classes never have to interact directly with it.
 				 * Please use the magic getter instead.
 				 */
-				private array $data = [])
+		private array $data = [])
 	{
-		$this->dba = $dba;
-		$this->logger = $logger;
+		$this->dba          = $dba;
+		$this->logger       = $logger;
 		$this->originalData = $this->data;
 	}
 
@@ -65,8 +65,8 @@ abstract class BaseModel extends BaseDataTransferObject
 	 */
 	public static function createFromPrototype(BaseModel $prototype, array $data): BaseModel
 	{
-		$model = clone $prototype;
-		$model->data = $data;
+		$model               = clone $prototype;
+		$model->data         = $data;
 		$model->originalData = $data;
 
 		return $model;

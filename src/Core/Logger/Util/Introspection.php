@@ -30,7 +30,7 @@ class Introspection implements IHaveCallIntrospections
 	 */
 	public function __construct(Request $request, private array $skipClassesPartials = [], private int $skipStackFramesCount = 0)
 	{
-		$this->requestId            = $request->getRequestId();
+		$this->requestId = $request->getRequestId();
 	}
 
 	/**

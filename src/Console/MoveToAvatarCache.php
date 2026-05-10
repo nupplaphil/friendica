@@ -12,7 +12,6 @@ use Friendica\Contact\Avatar;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Protocol;
-use Friendica\Database\Database;
 use Friendica\Model\Contact;
 use Friendica\Model\Photo;
 use Friendica\Object\Image;
@@ -53,7 +52,7 @@ HELP;
 			return 2;
 		}
 
-		$fields = ['id', 'avatar', 'photo', 'thumb', 'micro', 'uri-id', 'url', 'avatar', 'network'];
+		$fields    = ['id', 'avatar', 'photo', 'thumb', 'micro', 'uri-id', 'url', 'avatar', 'network'];
 		$condition = ["NOT `self` AND `avatar` != ? AND `photo` LIKE ? AND `uid` = ? AND `uri-id` != ? AND NOT `uri-id` IS NULL AND NOT `network` IN (?, ?)",
 			'', $this->baseUrl . '/photo/%', 0, 0, Protocol::MAIL, Protocol::FEED];
 

@@ -59,40 +59,40 @@ final class Report extends \Friendica\BaseEntity
 
 	public function __construct(
 		/** @var int ID of the contact making a moderation report */
-								protected int $reporterCid,
+		protected int $reporterCid,
 		/** @var int ID of the contact being reported */
-								protected int $cid,
+		protected int $cid,
 		/** @var int ID of the gserver of the contact being reported */
-								protected int $gsid,
+		protected int $gsid,
 		/** @var \DateTimeImmutable When the report was created */
-								protected \DateTimeImmutable $created,
+		protected \DateTimeImmutable $created,
 		/** @var int One of CATEGORY_* */
-								protected int $category,
+		protected int $category,
 		/** @var int ID of the user making a moderation report, null in case of an incoming forwarded report */
-								protected ?int $reporterUid = null,
+		protected ?int $reporterUid = null,
 		/** @var string Reporter comment */
-								protected string $comment = '',
+		protected string $comment = '',
 		/** @var bool Whether this report should be forwarded to the remote server */
-								protected bool $forward = false,
+		protected bool $forward = false,
 		Collection\Report\Posts $posts = null,
 		Collection\Report\Rules $rules = null,
 		/** @var string Remarks shared with the reporter */
-								protected string $publicRemarks = '',
+		protected string $publicRemarks = '',
 		/** @var string Remarks shared with the moderation team */
-								protected string $privateRemarks = '',
+		protected string $privateRemarks = '',
 		/** @var \DateTimeImmutable|null When the report was last edited */
-								protected ?\DateTimeImmutable $edited = null,
+		protected ?\DateTimeImmutable $edited = null,
 		/** @var int One of STATUS_* */
-								protected int $status = self::STATUS_OPEN,
+		protected int $status = self::STATUS_OPEN,
 		/** @var int|null One of RESOLUTION_* if any */
-								protected ?int $resolution = null,
+		protected ?int $resolution = null,
 		/** @var int|null Assigned moderator user id if any */
-								protected ?int $assignedUid = null,
+		protected ?int $assignedUid = null,
 		/** @var int|null Last editor user ID if any */
-								protected ?int $lastEditorUid = null,
-		protected ?int $id = null
+		protected ?int $lastEditorUid = null,
+		protected ?int $id = null,
 	) {
-		$this->posts          = $posts ?? new Collection\Report\Posts();
-		$this->rules          = $rules ?? new Collection\Report\Rules();
+		$this->posts = $posts ?? new Collection\Report\Posts();
+		$this->rules = $rules ?? new Collection\Report\Rules();
 	}
 }

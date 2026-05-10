@@ -9,7 +9,6 @@ namespace Friendica\Test\Util;
 
 use Friendica\Core\Hook;
 use Friendica\Core\Storage\Capability\ICanWriteToStorage;
-
 use Friendica\Core\L10n;
 
 /**
@@ -17,7 +16,7 @@ use Friendica\Core\L10n;
  */
 class SampleStorageBackend implements ICanWriteToStorage
 {
-	const NAME = 'Sample Storage';
+	public const NAME = 'Sample Storage';
 
 	/** @var array */
 	private $options = [
@@ -40,9 +39,7 @@ class SampleStorageBackend implements ICanWriteToStorage
 	 * You can add here every dynamic class as dependency you like and add them to a private field
 	 * Friendica automatically creates these classes and passes them as argument to the constructor
 	 */
-	public function __construct(private L10n $l10n)
-				{
-							}
+	public function __construct(private L10n $l10n) {}
 
 	public function get(string $reference): string
 	{

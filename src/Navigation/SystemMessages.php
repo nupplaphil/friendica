@@ -21,9 +21,7 @@ use Friendica\Core\Session\Capability\IHandleSessions;
 
 class SystemMessages
 {
-	public function __construct(private IHandleSessions $session)
-				{
-							}
+	public function __construct(private IHandleSessions $session) {}
 
 	public function addNotice(string $message)
 	{

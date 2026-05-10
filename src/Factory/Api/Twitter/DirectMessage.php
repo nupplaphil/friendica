@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 class DirectMessage extends BaseFactory
 {
 	public function __construct(LoggerInterface $logger, private Database $dba, /** @var twitterUser entity */
-				private TwitterUser $twitterUser)
+		private TwitterUser $twitterUser)
 	{
 		parent::__construct($logger);
 	}
@@ -53,7 +53,7 @@ class DirectMessage extends BaseFactory
 				$text = HTML::toPlaintext(BBCode::convertForUriId($mail['uri-id'], $mail['body'], BBCode::TWITTER_API), 0);
 			}
 		} else {
-			$text  = $mail['title'] . "\n" . HTML::toPlaintext(BBCode::convertForUriId($mail['uri-id'], $mail['body'], BBCode::TWITTER_API), 0);
+			$text = $mail['title'] . "\n" . HTML::toPlaintext(BBCode::convertForUriId($mail['uri-id'], $mail['body'], BBCode::TWITTER_API), 0);
 		}
 
 		$pcid = Contact::getPublicIdByUserId($uid);

@@ -23,9 +23,7 @@ final class Activity
 	 *
 	 * @param Database $dba
 	 */
-	public function __construct(private Database $dba)
-				{
-							}
+	public function __construct(private Database $dba) {}
 
 	/**
 	 * Find an activity by uid and network.

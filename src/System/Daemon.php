@@ -38,9 +38,7 @@ final class Daemon
 		return $this->pidfile;
 	}
 
-	public function __construct(private LoggerInterface $logger, private Database $dba)
-				{
-							}
+	public function __construct(private LoggerInterface $logger, private Database $dba) {}
 
 	/**
 	 * Initialize the current daemon class with a given PID file

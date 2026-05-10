@@ -20,14 +20,12 @@ use Friendica\Database\Database as DBA;
  */
 class Database implements ICanWriteToStorage
 {
-	const NAME = 'Database';
+	public const NAME = 'Database';
 
 	/**
 	 * @param DBA             $dba
 	 */
-	public function __construct(private DBA $dba)
-				{
-							}
+	public function __construct(private DBA $dba) {}
 
 	/**
 	 * @inheritDoc

@@ -86,8 +86,7 @@ class Delegation extends BaseModule
 			if (!$this->db->isResult($user)
 				&& (
 					$orig_record['parent-uid'] && $orig_record['parent-uid'] === $identity
-					||
-					$orig_record['uid'] && $orig_record['uid'] === $identity
+					|| $orig_record['uid'] && $orig_record['uid'] === $identity
 				)
 			) {
 				$user = User::getById($identity);
@@ -107,7 +106,7 @@ class Delegation extends BaseModule
 		}
 
 		$this->eventDispatcher->dispatch(
-			new Event(Event::HOME_INIT)
+			new Event(Event::HOME_INIT),
 		);
 
 		$this->systemMessages->addNotice($this->t('You are now logged in as %s', $user['username']));
@@ -132,13 +131,13 @@ class Delegation extends BaseModule
 			$notifications = $this->notify->countForUser(
 				$identity['uid'],
 				["`msg` != '' AND NOT (`type` IN (?, ?)) AND NOT `seen`", Notification\Type::INTRO, Notification\Type::MAIL],
-				['distinct' => true, 'expression' => 'parent']
+				['distinct' => true, 'expression' => 'parent'],
 			);
 
 			$notifications += $this->db->count(
 				'mail',
 				['uid'      => $identity['uid'], 'seen' => false],
-				['distinct' => true, 'expression' => 'convid']
+				['distinct' => true, 'expression' => 'convid'],
 			);
 
 			$notifications += $this->intro->countActiveForUser($identity['uid']);

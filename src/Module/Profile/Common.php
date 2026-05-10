@@ -83,26 +83,26 @@ class Common extends BaseProfile
 				$contact = Contact::selectFirst(
 					[],
 					['uri-id' => $contact['uri-id'], 'uid' => [0, $this->userSession->getLocalUserId()]],
-					['order' => ['uid' => 'DESC']]
+					['order'  => ['uid' => 'DESC']],
 				);
 				return Module\Contact::getContactTemplateVars($contact);
 			},
-			$commonFollows
+			$commonFollows,
 		);
 
 		$title = $this->tt('Common contact (%s)', 'Common contacts (%s)', $total);
-		$desc = $this->t(
+		$desc  = $this->t(
 			'Both <strong>%s</strong> and yourself have publicly interacted with these contacts (follow, comment or likes on public posts).',
-			htmlentities($profile['name'], ENT_COMPAT, 'UTF-8')
+			htmlentities($profile['name'], ENT_COMPAT, 'UTF-8'),
 		);
 
 		$tpl = Renderer::getMarkupTemplate('profile/contacts.tpl');
 		$o .= Renderer::replaceMacros($tpl, [
-			'$title'    => $title,
-			'$desc'     => $desc,
-			'$tabs'     => $tabs,
+			'$title' => $title,
+			'$desc'  => $desc,
+			'$tabs'  => $tabs,
 
-			'$noresult_label'  => $this->t('No common contacts.'),
+			'$noresult_label' => $this->t('No common contacts.'),
 
 			'$contacts' => $contacts,
 			'$paginate' => $pager->renderFull($total),

@@ -25,9 +25,7 @@ use Psr\Log\LoggerInterface;
  */
 class System
 {
-	public function __construct(private LoggerInterface $logger, private IManageConfigValues $config, private string $basePath)
-				{
-							}
+	public function __construct(private LoggerInterface $logger, private IManageConfigValues $config, private string $basePath) {}
 
 	/**
 	 * Checks if the maximum number of database processes is reached

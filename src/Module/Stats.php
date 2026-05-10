@@ -55,13 +55,13 @@ class Stats extends BaseModule
 		private AddonHelper $addonHelper,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->config      = $config;
-		$this->keyValue    = $keyValue;
-		$this->dba         = $dba;
+		$this->config   = $config;
+		$this->keyValue = $keyValue;
+		$this->dba      = $dba;
 	}
 
 	protected function content(array $request = []): string

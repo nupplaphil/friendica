@@ -66,7 +66,7 @@ class Contacts extends Module\BaseProfile
 			'archive' => false,
 			'failed'  => false,
 			'self'    => false,
-			'network' => [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA]
+			'network' => [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA],
 		];
 
 		switch ($type) {
@@ -93,11 +93,11 @@ class Contacts extends Module\BaseProfile
 				$contact = Model\Contact::selectFirst(
 					[],
 					['uri-id' => $contact['uri-id'], 'uid' => [0, $this->userSession->getLocalUserId()]],
-					['order'  => ['uid' => 'DESC']]
+					['order'  => ['uid' => 'DESC']],
 				);
 				return $contact ? Module\Contact::getContactTemplateVars($contact) : null;
 			},
-			Model\Contact::selectToArray(['uri-id'], $condition, $params)
+			Model\Contact::selectToArray(['uri-id'], $condition, $params),
 		);
 
 		// Remove nonexistent contacts
@@ -115,7 +115,7 @@ class Contacts extends Module\BaseProfile
 				$title = $this->tt('Friend (%s)', 'Friends (%s)', $total);
 				$desc  = $this->t(
 					'These contacts both follow and are followed by <strong>%s</strong>.',
-					htmlentities($profile['name'], ENT_COMPAT, 'UTF-8')
+					htmlentities($profile['name'], ENT_COMPAT, 'UTF-8'),
 				);
 				break;
 			case 'all':

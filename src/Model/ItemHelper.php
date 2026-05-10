@@ -31,9 +31,9 @@ final class ItemHelper
 		private Activity $activity,
 		private LoggerInterface $logger,
 		private Database $database,
-		BaseURL $baseURL
+		BaseURL $baseURL,
 	) {
-		$this->baseUrl     = $baseURL->__toString();
+		$this->baseUrl = $baseURL->__toString();
 	}
 
 	public function prepareOriginPost(array $item): array

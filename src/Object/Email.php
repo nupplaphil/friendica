@@ -17,19 +17,17 @@ use Friendica\Object\EMail\IEmail;
 class Email implements IEmail
 {
 	public function __construct(
-								private string $fromName,
-								private string $fromAddress,
-								private string $replyTo,
-								private string $toAddress,
-								private string $subject,
-								private string $msgHtml,
-								private string $msgText,
-								/** @var string[][] */
-								private array $additionalMailHeader = [],
-								private ?int $toUid = null
-							)
-							{
-										}
+		private string $fromName,
+		private string $fromAddress,
+		private string $replyTo,
+		private string $toAddress,
+		private string $subject,
+		private string $msgHtml,
+		private string $msgText,
+		/** @var string[][] */
+		private array $additionalMailHeader = [],
+		private ?int $toUid = null,
+	) {}
 
 	/**
 	 * {@inheritDoc}

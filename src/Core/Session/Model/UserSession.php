@@ -20,9 +20,7 @@ class UserSession implements IHandleUserSessions
 	/** @var int|bool saves the public Contact ID for later usage */
 	protected $publicContactId = false;
 
-	public function __construct(private IHandleSessions $session)
-				{
-							}
+	public function __construct(private IHandleSessions $session) {}
 
 	/** {@inheritDoc} */
 	public function getLocalUserId()
@@ -70,7 +68,7 @@ class UserSession implements IHandleUserSessions
 		}
 
 		if (!empty($this->session->get('visitor_id'))) {
-			return (int)$this->session->get('visitor_id');
+			return (int) $this->session->get('visitor_id');
 		}
 
 		return false;

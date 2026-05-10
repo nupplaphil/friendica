@@ -9,9 +9,7 @@ namespace Friendica\Security\OAuth1;
 
 class OAuthConsumer implements \Stringable
 {
-	public function __construct(public $key, public $secret, public $callback_url = null)
-				{
-							}
+	public function __construct(public $key, public $secret, public $callback_url = null) {}
 
 	public function __toString(): string
 	{

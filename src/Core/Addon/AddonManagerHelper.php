@@ -28,9 +28,7 @@ final class AddonManagerHelper implements AddonHelper
 	/** @var string[] */
 	private array $addons = [];
 
-	public function __construct(private string $addonPath, private Database $database, private IManageConfigValues $config, private ICanCache $cache, private LoggerInterface $logger, private Profiler $profiler)
-				{
-							}
+	public function __construct(private string $addonPath, private Database $database, private IManageConfigValues $config, private ICanCache $cache, private LoggerInterface $logger, private Profiler $profiler) {}
 	/**
 	 * Returns the absolute path to the addon folder
 	 *

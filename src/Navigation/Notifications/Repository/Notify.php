@@ -69,11 +69,11 @@ class Notify extends BaseRepository
 		private EventDispatcherInterface $eventDispatcher,
 		Factory\Notify $factory = null,
 	) {
-		$this->l10n            = $l10n;
-		$this->baseUrl         = $baseUrl;
-		$this->config          = $config;
-		$this->emailer         = $emailer;
-		$this->notification    = $notification;
+		$this->l10n         = $l10n;
+		$this->baseUrl      = $baseUrl;
+		$this->config       = $config;
+		$this->emailer      = $emailer;
+		$this->notification = $notification;
 
 		parent::__construct($database, $logger, $factory ?? new Factory\Notify($logger));
 	}

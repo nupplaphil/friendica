@@ -60,7 +60,7 @@ HELP;
 	public function __construct(private Database $dba, private DbaDefinition $dbaDefinition, private ViewDefinition $viewDefinition, BasePath $basePath, private IManageConfigValues $config, $argv = null)
 	{
 		parent::__construct($argv);
-		$this->basePath       = $basePath->getPath();
+		$this->basePath = $basePath->getPath();
 	}
 
 	protected function doExecute(): int

@@ -42,7 +42,7 @@ class Create extends BaseModule
 	public function __construct(private \Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, private \Friendica\Moderation\Factory\Report $factory, private UserSession $session, private App\Page $page, private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-		$this->reportUtil     = $reportUtil;
+		$this->reportUtil = $reportUtil;
 	}
 
 	protected function post(array $request = [])

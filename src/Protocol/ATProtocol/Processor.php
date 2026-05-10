@@ -33,17 +33,15 @@ use stdClass;
 class Processor
 {
 	/**
-				 * Processor constructor.
-				 *
-				 * @param Database $db
-				 * @param LoggerInterface $logger
-				 * @param BaseURL $baseURL
-				 * @param ATProtocol $atprotocol
-				 * @param Actor $actor
-				 */
-				public function __construct(private Database $db, private LoggerInterface $logger, private BaseURL $baseURL, private ATProtocol $atprotocol, private Actor $actor)
-				{
-							}
+	 * Processor constructor.
+	 *
+	 * @param Database $db
+	 * @param LoggerInterface $logger
+	 * @param BaseURL $baseURL
+	 * @param ATProtocol $atprotocol
+	 * @param Actor $actor
+	 */
+	public function __construct(private Database $db, private LoggerInterface $logger, private BaseURL $baseURL, private ATProtocol $atprotocol, private Actor $actor) {}
 
 	/**
 	 * Process account events and update contact archive state.

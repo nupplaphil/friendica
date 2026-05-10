@@ -39,17 +39,15 @@ final class ATProtocol
 	private ?int $uid = null;
 
 	/**
-				 * Initialize the AT Protocol service.
-				 *
-				 * @param LoggerInterface $logger
-				 * @param Database $db
-				 * @param IManageConfigValues $config
-				 * @param IManagePersonalConfigValues $pConfig
-				 * @param ICanSendHttpRequests $httpClient
-				 */
-				public function __construct(private LoggerInterface $logger, private Database $db, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private ICanSendHttpRequests $httpClient)
-				{
-							}
+	 * Initialize the AT Protocol service.
+	 *
+	 * @param LoggerInterface $logger
+	 * @param Database $db
+	 * @param IManageConfigValues $config
+	 * @param IManagePersonalConfigValues $pConfig
+	 * @param ICanSendHttpRequests $httpClient
+	 */
+	public function __construct(private LoggerInterface $logger, private Database $db, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private ICanSendHttpRequests $httpClient) {}
 
 	/**
 	 * Get the AppView API URL

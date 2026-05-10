@@ -26,9 +26,7 @@ class CacheLock extends AbstractLock
 	 *
 	 * @param ICanCacheInMemory $cache The CacheDriver for this type of lock
 	 */
-	public function __construct(private ICanCacheInMemory $cache)
-				{
-							}
+	public function __construct(private ICanCacheInMemory $cache) {}
 
 	/**
 	 * (@inheritdoc)

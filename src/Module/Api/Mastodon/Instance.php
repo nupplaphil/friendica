@@ -45,7 +45,7 @@ class Instance extends BaseApi
 	{
 		$administrator = User::getFirstAdmin(['nickname']);
 		if ($administrator) {
-			$adminContact = $this->database->selectFirst('contact', ['uri-id'], ['nick' => $administrator['nickname'], 'self' => true]);
+			$adminContact    = $this->database->selectFirst('contact', ['uri-id'], ['nick' => $administrator['nickname'], 'self' => true]);
 			$contact_account = $this->accountFactory->createFromUriId($adminContact['uri-id']);
 		}
 
@@ -54,10 +54,10 @@ class Instance extends BaseApi
 
 	private function buildConfigurationInfo(): InstanceV2Entity\Configuration
 	{
-		$statuses_config = new InstanceV2Entity\StatusesConfig((int)$this->config->get(
+		$statuses_config = new InstanceV2Entity\StatusesConfig((int) $this->config->get(
 			'config',
 			'api_import_size',
-			$this->config->get('config', 'max_import_size')
+			$this->config->get('config', 'max_import_size'),
 		), 99, 23);
 
 		$image_size_limit = Strings::getBytesFromShorthand($this->config->get('system', 'maximagesize') ?? 0);

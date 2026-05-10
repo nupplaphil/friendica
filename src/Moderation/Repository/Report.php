@@ -30,7 +30,7 @@ final class Report extends \Friendica\BaseRepository
 	{
 		parent::__construct($database, $logger, $factory);
 
-		$this->factory     = $factory;
+		$this->factory = $factory;
 	}
 
 	public function selectOneById(int $lastInsertId): ReportEntity

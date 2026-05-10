@@ -55,7 +55,7 @@ class OpenSearch extends BaseModule
 				],
 			],
 			/** @var DOMDocument $xml */
-			$xml
+			$xml,
 		);
 
 		/** @var DOMElement $parent */
@@ -69,7 +69,7 @@ class OpenSearch extends BaseModule
 
 		if (!empty($shortcut_icon)) {
 			$shortcut_icon = Network::addBasePath($shortcut_icon, $this->baseUrl);
-			$imagedata = getimagesize($shortcut_icon);
+			$imagedata     = getimagesize($shortcut_icon);
 		}
 
 		if (!empty($imagedata)) {
@@ -79,12 +79,17 @@ class OpenSearch extends BaseModule
 				'type'   => $imagedata['mime'],
 			]);
 		} else {
-			XML::addElement($xml, $parent, 'Image',
-			$this->baseUrl . '/images/friendica-16.png', [
-				'height' => 16,
-				'width'  => 16,
-				'type'   => 'image/png',
-			]);
+			XML::addElement(
+				$xml,
+				$parent,
+				'Image',
+				$this->baseUrl . '/images/friendica-16.png',
+				[
+					'height' => 16,
+					'width'  => 16,
+					'type'   => 'image/png',
+				],
+			);
 		}
 
 		XML::addElement($xml, $parent, 'Url', '', [

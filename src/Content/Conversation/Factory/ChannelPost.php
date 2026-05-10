@@ -32,16 +32,14 @@ use Psr\Log\LoggerInterface;
 final class ChannelPost
 {
 	/**
-				 * ChannelPost constructor.
-				 *
-				 * @param Database $dba Database access object.
-				 * @param UserDefinedChannel $channelRepository Channel repository.
-				 * @param LoggerInterface $logger Logger instance.
-				 * @param IManageConfigValues $config Configuration manager.
-				 */
-				public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config)
-				{
-							}
+	 * ChannelPost constructor.
+	 *
+	 * @param Database $dba Database access object.
+	 * @param UserDefinedChannel $channelRepository Channel repository.
+	 * @param LoggerInterface $logger Logger instance.
+	 * @param IManageConfigValues $config Configuration manager.
+	 */
+	public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config) {}
 
 	/**
 	 * Add a post to matching user-defined channels.
@@ -103,7 +101,7 @@ final class ChannelPost
 			}
 
 			$cache = [
-				'channel'     => (int)$channel->code,
+				'channel'     => (int) $channel->code,
 				'uid'         => $channel->uid,
 				'uri-id'      => $engagement['uri-id'],
 				'in-timeline' => $in_timeline,

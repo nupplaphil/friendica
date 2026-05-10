@@ -93,7 +93,7 @@ class Add extends BaseModeration
 		}
 
 		array_walk($gservers, function (array &$gserver) {
-			$gserver['domain'] = (new Uri($gserver['url']))->getHost();
+			$gserver['domain']       = (new Uri($gserver['url']))->getHost();
 			$gserver['network_svg']  = ContactSelector::networkToSVG($gserver['network']);
 			$gserver['network_name'] = ContactSelector::networkToName($gserver['network']);
 		});
@@ -122,7 +122,7 @@ class Add extends BaseModeration
 			'$newreason'           => ['reason', $this->t('Block reason'), $request['reason'] ?? '', $this->t('The reason why you blocked this server domain pattern. This reason will be shown publicly in the server information page.'), $this->t('Required'), '', ''],
 			'$pattern'             => $pattern,
 			'$gservers'            => $gservers,
-			'$form_security_token' => self::getFormSecurityToken('moderation_blocklist_add')
+			'$form_security_token' => self::getFormSecurityToken('moderation_blocklist_add'),
 		]);
 	}
 }

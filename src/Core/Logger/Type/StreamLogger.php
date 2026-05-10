@@ -18,7 +18,7 @@ use Psr\Log\LogLevel;
  */
 class StreamLogger extends AbstractLogger
 {
-	const NAME = 'stream';
+	public const NAME = 'stream';
 
 	/**
 	 * Translates LogLevel log levels to integer values
@@ -36,19 +36,19 @@ class StreamLogger extends AbstractLogger
 	];
 
 	/**
-				 * {@inheritdoc}
-				 * @param int $logLevel The minimum loglevel at which this logger will be triggered
-				 *
-				 * @throws LoggerException
-				 * @param resource|null $stream
-				 */
-				public function __construct(string $channel, IHaveCallIntrospections $introspection, /**
+	 * {@inheritdoc}
+	 * @param int $logLevel The minimum loglevel at which this logger will be triggered
+	 *
+	 * @throws LoggerException
+	 * @param resource|null $stream
+	 */
+	public function __construct(string $channel, IHaveCallIntrospections $introspection, /**
 				 * The stream, where the current logger is writing into
 				 */
-				private $stream, private int $logLevel, /**
+		private $stream, private int $logLevel, /**
 				 * The current process ID
 				 */
-				private int $pid)
+		private int $pid)
 	{
 		parent::__construct($channel, $introspection);
 	}

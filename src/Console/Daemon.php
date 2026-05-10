@@ -89,7 +89,7 @@ HELP;
 						'system' => [
 							'pidfile' => '/path/to/daemon.pid',
 						],
-					TXT
+					TXT,
 			);
 		}
 
@@ -181,7 +181,7 @@ HELP;
 						$arg   = (($seconds + 1) / ($wait_interval / 9)) + 1;
 						$sleep = min(1000000, round(log10($arg) * 1000000, 0));
 
-						$this->daemon->sleep((int)$sleep);
+						$this->daemon->sleep((int) $sleep);
 
 						$timeout = ($seconds >= $wait_interval);
 					} while (!$timeout && !Worker\IPC::JobsExists());

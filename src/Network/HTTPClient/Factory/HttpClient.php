@@ -57,7 +57,7 @@ class HttpClient extends BaseFactory
 		$onRedirect = function (
 			RequestInterface $request,
 			ResponseInterface $response,
-			UriInterface $uri
+			UriInterface $uri,
 		) use ($logger) {
 			$logger->info('Curl redirect.', ['url' => $request->getUri(), 'to' => $uri, 'method' => $request->getMethod()]);
 		};
@@ -82,10 +82,10 @@ class HttpClient extends BaseFactory
 			RequestOptions::TIMEOUT          => $this->config->get('system', 'curl_timeout', 60),
 			// by default, we will allow self-signed certs,
 			// but it can be overridden
-			RequestOptions::VERIFY  => (bool)$this->config->get('system', 'verifyssl'),
+			RequestOptions::VERIFY  => (bool) $this->config->get('system', 'verifyssl'),
 			RequestOptions::PROXY   => $proxy,
 			RequestOptions::HEADERS => [],
-			'handler' => $handlerStack ?? HandlerStack::create(),
+			'handler'               => $handlerStack ?? HandlerStack::create(),
 		]);
 
 		$resolver = new URLResolver();

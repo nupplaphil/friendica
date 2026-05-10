@@ -31,7 +31,7 @@ class ParseUrl extends BaseModule
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->userSession     = $userSession;
+		$this->userSession = $userSession;
 	}
 
 	protected function rawContent(array $request = [])

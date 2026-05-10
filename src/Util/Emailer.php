@@ -34,7 +34,7 @@ class Emailer
 		private IManagePersonalConfigValues $pConfig,
 		private BaseURL $baseUrl,
 		private LoggerInterface $logger,
-		private L10n $l10n
+		private L10n $l10n,
 	) {
 		$this->siteEmailAddress = $this->config->get('config', 'sender_email');
 		if (empty($this->siteEmailAddress)) {

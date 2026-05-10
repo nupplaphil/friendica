@@ -28,9 +28,7 @@ final class Activity
 	 * @param int $medianThreadScore
 	 * @param int $medianPostScore
 	 */
-	public function __construct(public int $uid, public string $network, public array $languages, public int $cid, public string $expires, public int $medianComments, public int $medianActivities, public int $medianViews, public int $medianThreadScore, public int $medianPostScore)
-				{
-							}
+	public function __construct(public int $uid, public string $network, public array $languages, public int $cid, public string $expires, public int $medianComments, public int $medianActivities, public int $medianViews, public int $medianThreadScore, public int $medianPostScore) {}
 
 	/**
 	 * Create an Activity instance from an array.

@@ -22,9 +22,7 @@ class Cache
 	/**
 	 * @param bool $hidePasswordOutput True, if cache variables should take extra care of password values
 	 */
-	public function __construct(private bool $hidePasswordOutput = true)
-				{
-							}
+	public function __construct(private bool $hidePasswordOutput = true) {}
 
 	/**
 	 * Tries to load the specified configuration array into the user specific config array.
@@ -105,10 +103,10 @@ class Cache
 			$this->config[$uid][$cat] = [];
 		}
 
-		if ($this->hidePasswordOutput &&
-			$key == 'password' &&
-			!empty($value) && is_string($value)) {
-			$this->config[$uid][$cat][$key] = new HiddenString((string)$value);
+		if ($this->hidePasswordOutput
+			&& $key == 'password'
+			&& !empty($value) && is_string($value)) {
+			$this->config[$uid][$cat][$key] = new HiddenString((string) $value);
 		} else {
 			$this->config[$uid][$cat][$key] = $value;
 		}

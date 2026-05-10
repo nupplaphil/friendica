@@ -31,8 +31,9 @@ class DatabaseLock extends AbstractLock
 	public function __construct(/**
 				 * @var Database The database connection of Friendica
 				 */
-				private Database $dba, ?int $pid = null)
-	{
+		private Database $dba,
+		?int $pid = null,
+	) {
 		$this->pid = $pid ?? getmypid();
 	}
 

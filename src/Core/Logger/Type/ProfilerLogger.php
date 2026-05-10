@@ -30,8 +30,9 @@ class ProfilerLogger implements LoggerInterface
 	public function __construct(/**
 				 * The Logger of the current call
 				 */
-				private LoggerInterface $logger, Profiler $profiler)
-	{
+		private LoggerInterface $logger,
+		Profiler $profiler,
+	) {
 		$this->profiler = $profiler;
 	}
 

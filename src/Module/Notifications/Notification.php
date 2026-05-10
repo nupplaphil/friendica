@@ -134,7 +134,7 @@ class Notification extends BaseModule
 			$this->notificationRepo->setAllSeenForUser($Notify->uid, ['target-uri-id' => $Notify->uriId]);
 		}
 
-		if ((string)$Notify->link) {
+		if ((string) $Notify->link) {
 			System::externalRedirect($Notify->link);
 		}
 

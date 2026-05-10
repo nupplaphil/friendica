@@ -37,9 +37,7 @@ class RobotsTxt
 	 */
 	private bool $isLoaded = false;
 
-	public function __construct(protected ICanSendHttpRequests $httpClient)
-				{
-							}
+	public function __construct(protected ICanSendHttpRequests $httpClient) {}
 
 	/**
 	 * Loads the RobotsTxt parser with a server URL

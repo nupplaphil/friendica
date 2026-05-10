@@ -66,26 +66,24 @@ class Mode
 	private $executor = self::UNDEFINED;
 
 	public function __construct(
-								private int $mode = 0,
-								/**
-								 * @var bool True, if the call is a backend call
-								 */
-								private bool $isBackend = false,
-								/**
-								 * @var bool True, if the call is a ajax call
-								 */
-								private bool $isAjax = false,
-								/**
-								 * @var bool True, if the call is from a mobile device
-								 */
-								private bool $isMobile = false,
-								/**
-								 * @var bool True, if the call is from a tablet device
-								 */
-								private bool $isTablet = false
-							)
-							{
-										}
+		private int $mode = 0,
+		/**
+		 * @var bool True, if the call is a backend call
+		 */
+		private bool $isBackend = false,
+		/**
+		 * @var bool True, if the call is a ajax call
+		 */
+		private bool $isAjax = false,
+		/**
+		 * @var bool True, if the call is from a mobile device
+		 */
+		private bool $isMobile = false,
+		/**
+		 * @var bool True, if the call is from a tablet device
+		 */
+		private bool $isTablet = false,
+	) {}
 
 	/**
 	 * Sets the App mode

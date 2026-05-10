@@ -100,7 +100,5 @@ class ContactResult implements IResult
 	 * @param int    $pCid
 	 * @param string $tags
 	 */
-	public function __construct(private $name, private $addr, private $item, private UriInterface $url, private $photo, private $network, private $cid = 0, private $pCid = 0, private $tags = '')
-				{
-							}
+	public function __construct(private $name, private $addr, private $item, private UriInterface $url, private $photo, private $network, private $cid = 0, private $pCid = 0, private $tags = '') {}
 }

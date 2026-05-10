@@ -56,28 +56,26 @@ final class AppLegacy implements AppHelper
 	];
 
 	public function __construct(
-								/**
-								 * @var Database The Friendica database connection
-								 */
-								private Database $database,
-								/**
-								 * @var IManageConfigValues The config
-								 */
-								private IManageConfigValues $config,
-								/**
-								 * @var Mode The Mode of the Application
-								 */
-								private Mode $mode,
-								private BaseURL $baseURL,
-								/**
-								 * @var L10n The translator
-								 */
-								private L10n $l10n,
-								private IManagePersonalConfigValues $pConfig,
-								private IHandleUserSessions $session
-							)
-							{
-										}
+		/**
+		 * @var Database The Friendica database connection
+		 */
+		private Database $database,
+		/**
+		 * @var IManageConfigValues The config
+		 */
+		private IManageConfigValues $config,
+		/**
+		 * @var Mode The Mode of the Application
+		 */
+		private Mode $mode,
+		private BaseURL $baseURL,
+		/**
+		 * @var L10n The translator
+		 */
+		private L10n $l10n,
+		private IManagePersonalConfigValues $pConfig,
+		private IHandleUserSessions $session,
+	) {}
 
 	/**
 	 * Set the profile owner ID
@@ -341,8 +339,7 @@ final class AppLegacy implements AppHelper
 
 		$mobile_theme_name = Strings::sanitizeFilePathItem($mobile_theme_name);
 		if ($mobile_theme_name == '---'
-			||
-			in_array($mobile_theme_name, Theme::getAllowedList())
+			|| in_array($mobile_theme_name, Theme::getAllowedList())
 			&& (file_exists('view/theme/' . $mobile_theme_name . '/style.css')
 				|| file_exists('view/theme/' . $mobile_theme_name . '/style.php'))
 		) {

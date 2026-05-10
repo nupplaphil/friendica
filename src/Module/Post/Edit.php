@@ -53,11 +53,11 @@ class Edit extends BaseModule
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->session         = $session;
-		$this->sysMessages     = $sysMessages;
-		$this->page            = $page;
-		$this->mode            = $mode;
-		$this->appHelper       = $appHelper;
+		$this->session     = $session;
+		$this->sysMessages = $sysMessages;
+		$this->page        = $page;
+		$this->mode        = $mode;
+		$this->appHelper   = $appHelper;
 	}
 
 

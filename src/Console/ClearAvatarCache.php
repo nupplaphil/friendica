@@ -10,7 +10,6 @@ namespace Friendica\Console;
 use Friendica\App\BaseURL;
 use Friendica\Contact\Avatar;
 use Friendica\Core\L10n;
-use Friendica\Database\Database;
 use Friendica\Model\Contact;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 

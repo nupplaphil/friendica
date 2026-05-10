@@ -88,7 +88,7 @@ class Router
 	 */
 	public function __construct(private array $server, private string $baseRoutesFilepath, private L10n $l10n, private ICanCache $cache, private ICanLock $lock, private IManageConfigValues $config, private Arguments $args, private LoggerInterface $logger, private EventDispatcherInterface $eventDispatcher, private AddonHelper $addonHelper, IHandleUserSessions $userSession, RouteCollector $routeCollector = null)
 	{
-		$this->isLocalUser        = !empty($userSession->getLocalUserId());
+		$this->isLocalUser = !empty($userSession->getLocalUserId());
 
 		$this->routeCollector = $routeCollector ?? new RouteCollector(new Std(), new GroupCountBased());
 

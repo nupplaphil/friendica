@@ -55,25 +55,23 @@ class ResultList
 	 * @param IResult[] $results
 	 */
 	public function __construct(
-								/**
-								 * Page of the result list
-								 */
-								private $page = 0,
-								/**
-								 * Total count of results
-								 */
-								private $total = 0,
-								/**
-								 * items per page
-								 */
-								private $itemsPage = 0,
-								/**
-								 * Array of results
-								 */
-								private array $results = []
-							)
-							{
-										}
+		/**
+		 * Page of the result list
+		 */
+		private $page = 0,
+		/**
+		 * Total count of results
+		 */
+		private $total = 0,
+		/**
+		 * items per page
+		 */
+		private $itemsPage = 0,
+		/**
+		 * Array of results
+		 */
+		private array $results = [],
+	) {}
 
 	/**
 	 * Adds a result to the result list

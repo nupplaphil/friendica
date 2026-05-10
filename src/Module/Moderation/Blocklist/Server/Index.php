@@ -41,14 +41,14 @@ class Index extends BaseModeration
 
 		// Edit the entries from blocklist
 		$blocklist = [];
-		foreach ((array)$request['domain'] as $id => $domain) {
+		foreach ((array) $request['domain'] as $id => $domain) {
 			// Trimming whitespaces as well as any lingering slashes
 			$domain = trim($domain);
 			$reason = trim($request['reason'][$id]);
 			if (empty($request['delete'][$id]) && !empty($domain)) {
 				$blocklist[] = [
 					'domain' => $domain,
-					'reason' => $reason
+					'reason' => $reason,
 				];
 			}
 		}
@@ -69,7 +69,7 @@ class Index extends BaseModeration
 			$blocklistform[] = [
 				'domain' => ["domain[$id]", $this->t('Blocked server domain pattern'), $b['domain'], '', $this->t('Required'), '', ''],
 				'reason' => ["reason[$id]", $this->t("Reason for the block"), $b['reason'], '', $this->t('Required'), '', ''],
-				'delete' => ["delete[$id]", $this->t("Delete server domain pattern") . ' (' . $b['domain'] . ')', false, $this->t("Check to delete this entry from the blocklist")]
+				'delete' => ["delete[$id]", $this->t("Delete server domain pattern") . ' (' . $b['domain'] . ')', false, $this->t("Check to delete this entry from the blocklist")],
 			];
 		}
 

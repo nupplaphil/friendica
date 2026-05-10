@@ -20,7 +20,5 @@ use DateTimeImmutable;
  */
 final class DeliveryQueueItem extends \Friendica\BaseEntity
 {
-	public function __construct(protected int $targetServerId, protected int $postUriId, protected DateTimeImmutable $created, protected string $command, protected int $targetContactId, protected int $senderUserId, protected int $failed = 0)
-				{
-							}
+	public function __construct(protected int $targetServerId, protected int $postUriId, protected DateTimeImmutable $created, protected string $command, protected int $targetContactId, protected int $senderUserId, protected int $failed = 0) {}
 }

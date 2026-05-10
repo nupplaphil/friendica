@@ -140,7 +140,7 @@ class FormattedNavNotification extends BaseFactory
 			self::$contacts[$intro->cid]['url'],
 			$msg,
 			$intro->datetime,
-			new Uri($this->baseUrl . '/notifications/intros/' . $intro->id)
+			new Uri($this->baseUrl . '/notifications/intros/' . $intro->id),
 		);
 	}
 }

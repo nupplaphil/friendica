@@ -16,36 +16,34 @@ namespace Friendica\App;
  */
 class Arguments
 {
-	const DEFAULT_MODULE = 'home';
+	public const DEFAULT_MODULE = 'home';
 
 	public function __construct(
-								/**
-								 * @var string The complete query string
-								 */
-								private string $queryString = '',
-								/**
-								 * @var string The current Friendica command
-								 */
-								private string $command = '',
-								/**
-								 * @var string The name of the current module
-								 */
-								private string $moduleName = '',
-								/**
-								 * @var array The arguments of the current execution
-								 */
-								private array $argv = [],
-								/**
-								 * @var int The count of arguments
-								 */
-								private int $argc = 0,
-								/**
-								 * @var string The used HTTP method
-								 */
-								private string $method = Router::GET
-							)
-							{
-										}
+		/**
+		 * @var string The complete query string
+		 */
+		private string $queryString = '',
+		/**
+		 * @var string The current Friendica command
+		 */
+		private string $command = '',
+		/**
+		 * @var string The name of the current module
+		 */
+		private string $moduleName = '',
+		/**
+		 * @var array The arguments of the current execution
+		 */
+		private array $argv = [],
+		/**
+		 * @var int The count of arguments
+		 */
+		private int $argc = 0,
+		/**
+		 * @var string The used HTTP method
+		 */
+		private string $method = Router::GET,
+	) {}
 
 	/**
 	 * @return string The whole query string of this call with url-encoded query parameters

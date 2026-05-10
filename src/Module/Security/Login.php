@@ -78,7 +78,7 @@ class Login extends BaseModule
 				trim($request['username']),
 				trim($request['password']),
 				!empty($request['remember']),
-				$request['return_path'] ?? ''
+				$request['return_path'] ?? '',
 			);
 		}
 	}
@@ -113,7 +113,7 @@ class Login extends BaseModule
 			$reg = [
 				'title' => DI::l10n()->t('Create an account'),
 				'desc'  => DI::l10n()->t('Register'),
-				'url'   => self::getRegisterURL()
+				'url'   => self::getRegisterURL(),
 			];
 		}
 
@@ -123,7 +123,7 @@ class Login extends BaseModule
 			DI::page()['htmlhead'] .= Renderer::replaceMacros(
 				Renderer::getMarkupTemplate('login_head.tpl'),
 				[
-				]
+				],
 			);
 
 			$tpl = Renderer::getMarkupTemplate('login.tpl');
@@ -170,7 +170,7 @@ class Login extends BaseModule
 
 				'$privacytitle' => DI::l10n()->t('Website Privacy Policy'),
 				'$privacylink'  => DI::l10n()->t('privacy policy'),
-			]
+			],
 		);
 
 		Hook::callAll('login_hook', $o);

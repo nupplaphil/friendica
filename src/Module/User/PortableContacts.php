@@ -17,7 +17,6 @@ use Friendica\Core\Cache\Capability\ICanCache;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Protocol;
-use Friendica\Core\System;
 use Friendica\Database\Database;
 use Friendica\Module\Response;
 use Friendica\Network\HTTPException;
@@ -96,7 +95,7 @@ class PortableContacts extends BaseModule
 			'tags'              => false,
 			'address'           => false,
 			'contactType'       => false,
-			'generation'        => false
+			'generation'        => false,
 		];
 
 		if (empty($request['fields']) || $request['fields'] == '@all') {
@@ -146,7 +145,7 @@ class PortableContacts extends BaseModule
 
 			$entry = [];
 			if ($selectedFields['id']) {
-				$entry['id'] = (int)$contact['id'];
+				$entry['id'] = (int) $contact['id'];
 			}
 
 			if ($selectedFields['displayName']) {
@@ -162,7 +161,7 @@ class PortableContacts extends BaseModule
 			}
 
 			if ($selectedFields['generation']) {
-				$entry['generation'] = (int)$contact['generation'];
+				$entry['generation'] = (int) $contact['generation'];
 			}
 
 			if ($selectedFields['urls']) {

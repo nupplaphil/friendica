@@ -13,11 +13,9 @@ namespace Friendica\Moderation\Entity\Report;
  */
 final class Post extends \Friendica\BaseEntity
 {
-	const STATUS_NO_ACTION = 0;
-	const STATUS_UNLISTED  = 1;
-	const STATUS_DELETED   = 2;
+	public const STATUS_NO_ACTION = 0;
+	public const STATUS_UNLISTED  = 1;
+	public const STATUS_DELETED   = 2;
 
-	public function __construct(protected int $uriId, protected int $status = self::STATUS_NO_ACTION)
-				{
-							}
+	public function __construct(protected int $uriId, protected int $status = self::STATUS_NO_ACTION) {}
 }

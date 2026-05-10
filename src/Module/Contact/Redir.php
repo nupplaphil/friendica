@@ -75,7 +75,7 @@ class Redir extends \Friendica\BaseModule
 		$this->checkUrl($contact_url, $url);
 		$target_url = $url ?: $contact_url;
 
-		$gserver = $this->database->selectFirst('gserver', ['url', 'network', 'openwebauth'], ['id' => $contact['gsid']]);
+		$gserver  = $this->database->selectFirst('gserver', ['url', 'network', 'openwebauth'], ['id' => $contact['gsid']]);
 		$basepath = $gserver['url'];
 
 		// This part can be removed, when all server entries had been updated. So removing it in 2025 should be safe.

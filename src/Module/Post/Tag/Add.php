@@ -151,7 +151,7 @@ EOT;
 		];
 
 		$hook_data = $this->eventDispatcher->dispatch(
-			new ArrayFilterEvent(ArrayFilterEvent::INSERT_POST_LOCAL_END, $hook_data)
+			new ArrayFilterEvent(ArrayFilterEvent::INSERT_POST_LOCAL_END, $hook_data),
 		)->getArray();
 
 		$post = $hook_data['item'] ?? $post;

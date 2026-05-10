@@ -46,9 +46,7 @@ class ConfigFileManager
 	 * @param string $configDir
 	 * @param string $staticDir
 	 */
-	public function __construct(private string $baseDir, private string $addonDir, private string $configDir, private string $staticDir, private array $server = [])
-				{
-							}
+	public function __construct(private string $baseDir, private string $addonDir, private string $configDir, private string $staticDir, private array $server = []) {}
 
 	/**
 	 * Load the configuration files into an configuration cache

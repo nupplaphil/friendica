@@ -20,9 +20,7 @@ class OAuthToken implements \Stringable
 	 * @param $key
 	 * @param $secret
 	 */
-	public function __construct(public $key, public $secret)
-				{
-							}
+	public function __construct(public $key, public $secret) {}
 
 	/**
 	 * generates the basic string serialization of a token that a server

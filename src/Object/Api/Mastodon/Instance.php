@@ -52,7 +52,7 @@ class Instance extends BaseDataTransferObject
 		$this->stats             = new Stats($config, $database);
 		$this->thumbnail         = $baseUrl . (new Header($config))->getMastodonBannerPath();
 		$this->languages         = [$config->get('system', 'language')];
-		$this->max_toot_chars    = (int)$config->get('config', 'api_import_size', $config->get('config', 'max_import_size'));
+		$this->max_toot_chars    = (int) $config->get('config', 'api_import_size', $config->get('config', 'max_import_size'));
 		$this->registrations     = ($register_policy !== Register::CLOSED);
 		$this->approval_required = ($register_policy === Register::APPROVE);
 		$this->invites_enabled   = false;

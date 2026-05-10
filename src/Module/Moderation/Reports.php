@@ -35,7 +35,7 @@ class Reports extends BaseModeration
 	public function __construct(private Database $database, Page $page, ReportUtil $reportUtil, private ReportRepository $reportRepository, AppHelper $appHelper, SystemMessages $systemMessages, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($page, $appHelper, $systemMessages, $session, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-		$this->reportUtil       = $reportUtil;
+		$this->reportUtil = $reportUtil;
 	}
 
 	protected function post(array $request = [])

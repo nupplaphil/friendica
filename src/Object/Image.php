@@ -50,8 +50,8 @@ class Image implements \Stringable
 	 */
 	public function __construct(string $data, string $type = '', private string $filename = '', bool $imagick = true)
 	{
-		$type           = Images::addMimeTypeByDataIfInvalid($type, $data);
-		$type           = Images::addMimeTypeByExtensionIfInvalid($type, $this->filename);
+		$type = Images::addMimeTypeByDataIfInvalid($type, $data);
+		$type = Images::addMimeTypeByExtensionIfInvalid($type, $this->filename);
 
 		if (Images::isSupportedMimeType($type)) {
 			$this->originType = $this->outputType = Images::getImageTypeByMimeType($type);

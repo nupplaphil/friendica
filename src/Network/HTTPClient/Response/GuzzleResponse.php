@@ -33,17 +33,17 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 	private $redirectIsPermanent = false;
 
 	/**
-				 * @param int $errorNumber
-				 * @param string $error
-				 */
-				public function __construct(ResponseInterface $response, /** @var string The URL */
-				private string $url, /**
+	 * @param int $errorNumber
+	 * @param string $error
+	 */
+	public function __construct(ResponseInterface $response, /** @var string The URL */
+		private string $url, /**
 				 * @var int the error number or 0 (zero) if no error
 				 */
-				private $errorNumber = 0, /**
+		private $errorNumber = 0, /**
 				 * @var string the error message or '' (the empty string) if no
 				 */
-				private $error = '')
+		private $error = '')
 	{
 		parent::__construct($response->getStatusCode(), $response->getHeaders(), $response->getBody(), $response->getProtocolVersion(), $response->getReasonPhrase());
 

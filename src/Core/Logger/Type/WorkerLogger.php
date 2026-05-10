@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 class WorkerLogger implements LoggerInterface, DefaultContextLogger
 {
 	/** @var int Length of the unique worker id */
-	const WORKER_ID_LENGTH = 7;
+	public const WORKER_ID_LENGTH = 7;
 
 	/**
 	 * @var string the current worker ID

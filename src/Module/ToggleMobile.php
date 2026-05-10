@@ -39,6 +39,6 @@ class ToggleMobile extends BaseModule
 
 		$this->session->set('show-mobile', !isset($request['off']));
 
-		System::externalRedirect((string)$uri);
+		System::externalRedirect((string) $uri);
 	}
 }

@@ -18,14 +18,14 @@ use Psr\Log\LogLevel;
  */
 class SyslogLogger extends AbstractLogger
 {
-	const NAME = 'syslog';
+	public const NAME = 'syslog';
 
-	const IDENT = 'Friendica';
+	public const IDENT = 'Friendica';
 
 	/** @var int The default syslog flags */
-	const DEFAULT_FLAGS = LOG_PID | LOG_ODELAY | LOG_CONS;
+	public const DEFAULT_FLAGS = LOG_PID | LOG_ODELAY | LOG_CONS;
 	/** @var int The default syslog facility */
-	const DEFAULT_FACILITY = LOG_USER;
+	public const DEFAULT_FACILITY = LOG_USER;
 
 	/**
 	 * Translates LogLevel log levels to syslog log priorities.
@@ -54,7 +54,7 @@ class SyslogLogger extends AbstractLogger
 		LOG_ERR     => 'ERROR',
 		LOG_CRIT    => 'CRITICAL',
 		LOG_ALERT   => 'ALERT',
-		LOG_EMERG   => 'EMERGENCY'
+		LOG_EMERG   => 'EMERGENCY',
 	];
 
 	/**
@@ -63,13 +63,13 @@ class SyslogLogger extends AbstractLogger
 	private string $errorMessage;
 
 	/**
-				 * {@inheritdoc}
-				 *
-				 * @param int $logLevel    The minimum loglevel at which this logger will be triggered
-				 * @param int $logOpts
-				 * @param int $logFacility
-				 */
-				public function __construct(string $channel, IHaveCallIntrospections $introspection, private int $logLevel, private int $logOpts, private int $logFacility)
+	 * {@inheritdoc}
+	 *
+	 * @param int $logLevel    The minimum loglevel at which this logger will be triggered
+	 * @param int $logOpts
+	 * @param int $logFacility
+	 */
+	public function __construct(string $channel, IHaveCallIntrospections $introspection, private int $logLevel, private int $logOpts, private int $logFacility)
 	{
 		parent::__construct($channel, $introspection);
 	}

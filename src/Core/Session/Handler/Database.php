@@ -25,9 +25,7 @@ class Database extends AbstractSessionHandler
 	 * @param LoggerInterface $logger
 	 * @param array           $server
 	 */
-	public function __construct(private DBA $dba, private LoggerInterface $logger, private array $server)
-				{
-							}
+	public function __construct(private DBA $dba, private LoggerInterface $logger, private array $server) {}
 
 	public function open($path, $name): bool
 	{

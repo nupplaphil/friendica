@@ -43,9 +43,7 @@ class ErrorHandler
 	/** @var int[] */
 	private static $fatalErrors = [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR];
 
-	public function __construct(private LoggerInterface $logger)
-				{
-							}
+	public function __construct(private LoggerInterface $logger) {}
 
 	/**
 	 * Registers a new ErrorHandler for a given Logger

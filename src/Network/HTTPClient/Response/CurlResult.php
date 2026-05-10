@@ -114,8 +114,8 @@ class CurlResult implements ICanHandleHttpResponses
 			throw new UnprocessableEntityException('CURL response doesn\'t contains a response HTTP code');
 		}
 
-		$this->returnCode  = $info['http_code'];
-		$this->info        = $info;
+		$this->returnCode = $info['http_code'];
+		$this->info       = $info;
 
 		$this->logger->debug('construct', ['url' => $this->url, 'returncode' => $this->returnCode, 'result' => $result]);
 

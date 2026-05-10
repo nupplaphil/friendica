@@ -57,7 +57,7 @@ class Reports extends BaseApi
 			$request['forward'],
 			$request['status_ids'],
 			$request['rule_ids'],
-			self::getCurrentUserID()
+			self::getCurrentUserID(),
 		);
 
 		$this->reportRepo->save($report);

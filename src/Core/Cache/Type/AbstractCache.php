@@ -17,13 +17,11 @@ abstract class AbstractCache implements ICanCache
 	public const NAME = '';
 
 	public function __construct(
-								/**
-								 * @var string The hostname
-								 */
-								private string $hostName
-							)
-							{
-										}
+		/**
+		 * @var string The hostname
+		 */
+		private string $hostName,
+	) {}
 
 	/**
 	 * Returns the prefix (to avoid namespace conflicts)

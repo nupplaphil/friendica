@@ -35,7 +35,7 @@ class Error extends BaseFactory
 
 	public function Unauthorized(string $error = '', string $error_description = ''): \Friendica\Object\Api\Mastodon\Error
 	{
-		$error             = $error ?: $this->l10n->t('Unauthorized');
+		$error = $error ?: $this->l10n->t('Unauthorized');
 		return new \Friendica\Object\Api\Mastodon\Error($error, $error_description);
 	}
 

@@ -74,7 +74,7 @@ class Thread
 				$this->writable      = $writable;
 				break;
 			default:
-				DI::logger()->info('[ERROR] Conversation::setMode : Unhandled mode ('. $mode .').');
+				DI::logger()->info('[ERROR] Conversation::setMode : Unhandled mode (' . $mode . ').');
 				return;
 		}
 		$this->mode = $mode;
@@ -139,7 +139,7 @@ class Thread
 		}
 
 		if ($this->getParent($item->getId())) {
-			DI::logger()->info('[WARN] Conversation::addThread : Thread already exists ('. $item->getId() .').');
+			DI::logger()->info('[WARN] Conversation::addThread : Thread already exists (' . $item->getId() . ').');
 			return false;
 		}
 
@@ -147,12 +147,12 @@ class Thread
 		 * Only add will be displayed
 		 */
 		if ($item->getDataValue('network') === Protocol::MAIL && DI::userSession()->getLocalUserId() != $item->getDataValue('uid')) {
-			DI::logger()->info('[WARN] Conversation::addThread : Thread is a mail ('. $item->getId() .').');
+			DI::logger()->info('[WARN] Conversation::addThread : Thread is a mail (' . $item->getId() . ').');
 			return false;
 		}
 
 		if ($item->getDataValue('verb') === Activity::LIKE || $item->getDataValue('verb') === Activity::DISLIKE) {
-			DI::logger()->info('[WARN] Conversation::addThread : Thread is a (dis)like ('. $item->getId() .').');
+			DI::logger()->info('[WARN] Conversation::addThread : Thread is a (dis)like (' . $item->getId() . ').');
 			return false;
 		}
 
@@ -186,7 +186,7 @@ class Thread
 			$item_data = $item->getTemplateData($conv_responses, $formSecurityToken);
 
 			if (!$item_data) {
-				DI::logger()->info('[ERROR] Conversation::getTemplateData : Failed to get item template data ('. $item->getId() .').');
+				DI::logger()->info('[ERROR] Conversation::getTemplateData : Failed to get item template data (' . $item->getId() . ').');
 				return false;
 			}
 			$result[] = $item_data;

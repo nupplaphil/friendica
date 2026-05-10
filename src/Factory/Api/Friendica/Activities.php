@@ -19,7 +19,7 @@ use Friendica\Factory\Api\Twitter\User as TwitterUser;
 class Activities extends BaseFactory
 {
 	public function __construct(LoggerInterface $logger, /** @var twitterUser entity */
-				private TwitterUser $twitterUser)
+		private TwitterUser $twitterUser)
 	{
 		parent::__construct($logger);
 	}

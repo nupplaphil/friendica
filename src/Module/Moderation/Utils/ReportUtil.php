@@ -12,9 +12,7 @@ use Friendica\Moderation\Entity\Report;
 
 final class ReportUtil
 {
-	public function __construct(private L10n $l10n)
-				{
-							}
+	public function __construct(private L10n $l10n) {}
 
 	public function getReportCategoryName(int $category): string
 	{

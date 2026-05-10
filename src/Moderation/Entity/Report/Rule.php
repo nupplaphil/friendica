@@ -13,7 +13,5 @@ namespace Friendica\Moderation\Entity\Report;
  */
 final class Rule extends \Friendica\BaseEntity
 {
-	public function __construct(protected int $lineId, protected string $text)
-				{
-							}
+	public function __construct(protected int $lineId, protected string $text) {}
 }

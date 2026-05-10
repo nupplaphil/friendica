@@ -31,9 +31,7 @@ class Actor
 	 * @param ATProtocol $atprotocol
 	 * @param IManageConfigValues $config
 	 */
-	public function __construct(private LoggerInterface $logger, private ATProtocol $atprotocol, private IManageConfigValues $config)
-				{
-							}
+	public function __construct(private LoggerInterface $logger, private ATProtocol $atprotocol, private IManageConfigValues $config) {}
 
 	/**
 	 * Synchronize the contacts (followers, sharers) for the given user

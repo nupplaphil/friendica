@@ -37,12 +37,12 @@ class Statistics extends BaseModule
 		private AddonHelper $addonHelper,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->config      = $config;
-		$this->keyValue    = $keyValue;
+		$this->config   = $config;
+		$this->keyValue = $keyValue;
 
 		if (!$this->config->get("system", "nodeinfo")) {
 			throw new NotFoundException();

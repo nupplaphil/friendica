@@ -48,7 +48,7 @@ class ScheduledStatus extends BaseFactory
 		foreach ($parameters['attachments'] as $attachment) {
 			$id = Photo::getIdForName($attachment['url']);
 
-			$media_ids[]         = (string)$id;
+			$media_ids[]         = (string) $id;
 			$media_attachments[] = DI::mstdnAttachment()->createFromPhoto($id);
 		}
 

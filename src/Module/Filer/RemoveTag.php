@@ -75,7 +75,7 @@ class RemoveTag extends BaseModule
 		$this->logger->info('Filer - Remove Tag', [
 			'term' => $term,
 			'item' => $item_id,
-			'type' => $type
+			'type' => $type,
 		]);
 
 		if (!$item_id || !strlen($term)) {
