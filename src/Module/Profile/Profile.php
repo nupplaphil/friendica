@@ -73,7 +73,7 @@ class Profile extends BaseProfile
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -96,7 +96,7 @@ class Profile extends BaseProfile
 					header('Access-Control-Allow-Origin: *');
 					header('Cache-Control: max-age=23200, stale-while-revalidate=23200');
 					$this->jsonExit($data, 'application/activity+json');
-				} catch (HTTPException\NotFoundException $e) {
+				} catch (HTTPException\NotFoundException) {
 					$this->jsonError(404, ['error' => 'Record not found']);
 				}
 			}
@@ -382,7 +382,7 @@ class Profile extends BaseProfile
 			try {
 				$input = (string) Uri::fromParts(parse_url($input));
 				return '<a href="' . $input . '" target="_blank" rel="noopener noreferrer me">' . $input . '</a>';
-			} catch (\Throwable $th) {
+			} catch (\Throwable) {
 				return '';
 			}
 		}

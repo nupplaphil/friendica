@@ -86,7 +86,7 @@ class Account extends BaseSettings
 				//  check for the correct password
 				try {
 					User::getIdFromPasswordAuthentication(DI::userSession()->getLocalUserId(), $request['mpassword']);
-				} catch (Exception $ex) {
+				} catch (Exception) {
 					$err .= DI::l10n()->t('Wrong Password.');
 					$email = $user['email'];
 				}

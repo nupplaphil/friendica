@@ -76,7 +76,7 @@ class RobotsTxt
 
 			$this->isLoaded = $this->parseRobotsTxt($curlResult->getBodyString());
 			return $this->isLoaded;
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return false;
 		}
 	}

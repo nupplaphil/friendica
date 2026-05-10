@@ -278,7 +278,7 @@ class Register extends BaseModule
 		} elseif (DI::userSession()->getLocalUserId() && !empty($arr['post']['parent_password'])) {
 			try {
 				Model\User::getIdFromPasswordAuthentication(DI::userSession()->getLocalUserId(), $arr['post']['parent_password']);
-			} catch (\Exception $ex) {
+			} catch (\Exception) {
 				DI::sysmsg()->addNotice(DI::l10n()->t("Password doesn't match."));
 				$regdata = ['nickname' => $arr['post']['nickname'], 'username' => $arr['post']['username']];
 				DI::baseUrl()->redirect('register?' . http_build_query($regdata));
@@ -495,7 +495,7 @@ class Register extends BaseModule
 
 			try {
 				Model\Register::createForApproval($user['uid'], DI::config()->get('system', 'language'), $_POST['permonlybox']);
-			} catch (\Throwable $e) {
+			} catch (\Throwable) {
 				$this->logger->error('Unable to create a `register` record.', ['user' => $user]);
 				DI::sysmsg()->addNotice(DI::l10n()->t('An internal error occured.')
 					. DI::l10n()->t('Your registration can not be processed.'));

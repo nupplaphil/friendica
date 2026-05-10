@@ -181,7 +181,7 @@ class Network
 	{
 		try {
 			return self::isUriBlocked(new Uri($url));
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			DI::logger()->warning('Invalid URL', ['url' => $url]);
 			return false;
 		}

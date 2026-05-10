@@ -184,7 +184,7 @@ class Ping extends BaseModule
 				}
 				try {
 					return $this->formattedNavNotification->createFromNotification($notification);
-				} catch (NoMessageException $e) {
+				} catch (NoMessageException) {
 					return null;
 				}
 			}, $notifications->getArrayCopy());
@@ -198,7 +198,7 @@ class Ping extends BaseModule
 			foreach ($intros as $intro) {
 				try {
 					$navNotifications[] = $this->formattedNavNotification->createFromIntro($intro);
-				} catch (HTTPException\NotFoundException $e) {
+				} catch (HTTPException\NotFoundException) {
 					$this->introductionRepo->delete($intro);
 				}
 			}

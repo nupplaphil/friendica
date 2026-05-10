@@ -105,7 +105,7 @@ class Proxy
 			parse_str($uri->getQuery(), $arr);
 
 			return $arr;
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			return [];
 		}
 	}

@@ -171,7 +171,7 @@ class Database
 				$this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $this->pdo_emulate_prepares);
 				$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 				$this->connected = true;
-			} catch (PDOException $e) {
+			} catch (PDOException) {
 				$this->connected = false;
 			}
 		}
@@ -955,7 +955,7 @@ class Database
 				}
 				break;
 			case self::MYSQLI:
-				if (get_class($stmt) == 'mysqli_result') {
+				if ($stmt instanceof mysqli_result) {
 					$columns = $stmt->fetch_assoc() ?? false;
 					break;
 				}

@@ -35,7 +35,7 @@ class VerifyQrCodeTest extends TestCase
 			);
 			$writer       = new Writer($renderer);
 			$qrcode_image = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $writer->writeString($otpauthUrl));
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			// Should not reach here when XMLWriter is available
 		}
 

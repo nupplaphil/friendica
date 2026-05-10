@@ -21,7 +21,7 @@ return \Rector\Config\RectorConfig::configure()
 	// ->withTypeCoverageLevel(0)
 	// ->withDeadCodeLevel(0)
 	// ->withCodeQualityLevel(0)
-	->withPhpLevel(78)
+	->withPhpLevel(82)
 	->withSets([
 		//\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
 	])

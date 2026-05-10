@@ -151,7 +151,7 @@ HELP;
 				$this->out($class . ' is not a valid backend storage class.');
 				return -1;
 			}
-		} catch (ReferenceStorageException $exception) {
+		} catch (ReferenceStorageException) {
 			$this->out($name . ' is not a registered backend.');
 			return -1;
 		}

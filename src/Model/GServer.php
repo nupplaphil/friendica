@@ -523,7 +523,7 @@ class GServer
 	{
 		try {
 			return (string) self::cleanUri(new Uri($dirtyUrl));
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			DI::logger()->warning('Invalid URL', ['dirtyUrl' => $dirtyUrl]);
 			return '';
 		}

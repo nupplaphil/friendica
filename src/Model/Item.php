@@ -3281,7 +3281,7 @@ class Item
 
 		try {
 			$url = (string) Uri::fromParts((array) $urlparts);
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			DI::logger()->notice('Invalid URL', ['$url' => $url, '$urlparts' => $urlparts]);
 			/* See https://github.com/friendica/friendica/issues/12113
 			 * Malformed URLs will result in a Fatal Error

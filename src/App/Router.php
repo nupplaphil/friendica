@@ -296,7 +296,7 @@ class Router
 					throw new HTTPException\NotFoundException($this->l10n->t('Page not found.'));
 				}
 			}
-		} catch (MethodNotAllowedException $e) {
+		} catch (MethodNotAllowedException) {
 			$this->moduleClass = MethodNotAllowed::class;
 		} catch (NotFoundException $e) {
 			$moduleName = $this->args->getModuleName();

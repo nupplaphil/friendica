@@ -182,7 +182,7 @@ class APContact
 			try {
 				$data        = Transmitter::getProfile($local_uid);
 				$local_owner = User::getOwnerDataById($local_uid);
-			} catch (HTTPException\NotFoundException $e) {
+			} catch (HTTPException\NotFoundException) {
 				$data = null;
 			}
 		}

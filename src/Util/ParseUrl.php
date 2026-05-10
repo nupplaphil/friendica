@@ -285,7 +285,7 @@ class ParseUrl
 			if (isset($mediaType->parameters['charset'])) {
 				$charset = $mediaType->parameters['charset'];
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 		}
 
 		$siteinfo['charset'] = $charset;

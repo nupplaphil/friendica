@@ -47,7 +47,7 @@ class Index extends BaseSettings
 				try {
 					$userGServer = $this->repository->selectOneByUserAndServer($this->session->getLocalUserId(), $gsid, false);
 					$this->repository->delete($userGServer);
-				} catch (NotFoundException $e) {
+				} catch (NotFoundException) {
 					// Nothing to delete
 				}
 			}

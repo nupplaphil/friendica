@@ -232,7 +232,7 @@ class ExAuth
 
 		try {
 			$curlResult = DI::httpClient()->get($url, HttpClientAccept::JSON, [HttpClientOptions::REQUEST => HttpClientRequest::CONTACTVERIFIER]);
-		} catch (\Throwable $th) {
+		} catch (\Throwable) {
 			return false;
 		}
 
@@ -280,7 +280,7 @@ class ExAuth
 			try {
 				$this->writeLog(LOG_INFO, 'internal auth for ' . $sUser . '@' . $aCommand[2]);
 				User::getIdFromPasswordAuthentication($sUser, $aCommand[3], true);
-			} catch (HTTPException\ForbiddenException $ex) {
+			} catch (HTTPException\ForbiddenException) {
 				// User exists, authentication failed
 				$this->writeLog(LOG_INFO, 'check against alternate password for ' . $sUser . '@' . $aCommand[2]);
 				$aUser     = User::getByNickname($sUser, ['uid']);

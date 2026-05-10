@@ -23,7 +23,7 @@ use kornrunner\Blurhash\Blurhash;
 /**
  * Class to handle images
  */
-class Image
+class Image implements \Stringable
 {
 	/** @var GdImage|Imagick|resource */
 	private $image;
@@ -294,7 +294,7 @@ class Image
 				/* Clean it */
 				$this->image = $this->image->deconstructImages();
 				return $this->image;
-			} catch (Exception $e) {
+			} catch (Exception) {
 				return false;
 			}
 		}
@@ -598,7 +598,7 @@ class Image
 				// to allow very tall images to be constrained only horizontally.
 				try {
 					$this->image->scaleImage($dest_width, $dest_height);
-				} catch (Exception $e) {
+				} catch (Exception) {
 					// Imagick couldn't use the data
 					return false;
 				}
@@ -721,7 +721,7 @@ class Image
 				/* Clean it */
 				$this->image = $this->image->deconstructImages();
 				return $this->image->getImagesBlob();
-			} catch (Exception $e) {
+			} catch (Exception) {
 				return false;
 			}
 		}
@@ -787,7 +787,7 @@ class Image
 				if ($image->isImagick()) {
 					try {
 						$colors = $image->image->getImagePixelColor($x, $y)->getColor();
-					} catch (\Exception $exception) {
+					} catch (\Exception) {
 						return '';
 					}
 					$row[] = [$colors['r'], $colors['g'], $colors['b']];

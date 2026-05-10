@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 class PermissionSet extends BaseRepository
 {
 	/** @var int Virtual permission set id for public permission */
-	const PUBLIC = 0;
+	public const PUBLIC = 0;
 
 	/** @var PermissionSetFactory */
 	protected $factory;
@@ -121,7 +121,7 @@ class PermissionSet extends BaseRepository
 			if (!empty($user_contact_str) && $this->db->exists('contact', [
 				'id'      => $cid,
 				'uid'     => $uid,
-				'blocked' => false
+				'blocked' => false,
 			])) {
 				$circle_ids = Circle::getIdsByContactId($cid);
 			}
@@ -169,7 +169,7 @@ class PermissionSet extends BaseRepository
 
 		return $this->selectOrCreate($this->factory->createFromString(
 			$uid,
-			$this->aclFormatter->toString($self_contact['id'])
+			$this->aclFormatter->toString($self_contact['id']),
 		));
 	}
 
@@ -201,7 +201,7 @@ class PermissionSet extends BaseRepository
 
 		try {
 			return $this->selectOne($this->convertToTableRow($permissionSet));
-		} catch (NotFoundException $exception) {
+		} catch (NotFoundException) {
 			return $this->save($permissionSet);
 		} catch (Exception $exception) {
 			throw new PermissionSetPersistenceException(sprintf('Cannot select PermissionSet %d', $permissionSet->id ?? 0), $exception);

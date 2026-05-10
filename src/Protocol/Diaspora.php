@@ -161,7 +161,7 @@ class Diaspora
 			if ($key == '') {
 				throw new \InvalidArgumentException();
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			DI::logger()->notice("Couldn't get a key for handle " . $handle . ". Discarding.");
 			return false;
 		}
@@ -250,7 +250,7 @@ class Diaspora
 				$outer_key = base64_decode($j_outer_key_bundle->key);
 
 				$xml = self::aesDecrypt($outer_key, $outer_iv, $ciphertext);
-			} catch (\Throwable $e) {
+			} catch (\Throwable) {
 				DI::logger()->notice('Outer Salmon did not verify. Discarding.');
 				if ($no_exit) {
 					return false;
@@ -305,7 +305,7 @@ class Diaspora
 			if ($key == '') {
 				throw new \InvalidArgumentException();
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			DI::logger()->notice("Couldn't get a key for handle " . $author_addr . ". Discarding.");
 			if ($no_exit) {
 				return false;
@@ -392,7 +392,7 @@ class Diaspora
 
 		try {
 			$author = WebFingerUri::fromString($idom->author_id);
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			DI::logger()->notice('Could not retrieve author URI.', ['idom' => $idom]);
 			throw new \Friendica\Network\HTTPException\BadRequestException();
 		}
@@ -760,7 +760,7 @@ class Diaspora
 			if (empty($key)) {
 				throw new \InvalidArgumentException();
 			}
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			DI::logger()->info('No key found', ['author' => $fields->author]);
 			return false;
 		}
@@ -787,7 +787,7 @@ class Diaspora
 		DI::logger()->info('Fetching diaspora key', ['handle' => $uri->getAddr()]);
 		try {
 			return DI::dsprContact()->getByAddr($uri)->pubKey;
-		} catch (NotFoundException|\InvalidArgumentException $e) {
+		} catch (NotFoundException|\InvalidArgumentException) {
 			return '';
 		}
 	}
@@ -1112,7 +1112,7 @@ class Diaspora
 
 		try {
 			$author = WebFingerUri::fromString($author_handle);
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			// If this isn't a "status_message" then quit
 			DI::logger()->info("Message doesn't seem to be a status message");
 			return false;
@@ -1202,7 +1202,7 @@ class Diaspora
 
 					$item = Post::selectFirst($fields, $condition);
 				}
-			} catch (HTTPException\NotFoundException $e) {
+			} catch (HTTPException\NotFoundException) {
 				DI::logger()->notice('Unable to retrieve author details', ['author' => $author->getAddr()]);
 			}
 		}
@@ -1338,7 +1338,7 @@ class Diaspora
 		try {
 			$old_author = WebFingerUri::fromString(XML::unescape($data->author));
 			$new_author = WebFingerUri::fromString(XML::unescape($data->profile->author));
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			DI::logger()->notice('Cannot find handles for sender and user', ['data' => $data]);
 			return false;
 		}
@@ -1431,7 +1431,7 @@ class Diaspora
 		} elseif ($person_uri) {
 			try {
 				return DI::dsprContact()->selectOneByAddr($person_uri)->baseurl . '/objects/' . $guid;
-			} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+			} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 				return '';
 			}
 		}
@@ -1467,7 +1467,7 @@ class Diaspora
 			try {
 				$contact = DI::dsprContact()->getByUrl(new Uri($match[3]));
 				Tag::storeByHash($uriid, $match[1], $contact->name ?: $contact->nick, $contact->url);
-			} catch (\Throwable $e) {
+			} catch (\Throwable) {
 			}
 		}
 	}
@@ -1526,7 +1526,7 @@ class Diaspora
 
 		try {
 			$author_url = (string) DI::dsprContact()->getByAddr($author)->url;
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('Unable to find author details', ['author' => $author->getAddr()]);
 			return false;
 		}
@@ -1643,7 +1643,7 @@ class Diaspora
 
 		try {
 			$msg_author_uri = WebFingerUri::fromString($msg_author_handle);
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			return false;
 		}
 
@@ -1784,7 +1784,7 @@ class Diaspora
 
 		try {
 			$author_url = (string) DI::dsprContact()->getByAddr($author)->url;
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('Unable to find author details', ['author' => $author->getAddr()]);
 			return false;
 		}
@@ -1904,7 +1904,7 @@ class Diaspora
 
 		try {
 			$author = DI::dsprContact()->getByAddr($author_uri);
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('Unable to find author details', ['author' => $author_uri->getAddr()]);
 			return false;
 		}
@@ -1976,7 +1976,7 @@ class Diaspora
 
 		try {
 			$author_url = (string) DI::dsprContact()->getByAddr($author)->url;
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('unable to find author details', ['author' => $author->getAddr()]);
 			return false;
 		}
@@ -2261,7 +2261,7 @@ class Diaspora
 
 		try {
 			$author_url = (string) DI::dsprContact()->getByAddr($author)->url;
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('Cannot resolve diaspora handle for recipient', ['author' => $author->getAddr(), 'recipient' => $recipient]);
 			return false;
 		}
@@ -2317,7 +2317,7 @@ class Diaspora
 		$created_at = DateTimeFormat::utc(XML::unescape($data->created_at));
 		try {
 			$root_author = WebFingerUri::fromString(XML::unescape($data->root_author));
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			return false;
 		}
 
@@ -2341,7 +2341,7 @@ class Diaspora
 
 		try {
 			$original_person = DI::dsprContact()->getByAddr($root_author);
-		} catch (HTTPException\NotFoundException $e) {
+		} catch (HTTPException\NotFoundException) {
 			return false;
 		}
 
@@ -2439,7 +2439,7 @@ class Diaspora
 
 		try {
 			$author = DI::dsprContact()->getByAddr($author_uri);
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			DI::logger()->notice('Unable to find details for author', ['author' => $author_uri->getAddr()]);
 			return false;
 		}
@@ -2575,7 +2575,7 @@ class Diaspora
 	private static function storePhotoAsMedia(int $uriid, $photo)
 	{
 		// @TODO Need to find object type, roland@f.haeder.net
-		DI::logger()->debug('photo=' . get_class($photo));
+		DI::logger()->debug('photo=' . $photo::class);
 		$data = [
 			'uri-id'      => $uriid,
 			'type'        => Post\Media::IMAGE,
@@ -2939,7 +2939,7 @@ class Diaspora
 		try {
 			$target   = DI::dsprContact()->getByAddr(WebFingerUri::fromString($contact['addr']));
 			$dest_url = $public_batch ? $target->batch : $target->notify;
-		} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+		} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 		}
 
 		if (empty($dest_url)) {
@@ -3025,7 +3025,7 @@ class Diaspora
 		if (!empty($contact['addr'])) {
 			try {
 				$pubkey = DI::dsprContact()->getByAddr(WebFingerUri::fromString($contact['addr']))->pubKey;
-			} catch (HTTPException\NotFoundException|\InvalidArgumentException $e) {
+			} catch (HTTPException\NotFoundException|\InvalidArgumentException) {
 			}
 		} else {
 			// The "addr" field should always be filled.

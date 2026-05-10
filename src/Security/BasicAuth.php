@@ -154,7 +154,7 @@ class BasicAuth
 			try {
 				$user_id = User::getIdFromPasswordAuthentication(trim($user), trim($password), true);
 				$record  = DBA::selectFirst('user', [], ['uid' => $user_id]);
-			} catch (Exception $ex) {
+			} catch (Exception) {
 				$record = [];
 			}
 		}

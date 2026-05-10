@@ -669,7 +669,7 @@ class Probe
 				[HttpClientOptions::TIMEOUT => DI::config()->get('system', 'xrd_timeout', 20), HttpClientOptions::REQUEST => HttpClientRequest::CONTACTINFO],
 			);
 		} catch (\Throwable $e) {
-			DI::logger()->notice($e->getMessage(), ['url' => $url, 'type' => $type, 'class' => get_class($e)]);
+			DI::logger()->notice($e->getMessage(), ['url' => $url, 'type' => $type, 'class' => $e::class]);
 			return null;
 		}
 
@@ -1711,7 +1711,7 @@ class Probe
 					],
 				],
 			];
-		} catch (Exception $e) {
+		} catch (Exception) {
 			// Default values for nonexistent targets
 			$data = [
 				'name'  => $url, 'nick' => $url, 'url' => $url, 'network' => Protocol::PHANTOM,

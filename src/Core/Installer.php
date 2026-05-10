@@ -403,7 +403,7 @@ class Installer
 		$status = true;
 		try {
 			new DOMDocument();
-		} catch (Exception $e) {
+		} catch (Exception) {
 			$help      = DI::l10n()->t('Error, XML PHP module required but not installed.');
 			$status    = false;
 			$returnVal = false;

@@ -72,7 +72,7 @@ class SemaphoreLock extends AbstractLock
 				$success = @sem_release(self::$semaphore[$key]);
 				unset(self::$semaphore[$key]);
 				$this->markRelease($key);
-			} catch (\Exception $exception) {
+			} catch (\Exception) {
 				$success = false;
 			}
 		}

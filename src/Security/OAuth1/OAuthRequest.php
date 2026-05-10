@@ -9,7 +9,7 @@ namespace Friendica\Security\OAuth1;
 
 use Friendica\Util\Strings;
 
-class OAuthRequest
+class OAuthRequest implements \Stringable
 {
 	private $parameters;
 	private $http_method;
@@ -287,9 +287,9 @@ class OAuthRequest
 		return $out;
 	}
 
-	public function __toString()
+	public function __toString(): string
 	{
-		return $this->to_url();
+		return (string) $this->to_url();
 	}
 
 
