@@ -9,6 +9,14 @@
     Created on : 11.08.2020
     Author     : Hypolite Petovan <hypolite@friendica.mrpetovan.com>
 */
+
+a:hover, button:focus, .btn-link:focus, .btn-primary:focus,
+a:hover, button:hover, .btn-link:hover, .btn-primary:hover,
+#topbar-first li a:hover, #topbar-first li button:hover,
+#topbar-first li a:focus, #topbar-first li button:focus {
+	color: white;
+}
+
 #topbar-first {
 	background-color: $background_color;
 }
@@ -33,6 +41,10 @@
 }
 #topbar-second ul.tabs li {
 	border_color: $link_color;
+}
+header #banner #logo-img:focus,
+header #banner #logo-img:hover {
+		background-color: $font_color;
 }
 
 .dropdown-menu,

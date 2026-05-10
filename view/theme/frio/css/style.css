@@ -300,6 +300,7 @@ details summary {
 	background: $nav_bg;
 	color: $btn_primary_color;
 }
+
 .btn.btn-primary:hover,
 .btn.btn-primary:focus {
 	color: $btn_primary_color;
@@ -1133,7 +1134,7 @@ ul li .intro-wrapper button.intro-action-link {
 .contact-photo-wrapper .dropdown-menu li.selected a {
 	border-left: 3px solid $link_color;
 	color: #fff;
-	background: $menu_background_hover_color;
+	background: $nav_icon_hover_color;
 }
 #photo-edit-link-wrap {
 	color: $font_color_darker;
@@ -1205,9 +1206,20 @@ aside .widget li a {
 	padding-top: 6px;
 	padding-bottom: 6px;
 }
-aside .widget li a,
+aside .widget li a {
+	color: $font_color_darker;
+}
+
 aside .widget li a:hover {
 	color: $font_color_darker;
+}
+
+aside .fakelink h3:hover {
+	color: $link_color;
+}
+
+aside .widget li.selected a {
+	color: $font_color;
 }
 
 /* group-list widget */
@@ -2161,10 +2173,13 @@ code > .hl-main {
 button[disabled] {
   	color: $font_color_lighter;
 }
-.wall-item-actions .active {
-	font-weight: bold;
-	color: $link_color;
+.wall-item-actions .active,
+.wall-item-actions button:focus,
+.wall-item-actions button:hover {
 	box-shadow: none;
+	color: $link_color;
+	font-weight: bold;
+	text-decoration: underline;
 }
 .wall-item-actions-left {
 	display: table-cell;
@@ -2204,9 +2219,6 @@ button[disabled] {
 		top: 8px;
 		right: 0;
 	}
-}
-.wall-item-actions button:hover {
-	text-decoration: underline;
 }
 .wall-item-actions .separator {
 	margin: 0 0.3em;
@@ -2763,6 +2775,10 @@ ul.viewcontact_wrapper > li {
 }
 .contact-wrapper .contact-photo-menu {
 	top: auto;
+}
+
+.contact-entry-details {
+  color: $font_color;
 }
 
 .contact-entry-desc {
