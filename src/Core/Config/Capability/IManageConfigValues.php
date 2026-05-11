@@ -42,7 +42,7 @@ interface IManageConfigValues
 	 * @throws ConfigPersistenceException In case the persistence layer throws errors
 	 *
 	 */
-	public function get(string $cat, string $key = null, $default_value = null);
+	public function get(string $cat, ?string $key = null, $default_value = null);
 
 	/**
 	 * Returns true, if the current config can be changed

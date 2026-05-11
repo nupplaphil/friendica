@@ -37,7 +37,7 @@ class Introduction extends BaseFactory implements ICanCreateFromTableRow
 		int $uid,
 		int $cid,
 		string $note,
-		int $sid = null,
+		?int $sid = null,
 		bool $knowyou = false
 	): Entity\Introduction {
 		return $this->createFromTableRow([

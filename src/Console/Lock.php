@@ -62,7 +62,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, ICanLock $lock, array $argv = null)
+	public function __construct(Mode $appMode, ICanLock $lock, ?array $argv = null)
 	{
 		parent::__construct($argv);
 
