@@ -190,6 +190,7 @@ class Compose extends BaseModule
 				'mytitle'              => $this->l10n->t('This is you'),
 				'submit'               => $this->l10n->t('Post'),
 				'edbold'               => $this->l10n->t('Bold'),
+				'edembed'              => $this->l10n->t('Embed'),
 				'editalic'             => $this->l10n->t('Italic'),
 				'eduline'              => $this->l10n->t('Underline'),
 				'edquote'              => $this->l10n->t('Quote'),

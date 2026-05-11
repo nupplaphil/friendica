@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.04-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-10 10:12+0200\n"
+"POT-Creation-Date: 2026-05-10 14:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,7 +160,7 @@ msgid "Insert web link"
 msgstr ""
 
 #: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:405
-#: src/Content/Conversation.php:1614 src/Module/Item/Compose.php:208
+#: src/Content/Conversation.php:1614 src/Module/Item/Compose.php:209
 #: src/Module/Post/Edit.php:143 src/Object/Post.php:623
 msgid "Please wait"
 msgstr ""
@@ -1029,7 +1029,7 @@ msgstr[1] ""
 msgid "Visible to <strong>everybody</strong>"
 msgstr ""
 
-#: src/Content/Conversation.php:337 src/Module/Item/Compose.php:202
+#: src/Content/Conversation.php:337 src/Module/Item/Compose.php:203
 #: src/Object/Post.php:1181
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
@@ -1088,60 +1088,70 @@ msgid "attach file"
 msgstr ""
 
 #: src/Content/Conversation.php:375 src/Module/Item/Compose.php:192
-#: src/Module/Post/Edit.php:171 src/Object/Post.php:1171
+#: src/Module/Post/Edit.php:171 src/Module/Settings/Profile/Index.php:269
+#: src/Object/Post.php:1171
 msgid "Bold"
 msgstr ""
 
-#: src/Content/Conversation.php:376 src/Module/Item/Compose.php:193
-#: src/Module/Post/Edit.php:172 src/Object/Post.php:1172
+#: src/Content/Conversation.php:376 src/Module/Item/Compose.php:194
+#: src/Module/Post/Edit.php:172 src/Module/Settings/Profile/Index.php:270
+#: src/Object/Post.php:1172
 msgid "Italic"
 msgstr ""
 
-#: src/Content/Conversation.php:377 src/Module/Item/Compose.php:194
-#: src/Module/Post/Edit.php:173 src/Object/Post.php:1173
+#: src/Content/Conversation.php:377 src/Module/Item/Compose.php:195
+#: src/Module/Post/Edit.php:173 src/Module/Settings/Profile/Index.php:271
+#: src/Object/Post.php:1173
 msgid "Underline"
 msgstr ""
 
-#: src/Content/Conversation.php:378 src/Module/Item/Compose.php:195
-#: src/Module/Post/Edit.php:174 src/Object/Post.php:1175
+#: src/Content/Conversation.php:378 src/Module/Item/Compose.php:196
+#: src/Module/Post/Edit.php:174 src/Module/Settings/Profile/Index.php:273
+#: src/Object/Post.php:1175
 msgid "Quote"
 msgstr ""
 
-#: src/Content/Conversation.php:379 src/Module/Item/Compose.php:196
-#: src/Module/Post/Edit.php:175 src/Object/Post.php:1176
+#: src/Content/Conversation.php:379 src/Module/Item/Compose.php:197
+#: src/Module/Post/Edit.php:175 src/Module/Settings/Profile/Index.php:274
+#: src/Object/Post.php:1176
 msgid "Add emojis"
 msgstr ""
 
-#: src/Content/Conversation.php:380 src/Module/Item/Compose.php:197
+#: src/Content/Conversation.php:380 src/Module/Item/Compose.php:198
 #: src/Object/Post.php:1174
 msgid "Content Warning"
 msgstr ""
 
-#: src/Content/Conversation.php:381 src/Module/Item/Compose.php:198
-#: src/Module/Post/Edit.php:176 src/Object/Post.php:1177
+#: src/Content/Conversation.php:381 src/Module/Item/Compose.php:199
+#: src/Module/Post/Edit.php:176 src/Module/Settings/Profile/Index.php:275
+#: src/Object/Post.php:1177
 msgid "Code"
 msgstr ""
 
-#: src/Content/Conversation.php:382 src/Module/Item/Compose.php:199
-#: src/Object/Post.php:1178
+#: src/Content/Conversation.php:382 src/Module/Item/Compose.php:200
+#: src/Module/Settings/Profile/Index.php:276
+#: src/Module/Settings/Profile/Index.php:277 src/Object/Post.php:1178
 msgid "Image"
 msgstr ""
 
-#: src/Content/Conversation.php:383 src/Module/Item/Compose.php:200
-#: src/Module/Post/Edit.php:177 src/Object/Post.php:1179
+#: src/Content/Conversation.php:383 src/Module/Item/Compose.php:201
+#: src/Module/Post/Edit.php:177 src/Module/Settings/Profile/Index.php:278
+#: src/Object/Post.php:1179
 msgid "Link"
 msgstr ""
 
-#: src/Content/Conversation.php:384 src/Module/Item/Compose.php:201
-#: src/Module/Post/Edit.php:178 src/Object/Post.php:1180
+#: src/Content/Conversation.php:384 src/Module/Item/Compose.php:202
+#: src/Module/Post/Edit.php:178 src/Module/Settings/Profile/Index.php:279
+#: src/Object/Post.php:1180
 msgid "Link or Media"
 msgstr ""
 
-#: src/Content/Conversation.php:385
+#: src/Content/Conversation.php:385 src/Module/Item/Compose.php:193
+#: src/Module/Settings/Profile/Index.php:272
 msgid "Embed"
 msgstr ""
 
-#: src/Content/Conversation.php:386 src/Module/Item/Compose.php:204
+#: src/Content/Conversation.php:386 src/Module/Item/Compose.php:205
 #: src/Module/Post/Edit.php:139
 msgid "Set your location"
 msgstr ""
@@ -1158,26 +1168,26 @@ msgstr ""
 msgid "clear location"
 msgstr ""
 
-#: src/Content/Conversation.php:391 src/Module/Item/Compose.php:209
+#: src/Content/Conversation.php:391 src/Module/Item/Compose.php:210
 #: src/Module/Post/Edit.php:155
 msgid "Set title"
 msgstr ""
 
-#: src/Content/Conversation.php:393 src/Module/Item/Compose.php:210
+#: src/Content/Conversation.php:393 src/Module/Item/Compose.php:211
 #: src/Module/Post/Edit.php:157
 msgid "Set summary, abstract or spoiler text"
 msgstr ""
 
-#: src/Content/Conversation.php:395 src/Module/Item/Compose.php:211
+#: src/Content/Conversation.php:395 src/Module/Item/Compose.php:212
 #: src/Module/Post/Edit.php:159
 msgid "Categories (comma-separated list)"
 msgstr ""
 
-#: src/Content/Conversation.php:396 src/Module/Item/Compose.php:227
+#: src/Content/Conversation.php:396 src/Module/Item/Compose.php:228
 msgid "Sensitive post"
 msgstr ""
 
-#: src/Content/Conversation.php:401 src/Module/Item/Compose.php:232
+#: src/Content/Conversation.php:401 src/Module/Item/Compose.php:233
 msgid "Scheduled at"
 msgstr ""
 
@@ -1190,7 +1200,7 @@ msgid "Public post"
 msgstr ""
 
 #: src/Content/Conversation.php:419 src/Module/Calendar/Event/Form.php:261
-#: src/Module/Item/Compose.php:203 src/Module/Post/Edit.php:165
+#: src/Module/Item/Compose.php:204 src/Module/Post/Edit.php:165
 #: src/Object/Post.php:1182
 msgid "Preview"
 msgstr ""
@@ -1466,7 +1476,7 @@ msgid "Sort by post creation date"
 msgstr ""
 
 #: src/Content/Conversation/Factory/Network.php:27
-#: src/Module/Settings/Profile/Index.php:280
+#: src/Module/Settings/Profile/Index.php:295
 msgid "Personal"
 msgstr ""
 
@@ -1713,7 +1723,7 @@ msgstr ""
 
 #: src/Content/Item.php:438 src/Content/Item.php:461 src/Model/Contact.php:1238
 #: src/Model/Contact.php:1294 src/Model/Contact.php:1304
-#: src/Module/Directory.php:143 src/Module/Settings/Profile/Index.php:279
+#: src/Module/Directory.php:143 src/Module/Settings/Profile/Index.php:294
 msgid "View Profile"
 msgstr ""
 
@@ -2054,7 +2064,7 @@ msgstr ""
 #: src/Module/Moderation/Blocklist/Contact.php:98
 #: src/Module/Moderation/Blocklist/Contact/Import.php:101
 #: src/Module/Moderation/Blocklist/Server/Add.php:110
-#: src/Module/Moderation/Blocklist/Server/Import.php:105
+#: src/Module/Moderation/Blocklist/Server/Import.php:104
 #: src/Module/Moderation/Blocklist/Server/Index.php:84
 #: src/Module/Moderation/Item/Delete.php:47
 #: src/Module/Moderation/Item/Source.php:71
@@ -3297,7 +3307,7 @@ msgstr ""
 msgid "Wall Photos"
 msgstr ""
 
-#: src/Model/Profile.php:342 src/Module/Settings/Profile/Index.php:273
+#: src/Model/Profile.php:342 src/Module/Settings/Profile/Index.php:288
 msgid "Change profile picture"
 msgstr ""
 
@@ -3743,7 +3753,7 @@ msgstr ""
 #: src/Module/Settings/ContactImport.php:111
 #: src/Module/Settings/Delegation.php:179 src/Module/Settings/Display.php:426
 #: src/Module/Settings/Features.php:90
-#: src/Module/Settings/Profile/Index.php:272
+#: src/Module/Settings/Profile/Index.php:287
 msgid "Save Settings"
 msgstr ""
 
@@ -5750,7 +5760,7 @@ msgstr ""
 #: src/Module/Moderation/Blocklist/Contact/Import.php:113
 #: src/Module/Moderation/Blocklist/Server/Add.php:125
 #: src/Module/Moderation/Blocklist/Server/Add.php:127
-#: src/Module/Moderation/Blocklist/Server/Import.php:116
+#: src/Module/Moderation/Blocklist/Server/Import.php:115
 #: src/Module/Moderation/Blocklist/Server/Index.php:75
 #: src/Module/Moderation/Blocklist/Server/Index.php:76
 #: src/Module/Moderation/Blocklist/Server/Index.php:104
@@ -5781,7 +5791,7 @@ msgid "Title"
 msgstr ""
 
 #: src/Module/Calendar/Event/Form.php:250
-#: src/Module/Settings/Profile/Index.php:282
+#: src/Module/Settings/Profile/Index.php:297
 msgid "Location"
 msgstr ""
 
@@ -7134,19 +7144,19 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: src/Module/Item/Compose.php:205
+#: src/Module/Item/Compose.php:206
 msgid "Clear the location"
 msgstr ""
 
-#: src/Module/Item/Compose.php:206
+#: src/Module/Item/Compose.php:207
 msgid "Location services are unavailable on your device"
 msgstr ""
 
-#: src/Module/Item/Compose.php:207
+#: src/Module/Item/Compose.php:208
 msgid "Location services are disabled. Please check the website's permissions on your device"
 msgstr ""
 
-#: src/Module/Item/Compose.php:218
+#: src/Module/Item/Compose.php:219
 msgid "If you want to always use this editor for posting, you can configure the New Post button to always open it in your <a href=\"/settings/display\">Theme settings</a>."
 msgstr ""
 
@@ -7532,7 +7542,7 @@ msgstr ""
 
 #: src/Module/Moderation/Blocklist/Contact.php:124
 #: src/Module/Moderation/Blocklist/Contact/Import.php:107
-#: src/Module/Moderation/Blocklist/Server/Import.php:111
+#: src/Module/Moderation/Blocklist/Server/Import.php:110
 msgid "Block Reason"
 msgstr ""
 
@@ -7565,7 +7575,7 @@ msgstr[1] ""
 
 #: src/Module/Moderation/Blocklist/Contact/Import.php:100
 #: src/Module/Moderation/Blocklist/Server/Add.php:109
-#: src/Module/Moderation/Blocklist/Server/Import.php:104
+#: src/Module/Moderation/Blocklist/Server/Import.php:103
 msgid "← Return to the list"
 msgstr ""
 
@@ -7578,7 +7588,7 @@ msgid "<p>Upload a CSV file with contact URLs and reasons for blocking.</p>"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Contact/Import.php:104
-#: src/Module/Moderation/Blocklist/Server/Import.php:108
+#: src/Module/Moderation/Blocklist/Server/Import.php:107
 #: src/Module/Moderation/Blocklist/Server/Index.php:95
 msgid "Upload file"
 msgstr ""
@@ -7705,74 +7715,74 @@ msgid "The reason why you blocked this server domain pattern. This reason will b
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Server/Import.php:63
-#: src/Module/Moderation/Blocklist/Server/Import.php:70
+#: src/Module/Moderation/Blocklist/Server/Import.php:69
 msgid "Error importing pattern file"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:77
+#: src/Module/Moderation/Blocklist/Server/Import.php:76
 msgid "Local blocklist replaced with the provided file."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:81
+#: src/Module/Moderation/Blocklist/Server/Import.php:80
 #, php-format
 msgid "%d pattern was added to the local blocklist."
 msgid_plural "%d patterns were added to the local blocklist."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:83
+#: src/Module/Moderation/Blocklist/Server/Import.php:82
 msgid "No pattern was added to the local blocklist."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:106
+#: src/Module/Moderation/Blocklist/Server/Import.php:105
 msgid "Import a Server Domain Pattern Blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:107
+#: src/Module/Moderation/Blocklist/Server/Import.php:106
 msgid "<p>This file can be downloaded from the <code>/friendica</code> path of any Friendica server.</p>"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:109
+#: src/Module/Moderation/Blocklist/Server/Import.php:108
 msgid "Patterns to import"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:110
+#: src/Module/Moderation/Blocklist/Server/Import.php:109
 msgid "Domain Pattern"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:112
+#: src/Module/Moderation/Blocklist/Server/Import.php:111
 msgid "Import Mode"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:113
+#: src/Module/Moderation/Blocklist/Server/Import.php:112
 msgid "Import Patterns"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:114
+#: src/Module/Moderation/Blocklist/Server/Import.php:113
 #, php-format
 msgid "%d total pattern"
 msgid_plural "%d total patterns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:116
+#: src/Module/Moderation/Blocklist/Server/Import.php:115
 #: src/Module/Moderation/Blocklist/Server/Index.php:104
 msgid "Server domain pattern blocklist CSV file"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:117
+#: src/Module/Moderation/Blocklist/Server/Import.php:116
 msgid "Append"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:117
+#: src/Module/Moderation/Blocklist/Server/Import.php:116
 msgid "Imports patterns from the file that weren't already existing in the current blocklist."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:118
+#: src/Module/Moderation/Blocklist/Server/Import.php:117
 msgid "Replace"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Import.php:118
+#: src/Module/Moderation/Blocklist/Server/Import.php:117
 msgid "Replaces the current blocklist by the imported patterns."
 msgstr ""
 
@@ -8675,7 +8685,7 @@ msgid "You're currently viewing your profile as <b>%s</b> <a href=\"%s\" class=\
 msgstr ""
 
 #: src/Module/Profile/Profile.php:180 src/Module/Settings/Account.php:522
-#: src/Module/Settings/Profile/Index.php:304
+#: src/Module/Settings/Profile/Index.php:319
 msgid "Display name:"
 msgstr ""
 
@@ -8687,12 +8697,12 @@ msgstr ""
 msgid "Birthday:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:199 src/Module/Settings/Profile/Index.php:312
+#: src/Module/Profile/Profile.php:199 src/Module/Settings/Profile/Index.php:327
 #: src/Util/Temporal.php:157
 msgid "Age: "
 msgstr ""
 
-#: src/Module/Profile/Profile.php:199 src/Module/Settings/Profile/Index.php:312
+#: src/Module/Profile/Profile.php:199 src/Module/Settings/Profile/Index.php:327
 #: src/Util/Temporal.php:157
 #, php-format
 msgid "%d year old"
@@ -8700,7 +8710,7 @@ msgid_plural "%d years old"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Profile/Profile.php:204 src/Module/Settings/Profile/Index.php:305
+#: src/Module/Profile/Profile.php:204 src/Module/Settings/Profile/Index.php:320
 msgid "Description:"
 msgstr ""
 
@@ -10379,48 +10389,48 @@ msgstr ""
 msgid "To verify your homepage, add a rel=\"me\" link to it, pointing to your profile URL (%s)."
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:270
+#: src/Module/Settings/Profile/Index.php:285
 msgid "Profile Actions"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:271
+#: src/Module/Settings/Profile/Index.php:286
 msgid "Edit Profile Details"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:274
+#: src/Module/Settings/Profile/Index.php:289
 msgid "To change your profile picture, you can either upload a new picture here, or click to visit your photos to pick among your existing pictures."
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:275
+#: src/Module/Settings/Profile/Index.php:290
 msgid "Upload new picture"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:276
+#: src/Module/Settings/Profile/Index.php:291
 msgid "Upload selected picture"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:277
+#: src/Module/Settings/Profile/Index.php:292
 msgid "Pick existing picture from photos"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:278
+#: src/Module/Settings/Profile/Index.php:293
 msgid "Go to my photos"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:281
+#: src/Module/Settings/Profile/Index.php:296
 msgid "Profile picture"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:283 src/Util/Temporal.php:83
+#: src/Module/Settings/Profile/Index.php:298 src/Util/Temporal.php:83
 #: src/Util/Temporal.php:85
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:284
+#: src/Module/Settings/Profile/Index.php:299
 msgid "Custom Profile Fields"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:286
+#: src/Module/Settings/Profile/Index.php:301
 #, php-format
 msgid ""
 "<p>Custom fields appear on <a href=\"%s\">your profile page</a>.</p>\n"
@@ -10430,59 +10440,59 @@ msgid ""
 "\t\t\t\t<p>Non-public fields can only be seen by the selected Friendica contacts or the Friendica contacts in the selected circles.</p>"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:307
+#: src/Module/Settings/Profile/Index.php:322
 msgid "Street Address:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:308
+#: src/Module/Settings/Profile/Index.php:323
 msgid "Locality/City:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:309
+#: src/Module/Settings/Profile/Index.php:324
 msgid "Region/State:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:310
+#: src/Module/Settings/Profile/Index.php:325
 msgid "Postal/Zip Code:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:311
+#: src/Module/Settings/Profile/Index.php:326
 msgid "Country:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:313
+#: src/Module/Settings/Profile/Index.php:328
 msgid "XMPP (Jabber) address:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:313
+#: src/Module/Settings/Profile/Index.php:328
 msgid "The XMPP address will be published so that people can follow you there."
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:314
+#: src/Module/Settings/Profile/Index.php:329
 msgid "Matrix (Element) address:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:314
+#: src/Module/Settings/Profile/Index.php:329
 msgid "The Matrix address will be published so that people can follow you there."
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:315
+#: src/Module/Settings/Profile/Index.php:330
 msgid "Homepage URL:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:316
+#: src/Module/Settings/Profile/Index.php:331
 msgid "Public Keywords:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:316
+#: src/Module/Settings/Profile/Index.php:331
 msgid "Used for suggesting potential friends, can be seen by others."
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:317
+#: src/Module/Settings/Profile/Index.php:332
 msgid "Private Keywords:"
 msgstr ""
 
-#: src/Module/Settings/Profile/Index.php:317
+#: src/Module/Settings/Profile/Index.php:332
 msgid "Used for searching profiles, never shown to others."
 msgstr ""
 
