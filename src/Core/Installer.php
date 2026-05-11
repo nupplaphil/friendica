@@ -252,7 +252,7 @@ class Installer
 			[$result] = explode("\n", $result);
 			$help     = "";
 			if (!$passed2) {
-				$help .= DI::l10n()->t("PHP executable is not the php cli binary \x28could be cgi-fgci version\x29") . '<br />';
+				$help .= DI::l10n()->t("PHP executable is not the php cli binary (could be cgi-fgci version)") . '<br />';
 				$help .= DI::l10n()->t('Found PHP version: ') . "<tt>$result</tt>";
 			}
 			$this->addCheck(DI::l10n()->t('PHP cli binary'), $passed2, true, $help);

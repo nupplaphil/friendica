@@ -130,7 +130,7 @@ final class LostPass extends BaseModule
 
 			$user = DBA::selectFirst('user', ['uid', 'username', 'nickname', 'email', 'pwdreset_time', 'language'], ['pwdreset' => hash('sha256', $pwdreset_token)]);
 			if (!DBA::isResult($user)) {
-				$this->sysMessages->addNotice($this->l10n->t("Request could not be verified. \x28You may have previously submitted it.\x29 Password reset failed."));
+				$this->sysMessages->addNotice($this->l10n->t("Request could not be verified. (You may have previously submitted it.) Password reset failed."));
 
 				return $this->form();
 			}
@@ -202,9 +202,8 @@ final class LostPass extends BaseModule
 			$preamble = Strings::deindent($this->l10n->t('
 				Dear %1$s,
 					Your password has been changed as requested. Please retain this
-				information for your records ' . "\x28" . 'or change your password immediately to
-				something that you will remember' . "\x29" . '.
-			', $user['username']));
+				information for your records (or change your password immediately to
+				something that you will remember).', $user['username']));
 			$body = Strings::deindent($this->l10n->t('
 				Your login details are as follows:
 
