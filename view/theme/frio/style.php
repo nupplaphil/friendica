@@ -112,7 +112,7 @@ if (!isset($nav_icon_hover_color)) {
 	if ($nihc->isLight()) {
 		$nav_icon_hover_color = '#' . $nihc->darken(10);
 	} else {
-		$nav_icon_hover_color = '#' . $nihc->lighten(20);
+		$nav_icon_hover_color = '#' . $nihc->lighten(13);
 	}
 }
 if (!isset($link_hover_color)) {
@@ -120,9 +120,9 @@ if (!isset($link_hover_color)) {
 	$lcolor = $lhc->getHex();
 
 	if ($lhc->isLight($lcolor, 75)) {
-		$link_hover_color = '#' . $lhc->darken(5);
+		$link_hover_color = '#' . $lhc->darken(20);
 	} else {
-		$link_hover_color = '#' . $lhc->lighten(5);
+		$link_hover_color = '#' . $lhc->lighten(20);
 	}
 }
 
@@ -166,7 +166,7 @@ $options = [
 	'$link_hover_color'            => $link_hover_color,
 	'$menu_background_hover_color' => $menu_background_hover_color,
 	'$btn_primary_color'           => $nav_icon_color,
-	'$btn_primary_hover_color'     => $menu_background_hover_color,
+	'$btn_primary_hover_color'     => $nav_icon_hover_color,
 	'$background_color'            => $background_color,
 	'$contentbg_transp'            => $contentbg_transp,
 	'$background_image'            => $background_image,
@@ -212,7 +212,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && isset($_SERVER['HTTP_IF_NONE_MA
 	$cached_etag     = str_replace(
 		['"', '-gzip'],
 		['', ''],
-		stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])
+		stripslashes($_SERVER['HTTP_IF_NONE_MATCH']),
 	);
 
 	if (($cached_modified == $modified) && ($cached_etag == $etag)) {
