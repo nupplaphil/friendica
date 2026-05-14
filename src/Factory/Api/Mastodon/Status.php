@@ -68,7 +68,7 @@ class Status extends BaseFactory
 		Emoji $mstdnEmojiFactory,
 		Poll $mstdnPollFactory,
 		ContentItem $contentItem,
-		ACLFormatter $aclFormatter
+		ACLFormatter $aclFormatter,
 	) {
 		parent::__construct($logger);
 		$this->dba                    = $dba;
