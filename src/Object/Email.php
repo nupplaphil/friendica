@@ -77,7 +77,7 @@ class Email implements IEmail
 		if ($plain) {
 			return $this->msgText;
 		} else {
-			return $this->msgHtml ?? '';
+			return $this->msgHtml;
 		}
 	}
 
