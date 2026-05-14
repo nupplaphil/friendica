@@ -335,7 +335,7 @@ class Statuses extends BaseApi
 
 		$scheduled_at = '';
 		if (!empty($request['scheduled_at'])) {
-				$scheduled_at = DateTimeFormat::utc($request['scheduled_at']);
+			$scheduled_at = DateTimeFormat::utc($request['scheduled_at']);
 		} else {
 			$scheduled_at = DI::contentItem()->getAutomaticScheduledAt($uid);
 		}
