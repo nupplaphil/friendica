@@ -47,9 +47,6 @@
                         <button type="button" class="btn btn-default bb-url" aria-label="{{$l10n.edurl}}" title="{{$l10n.edurl}}" onclick="insertFormatting('url',{{$id}});" tabindex="7">
                             <i class="fa fa-link"></i>
                         </button>
-                        <button type="button" class="btn btn-default bb-url" aria-label="{{$l10n.edembed}}" title="{{$l10n.edembed}}" onclick="insertFormatting('embed',{{$id}});" tabindex="8">
-                            <i class="fa fa-play"></i>
-                        </button>
                         <button type="button" class="btn btn-default underline" aria-label="{{$l10n.eduline}}" title="{{$l10n.eduline}}" onclick="insertFormatting('u',{{$id}});" tabindex="9">
                             <i class="fa fa-underline"></i>
                         </button>

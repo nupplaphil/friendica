@@ -382,7 +382,6 @@ class Conversation
 			'$edimg'               => $this->l10n->t('Image'),
 			'$edurl'               => $this->l10n->t('Link'),
 			'$edattach'            => $this->l10n->t('Link or Media'),
-			'$edembed'             => $this->l10n->t('Embed'),
 			'$setloc'              => $this->l10n->t('Set your location'),
 			'$shortsetloc'         => $this->l10n->t('set location'),
 			'$noloc'               => $this->l10n->t('Clear browser location'),

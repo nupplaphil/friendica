@@ -269,7 +269,6 @@ class Index extends BaseSettings
 			'edbold'   => $this->t('Bold'),
 			'editalic' => $this->t('Italic'),
 			'eduline'  => $this->t('Underline'),
-			'edembed'  => $this->t('Embed'),
 			'edquote'  => $this->t('Quote'),
 			'edemojis' => $this->t('Add emojis'),
 			'edcode'   => $this->t('Code'),
