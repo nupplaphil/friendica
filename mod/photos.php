@@ -444,9 +444,9 @@ function photos_content()
 
 		$eventDispatcher = DI::eventDispatcher();
 
-		$eventDispatcher->dispatch(
+		$ret = $eventDispatcher->dispatch(
 			new ArrayFilterEvent(ArrayFilterEvent::PHOTO_UPLOAD_FORM, $ret),
-		);
+		)->getArray();
 
 		// Determine if we're in album context (uploading to a specific album)
 		$is_album_context = !empty($selname);

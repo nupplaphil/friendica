@@ -134,30 +134,18 @@ class Status extends BaseFactory
 			}
 		}
 
-		$count_announce = Post::countPosts([
+		$condition = [
 			'thr-parent-id' => $uriId,
 			'gravity'       => Item::GRAVITY_ACTIVITY,
-			'vid'           => Verb::getID(Activity::ANNOUNCE),
 			'deleted'       => false,
-		]) + Post::countPosts([
-			'quote-uri-id' => $uriId,
-			'body'         => '',
-			'deleted'      => false,
-		]);
+		];
+		$condition = DBA::mergeConditions($condition, ["((`uid` = ? AND `global`) OR (`uid` = ? AND NOT `global`))", 0, $uid]);
 
-		$count_like = Post::countPosts([
-			'thr-parent-id' => $uriId,
-			'gravity'       => Item::GRAVITY_ACTIVITY,
-			'vid'           => Verb::getID(Activity::LIKE),
-			'deleted'       => false,
-		]);
+		$count_announce = Post::count(DBA::mergeConditions($condition, ['vid' => Verb::getID(Activity::ANNOUNCE)]))
+			+ Post::countPosts(['quote-uri-id' => $uriId, 'body' => '', 'deleted' => false]);
 
-		$count_dislike = Post::countPosts([
-			'thr-parent-id' => $uriId,
-			'gravity'       => Item::GRAVITY_ACTIVITY,
-			'vid'           => Verb::getID(Activity::DISLIKE),
-			'deleted'       => false,
-		]);
+		$count_like    = Post::count(DBA::mergeConditions($condition, ['vid' => Verb::getID(Activity::LIKE)]));
+		$count_dislike = Post::count(DBA::mergeConditions($condition, ['vid' => Verb::getID(Activity::DISLIKE)]));
 
 		$counts = new \Friendica\Object\Api\Mastodon\Status\Counts(
 			Post::countPosts(['thr-parent-id' => $uriId, 'gravity' => Item::GRAVITY_COMMENT, 'deleted' => false], []),

@@ -253,11 +253,18 @@ class Photos extends \Friendica\Module\BaseProfile
 		if ($preview < 0) {
 			$this->logger->warning('image store failed');
 			$this->systemMessages->addNotice($this->t('Image upload failed.'));
+			$this->eventDispatcher->dispatch(
+				new ArrayFilterEvent(ArrayFilterEvent::PHOTO_UPLOAD_END, ['id' => 0]),
+			);
 			return;
 		}
 
 		// Update the photo albums cache
 		Photo::clearAlbumCache($this->owner['uid']);
+
+		$this->eventDispatcher->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::PHOTO_UPLOAD_END, ['id' => $resource_id]),
+		);
 
 		$this->baseUrl->redirect($this->session->get('photo_return') ?? 'profile/' . $this->owner['nickname'] . '/photos');
 	}

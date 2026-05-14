@@ -335,7 +335,7 @@ class Statuses extends BaseApi
 
 		$scheduled_at = '';
 		if (!empty($request['scheduled_at'])) {
-			$scheduled_at = DateTimeFormat::utc($request['scheduled_at']);
+				$scheduled_at = DateTimeFormat::utc($request['scheduled_at']);
 		} else {
 			$scheduled_at = DI::contentItem()->getAutomaticScheduledAt($uid);
 		}
@@ -355,6 +355,8 @@ class Statuses extends BaseApi
 
 			$this->jsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($id, $uid)->toArray());
 		}
+
+		$item['created'] = $scheduled_at;
 
 		$id = Item::insert($item, true);
 		if (!empty($id)) {

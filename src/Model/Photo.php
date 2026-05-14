@@ -782,6 +782,21 @@ class Photo
 	}
 
 	/**
+	 * Fetch the photo albums that are available for a viewer for API output
+	 *
+	 * This function is used for API output and doesn't contain any permission checks or caching.
+	 *
+	 * @param int $uid User id of the photos
+	 *
+	 * @return array Returns array of the photo albums
+	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 */
+	public static function getAlbumsForAPI(int $uid): array
+	{
+		return DBA::toArray(DBA::p("SELECT COUNT(DISTINCT `resource-id`) as `total`, `album`, MIN(`created`) AS `created` FROM `photo` WHERE `uid` = ? GROUP BY `album`", $uid));
+	}
+
+	/**
 	 * @param int $uid User id of the photos
 	 * @return void
 	 * @throws \Exception

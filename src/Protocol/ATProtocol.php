@@ -361,7 +361,12 @@ final class ATProtocol
 	 */
 	public function getDid(string $handle): string
 	{
+		$handle = trim($handle, '@');
 		if ($handle == '') {
+			return '';
+		}
+
+		if (str_contains($handle, '@') || str_contains($handle, '/') || !str_contains($handle, '.')) {
 			return '';
 		}
 

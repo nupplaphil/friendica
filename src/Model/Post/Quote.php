@@ -52,9 +52,6 @@ class Quote
 		$fields = DI::dbaDefinition()->truncateFieldsForTable('post-quote', $data);
 
 		// Remove the key fields
-		if (isset($fields['uri-id'])) {
-			DI::logger()->debug('Blubb-1', ['uri-id' => $uri_id, 'fields' => $fields]);
-		}
 		unset($fields['uri-id']);
 
 		if (empty($fields)) {

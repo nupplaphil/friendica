@@ -72,4 +72,26 @@ class AddContact
 		}
 		return ($adding >= $add_limit);
 	}
+
+	/**
+	 * Add contact data via probe for multiple contacts
+	 * @param array $urls Array of contact links
+	 * @param int   $uid  User ID
+	 */
+	public static function addByArray(array $urls, int $uid)
+	{
+		$added  = 0;
+		$failed = 0;
+		foreach ($urls as $url) {
+			$url = trim($url, '@');
+			if (str_contains($url, '@') || Network::isValidHttpUrl($url) || Network::isValidAtUrl($url)) {
+				AddContact::add(Worker::PRIORITY_MEDIUM, $uid, $url);
+				$added++;
+			} else {
+				DI::logger()->notice('Invalid account', ['url' => $url]);
+				$failed++;
+			}
+		}
+		DI::logger()->notice('Import done', ['added' => $added, 'failed' => $failed]);
+	}
 }

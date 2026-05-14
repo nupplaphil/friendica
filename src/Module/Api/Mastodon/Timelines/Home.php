@@ -61,7 +61,7 @@ class Home extends BaseApi
 			$condition = DBA::mergeConditions($condition, ["NOT `uri-id` IN (SELECT `uri-id` FROM `post-user` WHERE `origin` AND `post-user`.`uri-id` = `post-user-view`.`uri-id`)"]);
 		}
 
-		$condition = DBA::mergeConditions($condition, ["NOT EXISTS(SELECT `cid` FROM `user-contact` WHERE `uid` = ? AND `cid` IN (`parent-owner-id`, `parent-author-id`) AND (`blocked` OR `ignored` OR `is-blocked` OR `channel-only`))", $uid]);
+		$condition = DBA::mergeConditions($condition, ["NOT EXISTS(SELECT `cid` FROM `user-contact` WHERE `uid` = ? AND `cid` IN (`author-id`, `owner-id`, `causer-id`, `parent-owner-id`, `parent-author-id`) AND (`blocked` OR `ignored` OR `is-blocked` OR `channel-only`))", $uid]);
 
 		if ($request['exclude_replies']) {
 			$items = Post::selectTimelineThreadForUser($uid, ['uri-id'], $condition, $params);

@@ -12,7 +12,7 @@
 
 	<form action="profile/{{$nickname}}/photos" enctype="multipart/form-data" method="post" name="photos-upload-form" id="photos-upload-form">
 {{if $is_album_context}}
-		<input type="hidden" name="album" value="{{$preselected_album}}" />
+		<input type="hidden" id="photos-upload-album-select" name="album" value="{{$preselected_album}}" />
 {{else}}
 		<div id="photos-upload-div" class="form-group">
 			<label for="photos-upload-newalbum">{{$albumtext_label}}</label>

@@ -52,11 +52,12 @@ class L10n
 		'ru'    => 'Русский',
 		'sv'    => 'Svenska',
 		'zh-cn' => '简体中文',
+		'zh-tw' => '繁體中文（臺灣）',
 	];
 
 	public const LANG_PARENTS = [
 		'en-gb' => 'en', 'da-dk' => 'da', 'fi-fi' => 'fi',
-		'nb-no' => 'nb', 'pt-br' => 'pt', 'zh-cn' => 'zh',
+		'nb-no' => 'nb', 'pt-br' => 'pt', 'zh-cn' => 'zh', 'zh-tw' => 'zh',
 	];
 
 	/** @var string Undetermined language */
