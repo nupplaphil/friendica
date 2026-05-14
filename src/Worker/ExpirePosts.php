@@ -299,8 +299,6 @@ class ExpirePosts
 					WHERE `uri-id` = `post-thread`.`uri-id`)
 				AND NOT `uri-id` IN (SELECT `uri-id` FROM `post-collection`
 					WHERE `uri-id` = `post-thread`.`uri-id`)
-				AND NOT `uri-id` IN (SELECT `uri-id` FROM `post-media`
-					WHERE `uri-id` = `post-thread`.`uri-id`)
 				AND NOT `uri-id` IN (SELECT `parent-uri-id` FROM `post-user` INNER JOIN `contact` ON `contact`.`id` = `contact-id` AND `notify_new_posts`
 					WHERE `parent-uri-id` = `post-thread`.`uri-id`)
 				AND NOT `uri-id` IN (SELECT `parent-uri-id` FROM `post-user`

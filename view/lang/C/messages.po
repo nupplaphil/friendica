@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 2026.04-dev\n"
+"Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-10 14:12+0200\n"
+"POT-Creation-Date: 2026-05-14 19:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,13 +38,13 @@ msgstr ""
 msgid "Empty post discarded."
 msgstr ""
 
-#: mod/item.php:449 src/Module/Admin/Themes/Details.php:31
+#: mod/item.php:452 src/Module/Admin/Themes/Details.php:31
 #: src/Module/Admin/Themes/Index.php:51 src/Module/Debug/ItemBody.php:34
 #: src/Module/Debug/ItemBody.php:42 src/Module/Item/Feed.php:66
 msgid "Item not found."
 msgstr ""
 
-#: mod/item.php:473 mod/message.php:56 mod/message.php:102 mod/photos.php:117
+#: mod/item.php:476 mod/message.php:56 mod/message.php:102 mod/photos.php:117
 #: mod/photos.php:418 src/Model/Event.php:510 src/Module/Attach.php:40
 #: src/Module/BaseApi.php:91 src/Module/BaseNotifications.php:83
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
@@ -58,8 +58,7 @@ msgstr ""
 #: src/Module/FollowConfirm.php:24 src/Module/FriendSuggest.php:44
 #: src/Module/Invite.php:28 src/Module/Invite.php:116
 #: src/Module/Notifications/Notification.php:62
-#: src/Module/Notifications/Notification.php:93
-#: src/Module/OStatus/Subscribe.php:54 src/Module/Post/Edit.php:72
+#: src/Module/Notifications/Notification.php:93 src/Module/Post/Edit.php:72
 #: src/Module/Profile/Common.php:63 src/Module/Profile/Contacts.php:66
 #: src/Module/Profile/Photos.php:97 src/Module/Profile/Schedule.php:27
 #: src/Module/Profile/Schedule.php:44 src/Module/Register.php:74
@@ -67,8 +66,8 @@ msgstr ""
 #: src/Module/Search/Directory.php:23 src/Module/Settings/Account.php:34
 #: src/Module/Settings/Account.php:337 src/Module/Settings/Channels.php:54
 #: src/Module/Settings/Channels.php:135
-#: src/Module/Settings/ContactImport.php:50
-#: src/Module/Settings/ContactImport.php:97
+#: src/Module/Settings/ContactImport.php:52
+#: src/Module/Settings/ContactImport.php:93
 #: src/Module/Settings/Delegation.php:76 src/Module/Settings/Display.php:84
 #: src/Module/Settings/Display.php:218
 #: src/Module/Settings/Profile/Photo/Crop.php:148
@@ -150,8 +149,8 @@ msgstr ""
 
 #: mod/message.php:189 mod/message.php:346 mod/photos.php:76 mod/photos.php:624
 #: src/Content/Conversation.php:371 src/Module/Post/Edit.php:129
-#: src/Module/Profile/Photos.php:355 src/Module/Profile/Photos.php:375
-#: src/Module/Profile/Photos.php:378
+#: src/Module/Profile/Photos.php:362 src/Module/Profile/Photos.php:382
+#: src/Module/Profile/Photos.php:385
 msgid "Upload photo"
 msgstr ""
 
@@ -160,7 +159,7 @@ msgid "Insert web link"
 msgstr ""
 
 #: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:405
-#: src/Content/Conversation.php:1614 src/Module/Item/Compose.php:209
+#: src/Content/Conversation.php:1644 src/Module/Item/Compose.php:209
 #: src/Module/Post/Edit.php:143 src/Object/Post.php:623
 msgid "Please wait"
 msgstr ""
@@ -240,17 +239,17 @@ msgid "User not found."
 msgstr ""
 
 #: mod/photos.php:73 src/Module/BaseProfile.php:53
-#: src/Module/Profile/Photos.php:352
+#: src/Module/Profile/Photos.php:359
 msgid "Photo Albums"
 msgstr ""
 
-#: mod/photos.php:74 src/Module/Profile/Photos.php:353
-#: src/Module/Profile/Photos.php:373
+#: mod/photos.php:74 src/Module/Profile/Photos.php:360
+#: src/Module/Profile/Photos.php:380
 msgid "Recent Photos"
 msgstr ""
 
 #: mod/photos.php:88 src/Module/BaseSettings.php:60
-#: src/Module/Profile/Photos.php:336
+#: src/Module/Profile/Photos.php:343
 msgid "everybody"
 msgstr ""
 
@@ -275,7 +274,7 @@ msgid "Failed to delete the photo."
 msgstr ""
 
 #: mod/photos.php:332 src/Module/Conversation/Community.php:146
-#: src/Module/Directory.php:34 src/Module/Profile/Photos.php:270
+#: src/Module/Directory.php:34 src/Module/Profile/Photos.php:277
 #: src/Module/Search/Index.php:50
 msgid "Public access denied."
 msgstr ""
@@ -362,7 +361,7 @@ msgstr ""
 msgid "Show Oldest First"
 msgstr ""
 
-#: mod/photos.php:609 src/Module/Profile/Photos.php:323
+#: mod/photos.php:609 src/Module/Profile/Photos.php:330
 msgid "View Photo"
 msgstr ""
 
@@ -431,7 +430,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: mod/photos.php:828 src/Content/Conversation.php:1537 src/Model/Event.php:654
+#: mod/photos.php:828 src/Content/Conversation.php:1567 src/Model/Event.php:654
 #: src/Module/Calendar/Event/Show.php:69
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
@@ -1324,34 +1323,34 @@ msgstr ""
 msgid "Channel \"%s\""
 msgstr ""
 
-#: src/Content/Conversation.php:1536 src/Object/Post.php:266
+#: src/Content/Conversation.php:1566 src/Object/Post.php:266
 msgid "Select"
 msgstr ""
 
-#: src/Content/Conversation.php:1556
+#: src/Content/Conversation.php:1586
 msgid "Pinned item"
 msgstr ""
 
-#: src/Content/Conversation.php:1573 src/Object/Post.php:558
+#: src/Content/Conversation.php:1603 src/Object/Post.php:558
 #: src/Object/Post.php:559
 #, php-format
 msgid "View %s's profile @ %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1587 src/Object/Post.php:546
+#: src/Content/Conversation.php:1617 src/Object/Post.php:546
 msgid "Categories:"
 msgstr ""
 
-#: src/Content/Conversation.php:1588 src/Object/Post.php:547
+#: src/Content/Conversation.php:1618 src/Object/Post.php:547
 msgid "Filed under:"
 msgstr ""
 
-#: src/Content/Conversation.php:1596 src/Object/Post.php:574
+#: src/Content/Conversation.php:1626 src/Object/Post.php:574
 #, php-format
 msgid "%s from %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1612
+#: src/Content/Conversation.php:1642
 msgid "View in context"
 msgstr ""
 
@@ -1691,7 +1690,7 @@ msgstr ""
 msgid "Find groups to join"
 msgstr ""
 
-#: src/Content/Item.php:336 src/Model/Item.php:2861
+#: src/Content/Item.php:336 src/Model/Item.php:2865
 msgid "event"
 msgstr ""
 
@@ -1699,7 +1698,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#: src/Content/Item.php:345 src/Model/Item.php:2863
+#: src/Content/Item.php:345 src/Model/Item.php:2867
 #: src/Module/Post/Tag/Add.php:112
 msgid "photo"
 msgstr ""
@@ -1777,7 +1776,7 @@ msgstr ""
 msgid "Unable to fetch user."
 msgstr ""
 
-#: src/Content/Item.php:1411 src/Core/L10n.php:480
+#: src/Content/Item.php:1411 src/Core/L10n.php:481
 msgid "Undetermined"
 msgstr ""
 
@@ -2110,8 +2109,8 @@ msgstr ""
 msgid "<a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a> %3$s"
 msgstr ""
 
-#: src/Content/Text/BBCode.php:950 src/Model/Item.php:3709
-#: src/Model/Item.php:3715 src/Model/Item.php:3716
+#: src/Content/Text/BBCode.php:950 src/Model/Item.php:3713
+#: src/Model/Item.php:3719 src/Model/Item.php:3720
 msgid "Link to source"
 msgstr ""
 
@@ -2715,7 +2714,7 @@ msgstr ""
 msgid "Could not connect to database."
 msgstr ""
 
-#: src/Core/L10n.php:490
+#: src/Core/L10n.php:491
 #, php-format
 msgid "%s (%s)"
 msgstr ""
@@ -3217,84 +3216,84 @@ msgstr ""
 msgid "Happy Birthday %s"
 msgstr ""
 
-#: src/Model/Item.php:2865
+#: src/Model/Item.php:2869
 msgid "activity"
 msgstr ""
 
-#: src/Model/Item.php:2867
+#: src/Model/Item.php:2871
 msgid "comment"
 msgstr ""
 
-#: src/Model/Item.php:2870 src/Module/Post/Tag/Add.php:112
+#: src/Model/Item.php:2874 src/Module/Post/Tag/Add.php:112
 msgid "post"
-msgstr ""
-
-#: src/Model/Item.php:3062
-#, php-format
-msgid "%s is blocked"
-msgstr ""
-
-#: src/Model/Item.php:3064
-#, php-format
-msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3066
 #, php-format
-msgid "Content from %s is collapsed"
+msgid "%s is blocked"
+msgstr ""
+
+#: src/Model/Item.php:3068
+#, php-format
+msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3070
+#, php-format
+msgid "Content from %s is collapsed"
+msgstr ""
+
+#: src/Model/Item.php:3074
 msgid "Sensitive content"
 msgstr ""
 
-#: src/Model/Item.php:3577
+#: src/Model/Item.php:3581
 msgid "bytes"
 msgstr ""
 
-#: src/Model/Item.php:3611
+#: src/Model/Item.php:3615
 #, php-format
 msgid "The media in this post is not displayed to visitors. To view it, please go to the <a href=\"%s\">original post</a>."
 msgstr ""
 
-#: src/Model/Item.php:3613
+#: src/Model/Item.php:3617
 msgid "The media in this post is not displayed to visitors. To view it, please log in."
 msgstr ""
 
-#: src/Model/Item.php:3638
+#: src/Model/Item.php:3642
 #, php-format
 msgid "%2$s (%3$d%%, %1$d vote)"
 msgid_plural "%2$s (%3$d%%, %1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3640
+#: src/Model/Item.php:3644
 #, php-format
 msgid "%2$s (%1$d vote)"
 msgid_plural "%2$s (%1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3645
+#: src/Model/Item.php:3649
 #, php-format
 msgid "%d voter. Poll end: %s"
 msgid_plural "%d voters. Poll end: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3647
+#: src/Model/Item.php:3651
 #, php-format
 msgid "%d voter."
 msgid_plural "%d voters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3649
+#: src/Model/Item.php:3653
 #, php-format
 msgid "Poll end: %s"
 msgstr ""
 
-#: src/Model/Item.php:3692 src/Model/Item.php:3693
+#: src/Model/Item.php:3696 src/Model/Item.php:3697
 #: src/Module/Calendar/Event/Show.php:70
 msgid "View related post"
 msgstr ""
@@ -3303,7 +3302,7 @@ msgstr ""
 msgid "[no subject]"
 msgstr ""
 
-#: src/Model/Photo.php:1197 src/Module/Media/Photo/Upload.php:154
+#: src/Model/Photo.php:1212 src/Module/Media/Photo/Upload.php:154
 msgid "Wall Photos"
 msgstr ""
 
@@ -3750,7 +3749,7 @@ msgstr ""
 #: src/Module/Admin/Themes/Index.php:105 src/Module/Admin/Tos.php:72
 #: src/Module/Settings/Addons.php:64 src/Module/Settings/Connectors.php:145
 #: src/Module/Settings/Connectors.php:231
-#: src/Module/Settings/ContactImport.php:111
+#: src/Module/Settings/ContactImport.php:101
 #: src/Module/Settings/Delegation.php:179 src/Module/Settings/Display.php:426
 #: src/Module/Settings/Features.php:90
 #: src/Module/Settings/Profile/Index.php:287
@@ -5521,26 +5520,26 @@ msgstr ""
 msgid "User registrations waiting for confirmation"
 msgstr ""
 
-#: src/Module/BaseApi.php:436 src/Module/BaseApi.php:452
-#: src/Module/BaseApi.php:468
+#: src/Module/BaseApi.php:442 src/Module/BaseApi.php:458
+#: src/Module/BaseApi.php:474
 msgid "Too Many Requests"
 msgstr ""
 
-#: src/Module/BaseApi.php:437
+#: src/Module/BaseApi.php:443
 #, php-format
 msgid "Daily posting limit of %d post reached. The post was rejected."
 msgid_plural "Daily posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:453
+#: src/Module/BaseApi.php:459
 #, php-format
 msgid "Weekly posting limit of %d post reached. The post was rejected."
 msgid_plural "Weekly posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:469
+#: src/Module/BaseApi.php:475
 #, php-format
 msgid "Monthly posting limit of %d post reached. The post was rejected."
 msgid_plural "Monthly posting limit of %d posts reached. The post was rejected."
@@ -5631,13 +5630,13 @@ msgstr ""
 msgid "Group Search - %s"
 msgstr ""
 
-#: src/Module/BaseSearch.php:115 src/Module/Conversation/Channel.php:121
+#: src/Module/BaseSearch.php:132 src/Module/Conversation/Channel.php:121
 #: src/Module/Conversation/Community.php:111 src/Module/Search/Index.php:140
 #: src/Module/Search/Index.php:192
 msgid "No results."
 msgstr ""
 
-#: src/Module/BaseSearch.php:142
+#: src/Module/BaseSearch.php:141
 #, php-format
 msgid "%d result was filtered out because your node blocks the domain it is registered on. You can review the list of domains your node is currently blocking in the <a href=\"/friendica\">About page</a>."
 msgid_plural "%d results were filtered out because your node blocks the domain they are registered on. You can review the list of domains your node is currently blocking in the <a href=\"/friendica\">About page</a>."
@@ -5675,7 +5674,7 @@ msgstr ""
 
 #: src/Module/BaseSettings.php:155
 #: src/Module/Moderation/Blocklist/Contact/Import.php:108
-#: src/Module/Settings/ContactImport.php:110
+#: src/Module/Settings/ContactImport.php:100
 msgid "Import Contacts"
 msgstr ""
 
@@ -8461,54 +8460,6 @@ msgstr ""
 msgid "Unsupported or missing grant type"
 msgstr ""
 
-#: src/Module/OStatus/Subscribe.php:58
-msgid "Subscribing to contacts"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:67
-msgid "No contact provided."
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:73
-msgid "Couldn't fetch information for contact."
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:84
-msgid "Couldn't fetch friends for contact."
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:90 src/Module/OStatus/Subscribe.php:101
-msgid "Couldn't fetch following contacts."
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:96
-msgid "Couldn't fetch remote profile."
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:106
-msgid "Unsupported network"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:122
-msgid "Done"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:136
-msgid "success"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:138
-msgid "failed"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:141
-msgid "ignored"
-msgstr ""
-
-#: src/Module/OStatus/Subscribe.php:146
-msgid "Keep this window open until done."
-msgstr ""
-
 #: src/Module/OpenSearch.php:55
 #, php-format
 msgid "Search in Friendica %s"
@@ -8670,7 +8621,7 @@ msgstr ""
 msgid "Image file is empty."
 msgstr ""
 
-#: src/Module/Profile/Photos.php:329
+#: src/Module/Profile/Photos.php:336
 msgid "View Album"
 msgstr ""
 
@@ -9978,28 +9929,29 @@ msgstr ""
 msgid "Move to folder:"
 msgstr ""
 
-#: src/Module/Settings/ContactImport.php:64
-msgid "Contact CSV file upload error"
-msgstr ""
-
-#: src/Module/Settings/ContactImport.php:83
+#: src/Module/Settings/ContactImport.php:62
+#: src/Module/Settings/ContactImport.php:81
 msgid "Importing Contacts done"
 msgstr ""
 
-#: src/Module/Settings/ContactImport.php:113
-msgid "Upload a CSV file that contains the handle of your followed accounts in the first column you exported from the old account."
+#: src/Module/Settings/ContactImport.php:70
+msgid "Contact CSV file upload error"
 msgstr ""
 
-#: src/Module/Settings/ContactImport.php:114
+#: src/Module/Settings/ContactImport.php:103
+msgid "Upload a CSV file that contains the handle of your followed accounts in the first column you exported from the old account. Your contacts will be added in the background. This can take some time."
+msgstr ""
+
+#: src/Module/Settings/ContactImport.php:104
 msgid "Upload File"
 msgstr ""
 
-#: src/Module/Settings/ContactImport.php:116
+#: src/Module/Settings/ContactImport.php:106
 msgid "Your legacy ActivityPub/GNU Social account"
 msgstr ""
 
-#: src/Module/Settings/ContactImport.php:116
-msgid "If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format user@domain.tld), your contacts will be added automatically. The field will be emptied when done."
+#: src/Module/Settings/ContactImport.php:106
+msgid "If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format user@domain.tld), your contacts will be added in the background. This can take some time."
 msgstr ""
 
 #: src/Module/Settings/Delegation.php:59
@@ -12204,7 +12156,7 @@ msgstr ""
 msgid "Repeat image to fill the screen."
 msgstr ""
 
-#: view/theme/frio/php/default.php:143 view/theme/frio/php/standard.php:84
+#: view/theme/frio/php/default.php:146 view/theme/frio/php/standard.php:84
 msgid "Back to top"
 msgstr ""
 

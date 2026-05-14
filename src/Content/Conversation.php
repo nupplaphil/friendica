@@ -885,7 +885,7 @@ class Conversation
 			$condition['author-hidden'] = false;
 		}
 
-		$emojis      = $this->getEmojis($uriids);
+		$emojis      = $this->getEmojis($uriids, $uid);
 		$quoteshares = $this->getQuoteShares($uriids);
 		$counts      = $this->getCounts($uriids);
 
@@ -1052,9 +1052,10 @@ class Conversation
 	 * Fetch emoji reaction from the conversation
 	 *
 	 * @param array $uriids
+	 * @param int   $uid
 	 * @return array
 	 */
-	private function getEmojis(array $uriids): array
+	private function getEmojis(array $uriids, int $uid): array
 	{
 		$emojis = [];
 
@@ -1062,6 +1063,7 @@ class Conversation
 			$emojis[$count['uri-id']][$count['reaction']]['emoji'] = $count['reaction'];
 			$emojis[$count['uri-id']][$count['reaction']]['verb']  = Verb::getByID($count['vid']);
 			$emojis[$count['uri-id']][$count['reaction']]['total'] = $count['count'];
+			$emojis[$count['uri-id']][$count['reaction']]['count'] = 0;
 			$emojis[$count['uri-id']][$count['reaction']]['title'] = [];
 		}
 
@@ -1079,9 +1081,10 @@ class Conversation
 
 		$verbs     = array_merge($activity_verbs, [Activity::EMOJIREACT, Activity::POST]);
 		$condition = DBA::mergeConditions(['parent-uri-id' => $uriids, 'gravity' => [ItemModel::GRAVITY_ACTIVITY, ItemModel::GRAVITY_COMMENT], 'verb' => $verbs], ["NOT `deleted`"]);
+		$condition = DBA::mergeConditions($condition, ["((`uid` = ? AND `global`) OR (`uid` = ? AND NOT `global`))", 0, $uid]);
 		$separator = chr(255) . chr(255) . chr(255);
 
-		$sql = "SELECT `parent-uri-id`, `thr-parent-id`, `body`, `verb`, `gravity`, GROUP_CONCAT(REPLACE(`author-name`, '" . $separator . "', ' ') SEPARATOR '" . $separator . "' LIMIT 50) AS `title` FROM `post-view` WHERE " . array_shift($condition) . " GROUP BY `parent-uri-id`, `thr-parent-id`, `verb`, `body`, `gravity`";
+		$sql = "SELECT `parent-uri-id`, `thr-parent-id`, `body`, `verb`, `gravity`, `private`, GROUP_CONCAT(REPLACE(`author-name`, '" . $separator . "', ' ') SEPARATOR '" . $separator . "' LIMIT 50) AS `title` FROM `post-user-view` WHERE " . array_shift($condition) . " GROUP BY `parent-uri-id`, `thr-parent-id`, `verb`, `body`, `gravity`, `private`";
 
 		$rows = DBA::p($sql, $condition);
 		while ($row = DBA::fetch($rows)) {
@@ -1092,10 +1095,37 @@ class Conversation
 			}
 
 			if (isset($emojis[$row['thr-parent-id']][$emoji]['title'])) {
-				$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'] ?? [], explode($separator, $row['title'])));
+				// Don't display private view activities
+				if (($emoji === Activity::VIEW) && ($row['private'] === ItemModel::PRIVATE)) {
+					continue;
+				}
+				$names = explode($separator, $row['title']);
+
+				$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'] ?? [], $names));
+				if ($row['private'] === ItemModel::PRIVATE) {
+					$emojis[$row['thr-parent-id']][$emoji]['total'] += count($names);
+				}
+				$emojis[$row['thr-parent-id']][$emoji]['count'] += count($names);
 			}
 		}
 		DBA::close($rows);
+
+		foreach ($emojis as $uri_id => $row) {
+			foreach ($row as $emoji => $value) {
+				/*
+				 * @todo This is a fix for old data in the post-counts table that counted not only public data
+				 * We possibly could rebuild the data in that table, then we wouldn't need this. (See the function update1544)
+				 */
+				if (($value['count'] < $value['total']) && ($value['count'] < 50)) {
+					$emojis[$uri_id][$emoji]['total'] = $value['count'];
+				}
+
+				// Don't display activities with no activity
+				if ($emojis[$uri_id][$emoji]['total'] === 0) {
+					unset($emojis[$uri_id][$emoji]);
+				}
+			}
+		}
 
 		return $emojis;
 	}

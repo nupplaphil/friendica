@@ -2750,6 +2750,10 @@ class Item
 			'unseen'      => 1,
 		];
 
+		if ($new_item['allow_gid'] || $new_item['allow_cid'] || $new_item['deny_gid'] || $new_item['deny_cid']) {
+			$new_item['private'] = Item::PRIVATE;
+		}
+
 		if (in_array($activity, [Activity::LIKE, Activity::DISLIKE])) {
 			$signed = Diaspora::createLikeSignature($uid, $new_item);
 			if (!empty($signed)) {

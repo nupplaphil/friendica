@@ -318,8 +318,11 @@ function item_process(array $post, array $request, bool $preview, string $return
 		if ($id && empty($request['scheduled_at'])) {
 			DI::contentItem()->setAutomaticScheduledAt($post['uid'], $scheduled_at);
 		}
+
 		item_post_return(DI::baseUrl(), $return_path);
 	}
+
+	$post['created'] = $scheduled_at;
 
 	if (!empty($post['cancel'])) {
 		DI::logger()->info('mod_item: post cancelled by addon.');

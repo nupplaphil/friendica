@@ -4348,7 +4348,7 @@ div.login-form, .login-content-wrapper,
 	}
 
 }/* Even smaller mobile displays */
-@media (width < 315px) {
+@media (width < 358px) {
 	/* Less topnav padding */
 	.navbar-left {
 		float: none!important;

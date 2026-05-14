@@ -99,43 +99,46 @@ if ($minimal) {
 			<div class="container">
 				<div class="row">
 <?php
-					if ((empty($_REQUEST['pagename']) || $_REQUEST['pagename'] != "lostpass") && ($_SERVER['REQUEST_URI'] != $basepath)) {
-						echo '
+					$pagename_parts = explode('/', (string) ($_REQUEST['pagename'] ?? ''));
+	$is_lostpasspage    = ($pagename_parts[0] ?? '') === 'lostpass';
+
+	if (!$is_lostpasspage && ($_SERVER['REQUEST_URI'] != $basepath)) {
+		echo '
 					<aside class="col-lg-3 col-md-3 offcanvas-sm offcanvas-xs">';
 
-						if (!empty($page['aside'])) {
-							echo $page['aside'];
-						}
+		if (!empty($page['aside'])) {
+			echo $page['aside'];
+		}
 
-						if (!empty($page['right_aside'])) {
-							echo $page['right_aside'];
-						}
+		if (!empty($page['right_aside'])) {
+			echo $page['right_aside'];
+		}
 
-						echo '
+		echo '
 					</aside>
 
 					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" id="content" tabindex="0">
 						<section class="sectiontop ';
-						echo $page['section'] ?? '';
-						echo '-content-wrapper">';
-						if (!empty($page['content'])) {
-							echo $page['content'];
-						}
-						echo '
+		echo $page['section'] ?? '';
+		echo '-content-wrapper">';
+		if (!empty($page['content'])) {
+			echo $page['content'];
+		}
+		echo '
 							<div id="pause"></div> <!-- The pause/resume Ajax indicator -->
 						</section>
 					</div>
 						';
-					} else {
-						echo '
+	} else {
+		echo '
 					<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="content" style="margin-top:50px;">';
-						if (!empty($page['content'])) {
-							echo $page['content'];
-						}
-						echo '
+		if (!empty($page['content'])) {
+			echo $page['content'];
+		}
+		echo '
 					</section>
 					';
-					}
+	}
 	?>
 				</div><!--row-->
 			</div><!-- container -->

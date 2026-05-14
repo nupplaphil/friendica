@@ -596,8 +596,7 @@ return [
 	'/u/{nickname}'       => $profileRoutes,
 	'/~{nickname}'        => $profileRoutes,
 
-	'/ostatus/subscribe' => [Module\OStatus\Subscribe::class,        [R::GET         ]],
-	'/poco'              => [Module\User\PortableContacts::class,    [R::GET         ]],
+	'/poco' => [Module\User\PortableContacts::class,    [R::GET         ]],
 
 	'/search' => [
 		'[/]'           => [Module\Search\Index::class, [R::GET         ]],

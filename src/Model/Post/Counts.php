@@ -30,7 +30,7 @@ class Counts
 			return true;
 		}
 
-		$condition = ['thr-parent-id' => $uri_id, 'vid' => $vid, 'deleted' => false];
+		$condition = ['thr-parent-id' => $uri_id, 'vid' => $vid, 'deleted' => false, 'private' => [Item::PUBLIC, Item::UNLISTED]];
 
 		if ($body == $verb) {
 			$condition['body'] = null;
@@ -52,7 +52,8 @@ class Counts
 			'count'         => Post::countPosts($condition),
 		];
 
-		if ($fields['count'] == 0) {
+		unset($condition['private']);
+		if ($fields['count'] === 0 && Post::countPosts($condition) === 0) {
 			DBA::delete('post-counts', ['uri-id' => $uri_id, 'vid' => $vid, 'reaction' => $body]);
 			return true;
 		}

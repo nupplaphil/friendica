@@ -128,11 +128,8 @@
 				isExtern = true;
 			}
 
-			// Don't process the textarea input if we have already
-			// an attachment preview.
-			if (!isExtern && isActive) {
-				return;
-			}
+			// Don't add an attachment if we have already an attachment preview.
+			attach = !isActive;
 
 			if (trim(text) !== "" && block === false && urlRegex.test(text)) {
 				binurl = bin2hex(text);
@@ -143,9 +140,9 @@
 
 				if (binurl in cache) {
 					isCrawling = false;
-					processContentData(cache[binurl]);
+					processContentData(cache[binurl], attach);
 				} else {
-					getContentData(binurl, processContentData);
+					getContentData(binurl, processContentData, attach);
 				}
 			}
 		};
@@ -157,18 +154,19 @@
 		 * @param {object} result
 		 * @returns {void}
 		 */
-		var processContentData = function(result) {
+		var processContentData = function(result, attach) {
 			if (result.contentType === 'image') {
 				insertImage(result.data);
-			}
-			if (result.contentType === 'audio') {
+			} else if (result.contentType === 'audio') {
 				insertAudio(result.data);
-			}
-			if (result.contentType === 'video') {
+			} else if (result.contentType === 'video') {
 				insertVideo(result.data);
-			}
-			if (result.contentType === 'attachment') {
+			} else if ((result.contentType === 'attachment' || result.contentType === 'embed') && attach) {
 				insertAttachment(result.data);
+			} else if (result.contentType === 'embed') {
+				insertEmbed(result.data);
+			} else {
+				insertUrl(result.data);
 			}
 			$('#profile-rotator').hide();
 		};
@@ -180,14 +178,14 @@
 		 * @param {type} callback
 		 * @returns {void}
 		 */
-		var getContentData = function(binurl, callback) {
+		var getContentData = function(binurl, callback, attach) {
 			$.get('parseurl?binurl='+ binurl + '&format=json', function (answer) {
 				obj = sanitizeInputData(answer);
 
 				// Put the data into a cache
 				cache[binurl] = obj;
 
-				callback(obj);
+				callback(obj, attach);
 
 				isCrawling = false;
 			});
@@ -232,6 +230,34 @@
 				return;
 			}
 			var bbcode = '\n[video]' + data.url + '[/video]\n';
+			addeditortext(bbcode);
+		};
+
+		/*
+		 * Add a [embed] bbtag with the embed url to the jot editor.
+		 *
+		 * @param {type} data
+		 * @returns {void}
+		 */
+		var insertEmbed = function(data) {
+			if (!isExtern) {
+				return;
+			}
+			var bbcode = '\n[embed]' + data.url + '[/embed]\n';
+			addeditortext(bbcode);
+		};
+
+		/*
+		 * Add a [url] bbtag with the url to the jot editor.
+		 *
+		 * @param {type} data
+		 * @returns {void}
+		 */
+		var insertUrl = function(data) {
+			if (!isExtern) {
+				return;
+			}
+			var bbcode = '\n[url=' + data.url + ']' + data.title + '[/url]\n';
 			addeditortext(bbcode);
 		};
 

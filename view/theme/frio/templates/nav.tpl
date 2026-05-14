@@ -85,7 +85,7 @@
 						{{/if}}
 
 						{{if $nav.messages}}
-							<li class="nav-segment hidden-xs">
+							<li class="nav-segment">
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
 									class="nav-menu {{$sel.messages}}"><i class="fa fa-envelope fa-lg fa-fw"

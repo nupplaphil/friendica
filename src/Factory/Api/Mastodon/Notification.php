@@ -83,7 +83,7 @@ class Notification extends BaseFactory
 		} elseif (($Notification->verb == Activity::ANNOUNCE)
 			&& in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
 			$type = MstdnNotification::TYPE_RESHARE;
-		} elseif (in_array($Notification->verb, [Activity::LIKE, Activity::DISLIKE])
+		} elseif (in_array($Notification->verb, [Activity::LIKE, Activity::DISLIKE, Activity::EMOJIREACT])
 			&& in_array($Notification->type, [Post\UserNotification::TYPE_DIRECT_COMMENT, Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT])) {
 			$type = MstdnNotification::TYPE_LIKE;
 		} elseif ($Notification->type === Post\UserNotification::TYPE_SHARED) {

@@ -397,7 +397,13 @@ class BaseApi extends BaseModule
 	 */
 	public function checkAllowedScope(string $scope)
 	{
-		$token = self::getCurrentApplication();
+		try {
+			$token = self::getCurrentApplication();
+		} catch (HTTPException\UnauthorizedException $th) {
+			$this->logAndJsonError(401, $this->errorFactory->Unauthorized($th->getMessage()));
+		} catch (\Throwable $th) {
+			$this->logAndJsonError(403, $this->errorFactory->Forbidden($th->getMessage()));
+		}
 
 		if (empty($token)) {
 			$this->logger->notice('Empty application token');
@@ -510,6 +516,6 @@ class BaseApi extends BaseModule
 	protected function logAndJsonError(int $errorno, Error $error)
 	{
 		$this->logger->info('API Error', ['no' => $errorno, 'error' => $error->toArray(), 'method' => $this->args->getMethod(), 'command' => $this->args->getQueryString(), 'user-agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
-		$this->jsonError(403, $error->toArray());
+		$this->jsonError($errorno, $error->toArray());
 	}
 }
