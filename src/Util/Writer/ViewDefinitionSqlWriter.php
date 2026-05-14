@@ -66,7 +66,7 @@ class ViewDefinitionSqlWriter
 				$sql_rows[] = "`" . static::escape($origin[0]) . "`.`" . static::escape($origin[1]) . "` AS `" . static::escape($fieldname) . "`";
 			}
 		}
-		return sprintf("CREATE VIEW `%s` AS SELECT \n\t", static::escape($viewName)) .
+		return sprintf("CREATE VIEW `%s` AS SELECT\n\t", static::escape($viewName)) .
 			   implode(",\n\t", $sql_rows) . "\n\t" . $viewStructure['query'] . ";\n\n";
 	}
 
