@@ -13,9 +13,6 @@ use Psr\Log\NullLogger;
 
 class CurlResultTest extends TestCase
 {
-	/**
-	 * @small
-	 */
 	public function testNormal()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
@@ -39,11 +36,8 @@ class CurlResultTest extends TestCase
 		self::assertSame('https://test.local', $curlResult->getRedirectUrl());
 	}
 
-	/**
-	 * @small
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirect()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
@@ -68,9 +62,6 @@ class CurlResultTest extends TestCase
 		self::assertSame('https://test.other/test/it', $curlResult->getRedirectUrl());
 	}
 
-	/**
-	 * @small
-	 */
 	public function testTimeout()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
@@ -95,11 +86,8 @@ class CurlResultTest extends TestCase
 		self::assertSame('Tested error', $curlResult->getError());
 	}
 
-	/**
-	 * @small
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirectHeader()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.redirect');
@@ -123,9 +111,6 @@ class CurlResultTest extends TestCase
 		self::assertSame('https://test.other/some/?key=value', $curlResult->getRedirectUrl());
 	}
 
-	/**
-	 * @small
-	 */
 	public function testInHeader()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
@@ -140,9 +125,6 @@ class CurlResultTest extends TestCase
 		self::assertFalse($curlResult->inHeader('wrongHeader'));
 	}
 
-	 /**
-	 * @small
-	 */
 	public function testGetHeaderArray()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
@@ -160,9 +142,6 @@ class CurlResultTest extends TestCase
 		self::assertArrayHasKey('vary', $headers);
 	}
 
-	 /**
-	 * @small
-	 */
 	public function testGetHeaderWithParam()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');

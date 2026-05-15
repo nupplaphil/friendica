@@ -99,9 +99,7 @@ class RequestTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataServerArray
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataServerArray')]
 	public function testRemoteAddress(array $server, array $config, string $assertion)
 	{
 		$configClass = \Mockery::mock(IManageConfigValues::class);

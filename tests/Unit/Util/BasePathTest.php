@@ -64,10 +64,10 @@ class BasePathTest extends TestCase
 	}
 
 	/**
-	 * Test the basepath determination
-	 * @dataProvider getDataPaths
-	 */
-	public function testDetermineBasePath(array $server, string $baseDir, string $expected): void
+				 * Test the basepath determination
+				 */
+				#[\PHPUnit\Framework\Attributes\DataProvider('getDataPaths')]
+				public function testDetermineBasePath(array $server, string $baseDir, string $expected): void
 	{
 		$basepath = new BasePath($baseDir, $server);
 		self::assertEquals($expected, $basepath->getPath());

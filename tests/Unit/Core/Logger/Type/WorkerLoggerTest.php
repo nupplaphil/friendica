@@ -61,8 +61,8 @@ class WorkerLoggerTest extends TestCase
 
 	/**
 	 * Test the WorkerLogger with different log calls
-	 * @dataProvider dataTest
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTest')]
 	public function testLogMethod($func, $msg, $context = [])
 	{
 		$logger = $this->createMock(LoggerInterface::class);

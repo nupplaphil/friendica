@@ -138,10 +138,10 @@ abstract class LoggerTestCase extends MockedTestCase
 	}
 
 	/**
-	 * Test with different logging data
-	 * @dataProvider dataTests
-	 */
-	public function testDifferentTypes($function, $message, array $context)
+				 * Test with different logging data
+				 */
+				#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
+				public function testDifferentTypes($function, $message, array $context)
 	{
 		$logger = $this->getInstance();
 		$logger->$function($message, $context);

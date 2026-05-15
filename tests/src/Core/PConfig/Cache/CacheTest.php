@@ -43,9 +43,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the setP() and getP() methods
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGet($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
@@ -93,9 +92,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the deleteP() method
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDelete($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
@@ -134,9 +132,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the keyDiff() method without result
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testKeyDiffWithoutResult($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();

@@ -35,13 +35,12 @@ class HTMLTest extends FixtureTestCase
 	/**
 	 * Test convert different input Markdown text into HTML
 	 *
-	 * @dataProvider dataHTML
 	 *
 	 * @param string $input    The Markdown text to test
 	 * @param string $expected The expected HTML output
-	 *
 	 * @throws Exception
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataHTML')]
 	public function testToPlaintext(string $input, string $expected)
 	{
 		$output = HTML::toPlaintext($input, 0);
@@ -98,13 +97,12 @@ its surprisingly good",
 	/**
 	 * Test convert bbcodes to HTML
 	 *
-	 * @dataProvider dataHTMLText
 	 *
 	 * @param string $expectedBBCode Expected BBCode output
 	 * @param string $html           HTML text
-	 *
 	 * @throws InternalServerErrorException
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataHTMLText')]
 	public function testToBBCode(string $expectedBBCode, string $html)
 	{
 		$actual = HTML::toBBCode($html);
@@ -149,11 +147,11 @@ its surprisingly good",
 	}
 
 	/**
-	 * @dataProvider dataXpathQuote
 	 * @param string $value
 	 * @return void
 	 * @throws \DOMException
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataXpathQuote')]
 	public function testXpathQuote(string $value)
 	{
 		$dom              = new \DOMDocument();
@@ -216,11 +214,11 @@ its surprisingly good",
 
 
 	/**
-	 * @dataProvider dataCheckRelMeLink
 	 * @param \DOMDocument $doc
 	 * @param UriInterface $meUrl
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheckRelMeLink')]
 	public function testCheckRelMeLink(\DOMDocument $doc, UriInterface $meUrl)
 	{
 		$this->assertTrue(HTML::checkRelMeLink($doc, $meUrl));
@@ -250,11 +248,11 @@ its surprisingly good",
 
 
 	/**
-	 * @dataProvider dataCheckRelMeLinkFail
 	 * @param \DOMDocument $doc
 	 * @param UriInterface $meUrl
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheckRelMeLinkFail')]
 	public function testCheckRelMeLinkFail(\DOMDocument $doc, UriInterface $meUrl)
 	{
 		$this->assertFalse(HTML::checkRelMeLink($doc, $meUrl));
@@ -1503,12 +1501,12 @@ Served from: blog.austria-insiderinfo.com @ 2023-01-07 10:50:10 by W3 Total Cach
 	}
 
 	/**
-	 * @dataProvider dataExtractCharset
 	 *
 	 * @param string|null $expected
 	 * @param string      $html
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataExtractCharset')]
 	public function testExtractCharset(?string $expected, string $html)
 	{
 		$doc = new \DOMDocument();

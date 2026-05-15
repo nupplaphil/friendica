@@ -114,9 +114,7 @@ EOF;
 		];
 	}
 
-	/**
-	 * @dataProvider dataHooks
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataHooks')]
 	public function testAddonLoader(array $structure, array $enabledAddons, array $files, array $assertion)
 	{
 		vfsStream::create($structure)->at($this->root);

@@ -105,8 +105,8 @@ class ProfilerTest extends MockedTestCase
 
 	/**
 	 * Test the Profiler savetimestamp
-	 * @dataProvider dataPerformance
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataPerformance')]
 	public function testSaveTimestamp($timestamp, $name, array $functions)
 	{
 		$config = \Mockery::mock(IManageConfigValues::class);
@@ -126,8 +126,8 @@ class ProfilerTest extends MockedTestCase
 
 	/**
 	 * Test the Profiler reset
-	 * @dataProvider dataPerformance
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataPerformance')]
 	public function testReset($timestamp, $name, array $functions)
 	{
 		$config = \Mockery::mock(IManageConfigValues::class);
@@ -181,8 +181,8 @@ class ProfilerTest extends MockedTestCase
 
 	/**
 	 * Test the output of the Profiler
-	 * @dataProvider dataBig
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataBig')]
 	public function testSaveLog($data)
 	{
 		$this->logger

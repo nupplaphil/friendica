@@ -51,12 +51,12 @@ class FileTagTest extends TestCase
 
 	/**
 	 * Test convert saved folders arrays to a file/category field
-	 * @dataProvider dataArrayToFile
 	 *
 	 * @param array  $array
 	 * @param string $type
 	 * @param string $file
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataArrayToFile')]
 	public function testArrayToFile(array $array, string $type, string $file)
 	{
 		self::assertEquals($file, FileTag::arrayToFile($array, $type));
@@ -111,12 +111,12 @@ class FileTagTest extends TestCase
 
 	/**
 	 * Test convert different saved folders to a file/category field
-	 * @dataProvider dataFileToArray
 	 *
 	 * @param string $file
 	 * @param string $type
 	 * @param array  $array
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFileToArray')]
 	public function testFileToArray(string $file, string $type, array $array)
 	{
 		self::assertEquals($array, FileTag::fileToArray($file, $type));

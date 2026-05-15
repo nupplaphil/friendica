@@ -52,9 +52,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataLocalUserId
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataLocalUserId')]
 	public function testGetLocalUserId(array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -105,9 +103,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataGetRemoteUserId
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetRemoteUserId')]
 	public function testGetRemoteUserId(array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -128,9 +124,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataGetRemoteContactId
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetRemoteContactId')]
 	public function testGetRemoteContactId(int $uid, array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -163,7 +157,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/** @dataProvider dataGetUserIdForVisitorContactID */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetUserIdForVisitorContactID')]
 	public function testGetUserIdForVisitorContactID(int $cid, array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -201,9 +195,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataAuthenticated
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataAuthenticated')]
 	public function testIsAuthenticated(array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -248,9 +240,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataIsVisitor
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsVisitor')]
 	public function testIsVisitor(array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));
@@ -301,9 +291,7 @@ class UserSessionTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataIsUnauthenticated
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsUnauthenticated')]
 	public function testIsUnauthenticated(array $data, $expected)
 	{
 		$userSession = new UserSession(new ArraySession($data));

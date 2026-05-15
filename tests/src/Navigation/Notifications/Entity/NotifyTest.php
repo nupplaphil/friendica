@@ -23,9 +23,7 @@ class NotifyTest extends FixtureTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataFormatNotify
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFormatNotify')]
 	public function testFormatNotify(string $name, string $message, string $assertion)
 	{
 		self::assertEquals($assertion, Notify::formatMessage($name, $message));

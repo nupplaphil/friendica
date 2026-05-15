@@ -144,7 +144,7 @@ final class AddonManagerHelper implements AddonHelper
 
 		try {
 			require_once($addon_file_path);
-		} catch (\Error $th) {
+		} catch (\Error) {
 			return false;
 		}
 

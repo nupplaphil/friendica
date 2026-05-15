@@ -54,9 +54,7 @@ class DateTimeFormatTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataYearMonth
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataYearMonth')]
 	public function testIsYearMonth(string $input, bool $assert)
 	{
 		$dtFormat = new DateTimeFormat();
@@ -173,13 +171,13 @@ class DateTimeFormatTest extends MockedTestCase
 	}
 
 	/**
-	 * @dataProvider dataFix
 	 *
 	 * @param $expectedDate
 	 * @param $dateString
 	 * @return void
 	 * @throws \Exception
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFix')]
 	public function testFix($expectedDate, $dateString)
 	{
 		$fixed = DateTimeFormat::fix($dateString);
@@ -251,9 +249,7 @@ class DateTimeFormatTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataConvert
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvert')]
 	public function testConvert($expected, string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL)
 	{
 		$this->assertSame($expected, DateTimeFormat::convert($s, $tz_to, $tz_from, $format));
@@ -273,9 +269,7 @@ class DateTimeFormatTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataConvertNow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvertNow')]
 	public function testConvertNow(string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL)
 	{
 		$this->assertSame(date(DateTimeFormat::MYSQL), DateTimeFormat::convert($s, $tz_to, $tz_from, $format));

@@ -98,9 +98,7 @@ class ACLFormatterTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataExpand
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataExpand')]
 	public function testExpand($input, array $assert)
 	{
 		self::assertAcl($input, $assert);
@@ -166,9 +164,7 @@ class ACLFormatterTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataAclToString
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataAclToString')]
 	public function testAclToString($input, string $assert)
 	{
 		$aclFormatter = new ACLFormatter();

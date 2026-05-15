@@ -130,10 +130,10 @@ class StreamLoggerTest extends LoggerTestCase
 	}
 
 	/**
-	 * Test a relative path
-	 * @doesNotPerformAssertions
-	 */
-	public function testRealPath()
+				 * Test a relative path
+				 */
+				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+				public function testRealPath()
 	{
 		static::markTestSkipped('vfsStream isn\'t compatible with chdir, so not testable.');
 

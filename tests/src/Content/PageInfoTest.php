@@ -65,12 +65,12 @@ class PageInfoTest extends DatabaseTestCase
 	}
 
 	/**
-	 * @dataProvider dataGetRelevantUrlFromBody
 	 *
 	 * @param string|null $expected
 	 * @param string      $body
 	 * @param bool        $searchNakedUrls
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetRelevantUrlFromBody')]
 	public function testGetRelevantUrlFromBody($expected, string $body, bool $searchNakedUrls = false)
 	{
 		self::assertSame($expected, PageInfoMock::getRelevantUrlFromBody($body, $searchNakedUrls));
@@ -113,12 +113,12 @@ class PageInfoTest extends DatabaseTestCase
 	}
 
 	/**
-	 * @dataProvider dataStripTrailingUrlFromBody
 	 *
 	 * @param string $expected
 	 * @param string $body
 	 * @param string $url
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStripTrailingUrlFromBody')]
 	public function testStripTrailingUrlFromBody(string $expected, string $body, string $url)
 	{
 		self::assertSame($expected, PageInfoMock::stripTrailingUrlFromBody($body, $url));

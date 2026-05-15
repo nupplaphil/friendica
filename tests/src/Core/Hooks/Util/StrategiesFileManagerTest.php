@@ -145,9 +145,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataHooks
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataHooks')]
 	public function testSetupHooks(string $content, string $addonContent, array $assertStrategies)
 	{
 		vfsStream::newFile(StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php')

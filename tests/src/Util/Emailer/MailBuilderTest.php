@@ -76,12 +76,12 @@ class MailBuilderTest extends MockedTestCase
 	}
 
 	/**
-	 * Test if the builder can create full rendered emails
-	 *
-	 * @todo Create test once "Renderer" and "BBCode" are dynamic
-	 * @doesNotPerformAssertions
-	 */
-	public function testBuilderWithNonRawEmail()
+				 * Test if the builder can create full rendered emails
+				 *
+				 * @todo Create test once "Renderer" and "BBCode" are dynamic
+				 */
+				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+				public function testBuilderWithNonRawEmail()
 	{
 		static::markTestIncomplete('Cannot easily mock Renderer and BBCode, so skipping tests wit them');
 	}

@@ -114,9 +114,7 @@ class FriendSuggestTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @dataProvider dataCreate
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreate')]
 	public function testCreateFromTableRow(array $input, Entity\FriendSuggest $assertion)
 	{
 		$factory = new FriendSuggest(new NullLogger());

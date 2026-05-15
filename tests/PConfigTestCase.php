@@ -263,9 +263,8 @@ abstract class PConfigTestCase extends MockedTestCase
 
 	/**
 	 * Test the configuration get() and set() methods without adapter
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGetWithoutDB(int $uid, $data)
 	{
 		$this->testedConfig = $this->getInstance();
@@ -279,9 +278,8 @@ abstract class PConfigTestCase extends MockedTestCase
 
 	/**
 	 * Test the configuration get() and set() methods with a model/db
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGetWithDB(int $uid, $data)
 	{
 		$this->configModel->shouldReceive('set')
@@ -321,9 +319,8 @@ abstract class PConfigTestCase extends MockedTestCase
 
 	/**
 	 * Test the configuration get() method with refresh
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testGetWithRefresh(int $uid, $data)
 	{
 		$this->configCache->load($uid, ['test' => ['it' => 'now']]);
@@ -346,9 +343,8 @@ abstract class PConfigTestCase extends MockedTestCase
 
 	/**
 	 * Test the configuration delete() method without a model/db
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDeleteWithoutDB(int $uid, $data)
 	{
 		$this->configCache->load($uid, ['test' => ['it' => $data]]);
@@ -445,8 +441,8 @@ abstract class PConfigTestCase extends MockedTestCase
 
 	/**
 	 * Test if multiple uids for caching are usable without errors
-	 * @dataProvider dataMultiUid
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMultiUid')]
 	public function testMultipleUidsWithCache(array $data1, array $data2)
 	{
 		$this->configCache->load($data1['uid'], $data1['data']);

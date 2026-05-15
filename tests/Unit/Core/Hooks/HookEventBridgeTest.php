@@ -139,10 +139,8 @@ class HookEventBridgeTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getNamedEventData
-	 */
-	public function testOnNamedEventCallsHook($name, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getNamedEventData')]
+				public function testOnNamedEventCallsHook($name, $expected): void
 	{
 		$event = new Event($name);
 
@@ -167,10 +165,8 @@ class HookEventBridgeTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getConfigLoadedEventData
-	 */
-	public function testOnConfigLoadedEventCallsHookWithCorrectValue($name, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getConfigLoadedEventData')]
+				public function testOnConfigLoadedEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$config = $this->createStub(ConfigFileManager::class);
 
@@ -197,10 +193,8 @@ class HookEventBridgeTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getCollectRoutesEventData
-	 */
-	public function testOnCollectRoutesEventCallsHookWithCorrectValue($name, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getCollectRoutesEventData')]
+				public function testOnCollectRoutesEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$routeCollector = $this->createStub(RouteCollector::class);
 
@@ -571,10 +565,8 @@ class HookEventBridgeTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getArrayFilterEventData
-	 */
-	public function testOnArrayFilterEventCallsHookWithCorrectValue($name, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getArrayFilterEventData')]
+				public function testOnArrayFilterEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$event = new ArrayFilterEvent($name, ['original']);
 
@@ -608,10 +600,8 @@ class HookEventBridgeTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getHtmlFilterEventData
-	 */
-	public function testOnHtmlFilterEventCallsHookWithCorrectValue($name, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getHtmlFilterEventData')]
+				public function testOnHtmlFilterEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$event = new HtmlFilterEvent($name, 'original');
 

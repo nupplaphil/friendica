@@ -348,9 +348,7 @@ class PermissionSetTest extends FixtureTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataSet
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
 	public function testSelectContactId(array $group_member, array $permissionSets, array $assertions)
 	{
 		/** @var Database $db */
@@ -379,9 +377,7 @@ class PermissionSetTest extends FixtureTestCase
 		$this->repository->selectOneById(-1, 42);
 	}
 
-	/**
-	 * @dataProvider dataSet
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
 	public function testSelectOneById(array $group_member, array $permissionSets, array $assertions)
 	{
 		if (count($permissionSets) === 0) {

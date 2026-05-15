@@ -108,9 +108,8 @@ class CookieTest extends MockedTestCase
 
 	/**
 	 * Test the get() method of the cookie class
-	 *
-	 * @dataProvider dataGet
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataGet')]
 	public function testGet(array $cookieData, bool $hasValues, $uid, $hash, $ip)
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
@@ -169,9 +168,8 @@ class CookieTest extends MockedTestCase
 
 	/**
 	 * Test the check() method of the cookie class
-	 *
-	 * @dataProvider dataCheck
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheck')]
 	public function testCheck(string $serverPrivateKey, string $userPrivateKey, string $password, string $assertHash, bool $assertTrue)
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
@@ -230,9 +228,8 @@ class CookieTest extends MockedTestCase
 
 	/**
 	 * Test the set() method of the cookie class
-	 *
-	 * @dataProvider dataSet
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
 	public function testSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray)
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
@@ -257,9 +254,8 @@ class CookieTest extends MockedTestCase
 
 	/**
 	 * Test the set() method of the cookie class
-	 *
-	 * @dataProvider dataSet
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
 	public function testDoubleSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray)
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();

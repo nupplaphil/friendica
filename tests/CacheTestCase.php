@@ -75,12 +75,10 @@ abstract class CacheTestCase extends MockedTestCase
 	}
 
 	/**
-	 * @small
-	 * @dataProvider dataSimple
-	 *
 	 * @param mixed $value1 a first
 	 * @param mixed $value2 a second
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
 	public function testSimple($value1, $value2, $value3, $value4)
 	{
 		self::assertNull($this->instance->get('value1'));
@@ -105,14 +103,13 @@ abstract class CacheTestCase extends MockedTestCase
 	}
 
 	/**
-	 * @small
-	 * @dataProvider dataSimple
 	 *
 	 * @param mixed $value1 a first
 	 * @param mixed $value2 a second
 	 * @param mixed $value3 a third
 	 * @param mixed $value4 a fourth
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
 	public function testClear($value1, $value2, $value3, $value4)
 	{
 		$this->instance->set('1_value1', $value1);
@@ -161,9 +158,6 @@ abstract class CacheTestCase extends MockedTestCase
 		]);
 	}
 
-	/**
-	 * @medium
-	 */
 	public function testTTL()
 	{
 		static::markTestSkipped('taking too much time without mocking');
@@ -181,12 +175,9 @@ abstract class CacheTestCase extends MockedTestCase
 	}
 
 	/**
-	 * @small
-	 *
 	 * @param mixed $data the data to store in the cache
-	 *
-	 * @dataProvider dataTypesInCache
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTypesInCache')]
 	public function testDifferentTypesInCache($data)
 	{
 		$this->instance->set('val', $data);
@@ -195,14 +186,11 @@ abstract class CacheTestCase extends MockedTestCase
 	}
 
 	/**
-	 * @small
-	 *
 	 * @param mixed $value1 a first
 	 * @param mixed $value2 a second
 	 * @param mixed $value3 a third
-	 *
-	 * @dataProvider dataSimple
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
 	public function testGetAllKeys($value1, $value2, $value3, $value4)
 	{
 		self::assertTrue($this->instance->set('value1', $value1));
@@ -222,9 +210,6 @@ abstract class CacheTestCase extends MockedTestCase
 		self::assertNotContains('value2', $list);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testSpaceInKey()
 	{
 		self::assertTrue($this->instance->set('key space', 'value'));

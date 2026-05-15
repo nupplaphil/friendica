@@ -107,9 +107,8 @@ class StringsTest extends TestCase
 	 *
 	 * @param string $input Input string
 	 * @param bool   $valid Whether testing on valid or invalid
-	 *
-	 * @dataProvider dataIsHex
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsHex')]
 	public function testIsHex(string $input, bool $valid = false)
 	{
 		self::assertEquals($valid, Strings::isHex($input));
@@ -159,9 +158,8 @@ class StringsTest extends TestCase
 	 * @param string   $replacement
 	 * @param int      $start
 	 * @param int|null $length
-	 *
-	 * @dataProvider dataSubstringReplaceMultiByte
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSubstringReplaceMultiByte')]
 	public function testSubstringReplaceMultiByte(string $expected, string $string, string $replacement, int $start, int $length = null)
 	{
 		self::assertEquals(

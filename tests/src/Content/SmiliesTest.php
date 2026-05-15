@@ -53,14 +53,13 @@ class SmiliesTest extends FixtureTestCase
 	/**
 	 * Test replace smilies in different texts
 	 *
-	 * @dataProvider dataLinks
 	 *
 	 * @param string $text     Test string
 	 * @param array  $smilies  List of smilies to replace
 	 * @param string $expected Expected result
-	 *
 	 * @throws InternalServerErrorException
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataLinks')]
 	public function testReplaceFromArray(string $text, array $smilies, string $expected): void
 	{
 		$output = Smilies::replaceFromArray($text, $smilies);
@@ -126,9 +125,7 @@ class SmiliesTest extends FixtureTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataIsEmojiPost
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsEmojiPost')]
 	public function testIsEmojiPost(bool $expected, string $body): void
 	{
 		$this->assertEquals($expected, Smilies::isEmojiPost($body));
@@ -210,9 +207,7 @@ class SmiliesTest extends FixtureTestCase
 		return $data;
 	}
 
-	/**
-	 * @dataProvider dataReplace
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataReplace')]
 	public function testReplace(string $expected, string $body): void
 	{
 		$result = Smilies::replace($body);
@@ -280,9 +275,7 @@ class SmiliesTest extends FixtureTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataExtractUsedSmilies
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataExtractUsedSmilies')]
 	public function testExtractUsedSmilies(array $expected, string $body, string $normalized): void
 	{
 		$extracted = Smilies::extractUsedSmilies($body, $converted);

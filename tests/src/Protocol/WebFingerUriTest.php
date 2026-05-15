@@ -75,12 +75,12 @@ class WebFingerUriTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataFromString
 	 * @param string $expectedLong
 	 * @param string $expectedShort
 	 * @param string $input
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFromString')]
 	public function testFromString(string $expectedLong, string $expectedShort, string $input)
 	{
 		$uri = WebFingerUri::fromString($input);
@@ -111,10 +111,10 @@ class WebFingerUriTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataFromStringFailure
 	 * @param string $input
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFromStringFailure')]
 	public function testFromStringFailure(string $input)
 	{
 		$this->expectException(\InvalidArgumentException::class);

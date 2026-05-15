@@ -77,9 +77,7 @@ class IntroductionTest extends TestCase
 		self::assertEquals($intro->ignore, $assertion['ignore'] ?? false);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateFromTableRow(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());
@@ -88,9 +86,7 @@ class IntroductionTest extends TestCase
 		$this->assertIntro($intro, $assertion);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateNew(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());
@@ -104,9 +100,7 @@ class IntroductionTest extends TestCase
 		]);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateDummy(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());

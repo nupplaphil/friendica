@@ -77,10 +77,10 @@ class SyslogLoggerTest extends LoggerTestCase
 	}
 
 	/**
-	 * Test the close() method
-	 * @doesNotPerformAssertions
-	 */
-	public function testClose()
+				 * Test the close() method
+				 */
+				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+				public function testClose()
 	{
 		$logger = $this->getInstance();
 		$logger->emergency('test');

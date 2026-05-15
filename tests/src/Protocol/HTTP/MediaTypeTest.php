@@ -54,12 +54,12 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @dataProvider dataValid
 	 *
 	 * @param MediaType $expected
 	 * @param string    $contentType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataValid')]
 	public function testValid(MediaType $expected, string $contentType)
 	{
 		$this->assertEquals($expected, MediaType::fromContentType($contentType));
@@ -80,11 +80,11 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @dataProvider dataInvalid
 	 *
 	 * @param string $contentType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInvalid')]
 	public function testInvalid(string $contentType)
 	{
 		$this->expectException(\InvalidArgumentException::class);
@@ -123,12 +123,12 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @dataProvider dataToString
 	 *
 	 * @param string    $expected
 	 * @param MediaType $mediaType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataToString')]
 	public function testToString(string $expected, MediaType $mediaType)
 	{
 		$this->assertEquals($expected, $mediaType->__toString());

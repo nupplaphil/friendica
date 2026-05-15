@@ -97,9 +97,6 @@ class ProbeTest extends MockedTestCase
 		return $template;
 	}
 
-	/**
-	 * @small
-	 */
 	public function testGetFeedLinkNoBase()
 	{
 		foreach (self::EXPECTED as $url => $hrefs) {
@@ -113,9 +110,6 @@ class ProbeTest extends MockedTestCase
 		}
 	}
 
-	/**
-	 * @small
-	 */
 	public function testGetFeedLinkBase()
 	{
 		foreach (self::EXPECTED as $url => $hrefs) {
@@ -158,9 +152,7 @@ class ProbeTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataCleanUri
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCleanUri')]
 	public function testCleanUri(string $expected, string $uri)
 	{
 		self::assertEquals($expected, Probe::cleanURI($uri));
@@ -208,9 +200,7 @@ xQIDAQAB
 		];
 	}
 
-	/**
-	 * @dataProvider dataUri
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataUri')]
 	public function testProbeUri(string $uri, array $assertInfos)
 	{
 		self::markTestIncomplete('hard work due mocking 19 different http-requests');

@@ -15,10 +15,8 @@ use Friendica\Core\Lock\Type\CacheLock;
 use Friendica\Test\CacheLockTestCase;
 use Mockery;
 
-/**
- * @requires extension redis
- * @group REDIS
- */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('redis')]
+#[\PHPUnit\Framework\Attributes\Group('REDIS')]
 class RedisCacheLockTest extends CacheLockTestCase
 {
 	protected function setUp(): void

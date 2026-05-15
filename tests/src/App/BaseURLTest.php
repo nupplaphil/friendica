@@ -104,9 +104,7 @@ class BaseURLTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataSystemUrl
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSystemUrl')]
 	public function testDetermine(array $input, array $server, string $assertion)
 	{
 		$origServerGlobal = $_SERVER;
@@ -147,9 +145,7 @@ class BaseURLTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataRemove
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRemove')]
 	public function testRemove(array $base, string $origUrl, string $assertion)
 	{
 		$config  = new ReadOnlyFileConfig(new Cache($base));

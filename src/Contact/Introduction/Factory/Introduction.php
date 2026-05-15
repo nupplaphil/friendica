@@ -21,15 +21,15 @@ class Introduction extends BaseFactory implements ICanCreateFromTableRow
 	public function createFromTableRow(array $row): Entity\Introduction
 	{
 		return new Entity\Introduction(
-			$row['uid'] ?? 0,
-			$row['contact-id'] ?? 0,
+			$row['uid']         ?? 0,
+			$row['contact-id']  ?? 0,
 			$row['suggest-cid'] ?? null,
 			!empty($row['knowyou']),
 			$row['note'] ?? '',
 			$row['hash'] ?? '',
 			new \DateTime($row['datetime'] ?? 'now', new \DateTimeZone('UTC')),
 			!empty($row['ignore']),
-			$row['id'] ?? null
+			$row['id'] ?? null,
 		);
 	}
 
@@ -38,7 +38,7 @@ class Introduction extends BaseFactory implements ICanCreateFromTableRow
 		int $cid,
 		string $note,
 		?int $sid = null,
-		bool $knowyou = false
+		bool $knowyou = false,
 	): Entity\Introduction {
 		return $this->createFromTableRow([
 			'uid'         => $uid,

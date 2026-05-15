@@ -46,11 +46,11 @@ class ProcessorTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataNormalizeMentionLinks
 	 *
 	 * @param string $expected
 	 * @param string $body
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataNormalizeMentionLinks')]
 	public function testNormalizeMentionLinks(string $expected, string $body)
 	{
 		$this->assertEquals($expected, ProcessorMock::normalizeMentionLinks($body));
@@ -90,12 +90,12 @@ class ProcessorTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataAddMentionLinks
 	 *
 	 * @param string $expected
 	 * @param string $body
 	 * @param array $tags
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataAddMentionLinks')]
 	public function testAddMentionLinks(string $expected, string $body, array $tags)
 	{
 		$this->assertEquals($expected, ProcessorMock::addMentionLinks($body, $tags));

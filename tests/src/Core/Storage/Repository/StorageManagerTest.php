@@ -140,9 +140,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the getByName() method
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testGetByName($name, $valid, $interface, $assert, $assertName)
 	{
 		if (!$valid) {
@@ -175,9 +174,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the isValidBackend() method
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$storageManager = new StorageManager(
@@ -215,9 +213,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the method getBackend()
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testGetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
@@ -241,9 +238,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the method getBackend() with a pre-configured backend
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testPresetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$this->config->set('storage', 'name', $name);
@@ -356,9 +352,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test moving data to a new storage (currently testing db & filesystem)
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testMoveStorage($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {

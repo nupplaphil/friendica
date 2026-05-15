@@ -29,10 +29,8 @@ class EventTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getPublicConstants
-	 */
-	public function testPublicConstantsAreAvailable($value, $expected): void
+	#[\PHPUnit\Framework\Attributes\DataProvider('getPublicConstants')]
+				public function testPublicConstantsAreAvailable($value, $expected): void
 	{
 		$this->assertSame($expected, $value);
 	}

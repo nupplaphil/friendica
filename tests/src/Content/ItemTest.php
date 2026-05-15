@@ -11,10 +11,8 @@ use Friendica\Test\MockedTestCase;
 
 class ItemTest extends MockedTestCase
 {
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function testDetermineCategoriesTerms()
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+				public function testDetermineCategoriesTerms()
 	{
 		static::markTestIncomplete('Test data needed.');
 	}

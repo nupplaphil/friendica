@@ -393,8 +393,8 @@ FIN;
 
 	/**
 	 * Test the automatic installation with a prepared config file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithConfig(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -470,8 +470,8 @@ CONF;
 	/**
 	 * Test the automatic installation with environment variables
 	 * Includes saving the DB credentials to the file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentAndSave(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -508,8 +508,8 @@ CONF;
 	/**
 	 * Test the automatic installation with environment variables
 	 * Don't save the db credentials to the file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentWithoutSave(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -544,8 +544,8 @@ CONF;
 
 	/**
 	 * Test the automatic installation with arguments
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithArguments(array $data)
 	{
 		$this->mockConnect(true, 1);

@@ -50,13 +50,12 @@ class PlaintextTest extends FixtureTestCase
 	/**
 	 * Test split long texts
 	 *
-	 * @dataProvider dataMessage
 	 *
 	 * @param string $text     Test string
 	 * @param array  $expected Expected result
-	 *
 	 * @throws InternalServerErrorException
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMessage')]
 	public function testSplitMessage(string $text, array $expected)
 	{
 		$item = [

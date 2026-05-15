@@ -32,13 +32,12 @@ class MarkdownTest extends FixtureTestCase
 	/**
 	 * Test convert different input Markdown text into HTML
 	 *
-	 * @dataProvider dataMarkdown
 	 *
 	 * @param string $input    The Markdown text to test
 	 * @param string $expected The expected HTML output
-	 *
 	 * @throws Exception
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdown')]
 	public function testConvert(string $input, string $expected)
 	{
 		$output = Markdown::convert($input);
@@ -59,11 +58,11 @@ class MarkdownTest extends FixtureTestCase
 	/**
 	 * Test convert Markdown to BBCode
 	 *
-	 * @dataProvider dataMarkdownText
 	 *
 	 * @param string $expectedBBCode Expected BBCode output
 	 * @param string $markdown       Markdown text
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdownText')]
 	public function testToBBCode(string $expectedBBCode, string $markdown)
 	{
 		$actual = Markdown::toBBCode($markdown);

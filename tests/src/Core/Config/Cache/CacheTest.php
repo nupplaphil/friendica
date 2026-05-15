@@ -46,8 +46,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the loadConfigArray() method without override
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testLoadConfigArray($data)
 	{
 		$configCache = new Cache();
@@ -58,8 +58,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the loadConfigArray() method with overrides
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testLoadConfigArrayOverride($data)
 	{
 		$override = [
@@ -119,8 +119,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the getAll() method
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testGetAll($data)
 	{
 		$configCache = new Cache();
@@ -134,8 +134,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the set() and get() method
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGet($data)
 	{
 		$configCache = new Cache();
@@ -188,8 +188,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the delete() method
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDelete($data)
 	{
 		$configCache = new Cache($data);
@@ -205,8 +205,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the keyDiff() method with result
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testKeyDiffWithResult($data)
 	{
 		$configCache = new Cache($data);
@@ -222,8 +222,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the keyDiff() method without result
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testKeyDiffWithoutResult($data)
 	{
 		$configCache = new Cache($data);
@@ -309,8 +309,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the set() method with overrides
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetOverrides($data)
 	{
 
@@ -331,10 +331,9 @@ class CacheTest extends MockedTestCase
 	}
 
 	/**
-	 * @dataProvider dataTests
-	 *
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetData($data)
 	{
 		$configCache = new Cache();
@@ -346,9 +345,7 @@ class CacheTest extends MockedTestCase
 		$this->assertEquals($data, $configCache->getDataBySource(Cache::SOURCE_FILE));
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testMerge($data)
 	{
 		$configCache = new Cache();
@@ -509,9 +506,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Tests that the Cache can return a whole category at once
-	 *
-	 * @dataProvider dataTestCat
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
 	public function testGetCategory($data, string $category, mixed $assertion)
 	{
 		$cache = new Cache($data);
@@ -521,9 +517,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test that the cache can get merged with different categories
-	 *
-	 * @dataProvider dataTestCat
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
 	public function testCatMerge($data, string $category, mixed $assertion)
 	{
 		$cache = new Cache($data);
@@ -540,9 +535,9 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test that keys are removed after a deletion
 	 *
-	 * @dataProvider dataTests
 	 *
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDeleteRemovesKey($data)
 	{
 		$cache = new Cache();
@@ -565,9 +560,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test that deleted keys are working with merge
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDeleteAndMergeWithDefault($data)
 	{
 		$cache = new Cache();

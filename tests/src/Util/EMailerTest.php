@@ -22,10 +22,9 @@ use Psr\Log\NullLogger;
 
 /**
  * Annotation necessary because of Hook calls
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
  */
+#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
+#[\PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses]
 class EMailerTest extends MockedTestCase
 {
 	use VFSTrait;

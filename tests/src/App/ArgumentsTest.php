@@ -183,9 +183,8 @@ class ArgumentsTest extends TestCase
 
 	/**
 	 * Test all variants of argument determination
-	 *
-	 * @dataProvider dataArguments
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataArguments')]
 	public function testDetermine(array $assert, array $server, array $get)
 	{
 		$arguments = (new App\Arguments())
@@ -196,9 +195,8 @@ class ArgumentsTest extends TestCase
 
 	/**
 	 * Test if the get/has methods are working for the determined arguments
-	 *
-	 * @dataProvider dataArguments
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataArguments')]
 	public function testGetHas(array $assert, array $server, array $get)
 	{
 		$arguments = (new App\Arguments())
@@ -246,9 +244,8 @@ class ArgumentsTest extends TestCase
 
 	/**
 	 * Test the ZRL and OWT stripping
-	 *
-	 * @dataProvider dataStripped
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStripped')]
 	public function testStrippedQueries(string $assert, string $input)
 	{
 		$command = 'test/it';
