@@ -24,9 +24,6 @@
 				<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$field.7.edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="id_{{$field.0}}">
 					<i class="fa fa-link"></i>
 				</button>
-				<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$field.7.edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="id_{{$field.0}}">
-					<i class="fa fa-play"></i>
-				</button>
 				<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$field.7.eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="id_{{$field.0}}">
 					<i class="fa fa-underline"></i>
 				</button>
