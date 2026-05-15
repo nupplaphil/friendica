@@ -114,18 +114,18 @@ class HookEventBridgeTest extends TestCase
 
 		$this->assertSame(
 			$expected,
-			HookEventBridge::getStaticSubscribedEvents()
+			HookEventBridge::getStaticSubscribedEvents(),
 		);
 
 		foreach ($expected as $methodName) {
 			$this->assertTrue(
 				method_exists(HookEventBridge::class, $methodName),
-				$methodName . '() is not defined'
+				$methodName . '() is not defined',
 			);
 
 			$this->assertTrue(
 				(new \ReflectionMethod(HookEventBridge::class, $methodName))->isStatic(),
-				$methodName . '() is not static'
+				$methodName . '() is not static',
 			);
 		}
 	}
@@ -140,7 +140,7 @@ class HookEventBridgeTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('getNamedEventData')]
-				public function testOnNamedEventCallsHook($name, $expected): void
+	public function testOnNamedEventCallsHook($name, $expected): void
 	{
 		$event = new Event($name);
 
@@ -166,7 +166,7 @@ class HookEventBridgeTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('getConfigLoadedEventData')]
-				public function testOnConfigLoadedEventCallsHookWithCorrectValue($name, $expected): void
+	public function testOnConfigLoadedEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$config = $this->createStub(ConfigFileManager::class);
 
@@ -194,7 +194,7 @@ class HookEventBridgeTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('getCollectRoutesEventData')]
-				public function testOnCollectRoutesEventCallsHookWithCorrectValue($name, $expected): void
+	public function testOnCollectRoutesEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$routeCollector = $this->createStub(RouteCollector::class);
 
@@ -566,7 +566,7 @@ class HookEventBridgeTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('getArrayFilterEventData')]
-				public function testOnArrayFilterEventCallsHookWithCorrectValue($name, $expected): void
+	public function testOnArrayFilterEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$event = new ArrayFilterEvent($name, ['original']);
 
@@ -601,7 +601,7 @@ class HookEventBridgeTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('getHtmlFilterEventData')]
-				public function testOnHtmlFilterEventCallsHookWithCorrectValue($name, $expected): void
+	public function testOnHtmlFilterEventCallsHookWithCorrectValue($name, $expected): void
 	{
 		$event = new HtmlFilterEvent($name, 'original');
 

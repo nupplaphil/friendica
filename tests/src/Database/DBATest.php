@@ -33,7 +33,8 @@ class DBATest extends DatabaseTestCase
 		DI::config()->set('system', 'theme', 'system_theme');
 	}
 
-	public function testExists() {
+	public function testExists()
+	{
 
 		self::assertTrue(DBA::exists('user', []));
 		self::assertFalse(DBA::exists('notable', []));

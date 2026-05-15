@@ -32,16 +32,16 @@ class ProfilerLoggerTest extends MockedTestCase
 	{
 		parent::setUp();
 
-		$this->logger = \Mockery::mock(LoggerInterface::class);
+		$this->logger   = \Mockery::mock(LoggerInterface::class);
 		$this->profiler = \Mockery::mock(Profiler::class);
 	}
 
 	/**
-				 * Test if the profiler is profiling data
-				 */
-				#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testProfiling($function, $message, array $context)
+	 * Test if the profiler is profiling data
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testProfiling($function, $message, array $context)
 	{
 		$logger = new ProfilerLogger($this->logger, $this->profiler);
 
@@ -53,10 +53,10 @@ class ProfilerLoggerTest extends MockedTestCase
 	}
 
 	/**
-				 * Test the log() function
-				 */
-				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testProfilingLog()
+	 * Test the log() function
+	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testProfilingLog()
 	{
 		$logger = new ProfilerLogger($this->logger, $this->profiler);
 

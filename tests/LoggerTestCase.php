@@ -9,7 +9,6 @@ namespace Friendica\Test;
 
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Logger\Util\Introspection;
-use Friendica\Test\MockedTestCase;
 use Mockery\MockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
@@ -18,11 +17,11 @@ abstract class LoggerTestCase extends MockedTestCase
 {
 	use LoggerDataTrait;
 
-	const LOGLINE = '/.* \[.*]: .* {.*\"file\":\".*\".*,.*\"line\":\d*,.*\"function\":\".*\".*,.*\"uid\":\".*\".*}/';
+	public const LOGLINE = '/.* \[.*]: .* {.*\"file\":\".*\".*,.*\"line\":\d*,.*\"function\":\".*\".*,.*\"uid\":\".*\".*}/';
 
-	const FILE = 'test';
-	const LINE = 666;
-	const FUNC = 'myfunction';
+	public const FILE = 'test';
+	public const LINE = 666;
+	public const FUNC = 'myfunction';
 
 	/**
 	 * @var Introspection|MockInterface
@@ -57,7 +56,7 @@ abstract class LoggerTestCase extends MockedTestCase
 		$this->introspection->shouldReceive('getRecord')->andReturn([
 			'file'     => self::FILE,
 			'line'     => self::LINE,
-			'function' => self::FUNC
+			'function' => self::FUNC,
 		]);
 
 		$this->config = \Mockery::mock(IManageConfigValues::class);
@@ -138,10 +137,10 @@ abstract class LoggerTestCase extends MockedTestCase
 	}
 
 	/**
-				 * Test with different logging data
-				 */
-				#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-				public function testDifferentTypes($function, $message, array $context)
+	 * Test with different logging data
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
+	public function testDifferentTypes($function, $message, array $context)
 	{
 		$logger = $this->getInstance();
 		$logger->$function($message, $context);
@@ -158,7 +157,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	 */
 	public function testExceptionHandling()
 	{
-		$e = new \Exception("Test String", 123);
+		$e         = new \Exception("Test String", 123);
 		$eFollowUp = new \Exception("FollowUp", 456, $e);
 
 		$assertion = $eFollowUp->__toString();

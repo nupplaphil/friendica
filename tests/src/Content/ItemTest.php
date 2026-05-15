@@ -12,7 +12,7 @@ use Friendica\Test\MockedTestCase;
 class ItemTest extends MockedTestCase
 {
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testDetermineCategoriesTerms()
+	public function testDetermineCategoriesTerms()
 	{
 		static::markTestIncomplete('Test data needed.');
 	}

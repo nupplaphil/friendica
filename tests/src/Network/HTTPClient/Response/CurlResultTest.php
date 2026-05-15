@@ -15,15 +15,15 @@ class CurlResultTest extends TestCase
 {
 	public function testNormal()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
+		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
 
-		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(),'https://test.local', $header . $body, [
-			'http_code' => 200,
+		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
+			'http_code'    => 200,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local'
+			'url'          => 'https://test.local',
 		]);
 
 		self::assertTrue($curlResult->isSuccess());
@@ -40,16 +40,16 @@ class CurlResultTest extends TestCase
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirect()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
+		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
 
-		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(),'https://test.local/test/it', $header . $body, [
-			'http_code' => 301,
+		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local/test/it', $header . $body, [
+			'http_code'    => 301,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local/test/it',
-			'redirect_url' => 'https://test.other'
+			'url'          => 'https://test.local/test/it',
+			'redirect_url' => 'https://test.other',
 		]);
 
 		self::assertTrue($curlResult->isSuccess());
@@ -64,16 +64,16 @@ class CurlResultTest extends TestCase
 
 	public function testTimeout()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
+		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
 
-		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(),'https://test.local/test/it', $header . $body, [
-			'http_code' => 500,
+		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local/test/it', $header . $body, [
+			'http_code'    => 500,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local/test/it',
-			'redirect_url' => 'https://test.other'
+			'url'          => 'https://test.local/test/it',
+			'redirect_url' => 'https://test.other',
 		], CURLE_OPERATION_TIMEDOUT, 'Tested error');
 
 		self::assertFalse($curlResult->isSuccess());
@@ -90,15 +90,15 @@ class CurlResultTest extends TestCase
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirectHeader()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.redirect');
+		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.redirect');
 		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.redirect.php');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
 
-		$curlResult = new CurlResult(new NullLogger(),'https://test.local/test/it?key=value', $header . $body, [
-			'http_code' => 301,
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local/test/it?key=value', $header . $body, [
+			'http_code'    => 301,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local/test/it?key=value',
+			'url'          => 'https://test.local/test/it?key=value',
 		]);
 
 		self::assertTrue($curlResult->isSuccess());
@@ -114,12 +114,12 @@ class CurlResultTest extends TestCase
 	public function testInHeader()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
-		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(),'https://test.local', $header . $body, [
-			'http_code' => 200,
+		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
+			'http_code'    => 200,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local'
+			'url'          => 'https://test.local',
 		]);
 		self::assertTrue($curlResult->inHeader('vary'));
 		self::assertFalse($curlResult->inHeader('wrongHeader'));
@@ -128,12 +128,12 @@ class CurlResultTest extends TestCase
 	public function testGetHeaderArray()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
-			'http_code' => 200,
+			'http_code'    => 200,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local'
+			'url'          => 'https://test.local',
 		]);
 
 		$headers = $curlResult->getHeaderArray();
@@ -145,12 +145,12 @@ class CurlResultTest extends TestCase
 	public function testGetHeaderWithParam()
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
 
-		$curlResult = new CurlResult(new NullLogger(),'https://test.local', $header . $body, [
-			'http_code' => 200,
+		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
+			'http_code'    => 200,
 			'content_type' => 'text/html; charset=utf-8',
-			'url' => 'https://test.local'
+			'url'          => 'https://test.local',
 		]);
 
 		self::assertNotEmpty($curlResult->getHeaders());

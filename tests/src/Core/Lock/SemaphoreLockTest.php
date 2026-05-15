@@ -47,7 +47,7 @@ class SemaphoreLockTest extends LockTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testLockTTL()
+	public function testLockTTL()
 	{
 		self::markTestSkipped("Semaphore doesn't work with TTL");
 	}
@@ -61,9 +61,9 @@ class SemaphoreLockTest extends LockTestCase
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);
 
-		self::assertTrue(file_exists($file));
+		self::assertFileExists($file);
 		self::assertFalse($this->instance->release('test', false));
-		self::assertTrue(file_exists($file));
+		self::assertFileExists($file);
 	}
 
 	/**
@@ -79,9 +79,9 @@ class SemaphoreLockTest extends LockTestCase
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);
 
-		self::assertTrue(file_exists($file));
+		self::assertFileExists($file);
 		self::assertFalse($this->instance->release('test', true));
-		self::assertTrue(file_exists($file));
+		self::assertFileExists($file);
 	}
 
 	/**
@@ -92,7 +92,7 @@ class SemaphoreLockTest extends LockTestCase
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);
 
-		self::assertTrue(file_exists($file));
+		self::assertFileExists($file);
 		self::assertTrue($this->instance->acquire('test'));
 		self::assertTrue($this->instance->isLocked('test'));
 		self::assertTrue($this->instance->release('test'));

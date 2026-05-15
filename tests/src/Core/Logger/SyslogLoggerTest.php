@@ -46,7 +46,7 @@ class SyslogLoggerTest extends LoggerTestCase
 		$this->config->shouldReceive('get')->with('system', 'loglevel')->andReturn($level);
 
 		$loggerFactory = new SyslogLoggerFactoryWrapper($this->introspection, 'test');
-		$this->logger = $loggerFactory->create($this->config);
+		$this->logger  = $loggerFactory->create($this->config);
 
 		return $this->logger;
 	}
@@ -77,10 +77,10 @@ class SyslogLoggerTest extends LoggerTestCase
 	}
 
 	/**
-				 * Test the close() method
-				 */
-				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testClose()
+	 * Test the close() method
+	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testClose()
 	{
 		$logger = $this->getInstance();
 		$logger->emergency('test');

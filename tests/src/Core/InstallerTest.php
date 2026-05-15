@@ -573,10 +573,10 @@ class InstallerTest extends MockedTestCase
 	}
 
 	/**
-				 * Test the setup of the config cache for installation
-				 */
-				#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-				public function testSetUpCache()
+	 * Test the setup of the config cache for installation
+	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testSetUpCache()
 	{
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
 
