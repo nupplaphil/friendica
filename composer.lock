@@ -963,7 +963,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.friendi.ca/Art4/php-json-ld.git",
-                "reference": "f7416c98e344624003792e5b0ac282656bcd4d68"
+                "reference": "0a5b28c6cb98df6ec57718bd17c66238870269dc"
             },
             "require": {
                 "ext-json": "*",
@@ -999,7 +999,7 @@
                 "Semantic Web",
                 "jsonld"
             ],
-            "time": "2026-05-16T07:07:14+00:00"
+            "time": "2026-05-16T07:21:26+00:00"
         },
         {
             "name": "geekwright/po",
