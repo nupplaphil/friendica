@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "679420b86fcc115290da493d3d00c998",
+    "content-hash": "8ce38707960f619aed83f86ba3c9b361",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -959,17 +959,16 @@
         },
         {
             "name": "friendica/json-ld",
-            "version": "dev-master",
+            "version": "dev-fix-deprecation-warnings",
             "source": {
                 "type": "git",
-                "url": "https://git.friendi.ca/friendica/php-json-ld",
-                "reference": "776da8c0dc704fde5f30aafc6572f05fa8258dec"
+                "url": "https://git.friendi.ca/Art4/php-json-ld.git",
+                "reference": "f7416c98e344624003792e5b0ac282656bcd4d68"
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.4.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1000,7 +999,7 @@
                 "Semantic Web",
                 "jsonld"
             ],
-            "time": "2026-05-15T20:03:58+00:00"
+            "time": "2026-05-16T07:07:14+00:00"
         },
         {
             "name": "geekwright/po",
