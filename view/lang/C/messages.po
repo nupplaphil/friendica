@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 13:18+0200\n"
+"POT-Creation-Date: 2026-05-16 21:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8824,7 +8824,11 @@ msgid "Account type:"
 msgstr ""
 
 #: src/Module/Register.php:187
-msgid "You can change the account type later. (<a href=\""
+msgid "You can change the account type later."
+msgstr ""
+
+#: src/Module/Register.php:187
+msgid "(Account type help)"
 msgstr ""
 
 #: src/Module/Register.php:212

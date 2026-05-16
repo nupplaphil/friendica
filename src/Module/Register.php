@@ -182,9 +182,9 @@ class Register extends BaseModule
 		/* build Select array */
 		$acct_type = [
 			'register_type', // id
-			DI::l10n()->t('Account type:'),	//label
+			DI::l10n()->t('Account type:'), //label
 			$selected,
-			DI::l10n()->t('You can change the account type later. (<a href="' . DI::baseUrl() . '/help/user/accounts-groups-pages" target="_blank">Account type help</a>)'), // tip
+			DI::l10n()->t('You can change the account type later.') . ' <a href="' . DI::baseUrl() . '/help/user/accounts-groups-pages" target="_blank">' . DI::l10n()->t('(Account type help)') . '</a>',
 			$acct_list,
 		];
 
