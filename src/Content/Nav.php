@@ -42,7 +42,7 @@ class Nav
 		'contacts'      => null,
 		'delegation'    => null,
 		'calendar'      => null,
-		'register'      => null
+		'register'      => null,
 	];
 
 	/**
@@ -118,11 +118,11 @@ class Nav
 			'$home'                 => $this->l10n->t('Home'),
 			'$skip'                 => $this->l10n->t('Skip to main content'),
 			'$clear_notifs'         => $this->l10n->t('Clear notifications'),
-			'$search_placeholder'   => $this->l10n->t('Search: @name, !group, #tags, content')
+			'$search_placeholder'   => $this->l10n->t('Search: @name, !group, #tags, content'),
 		]);
 
 		$nav = $this->eventDispatcher->dispatch(
-			new HtmlFilterEvent(HtmlFilterEvent::PAGE_HEADER, $nav)
+			new HtmlFilterEvent(HtmlFilterEvent::PAGE_HEADER, $nav),
 		)->getHtml();
 
 		return $nav;
@@ -161,7 +161,7 @@ class Nav
 			$arr = ['app_menu' => $appMenu];
 
 			$arr = $this->eventDispatcher->dispatch(
-				new ArrayFilterEvent(ArrayFilterEvent::APP_MENU, $arr)
+				new ArrayFilterEvent(ArrayFilterEvent::APP_MENU, $arr),
 			)->getArray();
 
 			$appMenu = $arr['app_menu'] ?? [];
@@ -267,7 +267,7 @@ class Nav
 			$nav['searchoption'] = [
 				$this->l10n->t('Full Text'),
 				$this->l10n->t('Tags'),
-				$this->l10n->t('Contacts')
+				$this->l10n->t('Contacts'),
 			];
 
 			if ($this->config->get('system', 'poco_local_search')) {
@@ -280,8 +280,8 @@ class Nav
 			$gdirpath = OpenWebAuth::getZrlUrl($this->config->get('system', 'directory'), true);
 		}
 
-		if (Feature::isEnabled($this->session->getLocalUserId(), Feature::COMMUNITY) && (($this->session->getLocalUserId() || $this->config->get('system', 'community_page_style') != Community::DISABLED_VISITOR) &&
-			!($this->config->get('system', 'community_page_style') == Community::DISABLED))) {
+		if (Feature::isEnabled($this->session->getLocalUserId(), Feature::COMMUNITY) && (($this->session->getLocalUserId() || $this->config->get('system', 'community_page_style') != Community::DISABLED_VISITOR)
+			&& !($this->config->get('system', 'community_page_style') == Community::DISABLED))) {
 			$nav['community'] = ['community', $this->l10n->t('Community'), '', $this->l10n->t('Conversations on this and other servers')];
 		}
 
@@ -352,7 +352,7 @@ class Nav
 		];
 
 		$nav_info = $this->eventDispatcher->dispatch(
-			new ArrayFilterEvent(ArrayFilterEvent::NAV_INFO, $nav_info)
+			new ArrayFilterEvent(ArrayFilterEvent::NAV_INFO, $nav_info),
 		)->getArray();
 
 		return $nav_info;
