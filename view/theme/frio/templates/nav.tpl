@@ -6,33 +6,36 @@
   *}}
 {{* we have modified the navmenu (look at function frio_remote_nav() ) to have remote links. *}}
 {{if $userinfo}}
-	<header>
-		<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
-		<div id="banner" class="hidden-sm hidden-xs">
-			<a href="{{$baseurl}}" aria-hidden="true">
-				<div id="logo-img" aria-label="{{$home}}"></div>
-			</a>
-		</div>
-	</header>
 	<nav id="topbar-first" class="topbar" role="menubar">
-		<div class="container">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+		<div class="container-fluid">
+			<div id="topbar-first-nav-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+				<header style="display: flex;" class="hidden-xs">
+					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
+					<div id="banner" class="hidden-sm hidden-xs">
+						<a href="{{$baseurl}}" aria-hidden="true">
+							<div id="logo-img" aria-label="{{$home}}"></div>
+						</a>
+					</div>
+					{{* The search box *}}
+					{{if $nav.search}}
+						<form id="search-box" class="navbar-form hidden-xs form-group form-group-search" role="search" method="get" action="{{$nav.search.0}}">
+							<div class="form-group form-group-search">
+								<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
+									type="search" name="q" placeholder="{{$search_placeholder}}">
+								<button class="btn btn-primary btn-md form-button-search" type="submit">
+									<i class="fa fa-search" aria-hidden="true"></i>
+									<span class="sr-only">{{$nav.search.1}}</span>
+								</button>
+							</div>
+						</form>
+					{{/if}}
+				</header>
 				<!-- div for navbar width-->
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="topbar-nav">
 
 					{{* Buttons for the mobile view *}}
-					{{* Mobile user menu dropdown button *}}
-					<button type="button" class="navbar-toggle offcanvas-right-toggle pull-right"
-						aria-controls="offcanvasUsermenu" aria-haspopup="true">
-						<span class="sr-only">Toggle navigation</span>
-						<i class="ri ri-more-2-line ri-fw ri-lg" aria-hidden="true"></i>
-					</button>
-					<button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse"
-						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
-						<span class="sr-only">Toggle Search</span>
-						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>
-					</button>
 					{{* Mobile left menu dropdown button *}}
 					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed pull-left visible-sm visible-xs"
 						data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
@@ -103,24 +106,8 @@
 				</div>
 
 				{{* This is the right part of the NavBar. It includes the search and the user menu *}}
-				<div class="topbar-actions pull-right">
+				<div class="topbar-actions">
 					<ul class="nav">
-
-						{{* The search box *}}
-						{{if $nav.search}}
-							<li id="search-box" class="hidden-xs">
-								<form class="navbar-form" role="search" method="get" action="{{$nav.search.0}}">
-									<div class="form-group form-group-search">
-										<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
-											type="search" name="q" placeholder="{{$search_placeholder}}">
-										<button class="btn btn-primary btn-md form-button-search" type="submit">
-											<i class="fa fa-search" aria-hidden="true"></i>
-											<span class="sr-only">{{$nav.search.1}}</span>
-										</button>
-									</div>
-								</form>
-							</li>
-						{{/if}}
 
 						{{if $nav.messages}}
 							<li class="nav-segment">
@@ -156,7 +143,6 @@
 												</button>
 											</header>
 										</header>
-
 									</li>
 
 							<li id="nav-notifications-loading" class="loading" style="font-weight: bold; color: #555; padding-left: 10px;">
@@ -168,6 +154,18 @@
 								</ul>
 							</li>
 						{{/if}}
+
+					{{* Mobile user menu dropdown button *}}
+					<button type="button" class="navbar-toggle offcanvas-right-toggle pull-right"
+						aria-controls="offcanvasUsermenu" aria-haspopup="true">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="fa fa-ellipsis-v fa-fw fa-lg" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse"
+						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
+						<span class="sr-only">Toggle Search</span>
+						<i class="fa fa-search fa-fw fa-lg" aria-hidden="true"></i>
+					</button>
 
 						{{* The user dropdown menu *}}
 						{{if $userinfo}}

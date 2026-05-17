@@ -434,18 +434,8 @@ header #site-location {
 	display: none;
 }
 header #banner {
-	position: fixed;
-	top: 0px;
-	z-index: 1040;
-	margin-top: 12.5px;
-	text-align: center;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-	font-size: 14px;
-	font-family: tahoma, "Lucida Sans", sans;
-	color: #fff;
-	font-weight: bold;
-	white-space: nowrap;
-	padding-left: 20px;
+	padding-top: 12.5px;
+	width: min-content;
 }
 header #banner #logo-img,
 .navbar-brand #logo-img {
@@ -629,7 +619,7 @@ nav.navbar {
 	z-index: 1030;
 	color: $nav_icon_color;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 795px) {
 	#topbar-first,
 	nav.navbar {
 		padding: 0 2px;
@@ -640,6 +630,10 @@ button#main-menu {
 	align-items: center;
 	display: flex;
 	gap: 5px;
+}
+#topbar-first-nav-container {
+		display: flex;
+		justify-content: space-between;
 }
 #topbar-first .navbar-toggle {
 	margin-top: 5px;
@@ -2589,7 +2583,6 @@ input[type="range"].form-control {
 }
 .form-group-search {
 	position: relative;
-	width: 100%;
 }
 
 #search-box .ri-search-line {
@@ -4391,14 +4384,17 @@ div.login-form, .login-content-wrapper,
 }
 
 	/* Even smaller mobile displays */
-@media (width < 358px) {
-	.topbar-nav .nav-segment a.nav-menu, .topbar-actions .nav-segment a.nav-menu, .topbar-actions .nav-segment button, .topbar-nav .navbar-toggle {
+@media (width < 392px) {
+	#topbar-first .container-fluid {
+		padding-inline: 0;
+	}
+	.topbar-nav .nav-segment a.nav-menu, .topbar-actions .nav-segment a.nav-menu, .topbar-actions .nav-segment button, .topbar-actions .navbar-toggle {
 		padding-left: 0!important;
 		padding-right: 10px!important;
 	}
 	.topbar-nav .offcanvas-right-toggle,
 	.topbar-nav #mobile-left-menu {
-		padding-right: 3px;
-		padding-left: 3px;
+		padding-inline-end: 3px;
+		padding-inline-start: 3px;
 	}
 }
