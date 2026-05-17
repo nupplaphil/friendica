@@ -61,24 +61,6 @@ class Jetstream
 	private $self   = [];
 	private $capped = false;
 
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var \Friendica\Core\Config\Capability\IManageConfigValues */
-	private $config;
-
-	/** @var IManageKeyValuePairs */
-	private $keyValue;
-
-	/** @var ATProtocol */
-	private $atprotocol;
-
-	/** @var Actor */
-	private $actor;
-
-	/** @var Processor */
-	private $processor;
-
 	/** @var \WebSocket\Client */
 	private $client;
 
@@ -92,15 +74,8 @@ class Jetstream
 	 * @param Actor $actor
 	 * @param Processor $processor
 	 */
-	public function __construct(LoggerInterface $logger, IManageConfigValues $config, IManageKeyValuePairs $keyValue, ATProtocol $atprotocol, Actor $actor, Processor $processor)
+	public function __construct(private LoggerInterface $logger, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private ATProtocol $atprotocol, private Actor $actor, private Processor $processor)
 	{
-		$this->logger     = $logger;
-		$this->config     = $config;
-		$this->keyValue   = $keyValue;
-		$this->atprotocol = $atprotocol;
-		$this->actor      = $actor;
-		$this->processor  = $processor;
-
 		$this->atprotocol->setApiForUser(0);
 	}
 

@@ -61,55 +61,7 @@ class Conversation
 	public const MODE_SEARCH        = 'search';
 	public const MODE_PROFILE       = 'profile';
 
-	/** @var Activity */
-	private $activity;
-	/** @var L10n */
-	private $l10n;
-	/** @var Profiler */
-	private $profiler;
-	/** @var LoggerInterface */
-	private $logger;
-	/** @var Item */
-	private $item;
-	/** @var Arguments */
-	private $args;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var BaseURL */
-	private $baseURL;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Page */
-	private $page;
-	/** @var Mode */
-	private $mode;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var UserGServerRepository */
-	private $userGServer;
-	private EventDispatcherInterface $eventDispatcher;
-	private Channel $channel;
-	private UserDefinedChannel $userDefinedChannel;
-
-	public function __construct(UserGServerRepository $userGServer, Channel $channel, UserDefinedChannel $userDefinedChannel, LoggerInterface $logger, Profiler $profiler, Activity $activity, L10n $l10n, Item $item, Arguments $args, BaseURL $baseURL, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, Page $page, Mode $mode, EventDispatcherInterface $eventDispatcher, IHandleUserSessions $session)
-	{
-		$this->activity           = $activity;
-		$this->item               = $item;
-		$this->config             = $config;
-		$this->mode               = $mode;
-		$this->baseURL            = $baseURL;
-		$this->profiler           = $profiler;
-		$this->logger             = $logger;
-		$this->l10n               = $l10n;
-		$this->args               = $args;
-		$this->pConfig            = $pConfig;
-		$this->page               = $page;
-		$this->eventDispatcher    = $eventDispatcher;
-		$this->session            = $session;
-		$this->userGServer        = $userGServer;
-		$this->channel            = $channel;
-		$this->userDefinedChannel = $userDefinedChannel;
-	}
+	public function __construct(private UserGServerRepository $userGServer, private Channel $channel, private UserDefinedChannel $userDefinedChannel, private LoggerInterface $logger, private Profiler $profiler, private Activity $activity, private L10n $l10n, private Item $item, private Arguments $args, private BaseURL $baseURL, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Page $page, private Mode $mode, private EventDispatcherInterface $eventDispatcher, private IHandleUserSessions $session) {}
 
 	/**
 	 * Checks item to see if it is one of the builtin activities (like/dislike, event attendance, consensus items, etc.)

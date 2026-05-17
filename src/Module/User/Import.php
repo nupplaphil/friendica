@@ -35,36 +35,11 @@ use Psr\Log\LoggerInterface;
 class Import extends \Friendica\BaseModule
 {
 	public const IMPORT_DEBUG = false;
-	public const MEMORY_LIMIT = 67108864; // 64MB
+	public const MEMORY_LIMIT = 67108864;
 
-	/** @var IManageConfigValues */
-	private $config;
-
-	/** @var IManagePersonalConfigValues */
-	private $pconfig;
-
-	/** @var SystemMessages */
-	private $systemMessages;
-
-	/** @var Database */
-	private $database;
-
-	/** @var PermissionSet */
-	private $permissionSet;
-
-	/** @var UserSession */
-	private $session;
-
-	public function __construct(UserSession $session, PermissionSet $permissionSet, IManagePersonalConfigValues $pconfig, Database $database, SystemMessages $systemMessages, IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private UserSession $session, private PermissionSet $permissionSet, private IManagePersonalConfigValues $pconfig, private Database $database, private SystemMessages $systemMessages, private IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->config         = $config;
-		$this->pconfig        = $pconfig;
-		$this->systemMessages = $systemMessages;
-		$this->database       = $database;
-		$this->permissionSet  = $permissionSet;
-		$this->session        = $session;
 	}
 
 	protected function post(array $request = [])

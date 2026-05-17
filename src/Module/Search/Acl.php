@@ -33,24 +33,18 @@ use Psr\Log\LoggerInterface;
  */
 class Acl extends BaseModule
 {
-	const TYPE_GLOBAL_CONTACT         = 'x';
-	const TYPE_MENTION_CONTACT        = 'c';
-	const TYPE_MENTION_CIRCLE         = 'g';
-	const TYPE_MENTION_CONTACT_CIRCLE = '';
-	const TYPE_MENTION_GROUP          = 'f';
-	const TYPE_PRIVATE_MESSAGE        = 'm';
-	const TYPE_ANY_CONTACT            = 'a';
-
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $database;
-	private EventDispatcherInterface $eventDispatcher;
+	public const TYPE_GLOBAL_CONTACT         = 'x';
+	public const TYPE_MENTION_CONTACT        = 'c';
+	public const TYPE_MENTION_CIRCLE         = 'g';
+	public const TYPE_MENTION_CONTACT_CIRCLE = '';
+	public const TYPE_MENTION_GROUP          = 'f';
+	public const TYPE_PRIVATE_MESSAGE        = 'm';
+	public const TYPE_ANY_CONTACT            = 'a';
 
 	public function __construct(
-		Database $database,
-		IHandleUserSessions $session,
-		EventDispatcherInterface $eventDispatcher,
+		private Database $database,
+		private IHandleUserSessions $session,
+		private EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -58,13 +52,9 @@ class Acl extends BaseModule
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session         = $session;
-		$this->database        = $database;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])
@@ -159,23 +149,23 @@ class Acl extends BaseModule
 				$condition = DBA::mergeConditions(
 					$condition,
 					["NOT `self` AND NOT `blocked`",
-					]
+					],
 				);
 				break;
 
 			case self::TYPE_MENTION_GROUP:
 				$condition = DBA::mergeConditions(
 					$condition,
-					["NOT `self` AND NOT `blocked` AND (NOT `ap-posting-restricted` OR `ap-posting-restricted` IS NULL) AND `contact-type` = ?", Contact::TYPE_COMMUNITY
-					]
+					["NOT `self` AND NOT `blocked` AND (NOT `ap-posting-restricted` OR `ap-posting-restricted` IS NULL) AND `contact-type` = ?", Contact::TYPE_COMMUNITY,
+					],
 				);
 				break;
 
 			case self::TYPE_PRIVATE_MESSAGE:
 				$condition = DBA::mergeConditions(
 					$condition,
-					["NOT `self` AND NOT `blocked` AND `network` IN (?, ?, ?)", Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA
-					]
+					["NOT `self` AND NOT `blocked` AND `network` IN (?, ?, ?)", Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA,
+					],
 				);
 				break;
 		}
@@ -201,7 +191,7 @@ class Acl extends BaseModule
 				LIMIT ?, ?",
 				$this->session->getLocalUserId(),
 				$start,
-				$count
+				$count,
 			));
 
 			foreach ($circles as $circle) {
@@ -212,7 +202,7 @@ class Acl extends BaseModule
 					'id'    => intval($circle['id']),
 					'uids'  => array_map('intval', explode(',', $circle['uids'])),
 					'link'  => '',
-					'group' => '0'
+					'group' => '0',
 				];
 			}
 			if ((count($resultCircles) > 0) && ($search == '')) {
@@ -292,7 +282,7 @@ class Acl extends BaseModule
 						'link'    => $contact['url'],
 						'nick'    => htmlentities(($contact['nick'] ?? '') ?: $contact['addr']),
 						'addr'    => htmlentities(($contact['addr'] ?? '') ?: $contact['url']),
-						'group'   => $contact['forum']
+						'group'   => $contact['forum'],
 					];
 				}
 			}

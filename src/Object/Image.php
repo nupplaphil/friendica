@@ -37,7 +37,6 @@ class Image implements \Stringable
 	private $valid;
 	private $outputType;
 	private $originType;
-	private $filename;
 
 	/**
 	 * Constructor
@@ -49,20 +48,19 @@ class Image implements \Stringable
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public function __construct(string $data, string $type = '', string $filename = '', bool $imagick = true)
+	public function __construct(string $data, string $type = '', private string $filename = '', bool $imagick = true)
 	{
-		$this->filename = $filename;
-		$type           = Images::addMimeTypeByDataIfInvalid($type, $data);
-		$type           = Images::addMimeTypeByExtensionIfInvalid($type, $filename);
+		$type = Images::addMimeTypeByDataIfInvalid($type, $data);
+		$type = Images::addMimeTypeByExtensionIfInvalid($type, $this->filename);
 
 		if (Images::isSupportedMimeType($type)) {
 			$this->originType = $this->outputType = Images::getImageTypeByMimeType($type);
 		} elseif (($type == '') || str_starts_with($type, 'image/') || substr($type, 0, 12) == ' application/') {
 			$this->originType = IMAGETYPE_UNKNOWN;
 			$this->outputType = IMAGETYPE_WEBP;
-			DI::logger()->debug('Unhandled image mime type, use WebP instead', ['type' => $type, 'filename' => $filename, 'size' => strlen($data)]);
+			DI::logger()->debug('Unhandled image mime type, use WebP instead', ['type' => $type, 'filename' => $this->filename, 'size' => strlen($data)]);
 		} else {
-			DI::logger()->debug('Unhandled mime type', ['type' => $type, 'filename' => $filename, 'size' => strlen($data)]);
+			DI::logger()->debug('Unhandled mime type', ['type' => $type, 'filename' => $this->filename, 'size' => strlen($data)]);
 			$this->valid = false;
 			return;
 		}

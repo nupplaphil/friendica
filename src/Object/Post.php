@@ -31,7 +31,6 @@ use InvalidArgumentException;
  */
 class Post
 {
-	private $data                = [];
 	private $template            = null;
 	private $available_templates = [
 		'wall'      => 'wall_thread.tpl',
@@ -63,9 +62,8 @@ class Post
 	 * @param array $data data array
 	 * @throws \Exception
 	 */
-	public function __construct(array $data)
+	public function __construct(private array $data)
 	{
-		$this->data = $data;
 		$this->setTemplate('wall');
 		$this->toplevel = $this->getId() == $this->getDataValue('parent');
 
@@ -87,8 +85,8 @@ class Post
 		}
 
 		// Prepare the children
-		if (!empty($data['children'])) {
-			foreach ($data['children'] as $item) {
+		if (!empty($this->data['children'])) {
+			foreach ($this->data['children'] as $item) {
 				// Only add will be displayed
 				if ($item['network'] === Protocol::MAIL && DI::userSession()->getLocalUserId() != $item['uid']) {
 					continue;
@@ -101,7 +99,7 @@ class Post
 					$item['writable'] = true;
 				}
 
-				$item['pagedrop'] = $data['pagedrop'];
+				$item['pagedrop'] = $this->data['pagedrop'];
 				$child            = new Post($item);
 				$this->addChild($child);
 			}

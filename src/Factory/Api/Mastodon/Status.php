@@ -34,54 +34,21 @@ use Psr\Log\LoggerInterface;
 
 class Status extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-	/** @var Account */
-	private $mstdnAccountFactory;
-	/** @var Mention */
-	private $mstdnMentionFactory;
-	/** @var Tag */
-	private $mstdnTagFactory;
-	/** @var Card */
-	private $mstdnCardFactory;
-	/** @var Attachment */
-	private $mstdnAttachmentFactory;
-	/** @var Emoji */
-	private $mstdnEmojiFactory;
-	/** @var Poll */
-	private $mstdnPollFactory;
-	/** @var ContentItem */
-	private $contentItem;
-	/** @var ACLFormatter */
-	private $aclFormatter;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		EventDispatcherInterface $eventDispatcher,
+		private EventDispatcherInterface $eventDispatcher,
 		LoggerInterface $logger,
-		Database $dba,
-		Account $mstdnAccountFactory,
-		Mention $mstdnMentionFactory,
-		Tag $mstdnTagFactory,
-		Card $mstdnCardFactory,
-		Attachment $mstdnAttachmentFactory,
-		Emoji $mstdnEmojiFactory,
-		Poll $mstdnPollFactory,
-		ContentItem $contentItem,
-		ACLFormatter $aclFormatter,
+		private Database $dba,
+		private Account $mstdnAccountFactory,
+		private Mention $mstdnMentionFactory,
+		private Tag $mstdnTagFactory,
+		private Card $mstdnCardFactory,
+		private Attachment $mstdnAttachmentFactory,
+		private Emoji $mstdnEmojiFactory,
+		private Poll $mstdnPollFactory,
+		private ContentItem $contentItem,
+		private ACLFormatter $aclFormatter,
 	) {
 		parent::__construct($logger);
-		$this->dba                    = $dba;
-		$this->mstdnAccountFactory    = $mstdnAccountFactory;
-		$this->mstdnMentionFactory    = $mstdnMentionFactory;
-		$this->mstdnTagFactory        = $mstdnTagFactory;
-		$this->mstdnCardFactory       = $mstdnCardFactory;
-		$this->mstdnAttachmentFactory = $mstdnAttachmentFactory;
-		$this->mstdnEmojiFactory      = $mstdnEmojiFactory;
-		$this->mstdnPollFactory       = $mstdnPollFactory;
-		$this->contentItem            = $contentItem;
-		$this->aclFormatter           = $aclFormatter;
-		$this->eventDispatcher        = $eventDispatcher;
 	}
 
 	/**

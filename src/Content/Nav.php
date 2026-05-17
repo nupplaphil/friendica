@@ -42,7 +42,7 @@ class Nav
 		'contacts'      => null,
 		'delegation'    => null,
 		'calendar'      => null,
-		'register'      => null
+		'register'      => null,
 	];
 
 	/**
@@ -52,31 +52,7 @@ class Nav
 	 */
 	private $appMenu = null;
 
-	/** @var BaseURL */
-	private $baseUrl;
-	/** @var L10n */
-	private $l10n;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Database */
-	private $database;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var Router */
-	private $router;
-
-	private EventDispatcherInterface $eventDispatcher;
-
-	public function __construct(BaseURL $baseUrl, L10n $l10n, IHandleUserSessions $session, Database $database, IManageConfigValues $config, Router $router, EventDispatcherInterface $eventDispatcher)
-	{
-		$this->baseUrl         = $baseUrl;
-		$this->l10n            = $l10n;
-		$this->session         = $session;
-		$this->database        = $database;
-		$this->config          = $config;
-		$this->router          = $router;
-		$this->eventDispatcher = $eventDispatcher;
-	}
+	public function __construct(private BaseURL $baseUrl, private L10n $l10n, private IHandleUserSessions $session, private Database $database, private IManageConfigValues $config, private Router $router, private EventDispatcherInterface $eventDispatcher) {}
 
 	/**
 	 * Set a menu item in navbar as selected
@@ -118,11 +94,11 @@ class Nav
 			'$home'                 => $this->l10n->t('Home'),
 			'$skip'                 => $this->l10n->t('Skip to main content'),
 			'$clear_notifs'         => $this->l10n->t('Clear notifications'),
-			'$search_placeholder'   => $this->l10n->t('Search: @name, !group, #tags, content')
+			'$search_placeholder'   => $this->l10n->t('Search: @name, !group, #tags, content'),
 		]);
 
 		$nav = $this->eventDispatcher->dispatch(
-			new HtmlFilterEvent(HtmlFilterEvent::PAGE_HEADER, $nav)
+			new HtmlFilterEvent(HtmlFilterEvent::PAGE_HEADER, $nav),
 		)->getHtml();
 
 		return $nav;
@@ -161,7 +137,7 @@ class Nav
 			$arr = ['app_menu' => $appMenu];
 
 			$arr = $this->eventDispatcher->dispatch(
-				new ArrayFilterEvent(ArrayFilterEvent::APP_MENU, $arr)
+				new ArrayFilterEvent(ArrayFilterEvent::APP_MENU, $arr),
 			)->getArray();
 
 			$appMenu = $arr['app_menu'] ?? [];
@@ -268,7 +244,7 @@ class Nav
 			$nav['searchoption'] = [
 				$this->l10n->t('Full Text'),
 				$this->l10n->t('Tags'),
-				$this->l10n->t('Contacts')
+				$this->l10n->t('Contacts'),
 			];
 
 			if ($this->config->get('system', 'poco_local_search')) {
@@ -281,8 +257,8 @@ class Nav
 			$gdirpath = OpenWebAuth::getZrlUrl($this->config->get('system', 'directory'), true);
 		}
 
-		if (Feature::isEnabled($this->session->getLocalUserId(), Feature::COMMUNITY) && (($this->session->getLocalUserId() || $this->config->get('system', 'community_page_style') != Community::DISABLED_VISITOR) &&
-			!($this->config->get('system', 'community_page_style') == Community::DISABLED))) {
+		if (Feature::isEnabled($this->session->getLocalUserId(), Feature::COMMUNITY) && (($this->session->getLocalUserId() || $this->config->get('system', 'community_page_style') != Community::DISABLED_VISITOR)
+			&& !($this->config->get('system', 'community_page_style') == Community::DISABLED))) {
 			$nav['community'] = ['community', $this->l10n->t('Community'), '', $this->l10n->t('Conversations on this and other servers')];
 		}
 
@@ -353,7 +329,7 @@ class Nav
 		];
 
 		$nav_info = $this->eventDispatcher->dispatch(
-			new ArrayFilterEvent(ArrayFilterEvent::NAV_INFO, $nav_info)
+			new ArrayFilterEvent(ArrayFilterEvent::NAV_INFO, $nav_info),
 		)->getArray();
 
 		return $nav_info;

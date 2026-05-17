@@ -25,36 +25,10 @@ use Psr\Log\LoggerInterface;
  */
 final class AddonManagerHelper implements AddonHelper
 {
-	private string $addonPath;
-
-	private Database $database;
-
-	private IManageConfigValues $config;
-
-	private ICanCache $cache;
-
-	private LoggerInterface $logger;
-
-	private Profiler $profiler;
-
 	/** @var string[] */
 	private array $addons = [];
 
-	public function __construct(
-		string $addonPath,
-		Database $database,
-		IManageConfigValues $config,
-		ICanCache $cache,
-		LoggerInterface $logger,
-		Profiler $profiler,
-	) {
-		$this->addonPath = $addonPath;
-		$this->database  = $database;
-		$this->config    = $config;
-		$this->cache     = $cache;
-		$this->logger    = $logger;
-		$this->profiler  = $profiler;
-	}
+	public function __construct(private string $addonPath, private Database $database, private IManageConfigValues $config, private ICanCache $cache, private LoggerInterface $logger, private Profiler $profiler) {}
 	/**
 	 * Returns the absolute path to the addon folder
 	 *

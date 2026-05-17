@@ -49,16 +49,11 @@ class Notify extends BaseRepository
 	/** @var IManageConfigValues */
 	protected $config;
 
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-
 	/** @var Emailer */
 	protected $emailer;
 
 	/** @var Factory\Notification */
 	protected $notification;
-
-	private EventDispatcherInterface $eventDispatcher;
 
 	protected static $table_name = 'notify';
 
@@ -68,19 +63,17 @@ class Notify extends BaseRepository
 		L10n $l10n,
 		BaseURL $baseUrl,
 		IManageConfigValues $config,
-		IManagePersonalConfigValues $pConfig,
+		private IManagePersonalConfigValues $pConfig,
 		Emailer $emailer,
 		Factory\Notification $notification,
-		EventDispatcherInterface $eventDispatcher,
+		private EventDispatcherInterface $eventDispatcher,
 		Factory\Notify $factory = null,
 	) {
-		$this->l10n            = $l10n;
-		$this->baseUrl         = $baseUrl;
-		$this->config          = $config;
-		$this->pConfig         = $pConfig;
-		$this->emailer         = $emailer;
-		$this->notification    = $notification;
-		$this->eventDispatcher = $eventDispatcher;
+		$this->l10n         = $l10n;
+		$this->baseUrl      = $baseUrl;
+		$this->config       = $config;
+		$this->emailer      = $emailer;
+		$this->notification = $notification;
 
 		parent::__construct($database, $logger, $factory ?? new Factory\Notify($logger));
 	}

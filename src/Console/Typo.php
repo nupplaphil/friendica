@@ -17,11 +17,6 @@ class Typo extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -39,11 +34,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(IManageConfigValues $config, array $argv = null)
+	public function __construct(private IManageConfigValues $config, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->config = $config;
 	}
 
 	protected function doExecute(): int

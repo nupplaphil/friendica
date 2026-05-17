@@ -19,13 +19,9 @@ use Psr\Log\LoggerInterface;
 
 class ScheduledStatus extends BaseFactory
 {
-	/** @var Database */
-	private $dba;
-
-	public function __construct(LoggerInterface $logger, Database $dba)
+	public function __construct(LoggerInterface $logger, private Database $dba)
 	{
 		parent::__construct($logger);
-		$this->dba = $dba;
 	}
 
 	/**
@@ -52,7 +48,7 @@ class ScheduledStatus extends BaseFactory
 		foreach ($parameters['attachments'] as $attachment) {
 			$id = Photo::getIdForName($attachment['url']);
 
-			$media_ids[]         = (string)$id;
+			$media_ids[]         = (string) $id;
 			$media_attachments[] = DI::mstdnAttachment()->createFromPhoto($id);
 		}
 

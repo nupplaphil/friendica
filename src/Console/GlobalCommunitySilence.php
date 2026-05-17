@@ -24,15 +24,6 @@ class GlobalCommunitySilence extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var App\Mode
-	 */
-	private $appMode;
-	/**
-	 * @var Database
-	 */
-	private $dba;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -53,12 +44,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(App\Mode $appMode, Database $dba, array $argv = null)
+	public function __construct(private App\Mode $appMode, private Database $dba, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
-		$this->dba     = $dba;
 	}
 
 	protected function doExecute(): int

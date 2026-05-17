@@ -31,14 +31,9 @@ class PermissionSet extends BaseRepository
 
 	protected static $table_name = 'permissionset';
 
-	/** @var ACLFormatter */
-	private $aclFormatter;
-
-	public function __construct(Database $database, LoggerInterface $logger, PermissionSetFactory $factory, ACLFormatter $aclFormatter)
+	public function __construct(Database $database, LoggerInterface $logger, PermissionSetFactory $factory, private ACLFormatter $aclFormatter)
 	{
 		parent::__construct($database, $logger, $factory);
-
-		$this->aclFormatter = $aclFormatter;
 	}
 
 	/**

@@ -31,25 +31,7 @@ use Psr\Log\LoggerInterface;
  */
 class HttpClient implements ICanSendHttpRequests
 {
-	/** @var LoggerInterface */
-	private $logger;
-	/** @var Profiler */
-	private $profiler;
-	/** @var Client */
-	private $client;
-	/** @var URLResolver */
-	private $resolver;
-	/** @var App\BaseURL */
-	private $baseUrl;
-
-	public function __construct(LoggerInterface $logger, Profiler $profiler, Client $client, URLResolver $resolver, App\BaseURL $baseUrl)
-	{
-		$this->logger   = $logger;
-		$this->profiler = $profiler;
-		$this->client   = $client;
-		$this->resolver = $resolver;
-		$this->baseUrl  = $baseUrl;
-	}
+	public function __construct(private LoggerInterface $logger, private Profiler $profiler, private Client $client, private URLResolver $resolver, private App\BaseURL $baseUrl) {}
 
 	/**
 	 * {@inheritDoc}

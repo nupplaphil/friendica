@@ -24,11 +24,6 @@ use Seld\CliPrompt\CliPrompt;
 class Contact extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
-
-	/**
-	 * @var Mode
-	 */
-	private $appMode;
 	/**
 	 * @var IManagePersonalConfigValues
 	 */
@@ -56,11 +51,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, ?array $argv = null)
+	public function __construct(private Mode $appMode, ?array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
 	}
 
 	protected function doExecute(): int

@@ -48,11 +48,6 @@ class CurlResult implements ICanHandleHttpResponses
 	private $isGone;
 
 	/**
-	 * @var string the URL which was called
-	 */
-	private $url;
-
-	/**
 	 * @var string in case of redirect, content was finally retrieved from this URL
 	 */
 	private $redirectUrl;
@@ -83,16 +78,6 @@ class CurlResult implements ICanHandleHttpResponses
 	private $isTimeout;
 
 	/**
-	 * @var int the error number or 0 (zero) if no error
-	 */
-	private $errorNumber;
-
-	/**
-	 * @var string the error message or '' (the empty string) if no
-	 */
-	private $error;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	protected $logger;
@@ -121,7 +106,7 @@ class CurlResult implements ICanHandleHttpResponses
 	 *
 	 * @throws UnprocessableEntityException when HTTP code of the CURL response is missing
 	 */
-	public function __construct(LoggerInterface $logger, string $url, string $result, array $info, int $errorNumber = 0, string $error = '')
+	public function __construct(LoggerInterface $logger, private string $url, string $result, array $info, private int $errorNumber = 0, private string $error = '')
 	{
 		$this->logger = $logger;
 
@@ -129,13 +114,10 @@ class CurlResult implements ICanHandleHttpResponses
 			throw new UnprocessableEntityException('CURL response doesn\'t contains a response HTTP code');
 		}
 
-		$this->returnCode  = $info['http_code'];
-		$this->url         = $url;
-		$this->info        = $info;
-		$this->errorNumber = $errorNumber;
-		$this->error       = $error;
+		$this->returnCode = $info['http_code'];
+		$this->info       = $info;
 
-		$this->logger->debug('construct', ['url' => $url, 'returncode' => $this->returnCode, 'result' => $result]);
+		$this->logger->debug('construct', ['url' => $this->url, 'returncode' => $this->returnCode, 'result' => $result]);
 
 		$this->parseBodyHeader($result);
 		$this->checkSuccess();

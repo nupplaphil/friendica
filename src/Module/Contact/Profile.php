@@ -46,50 +46,25 @@ use Psr\Log\LoggerInterface;
  */
 class Profile extends BaseModule
 {
-	/** @var LocalRelationshipRepository */
-	private $localRelationship;
-	/** @var Page */
-	private $page;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var Database */
-	private $db;
-	/** @var UserGServerRepository */
-	private $userGServer;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		UserGServerRepository $userGServer,
-		EventDispatcherInterface $eventDispatcher,
-		Database $db,
-		SystemMessages $systemMessages,
-		IHandleUserSessions $session,
+		private UserGServerRepository $userGServer,
+		private EventDispatcherInterface $eventDispatcher,
+		private Database $db,
+		private SystemMessages $systemMessages,
+		private IHandleUserSessions $session,
 		L10n $l10n,
-		LocalRelationshipRepository $localRelationship,
+		private LocalRelationshipRepository $localRelationship,
 		BaseURL $baseUrl,
 		Arguments $args,
 		LoggerInterface $logger,
 		Profiler $profiler,
 		Response $response,
-		Page $page,
-		IManageConfigValues $config,
+		private Page $page,
+		private IManageConfigValues $config,
 		array $server,
 		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->localRelationship = $localRelationship;
-		$this->page              = $page;
-		$this->config            = $config;
-		$this->session           = $session;
-		$this->systemMessages    = $systemMessages;
-		$this->db                = $db;
-		$this->userGServer       = $userGServer;
-		$this->eventDispatcher   = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])

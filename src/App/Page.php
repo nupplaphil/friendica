@@ -66,12 +66,6 @@ class Page implements ArrayAccess
 		'section'     => '',
 		'module'      => '',
 	];
-	/**
-	 * @var string The basepath of the page
-	 */
-	private $basePath;
-
-	private EventDispatcherInterface $eventDispatcher;
 
 	private $timestamp = 0;
 	private $method    = '';
@@ -79,13 +73,11 @@ class Page implements ArrayAccess
 	private $command   = '';
 
 	/**
-	 * @param string $basepath The Page basepath
+	 * @param string $basePath The Page basepath
 	 */
-	public function __construct(string $basepath, EventDispatcherInterface $eventDispatcher)
+	public function __construct(private string $basePath, private EventDispatcherInterface $eventDispatcher)
 	{
-		$this->timestamp       = microtime(true);
-		$this->basePath        = $basepath;
-		$this->eventDispatcher = $eventDispatcher;
+		$this->timestamp = microtime(true);
 	}
 
 	public function setLogging(string $method, string $module, string $command)
@@ -194,7 +186,7 @@ class Page implements ArrayAccess
 		L10n $l10n,
 		IManageConfigValues $config,
 		IManagePersonalConfigValues $pConfig,
-		int $localUID
+		int $localUID,
 	) {
 		// Default title: current module called
 		if (empty($this->page['title']) && $args->getModuleName()) {
@@ -223,7 +215,7 @@ class Page implements ArrayAccess
 		}
 
 		$this->page['htmlhead'] = $this->eventDispatcher->dispatch(
-			new HtmlFilterEvent(HtmlFilterEvent::HEAD, $this->page['htmlhead'])
+			new HtmlFilterEvent(HtmlFilterEvent::HEAD, $this->page['htmlhead']),
 		)->getHtml();
 
 		$tpl = Renderer::getMarkupTemplate('head.tpl');
@@ -263,7 +255,7 @@ class Page implements ArrayAccess
 
 			'$local_user'     => $localUID,
 			'$generator'      => 'Friendica' . ' ' . App::VERSION,
-			'$update_content' => (int)$pConfig->get($localUID, 'system', 'update_content'),
+			'$update_content' => (int) $pConfig->get($localUID, 'system', 'update_content'),
 			'$shortcut_icon'  => $shortcut_icon,
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),
@@ -342,12 +334,12 @@ class Page implements ArrayAccess
 			}
 			$this->page['footer'] .= Renderer::replaceMacros(Renderer::getMarkupTemplate("toggle_mobile_footer.tpl"), [
 				'$toggle_link' => $link,
-				'$toggle_text' => $l10n->t('toggle mobile')
+				'$toggle_text' => $l10n->t('toggle mobile'),
 			]);
 		}
 
 		$this->page['footer'] = $this->eventDispatcher->dispatch(
-			new HtmlFilterEvent(HtmlFilterEvent::FOOTER, $this->page['footer'])
+			new HtmlFilterEvent(HtmlFilterEvent::FOOTER, $this->page['footer']),
 		)->getHtml();
 
 		$tpl                  = Renderer::getMarkupTemplate('footer.tpl');
@@ -374,11 +366,11 @@ class Page implements ArrayAccess
 		// initialise content region
 		if ($mode->isNormal()) {
 			$this->page['content'] = $this->eventDispatcher->dispatch(
-				new HtmlFilterEvent(HtmlFilterEvent::PAGE_CONTENT_TOP, $this->page['content'])
+				new HtmlFilterEvent(HtmlFilterEvent::PAGE_CONTENT_TOP, $this->page['content']),
 			)->getHtml();
 		}
 
-		$this->page['content'] .= (string)$response->getBody();
+		$this->page['content'] .= (string) $response->getBody();
 	}
 
 	/**
@@ -429,7 +421,7 @@ class Page implements ArrayAccess
 		IManageConfigValues $config,
 		IManagePersonalConfigValues $pconfig,
 		Nav $nav,
-		int $localUID
+		int $localUID,
 	) {
 		$moduleName = $args->getModuleName();
 
@@ -474,7 +466,7 @@ class Page implements ArrayAccess
 
 		if (!$mode->isAjax()) {
 			$this->page['content'] = $this->eventDispatcher->dispatch(
-				new HtmlFilterEvent(HtmlFilterEvent::PAGE_END, $this->page['content'])
+				new HtmlFilterEvent(HtmlFilterEvent::PAGE_END, $this->page['content']),
 			)->getHtml();
 		}
 

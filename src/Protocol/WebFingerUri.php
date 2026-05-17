@@ -11,30 +11,8 @@ use GuzzleHttp\Psr7\Uri;
 
 class WebFingerUri implements \Stringable
 {
-	/**
-	 * @var string
-	 */
-	private $user;
-	/**
-	 * @var string
-	 */
-	private $host;
-	/**
-	 * @var int|null
-	 */
-	private $port;
-	/**
-	 * @var string|null
-	 */
-	private $path;
-
-	private function __construct(string $user, string $host, int $port = null, string $path = null)
+	private function __construct(private string $user, private string $host, private ?int $port = null, private ?string $path = null)
 	{
-		$this->user = $user;
-		$this->host = $host;
-		$this->port = $port;
-		$this->path = $path;
-
 		$this->validate();
 	}
 

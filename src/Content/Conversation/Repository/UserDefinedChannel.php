@@ -40,9 +40,6 @@ class UserDefinedChannel extends BaseRepository
 	/** @var UserDefinedChannelFactory */
 	protected $factory;
 
-	private ICanCache $cache;
-	private IManageConfigValues $config;
-
 	/**
 	 * UserDefinedChannel repository constructor.
 	 *
@@ -52,12 +49,9 @@ class UserDefinedChannel extends BaseRepository
 	 * @param IManageConfigValues $config Configuration manager.
 	 * @param ICanCache $cache Cache capability.
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, UserDefinedChannelFactory $factory, IManageConfigValues $config, ICanCache $cache)
+	public function __construct(Database $database, LoggerInterface $logger, UserDefinedChannelFactory $factory, private IManageConfigValues $config, private ICanCache $cache)
 	{
 		parent::__construct($database, $logger, $factory);
-
-		$this->config = $config;
-		$this->cache  = $cache;
 	}
 
 	/**

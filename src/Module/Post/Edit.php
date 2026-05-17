@@ -46,21 +46,18 @@ class Edit extends BaseModule
 	/** @var AppHelper */
 	protected $appHelper;
 
-	private EventDispatcherInterface $eventDispatcher;
-
 	/** @var bool */
 	protected $isModal = false;
 
-	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $session, SystemMessages $sysMessages, Page $page, Mode $mode, AppHelper $appHelper, EventDispatcherInterface $eventDispatcher, array $server, array $parameters = [])
+	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $session, SystemMessages $sysMessages, Page $page, Mode $mode, AppHelper $appHelper, private EventDispatcherInterface $eventDispatcher, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->session         = $session;
-		$this->sysMessages     = $sysMessages;
-		$this->page            = $page;
-		$this->mode            = $mode;
-		$this->appHelper       = $appHelper;
-		$this->eventDispatcher = $eventDispatcher;
+		$this->session     = $session;
+		$this->sysMessages = $sysMessages;
+		$this->page        = $page;
+		$this->mode        = $mode;
+		$this->appHelper   = $appHelper;
 	}
 
 

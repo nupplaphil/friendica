@@ -16,12 +16,13 @@ return \Rector\Config\RectorConfig::configure()
 		__DIR__ . '/tests',
 		__DIR__ . '/view',
 	])
+	->withSkipPath(__DIR__ . '/view/smarty3/compiled')
 	->withIndent("\t", 4)
 	->withPhpVersion(80200)
 	// ->withTypeCoverageLevel(0)
 	// ->withDeadCodeLevel(0)
 	// ->withCodeQualityLevel(0)
-	->withPhpLevel(82)
+	->withPhpLevel(83)
 	->withSets([
 		//\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
 	])

@@ -53,27 +53,6 @@ use Psr\Log\LoggerInterface;
  */
 class Item
 {
-	/** @var Activity */
-	private $activity;
-	/** @var L10n */
-	private $l10n;
-	/** @var Profiler */
-	private $profiler;
-	/** @var IHandleUserSessions */
-	private $userSession;
-	/** @var Video */
-	private $bbCodeVideo;
-	/** @var ACLFormatter */
-	private $aclFormatter;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var BaseURL */
-	private $baseURL;
-	/** @var Emailer */
-	private $emailer;
-	private EventDispatcherInterface $eventDispatcher;
 	/** @var LoggerInterface */
 	protected $logger;
 	/** @var PostMediaRepository */
@@ -81,19 +60,8 @@ class Item
 	/** @var PostMediaFactory */
 	protected $postMediaFactory;
 
-	public function __construct(LoggerInterface $logger, Profiler $profiler, Activity $activity, L10n $l10n, IHandleUserSessions $userSession, Video $bbCodeVideo, ACLFormatter $aclFormatter, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, BaseURL $baseURL, Emailer $emailer, EventDispatcherInterface $eventDispatcher, PostMediaRepository $postMediaRepository, PostMediaFactory $postMediaFactory)
+	public function __construct(LoggerInterface $logger, private Profiler $profiler, private Activity $activity, private L10n $l10n, private IHandleUserSessions $userSession, private Video $bbCodeVideo, private ACLFormatter $aclFormatter, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, private BaseURL $baseURL, private Emailer $emailer, private EventDispatcherInterface $eventDispatcher, PostMediaRepository $postMediaRepository, PostMediaFactory $postMediaFactory)
 	{
-		$this->profiler            = $profiler;
-		$this->activity            = $activity;
-		$this->l10n                = $l10n;
-		$this->userSession         = $userSession;
-		$this->bbCodeVideo         = $bbCodeVideo;
-		$this->aclFormatter        = $aclFormatter;
-		$this->baseURL             = $baseURL;
-		$this->pConfig             = $pConfig;
-		$this->config              = $config;
-		$this->emailer             = $emailer;
-		$this->eventDispatcher     = $eventDispatcher;
 		$this->logger              = $logger;
 		$this->postMediaRepository = $postMediaRepository;
 		$this->postMediaFactory    = $postMediaFactory;

@@ -24,16 +24,6 @@ class Cache extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Mode
-	 */
-	private $appMode;
-
-	/**
-	 * @var ICanCache
-	 */
-	private $cache;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -68,12 +58,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, ICanCache $cache, array $argv = null)
+	public function __construct(private Mode $appMode, private ICanCache $cache, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
-		$this->cache   = $cache;
 	}
 
 	protected function doExecute(): int

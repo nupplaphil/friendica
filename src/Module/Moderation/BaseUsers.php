@@ -32,11 +32,9 @@ abstract class BaseUsers extends BaseModeration
 	/** @var Database */
 	protected $database;
 
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
 		Database $database,
-		EventDispatcherInterface $eventDispatcher,
+		private EventDispatcherInterface $eventDispatcher,
 		Page $page,
 		AppHelper $appHelper,
 		SystemMessages $systemMessages,
@@ -48,12 +46,11 @@ abstract class BaseUsers extends BaseModeration
 		Profiler $profiler,
 		Response $response,
 		array $server,
-		array $parameters = []
+		array $parameters = [],
 	) {
 		parent::__construct($page, $appHelper, $systemMessages, $session, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->database        = $database;
-		$this->eventDispatcher = $eventDispatcher;
+		$this->database = $database;
 	}
 
 	/**
@@ -140,7 +137,7 @@ abstract class BaseUsers extends BaseModeration
 				User::PAGE_FLAGS_COMMUNITY => $this->t('Public Group'),
 				User::PAGE_FLAGS_COMM_MAN  => $this->t('Public Group - Restricted'),
 				User::PAGE_FLAGS_FREELOVE  => $this->t('Automatic Friend Page'),
-				User::PAGE_FLAGS_PRVGROUP  => $this->t('Private Group')
+				User::PAGE_FLAGS_PRVGROUP  => $this->t('Private Group'),
 			];
 			$account_types = [
 				User::ACCOUNT_TYPE_PERSON       => $this->t('Personal Page'),

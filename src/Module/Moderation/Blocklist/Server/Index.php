@@ -24,14 +24,9 @@ use Psr\Log\LoggerInterface;
 
 class Index extends BaseModeration
 {
-	/** @var DomainPatternBlocklist */
-	private $blocklist;
-
-	public function __construct(DomainPatternBlocklist $blocklist, Page $page, AppHelper $appHelper, SystemMessages $systemMessages, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private DomainPatternBlocklist $blocklist, Page $page, AppHelper $appHelper, SystemMessages $systemMessages, IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($page, $appHelper, $systemMessages, $session, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->blocklist = $blocklist;
 	}
 
 	protected function post(array $request = [])
@@ -46,14 +41,14 @@ class Index extends BaseModeration
 
 		// Edit the entries from blocklist
 		$blocklist = [];
-		foreach ((array)$request['domain'] as $id => $domain) {
+		foreach ((array) $request['domain'] as $id => $domain) {
 			// Trimming whitespaces as well as any lingering slashes
 			$domain = trim($domain);
 			$reason = trim($request['reason'][$id]);
 			if (empty($request['delete'][$id]) && !empty($domain)) {
 				$blocklist[] = [
 					'domain' => $domain,
-					'reason' => $reason
+					'reason' => $reason,
 				];
 			}
 		}
@@ -74,7 +69,7 @@ class Index extends BaseModeration
 			$blocklistform[] = [
 				'domain' => ["domain[$id]", $this->t('Blocked server domain pattern'), $b['domain'], '', $this->t('Required'), '', ''],
 				'reason' => ["reason[$id]", $this->t("Reason for the block"), $b['reason'], '', $this->t('Required'), '', ''],
-				'delete' => ["delete[$id]", $this->t("Delete server domain pattern") . ' (' . $b['domain'] . ')', false, $this->t("Check to delete this entry from the blocklist")]
+				'delete' => ["delete[$id]", $this->t("Delete server domain pattern") . ' (' . $b['domain'] . ')', false, $this->t("Check to delete this entry from the blocklist")],
 			];
 		}
 
