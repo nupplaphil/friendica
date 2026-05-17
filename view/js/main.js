@@ -135,7 +135,6 @@ var timer = null;
 var pr = 0;
 var liking = 0;
 var in_progress = false;
-var langSelect = false;
 var commentBusy = false;
 var last_popup_menu = null;
 var last_popup_button = null;

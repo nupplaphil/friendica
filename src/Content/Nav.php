@@ -203,7 +203,6 @@ class Nav
 			'calendar'      => null,
 			'login'         => null,
 			'logout'        => null,
-			'langselector'  => null,
 			'messages'      => null,
 			'network'       => null,
 			'notifications' => null,
