@@ -59,11 +59,11 @@ Please check your email (including spam folders) for your registration details a
 ## Login Page
 
 On the 'Login' page, please enter your login information that was provided during registration.
-You may use either your username or email address to login.
+You may use either your username or email address to log in.
 
 If you use your account to manage other accounts and these all have the same email address, please enter the username for the account you wish to manage.
 
-If your account has been OpenID enabled, you may use your OpenID address as a login name and leave the password blank.
+If your account has been OpenID enabled, you may use your OpenID address to log in and leave the password blank.
 You will be redirected to your OpenID provider to complete your authorisation.
 
 Otherwise, enter your password.
