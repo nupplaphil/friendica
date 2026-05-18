@@ -63,18 +63,13 @@ HELP;
 			return 0;
 		}
 
-		switch ($this->getArgument(0)) {
-			case 'add':
-				return $this->addBlockedServer();
-			case 'remove':
-				return $this->removeBlockedServer();
-			case 'export':
-				return $this->exportBlockedServers();
-			case 'import':
-				return $this->importBlockedServers();
-			default:
-				throw new CommandArgsException('Unknown command.');
-		}
+		return match ($this->getArgument(0)) {
+												'add' => $this->addBlockedServer(),
+												'remove' => $this->removeBlockedServer(),
+												'export' => $this->exportBlockedServers(),
+												'import' => $this->importBlockedServers(),
+												default => throw new CommandArgsException('Unknown command.'),
+											};
 	}
 
 	/**

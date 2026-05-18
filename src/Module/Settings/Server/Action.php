@@ -70,16 +70,11 @@ class Action extends \Friendica\BaseModule
 
 		$userGServer = $this->repository->getOneByUserAndServer($this->session->getLocalUserId(), $this->parameters['gsid']);
 
-		switch ($this->parameters['action']) {
-			case 'ignore':
-				$userGServer->ignore();
-				break;
-			case 'unignore':
-				$userGServer->unignore();
-				break;
-			default:
-				throw new BadRequestException('Unknown user server action ' . $this->parameters['action']);
-		}
+		match ($this->parameters['action']) {
+												'ignore' => $userGServer->ignore(),
+												'unignore' => $userGServer->unignore(),
+												default => throw new BadRequestException('Unknown user server action ' . $this->parameters['action']),
+											};
 
 		$this->repository->save($userGServer);
 

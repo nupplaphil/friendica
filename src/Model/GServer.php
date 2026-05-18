@@ -1629,20 +1629,11 @@ class GServer
 		}
 
 		if (!empty($data['register_policy'])) {
-			switch ($data['register_policy']) {
-				case 'REGISTER_OPEN':
-					$serverdata['register_policy'] = Register::OPEN;
-					break;
-
-				case 'REGISTER_APPROVE':
-					$serverdata['register_policy'] = Register::APPROVE;
-					break;
-
-				case 'REGISTER_CLOSED':
-				default:
-					$serverdata['register_policy'] = Register::CLOSED;
-					break;
-			}
+			$serverdata['register_policy'] = match ($data['register_policy']) {
+																'REGISTER_OPEN' => Register::OPEN,
+																'REGISTER_APPROVE' => Register::APPROVE,
+																default => Register::CLOSED,
+															};
 		}
 
 		return $serverdata;

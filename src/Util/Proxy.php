@@ -138,19 +138,13 @@ class Proxy
 
 	public static function getPixelsFromSize(string $size): int
 	{
-		switch ($size) {
-			case Proxy::SIZE_MICRO:
-				return Proxy::PIXEL_MICRO;
-			case Proxy::SIZE_THUMB:
-				return Proxy::PIXEL_THUMB;
-			case Proxy::SIZE_SMALL:
-				return Proxy::PIXEL_SMALL;
-			case Proxy::SIZE_MEDIUM:
-				return Proxy::PIXEL_MEDIUM;
-			case Proxy::SIZE_LARGE:
-				return Proxy::PIXEL_LARGE;
-			default:
-				return 0;
-		}
+		return match ($size) {
+												Proxy::SIZE_MICRO => Proxy::PIXEL_MICRO,
+												Proxy::SIZE_THUMB => Proxy::PIXEL_THUMB,
+												Proxy::SIZE_SMALL => Proxy::PIXEL_SMALL,
+												Proxy::SIZE_MEDIUM => Proxy::PIXEL_MEDIUM,
+												Proxy::SIZE_LARGE => Proxy::PIXEL_LARGE,
+												default => 0,
+											};
 	}
 }

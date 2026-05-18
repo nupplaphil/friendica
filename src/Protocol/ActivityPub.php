@@ -125,26 +125,15 @@ class ActivityPub
 	{
 		$accounttype = -1;
 
-		switch ($apcontact['type']) {
-			case 'Person':
-				$accounttype = User::ACCOUNT_TYPE_PERSON;
-				break;
-			case 'Organization':
-				$accounttype = User::ACCOUNT_TYPE_ORGANISATION;
-				break;
-			case 'Service':
-				$accounttype = User::ACCOUNT_TYPE_NEWS;
-				break;
-			case 'Group':
-				$accounttype = User::ACCOUNT_TYPE_COMMUNITY;
-				break;
-			case 'Application':
-				$accounttype = User::ACCOUNT_TYPE_RELAY;
-				break;
-			case 'Tombstone':
-				$accounttype = User::ACCOUNT_TYPE_DELETED;
-				break;
-		}
+		$accounttype = match ($apcontact['type']) {
+												'Person' => User::ACCOUNT_TYPE_PERSON,
+												'Organization' => User::ACCOUNT_TYPE_ORGANISATION,
+												'Service' => User::ACCOUNT_TYPE_NEWS,
+												'Group' => User::ACCOUNT_TYPE_COMMUNITY,
+												'Application' => User::ACCOUNT_TYPE_RELAY,
+												'Tombstone' => User::ACCOUNT_TYPE_DELETED,
+												default => $accounttype,
+											};
 
 		return $accounttype;
 	}
