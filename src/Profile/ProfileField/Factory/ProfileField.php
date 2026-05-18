@@ -18,14 +18,9 @@ use Psr\Log\LoggerInterface;
 
 class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 {
-	/** @var PermissionSetFactory */
-	private $permissionSetFactory;
-
-	public function __construct(LoggerInterface $logger, PermissionSetFactory $permissionSetFactory)
+	public function __construct(LoggerInterface $logger, private PermissionSetFactory $permissionSetFactory)
 	{
 		parent::__construct($logger);
-
-		$this->permissionSetFactory = $permissionSetFactory;
 	}
 
 	/**
@@ -35,8 +30,8 @@ class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 	 */
 	public function createFromTableRow(array $row, PermissionSet $permissionSet = null): Entity\ProfileField
 	{
-		if (empty($permissionSet) &&
-			(!array_key_exists('psid', $row) || !array_key_exists('allow_cid', $row) || !array_key_exists('allow_gid', $row) || !array_key_exists('deny_cid', $row) || !array_key_exists('deny_gid', $row))
+		if (empty($permissionSet)
+			&& (!array_key_exists('psid', $row) || !array_key_exists('allow_cid', $row) || !array_key_exists('allow_gid', $row) || !array_key_exists('deny_cid', $row) || !array_key_exists('deny_gid', $row))
 		) {
 			throw new UnexpectedPermissionSetException('Either set the PermissionSet fields (join) or the PermissionSet itself');
 		}
@@ -56,10 +51,10 @@ class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 				$row['allow_gid'],
 				$row['deny_cid'],
 				$row['deny_gid'],
-				$row['psid']
+				$row['psid'],
 			),
-			$row['id'] ?? null,
-			$owner['uri-id'] ?? null
+			$row['id']       ?? null,
+			$owner['uri-id'] ?? null,
 		);
 	}
 
@@ -82,7 +77,7 @@ class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 		string $label,
 		string $value,
 		PermissionSet $permissionSet,
-		int $id = null
+		int $id = null,
 	): Entity\ProfileField {
 		return $this->createFromTableRow([
 			'uid'   => $uid,

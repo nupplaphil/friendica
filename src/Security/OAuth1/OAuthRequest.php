@@ -12,19 +12,17 @@ use Friendica\Util\Strings;
 class OAuthRequest implements \Stringable
 {
 	private $parameters;
-	private $http_method;
 	private $http_url;
 	// for debug purposes
 	public $base_string;
 	public static $version    = '1.0';
 	public static $POST_INPUT = 'php://input';
 
-	public function __construct($http_method, $http_url, $parameters = null)
+	public function __construct(private $http_method, $http_url, $parameters = null)
 	{
 		@$parameters or $parameters = [];
 		$parameters                 = array_merge(OAuthUtil::parse_parameters(parse_url($http_url, PHP_URL_QUERY)), $parameters);
 		$this->parameters           = $parameters;
-		$this->http_method          = $http_method;
 		$this->http_url             = $http_url;
 	}
 

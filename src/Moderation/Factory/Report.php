@@ -17,14 +17,9 @@ use Psr\Log\LoggerInterface;
 
 class Report extends \Friendica\BaseFactory implements ICanCreateFromTableRow
 {
-	/** @var ClockInterface */
-	private $clock;
-
-	public function __construct(LoggerInterface $logger, ClockInterface $clock)
+	public function __construct(LoggerInterface $logger, private ClockInterface $clock)
 	{
 		parent::__construct($logger);
-
-		$this->clock = $clock;
 	}
 
 	/**

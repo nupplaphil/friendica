@@ -78,11 +78,6 @@ class App
 	}
 
 	/**
-	 * @var Container
-	 */
-	private $container;
-
-	/**
 	 * @var Mode The Mode of the Application
 	 */
 	private $mode;
@@ -133,10 +128,7 @@ class App
 	 */
 	private $appHelper;
 
-	private function __construct(Container $container)
-	{
-		$this->container = $container;
-	}
+	private function __construct(private Container $container) {}
 
 	/**
 	 * @internal

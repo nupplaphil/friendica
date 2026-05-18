@@ -25,20 +25,9 @@ use Psr\Log\LoggerInterface;
 
 class RemoveMe extends BaseSettings
 {
-	/** @var Emailer */
-	private $emailer;
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var Cookie */
-	private $cookie;
-
-	public function __construct(Cookie $cookie, SystemMessages $systemMessages, Emailer $emailer, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private Cookie $cookie, private SystemMessages $systemMessages, private Emailer $emailer, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->emailer        = $emailer;
-		$this->systemMessages = $systemMessages;
-		$this->cookie         = $cookie;
 	}
 
 	protected function post(array $request = [])
@@ -75,7 +64,8 @@ class RemoveMe extends BaseSettings
 				->withMessage(
 					$l10n->t('[Friendica System Notify]') . ' ' . $l10n->t('User deleted their account'),
 					$l10n->t('On your Friendica node an user deleted their account. Please ensure that their data is removed from the backups.'),
-					$l10n->t('The user id is %d', $this->session->getLocalUserId()))
+					$l10n->t('The user id is %d', $this->session->getLocalUserId()),
+				)
 				->forUser($admin)
 				->withRecipient($admin['email'])
 				->build();

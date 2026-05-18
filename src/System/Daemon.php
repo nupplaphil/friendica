@@ -15,8 +15,6 @@ use Psr\Log\LoggerInterface;
  */
 final class Daemon
 {
-	private LoggerInterface $logger;
-	private Database $dba;
 	private ?string $pidfile = null;
 	private ?int $pid        = null;
 
@@ -40,11 +38,7 @@ final class Daemon
 		return $this->pidfile;
 	}
 
-	public function __construct(LoggerInterface $logger, Database $dba)
-	{
-		$this->logger = $logger;
-		$this->dba    = $dba;
-	}
+	public function __construct(private LoggerInterface $logger, private Database $dba) {}
 
 	/**
 	 * Initialize the current daemon class with a given PID file

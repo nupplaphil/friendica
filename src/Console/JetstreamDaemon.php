@@ -24,13 +24,6 @@ use RuntimeException;
  */
 final class JetstreamDaemon extends Console
 {
-	private Mode $mode;
-	private IManageConfigValues $config;
-	private IManageKeyValuePairs $keyValue;
-	private SysDaemon $daemon;
-	private Jetstream $jetstream;
-	private AddonHelper $addonHelper;
-
 	/**
 	 * @param Mode                 $mode
 	 * @param IManageConfigValues  $config
@@ -39,16 +32,9 @@ final class JetstreamDaemon extends Console
 	 * @param Jetstream            $jetstream
 	 * @param array|null           $argv
 	 */
-	public function __construct(Mode $mode, IManageConfigValues $config, IManageKeyValuePairs $keyValue, SysDaemon $daemon, Jetstream $jetstream, AddonHelper $addonHelper, array $argv = null)
+	public function __construct(private Mode $mode, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private SysDaemon $daemon, private Jetstream $jetstream, private AddonHelper $addonHelper, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->mode        = $mode;
-		$this->config      = $config;
-		$this->keyValue    = $keyValue;
-		$this->jetstream   = $jetstream;
-		$this->daemon      = $daemon;
-		$this->addonHelper = $addonHelper;
 	}
 
 	protected function getHelp(): string

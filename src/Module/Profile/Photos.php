@@ -36,33 +36,18 @@ use Psr\Log\LoggerInterface;
 
 class Photos extends \Friendica\Module\BaseProfile
 {
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Page */
-	private $page;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var AppHelper */
-	private $appHelper;
-	/** @var Database */
-	private $database;
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var ACLFormatter */
-	private $aclFormatter;
-	private EventDispatcherInterface $eventDispatcher;
 	/** @var array owner-view record */
 	private $owner;
 
 	public function __construct(
-		ACLFormatter $aclFormatter,
-		SystemMessages $systemMessages,
-		Database $database,
-		AppHelper $appHelper,
-		IManageConfigValues $config,
-		Page $page,
-		IHandleUserSessions $session,
-		EventDispatcherInterface $eventDispatcher,
+		private ACLFormatter $aclFormatter,
+		private SystemMessages $systemMessages,
+		private Database $database,
+		private AppHelper $appHelper,
+		private IManageConfigValues $config,
+		private Page $page,
+		private IHandleUserSessions $session,
+		private EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -73,15 +58,6 @@ class Photos extends \Friendica\Module\BaseProfile
 		array $parameters = [],
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session         = $session;
-		$this->page            = $page;
-		$this->config          = $config;
-		$this->appHelper       = $appHelper;
-		$this->database        = $database;
-		$this->systemMessages  = $systemMessages;
-		$this->aclFormatter    = $aclFormatter;
-		$this->eventDispatcher = $eventDispatcher;
 
 		$owner = Profile::load($this->appHelper, $this->parameters['nickname'] ?? '', false);
 		if (!$owner || $owner['account_removed'] || $owner['account_expired']) {

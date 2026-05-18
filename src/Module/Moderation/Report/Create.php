@@ -36,30 +36,13 @@ class Create extends BaseModule
 	public const CONTACT_ACTION_COLLAPSE = 1;
 	public const CONTACT_ACTION_IGNORE   = 2;
 	public const CONTACT_ACTION_BLOCK    = 3;
-
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var App\Page */
-	private $page;
-	/** @var UserSession */
-	private $session;
-	/** @var \Friendica\Moderation\Factory\Report */
-	private $factory;
-	/** @var \Friendica\Moderation\Repository\Report */
-	private $repository;
 	/** @var ReportUtil */
 	protected $reportUtil;
 
-	public function __construct(\Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, \Friendica\Moderation\Factory\Report $factory, UserSession $session, App\Page $page, SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private \Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, private \Friendica\Moderation\Factory\Report $factory, private UserSession $session, private App\Page $page, private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->systemMessages = $systemMessages;
-		$this->page           = $page;
-		$this->reportUtil     = $reportUtil;
-		$this->session        = $session;
-		$this->factory        = $factory;
-		$this->repository     = $repository;
+		$this->reportUtil = $reportUtil;
 	}
 
 	protected function post(array $request = [])

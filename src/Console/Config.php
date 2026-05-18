@@ -37,15 +37,6 @@ class Config extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Mode
-	 */
-	private $appMode;
-	/**
-	 * @var IManageConfigValues
-	 */
-	private $config;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -80,12 +71,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, IManageConfigValues $config, ?array $argv = null)
+	public function __construct(private Mode $appMode, private IManageConfigValues $config, ?array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
-		$this->config  = $config;
 	}
 
 	protected function doExecute(): int

@@ -24,17 +24,9 @@ use Psr\Log\LoggerInterface;
  */
 class RemoveTag extends BaseModule
 {
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var IHandleUserSessions */
-	private $userSession;
-
-	public function __construct(SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $userSession, array $server, array $parameters = [])
+	public function __construct(private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private IHandleUserSessions $userSession, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->systemMessages = $systemMessages;
-		$this->userSession    = $userSession;
 	}
 
 	protected function post(array $request = [])
@@ -83,7 +75,7 @@ class RemoveTag extends BaseModule
 		$this->logger->info('Filer - Remove Tag', [
 			'term' => $term,
 			'item' => $item_id,
-			'type' => $type
+			'type' => $type,
 		]);
 
 		if (!$item_id || !strlen($term)) {

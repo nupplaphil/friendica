@@ -18,23 +18,12 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GuzzleResponse extends Response implements ICanHandleHttpResponses, ResponseInterface
 {
-	/** @var string The URL */
-	private $url;
 	/** @var boolean */
 	private $isTimeout;
 	/** @var boolean */
 	private $isSuccess;
 	/** @var boolean */
 	private $isGone;
-	/**
-	 * @var int the error number or 0 (zero) if no error
-	 */
-	private $errorNumber;
-
-	/**
-	 * @var string the error message or '' (the empty string) if no
-	 */
-	private $error;
 
 	/** @var string  */
 	private $redirectUrl = '';
@@ -43,12 +32,20 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 	/** @var bool */
 	private $redirectIsPermanent = false;
 
-	public function __construct(ResponseInterface $response, string $url, $errorNumber = 0, $error = '')
+	/**
+	 * @param int $errorNumber
+	 * @param string $error
+	 */
+	public function __construct(ResponseInterface $response, /** @var string The URL */
+		private string $url, /**
+				 * @var int the error number or 0 (zero) if no error
+				 */
+		private $errorNumber = 0, /**
+				 * @var string the error message or '' (the empty string) if no
+				 */
+		private $error = '')
 	{
 		parent::__construct($response->getStatusCode(), $response->getHeaders(), $response->getBody(), $response->getProtocolVersion(), $response->getReasonPhrase());
-		$this->url         = $url;
-		$this->error       = $error;
-		$this->errorNumber = $errorNumber;
 
 		$this->checkSuccess();
 		$this->checkGone();

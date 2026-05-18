@@ -35,9 +35,6 @@
 			<button type="button" class="btn btn-default icon bb-url" style="cursor: pointer;" title="{{$edurl}}" data-role="insert-formatting" data-comment=" " data-bbcode="url" data-id="input">
 					<i class="fa fa-link" aria-hidden="true"></i>
 			</button>
-			<button type="button" class="btn btn-default icon bb-embed" style="cursor: pointer;" title="{{$edembed}}" data-role="insert-formatting" data-comment=" " data-bbcode="embed" data-id="input">
-				<i class="fa fa-play" aria-hidden="true"></i>
-			</button>
 			<button type="button" class="btn btn-default icon underline" style="cursor: pointer;" title="{{$eduline}}" data-role="insert-formatting" data-comment=" " data-bbcode="u" data-id="input">
 				<i class="fa fa-underline" aria-hidden="true"></i>
 			</button>

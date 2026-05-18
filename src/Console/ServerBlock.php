@@ -23,9 +23,6 @@ class ServerBlock extends Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/** @var DomainPatternBlocklist */
-	private $blocklist;
-
 	protected function getHelp(): string
 	{
 		return <<<HELP
@@ -54,11 +51,9 @@ Options
 HELP;
 	}
 
-	public function __construct(DomainPatternBlocklist $blocklist, $argv = null)
+	public function __construct(private DomainPatternBlocklist $blocklist, $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->blocklist = $blocklist;
 	}
 
 	protected function doExecute(): int

@@ -51,16 +51,6 @@ class StorageManager
 	 */
 	private $backendInstances = [];
 
-	/** @var Database */
-	private $dba;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var LoggerInterface */
-	private $logger;
-	private EventDispatcherInterface $eventDispatcher;
-	/** @var L10n */
-	private $l10n;
-
 	/** @var ICanWriteToStorage */
 	private $currentBackend;
 
@@ -74,14 +64,9 @@ class StorageManager
 	 * @throws InvalidClassStorageException in case the active backend class is invalid
 	 * @throws StorageException in case of unexpected errors during the active backend class loading
 	 */
-	public function __construct(Database $dba, IManageConfigValues $config, LoggerInterface $logger, EventDispatcherInterface $eventDispatcher, L10n $l10n, bool $includeAddon = true)
+	public function __construct(private Database $dba, private IManageConfigValues $config, private LoggerInterface $logger, private EventDispatcherInterface $eventDispatcher, private L10n $l10n, bool $includeAddon = true)
 	{
-		$this->dba             = $dba;
-		$this->config          = $config;
-		$this->logger          = $logger;
-		$this->eventDispatcher = $eventDispatcher;
-		$this->l10n            = $l10n;
-		$this->validBackends   = $config->get('storage', 'backends', self::DEFAULT_BACKENDS);
+		$this->validBackends = $this->config->get('storage', 'backends', self::DEFAULT_BACKENDS);
 
 		$currentName = $this->config->get('storage', 'name');
 

@@ -30,11 +30,6 @@ class Console extends \Asika\SimpleConsole\Console
 	protected $helpOptions             = [];
 	protected array $customHelpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Container The Container
-	 */
-	protected Container $container;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -124,11 +119,9 @@ HELP;
 	 *
 	 * @param Container $container The Friendica container
 	 */
-	public function __construct(Container $container, array $argv = null)
+	public function __construct(protected Container $container, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->container = $container;
 	}
 
 	public static function create(Container $container, array $argv = null): Console

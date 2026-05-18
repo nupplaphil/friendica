@@ -20,19 +20,6 @@ use RuntimeException;
 class FixAPDeliveryWorkerTaskParameters extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
-
-	/**
-	 * @var Mode
-	 */
-	private $appMode;
-	/**
-	 * @var Database
-	 */
-	private $dba;
-	/**
-	 * @var L10n
-	 */
-	private $l10n;
 	/**
 	 * @var int
 	 */
@@ -65,13 +52,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, Database $dba, L10n $l10n, array $argv = null)
+	public function __construct(private Mode $appMode, private Database $dba, private L10n $l10n, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
-		$this->dba     = $dba;
-		$this->l10n    = $l10n;
 	}
 
 	protected function doExecute(): int

@@ -25,19 +25,6 @@ class User extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/**
-	 * @var Mode
-	 */
-	private $appMode;
-	/**
-	 * @var L10n
-	 */
-	private $l10n;
-	/**
-	 * @var IManagePersonalConfigValues
-	 */
-	private $pConfig;
-
 	protected function getHelp()
 	{
 		$help = <<<HELP
@@ -74,13 +61,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(Mode $appMode, L10n $l10n, IManagePersonalConfigValues $pConfig, array $argv = null)
+	public function __construct(private Mode $appMode, private L10n $l10n, private IManagePersonalConfigValues $pConfig, array $argv = null)
 	{
 		parent::__construct($argv);
-
-		$this->appMode = $appMode;
-		$this->l10n    = $l10n;
-		$this->pConfig = $pConfig;
 	}
 
 	protected function doExecute(): int

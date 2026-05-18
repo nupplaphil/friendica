@@ -43,35 +43,9 @@ use Psr\Log\LoggerInterface;
 
 class Conversations extends BaseProfile
 {
-	/** @var AppHelper */
-	private $appHelper;
-	/** @var Page */
-	private $page;
-	/** @var DateTimeFormat */
-	private $dateTimeFormat;
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IHandleUserSessions */
-	private $session;
-	/** @var Conversation */
-	private $conversation;
-	/** @var IManagePersonalConfigValues */
-	private $pConfig;
-	/** @var Mode */
-	private $mode;
-
-	public function __construct(Mode $mode, IManagePersonalConfigValues $pConfig, Conversation $conversation, IHandleUserSessions $session, IManageConfigValues $config, DateTimeFormat $dateTimeFormat, Page $page, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private Mode $mode, private IManagePersonalConfigValues $pConfig, private Conversation $conversation, private IHandleUserSessions $session, private IManageConfigValues $config, private DateTimeFormat $dateTimeFormat, private Page $page, private AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->appHelper      = $appHelper;
-		$this->page           = $page;
-		$this->dateTimeFormat = $dateTimeFormat;
-		$this->config         = $config;
-		$this->session        = $session;
-		$this->conversation   = $conversation;
-		$this->pConfig        = $pConfig;
-		$this->mode           = $mode;
 	}
 
 	protected function content(array $request = []): string
@@ -161,12 +135,12 @@ class Conversations extends BaseProfile
 
 		if (!empty($category)) {
 			$condition = DBA::mergeConditions($condition, ["`uri-id` IN (SELECT `uri-id` FROM `category-view` WHERE `name` = ? AND `type` = ? AND `uid` = ?)",
-			                                               $category, Category::CATEGORY, $profile['uid']]);
+				$category, Category::CATEGORY, $profile['uid']]);
 		}
 
 		if (!empty($hashtags)) {
 			$condition = DBA::mergeConditions($condition, ["`uri-id` IN (SELECT `uri-id` FROM `tag-search-view` WHERE `name` = ? AND `uid` = ?)",
-			                                               $hashtags, $profile['uid']]);
+				$hashtags, $profile['uid']]);
 		}
 
 		if (!empty($datequery)) {
@@ -184,20 +158,28 @@ class Conversations extends BaseProfile
 		}
 
 		if ($this->mode->isMobile()) {
-			$itemspage_network = $this->pConfig->get($this->session->getLocalUserId(), 'system', 'itemspage_mobile_network',
-				$this->config->get('system', 'itemspage_network_mobile'));
+			$itemspage_network = $this->pConfig->get(
+				$this->session->getLocalUserId(),
+				'system',
+				'itemspage_mobile_network',
+				$this->config->get('system', 'itemspage_network_mobile'),
+			);
 		} else {
-			$itemspage_network = $this->pConfig->get($this->session->getLocalUserId(), 'system', 'itemspage_network',
-				$this->config->get('system', 'itemspage_network'));
+			$itemspage_network = $this->pConfig->get(
+				$this->session->getLocalUserId(),
+				'system',
+				'itemspage_network',
+				$this->config->get('system', 'itemspage_network'),
+			);
 		}
 
 		$condition = DBA::mergeConditions($condition, ["((`gravity` = ? AND `wall`) OR
 			(`gravity` = ? AND `vid` = ? AND `origin`
 			AND EXISTS(SELECT `uri-id` FROM `post` WHERE `uri-id` = `post-origin-view`.`thr-parent-id` AND `gravity` = ? AND `network` IN (?, ?))))",
-		                                               Item::GRAVITY_PARENT, Item::GRAVITY_ACTIVITY, Verb::getID(Activity::ANNOUNCE), Item::GRAVITY_PARENT, Protocol::ACTIVITYPUB, Protocol::DFRN]);
+			Item::GRAVITY_PARENT, Item::GRAVITY_ACTIVITY, Verb::getID(Activity::ANNOUNCE), Item::GRAVITY_PARENT, Protocol::ACTIVITYPUB, Protocol::DFRN]);
 
-		$condition = DBA::mergeConditions($condition, ['uid'     => $profile['uid'], 'network' => Protocol::FEDERATED,
-		                                               'visible' => true, 'deleted' => false]);
+		$condition = DBA::mergeConditions($condition, ['uid' => $profile['uid'], 'network' => Protocol::FEDERATED,
+			'visible'                                           => true, 'deleted' => false]);
 
 		$pager  = new Pager($this->l10n, $this->args->getQueryString(), $itemspage_network);
 		$params = ['limit' => [$pager->getStart(), $pager->getItemsPerPage()], 'order' => ['received' => true]];

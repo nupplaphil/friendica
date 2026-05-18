@@ -22,17 +22,12 @@ class Storage extends \Asika\SimpleConsole\Console
 {
 	protected $helpOptions = ['h', 'help', '?'];
 
-	/** @var StorageManager */
-	private $storageManager;
-
 	/**
 	 * @param StorageManager $storageManager
 	 */
-	public function __construct(StorageManager $storageManager, array $argv = [])
+	public function __construct(private StorageManager $storageManager, array $argv = [])
 	{
 		parent::__construct($argv);
-
-		$this->storageManager = $storageManager;
 	}
 
 	protected function getHelp()

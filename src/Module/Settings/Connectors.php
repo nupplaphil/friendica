@@ -28,23 +28,9 @@ use Psr\Log\LoggerInterface;
 
 class Connectors extends BaseSettings
 {
-	/** @var IManageConfigValues */
-	private $config;
-	/** @var IManagePersonalConfigValues */
-	private $pconfig;
-	/** @var Database */
-	private $database;
-	/** @var SystemMessages */
-	private $systemMessages;
-
-	public function __construct(SystemMessages $systemMessages, Database $database, IManagePersonalConfigValues $pconfig, IManageConfigValues $config, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private SystemMessages $systemMessages, private Database $database, private IManagePersonalConfigValues $pconfig, private IManageConfigValues $config, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->config         = $config;
-		$this->pconfig        = $pconfig;
-		$this->database       = $database;
-		$this->systemMessages = $systemMessages;
 	}
 
 	protected function post(array $request = [])

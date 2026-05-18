@@ -37,13 +37,6 @@ use Psr\Log\LoggerInterface;
  */
 class Notes extends BaseProfile
 {
-	protected AppHelper $appHelper;
-	protected UserSession $userSession;
-	protected Mode $mode;
-	protected IManagePersonalConfigValues $pConfig;
-	protected IManageConfigValues $config;
-	protected Conversation $conversation;
-
 	/**
 	 * Notes constructor.
 	 *
@@ -62,15 +55,9 @@ class Notes extends BaseProfile
 	 * @param IManageConfigValues $config
 	 * @param Conversation $conversation
 	 */
-	public function __construct(AppHelper $appHelper, UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters, Mode $mode, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, Conversation $conversation)
+	public function __construct(protected AppHelper $appHelper, protected UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters, protected Mode $mode, protected IManagePersonalConfigValues $pConfig, protected IManageConfigValues $config, protected Conversation $conversation)
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-		$this->appHelper    = $appHelper;
-		$this->userSession  = $userSession;
-		$this->mode         = $mode;
-		$this->pConfig      = $pConfig;
-		$this->config       = $config;
-		$this->conversation = $conversation;
 	}
 
 	/**

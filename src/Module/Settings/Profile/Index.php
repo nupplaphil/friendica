@@ -38,28 +38,14 @@ use Psr\Log\LoggerInterface;
 
 class Index extends BaseSettings
 {
-	/** @var ProfileField\Repository\ProfileField */
-	private $profileFieldRepo;
-	/** @var ProfileField\Factory\ProfileField */
-	private $profileFieldFactory;
-	/** @var SystemMessages */
-	private $systemMessages;
-	/** @var PermissionSet\Repository\PermissionSet */
-	private $permissionSetRepo;
-	/** @var PermissionSet\Factory\PermissionSet */
-	private $permissionSetFactory;
-	/** @var ACLFormatter */
-	private $aclFormatter;
-	private EventDispatcherInterface $eventDispatcher;
-
 	public function __construct(
-		ACLFormatter $aclFormatter,
-		PermissionSet\Factory\PermissionSet $permissionSetFactory,
-		PermissionSet\Repository\PermissionSet $permissionSetRepo,
-		SystemMessages $systemMessages,
-		ProfileField\Factory\ProfileField $profileFieldFactory,
-		ProfileField\Repository\ProfileField $profileFieldRepo,
-		EventDispatcherInterface $eventDispatcher,
+		private ACLFormatter $aclFormatter,
+		private PermissionSet\Factory\PermissionSet $permissionSetFactory,
+		private PermissionSet\Repository\PermissionSet $permissionSetRepo,
+		private SystemMessages $systemMessages,
+		private ProfileField\Factory\ProfileField $profileFieldFactory,
+		private ProfileField\Repository\ProfileField $profileFieldRepo,
+		private EventDispatcherInterface $eventDispatcher,
 		IHandleUserSessions $session,
 		Page $page,
 		L10n $l10n,
@@ -72,14 +58,6 @@ class Index extends BaseSettings
 		array $parameters = [],
 	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->profileFieldRepo     = $profileFieldRepo;
-		$this->profileFieldFactory  = $profileFieldFactory;
-		$this->systemMessages       = $systemMessages;
-		$this->permissionSetRepo    = $permissionSetRepo;
-		$this->permissionSetFactory = $permissionSetFactory;
-		$this->aclFormatter         = $aclFormatter;
-		$this->eventDispatcher      = $eventDispatcher;
 	}
 
 	protected function post(array $request = [])
@@ -269,7 +247,6 @@ class Index extends BaseSettings
 			'edbold'   => $this->t('Bold'),
 			'editalic' => $this->t('Italic'),
 			'eduline'  => $this->t('Underline'),
-			'edembed'  => $this->t('Embed'),
 			'edquote'  => $this->t('Quote'),
 			'edemojis' => $this->t('Add emojis'),
 			'edcode'   => $this->t('Code'),

@@ -32,38 +32,16 @@ use stdClass;
  */
 class Processor
 {
-	/** @var Database */
-	private $db;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var BaseURL */
-	private $baseURL;
-
-	/** @var ATProtocol */
-	private $atprotocol;
-
-	/** @var Actor */
-	private $actor;
-
 	/**
 	 * Processor constructor.
 	 *
-	 * @param Database $database
+	 * @param Database $db
 	 * @param LoggerInterface $logger
 	 * @param BaseURL $baseURL
 	 * @param ATProtocol $atprotocol
 	 * @param Actor $actor
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, BaseURL $baseURL, ATProtocol $atprotocol, Actor $actor)
-	{
-		$this->db         = $database;
-		$this->logger     = $logger;
-		$this->baseURL    = $baseURL;
-		$this->atprotocol = $atprotocol;
-		$this->actor      = $actor;
-	}
+	public function __construct(private Database $db, private LoggerInterface $logger, private BaseURL $baseURL, private ATProtocol $atprotocol, private Actor $actor) {}
 
 	/**
 	 * Process account events and update contact archive state.
