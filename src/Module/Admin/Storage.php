@@ -39,10 +39,10 @@ class Storage extends BaseAdmin
 			$storage_opts_data   = [];
 			foreach ($storage_opts as $name => $info) {
 				$fieldname = $storage_form_prefix . '_' . $name;
-				$value = match ($info[0]) {
-																				'checkbox', 'yesno' => !empty($_POST[$fieldname]),
-																				default => $_POST[$fieldname] ?? '',
-																			};
+				$value     = match ($info[0]) {
+					'checkbox', 'yesno' => !empty($_POST[$fieldname]),
+					default => $_POST[$fieldname] ?? '',
+				};
 				$storage_opts_data[$name] = $value;
 			}
 			unset($name);

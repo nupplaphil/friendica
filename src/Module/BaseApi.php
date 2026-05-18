@@ -122,9 +122,9 @@ class BaseApi extends BaseModule
 			}
 		} else {
 			$order_field = match ($requested_order) {
-																TimelineOrderByTypes::RECEIVED, TimelineOrderByTypes::CHANGED, TimelineOrderByTypes::EDITED, TimelineOrderByTypes::CREATED, TimelineOrderByTypes::COMMENTED => $requested_order,
-																default => throw new \Exception("Unrecognized request order: $requested_order"),
-															};
+				TimelineOrderByTypes::RECEIVED, TimelineOrderByTypes::CHANGED, TimelineOrderByTypes::EDITED, TimelineOrderByTypes::CREATED, TimelineOrderByTypes::COMMENTED => $requested_order,
+				default => throw new \Exception("Unrecognized request order: $requested_order"),
+			};
 
 			if (!empty($request['max_id'])) {
 				$condition = DBA::mergeConditions($condition, ["`$order_field` < ?", DateTimeFormat::convert($request['max_id'], DateTimeFormat::MYSQL)]);
@@ -153,10 +153,10 @@ class BaseApi extends BaseModule
 	protected function buildOrderAndLimitParams(array $request, array $params = []): array
 	{
 		$requested_order = $request['friendica_order'];
-		$order_field = match ($requested_order) {
-												TimelineOrderByTypes::CHANGED, TimelineOrderByTypes::CREATED, TimelineOrderByTypes::COMMENTED, TimelineOrderByTypes::EDITED, TimelineOrderByTypes::RECEIVED => $requested_order,
-												default => 'uri-id',
-											};
+		$order_field     = match ($requested_order) {
+			TimelineOrderByTypes::CHANGED, TimelineOrderByTypes::CREATED, TimelineOrderByTypes::COMMENTED, TimelineOrderByTypes::EDITED, TimelineOrderByTypes::RECEIVED => $requested_order,
+			default => 'uri-id',
+		};
 
 		if (!empty($request['min_id'])) {
 			$params['order'] = [$order_field];

@@ -70,11 +70,11 @@ HELP;
 		$command = $this->getArgument(0);
 
 		return match ($command) {
-												'list' => $this->list(),
-												'enable' => $this->enable(),
-												'disable' => $this->disable(),
-												default => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
-											};
+			'list'    => $this->list(),
+			'enable'  => $this->enable(),
+			'disable' => $this->disable(),
+			default   => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
+		};
 	}
 
 	/**

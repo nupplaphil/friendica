@@ -77,13 +77,13 @@ class Link
 
 		$url = DI::baseUrl() . '/photo/link/';
 		match ($size) {
-												Proxy::SIZE_MICRO => $url .= Proxy::PIXEL_MICRO . '/',
-												Proxy::SIZE_THUMB => $url .= Proxy::PIXEL_THUMB . '/',
-												Proxy::SIZE_SMALL => $url .= Proxy::PIXEL_SMALL . '/',
-												Proxy::SIZE_MEDIUM => $url .= Proxy::PIXEL_MEDIUM . '/',
-												Proxy::SIZE_LARGE => $url .= Proxy::PIXEL_LARGE . '/',
-												default => $url . $id,
-											};
+			Proxy::SIZE_MICRO  => $url .= Proxy::PIXEL_MICRO . '/',
+			Proxy::SIZE_THUMB  => $url .= Proxy::PIXEL_THUMB . '/',
+			Proxy::SIZE_SMALL  => $url .= Proxy::PIXEL_SMALL . '/',
+			Proxy::SIZE_MEDIUM => $url .= Proxy::PIXEL_MEDIUM . '/',
+			Proxy::SIZE_LARGE  => $url .= Proxy::PIXEL_LARGE . '/',
+			default            => $url . $id,
+		};
 		return $url . $id;
 	}
 

@@ -64,12 +64,12 @@ HELP;
 		}
 
 		return match ($this->getArgument(0)) {
-												'add' => $this->addBlockedServer(),
-												'remove' => $this->removeBlockedServer(),
-												'export' => $this->exportBlockedServers(),
-												'import' => $this->importBlockedServers(),
-												default => throw new CommandArgsException('Unknown command.'),
-											};
+			'add'    => $this->addBlockedServer(),
+			'remove' => $this->removeBlockedServer(),
+			'export' => $this->exportBlockedServers(),
+			'import' => $this->importBlockedServers(),
+			default  => throw new CommandArgsException('Unknown command.'),
+		};
 	}
 
 	/**

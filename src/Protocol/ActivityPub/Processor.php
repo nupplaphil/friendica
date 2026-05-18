@@ -1182,18 +1182,18 @@ class Processor
 
 			$item['uid'] = $receiver;
 
-			$type = $activity['reception_type'][$receiver] ?? Receiver::TARGET_UNKNOWN;
+			$type                = $activity['reception_type'][$receiver] ?? Receiver::TARGET_UNKNOWN;
 			$item['post-reason'] = match ($type) {
-																Receiver::TARGET_TO => Item::PR_TO,
-																Receiver::TARGET_CC => Item::PR_CC,
-																Receiver::TARGET_BTO => Item::PR_BTO,
-																Receiver::TARGET_BCC => Item::PR_BCC,
-																Receiver::TARGET_AUDIENCE => Item::PR_AUDIENCE,
-																Receiver::TARGET_FOLLOWER => Item::PR_FOLLOWER,
-																Receiver::TARGET_ANSWER => Item::PR_COMMENT,
-																Receiver::TARGET_GLOBAL => Item::PR_GLOBAL,
-																default => Item::PR_NONE,
-															};
+				Receiver::TARGET_TO       => Item::PR_TO,
+				Receiver::TARGET_CC       => Item::PR_CC,
+				Receiver::TARGET_BTO      => Item::PR_BTO,
+				Receiver::TARGET_BCC      => Item::PR_BCC,
+				Receiver::TARGET_AUDIENCE => Item::PR_AUDIENCE,
+				Receiver::TARGET_FOLLOWER => Item::PR_FOLLOWER,
+				Receiver::TARGET_ANSWER   => Item::PR_COMMENT,
+				Receiver::TARGET_GLOBAL   => Item::PR_GLOBAL,
+				default                   => Item::PR_NONE,
+			};
 
 			$item['post-reason'] = Item::getPostReason($item);
 

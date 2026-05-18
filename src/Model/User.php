@@ -122,16 +122,16 @@ class User
 	 * @return int|null Numeric account type - or null when not set
 	 */
 	public static function getAccountTypeByString(string $accounttype)
-				{
-								return match ($accounttype) {
-												'person' => self::ACCOUNT_TYPE_PERSON,
-												'organisation' => self::ACCOUNT_TYPE_ORGANISATION,
-												'news' => self::ACCOUNT_TYPE_NEWS,
-												'community' => self::ACCOUNT_TYPE_COMMUNITY,
-												'relay' => self::ACCOUNT_TYPE_RELAY,
-												default => null,
-											};
-										}
+	{
+		return match ($accounttype) {
+			'person'       => self::ACCOUNT_TYPE_PERSON,
+			'organisation' => self::ACCOUNT_TYPE_ORGANISATION,
+			'news'         => self::ACCOUNT_TYPE_NEWS,
+			'community'    => self::ACCOUNT_TYPE_COMMUNITY,
+			'relay'        => self::ACCOUNT_TYPE_RELAY,
+			default        => null,
+		};
+	}
 
 	/**
 	 * Get the Uri-Id of the system account

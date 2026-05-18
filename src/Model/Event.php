@@ -845,10 +845,10 @@ class Event
 
 		// Get the file extension for the format.
 		$file_ext = match ($format) {
-												"ical" => "ics",
-												"csv" => "csv",
-												default => "",
-											};
+			"ical"  => "ics",
+			"csv"   => "csv",
+			default => "",
+		};
 
 		$return = [
 			'success'   => $process,

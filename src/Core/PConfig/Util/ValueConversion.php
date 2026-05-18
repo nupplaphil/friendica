@@ -32,9 +32,9 @@ class ValueConversion
 		}
 
 		return match (true) {
-												preg_match("|^a:[0-9]+:{.*}$|s", $value) => unserialize($value),
-												default => $value,
-											};
+			preg_match("|^a:[0-9]+:{.*}$|s", $value) => unserialize($value),
+			default                                  => $value,
+		};
 	}
 
 	/**
@@ -52,8 +52,8 @@ class ValueConversion
 		}
 
 		return match (true) {
-												is_array($value) => serialize($value),
-												default => (string)$value,
-											};
+			is_array($value) => serialize($value),
+			default          => (string) $value,
+		};
 	}
 }

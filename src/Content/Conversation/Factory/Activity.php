@@ -184,11 +184,11 @@ final class Activity
 	private function setNetworkFilter(array $condition, string $network): array
 	{
 		$network_condition = match ($network) {
-												'', Protocol::DFRN => ["(`network` IN (?, ?, ?) OR `network` IS NULL)", Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA],
-												Protocol::ACTIVITYPUB => ["(`network` IN (?, ?) OR `network` IS NULL)", Protocol::ACTIVITYPUB, Protocol::DFRN],
-												Protocol::DIASPORA => ["(`network` IN (?, ?) OR `network` IS NULL)", Protocol::DFRN, Protocol::DIASPORA],
-												default => ["(`network` = ? OR `network` IS NULL)", $network],
-											};
+			'', Protocol::DFRN => ["(`network` IN (?, ?, ?) OR `network` IS NULL)", Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA],
+			Protocol::ACTIVITYPUB => ["(`network` IN (?, ?) OR `network` IS NULL)", Protocol::ACTIVITYPUB, Protocol::DFRN],
+			Protocol::DIASPORA    => ["(`network` IN (?, ?) OR `network` IS NULL)", Protocol::DFRN, Protocol::DIASPORA],
+			default               => ["(`network` = ? OR `network` IS NULL)", $network],
+		};
 
 		return DBA::mergeConditions($condition, $network_condition);
 	}

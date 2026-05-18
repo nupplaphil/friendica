@@ -1630,10 +1630,10 @@ class GServer
 
 		if (!empty($data['register_policy'])) {
 			$serverdata['register_policy'] = match ($data['register_policy']) {
-																'REGISTER_OPEN' => Register::OPEN,
-																'REGISTER_APPROVE' => Register::APPROVE,
-																default => Register::CLOSED,
-															};
+				'REGISTER_OPEN'    => Register::OPEN,
+				'REGISTER_APPROVE' => Register::APPROVE,
+				default            => Register::CLOSED,
+			};
 		}
 
 		return $serverdata;

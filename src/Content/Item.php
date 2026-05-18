@@ -300,9 +300,9 @@ class Item
 				switch ($obj['verb']) {
 					case Activity::POST:
 						$post_type = match ($obj['object-type']) {
-																												Activity\ObjectType::EVENT => $this->l10n->t('event'),
-																												default => $this->l10n->t('status'),
-																											};
+							Activity\ObjectType::EVENT => $this->l10n->t('event'),
+							default                    => $this->l10n->t('status'),
+						};
 						break;
 
 					default:

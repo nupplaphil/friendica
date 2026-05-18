@@ -17,13 +17,14 @@ final class ReportUtil
 	public function getReportCategoryName(int $category): string
 	{
 		return match ($category) {
-												Report::CATEGORY_SPAM => $this->l10n->t('Spam'),
-												Report::CATEGORY_ILLEGAL => $this->l10n->t('Illegal Content'),
-												Report::CATEGORY_SAFETY => $this->l10n->t('Community Safety'),
-												Report::CATEGORY_UNWANTED => $this->l10n->t('Unwanted Content/Behavior'),
-												Report::CATEGORY_VIOLATION => $this->l10n->t('Rules Violation'),
-												Report::CATEGORY_OTHER => $this->l10n->t('Other'),
-												default => "",
-											};;
+			Report::CATEGORY_SPAM      => $this->l10n->t('Spam'),
+			Report::CATEGORY_ILLEGAL   => $this->l10n->t('Illegal Content'),
+			Report::CATEGORY_SAFETY    => $this->l10n->t('Community Safety'),
+			Report::CATEGORY_UNWANTED  => $this->l10n->t('Unwanted Content/Behavior'),
+			Report::CATEGORY_VIOLATION => $this->l10n->t('Rules Violation'),
+			Report::CATEGORY_OTHER     => $this->l10n->t('Other'),
+			default                    => "",
+		};
+		;
 	}
 }

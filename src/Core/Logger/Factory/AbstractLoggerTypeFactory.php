@@ -45,12 +45,12 @@ abstract class AbstractLoggerTypeFactory
 	protected static function mapLegacyConfigDebugLevel(string $level): string
 	{
 		return match ($level) {
-												"0" => LogLevel::ERROR,
-												"1" => LogLevel::WARNING,
-												"2" => LogLevel::NOTICE,
-												"3" => LogLevel::INFO,
-												"4", "5" => LogLevel::DEBUG,
-												default => $level,
-											};
+			"0" => LogLevel::ERROR,
+			"1" => LogLevel::WARNING,
+			"2" => LogLevel::NOTICE,
+			"3" => LogLevel::INFO,
+			"4", "5" => LogLevel::DEBUG,
+			default => $level,
+		};
 	}
 }

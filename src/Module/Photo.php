@@ -470,10 +470,10 @@ class Photo extends BaseApi
 			$contact = DBA::selectFirst('contact', [], ['uid' => $id, 'self' => true]) ?: [];
 
 			$default = match ($type) {
-																'profile', 'custom' => Contact::getDefaultAvatar($contact, Proxy::SIZE_SMALL),
-																'micro' => Contact::getDefaultAvatar($contact, Proxy::SIZE_MICRO),
-																default => Contact::getDefaultAvatar($contact, Proxy::SIZE_THUMB),
-															};
+				'profile', 'custom' => Contact::getDefaultAvatar($contact, Proxy::SIZE_SMALL),
+				'micro' => Contact::getDefaultAvatar($contact, Proxy::SIZE_MICRO),
+				default => Contact::getDefaultAvatar($contact, Proxy::SIZE_THUMB),
+			};
 
 			if (DI::baseUrl()->isLocalUrl($default)) {
 				System::externalRedirect($default);

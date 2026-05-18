@@ -68,9 +68,9 @@ class Compose extends BaseModule
 		$posttype = $this->parameters['type'] ?? Item::PT_ARTICLE;
 		if (!in_array($posttype, [Item::PT_ARTICLE, Item::PT_PERSONAL_NOTE])) {
 			$posttype = match ($posttype) {
-																'note' => Item::PT_PERSONAL_NOTE,
-																default => Item::PT_ARTICLE,
-															};
+				'note'  => Item::PT_PERSONAL_NOTE,
+				default => Item::PT_ARTICLE,
+			};
 		}
 
 		$user = User::getById($this->session->getLocalUserId(), ['allow_cid', 'allow_gid', 'deny_cid', 'deny_gid', 'default-location']);

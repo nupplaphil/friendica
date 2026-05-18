@@ -395,12 +395,12 @@ class Contact extends BaseModule
 		$tabs_html = Renderer::replaceMacros($tabs_tpl, ['$tabs' => $tabs, '$more' => DI::l10n()->t('More')]);
 
 		$header = match ($rel) {
-												'followers' => DI::l10n()->t('Followers'),
-												'following' => DI::l10n()->t('Following'),
-												'mutuals' => DI::l10n()->t('Friends'),
-												'nothing' => DI::l10n()->t('No relationship'),
-												default => DI::l10n()->t('Contacts'),
-											};
+			'followers' => DI::l10n()->t('Followers'),
+			'following' => DI::l10n()->t('Following'),
+			'mutuals'   => DI::l10n()->t('Friends'),
+			'nothing'   => DI::l10n()->t('No relationship'),
+			default     => DI::l10n()->t('Contacts'),
+		};
 
 		switch ($type) {
 			case 'pending':

@@ -214,11 +214,11 @@ class Delivery
 		DI::logger()->notice('Delivering', ['cmd' => $cmd, 'uri-id' => $post_uriid, 'followup' => $followup, 'network' => $contact['network']]);
 
 		$success = match ($contact['network']) {
-												Protocol::DFRN => self::deliverDFRN($cmd, $contact, $owner, $items, $target_item, $public_message, $top_level, $followup, $protocol),
-												Protocol::DIASPORA => self::deliverDiaspora($cmd, $contact, $owner, $items, $target_item, $public_message, $top_level, $followup),
-												Protocol::MAIL => self::deliverMail($cmd, $contact, $owner, $target_item, $thr_parent),
-												default => true,
-											};
+			Protocol::DFRN     => self::deliverDFRN($cmd, $contact, $owner, $items, $target_item, $public_message, $top_level, $followup, $protocol),
+			Protocol::DIASPORA => self::deliverDiaspora($cmd, $contact, $owner, $items, $target_item, $public_message, $top_level, $followup),
+			Protocol::MAIL     => self::deliverMail($cmd, $contact, $owner, $target_item, $thr_parent),
+			default            => true,
+		};
 
 		return $success;
 	}

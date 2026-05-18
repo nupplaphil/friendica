@@ -1791,12 +1791,12 @@ class Contact
 	public static function getAccountType(int $type): string
 	{
 		$account_type = match ($type) {
-												self::TYPE_ORGANISATION => DI::l10n()->t("Organisation"),
-												self::TYPE_NEWS => DI::l10n()->t('News'),
-												self::TYPE_COMMUNITY => DI::l10n()->t("Group"),
-												self::TYPE_RELAY => DI::l10n()->t("Relay"),
-												default => "",
-											};
+			self::TYPE_ORGANISATION => DI::l10n()->t("Organisation"),
+			self::TYPE_NEWS         => DI::l10n()->t('News'),
+			self::TYPE_COMMUNITY    => DI::l10n()->t("Group"),
+			self::TYPE_RELAY        => DI::l10n()->t("Relay"),
+			default                 => "",
+		};
 
 		return $account_type;
 	}
@@ -2006,21 +2006,21 @@ class Contact
 		}
 
 		$header = match ($platform) {
-												'friendica', 'friendika' => DI::baseUrl() . (new Header(DI::config()))->getMastodonBannerPath(),
-												/**
-												 * Picture credits
-												 * @author  John Liu <https://www.flickr.com/photos/8047705@N02/>
-												 * @license CC BY 2.0 https://creativecommons.org/licenses/by/2.0/
-												 * @link    https://www.flickr.com/photos/8047705@N02/5572197407
-												 */
-												'diaspora' => DI::baseUrl() . '/images/diaspora-banner.jpg',
-												/**
-												 * Use a random picture.
-												 * The service provides random pictures from Unsplash.
-												 * @license https://unsplash.com/license
-												 */
-												default => 'https://picsum.photos/seed/' . hash('ripemd128', $contact['url']) . '/960/300',
-											};
+			'friendica', 'friendika' => DI::baseUrl() . (new Header(DI::config()))->getMastodonBannerPath(),
+			/**
+			 * Picture credits
+			 * @author  John Liu <https://www.flickr.com/photos/8047705@N02/>
+			 * @license CC BY 2.0 https://creativecommons.org/licenses/by/2.0/
+			 * @link    https://www.flickr.com/photos/8047705@N02/5572197407
+			 */
+			'diaspora' => DI::baseUrl() . '/images/diaspora-banner.jpg',
+			/**
+			 * Use a random picture.
+			 * The service provides random pictures from Unsplash.
+			 * @license https://unsplash.com/license
+			 */
+			default => 'https://picsum.photos/seed/' . hash('ripemd128', $contact['url']) . '/960/300',
+		};
 
 		return $header;
 	}

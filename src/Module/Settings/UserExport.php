@@ -169,9 +169,9 @@ class UserExport extends BaseSettings
 				}
 
 				$result[$k] = match ($dbStructure[$table]['fields'][$k]['type']) {
-																				'datetime' => $v ?? DBA::NULL_DATETIME,
-																				default => $v,
-																			};
+					'datetime' => $v ?? DBA::NULL_DATETIME,
+					default    => $v,
+				};
 			}
 		}
 		DBA::close($rows);

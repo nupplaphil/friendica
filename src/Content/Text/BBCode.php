@@ -2625,10 +2625,10 @@ class BBCode
 
 		if (in_array($siteinfo['type'], ['image', 'video', 'audio'])) {
 			$bbcode = match ($siteinfo['type']) {
-																'video' => "\n" . '[video]' . $url . '[/video]' . "\n",
-																'audio' => "\n" . '[audio]' . $url . '[/audio]' . "\n",
-																default => "\n" . '[img=' . $url . '][/img]' . "\n",
-															};
+				'video' => "\n" . '[video]' . $url . '[/video]' . "\n",
+				'audio' => "\n" . '[audio]' . $url . '[/audio]' . "\n",
+				default => "\n" . '[img=' . $url . '][/img]' . "\n",
+			};
 
 			DI::profiler()->stopRecording();
 			return $bbcode;

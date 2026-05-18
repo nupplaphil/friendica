@@ -376,13 +376,13 @@ class Circle extends BaseModule
 	}
 
 	private static function matchRelation(string $relation, int $rel)
-				{
-								return match ($relation) {
-												'followers' => $rel == Model\Contact::FOLLOWER,
-												'following' => $rel == Model\Contact::SHARING,
-												'mutuals' => $rel == Model\Contact::FRIEND,
-												'nothing' => $rel == Model\Contact::NOTHING,
-												default => true,
-											};
-										}
+	{
+		return match ($relation) {
+			'followers' => $rel == Model\Contact::FOLLOWER,
+			'following' => $rel == Model\Contact::SHARING,
+			'mutuals'   => $rel == Model\Contact::FRIEND,
+			'nothing'   => $rel == Model\Contact::NOTHING,
+			default     => true,
+		};
+	}
 }

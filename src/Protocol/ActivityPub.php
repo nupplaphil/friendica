@@ -46,8 +46,8 @@ use Friendica\Util\JsonLD;
  */
 class ActivityPub
 {
-	const PUBLIC_COLLECTION = 'https://www.w3.org/ns/activitystreams#Public';
-	const CONTEXT           = [
+	public const PUBLIC_COLLECTION = 'https://www.w3.org/ns/activitystreams#Public';
+	public const CONTEXT           = [
 		'https://www.w3.org/ns/activitystreams', 'https://w3id.org/security/v1',
 		[
 			'ostatus'            => 'http://ostatus.org#',
@@ -92,13 +92,13 @@ class ActivityPub
 			'discoverable'              => 'toot:discoverable',
 			'PropertyValue'             => 'schema:PropertyValue',
 			'value'                     => 'schema:value',
-		]
+		],
 	];
-	const ACCOUNT_TYPES = ['Person', 'Organization', 'Service', 'Group', 'Application', 'Tombstone'];
+	public const ACCOUNT_TYPES = ['Person', 'Organization', 'Service', 'Group', 'Application', 'Tombstone'];
 
-	const ARTICLE_DEFAULT     = 0;
-	const ARTICLE_USE_SUMMARY = 1;
-	const ARTICLE_EMBED_TITLE = 2;
+	public const ARTICLE_DEFAULT     = 0;
+	public const ARTICLE_USE_SUMMARY = 1;
+	public const ARTICLE_EMBED_TITLE = 2;
 
 	/**
 	 * Checks if the web request is done for the AP protocol
@@ -126,14 +126,14 @@ class ActivityPub
 		$accounttype = -1;
 
 		$accounttype = match ($apcontact['type']) {
-												'Person' => User::ACCOUNT_TYPE_PERSON,
-												'Organization' => User::ACCOUNT_TYPE_ORGANISATION,
-												'Service' => User::ACCOUNT_TYPE_NEWS,
-												'Group' => User::ACCOUNT_TYPE_COMMUNITY,
-												'Application' => User::ACCOUNT_TYPE_RELAY,
-												'Tombstone' => User::ACCOUNT_TYPE_DELETED,
-												default => $accounttype,
-											};
+			'Person'       => User::ACCOUNT_TYPE_PERSON,
+			'Organization' => User::ACCOUNT_TYPE_ORGANISATION,
+			'Service'      => User::ACCOUNT_TYPE_NEWS,
+			'Group'        => User::ACCOUNT_TYPE_COMMUNITY,
+			'Application'  => User::ACCOUNT_TYPE_RELAY,
+			'Tombstone'    => User::ACCOUNT_TYPE_DELETED,
+			default        => $accounttype,
+		};
 
 		return $accounttype;
 	}

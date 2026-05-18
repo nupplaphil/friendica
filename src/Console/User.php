@@ -86,18 +86,18 @@ HELP;
 		$command = $this->getArgument(0);
 
 		return match ($command) {
-												'password' => $this->password(),
-												'add' => ($this->addUser()) ? 0 : 1,
-												'allow' => ($this->pendingUser(true)) ? 0 : 1,
-												'deny' => ($this->pendingUser(false)) ? 0 : 1,
-												'block' => ($this->blockUser(true)) ? 0 : 1,
-												'unblock' => ($this->blockUser(false)) ? 0 : 1,
-												'delete' => ($this->deleteUser()) ? 0 : 1,
-												'list' => ($this->listUser()) ? 0 : 1,
-												'search' => ($this->searchUser()) ? 0 : 1,
-												'config' => ($this->configUser()) ? 0 : 1,
-												default => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
-											};
+			'password' => $this->password(),
+			'add'      => ($this->addUser()) ? 0 : 1,
+			'allow'    => ($this->pendingUser(true)) ? 0 : 1,
+			'deny'     => ($this->pendingUser(false)) ? 0 : 1,
+			'block'    => ($this->blockUser(true)) ? 0 : 1,
+			'unblock'  => ($this->blockUser(false)) ? 0 : 1,
+			'delete'   => ($this->deleteUser()) ? 0 : 1,
+			'list'     => ($this->listUser()) ? 0 : 1,
+			'search'   => ($this->searchUser()) ? 0 : 1,
+			'config'   => ($this->configUser()) ? 0 : 1,
+			default    => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
+		};
 	}
 
 	/**
