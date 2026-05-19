@@ -1,4 +1,4 @@
-# Changelog
+# Upgrade
 
 All notable changes to the **Friendica Core** will be documented in this file.
 As an Addon maintainer or Friendica Developer you can inform yourself about all deprecations or breaking changes.
@@ -6,7 +6,13 @@ As an Addon maintainer or Friendica Developer you can inform yourself about all 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project [promises Backward Compatibility](doc/Developers-Intro.md#backward-compatibility).
 
-## [Version 2025.07](https://github.com/friendica/friendica/compare/2024.12-1...develop) - (unreleased)
+## [Version 2026.04](https://github.com/friendica/friendica/compare/2026.01...develop) - (unreleased)
+
+### Removed
+
+- Support for PHP 7.4, 8.0 and 8.1 was dropped.
+
+## [Version 2026.01](https://github.com/friendica/friendica/compare/2024.12-1...2026.01) - 2026-01-27
 
 ### Added
 
