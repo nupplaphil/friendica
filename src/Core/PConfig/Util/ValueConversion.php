@@ -32,8 +32,8 @@ class ValueConversion
 		}
 
 		return match (true) {
-			preg_match("|^a:[0-9]+:{.*}$|s", $value) => unserialize($value),
-			default                                  => $value,
+			preg_match("|^a:[0-9]+:{.*}$|s", $value) === 1 => unserialize($value),
+			default                                        => $value,
 		};
 	}
 
