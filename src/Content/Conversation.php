@@ -178,22 +178,15 @@ class Conversation
 			}
 		}
 
-		switch ($verb) {
-			case 'like':
-				return $this->l10n->tt('%2$s likes this.', '%2$s like this.', $total, $likerString);
-			case 'dislike':
-				return $this->l10n->tt('%2$s doesn\'t like this.', '%2$s don\'t like this.', $total, $likerString);
-			case 'attendyes':
-				return $this->l10n->tt('%2$s attends.', '%2$s attend.', $total, $likerString);
-			case 'attendno':
-				return $this->l10n->tt('%2$s doesn\'t attend.', '%2$s don\'t attend.', $total, $likerString);
-			case 'attendmaybe':
-				return $this->l10n->tt('%2$s attends maybe.', '%2$s attend maybe.', $total, $likerString);
-			case 'announce':
-				return $this->l10n->tt('%2$s reshared this.', '%2$s reshared this.', $total, $likerString);
-			default:
-				throw new InternalServerErrorException(sprintf('Unknown verb "%s"', $verb));
-		}
+		return match ($verb) {
+			'like'        => $this->l10n->tt('%2$s likes this.', '%2$s like this.', $total, $likerString),
+			'dislike'     => $this->l10n->tt('%2$s doesn\'t like this.', '%2$s don\'t like this.', $total, $likerString),
+			'attendyes'   => $this->l10n->tt('%2$s attends.', '%2$s attend.', $total, $likerString),
+			'attendno'    => $this->l10n->tt('%2$s doesn\'t attend.', '%2$s don\'t attend.', $total, $likerString),
+			'attendmaybe' => $this->l10n->tt('%2$s attends maybe.', '%2$s attend maybe.', $total, $likerString),
+			'announce'    => $this->l10n->tt('%2$s reshared this.', '%2$s reshared this.', $total, $likerString),
+			default       => throw new InternalServerErrorException(sprintf('Unknown verb "%s"', $verb)),
+		};
 	}
 
 	/**

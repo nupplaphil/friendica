@@ -115,22 +115,12 @@ class Post
 	 */
 	private function fetchPrivacy(array $item): string
 	{
-		switch ($item['private']) {
-			case Item::PRIVATE:
-				$output = DI::l10n()->t('Private Message');
-				break;
-
-			case Item::PUBLIC:
-				$output = DI::l10n()->t('Public Message');
-				break;
-
-			case Item::UNLISTED:
-				$output = DI::l10n()->t('Unlisted Message');
-				break;
-
-			default:
-				throw new InvalidArgumentException('Item privacy ' . $item['privacy'] . ' is unsupported');
-		}
+		$output = match ($item['private']) {
+			Item::PRIVATE  => DI::l10n()->t('Private Message'),
+			Item::PUBLIC   => DI::l10n()->t('Public Message'),
+			Item::UNLISTED => DI::l10n()->t('Unlisted Message'),
+			default        => throw new InvalidArgumentException('Item privacy ' . $item['privacy'] . ' is unsupported'),
+		};
 
 		return $output;
 	}

@@ -456,19 +456,11 @@ class Jetstream
 	 */
 	private function routeLike(stdClass $data): void
 	{
-		switch ($data->commit->operation) {
-			case 'delete':
-				$this->processor->deleteRecord($data);
-				break;
-
-			case 'create':
-				$this->processor->createLike($data);
-				break;
-
-			default:
-				$this->storeCommitMessage($data);
-				break;
-		}
+		match ($data->commit->operation) {
+			'delete' => $this->processor->deleteRecord($data),
+			'create' => $this->processor->createLike($data),
+			default  => $this->storeCommitMessage($data),
+		};
 	}
 
 	/**
@@ -479,23 +471,12 @@ class Jetstream
 	 */
 	private function routeProfile(stdClass $data): void
 	{
-		switch ($data->commit->operation) {
-			case 'delete':
-				$this->storeCommitMessage($data);
-				break;
-
-			case 'create':
-				$this->actor->updateContactByDID($data->did, 0);
-				break;
-
-			case 'update':
-				$this->actor->updateContactByDID($data->did, 0);
-				break;
-
-			default:
-				$this->storeCommitMessage($data);
-				break;
-		}
+		match ($data->commit->operation) {
+			'delete' => $this->storeCommitMessage($data),
+			'create' => $this->actor->updateContactByDID($data->did, 0),
+			'update' => $this->actor->updateContactByDID($data->did, 0),
+			default  => $this->storeCommitMessage($data),
+		};
 	}
 
 	/**

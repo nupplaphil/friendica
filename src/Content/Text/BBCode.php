@@ -2624,17 +2624,11 @@ class BBCode
 		$siteinfo = ParseUrl::getSiteinfoCached($url);
 
 		if (in_array($siteinfo['type'], ['image', 'video', 'audio'])) {
-			switch ($siteinfo['type']) {
-				case 'video':
-					$bbcode = "\n" . '[video]' . $url . '[/video]' . "\n";
-					break;
-				case 'audio':
-					$bbcode = "\n" . '[audio]' . $url . '[/audio]' . "\n";
-					break;
-				default:
-					$bbcode = "\n" . '[img=' . $url . '][/img]' . "\n";
-					break;
-			}
+			$bbcode = match ($siteinfo['type']) {
+				'video' => "\n" . '[video]' . $url . '[/video]' . "\n",
+				'audio' => "\n" . '[audio]' . $url . '[/audio]' . "\n",
+				default => "\n" . '[img=' . $url . '][/img]' . "\n",
+			};
 
 			DI::profiler()->stopRecording();
 			return $bbcode;

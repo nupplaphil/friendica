@@ -85,30 +85,19 @@ HELP;
 
 		$command = $this->getArgument(0);
 
-		switch ($command) {
-			case 'password':
-				return $this->password();
-			case 'add':
-				return ($this->addUser()) ? 0 : 1;
-			case 'allow':
-				return ($this->pendingUser(true)) ? 0 : 1;
-			case 'deny':
-				return ($this->pendingUser(false)) ? 0 : 1;
-			case 'block':
-				return ($this->blockUser(true)) ? 0 : 1;
-			case 'unblock':
-				return ($this->blockUser(false)) ? 0 : 1;
-			case 'delete':
-				return ($this->deleteUser()) ? 0 : 1;
-			case 'list':
-				return ($this->listUser()) ? 0 : 1;
-			case 'search':
-				return ($this->searchUser()) ? 0 : 1;
-			case 'config':
-				return ($this->configUser()) ? 0 : 1;
-			default:
-				throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.');
-		}
+		return match ($command) {
+			'password' => $this->password(),
+			'add'      => ($this->addUser()) ? 0 : 1,
+			'allow'    => ($this->pendingUser(true)) ? 0 : 1,
+			'deny'     => ($this->pendingUser(false)) ? 0 : 1,
+			'block'    => ($this->blockUser(true)) ? 0 : 1,
+			'unblock'  => ($this->blockUser(false)) ? 0 : 1,
+			'delete'   => ($this->deleteUser()) ? 0 : 1,
+			'list'     => ($this->listUser()) ? 0 : 1,
+			'search'   => ($this->searchUser()) ? 0 : 1,
+			'config'   => ($this->configUser()) ? 0 : 1,
+			default    => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
+		};
 	}
 
 	/**

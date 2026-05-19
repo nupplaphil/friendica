@@ -1182,35 +1182,18 @@ class Processor
 
 			$item['uid'] = $receiver;
 
-			$type = $activity['reception_type'][$receiver] ?? Receiver::TARGET_UNKNOWN;
-			switch ($type) {
-				case Receiver::TARGET_TO:
-					$item['post-reason'] = Item::PR_TO;
-					break;
-				case Receiver::TARGET_CC:
-					$item['post-reason'] = Item::PR_CC;
-					break;
-				case Receiver::TARGET_BTO:
-					$item['post-reason'] = Item::PR_BTO;
-					break;
-				case Receiver::TARGET_BCC:
-					$item['post-reason'] = Item::PR_BCC;
-					break;
-				case Receiver::TARGET_AUDIENCE:
-					$item['post-reason'] = Item::PR_AUDIENCE;
-					break;
-				case Receiver::TARGET_FOLLOWER:
-					$item['post-reason'] = Item::PR_FOLLOWER;
-					break;
-				case Receiver::TARGET_ANSWER:
-					$item['post-reason'] = Item::PR_COMMENT;
-					break;
-				case Receiver::TARGET_GLOBAL:
-					$item['post-reason'] = Item::PR_GLOBAL;
-					break;
-				default:
-					$item['post-reason'] = Item::PR_NONE;
-			}
+			$type                = $activity['reception_type'][$receiver] ?? Receiver::TARGET_UNKNOWN;
+			$item['post-reason'] = match ($type) {
+				Receiver::TARGET_TO       => Item::PR_TO,
+				Receiver::TARGET_CC       => Item::PR_CC,
+				Receiver::TARGET_BTO      => Item::PR_BTO,
+				Receiver::TARGET_BCC      => Item::PR_BCC,
+				Receiver::TARGET_AUDIENCE => Item::PR_AUDIENCE,
+				Receiver::TARGET_FOLLOWER => Item::PR_FOLLOWER,
+				Receiver::TARGET_ANSWER   => Item::PR_COMMENT,
+				Receiver::TARGET_GLOBAL   => Item::PR_GLOBAL,
+				default                   => Item::PR_NONE,
+			};
 
 			$item['post-reason'] = Item::getPostReason($item);
 

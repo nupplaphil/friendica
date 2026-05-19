@@ -262,20 +262,13 @@ class Profile extends BaseModule
 		$this->page['htmlhead'] .= Renderer::replaceMacros(Renderer::getMarkupTemplate('contact_head.tpl'), [
 		]);
 
-		$con = $this->t('Connection:');
-		switch ($localRelationship->rel) {
-			case ContactModel::FRIEND:
-				$relation_text = $this->t('Friend');
-				break;
-			case ContactModel::FOLLOWER:
-				$relation_text = $this->t('Follows you');
-				break;
-			case ContactModel::SHARING:
-				$relation_text = $this->t('You follow');
-				break;
-			default:
-				$relation_text = '';
-		}
+		$con           = $this->t('Connection:');
+		$relation_text = match ($localRelationship->rel) {
+			ContactModel::FRIEND   => $this->t('Friend'),
+			ContactModel::FOLLOWER => $this->t('Follows you'),
+			ContactModel::SHARING  => $this->t('You follow'),
+			default                => '',
+		};
 
 		if (!Protocol::supportsFollow($contact['network'])) {
 			$relation_text = '';
