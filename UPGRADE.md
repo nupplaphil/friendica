@@ -6,11 +6,17 @@ As an Addon maintainer or Friendica Developer you can inform yourself about all 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project [promises Backward Compatibility](doc/Developers-Intro.md#backward-compatibility).
 
-## [Version 2026.04](https://github.com/friendica/friendica/compare/2026.01...develop) - (unreleased)
+## [Version 2026.08](https://github.com/friendica/friendica/compare/2026.05...develop) - (unreleased)
 
 ### Removed
 
-- Support for PHP 7.4, 8.0 and 8.1 was dropped.
+- Dropped support for PHP 7.4, 8.0 and 8.1.
+
+## [Version 2026.05](https://github.com/friendica/friendica/compare/2026.01...2026.05) - (2026-05-20)
+
+### Deprecated
+
+- Support for PHP 7.4, 8.0 and 8.1 is deprecated and will be removed in the next release.
 
 ## [Version 2026.01](https://github.com/friendica/friendica/compare/2024.12-1...2026.01) - 2026-01-27
 
