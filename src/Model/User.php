@@ -123,23 +123,14 @@ class User
 	 */
 	public static function getAccountTypeByString(string $accounttype)
 	{
-		switch ($accounttype) {
-			case 'person':
-				return self::ACCOUNT_TYPE_PERSON;
-
-			case 'organisation':
-				return self::ACCOUNT_TYPE_ORGANISATION;
-
-			case 'news':
-				return self::ACCOUNT_TYPE_NEWS;
-
-			case 'community':
-				return self::ACCOUNT_TYPE_COMMUNITY;
-
-			case 'relay':
-				return self::ACCOUNT_TYPE_RELAY;
-		}
-		return null;
+		return match ($accounttype) {
+			'person'       => self::ACCOUNT_TYPE_PERSON,
+			'organisation' => self::ACCOUNT_TYPE_ORGANISATION,
+			'news'         => self::ACCOUNT_TYPE_NEWS,
+			'community'    => self::ACCOUNT_TYPE_COMMUNITY,
+			'relay'        => self::ACCOUNT_TYPE_RELAY,
+			default        => null,
+		};
 	}
 
 	/**

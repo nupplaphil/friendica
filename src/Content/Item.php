@@ -299,13 +299,10 @@ class Item
 
 				switch ($obj['verb']) {
 					case Activity::POST:
-						switch ($obj['object-type']) {
-							case Activity\ObjectType::EVENT:
-								$post_type = $this->l10n->t('event');
-								break;
-							default:
-								$post_type = $this->l10n->t('status');
-						}
+						$post_type = match ($obj['object-type']) {
+							Activity\ObjectType::EVENT => $this->l10n->t('event'),
+							default                    => $this->l10n->t('status'),
+						};
 						break;
 
 					default:
@@ -1411,4 +1408,41 @@ class Item
 		$this->logger->debug('Marking item as viewed.', ['uri-id' => $uri_id, 'uid' => $uid]);
 		ItemModel::performActivity($item['id'], 'view', $uid, '<' . $self['id'] . '>', '', '', '');
 	}
+
+	/**
+	 * Check if the summary is redundant to the body
+	 *
+	 * @param string $body
+	 * @param string $summary
+	 * @return boolean summary is redundant
+	 */
+	public function redundantSummary(?string $body, ?string $summary): bool
+	{
+		$normalize = function (string $text): string {
+			$text = mb_strtolower($text);
+			$text = str_replace(["\n", "\r", "\t"], ' ', $text);
+			$text = preg_replace('/\s+/', ' ', $text);
+			return trim($text);
+		};
+
+		$summary_norm = $normalize($summary ?? '');
+		if ($summary_norm === '') {
+			return false;
+		}
+
+		$body_norm = $normalize(BBCode::toPlaintext($body ?? '', false));
+
+		$len        = mb_strlen($summary_norm);
+		$body_start = mb_substr($body_norm, 0, $len);
+
+		$distance = levenshtein($body_start, $summary_norm);
+		$max_len  = max($len, mb_strlen($body_start));
+
+		if ($max_len == 0) {
+			return false;
+		}
+
+		return ($distance / $max_len) <= 0.1;
+	}
+
 }

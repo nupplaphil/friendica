@@ -1902,11 +1902,12 @@ class Transmitter
 
 			if (!empty($item['quote-uri-id']) && ($item['quote-uri-id'] != $item['uri-id'])) {
 				if (Post::exists(['uri-id' => $item['quote-uri-id'], 'network' => [Protocol::ACTIVITYPUB, Protocol::DFRN]])) {
-					$real_quote               = true;
-					$data['_misskey_content'] = BBCode::convertForUriId($item['uri-id'], BBCode::removeSharedData($body), BBCode::ACTIVITYPUB);
-					$data['quoteUrl']         = $item['quote-uri'];
-					$data['quoteUri']         = $item['quote-uri'];
-					$body                     = DI::contentItem()->addShareLink($body, $item['quote-uri-id']);
+					$real_quote = true;
+					// Currently deactivated until we now the format, see https://github.com/friendica/friendica/issues/15688#issuecomment-4470527471
+					// $data['_misskey_content'] = BBCode::convertForUriId($item['uri-id'], BBCode::removeSharedData($body), BBCode::ACTIVITYPUB);
+					$data['quoteUrl'] = $item['quote-uri'];
+					$data['quoteUri'] = $item['quote-uri'];
+					$body             = DI::contentItem()->addShareLink($body, $item['quote-uri-id']);
 				} else {
 					$body = DI::contentItem()->addSharedPost($item, $body);
 				}

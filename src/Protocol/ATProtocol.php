@@ -492,16 +492,11 @@ final class ATProtocol
 	 */
 	public function getUserForProtocol(int $protocol): ?int
 	{
-		switch ($protocol) {
-			case Conversation::PARCEL_JETSTREAM:
-				return 0;
-
-			case Conversation::PARCEL_CONNECTOR:
-				return $this->getUser();
-
-			default:
-				return null;
-		}
+		return match ($protocol) {
+			Conversation::PARCEL_JETSTREAM => 0,
+			Conversation::PARCEL_CONNECTOR => $this->getUser(),
+			default                        => null,
+		};
 	}
 
 	/**

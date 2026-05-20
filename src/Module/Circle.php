@@ -377,16 +377,12 @@ class Circle extends BaseModule
 
 	private static function matchRelation(string $relation, int $rel)
 	{
-		switch ($relation) {
-			case 'followers':
-				return($rel == Model\Contact::FOLLOWER);
-			case 'following':
-				return($rel == Model\Contact::SHARING);
-			case 'mutuals':
-				return($rel == Model\Contact::FRIEND);
-			case 'nothing':
-				return($rel == Model\Contact::NOTHING);
-		}
-		return true;
+		return match ($relation) {
+			'followers' => $rel == Model\Contact::FOLLOWER,
+			'following' => $rel == Model\Contact::SHARING,
+			'mutuals'   => $rel == Model\Contact::FRIEND,
+			'nothing'   => $rel == Model\Contact::NOTHING,
+			default     => true,
+		};
 	}
 }

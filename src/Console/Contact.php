@@ -75,18 +75,13 @@ HELP;
 
 		$command = $this->getArgument(0);
 
-		switch ($command) {
-			case 'add':
-				return ($this->addContact()) ? 0 : 1;
-			case 'remove':
-				return ($this->removeContact()) ? 0 : 1;
-			case 'search':
-				return ($this->searchContact()) ? 0 : 1;
-			case 'terminate':
-				return ($this->terminateContact()) ? 0 : 1;
-			default:
-				throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.');
-		}
+		return match ($command) {
+			'add'       => ($this->addContact()) ? 0 : 1,
+			'remove'    => ($this->removeContact()) ? 0 : 1,
+			'search'    => ($this->searchContact()) ? 0 : 1,
+			'terminate' => ($this->terminateContact()) ? 0 : 1,
+			default     => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
+		};
 	}
 
 	/**

@@ -394,22 +394,13 @@ class Contact extends BaseModule
 		$tabs_tpl  = Renderer::getMarkupTemplate('common_tabs.tpl');
 		$tabs_html = Renderer::replaceMacros($tabs_tpl, ['$tabs' => $tabs, '$more' => DI::l10n()->t('More')]);
 
-		switch ($rel) {
-			case 'followers':
-				$header = DI::l10n()->t('Followers');
-				break;
-			case 'following':
-				$header = DI::l10n()->t('Following');
-				break;
-			case 'mutuals':
-				$header = DI::l10n()->t('Friends');
-				break;
-			case 'nothing':
-				$header = DI::l10n()->t('No relationship');
-				break;
-			default:
-				$header = DI::l10n()->t('Contacts');
-		}
+		$header = match ($rel) {
+			'followers' => DI::l10n()->t('Followers'),
+			'following' => DI::l10n()->t('Following'),
+			'mutuals'   => DI::l10n()->t('Friends'),
+			'nothing'   => DI::l10n()->t('No relationship'),
+			default     => DI::l10n()->t('Contacts'),
+		};
 
 		switch ($type) {
 			case 'pending':

@@ -115,22 +115,12 @@ class Post
 	 */
 	private function fetchPrivacy(array $item): string
 	{
-		switch ($item['private']) {
-			case Item::PRIVATE:
-				$output = DI::l10n()->t('Private Message');
-				break;
-
-			case Item::PUBLIC:
-				$output = DI::l10n()->t('Public Message');
-				break;
-
-			case Item::UNLISTED:
-				$output = DI::l10n()->t('Unlisted Message');
-				break;
-
-			default:
-				throw new InvalidArgumentException('Item privacy ' . $item['privacy'] . ' is unsupported');
-		}
+		$output = match ($item['private']) {
+			Item::PRIVATE  => DI::l10n()->t('Private Message'),
+			Item::PUBLIC   => DI::l10n()->t('Public Message'),
+			Item::UNLISTED => DI::l10n()->t('Unlisted Message'),
+			default        => throw new InvalidArgumentException('Item privacy ' . $item['privacy'] . ' is unsupported'),
+		};
 
 		return $output;
 	}
@@ -526,6 +516,10 @@ class Post
 		$parent_guid     = $thread_parent[$item['thr-parent-id']]['guid'] ?? '';
 		$parent_username = $thread_parent[$item['thr-parent-id']]['name'] ?? '';
 		$parent_unknown  = $parent_username ? '' : DI::l10n()->t('Unknown parent');
+
+		if (DI::contentItem()->redundantSummary($item['body'], $item['content-warning'])) {
+			$item['content-warning'] = '';
+		}
 
 		$tmp_item = [
 			'parentguid'             => $parent_guid,

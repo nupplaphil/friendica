@@ -1790,27 +1790,13 @@ class Contact
 	 */
 	public static function getAccountType(int $type): string
 	{
-		switch ($type) {
-			case self::TYPE_ORGANISATION:
-				$account_type = DI::l10n()->t("Organisation");
-				break;
-
-			case self::TYPE_NEWS:
-				$account_type = DI::l10n()->t('News');
-				break;
-
-			case self::TYPE_COMMUNITY:
-				$account_type = DI::l10n()->t("Group");
-				break;
-
-			case self::TYPE_RELAY:
-				$account_type = DI::l10n()->t("Relay");
-				break;
-
-			default:
-				$account_type = "";
-				break;
-		}
+		$account_type = match ($type) {
+			self::TYPE_ORGANISATION => DI::l10n()->t("Organisation"),
+			self::TYPE_NEWS         => DI::l10n()->t('News'),
+			self::TYPE_COMMUNITY    => DI::l10n()->t("Group"),
+			self::TYPE_RELAY        => DI::l10n()->t("Relay"),
+			default                 => "",
+		};
 
 		return $account_type;
 	}
@@ -2019,29 +2005,22 @@ class Contact
 			$platform = '';
 		}
 
-		switch ($platform) {
-			case 'friendica':
-			case 'friendika':
-				$header = DI::baseUrl() . (new Header(DI::config()))->getMastodonBannerPath();
-				break;
-			case 'diaspora':
-				/**
-				 * Picture credits
-				 * @author  John Liu <https://www.flickr.com/photos/8047705@N02/>
-				 * @license CC BY 2.0 https://creativecommons.org/licenses/by/2.0/
-				 * @link    https://www.flickr.com/photos/8047705@N02/5572197407
-				 */
-				$header = DI::baseUrl() . '/images/diaspora-banner.jpg';
-				break;
-			default:
-				/**
-				 * Use a random picture.
-				 * The service provides random pictures from Unsplash.
-				 * @license https://unsplash.com/license
-				 */
-				$header = 'https://picsum.photos/seed/' . hash('ripemd128', $contact['url']) . '/960/300';
-				break;
-		}
+		$header = match ($platform) {
+			'friendica', 'friendika' => DI::baseUrl() . (new Header(DI::config()))->getMastodonBannerPath(),
+			/**
+			 * Picture credits
+			 * @author  John Liu <https://www.flickr.com/photos/8047705@N02/>
+			 * @license CC BY 2.0 https://creativecommons.org/licenses/by/2.0/
+			 * @link    https://www.flickr.com/photos/8047705@N02/5572197407
+			 */
+			'diaspora' => DI::baseUrl() . '/images/diaspora-banner.jpg',
+			/**
+			 * Use a random picture.
+			 * The service provides random pictures from Unsplash.
+			 * @license https://unsplash.com/license
+			 */
+			default => 'https://picsum.photos/seed/' . hash('ripemd128', $contact['url']) . '/960/300',
+		};
 
 		return $header;
 	}

@@ -844,18 +844,11 @@ class Event
 		}
 
 		// Get the file extension for the format.
-		switch ($format) {
-			case "ical":
-				$file_ext = "ics";
-				break;
-
-			case "csv":
-				$file_ext = "csv";
-				break;
-
-			default:
-				$file_ext = "";
-		}
+		$file_ext = match ($format) {
+			"ical"  => "ics",
+			"csv"   => "csv",
+			default => "",
+		};
 
 		$return = [
 			'success'   => $process,

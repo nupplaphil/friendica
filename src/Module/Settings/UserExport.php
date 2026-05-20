@@ -168,14 +168,10 @@ class UserExport extends BaseSettings
 					continue;
 				}
 
-				switch ($dbStructure[$table]['fields'][$k]['type']) {
-					case 'datetime':
-						$result[$k] = $v ?? DBA::NULL_DATETIME;
-						break;
-					default:
-						$result[$k] = $v;
-						break;
-				}
+				$result[$k] = match ($dbStructure[$table]['fields'][$k]['type']) {
+					'datetime' => $v ?? DBA::NULL_DATETIME,
+					default    => $v,
+				};
 			}
 		}
 		DBA::close($rows);

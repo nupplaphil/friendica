@@ -54,7 +54,7 @@ class APContact
 			return $data;
 		}
 
-		$webfinger = Probe::getWebfingerArray($addr);
+		$webfinger = Probe::getWebfingerArray($addr, false);
 		if (empty($webfinger['webfinger']['links'])) {
 			return [];
 		}
@@ -305,6 +305,30 @@ class APContact
 			$apcontact['alias'] = JsonLD::fetchElement($compacted, 'as:url', '@id');
 			if (is_array($apcontact['alias'])) {
 				$apcontact['alias'] = JsonLD::fetchElement($compacted['as:url'], 'as:href', '@id');
+			}
+		}
+
+		// There seem to be Mastodon versions where you can only use webfinger with the alias.
+		if (isset($apcontact['alias']) && (!isset($apcontact['addr']) || !isset($apcontact['baseurl']))) {
+			$apcontact = array_merge($apcontact, self::fetchWebfingerData($apcontact['alias']));
+		}
+
+		// If nothing is found yet, try to use the nick and the host of the profile URL to query the webfinger data.
+		if (empty($apcontact['addr']) || empty($apcontact['baseurl'])) {
+			try {
+				$apcontact = array_merge($apcontact, self::fetchWebfingerData($apcontact['nick'] . '@' . (new Uri($apcontact['url']))->getAuthority()));
+			} catch (\Throwable $e) {
+				DI::logger()->warning('Unable to coerce APContact URL into a UriInterface object', ['url' => $apcontact['url'], 'error' => $e->getMessage()]);
+			}
+		}
+
+		// The field "as:alsoKnownAs" is used by bird.gy and seems to be the only way to query the webfinger data.
+		$alsoKnownAs = JsonLD::fetchElement($compacted, 'as:alsoKnownAs', '@id');
+		if (isset($alsoKnownAs) && (empty($apcontact['addr']) || empty($apcontact['baseurl']))) {
+			try {
+				$apcontact = array_merge($apcontact, self::fetchWebfingerData($alsoKnownAs . '@' . (new Uri($apcontact['url']))->getAuthority()));
+			} catch (\Throwable $e) {
+				DI::logger()->warning('Unable to coerce APContact URL into a UriInterface object', ['url' => $apcontact['url'], 'error' => $e->getMessage()]);
 			}
 		}
 

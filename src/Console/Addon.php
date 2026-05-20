@@ -69,16 +69,12 @@ HELP;
 
 		$command = $this->getArgument(0);
 
-		switch ($command) {
-			case 'list':
-				return $this->list();
-			case 'enable':
-				return $this->enable();
-			case 'disable':
-				return $this->disable();
-			default:
-				throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.');
-		}
+		return match ($command) {
+			'list'    => $this->list(),
+			'enable'  => $this->enable(),
+			'disable' => $this->disable(),
+			default   => throw new \Asika\SimpleConsole\CommandArgsException('Wrong command.'),
+		};
 	}
 
 	/**

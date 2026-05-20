@@ -45,11 +45,6 @@ class Probe
 	public const WEBFINGER = '/.well-known/webfinger?resource={uri}';
 
 	/**
-	 * @var string Base URL
-	 */
-	private static $baseurl;
-
-	/**
 	 * @var boolean Whether a timeout has occurred
 	 */
 	private static $isTimeout;
@@ -389,16 +384,18 @@ class Probe
 	/**
 	 * Get webfinger data from a given URI
 	 *
-	 * @param string $uri URI
+	 * @param string $uri      URI
+	 * @param bool   $guessing Guess the address if it is not provided in the URI (e.g. for "https://example.com/user" it would guess "user@example.com")
 	 *
 	 * @return array Webfinger data
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	public static function getWebfingerArray(string $uri): array
+	public static function getWebfingerArray(string $uri, bool $guessing = true): array
 	{
 		$parts = parse_url($uri);
 
 		if (!empty($parts['scheme']) && !empty($parts['host'])) {
+			$addr = '';
 			$host = $parts['host'];
 			if (!empty($parts['port'])) {
 				$host .= ':' . $parts['port'];
@@ -406,34 +403,24 @@ class Probe
 
 			$baseurl = $parts['scheme'] . '://' . $host;
 
-			$nick = '';
-			$addr = '';
-
-			$path_parts = [];
-
-			if (array_key_exists('path', $parts) && trim(strval($parts['path']), '/') !== '') {
-				$path_parts = explode('/', trim($parts['path'], '/'));
-
-				$nick = ltrim(end($path_parts), '@');
-				$addr = $nick . '@' . $host;
+			if ($guessing) {
+				$path_parts = explode('/', trim($parts['path'] ?? '', '/'));
+				if ($path_parts) {
+					$addr = ltrim(end($path_parts), '@') . '@' . $host;
+				}
 			}
 
-			$webfinger = self::getWebfinger($parts['scheme'] . '://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, $uri, $addr);
-
-			if (empty($webfinger)) {
-				while (empty($webfinger) && (count($path_parts) > 1)) {
-					$host .= '/' . array_shift($path_parts);
-					$baseurl = $parts['scheme'] . '://' . $host;
-
-					if (!empty($nick)) {
-						$addr = $nick . '@' . $host;
+			$webfinger = self::getWebfinger($baseurl . self::WEBFINGER, HttpClientAccept::JRD_JSON, $uri, $addr);
+			if (isset($webfinger['webfinger']['subject'])) {
+				$addr = str_replace('acct:', '', $webfinger['webfinger']['subject']);
+				if (str_contains($addr, '@') && !str_contains($addr, '/')) {
+					$addr_parts = explode('@', $addr);
+					if (count($addr_parts) === 2) {
+						$webfinger['nick']    = $addr_parts[0];
+						$webfinger['addr']    = $addr;
+						$webfinger['baseurl'] = $baseurl;
+						return $webfinger;
 					}
-
-					$webfinger = self::getWebfinger($parts['scheme'] . '://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, $uri, $addr);
-				}
-
-				if (empty($webfinger)) {
-					return [];
 				}
 			}
 		} elseif (str_contains($uri, '@') && !str_contains($uri, '/')) {
@@ -448,16 +435,14 @@ class Probe
 			}
 
 			$host = $addr_parts[1];
-			$nick = $addr_parts[0];
-			$addr = $uri;
 
-			$webfinger = self::getWebfinger('https://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, $uri, $addr);
+			$webfinger = self::getWebfinger('https://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, '', $uri);
 			if (self::$isTimeout) {
 				return [];
 			}
 
 			if (is_null($webfinger)) {
-				$webfinger = self::getWebfinger('http://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, $uri, $addr);
+				$webfinger = self::getWebfinger('http://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, '', $uri);
 				if (self::$isTimeout || is_null($webfinger)) {
 					return [];
 				}
@@ -466,26 +451,17 @@ class Probe
 				$baseurl = 'https://' . $host;
 			}
 
-			if (empty($webfinger)) {
-				$baseurl = self::$baseurl;
+			if (!$webfinger) {
+				return [];
 			}
-		} else {
-			DI::logger()->info('URI was not detectable', ['uri' => $uri]);
-			return [];
+
+			$webfinger['nick']    = $addr_parts[0];
+			$webfinger['addr']    = $uri;
+			$webfinger['baseurl'] = $baseurl;
+			return $webfinger;
 		}
-
-		if (empty($webfinger)) {
-			return [];
-		}
-
-		if ($webfinger['detected'] == $addr) {
-			$webfinger['nick'] = $nick;
-			$webfinger['addr'] = $addr;
-		}
-
-		$webfinger['baseurl'] = $baseurl;
-
-		return $webfinger;
+		DI::logger()->info('URI was not detectable', ['uri' => $uri]);
+		return [];
 	}
 
 	/**
@@ -518,7 +494,7 @@ class Probe
 		}
 
 		// Then try the URI
-		if (empty($webfinger) && $uri != $addr) {
+		if (empty($webfinger) && $uri !== '' && $uri != $addr) {
 			$detected  = $uri;
 			$path      = str_replace('{uri}', urlencode($uri), $template);
 			$webfinger = self::webfinger($path, $type);
@@ -579,12 +555,14 @@ class Probe
 
 		DI::logger()->info('Probing start', ['uri' => $uri]);
 
-		if (!empty($ap_profile['addr']) && ($ap_profile['addr'] != $uri)) {
-			$data = self::getWebfingerArray($ap_profile['addr']);
+		if (!empty($ap_profile['addr'])) {
+			$data = self::getWebfingerArray($ap_profile['addr'], false);
 		}
 
 		if (empty($data)) {
-			$data = self::getWebfingerArray($uri);
+			// We only guess the address when we are sure that the URI is not some AP profile.
+			// We only need it for Diaspora where there doesn't seem to be another way than to guess the address from the URI.
+			$data = self::getWebfingerArray($uri, !$ap_profile);
 		}
 
 		if (empty($data)) {
