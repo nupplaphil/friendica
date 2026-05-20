@@ -517,6 +517,10 @@ class Post
 		$parent_username = $thread_parent[$item['thr-parent-id']]['name'] ?? '';
 		$parent_unknown  = $parent_username ? '' : DI::l10n()->t('Unknown parent');
 
+		if (DI::contentItem()->redundantSummary($item['body'], $item['content-warning'])) {
+			$item['content-warning'] = '';
+		}
+
 		$tmp_item = [
 			'parentguid'             => $parent_guid,
 			'inreplyto'              => DI::l10n()->t('in reply to %s', $parent_username),

@@ -162,7 +162,7 @@
 			trigger: [
 				{
 					selector: '.emojis',
-					insertInto: ['#comment-edit-text-0', '.profile-jot-text-full', '.comment-edit-text-full', '.prvmail-text', '.emojis-target']
+					insertInto: ['#comment-edit-text-0', '#profile-jot-text', '.profile-jot-text-full', '.comment-edit-text-full', '.prvmail-text', '.emojis-target']
 				}
 			],
 			closeButton: true

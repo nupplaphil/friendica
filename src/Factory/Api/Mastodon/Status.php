@@ -190,6 +190,10 @@ class Status extends BaseFactory
 			new ArrayFilterEvent(ArrayFilterEvent::PREPARE_POST_FILTER_CONTENT, $hook_data),
 		)->getArray();
 
+		if ($this->contentItem->redundantSummary($item['body'], $item['content-warning'])) {
+			$item['content-warning'] = '';
+		}
+
 		$filter_reasons = $hook_data['filter_reasons'];
 		unset($hook_data);
 		if (!empty($filter_reasons)) {
