@@ -95,7 +95,7 @@ class ItemTest extends MockedTestCase
 		$this->setDiceProperty($this->originalDice);
 	}
 
-	public function dataRedundantSummary()
+	public static function dataRedundantSummary()
 	{
 		return [
 			'empty-summary' => [
