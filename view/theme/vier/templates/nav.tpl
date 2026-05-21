@@ -6,8 +6,6 @@
   *}}
 
 <header>
-	{{* {{$langselector}} *}}
-
 	<div id="site-location">{{$sitelocation}}</div>
 	<div id="banner">{{$banner nofilter}}</div>
 </header>
@@ -164,7 +162,3 @@
 	</ul>
 
 </nav>
-
-<!--
-<div class="icon-flag" style="position: fixed; bottom: 10px; left: 20px; z-index:9;">{{$langselector}}</div>
--->

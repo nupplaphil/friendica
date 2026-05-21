@@ -7,8 +7,6 @@
 {{* we have modified the navmenu (look at function frio_remote_nav() ) to have remote links. *}}
 {{if $userinfo}}
 	<header>
-		{{* {{$langselector}} *}}
-
 		<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
 		<div id="banner" class="hidden-sm hidden-xs">
 			<a href="{{$baseurl}}" aria-hidden="true">
@@ -322,9 +320,6 @@
 							</li>{{* End of userinfo dropdown menu *}}
 						{{/if}}
 
-						<!-- Language selector, I do not find it relevant, activate if necessary.
-						<li>{{$langselector}}</li>
-						-->
 					</ul>
 				</div>{{* End of right navbar *}}
 
