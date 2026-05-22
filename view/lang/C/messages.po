@@ -590,7 +590,7 @@ msgstr ""
 msgid "Following"
 msgstr ""
 
-#: src/BaseModule.php:442 src/Content/Widget.php:265 src/Model/User.php:1419
+#: src/BaseModule.php:442 src/Content/Widget.php:265 src/Model/User.php:1422
 #: src/Module/Contact.php:400
 msgid "Friends"
 msgstr ""
@@ -861,7 +861,7 @@ msgstr ""
 msgid "RSS/Atom"
 msgstr ""
 
-#: src/Content/ContactSelector.php:122
+#: src/Content/ContactSelector.php:122 src/Module/Admin/Roles.php:124
 #: src/Module/Moderation/Users/Active.php:82
 #: src/Module/Moderation/Users/Blocked.php:82
 #: src/Module/Moderation/Users/Create.php:59
@@ -1531,7 +1531,7 @@ msgstr ""
 
 #: src/Content/Feature.php:121 src/Model/Profile.php:812
 #: src/Module/Admin/Summary.php:207 src/Module/Item/Compose.php:152
-#: src/Module/Moderation/Report/Create.php:302
+#: src/Module/Moderation/Report/Create.php:307
 #: src/Module/Moderation/Summary.php:60
 msgid "Summary"
 msgstr ""
@@ -1689,6 +1689,7 @@ msgid "event"
 msgstr ""
 
 #: src/Content/Item.php:304 src/Content/Item.php:314
+#: src/Module/Moderation/Reports.php:340
 msgid "status"
 msgstr ""
 
@@ -2039,7 +2040,8 @@ msgstr ""
 #: src/Module/Moderation/Blocklist/Server/Index.php:84
 #: src/Module/Moderation/Item/Delete.php:47
 #: src/Module/Moderation/Item/Source.php:66
-#: src/Module/Moderation/Reports.php:118 src/Module/Moderation/Summary.php:59
+#: src/Module/Moderation/Reports.php:236 src/Module/Moderation/Reports.php:325
+#: src/Module/Moderation/Summary.php:59
 #: src/Module/Moderation/Users/Active.php:89
 #: src/Module/Moderation/Users/Blocked.php:89
 #: src/Module/Moderation/Users/Create.php:47
@@ -2910,60 +2912,60 @@ msgstr ""
 msgid "Relay"
 msgstr ""
 
-#: src/Model/Contact.php:3112
+#: src/Model/Contact.php:3138
 msgid "Disallowed profile URL."
 msgstr ""
 
-#: src/Model/Contact.php:3117 src/Module/Friendica.php:91
+#: src/Model/Contact.php:3143 src/Module/Friendica.php:91
 msgid "Blocked domain"
 msgstr ""
 
-#: src/Model/Contact.php:3122
+#: src/Model/Contact.php:3148
 msgid "Connect URL missing."
 msgstr ""
 
-#: src/Model/Contact.php:3135
+#: src/Model/Contact.php:3161
 msgid "The contact could not be added. Please check the relevant network credentials in your Settings -> Social Networks page."
 msgstr ""
 
-#: src/Model/Contact.php:3153
+#: src/Model/Contact.php:3179
 #, php-format
 msgid "Expected network %s does not match actual network %s"
 msgstr ""
 
-#: src/Model/Contact.php:3170
+#: src/Model/Contact.php:3196
 msgid "This seems to be a relay account. They can't be followed by users."
 msgstr ""
 
-#: src/Model/Contact.php:3177
+#: src/Model/Contact.php:3203
 msgid "The profile address specified does not provide adequate information."
 msgstr ""
 
-#: src/Model/Contact.php:3179
+#: src/Model/Contact.php:3205
 msgid "No compatible communication protocols or feeds were discovered."
 msgstr ""
 
-#: src/Model/Contact.php:3182
+#: src/Model/Contact.php:3208
 msgid "An author or name was not found."
 msgstr ""
 
-#: src/Model/Contact.php:3185
+#: src/Model/Contact.php:3211
 msgid "No browser URL could be matched to this address."
 msgstr ""
 
-#: src/Model/Contact.php:3188
+#: src/Model/Contact.php:3214
 msgid "Unable to match @-style Identity Address with a known protocol or email contact."
 msgstr ""
 
-#: src/Model/Contact.php:3189
+#: src/Model/Contact.php:3215
 msgid "Use mailto: in front of address to force email check."
 msgstr ""
 
-#: src/Model/Contact.php:3195
+#: src/Model/Contact.php:3221
 msgid "Limited profile. This person will be unable to receive direct/personal notifications from you."
 msgstr ""
 
-#: src/Model/Contact.php:3254
+#: src/Model/Contact.php:3280
 msgid "Unable to retrieve contact information."
 msgstr ""
 
@@ -3413,7 +3415,7 @@ msgstr ""
 msgid "Responsible account: %s"
 msgstr ""
 
-#: src/Model/User.php:229 src/Model/User.php:1353
+#: src/Model/User.php:229 src/Model/User.php:1356
 msgid "SERIOUS ERROR: Generation of security keys failed."
 msgstr ""
 
@@ -3445,103 +3447,103 @@ msgstr ""
 msgid "The password can't contain white spaces nor accentuated letters"
 msgstr ""
 
-#: src/Model/User.php:1233
+#: src/Model/User.php:1236
 msgid "Passwords do not match. Password unchanged."
 msgstr ""
 
-#: src/Model/User.php:1242
+#: src/Model/User.php:1245
 msgid "An invitation is required."
 msgstr ""
 
-#: src/Model/User.php:1246
+#: src/Model/User.php:1249
 msgid "Invitation could not be verified."
 msgstr ""
 
-#: src/Model/User.php:1254
+#: src/Model/User.php:1257
 msgid "Invalid OpenID url"
 msgstr ""
 
-#: src/Model/User.php:1268 src/Security/Authentication.php:205
+#: src/Model/User.php:1271 src/Security/Authentication.php:205
 msgid "We encountered a problem while logging in with the OpenID you provided. Please check the correct spelling of the ID."
 msgstr ""
 
-#: src/Model/User.php:1268 src/Security/Authentication.php:205
+#: src/Model/User.php:1271 src/Security/Authentication.php:205
 msgid "The error message was:"
 msgstr ""
 
-#: src/Model/User.php:1274
+#: src/Model/User.php:1277
 msgid "Please enter the required information."
 msgstr ""
 
-#: src/Model/User.php:1288
+#: src/Model/User.php:1291
 #, php-format
 msgid "system.username_min_length (%s) and system.username_max_length (%s) are excluding each other, swapping values."
 msgstr ""
 
-#: src/Model/User.php:1295
+#: src/Model/User.php:1298
 #, php-format
 msgid "Username should be at least %s character."
 msgid_plural "Username should be at least %s characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/User.php:1299
+#: src/Model/User.php:1302
 #, php-format
 msgid "Username should be at most %s character."
 msgid_plural "Username should be at most %s characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/User.php:1307
+#: src/Model/User.php:1310
 msgid "That doesn't appear to be your full (First Last) name."
 msgstr ""
 
-#: src/Model/User.php:1312
+#: src/Model/User.php:1315
 msgid "Your email domain is not among those allowed on this site."
 msgstr ""
 
-#: src/Model/User.php:1316
+#: src/Model/User.php:1319
 msgid "Not a valid email address."
 msgstr ""
 
-#: src/Model/User.php:1319
+#: src/Model/User.php:1322
 msgid "The nickname was blocked from registration by the nodes admin."
 msgstr ""
 
-#: src/Model/User.php:1323 src/Model/User.php:1329
+#: src/Model/User.php:1326 src/Model/User.php:1332
 #: src/Module/User/Import.php:206
 msgid "Cannot use that email."
 msgstr ""
 
-#: src/Model/User.php:1335
+#: src/Model/User.php:1338
 msgid "Your nickname can only contain a-z, 0-9 and _."
 msgstr ""
 
-#: src/Model/User.php:1343 src/Model/User.php:1393
+#: src/Model/User.php:1346 src/Model/User.php:1396
 msgid "Nickname is already registered. Please choose another."
 msgstr ""
 
-#: src/Model/User.php:1380 src/Model/User.php:1384
+#: src/Model/User.php:1383 src/Model/User.php:1387
 msgid "An error occurred during registration. Please try again."
 msgstr ""
 
-#: src/Model/User.php:1407
+#: src/Model/User.php:1410
 msgid "An error occurred creating your default profile. Please try again."
 msgstr ""
 
-#: src/Model/User.php:1414
+#: src/Model/User.php:1417
 msgid "An error occurred creating your self contact. Please try again."
 msgstr ""
 
-#: src/Model/User.php:1423
+#: src/Model/User.php:1426
 msgid "An error occurred creating your default contact circle. Please try again."
 msgstr ""
 
-#: src/Model/User.php:1471
+#: src/Model/User.php:1474
 msgid "Profile Photos"
 msgstr ""
 
-#: src/Model/User.php:1669
+#: src/Model/User.php:1672
 #, php-format
 msgid ""
 "\n"
@@ -3549,7 +3551,7 @@ msgid ""
 "\t\t\tthe administrator of %2$s has set up an account for you."
 msgstr ""
 
-#: src/Model/User.php:1672
+#: src/Model/User.php:1675
 #, php-format
 msgid ""
 "\n"
@@ -3580,12 +3582,12 @@ msgid ""
 "\t\tThank you and welcome to %4$s."
 msgstr ""
 
-#: src/Model/User.php:1704 src/Model/User.php:1810
+#: src/Model/User.php:1707 src/Model/User.php:1813
 #, php-format
 msgid "Registration details for %s"
 msgstr ""
 
-#: src/Model/User.php:1724
+#: src/Model/User.php:1727
 #, php-format
 msgid ""
 "\n"
@@ -3600,12 +3602,12 @@ msgid ""
 "\t\t"
 msgstr ""
 
-#: src/Model/User.php:1743
+#: src/Model/User.php:1746
 #, php-format
 msgid "Registration at %s"
 msgstr ""
 
-#: src/Model/User.php:1767
+#: src/Model/User.php:1770
 #, php-format
 msgid ""
 "\n"
@@ -3614,7 +3616,7 @@ msgid ""
 "\t\t\t"
 msgstr ""
 
-#: src/Model/User.php:1775
+#: src/Model/User.php:1778
 #, php-format
 msgid ""
 "\n"
@@ -3645,7 +3647,7 @@ msgid ""
 "\t\t\tThank you and welcome to %2$s."
 msgstr ""
 
-#: src/Model/User.php:1837
+#: src/Model/User.php:1840
 msgid "User with delegates can't be removed, please remove delegate users first"
 msgstr ""
 
@@ -3680,15 +3682,15 @@ msgstr ""
 #: src/Module/Admin/Addons/Details.php:137 src/Module/Admin/Addons/Index.php:83
 #: src/Module/Admin/Federation.php:218 src/Module/Admin/Logs/Settings.php:74
 #: src/Module/Admin/Logs/View.php:71 src/Module/Admin/Queue.php:64
-#: src/Module/Admin/Site.php:457 src/Module/Admin/Storage.php:119
-#: src/Module/Admin/Summary.php:206 src/Module/Admin/Themes/Details.php:82
-#: src/Module/Admin/Themes/Index.php:103 src/Module/Admin/Tos.php:63
-#: src/Module/Moderation/Users/Pending.php:82
+#: src/Module/Admin/Roles.php:118 src/Module/Admin/Site.php:457
+#: src/Module/Admin/Storage.php:119 src/Module/Admin/Summary.php:206
+#: src/Module/Admin/Themes/Details.php:82 src/Module/Admin/Themes/Index.php:103
+#: src/Module/Admin/Tos.php:63 src/Module/Moderation/Users/Pending.php:82
 msgid "Administration"
 msgstr ""
 
 #: src/Module/Admin/Addons/Details.php:138 src/Module/Admin/Addons/Index.php:84
-#: src/Module/BaseAdmin.php:77 src/Module/BaseSettings.php:127
+#: src/Module/BaseAdmin.php:78 src/Module/BaseSettings.php:127
 msgid "Addons"
 msgstr ""
 
@@ -3818,7 +3820,8 @@ msgid "Manage Additional Features"
 msgstr ""
 
 #: src/Module/Admin/Federation.php:70
-#: src/Module/Moderation/Report/Create.php:200
+#: src/Module/Moderation/Report/Create.php:205
+#: src/Module/Moderation/Reports.php:576 src/Module/Moderation/Reports.php:587
 #: src/Module/Moderation/Utils/ReportUtil.php:25
 msgid "Other"
 msgstr ""
@@ -3997,7 +4000,7 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-#: src/Module/Admin/Logs/View.php:85
+#: src/Module/Admin/Logs/View.php:85 src/Module/Admin/Roles.php:125
 #: src/Module/Debug/ActivityPubConversion.php:49
 msgid "Source"
 msgstr ""
@@ -4055,7 +4058,7 @@ msgstr ""
 msgid "Job Parameters"
 msgstr ""
 
-#: src/Module/Admin/Queue.php:70 src/Module/Moderation/Reports.php:124
+#: src/Module/Admin/Queue.php:70 src/Module/Moderation/Reports.php:242
 #: src/Module/Settings/OAuth.php:58
 msgid "Created"
 msgstr ""
@@ -4066,6 +4069,92 @@ msgstr ""
 
 #: src/Module/Admin/Queue.php:72
 msgid "Priority"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:48
+msgid "Please select a valid user."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:60
+msgid "The selected user cannot be assigned moderation rights."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:67
+msgid "Moderation rights have been granted."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:78
+msgid "Moderation rights have been removed."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:83
+msgid "Unknown role action."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:119 src/Module/BaseAdmin.php:76
+msgid "Roles"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:120
+msgid "Manage moderators for this node. Administrator rights are read-only and managed through the node configuration."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:121
+msgid "Users with administrator rights (read-only)"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:122
+msgid "Users with moderation rights"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:123 src/Module/Admin/Roles.php:135
+msgid "User"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:126 src/Module/Contact/Profile.php:435
+#: src/Module/Moderation/Reports.php:342
+#: src/Module/Settings/TwoFactor/Index.php:146
+msgid "Actions"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:127
+msgid "No administrators found."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:128
+msgid "No users with moderation rights found."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:129
+msgid "Administrator"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:130
+msgid "Moderator"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:131
+msgid "Administrator + Moderator"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:132
+msgid "Remove moderation rights"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:133
+msgid "Administrators always keep moderation rights."
+msgstr ""
+
+#: src/Module/Admin/Roles.php:134
+msgid "Assign moderation rights"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:136
+msgid "Grant moderation rights"
+msgstr ""
+
+#: src/Module/Admin/Roles.php:137
+msgid "All active users already have moderation rights."
 msgstr ""
 
 #: src/Module/Admin/Site.php:231
@@ -4127,7 +4216,8 @@ msgstr ""
 msgid "Multi user instance"
 msgstr ""
 
-#: src/Module/Admin/Site.php:434
+#: src/Module/Admin/Site.php:434 src/Module/Moderation/Reports.php:212
+#: src/Module/Moderation/Reports.php:285
 msgid "Closed"
 msgstr ""
 
@@ -4135,7 +4225,8 @@ msgstr ""
 msgid "Requires approval"
 msgstr ""
 
-#: src/Module/Admin/Site.php:436
+#: src/Module/Admin/Site.php:436 src/Module/Moderation/Reports.php:212
+#: src/Module/Moderation/Reports.php:285
 msgid "Open"
 msgstr ""
 
@@ -5144,7 +5235,7 @@ msgstr ""
 msgid "Storage Configuration"
 msgstr ""
 
-#: src/Module/Admin/Storage.php:122 src/Module/BaseAdmin.php:76
+#: src/Module/Admin/Storage.php:122 src/Module/BaseAdmin.php:77
 msgid "Storage"
 msgstr ""
 
@@ -5294,7 +5385,7 @@ msgid "Screenshot"
 msgstr ""
 
 #: src/Module/Admin/Themes/Details.php:83 src/Module/Admin/Themes/Index.php:104
-#: src/Module/BaseAdmin.php:78 src/Module/Settings/Display.php:416
+#: src/Module/BaseAdmin.php:79 src/Module/Settings/Display.php:416
 msgid "Themes"
 msgstr ""
 
@@ -5432,86 +5523,86 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:79 src/Module/BaseSettings.php:98
+#: src/Module/BaseAdmin.php:80 src/Module/BaseSettings.php:98
 msgid "Additional features"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:82
+#: src/Module/BaseAdmin.php:83
 msgid "Database"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:83
+#: src/Module/BaseAdmin.php:84
 msgid "DB updates"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:84
+#: src/Module/BaseAdmin.php:85
 msgid "Inspect Deferred Workers"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:85
+#: src/Module/BaseAdmin.php:86
 msgid "Inspect worker Queue"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:87
+#: src/Module/BaseAdmin.php:88
 msgid "Logs"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:89 src/Module/Calendar/Show.php:114
+#: src/Module/BaseAdmin.php:90 src/Module/Calendar/Show.php:114
 msgid "View"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:91 src/Module/BaseModeration.php:109
+#: src/Module/BaseAdmin.php:92 src/Module/BaseModeration.php:109
 msgid "Diagnostics"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:92
+#: src/Module/BaseAdmin.php:93
 msgid "PHP Info"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:93
+#: src/Module/BaseAdmin.php:94
 msgid "probe address"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:94
+#: src/Module/BaseAdmin.php:95
 msgid "check webfinger"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:95
+#: src/Module/BaseAdmin.php:96
 msgid "Babel"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:96 src/Module/Debug/ActivityPubConversion.php:125
+#: src/Module/BaseAdmin.php:97 src/Module/Debug/ActivityPubConversion.php:125
 msgid "ActivityPub Conversion"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:115
+#: src/Module/BaseAdmin.php:116
 msgid "Addon settings"
 msgstr ""
 
-#: src/Module/BaseAdmin.php:116 src/Module/BaseModeration.php:118
+#: src/Module/BaseAdmin.php:117 src/Module/BaseModeration.php:118
 msgid "User registrations waiting for confirmation"
 msgstr ""
 
-#: src/Module/BaseApi.php:427 src/Module/BaseApi.php:443
-#: src/Module/BaseApi.php:459
+#: src/Module/BaseApi.php:443 src/Module/BaseApi.php:459
+#: src/Module/BaseApi.php:475
 msgid "Too Many Requests"
 msgstr ""
 
-#: src/Module/BaseApi.php:428
+#: src/Module/BaseApi.php:444
 #, php-format
 msgid "Daily posting limit of %d post reached. The post was rejected."
 msgid_plural "Daily posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:444
+#: src/Module/BaseApi.php:460
 #, php-format
 msgid "Weekly posting limit of %d post reached. The post was rejected."
 msgid_plural "Weekly posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:460
+#: src/Module/BaseApi.php:476
 #, php-format
 msgid "Monthly posting limit of %d post reached. The post was rejected."
 msgid_plural "Monthly posting limit of %d posts reached. The post was rejected."
@@ -5526,7 +5617,7 @@ msgstr ""
 msgid "Submanaged account can't access the moderation pages. Please log back in as the main account."
 msgstr ""
 
-#: src/Module/BaseModeration.php:99 src/Module/Moderation/Reports.php:123
+#: src/Module/BaseModeration.php:99 src/Module/Moderation/Reports.php:241
 msgid "Reports"
 msgstr ""
 
@@ -6119,10 +6210,10 @@ msgstr ""
 #: src/Module/FriendSuggest.php:138 src/Module/Install.php:216
 #: src/Module/Install.php:256 src/Module/Install.php:293
 #: src/Module/Invite.php:162 src/Module/Moderation/Item/Source.php:70
-#: src/Module/Moderation/Report/Create.php:177
-#: src/Module/Moderation/Report/Create.php:192
-#: src/Module/Moderation/Report/Create.php:220
-#: src/Module/Moderation/Report/Create.php:280
+#: src/Module/Moderation/Report/Create.php:182
+#: src/Module/Moderation/Report/Create.php:197
+#: src/Module/Moderation/Report/Create.php:225
+#: src/Module/Moderation/Report/Create.php:285
 #: src/Module/Settings/Server/Action.php:54 src/Module/User/Delegation.php:155
 #: view/theme/vier/config.php:123
 msgid "Submit"
@@ -6130,7 +6221,7 @@ msgstr ""
 
 #: src/Module/Contact/Advanced.php:120
 #: src/Module/Moderation/Blocklist/Contact.php:118
-#: src/Module/Moderation/Reports.php:124
+#: src/Module/Moderation/Reports.php:242
 #: src/Module/Moderation/Users/Active.php:82
 #: src/Module/Moderation/Users/Blocked.php:82
 #: src/Module/Moderation/Users/Deleted.php:69
@@ -6249,7 +6340,7 @@ msgstr ""
 #: src/Module/Contact/Follow.php:155 src/Module/Contact/Profile.php:422
 #: src/Module/Contact/Unfollow.php:98
 #: src/Module/Moderation/Blocklist/Contact.php:128
-#: src/Module/Moderation/Reports.php:133
+#: src/Module/Moderation/Reports.php:260
 #: src/Module/Notifications/Introductions.php:125
 #: src/Module/Notifications/Introductions.php:198
 msgid "Profile URL"
@@ -6423,7 +6514,7 @@ msgid "Block/Unblock contact"
 msgstr ""
 
 #: src/Module/Contact/Profile.php:393
-#: src/Module/Moderation/Report/Create.php:316
+#: src/Module/Moderation/Report/Create.php:321
 msgid "Ignore contact"
 msgstr ""
 
@@ -6492,12 +6583,7 @@ msgstr ""
 msgid "Comma separated list of keywords that should not be converted to hashtags, when \"Fetch information and keywords\" is selected"
 msgstr ""
 
-#: src/Module/Contact/Profile.php:435
-#: src/Module/Settings/TwoFactor/Index.php:146
-msgid "Actions"
-msgstr ""
-
-#: src/Module/Contact/Profile.php:437
+#: src/Module/Contact/Profile.php:437 src/Module/Moderation/Reports.php:242
 #: src/Module/Settings/TwoFactor/Index.php:126 view/theme/frio/theme.php:218
 msgid "Status"
 msgstr ""
@@ -7513,7 +7599,7 @@ msgid "Block New Remote Contact"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Contact.php:118
-#: src/Module/Moderation/Reports.php:124
+#: src/Module/Moderation/Reports.php:242
 msgid "Photo"
 msgstr ""
 
@@ -7861,6 +7947,7 @@ msgid "You need to know the GUID of the item. You can find it e.g. by looking at
 msgstr ""
 
 #: src/Module/Moderation/Item/Delete.php:53
+#: src/Module/Moderation/Reports.php:341
 msgid "GUID"
 msgstr ""
 
@@ -7919,225 +8006,452 @@ msgstr ""
 msgid "Item Guid"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:67
+#: src/Module/Moderation/Report/Create.php:68
 msgid "Contact not found or their server is already blocked on this node."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:101
+#: src/Module/Moderation/Report/Create.php:106
 msgid "The moderation report has been submitted."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:145
+#: src/Module/Moderation/Report/Create.php:150
 msgid "Please login to access this page."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:174
-#: src/Module/Moderation/Report/Create.php:189
-#: src/Module/Moderation/Report/Create.php:217
-#: src/Module/Moderation/Report/Create.php:277
-#: src/Module/Moderation/Report/Create.php:301
+#: src/Module/Moderation/Report/Create.php:179
+#: src/Module/Moderation/Report/Create.php:194
+#: src/Module/Moderation/Report/Create.php:222
+#: src/Module/Moderation/Report/Create.php:282
+#: src/Module/Moderation/Report/Create.php:306
 msgid "Create Moderation Report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:175
+#: src/Module/Moderation/Report/Create.php:180
 msgid "Pick Contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:176
+#: src/Module/Moderation/Report/Create.php:181
 msgid "Please enter below the contact address or profile URL you would like to create a moderation report about."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:180
+#: src/Module/Moderation/Report/Create.php:185
 msgid "Contact address/URL"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:190
+#: src/Module/Moderation/Report/Create.php:195
 msgid "Pick Category"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:191
+#: src/Module/Moderation/Report/Create.php:196
 msgid "Please pick below the category of your report."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:195
+#: src/Module/Moderation/Report/Create.php:200
+#: src/Module/Moderation/Reports.php:573 src/Module/Moderation/Reports.php:584
 #: src/Module/Moderation/Utils/ReportUtil.php:20
 msgid "Spam"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:195
+#: src/Module/Moderation/Report/Create.php:200
 msgid "This contact is publishing many repeated/overly long posts/replies or advertising their product/websites in otherwise irrelevant conversations."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:196
+#: src/Module/Moderation/Report/Create.php:201
+#: src/Module/Moderation/Reports.php:574 src/Module/Moderation/Reports.php:585
 #: src/Module/Moderation/Utils/ReportUtil.php:21
 msgid "Illegal Content"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:196
+#: src/Module/Moderation/Report/Create.php:201
 msgid "This contact is publishing content that is considered illegal in this node's hosting juridiction."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:197
+#: src/Module/Moderation/Report/Create.php:202
 #: src/Module/Moderation/Utils/ReportUtil.php:22
 msgid "Community Safety"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:197
+#: src/Module/Moderation/Report/Create.php:202
 msgid "This contact aggravated you or other people, by being provocative or insensitive, intentionally or not. This includes disclosing people's private information (doxxing), posting threats or offensive pictures in posts or replies."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:198
+#: src/Module/Moderation/Report/Create.php:203
 #: src/Module/Moderation/Utils/ReportUtil.php:23
 msgid "Unwanted Content/Behavior"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:198
+#: src/Module/Moderation/Report/Create.php:203
 msgid "This contact has repeatedly published content irrelevant to the node's theme or is openly criticizing the node's administration/moderation without directly engaging with the relevant people for example or repeatedly nitpicking on a sensitive topic."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:199
+#: src/Module/Moderation/Report/Create.php:204
+#: src/Module/Moderation/Reports.php:575 src/Module/Moderation/Reports.php:586
 #: src/Module/Moderation/Utils/ReportUtil.php:24
 msgid "Rules Violation"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:199
+#: src/Module/Moderation/Report/Create.php:204
 msgid "This contact violated one or more rules of this node. You will be able to pick which one(s) in the next step."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:200
+#: src/Module/Moderation/Report/Create.php:205
 msgid "Please elaborate below why you submitted this report. The more details you provide, the better your report can be handled."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:202
+#: src/Module/Moderation/Report/Create.php:207
 msgid "Additional Information"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:202
+#: src/Module/Moderation/Report/Create.php:207
 msgid "Please provide any additional information relevant to this particular report. You will be able to attach posts by this contact in the next step, but any context is welcome."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:218
+#: src/Module/Moderation/Report/Create.php:223
 msgid "Pick Rules"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:219
+#: src/Module/Moderation/Report/Create.php:224
 msgid "Please pick below the node rules you believe this contact violated."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:278
+#: src/Module/Moderation/Report/Create.php:283
 msgid "Pick Posts"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:279
+#: src/Module/Moderation/Report/Create.php:284
 msgid "Please optionally pick posts to attach to your report."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:295
+#: src/Module/Moderation/Report/Create.php:300
 msgid "Would you like to forward this report to the remote server?"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:297
+#: src/Module/Moderation/Report/Create.php:302
 msgid "Would you ike to forward this report to the remote server?"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:303
+#: src/Module/Moderation/Report/Create.php:308
 msgid "Submit Report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:304
+#: src/Module/Moderation/Report/Create.php:309
 msgid "Further Action"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:305
+#: src/Module/Moderation/Report/Create.php:310
 msgid "You can also perform one of the following action on the contact you reported:"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:314
+#: src/Module/Moderation/Report/Create.php:319
 msgid "Nothing"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:315
+#: src/Module/Moderation/Report/Create.php:320
 msgid "Collapse contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:315
+#: src/Module/Moderation/Report/Create.php:320
 msgid "Their posts and replies will keep appearing in your Network page but their content will be collapsed by default."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:316
+#: src/Module/Moderation/Report/Create.php:321
 msgid "Their posts won't appear in your Network page anymore, but their replies can appear in forum threads. They still can follow you."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:317
+#: src/Module/Moderation/Report/Create.php:322
 msgid "Block contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:317
+#: src/Module/Moderation/Report/Create.php:322
 msgid "Their posts won't appear in your Network page anymore, but their replies can appear in forum threads, with their content collapsed by default. They cannot follow you but still can have access to your public posts by other means."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:320
+#: src/Module/Moderation/Report/Create.php:325
 msgid "Forward report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:342
+#: src/Module/Moderation/Report/Create.php:347
 msgid "1. Pick a contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:343
+#: src/Module/Moderation/Report/Create.php:348
 msgid "2. Pick a category"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:344
+#: src/Module/Moderation/Report/Create.php:349
 msgid "2a. Pick rules"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:345
+#: src/Module/Moderation/Report/Create.php:350
 msgid "2b. Add comment"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:346
+#: src/Module/Moderation/Report/Create.php:351
 msgid "3. Pick posts"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:119
+#: src/Module/Moderation/Reports.php:237
 msgid "List of reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:120
+#: src/Module/Moderation/Reports.php:238
 msgid "This page display reports created by our or remote users."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:121
+#: src/Module/Moderation/Reports.php:239
 msgid "No report exists at this node."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:124 src/Object/Post.php:613
+#: src/Module/Moderation/Reports.php:242 src/Object/Post.php:613
 #: src/Object/Post.php:1164
 msgid "Comment"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:124
+#: src/Module/Moderation/Reports.php:242 src/Module/Moderation/Reports.php:336
 msgid "Category"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:125
+#: src/Module/Moderation/Reports.php:243
 msgid "Select all"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:126
+#: src/Module/Moderation/Reports.php:244
 msgid "Close selected reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:130
+#: src/Module/Moderation/Reports.php:245
+msgid "Open reports"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:246
+msgid "Closed reports"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:247
+msgid "All reports"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:253 src/Module/Moderation/Reports.php:583
+msgid "All categories"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:257
 #, php-format
 msgid "%s total report"
 msgid_plural "%s total reports"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Reports.php:133
+#: src/Module/Moderation/Reports.php:260
 msgid "URL of the reported contact."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:326
+msgid "Report details"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:327
+msgid "Back to reports"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:329
+msgid "Forwarded"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:330
+msgid "Not forwarded"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:331
+msgid "Assigned user id:"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:332 src/Module/Moderation/Reports.php:602
+msgid "Unassigned"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:333
+msgid "Reporter:"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:334
+msgid "Target:"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:335
+msgid "Category and rules"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:337
+msgid "Node rules"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:338
+msgid "Attached posts"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:339
+msgid "URI-ID"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:343
+msgid "Public remarks"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:344
+msgid "Private remarks"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:345
+msgid "This report is finalized and read-only."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:346
+msgid "Save remarks"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:347
+msgid "Assign to me"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:348
+msgid "Unassign"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:349
+msgid "Mark resolved"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:350
+msgid "Save category and rules"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:351
+msgid "Delete all reported posts"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:352
+msgid "Block local user"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:353
+msgid "Block remote contact"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:354
+msgid "Block remote contact and purge content"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:355
+msgid "Delete this reported post"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:356
+msgid "Warn user"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:357
+msgid "Warning message"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:358
+msgid "Silence local user (future posts unlisted)"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:377
+#, php-format
+msgid "%s reported post marked for deletion"
+msgid_plural "%s reported posts marked for deletion"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Module/Moderation/Reports.php:379
+msgid "This report has no attached posts."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:386
+msgid "Invalid reported post id."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:400
+msgid "This post is not attached to the report."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:407
+msgid "Reported post marked for deletion."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:416
+msgid "Reported target contact not found."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:424
+msgid "The local user has been blocked."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:429
+msgid "Could not map the reported local contact to a user account."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:434
+msgid "Failed to block the remote contact."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:447
+msgid "The remote contact has been blocked and related content will be purged."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:449
+msgid "The remote contact has been blocked."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:456
+msgid "Please provide a warning message."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:468
+msgid "Moderator warning:"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:473
+msgid "Warning text has been saved, but automatic delivery is only available for local users."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:479
+msgid "Warning text has been saved, but the local user has no deliverable email address."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:487
+#, php-format
+msgid "Moderation warning from %s"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:488
+msgid "Your recent activity was reported to the moderation team. Please review this warning message."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:496
+msgid "Warning sent to the local user and stored in public remarks."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:498 src/Module/Moderation/Reports.php:502
+msgid "Warning text was stored, but sending the email failed."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:513
+msgid "This action is only available for local users."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:525
+msgid "Local user silenced: future posts will be unlisted, and public community visibility is reduced."
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:600
+msgid "All assignments"
+msgstr ""
+
+#: src/Module/Moderation/Reports.php:601
+msgid "Assigned to me"
 msgstr ""
 
 #: src/Module/Moderation/Summary.php:41 src/Module/Settings/Account.php:380

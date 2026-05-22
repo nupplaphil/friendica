@@ -1829,6 +1829,32 @@ class Contact
 	}
 
 	/**
+	 * Hides a contact
+	 *
+	 * @param int $cid Contact id to hide
+	 * @return bool Whether it was successful
+	 */
+	public static function hide(int $cid): bool
+	{
+		$return = self::update(['hidden' => true], ['id' => $cid]);
+
+		return $return;
+	}
+
+	/**
+	 * Unhide a contact
+	 *
+	 * @param int $cid Contact id to unhide
+	 * @return bool Whether it was successful
+	 */
+	public static function unhide(int $cid): bool
+	{
+		$return = self::update(['hidden' => false], ['id' => $cid]);
+
+		return $return;
+	}
+
+	/**
 	 * Ensure that cached avatar exist
 	 *
 	 * @param integer $cid Contact id

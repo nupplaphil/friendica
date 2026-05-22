@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -2308,6 +2308,85 @@ class Transmitter
 
 		$signed = LDSignature::sign($data, $owner);
 		return HTTPSignature::transmit($signed, $profile['inbox'], $owner);
+	}
+
+	/**
+	 * Forwards a moderation report to the remote server of the reported account via ActivityPub Flag.
+	 *
+	 * @param int $reportId Moderation report id
+	 * @return bool success
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws \Exception
+	 */
+	public static function sendModerationReport(int $reportId): bool
+	{
+		try {
+			$report = DI::report()->selectOneById($reportId);
+		} catch (\Throwable $e) {
+			DI::logger()->notice('Cannot forward report, report not found', ['report_id' => $reportId, 'exception' => $e]);
+			return false;
+		}
+
+		if (!$report->forward) {
+			DI::logger()->debug('Skipping report forwarding, forwarding disabled', ['report_id' => $reportId]);
+			return false;
+		}
+
+		if (empty($report->reporterUid)) {
+			DI::logger()->debug('Skipping report forwarding, no local reporter user', ['report_id' => $reportId]);
+			return false;
+		}
+
+		$target = Contact::getById($report->cid, ['url', 'addr']);
+		if (empty($target['url']) || DI::baseUrl()->isLocalUrl($target['url'])) {
+			DI::logger()->debug('Skipping report forwarding, target is local or missing URL', ['report_id' => $reportId, 'target' => $target]);
+			return false;
+		}
+
+		$profile = APContact::getByURL($target['url']);
+		if (empty($profile['inbox'])) {
+			DI::logger()->warning('Skipping report forwarding, no remote inbox found', ['report_id' => $reportId, 'target_url' => $target['url']]);
+			return false;
+		}
+
+		$owner = User::getOwnerDataById((int) $report->reporterUid);
+		if (empty($owner['url'])) {
+			DI::logger()->warning('Skipping report forwarding, owner data not found', ['report_id' => $reportId, 'uid' => $report->reporterUid]);
+			return false;
+		}
+
+		$objects = [['id' => $target['url']]];
+		foreach ($report->posts as $post) {
+			$postRow = Post::selectFirst(['uri'], ['uri-id' => $post->uriId]);
+			if (!empty($postRow['uri'])) {
+				$objects[] = ['id' => $postRow['uri']];
+			}
+		}
+
+		$data = [
+			'@context'   => ActivityPub::CONTEXT,
+			'id'         => DI::baseUrl() . '/activity/' . System::createGUID(),
+			'type'       => 'Flag',
+			'actor'      => $owner['url'],
+			'object'     => $objects,
+			'content'    => $report->comment,
+			'published'  => DateTimeFormat::utcNow(DateTimeFormat::ATOM),
+			'instrument' => self::getService(),
+			'to'         => [$profile['url'] ?? $target['url']],
+		];
+
+		DI::logger()->info('Sending moderation report via ActivityPub', ['report_id' => $reportId, 'target' => $target['url'], 'inbox' => $profile['inbox']]);
+
+		$signed  = LDSignature::sign($data, $owner);
+		$success = HTTPSignature::transmit($signed, $profile['inbox'], $owner);
+
+		if ($success) {
+			DI::logger()->info('Forwarded moderation report to remote server', ['report_id' => $reportId, 'target' => $target['url'], 'inbox' => $profile['inbox']]);
+		} else {
+			DI::logger()->warning('Failed forwarding moderation report to remote server', ['report_id' => $reportId, 'target' => $target['url'], 'inbox' => $profile['inbox']]);
+		}
+
+		return $success;
 	}
 
 	/**

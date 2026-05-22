@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -372,6 +372,22 @@ class BaseApi extends BaseModule
 		}
 
 		return (int) $uid;
+	}
+
+	/**
+	 * Check whether the current API user has moderator privileges.
+	 * Halts execution with a 403 JSON error when access is missing.
+	 */
+	protected function checkModeratorAccess(): void
+	{
+		$uid = self::getCurrentUserID();
+		if (empty($uid) || !User::isModerator($uid)) {
+			$this->logger->warning('Denied access to moderation API endpoint', [
+				'uid'     => $uid,
+				'command' => $this->args->getCommand(),
+			]);
+			$this->logAndJsonError(403, $this->errorFactory->Forbidden());
+		}
 	}
 
 	/**

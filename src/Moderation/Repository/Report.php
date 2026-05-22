@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -22,6 +22,16 @@ use Psr\Log\LoggerInterface;
 final class Report extends \Friendica\BaseRepository
 {
 	protected static $table_name = 'report';
+
+	private const ALLOWED_STATUSES = [
+		ReportEntity::STATUS_OPEN,
+		ReportEntity::STATUS_CLOSED,
+	];
+
+	private const ALLOWED_RESOLUTIONS = [
+		ReportEntity::RESOLUTION_ACCEPTED,
+		ReportEntity::RESOLUTION_REJECTED,
+	];
 
 	/** @var ReportFactory */
 	protected $factory;
@@ -108,6 +118,82 @@ final class Report extends \Friendica\BaseRepository
 	 */
 	public function setStatus(int $reportId, int $status): bool
 	{
-		return $this->db->update(self::$table_name, ['status' => $status], ['id' => $reportId]);
+		$this->assertStatus($status);
+
+		return $this->updateModerationFields($reportId, ['status' => $status]);
+	}
+
+	public function setAssignment(int $reportId, ?int $assignedUid, ?int $lastEditorUid = null): bool
+	{
+		$fields = ['assigned-uid' => $assignedUid];
+
+		if ($lastEditorUid !== null) {
+			$fields['last-editor-uid'] = $lastEditorUid;
+		}
+
+		return $this->updateModerationFields($reportId, $fields);
+	}
+
+	public function setRemarks(int $reportId, string $publicRemarks = '', string $privateRemarks = '', ?int $lastEditorUid = null): bool
+	{
+		$fields = [
+			'public-remarks'  => $publicRemarks,
+			'private-remarks' => $privateRemarks,
+		];
+
+		if ($lastEditorUid !== null) {
+			$fields['last-editor-uid'] = $lastEditorUid;
+		}
+
+		return $this->updateModerationFields($reportId, $fields);
+	}
+
+	public function setResolution(int $reportId, ?int $resolution, ?int $lastEditorUid = null): bool
+	{
+		if ($resolution !== null) {
+			$this->assertResolution($resolution);
+		}
+
+		$fields = ['resolution' => $resolution];
+
+		if ($lastEditorUid !== null) {
+			$fields['last-editor-uid'] = $lastEditorUid;
+		}
+
+		return $this->updateModerationFields($reportId, $fields);
+	}
+
+	public function updateModerationState(int $reportId, array $fields): bool
+	{
+		if (array_key_exists('status', $fields)) {
+			$this->assertStatus((int) $fields['status']);
+		}
+
+		if (array_key_exists('resolution', $fields) && $fields['resolution'] !== null) {
+			$this->assertResolution((int) $fields['resolution']);
+		}
+
+		return $this->updateModerationFields($reportId, $fields);
+	}
+
+	private function updateModerationFields(int $reportId, array $fields): bool
+	{
+		$fields['edited'] = (new \DateTimeImmutable('now', new \DateTimeZone('UTC')))->format(DateTimeFormat::MYSQL);
+
+		return $this->db->update(self::$table_name, $fields, ['id' => $reportId]);
+	}
+
+	private function assertStatus(int $status): void
+	{
+		if (!in_array($status, self::ALLOWED_STATUSES, true)) {
+			throw new \InvalidArgumentException('Invalid report status: ' . $status);
+		}
+	}
+
+	private function assertResolution(int $resolution): void
+	{
+		if (!in_array($resolution, self::ALLOWED_RESOLUTIONS, true)) {
+			throw new \InvalidArgumentException('Invalid report resolution: ' . $resolution);
+		}
 	}
 }
