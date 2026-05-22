@@ -350,7 +350,6 @@ class System
 	 * @param string      $content
 	 * @param string      $type
 	 * @param string|null $content_type
-	 * @return void
 	 * @throws InternalServerErrorException
 	 * @deprecated since 2023.09 Use BaseModule->httpExit() instead
 	 */
