@@ -128,13 +128,13 @@ class L10n
 			// we haven't loaded user data yet, but we need user language
 			if ($session->get('uid')) {
 				$user = $this->dba->selectFirst('user', ['language'], ['uid' => $_SESSION['uid']]);
-				if ($this->dba->isResult($user)) {
+				if ($this->dba->isResult($user) && preg_match('/^[a-z]{2,3}([_-][a-zA-Z]{2,4})?$/', $user['language'])) {
 					$session->set('language', $user['language']);
 				}
 			}
 		}
 
-		if (isset($_GET['lang'])) {
+		if (isset($_GET['lang']) && preg_match('/^[a-z]{2,3}([_-][a-zA-Z]{2,4})?$/', $_GET['lang'])) {
 			$session->set('language', $_GET['lang']);
 		}
 	}
@@ -654,8 +654,12 @@ class L10n
 	 */
 	public function formatDateTime(string $datestring, int $dateType, int $timeType, ?string $pattern = null): string
 	{
+		$locale = $this->session->get('language') ?? $this->locale ?: $this->config->get('system', 'language', 'en_US');
+		if (!is_string($locale) || !strlen($locale) || !preg_match('/^[a-z]{2,3}([_-][a-zA-Z]{2,4})?$/', $locale)) {
+			$locale = 'en_US';
+		}
 		$formatter = new IntlDateFormatter(
-			$this->session->get('language') ?? $this->locale ?: $this->config->get('system', 'language', 'en_US'),
+			$locale,
 			$dateType,
 			$timeType,
 			$this->session->get('timezone') ?? null,
