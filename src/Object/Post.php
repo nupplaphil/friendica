@@ -274,7 +274,11 @@ class Post
 			];
 			$report = [
 				'label' => DI::l10n()->t('Report this post'),
-				'href'  => 'moderation/report/create?' . http_build_query(['cid' => $item['author-id'], 'uri-ids' => [$item['uri-id']]]),
+				'href'  => 'moderation/report/create?' . http_build_query([
+					'cid'     => $item['author-id'],
+					'uri-ids' => [$item['uri-id']],
+					'return'  => DI::args()->getQueryString(),
+				]),
 			];
 			$authorBaseUri = new Uri($item['author-baseurl'] ?? '');
 			if ($authorBaseUri->getHost() && !DI::baseUrl()->isLocalUrl($authorBaseUri)) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-22 08:04+0200\n"
+"POT-Creation-Date: 2026-05-23 17:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,13 +38,13 @@ msgstr ""
 msgid "Empty post discarded."
 msgstr ""
 
-#: mod/item.php:452 src/Module/Admin/Themes/Details.php:31
+#: mod/item.php:455 src/Module/Admin/Themes/Details.php:31
 #: src/Module/Admin/Themes/Index.php:51 src/Module/Debug/ItemBody.php:34
 #: src/Module/Debug/ItemBody.php:42 src/Module/Item/Feed.php:66
 msgid "Item not found."
 msgstr ""
 
-#: mod/item.php:476 mod/message.php:56 mod/message.php:102 mod/photos.php:117
+#: mod/item.php:479 mod/message.php:56 mod/message.php:102 mod/photos.php:117
 #: mod/photos.php:418 src/Model/Event.php:510 src/Module/Attach.php:40
 #: src/Module/BaseApi.php:91 src/Module/BaseNotifications.php:83
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
@@ -147,7 +147,7 @@ msgid "Your message"
 msgstr ""
 
 #: mod/message.php:189 mod/message.php:346 mod/photos.php:76 mod/photos.php:624
-#: src/Content/Conversation.php:316 src/Module/Post/Edit.php:126
+#: src/Content/Conversation.php:314 src/Module/Post/Edit.php:126
 #: src/Module/Profile/Photos.php:338 src/Module/Profile/Photos.php:358
 #: src/Module/Profile/Photos.php:361
 msgid "Upload photo"
@@ -157,9 +157,9 @@ msgstr ""
 msgid "Insert web link"
 msgstr ""
 
-#: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:349
-#: src/Content/Conversation.php:1592 src/Module/Item/Compose.php:172
-#: src/Module/Post/Edit.php:140 src/Object/Post.php:615
+#: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:347
+#: src/Content/Conversation.php:1590 src/Module/Item/Compose.php:172
+#: src/Module/Post/Edit.php:140 src/Object/Post.php:619
 msgid "Please wait"
 msgstr ""
 
@@ -312,7 +312,7 @@ msgstr ""
 msgid "If you want to add this photo to an album, begin typing its name, and existing albums will be suggested, which you can select. If you choose something new, it will be created."
 msgstr ""
 
-#: mod/photos.php:487 mod/photos.php:806 src/Content/Conversation.php:351
+#: mod/photos.php:487 mod/photos.php:806 src/Content/Conversation.php:349
 #: src/Module/Calendar/Event/Form.php:266 src/Module/Post/Edit.php:180
 msgid "Permissions"
 msgstr ""
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Delete Album"
 msgstr ""
 
-#: mod/photos.php:556 mod/photos.php:655 src/Content/Conversation.php:366
+#: mod/photos.php:556 mod/photos.php:655 src/Content/Conversation.php:364
 #: src/Module/Contact/Follow.php:158 src/Module/Contact/Revoke.php:92
 #: src/Module/Contact/Unfollow.php:95
 #: src/Module/Media/Attachment/Browser.php:64
@@ -429,7 +429,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: mod/photos.php:828 src/Content/Conversation.php:1511 src/Model/Event.php:654
+#: mod/photos.php:828 src/Content/Conversation.php:1509 src/Model/Event.php:654
 #: src/Module/Calendar/Event/Show.php:69
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
@@ -995,356 +995,356 @@ msgid_plural "<button type=\"button\" %2$s>%1$d people</button> like this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:226
+#: src/Content/Conversation.php:224
 #, php-format
 msgid "<button type=\"button\" %2$s>%1$d person</button> attends"
 msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:229
+#: src/Content/Conversation.php:227
 #, php-format
 msgid "<button type=\"button\" %2$s>%1$d person</button> doesn't attend"
 msgid_plural "<button type=\"button\" %2$s>%1$d people</button> don't attend"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:232
+#: src/Content/Conversation.php:230
 #, php-format
 msgid "<button type=\"button\" %2$s>%1$d person</button> attends maybe"
 msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend maybe"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:235
+#: src/Content/Conversation.php:233
 #, php-format
 msgid "<button type=\"button\" %2$s>%1$d person</button> reshared this"
 msgid_plural "<button type=\"button\" %2$s>%1$d people</button> reshared this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:281
+#: src/Content/Conversation.php:279
 msgid "Visible to <strong>everybody</strong>"
 msgstr ""
 
-#: src/Content/Conversation.php:282 src/Module/Item/Compose.php:166
-#: src/Object/Post.php:1173
+#: src/Content/Conversation.php:280 src/Module/Item/Compose.php:166
+#: src/Object/Post.php:1177
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
 
-#: src/Content/Conversation.php:283
+#: src/Content/Conversation.php:281
 msgid "Tag term:"
 msgstr ""
 
-#: src/Content/Conversation.php:284
+#: src/Content/Conversation.php:282
 msgid "Save to Folder"
 msgstr ""
 
-#: src/Content/Conversation.php:285
+#: src/Content/Conversation.php:283
 msgid "Where are you right now?"
 msgstr ""
 
-#: src/Content/Conversation.php:286
+#: src/Content/Conversation.php:284
 msgid "Delete item(s)?"
 msgstr ""
 
-#: src/Content/Conversation.php:287 src/Module/Post/Edit.php:102
+#: src/Content/Conversation.php:285 src/Module/Post/Edit.php:102
 msgid "Post published."
 msgstr ""
 
-#: src/Content/Conversation.php:288 src/Module/Post/Edit.php:103
+#: src/Content/Conversation.php:286 src/Module/Post/Edit.php:103
 msgid "Go to post"
 msgstr ""
 
-#: src/Content/Conversation.php:301 src/Module/Item/Compose.php:140
+#: src/Content/Conversation.php:299 src/Module/Item/Compose.php:140
 msgid "Created at"
 msgstr ""
 
-#: src/Content/Conversation.php:311
+#: src/Content/Conversation.php:309
 msgid "New Post"
 msgstr ""
 
-#: src/Content/Conversation.php:314 src/Module/Item/Compose.php:155
+#: src/Content/Conversation.php:312 src/Module/Item/Compose.php:155
 msgid "Post"
 msgstr ""
 
-#: src/Content/Conversation.php:315 src/Content/Nav.php:89
-#: src/Module/Post/Edit.php:125 src/Object/Post.php:1162
+#: src/Content/Conversation.php:313 src/Content/Nav.php:89
+#: src/Module/Post/Edit.php:125 src/Object/Post.php:1166
 msgid "Loading..."
 msgstr ""
 
-#: src/Content/Conversation.php:317 src/Module/Post/Edit.php:127
+#: src/Content/Conversation.php:315 src/Module/Post/Edit.php:127
 msgid "upload photo"
 msgstr ""
 
-#: src/Content/Conversation.php:318 src/Module/Post/Edit.php:128
+#: src/Content/Conversation.php:316 src/Module/Post/Edit.php:128
 msgid "Attach file"
 msgstr ""
 
-#: src/Content/Conversation.php:319 src/Module/Post/Edit.php:129
+#: src/Content/Conversation.php:317 src/Module/Post/Edit.php:129
 msgid "attach file"
 msgstr ""
 
-#: src/Content/Conversation.php:320 src/Module/Item/Compose.php:156
+#: src/Content/Conversation.php:318 src/Module/Item/Compose.php:156
 #: src/Module/Post/Edit.php:168 src/Module/Settings/Profile/Index.php:247
-#: src/Object/Post.php:1163
+#: src/Object/Post.php:1167
 msgid "Bold"
 msgstr ""
 
-#: src/Content/Conversation.php:321 src/Module/Item/Compose.php:157
+#: src/Content/Conversation.php:319 src/Module/Item/Compose.php:157
 #: src/Module/Post/Edit.php:169 src/Module/Settings/Profile/Index.php:248
-#: src/Object/Post.php:1164
+#: src/Object/Post.php:1168
 msgid "Italic"
 msgstr ""
 
-#: src/Content/Conversation.php:322 src/Module/Item/Compose.php:158
+#: src/Content/Conversation.php:320 src/Module/Item/Compose.php:158
 #: src/Module/Post/Edit.php:170 src/Module/Settings/Profile/Index.php:249
-#: src/Object/Post.php:1165
+#: src/Object/Post.php:1169
 msgid "Underline"
 msgstr ""
 
-#: src/Content/Conversation.php:323 src/Module/Item/Compose.php:159
+#: src/Content/Conversation.php:321 src/Module/Item/Compose.php:159
 #: src/Module/Post/Edit.php:171 src/Module/Settings/Profile/Index.php:250
-#: src/Object/Post.php:1167
+#: src/Object/Post.php:1171
 msgid "Quote"
 msgstr ""
 
-#: src/Content/Conversation.php:324 src/Module/Item/Compose.php:160
+#: src/Content/Conversation.php:322 src/Module/Item/Compose.php:160
 #: src/Module/Post/Edit.php:172 src/Module/Settings/Profile/Index.php:251
-#: src/Object/Post.php:1168
+#: src/Object/Post.php:1172
 msgid "Add emojis"
 msgstr ""
 
-#: src/Content/Conversation.php:325 src/Module/Item/Compose.php:161
-#: src/Object/Post.php:1166
+#: src/Content/Conversation.php:323 src/Module/Item/Compose.php:161
+#: src/Object/Post.php:1170
 msgid "Content Warning"
 msgstr ""
 
-#: src/Content/Conversation.php:326 src/Module/Item/Compose.php:162
+#: src/Content/Conversation.php:324 src/Module/Item/Compose.php:162
 #: src/Module/Post/Edit.php:173 src/Module/Settings/Profile/Index.php:252
-#: src/Object/Post.php:1169
+#: src/Object/Post.php:1173
 msgid "Code"
 msgstr ""
 
-#: src/Content/Conversation.php:327 src/Module/Item/Compose.php:163
+#: src/Content/Conversation.php:325 src/Module/Item/Compose.php:163
 #: src/Module/Settings/Profile/Index.php:253
-#: src/Module/Settings/Profile/Index.php:254 src/Object/Post.php:1170
+#: src/Module/Settings/Profile/Index.php:254 src/Object/Post.php:1174
 msgid "Image"
 msgstr ""
 
-#: src/Content/Conversation.php:328 src/Module/Item/Compose.php:164
+#: src/Content/Conversation.php:326 src/Module/Item/Compose.php:164
 #: src/Module/Post/Edit.php:174 src/Module/Settings/Profile/Index.php:255
-#: src/Object/Post.php:1171
+#: src/Object/Post.php:1175
 msgid "Link"
 msgstr ""
 
-#: src/Content/Conversation.php:329 src/Module/Item/Compose.php:165
+#: src/Content/Conversation.php:327 src/Module/Item/Compose.php:165
 #: src/Module/Post/Edit.php:175 src/Module/Settings/Profile/Index.php:256
-#: src/Object/Post.php:1172
+#: src/Object/Post.php:1176
 msgid "Link or Media"
 msgstr ""
 
-#: src/Content/Conversation.php:330 src/Module/Item/Compose.php:168
+#: src/Content/Conversation.php:328 src/Module/Item/Compose.php:168
 #: src/Module/Post/Edit.php:136
 msgid "Set your location"
 msgstr ""
 
-#: src/Content/Conversation.php:331 src/Module/Post/Edit.php:137
+#: src/Content/Conversation.php:329 src/Module/Post/Edit.php:137
 msgid "set location"
 msgstr ""
 
-#: src/Content/Conversation.php:332 src/Module/Post/Edit.php:138
+#: src/Content/Conversation.php:330 src/Module/Post/Edit.php:138
 msgid "Clear browser location"
 msgstr ""
 
-#: src/Content/Conversation.php:333 src/Module/Post/Edit.php:139
+#: src/Content/Conversation.php:331 src/Module/Post/Edit.php:139
 msgid "clear location"
 msgstr ""
 
-#: src/Content/Conversation.php:335 src/Module/Item/Compose.php:173
+#: src/Content/Conversation.php:333 src/Module/Item/Compose.php:173
 #: src/Module/Post/Edit.php:152
 msgid "Set title"
 msgstr ""
 
-#: src/Content/Conversation.php:337 src/Module/Item/Compose.php:174
+#: src/Content/Conversation.php:335 src/Module/Item/Compose.php:174
 #: src/Module/Post/Edit.php:154
 msgid "Set summary, abstract or spoiler text"
 msgstr ""
 
-#: src/Content/Conversation.php:339 src/Module/Item/Compose.php:175
+#: src/Content/Conversation.php:337 src/Module/Item/Compose.php:175
 #: src/Module/Post/Edit.php:156
 msgid "Categories (comma-separated list)"
 msgstr ""
 
-#: src/Content/Conversation.php:340 src/Module/Item/Compose.php:191
+#: src/Content/Conversation.php:338 src/Module/Item/Compose.php:191
 msgid "Sensitive post"
 msgstr ""
 
-#: src/Content/Conversation.php:345 src/Module/Item/Compose.php:196
+#: src/Content/Conversation.php:343 src/Module/Item/Compose.php:196
 msgid "Scheduled at"
 msgstr ""
 
-#: src/Content/Conversation.php:350 src/Module/Post/Edit.php:141
+#: src/Content/Conversation.php:348 src/Module/Post/Edit.php:141
 msgid "Permission settings"
 msgstr ""
 
-#: src/Content/Conversation.php:359 src/Module/Post/Edit.php:150
+#: src/Content/Conversation.php:357 src/Module/Post/Edit.php:150
 msgid "Public post"
 msgstr ""
 
-#: src/Content/Conversation.php:363 src/Module/Calendar/Event/Form.php:261
+#: src/Content/Conversation.php:361 src/Module/Calendar/Event/Form.php:261
 #: src/Module/Item/Compose.php:167 src/Module/Post/Edit.php:162
-#: src/Object/Post.php:1174
+#: src/Object/Post.php:1178
 msgid "Preview"
 msgstr ""
 
-#: src/Content/Conversation.php:373 src/Content/Item.php:407
+#: src/Content/Conversation.php:371 src/Content/Item.php:407
 #: src/Content/Widget/VCard.php:120 src/Model/Contact.php:1308
 #: src/Model/Profile.php:472 src/Module/Admin/Logs/View.php:79
 #: src/Module/Post/Edit.php:178
 msgid "Message"
 msgstr ""
 
-#: src/Content/Conversation.php:374 src/Module/Post/Edit.php:179
+#: src/Content/Conversation.php:372 src/Module/Post/Edit.php:179
 msgid "Add file"
 msgstr ""
 
-#: src/Content/Conversation.php:376 src/Module/Post/Edit.php:182
+#: src/Content/Conversation.php:374 src/Module/Post/Edit.php:182
 msgid "Open Compose page"
 msgstr ""
 
-#: src/Content/Conversation.php:546
+#: src/Content/Conversation.php:544
 msgid "remove"
 msgstr ""
 
-#: src/Content/Conversation.php:550
+#: src/Content/Conversation.php:548
 msgid "Delete Selected Items"
 msgstr ""
 
-#: src/Content/Conversation.php:682 src/Content/Conversation.php:685
-#: src/Content/Conversation.php:688 src/Content/Conversation.php:691
-#: src/Content/Conversation.php:694
+#: src/Content/Conversation.php:680 src/Content/Conversation.php:683
+#: src/Content/Conversation.php:686 src/Content/Conversation.php:689
+#: src/Content/Conversation.php:692
 #, php-format
 msgid "You had been addressed (%s)."
 msgstr ""
 
-#: src/Content/Conversation.php:697
+#: src/Content/Conversation.php:695
 #, php-format
 msgid "You are following %s."
 msgstr ""
 
-#: src/Content/Conversation.php:702
+#: src/Content/Conversation.php:700
 #, php-format
 msgid "You subscribed to %s."
 msgstr ""
 
-#: src/Content/Conversation.php:704
+#: src/Content/Conversation.php:702
 msgid "You subscribed to one or more tags in this post."
 msgstr ""
 
-#: src/Content/Conversation.php:724
+#: src/Content/Conversation.php:722
 #, php-format
 msgid "%s reshared this."
 msgstr ""
 
-#: src/Content/Conversation.php:726
+#: src/Content/Conversation.php:724
 msgid "Reshared"
 msgstr ""
 
-#: src/Content/Conversation.php:726
+#: src/Content/Conversation.php:724
 #, php-format
 msgid "Reshared by %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:729
+#: src/Content/Conversation.php:727
 #, php-format
 msgid "%s is participating in this thread."
 msgstr ""
 
-#: src/Content/Conversation.php:732
+#: src/Content/Conversation.php:730
 msgid "Stored for general reasons"
 msgstr ""
 
-#: src/Content/Conversation.php:735
+#: src/Content/Conversation.php:733
 msgid "Global post"
 msgstr ""
 
-#: src/Content/Conversation.php:738
+#: src/Content/Conversation.php:736
 msgid "Sent via an relay server"
 msgstr ""
 
-#: src/Content/Conversation.php:738
+#: src/Content/Conversation.php:736
 #, php-format
 msgid "Sent via the relay server %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:741
+#: src/Content/Conversation.php:739
 msgid "Fetched"
 msgstr ""
 
-#: src/Content/Conversation.php:741
+#: src/Content/Conversation.php:739
 #, php-format
 msgid "Fetched because of %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:744
+#: src/Content/Conversation.php:742
 msgid "Stored because of a child post to complete this thread."
 msgstr ""
 
-#: src/Content/Conversation.php:747
+#: src/Content/Conversation.php:745
 msgid "Local delivery"
 msgstr ""
 
-#: src/Content/Conversation.php:750
+#: src/Content/Conversation.php:748
 msgid "Stored because of your activity (like, comment, bookmark, ...)"
 msgstr ""
 
-#: src/Content/Conversation.php:753
+#: src/Content/Conversation.php:751
 msgid "Distributed"
 msgstr ""
 
-#: src/Content/Conversation.php:756
+#: src/Content/Conversation.php:754
 msgid "Pushed to us"
 msgstr ""
 
-#: src/Content/Conversation.php:763
+#: src/Content/Conversation.php:761
 #, php-format
 msgid "Channel \"%s\": %s"
 msgstr ""
 
-#: src/Content/Conversation.php:765
+#: src/Content/Conversation.php:763
 #, php-format
 msgid "Channel \"%s\""
 msgstr ""
 
-#: src/Content/Conversation.php:1510 src/Object/Post.php:254
+#: src/Content/Conversation.php:1508 src/Object/Post.php:254
 msgid "Select"
 msgstr ""
 
-#: src/Content/Conversation.php:1530
+#: src/Content/Conversation.php:1528
 msgid "Pinned item"
 msgstr ""
 
-#: src/Content/Conversation.php:1551 src/Object/Post.php:550
-#: src/Object/Post.php:551
+#: src/Content/Conversation.php:1549 src/Object/Post.php:554
+#: src/Object/Post.php:555
 #, php-format
 msgid "View %s's profile @ %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1565 src/Object/Post.php:538
+#: src/Content/Conversation.php:1563 src/Object/Post.php:542
 msgid "Categories:"
 msgstr ""
 
-#: src/Content/Conversation.php:1566 src/Object/Post.php:539
+#: src/Content/Conversation.php:1564 src/Object/Post.php:543
 msgid "Filed under:"
 msgstr ""
 
-#: src/Content/Conversation.php:1574 src/Object/Post.php:566
+#: src/Content/Conversation.php:1572 src/Object/Post.php:570
 #, php-format
 msgid "%s from %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1590
+#: src/Content/Conversation.php:1588
 msgid "View in context"
 msgstr ""
 
@@ -1531,7 +1531,7 @@ msgstr ""
 
 #: src/Content/Feature.php:121 src/Model/Profile.php:812
 #: src/Module/Admin/Summary.php:207 src/Module/Item/Compose.php:152
-#: src/Module/Moderation/Report/Create.php:265
+#: src/Module/Moderation/Report/Create.php:302
 #: src/Module/Moderation/Summary.php:60
 msgid "Summary"
 msgstr ""
@@ -1747,16 +1747,16 @@ msgstr ""
 msgid "Block user"
 msgstr ""
 
-#: src/Content/Item.php:411 src/Object/Post.php:282
+#: src/Content/Item.php:411 src/Object/Post.php:286
 #, php-format
 msgid "Ignore %s server"
 msgstr ""
 
-#: src/Content/Item.php:415 src/Object/Post.php:506
+#: src/Content/Item.php:415 src/Object/Post.php:510
 msgid "Detected languages"
 msgstr ""
 
-#: src/Content/Item.php:418 src/Object/Post.php:593
+#: src/Content/Item.php:418 src/Object/Post.php:597
 msgid "Raw content"
 msgstr ""
 
@@ -3840,7 +3840,7 @@ msgid "Manage Additional Features"
 msgstr ""
 
 #: src/Module/Admin/Federation.php:70
-#: src/Module/Moderation/Report/Create.php:163
+#: src/Module/Moderation/Report/Create.php:200
 #: src/Module/Moderation/Utils/ReportUtil.php:25
 msgid "Other"
 msgstr ""
@@ -5610,7 +5610,7 @@ msgstr ""
 #: src/Module/Contact.php:533 src/Module/Conversation/Channel.php:94
 #: src/Module/Conversation/Community.php:87
 #: src/Module/Conversation/Network.php:380
-#: src/Module/Moderation/BaseUsers.php:127 src/Object/Post.php:613
+#: src/Module/Moderation/BaseUsers.php:127 src/Object/Post.php:617
 msgid "More"
 msgstr ""
 
@@ -6097,7 +6097,7 @@ msgid "Pending incoming contact request"
 msgstr ""
 
 #: src/Module/Contact.php:600 src/Module/Item/Compose.php:154
-#: src/Object/Post.php:1158
+#: src/Object/Post.php:1162
 msgid "This is you"
 msgstr ""
 
@@ -6121,10 +6121,10 @@ msgstr ""
 #: src/Module/FriendSuggest.php:138 src/Module/Install.php:216
 #: src/Module/Install.php:256 src/Module/Install.php:293
 #: src/Module/Invite.php:162 src/Module/Moderation/Item/Source.php:70
-#: src/Module/Moderation/Report/Create.php:140
-#: src/Module/Moderation/Report/Create.php:155
-#: src/Module/Moderation/Report/Create.php:183
-#: src/Module/Moderation/Report/Create.php:243
+#: src/Module/Moderation/Report/Create.php:177
+#: src/Module/Moderation/Report/Create.php:192
+#: src/Module/Moderation/Report/Create.php:220
+#: src/Module/Moderation/Report/Create.php:280
 #: src/Module/Settings/Server/Action.php:54 src/Module/User/Delegation.php:155
 #: view/theme/vier/config.php:123
 msgid "Submit"
@@ -6425,7 +6425,7 @@ msgid "Block/Unblock contact"
 msgstr ""
 
 #: src/Module/Contact/Profile.php:393
-#: src/Module/Moderation/Report/Create.php:278
+#: src/Module/Moderation/Report/Create.php:316
 msgid "Ignore contact"
 msgstr ""
 
@@ -7908,176 +7908,180 @@ msgstr ""
 msgid "Contact not found or their server is already blocked on this node."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:108
+#: src/Module/Moderation/Report/Create.php:101
+msgid "The moderation report has been submitted."
+msgstr ""
+
+#: src/Module/Moderation/Report/Create.php:145
 msgid "Please login to access this page."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:137
-#: src/Module/Moderation/Report/Create.php:152
-#: src/Module/Moderation/Report/Create.php:180
-#: src/Module/Moderation/Report/Create.php:240
-#: src/Module/Moderation/Report/Create.php:264
+#: src/Module/Moderation/Report/Create.php:174
+#: src/Module/Moderation/Report/Create.php:189
+#: src/Module/Moderation/Report/Create.php:217
+#: src/Module/Moderation/Report/Create.php:277
+#: src/Module/Moderation/Report/Create.php:301
 msgid "Create Moderation Report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:138
+#: src/Module/Moderation/Report/Create.php:175
 msgid "Pick Contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:139
+#: src/Module/Moderation/Report/Create.php:176
 msgid "Please enter below the contact address or profile URL you would like to create a moderation report about."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:143
+#: src/Module/Moderation/Report/Create.php:180
 msgid "Contact address/URL"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:153
+#: src/Module/Moderation/Report/Create.php:190
 msgid "Pick Category"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:154
+#: src/Module/Moderation/Report/Create.php:191
 msgid "Please pick below the category of your report."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:158
+#: src/Module/Moderation/Report/Create.php:195
 #: src/Module/Moderation/Utils/ReportUtil.php:20
 msgid "Spam"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:158
+#: src/Module/Moderation/Report/Create.php:195
 msgid "This contact is publishing many repeated/overly long posts/replies or advertising their product/websites in otherwise irrelevant conversations."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:159
+#: src/Module/Moderation/Report/Create.php:196
 #: src/Module/Moderation/Utils/ReportUtil.php:21
 msgid "Illegal Content"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:159
+#: src/Module/Moderation/Report/Create.php:196
 msgid "This contact is publishing content that is considered illegal in this node's hosting juridiction."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:160
+#: src/Module/Moderation/Report/Create.php:197
 #: src/Module/Moderation/Utils/ReportUtil.php:22
 msgid "Community Safety"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:160
+#: src/Module/Moderation/Report/Create.php:197
 msgid "This contact aggravated you or other people, by being provocative or insensitive, intentionally or not. This includes disclosing people's private information (doxxing), posting threats or offensive pictures in posts or replies."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:161
+#: src/Module/Moderation/Report/Create.php:198
 #: src/Module/Moderation/Utils/ReportUtil.php:23
 msgid "Unwanted Content/Behavior"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:161
+#: src/Module/Moderation/Report/Create.php:198
 msgid "This contact has repeatedly published content irrelevant to the node's theme or is openly criticizing the node's administration/moderation without directly engaging with the relevant people for example or repeatedly nitpicking on a sensitive topic."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:162
+#: src/Module/Moderation/Report/Create.php:199
 #: src/Module/Moderation/Utils/ReportUtil.php:24
 msgid "Rules Violation"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:162
+#: src/Module/Moderation/Report/Create.php:199
 msgid "This contact violated one or more rules of this node. You will be able to pick which one(s) in the next step."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:163
+#: src/Module/Moderation/Report/Create.php:200
 msgid "Please elaborate below why you submitted this report. The more details you provide, the better your report can be handled."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:165
+#: src/Module/Moderation/Report/Create.php:202
 msgid "Additional Information"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:165
+#: src/Module/Moderation/Report/Create.php:202
 msgid "Please provide any additional information relevant to this particular report. You will be able to attach posts by this contact in the next step, but any context is welcome."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:181
+#: src/Module/Moderation/Report/Create.php:218
 msgid "Pick Rules"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:182
+#: src/Module/Moderation/Report/Create.php:219
 msgid "Please pick below the node rules you believe this contact violated."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:241
+#: src/Module/Moderation/Report/Create.php:278
 msgid "Pick Posts"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:242
+#: src/Module/Moderation/Report/Create.php:279
 msgid "Please optionally pick posts to attach to your report."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:258
+#: src/Module/Moderation/Report/Create.php:295
 msgid "Would you like to forward this report to the remote server?"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:260
+#: src/Module/Moderation/Report/Create.php:297
 msgid "Would you ike to forward this report to the remote server?"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:266
+#: src/Module/Moderation/Report/Create.php:303
 msgid "Submit Report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:267
+#: src/Module/Moderation/Report/Create.php:304
 msgid "Further Action"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:268
+#: src/Module/Moderation/Report/Create.php:305
 msgid "You can also perform one of the following action on the contact you reported:"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:276
+#: src/Module/Moderation/Report/Create.php:314
 msgid "Nothing"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:277
+#: src/Module/Moderation/Report/Create.php:315
 msgid "Collapse contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:277
+#: src/Module/Moderation/Report/Create.php:315
 msgid "Their posts and replies will keep appearing in your Network page but their content will be collapsed by default."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:278
+#: src/Module/Moderation/Report/Create.php:316
 msgid "Their posts won't appear in your Network page anymore, but their replies can appear in forum threads. They still can follow you."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:279
+#: src/Module/Moderation/Report/Create.php:317
 msgid "Block contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:279
+#: src/Module/Moderation/Report/Create.php:317
 msgid "Their posts won't appear in your Network page anymore, but their replies can appear in forum threads, with their content collapsed by default. They cannot follow you but still can have access to your public posts by other means."
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:282
+#: src/Module/Moderation/Report/Create.php:320
 msgid "Forward report"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:304
+#: src/Module/Moderation/Report/Create.php:342
 msgid "1. Pick a contact"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:305
+#: src/Module/Moderation/Report/Create.php:343
 msgid "2. Pick a category"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:306
+#: src/Module/Moderation/Report/Create.php:344
 msgid "2a. Pick rules"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:307
+#: src/Module/Moderation/Report/Create.php:345
 msgid "2b. Add comment"
 msgstr ""
 
-#: src/Module/Moderation/Report/Create.php:308
+#: src/Module/Moderation/Report/Create.php:346
 msgid "3. Pick posts"
 msgstr ""
 
@@ -8093,8 +8097,8 @@ msgstr ""
 msgid "No report exists at this node."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:124 src/Object/Post.php:609
-#: src/Object/Post.php:1160
+#: src/Module/Moderation/Reports.php:124 src/Object/Post.php:613
+#: src/Object/Post.php:1164
 msgid "Comment"
 msgstr ""
 
@@ -8721,7 +8725,7 @@ msgstr ""
 msgid "Private Message"
 msgstr ""
 
-#: src/Module/Profile/Schedule.php:101 src/Object/Post.php:553
+#: src/Module/Profile/Schedule.php:101 src/Object/Post.php:557
 msgid "via"
 msgstr ""
 
@@ -11641,7 +11645,7 @@ msgstr ""
 msgid "Connector Message"
 msgstr ""
 
-#: src/Object/Post.php:241 src/Object/Post.php:413
+#: src/Object/Post.php:241 src/Object/Post.php:417
 msgid "Pinned to your wall"
 msgstr ""
 
@@ -11672,240 +11676,240 @@ msgstr ""
 msgid "Report this post"
 msgstr ""
 
-#: src/Object/Post.php:287
+#: src/Object/Post.php:291
 msgid "Save to folder"
 msgstr ""
 
-#: src/Object/Post.php:333
+#: src/Object/Post.php:337
 msgid "I will attend"
 msgstr ""
 
-#: src/Object/Post.php:333
+#: src/Object/Post.php:337
 msgid "I will not attend"
 msgstr ""
 
-#: src/Object/Post.php:333
+#: src/Object/Post.php:337
 msgid "I might attend"
 msgstr ""
 
-#: src/Object/Post.php:380
+#: src/Object/Post.php:384
 msgid "Turn off related notifications"
 msgstr ""
 
-#: src/Object/Post.php:381
+#: src/Object/Post.php:385
 msgid "Turn on related notifications"
 msgstr ""
 
-#: src/Object/Post.php:386
+#: src/Object/Post.php:390
 msgid "Notifications turned off for this post"
 msgstr ""
 
-#: src/Object/Post.php:393
+#: src/Object/Post.php:397
 msgid "Bookmark"
 msgstr ""
 
-#: src/Object/Post.php:394
+#: src/Object/Post.php:398
 msgid "Remove bookmark"
 msgstr ""
 
-#: src/Object/Post.php:399
+#: src/Object/Post.php:403
 msgid "Starred"
 msgstr ""
 
-#: src/Object/Post.php:407
+#: src/Object/Post.php:411
 msgid "Pin to your wall"
 msgstr ""
 
-#: src/Object/Post.php:408
+#: src/Object/Post.php:412
 msgid "Unpin from your wall"
 msgstr ""
 
-#: src/Object/Post.php:418
+#: src/Object/Post.php:422
 msgid "Add tag to post"
 msgstr ""
 
-#: src/Object/Post.php:429
+#: src/Object/Post.php:433
 msgid "I like this (toggle)"
 msgstr ""
 
-#: src/Object/Post.php:429
+#: src/Object/Post.php:433
 msgid "Like"
 msgstr ""
 
-#: src/Object/Post.php:430
+#: src/Object/Post.php:434
 msgid "I don't like this (toggle)"
 msgstr ""
 
-#: src/Object/Post.php:430
+#: src/Object/Post.php:434
 msgid "Dislike"
 msgstr ""
 
-#: src/Object/Post.php:433
+#: src/Object/Post.php:437
 msgid "Quote share this"
 msgstr ""
 
-#: src/Object/Post.php:433
+#: src/Object/Post.php:437
 msgid "Quote Share"
 msgstr ""
 
-#: src/Object/Post.php:436
+#: src/Object/Post.php:440
 msgid "Reshare this"
 msgstr ""
 
-#: src/Object/Post.php:436
+#: src/Object/Post.php:440
 msgid "Reshare"
 msgstr ""
 
-#: src/Object/Post.php:437
+#: src/Object/Post.php:441
 msgid "Cancel your Reshare"
 msgstr ""
 
-#: src/Object/Post.php:437
+#: src/Object/Post.php:441
 msgid "Unshare"
 msgstr ""
 
-#: src/Object/Post.php:481
+#: src/Object/Post.php:485
 #, php-format
 msgid "%s (Received %s)"
 msgstr ""
 
-#: src/Object/Post.php:487
+#: src/Object/Post.php:491
 msgid "Comment this item on your system"
 msgstr ""
 
-#: src/Object/Post.php:487
+#: src/Object/Post.php:491
 msgid "Remote comment"
 msgstr ""
 
-#: src/Object/Post.php:511
+#: src/Object/Post.php:515
 msgid "Share via ..."
 msgstr ""
 
-#: src/Object/Post.php:511
+#: src/Object/Post.php:515
 msgid "Share via external services"
 msgstr ""
 
-#: src/Object/Post.php:518
+#: src/Object/Post.php:522
 msgid "Unknown parent"
 msgstr ""
 
-#: src/Object/Post.php:526
+#: src/Object/Post.php:530
 #, php-format
 msgid "in reply to %s"
 msgstr ""
 
-#: src/Object/Post.php:528
+#: src/Object/Post.php:532
 msgid "Parent is probably private or not federated."
 msgstr ""
 
-#: src/Object/Post.php:552
+#: src/Object/Post.php:556
 msgid "to"
 msgstr ""
 
-#: src/Object/Post.php:554
+#: src/Object/Post.php:558
 msgid "Wall-to-Wall"
 msgstr ""
 
-#: src/Object/Post.php:555
+#: src/Object/Post.php:559
 msgid "via Wall-To-Wall:"
 msgstr ""
 
-#: src/Object/Post.php:610
+#: src/Object/Post.php:614
 #, php-format
 msgid "Reply to %s"
 msgstr ""
 
-#: src/Object/Post.php:632
+#: src/Object/Post.php:636
 msgid "Notifier task is pending"
 msgstr ""
 
-#: src/Object/Post.php:633
+#: src/Object/Post.php:637
 msgid "Delivery to remote servers is pending"
 msgstr ""
 
-#: src/Object/Post.php:634
+#: src/Object/Post.php:638
 msgid "Delivery to remote servers is underway"
 msgstr ""
 
-#: src/Object/Post.php:635
+#: src/Object/Post.php:639
 msgid "Delivery to remote servers is mostly done"
 msgstr ""
 
-#: src/Object/Post.php:636
+#: src/Object/Post.php:640
 msgid "Delivery to remote servers is done"
 msgstr ""
 
-#: src/Object/Post.php:661
+#: src/Object/Post.php:665
 #, php-format
 msgid "%d comment"
 msgid_plural "%d comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Object/Post.php:662
+#: src/Object/Post.php:666
 msgid "Show more"
 msgstr ""
 
-#: src/Object/Post.php:663
+#: src/Object/Post.php:667
 msgid "Show fewer"
 msgstr ""
 
-#: src/Object/Post.php:700
+#: src/Object/Post.php:704
 #, php-format
 msgid "Reshared by: %s"
 msgstr ""
 
-#: src/Object/Post.php:705
+#: src/Object/Post.php:709
 #, php-format
 msgid "Viewed by: %s"
 msgstr ""
 
-#: src/Object/Post.php:710
+#: src/Object/Post.php:714
 #, php-format
 msgid "Read by: %s"
 msgstr ""
 
-#: src/Object/Post.php:715
+#: src/Object/Post.php:719
 #, php-format
 msgid "Liked by: %s"
 msgstr ""
 
-#: src/Object/Post.php:720
+#: src/Object/Post.php:724
 #, php-format
 msgid "Disliked by: %s"
 msgstr ""
 
-#: src/Object/Post.php:725
+#: src/Object/Post.php:729
 #, php-format
 msgid "Attended by: %s"
 msgstr ""
 
-#: src/Object/Post.php:730
+#: src/Object/Post.php:734
 #, php-format
 msgid "Maybe attended by: %s"
 msgstr ""
 
-#: src/Object/Post.php:735
+#: src/Object/Post.php:739
 #, php-format
 msgid "Not attended by: %s"
 msgstr ""
 
-#: src/Object/Post.php:740
+#: src/Object/Post.php:744
 #, php-format
 msgid "Commented by: %s"
 msgstr ""
 
-#: src/Object/Post.php:745
+#: src/Object/Post.php:749
 #, php-format
 msgid "Reacted with %s by: %s"
 msgstr ""
 
-#: src/Object/Post.php:768
+#: src/Object/Post.php:772
 #, php-format
 msgid "Quote shared by: %s"
 msgstr ""
 
-#: src/Object/Post.php:1161
+#: src/Object/Post.php:1165
 msgid "Post comment"
 msgstr ""
 
