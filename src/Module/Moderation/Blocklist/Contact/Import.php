@@ -113,7 +113,7 @@ class Import extends \Friendica\Module\BaseModeration
 			'$listfile'            => ['listfile', $this->t('Contact blocklist CSV file'), '', '', $this->t('Required'), '', 'file'],
 			'$purge'               => ['purge', $this->t('Also purge contacts'), false, $this->t('Removes all content related to these contacts from the node. Keeps the contact records. This action cannot be undone.')],
 			'$contactlist'         => $this->contactlist,
-			'$form_security_token' => self::getFormSecurityToken('moderation_contactblock_import')
+			'$form_security_token' => self::getFormSecurityToken('moderation_contactblock_import'),
 		]);
 	}
 
