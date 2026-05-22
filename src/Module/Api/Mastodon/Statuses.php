@@ -354,9 +354,9 @@ class Statuses extends BaseApi
 			}
 
 			$this->jsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($id, $uid)->toArray());
+		} elseif (!empty($request['scheduled_at'])) {
+			$item['created'] = $scheduled_at;
 		}
-
-		$item['created'] = $scheduled_at;
 
 		$id = Item::insert($item, true);
 		if (!empty($id)) {
