@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 class PasswordTooLong extends \Friendica\BaseModule
 {
-	public function __construct(private SystemMessages $sysmsg, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private IHandleUserSessions $userSession, $server, array $parameters = [])
+	public function __construct(private readonly SystemMessages $sysmsg, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly IHandleUserSessions $userSession, $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

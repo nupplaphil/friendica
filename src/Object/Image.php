@@ -48,7 +48,7 @@ class Image implements \Stringable
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public function __construct(string $data, string $type = '', private string $filename = '', bool $imagick = true)
+	public function __construct(string $data, string $type = '', private readonly string $filename = '', bool $imagick = true)
 	{
 		$type = Images::addMimeTypeByDataIfInvalid($type, $data);
 		$type = Images::addMimeTypeByExtensionIfInvalid($type, $this->filename);

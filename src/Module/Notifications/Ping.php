@@ -42,7 +42,7 @@ use Psr\Log\LoggerInterface;
 
 class Ping extends BaseModule
 {
-	public function __construct(private AppHelper $appHelper, private Repository\Notify $notify, private ICanCache $cache, private Database $database, private IManagePersonalConfigValues $pconfig, private IManageConfigValues $config, private IHandleUserSessions $session, private SystemMessages $systemMessages, private Repository\Notification $notificationRepo, private Introduction $introductionRepo, private Factory\FormattedNavNotification $formattedNavNotification, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly AppHelper $appHelper, private readonly Repository\Notify $notify, private readonly ICanCache $cache, private readonly Database $database, private readonly IManagePersonalConfigValues $pconfig, private readonly IManageConfigValues $config, private readonly IHandleUserSessions $session, private readonly SystemMessages $systemMessages, private readonly Repository\Notification $notificationRepo, private readonly Introduction $introductionRepo, private readonly Factory\FormattedNavNotification $formattedNavNotification, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

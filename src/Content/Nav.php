@@ -52,7 +52,7 @@ class Nav
 	 */
 	private $appMenu = null;
 
-	public function __construct(private BaseURL $baseUrl, private L10n $l10n, private IHandleUserSessions $session, private Database $database, private IManageConfigValues $config, private Router $router, private EventDispatcherInterface $eventDispatcher) {}
+	public function __construct(private readonly BaseURL $baseUrl, private readonly L10n $l10n, private readonly IHandleUserSessions $session, private readonly Database $database, private readonly IManageConfigValues $config, private readonly Router $router, private readonly EventDispatcherInterface $eventDispatcher) {}
 
 	/**
 	 * Set a menu item in navbar as selected

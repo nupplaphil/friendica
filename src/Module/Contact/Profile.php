@@ -47,20 +47,20 @@ use Psr\Log\LoggerInterface;
 class Profile extends BaseModule
 {
 	public function __construct(
-		private UserGServerRepository $userGServer,
-		private EventDispatcherInterface $eventDispatcher,
-		private Database $db,
-		private SystemMessages $systemMessages,
-		private IHandleUserSessions $session,
+		private readonly UserGServerRepository $userGServer,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly Database $db,
+		private readonly SystemMessages $systemMessages,
+		private readonly IHandleUserSessions $session,
 		L10n $l10n,
-		private LocalRelationshipRepository $localRelationship,
+		private readonly LocalRelationshipRepository $localRelationship,
 		BaseURL $baseUrl,
 		Arguments $args,
 		LoggerInterface $logger,
 		Profiler $profiler,
 		Response $response,
 		private Page $page,
-		private IManageConfigValues $config,
+		private readonly IManageConfigValues $config,
 		array $server,
 		array $parameters = [],
 	) {

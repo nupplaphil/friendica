@@ -13,7 +13,7 @@ class BasePath
 	 * @param string $baseDir The default base path
 	 * @param array  $server  server arguments
 	 */
-	public function __construct(private string $baseDir, private array $server = []) {}
+	public function __construct(private readonly string $baseDir, private readonly array $server = []) {}
 
 	/**
 	 * Returns the base Friendica filesystem path without trailing slash

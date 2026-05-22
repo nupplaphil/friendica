@@ -37,7 +37,7 @@ class Import extends \Friendica\BaseModule
 	public const IMPORT_DEBUG = false;
 	public const MEMORY_LIMIT = 67108864;
 
-	public function __construct(private UserSession $session, private PermissionSet $permissionSet, private IManagePersonalConfigValues $pconfig, private Database $database, private SystemMessages $systemMessages, private IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly UserSession $session, private readonly PermissionSet $permissionSet, private readonly IManagePersonalConfigValues $pconfig, private readonly Database $database, private readonly SystemMessages $systemMessages, private readonly IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

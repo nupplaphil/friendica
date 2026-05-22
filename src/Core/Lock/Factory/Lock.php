@@ -34,19 +34,19 @@ class Lock
 		/**
 		 * @var Cache The memory cache driver in case we use it
 		 */
-		private Cache $cacheFactory,
+		private readonly Cache $cacheFactory,
 		/**
 		 * @var IManageConfigValues The configuration to read parameters out of the config
 		 */
-		private IManageConfigValues $config,
+		private readonly IManageConfigValues $config,
 		/**
 		 * @var Database The database connection in case that the cache is used the dba connection
 		 */
-		private Database $dba,
+		private readonly Database $dba,
 		/**
 		 * @var LoggerInterface The Friendica Logger
 		 */
-		private LoggerInterface $logger,
+		private readonly LoggerInterface $logger,
 	) {}
 
 	public function create()

@@ -45,10 +45,10 @@ class StreamLogger extends AbstractLogger
 	public function __construct(string $channel, IHaveCallIntrospections $introspection, /**
 				 * The stream, where the current logger is writing into
 				 */
-		private $stream, private int $logLevel, /**
+		private $stream, private readonly int $logLevel, /**
 				 * The current process ID
 				 */
-		private int $pid)
+		private readonly int $pid)
 	{
 		parent::__construct($channel, $introspection);
 	}

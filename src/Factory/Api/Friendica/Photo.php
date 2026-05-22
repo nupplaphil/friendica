@@ -20,7 +20,7 @@ use Friendica\Util\Images;
 
 class Photo extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private BaseURL $baseUrl, private Status $status, private Activities $activities)
+	public function __construct(LoggerInterface $logger, private readonly BaseURL $baseUrl, private readonly Status $status, private readonly Activities $activities)
 	{
 		parent::__construct($logger);
 	}

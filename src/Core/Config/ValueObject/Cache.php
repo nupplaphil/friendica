@@ -60,7 +60,7 @@ class Cache
 	 * @param bool  $hidePasswordOutput True, if cache variables should take extra care of password values
 	 * @param int   $source             Sets a source of the initial config values
 	 */
-	public function __construct(array $config = [], private bool $hidePasswordOutput = true, int $source = self::SOURCE_DEFAULT)
+	public function __construct(array $config = [], private readonly bool $hidePasswordOutput = true, int $source = self::SOURCE_DEFAULT)
 	{
 		$this->load($config, $source);
 	}

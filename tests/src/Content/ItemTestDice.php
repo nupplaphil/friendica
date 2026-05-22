@@ -9,7 +9,7 @@ namespace Friendica\Test\src\Content;
 
 class ItemTestDice
 {
-	public function __construct(private $profiler, private $eventDispatcher, private $config, private $l10n, private $baseUrl, private \Closure $mockFactory) {}
+	public function __construct(private $profiler, private $eventDispatcher, private $config, private $l10n, private $baseUrl, private readonly \Closure $mockFactory) {}
 
 	public function create($class)
 	{

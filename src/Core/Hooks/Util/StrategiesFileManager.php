@@ -31,7 +31,7 @@ class StrategiesFileManager
 	/** @var string */
 	protected $basePath;
 
-	public function __construct(string $basePath, private IManageConfigValues $configuration)
+	public function __construct(string $basePath, private readonly IManageConfigValues $configuration)
 	{
 		$this->basePath = $basePath;
 	}

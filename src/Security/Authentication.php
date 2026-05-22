@@ -67,16 +67,16 @@ class Authentication
 	 * @param Request                     $request
 	 */
 	public function __construct(
-		private IManageConfigValues $config,
-		private Mode $mode,
-		private BaseURL $baseUrl,
-		private L10n $l10n,
-		private Database $dba,
-		private LoggerInterface $logger,
-		private Cookie $cookie,
-		private IHandleUserSessions $session,
-		private IManagePersonalConfigValues $pConfig,
-		private AppHelper $appHelper,
+		private readonly IManageConfigValues $config,
+		private readonly Mode $mode,
+		private readonly BaseURL $baseUrl,
+		private readonly L10n $l10n,
+		private readonly Database $dba,
+		private readonly LoggerInterface $logger,
+		private readonly Cookie $cookie,
+		private readonly IHandleUserSessions $session,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly AppHelper $appHelper,
 		Request $request,
 	) {
 		$this->remoteAddress = $request->getRemoteAddress();

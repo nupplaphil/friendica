@@ -71,7 +71,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Mode $appMode, private IManageConfigValues $config, ?array $argv = null)
+	public function __construct(private readonly Mode $appMode, private readonly IManageConfigValues $config, ?array $argv = null)
 	{
 		parent::__construct($argv);
 	}

@@ -36,7 +36,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Database $dba, private L10n $l10n, array $argv = null)
+	public function __construct(private readonly Database $dba, private readonly L10n $l10n, array $argv = null)
 	{
 		parent::__construct($argv);
 	}

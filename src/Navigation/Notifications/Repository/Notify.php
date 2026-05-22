@@ -63,10 +63,10 @@ class Notify extends BaseRepository
 		L10n $l10n,
 		BaseURL $baseUrl,
 		IManageConfigValues $config,
-		private IManagePersonalConfigValues $pConfig,
+		private readonly IManagePersonalConfigValues $pConfig,
 		Emailer $emailer,
 		Factory\Notification $notification,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		Factory\Notify $factory = null,
 	) {
 		$this->l10n         = $l10n;

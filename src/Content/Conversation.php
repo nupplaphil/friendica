@@ -61,7 +61,7 @@ class Conversation
 	public const MODE_SEARCH        = 'search';
 	public const MODE_PROFILE       = 'profile';
 
-	public function __construct(private UserGServerRepository $userGServer, private Channel $channel, private UserDefinedChannel $userDefinedChannel, private LoggerInterface $logger, private Profiler $profiler, private Activity $activity, private L10n $l10n, private Item $item, private Arguments $args, private BaseURL $baseURL, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Page $page, private Mode $mode, private EventDispatcherInterface $eventDispatcher, private IHandleUserSessions $session) {}
+	public function __construct(private readonly UserGServerRepository $userGServer, private readonly Channel $channel, private readonly UserDefinedChannel $userDefinedChannel, private readonly LoggerInterface $logger, private readonly Profiler $profiler, private readonly Activity $activity, private readonly L10n $l10n, private readonly Item $item, private readonly Arguments $args, private readonly BaseURL $baseURL, private readonly IManageConfigValues $config, private readonly IManagePersonalConfigValues $pConfig, private Page $page, private readonly Mode $mode, private readonly EventDispatcherInterface $eventDispatcher, private readonly IHandleUserSessions $session) {}
 
 	/**
 	 * Checks item to see if it is one of the builtin activities (like/dislike, event attendance, consensus items, etc.)

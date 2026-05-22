@@ -40,7 +40,7 @@ final class Daemon extends Console
 	 * @param SysDaemon            $daemon
 	 * @param array|null           $argv
 	 */
-	public function __construct(private Mode $mode, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private BasePath $basePath, private System $system, private LoggerInterface $logger, private Database $dba, private SysDaemon $daemon, array $argv = null)
+	public function __construct(private readonly Mode $mode, private readonly IManageConfigValues $config, private readonly IManageKeyValuePairs $keyValue, private readonly BasePath $basePath, private readonly System $system, private readonly LoggerInterface $logger, private readonly Database $dba, private readonly SysDaemon $daemon, array $argv = null)
 	{
 		parent::__construct($argv);
 	}

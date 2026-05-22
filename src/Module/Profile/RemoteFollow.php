@@ -37,7 +37,7 @@ class RemoteFollow extends BaseModule
 	/** @var array */
 	protected $owner;
 
-	public function __construct(private IHandleUserSessions $userSession, private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, App\Page $page, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly IHandleUserSessions $userSession, private readonly SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, App\Page $page, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->page = $page;

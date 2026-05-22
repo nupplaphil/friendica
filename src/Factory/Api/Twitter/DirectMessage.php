@@ -18,8 +18,8 @@ use Psr\Log\LoggerInterface;
 
 class DirectMessage extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private Database $dba, /** @var twitterUser entity */
-		private TwitterUser $twitterUser)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba, /** @var twitterUser entity */
+		private readonly TwitterUser $twitterUser)
 	{
 		parent::__construct($logger);
 	}

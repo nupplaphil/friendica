@@ -45,8 +45,8 @@ class InstanceV2 extends BaseApi
 		LoggerInterface $logger,
 		Profiler $profiler,
 		ApiResponse $response,
-		private Database $database,
-		private IManageConfigValues $config,
+		private readonly Database $database,
+		private readonly IManageConfigValues $config,
 		array $server,
 		array $parameters = [],
 	) {

@@ -53,7 +53,7 @@ class PostMedia extends BaseRepository
 	 * @param BaseURL $baseURL Base URL helper
 	 * @param Item $item Item helper
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, PostMediaFactory $factory, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, private BaseURL $baseURL, private Item $item)
+	public function __construct(Database $database, LoggerInterface $logger, PostMediaFactory $factory, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, private readonly BaseURL $baseURL, private readonly Item $item)
 	{
 		parent::__construct($database, $logger, $factory);
 	}

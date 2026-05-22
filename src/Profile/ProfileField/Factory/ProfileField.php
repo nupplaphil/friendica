@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 {
-	public function __construct(LoggerInterface $logger, private PermissionSetFactory $permissionSetFactory)
+	public function __construct(LoggerInterface $logger, private readonly PermissionSetFactory $permissionSetFactory)
 	{
 		parent::__construct($logger);
 	}

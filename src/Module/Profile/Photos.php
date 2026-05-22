@@ -40,14 +40,14 @@ class Photos extends \Friendica\Module\BaseProfile
 	private $owner;
 
 	public function __construct(
-		private ACLFormatter $aclFormatter,
-		private SystemMessages $systemMessages,
-		private Database $database,
-		private AppHelper $appHelper,
-		private IManageConfigValues $config,
+		private readonly ACLFormatter $aclFormatter,
+		private readonly SystemMessages $systemMessages,
+		private readonly Database $database,
+		private readonly AppHelper $appHelper,
+		private readonly IManageConfigValues $config,
 		private Page $page,
-		private IHandleUserSessions $session,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly IHandleUserSessions $session,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,

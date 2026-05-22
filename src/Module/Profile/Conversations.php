@@ -43,7 +43,7 @@ use Psr\Log\LoggerInterface;
 
 class Conversations extends BaseProfile
 {
-	public function __construct(private Mode $mode, private IManagePersonalConfigValues $pConfig, private Conversation $conversation, private IHandleUserSessions $session, private IManageConfigValues $config, private DateTimeFormat $dateTimeFormat, private Page $page, private AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly Mode $mode, private readonly IManagePersonalConfigValues $pConfig, private readonly Conversation $conversation, private readonly IHandleUserSessions $session, private readonly IManageConfigValues $config, private readonly DateTimeFormat $dateTimeFormat, private Page $page, private readonly AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

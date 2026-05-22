@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
  */
 class Conversations extends BaseModule
 {
-	public function __construct(L10n $l10n, private LocalRelationship $localRelationship, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private Page $page, private Conversation $conversation, private IHandleUserSessions $userSession, $server, array $parameters = [])
+	public function __construct(L10n $l10n, private readonly LocalRelationship $localRelationship, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private Page $page, private readonly Conversation $conversation, private readonly IHandleUserSessions $userSession, $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

@@ -23,7 +23,7 @@ final class DelegatingLoggerFactory implements LoggerFactory
 	/** @var array<string,LoggerFactory> */
 	private array $factories = [];
 
-	public function __construct(private IManageConfigValues $config) {}
+	public function __construct(private readonly IManageConfigValues $config) {}
 
 	public function registerFactory(string $name, LoggerFactory $factory): void
 	{

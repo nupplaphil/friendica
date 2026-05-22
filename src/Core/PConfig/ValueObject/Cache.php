@@ -22,7 +22,7 @@ class Cache
 	/**
 	 * @param bool $hidePasswordOutput True, if cache variables should take extra care of password values
 	 */
-	public function __construct(private bool $hidePasswordOutput = true) {}
+	public function __construct(private readonly bool $hidePasswordOutput = true) {}
 
 	/**
 	 * Tries to load the specified configuration array into the user specific config array.

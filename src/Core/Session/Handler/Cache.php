@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
  */
 class Cache extends AbstractSessionHandler
 {
-	public function __construct(private ICanCache $cache, private LoggerInterface $logger) {}
+	public function __construct(private readonly ICanCache $cache, private readonly LoggerInterface $logger) {}
 
 	public function open($path, $name): bool
 	{

@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
 
 class Mention extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private BaseURL $baseUrl)
+	public function __construct(LoggerInterface $logger, private readonly BaseURL $baseUrl)
 	{
 		parent::__construct($logger);
 	}

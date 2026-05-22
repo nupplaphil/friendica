@@ -33,11 +33,11 @@ use Psr\Log\LoggerInterface;
 class Friendica extends BaseModule
 {
 	public function __construct(
-		private AddonHelper $addonHelper,
-		private EventDispatcherInterface $eventDispatcher,
-		private IHandleUserSessions $session,
-		private IManageKeyValuePairs $keyValue,
-		private IManageConfigValues $config,
+		private readonly AddonHelper $addonHelper,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly IHandleUserSessions $session,
+		private readonly IManageKeyValuePairs $keyValue,
+		private readonly IManageConfigValues $config,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,

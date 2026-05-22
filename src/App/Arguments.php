@@ -22,15 +22,15 @@ class Arguments
 		/**
 		 * @var string The complete query string
 		 */
-		private string $queryString = '',
+		private readonly string $queryString = '',
 		/**
 		 * @var string The current Friendica command
 		 */
-		private string $command = '',
+		private readonly string $command = '',
 		/**
 		 * @var string The name of the current module
 		 */
-		private string $moduleName = '',
+		private readonly string $moduleName = '',
 		/**
 		 * @var array The arguments of the current execution
 		 */
@@ -42,7 +42,7 @@ class Arguments
 		/**
 		 * @var string The used HTTP method
 		 */
-		private string $method = Router::GET,
+		private readonly string $method = Router::GET,
 	) {}
 
 	/**

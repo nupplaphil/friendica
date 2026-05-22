@@ -24,13 +24,13 @@ use Psr\Log\LoggerInterface;
  */
 final class ItemHelper
 {
-	private string $baseUrl;
+	private readonly string $baseUrl;
 
 	public function __construct(
-		private ItemContent $itemContent,
-		private Activity $activity,
-		private LoggerInterface $logger,
-		private Database $database,
+		private readonly ItemContent $itemContent,
+		private readonly Activity $activity,
+		private readonly LoggerInterface $logger,
+		private readonly Database $database,
 		BaseURL $baseURL,
 	) {
 		$this->baseUrl = $baseURL->__toString();

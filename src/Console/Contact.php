@@ -51,7 +51,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Mode $appMode, ?array $argv = null)
+	public function __construct(private readonly Mode $appMode, ?array $argv = null)
 	{
 		parent::__construct($argv);
 	}

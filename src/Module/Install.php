@@ -62,7 +62,7 @@ class Install extends BaseModule
 	public function __construct(AppHelper $appHelper, BasePath $basePath, Mode $mode, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, /**
 				 * @var Installer The installer
 				 */
-		private Installer $installer, array $server, array $parameters = [])
+		private readonly Installer $installer, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 

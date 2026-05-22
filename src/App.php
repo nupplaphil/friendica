@@ -128,7 +128,7 @@ class App
 	 */
 	private $appHelper;
 
-	private function __construct(private Container $container) {}
+	private function __construct(private readonly Container $container) {}
 
 	/**
 	 * @internal

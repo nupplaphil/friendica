@@ -65,7 +65,7 @@ class ExAuth
 	 *
 	 * @throws Exception
 	 */
-	public function __construct(private App\Mode $appMode, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Database $dba, private App\BaseURL $baseURL)
+	public function __construct(private readonly App\Mode $appMode, private readonly IManageConfigValues $config, private readonly IManagePersonalConfigValues $pConfig, private readonly Database $dba, private readonly App\BaseURL $baseURL)
 	{
 		$this->bDebug = (int) $this->config->get('jabber', 'debug');
 

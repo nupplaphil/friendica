@@ -54,7 +54,7 @@ class Display extends BaseSettings
 	/** @var TimelineFactory */
 	protected $timeline;
 
-	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, NetworkFactory $network, CommunityFactory $community, ChannelFactory $channel, TimelineFactory $timeline, private SystemMessages $systemMessages, private AppHelper $appHelper, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, IHandleUserSessions $session, Page $page, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, NetworkFactory $network, CommunityFactory $community, ChannelFactory $channel, TimelineFactory $timeline, private readonly SystemMessages $systemMessages, private readonly AppHelper $appHelper, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, IHandleUserSessions $session, Page $page, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->timeline           = $timeline;

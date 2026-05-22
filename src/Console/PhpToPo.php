@@ -20,7 +20,7 @@ class PhpToPo extends \Asika\SimpleConsole\Console
 	private $normBaseMsgIds  = [];
 	public const NORM_REGEXP = "|[\\\]|";
 
-	public function __construct(private AppHelper $appHelper, array $argv = null)
+	public function __construct(private readonly AppHelper $appHelper, array $argv = null)
 	{
 		parent::__construct($argv);
 	}

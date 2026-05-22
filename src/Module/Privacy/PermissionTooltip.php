@@ -34,12 +34,12 @@ use Psr\Log\LoggerInterface;
 class PermissionTooltip extends BaseModule
 {
 	public function __construct(
-		private PermissionSet $permissionSet,
-		private IManageConfigValues $config,
-		private IHandleUserSessions $session,
-		private ACLFormatter $aclFormatter,
-		private Database $dba,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly PermissionSet $permissionSet,
+		private readonly IManageConfigValues $config,
+		private readonly IHandleUserSessions $session,
+		private readonly ACLFormatter $aclFormatter,
+		private readonly Database $dba,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,

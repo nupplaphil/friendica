@@ -32,7 +32,7 @@ class Upload extends \Friendica\BaseModule
 	/** @var bool */
 	private $isJson = false;
 
-	public function __construct(private App\Page $page, private IManageConfigValues $config, private SystemMessages $systemMessages, private IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly App\Page $page, private readonly IManageConfigValues $config, private readonly SystemMessages $systemMessages, private readonly IHandleUserSessions $userSession, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

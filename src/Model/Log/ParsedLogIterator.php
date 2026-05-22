@@ -30,7 +30,7 @@ class ParsedLogIterator implements \Iterator
 	/** @var string search term */
 	private $search = '';
 
-	public function __construct(private ReversedFileReader $reader) {}
+	public function __construct(private readonly ReversedFileReader $reader) {}
 
 	/**
 	 * @param string $filename	File to open
