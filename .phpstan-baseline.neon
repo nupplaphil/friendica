@@ -1529,28 +1529,3 @@ parameters:
 			identifier: nullCoalesce.offset
 			count: 1
 			path: src/Util/Writer/DocWriter.php
-
-		-
-			message: '#^Call to function is_array\(\) with object will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Util/XML.php
-
-		-
-			message: '#^Call to function is_string\(\) with object will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Util/XML.php
-
-		-
-			message: '#^Negated boolean expression is always false\.$#'
-			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: src/Util/XML.php
-
-		-
-			message: '#^Result of && is always true\.$#'
-			identifier: booleanAnd.alwaysTrue
-			count: 1
-			path: src/Util/XML.php
-
