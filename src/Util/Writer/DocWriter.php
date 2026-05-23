@@ -97,7 +97,7 @@ class DocWriter
 				];
 
 				foreach ($field as $fieldName => $fieldvalue) {
-					$lengths[$fieldName] = max($lengths[$fieldName] ?? 0, strlen((string) $fieldvalue));
+					$lengths[$fieldName] = max($lengths[$fieldName], strlen((string) $fieldvalue));
 				}
 				$fields[] = $field;
 

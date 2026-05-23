@@ -1517,15 +1517,3 @@ parameters:
 			identifier: nullCoalesce.expr
 			count: 2
 			path: src/Util/Profiler.php
-
-		-
-			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Util/Writer/DbaDefinitionSqlWriter.php
-
-		-
-			message: '#^Offset ''comment''\|''default''\|''extra''\|''name''\|''null''\|''primary''\|''type'' on array\{name\: int\<3, max\>, comment\: int\<3, max\>, type\: int\<3, max\>, null\: int\<3, max\>, primary\: int\<3, max\>, default\: int\<3, max\>, extra\: int\<3, max\>\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Util/Writer/DocWriter.php
