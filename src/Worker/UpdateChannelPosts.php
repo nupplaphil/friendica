@@ -55,9 +55,9 @@ final class UpdateChannelPosts
 			$orders = [
 				UserDefinedChannel::CIRCLE_CREATION => 'created',
 				UserDefinedChannel::CIRCLE_POSTS    => 'received',
-				UserDefinedChannel::CIRCLE_ACTIVITY => 'commented'
+				UserDefinedChannel::CIRCLE_ACTIVITY => 'commented',
 			];
-			$order     = $orders[(int)$channel->circle];
+			$order     = $orders[(int) $channel->circle];
 			$table     = 'post-engagement-user-view';
 			$fields    = ['uri-id', 'created', 'received', 'commented'];
 			$condition = DBA::mergeConditions($condition, ['uid' => $uid]);
@@ -69,7 +69,7 @@ final class UpdateChannelPosts
 		while ($row = DBA::fetch($query)) {
 			$rows++;
 			$cache = [
-				'channel'   => (int)$channel->code,
+				'channel'   => (int) $channel->code,
 				'uid'       => $channel->uid,
 				'uri-id'    => $row['uri-id'],
 				'created'   => $row['created'],
