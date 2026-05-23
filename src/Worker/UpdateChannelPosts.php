@@ -41,9 +41,6 @@ final class UpdateChannelPosts
 			return;
 		}
 		$channel = DI::userDefinedChannel()->selectById($id, $uid);
-		if (!$channel) {
-			return;
-		}
 
 		DI::logger()->debug('Delete channel posts', ['channel' => $id, 'uid' => $uid]);
 		DBA::delete('channel-post', ['channel' => $id, 'uid' => $uid]);

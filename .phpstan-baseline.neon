@@ -1560,8 +1560,3 @@ parameters:
 			count: 1
 			path: src/Worker/OnePoll.php
 
-		-
-			message: '#^Negated boolean expression is always false\.$#'
-			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: src/Worker/UpdateChannelPosts.php
