@@ -184,12 +184,16 @@ details summary {
 		padding-left: 0;
 		padding-right: 0;
 	}
-	#topbar-first > .container-fluid {
-		padding-inline: 0;
+	#topbar-first > .container-fluid, #topbar-second > .container-fluid {
+		padding-inline: 2px;
 	}
 
 	ul#nav-user-menu {
 		margin-right: 10px;
+	}
+
+	#topbar-second #tabmenu {
+		text-align: unset;
 	}
 }
 /*
@@ -453,6 +457,7 @@ header #banner #logo-img,
 }
 
 #navbrand-container {
+	align-items: center;
 	display: flex;
 }
 #navbrand-container #navbar-brand-text {
@@ -541,9 +546,6 @@ header #banner #logo-img,
 /* offcanvas section ends */
 
 /* NavBar */
-.topbar, #topbar-first-nav-container {
-	height: 50px;
-}
 .topbar {
 	position: fixed;
 	display: block;
@@ -718,6 +720,9 @@ nav.navbar .nav > li > button:focus {
 	border-bottom-color: rgba(0, 0, 0, 0.15);
 	top: -19px;
 	z-index: 1035;
+}
+.topbar, #topbar-first-nav-container {
+	height: 50px;
 }
 .topbar-nav, .topbar-actions, #topbar-first ul.nav {
 		align-items: center;
@@ -936,16 +941,13 @@ nav.navbar .nav > li > button:focus {
 	-moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
 	border-bottom: 1px solid #d4d4d4;
-	padding-inline: 15px;
 }
-#topbar-second > .container {
+#topbar-second > .container-fluid {
 	height: 100%;
 }
-@media screen and (max-width: 767px) {
-	#topbar-second > .container,
-	#topbar-second #navbar-button {
-		padding: 0;
-	}
+
+#topbar-second #navbar-button {
+	padding: 0;
 }
 #topbar-second .dropdown-menu {
 	padding-top: 0;
@@ -2402,6 +2404,9 @@ moved it to the nav through js */
 	padding-right: 10px;
 	padding-left: 10px;
 }
+#tabmenu {
+	text-align: center;
+}
 #tabmenu,
 .tabbar-wrapper,
 .tabbar,
@@ -2553,6 +2558,10 @@ input[type="range"].form-control {
 }
 
 /* Search form */
+#search-box {
+	padding-right: 0;
+}
+
 .form-control.form-search {
 	border-radius: 30px;
 }
