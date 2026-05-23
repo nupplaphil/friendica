@@ -1511,9 +1511,3 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: src/Util/ParseUrl.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 2
-			path: src/Util/Profiler.php

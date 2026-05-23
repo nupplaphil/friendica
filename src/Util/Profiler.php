@@ -53,8 +53,8 @@ class Profiler implements ContainerInterface
 
 	public function __construct(IManageConfigValues $config)
 	{
-		$this->enabled    = (bool)$config->get('system', 'profiler') ?? false;
-		$this->rendertime = (bool)$config->get('rendertime', 'callstack') ?? false;
+		$this->enabled    = (bool) $config->get('system', 'profiler');
+		$this->rendertime = (bool) $config->get('rendertime', 'callstack');
 		$this->reset();
 	}
 
