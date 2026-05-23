@@ -184,6 +184,13 @@ details summary {
 		padding-left: 0;
 		padding-right: 0;
 	}
+	#topbar-first > .container-fluid {
+		padding-inline: 0;
+	}
+
+	ul#nav-user-menu {
+		margin-right: 10px;
+	}
 }
 /*
 * standard page elements
@@ -534,35 +541,22 @@ header #banner #logo-img,
 /* offcanvas section ends */
 
 /* NavBar */
+.topbar, #topbar-first-nav-container {
+	height: 50px;
+}
 .topbar {
 	position: fixed;
 	display: block;
-	height: 50px;
 	width: 100%;
-	padding-left: 15px;
-	padding-right: 15px;
-}
-.topbar ul.nav {
-	float: left;
-}
-.topbar ul.nav > li {
-	float: left;
 }
 
-@media (min-width: 992px) {
-	.topbar ul.nav > li > a,
-	.topbar ul.nav > li > button {
-		padding-top: 15px;
-		padding-bottom: 15px;
-		line-height: 20px;
-	}
+.topbar ul.nav > li > a,
+.topbar ul.nav > li > button {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	line-height: 20px;
 }
-@media (max-width: 991px) {
-	.topbar ul.nav > li > a,
-	.topbar ul.nav > li > button {
-		padding: 15px 10px;
-	}
-}
+
 .topbar .dropdown-footer {
 	margin: 10px;
 }
@@ -619,12 +613,6 @@ nav.navbar {
 	z-index: 1030;
 	color: $nav_icon_color;
 }
-@media screen and (max-width: 795px) {
-	#topbar-first,
-	nav.navbar {
-		padding: 0 2px;
-	}
-}
 
 button#main-menu {
 	align-items: center;
@@ -634,11 +622,10 @@ button#main-menu {
 #topbar-first-nav-container {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 }
 #topbar-first .navbar-toggle {
-	margin-top: 5px;
-	margin-bottom: 0;
-	margin-right: 0;
+	margin: 0;
 }
 #topbar-first .nav > li > a,
 #topbar-first .nav > li > button,
@@ -662,12 +649,9 @@ nav.navbar .nav > li > button:focus {
 }
 /* Current section highlighting */
 #topbar-first .nav > li > a.selected i {
-	border-bottom: 3px solid $nav_icon_color;
-	padding-bottom: 7px;
-}
-/* Offset the overflow caused by the current section highlighting padding above by a lowered height */
-#topbar-first .nav > li > a.selected:hover {
-	height: 50px;
+	text-decoration: underline;
+	text-underline-offset: 8px;
+	text-decoration-thickness: 3px;
 }
 #topbar-first .nav > .account img {
 	height: 32px;
@@ -682,20 +666,6 @@ nav.navbar .nav > li > button:focus {
 #topbar-first .nav > .account .dropdown-toggle span {
 	font-size: 12px;
 }
-#topbar-first .topbar-brand {
-	position: relative;
-	z-index: 2;
-}
-#topbar-first .topbar-actions {
-	position: relative;
-	z-index: 3;
-}
-#topbar-first .topbar-nav {
-	left: 0;
-	right: 0;
-	text-align: center;
-	z-index: 1;
-}
 /* Workaround for Safari bug where the notification icon jumps on the next line */
 #topbar-first .topbar-nav .nav > li + li {
 	margin-left: 1px;
@@ -704,10 +674,6 @@ nav.navbar .nav > li > button:focus {
 	margin-left: -1px;
 }
 /* End workaround */
-#topbar-first .topbar-nav .nav-segment {
-	position: relative;
-	text-align: left;
-}
 #topbar-first .topbar-nav .nav-segment > a {
 	display: inline-block;
 	text-decoration: none;
@@ -753,6 +719,14 @@ nav.navbar .nav > li > button:focus {
 	top: -19px;
 	z-index: 1035;
 }
+.topbar-nav, .topbar-actions, #topbar-first ul.nav {
+		align-items: center;
+		display: flex;
+		height: 100%;
+	}
+#topbar-first > ul.nav li, #topbar-first > ul.nav li a, .topbar-actions > ul.nav > li {
+		height: inherit;
+	}
 #topbar-first .topbar-actions .dropdown-menu {
 	margin-left: -200px;
 }
@@ -962,6 +936,7 @@ nav.navbar .nav > li > button:focus {
 	-moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
 	border-bottom: 1px solid #d4d4d4;
+	padding-inline: 15px;
 }
 #topbar-second > .container {
 	height: 100%;
@@ -4385,15 +4360,12 @@ div.login-form, .login-content-wrapper,
 
 	/* Even smaller mobile displays */
 @media (width < 392px) {
-	#topbar-first .container-fluid {
-		padding-inline: 0;
-	}
 	.topbar-nav .nav-segment a.nav-menu, .topbar-actions .nav-segment a.nav-menu, .topbar-actions .nav-segment button, .topbar-actions .navbar-toggle {
 		padding-left: 0!important;
 		padding-right: 10px!important;
 	}
-	.topbar-nav .offcanvas-right-toggle,
-	.topbar-nav #mobile-left-menu {
+	#topbar-first .offcanvas-right-toggle,
+	#topbar-first #mobile-left-menu {
 		padding-inline-end: 3px;
 		padding-inline-start: 3px;
 	}

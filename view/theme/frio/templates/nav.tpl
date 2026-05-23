@@ -10,7 +10,16 @@
 		<div class="container-fluid">
 			<div id="topbar-first-nav-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
 
-				<header style="display: flex;" class="hidden-xs">
+				<header style="display: flex;">
+
+					{{* Buttons for the mobile view *}}
+					{{* Mobile left menu dropdown button *}}
+					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed visible-sm visible-xs"
+						data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="fa fa-angle-double-right fa-fw fa-lg" aria-hidden="true"></i>
+					</button>
+
 					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
 					<div id="banner" class="hidden-sm hidden-xs">
 						<a href="{{$baseurl}}" aria-hidden="true">
@@ -30,18 +39,15 @@
 							</div>
 						</form>
 					{{/if}}
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
+						<span class="sr-only">Toggle Search</span>
+						<i class="fa fa-search fa-fw fa-lg" aria-hidden="true"></i>
+					</button>
 				</header>
 				<!-- div for navbar width-->
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="topbar-nav">
-
-					{{* Buttons for the mobile view *}}
-					{{* Mobile left menu dropdown button *}}
-					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed pull-left visible-sm visible-xs"
-						data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
-						<span class="sr-only">Toggle navigation</span>
-						<i class="ri ri-arrow-right-double-line ri-fw ri-lg" aria-hidden="true"></i>
-					</button>
 
 					{{* Left section of the NavBar with navigation shortcuts/icons *}}
 					<ul class="nav navbar-left">
@@ -93,6 +99,13 @@
 							</li>
 						{{/if}}
 
+					</ul>
+				</div>
+
+				{{* This is the right part of the NavBar. It includes the search and the user menu *}}
+				<div class="topbar-actions">
+					<ul class="nav">
+
 						{{if $nav.contacts}}
 							<li class="nav-segment hidden-xs">
 								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
@@ -101,13 +114,6 @@
 										class="ri ri-contacts-line ri-lg ri-fw"></i></a>
 							</li>
 						{{/if}}
-
-					</ul>
-				</div>
-
-				{{* This is the right part of the NavBar. It includes the search and the user menu *}}
-				<div class="topbar-actions">
-					<ul class="nav">
 
 						{{if $nav.messages}}
 							<li class="nav-segment">
@@ -156,15 +162,10 @@
 						{{/if}}
 
 					{{* Mobile user menu dropdown button *}}
-					<button type="button" class="navbar-toggle offcanvas-right-toggle pull-right"
+					<button type="button" class="navbar-toggle offcanvas-right-toggle"
 						aria-controls="offcanvasUsermenu" aria-haspopup="true">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-ellipsis-v fa-fw fa-lg" aria-hidden="true"></i>
-					</button>
-					<button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse"
-						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
-						<span class="sr-only">Toggle Search</span>
-						<i class="fa fa-search fa-fw fa-lg" aria-hidden="true"></i>
 					</button>
 
 						{{* The user dropdown menu *}}
@@ -440,7 +441,7 @@
 {{else}}
 	{{* The navbar for users which are not logged in *}}
 	<nav class="navbar navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 		<div class="navbar-header pull-left">
 			<button type="button" class="navbar-toggle collapsed pull-left visible-sm visible-xs"
 					data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
