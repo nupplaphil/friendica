@@ -1554,9 +1554,3 @@ parameters:
 			count: 1
 			path: src/Util/XML.php
 
-		-
-			message: '#^If condition is always true\.$#'
-			identifier: if.alwaysTrue
-			count: 1
-			path: src/Worker/OnePoll.php
-

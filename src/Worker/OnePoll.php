@@ -327,11 +327,11 @@ class OnePoll
 
 					if ($raw_refs) {
 						$refs_arr = explode(' ', $raw_refs);
-						if (count($refs_arr)) {
-							for ($x = 0; $x < count($refs_arr); $x++) {
-								$refs_arr[$x] = Email::msgid2iri(str_replace(['<', '>', ' '], ['', '', ''], $refs_arr[$x]));
-							}
+
+						for ($x = 0; $x < count($refs_arr); $x++) {
+							$refs_arr[$x] = Email::msgid2iri(str_replace(['<', '>', ' '], ['', '', ''], $refs_arr[$x]));
 						}
+
 						$condition = ['uri' => $refs_arr, 'uid' => $importer_uid];
 						$parent    = Post::selectFirst(['uri'], $condition);
 						if (DBA::isResult($parent)) {
