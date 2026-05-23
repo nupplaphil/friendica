@@ -1,0 +1,1573 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/App.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/App/Page.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/App/Router.php
+
+		-
+			message: '#^Property Friendica\\App\\Router\:\:\$logger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/App/Router.php
+
+		-
+			message: '#^Property Friendica\\App\\Router\:\:\$routeCollector \(FastRoute\\RouteCollector\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/App/Router.php
+
+		-
+			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/AppLegacy.php
+
+		-
+			message: '#^Right side of \|\| is always false\.$#'
+			identifier: booleanOr.rightAlwaysFalse
+			count: 1
+			path: src/BaseModel.php
+
+		-
+			message: '#^Property Friendica\\Console\\Addon\:\:\$dba is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/Addon.php
+
+		-
+			message: '#^Expression in empty\(\) is not falsy\.$#'
+			identifier: empty.expr
+			count: 1
+			path: src/Console/AutomaticInstallation.php
+
+		-
+			message: '#^Property Friendica\\Console\\AutomaticInstallation\:\:\$appMode is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/AutomaticInstallation.php
+
+		-
+			message: '#^Property Friendica\\Console\\ClearAvatarCache\:\:\$baseUrl is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/ClearAvatarCache.php
+
+		-
+			message: '#^Call to function is_array\(\) with \*NEVER\* will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Console/Config.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Console/Config.php
+
+		-
+			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Console/Config.php
+
+		-
+			message: '#^Property Friendica\\Console\\Config\:\:\$appMode is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/Config.php
+
+		-
+			message: '#^Property Friendica\\Console\\Contact\:\:\$pConfig is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: src/Console/Contact.php
+
+		-
+			message: '#^Comparison operation "\>" between int\<1, max\> and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: src/Console/CreateDoxygen.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Console/Daemon.php
+
+		-
+			message: '#^While loop condition is always true\.$#'
+			identifier: while.alwaysTrue
+			count: 1
+			path: src/Console/Daemon.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<int\<0, max\>, non\-empty\-list\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Console/DocBloxErrorChecker.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Console/DocBloxErrorChecker.php
+
+		-
+			message: '#^Left side of \|\| is always true\.$#'
+			identifier: booleanOr.leftAlwaysTrue
+			count: 1
+			path: src/Console/Extract.php
+
+		-
+			message: '#^Right side of \|\| is always true\.$#'
+			identifier: booleanOr.rightAlwaysTrue
+			count: 1
+			path: src/Console/Extract.php
+
+		-
+			message: '#^Property Friendica\\Console\\FixAPDeliveryWorkerTaskParameters\:\:\$l10n is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/FixAPDeliveryWorkerTaskParameters.php
+
+		-
+			message: '#^Property Friendica\\Console\\GlobalCommunitySilence\:\:\$dba is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/GlobalCommunitySilence.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/Console/MergeContacts.php
+
+		-
+			message: '#^Call to function is_array\(\) with \*NEVER\* will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Console/PhpToPo.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Console/PhpToPo.php
+
+		-
+			message: '#^Loose comparison using \!\= between '''' and '''' will always evaluate to false\.$#'
+			identifier: notEqual.alwaysFalse
+			count: 1
+			path: src/Console/PhpToPo.php
+
+		-
+			message: '#^Property Friendica\\Console\\PhpToPo\:\:\$appHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/PhpToPo.php
+
+		-
+			message: '#^Property Friendica\\Console\\Relay\:\:\$dba is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Console/Relay.php
+
+		-
+			message: '#^Call to function is_null\(\) with Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Console/Storage.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Console/Storage.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Console/Storage.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage and '''' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Console/Storage.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 4
+			path: src/Console/Storage.php
+
+		-
+			message: '#^Call to function is_null\(\) with Friendica\\Object\\Image will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Contact/Avatar.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Content/Conversation.php
+
+		-
+			message: '#^Offset ''title'' on array\{emoji\: mixed, verb\: string, total\: mixed, count\: int\<0, max\>, title\: array\<int\<0, max\>, string\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Content/Conversation.php
+
+		-
+			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 2
+			path: src/Content/Conversation/Repository/UserDefinedChannel.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Content/Conversation/Repository/UserDefinedChannel.php
+
+		-
+			message: '#^Property Friendica\\Content\\Conversation\\Entity\\Timeline\:\:\$circle \(int\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Content/Conversation/Repository/UserDefinedChannel.php
+
+		-
+			message: '#^Property Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:\$cache is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Content/Conversation/Repository/UserDefinedChannel.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Content/Item.php
+
+		-
+			message: '#^Loose comparison using \=\= between int\<1, max\> and 0 will always evaluate to false\.$#'
+			identifier: equal.alwaysFalse
+			count: 1
+			path: src/Content/Item.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between Psr\\Http\\Message\\UriInterface and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Content/Post/Entity/PostMedia.php
+
+		-
+			message: '#^Property Friendica\\Content\\Post\\Repository\\PostMedia\:\:\$item is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '#^Call to function array_key_exists\(\) with string and array\{\} will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Content/Smilies.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Property Friendica\\Content\\Post\\Entity\\PostMedia\:\:\$url \(Psr\\Http\\Message\\UriInterface\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 3
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Offset ''charset'' on string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Content/Text/HTML.php
+
+		-
+			message: '#^Loose comparison using \=\= between non\-empty\-string and '''' will always evaluate to false\.$#'
+			identifier: equal.alwaysFalse
+			count: 1
+			path: src/Content/Text/Markdown.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\{non\-falsy\-string\} will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/Addon/AddonManagerHelper.php
+
+		-
+			message: '#^Comparison operation "\<" between 1 and 1 is always false\.$#'
+			identifier: smaller.alwaysFalse
+			count: 1
+			path: src/Core/Addon/AddonManagerHelper.php
+
+		-
+			message: '#^Offset 1 on array\{non\-falsy\-string, numeric\-string, numeric\-string\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Core/Cache/Type/MemcacheCache.php
+
+		-
+			message: '#^Offset 1 on array\{non\-falsy\-string, numeric\-string, numeric\-string\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Core/Cache/Type/MemcachedCache.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Core/Cache/Type/RedisCache.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Core/Config/Util/ConfigFileManager.php
+
+		-
+			message: '#^Offset ''system'' on array\{\}\|array\{database\: non\-empty\-array\{hostname\?\: mixed, username\?\: mixed, password\?\: mixed, database\?\: mixed\}\} in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Core/Config/Util/ConfigFileManager.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Core/Config/Util/ConfigFileManager.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<bool\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/Config/ValueObject/Cache.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/Config/ValueObject/Cache.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/Config/ValueObject/Cache.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 14
+			path: src/Core/Hooks/HookEventBridge.php
+
+		-
+			message: '#^Static property Friendica\\Core\\Hooks\\HookEventBridge\:\:\$mockedCallHook \(Closure\|null\) is never assigned Closure so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Core/Hooks/HookEventBridge.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Core/Installer.php
+
+		-
+			message: '#^Property Friendica\\Core\\Installer\:\:\$phppath \(string\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/Core/Installer.php
+
+		-
+			message: '#^Comparison operation "\>" between int\<1, max\> and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: src/Core/L10n.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: src/Core/Logger/Factory/SyslogLoggerFactory.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Core/Logger/Handler/ErrorHandler.php
+
+		-
+			message: '#^Property Friendica\\Core\\Logger\\Handler\\ErrorHandler\:\:\$reservedMemory is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Core/Logger/Handler/ErrorHandler.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between '''' and ''trigger_error'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Core/Logger/Handler/ErrorHandler.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 3
+			path: src/Core/Logger/LoggerManager.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 2
+			path: src/Core/Logger/Type/SyslogLogger.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/PConfig/ValueObject/Cache.php
+
+		-
+			message: '#^Call to function is_int\(\) with int will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 4
+			path: src/Core/PConfig/ValueObject/Cache.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Core/System.php
+
+		-
+			message: '#^Offset ''function'' on array\{function\: string, line\?\: int, file\: string, class\?\: class\-string, type\?\: ''\-\>''\|''\:\:'', args\?\: list\<mixed\>, object\?\: object\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Core/System.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Core/Theme.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Core/Update.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Core/Worker.php
+
+		-
+			message: '#^Static property Friendica\\Core\\Worker\:\:\$process is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Core/Worker.php
+
+		-
+			message: '#^Static method Friendica\\Core\\Worker\\Cron\:\:addIntros\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Core/Worker/Cron.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Database/DBStructure.php
+
+		-
+			message: '#^Call to function is_null\(\) with array will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Database/DBStructure.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Database/DBStructure.php
+
+		-
+			message: '#^Call to function is_bool\(\) with object will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Call to function is_object\(\) with mysqli_result\|mysqli_stmt\|PDOStatement will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Call to function is_object\(\) with object will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 3
+			path: src/Database/Database.php
+
+		-
+			message: '#^Comparison operation "\>" between int\<1, max\> and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Instanceof between mysqli_stmt\|PDOStatement and mysqli_result will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Method Friendica\\Database\\Database\:\:logIndex\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Method Friendica\\Database\\Database\:\:sanitizeIdentifier\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Property Friendica\\Database\\Database\:\:\$relation is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Loose comparison using \!\= between 0 and 0 will always evaluate to false\.$#'
+			identifier: notEqual.alwaysFalse
+			count: 1
+			path: src/Factory/Api/Mastodon/ScheduledStatus.php
+
+		-
+			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Media\:\:\$baseUrl is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Factory/Api/Twitter/Media.php
+
+		-
+			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Mention\:\:\$baseUrl is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Factory/Api/Twitter/Mention.php
+
+		-
+			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Status\:\:\$dba is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Factory/Api/Twitter/Status.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Model/Circle.php
+
+		-
+			message: '#^Dead catch \- InvalidArgumentException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 4
+			path: src/Model/Contact.php
+
+		-
+			message: '#^Offset ''network'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '#^Call to function array_merge\(\) on a separate line has no effect\.$#'
+			identifier: function.resultUnused
+			count: 1
+			path: src/Model/Contact/Introduction.php
+
+		-
+			message: '#^Offset ''platform'' on array\{detection\-method\: int, register_policy\: 0\|2, platform\: string, site_name\?\: mixed, info\?\: mixed\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Model/GServer.php
+
+		-
+			message: '#^Call to function is_int\(\) with int\<min, \-1\>\|int\<1, max\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Offset ''uri\-id'' on array\{\} in empty\(\) does not exist\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Offset ''voters'' on array\{id\: mixed, multiple\: mixed, voters\: mixed, endtime\: mixed\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '#^Property Friendica\\Content\\Post\\Entity\\PostMedia\:\:\$url \(Psr\\Http\\Message\\UriInterface\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Right side of \|\| is always false\.$#'
+			identifier: booleanOr.rightAlwaysFalse
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with int will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Model/Photo.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<1, max\> and 0 is always false\.$#'
+			identifier: smallerOrEqual.alwaysFalse
+			count: 1
+			path: src/Model/Photo.php
+
+		-
+			message: '#^Method Friendica\\Model\\Photo\:\:fitImageSize\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Model/Photo.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Model/Post.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 3
+			path: src/Model/Post/Media.php
+
+		-
+			message: '#^Right side of \|\| is always false\.$#'
+			identifier: booleanOr.rightAlwaysFalse
+			count: 1
+			path: src/Model/Post/Media.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Model/Profile.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Model/Profile.php
+
+		-
+			message: '#^Property Friendica\\Content\\Conversation\\Entity\\Timeline\:\:\$languages \(array\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Model/User.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/Model/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 2
+			path: src/Model/User.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Module/Acctlink.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Module/ActivityPub/Outbox.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Admin/DBSync.php
+
+		-
+			message: '#^Instanceof between Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage and Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: src/Module/Admin/Storage.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Api/Friendica/Photo/Update.php
+
+		-
+			message: '#^Right side of && is always false\.$#'
+			identifier: booleanAnd.rightAlwaysFalse
+			count: 1
+			path: src/Module/Api/Mastodon/Apps.php
+
+		-
+			message: '#^Offset ''last_read_id'' on non\-falsy\-string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Module/Api/Mastodon/Markers.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 2
+			path: src/Module/Api/Mastodon/Markers.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between '''' and '''' will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Module/Api/Mastodon/Markers.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Api/Mastodon/Markers.php
+
+		-
+			message: '#^Method Friendica\\Module\\Api\\Mastodon\\Search\:\:searchStatuses\(\) never returns Friendica\\Object\\Api\\Mastodon\\Status so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '#^Offset 1 on array\{non\-falsy\-string, non\-empty\-string\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Module/Api/Twitter/Search/Tweets.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Module/Calendar/Event/Show.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Module/Calendar/Export.php
+
+		-
+			message: '#^Loose comparison using \=\= between int\<min, 0\>\|int\<2, max\> and 1 will always evaluate to false\.$#'
+			identifier: equal.alwaysFalse
+			count: 1
+			path: src/Module/Circle.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Module/Circle.php
+
+		-
+			message: '#^Dead catch \- InvalidArgumentException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: src/Module/Contact.php
+
+		-
+			message: '#^Property Friendica\\Module\\Contact\\Unfollow\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Contact/Unfollow.php
+
+		-
+			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Module/Conversation/Network.php
+
+		-
+			message: '#^Property Friendica\\Module\\Conversation\\Timeline\:\:\$selectedTab \(string\) on left side of \?\?\= is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Module/Conversation/Network.php
+
+		-
+			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 3
+			path: src/Module/Conversation/Timeline.php
+
+		-
+			message: '#^Expression in empty\(\) is not falsy\.$#'
+			identifier: empty.expr
+			count: 1
+			path: src/Module/Conversation/Timeline.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Module/Debug/ActivityPubConversion.php
+
+		-
+			message: '#^Method Friendica\\Module\\Filer\\RemoveTag\:\:removeTag\(\) never assigns null to &\$term so it can be removed from the by\-ref type\.$#'
+			identifier: parameterByRef.unusedType
+			count: 1
+			path: src/Module/Filer/RemoveTag.php
+
+		-
+			message: '#^Method Friendica\\Module\\Filer\\RemoveTag\:\:removeTag\(\) never assigns null to &\$type so it can be removed from the by\-ref type\.$#'
+			identifier: parameterByRef.unusedType
+			count: 1
+			path: src/Module/Filer/RemoveTag.php
+
+		-
+			message: '#^Method Friendica\\Module\\Filer\\RemoveTag\:\:removeTag\(\) never assigns string to &\$type so it can be removed from the by\-ref type\.$#'
+			identifier: parameterByRef.unusedType
+			count: 1
+			path: src/Module/Filer/RemoveTag.php
+
+		-
+			message: '#^Property Friendica\\Module\\Media\\Attachment\\Upload\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Media/Attachment/Upload.php
+
+		-
+			message: '#^Property Friendica\\Module\\Media\\Photo\\Upload\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Media/Photo/Upload.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Module/Moderation/Blocklist/Contact.php
+
+		-
+			message: '#^Property Friendica\\Module\\Moderation\\Report\\Create\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Module/Moderation/Reports.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 2
+			path: src/Module/Moderation/Users/Active.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 2
+			path: src/Module/Moderation/Users/Blocked.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 3
+			path: src/Module/Moderation/Users/Index.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 2
+			path: src/Module/Moderation/Users/Pending.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: src/Module/Moderation/Users/Pending.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '#^Property Friendica\\Module\\Notifications\\Ping\:\:\$appHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Notifications/Ping.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between '''' and ''none'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Module/Post/Edit.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Module/Post/Tag/Remove.php
+
+		-
+			message: '#^Call to Friendica\\BaseModule\:\:content\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/Module/Profile/Photos.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/RandomProfile.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Register.php
+
+		-
+			message: '#^Property Friendica\\Module\\Security\\Login\:\:\$config is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Security/Login.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between ''2y'' and ''2y'' will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/Module/Security/PasswordTooLong.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: src/Module/Security/TwoFactor/SignOut.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Module/Settings/Account.php
+
+		-
+			message: '#^Property Friendica\\Content\\Conversation\\Entity\\Timeline\:\:\$languages \(array\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Module/Settings/Channels.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 2
+			path: src/Module/Settings/Server/Index.php
+
+		-
+			message: '#^Offset ''description'' on non\-empty\-array\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Module/Settings/TwoFactor/AppSpecific.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Settings/TwoFactor/AppSpecific.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Module/Settings/TwoFactor/Trusted.php
+
+		-
+			message: '#^Property Friendica\\Module\\User\\Delegation\:\:\$appHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/User/Delegation.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 2
+			path: src/Module/User/Import.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-list\<string\> and array\{\} will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Module/Xrd.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Navigation/Notifications/Factory/Introduction.php
+
+		-
+			message: '#^Property Friendica\\Navigation\\Notifications\\Factory\\Notification\:\:\$localRelationshipRepo is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Navigation/Notifications/Factory/Notification.php
+
+		-
+			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Navigation/Notifications/Repository/Notify.php
+
+		-
+			message: '#^Property Friendica\\Network\\HTTPClient\\Response\\CurlResult\:\:\$isGone is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Network/HTTPClient/Response/CurlResult.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 3
+			path: src/Network/HTTPClient/Response/GuzzleResponse.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Left side of \|\| is always false\.$#'
+			identifier: booleanOr.leftAlwaysFalse
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between IMAP\\Connection\|resource and false will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed~\(0\|0\.0\|''''\|''0''\|array\{\}\|false\|null\) and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Network/RobotsTxt.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Network/RobotsTxt.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between int\<1, max\>\|false and 0 will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Network/RobotsTxt.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Object/Api/Mastodon/Relationship.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Object/Api/Twitter/DirectMessage.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Object/Email.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Object/Image.php
+
+		-
+			message: '#^Property Friendica\\Object\\Image\:\:\$image \(GdImage\|Imagick\|resource\) in empty\(\) is not falsy\.$#'
+			identifier: empty.property
+			count: 3
+			path: src/Object/Image.php
+
+		-
+			message: '#^Property Friendica\\Object\\Image\:\:\$image \(GdImage\|Imagick\|resource\) is never assigned resource so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Object/Image.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Object/Post.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Object/Post.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Protocol/ATProtocol.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Protocol/ATProtocol/Jetstream.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Protocol/ActivityPub/Delivery.php
+
+		-
+			message: '#^Offset ''id'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/Protocol/ActivityPub/Fetch.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Offset ''as\:object'' on non\-empty\-array on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '#^Static method Friendica\\Protocol\\ActivityPub\\Transmitter\:\:isAPPost\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '#^Static method Friendica\\Protocol\\ActivityPub\\Transmitter\:\:mentionAddrCallback\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '#^Call to function is_object\(\) with object will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 3
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Method Friendica\\Protocol\\Diaspora\:\:receiveStatusMessage\(\) never returns int so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 2
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Offset ''lng'' on array\{address\?\: mixed, lat\: string, lng\: string\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\{string, ''\!''\|''@'', string, non\-empty\-string\} and '''' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Property Friendica\\Protocol\\Diaspora\\Entity\\DiasporaContact\:\:\$uriId \(int\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Protocol/Diaspora/Repository/DiasporaContact.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 2
+			path: src/Protocol/Email.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Protocol/Email.php
+
+		-
+			message: '#^Method Friendica\\Render\\FriendicaSmartyEngine\:\:testInstall\(\) never assigns array to &\$errors so it can be removed from the by\-ref type\.$#'
+			identifier: parameterByRef.unusedType
+			count: 1
+			path: src/Render/FriendicaSmartyEngine.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Security/Authentication.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-list\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Security/ExAuth.php
+
+		-
+			message: '#^Unused result of "or" operator\.$#'
+			identifier: logicalOr.resultUnused
+			count: 3
+			path: src/Security/OAuth1/OAuthRequest.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Util/ACLFormatter.php
+
+		-
+			message: '#^Dead catch \- Throwable is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: src/Util/DateTimeFormat.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 3
+			path: src/Util/EMailer/MailBuilder.php
+
+		-
+			message: '#^Property Friendica\\Util\\EMailer\\MailBuilder\:\:\$recipientUid \(int\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Util/EMailer/MailBuilder.php
+
+		-
+			message: '#^Property Friendica\\Util\\EMailer\\MailBuilder\:\:\$senderNoReply \(string\) on left side of \?\?\= is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Util/EMailer/MailBuilder.php
+
+		-
+			message: '#^Instanceof between array\|int\|string\|null and Friendica\\Object\\EMail\\IEmail will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Util/Emailer.php
+
+		-
+			message: '#^Property Friendica\\Util\\Emailer\:\:\$pConfig is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Util/Emailer.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Util/Emailer.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Util/HTTPHeaders.php
+
+		-
+			message: '#^Offset ''headers'' on array\{keyId\: string, algorithm\: non\-falsy\-string, created\: string\|null, expires\: string\|null, headers\: non\-empty\-list\<string\>, signature\: non\-falsy\-string\} in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/Util/HTTPSignature.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Util/HTTPSignature.php
+
+		-
+			message: '#^Offset ''@context'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 2
+			path: src/Util/JsonLD.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<int\|string, array\<mixed\>\|string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Util/Network.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Util/Network.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Call to function is_string\(\) with ''author_name''\|''author_url''\|''image''\|''license_id''\|''license_name''\|''license_url''\|''publisher_name''\|''publisher_url''\|''text''\|''title'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Left side of && is always false\.$#'
+			identifier: booleanAnd.leftAlwaysFalse
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Offset ''charset'' on string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Offset ''html'' on non\-empty\-array on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Util/ParseUrl.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: src/Util/Profiler.php
+
+		-
+			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Util/Writer/DbaDefinitionSqlWriter.php
+
+		-
+			message: '#^Offset ''comment''\|''default''\|''extra''\|''name''\|''null''\|''primary''\|''type'' on array\{name\: int\<3, max\>, comment\: int\<3, max\>, type\: int\<3, max\>, null\: int\<3, max\>, primary\: int\<3, max\>, default\: int\<3, max\>, extra\: int\<3, max\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Util/Writer/DocWriter.php
+
+		-
+			message: '#^Call to function is_array\(\) with object will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Util/XML.php
+
+		-
+			message: '#^Call to function is_string\(\) with object will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Util/XML.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Util/XML.php
+
+		-
+			message: '#^Result of && is always true\.$#'
+			identifier: booleanAnd.alwaysTrue
+			count: 1
+			path: src/Util/XML.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Worker/OnePoll.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Worker/UpdateChannelPosts.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 1
+			path: src/Worker/UpdateGServer.php

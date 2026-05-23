@@ -4,9 +4,10 @@
 
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - .phpstan-baseline.neon
 
 parameters:
-    level: 3
+    level: 4
 
     phpVersion: 80200 # PHP 8.2
 
