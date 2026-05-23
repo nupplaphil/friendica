@@ -769,14 +769,12 @@ class ParseUrl
 	 */
 	public static function convertTagsToArray(string $string): array
 	{
-		$arr_tags = str_getcsv($string);
-		if (count($arr_tags)) {
-			// add the # sign to every tag
-			array_walk($arr_tags, self::arrAddHashes(...));
+		$arr_tags = str_getcsv($string, ',', '"', '\\');
 
-			return $arr_tags;
-		}
-		return [];
+		// add the # sign to every tag
+		array_walk($arr_tags, self::arrAddHashes(...));
+
+		return $arr_tags;
 	}
 
 	/**
@@ -1163,7 +1161,7 @@ class ParseUrl
 			}
 		} elseif (!empty($jsonld['keywords'])) {
 			$content = JsonLD::fetchElementArray($jsonld, 'keywords');
-			if (!empty($content) && is_array($content)) {
+			if (is_array($content) && !empty($content)) {
 				$jsonldinfo['keywords'] = $content;
 			}
 		}
@@ -1636,13 +1634,13 @@ class ParseUrl
 		foreach ($fields as $key => $value) {
 			unset($unknown_fields[$key]);
 			if (isset($data[$key]) && (empty($siteinfo[$value]) || $overwrite)) {
-				if ($value == 'published') {
+				if ($value === 'published') {
 					$siteinfo[$value] = DateTimeFormat::utc($data[$key]);
-				} elseif (is_string($value)) {
-					$siteinfo[$value] = trim(strip_tags(html_entity_decode($data[$key], ENT_COMPAT, 'UTF-8')));
-				} else {
-					$siteinfo[$value] = $data[$key];
+
+					continue;
 				}
+
+				$siteinfo[$value] = trim(strip_tags(html_entity_decode($data[$key], ENT_COMPAT, 'UTF-8')));
 			}
 		}
 
@@ -1702,7 +1700,7 @@ class ParseUrl
 		unset($siteinfo['player']);
 
 		if ($data['type'] == 'rich' && !isset($siteinfo['text'])) {
-			$bbcode = HTML::toBBCode($data['html'] ?? '');
+			$bbcode = HTML::toBBCode($data['html']);
 			$bbcode = preg_replace("(\[url\](.*?)\[\/url\])ism", "", $bbcode);
 
 			$siteinfo['text'] = strip_tags(BBCode::convert($bbcode, false));
