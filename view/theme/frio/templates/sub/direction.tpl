@@ -28,7 +28,7 @@
 		{{elseif $direction.direction == 10}}
 			<i class="ri ri-server-line"></i>
 		{{elseif $direction.direction == 11}}
-			<i class="ri ri-rss-line"></i>
+			<i class="ri ri-broadcast-line"></i>
 		{{/if}}
 	</span>
 {{/if}}

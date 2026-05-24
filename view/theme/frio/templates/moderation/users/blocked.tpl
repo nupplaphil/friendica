@@ -79,7 +79,7 @@
 							{{if $u.page_flags_raw==1}}ri-megaphone-line{{/if}}		{{* PAGE_SOAPBOX *}}
 							{{if $u.page_flags_raw==2}}ri-team-line{{/if}}		{{* PAGE_COMMUNITY *}}
 							{{if $u.page_flags_raw==3}}ri-heart-line{{/if}}		{{* PAGE_FREELOVE *}}
-							{{if $u.page_flags_raw==4}}ri-rss-line{{/if}}		{{* PAGE_BLOG *}}
+							{{if $u.page_flags_raw==4}}ri-broadcast-line{{/if}}		{{* PAGE_BLOG *}}
 							{{if $u.page_flags_raw==5}}ri-spy-line{{/if}}	{{* PAGE_PRVGROUP *}}
 							{{if $u.page_flags_raw==6}}ri-team-line{{/if}}		{{* PAGE_COMM_MAN *}}
 								" title="{{$u.page_flags}}">

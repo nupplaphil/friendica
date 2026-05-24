@@ -6,7 +6,7 @@
   *}}
 <nav>
 	{{if $type == "channel"}}
-		{{assign var="icon" value="ri-rss-line"}}
+		{{assign var="icon" value="ri-broadcast-line"}}
 	{{else if $type == "accounttype"}}
 		{{assign var="icon" value="ri-account-box-line"}}
 	{{else if $type == "rel"}}
