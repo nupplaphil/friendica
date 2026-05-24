@@ -57,6 +57,7 @@ class CircleExport extends BaseModule
 		$members = DBA::selectToArray('circle-member-view', ['contact-addr', 'contact-link'], ['circle-id' => $circleId, 'uid' => $owner['uid']], ['order' => ['contact-name']]);
 
 		$stream = fopen('php://temp', 'r+');
+		// @see https://github.com/mastodon/mastodon/blob/main/app/models/form/import.rb
 		fputcsv($stream, ['List name', 'Account address']);
 		foreach ($members as $member) {
 			$accountAddress = trim((string) ($member['contact-addr'] ?: $member['contact-link']));

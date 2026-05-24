@@ -65,6 +65,7 @@ class ContactImport extends BaseSettings
 					$csvArray = array_map('str_getcsv', file($_FILES['importcontact-filename']['tmp_name']));
 					$this->logger->notice('Import started', ['lines' => count($csvArray)]);
 					// detect Mastodon-style CSV with 'List name' and 'Account address' headers
+					// @see https://github.com/mastodon/mastodon/blob/main/app/models/form/import.rb
 					$uid = $this->session->getLocalUserId();
 					if (!empty($csvArray[0]) && isset($csvArray[0][0], $csvArray[0][1])
 						&& strtolower(trim($csvArray[0][0])) === 'list name'
