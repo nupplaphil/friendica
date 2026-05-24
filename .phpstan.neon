@@ -29,6 +29,8 @@ parameters:
     dynamicConstantNames:
         - DB_UPDATE_VERSION
 
+    treatPhpDocTypesAsCertain: false
+
     # See all rules at https://github.com/phpstan/phpstan-strict-rules/blob/2.0.x/rules.neon
     strictRules:
         allRules: false

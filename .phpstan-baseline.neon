@@ -1385,15 +1385,3 @@ parameters:
 			identifier: logicalOr.resultUnused
 			count: 3
 			path: src/Security/OAuth1/OAuthRequest.php
-
-		-
-			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Util/ACLFormatter.php
-
-		-
-			message: '#^Dead catch \- Throwable is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 1
-			path: src/Util/DateTimeFormat.php

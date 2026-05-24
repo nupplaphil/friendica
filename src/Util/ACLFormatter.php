@@ -96,19 +96,16 @@ final class ACLFormatter
 	 */
 	public function toString($permissions): string
 	{
-		$return = '';
-		if (is_array($permissions)) {
-			$item = $permissions;
-		} elseif (empty($permissions)) {
-			return '';
-		} else {
-			$item = explode(',', $permissions);
+		if (is_string($permissions)) {
+			$permissions = explode(',', $permissions);
 		}
 
-		if (is_array($item)) {
-			array_walk($item, $this->sanitizeItem(...));
-			$return = implode('', $item);
+		if (!is_array($permissions)) {
+			return '';
 		}
-		return $return;
+
+		array_walk($item, $this->sanitizeItem(...));
+
+		return implode('', $permissions);
 	}
 }
