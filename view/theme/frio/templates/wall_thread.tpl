@@ -37,11 +37,11 @@ as the value of $top_child_total (this is done at the end of this file)
 	{{if $item.thread_level<3}}
 		<button type="button" class="hide-comments-outer fakelink" onclick="showHideComments({{$item.id}});">
 			<span id="hide-comments-total-{{$item.id}}" class="hide-comments-total">
-				<i class="ri ri-arrow-right-s-fill" aria-hidden="true"></i>
-				{{$item.num_comments}} - {{$item.show_text}}
-			</span>
-			<span id="hide-comments-{{$item.id}}" class="hide-comments" style="display: none">
-				<i class="ri ri-arrow-down-s-fill" aria-hidden="true"></i>
+					<i class="ri ri-arrow-right-s-line" aria-hidden="true"></i>
+					{{$item.num_comments}} - {{$item.show_text}}
+				</span>
+				<span id="hide-comments-{{$item.id}}" class="hide-comments" style="display: none">
+					<i class="ri ri-arrow-down-s-line" aria-hidden="true"></i>
 				{{$item.num_comments}} - {{$item.hide_text}}
 			</span>
 		</button>
@@ -423,7 +423,7 @@ as the value of $top_child_total (this is done at the end of this file)
 				{{* TODO: This currently creates a duplicate post according to: https://forum.friendi.ca/display/373ebf56-2469-ed09-ccc0-ecd539065051 *}}
 				{{if $item.tagger}} {{* tag the post *}}
 				<li role="menuitem">
-						<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}"><i class="ri ri-price-tag-3-line" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
+						<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}"><i class="ri ri-hashtag" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
 				</li>
 				{{/if}}
 
@@ -640,7 +640,7 @@ as the value of $top_child_total (this is done at the end of this file)
 
 							{{if $item.tagger}} {{* tag the post *}}
 								<li role="menuitem">
-									<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}" title="{{$item.tagger.add}}"><i class="ri ri-price-tag-3-line" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
+									<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}" title="{{$item.tagger.add}}"><i class="ri ri-hashtag" aria-hidden="true"></i>&ensp;{{$item.tagger.add}}</a>
 								</li>
 							{{/if}}
 

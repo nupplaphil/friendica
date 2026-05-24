@@ -102,7 +102,7 @@
                     <button type="button" class="btn btn-default" onclick="preview_comment_toggle({{$id}}, '{{$l10n.preview}}');" id="comment-edit-preview-link-{{$id}}" tabindex="8">
                         <i class="ri ri-eye-line"></i> <span id="preview-btn-text-{{$id}}">{{$l10n.preview}}</span>
                     </button>
-                    <button type="submit" class="btn btn-primary" id="comment-edit-submit-{{$id}}" name="submit" tabindex="9"><i class="ri ri-send-plane-fill"></i> {{$l10n.submit}}</button>
+                    <button type="submit" class="btn btn-primary" id="comment-edit-submit-{{$id}}" name="submit" tabindex="9"><i class="ri ri-send-plane-line"></i> {{$l10n.submit}}</button>
                 </div>
             </div>
 

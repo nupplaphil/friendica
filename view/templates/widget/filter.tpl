@@ -6,13 +6,15 @@
   *}}
 <nav>
 	{{if $type == "channel"}}
-		{{assign var="icon" value="ri-layout-grid-line"}}
+		{{assign var="icon" value="ri-rss-line"}}
 	{{else if $type == "accounttype"}}
-		{{assign var="icon" value="ri-umbrella-line"}}
+		{{assign var="icon" value="ri-account-box-line"}}
 	{{else if $type == "rel"}}
 		{{assign var="icon" value="ri-arrow-left-right-line"}}
 	{{else if $type == "circle"}}
-		{{assign var="icon" value="ri-account-circle-line"}}
+		{{assign var="icon" value="ri-user-community-line"}}
+	{{else if $type == "nets"}}
+		{{assign var="icon" value="ri-message-2-line"}}
 	{{else}} {{* fallback to type="file" *}}
 		{{assign var="icon" value="ri-folder-line"}}
 	{{/if}}

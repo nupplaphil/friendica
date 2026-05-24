@@ -8,7 +8,7 @@
 	<span id="circle-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('circle-sidebar', 'circle-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="ri ri-account-circle-line" aria-hidden="true"></i>
+				<i class="ri ri-user-community-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>
@@ -16,7 +16,7 @@
 	<div class="widget" id="circle-sidebar">
 		<button class="fakelink" onclick="openCloseWidget('circle-sidebar', 'circle-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="ri ri-account-circle-line" aria-hidden="true"></i>
+				<i class="ri ri-user-community-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>

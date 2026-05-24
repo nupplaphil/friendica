@@ -195,7 +195,7 @@
 
 						{{if $item.tagger}} {{* tag the post *}}
 							<li role="menuitem">
-								<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}" title="{{$item.tagger.add}}"><i class="ri ri-price-tag-3-line" aria-hidden="true"></i> {{$item.tagger.add}}</a>
+								<a id="tagger-{{$item.id}}" href="javascript:itemTag({{$item.id}});" class="btn-link {{$item.tagger.class}}" title="{{$item.tagger.add}}"><i class="ri ri-hashtag" aria-hidden="true"></i> {{$item.tagger.add}}</a>
 							</li>
 						{{/if}}
 

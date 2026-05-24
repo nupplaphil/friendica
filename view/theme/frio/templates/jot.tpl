@@ -135,7 +135,7 @@
 
 						<li class="pull-right">
 							<button class="btn btn-primary" type="submit" id="profile-jot-submit" name="submit" data-loading-text="{{$loading}}">
-								<i class="ri ri-send-plane-fill ri-fw" aria-hidden="true"></i> {{$share}}
+							<i class="ri ri-send-plane-line ri-fw" aria-hidden="true"></i> {{$share}}
 							</button>
 						</li>
 						<li id="character-counter" class="grey jothidden text-info pull-right"></li>
@@ -162,7 +162,7 @@
 					<ul id="profile-jot-preview-submit-wrapper" class="jothidden nav nav-pills">
 						<li class="pull-right">
 							<button class="btn btn-primary" type="submit" id="profile-jot-preview-submit" name="submit" data-loading-text="{{$loading}}">
-								<i class="ri ri-send-plane-fill ri-fw" aria-hidden="true"></i> {{$share}}
+							<i class="ri ri-send-plane-line ri-fw" aria-hidden="true"></i> {{$share}}
 							</button>
 						</li>
 					</ul>

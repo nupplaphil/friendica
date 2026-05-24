@@ -52,7 +52,7 @@
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-										class="ri ri-lg ri-layout-grid-line ri-fw" aria-hidden="true"></i><span id="net-update"
+										class="ri ri-lg ri-message-line ri-fw" aria-hidden="true"></i><span id="net-update"
 										class="nav-network-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
@@ -68,7 +68,7 @@
 						{{if $nav.home}}
 							<li class="nav-segment">
 								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-home-line ri-fw"
+									aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-user-line ri-fw"
 										aria-hidden="true"></i><span id="home-update"
 										class="nav-home-badge badge nav-notification"></span></a>
 							</li>
@@ -78,7 +78,7 @@
 							<li class="nav-segment">
 								<a accesskey="c" class="nav-menu {{$sel.community}}" href="{{$nav.community.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.community.3}}" title="{{$nav.community.3}}"><i
-										class="ri ri-lg ri-focus-3-line ri-fw" aria-hidden="true"></i></a>
+										class="ri ri-lg ri-user-community-line ri-fw" aria-hidden="true"></i></a>
 							</li>
 						{{/if}}
 
@@ -105,7 +105,7 @@
 								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
 									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
-										class="ri ri-team-line ri-lg ri-fw"></i></a>
+										class="ri ri-contacts-line ri-lg ri-fw"></i></a>
 							</li>
 						{{/if}}
 
@@ -116,7 +116,7 @@
 									type="button" aria-haspopup="true" aria-expanded="false"
 									aria-controls="nav-notifications-menu">
 									<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
-									<i class="ri ri-notification-3-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>
+									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>
 								</button>
 								{{* The notifications dropdown menu. There are two parts of menu. The second is at the bottom of this file. It is loaded via js. Look at nav-notifications-template *}}
 								<ul id="nav-notifications-menu" class="dropdown-menu menu-popup" role="menu"
@@ -229,7 +229,7 @@
 											<a role="menuitem" id="nav-delegation-link"
 												class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
 												href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">
-												<i class="ri ri-flag-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
+												<i class="ri ri-contacts-book-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
 											</a>
 										</li>
 									{{/if}}
@@ -269,7 +269,7 @@
 										<li>
 											<a accesskey="a" role="menuitem" id="nav-admin-link"
 												class="nav-link {{$nav.admin.2}}" href="{{$nav.admin.0}}"
-												title="{{$nav.admin.3}}"><i class="ri ri-spy-line ri-fw" aria-hidden="true"></i>
+												title="{{$nav.admin.3}}"><i class="ri ri-admin-line ri-fw" aria-hidden="true"></i>
 												{{$nav.admin.1}}
 											</a>
 										</li>
@@ -278,7 +278,7 @@
 										<li>
 											<a accesskey="m" role="menuitem" id="nav-moderation-link"
 												class="nav-link {{$nav.moderation.2}}" href="{{$nav.moderation.0}}"
-												title="{{$nav.moderation.3}}"><i class="ri ri-auction-line ri-fw" aria-hidden="true"></i>
+												title="{{$nav.moderation.3}}"><i class="ri ri-shield-user-line ri-fw" aria-hidden="true"></i>
 												{{$nav.moderation.1}}
 											</a>
 										</li>
@@ -373,7 +373,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
-										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-flag-line ri-fw"
+										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-contacts-book-line ri-fw"
 											aria-hidden="true"></i> {{$nav.delegation.1}}
 									</a>
 								</li>
@@ -393,7 +393,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-link {{$nav.admin.2}}" href="{{$nav.admin.0}}" title="{{$nav.admin.3}}"><i
-											class="ri ri-spy-line ri-fw" aria-hidden="true"></i>
+											class="ri ri-admin-line ri-fw" aria-hidden="true"></i>
 										{{$nav.admin.1}}
 									</a>
 								</li>
@@ -402,7 +402,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-link {{$nav.moderation.2}}" href="{{$nav.moderation.0}}" title="{{$nav.moderation.3}}"><i
-											class="ri ri-auction-line ri-fw" aria-hidden="true"></i>
+											class="ri ri-shield-user-line ri-fw" aria-hidden="true"></i>
 										{{$nav.moderation.1}}
 									</a>
 								</li>

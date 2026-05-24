@@ -203,7 +203,7 @@ class Nav
 			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Conversations'), '', $this->l10n->t('Conversations you started'), 'ri-chat-3-line'];
 			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/photos', $this->l10n->t('Photos'), '', $this->l10n->t('Your photos'), 'ri-image-line'];
 			$nav['usermenu'][] = ['calendar/', $this->l10n->t('Calendar'), '', $this->l10n->t('Your calendar'), 'ri-calendar-line'];
-			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Your personal notes'), 'ri-book-line'];
+			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Your personal notes'), 'ri-sticky-note-line'];
 
 			// user info
 			$contact  = $this->database->selectFirst('contact', ['id', 'url', 'avatar', 'micro', 'name', 'nick', 'baseurl', 'updated'], ['uid' => $this->session->getLocalUserId(), 'self' => true]);
