@@ -1457,15 +1457,3 @@ parameters:
 			identifier: empty.offset
 			count: 2
 			path: src/Util/JsonLD.php
-
-		-
-			message: '#^Call to function is_array\(\) with array\<int\|string, array\<mixed\>\|string\> will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Util/Network.php
-
-		-
-			message: '#^If condition is always true\.$#'
-			identifier: if.alwaysTrue
-			count: 1
-			path: src/Util/Network.php
