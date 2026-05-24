@@ -25,6 +25,7 @@ use Friendica\Network\HTTPClient\Client\HttpClientRequest;
 use Friendica\Network\HTTPException;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Util\Profiler;
+use Friendica\Core\Worker;
 use Friendica\Worker\AddContact;
 use Psr\Log\LoggerInterface;
 
@@ -63,12 +64,35 @@ class ContactImport extends BaseSettings
 				} else {
 					$csvArray = array_map('str_getcsv', file($_FILES['importcontact-filename']['tmp_name']));
 					$this->logger->notice('Import started', ['lines' => count($csvArray)]);
-					// import contacts
-					$urls = [];
-					foreach ($csvArray as $csvRow) {
-						$urls[] = $csvRow[0];
+					// detect Mastodon-style CSV with 'List name' and 'Account address' headers
+					$uid = $this->session->getLocalUserId();
+					if (!empty($csvArray[0]) && isset($csvArray[0][0], $csvArray[0][1])
+						&& strtolower(trim($csvArray[0][0])) === 'list name'
+						&& strtolower(trim($csvArray[0][1])) === 'account address'
+					) {
+						// skip header row, col[0] = circle name, col[1] = contact address
+						$added  = 0;
+						$failed = 0;
+						foreach (array_slice($csvArray, 1) as $csvRow) {
+							$circleName = isset($csvRow[0]) ? trim($csvRow[0]) : '';
+							$url        = isset($csvRow[1]) ? trim($csvRow[1], '@') : '';
+							if ($url !== '' && (str_contains($url, '@') || \Friendica\Util\Network::isValidHttpUrl($url) || \Friendica\Util\Network::isValidAtUrl($url))) {
+								AddContact::add(Worker::PRIORITY_MEDIUM, $uid, $url, $circleName);
+								$added++;
+							} else {
+								$this->logger->notice('Invalid account in circle CSV', ['url' => $url]);
+								$failed++;
+							}
+						}
+						$this->logger->notice('Circle CSV import done', ['added' => $added, 'failed' => $failed]);
+					} else {
+						// import contacts
+						$urls = [];
+						foreach ($csvArray as $csvRow) {
+							$urls[] = $csvRow[0];
+						}
+						AddContact::addByArray($urls, $uid);
 					}
-					AddContact::addByArray($urls, $this->session->getLocalUserId());
 
 					$this->systemMessages->addInfo($this->l10n->t('Importing Contacts done'));
 					// delete temp file

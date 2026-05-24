@@ -286,7 +286,7 @@ class Circle
 		if (!$ucid) {
 			throw new HTTPException\NotFoundException('Invalid contact.');
 		}
-
+		DI::logger()->debug('Adding contact to circle', ['gid' => $gid, 'cid' => $cid, 'ucid' => $ucid]);
 		return DBA::insert('group_member', ['gid' => $gid, 'contact-id' => $ucid], Database::INSERT_IGNORE);
 	}
 
