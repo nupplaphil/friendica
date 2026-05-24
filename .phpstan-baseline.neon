@@ -1367,21 +1367,3 @@ parameters:
 			identifier: parameterByRef.unusedType
 			count: 1
 			path: src/Render/FriendicaSmartyEngine.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
-			identifier: identical.alwaysTrue
-			count: 1
-			path: src/Security/Authentication.php
-
-		-
-			message: '#^Call to function is_array\(\) with non\-empty\-list\<string\> will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Security/ExAuth.php
-
-		-
-			message: '#^Unused result of "or" operator\.$#'
-			identifier: logicalOr.resultUnused
-			count: 3
-			path: src/Security/OAuth1/OAuthRequest.php

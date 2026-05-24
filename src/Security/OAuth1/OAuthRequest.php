@@ -18,12 +18,18 @@ class OAuthRequest implements \Stringable
 	public static $version    = '1.0';
 	public static $POST_INPUT = 'php://input';
 
+	/**
+	 * @param array|null $parameters
+	 */
 	public function __construct(private $http_method, $http_url, $parameters = null)
 	{
-		@$parameters or $parameters = [];
-		$parameters                 = array_merge(OAuthUtil::parse_parameters(parse_url((string) $http_url, PHP_URL_QUERY)), $parameters);
-		$this->parameters           = $parameters;
-		$this->http_url             = $http_url;
+		if (is_null($parameters)) {
+			$parameters = [];
+		}
+
+		$parameters       = array_merge(OAuthUtil::parse_parameters(parse_url((string) $http_url, PHP_URL_QUERY)), $parameters);
+		$this->parameters = $parameters;
+		$this->http_url   = $http_url;
 	}
 
 
@@ -102,10 +108,13 @@ class OAuthRequest implements \Stringable
 	 *
 	 * @return OAuthRequest
 	 */
-	public static function from_consumer_and_token(OAuthConsumer $consumer, $http_method, $http_url, array $parameters = null, OAuthToken $token = null)
+	public static function from_consumer_and_token(OAuthConsumer $consumer, $http_method, $http_url, ?array $parameters = null, OAuthToken $token = null)
 	{
-		@$parameters or $parameters = [];
-		$defaults                   = [
+		if (is_null($parameters)) {
+			$parameters = [];
+		}
+
+		$defaults = [
 			"oauth_version"      => OAuthRequest::$version,
 			"oauth_nonce"        => OAuthRequest::generate_nonce(),
 			"oauth_timestamp"    => OAuthRequest::generate_timestamp(),
@@ -206,18 +215,18 @@ class OAuthRequest implements \Stringable
 	{
 		$parts = parse_url((string) $this->http_url);
 
-		$port   = @$parts['port'];
 		$scheme = $parts['scheme'];
+		$port   = $parts['port'] ?? ($scheme === 'https') ? '443' : '80';
 		$host   = $parts['host'];
 		$path   = @$parts['path'];
 
-		$port or $port = ($scheme == 'https') ? '443' : '80';
-
-		if (($scheme == 'https' && $port != '443')
-			|| ($scheme == 'http' && $port != '80')
+		if (
+			($scheme === 'https' && $port != '443')
+			|| ($scheme === 'http' && $port != '80')
 		) {
 			$host = "$host:$port";
 		}
+
 		return "$scheme://$host$path";
 	}
 
