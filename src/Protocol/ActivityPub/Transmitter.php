@@ -387,6 +387,7 @@ class Transmitter
 		$data['url']                       = $owner['url'];
 		$data['manuallyApprovesFollowers'] = in_array($owner['page-flags'], [User::PAGE_FLAGS_NORMAL, User::PAGE_FLAGS_PRVGROUP]);
 		$data['discoverable']              = (bool) $owner['net-publish'] && $full;
+		$data['indexable']                 = (bool) $owner['net-publish'] && $full;
 		$data['publicKey']                 = [
 			'id'           => $owner['url'] . '#main-key',
 			'owner'        => $owner['url'],
@@ -456,6 +457,7 @@ class Transmitter
 			'image'                     => ['type' => 'Image', 'url' => Contact::getHeaderUrlForId($cid, '', $contact['updated'])],
 			'manuallyApprovesFollowers' => (bool) $contact['manually-approve'],
 			'discoverable'              => !$contact['unsearchable'],
+			'indexable'                 => !$contact['unsearchable'],
 		];
 
 		if (empty($data['url'])) {

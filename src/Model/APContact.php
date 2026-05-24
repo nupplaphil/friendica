@@ -416,6 +416,7 @@ class APContact
 			}
 		}
 
+		$apcontact['indexable']    = JsonLD::fetchElement($compacted, 'toot:indexable', '@value');
 		$apcontact['discoverable'] = JsonLD::fetchElement($compacted, 'toot:discoverable', '@value');
 		if (is_null($apcontact['discoverable']) && in_array($apcontact['type'], ['Application', 'Service'])) {
 			$apcontact['discoverable'] = false;

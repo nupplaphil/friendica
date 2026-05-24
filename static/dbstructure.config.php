@@ -44,7 +44,7 @@ use Friendica\Database\DBA;
 
 // This file is required several times during the test in DbaDefinition which justifies this condition
 if (!defined('DB_UPDATE_VERSION')) {
-	define('DB_UPDATE_VERSION', 1595);
+	define('DB_UPDATE_VERSION', 1596);
 }
 
 return [
@@ -438,6 +438,7 @@ return [
 			"featured-tags"      => ["type" => "varbinary(383)", "comment" => "Address for the collection of featured tags"],
 			"manually-approve"   => ["type" => "boolean", "comment" => ""],
 			"discoverable"       => ["type" => "boolean", "comment" => "Mastodon extension: true if profile is published in their directory"],
+			"indexable"          => ["type" => "boolean", "comment" => "Mastodon extension: true if public posts may appear in search results"],
 			"suspended"          => ["type" => "boolean", "comment" => "Mastodon extension: true if profile is suspended"],
 			"posting-restricted" => ["type" => "boolean", "comment" => "lemmy:postingRestrictedToMods"],
 			"nick"               => ["type" => "varchar(255)", "not null" => "1", "default" => "", "comment" => ""],
