@@ -8,7 +8,7 @@
 	<span id="tagblock-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('tagblock', 'tagblock-inflated');" aria-expanded="false">
 			<h3>
-					<i class="fa fa-tag" aria-hidden="true"></i>
+					<i class="ri ri-price-tag-3-line" aria-hidden="true"></i>
 					{{$title}}
 			</h3>
 		</button>
@@ -16,7 +16,7 @@
 	<div id="tagblock" class="tagblock widget">
 		<button class="fakelink" onclick="openCloseWidget('tagblock', 'tagblock-inflated');" aria-expanded="true">
 			<h3>
-					<i class="fa fa-tag" aria-hidden="true"></i>
+					<i class="ri ri-price-tag-3-line" aria-hidden="true"></i>
 					{{$title}}
 			</h3>
 		</button>

@@ -8,7 +8,7 @@
 	<span id="trending-tags-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="fa fa-tag" aria-hidden="true"></i>
+				<i class="ri ri-price-tag-3-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 			<small>{{$subtitle}}</small>
@@ -17,7 +17,7 @@
 	<div id="trending-tags-sidebar" class="widget">
 		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');">
 			<h3>
-					<i class="fa fa-tag" aria-hidden="true"></i>
+					<i class="ri ri-price-tag-3-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 			<small>{{$subtitle}}</small>
@@ -26,7 +26,7 @@
 			{{section name=ol loop=$tags max=10}}
 				<li style="margin-bottom: 5px;">
 					<a href="search?tag={{$tags[ol].term}}" style="text-decoration: none; color: inherit;">
-						<i class="fa fa-hashtag" aria-hidden="true"></i> {{$tags[ol].term}}
+						<i class="ri ri-hashtag" aria-hidden="true"></i> {{$tags[ol].term}}
 					</a>
 				</li>
 			{{/section}}
@@ -34,7 +34,7 @@
 		{{if $tags|count > 10}}
 			<div style="text-align: left; margin-top: 10px;">
 				<a href="#" onclick="toggleTags(event)" role="button" aria-expanded="false" aria-controls="more-tags" style="text-decoration: none; color: inherit; cursor: pointer; display: inline-flex; align-items: center; font-weight: bold;">
-					<i id="caret-icon" class="fa fa-caret-right" aria-hidden="true" style="margin-right: 5px;"></i>
+					<i id="caret-icon" class="ri ri-arrow-right-s-fill" aria-hidden="true" style="margin-right: 5px;"></i>
 					<span id="link-text">{{$showmore}}</span>
 				</a>
 			</div>
@@ -42,7 +42,7 @@
 				{{section name=ul loop=$tags start=10}}
 					<li style="margin-bottom: 5px;">
 						<a href="search?tag={{$tags[ul].term}}" style="text-decoration: none; color: inherit;">
-							<i class="fa fa-hashtag" aria-hidden="true"></i> {{$tags[ul].term}}
+							<i class="ri ri-hashtag" aria-hidden="true"></i> {{$tags[ul].term}}
 						</a>
 					</li>
 				{{/section}}
@@ -63,12 +63,12 @@
 			moreTags.style.display = 'block';
 			linkText.textContent = '{{$showless}}';
 			link.setAttribute('aria-expanded', 'true');
-			caretIcon.className = 'fa fa-caret-down';
+			caretIcon.className = 'ri ri-arrow-down-s-fill';
 		} else {
 			moreTags.style.display = 'none';
 			linkText.textContent = '{{$showmore}}';
 			link.setAttribute('aria-expanded', 'false');
-			caretIcon.className = 'fa fa-caret-right';
+			caretIcon.className = 'ri ri-arrow-right-s-fill';
 		}
 	}
 

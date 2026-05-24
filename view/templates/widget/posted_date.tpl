@@ -21,7 +21,7 @@
 	<span id="datebrowse-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('datebrowse-sidebar', 'datebrowse-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="fa fa-archive" aria-hidden="true"></i>
+				<i class="ri ri-archive-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>
@@ -29,7 +29,7 @@
 	<div id="datebrowse-sidebar" class="widget">
 		<button class="fakelink" onclick="openCloseWidget('datebrowse-sidebar', 'datebrowse-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="fa fa-archive" aria-hidden="true"></i>
+				<i class="ri ri-archive-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>

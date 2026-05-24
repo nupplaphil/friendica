@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d0683679f45a6a7c6fd23ac03496a40",
+    "content-hash": "9e80fb50429d3ec539f41c3b92553038",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -560,6 +560,7 @@
                 "issues": "https://github.com/DivineOmega/DO-File-Cache/issues",
                 "source": "https://github.com/DivineOmega/DO-File-Cache/tree/master"
             },
+            "abandoned": "jord-jd/do-file-cache",
             "time": "2018-12-31T09:36:51+00:00"
         },
         {
@@ -603,8 +604,16 @@
             ],
             "description": "PSR-6 adapter for DO File Cache",
             "support": {
-                "source": "https://github.com/DivineOmega/DO-File-Cache-PSR-6/tree/master"
+                "issues": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/issues",
+                "source": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/tree/v2.0.1"
             },
+            "funding": [
+                {
+                    "url": "https://github.com/DivineOmega",
+                    "type": "github"
+                }
+            ],
+            "abandoned": "jord-jd/do-file-cache-psr-6",
             "time": "2018-07-13T08:32:36+00:00"
         },
         {
@@ -683,6 +692,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": "jord-jd/password_exposed",
             "time": "2021-04-20T09:34:23+00:00"
         },
         {
@@ -731,6 +741,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": "jord-jd/psr-18-guzzle-adapter",
             "time": "2021-04-20T08:50:57+00:00"
         },
         {
@@ -2325,18 +2336,6 @@
             ]
         },
         {
-            "name": "npm-asset/fork-awesome",
-            "version": "1.2.0",
-            "dist": {
-                "type": "tar",
-                "url": "https://registry.npmjs.org/fork-awesome/-/fork-awesome-1.2.0.tgz"
-            },
-            "type": "npm-asset",
-            "license": [
-                "(OFL-1.1 AND MIT)"
-            ]
-        },
-        {
             "name": "npm-asset/fullcalendar",
             "version": "3.10.5",
             "dist": {
@@ -2480,6 +2479,18 @@
             "type": "npm-asset",
             "license": [
                 "BSD-3-Clause"
+            ]
+        },
+        {
+            "name": "npm-asset/remixicon",
+            "version": "4.9.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/remixicon/-/remixicon-4.9.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "Apache-2.0"
             ]
         },
         {
@@ -2627,6 +2638,7 @@
                 "issues": "https://github.com/oomphinc/composer-installers-extender/issues",
                 "source": "https://github.com/oomphinc/composer-installers-extender/tree/2.0.1"
             },
+            "abandoned": true,
             "time": "2021-12-15T12:32:42+00:00"
         },
         {
@@ -3059,6 +3071,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Table",
                 "source": "https://github.com/pear/Console_Table"
             },
+            "abandoned": true,
             "time": "2018-01-25T20:47:17+00:00"
         },
         {
@@ -8537,6 +8550,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2025-03-19T07:56:08+00:00"
         },
         {
@@ -8593,6 +8607,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2024-07-03T04:45:54+00:00"
         },
         {
@@ -10414,9 +10429,9 @@
         "ext-simplexml": "*",
         "ext-xml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.2"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.3.0"
 }

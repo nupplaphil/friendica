@@ -6,20 +6,20 @@
   *}}
 <nav>
 	{{if $type == "channel"}}
-		{{assign var="icon" value="fa-th-large"}}
+		{{assign var="icon" value="ri-layout-grid-line"}}
 	{{else if $type == "accounttype"}}
-		{{assign var="icon" value="fa-umbrella"}}
+		{{assign var="icon" value="ri-umbrella-line"}}
 	{{else if $type == "rel"}}
-		{{assign var="icon" value="fa-exchange"}}
+		{{assign var="icon" value="ri-arrow-left-right-line"}}
 	{{else if $type == "circle"}}
-		{{assign var="icon" value="fa-user-circle"}}
+		{{assign var="icon" value="ri-account-circle-line"}}
 	{{else}} {{* fallback to type="file" *}}
-		{{assign var="icon" value="fa-folder"}}
+		{{assign var="icon" value="ri-folder-line"}}
 	{{/if}}
 	<span id="{{$type}}-sidebar-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('{{$type}}-sidebar', '{{$type}}-sidebar-inflated');" aria-expanded="false">
 			<h3>
-				<i class="fa {{$icon}}" aria-hidden="true"></i>
+				<i class="ri {{$icon}}" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>
@@ -27,7 +27,7 @@
 	<div id="{{$type}}-sidebar" class="widget">
 		<button class="fakelink" onclick="openCloseWidget('{{$type}}-sidebar', '{{$type}}-sidebar-inflated');" aria-expanded="true">
 			<h3>
-				<i class="fa {{$icon}}" aria-hidden="true"></i>
+				<i class="ri {{$icon}}" aria-hidden="true"></i>
 			{{$title}}
 			</h3>
 		</button>

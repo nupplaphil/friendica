@@ -18,7 +18,7 @@
 		<ul class="nav nav-pills preferences">
 			<li>
 				<a class="btn btn-primary" type="button" id="profile-viewas-link" href="{{$viewas_link.url}}">
-					<i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{$viewas_link.label}}
+					<i class="ri ri-eye-line" aria-hidden="true"></i>&nbsp;{{$viewas_link.label}}
 				</a>
 			</li>
 		</ul>
@@ -91,7 +91,7 @@
 		<dt class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile-label-name text-muted">{{$basic_fields.pub_keywords.label}}</dt>
 		<dd class="col-lg-8 col-md-8 col-sm-8 col-xs-12 profile-entry">
             {{foreach $basic_fields.pub_keywords.value as $tag}}
-				<a href="{{$tag.url}}" class="tag label btn-info sm">{{$tag.label}} <i class="fa fa-bolt" aria-hidden="true"></i></a>
+				<a href="{{$tag.url}}" class="tag label btn-info sm">{{$tag.label}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></a>
             {{/foreach}}
 		</dd>
 	</dl>
