@@ -219,7 +219,7 @@
 											<a role="menuitem" id="nav-menu-contacts-link"
 												class="nav-link {{$nav.contacts.2}}" href="{{$nav.contacts.0}}"
 												title="{{$nav.contacts.3}}">
-												<i class="ri ri-team-line ri-fw" aria-hidden="true"></i>
+												<i class="ri ri-contacts-line ri-fw" aria-hidden="true"></i>
 												{{$nav.contacts.1}}
 											</a>
 										</li>
@@ -355,7 +355,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-link {{$nav.contacts.2}}" href="{{$nav.contacts.0}}"
-										title="{{$nav.contacts.3}}"><i class="ri ri-team-line ri-fw" aria-hidden="true"></i>
+										title="{{$nav.contacts.3}}"><i class="ri ri-contacts-line ri-fw" aria-hidden="true"></i>
 										{{$nav.contacts.1}}
 									</a>
 								</li>
