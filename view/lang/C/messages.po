@@ -625,13 +625,13 @@ msgid "The avatar cache needs to be disabled in local.config.php to use this com
 msgstr ""
 
 #: src/Console/GlobalCommunityBlock.php:70
-#: src/Module/Moderation/Blocklist/Contact.php:48
+#: src/Module/Moderation/Blocklist/Contact.php:52
 #, php-format
 msgid "Could not find any contact entry for this URL (%s)"
 msgstr ""
 
 #: src/Console/GlobalCommunityBlock.php:75
-#: src/Module/Moderation/Blocklist/Contact.php:65
+#: src/Module/Moderation/Blocklist/Contact.php:69
 msgid "The contact has been blocked from the node"
 msgstr ""
 
@@ -1912,6 +1912,8 @@ msgid "Addon applications, utilities, games"
 msgstr ""
 
 #: src/Content/Nav.php:241 src/Content/Text/HTML.php:869
+#: src/Module/Moderation/Blocklist/Contact.php:112
+#: src/Module/Moderation/Blocklist/Server/Index.php:103
 #: src/Module/Search/Index.php:99
 msgid "Search"
 msgstr ""
@@ -2054,11 +2056,11 @@ msgid "Site setup and configuration"
 msgstr ""
 
 #: src/Content/Nav.php:311 src/Module/BaseModeration.php:117
-#: src/Module/Moderation/Blocklist/Contact.php:93
+#: src/Module/Moderation/Blocklist/Contact.php:99
 #: src/Module/Moderation/Blocklist/Contact/Import.php:101
 #: src/Module/Moderation/Blocklist/Server/Add.php:105
 #: src/Module/Moderation/Blocklist/Server/Import.php:99
-#: src/Module/Moderation/Blocklist/Server/Index.php:79
+#: src/Module/Moderation/Blocklist/Server/Index.php:84
 #: src/Module/Moderation/Item/Delete.php:47
 #: src/Module/Moderation/Item/Source.php:66
 #: src/Module/Moderation/Reports.php:118 src/Module/Moderation/Summary.php:59
@@ -5754,10 +5756,10 @@ msgstr ""
 #: src/Module/Moderation/Blocklist/Server/Add.php:120
 #: src/Module/Moderation/Blocklist/Server/Add.php:122
 #: src/Module/Moderation/Blocklist/Server/Import.php:110
-#: src/Module/Moderation/Blocklist/Server/Index.php:70
-#: src/Module/Moderation/Blocklist/Server/Index.php:71
-#: src/Module/Moderation/Blocklist/Server/Index.php:99
-#: src/Module/Moderation/Blocklist/Server/Index.php:100
+#: src/Module/Moderation/Blocklist/Server/Index.php:75
+#: src/Module/Moderation/Blocklist/Server/Index.php:76
+#: src/Module/Moderation/Blocklist/Server/Index.php:109
+#: src/Module/Moderation/Blocklist/Server/Index.php:110
 #: src/Module/Moderation/Item/Delete.php:53 src/Module/Register.php:204
 #: src/Module/Security/TwoFactor/Verify.php:87
 #: src/Module/Settings/Channels.php:170 src/Module/Settings/Channels.php:196
@@ -5897,7 +5899,8 @@ msgstr ""
 msgid "Save Circle"
 msgstr ""
 
-#: src/Module/Circle.php:160
+#: src/Module/Circle.php:160 src/Module/Moderation/Blocklist/Contact.php:113
+#: src/Module/Moderation/Blocklist/Server/Index.php:104
 msgid "Filter"
 msgstr ""
 
@@ -6021,14 +6024,14 @@ msgid "Update"
 msgstr ""
 
 #: src/Module/Contact.php:444 src/Module/Contact/Profile.php:547
-#: src/Module/Moderation/Blocklist/Contact.php:102
+#: src/Module/Moderation/Blocklist/Contact.php:108
 #: src/Module/Moderation/Users/Active.php:93
 #: src/Module/Moderation/Users/Index.php:101
 msgid "Block"
 msgstr ""
 
 #: src/Module/Contact.php:444 src/Module/Contact/Profile.php:547
-#: src/Module/Moderation/Blocklist/Contact.php:103
+#: src/Module/Moderation/Blocklist/Contact.php:109
 #: src/Module/Moderation/Users/Blocked.php:94
 #: src/Module/Moderation/Users/Index.php:103
 msgid "Unblock"
@@ -6131,7 +6134,7 @@ msgid "Submit"
 msgstr ""
 
 #: src/Module/Contact/Advanced.php:120
-#: src/Module/Moderation/Blocklist/Contact.php:108
+#: src/Module/Moderation/Blocklist/Contact.php:118
 #: src/Module/Moderation/Reports.php:124
 #: src/Module/Moderation/Users/Active.php:82
 #: src/Module/Moderation/Users/Blocked.php:82
@@ -6250,7 +6253,7 @@ msgstr ""
 
 #: src/Module/Contact/Follow.php:155 src/Module/Contact/Profile.php:422
 #: src/Module/Contact/Unfollow.php:98
-#: src/Module/Moderation/Blocklist/Contact.php:117
+#: src/Module/Moderation/Blocklist/Contact.php:128
 #: src/Module/Moderation/Reports.php:133
 #: src/Module/Notifications/Introductions.php:125
 #: src/Module/Notifications/Introductions.php:198
@@ -6854,8 +6857,8 @@ msgid "On this server the following remote servers are blocked."
 msgstr ""
 
 #: src/Module/Friendica.php:92
-#: src/Module/Moderation/Blocklist/Server/Index.php:71
-#: src/Module/Moderation/Blocklist/Server/Index.php:95
+#: src/Module/Moderation/Blocklist/Server/Index.php:76
+#: src/Module/Moderation/Blocklist/Server/Index.php:100
 #: src/Module/Settings/Channels.php:217
 msgid "Reason for the block"
 msgstr ""
@@ -7446,42 +7449,42 @@ msgstr ""
 msgid "Community Group"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:53
+#: src/Module/Moderation/Blocklist/Contact.php:57
 msgid "You can't block a local contact, please block the user instead"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:72
+#: src/Module/Moderation/Blocklist/Contact.php:76
 #, php-format
 msgid "%s contact unblocked"
 msgid_plural "%s contacts unblocked"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:94
+#: src/Module/Moderation/Blocklist/Contact.php:100
 msgid "Remote Contact Blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:95
+#: src/Module/Moderation/Blocklist/Contact.php:101
 msgid "This page allows you to prevent any message from a remote contact to reach your node."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:96
+#: src/Module/Moderation/Blocklist/Contact.php:102
 msgid "Block Remote Contact"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:97
+#: src/Module/Moderation/Blocklist/Contact.php:103
 msgid "Import/Export"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:98
+#: src/Module/Moderation/Blocklist/Contact.php:104
 msgid "Import from CSV file"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:99
+#: src/Module/Moderation/Blocklist/Contact.php:105
 msgid "Export to CSV file"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:100
+#: src/Module/Moderation/Blocklist/Contact.php:106
 #: src/Module/Moderation/Users/Active.php:91
 #: src/Module/Moderation/Users/Blocked.php:91
 #: src/Module/Moderation/Users/Index.php:98
@@ -7489,51 +7492,60 @@ msgstr ""
 msgid "select all"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:101
+#: src/Module/Moderation/Blocklist/Contact.php:107
 msgid "select none"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:104
+#: src/Module/Moderation/Blocklist/Contact.php:110
 msgid "No remote contact is blocked from this node."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:106
+#: src/Module/Moderation/Blocklist/Contact.php:111
+msgid "No blocked remote contact matches your search."
+msgstr ""
+
+#: src/Module/Moderation/Blocklist/Contact.php:114
+#: src/Module/Moderation/Blocklist/Server/Index.php:105
+msgid "Reset"
+msgstr ""
+
+#: src/Module/Moderation/Blocklist/Contact.php:116
 msgid "Blocked Remote Contacts"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:107
+#: src/Module/Moderation/Blocklist/Contact.php:117
 msgid "Block New Remote Contact"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:108
+#: src/Module/Moderation/Blocklist/Contact.php:118
 #: src/Module/Moderation/Reports.php:124
 msgid "Photo"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:108
+#: src/Module/Moderation/Blocklist/Contact.php:118
 msgid "Reason"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:114
+#: src/Module/Moderation/Blocklist/Contact.php:124
 #, php-format
 msgid "%s total blocked contact"
 msgid_plural "%s total blocked contacts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:117
+#: src/Module/Moderation/Blocklist/Contact.php:128
 msgid "URL of the remote contact to block."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:118
+#: src/Module/Moderation/Blocklist/Contact.php:129
 msgid "Also purge contact"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:118
+#: src/Module/Moderation/Blocklist/Contact.php:129
 msgid "Removes all content related to this contact from the node. Keeps the contact record. This action cannot be undone."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Contact.php:119
+#: src/Module/Moderation/Blocklist/Contact.php:130
 #: src/Module/Moderation/Blocklist/Contact/Import.php:107
 #: src/Module/Moderation/Blocklist/Server/Import.php:105
 msgid "Block Reason"
@@ -7582,7 +7594,7 @@ msgstr ""
 
 #: src/Module/Moderation/Blocklist/Contact/Import.php:104
 #: src/Module/Moderation/Blocklist/Server/Import.php:102
-#: src/Module/Moderation/Blocklist/Server/Index.php:90
+#: src/Module/Moderation/Blocklist/Server/Index.php:95
 msgid "Upload file"
 msgstr ""
 
@@ -7636,7 +7648,7 @@ msgid "Block A New Server Domain Pattern"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Server/Add.php:107
-#: src/Module/Moderation/Blocklist/Server/Index.php:83
+#: src/Module/Moderation/Blocklist/Server/Index.php:88
 msgid ""
 "<p>The server domain pattern syntax is case-insensitive shell wildcard, comprising the following special characters:</p>\n"
 "<ul>\n"
@@ -7646,7 +7658,7 @@ msgid ""
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Server/Add.php:112
-#: src/Module/Moderation/Blocklist/Server/Index.php:91
+#: src/Module/Moderation/Blocklist/Server/Index.php:96
 msgid "Check pattern"
 msgstr ""
 
@@ -7680,12 +7692,12 @@ msgid "Add pattern to the blocklist"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Server/Add.php:120
-#: src/Module/Moderation/Blocklist/Server/Index.php:100
+#: src/Module/Moderation/Blocklist/Server/Index.php:110
 msgid "Server Domain Pattern"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Server/Add.php:120
-#: src/Module/Moderation/Blocklist/Server/Index.php:100
+#: src/Module/Moderation/Blocklist/Server/Index.php:110
 msgid "The domain pattern of the new server to add to the blocklist. Do not include the protocol."
 msgstr ""
 
@@ -7759,7 +7771,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Module/Moderation/Blocklist/Server/Import.php:110
-#: src/Module/Moderation/Blocklist/Server/Index.php:99
+#: src/Module/Moderation/Blocklist/Server/Index.php:109
 msgid "Server domain pattern blocklist CSV file"
 msgstr ""
 
@@ -7779,54 +7791,62 @@ msgstr ""
 msgid "Replaces the current blocklist by the imported patterns."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:70
-#: src/Module/Moderation/Blocklist/Server/Index.php:94
+#: src/Module/Moderation/Blocklist/Server/Index.php:75
+#: src/Module/Moderation/Blocklist/Server/Index.php:99
 #: src/Module/Settings/Channels.php:216
 msgid "Blocked server domain pattern"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:72
+#: src/Module/Moderation/Blocklist/Server/Index.php:77
 msgid "Delete server domain pattern"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:72
+#: src/Module/Moderation/Blocklist/Server/Index.php:77
 msgid "Check to delete this entry from the blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:80
+#: src/Module/Moderation/Blocklist/Server/Index.php:85
 msgid "Server Domain Pattern Blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:81
+#: src/Module/Moderation/Blocklist/Server/Index.php:86
 msgid "This page can be used to define a blocklist of server domain patterns from the federated network that are not allowed to interact with your node. For each domain pattern you should also provide the reason why you block it."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:82
+#: src/Module/Moderation/Blocklist/Server/Index.php:87
 msgid "The list of blocked server domain patterns will be made publically available on the <a href=\"/friendica\">/friendica</a> page so that your users and people investigating communication problems can find the reason easily."
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:88
+#: src/Module/Moderation/Blocklist/Server/Index.php:93
 msgid "Import server domain pattern blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:89
+#: src/Module/Moderation/Blocklist/Server/Index.php:94
 msgid "Add new entry to the blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:92
+#: src/Module/Moderation/Blocklist/Server/Index.php:97
 msgid "Save changes to the blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:93
+#: src/Module/Moderation/Blocklist/Server/Index.php:98
 msgid "Current Entries in the Blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:96
+#: src/Module/Moderation/Blocklist/Server/Index.php:101
 msgid "Delete entry from the blocklist"
 msgstr ""
 
-#: src/Module/Moderation/Blocklist/Server/Index.php:97
+#: src/Module/Moderation/Blocklist/Server/Index.php:102
 msgid "Delete entry from the blocklist?"
+msgstr ""
+
+#: src/Module/Moderation/Blocklist/Server/Index.php:106
+msgid "No server domain pattern is blocked on this node."
+msgstr ""
+
+#: src/Module/Moderation/Blocklist/Server/Index.php:107
+msgid "No blocked server domain pattern matches your search."
 msgstr ""
 
 #: src/Module/Moderation/Item/Delete.php:36
