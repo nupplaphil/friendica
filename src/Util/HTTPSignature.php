@@ -232,7 +232,7 @@ class HTTPSignature
 			'signature' => base64_decode((string) preg_replace('/\s+/', '', $headers['signature'] ?? '')),
 		];
 
-		if (!empty($return['signature']) && !empty($return['algorithm']) && empty($return['headers'])) {
+		if (!empty($return['signature']) && !empty($return['algorithm'])) {
 			$return['headers'] = ['date'];
 		}
 

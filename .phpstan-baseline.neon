@@ -1439,15 +1439,3 @@ parameters:
 			identifier: if.alwaysTrue
 			count: 1
 			path: src/Util/HTTPHeaders.php
-
-		-
-			message: '#^Offset ''headers'' on array\{keyId\: string, algorithm\: non\-falsy\-string, created\: string\|null, expires\: string\|null, headers\: non\-empty\-list\<string\>, signature\: non\-falsy\-string\} in empty\(\) always exists and is not falsy\.$#'
-			identifier: empty.offset
-			count: 1
-			path: src/Util/HTTPSignature.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 1
-			path: src/Util/HTTPSignature.php
