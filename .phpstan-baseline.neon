@@ -1433,9 +1433,3 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: src/Util/Emailer.php
-
-		-
-			message: '#^If condition is always true\.$#'
-			identifier: if.alwaysTrue
-			count: 1
-			path: src/Util/HTTPHeaders.php
