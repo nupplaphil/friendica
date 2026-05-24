@@ -115,7 +115,7 @@ class Emailer
 	{
 		Hook::callAll('emailer_send_prepare', $email);
 
-		if (! $email instanceof IEmail) {
+		if (! ($email instanceof IEmail)) {
 			return true;
 		}
 
@@ -166,7 +166,7 @@ class Emailer
 								. "Content-Transfer-Encoding: base64\n\n"
 								. $textBody . "\n";
 
-		if (!$email_textonly && !is_null($email->getMessage())) {
+		if (!$email_textonly && $email->getMessage() !== '') {
 			$multipartMessageBody
 				.= "--" . $mimeBoundary . "\n"                // text/html section
 				. "Content-Type: text/html; charset=UTF-8\n"

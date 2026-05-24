@@ -171,8 +171,8 @@ class Hook
 	 * Use this function when you want to be able to allow a hook to manipulate
 	 * the provided data.
 	 *
-	 * @param string                $name of the hook to call
-	 * @param int|string|array|null $data to transmit to the callback handler
+	 * @param string $name of the hook to call
+	 * @param mixed  $data to transmit to the callback handler
 	 * @return void
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */

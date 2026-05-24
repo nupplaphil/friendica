@@ -1397,39 +1397,3 @@ parameters:
 			identifier: catch.neverThrown
 			count: 1
 			path: src/Util/DateTimeFormat.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 3
-			path: src/Util/EMailer/MailBuilder.php
-
-		-
-			message: '#^Property Friendica\\Util\\EMailer\\MailBuilder\:\:\$recipientUid \(int\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/Util/EMailer/MailBuilder.php
-
-		-
-			message: '#^Property Friendica\\Util\\EMailer\\MailBuilder\:\:\$senderNoReply \(string\) on left side of \?\?\= is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/Util/EMailer/MailBuilder.php
-
-		-
-			message: '#^Instanceof between array\|int\|string\|null and Friendica\\Object\\EMail\\IEmail will always evaluate to false\.$#'
-			identifier: instanceof.alwaysFalse
-			count: 1
-			path: src/Util/Emailer.php
-
-		-
-			message: '#^Property Friendica\\Util\\Emailer\:\:\$pConfig is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Util/Emailer.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Util/Emailer.php
