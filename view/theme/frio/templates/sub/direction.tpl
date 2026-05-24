@@ -22,13 +22,13 @@
 		{{elseif $direction.direction == 7}}
 			<i class="ri ri-at-line"></i>
 		{{elseif $direction.direction == 8}}
-			<i class="ri ri-share-forward-line"></i>
+			<i class="ri ri-save-line"></i>
 		{{elseif $direction.direction == 9}}
 			<i class="ri ri-global-line"></i>
 		{{elseif $direction.direction == 10}}
-			<i class="ri ri-inbox-line"></i>
+			<i class="ri ri-server-line"></i>
 		{{elseif $direction.direction == 11}}
-			<i class="ri ri-sticky-note-line"></i>
+			<i class="ri ri-rss-line"></i>
 		{{/if}}
 	</span>
 {{/if}}
