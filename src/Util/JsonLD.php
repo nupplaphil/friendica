@@ -237,11 +237,11 @@ class JsonLD
 		}
 
 		// Preparation for adding possibly missing content to the context
-		if (!empty($json['@context']) && is_string($json['@context'])) {
+		if (is_string($json['@context'])) {
 			$json['@context'] = [$json['@context']];
 		}
 
-		if (!empty($json['@context']) && is_array($json['@context'])) {
+		if (is_array($json['@context'])) {
 			// Remove empty entries from the context (a problem with WriteFreely)
 			$json['@context'] = array_filter($json['@context']);
 

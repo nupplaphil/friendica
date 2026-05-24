@@ -1451,9 +1451,3 @@ parameters:
 			identifier: booleanAnd.alwaysFalse
 			count: 1
 			path: src/Util/HTTPSignature.php
-
-		-
-			message: '#^Offset ''@context'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
-			identifier: empty.offset
-			count: 2
-			path: src/Util/JsonLD.php
