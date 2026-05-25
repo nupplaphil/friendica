@@ -833,21 +833,3 @@ parameters:
 			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: src/Network/Probe.php
-
-		-
-			message: '#^Negated boolean expression is always false\.$#'
-			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: src/Network/RobotsTxt.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 1
-			path: src/Network/RobotsTxt.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between int\<1, max\>\|false and 0 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Network/RobotsTxt.php
