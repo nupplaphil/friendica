@@ -2239,15 +2239,25 @@ class Diaspora
 
 		if (!$following && $sharing && in_array($importer['page-flags'], [User::PAGE_FLAGS_SOAPBOX, User::PAGE_FLAGS_NORMAL])) {
 			DI::logger()->info("Author " . $author . " wants to share with us - but doesn't want to listen. Request is ignored.");
+
 			return false;
-		} elseif (!$following && !$sharing) {
+		}
+
+		if (!$following && !$sharing) {
 			DI::logger()->info("Author " . $author . " doesn't want anything - and we don't know the author. Request is ignored.");
+
 			return false;
-		} elseif (!$following && $sharing) {
+		}
+
+		if (!$following && $sharing) {
 			DI::logger()->info("Author " . $author . " wants to share with us.");
-		} elseif ($following && $sharing) {
+		}
+
+		if ($following && $sharing) {
 			DI::logger()->info("Author " . $author . " wants to have a bidirectional connection.");
-		} elseif ($following && !$sharing) {
+		}
+
+		if ($following && !$sharing) {
 			DI::logger()->info("Author " . $author . " wants to listen to us.");
 		}
 

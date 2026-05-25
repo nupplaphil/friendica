@@ -917,9 +917,3 @@ parameters:
 			identifier: booleanAnd.rightAlwaysTrue
 			count: 1
 			path: src/Protocol/ActivityPub/Processor.php
-
-		-
-			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 2
-			path: src/Protocol/ActivityPub/Receiver.php
