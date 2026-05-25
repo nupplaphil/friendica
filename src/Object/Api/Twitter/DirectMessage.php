@@ -51,14 +51,14 @@ class DirectMessage extends BaseDataTransferObject
 	 */
 	public function __construct(array $mail, User $sender, User $recipient, string $text, string $title = null)
 	{
-		$this->id                    = (int)$mail['id'];
+		$this->id                    = (int) $mail['id'];
 		$this->created_at            = DateTimeFormat::utc($mail['created'] ?? 'now', DateTimeFormat::API);
 		$this->title                 = $title;
 		$this->text                  = $text;
 		$this->sender                = $sender->toArray();
 		$this->recipient             = $recipient->toArray();
-		$this->sender_id             = (int)$this->sender['id'];
-		$this->recipient_id          = (int)$this->recipient['id'];
+		$this->sender_id             = (int) $this->sender['id'];
+		$this->recipient_id          = (int) $this->recipient['id'];
 		$this->sender_screen_name    = $this->sender['screen_name'];
 		$this->recipient_screen_name = $this->recipient['screen_name'];
 		$this->friendica_seen        = (bool) $mail['seen'];
