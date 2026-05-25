@@ -47,7 +47,7 @@ class BasicAuthTest extends ApiTestCase
 	/**
 	 * Test the BasicAuth::getCurrentUserID() function without any login.
 	 */
-	public function testApiLoginWithoutLogin()
+	public function testApiLoginWithoutLogin(): never
 	{
 		self::markTestIncomplete('Needs Refactoring of BasicAuth first.');
 		/*
@@ -60,7 +60,7 @@ class BasicAuthTest extends ApiTestCase
 	/**
 	 * Test the BasicAuth::getCurrentUserID() function with a bad login.
 	 */
-	public function testApiLoginWithBadLogin()
+	public function testApiLoginWithBadLogin(): never
 	{
 		self::markTestIncomplete('Needs Refactoring of BasicAuth first.');
 		/*
@@ -85,7 +85,7 @@ class BasicAuthTest extends ApiTestCase
 	/**
 	 * Test the BasicAuth::getCurrentUserID() function with a remote user.
 	 */
-	public function testApiLoginWithRemoteUser()
+	public function testApiLoginWithRemoteUser(): never
 	{
 		self::markTestIncomplete('Needs Refactoring of BasicAuth first.');
 		/*

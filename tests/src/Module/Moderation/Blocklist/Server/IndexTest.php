@@ -12,9 +12,7 @@ use Friendica\Test\MockedTestCase;
 
 class IndexTest extends MockedTestCase
 {
-	/**
-	 * @dataProvider filterEntriesBySearchProvider
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('filterEntriesBySearchProvider')]
 	public function testFilterEntriesBySearch(array $entries, string $search, array $expectedDomains): void
 	{
 		$reflection = new \ReflectionClass(Index::class);

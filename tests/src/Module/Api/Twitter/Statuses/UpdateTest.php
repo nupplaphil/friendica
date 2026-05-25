@@ -77,7 +77,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithoutAuthenticatedUser()
+	public function testApiStatusesUpdateWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -94,7 +94,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithParent()
+	public function testApiStatusesUpdateWithParent(): never
 	{
 		$this->markTestIncomplete('This triggers an exit() somewhere and kills PHPUnit.');
 	}
@@ -104,7 +104,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithMediaIds()
+	public function testApiStatusesUpdateWithMediaIds(): never
 	{
 		$this->markTestIncomplete();
 	}
@@ -114,7 +114,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithDayThrottleReached()
+	public function testApiStatusesUpdateWithDayThrottleReached(): never
 	{
 		$this->markTestIncomplete();
 	}

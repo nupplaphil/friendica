@@ -31,7 +31,7 @@ class ListsTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesFollowersWithUndefinedCursor()
+	public function testApiStatusesFollowersWithUndefinedCursor(): never
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

@@ -42,7 +42,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithoutAuthenticatedUser()
+	public function testApiDirectMessagesNewWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

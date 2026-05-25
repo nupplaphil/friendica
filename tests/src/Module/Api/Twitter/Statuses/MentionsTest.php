@@ -55,7 +55,7 @@ class MentionsTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesMentionsWithUnallowedUser()
+	public function testApiStatusesMentionsWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

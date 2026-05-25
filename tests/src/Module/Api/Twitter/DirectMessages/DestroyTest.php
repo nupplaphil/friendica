@@ -58,7 +58,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser()
+	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

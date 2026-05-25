@@ -78,7 +78,7 @@ class ShowTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesShowWithUnallowedUser()
+	public function testApiStatusesShowWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
