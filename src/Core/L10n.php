@@ -658,25 +658,14 @@ class L10n
 		if (!is_string($locale) || !strlen($locale) || !Locale::parseLocale($locale)) {
 			$locale = 'en_US';
 		}
-		try {
-			$formatter = new IntlDateFormatter(
-				$locale,
-				$dateType,
-				$timeType,
-				$this->session->get('timezone') ?? null,
-				null,
-				$pattern,
-			);
-		} catch (\ValueError) {
-			$formatter = new IntlDateFormatter(
-				'en_US',
-				$dateType,
-				$timeType,
-				$this->session->get('timezone') ?? null,
-				null,
-				$pattern,
-			);
-		}
+		$formatter = new IntlDateFormatter(
+			$locale,
+			$dateType,
+			$timeType,
+			$this->session->get('timezone') ?? null,
+			null,
+			$pattern,
+		);
 
 		return $formatter->format(new DateTime($datestring));
 	}
