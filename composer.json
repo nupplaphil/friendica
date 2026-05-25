@@ -36,7 +36,7 @@
 		"divineomega/password_exposed": "^3",
 		"enyo/dropzone": "^5.9",
 		"ezyang/htmlpurifier": "^4.7",
-		"friendica/json-ld": "^1.0",
+		"friendica/json-ld": "^1.1.5",
 		"geekwright/po": "^2.0",
 		"guzzlehttp/guzzle": "^7",
 		"guzzlehttp/oauth-subscriber": "^0.8",
@@ -94,8 +94,9 @@
 	},
 	"repositories": [
 		{
+			"name": "friendica/php-json-ld",
 			"type": "vcs",
-			"url": "https://git.friendi.ca/friendica/php-json-ld"
+			"url": "https://git.friendi.ca/friendica/php-json-ld.git"
 		},
 		{
 			"type": "composer",
@@ -164,7 +165,7 @@
 		"phpmd/phpmd": "^2.15",
 		"phpstan/phpstan": "^2.1.39",
 		"phpstan/phpstan-strict-rules": "^2.0.10",
-		"phpunit/phpunit": "^9.6",
+		"phpunit/phpunit": "^10.5",
 		"rector/rector": "^2.2"
 	},
 	"scripts": {

@@ -59,10 +59,9 @@ class ContactEndpointTest extends FixtureTestCase
 	}
 
 	/**
-	 * @depends testIds
-	 *
 	 * @throws NotFoundException
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends('testIds')]
 	public function testIdsStringify()
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');
@@ -156,12 +155,12 @@ class ContactEndpointTest extends FixtureTestCase
 	}
 
 	/**
-	 * @depends testIds
 	 *
 	 * @throws NotFoundException
 	 * @throws InternalServerErrorException
 	 * @throws \ImagickException
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends('testIds')]
 	public function testList()
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');

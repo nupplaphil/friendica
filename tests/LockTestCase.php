@@ -34,9 +34,6 @@ abstract class LockTestCase extends MockedTestCase
 		parent::tearDown();
 	}
 
-	/**
-	 * @small
-	 */
 	public function testLock()
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
@@ -45,9 +42,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('bar'));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testDoubleLock()
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
@@ -57,9 +51,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertTrue($this->instance->acquire('foo', 1));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testReleaseLock()
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
@@ -69,9 +60,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('foo'));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testReleaseAll()
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -89,9 +77,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('nice'));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testReleaseAfterUnlock()
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
@@ -113,9 +98,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('nice'));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testReleaseWitTTL()
 	{
 		self::assertFalse($this->instance->isLocked('test'));
@@ -125,9 +107,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('test'));
 	}
 
-	/**
-	 * @small
-	 */
 	public function testGetLocks()
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -145,9 +124,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertContains('nice', $locks);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testGetLocksWithPrefix()
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -165,9 +141,6 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertNotContains('foo', $locks);
 	}
 
-	/**
-	 * @medium
-	 */
 	public function testLockTTL()
 	{
 		static::markTestSkipped('taking too much time without mocking');

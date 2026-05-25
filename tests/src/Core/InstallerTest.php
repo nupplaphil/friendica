@@ -125,11 +125,7 @@ class InstallerTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @small
-	 *
-	 * @dataProvider getCheckKeysData
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('getCheckKeysData')]
 	public function testCheckKeys($function, $expected)
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -146,9 +142,6 @@ class InstallerTest extends MockedTestCase
 		self::assertSame($expected, $install->checkKeys());
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutIntlChar()
 	{
 		$class_exists = $this->getFunctionMock('Friendica\Core', 'class_exists');
@@ -173,9 +166,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutCurlInit()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -200,9 +190,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutImagecreateformjpeg()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -227,9 +214,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutOpensslpublicencrypt()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -254,9 +238,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutMbStrlen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -281,9 +262,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutIconvStrlen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -308,9 +286,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutPosixkill()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -335,9 +310,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutProcOpen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -362,9 +334,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutJsonEncode()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -389,9 +358,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutFinfoOpen()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -416,9 +382,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctionsWithoutGmpStrval()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -443,9 +406,6 @@ class InstallerTest extends MockedTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckFunctions()
 	{
 		$function_exists = $this->getFunctionMock('Friendica\Core', 'function_exists');
@@ -475,9 +435,6 @@ class InstallerTest extends MockedTestCase
 		self::assertTrue($install->checkFunctions());
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckLocalIni()
 	{
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
@@ -495,9 +452,6 @@ class InstallerTest extends MockedTestCase
 		self::assertTrue($install->checkLocalIni());
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckHtAccessFail()
 	{
 		// Mocking that we can use CURL
@@ -546,9 +500,6 @@ class InstallerTest extends MockedTestCase
 		self::assertSame('test Error', $install->getChecks()[0]['error_msg']['msg']);
 	}
 
-	/**
-	 * @small
-	 */
 	public function testCheckHtAccessWork()
 	{
 		// Mocking that we can use CURL
@@ -623,8 +574,8 @@ class InstallerTest extends MockedTestCase
 
 	/**
 	 * Test the setup of the config cache for installation
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function testSetUpCache()
 	{
 		$this->l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });

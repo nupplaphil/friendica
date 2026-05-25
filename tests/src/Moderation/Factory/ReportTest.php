@@ -18,7 +18,7 @@ use Psr\Log\NullLogger;
 
 class ReportTest extends MockedTestCase
 {
-	public function dataCreateFromTableRow(): array
+	public static function dataCreateFromTableRow(): array
 	{
 		$clock = new FrozenClock();
 
@@ -131,9 +131,7 @@ class ReportTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataCreateFromTableRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromTableRow')]
 	public function testCreateFromTableRow(ClockInterface $clock, array $row, Collection\Report\Posts $posts, Collection\Report\Rules $rules, Entity\Report $assertion)
 	{
 		$factory = new Factory\Report(new NullLogger(), $clock);
@@ -141,7 +139,7 @@ class ReportTest extends MockedTestCase
 		$this->assertEquals($factory->createFromTableRow($row, $posts, $rules), $assertion);
 	}
 
-	public function dataCreateFromReportsRequest(): array
+	public static function dataCreateFromReportsRequest(): array
 	{
 		$clock = new FrozenClock();
 
@@ -248,9 +246,7 @@ class ReportTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataCreateFromReportsRequest
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromReportsRequest')]
 	public function testCreateFromReportsRequest(ClockInterface $clock, array $rules, int $reporterId, int $cid, int $gsid, string $comment, string $category, bool $forward, array $postUriIds, array $ruleIds, ?int $uid, Entity\Report $assertion)
 	{
 		$factory = new Factory\Report(new NullLogger(), $clock);

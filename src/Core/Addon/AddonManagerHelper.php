@@ -116,7 +116,11 @@ final class AddonManagerHelper implements AddonHelper
 
 		$timestamp = @filemtime($addon_file_path);
 
-		@include_once($addon_file_path);
+		try {
+			require_once($addon_file_path);
+		} catch (\Error) {
+			return false;
+		}
 
 		if (function_exists($addonId . '_install')) {
 			$func = $addonId . '_install';

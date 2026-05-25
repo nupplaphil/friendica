@@ -48,7 +48,7 @@ use PHPUnit\Framework\TestCase;
 
 class WebFingerUriTest extends TestCase
 {
-	public function dataFromString(): array
+	public static function dataFromString(): array
 	{
 		return [
 			'long' => [
@@ -75,12 +75,12 @@ class WebFingerUriTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataFromString
 	 * @param string $expectedLong
 	 * @param string $expectedShort
 	 * @param string $input
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFromString')]
 	public function testFromString(string $expectedLong, string $expectedShort, string $input)
 	{
 		$uri = WebFingerUri::fromString($input);
@@ -89,7 +89,7 @@ class WebFingerUriTest extends TestCase
 		$this->assertEquals($expectedShort, $uri->getShortForm());
 	}
 
-	public function dataFromStringFailure()
+	public static function dataFromStringFailure()
 	{
 		return [
 			'missing user' => [
@@ -111,10 +111,10 @@ class WebFingerUriTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataFromStringFailure
 	 * @param string $input
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataFromStringFailure')]
 	public function testFromStringFailure(string $input)
 	{
 		$this->expectException(\InvalidArgumentException::class);

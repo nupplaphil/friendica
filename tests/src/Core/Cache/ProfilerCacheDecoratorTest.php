@@ -31,9 +31,7 @@ class ProfilerCacheDecoratorTest extends MemoryCacheTestCase
 		parent::tearDown();
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function testTTL()
 	{
 		// Array Cache doesn't support TTL
@@ -41,9 +39,6 @@ class ProfilerCacheDecoratorTest extends MemoryCacheTestCase
 		return true;
 	}
 
-	/**
-	 * @small
-	 */
 	public function testGetStats()
 	{
 		self::assertEmpty($this->cache->getStats());

@@ -95,7 +95,7 @@ class ItemTest extends MockedTestCase
 		$this->setDiceProperty($this->originalDice);
 	}
 
-	public function dataRedundantSummary()
+	public static function dataRedundantSummary()
 	{
 		return [
 			'empty-summary' => [
@@ -132,12 +132,11 @@ class ItemTest extends MockedTestCase
 	}
 
 	/**
-	 * @dataProvider dataRedundantSummary
-	 *
 	 * @param bool $expected
 	 * @param string $body
 	 * @param string $summary
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRedundantSummary')]
 	public function testRedundantSummary(bool $expected, string $body, string $summary)
 	{
 		$item = $this->createItem();

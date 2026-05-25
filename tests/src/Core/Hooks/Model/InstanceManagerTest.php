@@ -51,7 +51,7 @@ class InstanceManagerTest extends MockedTestCase
 		self::assertNotSame($getInstanceA, $getInstanceB);
 	}
 
-	public function dataTests(): array
+	public static function dataTests(): array
 	{
 		return [
 			'only_a' => [
@@ -77,9 +77,7 @@ class InstanceManagerTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testInstanceWithArgs(string $aString = null, bool $cBool = null, string $bString = null)
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
@@ -113,9 +111,7 @@ class InstanceManagerTest extends MockedTestCase
 		self::assertEquals($cBool, $getInstanceB->getCBool());
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testInstanceWithTwoStrategies(string $aString = null, bool $cBool = null, string $bString = null)
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
@@ -177,9 +173,8 @@ class InstanceManagerTest extends MockedTestCase
 
 	/**
 	 * Test in case there are already some rules
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testWithGivenRules(string $aString = null, bool $cBool = null, string $bString = null)
 	{
 		$args = [];

@@ -73,7 +73,7 @@ class ConfigTest extends DatabaseTestCase
 		return new DatabaseConfig($this->getDbInstance(), $this->configCache);
 	}
 
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'string'       => ['data' => 'it'],
@@ -83,11 +83,11 @@ class ConfigTest extends DatabaseTestCase
 			'decimal'      => ['data' => 2.456],
 			'array'        => ['data' => ['1', 2, '3', true, false]],
 			'boolIntTrue'  => ['data' => 1],
-			'boolIntFalse' => ['Data' => 0],
+			'boolIntFalse' => ['data' => 0],
 		];
 	}
 
-	public function dataConfigLoad()
+	public static function dataConfigLoad()
 	{
 		$data = [
 			'system' => [
@@ -174,9 +174,9 @@ class ConfigTest extends DatabaseTestCase
 
 	/**
 	 * Test the configuration initialization
-	 * @dataProvider dataConfigLoad
 	 */
-	public function testSetUp(array $data)
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataConfigLoad')]
+	public function testSetUp(array $data, array $possibleCats, array $load)
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 
@@ -192,10 +192,9 @@ class ConfigTest extends DatabaseTestCase
 	 *
 	 * @param array $data
 	 * @param array $load
-	 *
-	 * @dataProvider dataConfigLoad
 	 */
-	public function testReload(array $data, array $load)
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataConfigLoad')]
+	public function testReload(array $data, array $possibleCats, array $load)
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 
@@ -210,7 +209,7 @@ class ConfigTest extends DatabaseTestCase
 		}
 	}
 
-	public function dataDoubleLoad()
+	public static function dataDoubleLoad()
 	{
 		return [
 			'config' => [
@@ -275,9 +274,8 @@ class ConfigTest extends DatabaseTestCase
 
 	/**
 	 * Test the configuration load() method with overwrite
-	 *
-	 * @dataProvider dataDoubleLoad
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataDoubleLoad')]
 	public function testCacheLoadDouble(array $data1, array $data2, array $expect = [])
 	{
 		$this->loadDirectFixture($this->configToDbArray($data1), $this->getDbInstance());
@@ -312,9 +310,8 @@ class ConfigTest extends DatabaseTestCase
 
 	/**
 	 * Test the configuration get() and set() methods
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGet($data)
 	{
 		$this->testedConfig = $this->getInstance();
@@ -349,9 +346,8 @@ class ConfigTest extends DatabaseTestCase
 
 	/**
 	 * Test the configuration delete() method without a model/db
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDelete($data)
 	{
 		$this->configCache->load(['test' => ['it' => $data]], Cache::SOURCE_FILE);
@@ -401,7 +397,7 @@ class ConfigTest extends DatabaseTestCase
 	}
 
 
-	public function dataTestCat()
+	public static function dataTestCat()
 	{
 		return [
 			'test_with_hashmap' => [
@@ -427,7 +423,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_hashmap',
+				'category'  => 'test_with_hashmap',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,
@@ -462,7 +458,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_keys',
+				'category'  => 'test_with_keys',
 				'assertion' => [
 					[
 						'last_update' => 1671051565,
@@ -500,7 +496,7 @@ class ConfigTest extends DatabaseTestCase
 						'dbclean_expire_conversation' => 90,
 					],
 				],
-				'cat'       => 'test_with_inner_array',
+				'category'  => 'test_with_inner_array',
 				'assertion' => [
 					'notifyall' => [
 						'last_update' => 1671051565,
@@ -518,9 +514,7 @@ class ConfigTest extends DatabaseTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataTestCat
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
 	public function testGetCategory(array $data, string $category, array $assertion)
 	{
 		$this->configCache = new Cache($data);
@@ -529,7 +523,7 @@ class ConfigTest extends DatabaseTestCase
 		self::assertEquals($assertion, $config->get($category));
 	}
 
-	public function dataSerialized(): array
+	public static function dataSerialized(): array
 	{
 		return [
 			'default' => [
@@ -547,9 +541,7 @@ class ConfigTest extends DatabaseTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataSerialized
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSerialized')]
 	public function testSerializedValues($value, $assertion)
 	{
 		$config = $this->getInstance();
@@ -558,7 +550,7 @@ class ConfigTest extends DatabaseTestCase
 		self::assertEquals($assertion, $config->get('test', 'it'));
 	}
 
-	public function dataEnv(): array
+	public static function dataEnv(): array
 	{
 		$data = [
 			'config' => [
@@ -605,9 +597,8 @@ class ConfigTest extends DatabaseTestCase
 
 	/**
 	 * Tests if environment variables can change the permission to write a config key
-	 *
-	 * @dataProvider dataEnv
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataEnv')]
 	public function testIsWritable(array $data, array $server, array $assertDisabled)
 	{
 		$this->setConfigFile('static' . DIRECTORY_SEPARATOR . 'env.config.php', true);

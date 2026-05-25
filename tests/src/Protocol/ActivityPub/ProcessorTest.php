@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ProcessorTest extends TestCase
 {
-	public function dataNormalizeMentionLinks(): array
+	public static function dataNormalizeMentionLinks(): array
 	{
 		return [
 			'one-link-@' => [
@@ -46,17 +46,17 @@ class ProcessorTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataNormalizeMentionLinks
 	 *
 	 * @param string $expected
 	 * @param string $body
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataNormalizeMentionLinks')]
 	public function testNormalizeMentionLinks(string $expected, string $body)
 	{
 		$this->assertEquals($expected, ProcessorMock::normalizeMentionLinks($body));
 	}
 
-	public function dataAddMentionLinks(): array
+	public static function dataAddMentionLinks(): array
 	{
 		return [
 			'issue-10603' => [
@@ -66,13 +66,13 @@ class ProcessorTest extends TestCase
 					[
 						'type' => 'Mention',
 						'href' => 'https://social.wake.st/users/liaizon',
-						'name' => '@liaizon@social.wake.st'
+						'name' => '@liaizon@social.wake.st',
 					],
 					[
 						'type' => 'Mention',
 						'href' => 'https://friendica.mrpetovan.com/profile/hypolite',
-						'name' => '@hypolite@friendica.mrpetovan.com'
-					]
+						'name' => '@hypolite@friendica.mrpetovan.com',
+					],
 				],
 			],
 			'issue-10617' => [
@@ -82,7 +82,7 @@ class ProcessorTest extends TestCase
 					[
 						'type' => 'Mention',
 						'href' => 'https://mastodon.technology/@sergey_m',
-						'name' => '@sergey_m'
+						'name' => '@sergey_m',
 					],
 				],
 			],
@@ -90,12 +90,12 @@ class ProcessorTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataAddMentionLinks
 	 *
 	 * @param string $expected
 	 * @param string $body
 	 * @param array $tags
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataAddMentionLinks')]
 	public function testAddMentionLinks(string $expected, string $body, array $tags)
 	{
 		$this->assertEquals($expected, ProcessorMock::addMentionLinks($body, $tags));

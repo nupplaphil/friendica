@@ -13,10 +13,8 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Test\MemoryCacheTestCase;
 use Mockery;
 
-/**
- * @requires extension redis
- * @group REDIS
- */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('redis')]
+#[\PHPUnit\Framework\Attributes\Group('REDIS')]
 class RedisCacheTest extends MemoryCacheTestCase
 {
 	protected function getInstance()
@@ -58,9 +56,6 @@ class RedisCacheTest extends MemoryCacheTestCase
 		parent::tearDown();
 	}
 
-	/**
-	 * @small
-	 */
 	public function testStats()
 	{
 		$stats = $this->instance->getStats();

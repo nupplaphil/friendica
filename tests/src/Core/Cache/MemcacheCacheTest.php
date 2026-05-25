@@ -13,10 +13,8 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Test\MemoryCacheTestCase;
 use Mockery;
 
-/**
- * @requires extension memcache
- * @group MEMCACHE
- */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('memcache')]
+#[\PHPUnit\Framework\Attributes\Group('MEMCACHE')]
 class MemcacheCacheTest extends MemoryCacheTestCase
 {
 	protected function getInstance()
@@ -49,20 +47,13 @@ class MemcacheCacheTest extends MemoryCacheTestCase
 		parent::tearDown();
 	}
 
-	/**
-	 * @small
-	 *
-	 * @dataProvider dataSimple
-	 * @doesNotPerformAssertions
-	 */
-	public function testGetAllKeys($value1, $value2, $value3)
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testGetAllKeys($value1, $value2, $value3, $value4)
 	{
 		static::markTestIncomplete('Race condition because of too fast getAllKeys() which uses a workaround');
 	}
 
-	/**
-	 * @small
-	 */
 	public function testStats()
 	{
 		$stats = $this->instance->getStats();

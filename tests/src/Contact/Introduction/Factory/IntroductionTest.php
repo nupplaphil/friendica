@@ -13,7 +13,7 @@ use Psr\Log\NullLogger;
 
 class IntroductionTest extends TestCase
 {
-	public function dataRow()
+	public static function dataRow()
 	{
 		return [
 			'default' => [
@@ -38,7 +38,7 @@ class IntroductionTest extends TestCase
 					'datetime'    => new \DateTime('1970-01-01 00:00:00', new \DateTimeZone('UTC')),
 					'ignore'      => false,
 					'id'          => 56,
-				]
+				],
 			],
 			'empty' => [
 				'input' => [
@@ -51,7 +51,7 @@ class IntroductionTest extends TestCase
 					'note'        => '',
 					'ignore'      => false,
 					'id'          => null,
-				]
+				],
 			],
 		];
 	}
@@ -77,9 +77,7 @@ class IntroductionTest extends TestCase
 		self::assertEquals($intro->ignore, $assertion['ignore'] ?? false);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateFromTableRow(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());
@@ -88,9 +86,7 @@ class IntroductionTest extends TestCase
 		$this->assertIntro($intro, $assertion);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateNew(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());
@@ -98,15 +94,13 @@ class IntroductionTest extends TestCase
 		$intro = $factory->createNew($input['uid'] ?? 0, $input['cid'] ?? 0, $input['note'] ?? '');
 
 		$this->assertIntro($intro, [
-			'uid'        => $input['uid'] ?? 0,
-			'contact-id' => $input['cid'] ?? 0,
+			'uid'        => $input['uid']  ?? 0,
+			'contact-id' => $input['cid']  ?? 0,
 			'note'       => $input['note'] ?? '',
 		]);
 	}
 
-	/**
-	 * @dataProvider dataRow
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
 	public function testCreateDummy(array $input, array $assertion)
 	{
 		$factory = new Introduction(new NullLogger());

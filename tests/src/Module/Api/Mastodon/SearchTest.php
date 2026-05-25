@@ -73,8 +73,8 @@ class SearchTest extends ApiTestCase
 
 	/**
 	 * Test the api_search() function with an q parameter contains hashtag.
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function testApiSearchWithHashtag()
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
@@ -91,8 +91,8 @@ class SearchTest extends ApiTestCase
 
 	/**
 	 * Test the api_search() function with an exclude_replies parameter.
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function testApiSearchWithExcludeReplies()
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');

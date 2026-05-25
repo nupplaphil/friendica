@@ -13,9 +13,7 @@ use Friendica\Core\Lock\Capability\ICanLock;
 use Friendica\Core\Lock\Type\CacheLock;
 use Friendica\Test\CacheLockTestCase;
 
-/**
- * @group APCU
- */
+#[\PHPUnit\Framework\Attributes\Group('APCU')]
 class APCuCacheLockTest extends CacheLockTestCase
 {
 	private APCuCache $cache;

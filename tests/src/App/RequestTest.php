@@ -13,7 +13,7 @@ use Friendica\Test\MockedTestCase;
 
 class RequestTest extends MockedTestCase
 {
-	public function dataServerArray(): array
+	public static function dataServerArray(): array
 	{
 		return [
 			'default' => [
@@ -99,9 +99,7 @@ class RequestTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataServerArray
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataServerArray')]
 	public function testRemoteAddress(array $server, array $config, string $assertion)
 	{
 		$configClass = \Mockery::mock(IManageConfigValues::class);
