@@ -650,8 +650,15 @@ class Receiver
 			$id            = JsonLD::fetchElement($activity, '@id');
 			$object_id     = JsonLD::fetchElement($activity, 'as:object', '@id');
 
-			if (!empty($published) && $object_id !== null && in_array($type, ['as:Create', 'as:Update']) && in_array($object_type, self::CONTENT_TYPES)
-				&& ($push || ($completion != self::COMPLETION_MANUAL)) && DI::contentItem()->isTooOld($published) && !Post::exists(['uri' => $object_id])) {
+			if (
+				!empty($published)
+				&& $object_id !== null
+				&& in_array($type, ['as:Create', 'as:Update'])
+				&& in_array($object_type, self::CONTENT_TYPES)
+				&& ($push || ($completion != self::COMPLETION_MANUAL))
+				&& DI::contentItem()->isTooOld($published)
+				&& !Post::exists(['uri' => $object_id])
+			) {
 				DI::logger()->debug('Activity is too old. It will not be processed', ['push' => $push, 'completion' => $completion, 'type' => $type,  'object-type' => $object_type, 'published' => $published, 'id' => $id, 'object-id' => $object_id]);
 				return true;
 			}
