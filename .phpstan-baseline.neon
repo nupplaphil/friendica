@@ -881,9 +881,3 @@ parameters:
 			identifier: booleanAnd.leftAlwaysTrue
 			count: 1
 			path: src/Object/Post.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Protocol/ATProtocol/Jetstream.php
