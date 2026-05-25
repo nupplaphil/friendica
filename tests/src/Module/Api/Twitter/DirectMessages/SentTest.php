@@ -46,7 +46,7 @@ class SentTest extends ApiTestCase
 		$response = (new Sent($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'rss']))
 			->run($this->httpExceptionMock);
 
-		self::assertXml((string)$response->getBody(), 'direct-messages');
+		self::assertXml((string) $response->getBody(), 'direct-messages');
 	}
 
 	/**

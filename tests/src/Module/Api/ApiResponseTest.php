@@ -43,15 +43,17 @@ class ApiResponseTest extends MockedTestCase
 		$response->error(200, 'OK', 'error_message', 'xml');
 
 		self::assertEquals(['Content-type' => 'text/xml', 'HTTP/1.1 200 OK'], $response->getHeaders());
-		self::assertEquals('<?xml version="1.0"?>' . "\n" .
-						   '<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" ' .
-						   'xmlns:friendica="http://friendi.ca/schema/api/1/" ' .
-						   'xmlns:georss="http://www.georss.org/georss">' . "\n" .
-						   '  <error>error_message</error>' . "\n" .
-						   '  <code>200 OK</code>' . "\n" .
-						   '  <request/>' . "\n" .
-						   '</status>' . "\n",
-			$response->getContent());
+		self::assertEquals(
+			'<?xml version="1.0"?>' . "\n"
+						   . '<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" '
+						   . 'xmlns:friendica="http://friendi.ca/schema/api/1/" '
+						   . 'xmlns:georss="http://www.georss.org/georss">' . "\n"
+						   . '  <error>error_message</error>' . "\n"
+						   . '  <code>200 OK</code>' . "\n"
+						   . '  <request/>' . "\n"
+						   . '</status>' . "\n",
+			$response->getContent(),
+		);
 	}
 
 	public function testErrorWithRss()
@@ -67,15 +69,16 @@ class ApiResponseTest extends MockedTestCase
 
 		self::assertEquals(['Content-type' => 'application/rss+xml', 'HTTP/1.1 200 OK'], $response->getHeaders());
 		self::assertEquals(
-			'<?xml version="1.0"?>' . "\n" .
-			'<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" ' .
-			'xmlns:friendica="http://friendi.ca/schema/api/1/" ' .
-			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
-			'  <error>error_message</error>' . "\n" .
-			'  <code>200 OK</code>' . "\n" .
-			'  <request/>' . "\n" .
-			'</status>' . "\n",
-			$response->getContent());
+			'<?xml version="1.0"?>' . "\n"
+			. '<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" '
+			. 'xmlns:friendica="http://friendi.ca/schema/api/1/" '
+			. 'xmlns:georss="http://www.georss.org/georss">' . "\n"
+			. '  <error>error_message</error>' . "\n"
+			. '  <code>200 OK</code>' . "\n"
+			. '  <request/>' . "\n"
+			. '</status>' . "\n",
+			$response->getContent(),
+		);
 	}
 
 	public function testErrorWithAtom()
@@ -91,15 +94,16 @@ class ApiResponseTest extends MockedTestCase
 
 		self::assertEquals(['Content-type' => 'application/atom+xml', 'HTTP/1.1 200 OK'], $response->getHeaders());
 		self::assertEquals(
-			'<?xml version="1.0"?>' . "\n" .
-			'<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" ' .
-			'xmlns:friendica="http://friendi.ca/schema/api/1/" ' .
-			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
-			'  <error>error_message</error>' . "\n" .
-			'  <code>200 OK</code>' . "\n" .
-			'  <request/>' . "\n" .
-			'</status>' . "\n",
-			$response->getContent());
+			'<?xml version="1.0"?>' . "\n"
+			. '<status xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" '
+			. 'xmlns:friendica="http://friendi.ca/schema/api/1/" '
+			. 'xmlns:georss="http://www.georss.org/georss">' . "\n"
+			. '  <error>error_message</error>' . "\n"
+			. '  <code>200 OK</code>' . "\n"
+			. '  <request/>' . "\n"
+			. '</status>' . "\n",
+			$response->getContent(),
+		);
 	}
 
 	public function testUnsupported()
@@ -200,13 +204,13 @@ class ApiResponseTest extends MockedTestCase
 		$response = new ApiResponse($l10n, $args, new NullLogger(), $baseUrl, $twitterUser);
 
 		self::assertEquals(
-			'<?xml version="1.0"?>' . "\n" .
-			'<root_element xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" ' .
-			'xmlns:friendica="http://friendi.ca/schema/api/1/" ' .
-			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
-			'  <data>some_data</data>' . "\n" .
-			'</root_element>' . "\n",
-			$response->createXML(['data' => ['some_data']], 'root_element')
+			'<?xml version="1.0"?>' . "\n"
+			. '<root_element xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" '
+			. 'xmlns:friendica="http://friendi.ca/schema/api/1/" '
+			. 'xmlns:georss="http://www.georss.org/georss">' . "\n"
+			. '  <data>some_data</data>' . "\n"
+			. '</root_element>' . "\n",
+			$response->createXML(['data' => ['some_data']], 'root_element'),
 		);
 	}
 
@@ -229,11 +233,11 @@ class ApiResponseTest extends MockedTestCase
 		$response = new ApiResponse($l10n, $args, new NullLogger(), $baseUrl, $twitterUser);
 
 		self::assertEquals(
-			'<?xml version="1.0"?>' . "\n" .
-			'<ok>' . "\n" .
-			'  <data>some_data</data>' . "\n" .
-			'</ok>' . "\n",
-			$response->createXML(['data' => ['some_data']], 'ok')
+			'<?xml version="1.0"?>' . "\n"
+			. '<ok>' . "\n"
+			. '  <data>some_data</data>' . "\n"
+			. '</ok>' . "\n",
+			$response->createXML(['data' => ['some_data']], 'ok'),
 		);
 	}
 
@@ -312,13 +316,13 @@ class ApiResponseTest extends MockedTestCase
 		$response = new ApiResponse($l10n, $args, new NullLogger(), $baseUrl, $twitterUser);
 
 		self::assertEquals(
-			'<?xml version="1.0"?>' . "\n" .
-			'<root_element xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" ' .
-			'xmlns:friendica="http://friendi.ca/schema/api/1/" ' .
-			'xmlns:georss="http://www.georss.org/georss">' . "\n" .
-			'  <data>some_data</data>' . "\n" .
-			'</root_element>' . "\n",
-			$response->formatData('root_element', 'xml', ['data' => ['some_data']])
+			'<?xml version="1.0"?>' . "\n"
+			. '<root_element xmlns="http://api.twitter.com" xmlns:statusnet="http://status.net/schema/api/1/" '
+			. 'xmlns:friendica="http://friendi.ca/schema/api/1/" '
+			. 'xmlns:georss="http://www.georss.org/georss">' . "\n"
+			. '  <data>some_data</data>' . "\n"
+			. '</root_element>' . "\n",
+			$response->formatData('root_element', 'xml', ['data' => ['some_data']]),
 		);
 	}
 

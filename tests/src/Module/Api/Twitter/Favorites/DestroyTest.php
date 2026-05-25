@@ -44,7 +44,7 @@ class DestroyTest extends ApiTestCase
 	{
 		$response = (new Destroy(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'id' => 3
+				'id' => 3,
 			]);
 
 		$json = $this->toJson($response);

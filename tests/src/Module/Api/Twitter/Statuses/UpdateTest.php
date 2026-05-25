@@ -36,8 +36,8 @@ class UpdateTest extends ApiTestCase
 				'height'   => 666,
 				'tmp_name' => $this->getTempImage(),
 				'name'     => 'spacer.png',
-				'type'     => 'image/png'
-			]
+				'type'     => 'image/png',
+			],
 		];
 
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
