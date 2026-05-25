@@ -49,10 +49,10 @@ final class FriendicaSmartyEngine extends TemplateEngine
 	}
 
 	/**
-     * Test install
-     *
-     * @param-out array $errors Array of errors passed by reference
-     */
+	 * Test install
+	 *
+	 * @param-out array $errors Array of errors passed by reference
+	 */
 	public function testInstall(?array &$errors = null)
 	{
 		/** @phpstan-ignore paramOut.type(ignore wrong param type in Smarty::testInstall()) */

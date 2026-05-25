@@ -1939,14 +1939,14 @@ class Receiver
 				$attachments[$mediatype] = ['type' => $mediatype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => null, 'name' => ''];
 			} elseif ($type == Post\Media::HLS) {
 				$attachment = [
-					'type' => $filetype,
+					'type'      => $filetype,
 					'mediaType' => $mediatype,
-					'url' => $href,
-					'height' => $height,
-					'width' => $width,
-					'size' => null,
-					'name' => '',
-					'image' => $icon,
+					'url'       => $href,
+					'height'    => $height,
+					'width'     => $width,
+					'size'      => null,
+					'name'      => '',
+					'image'     => $icon,
 				];
 
 				$attachment['player-url']    = $player['embed']  ?? null;

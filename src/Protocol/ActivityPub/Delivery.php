@@ -164,15 +164,15 @@ class Delivery
 					}
 
 					DI::logger()->notice('Delivery failed', [
-						'retcode' => $response->getReturnCode(),
+						'retcode'       => $response->getReturnCode(),
 						'serverfailure' => $serverfail,
-						'drop' => $drop,
-						'runtime' => round($runtime, 3),
-						'uri-id' => $uri_id,
-						'uid' => $uid,
-						'item_id' => $item_id,
-						'cmd' => $cmd,
-						'inbox' => $inbox,
+						'drop'          => $drop,
+						'runtime'       => round($runtime, 3),
+						'uri-id'        => $uri_id,
+						'uid'           => $uid,
+						'item_id'       => $item_id,
+						'cmd'           => $cmd,
+						'inbox'         => $inbox,
 					]);
 				}
 				if ($uri_id) {

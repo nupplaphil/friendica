@@ -11,7 +11,6 @@ use Friendica\App;
 use Friendica\Content\Feature;
 use Friendica\Content\Smilies;
 use Friendica\Content\Text\BBCode;
-use Friendica\Content\Text\Plaintext;
 use Friendica\Core\Cache\Enum\Duration;
 use Friendica\Core\Protocol;
 use Friendica\Core\System;
