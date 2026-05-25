@@ -261,6 +261,15 @@ button.btn-primary {
   }
 }
 
+.fancybox-content {
+  background-color: var(--bg-secondary);
+
+  .event {
+    background-color: var(--bg-primary);
+    padding: 10px;
+  }
+}
+
 /* Input Fields */
 input,
 textarea,
