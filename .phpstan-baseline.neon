@@ -983,9 +983,3 @@ parameters:
 			identifier: nullCoalesce.property
 			count: 1
 			path: src/Protocol/Diaspora/Repository/DiasporaContact.php
-
-		-
-			message: '#^Method Friendica\\Render\\FriendicaSmartyEngine\:\:testInstall\(\) never assigns array to &\$errors so it can be removed from the by\-ref type\.$#'
-			identifier: parameterByRef.unusedType
-			count: 1
-			path: src/Render/FriendicaSmartyEngine.php
