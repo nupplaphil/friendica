@@ -11,6 +11,7 @@ use Friendica\App;
 use Friendica\Content\Feature;
 use Friendica\Content\Smilies;
 use Friendica\Content\Text\BBCode;
+use Friendica\Content\Text\Plaintext;
 use Friendica\Core\Cache\Enum\Duration;
 use Friendica\Core\Protocol;
 use Friendica\Core\System;
@@ -533,21 +534,6 @@ class Transmitter
 		}
 
 		return $permissions;
-	}
-
-	/**
-	 * Check if the given item id is from ActivityPub
-	 *
-	 * @param integer $item_id
-	 * @return boolean "true" if the post is from ActivityPub
-	 */
-	private static function isAPPost(int $item_id): bool
-	{
-		if (empty($item_id)) {
-			return false;
-		}
-
-		return Post::exists(['id' => $item_id, 'network' => Protocol::ACTIVITYPUB]);
 	}
 
 	/**
@@ -1095,21 +1081,24 @@ class Transmitter
 					continue;
 				}
 
-				if ($item_profile && ($receiver == $item_profile['followers']) && ($uid == $profile_uid)) {
+				if ($receiver == $item_profile['followers'] && ($uid == $profile_uid)) {
 					$inboxes = array_merge_recursive($inboxes, self::fetchTargetInboxesforUser($uid));
-				} else {
-					$profile = APContact::getByURL($receiver, false);
-					if (!empty($profile)) {
-						$contact = Contact::getByURLForUser($receiver, $uid, false, ['id']);
 
-						if (empty($profile['sharedinbox']) || $blindcopy || Contact::isLocal($receiver)) {
-							$target = $profile['inbox'];
-						} else {
-							$target = $profile['sharedinbox'];
-						}
-						if (!self::archivedInbox($target) && !in_array($contact['id'], $inboxes[$target] ?? [])) {
-							$inboxes[$target][] = $contact['id'] ?? 0;
-						}
+					continue;
+				}
+
+				$profile = APContact::getByURL($receiver, false);
+
+				if (!empty($profile)) {
+					$contact = Contact::getByURLForUser($receiver, $uid, false, ['id']);
+
+					if (empty($profile['sharedinbox']) || $blindcopy || Contact::isLocal($receiver)) {
+						$target = $profile['inbox'];
+					} else {
+						$target = $profile['sharedinbox'];
+					}
+					if (!self::archivedInbox($target) && !in_array($contact['id'], $inboxes[$target] ?? [])) {
+						$inboxes[$target][] = $contact['id'] ?? 0;
 					}
 				}
 			}
@@ -1659,27 +1648,6 @@ class Transmitter
 	}
 
 	/**
-	 * Callback function to replace a Friendica style mention in a mention for a summary
-	 *
-	 * @param array $match Matching values for the callback
-	 * @return string Replaced mention
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 */
-	private static function mentionAddrCallback(array $match): string
-	{
-		if (empty($match[1])) {
-			return '';
-		}
-
-		$data = Contact::getByURL($match[1], false, ['addr']);
-		if (empty($data['addr'])) {
-			return $match[0];
-		}
-
-		return '@' . $data['addr'];
-	}
-
-	/**
 	 * Remove image elements since they are added as attachment
 	 *
 	 * @param string $body HTML code
@@ -1866,19 +1834,6 @@ class Transmitter
 			$body = $item['raw-body'] ?? self::removePictures($body);
 		}
 		$body = self::addEmojiTags($emojis, $body);
-
-		/**
-		 * @todo Improve the automated summary
-		 * This part is currently deactivated. The automated summary seems to be more
-		 * confusing than helping. But possibly we will find a better way.
-		 * So the code is left here for now as a reminder
-		 *
-		 * } elseif (($type == 'Article') && empty($data['summary'])) {
-		 * 		$regexp = "/[@!]\[url\=([^\[\]]*)\].*?\[\/url\]/ism";
-		 * 		$summary = preg_replace_callback($regexp, [self::class, 'mentionAddrCallback'], $body);
-		 * 		$data['summary'] = BBCode::toPlaintext(Plaintext::shorten(self::removePictures($summary), 1000));
-		 * }
-		 */
 
 		if (empty($item['uid']) || !Feature::isEnabled($item['uid'], Feature::EXPLICIT_MENTIONS)) {
 			$body = self::prependMentions($body, $item['uri-id'], $item['author-link']);

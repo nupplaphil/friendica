@@ -929,21 +929,3 @@ parameters:
 			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: src/Protocol/ActivityPub/Receiver.php
-
-		-
-			message: '#^Left side of && is always true\.$#'
-			identifier: booleanAnd.leftAlwaysTrue
-			count: 1
-			path: src/Protocol/ActivityPub/Transmitter.php
-
-		-
-			message: '#^Static method Friendica\\Protocol\\ActivityPub\\Transmitter\:\:isAPPost\(\) is unused\.$#'
-			identifier: method.unused
-			count: 1
-			path: src/Protocol/ActivityPub/Transmitter.php
-
-		-
-			message: '#^Static method Friendica\\Protocol\\ActivityPub\\Transmitter\:\:mentionAddrCallback\(\) is unused\.$#'
-			identifier: method.unused
-			count: 1
-			path: src/Protocol/ActivityPub/Transmitter.php
