@@ -34,7 +34,7 @@ class Image implements \Stringable
 	private $imagick;
 	private $width;
 	private $height;
-	private $valid;
+	private $valid = false;
 	private $outputType;
 	private $originType;
 
@@ -70,10 +70,11 @@ class Image implements \Stringable
 		if ($this->isImagick() && (empty($data) || $this->loadData($data))) {
 			$this->valid = !empty($data);
 			return;
-		} else {
-			// Failed to load with Imagick, fallback
-			$this->imagick = false;
 		}
+
+		// Failed to load with Imagick, fallback
+		$this->imagick = false;
+
 		$this->loadData($data);
 	}
 
