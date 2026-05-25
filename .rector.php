@@ -24,7 +24,7 @@ return \Rector\Config\RectorConfig::configure()
 	// ->withCodeQualityLevel(0)
 	->withPhpLevel(84)
 	->withSets([
-		\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_74,
+		//\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
 		\Rector\PHPUnit\Set\PHPUnitSetList::PHPUNIT_120,
 		\Rector\PHPUnit\Set\PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
 	])
