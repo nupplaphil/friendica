@@ -851,15 +851,3 @@ parameters:
 			identifier: identical.alwaysFalse
 			count: 1
 			path: src/Network/RobotsTxt.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Object/Api/Mastodon/Relationship.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Object/Api/Twitter/DirectMessage.php

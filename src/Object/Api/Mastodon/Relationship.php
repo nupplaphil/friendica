@@ -88,7 +88,7 @@ class Relationship extends BaseDataTransferObject
 			$this->requested   = (bool)($contactRecord['pending'] ?? false);
 			$this->followed_by = !$contactRecord['pending'] && in_array($contactRecord['rel'] ?? 0, [Contact::FOLLOWER, Contact::FRIEND]);
 			$this->muting      = (bool)($contactRecord['readonly'] ?? false) || $muted;
-			$this->notifying   = (bool)$contactRecord['notify_new_posts'] ?? false;
+			$this->notifying   = (bool)$contactRecord['notify_new_posts'];
 			$this->blocking    = (bool)($contactRecord['blocked'] ?? false) || $blocked;
 			$this->blocked_by  = $isBlocked;
 			$this->note        = $contactRecord['info'];

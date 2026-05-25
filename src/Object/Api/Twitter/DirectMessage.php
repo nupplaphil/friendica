@@ -61,7 +61,7 @@ class DirectMessage extends BaseDataTransferObject
 		$this->recipient_id          = (int)$this->recipient['id'];
 		$this->sender_screen_name    = $this->sender['screen_name'];
 		$this->recipient_screen_name = $this->recipient['screen_name'];
-		$this->friendica_seen        = (bool)$mail['seen'] ?? false;
+		$this->friendica_seen        = (bool) $mail['seen'];
 		$this->friendica_parent_uri  = $mail['parent-uri'] ?? '';
 	}
 
