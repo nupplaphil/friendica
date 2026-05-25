@@ -529,12 +529,6 @@ parameters:
 			path: src/Model/User.php
 
 		-
-			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
-			identifier: identical.alwaysTrue
-			count: 2
-			path: src/Model/User.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 1
@@ -739,22 +733,10 @@ parameters:
 			path: src/Module/Security/Login.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between ''2y'' and ''2y'' will always evaluate to false\.$#'
-			identifier: notIdentical.alwaysFalse
-			count: 1
-			path: src/Module/Security/PasswordTooLong.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 2
 			path: src/Module/Security/TwoFactor/SignOut.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
-			identifier: identical.alwaysTrue
-			count: 1
-			path: src/Module/Settings/Account.php
 
 		-
 			message: '#^Property Friendica\\Content\\Conversation\\Entity\\Timeline\:\:\$languages \(array\) on left side of \?\? is not nullable\.$#'
@@ -1007,9 +989,3 @@ parameters:
 			identifier: parameterByRef.unusedType
 			count: 1
 			path: src/Render/FriendicaSmartyEngine.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between ''2y'' and ''2y'' will always evaluate to true\.$#'
-			identifier: identical.alwaysTrue
-			count: 1
-			path: src/Security/Authentication.php

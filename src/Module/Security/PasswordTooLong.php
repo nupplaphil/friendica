@@ -58,8 +58,9 @@ class PasswordTooLong extends \Friendica\BaseModule
 
 	protected function content(array $request = []): string
 	{
-		// Nothing to do here
+		/** @phpstan-ignore notIdentical.alwaysFalse(value of PASSWORD_DEFAULT will be change in a future PHP version) */
 		if (PASSWORD_DEFAULT !== PASSWORD_BCRYPT) {
+			// Nothing to do here
 			$this->baseUrl->redirect();
 		}
 

@@ -992,6 +992,7 @@ class User
 			$allowed_characters = preg_quote($allowed_characters, $delimiter);
 		}
 
+		/** @phpstan-ignore identical.alwaysTrue(value of PASSWORD_DEFAULT will be change in a future PHP version) */
 		return '^[a-zA-Z0-9' . $allowed_characters . ']' . (PASSWORD_DEFAULT === PASSWORD_BCRYPT ? '{1,72}' : '+') . '$';
 	}
 
@@ -1015,6 +1016,7 @@ class User
 			throw new Exception(DI::l10n()->t('The new password has been exposed in a public data dump, please choose another.'));
 		}
 
+		/** @phpstan-ignore identical.alwaysTrue(value of PASSWORD_DEFAULT will be change in a future PHP version) */
 		if (PASSWORD_DEFAULT === PASSWORD_BCRYPT && strlen($password) > 72) {
 			throw new Exception(DI::l10n()->t('The password length is limited to 72 characters.'));
 		}
