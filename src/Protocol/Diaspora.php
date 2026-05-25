@@ -1460,10 +1460,6 @@ class Diaspora
 		 */
 
 		foreach ($matches as $match) {
-			if ($match === '') {
-				continue;
-			}
-
 			try {
 				$contact = DI::dsprContact()->getByUrl(new Uri($match[3]));
 				Tag::storeByHash($uriid, $match[1], $contact->name ?: $contact->nick, $contact->url);
@@ -1601,11 +1597,9 @@ class Diaspora
 			return false;
 		}
 
-		if ($message_id) {
-			DI::logger()->info('Stored comment ' . $datarray['guid'] . ' with message id ' . $message_id);
-			if ($datarray['uid'] == 0) {
-				Item::distribute($message_id, json_encode($data));
-			}
+		DI::logger()->info('Stored comment ' . $datarray['guid'] . ' with message id ' . $message_id);
+		if ($datarray['uid'] == 0) {
+			Item::distribute($message_id, json_encode($data));
 		}
 
 		return true;
@@ -1859,11 +1853,9 @@ class Diaspora
 			return false;
 		}
 
-		if ($message_id) {
-			DI::logger()->info('Stored like ' . $datarray['guid'] . ' with message id ' . $message_id);
-			if ($datarray['uid'] == 0) {
-				Item::distribute($message_id, json_encode($data));
-			}
+		DI::logger()->info('Stored like ' . $datarray['guid'] . ' with message id ' . $message_id);
+		if ($datarray['uid'] == 0) {
+			Item::distribute($message_id, json_encode($data));
 		}
 
 		return true;
@@ -2619,7 +2611,7 @@ class Diaspora
 	 * @param string           $xml       The original XML of the message
 	 * @param int              $direction Indicates if the message had been fetched or pushed (self::PUSHED, self::FETCHED, self::FORCED_FETCH)
 	 *
-	 * @return int|bool The message id of the newly created item or false on error
+	 * @return bool True if the item was created or false on error
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
@@ -3394,7 +3386,7 @@ class Diaspora
 			}
 
 			// Diaspora rejects messages when they contain a location without "lat" or "lng"
-			if (!isset($location['lat']) || !isset($location['lng'])) {
+			if ($location['lat'] === '' || $location['lng'] === '') {
 				unset($message['location']);
 			}
 
@@ -3694,7 +3686,9 @@ class Diaspora
 	{
 		if ($item['deleted']) {
 			return self::sendRetraction($item, $owner, $contact, $public_batch, true);
-		} elseif (in_array($item['verb'], [Activity::LIKE, Activity::DISLIKE])) {
+		}
+
+		if (in_array($item['verb'], [Activity::LIKE, Activity::DISLIKE])) {
 			$type = 'like';
 		} else {
 			$type = 'comment';
@@ -3707,13 +3701,12 @@ class Diaspora
 		$message = [];
 		if (is_array($msg)) {
 			foreach ($msg as $field => $data) {
-				if (!$item['deleted']) {
-					if ($field == 'diaspora_handle') {
-						$field = 'author';
-					}
-					if ($field == 'target_type') {
-						$field = 'parent_type';
-					}
+				if ($field == 'diaspora_handle') {
+					$field = 'author';
+				}
+
+				if ($field == 'target_type') {
+					$field = 'parent_type';
 				}
 
 				$message[$field] = $data;

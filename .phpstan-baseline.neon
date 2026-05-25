@@ -947,39 +947,3 @@ parameters:
 			identifier: method.unused
 			count: 1
 			path: src/Protocol/ActivityPub/Transmitter.php
-
-		-
-			message: '#^If condition is always true\.$#'
-			identifier: if.alwaysTrue
-			count: 2
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Method Friendica\\Protocol\\Diaspora\:\:receiveStatusMessage\(\) never returns int so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Negated boolean expression is always true\.$#'
-			identifier: booleanNot.alwaysTrue
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Offset ''lng'' on array\{address\?\: mixed, lat\: string, lng\: string\} in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between array\{string, ''\!''\|''@'', string, non\-empty\-string\} and '''' will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Property Friendica\\Protocol\\Diaspora\\Entity\\DiasporaContact\:\:\$uriId \(int\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/Protocol/Diaspora/Repository/DiasporaContact.php
