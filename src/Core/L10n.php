@@ -463,14 +463,14 @@ class L10n
 	 * Validate a locale string against the list of available locales.
 	 *
 	 * This function checks if the provided locale string matches any of the available locales using `Locale::lookup()`.
-	 * If a match is found, it returns the matched locale; otherwise, it returns a default locale ('en-US').
+	 * If a match is found, it returns the matched locale; otherwise, it returns a default locale.
 	 *
 	 * @param string $locale The locale string to validate (e.g., 'en-US', 'de-DE')
-	 * @return string The validated locale if found, or 'en-US' as a default fallback
+	 * @return string The validated locale if found, or the detected locale, the system default or finally 'en-US' as a fallback
 	 */
 	public function validateLocale(string $locale): string
 	{
-		return Locale::lookup($this->getAvailableLocales(), $locale) ?: 'en-US';
+		return Locale::lookup($this->getAvailableLocales(), $locale) ?: $this->locale ?: $this->config->get('system', 'language', 'en-US');
 	}
 
 	/**
