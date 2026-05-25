@@ -459,15 +459,15 @@
 			<div class="pull-right">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="login?mode=none" id="nav-login">
+						<a href="login?mode=none" id="nav-login" class="btn btn-primary">
 							<i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>
 							{{$nav.login.3}}
 						</a>
 					</li>
 					<li>
-						<a href="{{$nav.about.0}}" id="nav-about" data-toggle="tooltip" aria-label="{{$nav.about.3}}"
+						<a href="{{$nav.about.0}}" id="nav-about" data-toggle="tooltip" aria-label="{{$nav.about.3}}" class="btn btn-primary"
 							title="{{$nav.about.3}}">
-							<i class="fa fa-info fa-fw" aria-hidden="true"></i>
+							<i class="fa fa-info fa-fw" aria-hidden="true"></i> {{$nav.about.1}}
 						</a>
 					</li>
 				</ul>

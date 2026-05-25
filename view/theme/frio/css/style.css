@@ -3918,6 +3918,9 @@ section .profile-match-wrapper {
 .mod-home #content {
 	padding: 0;
 }
+.mod-home #nav-about {
+	background: transparent;
+}
 div.login-form, .login-content-wrapper {
 	margin: 20px 0;
 	padding: 10px 15px;
