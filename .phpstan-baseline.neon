@@ -863,21 +863,3 @@ parameters:
 			identifier: nullCoalesce.expr
 			count: 1
 			path: src/Object/Api/Twitter/DirectMessage.php
-
-		-
-			message: '#^Property Friendica\\Object\\Image\:\:\$image \(GdImage\|Imagick\|resource\) in empty\(\) is not falsy\.$#'
-			identifier: empty.property
-			count: 3
-			path: src/Object/Image.php
-
-		-
-			message: '#^Property Friendica\\Object\\Image\:\:\$image \(GdImage\|Imagick\|resource\) is never assigned resource so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Object/Image.php
-
-		-
-			message: '#^Left side of && is always true\.$#'
-			identifier: booleanAnd.leftAlwaysTrue
-			count: 1
-			path: src/Object/Post.php

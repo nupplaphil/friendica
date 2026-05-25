@@ -1206,7 +1206,7 @@ class Post
 		if ($this->isToplevel()) {
 			if ($conv->getMode() !== 'profile') {
 				if ($this->getDataValue('owner-link')) {
-					$owner_linkmatch = (($this->getDataValue('owner-link')) && Strings::compareLink($this->getDataValue('owner-link'), $this->getDataValue('author-link')));
+					$owner_linkmatch = Strings::compareLink($this->getDataValue('owner-link'), $this->getDataValue('author-link'));
 					$alias_linkmatch = (($this->getDataValue('alias')) && Strings::compareLink($this->getDataValue('alias'), $this->getDataValue('author-link')));
 					$owner_namematch = (($this->getDataValue('owner-name')) && $this->getDataValue('owner-name') == $this->getDataValue('author-name'));
 
