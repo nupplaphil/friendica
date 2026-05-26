@@ -449,28 +449,47 @@ class L10n
 				$locales[] = $locale['language'];
 			}
 			if (isset($locale['language'], $locale['region'])) {
-				$locales[] = $locale['language'] . '-' . $locale['region'];
+				$locales[] = Locale::composeLocale($locale);
 			}
 		}
 		$locales = array_unique($locales);
-		asort($locales);
+		sort($locales);
 
 		$this->locales = $locales;
 		return $locales;
 	}
 
 	/**
-	 * Validate a locale string against the list of available locales.
+	 * Normalise a locale string against the list of available locales.
 	 *
 	 * This function checks if the provided locale string matches any of the available locales using `Locale::lookup()`.
 	 * If a match is found, it returns the matched locale; otherwise, it returns a default locale.
 	 *
-	 * @param string $locale The locale string to validate (e.g., 'en-US', 'de-DE')
-	 * @return string The validated locale if found, or the detected locale, the system default or finally 'en-US' as a fallback
+	 * @param string $locale The locale string to normalise (e.g., 'en-US', 'de-DE')
+	 * @return string The normalised locale if found, or the detected locale, the system default or finally 'en-US' as a fallback
 	 */
-	public function validateLocale(string $locale): string
+	public function normaliseLocale(string $locale): string
 	{
-		return Locale::lookup($this->getAvailableLocales(), $locale) ?: $this->locale ?: $this->config->get('system', 'language', 'en-US');
+		$normalised = Locale::lookup($this->getAvailableLocales(), $locale);
+		if ($normalised) {
+			return $normalised;
+		}
+
+		$default_locale = $this->locale ?: $this->config->get('system', 'language', 'en-US');
+
+		$locale_parts = Locale::parseLocale($locale);
+		if (!isset($locale_parts['language'])) {
+			return $default_locale;
+		}
+
+		$iso639 = new \Matriphe\ISO639\ISO639();
+
+		$languages = array_column($iso639->allLanguages(), 0);
+		if (in_array($locale_parts['language'], $languages)) {
+			return $locale_parts['language'];
+		}
+
+		return $default_locale;
 	}
 
 	/**
