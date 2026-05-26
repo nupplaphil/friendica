@@ -199,10 +199,10 @@ class Channels extends BaseSettings
 					$channel->languages,
 					$this->t('Select all languages that you want to see in this channel. "Unspecified" describes all posts for which no language information was detected (e.g. posts with just an image or too little text to be sure of the language). If you want to see all languages, you will need to select all items in the list.'),
 					$languages,
-					'multiple'
+					'multiple',
 				],
-				'publish'      => $publish,
-				'delete'       => ["delete[$channel->code]", $this->t("Delete channel") . ' (' . $channel->label . ')', false, $this->t("Check to delete this entry from the channel list")],
+				'publish' => $publish,
+				'delete'  => ["delete[$channel->code]", $this->t("Delete channel") . ' (' . $channel->label . ')', false, $this->t("Check to delete this entry from the channel list")],
 			];
 		}
 

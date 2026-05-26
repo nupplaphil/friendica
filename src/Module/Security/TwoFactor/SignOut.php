@@ -70,10 +70,14 @@ class SignOut extends BaseModule
 					$trusted = $this->cookie->get('2fa_cookie_hash');
 					$this->cookie->reset(['2fa_cookie_hash' => $trusted]);
 					$this->session->clear();
+
+					break;
 				case 'sign_out':
 					$this->trustedBrowserRepository->removeForUser($this->session->getLocalUserId(), $this->cookie->get('2fa_cookie_hash'));
 					$this->cookie->clear();
 					$this->session->clear();
+
+					break;
 			}
 
 			$this->baseUrl->redirect();

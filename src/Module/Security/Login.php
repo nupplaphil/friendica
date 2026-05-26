@@ -9,7 +9,6 @@ namespace Friendica\Module\Security;
 
 use Friendica\App;
 use Friendica\BaseModule;
-use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Hook;
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
