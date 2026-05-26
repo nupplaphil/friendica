@@ -25,7 +25,8 @@ return \Rector\Config\RectorConfig::configure()
 	->withPhpLevel(84)
 	->withSets([
 		//\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
-		\Rector\PHPUnit\Set\PHPUnitSetList::PHPUNIT_100,
+		\Rector\PHPUnit\Set\PHPUnitSetList::PHPUNIT_120,
+		\Rector\PHPUnit\Set\PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
 	])
 	->withSkip([
 		\Rector\Php56\Rector\FuncCall\PowToExpRector::class,
