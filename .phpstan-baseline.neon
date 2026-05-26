@@ -765,15 +765,3 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: src/Module/Settings/TwoFactor/Trusted.php
-
-		-
-			message: '#^Property Friendica\\Module\\User\\Delegation\:\:\$appHelper is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Module/User/Delegation.php
-
-		-
-			message: '#^If condition is always false\.$#'
-			identifier: if.alwaysFalse
-			count: 2
-			path: src/Module/User/Import.php
