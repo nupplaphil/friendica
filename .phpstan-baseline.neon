@@ -803,33 +803,3 @@ parameters:
 			identifier: nullCoalesce.expr
 			count: 1
 			path: src/Network/HTTPClient/Response/GuzzleResponse.php
-
-		-
-			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Network/Probe.php
-
-		-
-			message: '#^Left side of && is always true\.$#'
-			identifier: booleanAnd.leftAlwaysTrue
-			count: 1
-			path: src/Network/Probe.php
-
-		-
-			message: '#^Left side of \|\| is always false\.$#'
-			identifier: booleanOr.leftAlwaysFalse
-			count: 1
-			path: src/Network/Probe.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between mixed and false will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/Network/Probe.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between mixed~\(0\|0\.0\|''''\|''0''\|array\{\}\|false\|null\) and '''' will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/Network/Probe.php
