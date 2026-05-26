@@ -779,15 +779,3 @@ parameters:
 			identifier: identical.alwaysFalse
 			count: 1
 			path: src/Module/Xrd.php
-
-		-
-			message: '#^Property Friendica\\Navigation\\Notifications\\Factory\\Notification\:\:\$localRelationshipRepo is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Navigation/Notifications/Factory/Notification.php
-
-		-
-			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Navigation/Notifications/Repository/Notify.php
