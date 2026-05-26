@@ -173,7 +173,7 @@ parameters:
 			path: src/Content/Conversation.php
 
 		-
-			message: '#^Offset ''title'' on array\{emoji\: mixed, verb\: string, total\: mixed, count\: int\<0, max\>, title\: array\} on left side of \?\? always exists and is not nullable\.$#'
+			message: '#^Offset ''title'' on array\{emoji\: mixed, verb\: string, total\: mixed, count\: int\<0, max\>, title\: array\<int\<0, max\>, string\>\} on left side of \?\? always exists and is not nullable\.$#'
 			identifier: nullCoalesce.offset
 			count: 1
 			path: src/Content/Conversation.php
@@ -251,7 +251,7 @@ parameters:
 			path: src/Content/Text/Markdown.php
 
 		-
-			message: '#^Call to function is_array\(\) with array\{0\?\: string\} will always evaluate to true\.$#'
+			message: '#^Call to function is_array\(\) with array\{\}\|array\{non\-falsy\-string\} will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/Core/Addon/AddonManagerHelper.php
@@ -599,12 +599,6 @@ parameters:
 			path: src/Module/Contact.php
 
 		-
-			message: '#^Property Friendica\\Module\\Contact\\Unfollow\:\:\$page is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Module/Contact/Unfollow.php
-
-		-
 			message: '#^Property Friendica\\Module\\Conversation\\Timeline\:\:\$selectedTab \(string\) on left side of \?\?\= is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -645,18 +639,6 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/Module/Media/Photo/Upload.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 1
-			path: src/Module/Moderation/Blocklist/Contact.php
-
-		-
-			message: '#^Property Friendica\\Module\\Moderation\\Report\\Create\:\:\$page is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
 
 		-
 			message: '#^Empty array passed to foreach\.$#'
@@ -753,15 +735,3 @@ parameters:
 			identifier: foreach.emptyArray
 			count: 2
 			path: src/Module/Settings/Server/Index.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/Settings/TwoFactor/AppSpecific.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/Settings/TwoFactor/Trusted.php
