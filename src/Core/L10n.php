@@ -437,7 +437,7 @@ class L10n
 	 *
 	 * @return array
 	 */
-	public function getAvailableLocales(): array
+	private function getAvailableLocales(): array
 	{
 		if ($this->locales) {
 			return $this->locales;
