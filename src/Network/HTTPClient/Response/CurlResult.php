@@ -45,7 +45,7 @@ class CurlResult implements ICanHandleHttpResponses
 	/**
 	 * @var boolean true (if HTTP 410 result) or false
 	 */
-	private $isGone;
+	private bool $isGone;
 
 	/**
 	 * @var string in case of redirect, content was finally retrieved from this URL
@@ -300,7 +300,7 @@ class CurlResult implements ICanHandleHttpResponses
 	/** {@inheritDoc} */
 	public function isGone(): bool
 	{
-		return $this->isSuccess;
+		return $this->isGone;
 	}
 
 	/** {@inheritDoc} */
