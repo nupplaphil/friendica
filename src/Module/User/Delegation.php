@@ -9,7 +9,6 @@ namespace Friendica\Module\User;
 
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
-use Friendica\AppHelper;
 use Friendica\BaseModule;
 use Friendica\Contact\Introduction\Repository\Introduction;
 use Friendica\Core\L10n;
