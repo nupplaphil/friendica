@@ -4,24 +4,17 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
-<nav>
-	<span id="trending-tags-sidebar-inflated" class="widget inflated">
-		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');" aria-expanded="false">
-			<h3>
+<!-- NOTE: Place "sidebar-widget-list" only on one element: The one that should be expanded/collapsed -->
+<nav id="trending-tags-sidebar" class="widget">
+	<!-- TODO: To myself: Figure out if the button element should contain all the widget actions or not -->
+	<button class="widget-btn fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar');" aria-expanded="false">
+		<h3>
 				<i class="ri ri-hashtag" aria-hidden="true"></i>
-				{{$title}}
-			</h3>
-			<small>{{$subtitle}}</small>
-		</button>
-	</span>
-	<div id="trending-tags-sidebar" class="widget">
-		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');">
-			<h3>
-					<i class="ri ri-hashtag" aria-hidden="true"></i>
-				{{$title}}
-			</h3>
-			<small>{{$subtitle}}</small>
-		</button>
+			{{$title}}
+		</h3>
+		<small>{{$subtitle}}</small>
+	</button>
+	<div id="trending-tags-list" class="sidebar-widget-list">
 		<ul id="tags-list">
 			{{section name=ol loop=$tags max=10}}
 				<li style="margin-bottom: 5px;">
@@ -52,6 +45,7 @@
 </nav>
 
 <script>
+	/* TODO: Consider generalising and moving to e.g. main.js for reuse by any widget */
 	function toggleTags(event) {
 		event.preventDefault();
 		var moreTags = document.getElementById('more-tags');
@@ -72,5 +66,5 @@
 		}
 	}
 
-	initWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');
+	initWidget('trending-tags-sidebar');
 </script>

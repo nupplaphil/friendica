@@ -37,40 +37,34 @@ function _resizeIframe(obj, desth) {
 	setTimeout(_resizeIframe, 100, obj, ch);
 }
 
-function initWidget(inflated, deflated) {
-	var elInf = document.getElementById(inflated);
-	var elDef = document.getElementById(deflated);
+function initWidget(name) {
+	const widget = document.getElementById(name)
+	const list = widget.getElementsByClassName("sidebar-widget-list")[0];
+	const btn = widget.getElementsByClassName("widget-btn")[0]
 
-	if (!elInf || !elDef) {
-		return;
-	}
-	if (localStorage.getItem(window.location.pathname.split("/")[1] + ":" + inflated) != "none") {
-		elInf.style.display = "block";
-		elDef.style.display = "none";
+	if (localStorage.getItem(window.location.pathname.split("/")[1] + ":" + name) != "block") {
+		list.style.display = "none";
+		btn.setAttribute("aria-expanded", false)
 	} else {
-		elInf.style.display = "none";
-		elDef.style.display = "block";
+		list.style.display = "block";
+		btn.setAttribute("aria-expanded", true)
 	}
 }
 
-function openCloseWidget(inflated, deflated) {
-	var elInf = document.getElementById(inflated);
-	var elDef = document.getElementById(deflated);
+/* Consider switching to Bootstrap collapses or native "details" element to handle showing/hiding */
+function openCloseWidget(name) {
+	widget = document.getElementById(name)
+	const list = widget.getElementsByClassName("sidebar-widget-list")[0];
+	const btn = event.currentTarget
 
-	if (!elInf || !elDef) {
-		return;
-	}
+	btn.ariaExpanded = btn.ariaExpanded !== 'true';
 
-	if (window.getComputedStyle(elInf).display === "none") {
-		elInf.style.display = "block";
-		elDef.style.display = "none";
-		localStorage.setItem(window.location.pathname.split("/")[1] + ":" + inflated, "block");
-		elInf.querySelector("button").focus();
+	if (window.getComputedStyle(list).display === "block") {
+		list.style.display = "none";
+		localStorage.setItem(window.location.pathname.split("/")[1] + ":" + name, "none");
 	} else {
-		elInf.style.display = "none";
-		elDef.style.display = "block";
-		localStorage.setItem(window.location.pathname.split("/")[1] + ":" + inflated, "none");
-		elDef.querySelector("button").focus();
+		list.style.display = "block";
+		localStorage.setItem(window.location.pathname.split("/")[1] + ":" + name, "block");
 	}
 }
 
