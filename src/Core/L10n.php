@@ -130,13 +130,13 @@ class L10n
 			if ($session->get('uid')) {
 				$user = $this->dba->selectFirst('user', ['language'], ['uid' => $_SESSION['uid']]);
 				if ($this->dba->isResult($user)) {
-					$session->set('language', $user['language']);
+					$session->set('language', $this->normaliseLocale($user['language']));
 				}
 			}
 		}
 
 		if (isset($_GET['lang'])) {
-			$session->set('language', $_GET['lang']);
+			$session->set('language', $this->normaliseLocale($_GET['lang']));
 		}
 	}
 
@@ -727,7 +727,7 @@ class L10n
 	public function formatDateTime(string $datestring, int $dateType, int $timeType, ?string $pattern = null): string
 	{
 		$formatter = new IntlDateFormatter(
-			$this->session->get('language') ?? $this->locale ?: $this->config->get('system', 'language', 'en-US'),
+			$this->normaliseLocale($this->session->get('language')),
 			$dateType,
 			$timeType,
 			$this->session->get('timezone') ?? null,
