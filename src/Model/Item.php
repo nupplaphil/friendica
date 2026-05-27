@@ -2514,6 +2514,11 @@ class Item
 				continue;
 			}
 
+			// don't expire featured posts
+			if (DBA::exists('post-collection', ['uri-id' => $item['uri-id'], 'type' => Post\Collection::FEATURED])) {
+				continue;
+			}
+
 			// Only expire posts, not photos and photo comments
 
 			if (!$expire_photos && !empty($item['resource-id'])) {
