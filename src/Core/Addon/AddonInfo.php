@@ -149,9 +149,7 @@ final class AddonInfo
 
 	private string $status = '';
 
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	public function getId(): string
 	{

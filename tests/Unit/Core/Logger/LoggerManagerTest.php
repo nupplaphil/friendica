@@ -40,7 +40,7 @@ class LoggerManagerTest extends TestCase
 	{
 		$factory = new LoggerManager(
 			$this->createStub(IManageConfigValues::class),
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$this->assertInstanceOf(LoggerInterface::class, $factory->getLogger());
@@ -50,7 +50,7 @@ class LoggerManagerTest extends TestCase
 	{
 		$factory = new LoggerManager(
 			$this->createStub(IManageConfigValues::class),
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$this->assertSame($factory->getLogger(), $factory->getLogger());
@@ -65,7 +65,7 @@ class LoggerManagerTest extends TestCase
 
 		$factory = new LoggerManager(
 			$config,
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$this->assertInstanceOf(NullLogger::class, $factory->getLogger());
@@ -81,7 +81,7 @@ class LoggerManagerTest extends TestCase
 
 		$factory = new LoggerManager(
 			$config,
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$this->assertInstanceOf(ProfilerLogger::class, $factory->getLogger());
@@ -97,7 +97,7 @@ class LoggerManagerTest extends TestCase
 
 		$factory = new LoggerManager(
 			$config,
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$logger1 = $factory->getLogger();
@@ -117,7 +117,7 @@ class LoggerManagerTest extends TestCase
 
 		$factory = new LoggerManager(
 			$config,
-			$this->createStub(LoggerFactory::class)
+			$this->createStub(LoggerFactory::class),
 		);
 
 		$factory->changeLogChannel(LogChannel::WORKER);

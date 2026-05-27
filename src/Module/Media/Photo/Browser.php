@@ -104,9 +104,9 @@ class Browser extends BaseModule
 				"`resource-id` = ? AND `height` <= ? AND `width` <= ?",
 				$record['resource-id'],
 				Proxy::PIXEL_MEDIUM,
-				Proxy::PIXEL_MEDIUM
+				Proxy::PIXEL_MEDIUM,
 			],
-			['order' => ['scale']]
+			['order' => ['scale']],
 		);
 		$scale = $photo['scale'] ?? $record['loq'];
 

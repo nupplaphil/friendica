@@ -126,10 +126,10 @@ function frio_scheme_get_current_for_user(int $uid)
 {
 	$available = array_keys(frio_scheme_get_list());
 
-	$scheme = DI::pConfig()->get($uid, 'frio', 'scheme') ?:
-			DI::pConfig()->get($uid, 'frio', 'schema') ?:
-				DI::config()->get('frio', 'scheme') ?:
-					DI::config()->get('frio', 'schema');
+	$scheme = DI::pConfig()->get($uid, 'frio', 'scheme')
+			?: DI::pConfig()->get($uid, 'frio', 'schema')
+				?: DI::config()->get('frio', 'scheme')
+					?: DI::config()->get('frio', 'schema');
 
 	if (!in_array($scheme, $available)) {
 		return FRIO_DEFAULT_SCHEME;
