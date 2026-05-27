@@ -14,9 +14,9 @@ return \Rector\Config\RectorConfig::configure()
 		__DIR__ . '/src',
 		__DIR__ . '/static',
 		__DIR__ . '/tests',
-		__DIR__ . '/view',
+		__DIR__ . '/view/php',
+		__DIR__ . '/view/theme',
 	])
-	->withSkipPath(__DIR__ . '/view/smarty3/compiled')
 	->withIndent("\t", 4)
 	->withPhpVersion(80200)
 	// ->withTypeCoverageLevel(0)
