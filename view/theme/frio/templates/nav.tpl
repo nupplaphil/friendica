@@ -61,7 +61,7 @@
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-									 class="ri ri-lg ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.network.1}}</span><span id="net-update"
+									 class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.network.1}}</span><span id="net-update"
 										class="nav-network-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
@@ -70,7 +70,7 @@
 							<li class="nav-segment">
 								<a accesskey="c" class="nav-menu {{$sel.community}}" href="{{$nav.community.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.community.3}}" title="{{$nav.community.3}}"><i
-									  class="ri ri-lg ri-user-community-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.community.1}}</span></a>
+									  class="ri ri-xl ri-earth-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.community.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -78,7 +78,7 @@
 							<li class="nav-segment">
 								<a accesskey="e" id="nav-calendar-link" href="{{$nav.calendar.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.3}}" class="nav-menu {{$sel.calendar}}"><i
-									class="ri ri-lg ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="d-none">{{$nav.calendar.1}}</span></a>
+									class="ri ri-xl ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="d-none">{{$nav.calendar.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -86,14 +86,14 @@
 							<li class="nav-segment">
 								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
-										class="ri ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-lg ri-newspaper-line ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
+										class="ri ri-xl ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
 							</li>
 						{{/if}}
 
 						{{if $nav.home}}
 							<li class="nav-segment hidden-xs">
 								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-										aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-user-{{if $sel.home}}fill{{else}}line{{/if}} ri-fw"
+										aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-xl ri-user-{{if $sel.home}}fill{{else}}line{{/if}} ri-fw"
 										aria-hidden="true"></i> <span class="d-none">{{$nav.home.1}}</span><span id="home-update"
 										class="nav-home-badge badge nav-notification"></span></a>
 							</li>

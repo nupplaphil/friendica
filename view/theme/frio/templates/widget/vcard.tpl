@@ -76,7 +76,7 @@
 			{{if $showgroup_link}}
 				<div id="show-group-button">
 					<a type="button" id="show-group" class="btn btn-labeled btn-primary" href="{{$showgroup_link}}" title="{{$showgroup}}" aria-label="{{$showgroup}}">
-						<span class=""><i class="ri ri-group-line"></i></span>
+						<span class=""><i class="ri ri-discuss-line"></i></span>
 						<span class="">{{$showgroup}}</span>
 					</a>
 				</div>

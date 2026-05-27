@@ -80,7 +80,7 @@ i {
 		font-size: 16px;
 }
 
-.wall-item-ago i {
+.wall-item-ago i, small i {
 	font-size: 13px;
 }
 
