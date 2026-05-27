@@ -160,7 +160,7 @@ class Notification extends BaseFactory implements ICanCreateFromTableRow
 				return $message;
 			}
 
-			$link = $this->baseUrl . '/display/' . urlencode($link_item['guid']);
+			$link = $this->baseUrl . '/display/' . urlencode((string) $link_item['guid']);
 
 			$body  = BBCode::toPlaintext($item['body'], false);
 			$title = Plaintext::shorten($body, 70);

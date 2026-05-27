@@ -941,7 +941,7 @@ class Contact
 			}
 
 			// We are adding a timestamp value so that other systems won't use cached content
-			$timestamp = strtotime($fields['avatar-date']);
+			$timestamp = strtotime((string) $fields['avatar-date']);
 
 			$prefix = DI::baseUrl() . '/photo/' . $avatar['resource-id'] . '-';
 			$suffix = Images::getExtensionByMimeType($avatar['type']) . '?ts=' . $timestamp;
@@ -1277,9 +1277,9 @@ class Contact
 		$unfollow_link = '';
 		if (!$contact['self'] && Protocol::supportsFollow($contact['network'])) {
 			if ($contact['uid'] && in_array($contact['rel'], [self::SHARING, self::FRIEND])) {
-				$unfollow_link = 'contact/unfollow?url=' . urlencode($contact['url']) . '&auto=1';
+				$unfollow_link = 'contact/unfollow?url=' . urlencode((string) $contact['url']) . '&auto=1';
 			} elseif (!$contact['pending']) {
-				$follow_link = 'contact/follow?binurl=' . bin2hex($contact['url']) . '&auto=1';
+				$follow_link = 'contact/follow?binurl=' . bin2hex((string) $contact['url']) . '&auto=1';
 			}
 		}
 
@@ -2019,7 +2019,7 @@ class Contact
 			 * The service provides random pictures from Unsplash.
 			 * @license https://unsplash.com/license
 			 */
-			default => 'https://picsum.photos/seed/' . hash('ripemd128', $contact['url']) . '/960/300',
+			default => 'https://picsum.photos/seed/' . hash('ripemd128', (string) $contact['url']) . '/960/300',
 		};
 
 		return $header;
@@ -2231,7 +2231,7 @@ class Contact
 		}
 		$query_params = [];
 		if ($updated) {
-			$query_params['ts'] = strtotime($updated);
+			$query_params['ts'] = strtotime((string) $updated);
 		}
 		if ($static) {
 			$query_params['static'] = true;
@@ -2277,7 +2277,7 @@ class Contact
 			$guid    = $account['guid']    ?? '';
 		}
 
-		$guid = urlencode($guid);
+		$guid = urlencode((string) $guid);
 
 		$url = DI::baseUrl() . '/photo/header/';
 		switch ($size) {
@@ -2300,7 +2300,7 @@ class Contact
 
 		$query_params = [];
 		if ($updated) {
-			$query_params['ts'] = strtotime($updated);
+			$query_params['ts'] = strtotime((string) $updated);
 		}
 		if ($static) {
 			$query_params['static'] = true;
@@ -2717,10 +2717,10 @@ class Contact
 
 		$data = Probe::uri($contact['url'], $network, $contact['uid']);
 
-		if (in_array($data['network'], Protocol::FEDERATED) && (parse_url($data['url'], PHP_URL_SCHEME) == 'http')) {
+		if (in_array($data['network'], Protocol::FEDERATED) && (parse_url((string) $data['url'], PHP_URL_SCHEME) == 'http')) {
 			$ssl_url  = str_replace('http://', 'https://', $contact['url']);
 			$ssl_data = Probe::uri($ssl_url, $network, $contact['uid']);
-			if (($ssl_data['network'] == $data['network']) && (parse_url($ssl_data['url'], PHP_URL_SCHEME) != 'http')) {
+			if (($ssl_data['network'] == $data['network']) && (parse_url((string) $ssl_data['url'], PHP_URL_SCHEME) != 'http')) {
 				$data = $ssl_data;
 			}
 		}
@@ -3184,7 +3184,7 @@ class Contact
 			if (empty($ret['url'])) {
 				$result['message'] .= DI::l10n()->t('No browser URL could be matched to this address.') . '<br />';
 			}
-			if (str_contains($ret['url'], '@')) {
+			if (str_contains((string) $ret['url'], '@')) {
 				$result['message'] .= DI::l10n()->t('Unable to match @-style Identity Address with a known protocol or email contact.') . '<br />';
 				$result['message'] .= DI::l10n()->t('Use mailto: in front of address to force email check.') . '<br />';
 			}
@@ -3535,7 +3535,7 @@ class Contact
 		while ($contact = DBA::fetch($contacts)) {
 			DI::logger()->notice('update_contact_birthday: ' . $contact['bd']);
 
-			$nextbd = DateTimeFormat::utcNow('Y') . substr($contact['bd'], 4);
+			$nextbd = DateTimeFormat::utcNow('Y') . substr((string) $contact['bd'], 4);
 
 			if (Event::createBirthday($contact, $nextbd)) {
 				// update bdyear
@@ -3672,7 +3672,7 @@ class Contact
 		}
 
 		// Only redirections to the same host do make sense
-		if (($url != '') && (parse_url($url, PHP_URL_HOST) != parse_url($contact['url'], PHP_URL_HOST))) {
+		if (($url != '') && (parse_url($url, PHP_URL_HOST) != parse_url((string) $contact['url'], PHP_URL_HOST))) {
 			return $url;
 		}
 

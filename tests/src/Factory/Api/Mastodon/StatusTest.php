@@ -54,7 +54,7 @@ class StatusTest extends FixtureTestCase
 		$this->assertEquals(count($emojis), count($result['emojis']));
 		foreach ($result['emojis'] as $emoji) {
 			$this->assertTrue(array_key_exists($emoji['shortcode'], $emojis));
-			$this->assertEquals(0, strpos($emoji['url'], 'http'));
+			$this->assertEquals(0, strpos((string) $emoji['url'], 'http'));
 		}
 	}
 }

@@ -26,11 +26,11 @@ class Unfollow extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
-		$term = ['uid' => $uid, 'term' => '#' . ltrim($this->parameters['hashtag'], '#')];
+		$term = ['uid' => $uid, 'term' => '#' . ltrim((string) $this->parameters['hashtag'], '#')];
 
 		DBA::delete('search', $term);
 
-		$hashtag = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => ltrim($this->parameters['hashtag'])], [], false);
+		$hashtag = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => ltrim((string) $this->parameters['hashtag'])], [], false);
 		$this->jsonExit($hashtag->toArray());
 	}
 }

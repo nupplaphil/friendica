@@ -213,7 +213,7 @@ class CookieTest extends MockedTestCase
 	{
 		self::assertArrayHasKey(Cookie::NAME, StaticCookie::$_COOKIE);
 
-		$data = json_decode(StaticCookie::$_COOKIE[Cookie::NAME]);
+		$data = json_decode((string) StaticCookie::$_COOKIE[Cookie::NAME]);
 
 		self::assertIsObject($data);
 		self::assertTrue(property_exists($data, 'uid'));

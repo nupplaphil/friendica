@@ -34,7 +34,7 @@ class Index extends BaseSettings
 		}
 
 		$src = $_FILES['userfile']['tmp_name'];
-		$filename = basename($_FILES['userfile']['name']);
+		$filename = basename((string) $_FILES['userfile']['name']);
 		$filesize = intval($_FILES['userfile']['size']);
 		$filetype = $_FILES['userfile']['type'];
 

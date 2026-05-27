@@ -32,7 +32,7 @@ class Emoji extends BaseFactory
 
 		foreach ($smilies as $shortcode => $url) {
 			if ($shortcode !== '' && $url !== '') {
-				$shortcode = trim($shortcode, ':');
+				$shortcode = trim((string) $shortcode, ':');
 
 				if ($prototype === null) {
 					$prototype = $this->create($shortcode, $url);
@@ -57,7 +57,7 @@ class Emoji extends BaseFactory
 		$icons = $smilies['icons'];
 		foreach ($smilies['texts'] as $i => $name) {
 			$url = $icons[$i];
-			if (preg_match('/src="(.+?)"/', $url, $matches)) {
+			if (preg_match('/src="(.+?)"/', (string) $url, $matches)) {
 				$emojis[$name] = $matches[1];
 			}
 		}

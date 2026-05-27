@@ -100,7 +100,7 @@ class AddContact
 		$added  = 0;
 		$failed = 0;
 		foreach ($urls as $url) {
-			$url = trim($url, '@');
+			$url = trim((string) $url, '@');
 			if (str_contains($url, '@') || Network::isValidHttpUrl($url) || Network::isValidAtUrl($url)) {
 				AddContact::add(Worker::PRIORITY_MEDIUM, $uid, $url);
 				$added++;

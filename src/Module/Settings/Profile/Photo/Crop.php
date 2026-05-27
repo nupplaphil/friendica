@@ -27,8 +27,8 @@ class Crop extends BaseSettings
 		$photo_prefix = $this->parameters['guid'];
 		$resource_id  = $photo_prefix;
 		$scale        = 0;
-		if (substr($photo_prefix, -2, 1) == '-') {
-			[$resource_id, $scale] = explode('-', $photo_prefix);
+		if (substr((string) $photo_prefix, -2, 1) == '-') {
+			[$resource_id, $scale] = explode('-', (string) $photo_prefix);
 		}
 
 		self::checkFormSecurityTokenRedirectOnError('settings/profile/photo/crop/' . $photo_prefix, 'settings_profile_photo_crop');

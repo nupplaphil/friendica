@@ -159,7 +159,7 @@ class APContact
 			$apcontact['addr'] = '';
 		}
 
-		if (!isset($apcontact['baseurl']) && empty(parse_url($url, PHP_URL_PATH))) {
+		if (!isset($apcontact['baseurl']) && empty(parse_url((string) $url, PHP_URL_PATH))) {
 			$apcontact['baseurl'] = $url;
 		}
 
@@ -263,11 +263,11 @@ class APContact
 
 		if (!empty($ims)) {
 			foreach ($ims as $link) {
-				if (str_starts_with($link, 'xmpp:')) {
-					$apcontact['xmpp'] = substr($link, 5);
+				if (str_starts_with((string) $link, 'xmpp:')) {
+					$apcontact['xmpp'] = substr((string) $link, 5);
 				}
-				if (str_starts_with($link, 'matrix:')) {
-					$apcontact['matrix'] = substr($link, 7);
+				if (str_starts_with((string) $link, 'matrix:')) {
+					$apcontact['matrix'] = substr((string) $link, 7);
 				}
 			}
 		}
@@ -433,7 +433,7 @@ class APContact
 
 		// When the photo is too large, try to shorten it by removing parts
 		if (strlen($apcontact['photo'] ?? '') > 383) {
-			$parts = parse_url($apcontact['photo']);
+			$parts = parse_url((string) $apcontact['photo']);
 			unset($parts['fragment']);
 			$apcontact['photo'] = (string) Uri::fromParts((array) $parts);
 
@@ -635,7 +635,7 @@ class APContact
 			return false;
 		}
 
-		$path = parse_url($apcontact['url'], PHP_URL_PATH);
+		$path = parse_url((string) $apcontact['url'], PHP_URL_PATH);
 		if (($apcontact['type'] == 'Group') && !empty($apcontact['followers']) && ($apcontact['nick'] == 'relay') && ($path == '/actor')) {
 			return true;
 		}

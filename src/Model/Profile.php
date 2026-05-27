@@ -274,7 +274,7 @@ class Profile
 			$profile_contact = Contact::selectFirst([], ['id' => $profile['cid']]);
 		}
 
-		$profile['picdate'] = urlencode($profile['picdate']);
+		$profile['picdate'] = urlencode((string) $profile['picdate']);
 
 		$profile['network_link'] = '';
 
@@ -320,14 +320,14 @@ class Profile
 		if (!$local_user_is_self) {
 			if (!$visitor_is_authenticated) {
 				// Remote follow is only available for local profiles
-				if (!empty($profile['nickname']) && str_starts_with($profile_url, (string) DI::baseUrl())) {
+				if (!empty($profile['nickname']) && str_starts_with((string) $profile_url, (string) DI::baseUrl())) {
 					$follow_link = 'profile/' . $profile['nickname'] . '/remote_follow';
 				}
 			} else {
 				if ($visitor_is_following) {
-					$unfollow_link = $visitor_base_path . '/contact/unfollow?url=' . urlencode($profile_url) . '&auto=1';
+					$unfollow_link = $visitor_base_path . '/contact/unfollow?url=' . urlencode((string) $profile_url) . '&auto=1';
 				} else {
-					$follow_link = $visitor_base_path . '/contact/follow?binurl=' . bin2hex($profile_url) . '&auto=1';
+					$follow_link = $visitor_base_path . '/contact/follow?binurl=' . bin2hex((string) $profile_url) . '&auto=1';
 				}
 			}
 
@@ -387,7 +387,7 @@ class Profile
 		$contact_count = 0;
 
 		if (!empty($profile['last-item'])) {
-			$updated = date('c', strtotime($profile['last-item']));
+			$updated = date('c', strtotime((string) $profile['last-item']));
 		}
 
 		if (!$block && $show_contacts) {
@@ -569,7 +569,7 @@ class Profile
 
 			$isToday = false;
 			foreach ($events as $event) {
-				if (strlen($event['name'])) {
+				if (strlen((string) $event['name'])) {
 					$total++;
 				}
 				if ((strtotime($event['start'] . ' +00:00') < $now) && (strtotime($event['finish'] . ' +00:00') > $now)) {
@@ -579,7 +579,7 @@ class Profile
 			$classToday = $isToday ? ' birthday-today ' : '';
 			if ($total) {
 				foreach ($events as $event) {
-					if (!strlen($event['name'])) {
+					if (!strlen((string) $event['name'])) {
 						continue;
 					}
 
@@ -645,7 +645,7 @@ class Profile
 					continue;
 				}
 
-				if (strlen($rr['summary'])) {
+				if (strlen((string) $rr['summary'])) {
 					$total++;
 				}
 
@@ -860,7 +860,7 @@ class Profile
 		}
 
 		$parent = User::getOwnerDataById($parent_uid);
-		if (strpos($about, (string) $parent['addr']) || strpos($about, (string) $parent['url'])) {
+		if (strpos((string) $about, (string) $parent['addr']) || strpos((string) $about, (string) $parent['url'])) {
 			return $about;
 		}
 

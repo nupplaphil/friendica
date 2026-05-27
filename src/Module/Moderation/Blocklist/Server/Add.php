@@ -54,10 +54,10 @@ class Add extends BaseModeration
 
 		self::checkFormSecurityTokenRedirectOnError('/moderation/blocklist/server/add', 'moderation_blocklist_add');
 
-		$pattern = trim($request['pattern']);
+		$pattern = trim((string) $request['pattern']);
 
 		//  Add new item to blocklist
-		$this->blocklist->addPattern($pattern, trim($request['reason']));
+		$this->blocklist->addPattern($pattern, trim((string) $request['reason']));
 
 		Worker::add(Worker::PRIORITY_LOW, 'UpdateBlockedServers');
 

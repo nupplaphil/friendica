@@ -85,7 +85,7 @@ class NPF
 			$bbcode = $shared['shared'];
 		}
 
-		$bbcode = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism", '[img]$3[/img]', $bbcode);
+		$bbcode = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism", '[img]$3[/img]', (string) $bbcode);
 
 		if (preg_match_all("#\[url=([^\]]+?)\]\s*\[img=([^\[\]]*)\]([^\[\]]*)\[\/img\]\s*\[/url\]#ism", $bbcode, $pictures, PREG_SET_ORDER)) {
 			foreach ($pictures as $picture) {
@@ -296,7 +296,7 @@ class NPF
 		if (!empty($type)) {
 			$formatting[] = [
 				'start' => $start,
-				'end'   => mb_strlen($text),
+				'end'   => mb_strlen((string) $text),
 				'type'  => $type
 			];
 		}
@@ -327,7 +327,7 @@ class NPF
 		if (!empty($attributes['href'])) {
 			$formatting[] = [
 				'start' => $start,
-				'end'   => mb_strlen($text),
+				'end'   => mb_strlen((string) $text),
 				'type'  => 'link',
 				'url'   => $attributes['href']
 			];
@@ -408,7 +408,7 @@ class NPF
 	private static function addLinkBlockForUriId(int $uri_id, int $level, array $npf): array
 	{
 		foreach (Post\Media::getByURIId($uri_id, [Post\Media::HTML]) as $link) {
-			$host = parse_url($link['url'], PHP_URL_HOST);
+			$host = parse_url((string) $link['url'], PHP_URL_HOST);
 			if (in_array($host, ['www.youtube.com', 'youtu.be'])) {
 				$block = [
 					'type'     => 'video',

@@ -62,7 +62,7 @@ class Upload extends \Friendica\BaseModule
 
 		if (!empty($_FILES['userfile'])) {
 			$src      = $_FILES['userfile']['tmp_name'];
-			$filename = basename($_FILES['userfile']['name']);
+			$filename = basename((string) $_FILES['userfile']['name']);
 			$filesize = intval($_FILES['userfile']['size']);
 			$filetype = $_FILES['userfile']['type'];
 		} elseif (!empty($_FILES['media'])) {
@@ -76,9 +76,9 @@ class Upload extends \Friendica\BaseModule
 
 			if (!empty($_FILES['media']['name'])) {
 				if (is_array($_FILES['media']['name'])) {
-					$filename = basename($_FILES['media']['name'][0]);
+					$filename = basename((string) $_FILES['media']['name'][0]);
 				} else {
-					$filename = basename($_FILES['media']['name']);
+					$filename = basename((string) $_FILES['media']['name']);
 				}
 			}
 
@@ -126,7 +126,7 @@ class Upload extends \Friendica\BaseModule
 		$max_length = $this->config->get('system', 'max_image_length');
 		if ($max_length > 0) {
 			$image->scaleDown($max_length);
-			$filesize = strlen($image->asString());
+			$filesize = strlen((string) $image->asString());
 			$this->logger->info('File upload: Scaling picture to new size', ['max_length' => $max_length]);
 		}
 

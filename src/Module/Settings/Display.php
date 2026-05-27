@@ -226,7 +226,7 @@ class Display extends BaseSettings
 			$is_unsupported  = file_exists('view/theme/' . $theme . '/unsupported');
 			$is_mobile       = file_exists('view/theme/' . $theme . '/mobile');
 			if (!$is_experimental || $this->config->get('experimental', 'exp_themes')) {
-				$theme_name = ucfirst($theme);
+				$theme_name = ucfirst((string) $theme);
 				if ($is_unsupported) {
 					$theme_name = $this->t('%s - (Unsupported)', $theme_name);
 				} elseif ($is_experimental) {
@@ -320,8 +320,8 @@ class Display extends BaseSettings
 			If we have an array create a temporary array with the items in the correct order.
 			Lastly we modify the $timelines array with our new order for "enable", "bookmark", or both.
 		*/
-		$widget_timeline_order = json_decode($this->pConfig->get($uid, 'system', 'widget_timeline_order'));
-		$menu_timeline_order   = json_decode($this->pConfig->get($uid, 'system', 'menu_timeline_order'));
+		$widget_timeline_order = json_decode((string) $this->pConfig->get($uid, 'system', 'widget_timeline_order'));
+		$menu_timeline_order   = json_decode((string) $this->pConfig->get($uid, 'system', 'menu_timeline_order'));
 		$temp_widget_order     = [];
 		$temp_menu_order       = [];
 		// do the sidebar widget order first...

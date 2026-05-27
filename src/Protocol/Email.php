@@ -236,13 +236,13 @@ class Email
 		$params = [];
 		if ($p->parameters) {
 			foreach ($p->parameters as $x) {
-				$params[strtolower($x->attribute)] = $x->value;
+				$params[strtolower((string) $x->attribute)] = $x->value;
 			}
 		}
 
 		if (isset($p->dparameters) && $p->dparameters) {
 			foreach ($p->dparameters as $x) {
-				$params[strtolower($x->attribute)] = $x->value;
+				$params[strtolower((string) $x->attribute)] = $x->value;
 			}
 		}
 
@@ -261,8 +261,8 @@ class Email
 		if ($p->type == 0 && $data) {
 			// Messages may be split in different parts because of inline attachments,
 			// so append parts together with blank row.
-			if (strtolower($p->subtype) == $subtype) {
-				$data = iconv($params['charset'], 'UTF-8//IGNORE', $data);
+			if (strtolower((string) $p->subtype) == $subtype) {
+				$data = iconv((string) $params['charset'], 'UTF-8//IGNORE', $data);
 				return (trim($data) . "\n\n");
 			} else {
 				$data = '';

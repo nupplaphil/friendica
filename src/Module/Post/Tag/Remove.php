@@ -39,7 +39,7 @@ class Remove extends \Friendica\BaseModule
 		$tags = [];
 		foreach ($request['tag'] ?? [] as $tag => $checked) {
 			if ($checked) {
-				$tags[] = hex2bin(trim($tag));
+				$tags[] = hex2bin(trim((string) $tag));
 			}
 		}
 
@@ -114,7 +114,7 @@ class Remove extends \Friendica\BaseModule
 		}
 
 		foreach ($tags as $tag) {
-			if (preg_match('~([#@!])\[url=([^\[\]]*)]([^\[\]]*)\[/url]~im', $tag, $results)) {
+			if (preg_match('~([#@!])\[url=([^\[\]]*)]([^\[\]]*)\[/url]~im', (string) $tag, $results)) {
 				Tag::removeByHash($item['uri-id'], $results[1], $results[3], $results[2]);
 			}
 		}

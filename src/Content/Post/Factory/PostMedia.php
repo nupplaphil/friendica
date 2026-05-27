@@ -65,7 +65,7 @@ class PostMedia extends BaseFactory implements ICanCreateFromTableRow
 			$row['embed-width'],
 			$row['embed-height'],
 			$row['page-type'],
-			$row['schematypes'] ? json_decode($row['schematypes'], true) : null,
+			$row['schematypes'] ? json_decode((string) $row['schematypes'], true) : null,
 		);
 	}
 

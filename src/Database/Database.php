@@ -135,11 +135,11 @@ class Database
 			$port = trim($this->config->get('database', 'port') ?? 0);
 		}
 
-		$user     = trim($this->config->get('database', 'username'));
-		$pass     = trim($this->config->get('database', 'password'));
-		$database = trim($this->config->get('database', 'database'));
-		$charset  = trim($this->config->get('database', 'charset'));
-		$socket   = trim($this->config->get('database', 'socket'));
+		$user     = trim((string) $this->config->get('database', 'username'));
+		$pass     = trim((string) $this->config->get('database', 'password'));
+		$database = trim((string) $this->config->get('database', 'database'));
+		$charset  = trim((string) $this->config->get('database', 'charset'));
+		$socket   = trim((string) $this->config->get('database', 'socket'));
 
 		if (!$host && !$socket || !$user) {
 			return false;
@@ -335,8 +335,8 @@ class Database
 			return;
 		}
 
-		$watchlist = explode(',', $this->config->get('system', 'db_log_index_watch'));
-		$denylist  = explode(',', $this->config->get('system', 'db_log_index_denylist'));
+		$watchlist = explode(',', (string) $this->config->get('system', 'db_log_index_watch'));
+		$denylist  = explode(',', (string) $this->config->get('system', 'db_log_index_denylist'));
 
 		while ($row = $this->fetch($r)) {
 			if ((intval($this->config->get('system', 'db_loglimit_index')) > 0)) {
@@ -459,7 +459,7 @@ class Database
 			if ($pos !== false) {
 				$sql = substr_replace($sql, $replace, $pos, 1);
 			}
-			$offset = $pos + strlen($replace);
+			$offset = $pos + strlen((string) $replace);
 		}
 		return $sql;
 	}
@@ -728,7 +728,7 @@ class Database
 				@file_put_contents(
 					$this->config->get('system', 'db_log'),
 					DateTimeFormat::utcNow() . "\t" . $duration . "\t"
-					. basename($backtrace[0]['file']) . "\t"
+					. basename((string) $backtrace[0]['file']) . "\t"
 					. $backtrace[0]['line'] . "\t" . $backtrace[0]['function'] . "\t"
 					. substr($this->replaceParameters($sql, $args), 0, 4000) . "\n",
 					FILE_APPEND,
@@ -1711,12 +1711,12 @@ class Database
 				continue;
 			}
 
-			if ((str_starts_with($types[$field], 'tinyint')) || (str_starts_with($types[$field], 'smallint'))
-				|| (str_starts_with($types[$field], 'mediumint')) || (str_starts_with($types[$field], 'int'))
-				|| (str_starts_with($types[$field], 'bigint')) || (str_starts_with($types[$field], 'boolean'))) {
+			if ((str_starts_with((string) $types[$field], 'tinyint')) || (str_starts_with((string) $types[$field], 'smallint'))
+				|| (str_starts_with((string) $types[$field], 'mediumint')) || (str_starts_with((string) $types[$field], 'int'))
+				|| (str_starts_with((string) $types[$field], 'bigint')) || (str_starts_with((string) $types[$field], 'boolean'))) {
 				$fields[$field] = (int) $content;
 			}
-			if ((str_starts_with($types[$field], 'float')) || (str_starts_with($types[$field], 'double'))) {
+			if ((str_starts_with((string) $types[$field], 'float')) || (str_starts_with((string) $types[$field], 'double'))) {
 				$fields[$field] = (float) $content;
 			}
 		}
@@ -1795,7 +1795,7 @@ class Database
 	 */
 	public function processlist(): array
 	{
-		$database = trim($this->config->get('database', 'database'));
+		$database = trim((string) $this->config->get('database', 'database'));
 
 		$ret  = $this->p('SHOW PROCESSLIST');
 		$data = $this->toArray($ret);
@@ -1810,7 +1810,7 @@ class Database
 			}
 
 			// Filter out all non blocking processes
-			$state = trim($process['State']);
+			$state = trim((string) $process['State']);
 			if (in_array($state, ['', 'init', 'statistics', 'updating'])) {
 				continue;
 			}

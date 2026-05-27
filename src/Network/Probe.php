@@ -599,7 +599,7 @@ class Probe
 		} else {
 			// We overwrite the detected nick with our try if the previous routines hadn't detected it.
 			// Additionally, it is overwritten when the nickname doesn't make sense (contains spaces).
-			if ((empty($result['nick']) || (strstr($result['nick'], ' '))) && ($nick != '')) {
+			if ((empty($result['nick']) || (strstr((string) $result['nick'], ' '))) && ($nick != '')) {
 				$result['nick'] = $nick;
 			}
 
@@ -837,7 +837,7 @@ class Probe
 			} elseif (($link['rel'] == ActivityNamespace::WEBFINGERAVATAR) && !empty($link['href'])) {
 				$data['photo'] = $link['href'];
 			} elseif (($link['rel'] == ActivityNamespace::DIASPORA_SEED) && !empty($link['href'])) {
-				$data['baseurl'] = trim($link['href'], '/');
+				$data['baseurl'] = trim((string) $link['href'], '/');
 			} elseif (($link['rel'] == ActivityNamespace::DIASPORA_GUID) && !empty($link['href'])) {
 				$data['guid'] = $link['href'];
 			}
@@ -855,8 +855,8 @@ class Probe
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
-			$data['addr'] = substr($webfinger['subject'], 5);
+		if (!empty($webfinger['subject']) && (str_starts_with((string) $webfinger['subject'], 'acct:'))) {
+			$data['addr'] = substr((string) $webfinger['subject'], 5);
 		}
 
 		if (!isset($data['network']) || ($hcard_url == '')) {
@@ -941,20 +941,20 @@ class Probe
 
 			$search = $xpath->query("//*[contains(concat(' ', @class, ' '), ' searchable ')]", $vcard); // */
 			if ($search->length > 0) {
-				$data['hide'] = (strtolower($search->item(0)->nodeValue) != 'true');
+				$data['hide'] = (strtolower((string) $search->item(0)->nodeValue) != 'true');
 			}
 
 			$search = $xpath->query("//*[contains(concat(' ', @class, ' '), ' key ')]", $vcard); // */
 			if ($search->length > 0) {
 				$data['pubkey'] = $search->item(0)->nodeValue;
-				if (strstr($data['pubkey'], 'RSA ')) {
+				if (strstr((string) $data['pubkey'], 'RSA ')) {
 					$data['pubkey'] = Crypto::rsaToPem($data['pubkey']);
 				}
 			}
 
 			$search = $xpath->query("//*[@id='pod_location']", $vcard); // */
 			if ($search->length > 0) {
-				$data['baseurl'] = trim($search->item(0)->nodeValue, '/');
+				$data['baseurl'] = trim((string) $search->item(0)->nodeValue, '/');
 			}
 		}
 
@@ -1013,7 +1013,7 @@ class Probe
 			if (($link['rel'] == ActivityNamespace::HCARD) && !empty($link['href'])) {
 				$hcard_url = $link['href'];
 			} elseif (($link['rel'] == ActivityNamespace::DIASPORA_SEED) && !empty($link['href'])) {
-				$data['baseurl'] = trim($link['href'], '/');
+				$data['baseurl'] = trim((string) $link['href'], '/');
 			} elseif (($link['rel'] == ActivityNamespace::WEBFINGERPROFILE) && !empty($link['href'])) {
 				$data['url'] = $link['href'];
 			} elseif (($link['rel'] == ActivityNamespace::FEED) && !empty($link['href'])) {
@@ -1039,8 +1039,8 @@ class Probe
 			}
 		}
 
-		if (!empty($webfinger['subject']) && (str_starts_with($webfinger['subject'], 'acct:'))) {
-			$data['addr'] = substr($webfinger['subject'], 5);
+		if (!empty($webfinger['subject']) && (str_starts_with((string) $webfinger['subject'], 'acct:'))) {
+			$data['addr'] = substr((string) $webfinger['subject'], 5);
 		}
 
 		// Fetch further information from the hcard
@@ -1062,7 +1062,7 @@ class Probe
 
 			// The Diaspora handle must always be lowercase
 			if (!empty($data['addr'])) {
-				$data['addr'] = strtolower($data['addr']);
+				$data['addr'] = strtolower((string) $data['addr']);
 			}
 
 			// We have to overwrite the detected value for "notify" since Hubzilla doesn't send it
@@ -1125,7 +1125,7 @@ class Probe
 
 		$base = $xpath->evaluate('string(/html/head/base/@href)') ?: $base;
 
-		$baseParts = parse_url($base);
+		$baseParts = parse_url((string) $base);
 		if (empty($baseParts['host'])) {
 			return $href;
 		}
@@ -1343,7 +1343,7 @@ class Probe
 
 		$mailbox  = Email::constructMailboxName($mailacct);
 		$password = '';
-		openssl_private_decrypt(hex2bin($mailacct['pass']), $password, $user['prvkey']);
+		openssl_private_decrypt(hex2bin((string) $mailacct['pass']), $password, $user['prvkey']);
 		$mbox = Email::connect($mailbox, $mailacct['user'], $password);
 		if ($mbox === false) {
 			return [];
@@ -1372,23 +1372,23 @@ class Probe
 
 		$x = Email::messageMeta($mbox, $msgs[0]);
 
-		if (stristr($x[0]->from, $uri)) {
+		if (stristr((string) $x[0]->from, $uri)) {
 			$adr = imap_rfc822_parse_adrlist($x[0]->from, '');
-		} elseif (stristr($x[0]->to, $uri)) {
+		} elseif (stristr((string) $x[0]->to, $uri)) {
 			$adr = imap_rfc822_parse_adrlist($x[0]->to, '');
 		}
 
 		if (isset($adr)) {
 			foreach ($adr as $feadr) {
-				if ((strcasecmp($feadr->mailbox, $data['name']) == 0)
-					&& (strcasecmp($feadr->host, $phost) == 0)
+				if ((strcasecmp((string) $feadr->mailbox, $data['name']) == 0)
+					&& (strcasecmp((string) $feadr->host, $phost) == 0)
 					&& !empty($feadr->personal)
 				) {
 					$personal     = imap_mime_header_decode($feadr->personal);
 					$data['name'] = '';
 					foreach ($personal as $perspart) {
 						if ($perspart->charset != 'default') {
-							$data['name'] .= iconv($perspart->charset, 'UTF-8//IGNORE', $perspart->text);
+							$data['name'] .= iconv((string) $perspart->charset, 'UTF-8//IGNORE', (string) $perspart->text);
 						} else {
 							$data['name'] .= $perspart->text;
 						}

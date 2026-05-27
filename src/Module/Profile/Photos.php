@@ -132,7 +132,7 @@ class Photos extends \Friendica\Module\BaseProfile
 			$error    = UPLOAD_ERR_OK;
 		} elseif (!empty($_FILES['userfile'])) {
 			$src      = $_FILES['userfile']['tmp_name'];
-			$filename = basename($_FILES['userfile']['name']);
+			$filename = basename((string) $_FILES['userfile']['name']);
 			$filesize = intval($_FILES['userfile']['size']);
 			$type     = $_FILES['userfile']['type'];
 			$error    = $_FILES['userfile']['error'];
@@ -307,7 +307,7 @@ class Photos extends \Friendica\Module\BaseProfile
 				'src'   => 'photo/' . $photo['resource-id'] . '-' . ((($photo['scale']) == 6) ? 4 : $photo['scale']) . Images::getExtensionByMimeType($photo['type']),
 				'alt'   => $photo['filename'],
 				'album' => [
-					'link' => 'photos/' . $this->owner['nickname'] . '/album/' . bin2hex($photo['album']),
+					'link' => 'photos/' . $this->owner['nickname'] . '/album/' . bin2hex((string) $photo['album']),
 					'name' => $photo['album'],
 					'alt'  => $this->t('View Album'),
 				],
@@ -324,9 +324,9 @@ class Photos extends \Friendica\Module\BaseProfile
 				return [
 					'text'      => $album['album'],
 					'total'     => $album['total'],
-					'url'       => 'photos/' . $this->owner['nickname'] . '/album/' . bin2hex($album['album']),
-					'urlencode' => urlencode($album['album']),
-					'bin2hex'   => bin2hex($album['album']),
+					'url'       => 'photos/' . $this->owner['nickname'] . '/album/' . bin2hex((string) $album['album']),
+					'urlencode' => urlencode((string) $album['album']),
+					'bin2hex'   => bin2hex((string) $album['album']),
 				];
 			}, $albums);
 

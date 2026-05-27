@@ -38,7 +38,7 @@ class Search
 
 		$tags = [];
 		while ($term = DBA::fetch($termsStmt)) {
-			$tags[] = trim(mb_strtolower($term['term']), '#');
+			$tags[] = trim(mb_strtolower((string) $term['term']), '#');
 		}
 		DBA::close($termsStmt);
 
@@ -47,7 +47,7 @@ class Search
 		$sql = array_shift($condition);
 		$channels = DBA::p($sql, $condition);
 		while ($channel = DBA::fetch($channels)) {
-			foreach (explode(',', $channel['include-tags']) as $tag) {
+			foreach (explode(',', (string) $channel['include-tags']) as $tag) {
 				$tag = trim(mb_strtolower($tag));
 				if (empty($tag)) {
 					continue;

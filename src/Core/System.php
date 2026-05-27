@@ -249,7 +249,7 @@ class System
 				if (in_array($func['class'], $exclude)) {
 					continue;
 				}
-				$classparts  = explode("\\", $func['class']);
+				$classparts  = explode("\\", (string) $func['class']);
 				$callstack[] = array_pop($classparts) . '::' . $func['function'] . (isset($func['line']) ? ' (' . $func['line'] . ')' : '');
 			} elseif (!in_array($func['function'], $ignore)) {
 				$func['database'] = ($func['function'] == 'q');

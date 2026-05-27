@@ -49,7 +49,7 @@ function is_modal()
 	$modalpages = get_modalpage_list();
 
 	foreach ($modalpages as $r => $value) {
-		if (str_contains($_REQUEST['pagename'], (string) $value)) {
+		if (str_contains((string) $_REQUEST['pagename'], (string) $value)) {
 			$is_modal = true;
 		}
 	}

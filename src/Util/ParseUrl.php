@@ -359,7 +359,7 @@ class ParseUrl
 
 		$list = $xpath->query('//title');
 		if ($list->length > 0) {
-			$siteinfo['title'] = trim($list->item(0)->nodeValue);
+			$siteinfo['title'] = trim((string) $list->item(0)->nodeValue);
 		}
 
 		$list = $xpath->query('//meta[@name]');
@@ -555,8 +555,8 @@ class ParseUrl
 
 		$siteinfo = self::checkMedia($url, $siteinfo);
 
-		if (!empty($siteinfo['text']) && mb_strlen($siteinfo['text']) > self::MAX_DESC_COUNT) {
-			$siteinfo['text'] = mb_substr($siteinfo['text'], 0, self::MAX_DESC_COUNT) . '…';
+		if (!empty($siteinfo['text']) && mb_strlen((string) $siteinfo['text']) > self::MAX_DESC_COUNT) {
+			$siteinfo['text'] = mb_substr((string) $siteinfo['text'], 0, self::MAX_DESC_COUNT) . '…';
 
 			$pos = mb_strrpos($siteinfo['text'], '.');
 			if ($pos > self::MIN_DESC_COUNT) {
@@ -653,7 +653,7 @@ class ParseUrl
 		}
 
 		// When the post is not publically visible, we have to do some guess work. At first we check if that page is an AT Protocol page
-		if (!isset($siteinfo['atprotocol']['uri']) && preg_match('#^https://.+/profile/(.+)/post/(.+)#', $siteinfo['url'], $matches)) {
+		if (!isset($siteinfo['atprotocol']['uri']) && preg_match('#^https://.+/profile/(.+)/post/(.+)#', (string) $siteinfo['url'], $matches)) {
 			$siteinfo['atprotocol']['uri'] = 'at://' . $siteinfo['atprotocol']['did'] . '/app.bsky.feed.post/' . $matches[2];
 			DI::logger()->debug('Found AT Protocol post via url structure', ['uri' => $siteinfo['url'], 'did' => $siteinfo['atprotocol']['did'], 'cid' => $matches[2]]);
 		}
@@ -1145,7 +1145,7 @@ class ParseUrl
 
 		$content = JsonLD::fetchElement($jsonld, 'thumbnailUrl');
 		if (!empty($content)) {
-			$jsonldinfo['image'] = trim($content);
+			$jsonldinfo['image'] = trim((string) $content);
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'image', 'url', '@type', 'ImageObject');
@@ -1157,7 +1157,7 @@ class ParseUrl
 			$content = JsonLD::fetchElement($jsonld, 'keywords');
 			if (!empty($content)) {
 				$siteinfo['keywords'] = [];
-				foreach (explode(',', $content) as $keyword) {
+				foreach (explode(',', (string) $content) as $keyword) {
 					$siteinfo['keywords'][] = trim($keyword);
 				}
 			}
@@ -1200,7 +1200,7 @@ class ParseUrl
 
 		$content = JsonLD::fetchElement($jsonld, 'name');
 		if (!empty($content)) {
-			$jsonldinfo['title'] = trim($content);
+			$jsonldinfo['title'] = trim((string) $content);
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'description');
@@ -1295,7 +1295,7 @@ class ParseUrl
 		if (!empty($content) && is_string($content)) {
 			$jsonldinfo['publisher_img'] = trim($content);
 		} elseif (is_array($content) && array_key_exists(0, $content)) {
-			$jsonldinfo['publisher_img'] = trim($content[0]);
+			$jsonldinfo['publisher_img'] = trim((string) $content[0]);
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'brand', 'name', '@type', 'Organization');
@@ -1392,8 +1392,8 @@ class ParseUrl
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'name');
-		if (!empty($content) && (($media['description'] ?? '') != trim($content))) {
-			$media['name'] = trim($content);
+		if (!empty($content) && (($media['description'] ?? '') != trim((string) $content))) {
+			$media['name'] = trim((string) $content);
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'contentUrl');
@@ -1437,11 +1437,11 @@ class ParseUrl
 		}
 
 		$content = JsonLD::fetchElement($jsonld, 'thumbnailUrl');
-		if (!empty($content) && (($media['image'] ?? '') != trim($content))) {
+		if (!empty($content) && (($media['image'] ?? '') != trim((string) $content))) {
 			if (!empty($media['image'])) {
-				$media['preview'] = trim($content);
+				$media['preview'] = trim((string) $content);
 			} else {
-				$media['image'] = trim($content);
+				$media['image'] = trim((string) $content);
 			}
 		}
 
@@ -1563,7 +1563,7 @@ class ParseUrl
 			}
 			foreach ($provider['endpoints'] as $endpoint) {
 				if (!isset($endpoint['schemes']) || !is_array($endpoint['schemes'])) {
-					$schemes[rtrim($provider['provider_url'], '/') . '/*'] = str_replace('{format}', 'json', $endpoint['url']);
+					$schemes[rtrim((string) $provider['provider_url'], '/') . '/*'] = str_replace('{format}', 'json', $endpoint['url']);
 					continue;
 				}
 				foreach ($endpoint['schemes'] as $scheme) {
@@ -1678,7 +1678,7 @@ class ParseUrl
 
 		if ($data['type'] == 'video' & empty($siteinfo['player']) && ($data['provider_url'] ?? '') == 'https://www.tiktok.com' && isset($data['embed_product_id']) && isset($data['thumbnail_width']) && isset($data['thumbnail_height'])) {
 			$siteinfo['embed']['type']    = $data['type'];
-			$siteinfo['embed']['html']    = trim($data['html']);
+			$siteinfo['embed']['html']    = trim((string) $data['html']);
 			$siteinfo['embed']['width']   = is_numeric($data['width'] ?? '') ? $data['width']  : $data['thumbnail_width'];
 			$siteinfo['embed']['height']  = is_numeric($data['height'] ?? '') ? $data['height'] : $data['thumbnail_height'];
 			$siteinfo['player']['embed']  = 'https://www.tiktok.com/player/v1/' . $data['embed_product_id'] . '?description=1&rel=0';
@@ -1770,7 +1770,7 @@ class ParseUrl
 	 */
 	private static function getSongLinkPlayer(array $siteinfo): array
 	{
-		$service    = 'https://api.song.link/v1-alpha.1/links?url=' . urlencode($siteinfo['url']);
+		$service    = 'https://api.song.link/v1-alpha.1/links?url=' . urlencode((string) $siteinfo['url']);
 		$curlResult = DI::httpClient()->get($service, HttpClientAccept::HTML, [HttpClientOptions::REQUEST => HttpClientRequest::SITEINFO]);
 		if (!$curlResult->isSuccess()) {
 			DI::logger()->debug('No song.link data', ['url' => $siteinfo['url'], 'code' => $curlResult->getReturnCode(), 'message' => $curlResult->getBodyString()]);

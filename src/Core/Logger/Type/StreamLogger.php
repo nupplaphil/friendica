@@ -112,7 +112,7 @@ class StreamLogger extends AbstractLogger
 			throw new LoggerException('Cannot get current datetime.', $exception);
 		}
 		$logMessage .= $this->channel . ' ';
-		$logMessage .= '[' . strtoupper($level) . ']: ';
+		$logMessage .= '[' . strtoupper((string) $level) . ']: ';
 		$logMessage .= $this->psrInterpolate($message, $context) . ' ';
 		$logMessage .= $this->jsonEncodeArray($context) . ' - ';
 		$logMessage .= $this->jsonEncodeArray($record);

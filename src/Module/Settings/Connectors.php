@@ -85,9 +85,9 @@ class Connectors extends BaseSettings
 			$this->logger->debug('updating mailaccount', ['response' => $r]);
 			$mailacct = $this->database->selectFirst('mailacct', [], ['uid' => $this->session->getLocalUserId()]);
 			if ($this->database->isResult($mailacct)) {
-				if (strlen($mailacct['server'])) {
+				if (strlen((string) $mailacct['server'])) {
 					$dcrpass = '';
-					openssl_private_decrypt(hex2bin($mailacct['pass']), $dcrpass, $user['prvkey']);
+					openssl_private_decrypt(hex2bin((string) $mailacct['pass']), $dcrpass, $user['prvkey']);
 					$mbox = Email::connect(Email::constructMailboxName($mailacct), $mail_user, $dcrpass);
 					unset($dcrpass);
 					if (!$mbox) {

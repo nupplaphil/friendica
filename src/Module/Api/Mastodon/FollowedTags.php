@@ -52,7 +52,7 @@ class FollowedTags extends BaseApi
 		while ($saved_search = DBA::fetch($saved_searches)) {
 			self::setBoundaries($saved_search['id']);
 
-			$hashtag  = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => ltrim($saved_search['term'], '#')], [], true);
+			$hashtag  = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => ltrim((string) $saved_search['term'], '#')], [], true);
 			$return[] = $hashtag->toArray();
 		}
 

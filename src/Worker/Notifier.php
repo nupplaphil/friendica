@@ -262,10 +262,10 @@ class Notifier
 				}
 
 				if (
-					strlen($parent['allow_cid'])
-					|| strlen($parent['allow_gid'])
-					|| strlen($parent['deny_cid'])
-					|| strlen($parent['deny_gid'])
+					strlen((string) $parent['allow_cid'])
+					|| strlen((string) $parent['allow_gid'])
+					|| strlen((string) $parent['deny_cid'])
+					|| strlen((string) $parent['deny_gid'])
 				) {
 					$public_message = false; // private recipients, not public
 				}
@@ -281,7 +281,7 @@ class Notifier
 					$recipients[] = $item['contact-id'];
 					// pull out additional tagged people to notify (if public message)
 					if ($public_message && $item['inform']) {
-						$people = explode(',', $item['inform']);
+						$people = explode(',', (string) $item['inform']);
 						foreach ($people as $person) {
 							if (str_starts_with($person, 'cid:')) {
 								$recipients[] = intval(substr($person, 4));

@@ -138,7 +138,7 @@ function vier_community_info()
 			foreach ($contacts as $contact) {
 				$entry = Renderer::replaceMacros($tpl, [
 					'$id'           => $contact['id'],
-					'$profile_link' => 'contact/follow?url=' . urlencode($contact['url']),
+					'$profile_link' => 'contact/follow?url=' . urlencode((string) $contact['url']),
 					'$photo'        => Contact::getMicro($contact),
 					'$alt_text'     => $contact['name'],
 				]);
@@ -163,7 +163,7 @@ function vier_community_info()
 			$aside['$lastusers_items'] = [];
 
 			foreach ($profiles as $profile) {
-				$profile_link = 'profile/' . ((strlen($profile['nickname'])) ? $profile['nickname'] : $profile['uid']);
+				$profile_link = 'profile/' . ((strlen((string) $profile['nickname'])) ? $profile['nickname'] : $profile['uid']);
 				$entry        = Renderer::replaceMacros($tpl, [
 					'$id'           => $profile['id'],
 					'$profile_link' => $profile_link,
@@ -205,7 +205,7 @@ function vier_community_info()
 
 		$helperlist = DI::config()->get("vier", "helperlist");
 
-		$helpers = explode(",", $helperlist);
+		$helpers = explode(",", (string) $helperlist);
 
 		if ($helpers) {
 			foreach ($helpers as $helper) {

@@ -70,7 +70,7 @@ class Tos extends BaseModule
 
 		$tpl = Renderer::getMarkupTemplate('tos.tpl');
 		if ($this->config->get('system', 'tosdisplay')) {
-			$lines = trim($this->config->get('system', 'tosrules') ?: '');
+			$lines = trim((string) $this->config->get('system', 'tosrules') ?: '');
 			if ($lines) {
 				$rules = "[ol]";
 				foreach (explode("\n", $lines) as $line) {

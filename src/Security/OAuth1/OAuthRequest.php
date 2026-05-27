@@ -21,7 +21,7 @@ class OAuthRequest implements \Stringable
 	public function __construct(private $http_method, $http_url, $parameters = null)
 	{
 		@$parameters or $parameters = [];
-		$parameters                 = array_merge(OAuthUtil::parse_parameters(parse_url($http_url, PHP_URL_QUERY)), $parameters);
+		$parameters                 = array_merge(OAuthUtil::parse_parameters(parse_url((string) $http_url, PHP_URL_QUERY)), $parameters);
 		$this->parameters           = $parameters;
 		$this->http_url             = $http_url;
 	}
@@ -64,7 +64,7 @@ class OAuthRequest implements \Stringable
 			if (
 				$http_method == "POST"
 				&& @strstr(
-					$request_headers["Content-Type"],
+					(string) $request_headers["Content-Type"],
 					"application/x-www-form-urlencoded",
 				)
 			) {
@@ -76,7 +76,7 @@ class OAuthRequest implements \Stringable
 
 			// We have a Authorization-header with OAuth data. Parse the header
 			// and add those overriding any duplicates from GET or POST
-			if (@substr($request_headers['Authorization'], 0, 6) == "OAuth ") {
+			if (@substr((string) $request_headers['Authorization'], 0, 6) == "OAuth ") {
 				$header_parameters = OAuthUtil::split_header(
 					$request_headers['Authorization'],
 				);
@@ -85,7 +85,7 @@ class OAuthRequest implements \Stringable
 		}
 		// fix for friendica redirect system
 
-		$http_url = substr($http_url, 0, strpos($http_url, (string) $parameters['pagename']) + strlen($parameters['pagename']));
+		$http_url = substr((string) $http_url, 0, strpos((string) $http_url, (string) $parameters['pagename']) + strlen((string) $parameters['pagename']));
 		unset($parameters['pagename']);
 
 		return new OAuthRequest($http_method, $http_url, $parameters);
@@ -195,7 +195,7 @@ class OAuthRequest implements \Stringable
 	 */
 	public function get_normalized_http_method()
 	{
-		return strtoupper($this->http_method);
+		return strtoupper((string) $this->http_method);
 	}
 
 	/**
@@ -204,7 +204,7 @@ class OAuthRequest implements \Stringable
 	 */
 	public function get_normalized_http_url()
 	{
-		$parts = parse_url($this->http_url);
+		$parts = parse_url((string) $this->http_url);
 
 		$port   = @$parts['port'];
 		$scheme = $parts['scheme'];
@@ -269,7 +269,7 @@ class OAuthRequest implements \Stringable
 		}
 
 		foreach ($this->parameters as $k => $v) {
-			if (!str_starts_with($k, "oauth")) {
+			if (!str_starts_with((string) $k, "oauth")) {
 				continue;
 			}
 			if (is_array($v)) {

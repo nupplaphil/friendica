@@ -67,7 +67,7 @@ class JsonLD
 				$url = DI::basePath() . '/static/data-integrity-v2.jsonld';
 				break;
 			default:
-				switch (parse_url($url, PHP_URL_PATH)) {
+				switch (parse_url((string) $url, PHP_URL_PATH)) {
 					case '/schemas/litepub-0.1.jsonld':
 						$url = DI::basePath() . '/static/litepub-0.1.jsonld';
 						break;

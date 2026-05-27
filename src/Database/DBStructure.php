@@ -305,7 +305,7 @@ class DBStructure
 					} else {
 						$new_index_definition = "__NOT_SET__";
 					}
-					if ($current_index_definition != $new_index_definition && !str_starts_with($indexName, 'local_')) {
+					if ($current_index_definition != $new_index_definition && !str_starts_with((string) $indexName, 'local_')) {
 						$sql2 = DbaDefinitionSqlWriter::dropIndex($indexName);
 						if ($sql3 == "") {
 							$sql3 = "ALTER" . $ignore . " TABLE `" . $name . "` " . $sql2;
@@ -933,7 +933,7 @@ class DBStructure
 		]);
 
 		while ($process = DBA::fetch($processes)) {
-			$parts = explode(' ', $process['info']);
+			$parts = explode(' ', (string) $process['info']);
 			if (in_array(strtolower(array_shift($parts)), ['alter', 'create', 'drop', 'rename'])) {
 				$isUpdate = true;
 			}

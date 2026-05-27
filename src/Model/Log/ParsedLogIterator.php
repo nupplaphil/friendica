@@ -85,7 +85,7 @@ class ParsedLogIterator implements \Iterator
 		foreach ($this->filters as $filter => $filtervalue) {
 			switch ($filter) {
 				case 'level':
-					$match = $match && ($parsedlogline->level == strtoupper($filtervalue));
+					$match = $match && ($parsedlogline->level == strtoupper((string) $filtervalue));
 					break;
 
 				case 'context':

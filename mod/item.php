@@ -246,7 +246,7 @@ function item_process(array $post, array $request, bool $preview, string $return
 
 	$post = DI::contentItem()->finalizePost($post, $preview);
 
-	if (!strlen($post['body'])) {
+	if (!strlen((string) $post['body'])) {
 		if ($preview) {
 			System::jsonExit(['preview' => '']);
 		}

@@ -122,7 +122,7 @@ class Image implements \Stringable
 			return false;
 		}
 
-		return str_contains(strtoupper($header['Chunk']), 'ANIM') || str_contains(strtoupper($header['Chunk']), 'ANMF');
+		return str_contains(strtoupper((string) $header['Chunk']), 'ANIM') || str_contains(strtoupper((string) $header['Chunk']), 'ANMF');
 	}
 
 	/**
@@ -874,7 +874,7 @@ class Image implements \Stringable
 
 			DI::cache()->set($cacheKey, base64_encode($preview), Duration::DAY);
 		} else {
-			$preview = base64_decode($preview);
+			$preview = base64_decode((string) $preview);
 		}
 
 		return $preview;

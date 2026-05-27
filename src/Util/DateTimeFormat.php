@@ -195,7 +195,7 @@ class DateTimeFormat
 		];
 
 		foreach ($pregPatterns as $pattern) {
-			$dateString = preg_replace($pattern[0], $pattern[1], $dateString);
+			$dateString = preg_replace($pattern[0], $pattern[1], (string) $dateString);
 		}
 
 		return $dateString;

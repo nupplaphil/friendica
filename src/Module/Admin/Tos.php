@@ -43,8 +43,8 @@ class Tos extends BaseAdmin
 
 		$displaytos = !empty($_POST['displaytos']);
 		$displayprivstatement = !empty($_POST['displayprivstatement']);
-		$tostext  = (!empty($_POST['tostext']) ? strip_tags(trim($_POST['tostext'])) : '');
-		$tosrules = (!empty($_POST['tosrules']) ? strip_tags(trim($_POST['tosrules'])) : '');
+		$tostext  = (!empty($_POST['tostext']) ? strip_tags(trim((string) $_POST['tostext'])) : '');
+		$tosrules = (!empty($_POST['tosrules']) ? strip_tags(trim((string) $_POST['tosrules'])) : '');
 
 		$this->config->set('system', 'tosdisplay', $displaytos);
 		$this->config->set('system', 'tosprivstatement', $displayprivstatement);

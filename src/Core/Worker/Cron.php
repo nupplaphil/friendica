@@ -84,7 +84,7 @@ class Cron
 					continue;
 				}
 
-				$argv = json_decode($entry['parameter'], true);
+				$argv = json_decode((string) $entry['parameter'], true);
 				if (!empty($entry['command'])) {
 					$command = $entry['command'];
 				} elseif (!empty($argv)) {
@@ -93,10 +93,10 @@ class Cron
 					return;
 				}
 
-				$command = basename($command);
+				$command = basename((string) $command);
 
 				// How long is the process already running?
-				$duration = (time() - strtotime($entry["executed"])) / 60;
+				$duration = (time() - strtotime((string) $entry["executed"])) / 60;
 				if ($duration > $max_duration) {
 					DI::logger()->warning('Worker process took too much time - killed', ['duration' => number_format($duration, 3), 'max' => $max_duration, 'id' => $entry["id"], 'pid' => $entry["pid"], 'command' => $command]);
 					posix_kill($entry["pid"], SIGTERM);

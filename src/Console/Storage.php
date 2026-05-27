@@ -161,7 +161,7 @@ HELP;
 		}
 
 		if (count($this->args) == 2) {
-			$table = strtolower($this->args[1]);
+			$table = strtolower((string) $this->args[1]);
 			if (!in_array($table, ['photo', 'attach'])) {
 				throw new CommandArgsException('Invalid table');
 			}

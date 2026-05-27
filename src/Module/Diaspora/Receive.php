@@ -134,7 +134,7 @@ class Receive extends BaseModule
 			$msg = Diaspora::decodeRaw($postdata, $privKey);
 		} else {
 
-			$xml = urldecode($_POST['xml']);
+			$xml = urldecode((string) $_POST['xml']);
 
 			$this->logger->info('Diaspora: Decode message in the old format.');
 			$msg = Diaspora::decode($xml, $privKey);

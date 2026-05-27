@@ -77,7 +77,7 @@ class DBSync extends BaseAdmin
 				$failed = [];
 				$configStmt = DBA::select('config', ['k', 'v'], ['cat' => 'database']);
 				while ($config = DBA::fetch($configStmt)) {
-					$upd = intval(substr($config['k'], 7));
+					$upd = intval(substr((string) $config['k'], 7));
 					if ($upd >= 1139 && $config['v'] != 'success') {
 						$failed[] = $upd;
 					}

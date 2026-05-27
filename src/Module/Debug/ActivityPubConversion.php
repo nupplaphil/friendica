@@ -31,7 +31,7 @@ class ActivityPubConversion extends BaseModule
 
 		if (!empty($_REQUEST['source'])) {
 			try {
-				$source = json_decode($_REQUEST['source'], true);
+				$source = json_decode((string) $_REQUEST['source'], true);
 				$trust_source = true;
 				$uid = DI::userSession()->getLocalUserId();
 				$push = false;

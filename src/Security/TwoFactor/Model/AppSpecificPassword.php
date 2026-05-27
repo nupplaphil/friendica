@@ -43,7 +43,7 @@ class AppSpecificPassword
 		$return = false;
 
 		foreach ($appSpecificPasswords as $appSpecificPassword) {
-			if (password_verify($plaintextPassword, $appSpecificPassword['hashed_password'])) {
+			if (password_verify($plaintextPassword, (string) $appSpecificPassword['hashed_password'])) {
 				$fields = ['last_used' => DateTimeFormat::utcNow()];
 				if (password_needs_rehash($appSpecificPassword['hashed_password'], PASSWORD_DEFAULT)) {
 					$fields['hashed_password'] = User::hashPassword($plaintextPassword);

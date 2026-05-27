@@ -348,8 +348,8 @@ class Register extends BaseModule
 		}
 
 		//Check if nickname contains only US-ASCII and do not start with a digit
-		if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]*$/', $arr['nickname'])) {
-			if (is_numeric(substr($arr['nickname'], 0, 1))) {
+		if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]*$/', (string) $arr['nickname'])) {
+			if (is_numeric(substr((string) $arr['nickname'], 0, 1))) {
 				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname cannot start with a digit."));
 			} else {
 				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname can only contain US-ASCII characters."));
@@ -430,7 +430,7 @@ class Register extends BaseModule
 
 		$using_invites = DI::config()->get('system', 'invitation_only');
 		$num_invites   = DI::config()->get('system', 'number_invites');
-		$invite_id     = (!empty($_POST['invite_id']) ? trim($_POST['invite_id']) : '');
+		$invite_id     = (!empty($_POST['invite_id']) ? trim((string) $_POST['invite_id']) : '');
 
 		if (self::getPolicy() === self::OPEN) {
 			if ($using_invites && $invite_id) {
@@ -543,7 +543,7 @@ class Register extends BaseModule
 
 		$inactive_since = DateTimeFormat::utc('now - ' . $days . ' day');
 		foreach ($admins as $admin) {
-			if (strtotime($admin['login_date']) > strtotime($inactive_since)) {
+			if (strtotime((string) $admin['login_date']) > strtotime($inactive_since)) {
 				return intval(DI::config()->get('config', 'register_policy'));
 			}
 		}

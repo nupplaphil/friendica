@@ -87,7 +87,7 @@ class Processor
 	public static function normalizeMentionLinks(string $body): string
 	{
 		$body = preg_replace('%\[url=([^\[\]]*)]([#@!])(.*?)\[/url]%ism', '$2[url=$1]$3[/url]', $body);
-		$body = preg_replace('%([#@!])\[zrl=([^\[\]]*)](.*?)\[/zrl]%ism', '$1[url=$2]$3[/url]', $body);
+		$body = preg_replace('%([#@!])\[zrl=([^\[\]]*)](.*?)\[/zrl]%ism', '$1[url=$2]$3[/url]', (string) $body);
 		return $body;
 	}
 
@@ -1411,14 +1411,14 @@ class Processor
 				continue;
 			}
 
-			$hash = substr($tag['name'], 0, 1);
+			$hash = substr((string) $tag['name'], 0, 1);
 			$type = 0;
 
 			if ($tag['type'] == 'Mention') {
 				if (in_array($hash, [Tag::TAG_CHARACTER[Tag::MENTION],
 					Tag::TAG_CHARACTER[Tag::EXCLUSIVE_MENTION],
 					Tag::TAG_CHARACTER[Tag::IMPLICIT_MENTION]])) {
-					$tag['name'] = substr($tag['name'], 1);
+					$tag['name'] = substr((string) $tag['name'], 1);
 				}
 				$type = Tag::IMPLICIT_MENTION;
 
@@ -1430,7 +1430,7 @@ class Processor
 				}
 			} elseif ($tag['type'] == 'Hashtag') {
 				if ($hash == Tag::TAG_CHARACTER[Tag::HASHTAG]) {
-					$tag['name'] = substr($tag['name'], 1);
+					$tag['name'] = substr((string) $tag['name'], 1);
 				}
 				$type = Tag::HASHTAG;
 			}
@@ -1449,9 +1449,9 @@ class Processor
 			foreach ($receivers[$element] ?? [] as $receiver) {
 				if ($receiver == ActivityPub::PUBLIC_COLLECTION) {
 					$name = Receiver::PUBLIC_COLLECTION;
-				} elseif ($path = parse_url($receiver, PHP_URL_PATH)) {
+				} elseif ($path = parse_url((string) $receiver, PHP_URL_PATH)) {
 					$name = trim($path, '/');
-				} elseif ($host = parse_url($receiver, PHP_URL_HOST)) {
+				} elseif ($host = parse_url((string) $receiver, PHP_URL_HOST)) {
 					$name = $host;
 				} else {
 					DI::logger()->warning('Unable to coerce name from receiver', ['element' => $element, 'type' => $type, 'receiver' => $receiver]);
@@ -1514,9 +1514,9 @@ class Processor
 			foreach ($key_interaction as $interaction) {
 				if ($interaction == ActivityPub::PUBLIC_COLLECTION) {
 					$name = Receiver::PUBLIC_COLLECTION;
-				} elseif ($path = parse_url($interaction, PHP_URL_PATH)) {
+				} elseif ($path = parse_url((string) $interaction, PHP_URL_PATH)) {
 					$name = trim($path, '/');
-				} elseif ($host = parse_url($interaction, PHP_URL_HOST)) {
+				} elseif ($host = parse_url((string) $interaction, PHP_URL_HOST)) {
 					$name = $host;
 				} else {
 					DI::logger()->warning('Unable to coerce name from interaction', ['key' => $key, 'interaction' => $interaction]);
@@ -1549,9 +1549,9 @@ class Processor
 					}
 					$name       = $author['nick'] ?: $author['url'];
 					$capability = $author['url'];
-				} elseif ($path = parse_url($capability, PHP_URL_PATH)) {
+				} elseif ($path = parse_url((string) $capability, PHP_URL_PATH)) {
 					$name = trim($path, '/');
-				} elseif ($host = parse_url($capability, PHP_URL_HOST)) {
+				} elseif ($host = parse_url((string) $capability, PHP_URL_HOST)) {
 					$name = $host;
 				} else {
 					DI::logger()->warning('Unable to coerce name from capability', ['element' => $element, 'type' => $type, 'capability' => $capability]);
@@ -1611,7 +1611,7 @@ class Processor
 				// Trying to generate a title out of the body
 				$title = $item['body'];
 
-				while (preg_match('#^(@\[url=([^\]]+)].*?\[\/url]\s)(.*)#is', $title, $matches)) {
+				while (preg_match('#^(@\[url=([^\]]+)].*?\[\/url]\s)(.*)#is', (string) $title, $matches)) {
 					$title = $matches[3];
 				}
 
@@ -1968,7 +1968,7 @@ class Processor
 					DI::logger()->debug('Replies id is already in the list of children', ['depth' => count($child['children']), 'children' => $child['children'], 'id' => $id]);
 					continue;
 				}
-				if (parse_url($id, PHP_URL_HOST) == parse_url($url, PHP_URL_HOST)) {
+				if (parse_url((string) $id, PHP_URL_HOST) == parse_url($url, PHP_URL_HOST)) {
 					DI::logger()->debug('Incluced activity will be processed', ['replies' => $url, 'id' => $id]);
 					self::processActivity($reply, $id, $child, '', Receiver::COMPLETION_REPLIES);
 					++$fetched;
@@ -2017,7 +2017,7 @@ class Processor
 		}
 
 		$url_host = parse_url($url, PHP_URL_HOST);
-		$id_host  = parse_url($id, PHP_URL_HOST);
+		$id_host  = parse_url((string) $id, PHP_URL_HOST);
 
 		if ($id_host == $url_host) {
 			return $object;
@@ -2047,25 +2047,25 @@ class Processor
 		$actor         = JsonLD::fetchElement($ldobject, 'as:actor', '@id');
 		$attributed_to = JsonLD::fetchElement($ldobject, 'as:attributedTo', '@id');
 
-		$id_host = parse_url($id, PHP_URL_HOST);
+		$id_host = parse_url((string) $id, PHP_URL_HOST);
 
 		if (!empty($actor) && !in_array($type, Receiver::CONTENT_TYPES) && !empty($object_id)) {
-			$actor_host = parse_url($actor, PHP_URL_HOST);
+			$actor_host = parse_url((string) $actor, PHP_URL_HOST);
 			if ($actor_host != $id_host) {
 				DI::logger()->notice('Host mismatch between received id and actor', ['id-host' => $id_host, 'actor-host' => $actor_host, 'id' => $id, 'type' => $type, 'object-id' => $object_id, 'object_type' => $object_type, 'actor' => $actor, 'attributed_to' => $attributed_to]);
 				return false;
 			}
 			if (!empty($object_type)) {
 				$object_attributed_to = JsonLD::fetchElement($ldobject['as:object'], 'as:attributedTo', '@id');
-				$attributed_to_host   = parse_url($object_attributed_to, PHP_URL_HOST);
-				$object_id_host       = parse_url($object_id, PHP_URL_HOST);
+				$attributed_to_host   = parse_url((string) $object_attributed_to, PHP_URL_HOST);
+				$object_id_host       = parse_url((string) $object_id, PHP_URL_HOST);
 				if (!empty($attributed_to_host) && ($attributed_to_host != $object_id_host)) {
 					DI::logger()->notice('Host mismatch between received object id and attributed actor', ['id-object-host' => $object_id_host, 'attributed-host' => $attributed_to_host, 'id' => $id, 'type' => $type, 'object-id' => $object_id, 'object_type' => $object_type, 'actor' => $actor, 'object_attributed_to' => $object_attributed_to]);
 					return false;
 				}
 			}
 		} elseif (!empty($attributed_to)) {
-			$attributed_to_host = parse_url($attributed_to, PHP_URL_HOST);
+			$attributed_to_host = parse_url((string) $attributed_to, PHP_URL_HOST);
 			if ($attributed_to_host != $id_host) {
 				DI::logger()->notice('Host mismatch between received id and attributed actor', ['id-host' => $id_host, 'attributed-host' => $attributed_to_host, 'id' => $id, 'type' => $type, 'object-id' => $object_id, 'object_type' => $object_type, 'actor' => $actor, 'attributed_to' => $attributed_to]);
 				return false;
@@ -2142,10 +2142,10 @@ class Processor
 		$tags        = Receiver::processTags(JsonLD::fetchElementArray($activity['as:object'], 'as:tag') ?? []);
 		if (!empty($tags)) {
 			foreach ($tags as $tag) {
-				if (($tag['type'] != 'Hashtag') && !strpos($tag['type'], ':Hashtag') || empty($tag['name'])) {
+				if (($tag['type'] != 'Hashtag') && !strpos((string) $tag['type'], ':Hashtag') || empty($tag['name'])) {
 					continue;
 				}
-				$messageTags[] = ltrim(mb_strtolower($tag['name']), '#');
+				$messageTags[] = ltrim(mb_strtolower((string) $tag['name']), '#');
 			}
 		}
 
@@ -2756,8 +2756,8 @@ class Processor
 					continue;
 				}
 
-				$hash = substr($tag['name'], 0, 1);
-				$name = substr($tag['name'], 1);
+				$hash = substr((string) $tag['name'], 0, 1);
+				$name = substr((string) $tag['name'], 1);
 				if (!in_array($hash, Tag::TAG_CHARACTER)) {
 					$hash = '';
 					$name = $tag['name'];

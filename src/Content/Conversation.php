@@ -117,7 +117,7 @@ class Conversation
 					$sparkle = ' class="sparkle" ';
 				}
 
-				$link = '<a href="' . $url . '"' . $sparkle . '>' . htmlentities($activity['author-name']) . '</a>';
+				$link = '<a href="' . $url . '"' . $sparkle . '>' . htmlentities((string) $activity['author-name']) . '</a>';
 
 				if (empty($activity['thr-parent-id'])) {
 					$activity['thr-parent-id'] = $activity['parent-uri-id'];
@@ -431,27 +431,27 @@ class Conversation
 					. "<script> var profile_uid = " . $_SESSION['uid']
 					. "; var netargs = '" . substr($this->args->getCommand(), 8)
 					. '?f='
-					. (!empty($_GET['contactid']) ? '&contactid=' . rawurlencode($_GET['contactid']) : '')
-					. (!empty($_GET['search'])    ? '&search=' . rawurlencode($_GET['search'])    : '')
-					. (!empty($_GET['star'])      ? '&star=' . rawurlencode($_GET['star'])      : '')
-					. (!empty($_GET['order'])     ? '&order=' . rawurlencode($_GET['order'])     : '')
-					. (!empty($_GET['bmark'])     ? '&bmark=' . rawurlencode($_GET['bmark'])     : '')
-					. (!empty($_GET['liked'])     ? '&liked=' . rawurlencode($_GET['liked'])     : '')
-					. (!empty($_GET['conv'])      ? '&conv=' . rawurlencode($_GET['conv'])      : '')
-					. (!empty($_GET['nets'])      ? '&nets=' . rawurlencode($_GET['nets'])      : '')
-					. (!empty($_GET['cmin'])      ? '&cmin=' . rawurlencode($_GET['cmin'])      : '')
-					. (!empty($_GET['cmax'])      ? '&cmax=' . rawurlencode($_GET['cmax'])      : '')
-					. (!empty($_GET['file'])      ? '&file=' . rawurlencode($_GET['file'])      : '')
-					. (!empty($_GET['channel'])   ? '&channel=' . rawurlencode($_GET['channel'])   : '')
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode($_GET['no_sharer']) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode($_GET['accounttype']) : '')
+					. (!empty($_GET['contactid']) ? '&contactid=' . rawurlencode((string) $_GET['contactid']) : '')
+					. (!empty($_GET['search'])    ? '&search=' . rawurlencode((string) $_GET['search'])    : '')
+					. (!empty($_GET['star'])      ? '&star=' . rawurlencode((string) $_GET['star'])      : '')
+					. (!empty($_GET['order'])     ? '&order=' . rawurlencode((string) $_GET['order'])     : '')
+					. (!empty($_GET['bmark'])     ? '&bmark=' . rawurlencode((string) $_GET['bmark'])     : '')
+					. (!empty($_GET['liked'])     ? '&liked=' . rawurlencode((string) $_GET['liked'])     : '')
+					. (!empty($_GET['conv'])      ? '&conv=' . rawurlencode((string) $_GET['conv'])      : '')
+					. (!empty($_GET['nets'])      ? '&nets=' . rawurlencode((string) $_GET['nets'])      : '')
+					. (!empty($_GET['cmin'])      ? '&cmin=' . rawurlencode((string) $_GET['cmin'])      : '')
+					. (!empty($_GET['cmax'])      ? '&cmax=' . rawurlencode((string) $_GET['cmax'])      : '')
+					. (!empty($_GET['file'])      ? '&file=' . rawurlencode((string) $_GET['file'])      : '')
+					. (!empty($_GET['channel'])   ? '&channel=' . rawurlencode((string) $_GET['channel'])   : '')
+					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) $_GET['no_sharer']) : '')
+					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) $_GET['accounttype']) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_PROFILE) {
 			$items = $this->addChildren($items, false, $order, $uid, $mode, $ignoredGsids);
 
 			if (!$update) {
-				$tab = !empty($_GET['tab']) ? trim($_GET['tab']) : 'posts';
+				$tab = !empty($_GET['tab']) ? trim((string) $_GET['tab']) : 'posts';
 
 				if ($tab === 'posts') {
 					/*
@@ -487,8 +487,8 @@ class Conversation
 				$live_update_div = '<div id="live-channel"></div>' . "\r\n"
 					. "<script> var profile_uid = -1; var netargs = '" . substr($this->args->getCommand(), 8)
 					. '?f='
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode($_GET['no_sharer']) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode($_GET['accounttype']) : '')
+					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) $_GET['no_sharer']) : '')
+					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) $_GET['accounttype']) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_COMMUNITY) {
@@ -498,8 +498,8 @@ class Conversation
 				$live_update_div = '<div id="live-community"></div>' . "\r\n"
 					. "<script> var profile_uid = -1; var netargs = '" . substr($this->args->getCommand(), 10)
 					. '?f='
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode($_GET['no_sharer']) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode($_GET['accounttype']) : '')
+					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) $_GET['no_sharer']) : '')
+					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) $_GET['accounttype']) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_CONTACTS) {
@@ -719,7 +719,7 @@ class Conversation
 						'alias'   => $row['causer-alias'],
 					];
 
-					$row['reshared'] = $this->l10n->t('%s reshared this.', '<a href="' . htmlentities(Contact::magicLinkByContact($causer)) . '">' . htmlentities($row['causer-name']) . '</a>');
+					$row['reshared'] = $this->l10n->t('%s reshared this.', '<a href="' . htmlentities(Contact::magicLinkByContact($causer)) . '">' . htmlentities((string) $row['causer-name']) . '</a>');
 				}
 				$row['direction'] = ['direction' => 3, 'title' => (empty($row['causer-id']) ? $this->l10n->t('Reshared') : $this->l10n->t('Reshared by %s <%s>', $row['causer-name'], $row['causer-link']))];
 				break;
@@ -1041,7 +1041,7 @@ class Conversation
 				if (($emoji === Activity::VIEW) && ($row['private'] === ItemModel::PRIVATE)) {
 					continue;
 				}
-				$names = explode($separator, $row['title']);
+				$names = explode($separator, (string) $row['title']);
 
 				$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'] ?? [], $names));
 				if ($row['private'] === ItemModel::PRIVATE) {
@@ -1107,7 +1107,7 @@ class Conversation
 		$rows = DBA::p($sql, $condition);
 		while ($row = DBA::fetch($rows)) {
 			$quotes[$row['quote-uri-id']]['total'] = $row['total'];
-			$quotes[$row['quote-uri-id']]['title'] = array_unique(explode($separator, $row['title']));
+			$quotes[$row['quote-uri-id']]['title'] = array_unique(explode($separator, (string) $row['title']));
 		}
 		DBA::close($rows);
 
@@ -1345,7 +1345,7 @@ class Conversation
 			return -1;
 		}
 
-		return strcmp($b['received'], $a['received']);
+		return strcmp((string) $b['received'], (string) $a['received']);
 	}
 
 	/**
@@ -1363,7 +1363,7 @@ class Conversation
 			return -1;
 		}
 
-		return strcmp($b['commented'], $a['commented']);
+		return strcmp((string) $b['commented'], (string) $a['commented']);
 	}
 
 	/**
@@ -1381,7 +1381,7 @@ class Conversation
 			return -1;
 		}
 
-		return strcmp($b['created'], $a['created']);
+		return strcmp((string) $b['created'], (string) $a['created']);
 	}
 
 	/**
@@ -1393,7 +1393,7 @@ class Conversation
 	 */
 	private function sortThrReceived(array $a, array $b): int
 	{
-		return strcmp($b['received'], $a['received']);
+		return strcmp((string) $b['received'], (string) $a['received']);
 	}
 
 	/**
@@ -1405,7 +1405,7 @@ class Conversation
 	 */
 	private function sortThrReceivedRev(array $a, array $b): int
 	{
-		return strcmp($a['received'], $b['received']);
+		return strcmp((string) $a['received'], (string) $b['received']);
 	}
 
 	/**
@@ -1417,7 +1417,7 @@ class Conversation
 	 */
 	private function sortThrCommented(array $a, array $b): int
 	{
-		return strcmp($b['commented'], $a['commented']);
+		return strcmp((string) $b['commented'], (string) $a['commented']);
 	}
 
 	/**
@@ -1429,7 +1429,7 @@ class Conversation
 	 */
 	private function sortThrCreated(array $a, array $b): int
 	{
-		return strcmp($b['created'], $a['created']);
+		return strcmp((string) $b['created'], (string) $a['created']);
 	}
 
 	/**

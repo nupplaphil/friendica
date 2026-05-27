@@ -52,7 +52,7 @@ class Upload extends \Friendica\BaseModule
 		}
 
 		$tempFileName = $_FILES['userfile']['tmp_name'];
-		$fileName     = basename($_FILES['userfile']['name']);
+		$fileName     = basename((string) $_FILES['userfile']['name']);
 		$fileSize     = intval($_FILES['userfile']['size']);
 		$maxFileSize  = Strings::getBytesFromShorthand($this->config->get('system', 'maxfilesize'));
 

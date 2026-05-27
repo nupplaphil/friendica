@@ -317,7 +317,7 @@ class Attach
 
 	public static function setPermissionFromBody(array $post)
 	{
-		preg_match_all("/\[attachment\](.*?)\[\/attachment\]/ism", $post['body'], $matches, PREG_SET_ORDER);
+		preg_match_all("/\[attachment\](.*?)\[\/attachment\]/ism", (string) $post['body'], $matches, PREG_SET_ORDER);
 		foreach ($matches as $attachment) {
 			if (DI::baseUrl()->isLocalUrl($attachment[1]) && preg_match('|.*?/attach/(\d+)|', $attachment[1], $match)) {
 				$fields = [

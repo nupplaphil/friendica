@@ -47,12 +47,12 @@ class DocWriter
 			foreach ($definition['indexes'] as $key => $value) {
 				$fieldlist         = implode(', ', $value);
 				$indexes[]         = ['name' => $key, 'fields' => $fieldlist];
-				$lengths['name']   = max($lengths['name'], strlen($key));
+				$lengths['name']   = max($lengths['name'], strlen((string) $key));
 				$lengths['fields'] = max($lengths['fields'], strlen($fieldlist));
 			}
 
 			array_walk_recursive($indexes, function (&$value, $key) use ($lengths) {
-				$value = str_pad($value, $lengths[$key], $value === '-' ? '-' : ' ');
+				$value = str_pad((string) $value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 
 			$foreign = [];
@@ -97,7 +97,7 @@ class DocWriter
 				];
 
 				foreach ($field as $fieldName => $fieldvalue) {
-					$lengths[$fieldName] = max($lengths[$fieldName] ?? 0, strlen($fieldvalue));
+					$lengths[$fieldName] = max($lengths[$fieldName] ?? 0, strlen((string) $fieldvalue));
 				}
 				$fields[] = $field;
 
@@ -111,7 +111,7 @@ class DocWriter
 			}
 
 			array_walk_recursive($fields, function (&$value, $key) use ($lengths) {
-				$value = str_pad($value, $lengths[$key], $value === '-' ? '-' : ' ');
+				$value = str_pad((string) $value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 
 			$tables[] = ['name' => $name, 'comment' => $definition['comment']];

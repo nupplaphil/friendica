@@ -159,7 +159,7 @@ class Delivery
 			 *
 			 */
 
-			if (!$top_level && ($parent['wall'] == 0) && stristr($target_item['uri'], $localhost)) {
+			if (!$top_level && ($parent['wall'] == 0) && stristr((string) $target_item['uri'], $localhost)) {
 				DI::logger()->info('Followup ' . $target_item["guid"]);
 				// local followup to remote post
 				$followup = true;
@@ -482,7 +482,7 @@ class Delivery
 		}
 
 		$addr = $contact['addr'];
-		if (!strlen($addr)) {
+		if (!strlen((string) $addr)) {
 			return true;
 		}
 
@@ -495,7 +495,7 @@ class Delivery
 		}
 
 		if (!empty($thr_parent['object'])) {
-			$data = json_decode($thr_parent['object'], true);
+			$data = json_decode((string) $thr_parent['object'], true);
 			if (!empty($data['reply_to'])) {
 				$addr = $data['reply_to'][0]['mailbox'] . '@' . $data['reply_to'][0]['host'];
 				DI::logger()->info('Use "reply-to" address of the thread parent', ['addr' => $addr]);
@@ -562,7 +562,7 @@ class Delivery
 				}
 			}
 
-			if (strncasecmp($subject, 'RE:', 3)) {
+			if (strncasecmp((string) $subject, 'RE:', 3)) {
 				$subject = 'Re: ' . $subject;
 			}
 		}

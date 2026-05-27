@@ -614,7 +614,7 @@ class Photo
 		if ($image->isValid()) {
 			$image->scaleToSquare(300);
 
-			$filesize     = strlen($image->asString());
+			$filesize     = strlen((string) $image->asString());
 			$maximagesize = Strings::getBytesFromShorthand(DI::config()->get('system', 'maximagesize'));
 
 			if ($maximagesize && ($filesize > $maximagesize)) {
@@ -623,7 +623,7 @@ class Photo
 					$image->toStatic();
 					$image = new Image($image->asString(), image_type_to_mime_type(IMAGETYPE_PNG));
 
-					$filesize = strlen($image->asString());
+					$filesize = strlen((string) $image->asString());
 					DI::logger()->info('Converted gif to a static png', ['uid' => $uid, 'cid' => $cid, 'size' => $filesize, 'type' => $image->getType()]);
 				}
 				if ($filesize > $maximagesize) {
@@ -631,7 +631,7 @@ class Photo
 						if ($filesize > $maximagesize) {
 							DI::logger()->info('Resize', ['uid' => $uid, 'cid' => $cid, 'size' => $filesize, 'max' => $maximagesize, 'pixels' => $pixels, 'type' => $image->getType()]);
 							$image->scaleDown($pixels);
-							$filesize = strlen($image->asString());
+							$filesize = strlen((string) $image->asString());
 						}
 					}
 				}
@@ -858,7 +858,7 @@ class Photo
 	public static function setPermissionFromBody($body, $uid, $original_contact_id, $str_contact_allow, $str_circle_allow, $str_contact_deny, $str_circle_deny): bool
 	{
 		// Simplify image codes
-		$img_body = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism", '[img]$3[/img]', $body);
+		$img_body = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism", '[img]$3[/img]', (string) $body);
 		$img_body = preg_replace("/\[img\=(.*?)\](.*?)\[\/img\]/ism", '[img]$1[/img]', $img_body);
 
 		// Search for images
@@ -1019,7 +1019,7 @@ class Photo
 	 */
 	public static function resizeToFileSize(Image $image, int $maximagesize): Image
 	{
-		$filesize = strlen($image->asString());
+		$filesize = strlen((string) $image->asString());
 		$width    = $image->getWidth();
 		$height   = $image->getHeight();
 
@@ -1029,7 +1029,7 @@ class Photo
 				if (($filesize > $maximagesize) && (max($width, $height) > $pixels)) {
 					DI::logger()->info('Resize', ['size' => $filesize, 'width' => $width, 'height' => $height, 'max' => $maximagesize, 'pixels' => $pixels]);
 					$image->scaleDown($pixels);
-					$filesize = strlen($image->asString());
+					$filesize = strlen((string) $image->asString());
 					$width    = $image->getWidth();
 					$height   = $image->getHeight();
 				}
@@ -1122,9 +1122,9 @@ class Photo
 
 		if (!empty($files['name'])) {
 			if (is_array($files['name'])) {
-				$filename = basename($files['name'][0]);
+				$filename = basename((string) $files['name'][0]);
 			} else {
-				$filename = basename($files['name']);
+				$filename = basename((string) $files['name']);
 			}
 		} else {
 			$filename = '';

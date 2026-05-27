@@ -111,11 +111,11 @@ class Index extends BaseSettings
 		$region       = $this->cleanInputText($request['region']);
 		$postal_code  = $this->cleanInputText($request['postal_code']);
 		$country_name = $this->cleanInputText($request['country_name']);
-		$pub_keywords = self::cleanKeywords(trim($request['pub_keywords']));
-		$prv_keywords = self::cleanKeywords(trim($request['prv_keywords']));
-		$xmpp         = $this->cleanInput(trim($request['xmpp']));
-		$matrix       = $this->cleanInput(trim($request['matrix']));
-		$homepage     = $this->cleanInput(trim($request['homepage']));
+		$pub_keywords = self::cleanKeywords(trim((string) $request['pub_keywords']));
+		$prv_keywords = self::cleanKeywords(trim((string) $request['prv_keywords']));
+		$xmpp         = $this->cleanInput(trim((string) $request['xmpp']));
+		$matrix       = $this->cleanInput(trim((string) $request['matrix']));
+		$homepage     = $this->cleanInput(trim((string) $request['homepage']));
 		if ((!str_starts_with($homepage, 'http')) && (strlen($homepage))) {
 			// neither http nor https in URL, add them
 			$homepage = 'http://' . $homepage;

@@ -385,7 +385,7 @@ abstract class BaseModule implements ICanHandleRequests
 
 		$user = User::getById(DI::userSession()->getLocalUserId(), ['guid', 'prvkey']);
 
-		$x = explode('.', $hash);
+		$x = explode('.', (string) $hash);
 		if (time() > (intval($x[0]) + $max_livetime)) {
 			return false;
 		}

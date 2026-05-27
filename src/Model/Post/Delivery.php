@@ -68,7 +68,7 @@ class Delivery
 		$deliveries = [];
 		while ($row = DBA::fetch($rows)) {
 			if (!empty($row['receivers'])) {
-				$row['receivers'] = json_decode($row['receivers'], true);
+				$row['receivers'] = json_decode((string) $row['receivers'], true);
 			} else {
 				$row['receivers'] = [];
 			}

@@ -191,7 +191,7 @@ final class AddonManagerHelper implements AddonHelper
 		$addons = array_filter($this->config->get('addons') ?? []);
 
 		foreach ($addons as $addonName => $data) {
-			$addonId = Strings::sanitizeFilePathItem(trim($addonName));
+			$addonId = Strings::sanitizeFilePathItem(trim((string) $addonName));
 
 			$addon_file_path = $this->getAddonPath() . '/' . $addonId . '/' . $addonId . '.php';
 

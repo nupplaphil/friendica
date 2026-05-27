@@ -149,7 +149,7 @@ class Post
 		 * between creation time and edit time of a second. Thats why we add the notice
 		 * only if the difference is more than 1 second.
 		 */
-		if (strtotime($item['edited']) - strtotime($item['created']) > 1) {
+		if (strtotime((string) $item['edited']) - strtotime((string) $item['created']) > 1) {
 			$edited = [
 				'label'    => DI::l10n()->t('This entry was edited'),
 				'date'     => DI::l10n()->fullDateTime($item['edited']),
@@ -308,7 +308,7 @@ class Post
 			$profile_link = $item['author-link'];
 		}
 
-		if (str_starts_with($profile_link, 'contact/redir/')) {
+		if (str_starts_with((string) $profile_link, 'contact/redir/')) {
 			$sparkle = ' sparkle';
 		}
 
@@ -481,7 +481,7 @@ class Post
 
 		$ago          = DI::l10n()->relativeDateTime($item['created']);
 		$ago_received = DI::l10n()->relativeDateTime($item['received']);
-		if (DI::config()->get('system', 'show_received') && (abs(strtotime($item['created']) - strtotime($item['received'])) > DI::config()->get('system', 'show_received_seconds')) && ($ago != $ago_received)) {
+		if (DI::config()->get('system', 'show_received') && (abs(strtotime((string) $item['created']) - strtotime((string) $item['received'])) > DI::config()->get('system', 'show_received_seconds')) && ($ago != $ago_received)) {
 			$ago = DI::l10n()->t('%s (Received %s)', $ago, $ago_received);
 		}
 
@@ -489,7 +489,7 @@ class Post
 		if (!DI::userSession()->getLocalUserId() && ($item['network'] != Protocol::DIASPORA) && !empty(DI::session()->get('remote_comment'))) {
 			$remote_comment = [
 				DI::l10n()->t('Comment this item on your system'), DI::l10n()->t('Remote comment'),
-				str_replace('{uri}', urlencode($item['uri']), DI::session()->get('remote_comment')),
+				str_replace('{uri}', urlencode((string) $item['uri']), DI::session()->get('remote_comment')),
 			];
 
 			// Ensure to either display the remote comment or the local activities
@@ -508,7 +508,7 @@ class Post
 		$language  = '';
 		if (!empty($item['language'])) {
 			$languages = DI::l10n()->t('Detected languages');
-			$language  = array_key_first(json_decode($item['language'], true));
+			$language  = array_key_first(json_decode((string) $item['language'], true));
 		}
 
 		if (in_array($item['private'], [Item::PUBLIC, Item::UNLISTED]) && in_array($item['network'], Protocol::FEDERATED)) {
@@ -531,7 +531,7 @@ class Post
 			'isunknown'              => $parent_unknown,
 			'isunknown_label'        => DI::l10n()->t('Parent is probably private or not federated.'),
 			'template'               => $this->getTemplate(),
-			'type'                   => implode('', array_slice(explode('/', $item['verb']), -1)),
+			'type'                   => implode('', array_slice(explode('/', (string) $item['verb']), -1)),
 			'comment_firstcollapsed' => false,
 			'comment_lastcollapsed'  => false,
 			'suppress_tags'          => DI::config()->get('system', 'suppress_tags'),
@@ -548,7 +548,7 @@ class Post
 			'body_html'              => $body_html,
 			'text'                   => strip_tags($body_html),
 			'id'                     => $this->getId(),
-			'guid'                   => urlencode($item['guid']),
+			'guid'                   => urlencode((string) $item['guid']),
 			'isevent'                => $isevent,
 			'attend'                 => $attend,
 			'linktitle'              => DI::l10n()->t('View %s\'s profile @ %s', $profile_name, $item['author-link']),

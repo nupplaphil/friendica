@@ -30,8 +30,8 @@ class Features extends BaseSettings
 	{
 		BaseSettings::checkFormSecurityTokenRedirectOnError('/settings/features', 'settings_features');
 		foreach ($request as $k => $v) {
-			if (str_starts_with($k, 'feature_')) {
-				$key = substr($k, 8);
+			if (str_starts_with((string) $k, 'feature_')) {
+				$key = substr((string) $k, 8);
 				if ($key == 'widgetorder') { // not boolean, stringified array
 					$this->pConfig->set($this->session->getLocalUserId(), 'feature', 'widgetorder', $v);
 				} elseif ($key == 'resetorder' && $v) {
@@ -56,7 +56,7 @@ class Features extends BaseSettings
 			}
 		}
 		// try to get widget order preference
-		$widgetorder = json_decode($this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
+		$widgetorder = json_decode((string) $this->pConfig->get($this->session->getLocalUserId(), 'feature', 'widgetorder'));
 		if (!empty($widgetorder)) {
 			$tmp = [];
 			// iterate through widgetorder and network items

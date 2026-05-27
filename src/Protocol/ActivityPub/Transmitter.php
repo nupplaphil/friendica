@@ -908,7 +908,7 @@ class Transmitter
 					if ($receiver == ActivityPub::PUBLIC_COLLECTION) {
 						$name = Receiver::PUBLIC_COLLECTION;
 					} else {
-						$name = trim(parse_url($receiver, PHP_URL_PATH), '/');
+						$name = trim(parse_url((string) $receiver, PHP_URL_PATH), '/');
 					}
 					Tag::store($item['uri-id'], $type, $name, $receiver);
 				}
@@ -1265,7 +1265,7 @@ class Transmitter
 		$reshared = false;
 
 		// Only check for a reshare, if it is a real reshare and no quoted reshare
-		if (str_starts_with($item['body'], '[share')) {
+		if (str_starts_with((string) $item['body'], '[share')) {
 			$announce = self::getAnnounceArray($item);
 			$reshared = !empty($announce);
 		}
@@ -1516,7 +1516,7 @@ class Transmitter
 		if (empty($item['coord'])) {
 			$coord = Map::getCoordinates($item['location']);
 		} else {
-			$coords = explode(' ', $item['coord']);
+			$coords = explode(' ', (string) $item['coord']);
 			if (count($coords) == 2) {
 				$coord = ['lat' => $coords[0], 'lon' => $coords[1]];
 			}
@@ -1568,7 +1568,7 @@ class Transmitter
 		$terms = Tag::getByURIId($item['uri-id'], [Tag::HASHTAG, Tag::MENTION, Tag::IMPLICIT_MENTION, Tag::EXCLUSIVE_MENTION]);
 		foreach ($terms as $term) {
 			if ($term['type'] == Tag::HASHTAG) {
-				$url    = DI::baseUrl() . '/search?tag=' . urlencode($term['name']);
+				$url    = DI::baseUrl() . '/search?tag=' . urlencode((string) $term['name']);
 				$tags[] = ['type' => 'Hashtag', 'href' => $url, 'name' => '#' . $term['name']];
 			} else {
 				$contact = Contact::getByURL($term['url'], false, ['addr']);
@@ -1891,7 +1891,7 @@ class Transmitter
 				// For community posts we remove the visible "!user@domain.tld".
 				// This improves the look at systems like Lemmy.
 				// Also in the future we should control the community delivery via other methods.
-				$body = preg_replace("/!\[url\=[^\[\]]*\][^\[\]]*\[\/url\]/ism", '', $body);
+				$body = preg_replace("/!\[url\=[^\[\]]*\][^\[\]]*\[\/url\]/ism", '', (string) $body);
 			}
 
 			if ($type == 'Page') {
@@ -1995,7 +1995,7 @@ class Transmitter
 	{
 		// Try to fetch the language from the post itself
 		if (!empty($item['language'])) {
-			$languages = array_keys(json_decode($item['language'], true));
+			$languages = array_keys(json_decode((string) $item['language'], true));
 			if (!empty($languages[0])) {
 				return DI::l10n()->toISO6391($languages[0]);
 			}
@@ -2135,7 +2135,7 @@ class Transmitter
 			return false;
 		}
 
-		$hash = hash('ripemd128', $uid ?: $contact['uid'] . '-' . $contact['id'] . '-' . $contact['created']);
+		$hash = hash('ripemd128', (string) $uid ?: $contact['uid'] . '-' . $contact['id'] . '-' . $contact['created']);
 		$uuid = substr($hash, 0, 8) . '-' . substr($hash, 8, 4) . '-' . substr($hash, 12, 4) . '-' . substr($hash, 16, 4) . '-' . substr($hash, 20, 12);
 		return DI::baseUrl() . '/activity/' . $uuid;
 	}

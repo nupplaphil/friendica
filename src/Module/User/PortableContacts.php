@@ -190,7 +190,7 @@ class PortableContacts extends BaseModule
 					$entry['updated'] = $contact['avatar-date'];
 				}
 
-				$entry['updated'] = date('c', strtotime($entry['updated']));
+				$entry['updated'] = date('c', strtotime((string) $entry['updated']));
 			}
 
 			if ($selectedFields['photos']) {

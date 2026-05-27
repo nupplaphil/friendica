@@ -55,7 +55,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
 		// Release the key resource
 		openssl_free_key($privatekeyid);
 
-		return base64_encode($signature);
+		return base64_encode((string) $signature);
 	}
 
 	public function check_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, $signature, \Friendica\Security\OAuth1\OAuthToken $token = null)

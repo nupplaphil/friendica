@@ -420,7 +420,7 @@ class Receiver
 				$apcontact    = APContact::getByURL($object_data['object_id'], true);
 				$trust_source = empty($apcontact) || ($apcontact['type'] == 'Tombstone') || $apcontact['suspended'];
 			}
-		} elseif (in_array($type, ['as:Create', 'as:Update', 'as:Invite']) || strpos($type, '#emojiReaction')) {
+		} elseif (in_array($type, ['as:Create', 'as:Update', 'as:Invite']) || strpos((string) $type, '#emojiReaction')) {
 			// Fetch the content only on activities where this matters
 			// We can receive "#emojiReaction" when fetching content from Hubzilla systems
 			$object_data = self::fetchObject($object_id, $activity['as:object'], $trust_source, $fetch_uid);
@@ -1905,7 +1905,7 @@ class Receiver
 				continue;
 			}
 
-			$filetype = strtolower(substr($mediatype, 0, strpos($mediatype, '/')));
+			$filetype = strtolower(substr((string) $mediatype, 0, strpos((string) $mediatype, '/')));
 			$type     = Post\Media::getType($mediatype);
 
 			$height = JsonLD::fetchElement($url, 'as:height', '@value');

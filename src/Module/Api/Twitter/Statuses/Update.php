@@ -116,7 +116,7 @@ class Update extends BaseApi
 		$item = DI::contentItem()->expandTags($item);
 
 		if (!empty($request['media_ids'])) {
-			$ids = explode(',', $request['media_ids']);
+			$ids = explode(',', (string) $request['media_ids']);
 		} elseif (!empty($_FILES['media'])) {
 			// upload the image if we have one
 			$picture = Photo::upload($uid, $_FILES['media']);

@@ -56,7 +56,7 @@ class Channels extends BaseSettings
 			$channel = $this->userDefinedChannel->createFromTableRow([
 				'label'            => $request['new_label'],
 				'description'      => $request['new_description'],
-				'access-key'       => substr(mb_strtolower($request['new_access_key']), 0, 1),
+				'access-key'       => substr(mb_strtolower((string) $request['new_access_key']), 0, 1),
 				'uid'              => $uid,
 				'circle'           => (int) $request['new_circle'],
 				'include-tags'     => Strings::cleanTags($request['new_include_tags']),
@@ -91,7 +91,7 @@ class Channels extends BaseSettings
 				'id'               => $id,
 				'label'            => $request['label'][$id],
 				'description'      => $request['description'][$id],
-				'access-key'       => substr(mb_strtolower($request['access_key'][$id]), 0, 1),
+				'access-key'       => substr(mb_strtolower((string) $request['access_key'][$id]), 0, 1),
 				'uid'              => $uid,
 				'circle'           => (int) $request['circle'][$id],
 				'include-tags'     => Strings::cleanTags($request['include_tags'][$id]),

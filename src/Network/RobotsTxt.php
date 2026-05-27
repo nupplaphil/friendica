@@ -100,7 +100,7 @@ class RobotsTxt
 
 		foreach ($lines as $line) {
 			$line = preg_replace('~\s*#.*$~', '', $line);
-			$line = trim($line);
+			$line = trim((string) $line);
 
 			if (empty($line)) {
 				continue;
@@ -154,13 +154,13 @@ class RobotsTxt
 		$length  = 0;
 
 		foreach ($this->allowRules as $rule) {
-			if (strlen($rule) > $length && $this->pathMatches($path, $rule)) {
-				$length = strlen($rule);
+			if (strlen((string) $rule) > $length && $this->pathMatches($path, $rule)) {
+				$length = strlen((string) $rule);
 			}
 		}
 
 		foreach ($this->disallowRules as $rule) {
-			if (strlen($rule) > $length && $this->pathMatches($path, $rule)) {
+			if (strlen((string) $rule) > $length && $this->pathMatches($path, $rule)) {
 				$allowed = false;
 			}
 		}

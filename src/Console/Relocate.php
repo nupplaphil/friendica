@@ -54,7 +54,7 @@ HELP;
 			throw new \Asika\SimpleConsole\CommandArgsException('Too many arguments');
 		}
 
-		$new_url = rtrim($this->getArgument(0), '/');
+		$new_url = rtrim((string) $this->getArgument(0), '/');
 
 		$parsed = @parse_url($new_url);
 		if (!is_array($parsed) || empty($parsed['host']) || empty($parsed['scheme'])) {

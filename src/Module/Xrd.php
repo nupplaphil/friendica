@@ -32,14 +32,14 @@ class Xrd extends BaseModule
 				throw new BadRequestException();
 			}
 
-			$uri  = urldecode(trim($_GET['uri']));
+			$uri  = urldecode(trim((string) $_GET['uri']));
 			$mode = self::getAcceptedContentType($_SERVER['HTTP_ACCEPT'] ?? '', Response::TYPE_XML);
 		} else {
 			if (empty($_GET['resource'])) {
 				throw new BadRequestException();
 			}
 
-			$uri  = urldecode(trim($_GET['resource']));
+			$uri  = urldecode(trim((string) $_GET['resource']));
 			$mode = self::getAcceptedContentType($_SERVER['HTTP_ACCEPT'] ?? '', Response::TYPE_JSON);
 		}
 

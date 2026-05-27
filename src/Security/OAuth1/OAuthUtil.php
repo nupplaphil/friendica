@@ -30,7 +30,7 @@ class OAuthUtil
 	// seem to be used anywhere so leaving it as is.
 	public static function urldecode_rfc3986($string)
 	{
-		return urldecode($string);
+		return urldecode((string) $string);
 	}
 
 	// Utility function for turning the Authorization: header into
@@ -41,7 +41,7 @@ class OAuthUtil
 		$pattern = '/(([-_a-z]*)=("([^"]*)"|([^,]*)),?)/';
 		$offset  = 0;
 		$params  = [];
-		while (preg_match($pattern, $header, $matches, PREG_OFFSET_CAPTURE, $offset) > 0) {
+		while (preg_match($pattern, (string) $header, $matches, PREG_OFFSET_CAPTURE, $offset) > 0) {
 			$match          = $matches[0];
 			$header_name    = $matches[2][0];
 			$header_content = (isset($matches[5])) ? $matches[5][0] : $matches[4][0];
@@ -91,14 +91,14 @@ class OAuthUtil
 			}
 
 			foreach ($_SERVER as $key => $value) {
-				if (str_starts_with($key, "HTTP_")) {
+				if (str_starts_with((string) $key, "HTTP_")) {
 					// this is chaos, basically it is just there to capitalize the first
 					// letter of every word that is not an initial HTTP and strip HTTP
 					// code from przemek
 					$key = str_replace(
 						" ",
 						"-",
-						ucwords(strtolower(str_replace("_", " ", substr($key, 5)))),
+						ucwords(strtolower(str_replace("_", " ", substr((string) $key, 5)))),
 					);
 					$out[$key] = $value;
 				}
@@ -116,7 +116,7 @@ class OAuthUtil
 			return [];
 		}
 
-		$pairs = explode('&', $input);
+		$pairs = explode('&', (string) $input);
 
 		$parsed_parameters = [];
 		foreach ($pairs as $pair) {
