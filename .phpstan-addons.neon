@@ -5,6 +5,8 @@
 parameters:
     level: 3
 
+    phpVersion: 80200 # PHP 8.2
+
     paths:
         - addon/
 
