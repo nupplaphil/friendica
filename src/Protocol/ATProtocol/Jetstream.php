@@ -119,7 +119,7 @@ class Jetstream
 						$this->logger->notice('Empty message received');
 						break;
 					}
-					$data = json_decode($message);
+					$data = json_decode((string) $message);
 					if (is_object($data)) {
 						$timestamp = $data->time_us;
 						$this->route($data);

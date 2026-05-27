@@ -104,7 +104,7 @@ class Edit extends BaseModule
 			'$is_mobile'     => $this->mode->isMobile(),
 		]);
 
-		if (strlen($item['allow_cid']) || strlen($item['allow_gid']) || strlen($item['deny_cid']) || strlen($item['deny_gid'])) {
+		if (strlen((string) $item['allow_cid']) || strlen((string) $item['allow_gid']) || strlen((string) $item['deny_cid']) || strlen((string) $item['deny_gid'])) {
 			$lockstate = 'lock';
 		} else {
 			$lockstate = 'unlock';

@@ -106,7 +106,7 @@ class Relay
 			}
 
 			foreach ($tags as $tag) {
-				$tag = mb_strtolower($tag);
+				$tag = mb_strtolower((string) $tag);
 				if (in_array($tag, $denyTags)) {
 					DI::logger()->info('Unwanted hashtag found - rejected', ['hashtag' => $tag, 'network' => $network, 'url' => $url, 'causer' => $causer]);
 					return false;

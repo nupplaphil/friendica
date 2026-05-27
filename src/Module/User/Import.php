@@ -202,7 +202,7 @@ class Import extends \Friendica\BaseModule
 			return;
 		}
 
-		if (in_array(strtolower($account['user']['email']), User::getAdminEmailList())) {
+		if (in_array(strtolower((string) $account['user']['email']), User::getAdminEmailList())) {
 			$this->systemMessages->addNotice($this->t('Cannot use that email.'));
 			return;
 		}
@@ -365,7 +365,7 @@ class Import extends \Friendica\BaseModule
 
 		foreach ($account['photo'] as $photo) {
 			$photo['uid']  = $newUid;
-			$photo['data'] = hex2bin($photo['data']);
+			$photo['data'] = hex2bin((string) $photo['data']);
 
 			$r = Photo::store(
 				new Image($photo['data'], $photo['type'], $photo['filename']),

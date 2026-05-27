@@ -147,20 +147,20 @@ class ItemTest extends MockedTestCase
 	private function createItem(): Item
 	{
 		return new Item(
-			$this->createMock(LoggerInterface::class),
-			$this->createMock(Profiler::class),
+			$this->createStub(LoggerInterface::class),
+			$this->createStub(Profiler::class),
 			new Activity(),
-			$this->createMock(L10n::class),
-			$this->createMock(IHandleUserSessions::class),
+			$this->createStub(L10n::class),
+			$this->createStub(IHandleUserSessions::class),
 			new Video(),
 			new ACLFormatter(),
-			$this->createMock(IManagePersonalConfigValues::class),
-			$this->createMock(IManageConfigValues::class),
-			$this->createMock(BaseURL::class),
-			$this->createMock(Emailer::class),
-			$this->createMock(EventDispatcherInterface::class),
-			$this->createMock(PostMediaRepository::class),
-			$this->createMock(PostMediaFactory::class),
+			$this->createStub(IManagePersonalConfigValues::class),
+			$this->createStub(IManageConfigValues::class),
+			$this->createStub(BaseURL::class),
+			$this->createStub(Emailer::class),
+			$this->createStub(EventDispatcherInterface::class),
+			$this->createStub(PostMediaRepository::class),
+			$this->createStub(PostMediaFactory::class),
 		);
 	}
 }

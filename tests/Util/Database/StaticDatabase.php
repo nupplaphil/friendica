@@ -141,16 +141,16 @@ class StaticDatabase extends Database
 		}
 
 		$port       = 0;
-		$serveraddr = trim($db_host);
+		$serveraddr = trim((string) $db_host);
 		$serverdata = explode(':', $serveraddr);
 		$server     = $serverdata[0];
 		if (count($serverdata) > 1) {
 			$port = (int) trim($serverdata[1]);
 		}
 		$server = trim($server);
-		$user   = trim($db_user);
+		$user   = trim((string) $db_user);
 		$pass   = trim($db_pw);
-		$db     = trim($db_data);
+		$db     = trim((string) $db_data);
 
 		if (!(strlen($server) && strlen($user) && strlen($db))) {
 			return;

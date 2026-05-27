@@ -67,7 +67,7 @@ class Cron
 			'workerqueue',
 			['id', 'pid', 'executed', 'priority', 'command', 'parameter'],
 			['NOT `done` AND `pid` != ? AND `executed` > ?', 0, DBA::NULL_DATETIME],
-			['order' => ['priority', 'retrial', 'created']]
+			['order' => ['priority', 'retrial', 'created']],
 		);
 
 		$max_duration_defaults = DI::config()->get('system', 'worker_max_duration');
@@ -84,7 +84,7 @@ class Cron
 					continue;
 				}
 
-				$argv = json_decode($entry['parameter'], true);
+				$argv = json_decode((string) $entry['parameter'], true);
 				if (!empty($entry['command'])) {
 					$command = $entry['command'];
 				} elseif (!empty($argv)) {
@@ -93,10 +93,10 @@ class Cron
 					return;
 				}
 
-				$command = basename($command);
+				$command = basename((string) $command);
 
 				// How long is the process already running?
-				$duration = (time() - strtotime($entry["executed"])) / 60;
+				$duration = (time() - strtotime((string) $entry["executed"])) / 60;
 				if ($duration > $max_duration) {
 					DI::logger()->warning('Worker process took too much time - killed', ['duration' => number_format($duration, 3), 'max' => $max_duration, 'id' => $entry["id"], 'pid' => $entry["pid"], 'command' => $command]);
 					posix_kill($entry["pid"], SIGTERM);
@@ -115,7 +115,7 @@ class Cron
 					DBA::update(
 						'workerqueue',
 						['executed' => DBA::NULL_DATETIME, 'created' => DateTimeFormat::utcNow(), 'priority' => $new_priority, 'pid' => 0],
-						['id'       => $entry["id"]]
+						['id'       => $entry["id"]],
 					);
 				} else {
 					DI::logger()->info('Process runtime is okay', ['duration' => number_format($duration, 3), 'max' => $max_duration, 'id' => $entry["id"], 'pid' => $entry["pid"], 'command' => $command]);
@@ -195,7 +195,7 @@ class Cron
 	 */
 	private static function deliverPosts()
 	{
-		foreach(DI::deliveryQueueItemRepo()->selectAggregateByServerId() as $delivery) {
+		foreach (DI::deliveryQueueItemRepo()->selectAggregateByServerId() as $delivery) {
 			if ($delivery->failed > 0) {
 				DI::logger()->info('Removing failed deliveries', ['gsid' => $delivery->targetServerId, 'failed' => $delivery->failed]);
 				DI::deliveryQueueItemRepo()->removeFailedByServerId($delivery->targetServerId, DI::config()->get('system', 'worker_defer_limit'));
@@ -237,7 +237,7 @@ class Cron
 				'uid'        => $contact['uid'],
 				'contact-id' => $contact['id'],
 				'datetime'   => $contact['created'],
-				'hash'       => Strings::getRandomHex()
+				'hash'       => Strings::getRandomHex(),
 			];
 			DI::logger()->notice('Adding missing intro', ['fields' => $fields]);
 			DBA::insert('intro', $fields);

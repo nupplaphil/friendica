@@ -77,7 +77,7 @@ final class FriendicaSmartyEngine extends TemplateEngine
 
 		foreach ($vars as $key => $value) {
 			if ($key[0] === '$') {
-				$key = substr($key, 1);
+				$key = substr((string) $key, 1);
 			}
 
 			$this->smarty->assign($key, $value);

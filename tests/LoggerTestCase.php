@@ -69,7 +69,7 @@ abstract class LoggerTestCase extends MockedTestCase
 
 	public function assertLoglineNums($assertNum, $string)
 	{
-		self::assertEquals($assertNum, preg_match_all(self::LOGLINE, $string));
+		self::assertEquals($assertNum, preg_match_all(self::LOGLINE, (string) $string));
 	}
 
 	/**

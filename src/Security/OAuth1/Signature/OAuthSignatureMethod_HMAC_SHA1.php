@@ -19,7 +19,7 @@ use Friendica\Security\OAuth1\OAuthUtil;
  */
 class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 {
-	function get_name()
+	public function get_name()
 	{
 		return "HMAC-SHA1";
 	}
@@ -45,7 +45,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 		$key       = implode('&', $key_parts);
 
 
-		$r = base64_encode(hash_hmac('sha1', $base_string, $key, true));
+		$r = base64_encode(hash_hmac('sha1', (string) $base_string, $key, true));
 		return $r;
 	}
 }

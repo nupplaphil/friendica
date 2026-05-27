@@ -44,7 +44,7 @@ class Contact extends BaseModule
 		}
 
 		$redirectUrl = $_POST['command'] ?? '';
-		if (!str_starts_with($redirectUrl, 'contact')) {
+		if (!str_starts_with((string) $redirectUrl, 'contact')) {
 			$redirectUrl = 'contact';
 		}
 		if (!empty($_POST['parameter'])) {

@@ -234,7 +234,7 @@ class Diaspora
 
 				$outer_key_bundle = '';
 				@openssl_private_decrypt($encrypted_aes_key_bundle, $outer_key_bundle, $privKey);
-				$j_outer_key_bundle = json_decode($outer_key_bundle);
+				$j_outer_key_bundle = json_decode((string) $outer_key_bundle);
 
 				if (!is_object($j_outer_key_bundle)) {
 					DI::logger()->info('Unable to decode outer key bundle', ['outer_key_bundle' => $outer_key_bundle]);
@@ -370,16 +370,16 @@ class Diaspora
 
 			$encrypted_header = json_decode(base64_decode($children->encrypted_header));
 
-			$encrypted_aes_key_bundle = base64_decode($encrypted_header->aes_key);
-			$ciphertext               = base64_decode($encrypted_header->ciphertext);
+			$encrypted_aes_key_bundle = base64_decode((string) $encrypted_header->aes_key);
+			$ciphertext               = base64_decode((string) $encrypted_header->ciphertext);
 
 			$outer_key_bundle = '';
 			openssl_private_decrypt($encrypted_aes_key_bundle, $outer_key_bundle, $privKey);
 
-			$j_outer_key_bundle = json_decode($outer_key_bundle);
+			$j_outer_key_bundle = json_decode((string) $outer_key_bundle);
 
-			$outer_iv  = base64_decode($j_outer_key_bundle->iv);
-			$outer_key = base64_decode($j_outer_key_bundle->key);
+			$outer_iv  = base64_decode((string) $j_outer_key_bundle->iv);
+			$outer_key = base64_decode((string) $j_outer_key_bundle->key);
 
 			$decrypted = self::aesDecrypt($outer_key, $outer_iv, $ciphertext);
 
@@ -945,7 +945,7 @@ class Diaspora
 			function ($match) use ($item) {
 				self::fetchGuidSub($match, $item);
 			},
-			$item['body'],
+			(string) $item['body'],
 		);
 
 		preg_replace_callback(
@@ -953,7 +953,7 @@ class Diaspora
 			function ($match) use ($item) {
 				self::fetchGuidSub($match, $item);
 			},
-			$item['body'],
+			(string) $item['body'],
 		);
 	}
 
@@ -1285,7 +1285,7 @@ class Diaspora
 		$platform = '';
 		$gserver  = DBA::selectFirst('gserver', ['platform'], ['nurl' => Strings::normaliseLink($contact['baseurl'])]);
 		if (!empty($gserver['platform'])) {
-			$platform = strtolower($gserver['platform']);
+			$platform = strtolower((string) $gserver['platform']);
 			DI::logger()->info('Detected platform', ['platform' => $platform, 'url' => $contact['url']]);
 		}
 
@@ -2142,7 +2142,7 @@ class Diaspora
 		// this is to prevent multiple birthday notifications in a single year
 		// if we already have a stored birthday and the 'm-d' part hasn't changed, preserve the entry, which will preserve the notify year
 
-		if (substr($birthday, 5) === substr($contact['bd'], 5)) {
+		if (substr($birthday, 5) === substr((string) $contact['bd'], 5)) {
 			$birthday = $contact['bd'];
 		}
 
@@ -2816,7 +2816,7 @@ class Diaspora
 
 		$json_object = json_encode(
 			[
-				'aes_key'                  => base64_encode($encrypted_key_bundle),
+				'aes_key'                  => base64_encode((string) $encrypted_key_bundle),
 				'encrypted_magic_envelope' => base64_encode($ciphertext),
 			],
 		);
@@ -3216,7 +3216,7 @@ class Diaspora
 		}
 
 		return [
-			'root_handle' => strtolower($reshared['post']['author-addr']),
+			'root_handle' => strtolower((string) $reshared['post']['author-addr']),
 			'root_guid'   => $reshared['post']['guid'],
 		];
 	}
@@ -3271,7 +3271,7 @@ class Diaspora
 			$eventdata['description'] = html_entity_decode(BBCode::toMarkdown($event['desc']));
 		}
 		if ($event['location']) {
-			$event['location'] = preg_replace("/\[map\](.*?)\[\/map\]/ism", '$1', $event['location']);
+			$event['location'] = preg_replace("/\[map\](.*?)\[\/map\]/ism", '$1', (string) $event['location']);
 			$coord             = Map::getCoordinates($event['location']);
 
 			$location            = [];
@@ -3362,8 +3362,8 @@ class Diaspora
 			$body = BBCode::toMarkdown($body);
 
 			// Adding the title
-			if (strlen($title)) {
-				$body = '### ' . html_entity_decode($title) . "\n\n" . $body;
+			if (strlen((string) $title)) {
+				$body = '### ' . html_entity_decode((string) $title) . "\n\n" . $body;
 			}
 
 			$location = [];
@@ -3373,7 +3373,7 @@ class Diaspora
 			}
 
 			if ($item['coord'] != '') {
-				$coord           = explode(' ', $item['coord']);
+				$coord           = explode(' ', (string) $item['coord']);
 				$location['lat'] = $coord[0];
 				$location['lng'] = $coord[1];
 			}
@@ -3447,7 +3447,7 @@ class Diaspora
 				continue;
 			}
 
-			$name = basename($media['url']);
+			$name = basename((string) $media['url']);
 			$path = str_replace($name, '', $media['url']);
 
 			$message[++$counter . ':photo'] = [
@@ -3743,7 +3743,7 @@ class Diaspora
 	 */
 	public static function sendRetraction(array $item, array $owner, array $contact, bool $public_batch = false, bool $relay = false): int
 	{
-		$itemaddr = strtolower($item['author-addr']);
+		$itemaddr = strtolower((string) $item['author-addr']);
 
 		$msg_type = 'retraction';
 

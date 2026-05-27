@@ -86,7 +86,7 @@ class Magic extends BaseModule
 
 		if ($contact !== []) {
 			// Redirect if the contact is already authenticated on this site.
-			if ($this->appHelper->getContactId() && str_contains($contact['nurl'], Strings::normaliseLink($this->baseUrl))) {
+			if ($this->appHelper->getContactId() && str_contains((string) $contact['nurl'], Strings::normaliseLink($this->baseUrl))) {
 				$this->logger->info('Contact is already authenticated, redirecting to destination.', ['dest' => $dest]);
 				System::externalRedirect($dest);
 			}

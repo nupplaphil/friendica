@@ -193,22 +193,22 @@ class Login extends BaseModule
 		if (is_array($attr) && count($attr)) {
 			foreach ($attr as $k => $v) {
 				if ($k === 'namePerson/friendly') {
-					$nick = trim($v);
+					$nick = trim((string) $v);
 				}
 				if ($k === 'namePerson/first') {
-					$first = trim($v);
+					$first = trim((string) $v);
 				}
 				if ($k === 'namePerson') {
-					$args['username'] = trim($v);
+					$args['username'] = trim((string) $v);
 				}
 				if ($k === 'contact/email') {
-					$args['email'] = trim($v);
+					$args['email'] = trim((string) $v);
 				}
 				if ($k === 'media/image/aspect11') {
-					$photosq = bin2hex(trim($v));
+					$photosq = bin2hex(trim((string) $v));
 				}
 				if ($k === 'media/image/default') {
-					$photo = bin2hex(trim($v));
+					$photo = bin2hex(trim((string) $v));
 				}
 			}
 		}
@@ -225,7 +225,7 @@ class Login extends BaseModule
 			$args['photo'] = $photo;
 		}
 
-		$args['openid_url'] = trim(DI::session()->get('openid_identity'));
+		$args['openid_url'] = trim((string) DI::session()->get('openid_identity'));
 
 		return 'register?' . http_build_query($args);
 	}

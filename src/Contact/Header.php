@@ -22,6 +22,6 @@ class Header
 	 */
 	public function getMastodonBannerPath(): string
 	{
-		return '/' . ltrim($this->config->get('api', 'mastodon_banner'), '/');
+		return '/' . ltrim((string) $this->config->get('api', 'mastodon_banner'), '/');
 	}
 }

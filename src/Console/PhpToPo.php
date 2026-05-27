@@ -209,7 +209,7 @@ HELP;
 	private function startsWith($haystack, $needle)
 	{
 		// search backwards starting from haystack length characters from the end
-		return $needle === "" || strrpos($haystack, (string) $needle, -strlen($haystack)) !== false;
+		return $needle === "" || strrpos((string) $haystack, (string) $needle, -strlen((string) $haystack)) !== false;
 	}
 
 	/**
@@ -237,7 +237,7 @@ HELP;
 
 	private function findOriginalMsgId($str)
 	{
-		$norm_str = preg_replace(self::NORM_REGEXP, "", $str);
+		$norm_str = preg_replace(self::NORM_REGEXP, "", (string) $str);
 		if (array_key_exists($norm_str, $this->normBaseMsgIds)) {
 			return $this->normBaseMsgIds[$norm_str];
 		}

@@ -148,7 +148,7 @@ class Redir extends \Friendica\BaseModule
 
 		if ($this->session->getRemoteUserId()) {
 			$host       = substr($this->baseUrl->getPath() . ($this->baseUrl->getPath() ? '/' . $this->baseUrl->getPath() : ''), strpos($this->baseUrl->getPath(), '://') + 3);
-			$remotehost = substr($contact['addr'], strpos($contact['addr'], '@') + 1);
+			$remotehost = substr((string) $contact['addr'], strpos((string) $contact['addr'], '@') + 1);
 
 			// On a local instance we have to check if the local user has already authenticated
 			// with the local contact. Otherwise, the local user would ask the local contact

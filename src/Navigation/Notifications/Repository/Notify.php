@@ -768,7 +768,7 @@ class Notify extends BaseRepository
 
 		$params['item']   = $item;
 		$params['parent'] = $item['parent'];
-		$params['link']   = $this->baseUrl . '/display/' . urlencode($item['guid']);
+		$params['link']   = $this->baseUrl . '/display/' . urlencode((string) $item['guid']);
 
 		$subjectPrefix = $l10n->t('[Friendica:Notify]');
 

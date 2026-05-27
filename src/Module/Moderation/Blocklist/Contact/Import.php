@@ -50,7 +50,7 @@ class Import extends \Friendica\Module\BaseModeration
 				return;
 			}
 		} elseif (isset($request['page_contactblock_import'])) {
-			$this->contactlist = json_decode($request['contactlist'], true);
+			$this->contactlist = json_decode((string) $request['contactlist'], true);
 			if ($this->contactlist === null) {
 				$this->notices[] = $this->t('Error parsing contact data.');
 				return;

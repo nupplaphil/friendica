@@ -214,7 +214,7 @@ final class ItemHelper
 			$item['commented'] = $item['received'] ;
 		}
 
-		$item['plink'] = ($item['plink'] ?? '') ?: $this->baseUrl . '/display/' . urlencode($item['guid']);
+		$item['plink'] = ($item['plink'] ?? '') ?: $this->baseUrl . '/display/' . urlencode((string) $item['guid']);
 
 		$item['gravity'] = $this->getGravity($item);
 

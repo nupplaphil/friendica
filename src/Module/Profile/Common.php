@@ -93,7 +93,7 @@ class Common extends BaseProfile
 		$title = $this->tt('Common contact (%s)', 'Common contacts (%s)', $total);
 		$desc  = $this->t(
 			'Both <strong>%s</strong> and yourself have publicly interacted with these contacts (follow, comment or likes on public posts).',
-			htmlentities($profile['name'], ENT_COMPAT, 'UTF-8'),
+			htmlentities((string) $profile['name'], ENT_COMPAT, 'UTF-8'),
 		);
 
 		$tpl = Renderer::getMarkupTemplate('profile/contacts.tpl');

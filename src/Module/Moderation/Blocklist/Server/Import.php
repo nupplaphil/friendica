@@ -59,7 +59,7 @@ class Import extends \Friendica\Module\BaseModeration
 				return;
 			}
 		} elseif (isset($request['page_blocklist_import'])) {
-			$this->blocklist = json_decode($request['blocklist'], true);
+			$this->blocklist = json_decode((string) $request['blocklist'], true);
 			if ($this->blocklist === null) {
 				$this->systemMessages->addNotice($this->t('Error importing pattern file'));
 				return;

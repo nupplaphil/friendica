@@ -95,7 +95,7 @@ class Account extends BaseSettings
 					$err .= DI::l10n()->t('Invalid email.');
 				}
 				//  ensure new email is not the admin mail
-				if (in_array(strtolower($email), User::getAdminEmailList())) {
+				if (in_array(strtolower((string) $email), User::getAdminEmailList())) {
 					$err .= DI::l10n()->t('Cannot change to that email.');
 					$email = $user['email'];
 				}
@@ -361,7 +361,7 @@ class Account extends BaseSettings
 		$expire_starred      = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'expire', 'starred', true);
 		$expire_network_only = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'expire', 'network_only', false);
 
-		if (!strlen($user['timezone'])) {
+		if (!strlen((string) $user['timezone'])) {
 			$timezone = DI::appHelper()->getTimeZone();
 		}
 

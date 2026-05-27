@@ -170,7 +170,7 @@ class SyslogLogger extends AbstractLogger
 
 	private function customErrorHandler($code, $msg)
 	{
-		$this->errorMessage = preg_replace('{^(fopen|mkdir)\(.*?\): }', '', $msg);
+		$this->errorMessage = preg_replace('{^(fopen|mkdir)\(.*?\): }', '', (string) $msg);
 	}
 
 	/**

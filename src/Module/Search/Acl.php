@@ -81,7 +81,7 @@ class Acl extends BaseModule
 	private function globalContactSearch(array $request): array
 	{
 		// autocomplete for global contact search (e.g. navbar search)
-		$search = trim($request['search']);
+		$search = trim((string) $request['search']);
 		$mode   = $request['smode'];
 		$page   = $request['page'] ?? 1;
 
@@ -91,7 +91,7 @@ class Acl extends BaseModule
 		foreach ($result as $contact) {
 			$contacts[] = [
 				'photo'   => Contact::getMicro($contact, true),
-				'name'    => htmlspecialchars($contact['name']),
+				'name'    => htmlspecialchars((string) $contact['name']),
 				'nick'    => $contact['addr'] ?: $contact['url'],
 				'network' => $contact['network'],
 				'link'    => $contact['url'],
@@ -198,9 +198,9 @@ class Acl extends BaseModule
 				$resultCircles[] = [
 					'type'  => self::TYPE_MENTION_CIRCLE,
 					'photo' => 'images/twopeople.png',
-					'name'  => htmlspecialchars($circle['name']),
+					'name'  => htmlspecialchars((string) $circle['name']),
 					'id'    => intval($circle['id']),
-					'uids'  => array_map('intval', explode(',', $circle['uids'])),
+					'uids'  => array_map('intval', explode(',', (string) $circle['uids'])),
 					'link'  => '',
 					'group' => '0',
 				];
@@ -220,12 +220,12 @@ class Acl extends BaseModule
 			$entry = [
 				'type'    => self::TYPE_MENTION_CONTACT,
 				'photo'   => Contact::getMicro($contact, true),
-				'name'    => htmlspecialchars($contact['name']),
+				'name'    => htmlspecialchars((string) $contact['name']),
 				'id'      => intval($contact['id']),
 				'network' => $contact['network'],
 				'link'    => $contact['url'],
-				'nick'    => htmlentities(($contact['attag'] ?? '') ?: $contact['nick']),
-				'addr'    => htmlentities(($contact['addr'] ?? '') ?: $contact['url']),
+				'nick'    => htmlentities((string) ($contact['attag'] ?? '') ?: (string) $contact['nick']),
+				'addr'    => htmlentities((string) ($contact['addr'] ?? '') ?: (string) $contact['url']),
 				'group'   => $contact['contact-type'] == Contact::TYPE_COMMUNITY,
 			];
 			if ($entry['group']) {
@@ -276,12 +276,12 @@ class Acl extends BaseModule
 					$unknown_contacts[] = [
 						'type'    => self::TYPE_MENTION_CONTACT,
 						'photo'   => Contact::getMicro($contact, true),
-						'name'    => htmlspecialchars($contact['name']),
+						'name'    => htmlspecialchars((string) $contact['name']),
 						'id'      => intval($contact['id']),
 						'network' => $contact['network'],
 						'link'    => $contact['url'],
-						'nick'    => htmlentities(($contact['nick'] ?? '') ?: $contact['addr']),
-						'addr'    => htmlentities(($contact['addr'] ?? '') ?: $contact['url']),
+						'nick'    => htmlentities((string) ($contact['nick'] ?? '') ?: (string) $contact['addr']),
+						'addr'    => htmlentities((string) ($contact['addr'] ?? '') ?: (string) $contact['url']),
 						'group'   => $contact['forum'],
 					];
 				}

@@ -400,12 +400,12 @@ class PostMedia extends BaseRepository
 			$data['author-url'] = '';
 		}
 
-		$parts = parse_url($data['url']);
+		$parts = parse_url((string) $data['url']);
 		if (!empty($parts['scheme']) && !empty($parts['host'])) {
 			if (empty($data['publisher-name'])) {
 				$data['publisher-name'] = $parts['host'];
 			}
-			if (empty($data['publisher-url']) || empty(parse_url($data['publisher-url'], PHP_URL_SCHEME))) {
+			if (empty($data['publisher-url']) || empty(parse_url((string) $data['publisher-url'], PHP_URL_SCHEME))) {
 				$data['publisher-url'] = $parts['scheme'] . '://' . $parts['host'];
 
 				if (!empty($parts['port'])) {
@@ -635,7 +635,7 @@ class PostMedia extends BaseRepository
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate($postMedia->embedHeight ? 'content/embed-iframe.tpl' : 'content/embed-iframe-resize.tpl'), [
-			'id'           => 'iframe-' . hash('md5', $postMedia->embedHtml),
+			'id'           => 'iframe-' . hash('md5', (string) $postMedia->embedHtml),
 			'src'          => $postMedia->embedHtml,
 			'height'       => $height,
 			'width'        => $width,

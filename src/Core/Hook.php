@@ -197,7 +197,7 @@ class Hook
 	public static function callSingle(string $name, array $hook, &$data = null)
 	{
 		// Don't run a theme's hook if the user isn't using the theme
-		if (str_contains($hook[0], 'view/theme/') && !str_contains($hook[0], 'view/theme/' . DI::appHelper()->getCurrentTheme())) {
+		if (str_contains((string) $hook[0], 'view/theme/') && !str_contains((string) $hook[0], 'view/theme/' . DI::appHelper()->getCurrentTheme())) {
 			return;
 		}
 

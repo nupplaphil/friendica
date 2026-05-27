@@ -271,7 +271,7 @@ class Avatar
 		if (empty($basepath)) {
 			$basepath = DI::basePath() . self::BASE_PATH;
 		}
-		$basepath = rtrim($basepath, '/') . '/';
+		$basepath = rtrim((string) $basepath, '/') . '/';
 
 		if (!file_exists($basepath)) {
 			// We only automatically create the folder when it is in the web root
@@ -297,7 +297,7 @@ class Avatar
 	{
 		$baseurl = DI::config()->get('system', 'avatar_cache_url');
 		if (!empty($baseurl)) {
-			return rtrim($baseurl, '/') . '/';
+			return rtrim((string) $baseurl, '/') . '/';
 		}
 
 		return DI::baseUrl() . self::BASE_PATH;

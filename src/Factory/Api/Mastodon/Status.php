@@ -169,7 +169,7 @@ class Status extends BaseFactory
 		if (in_array($item['network'], Protocol::FEDERATED)) {
 			$gserver = $this->dba->selectFirst('gserver', ['site_name', 'platform', 'version'], ['id' => $item['author-gsid']]);
 			if (!empty($gserver)) {
-				$platform = ucfirst($gserver['platform']);
+				$platform = ucfirst((string) $gserver['platform']);
 				$version  = $gserver['version'];
 				$sitename = $gserver['site_name'];
 			}
@@ -238,7 +238,7 @@ class Status extends BaseFactory
 			}
 			$emojis = $this->mstdnEmojiFactory->createCollectionFromArray($used_smilies)->getArrayCopy(true);
 		} else {
-			if (preg_match_all("(\[emoji=(.*?)](.*?)\[/emoji])ism", $item['body'] ?: $item['raw-body'], $matches)) {
+			if (preg_match_all("(\[emoji=(.*?)](.*?)\[/emoji])ism", $item['body'] ?: (string) $item['raw-body'], $matches)) {
 				$emojis = $this->mstdnEmojiFactory->createCollectionFromArray(array_combine($matches[2], $matches[1]))->getArrayCopy(true);
 			}
 		}

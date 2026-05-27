@@ -133,13 +133,13 @@ class CurlResult implements ICanHandleHttpResponses
 
 		$header = '';
 		$base   = $result;
-		while (preg_match('/^HTTP\/.+? \d+/', $base)) {
-			$chunk = substr($base, 0, strpos($base, "\r\n\r\n") + 4);
+		while (preg_match('/^HTTP\/.+? \d+/', (string) $base)) {
+			$chunk = substr((string) $base, 0, strpos((string) $base, "\r\n\r\n") + 4);
 			$header .= $chunk;
-			$base = substr($base, strlen($chunk));
+			$base = substr((string) $base, strlen($chunk));
 		}
 
-		$this->body          = substr($result, strlen($header));
+		$this->body          = substr((string) $result, strlen($header));
 		$this->header        = $header;
 		$this->header_fields = []; // Is filled on demand
 	}

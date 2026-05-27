@@ -44,7 +44,7 @@ class TagCloud
 			foreach ($r as $rr) {
 				$tags[] = [
 					'level' => $rr[2],
-					'url'   => $url . '/conversations?tag=' . urlencode($rr[0]),
+					'url'   => $url . '/conversations?tag=' . urlencode((string) $rr[0]),
 					'name'  => $rr[0],
 				];
 			}

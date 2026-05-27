@@ -232,7 +232,7 @@ class UserExport extends BaseSettings
 			sprintf("SELECT * FROM `photo` WHERE uid = %d AND profile = 1", $user_id),
 		);
 		foreach ($photo as &$p) {
-			$p['data'] = bin2hex($p['data']);
+			$p['data'] = bin2hex((string) $p['data']);
 		}
 
 		$pconfig = $this->exportMultiRow(

@@ -120,7 +120,7 @@ class Status extends BaseFactory
 		$geo = [];
 
 		if ($item['coord'] != '') {
-			$coords = explode(' ', $item["coord"]);
+			$coords = explode(' ', (string) $item["coord"]);
 			if (count($coords) == 2) {
 				$geo = [
 					'type'        => 'Point',

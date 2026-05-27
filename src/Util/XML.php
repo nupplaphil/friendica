@@ -96,7 +96,7 @@ class XML
 				}
 
 				foreach ($value as $attr_key => $attr_value) {
-					$element_parts = explode(':', $attr_key);
+					$element_parts = explode(':', (string) $attr_key);
 					if ((count($element_parts) > 1) && isset($namespaces[$element_parts[0]])) {
 						$namespace = $namespaces[$element_parts[0]];
 					} else {
@@ -210,7 +210,7 @@ class XML
 
 			foreach ($xml_element as $key => $value) {
 				$recursion_depth++;
-				$result_array[strtolower($key)] = self::elementToArray($value, $recursion_depth);
+				$result_array[strtolower((string) $key)] = self::elementToArray($value, $recursion_depth);
 				$recursion_depth--;
 			}
 
@@ -329,12 +329,12 @@ class XML
 			}
 
 			// See tag status and do the needed.
-			if ($namespaces && strpos($tag, ':')) {
-				$namespc              = substr($tag, 0, strrpos($tag, ':'));
-				$tag                  = strtolower(substr($tag, strlen($namespc) + 1));
+			if ($namespaces && strpos((string) $tag, ':')) {
+				$namespc              = substr((string) $tag, 0, strrpos((string) $tag, ':'));
+				$tag                  = strtolower(substr((string) $tag, strlen($namespc) + 1));
 				$result['@namespace'] = $namespc;
 			}
-			$tag = strtolower($tag);
+			$tag = strtolower((string) $tag);
 
 			if ($type == 'open') {   // The starting of the tag '<tag>'
 				$parent[$level - 1] = &$current;

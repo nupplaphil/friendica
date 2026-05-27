@@ -43,7 +43,7 @@ class RemoveTag extends BaseModule
 		$this->removeTag($request, $type, $term);
 
 		if ($type == Post\Category::FILE) {
-			$this->baseUrl->redirect('filed?file=' . rawurlencode($term));
+			$this->baseUrl->redirect('filed?file=' . rawurlencode((string) $term));
 		}
 
 		return '';

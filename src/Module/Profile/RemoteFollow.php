@@ -83,9 +83,9 @@ class RemoteFollow extends BaseModule
 		// Send the subscriber home to subscribe
 		// Diaspora needs the uri in the format user@domain.tld
 		if ($data['network'] == Protocol::DIASPORA) {
-			$uri = urlencode($this->owner['addr']);
+			$uri = urlencode((string) $this->owner['addr']);
 		} else {
-			$uri = urlencode($this->owner['url']);
+			$uri = urlencode((string) $this->owner['url']);
 		}
 
 		$follow_link = str_replace('{uri}', $uri, $data['subscribe']);

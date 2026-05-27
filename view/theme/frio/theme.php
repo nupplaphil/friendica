@@ -82,7 +82,7 @@ function frio_item_photo_links(&$body_info)
 	$occurence = 0;
 	$p         = Plaintext::getBoundariesPosition($body_info['html'], '<a', '>');
 	while ($p !== false && ($occurence++ < 500)) {
-		$link    = substr($body_info['html'], $p['start'], $p['end'] - $p['start']);
+		$link    = substr((string) $body_info['html'], $p['start'], $p['end'] - $p['start']);
 		$matches = [];
 
 		preg_match('/\/photos\/[\w]+\/image\/([\w]+)/', $link, $matches);
@@ -94,7 +94,7 @@ function frio_item_photo_links(&$body_info)
 			$newlink = preg_replace('#href="([^"]+)/contact/redir/(\d+)&url=([^"]+)"#', 'href="$1/contact/redir/$2&quiet=1&url=$3"', $newlink);
 
 			// Having any arguments to the link for Colorbox causes it to fetch base64 code instead of the image
-			$newlink = preg_replace('/\/[?&]zrl=([^&"]+)/', '', $newlink);
+			$newlink = preg_replace('/\/[?&]zrl=([^&"]+)/', '', (string) $newlink);
 
 			$body_info['html'] = str_replace($link, $newlink, $body_info['html']);
 		}
@@ -115,7 +115,7 @@ function frio_item_photo_links(&$body_info)
 function frio_item_photo_menu(&$arr)
 {
 	foreach ($arr['menu'] as $k => $v) {
-		if (str_starts_with($v, 'message/new/')) {
+		if (str_starts_with((string) $v, 'message/new/')) {
 			$v               = 'javascript:addToModal(\'' . $v . '\'); return false;';
 			$arr['menu'][$k] = $v;
 		}
@@ -162,7 +162,7 @@ function frio_contact_photo_menu(&$args)
 	// Add to pm link a new key with the value 'modal'.
 	// Later we can make conditions in the corresponding templates (e.g.
 	// contact/entry.tpl)
-	if (str_contains($pmlink, 'message/new/' . $cid)) {
+	if (str_contains((string) $pmlink, 'message/new/' . $cid)) {
 		$args['menu']['pm'][3] = 'modal';
 	}
 }

@@ -192,7 +192,7 @@ class Strings
 		}
 
 		for ($k = 0; $k < count($lines); $k++) {
-			$lines[$k] = preg_replace("|^" . $chr . "{" . $count . "}|", "", $lines[$k]);
+			$lines[$k] = preg_replace("|^" . $chr . "{" . $count . "}|", "", (string) $lines[$k]);
 		}
 
 		return implode("\n", $lines);

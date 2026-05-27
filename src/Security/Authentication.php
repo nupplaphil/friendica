@@ -306,10 +306,10 @@ class Authentication
 
 		$this->session->setVisitorsContacts($my_url);
 
-		$member_since = strtotime($user_record['register_date']);
+		$member_since = strtotime((string) $user_record['register_date']);
 		$this->session->set('new_member', time() < ($member_since + (60 * 60 * 24 * 14)));
 
-		if (strlen($user_record['timezone'])) {
+		if (strlen((string) $user_record['timezone'])) {
 			$this->appHelper->setTimeZone($user_record['timezone']);
 			$this->session->set('timezone', $user_record['timezone']);
 		}

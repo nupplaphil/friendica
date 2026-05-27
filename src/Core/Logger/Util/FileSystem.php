@@ -87,6 +87,6 @@ class FileSystem implements FileSystemUtil
 
 	private function customErrorHandler($code, $msg)
 	{
-		$this->errorMessage = preg_replace('{^(fopen|mkdir)\(.*?\): }', '', $msg);
+		$this->errorMessage = preg_replace('{^(fopen|mkdir)\(.*?\): }', '', (string) $msg);
 	}
 }

@@ -123,7 +123,7 @@ class PermissionSet extends BaseRepository
 
 			$circle_str = '<<>>'; // should be impossible to match
 			foreach ($circle_ids as $circle_id) {
-				$circle_str .= '|<' . preg_quote($circle_id) . '>';
+				$circle_str .= '|<' . preg_quote((string) $circle_id) . '>';
 			}
 
 			if (!empty($user_contact_str)) {

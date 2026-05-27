@@ -101,7 +101,7 @@ class Contacts extends BaseModule
 				$title   = $this->tt('Friend (%s)', 'Friends (%s)', $total);
 				$desc    = $this->t(
 					'These contacts both follow and are followed by <strong>%s</strong>.',
-					htmlentities($contact['name'], ENT_COMPAT, 'UTF-8'),
+					htmlentities((string) $contact['name'], ENT_COMPAT, 'UTF-8'),
 				);
 				break;
 			case 'common':
@@ -109,7 +109,7 @@ class Contacts extends BaseModule
 				$title   = $this->tt('Common contact (%s)', 'Common contacts (%s)', $total);
 				$desc    = $this->t(
 					'Both <strong>%s</strong> and yourself have publicly interacted with these contacts (follow, comment or likes on public posts).',
-					htmlentities($contact['name'], ENT_COMPAT, 'UTF-8'),
+					htmlentities((string) $contact['name'], ENT_COMPAT, 'UTF-8'),
 				);
 				break;
 			default:

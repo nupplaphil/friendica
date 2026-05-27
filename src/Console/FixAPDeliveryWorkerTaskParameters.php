@@ -96,7 +96,7 @@ HELP;
 
 	private function processRow(array $workerqueueItem)
 	{
-		$parameters = json_decode($workerqueueItem['parameter'], true);
+		$parameters = json_decode((string) $workerqueueItem['parameter'], true);
 
 		if (!$parameters) {
 			$this->errored++;

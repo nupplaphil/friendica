@@ -147,12 +147,12 @@ class Arguments
 		parse_str($server['QUERY_STRING'], $queryParameters);
 
 		if (!empty($get['pagename'])) {
-			$command = trim($get['pagename'], '/\\');
+			$command = trim((string) $get['pagename'], '/\\');
 		} elseif (!empty($queryParameters['pagename'])) {
 			$command = trim($queryParameters['pagename'], '/\\');
 		} elseif (!empty($get['q'])) {
 			// Legacy page name parameter, now conflicts with the search query parameter
-			$command = trim($get['q'], '/\\');
+			$command = trim((string) $get['q'], '/\\');
 		} else {
 			$command = '';
 		}

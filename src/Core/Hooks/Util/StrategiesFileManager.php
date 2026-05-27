@@ -92,7 +92,7 @@ class StrategiesFileManager
 		$returnConfig = [];
 
 		foreach ($addons as $addon) {
-			$addonName = Strings::sanitizeFilePathItem(trim($addon));
+			$addonName = Strings::sanitizeFilePathItem(trim((string) $addon));
 
 			$configFile = $this->basePath . '/addon/' . $addonName . '/' . static::STATIC_DIR . '/strategies.config.php';
 

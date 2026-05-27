@@ -420,8 +420,8 @@ final class ATProtocol
 			return '';
 		}
 		foreach ($records as $record) {
-			if (!empty($record['txt']) && str_starts_with($record['txt'], 'did=')) {
-				$did = substr($record['txt'], 4);
+			if (!empty($record['txt']) && str_starts_with((string) $record['txt'], 'did=')) {
+				$did = substr((string) $record['txt'], 4);
 				if (!$this->isValidDid($did, $handle)) {
 					$this->logger->notice('Invalid DID', ['handle' => $handle, 'did' => $did]);
 					return '';

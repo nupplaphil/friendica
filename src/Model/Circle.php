@@ -239,11 +239,11 @@ class Circle
 				$user['def_gid'] = 0;
 				$change          = true;
 			}
-			if (str_contains($user['allow_gid'], '<' . $gid . '>')) {
+			if (str_contains((string) $user['allow_gid'], '<' . $gid . '>')) {
 				$user['allow_gid'] = str_replace('<' . $gid . '>', '', $user['allow_gid']);
 				$change            = true;
 			}
-			if (str_contains($user['deny_gid'], '<' . $gid . '>')) {
+			if (str_contains((string) $user['deny_gid'], '<' . $gid . '>')) {
 				$user['deny_gid'] = str_replace('<' . $gid . '>', '', $user['deny_gid']);
 				$change           = true;
 			}

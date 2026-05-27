@@ -15,14 +15,14 @@ class CreateTest extends MockedTestCase
 {
 	public function testGetReturnPathFallsBackForMissingReturn(): void
 	{
-		$module = $this->createModule($this->createMock(App\BaseURL::class));
+		$module = $this->createModule($this->createStub(App\BaseURL::class));
 
 		self::assertSame('moderation/reports', $this->invokeGetReturnPath($module, []));
 	}
 
 	public function testGetReturnPathKeepsRelativePath(): void
 	{
-		$module = $this->createModule($this->createMock(App\BaseURL::class));
+		$module = $this->createModule($this->createStub(App\BaseURL::class));
 
 		self::assertSame('network?foo=bar', $this->invokeGetReturnPath($module, ['return' => 'network?foo=bar']));
 	}

@@ -199,7 +199,7 @@ class Widget
 		}
 
 		array_walk($options, function (&$value) {
-			$value['ref'] = rawurlencode($value['ref']);
+			$value['ref'] = rawurlencode((string) $value['ref']);
 		});
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('widget/filter.tpl'), [
@@ -499,7 +499,7 @@ class Widget
 			$nextday   = date('Y-m-d', strtotime($dnow . ' + 1 day'));
 			$nextday   = substr($nextday, 4);
 			$dnow      = substr($dnow, 0, 8) . '01';
-			$dthen     = substr($dthen, 0, 8) . '01';
+			$dthen     = substr((string) $dthen, 0, 8) . '01';
 
 			/*
 			 * Starting with the current month, get the first and last days of every

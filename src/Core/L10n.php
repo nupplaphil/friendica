@@ -210,7 +210,7 @@ class L10n
 		if (empty($lang_variable)) {
 			$acceptedLanguages = [];
 		} else {
-			$acceptedLanguages = preg_split('/,\s*/', $lang_variable);
+			$acceptedLanguages = preg_split('/,\s*/', (string) $lang_variable);
 		}
 
 		// Add get as absolute quality accepted language (except this language isn't valid)
@@ -233,7 +233,7 @@ class L10n
 		foreach ($acceptedLanguages as $acceptedLanguage) {
 			$res = preg_match(
 				'/^([a-z]{1,8}(?:-[a-z]{1,8})*)(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i',
-				$acceptedLanguage,
+				(string) $acceptedLanguage,
 				$matches,
 			);
 

@@ -327,8 +327,8 @@ class Display extends BaseModule
 		}
 
 		$description = htmlspecialchars($description, ENT_COMPAT, 'UTF-8', true); // allow double encoding here
-		$title       = htmlspecialchars($title, ENT_COMPAT, 'UTF-8', true); // allow double encoding here
-		$author_name = htmlspecialchars($author_name, ENT_COMPAT, 'UTF-8', true); // allow double encoding here
+		$title       = htmlspecialchars((string) $title, ENT_COMPAT, 'UTF-8', true); // allow double encoding here
+		$author_name = htmlspecialchars((string) $author_name, ENT_COMPAT, 'UTF-8', true); // allow double encoding here
 
 		$page = $this->page;
 
