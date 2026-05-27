@@ -33,7 +33,7 @@ class Peers extends BaseApi
 		while ($instance = DBA::fetch($instances)) {
 			$urldata = parse_url((string) $instance['url']);
 			unset($urldata['scheme']);
-			$return[] = ltrim((string)Uri::fromParts((array)$urldata), '/');
+			$return[] = ltrim((string) Uri::fromParts((array) $urldata), '/');
 		}
 		DBA::close($instances);
 

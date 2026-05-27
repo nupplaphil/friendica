@@ -93,7 +93,7 @@ class Federation extends BaseAdmin
 			'',
 			GServer::DETECT_MANUAL,
 			Protocol::PHANTOM,
-			Protocol::FEED
+			Protocol::FEED,
 		);
 		while ($gserver = DBA::fetch($gservers)) {
 			$total += $gserver['total'];
@@ -133,17 +133,17 @@ class Federation extends BaseAdmin
 				$platform = 'hubzilla';
 			} elseif (in_array($platform, ['osada', 'mistpark', 'roadhouse', 'streams', 'zap'])) {
 				$platform = 'nomad';
-			} elseif(stristr($platform, 'pleroma')) {
+			} elseif (stristr($platform, 'pleroma')) {
 				$platform = 'pleroma';
-			} elseif(stristr($platform, 'glitchsoc')) {
+			} elseif (stristr($platform, 'glitchsoc')) {
 				$platform = 'glitchsoc';
-			} elseif(stristr($platform, 'iceshrimp.net')) {
+			} elseif (stristr($platform, 'iceshrimp.net')) {
 				$platform = 'iceshrimp';
-			} elseif(stristr($platform, 'statusnet')) {
+			} elseif (stristr($platform, 'statusnet')) {
 				$platform = 'gnusocial';
-			} elseif(stristr($platform, 'nextcloud')) {
+			} elseif (stristr($platform, 'nextcloud')) {
 				$platform = 'nextcloud';
-			} elseif(stristr($platform, 'wordpress')) {
+			} elseif (stristr($platform, 'wordpress')) {
 				$platform = 'wordpress';
 			} elseif (in_array($platform, ['activityrelay', 'pub-relay', 'selective-relay', 'aoderelay'])) {
 				$platform = 'relay';

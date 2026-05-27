@@ -2052,7 +2052,7 @@ class Item
 				function ($match) {
 					return ("[bookmark=" . str_replace("#", "&num;", $match[1]) . "]" . str_replace("#", "&num;", $match[2]) . "[/bookmark]");
 				},
-				$body,
+				(string) $body,
 			);
 
 			$body = preg_replace_callback(
@@ -2060,14 +2060,14 @@ class Item
 				function ($match) {
 					return ("[attachment " . str_replace("#", "&num;", $match[1]) . "]" . $match[2] . "[/attachment]");
 				},
-				$body,
+				(string) $body,
 			);
 
 			// Repair recursive urls
 			$body = preg_replace(
 				"/&num;\[url\=([$URLSearchString]*)\](.*?)\[\/url\]/ism",
 				"&num;$2",
-				$body,
+				(string) $body,
 			);
 
 			foreach ($tags as $tag) {

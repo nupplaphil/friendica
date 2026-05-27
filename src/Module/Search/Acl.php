@@ -224,8 +224,8 @@ class Acl extends BaseModule
 				'id'      => intval($contact['id']),
 				'network' => $contact['network'],
 				'link'    => $contact['url'],
-				'nick'    => htmlentities(($contact['attag'] ?? '') ?: (string) $contact['nick']),
-				'addr'    => htmlentities(($contact['addr'] ?? '') ?: (string) $contact['url']),
+				'nick'    => htmlentities((string) ($contact['attag'] ?? '') ?: (string) $contact['nick']),
+				'addr'    => htmlentities((string) ($contact['addr'] ?? '') ?: (string) $contact['url']),
 				'group'   => $contact['contact-type'] == Contact::TYPE_COMMUNITY,
 			];
 			if ($entry['group']) {
@@ -280,8 +280,8 @@ class Acl extends BaseModule
 						'id'      => intval($contact['id']),
 						'network' => $contact['network'],
 						'link'    => $contact['url'],
-						'nick'    => htmlentities(($contact['nick'] ?? '') ?: (string) $contact['addr']),
-						'addr'    => htmlentities(($contact['addr'] ?? '') ?: (string) $contact['url']),
+						'nick'    => htmlentities((string) ($contact['nick'] ?? '') ?: (string) $contact['addr']),
+						'addr'    => htmlentities((string) ($contact['addr'] ?? '') ?: (string) $contact['url']),
 						'group'   => $contact['forum'],
 					];
 				}

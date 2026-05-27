@@ -47,7 +47,7 @@ class PageNotFound extends BaseModule
 		$this->logger->debug('index.php: page not found.', [
 			'request_uri' => $this->server['REQUEST_URI'],
 			'address'     => $this->remoteAddress,
-			'query'       => $this->server['QUERY_STRING']
+			'query'       => $this->server['QUERY_STRING'],
 		]);
 
 		return parent::run($httpException, $request);

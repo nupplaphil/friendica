@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
  */
 class ExternalResource implements ICanReadFromStorage
 {
-	const NAME = 'ExternalResource';
+	public const NAME = 'ExternalResource';
 
 	/** @var LoggerInterface */
 	protected $logger;

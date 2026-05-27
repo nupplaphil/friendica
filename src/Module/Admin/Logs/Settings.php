@@ -28,8 +28,8 @@ class Settings extends BaseAdmin
 		$debugging = !empty($_POST['debugging']);
 		$loglevel  = ($_POST['loglevel'] ?? '') ?: LogLevel::ERROR;
 
-		if (is_file($logfile) &&
-		!is_writeable($logfile)) {
+		if (is_file($logfile)
+		&& !is_writeable($logfile)) {
 			DI::sysmsg()->addNotice(DI::l10n()->t('The logfile \'%s\' is not writable. No logging possible', $logfile));
 			return;
 		}

@@ -150,7 +150,7 @@ class Site extends BaseAdmin
 		$relay_user_tags   = !empty($_POST['relay_user_tags']);
 
 		$relay_deny_undetected_language = !empty($_POST['relay_deny_undetected_language']);
-		$relay_language_quality         = (!empty($_POST['relay_language_quality']) ? (float)($_POST['relay_language_quality']) : 0);
+		$relay_language_quality         = (!empty($_POST['relay_language_quality']) ? (float) ($_POST['relay_language_quality']) : 0);
 		$relay_languages                = (!empty($_POST['relay_languages'])        ? intval($_POST['relay_languages'])       : 0);
 
 		$engagement_hours        = (!empty($_POST['engagement_hours'])        ? intval($_POST['engagement_hours'])     : 0);
@@ -352,8 +352,8 @@ class Site extends BaseAdmin
 		/* Installed langs */
 		$lang_choices = DI::l10n()->getAvailableLanguages();
 
-		if (DI::config()->get('system', 'directory_submit_url') &&
-			!DI::config()->get('system', 'directory')) {
+		if (DI::config()->get('system', 'directory_submit_url')
+			&& !DI::config()->get('system', 'directory')) {
 			DI::config()->set('system', 'directory', dirname((string) DI::config()->get('system', 'directory_submit_url')));
 			DI::config()->delete('system', 'directory_submit_url');
 		}
@@ -393,7 +393,7 @@ class Site extends BaseAdmin
 			Processor::FETCH_REPLIES_ALL         => DI::l10n()->t('Fetch replies on all posts'),
 			Processor::FETCH_REPLIES_NONE        => DI::l10n()->t('Don\'t fetch replies'),
 			Processor::FETCH_REPLIES_FOLLOWED    => DI::l10n()->t('Fetch replies on posts from followed contacts only'),
-			Processor::FETCH_REPLIES_INTERACTION => DI::l10n()->t('Fetch replies on posts with interactions only')
+			Processor::FETCH_REPLIES_INTERACTION => DI::l10n()->t('Fetch replies on posts with interactions only'),
 		];
 
 		/* Community page style */
@@ -402,7 +402,7 @@ class Site extends BaseAdmin
 			Community::DISABLED_VISITOR => DI::l10n()->t('No community page for visitors'),
 			Community::LOCAL            => DI::l10n()->t('Public postings from users of this site'),
 			Community::GLOBAL           => DI::l10n()->t('Public postings from the federated network'),
-			Community::LOCAL_AND_GLOBAL => DI::l10n()->t('Public postings from local users and the federated network')
+			Community::LOCAL_AND_GLOBAL => DI::l10n()->t('Public postings from local users and the federated network'),
 		];
 
 		/* get user names to make the install a personal install of X */
@@ -433,13 +433,13 @@ class Site extends BaseAdmin
 		$register_choices = [
 			Register::CLOSED  => DI::l10n()->t('Closed'),
 			Register::APPROVE => DI::l10n()->t('Requires approval'),
-			Register::OPEN    => DI::l10n()->t('Open')
+			Register::OPEN    => DI::l10n()->t('Open'),
 		];
 
 		$check_git_version_choices = [
 			'none'    => DI::l10n()->t('Don\'t check'),
 			'stable'  => DI::l10n()->t('check the stable version'),
-			'develop' => DI::l10n()->t('check the development version')
+			'develop' => DI::l10n()->t('check the development version'),
 		];
 
 		$discovery_choices = [
@@ -550,10 +550,10 @@ class Site extends BaseAdmin
 			'$min_memory'                      => ['min_memory', DI::l10n()->t('Minimal Memory'), DI::config()->get('system', 'min_memory'), DI::l10n()->t('Minimal free memory in MB for the worker. Needs access to /proc/meminfo - default 0 (deactivated).')],
 			'$optimize_tables'                 => ['optimize_tables', DI::l10n()->t('Periodically optimize tables'), DI::config()->get('system', 'optimize_tables'), DI::l10n()->t('Periodically optimize tables like the cache and the workerqueue')],
 
-			'$contact_discovery' => ['contact_discovery', DI::l10n()->t('Discover followers/followings from contacts'), DI::config()->get('system', 'contact_discovery'), DI::l10n()->t('If enabled, contacts are checked for their followers and following contacts.') . '<ul>' .
-				'<li>' . DI::l10n()->t('None - deactivated') . '</li>' .
-				'<li>' . DI::l10n()->t('Local contacts - contacts of our local contacts are discovered for their followers/followings.') . '</li>' .
-				'<li>' . DI::l10n()->t('Interactors - contacts of our local contacts and contacts who interacted on locally visible postings are discovered for their followers/followings.') . '</li></ul>',
+			'$contact_discovery' => ['contact_discovery', DI::l10n()->t('Discover followers/followings from contacts'), DI::config()->get('system', 'contact_discovery'), DI::l10n()->t('If enabled, contacts are checked for their followers and following contacts.') . '<ul>'
+				. '<li>' . DI::l10n()->t('None - deactivated') . '</li>'
+				. '<li>' . DI::l10n()->t('Local contacts - contacts of our local contacts are discovered for their followers/followings.') . '</li>'
+				. '<li>' . DI::l10n()->t('Interactors - contacts of our local contacts and contacts who interacted on locally visible postings are discovered for their followers/followings.') . '</li></ul>',
 				$discovery_choices],
 			'$update_active_contacts' => ['update_active_contacts', DI::l10n()->t('Only update contacts/servers with local data'), DI::config()->get('system', 'update_active_contacts'), DI::l10n()->t('If enabled, the system will only look for changes in contacts and servers that engaged on this system by either being in a contact list of a user or when posts or comments exists from the contact on this system.')],
 			'$update_known_contacts'  => ['update_known_contacts', DI::l10n()->t('Only update contacts with relations'), DI::config()->get('system', 'update_known_contacts'), DI::l10n()->t('If enabled, the system will only look for changes in contacts that are in a contact list of a user on this system.')],

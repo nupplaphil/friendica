@@ -8,7 +8,6 @@
 namespace Friendica\Module\Item;
 
 use Friendica\BaseModule;
-use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Post;
@@ -67,7 +66,7 @@ class Pin extends BaseModule
 			'status'  => 'ok',
 			'item_id' => $itemId,
 			'verb'    => 'pin',
-			'state'   => (int)$pinned,
+			'state'   => (int) $pinned,
 		];
 
 		$this->jsonExit($return);

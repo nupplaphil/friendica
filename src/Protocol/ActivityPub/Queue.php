@@ -415,7 +415,7 @@ class Queue
 		$ldactivity = JsonLD::compact($activity);
 		return [
 			'data'  => Receiver::prepareObjectData($ldactivity, $uid, $entry['push'], $trust_source),
-			'trust' => $trust_source
+			'trust' => $trust_source,
 		];
 	}
 

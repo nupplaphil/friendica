@@ -193,9 +193,9 @@ class Mail
 				'replied'    => 0,
 				'uri'        => $uri,
 				'parent-uri' => $replyto,
-				'created'    => DateTimeFormat::utcNow()
+				'created'    => DateTimeFormat::utcNow(),
 			],
-			false
+			false,
 		);
 
 		/**

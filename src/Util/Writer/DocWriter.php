@@ -17,7 +17,7 @@ use Friendica\Network\HTTPException\ServiceUnavailableException;
 class DocWriter
 {
 	/** @var string the relativ path to the database specification */
-	const DOC_PATH_PREFIX = '/doc/en/spec/database/';
+	public const DOC_PATH_PREFIX = '/doc/en/spec/database/';
 
 	/**
 	 * Creates all database definitions as Markdown fields and create the mkdoc config file.
@@ -40,7 +40,7 @@ class DocWriter
 				[
 					'name'   => '-',
 					'fields' => '-',
-				]
+				],
 			];
 
 			$lengths = ['name' => 4, 'fields' => 6];
@@ -74,7 +74,7 @@ class DocWriter
 					'primary' => '-',
 					'default' => '-',
 					'extra'   => '-',
-				]
+				],
 			];
 			$lengths = [
 				'name'    => 5,
@@ -105,7 +105,7 @@ class DocWriter
 					$foreign[] = [
 						'field'       => $key,
 						'targettable' => array_keys($value['foreign'])[0],
-						'targetfield' => array_values($value['foreign'])[0]
+						'targetfield' => array_values($value['foreign'])[0],
 					];
 				}
 			}

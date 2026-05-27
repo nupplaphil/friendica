@@ -17,7 +17,7 @@ use Friendica\Event\ArrayFilterEvent;
 class DbaDefinition
 {
 	/** @var string The relative path of the db structure config file */
-	const DBSTRUCTURE_RELATIVE_PATH = '/static/dbstructure.config.php';
+	public const DBSTRUCTURE_RELATIVE_PATH = '/static/dbstructure.config.php';
 
 	/** @var array The complete DB definition as an array */
 	protected $definition;
@@ -81,9 +81,9 @@ class DbaDefinition
 				} elseif (is_string($data[$field]) && preg_match("/binary\((\d*)\)/", (string) $definition[$table]['fields'][$field]['type'], $result)) {
 					$data[$field] = substr($data[$field], 0, $result[1]);
 				} elseif (is_numeric($data[$field]) && $definition[$table]['fields'][$field]['type'] === 'int') {
-					$data[$field] = min(max((int)$data[$field], -2147483648), 2147483647);
+					$data[$field] = min(max((int) $data[$field], -2147483648), 2147483647);
 				} elseif (is_numeric($data[$field]) && $definition[$table]['fields'][$field]['type'] === 'int unsigned') {
-					$data[$field] = min(max((int)$data[$field], 0), 4294967295);
+					$data[$field] = min(max((int) $data[$field], 0), 4294967295);
 				}
 				$fields[$field] = $data[$field];
 			}

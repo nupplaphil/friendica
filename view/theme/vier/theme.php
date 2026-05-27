@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2010-2024, the Friendica project
  * SPDX-FileCopyrightText: 2010-2024 the Friendica project
@@ -46,8 +47,8 @@ function vier_init()
 	}
 
 	if (DI::mode()->isMobile() || DI::mode()->isMobile()) {
-		DI::page()['htmlhead'] .= '<meta name=viewport content="width=device-width, initial-scale=1">'."\n";
-		DI::page()['htmlhead'] .= '<link rel="stylesheet" type="text/css" href="view/theme/vier/mobile.css" media="screen"/>'."\n";
+		DI::page()['htmlhead'] .= '<meta name=viewport content="width=device-width, initial-scale=1">' . "\n";
+		DI::page()['htmlhead'] .= '<link rel="stylesheet" type="text/css" href="view/theme/vier/mobile.css" media="screen"/>' . "\n";
 	}
 	/// @todo deactivated since it doesn't work with desktop browsers at the moment
 	//DI::page()['htmlhead'] .= '<link rel="stylesheet" type="text/css" href="view/theme/vier/mobile.css" media="screen and (max-width: 1000px)"/>'."\n";
@@ -124,7 +125,7 @@ function vier_community_info()
 	$show_lastusers = get_vier_config("show_lastusers", 1);
 
 	// get_baseurl
-	$aside['$url'] = $url = (string)DI::baseUrl();
+	$aside['$url'] = $url = (string) DI::baseUrl();
 
 	// community_profiles
 	if ($show_profiles) {

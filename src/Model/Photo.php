@@ -859,10 +859,10 @@ class Photo
 	{
 		// Simplify image codes
 		$img_body = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.*?)\[\/img\]/ism", '[img]$3[/img]', (string) $body);
-		$img_body = preg_replace("/\[img\=(.*?)\](.*?)\[\/img\]/ism", '[img]$1[/img]', $img_body);
+		$img_body = preg_replace("/\[img\=(.*?)\](.*?)\[\/img\]/ism", '[img]$1[/img]', (string) $img_body);
 
 		// Search for images
-		if (!preg_match_all("/\[img\](.*?)\[\/img\]/", $img_body, $match)) {
+		if (!preg_match_all("/\[img\](.*?)\[\/img\]/", (string) $img_body, $match)) {
 			return false;
 		}
 		$images = $match[1];

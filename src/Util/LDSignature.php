@@ -55,7 +55,7 @@ class LDSignature
 		$dhash = self::hash(self::signableData($data));
 
 		$x = Crypto::rsaVerify($ohash . $dhash, base64_decode((string) $data['signature']['signatureValue']), $pubkey);
-		DI::logger()->info('LD-verify', ['verified' => (int)$x, 'actor' => $profile['url']]);
+		DI::logger()->info('LD-verify', ['verified' => (int) $x, 'actor' => $profile['url']]);
 
 		if (empty($x)) {
 			return false;

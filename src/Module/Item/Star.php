@@ -8,7 +8,6 @@
 namespace Friendica\Module\Item;
 
 use Friendica\BaseModule;
-use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Item;
@@ -53,7 +52,7 @@ class Star extends BaseModule
 			}
 		}
 
-		$starred = !(bool)$item['starred'];
+		$starred = !(bool) $item['starred'];
 
 		Item::update(['starred' => $starred], ['id' => $itemId]);
 
@@ -74,7 +73,7 @@ class Star extends BaseModule
 			'status'  => 'ok',
 			'item_id' => $itemId,
 			'verb'    => 'star',
-			'state'   => (int)$starred,
+			'state'   => (int) $starred,
 		];
 
 		$this->jsonExit($return);

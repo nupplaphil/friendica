@@ -2228,7 +2228,7 @@ class BBCode
 
 		$text = self::performWithEscapedTags($text, ['code', 'noparse', 'nobb', 'pre'], function ($text) {
 			$text = preg_replace("/[\s|\n]*\[abstract\].*?\[\/abstract\][\s|\n]*/ism", ' ', (string) $text);
-			$text = preg_replace("/[\s|\n]*\[abstract=.*?\].*?\[\/abstract][\s|\n]*/ism", ' ', $text);
+			$text = preg_replace("/[\s|\n]*\[abstract=.*?\].*?\[\/abstract][\s|\n]*/ism", ' ', (string) $text);
 			return $text;
 		});
 
@@ -2411,7 +2411,7 @@ class BBCode
 			// Match full names against @tags including the space between first and last
 			// We will look these up afterward to see if they are full names or not recognisable.
 
-			if (preg_match_all('/(@[^ \x0D\x0A,:?]+ [^ \x0D\x0A@,:?]+)([ \x0D\x0A@,:?]|$)/', $string, $matches)) {
+			if (preg_match_all('/(@[^ \x0D\x0A,:?]+ [^ \x0D\x0A@,:?]+)([ \x0D\x0A@,:?]|$)/', (string) $string, $matches)) {
 				foreach ($matches[1] as $match) {
 					if (strstr($match, ']')) {
 						// we might be inside a bbcode color tag - leave it alone
@@ -2429,7 +2429,7 @@ class BBCode
 			// Otherwise pull out single word tags. These can be @nickname, @first_last
 			// and #hash tags.
 
-			if (preg_match_all('/(?<=^|\s)([!#@][^\^ \x0D\x0A,;:?\']*[^\^ \x0D\x0A,;:?!\'.])/', $string, $matches)) {
+			if (preg_match_all('/(?<=^|\s)([!#@][^\^ \x0D\x0A,;:?\']*[^\^ \x0D\x0A,;:?!\'.])/', (string) $string, $matches)) {
 				foreach ($matches[1] as $match) {
 					if (strstr($match, ']')) {
 						// we might be inside a bbcode color tag - leave it alone
@@ -2437,7 +2437,7 @@ class BBCode
 					}
 
 					// try not to catch url fragments
-					if (strpos($string, $match) && preg_match('/[a-zA-z0-9\/]/', substr($string, strpos($string, $match) - 1, 1))) {
+					if (strpos((string) $string, $match) && preg_match('/[a-zA-z0-9\/]/', substr((string) $string, strpos((string) $string, $match) - 1, 1))) {
 						continue;
 					}
 
