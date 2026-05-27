@@ -29,7 +29,7 @@ use Psr\Log\LoggerInterface;
  *
  * @package Friendica\Content\Conversation\Factory
  */
-final class ChannelPost
+final readonly class ChannelPost
 {
 	/**
 	 * ChannelPost constructor.
@@ -39,7 +39,7 @@ final class ChannelPost
 	 * @param LoggerInterface $logger Logger instance.
 	 * @param IManageConfigValues $config Configuration manager.
 	 */
-	public function __construct(private readonly Database $dba, private readonly UserDefinedChannel $channelRepository, private readonly LoggerInterface $logger, private readonly IManageConfigValues $config) {}
+	public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config) {}
 
 	/**
 	 * Add a post to matching user-defined channels.

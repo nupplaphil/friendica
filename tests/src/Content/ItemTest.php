@@ -46,7 +46,6 @@ class ItemTest extends MockedTestCase
 	{
 		$reflection = new \ReflectionClass(\Friendica\DI::class);
 		$property   = $reflection->getProperty('dice');
-		$property->setAccessible(true);
 
 		return $property->getValue();
 	}
@@ -55,7 +54,6 @@ class ItemTest extends MockedTestCase
 	{
 		$reflection = new \ReflectionClass(\Friendica\DI::class);
 		$property   = $reflection->getProperty('dice');
-		$property->setAccessible(true);
 		$property->setValue(null, $value);
 	}
 

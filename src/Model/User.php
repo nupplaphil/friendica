@@ -1091,7 +1091,7 @@ class User
 		$forbidden_nicknames = DI::config()->get('system', 'forbidden_nicknames', '');
 		if (!empty($forbidden_nicknames)) {
 			$forbidden = explode(',', $forbidden_nicknames);
-			$forbidden = array_map('trim', $forbidden);
+			$forbidden = array_map(trim(...), $forbidden);
 		} else {
 			$forbidden = [];
 		}

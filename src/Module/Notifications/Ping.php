@@ -222,8 +222,8 @@ class Ping extends BaseModule
 		$data['notifications'] = $navNotifications;
 
 		$data['sysmsgs'] = [
-			'notice' => array_map([Strings::class, 'escapeHtml'], $this->systemMessages->flushNotices()),
-			'info'   => array_map([Strings::class, 'escapeHtml'], $this->systemMessages->flushInfos()),
+			'notice' => array_map(Strings::escapeHtml(...), $this->systemMessages->flushNotices()),
+			'info'   => array_map(Strings::escapeHtml(...), $this->systemMessages->flushInfos()),
 		];
 
 		if (isset($_GET['callback'])) {

@@ -340,8 +340,8 @@ class Smilies
 			return $text;
 		}
 
-		$text = preg_replace_callback('/<(pre)>(.*?)<\/pre>/ism', [self::class, 'encode'], $text);
-		$text = preg_replace_callback('/<(code)>(.*?)<\/code>/ism', [self::class, 'encode'], (string) $text);
+		$text = preg_replace_callback('/<(pre)>(.*?)<\/pre>/ism', self::encode(...), $text);
+		$text = preg_replace_callback('/<(code)>(.*?)<\/code>/ism', self::encode(...), (string) $text);
 
 		if ($no_images) {
 			$cleaned = ['texts' => [], 'icons' => []];
@@ -355,11 +355,11 @@ class Smilies
 			$smilies = $cleaned;
 		}
 
-		$text = preg_replace_callback('/\B&lt;3+?\b/', [self::class, 'heartReplaceCallback'], (string) $text);
+		$text = preg_replace_callback('/\B&lt;3+?\b/', self::heartReplaceCallback(...), (string) $text);
 		$text = self::strOrigReplace($smilies['texts'], $smilies['icons'], $text);
 
-		$text = preg_replace_callback('/<(code)>(.*?)<\/code>/ism', [self::class, 'decode'], $text);
-		$text = preg_replace_callback('/<(pre)>(.*?)<\/pre>/ism', [self::class, 'decode'], (string) $text);
+		$text = preg_replace_callback('/<(code)>(.*?)<\/code>/ism', self::decode(...), $text);
+		$text = preg_replace_callback('/<(pre)>(.*?)<\/pre>/ism', self::decode(...), (string) $text);
 
 		return $text;
 	}

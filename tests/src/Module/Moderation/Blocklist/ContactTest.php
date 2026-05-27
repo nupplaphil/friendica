@@ -40,7 +40,6 @@ class ContactTest extends MockedTestCase
 	{
 		$reflection = new \ReflectionClass(Contact::class);
 		$method     = $reflection->getMethod('buildSearchCondition');
-		$method->setAccessible(true);
 
 		return $method->invoke(null, $condition, $search);
 	}

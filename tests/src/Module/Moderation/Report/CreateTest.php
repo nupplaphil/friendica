@@ -79,7 +79,6 @@ class CreateTest extends MockedTestCase
 		$module = $reflectionClass->newInstanceWithoutConstructor();
 
 		$baseUrlProperty = new \ReflectionProperty(\Friendica\BaseModule::class, 'baseUrl');
-		$baseUrlProperty->setAccessible(true);
 		$baseUrlProperty->setValue($module, $baseUrl);
 
 		return $module;
@@ -88,7 +87,6 @@ class CreateTest extends MockedTestCase
 	private function invokeGetReturnPath(Create $module, array $request): string
 	{
 		$method = new \ReflectionMethod($module, 'getReturnPath');
-		$method->setAccessible(true);
 
 		return $method->invoke($module, $request);
 	}

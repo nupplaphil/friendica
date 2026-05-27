@@ -145,7 +145,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new Event($name);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected) {
 			$this->assertSame($expected, $name);
@@ -173,7 +172,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ConfigLoadedEvent($name, $config);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected, $config) {
 			$this->assertSame($expected, $name);
@@ -201,7 +199,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new CollectRoutesEvent($name, $routeCollector);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected, $routeCollector) {
 			$this->assertSame($expected, $name);
@@ -218,7 +215,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::PERMISSION_TOOLTIP_CONTENT, ['model' => ['uid' => -1]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('lockview_content', $name);
@@ -240,7 +236,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::INSERT_POST_LOCAL, ['item' => ['id' => -1]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('post_local', $name);
@@ -262,7 +257,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::INSERT_POST_LOCAL_END, ['item' => ['id' => -1]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('post_local_end', $name);
@@ -284,7 +278,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::PREPARE_POST_START, ['item' => ['id' => -1]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('prepare_body_init', $name);
@@ -306,7 +299,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::PHOTO_UPLOAD_START, ['request' => ['album' => -1]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('photo_post_init', $name);
@@ -328,7 +320,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::PHOTO_UPLOAD_END, ['id' => -1]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, int $data): int {
 			$this->assertSame('photo_post_end', $name);
@@ -345,7 +336,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::PROFILE_SIDEBAR_ENTRY, ['profile' => ['uid' => 0, 'name' => 'original']]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('profile_sidebar_enter', $name);
@@ -367,7 +357,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::BBCODE_TO_HTML_START, ['bbcode2html' => '[b]original[/b]']);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, string $data): string {
 			$this->assertSame('bbcode', $name);
@@ -389,7 +378,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::HTML_TO_BBCODE_END, ['html2bbcode' => '<b>original</b>']);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, string $data): string {
 			$this->assertSame('html2bbcode', $name);
@@ -411,7 +399,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::BBCODE_TO_MARKDOWN_END, ['bbcode2markdown' => '[b]original[/b]']);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, string $data): string {
 			$this->assertSame('bb2diaspora', $name);
@@ -433,7 +420,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::EVENT_CREATED, ['event' => ['id' => 123]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, int $data): int {
 			$this->assertSame('event_created', $name);
@@ -450,7 +436,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::ACCOUNT_REGISTER, ['uid' => 123]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, int $data): int {
 			$this->assertSame('register_account', $name);
@@ -467,7 +452,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::ACCOUNT_REMOVE, ['user' => ['uid' => 123]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, array $data): array {
 			$this->assertSame('remove_user', $name);
@@ -484,7 +468,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent(ArrayFilterEvent::EVENT_UPDATED, ['event' => ['id' => 123]]);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, int $data): int {
 			$this->assertSame('event_updated', $name);
@@ -571,7 +554,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new ArrayFilterEvent($name, ['original']);
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected) {
 			$this->assertSame($expected, $name);
@@ -606,7 +588,6 @@ class HookEventBridgeTest extends TestCase
 		$event = new HtmlFilterEvent($name, 'original');
 
 		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
-		$reflectionProperty->setAccessible(true);
 
 		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected) {
 			$this->assertSame($expected, $name);

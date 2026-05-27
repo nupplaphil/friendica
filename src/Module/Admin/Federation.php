@@ -416,7 +416,7 @@ class Federation extends BaseAdmin
 			$versions[]   = $version;
 		}
 
-		usort($versions, 'version_compare');
+		usort($versions, version_compare(...));
 
 		$versionCounts = [];
 		foreach ($versions as $version) {

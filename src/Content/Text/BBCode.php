@@ -1123,8 +1123,8 @@ class BBCode
 	public static function cleanPictureLinks(string $text): string
 	{
 		DI::profiler()->startRecording('rendering');
-		$return = preg_replace_callback("&\[url=([^\[\]]*)\]\[img=(.*)\](.*)\[\/img\]\[\/url\]&Usi", [self::class, 'cleanPictureLinksCallback'], $text);
-		$return = preg_replace_callback("&\[url=([^\[\]]*)\]\[img\](.*)\[\/img\]\[\/url\]&Usi", [self::class, 'cleanPictureLinksCallback'], (string) $return);
+		$return = preg_replace_callback("&\[url=([^\[\]]*)\]\[img=(.*)\](.*)\[\/img\]\[\/url\]&Usi", self::cleanPictureLinksCallback(...), $text);
+		$return = preg_replace_callback("&\[url=([^\[\]]*)\]\[img\](.*)\[\/img\]\[\/url\]&Usi", self::cleanPictureLinksCallback(...), (string) $return);
 		DI::profiler()->stopRecording();
 		return $return;
 	}
@@ -1159,7 +1159,7 @@ class BBCode
 	{
 		DI::profiler()->startRecording('rendering');
 		$regexp = "/([@!])\[url\=([^\[\]]*)\](.*?)\[\/url\]/ism";
-		$body   = preg_replace_callback($regexp, [self::class, 'mentionCallback'], $body);
+		$body   = preg_replace_callback($regexp, self::mentionCallback(...), $body);
 		DI::profiler()->stopRecording();
 		return $body;
 	}
@@ -1204,7 +1204,7 @@ class BBCode
 	{
 		DI::profiler()->startRecording('rendering');
 		$regexp = "/([@!])\[url\=([^\[\]]*)\].*?\[\/url\]/ism";
-		$body   = preg_replace_callback($regexp, [self::class, 'mentionToAddrCallback'], $body);
+		$body   = preg_replace_callback($regexp, self::mentionToAddrCallback(...), $body);
 		DI::profiler()->stopRecording();
 		return $body;
 	}
@@ -1885,8 +1885,8 @@ class BBCode
 		// Simplify "video" element
 		$text = preg_replace('(\[video[^\]]*?\ssrc\s?=\s?([^\s\]]+)[^\]]*?\].*?\[/video\])ism', '[video]$1[/video]', $text);
 
-		$text = preg_replace_callback("/\[(video)\](.*?)\[\/video\]/ism", [self::class, 'sanitizeLinksCallback'], (string) $text);
-		$text = preg_replace_callback("/\[(audio)\](.*?)\[\/audio\]/ism", [self::class, 'sanitizeLinksCallback'], (string) $text);
+		$text = preg_replace_callback("/\[(video)\](.*?)\[\/video\]/ism", self::sanitizeLinksCallback(...), (string) $text);
+		$text = preg_replace_callback("/\[(audio)\](.*?)\[\/audio\]/ism", self::sanitizeLinksCallback(...), (string) $text);
 
 		if ($simple_html == self::NPF) {
 			$text = preg_replace(
@@ -1909,7 +1909,7 @@ class BBCode
 	private static function convertIFramesToHtml(string $text): string
 	{
 		// Backward compatibility, [iframe] support has been removed in version 2020.12
-		$text = preg_replace_callback("/\[(iframe)\](.*?)\[\/iframe\]/ism", [self::class, 'sanitizeLinksCallback'], $text);
+		$text = preg_replace_callback("/\[(iframe)\](.*?)\[\/iframe\]/ism", self::sanitizeLinksCallback(...), $text);
 		$text = preg_replace("/\[iframe\](.*?)\[\/iframe\]/ism", '[url]$1[/url]', (string) $text);
 
 		return $text;
@@ -1938,8 +1938,8 @@ class BBCode
 
 	private static function convertUrlToHtml(string $text, int $simple_html, bool $for_plaintext): string
 	{
-		$text = preg_replace_callback("/\[(url)\](.*?)\[\/url\]/ism", [self::class, 'sanitizeLinksCallback'], $text);
-		$text = preg_replace_callback("/\[(url)\=(.*?)\](.*?)\[\/url\]/ism", [self::class, 'sanitizeLinksCallback'], (string) $text);
+		$text = preg_replace_callback("/\[(url)\](.*?)\[\/url\]/ism", self::sanitizeLinksCallback(...), $text);
+		$text = preg_replace_callback("/\[(url)\=(.*?)\](.*?)\[\/url\]/ism", self::sanitizeLinksCallback(...), (string) $text);
 
 		// Handle mentions and hashtag links
 		if ($simple_html == self::DIASPORA) {
@@ -1996,7 +1996,7 @@ class BBCode
 
 		if ($for_plaintext) {
 			$text = preg_replace("(\[url\](.*?)\[\/url\])ism", " $1 ", (string) $text);
-			$text = preg_replace_callback("&\[url=([^\[\]]*)\]\[img\](.*)\[\/img\]\[\/url\]&Usi", [self::class, 'removePictureLinksCallback'], (string) $text);
+			$text = preg_replace_callback("&\[url=([^\[\]]*)\]\[img\](.*)\[\/img\]\[\/url\]&Usi", self::removePictureLinksCallback(...), (string) $text);
 		}
 
 		// Bookmarks in red - will be converted to bookmarks in friendica
@@ -2009,7 +2009,7 @@ class BBCode
 		);
 
 		if (in_array($simple_html, [self::TWITTER, self::ATPROTOCOL])) {
-			$text = preg_replace_callback("/([^#@!])\[url\=([^\]]*)\](.*?)\[\/url\]/ism", [self::class, 'expandLinksCallback'], (string) $text);
+			$text = preg_replace_callback("/([^#@!])\[url\=([^\]]*)\](.*?)\[\/url\]/ism", self::expandLinksCallback(...), (string) $text);
 			//$text = preg_replace("/[^#@!]\[url\=([^\]]*)\](.*?)\[\/url\]/ism", ' $2 [url]$1[/url]', $text);
 			$text = preg_replace("/\[bookmark\=([^\]]*)\](.*?)\[\/bookmark\]/ism", ' $2 [url]$1[/url]', (string) $text);
 		}
@@ -2146,7 +2146,7 @@ class BBCode
 
 	private static function convertMailToHtml(string $text): string
 	{
-		$text = preg_replace_callback("/\[(mail)\](.*?)\[\/mail\]/ism", [self::class, 'sanitizeLinksCallback'], $text);
+		$text = preg_replace_callback("/\[(mail)\](.*?)\[\/mail\]/ism", self::sanitizeLinksCallback(...), $text);
 		$text = preg_replace("/\[mail\](.*?)\[\/mail\]/", '<a href="mailto:$1">$1</a>', (string) $text);
 		$text = preg_replace("/\[mail\=(.*?)\](.*?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', (string) $text);
 		return $text;
@@ -2361,7 +2361,7 @@ class BBCode
 			$url_search_string = "^\[\]";
 			$text              = preg_replace_callback(
 				"/([@!])\[(.*?)\]\(([$url_search_string]*?)\)/ism",
-				[self::class, 'bbCodeMention2DiasporaCallback'],
+				self::bbCodeMention2DiasporaCallback(...),
 				$text,
 			);
 		}
@@ -2492,7 +2492,7 @@ class BBCode
 	 */
 	public static function performWithEscapedTags(string $text, array $tagList, callable $callback): string
 	{
-		$tagList = array_map('preg_quote', $tagList);
+		$tagList = array_map(preg_quote(...), $tagList);
 
 		return Strings::performWithEscapedBlocks($text, '#\[(?:' . implode('|', $tagList) . ').*?\[/(?:' . implode('|', $tagList) . ')]#ism', $callback);
 	}

@@ -16,14 +16,14 @@ use Friendica\Util\DateTimeFormat;
 /**
  * Activity repository for handling activity table operations.
  */
-final class Activity
+final readonly class Activity
 {
 	/**
 	 * ActivityRepository constructor.
 	 *
 	 * @param Database $dba
 	 */
-	public function __construct(private readonly Database $dba) {}
+	public function __construct(private Database $dba) {}
 
 	/**
 	 * Find an activity by uid and network.

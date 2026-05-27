@@ -188,10 +188,10 @@ HELP;
 		//split array...
 		$parts = array_chunk($fileset, $ps);
 		//filter working subsets...
-		$parts = array_filter($parts, [$this, 'runs']);
+		$parts = array_filter($parts, $this->runs(...));
 		//melt remaining parts together
 		if (is_array($parts)) {
-			return array_reduce($parts, "array_merge", []);
+			return array_reduce($parts, array_merge(...), []);
 		}
 		return [];
 	}

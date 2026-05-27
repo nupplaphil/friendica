@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
  *
  * @package Friendica\Content\Conversation\Factory
  */
-final class SystemChannelPost
+final readonly class SystemChannelPost
 {
 	/**
 	 * SystemChannelPost constructor.
@@ -44,7 +44,7 @@ final class SystemChannelPost
 	 * @param IManageConfigValues $config Configuration manager.
 	 * @param ActivityFactory $activityFactory Activity factory.
 	 */
-	public function __construct(private readonly Database $dba, private readonly UserDefinedChannel $channelRepository, private readonly LoggerInterface $logger, private readonly IManageConfigValues $config, private readonly ActivityFactory $activityFactory) {}
+	public function __construct(private Database $dba, private UserDefinedChannel $channelRepository, private LoggerInterface $logger, private IManageConfigValues $config, private ActivityFactory $activityFactory) {}
 
 	/**
 	 * Add a post to matching system channels for one or many users.

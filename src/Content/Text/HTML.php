@@ -1012,7 +1012,7 @@ class HTML
 		// the quotes, e.g.:
 		//
 		//    concat("'foo'", '"', "bar")
-		return 'concat(' . implode(', \'"\', ', array_map([self::class, 'xpathQuote'], explode('"', $value))) . ')';
+		return 'concat(' . implode(', \'"\', ', array_map(self::xpathQuote(...), explode('"', $value))) . ')';
 	}
 
 	/**
