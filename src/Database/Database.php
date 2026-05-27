@@ -640,7 +640,7 @@ class Database
 
 				if (count($values) > 0) {
 					array_unshift($values, $param_types);
-					call_user_func_array([$stmt, 'bind_param'], $values);
+					call_user_func_array($stmt->bind_param(...), $values);
 				}
 
 				if (!$stmt->execute()) {
@@ -1013,7 +1013,7 @@ class Database
 
 		$table_string = DBA::buildTableString([$table]);
 
-		$fields_string = implode(', ', array_map([DBA::class, 'quoteIdentifier'], array_keys($param)));
+		$fields_string = implode(', ', array_map(DBA::quoteIdentifier(...), array_keys($param)));
 
 		$values_string = substr(str_repeat("?, ", count($param)), 0, -2);
 
@@ -1026,7 +1026,7 @@ class Database
 		$sql .= "INTO " . $table_string . " (" . $fields_string . ") VALUES (" . $values_string . ")";
 
 		if ($duplicate_mode == self::INSERT_UPDATE) {
-			$fields_string = implode(' = ?, ', array_map([DBA::class, 'quoteIdentifier'], array_keys($param)));
+			$fields_string = implode(' = ?, ', array_map(DBA::quoteIdentifier(...), array_keys($param)));
 
 			$sql .= " ON DUPLICATE KEY UPDATE " . $fields_string . " = ?";
 
@@ -1071,7 +1071,7 @@ class Database
 			return false;
 		}
 
-		$fields_string = implode(', ', array_map([DBA::class, 'quoteIdentifier'], $fields));
+		$fields_string = implode(', ', array_map(DBA::quoteIdentifier(...), $fields));
 		$table_string  = DBA::buildTableString([$table]);
 
 		$values_list = [];
@@ -1130,7 +1130,7 @@ class Database
 
 		$table_string = DBA::buildTableString([$table]);
 
-		$fields_string = implode(', ', array_map([DBA::class, 'quoteIdentifier'], array_keys($param)));
+		$fields_string = implode(', ', array_map(DBA::quoteIdentifier(...), array_keys($param)));
 
 		$values_string = substr(str_repeat("?, ", count($param)), 0, -2);
 
@@ -1425,7 +1425,7 @@ class Database
 		}
 
 		$sql = "UPDATE " . $ignore . $table_string . " SET "
-			. ((count($fields) > 0) ? implode(" = ?, ", array_map([DBA::class, 'quoteIdentifier'], array_keys($fields))) . " = ?" : "")
+			. ((count($fields) > 0) ? implode(" = ?, ", array_map(DBA::quoteIdentifier(...), array_keys($fields))) . " = ?" : "")
 			. ((count($direct_fields) > 0) ? ((count($fields) > 0) ? " , " : "") . implode(" , ", $direct_fields) : "")
 			. $condition_string;
 
@@ -1972,7 +1972,7 @@ class Database
 	 */
 	public function escapeArray(&$arr, bool $add_quotation = false)
 	{
-		array_walk($arr, [$this, 'escapeArrayCallback'], $add_quotation);
+		array_walk($arr, $this->escapeArrayCallback(...), $add_quotation);
 	}
 
 	/**

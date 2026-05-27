@@ -17,7 +17,6 @@ class IndexTest extends MockedTestCase
 	{
 		$reflection = new \ReflectionClass(Index::class);
 		$method     = $reflection->getMethod('filterEntriesBySearch');
-		$method->setAccessible(true);
 
 		$result  = $method->invoke(null, $entries, $search);
 		$domains = array_values(array_map(static fn (array $entry): string => $entry['domain'], $result));

@@ -200,7 +200,7 @@ class Acl extends BaseModule
 					'photo' => 'images/twopeople.png',
 					'name'  => htmlspecialchars((string) $circle['name']),
 					'id'    => intval($circle['id']),
-					'uids'  => array_map('intval', explode(',', (string) $circle['uids'])),
+					'uids'  => array_map(intval(...), explode(',', (string) $circle['uids'])),
 					'link'  => '',
 					'group' => '0',
 				];

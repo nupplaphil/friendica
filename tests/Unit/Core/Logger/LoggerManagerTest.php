@@ -30,11 +30,9 @@ class LoggerManagerTest extends TestCase
 	protected function tearDown(): void
 	{
 		$reflectionProperty = new \ReflectionProperty(LoggerManager::class, 'logger');
-		$reflectionProperty->setAccessible(true);
 		$reflectionProperty->setValue(null, null);
 
 		$reflectionProperty = new \ReflectionProperty(LoggerManager::class, 'logChannel');
-		$reflectionProperty->setAccessible(true);
 		$reflectionProperty->setValue(null, LogChannel::DEFAULT);
 	}
 

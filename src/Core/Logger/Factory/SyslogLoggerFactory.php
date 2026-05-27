@@ -22,9 +22,9 @@ use Psr\Log\LoggerInterface;
  *
  * @internal
  */
-final class SyslogLoggerFactory implements LoggerFactory
+final readonly class SyslogLoggerFactory implements LoggerFactory
 {
-	public function __construct(private readonly IManageConfigValues $config, private readonly IHaveCallIntrospections $introspection) {}
+	public function __construct(private IManageConfigValues $config, private IHaveCallIntrospections $introspection) {}
 
 	/**
 	 * Creates and returns a PSR-3 Logger instance.

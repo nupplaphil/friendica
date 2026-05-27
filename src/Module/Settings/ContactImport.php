@@ -62,7 +62,7 @@ class ContactImport extends BaseSettings
 					$this->logger->notice('Contact CSV file upload error', ['error' => $_FILES['importcontact-filename']['error']]);
 					$this->systemMessages->addNotice($this->l10n->t('Contact CSV file upload error'));
 				} else {
-					$csvArray = array_map('str_getcsv', file($_FILES['importcontact-filename']['tmp_name']));
+					$csvArray = array_map(str_getcsv(...), file($_FILES['importcontact-filename']['tmp_name']));
 					$this->logger->notice('Import started', ['lines' => count($csvArray)]);
 					// detect Mastodon-style CSV with 'List name' and 'Account address' headers
 					// @see https://github.com/mastodon/mastodon/blob/main/app/models/form/import.rb

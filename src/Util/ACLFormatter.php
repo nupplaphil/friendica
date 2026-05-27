@@ -57,7 +57,7 @@ final class ACLFormatter
 
 		sort($elements);
 
-		array_walk($elements, [$this, 'sanitizeItem']);
+		array_walk($elements, $this->sanitizeItem(...));
 
 		return implode('', $elements);
 	}
@@ -105,7 +105,7 @@ final class ACLFormatter
 		}
 
 		if (is_array($item)) {
-			array_walk($item, [$this, 'sanitizeItem']);
+			array_walk($item, $this->sanitizeItem(...));
 			$return = implode('', $item);
 		}
 		return $return;

@@ -12,7 +12,7 @@ class OAuthUtil
 	public static function urlencode_rfc3986($input)
 	{
 		if (is_array($input)) {
-			return array_map([\Friendica\Security\OAuth1\OAuthUtil::class, 'urlencode_rfc3986'], $input);
+			return array_map(\Friendica\Security\OAuth1\OAuthUtil::urlencode_rfc3986(...), $input);
 		} elseif (is_scalar($input)) {
 			return str_replace(
 				'+',
@@ -146,7 +146,7 @@ class OAuthUtil
 	{
 		// Parameters are sorted by name, using lexicographical byte value ordering.
 		// Ref: Spec: 9.1.1 (1)
-		uksort($params, 'strcmp');
+		uksort($params, strcmp(...));
 		return http_build_query($params, '', null, PHP_QUERY_RFC3986);
 	}
 }

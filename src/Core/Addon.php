@@ -52,7 +52,7 @@ class Addon
 		if (is_array($files)) {
 			foreach ($files as $file) {
 				if (is_dir($file)) {
-					[$tmp, $addon] = array_map('trim', explode('/', $file));
+					[$tmp, $addon] = array_map(trim(...), explode('/', $file));
 					$info          = self::getInfo($addon);
 
 					if (DI::config()->get('system', 'show_unsupported_addons')
@@ -272,7 +272,7 @@ class Addon
 			foreach ($ll as $l) {
 				$l = trim($l, "\t\n\r */");
 				if ($l != "") {
-					$addon_info = array_map("trim", explode(":", $l, 2));
+					$addon_info = array_map(trim(...), explode(":", $l, 2));
 					if (count($addon_info) < 2) {
 						continue;
 					}

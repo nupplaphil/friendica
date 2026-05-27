@@ -93,8 +93,8 @@ final class Report extends \Friendica\BaseRepository
 			throw new NotFoundException();
 		}
 
-		$reportPosts = new PostsCollection(array_map([$this->postFactory, 'createFromTableRow'], $this->db->selectToArray('report-post', ['uri-id', 'status'], ['rid' => $condition['id'] ?? 0])));
-		$reportRules = new RulesCollection(array_map([$this->ruleFactory, 'createFromTableRow'], $this->db->selectToArray('report-rule', ['line-id', 'text'], ['rid' => $condition['id'] ?? 0])));
+		$reportPosts = new PostsCollection(array_map($this->postFactory->createFromTableRow(...), $this->db->selectToArray('report-post', ['uri-id', 'status'], ['rid' => $condition['id'] ?? 0])));
+		$reportRules = new RulesCollection(array_map($this->ruleFactory->createFromTableRow(...), $this->db->selectToArray('report-rule', ['line-id', 'text'], ['rid' => $condition['id'] ?? 0])));
 
 		return $this->factory->createFromTableRow($fields, $reportPosts, $reportRules);
 	}

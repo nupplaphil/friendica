@@ -1161,7 +1161,7 @@ class Conversation
 	{
 		$this->profiler->startRecording('rendering');
 		$result = $items;
-		usort($result, [$this, 'sortThrReceivedRev']);
+		usort($result, $this->sortThrReceivedRev(...));
 		foreach ($result as $k => $i) {
 			if (isset($result[$k]['children'])) {
 				$result[$k]['children'] = $this->sortItemChildren($result[$k]['children']);
@@ -1284,17 +1284,17 @@ class Conversation
 		}
 
 		if (stristr($order, 'pinned_received')) {
-			usort($parents, [$this, 'sortThrFeaturedReceived']);
+			usort($parents, $this->sortThrFeaturedReceived(...));
 		} elseif (stristr($order, 'pinned_commented')) {
-			usort($parents, [$this, 'sortThrFeaturedCommented']);
+			usort($parents, $this->sortThrFeaturedCommented(...));
 		} elseif (stristr($order, 'pinned_created')) {
-			usort($parents, [$this, 'sortThrFeaturedCreated']);
+			usort($parents, $this->sortThrFeaturedCreated(...));
 		} elseif (stristr($order, 'received')) {
-			usort($parents, [$this, 'sortThrReceived']);
+			usort($parents, $this->sortThrReceived(...));
 		} elseif (stristr($order, 'commented')) {
-			usort($parents, [$this, 'sortThrCommented']);
+			usort($parents, $this->sortThrCommented(...));
 		} elseif (stristr($order, 'created')) {
-			usort($parents, [$this, 'sortThrCreated']);
+			usort($parents, $this->sortThrCreated(...));
 		}
 
 		/*

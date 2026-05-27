@@ -22,15 +22,15 @@ use Psr\Log\LoggerInterface;
  *
  * @see Item::insert()
  */
-final class ItemHelper
+final readonly class ItemHelper
 {
-	private readonly string $baseUrl;
+	private string $baseUrl;
 
 	public function __construct(
-		private readonly ItemContent $itemContent,
-		private readonly Activity $activity,
-		private readonly LoggerInterface $logger,
-		private readonly Database $database,
+		private ItemContent $itemContent,
+		private Activity $activity,
+		private LoggerInterface $logger,
+		private Database $database,
 		BaseURL $baseURL,
 	) {
 		$this->baseUrl = $baseURL->__toString();

@@ -24,9 +24,9 @@ use Psr\Log\LoggerInterface;
  *
  * @internal
  */
-final class StreamLoggerFactory implements LoggerFactory
+final readonly class StreamLoggerFactory implements LoggerFactory
 {
-	public function __construct(private readonly IManageConfigValues $config, private readonly IHaveCallIntrospections $introspection, private readonly FileSystemUtil $fileSystem) {}
+	public function __construct(private IManageConfigValues $config, private IHaveCallIntrospections $introspection, private FileSystemUtil $fileSystem) {}
 
 	/**
 	 * Creates and returns a PSR-3 Logger instance.

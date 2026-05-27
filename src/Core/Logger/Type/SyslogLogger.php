@@ -134,7 +134,7 @@ class SyslogLogger extends AbstractLogger
 	 */
 	private function write(int $priority, string $message)
 	{
-		set_error_handler([$this, 'customErrorHandler']);
+		set_error_handler($this->customErrorHandler(...));
 		$opened = openlog(self::IDENT, $this->logOpts, $this->logFacility);
 		restore_error_handler();
 
@@ -183,7 +183,7 @@ class SyslogLogger extends AbstractLogger
 	 */
 	protected function syslogWrapper(int $level, string $entry)
 	{
-		set_error_handler([$this, 'customErrorHandler']);
+		set_error_handler($this->customErrorHandler(...));
 		$written = syslog($level, $entry);
 		restore_error_handler();
 

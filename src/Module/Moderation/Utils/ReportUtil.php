@@ -10,9 +10,9 @@ namespace Friendica\Module\Moderation\Utils;
 use Friendica\Core\L10n;
 use Friendica\Moderation\Entity\Report;
 
-final class ReportUtil
+final readonly class ReportUtil
 {
-	public function __construct(private readonly L10n $l10n) {}
+	public function __construct(private L10n $l10n) {}
 
 	public function getReportCategoryName(int $category): string
 	{
