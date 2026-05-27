@@ -8,7 +8,7 @@
 	<span id="sidebar-community-no-sharer-inflated" class="widget inflated fakelink">
 		<button class="fakelink" onclick="openCloseWidget('sidebar-community-no-sharer', 'sidebar-community-no-sharer-inflated');" aria-expanded="false">
 			<h3>
-				<i class="fa fa-user-o" aria-hidden="true"></i>
+				<i class="ri ri-user-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>
@@ -16,7 +16,7 @@
 	<div id="sidebar-community-no-sharer" class="widget">
 		<button class="fakelink" onclick="openCloseWidget('sidebar-community-no-sharer', 'sidebar-community-no-sharer-inflated');" aria-expanded="true">
 			<h3>
-				<i class="fa fa-user-o" aria-hidden="true"></i>
+				<i class="ri ri-user-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>

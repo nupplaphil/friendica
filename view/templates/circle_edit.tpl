@@ -19,7 +19,7 @@
 		<div id="circle-edit-submit-wrapper">
 			<input type="submit" name="submit" value="{{$submit}}">
 			<button type="button" onclick="window.location.href='circle/markread/{{$gid}}?t={{$form_security_token_markread}}';" title="{{$markread_label}}">
-				<i class="fa fa-eye" aria-hidden="true"></i> {{$markread_label}}
+				<i class="ri ri-eye-line" aria-hidden="true"></i> {{$markread_label}}
 			</button>
 		</div>
 		<div id="circle-edit-select-end"></div>

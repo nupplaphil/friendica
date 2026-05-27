@@ -771,34 +771,34 @@ function doActivityItemAction(ident, verb, un) {
 	var thumbsClass = '';
 	switch (verb) {
 		case 'like':
-			thumbsClass = 'fa-thumbs-up';
+			thumbsClass = 'ri-thumb-up-line';
 			break;
 		case 'dislike':
-			thumbsClass = 'fa-thumbs-down';
+			thumbsClass = 'ri-thumb-down-line';
 			break;
 		case 'announce':
-			thumbsClass = 'fa-retweet';
+			thumbsClass = 'ri-repeat-line';
 			break;
 		case 'attendyes':
-			thumbsClass = 'fa-check';
+			thumbsClass = 'ri-check-line';
 			break;
 		case 'attendno':
-			thumbsClass = 'fa-times';
+			thumbsClass = 'ri-close-line';
 			break;
 		case 'attendmaybe':
-			thumbsClass = 'fa-question';
+			thumbsClass = 'ri-question-line';
 	}
 	if (verb.indexOf('announce') === 0 ) {
 		// Share-Button(s)
 		// remove share-symbol, to replace it by rotator
-		$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').removeClass('fa-share');
-		$('button[id^=announce-' + ident.toString() + '] i:first-child').removeClass('fa-retweet');
+		$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').removeClass('ri-share-forward-line');
+		$('button[id^=announce-' + ident.toString() + '] i:first-child').removeClass('ri-repeat-line');
 		// avoid multiple rotators on like/share-button if klicked multiple times.
 		if ($('img[id^=waitfor-' + verb + '-' + ident.toString() + ']').length == 0) {
 			// append rotator to the shareMenu-button for small media
 			$('<img>')
 				.attr({id: 'waitfor-' + verb + '-' + ident.toString(), src: 'images/rotator.gif'})
-				.addClass('fa')
+				.addClass('ri')
 				.appendTo($('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child' ));
 		}
 	}
@@ -807,7 +807,7 @@ function doActivityItemAction(ident, verb, un) {
 	if ($('button:not(button.dropdown-toggle) img#waitfor-' + verb + '-' + ident.toString()).length == 0) {
 		$('<img>')
 			.attr({id: 'waitfor-' + verb + '-' + ident.toString(), src: 'images/rotator.gif'})
-			.addClass('fa')
+			.addClass('ri')
 			.appendTo($('button[id^=' + verb + '-' + ident.toString() + '] i:first-child'));
 	}
 	$.post('item/' + ident.toString() + '/activity/' + _verb)
@@ -829,7 +829,7 @@ function doActivityItemAction(ident, verb, un) {
 				$('a[id^=' + verb + '-' + ident.toString() + ']' )
 					.removeClass('active')
 					.attr('href', 'javascript:doActivityItemAction(' + ident +', "' + verb + '")');
-				$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child' ).addClass('fa-retweet').removeClass('fa-ban');
+				$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child' ).addClass('ri-repeat-line').removeClass('ri-forbid-2-line');
 			} else {
 				// like/dislike buttons
 				$('button[id^=' + verb + '-' + ident.toString() + ']' )
@@ -839,12 +839,12 @@ function doActivityItemAction(ident, verb, un) {
 				$('a[id^=' + verb + '-' + ident.toString() + ']' )
 					.addClass('active')
 					.attr('href', 'javascript:doActivityItemAction(' + ident + ', "' + verb + '", true )');
-				$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child' ).removeClass('fa-retweet').addClass('fa-ban');
+				$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child' ).removeClass('ri-repeat-line').addClass('ri-forbid-2-line');
 			}
 			$('button[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 			if (verb.indexOf('announce') === 0 ) {
 				// ShareMenuButton
-				$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('fa-share');
+				$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('ri-share-forward-line');
 				if (data.verb == 'un' + verb) {
 					$('button[id^=shareMenuOptions-' + ident.toString() + ']').removeClass('active');
 				} else {
@@ -858,7 +858,7 @@ function doActivityItemAction(ident, verb, un) {
 			 * reset all buttons
 			 */
 			$('img[id^=waitfor-' + verb + '-' + ident.toString() + ']').remove();
-			$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('fa-share');
+			$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('ri-share-forward-line');
 			$('button[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 			$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 			$.jGrowl(aActErr[verb] + '<br>(' + aErrType['srvErr'] + ')', {sticky: false, theme: 'info', life: 5000});
@@ -867,7 +867,7 @@ function doActivityItemAction(ident, verb, un) {
 	.error(function(data){
 		// Server could not be reached successfully
 		$('img[id^=waitfor-' + verb + '-' + ident.toString() + ']').remove();
-		$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('fa-share');
+		$('button[id^=shareMenuOptions-' + ident.toString() + '] i:first-child').addClass('ri-share-forward-line');
 		$('button[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 		$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 		$.jGrowl(aActErr[verb] + '<br>(' + aErrType['netErr'] + ')', {sticky: false, theme: 'info', life: 5000});

@@ -950,7 +950,7 @@ nav.navbar .nav > li > button:focus {
 	top: 2px;
 }
 
-#search-mobile .form-button-search .fa {
+#search-mobile .form-button-search .ri {
 	font-size: 1.6em;
 }
 
@@ -1656,13 +1656,13 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 	overflow-y: overlay;
 }
 /* ACL */
-.fa.lock:before {
-	font-family: ForkAwesome;
-	content: "\f023";
+.ri.lock:before {
+	font-family: remixicon;
+	content: "\eece";
 }
-.fa.unlock:before {
-	font-family: ForkAwesome;
-	content: "\f09c";
+.ri.unlock:before {
+	font-family: remixicon;
+	content: "\eed2";
 }
 
 #acl-wrapper label.panel-heading {
@@ -1806,7 +1806,7 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 .fbrowser .profile-rotator-wrapper {
 	min-height: 200px;
 }
-.fbrowser .fa-spin {
+.fbrowser .ri-spin {
 	position: absolute;
 	left: 45%;
 	top: 40%;
@@ -2597,8 +2597,8 @@ input[type="range"].form-control {
 	width: 100%;
 }
 
-#search-box .fa-search {
-	font-size: 1.4em;
+#search-box .ri-search-line {
+	font-size: 1.1em;
 }
 
 /* Both desktop and mobile - multiple search fields */
@@ -2850,10 +2850,10 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	font-size: 18px;
 }
 
-.contact-circle-actions .fa-times-circle {
+.contact-circle-actions .ri-close-circle-line {
 	color: #d00000;
 }
-.contact-circle-actions .fa-plus-circle {
+.contact-circle-actions .ri-add-circle-line {
 	color: #008000;
 }
 
@@ -3305,14 +3305,14 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 }
 details.profile-jot-net[open] summary:before,
 .panel .section-subtitle-wrapper .accordion-toggle:before {
-	font-family: ForkAwesome;
-	content: "\f0d7";
+	font-family: remixicon;
+	content: "\ea4e";
 	padding-right: 5px;
 }
 details.profile-jot-net summary:before,
 .panel .section-subtitle-wrapper .accordion-toggle.collapsed:before {
-	font-family: ForkAwesome;
-	content: "\f0da";
+	font-family: remixicon;
+	content: "\ea6e";
 }
 details.profile-jot-net summary:before {
 	padding-right: 5px;
@@ -3350,9 +3350,9 @@ details.profile-jot-net[open] summary:before {
 }
 
 #frio-accents input[type="radio"]:checked + label::before {
-	content: '\f00c';
+	content: '\eb7b';
 	color: white;
-	font-family: ForkAwesome;
+	font-family: remixicon;
 	font-weight: normal;
 	font-size: 18px;
 }
@@ -3426,15 +3426,15 @@ details.profile-jot-net[open] summary:before {
 	padding-right: 10px;
 }
 span.widget > .fakelink > h3:before {
-	font-family: ForkAwesome;
-	content: "\f0da"; /* Right Plain Pointer */
+	font-family: remixicon;
+	content: "\ea6e"; /* Right Pointer */
 	margin-left: 4px;
 }
 div.widget > .fakelink > h3:before,
 #sidebar-circle-header > .fakelink > h3:before,
 #sidebar-group-header > .fakelink > h3:before {
-	font-family: ForkAwesome;
-	content: "\f0d7"; /* Bottom Plain Pointer */
+	font-family: remixicon;
+	content: "\ea4e"; /* Down Pointer */
 }
 
 .widget button.fakelink {
@@ -3644,8 +3644,8 @@ li.addon {
 	transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 #adminpage li .icon.on:after {
-	font-family: "ForkAwesome";
-	content: "\f00c";
+	font-family: "remixicon";
+	content: "\eb7b";
 	display: inline-block;
 	position: absolute;
 	width: 16px;
