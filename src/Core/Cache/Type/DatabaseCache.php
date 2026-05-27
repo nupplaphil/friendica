@@ -20,7 +20,7 @@ class DatabaseCache extends AbstractCache implements ICanCache
 {
 	public const NAME = 'database';
 
-	public function __construct(string $hostname, private Database $dba)
+	public function __construct(string $hostname, private readonly Database $dba)
 	{
 		parent::__construct($hostname);
 	}

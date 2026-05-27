@@ -20,7 +20,7 @@ abstract class AbstractCache implements ICanCache
 		/**
 		 * @var string The hostname
 		 */
-		private string $hostName,
+		private readonly string $hostName,
 	) {}
 
 	/**

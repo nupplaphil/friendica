@@ -30,7 +30,7 @@ class Notification extends BaseRepository
 
 	protected static $table_name = 'notification';
 
-	public function __construct(private IManagePersonalConfigValues $pconfig, Database $database, LoggerInterface $logger, Factory\Notification $factory)
+	public function __construct(private readonly IManagePersonalConfigValues $pconfig, Database $database, LoggerInterface $logger, Factory\Notification $factory)
 	{
 		parent::__construct($database, $logger, $factory);
 	}

@@ -29,7 +29,7 @@ use Psr\Log\LoggerInterface;
  */
 class Posts extends BaseModule
 {
-	public function __construct(L10n $l10n, private LocalRelationship $localRelationship, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private App\Page $page, private IHandleUserSessions $userSession, $server, array $parameters = [])
+	public function __construct(L10n $l10n, private readonly LocalRelationship $localRelationship, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private App\Page $page, private readonly IHandleUserSessions $userSession, $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

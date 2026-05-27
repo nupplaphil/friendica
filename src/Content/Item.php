@@ -60,7 +60,7 @@ class Item
 	/** @var PostMediaFactory */
 	protected $postMediaFactory;
 
-	public function __construct(LoggerInterface $logger, private Profiler $profiler, private Activity $activity, private L10n $l10n, private IHandleUserSessions $userSession, private Video $bbCodeVideo, private ACLFormatter $aclFormatter, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, private BaseURL $baseURL, private Emailer $emailer, private EventDispatcherInterface $eventDispatcher, PostMediaRepository $postMediaRepository, PostMediaFactory $postMediaFactory)
+	public function __construct(LoggerInterface $logger, private readonly Profiler $profiler, private readonly Activity $activity, private readonly L10n $l10n, private readonly IHandleUserSessions $userSession, private readonly Video $bbCodeVideo, private readonly ACLFormatter $aclFormatter, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, private readonly BaseURL $baseURL, private readonly Emailer $emailer, private readonly EventDispatcherInterface $eventDispatcher, PostMediaRepository $postMediaRepository, PostMediaFactory $postMediaFactory)
 	{
 		$this->logger              = $logger;
 		$this->postMediaRepository = $postMediaRepository;

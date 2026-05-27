@@ -36,8 +36,8 @@ class UpdateTest extends ApiTestCase
 				'height'   => 666,
 				'tmp_name' => $this->getTempImage(),
 				'name'     => 'spacer.png',
-				'type'     => 'image/png'
-			]
+				'type'     => 'image/png',
+			],
 		];
 
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
@@ -77,7 +77,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithoutAuthenticatedUser()
+	public function testApiStatusesUpdateWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -94,7 +94,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithParent()
+	public function testApiStatusesUpdateWithParent(): never
 	{
 		$this->markTestIncomplete('This triggers an exit() somewhere and kills PHPUnit.');
 	}
@@ -104,7 +104,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithMediaIds()
+	public function testApiStatusesUpdateWithMediaIds(): never
 	{
 		$this->markTestIncomplete();
 	}
@@ -114,7 +114,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithDayThrottleReached()
+	public function testApiStatusesUpdateWithDayThrottleReached(): never
 	{
 		$this->markTestIncomplete();
 	}

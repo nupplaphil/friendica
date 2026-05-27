@@ -12,7 +12,7 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 
 class DomainPatternBlocklist
 {
-	public function __construct(private IManageConfigValues $config) {}
+	public function __construct(private readonly IManageConfigValues $config) {}
 
 	public function get(): array
 	{

@@ -38,7 +38,7 @@ class FilesystemConfig implements ICanConfigureStorage
 	 * @param IManageConfigValues $config
 	 * @param L10n                $l10n
 	 */
-	public function __construct(private IManageConfigValues $config, private L10n $l10n)
+	public function __construct(private readonly IManageConfigValues $config, private readonly L10n $l10n)
 	{
 		$path              = $this->config->get('storage', 'filesystem_path', self::DEFAULT_BASE_FOLDER);
 		$this->storagePath = rtrim($path, '/');

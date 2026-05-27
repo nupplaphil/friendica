@@ -48,7 +48,7 @@ class MemcachedCacheTest extends MemoryCacheTestCase
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testGetAllKeys($value1, $value2, $value3, $value4)
+	public function testGetAllKeys($value1, $value2, $value3, $value4): never
 	{
 		static::markTestIncomplete('Race condition because of too fast getAllKeys() which uses a workaround');
 	}

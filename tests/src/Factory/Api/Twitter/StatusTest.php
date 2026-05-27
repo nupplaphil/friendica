@@ -61,7 +61,7 @@ class StatusTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiConvertItemWithoutBody()
+	public function testApiConvertItemWithoutBody(): never
 	{
 		self::markTestIncomplete('Needs a dataset first');
 
@@ -85,7 +85,7 @@ class StatusTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiConvertItemWithTitleInBody()
+	public function testApiConvertItemWithTitleInBody(): never
 	{
 		self::markTestIncomplete('Needs a dataset first');
 

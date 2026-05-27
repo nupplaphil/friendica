@@ -18,7 +18,7 @@ class DisposableFullTextSearch
 	/** @var int Unique identifier of the haystack in the database. */
 	private int $identifier;
 
-	public function __construct(private Database $db, string $haystack)
+	public function __construct(private readonly Database $db, string $haystack)
 	{
 		// Unique identifier generation. Two DisposableFullTextSearch object should never have the same as the first object destruction
 		// would delete both check-full-text-search rows before the second object destruction is called, leading to unexpected behavior.

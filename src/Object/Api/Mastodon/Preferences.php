@@ -25,17 +25,17 @@ class Preferences extends BaseDataTransferObject
 		/**
 		 * @var string (Enumerable, oneOf)
 		 */
-		private string $visibility,
-		private bool $sensitive,
+		private readonly string $visibility,
+		private readonly bool $sensitive,
 		/**
 		 * @var string (ISO 639-1 language two-letter code), or null
 		 */
-		private string $language,
+		private readonly string $language,
 		/**
 		 * @var string (Enumerable, oneOf)
 		 */
-		private string $media,
-		private bool $spoilers,
+		private readonly string $media,
+		private readonly bool $spoilers,
 	) {}
 
 	/**

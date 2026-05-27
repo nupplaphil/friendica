@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
 
 class Account extends BaseFactory
 {
-	public function __construct(private IManagePersonalConfigValues $pConfig, LoggerInterface $logger, private BaseURL $baseUrl, private ProfileFieldRepository $profileFieldRepo, private Field $mstdnFieldFactory)
+	public function __construct(private readonly IManagePersonalConfigValues $pConfig, LoggerInterface $logger, private readonly BaseURL $baseUrl, private readonly ProfileFieldRepository $profileFieldRepo, private readonly Field $mstdnFieldFactory)
 	{
 		parent::__construct($logger);
 	}

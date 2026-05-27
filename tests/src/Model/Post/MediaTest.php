@@ -16,7 +16,7 @@ class MediaTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetAttachments()
+	public function testApiGetAttachments(): never
 	{
 		self::markTestIncomplete('Needs Model\Post\Media refactoring first.');
 
@@ -29,7 +29,7 @@ class MediaTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetAttachmentsWithImage()
+	public function testApiGetAttachmentsWithImage(): never
 	{
 		self::markTestIncomplete('Needs Model\Post\Media refactoring first.');
 
@@ -42,7 +42,7 @@ class MediaTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetAttachmentsWithImageAndAndStatus()
+	public function testApiGetAttachmentsWithImageAndAndStatus(): never
 	{
 		self::markTestIncomplete('Needs Model\Post\Media refactoring first.');
 

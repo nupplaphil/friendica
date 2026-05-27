@@ -42,9 +42,9 @@ class Acl extends BaseModule
 	public const TYPE_ANY_CONTACT            = 'a';
 
 	public function __construct(
-		private Database $database,
-		private IHandleUserSessions $session,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly Database $database,
+		private readonly IHandleUserSessions $session,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,

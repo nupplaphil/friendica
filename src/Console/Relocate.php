@@ -38,7 +38,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private \Friendica\App\BaseURL $baseUrl, private \Friendica\Database\Database $database, private IManageConfigValues $config, $argv = null)
+	public function __construct(private readonly \Friendica\App\BaseURL $baseUrl, private readonly \Friendica\Database\Database $database, private readonly IManageConfigValues $config, $argv = null)
 	{
 		parent::__construct($argv);
 	}

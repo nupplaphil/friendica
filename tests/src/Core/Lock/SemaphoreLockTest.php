@@ -47,7 +47,7 @@ class SemaphoreLockTest extends LockTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testLockTTL()
+	public function testLockTTL(): never
 	{
 		self::markTestSkipped("Semaphore doesn't work with TTL");
 	}

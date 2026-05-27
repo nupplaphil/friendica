@@ -16,7 +16,7 @@ class HomeTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesHomeTimeline()
+	public function testApiStatusesHomeTimeline(): never
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -37,7 +37,7 @@ class HomeTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesHomeTimelineWithNegativePage()
+	public function testApiStatusesHomeTimelineWithNegativePage(): never
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -56,7 +56,7 @@ class HomeTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesHomeTimelineWithUnallowedUser()
+	public function testApiStatusesHomeTimelineWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -72,7 +72,7 @@ class HomeTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesHomeTimelineWithRss()
+	public function testApiStatusesHomeTimelineWithRss(): never
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 

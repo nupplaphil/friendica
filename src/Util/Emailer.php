@@ -30,11 +30,11 @@ class Emailer
 	private $siteEmailName;
 
 	public function __construct(
-		private IManageConfigValues $config,
-		private IManagePersonalConfigValues $pConfig,
-		private BaseURL $baseUrl,
-		private LoggerInterface $logger,
-		private L10n $l10n,
+		private readonly IManageConfigValues $config,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly BaseURL $baseUrl,
+		private readonly LoggerInterface $logger,
+		private readonly L10n $l10n,
 	) {
 		$this->siteEmailAddress = $this->config->get('config', 'sender_email');
 		if (empty($this->siteEmailAddress)) {

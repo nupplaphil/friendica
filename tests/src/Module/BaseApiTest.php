@@ -12,7 +12,7 @@ use Friendica\Test\ApiTestCase;
 
 class BaseApiTest extends ApiTestCase
 {
-	public function testWithWrongAuth()
+	public function testWithWrongAuth(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

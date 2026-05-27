@@ -31,7 +31,7 @@ final class Activity
 	 * @param ActivityRepository $activityRepository
 	 * @param UserDefinedChannel $channelRepository
 	 */
-	public function __construct(private ActivityRepository $activityRepository, private UserDefinedChannel $channelRepository, private Database $database, private LoggerInterface $logger) {}
+	public function __construct(private readonly ActivityRepository $activityRepository, private readonly UserDefinedChannel $channelRepository, private readonly Database $database, private readonly LoggerInterface $logger) {}
 
 	/**
 	 * Get activities for a user and network.

@@ -39,7 +39,7 @@ use Psr\Log\LoggerInterface;
 
 class Compose extends BaseModule
 {
-	public function __construct(private EventDispatcherInterface $eventDispatcher, private AppHelper $appHelper, private UserSession $session, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private Page $page, private ACLFormatter $ACLFormatter, private SystemMessages $systemMessages, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly EventDispatcherInterface $eventDispatcher, private readonly AppHelper $appHelper, private readonly UserSession $session, private readonly IManageConfigValues $config, private readonly IManagePersonalConfigValues $pConfig, private readonly Page $page, private readonly ACLFormatter $ACLFormatter, private readonly SystemMessages $systemMessages, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

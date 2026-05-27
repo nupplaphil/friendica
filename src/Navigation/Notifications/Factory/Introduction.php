@@ -33,7 +33,7 @@ class Introduction extends BaseFactory
 	/** @var string */
 	private $nick;
 
-	public function __construct(LoggerInterface $logger, private Database $dba, private BaseURL $baseUrl, private L10n $l10n, private IManagePersonalConfigValues $pConfig, private IHandleUserSessions $session)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba, private readonly BaseURL $baseUrl, private readonly L10n $l10n, private readonly IManagePersonalConfigValues $pConfig, private readonly IHandleUserSessions $session)
 	{
 		parent::__construct($logger);
 		$this->nick = $this->session->getLocalUserNickname() ?? '';

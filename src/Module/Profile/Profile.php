@@ -45,13 +45,13 @@ use Psr\Log\LoggerInterface;
 class Profile extends BaseProfile
 {
 	public function __construct(
-		private ProfileField $profileField,
+		private readonly ProfileField $profileField,
 		private Page $page,
-		private IManageConfigValues $config,
-		private IHandleUserSessions $session,
-		private AppHelper $appHelper,
-		private Database $database,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly IManageConfigValues $config,
+		private readonly IHandleUserSessions $session,
+		private readonly AppHelper $appHelper,
+		private readonly Database $database,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,

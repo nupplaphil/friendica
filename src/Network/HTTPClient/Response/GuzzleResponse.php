@@ -37,7 +37,7 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 	 * @param string $error
 	 */
 	public function __construct(ResponseInterface $response, /** @var string The URL */
-		private string $url, /**
+		private readonly string $url, /**
 				 * @var int the error number or 0 (zero) if no error
 				 */
 		private $errorNumber = 0, /**

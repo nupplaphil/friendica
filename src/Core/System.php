@@ -25,7 +25,7 @@ use Psr\Log\LoggerInterface;
  */
 class System
 {
-	public function __construct(private LoggerInterface $logger, private IManageConfigValues $config, private string $basePath) {}
+	public function __construct(private readonly LoggerInterface $logger, private readonly IManageConfigValues $config, private readonly string $basePath) {}
 
 	/**
 	 * Checks if the maximum number of database processes is reached
@@ -350,11 +350,10 @@ class System
 	 * @param string      $content
 	 * @param string      $type
 	 * @param string|null $content_type
-	 * @return void
 	 * @throws InternalServerErrorException
 	 * @deprecated since 2023.09 Use BaseModule->httpExit() instead
 	 */
-	public static function httpExit(string $content, string $type = Response::TYPE_HTML, ?string $content_type = null)
+	public static function httpExit(string $content, string $type = Response::TYPE_HTML, ?string $content_type = null): never
 	{
 		DI::apiResponse()->setType($type, $content_type);
 		DI::apiResponse()->addContent($content);
@@ -388,7 +387,7 @@ class System
 	 * @throws InternalServerErrorException
 	 * @deprecated since 2023.09 Use BaseModule->jsonExit instead
 	 */
-	public static function jsonExit($content, string $content_type = 'application/json', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+	public static function jsonExit($content, string $content_type = 'application/json', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
 	{
 		self::httpExit(json_encode($content, $options), Response::TYPE_JSON, $content_type);
 	}
@@ -398,7 +397,7 @@ class System
 	 *
 	 * @return never
 	 */
-	public static function exit()
+	public static function exit(): never
 	{
 		DI::page()->logRuntime(DI::config(), 'exit');
 		exit();
@@ -590,7 +589,7 @@ class System
 	 *
 	 * @param string $o
 	 */
-	public static function htmlUpdateExit($o)
+	public static function htmlUpdateExit($o): never
 	{
 		DI::apiResponse()->setType(Response::TYPE_HTML);
 		echo "<!DOCTYPE html><html><body>\r\n";

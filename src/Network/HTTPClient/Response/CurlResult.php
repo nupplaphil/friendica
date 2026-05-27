@@ -106,7 +106,7 @@ class CurlResult implements ICanHandleHttpResponses
 	 *
 	 * @throws UnprocessableEntityException when HTTP code of the CURL response is missing
 	 */
-	public function __construct(LoggerInterface $logger, private string $url, string $result, array $info, private int $errorNumber = 0, private string $error = '')
+	public function __construct(LoggerInterface $logger, private readonly string $url, string $result, array $info, private readonly int $errorNumber = 0, private readonly string $error = '')
 	{
 		$this->logger = $logger;
 

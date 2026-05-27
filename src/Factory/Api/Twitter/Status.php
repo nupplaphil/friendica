@@ -25,14 +25,14 @@ use Psr\Log\LoggerInterface;
 
 class Status extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private Database $dba, /** @var twitterUser entity */
-		private TwitterUser $twitterUser, /** @var Hashtag entity */
-		private Hashtag $hashtag, /** @var Media entity */
-		private Media $media, /** @var Url entity */
-		private Url $url, /** @var Mention entity */
-		private Mention $mention, /** @var Activities entity */
-		private Activities $activities, /** @var Attachment entity */
-		private Attachment $attachment, private ContentItem $contentItem)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba, /** @var twitterUser entity */
+		private readonly TwitterUser $twitterUser, /** @var Hashtag entity */
+		private readonly Hashtag $hashtag, /** @var Media entity */
+		private readonly Media $media, /** @var Url entity */
+		private readonly Url $url, /** @var Mention entity */
+		private readonly Mention $mention, /** @var Activities entity */
+		private readonly Activities $activities, /** @var Attachment entity */
+		private readonly Attachment $attachment, private readonly ContentItem $contentItem)
 	{
 		parent::__construct($logger);
 	}

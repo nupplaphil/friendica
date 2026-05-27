@@ -52,7 +52,7 @@ class DBStructureTest extends DatabaseTestCase
 		self::assertFalse(DBStructure::existsColumn('user', [ $toColumn ]));
 	}
 
-	public function testChangePrimaryKey()
+	public function testChangePrimaryKey(): never
 	{
 		static::markTestSkipped('rename primary key with autoincrement and foreign key support necessary first');
 		$oldID = 'client_id';

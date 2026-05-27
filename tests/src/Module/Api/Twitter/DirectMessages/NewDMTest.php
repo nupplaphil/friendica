@@ -34,7 +34,7 @@ class NewDMTest extends ApiTestCase
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
 
-		self::assertEmpty((string)$response->getBody());
+		self::assertEmpty((string) $response->getBody());
 	}
 
 	/**
@@ -42,7 +42,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithoutAuthenticatedUser()
+	public function testApiDirectMessagesNewWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -66,7 +66,7 @@ class NewDMTest extends ApiTestCase
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',
-				'user_id' => 43
+				'user_id' => 43,
 			]);
 
 		$json = $this->toJson($response);
@@ -88,7 +88,7 @@ class NewDMTest extends ApiTestCase
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',
-				'user_id' => 44
+				'user_id' => 44,
 			]);
 
 		$json = $this->toJson($response);
@@ -142,6 +142,6 @@ class NewDMTest extends ApiTestCase
 				'title'   => 'message_title',
 			]);
 
-		self::assertXml((string)$response->getBody(), 'direct-messages');
+		self::assertXml((string) $response->getBody(), 'direct-messages');
 	}
 }

@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
 
 class ListEntity extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private Database $dba)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba)
 	{
 		parent::__construct($logger);
 	}

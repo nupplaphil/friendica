@@ -34,7 +34,7 @@ use Psr\Log\LoggerInterface;
  **/
 class ContactImport extends BaseSettings
 {
-	public function __construct(private ICanSendHttpRequests $httpClient, protected SystemMessages $systemMessages, private IManageConfigValues $config, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly ICanSendHttpRequests $httpClient, protected SystemMessages $systemMessages, private readonly IManageConfigValues $config, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

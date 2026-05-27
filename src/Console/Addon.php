@@ -43,7 +43,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Mode $appMode, private L10n $l10n, private Database $dba, private AddonHelper $addonHelper, array $argv = null)
+	public function __construct(private readonly Mode $appMode, private readonly L10n $l10n, private readonly Database $dba, private readonly AddonHelper $addonHelper, array $argv = null)
 	{
 		parent::__construct($argv);
 

@@ -28,7 +28,7 @@ use Psr\Log\LoggerInterface;
 
 class Channels extends BaseSettings
 {
-	public function __construct(private Factory\UserDefinedChannel $userDefinedChannel, private UserDefinedChannel $channel, App\Page $page, IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private IManagePersonalConfigValues $pConfig, private IManageConfigValues $config, array $server, array $parameters = [])
+	public function __construct(private readonly Factory\UserDefinedChannel $userDefinedChannel, private readonly UserDefinedChannel $channel, App\Page $page, IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, array $server, array $parameters = [])
 	{
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

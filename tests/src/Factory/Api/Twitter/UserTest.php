@@ -49,7 +49,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetUserWithFrioSchema()
+	public function testApiGetUserWithFrioSchema(): never
 	{
 		$this->markTestIncomplete('Needs missing fields for profile colors at API User object first.');
 
@@ -71,7 +71,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetUserWithEmptyFrioSchema()
+	public function testApiGetUserWithEmptyFrioSchema(): never
 	{
 		$this->markTestIncomplete('Needs missing fields for profile colors at API User object first.');
 
@@ -93,7 +93,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetUserWithCustomFrioSchema()
+	public function testApiGetUserWithCustomFrioSchema(): never
 	{
 		$this->markTestIncomplete('Needs missing fields for profile colors at API User object first.');
 
@@ -132,7 +132,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiUserWithUnallowedUser()
+	public function testApiUserWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

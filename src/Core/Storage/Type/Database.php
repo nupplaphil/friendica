@@ -25,7 +25,7 @@ class Database implements ICanWriteToStorage
 	/**
 	 * @param DBA             $dba
 	 */
-	public function __construct(private DBA $dba) {}
+	public function __construct(private readonly DBA $dba) {}
 
 	/**
 	 * @inheritDoc

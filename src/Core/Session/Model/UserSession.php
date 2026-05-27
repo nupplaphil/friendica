@@ -20,7 +20,7 @@ class UserSession implements IHandleUserSessions
 	/** @var int|bool saves the public Contact ID for later usage */
 	protected $publicContactId = false;
 
-	public function __construct(private IHandleSessions $session) {}
+	public function __construct(private readonly IHandleSessions $session) {}
 
 	/** {@inheritDoc} */
 	public function getLocalUserId()

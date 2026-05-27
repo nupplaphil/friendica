@@ -51,7 +51,7 @@ Options
 HELP;
 	}
 
-	public function __construct(private DomainPatternBlocklist $blocklist, $argv = null)
+	public function __construct(private readonly DomainPatternBlocklist $blocklist, $argv = null)
 	{
 		parent::__construct($argv);
 	}

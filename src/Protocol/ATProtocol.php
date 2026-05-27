@@ -47,7 +47,7 @@ final class ATProtocol
 	 * @param IManagePersonalConfigValues $pConfig
 	 * @param ICanSendHttpRequests $httpClient
 	 */
-	public function __construct(private LoggerInterface $logger, private Database $db, private IManageConfigValues $config, private IManagePersonalConfigValues $pConfig, private ICanSendHttpRequests $httpClient) {}
+	public function __construct(private readonly LoggerInterface $logger, private readonly Database $db, private readonly IManageConfigValues $config, private readonly IManagePersonalConfigValues $pConfig, private readonly ICanSendHttpRequests $httpClient) {}
 
 	/**
 	 * Get the AppView API URL

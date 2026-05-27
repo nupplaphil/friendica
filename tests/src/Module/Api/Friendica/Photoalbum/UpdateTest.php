@@ -34,7 +34,7 @@ class UpdateTest extends ApiTestCase
 		$this->expectException(BadRequestException::class);
 		(new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'album' => 'album_name'
+				'album' => 'album_name',
 			]);
 	}
 
@@ -44,11 +44,11 @@ class UpdateTest extends ApiTestCase
 		(new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'album'     => 'album_name',
-				'album_new' => 'album_name'
+				'album_new' => 'album_name',
 			]);
 	}
 
-	public function testWithoutAuthenticatedUser()
+	public function testWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}
@@ -60,7 +60,7 @@ class UpdateTest extends ApiTestCase
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'album'     => 'test_album',
-				'album_new' => 'test_album_2'
+				'album_new' => 'test_album_2',
 			]);
 
 		$json = $this->toJson($response);

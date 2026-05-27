@@ -42,7 +42,7 @@ use Psr\Log\LoggerInterface;
  */
 class FormattedNotify extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private Database $dba, private Repository\Notify $notify, private BaseURL $baseUrl, private L10n $l10n, private IHandleUserSessions $userSession)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba, private readonly Repository\Notify $notify, private readonly BaseURL $baseUrl, private readonly L10n $l10n, private readonly IHandleUserSessions $userSession)
 	{
 		parent::__construct($logger);
 	}

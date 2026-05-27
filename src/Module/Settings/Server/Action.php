@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 
 class Action extends \Friendica\BaseModule
 {
-	public function __construct(private GServer $gserverRepo, private UserGServer $repository, private IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly GServer $gserverRepo, private readonly UserGServer $repository, private readonly IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

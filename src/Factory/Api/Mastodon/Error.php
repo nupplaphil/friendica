@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 /** @todo A Factory shouldn't return something to the frontpage, it's for creating content, not showing it */
 class Error extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private L10n $l10n)
+	public function __construct(LoggerInterface $logger, private readonly L10n $l10n)
 	{
 		parent::__construct($logger);
 	}

@@ -27,11 +27,11 @@ class Media extends BaseProfile
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
-		private AppHelper $appHelper,
+		private readonly AppHelper $appHelper,
 		LoggerInterface $logger,
 		Profiler $profiler,
 		Response $response,
-		private IHandleUserSessions $userSession,
+		private readonly IHandleUserSessions $userSession,
 		$server,
 		array $parameters = [],
 	) {

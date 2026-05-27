@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Uri;
 
 class WebFingerUri implements \Stringable
 {
-	private function __construct(private string $user, private string $host, private ?int $port = null, private ?string $path = null)
+	private function __construct(private readonly string $user, private readonly string $host, private readonly ?int $port = null, private readonly ?string $path = null)
 	{
 		$this->validate();
 	}
