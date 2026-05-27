@@ -66,7 +66,7 @@ class Mode
 	private $executor = self::UNDEFINED;
 
 	public function __construct(
-		private int $mode = 0,
+		private readonly int $mode = 0,
 		/**
 		 * @var bool True, if the call is a backend call
 		 */
@@ -74,15 +74,15 @@ class Mode
 		/**
 		 * @var bool True, if the call is a ajax call
 		 */
-		private bool $isAjax = false,
+		private readonly bool $isAjax = false,
 		/**
 		 * @var bool True, if the call is from a mobile device
 		 */
-		private bool $isMobile = false,
+		private readonly bool $isMobile = false,
 		/**
 		 * @var bool True, if the call is from a tablet device
 		 */
-		private bool $isTablet = false,
+		private readonly bool $isTablet = false,
 	) {}
 
 	/**

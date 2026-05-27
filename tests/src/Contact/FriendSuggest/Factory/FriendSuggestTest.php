@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
 
 class FriendSuggestTest extends MockedTestCase
 {
-	public function dataCreate()
+	public static function dataCreate()
 	{
 		return [
 			'default' => [
@@ -26,7 +26,7 @@ class FriendSuggestTest extends MockedTestCase
 					'request' => 'https://friendica.local/dfrn_request/test',
 					'photo'   => 'https://friendica.local/photo/profile/test',
 					'note'    => 'a common note',
-					'created' => '2021-10-12 12:23:00'
+					'created' => '2021-10-12 12:23:00',
 				],
 				'assertion' => new Entity\FriendSuggest(
 					12,
@@ -36,7 +36,7 @@ class FriendSuggestTest extends MockedTestCase
 					'https://friendica.local/dfrn_request/test',
 					'https://friendica.local/photo/profile/test',
 					'a common note',
-					new \DateTime('2021-10-12 12:23:00', new \DateTimeZone('UTC'))
+					new \DateTime('2021-10-12 12:23:00', new \DateTimeZone('UTC')),
 				),
 			],
 			'minimum' => [
@@ -52,7 +52,7 @@ class FriendSuggestTest extends MockedTestCase
 					'',
 					'',
 					new \DateTime('now', new \DateTimeZone('UTC')),
-					20
+					20,
 				),
 			],
 			'full' => [
@@ -76,7 +76,7 @@ class FriendSuggestTest extends MockedTestCase
 					'https://friendica.local/photo/profile/test',
 					'a common note',
 					new \DateTime('2021-10-12 12:23:00', new \DateTimeZone('UTC')),
-					666
+					666,
 				),
 			],
 		];
@@ -100,15 +100,21 @@ class FriendSuggestTest extends MockedTestCase
 
 		$this->assertFriendSuggest(
 			$factory->createNew(12, 13),
-			new Entity\FriendSuggest(12, 13, '', '', '', '', '',
-				new \DateTime('now', new \DateTimeZone('UTC')), null
-			)
+			new Entity\FriendSuggest(
+				12,
+				13,
+				'',
+				'',
+				'',
+				'',
+				'',
+				new \DateTime('now', new \DateTimeZone('UTC')),
+				null,
+			),
 		);
 	}
 
-	/**
-	 * @dataProvider dataCreate
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreate')]
 	public function testCreateFromTableRow(array $input, Entity\FriendSuggest $assertion)
 	{
 		$factory = new FriendSuggest(new NullLogger());
@@ -120,8 +126,16 @@ class FriendSuggestTest extends MockedTestCase
 	{
 		$factory = new FriendSuggest(new NullLogger());
 
-		$this->assertFriendSuggest($factory->createEmpty(66), new Entity\FriendSuggest(0, 0, '', '', '', '', '',
-			new \DateTime('now', new \DateTimeZone('UTC')), 66
+		$this->assertFriendSuggest($factory->createEmpty(66), new Entity\FriendSuggest(
+			0,
+			0,
+			'',
+			'',
+			'',
+			'',
+			'',
+			new \DateTime('now', new \DateTimeZone('UTC')),
+			66,
 		));
 	}
 }

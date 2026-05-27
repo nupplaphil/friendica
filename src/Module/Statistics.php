@@ -34,7 +34,7 @@ class Statistics extends BaseModule
 		Profiler $profiler,
 		IManageConfigValues $config,
 		IManageKeyValuePairs $keyValue,
-		private AddonHelper $addonHelper,
+		private readonly AddonHelper $addonHelper,
 		Response $response,
 		array $server,
 		array $parameters = [],

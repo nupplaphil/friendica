@@ -38,7 +38,7 @@ class WorkerLogger implements LoggerInterface, DefaultContextLogger
 	 *
 	 * @throws LoggerException
 	 */
-	public function __construct(private LoggerInterface $logger)
+	public function __construct(private readonly LoggerInterface $logger)
 	{
 		try {
 			$this->workerId = Strings::getRandomHex(self::WORKER_ID_LENGTH);

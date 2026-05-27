@@ -98,7 +98,7 @@ class Network extends Timeline
 		ChannelFactory $channelFactory,
 		UserDefinedChannel $channel,
 		AppHelper $appHelper,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		TimelineFactory $timeline,
 		SystemMessages $systemMessages,
 		Mode $mode,

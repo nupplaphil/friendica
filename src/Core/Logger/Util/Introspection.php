@@ -28,7 +28,7 @@ class Introspection implements IHaveCallIntrospections
 	 * @param string[] $skipClassesPartials  An array of classes to skip during logging
 	 * @param int      $skipStackFramesCount If the logger should use information from other hierarchy levels of the call
 	 */
-	public function __construct(Request $request, private array $skipClassesPartials = [], private int $skipStackFramesCount = 0)
+	public function __construct(Request $request, private array $skipClassesPartials = [], private readonly int $skipStackFramesCount = 0)
 	{
 		$this->requestId = $request->getRequestId();
 	}

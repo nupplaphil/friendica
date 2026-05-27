@@ -45,13 +45,13 @@ use Psr\Log\LoggerInterface;
 class Profile extends BaseProfile
 {
 	public function __construct(
-		private ProfileField $profileField,
+		private readonly ProfileField $profileField,
 		private Page $page,
-		private IManageConfigValues $config,
-		private IHandleUserSessions $session,
-		private AppHelper $appHelper,
-		private Database $database,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly IManageConfigValues $config,
+		private readonly IHandleUserSessions $session,
+		private readonly AppHelper $appHelper,
+		private readonly Database $database,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -247,6 +247,27 @@ class Profile extends BaseProfile
 				'group_list',
 				$this->t('Groups:'),
 				GroupManager::profileAdvanced($profile['uid']),
+			);
+		}
+
+		$publicCircleLinks = [];
+		$publicCircles     = DBA::selectToArray('group', ['id', 'name'], ['uid' => $profile['uid'], 'deleted' => false, 'public' => true], ['order' => ['name']]);
+		foreach ($publicCircles as $publicCircle) {
+			$publicCircleLinks[] = sprintf(
+				'<a href="%s/profile/%s/circles/%d/download">%s</a>',
+				$this->baseUrl,
+				urlencode($profile['nickname']),
+				(int) $publicCircle['id'],
+				htmlentities($publicCircle['name'], ENT_COMPAT, 'UTF-8', true),
+			);
+		}
+
+		if (!empty($publicCircleLinks)) {
+			$custom_fields += self::buildField(
+				'public_circle_downloads',
+				$this->t('Public circles (CSV):'),
+				implode('<br>', $publicCircleLinks),
+				'aprofile custom',
 			);
 		}
 

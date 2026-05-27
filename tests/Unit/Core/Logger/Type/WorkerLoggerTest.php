@@ -18,7 +18,7 @@ class WorkerLoggerTest extends TestCase
 		self::assertMatchesRegularExpression('/^[a-zA-Z0-9]{' . WorkerLogger::WORKER_ID_LENGTH . '}+$/', $uid);
 	}
 
-	public function dataTest()
+	public static function dataTest(): array
 	{
 		return [
 			'info' => [
@@ -48,7 +48,7 @@ class WorkerLoggerTest extends TestCase
 			],
 			'notice' => [
 				'func'    => 'notice',
-				'msg'     => 'Notice' . ' alert' . true . 'with' . '\'strange\'' . 1.24. 'behavior',
+				'msg'     => 'Notice' . ' alert' . true . 'with' . '\'strange\'' . 1.24 . 'behavior',
 				'context' => ['test' => 'it'],
 			],
 			'debug' => [
@@ -61,8 +61,8 @@ class WorkerLoggerTest extends TestCase
 
 	/**
 	 * Test the WorkerLogger with different log calls
-	 * @dataProvider dataTest
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTest')]
 	public function testLogMethod($func, $msg, $context = [])
 	{
 		$logger = $this->createMock(LoggerInterface::class);
@@ -145,12 +145,12 @@ class WorkerLoggerTest extends TestCase
 
 		$this->assertSame(
 			['worker_id', 'worker_cmd'],
-			array_keys($workLogger->replaceDefaultContext($newContext))
+			array_keys($workLogger->replaceDefaultContext($newContext)),
 		);
 
 		$this->assertSame(
 			$newContext,
-			$workLogger->replaceDefaultContext([])
+			$workLogger->replaceDefaultContext([]),
 		);
 	}
 }

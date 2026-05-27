@@ -58,7 +58,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser()
+	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -80,7 +80,7 @@ class DestroyTest extends ApiTestCase
 		$this->expectException(\Friendica\Network\HTTPException\BadRequestException::class);
 		(new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
-				'id' => 1
+				'id' => 1,
 			]);
 	}
 

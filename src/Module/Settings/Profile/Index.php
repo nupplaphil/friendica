@@ -39,13 +39,13 @@ use Psr\Log\LoggerInterface;
 class Index extends BaseSettings
 {
 	public function __construct(
-		private ACLFormatter $aclFormatter,
-		private PermissionSet\Factory\PermissionSet $permissionSetFactory,
-		private PermissionSet\Repository\PermissionSet $permissionSetRepo,
-		private SystemMessages $systemMessages,
-		private ProfileField\Factory\ProfileField $profileFieldFactory,
-		private ProfileField\Repository\ProfileField $profileFieldRepo,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly ACLFormatter $aclFormatter,
+		private readonly PermissionSet\Factory\PermissionSet $permissionSetFactory,
+		private readonly PermissionSet\Repository\PermissionSet $permissionSetRepo,
+		private readonly SystemMessages $systemMessages,
+		private readonly ProfileField\Factory\ProfileField $profileFieldFactory,
+		private readonly ProfileField\Repository\ProfileField $profileFieldRepo,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		IHandleUserSessions $session,
 		Page $page,
 		L10n $l10n,

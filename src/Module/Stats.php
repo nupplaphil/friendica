@@ -52,7 +52,7 @@ class Stats extends BaseModule
 		IManageConfigValues $config,
 		IManageKeyValuePairs $keyValue,
 		Database $dba,
-		private AddonHelper $addonHelper,
+		private readonly AddonHelper $addonHelper,
 		Response $response,
 		array $server,
 		array $parameters = [],

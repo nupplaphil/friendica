@@ -20,7 +20,7 @@ final class ConfigLoadedEvent extends Event
 {
 	public const CONFIG_LOADED = 'friendica.config_loaded';
 
-	public function __construct(string $name, private ConfigFileManager $config)
+	public function __construct(string $name, private readonly ConfigFileManager $config)
 	{
 		parent::__construct($name);
 	}

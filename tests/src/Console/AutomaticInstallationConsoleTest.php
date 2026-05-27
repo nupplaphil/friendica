@@ -110,7 +110,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	 *
 	 * @return array the dataset
 	 */
-	public function dataInstaller()
+	public static function dataInstaller()
 	{
 		return [
 			'empty' => [
@@ -393,8 +393,8 @@ FIN;
 
 	/**
 	 * Test the automatic installation with a prepared config file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithConfig(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -470,8 +470,8 @@ CONF;
 	/**
 	 * Test the automatic installation with environment variables
 	 * Includes saving the DB credentials to the file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentAndSave(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -482,19 +482,19 @@ CONF;
 		$this->mockGetMarkupTemplate('local.config.tpl', 'testTemplate', 1);
 		$this->mockReplaceMacros('testTemplate', Mockery::any(), '', 1);
 
-		self::assertTrue(putenv('MYSQL_HOST='     . $data['database']['hostname']));
-		self::assertTrue(putenv('MYSQL_PORT='     . $data['database']['port']));
+		self::assertTrue(putenv('MYSQL_HOST=' . $data['database']['hostname']));
+		self::assertTrue(putenv('MYSQL_PORT=' . $data['database']['port']));
 		self::assertTrue(putenv('MYSQL_DATABASE=' . $data['database']['database']));
 		self::assertTrue(putenv('MYSQL_USERNAME=' . $data['database']['username']));
 		self::assertTrue(putenv('MYSQL_PASSWORD=' . $data['database']['password']));
 
-		self::assertTrue(putenv('FRIENDICA_HOSTNAME='   . $data['config']['hostname']));
-		self::assertTrue(putenv('FRIENDICA_BASE_PATH='  . $data['system']['basepath']));
-		self::assertTrue(putenv('FRIENDICA_URL='        . $data['system']['url']));
-		self::assertTrue(putenv('FRIENDICA_PHP_PATH='   . $data['config']['php_path']));
+		self::assertTrue(putenv('FRIENDICA_HOSTNAME=' . $data['config']['hostname']));
+		self::assertTrue(putenv('FRIENDICA_BASE_PATH=' . $data['system']['basepath']));
+		self::assertTrue(putenv('FRIENDICA_URL=' . $data['system']['url']));
+		self::assertTrue(putenv('FRIENDICA_PHP_PATH=' . $data['config']['php_path']));
 		self::assertTrue(putenv('FRIENDICA_ADMIN_MAIL=' . $data['config']['admin_email']));
-		self::assertTrue(putenv('FRIENDICA_TZ='         . $data['system']['default_timezone']));
-		self::assertTrue(putenv('FRIENDICA_LANG='       . $data['system']['language']));
+		self::assertTrue(putenv('FRIENDICA_TZ=' . $data['system']['default_timezone']));
+		self::assertTrue(putenv('FRIENDICA_LANG=' . $data['system']['language']));
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 		$console->setOption('savedb', true);
@@ -508,8 +508,8 @@ CONF;
 	/**
 	 * Test the automatic installation with environment variables
 	 * Don't save the db credentials to the file
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentWithoutSave(array $data)
 	{
 		$this->mockConnect(true, 1);
@@ -526,13 +526,13 @@ CONF;
 		self::assertTrue(putenv('MYSQL_USERNAME=' . $data['database']['username']));
 		self::assertTrue(putenv('MYSQL_PASSWORD=' . $data['database']['password']));
 
-		self::assertTrue(putenv('FRIENDICA_HOSTNAME='   . $data['config']['hostname']));
-		self::assertTrue(putenv('FRIENDICA_BASE_PATH='  . $data['system']['basepath']));
-		self::assertTrue(putenv('FRIENDICA_URL='        . $data['system']['url']));
-		self::assertTrue(putenv('FRIENDICA_PHP_PATH='   . $data['config']['php_path']));
+		self::assertTrue(putenv('FRIENDICA_HOSTNAME=' . $data['config']['hostname']));
+		self::assertTrue(putenv('FRIENDICA_BASE_PATH=' . $data['system']['basepath']));
+		self::assertTrue(putenv('FRIENDICA_URL=' . $data['system']['url']));
+		self::assertTrue(putenv('FRIENDICA_PHP_PATH=' . $data['config']['php_path']));
 		self::assertTrue(putenv('FRIENDICA_ADMIN_MAIL=' . $data['config']['admin_email']));
-		self::assertTrue(putenv('FRIENDICA_TZ='         . $data['system']['default_timezone']));
-		self::assertTrue(putenv('FRIENDICA_LANG='       . $data['system']['language']));
+		self::assertTrue(putenv('FRIENDICA_TZ=' . $data['system']['default_timezone']));
+		self::assertTrue(putenv('FRIENDICA_LANG=' . $data['system']['language']));
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 
@@ -544,8 +544,8 @@ CONF;
 
 	/**
 	 * Test the automatic installation with arguments
-	 * @dataProvider dataInstaller
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithArguments(array $data)
 	{
 		$this->mockConnect(true, 1);

@@ -74,7 +74,7 @@ class Jetstream
 	 * @param Actor $actor
 	 * @param Processor $processor
 	 */
-	public function __construct(private LoggerInterface $logger, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private ATProtocol $atprotocol, private Actor $actor, private Processor $processor)
+	public function __construct(private readonly LoggerInterface $logger, private readonly IManageConfigValues $config, private readonly IManageKeyValuePairs $keyValue, private readonly ATProtocol $atprotocol, private readonly Actor $actor, private readonly Processor $processor)
 	{
 		$this->atprotocol->setApiForUser(0);
 	}

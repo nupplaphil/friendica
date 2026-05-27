@@ -77,7 +77,7 @@ Examples
 HELP;
 	}
 
-	public function __construct(private Mode $appMode, private Cache $configCache, private IManageConfigValues $config, private Database $dba, array $argv = null)
+	public function __construct(private readonly Mode $appMode, private readonly Cache $configCache, private readonly IManageConfigValues $config, private readonly Database $dba, array $argv = null)
 	{
 		parent::__construct($argv);
 	}

@@ -69,7 +69,7 @@ class SyslogLogger extends AbstractLogger
 	 * @param int $logOpts
 	 * @param int $logFacility
 	 */
-	public function __construct(string $channel, IHaveCallIntrospections $introspection, private int $logLevel, private int $logOpts, private int $logFacility)
+	public function __construct(string $channel, IHaveCallIntrospections $introspection, private readonly int $logLevel, private readonly int $logOpts, private readonly int $logFacility)
 	{
 		parent::__construct($channel, $introspection);
 	}

@@ -22,10 +22,9 @@ use Psr\Log\NullLogger;
 
 /**
  * Annotation necessary because of Hook calls
- *
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
  */
+#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
+#[\PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses]
 class EMailerTest extends MockedTestCase
 {
 	use VFSTrait;
@@ -46,7 +45,7 @@ class EMailerTest extends MockedTestCase
 
 		$this->setUpVfsDir();
 
-		$this->config  = \Mockery::mock(IManageConfigValues::class);
+		$this->config = \Mockery::mock(IManageConfigValues::class);
 		$this->config->shouldReceive('get')->withArgs(['config', 'sender_email'])->andReturn('test@friendica.local')->once();
 		$this->config->shouldReceive('get')->withArgs(['config', 'sitename', 'Friendica Social Network'])->andReturn('Friendica Social Network')->once();
 		$this->config->shouldReceive('get')->withArgs(['system', 'sendmail_params', true])->andReturn(true);

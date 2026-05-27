@@ -38,7 +38,7 @@ use Psr\Log\LoggerInterface;
 class Network extends NetworkModule
 {
 	public function __construct(
-		private ICanLock $lock,
+		private readonly ICanLock $lock,
 		UserDefinedChannelFactory $userDefinedChannel,
 		NetworkFactory $network,
 		CommunityFactory $community,

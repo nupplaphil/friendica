@@ -26,10 +26,8 @@ class DBStructureTest extends DatabaseTestCase
 		DI::init($dice);
 	}
 
-	/**
-	 * @small
-	 */
-	public function testExists() {
+	public function testExists()
+	{
 		self::assertTrue(DBStructure::existsTable('user'));
 		self::assertFalse(DBStructure::existsTable('nonexistent'));
 
@@ -38,14 +36,12 @@ class DBStructureTest extends DatabaseTestCase
 		self::assertFalse(DBStructure::existsColumn('user', ['uid', 'nonsense']));
 	}
 
-	/**
-	 * @small
-	 */
-	public function testRename() {
+	public function testRename()
+	{
 		$fromColumn = 'email';
-		$toColumn = 'email_key';
-		$fromType = 'varchar(255) NOT NULL DEFAULT \'\' COMMENT \'the users email address\'';
-		$toType = 'varchar(255) NOT NULL DEFAULT \'\' COMMENT \'Adapted column\'';
+		$toColumn   = 'email_key';
+		$fromType   = 'varchar(255) NOT NULL DEFAULT \'\' COMMENT \'the users email address\'';
+		$toType     = 'varchar(255) NOT NULL DEFAULT \'\' COMMENT \'Adapted column\'';
 
 		self::assertTrue(DBStructure::rename('user', [ $fromColumn => [ $toColumn, $toType ]]));
 		self::assertTrue(DBStructure::existsColumn('user', [ $toColumn ]));
@@ -56,10 +52,8 @@ class DBStructureTest extends DatabaseTestCase
 		self::assertFalse(DBStructure::existsColumn('user', [ $toColumn ]));
 	}
 
-	/**
-	 * @small
-	 */
-	public function testChangePrimaryKey() {
+	public function testChangePrimaryKey(): never
+	{
 		static::markTestSkipped('rename primary key with autoincrement and foreign key support necessary first');
 		$oldID = 'client_id';
 		$newID = 'pw';

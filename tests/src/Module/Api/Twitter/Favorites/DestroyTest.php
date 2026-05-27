@@ -44,7 +44,7 @@ class DestroyTest extends ApiTestCase
 	{
 		$response = (new Destroy(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'id' => 3
+				'id' => 3,
 			]);
 
 		$json = $this->toJson($response);
@@ -57,7 +57,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser()
+	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

@@ -13,7 +13,7 @@ use Friendica\Test\FixtureTestCase;
 
 class MarkdownTest extends FixtureTestCase
 {
-	public function dataMarkdown()
+	public static function dataMarkdown()
 	{
 		$inputFiles = glob(__DIR__ . '/../../../datasets/content/text/markdown/*.md');
 
@@ -22,7 +22,7 @@ class MarkdownTest extends FixtureTestCase
 		foreach ($inputFiles as $file) {
 			$data[str_replace('.md', '', $file)] = [
 				'input'    => file_get_contents($file),
-				'expected' => file_get_contents(str_replace('.md', '.html', $file))
+				'expected' => file_get_contents(str_replace('.md', '.html', $file)),
 			];
 		}
 
@@ -32,13 +32,12 @@ class MarkdownTest extends FixtureTestCase
 	/**
 	 * Test convert different input Markdown text into HTML
 	 *
-	 * @dataProvider dataMarkdown
 	 *
 	 * @param string $input    The Markdown text to test
 	 * @param string $expected The expected HTML output
-	 *
 	 * @throws Exception
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdown')]
 	public function testConvert(string $input, string $expected)
 	{
 		$output = Markdown::convert($input);
@@ -46,7 +45,7 @@ class MarkdownTest extends FixtureTestCase
 		self::assertEquals($expected, $output);
 	}
 
-	public function dataMarkdownText()
+	public static function dataMarkdownText()
 	{
 		return [
 			'bug-8358-double-decode' => [
@@ -59,14 +58,14 @@ class MarkdownTest extends FixtureTestCase
 	/**
 	 * Test convert Markdown to BBCode
 	 *
-	 * @dataProvider dataMarkdownText
 	 *
 	 * @param string $expectedBBCode Expected BBCode output
-	 * @param string $html           Markdown text
+	 * @param string $markdown       Markdown text
 	 */
-	public function testToBBCode(string $expectedBBCode, string $html)
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdownText')]
+	public function testToBBCode(string $expectedBBCode, string $markdown)
 	{
-		$actual = Markdown::toBBCode($html);
+		$actual = Markdown::toBBCode($markdown);
 
 		self::assertEquals($expectedBBCode, $actual);
 	}

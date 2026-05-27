@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
 
 class Conversation extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private Database $dba, private Status $mstdnStatusFactory, private Account $mstdnAccountFactory)
+	public function __construct(LoggerInterface $logger, private readonly Database $dba, private readonly Status $mstdnStatusFactory, private readonly Account $mstdnAccountFactory)
 	{
 		parent::__construct($logger);
 	}

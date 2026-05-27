@@ -14,62 +14,62 @@ use Psr\Log\NullLogger;
 
 class MimeTypeTest extends TestCase
 {
-	public function dataCreateFromContentType(): array
+	public static function dataCreateFromContentType(): array
 	{
 		return [
 			'image/jpg' => [
-				'expected' => new Entity\MimeType('image', 'jpg'),
+				'expected'    => new Entity\MimeType('image', 'jpg'),
 				'contentType' => 'image/jpg',
 			],
 			'image/jpg;charset=utf8' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
 				'contentType' => 'image/jpg; charset=utf8',
 			],
 			'image/jpg; charset=utf8' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
 				'contentType' => 'image/jpg; charset=utf8',
 			],
 			'image/jpg; charset = utf8' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
 				'contentType' => 'image/jpg; charset=utf8',
 			],
 			'image/jpg; charset="utf8"' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
 				'contentType' => 'image/jpg; charset="utf8"',
 			],
 			'image/jpg; charset="\"utf8\""' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => '"utf8"']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => '"utf8"']),
 				'contentType' => 'image/jpg; charset="\"utf8\""',
 			],
 			'image/jpg; charset="\"utf8\" (comment)"' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => '"utf8"']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => '"utf8"']),
 				'contentType' => 'image/jpg; charset="\"utf8\" (comment)"',
 			],
 			'image/jpg; charset=utf8 (comment)' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8']),
 				'contentType' => 'image/jpg; charset="utf8 (comment)"',
 			],
 			'image/jpg; charset=utf8; attribute=value' => [
-				'expected' => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8', 'attribute' => 'value']),
+				'expected'    => new Entity\MimeType('image', 'jpg', ['charset' => 'utf8', 'attribute' => 'value']),
 				'contentType' => 'image/jpg; charset=utf8; attribute=value',
 			],
 			'empty' => [
-				'expected' => new Entity\MimeType('unkn', 'unkn'),
+				'expected'    => new Entity\MimeType('unkn', 'unkn'),
 				'contentType' => '',
 			],
 			'unknown' => [
-				'expected' => new Entity\MimeType('unkn', 'unkn'),
+				'expected'    => new Entity\MimeType('unkn', 'unkn'),
 				'contentType' => 'unknown',
 			],
 		];
 	}
 
 	/**
-	 * @dataProvider dataCreateFromContentType
 	 * @param Entity\MimeType $expected
 	 * @param string          $contentType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromContentType')]
 	public function testCreateFromContentType(Entity\MimeType $expected, string $contentType)
 	{
 		$factory = new Factory\MimeType(new NullLogger());
@@ -77,7 +77,7 @@ class MimeTypeTest extends TestCase
 		$this->assertEquals($expected, $factory->createFromContentType($contentType));
 	}
 
-	public function dataToString(): array
+	public static function dataToString(): array
 	{
 		return [
 			'image/jpg' => [
@@ -104,17 +104,17 @@ class MimeTypeTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataToString
 	 * @param string          $expected
 	 * @param Entity\MimeType $mimeType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataToString')]
 	public function testToString(string $expected, Entity\MimeType $mimeType)
 	{
 		$this->assertEquals($expected, $mimeType->__toString());
 	}
 
-	public function dataRoundtrip(): array
+	public static function dataRoundtrip(): array
 	{
 		return [
 			['image/jpg'],
@@ -125,10 +125,10 @@ class MimeTypeTest extends TestCase
 	}
 
 	/**
-	 * @dataProvider dataRoundtrip
 	 * @param string $expected
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRoundtrip')]
 	public function testRoundtrip(string $expected)
 	{
 		$factory = new Factory\MimeType(new NullLogger());

@@ -25,7 +25,7 @@ use Psr\Log\LoggerInterface;
  */
 class Hovercard extends BaseModule
 {
-	public function __construct(private IHandleUserSessions $userSession, private IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly IHandleUserSessions $userSession, private readonly IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}

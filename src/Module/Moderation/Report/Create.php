@@ -39,7 +39,7 @@ class Create extends BaseModule
 	/** @var ReportUtil */
 	protected $reportUtil;
 
-	public function __construct(private \Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, private \Friendica\Moderation\Factory\Report $factory, private UserSession $session, private App\Page $page, private SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly \Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, private readonly \Friendica\Moderation\Factory\Report $factory, private readonly UserSession $session, private App\Page $page, private readonly SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->reportUtil = $reportUtil;
@@ -52,7 +52,7 @@ class Create extends BaseModule
 		}
 
 		$report = [];
-		foreach (['cid', 'category', 'rule-ids', 'uri-ids'] as $key) {
+		foreach (['cid', 'category', 'rule-ids', 'uri-ids', 'return'] as $key) {
 			if (isset($request[$key])) {
 				$report[$key] = $request[$key];
 			}
@@ -97,9 +97,46 @@ class Create extends BaseModule
 					Contact\User::setBlocked($request['cid'], $this->session->getLocalUserId(), true);
 					break;
 			}
+
+			$this->systemMessages->addInfo($this->t('The moderation report has been submitted.'));
+			$this->baseUrl->redirect($this->getReturnPath($request));
 		}
 
 		$this->baseUrl->redirect($this->args->getCommand() . '?' . http_build_query($report));
+	}
+
+	private function getReturnPath(array $request): string
+	{
+		$return = trim((string) ($request['return'] ?? ''));
+		if ($return === '') {
+			return 'moderation/reports';
+		}
+
+		if (!empty(parse_url($return, PHP_URL_SCHEME))) {
+			if (!$this->baseUrl->isLocalUrl($return)) {
+				return 'moderation/reports';
+			}
+
+			$path     = parse_url($return, PHP_URL_PATH);
+			$query    = parse_url($return, PHP_URL_QUERY);
+			$basePath = rtrim((string) $this->baseUrl->getPath(), '/');
+
+			$path = (string) $path;
+			if ($basePath !== '' && $basePath !== '/') {
+				if ($path === $basePath) {
+					$path = '';
+				} elseif (str_starts_with($path, $basePath . '/')) {
+					$path = substr($path, strlen($basePath) + 1);
+				}
+			}
+
+			$return = $path;
+			if (!empty($query)) {
+				$return .= '?' . $query;
+			}
+		}
+
+		return ltrim($return, '/');
 	}
 
 	protected function content(array $request = []): string
@@ -272,6 +309,7 @@ class Create extends BaseModule
 			'$category' => $request['category'],
 			'$ruleIds'  => implode(',', $request['rule-ids'] ?? []),
 			'$uriIds'   => implode(',', $request['uri-ids'] ?? []),
+			'$return'   => $request['return'] ?? '',
 
 			'$nothing'  => ['contact_action', $this->t('Nothing'), self::CONTACT_ACTION_NONE, '', true],
 			'$collapse' => ['contact_action', $this->t('Collapse contact'), self::CONTACT_ACTION_COLLAPSE, $this->t('Their posts and replies will keep appearing in your Network page but their content will be collapsed by default.')],

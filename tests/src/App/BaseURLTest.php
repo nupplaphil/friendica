@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
 
 class BaseURLTest extends MockedTestCase
 {
-	public function dataSystemUrl(): array
+	public static function dataSystemUrl(): array
 	{
 		return [
 			'default' => [
@@ -104,9 +104,7 @@ class BaseURLTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataSystemUrl
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataSystemUrl')]
 	public function testDetermine(array $input, array $server, string $assertion)
 	{
 		$origServerGlobal = $_SERVER;
@@ -116,12 +114,12 @@ class BaseURLTest extends MockedTestCase
 
 		$baseUrl = new BaseURL($config, new NullLogger(), $server);
 
-		self::assertEquals($assertion, (string)$baseUrl);
+		self::assertEquals($assertion, (string) $baseUrl);
 
 		$_SERVER = $origServerGlobal;
 	}
 
-	public function dataRemove(): array
+	public static function dataRemove(): array
 	{
 		return [
 			'same' => [
@@ -147,9 +145,7 @@ class BaseURLTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataRemove
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataRemove')]
 	public function testRemove(array $base, string $origUrl, string $assertion)
 	{
 		$config  = new ReadOnlyFileConfig(new Cache($base));
@@ -169,7 +165,7 @@ class BaseURLTest extends MockedTestCase
 		$config = new ReadOnlyFileConfig(new Cache([
 			'system' => [
 				'url' => 'https://friendica.local',
-			]
+			],
 		]));
 		$baseUrl = new BaseURL($config, new NullLogger());
 		$baseUrl->redirect('https://friendica.other');

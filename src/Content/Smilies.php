@@ -151,7 +151,7 @@ class Smilies
 	 * @return array with smilie codes (colon included) as the keys, their image urls as values;
 	 *               the normalized string is put under the '' (empty string) key
 	 */
-	public static function extractUsedSmilies(string $text, string &$normalized = null): array
+	public static function extractUsedSmilies(string $text, ?string &$normalized = null): array
 	{
 		$emojis = [];
 

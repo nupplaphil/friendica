@@ -261,6 +261,15 @@ button.btn-primary {
   }
 }
 
+.fancybox-content {
+  background-color: var(--bg-secondary);
+
+  .event {
+    background-color: var(--bg-primary);
+    padding: 10px;
+  }
+}
+
 /* Input Fields */
 input,
 textarea,
@@ -357,6 +366,42 @@ aside {
 .hljs, .hljs-subst {
   color: var(--text-primary) !important;
 }
+
+/* Hovercard */
+.hovercard {
+	background-color: var(--bg-secondary);
+	box-shadow: 0 10px 50px var(--shadow);
+}
+
+.hover-card-footer {
+	background-color: var(--bg-secondary);
+	border-top: 1px solid var(--border-color);
+	color: var(--text-secondary);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hovercard.top > .arrow:after {
+	border-top-color: var(--bg-secondary);
+}
+
+.hovercard.right > .arrow:after {
+	border-right-color: var(--bg-secondary);
+}
+
+.hovercard.bottom > .arrow:after {
+	border-bottom-color: var(--bg-secondary);
+}
+
+.hovercard.left > .arrow:after {
+	border-left-color: var(--bg-secondary);
+}
+
+.hover-card-content,
+.hover-card-content .profile-addr {
+	color: var(--text-secondary);
+}
+
 
 /* Dropdowns */
 .dropdown-menu {

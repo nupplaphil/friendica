@@ -57,7 +57,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Database $dba, private DbaDefinition $dbaDefinition, private ViewDefinition $viewDefinition, BasePath $basePath, private IManageConfigValues $config, $argv = null)
+	public function __construct(private readonly Database $dba, private readonly DbaDefinition $dbaDefinition, private readonly ViewDefinition $viewDefinition, BasePath $basePath, private readonly IManageConfigValues $config, $argv = null)
 	{
 		parent::__construct($argv);
 		$this->basePath = $basePath->getPath();

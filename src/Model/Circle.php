@@ -104,15 +104,21 @@ class Circle
 	/**
 	 * Update circle information.
 	 *
-	 * @param int    $id   Circle ID
-	 * @param string $name Circle name
+	 * @param int       $id     Circle ID
+	 * @param string    $name   Circle name
+	 * @param bool|null $public Circle public state (null to keep unchanged)
 	 *
 	 * @return bool Was the update successful?
 	 * @throws \Exception
 	 */
-	public static function update(int $id, string $name): bool
+	public static function update(int $id, string $name, ?bool $public = null): bool
 	{
-		return DBA::update('group', ['name' => $name], ['id' => $id]);
+		$fields = ['name' => $name];
+		if ($public !== null) {
+			$fields['public'] = $public;
+		}
+
+		return DBA::update('group', $fields, ['id' => $id]);
 	}
 
 	/**
@@ -280,7 +286,7 @@ class Circle
 		if (!$ucid) {
 			throw new HTTPException\NotFoundException('Invalid contact.');
 		}
-
+		DI::logger()->debug('Adding contact to circle', ['gid' => $gid, 'cid' => $cid, 'ucid' => $ucid]);
 		return DBA::insert('group_member', ['gid' => $gid, 'contact-id' => $ucid], Database::INSERT_IGNORE);
 	}
 

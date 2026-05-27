@@ -32,7 +32,7 @@ final class JetstreamDaemon extends Console
 	 * @param Jetstream            $jetstream
 	 * @param array|null           $argv
 	 */
-	public function __construct(private Mode $mode, private IManageConfigValues $config, private IManageKeyValuePairs $keyValue, private SysDaemon $daemon, private Jetstream $jetstream, private AddonHelper $addonHelper, array $argv = null)
+	public function __construct(private readonly Mode $mode, private readonly IManageConfigValues $config, private readonly IManageKeyValuePairs $keyValue, private readonly SysDaemon $daemon, private readonly Jetstream $jetstream, private readonly AddonHelper $addonHelper, array $argv = null)
 	{
 		parent::__construct($argv);
 	}

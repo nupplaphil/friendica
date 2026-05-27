@@ -22,9 +22,11 @@ return \Rector\Config\RectorConfig::configure()
 	// ->withTypeCoverageLevel(0)
 	// ->withDeadCodeLevel(0)
 	// ->withCodeQualityLevel(0)
-	->withPhpLevel(84)
+	->withPhpLevel(100)
 	->withSets([
 		//\Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_85,
+		\Rector\PHPUnit\Set\PHPUnitSetList::PHPUNIT_120,
+		\Rector\PHPUnit\Set\PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
 	])
 	->withSkip([
 		\Rector\Php56\Rector\FuncCall\PowToExpRector::class,

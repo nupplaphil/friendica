@@ -28,7 +28,7 @@ class DeleteTest extends ApiTestCase
 		(new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))->run($this->httpExceptionMock);
 	}
 
-	public function testWithoutAuthenticatedUser()
+	public function testWithoutAuthenticatedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}
@@ -45,7 +45,7 @@ class DeleteTest extends ApiTestCase
 
 		$response = (new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'photo_id' => '709057080661a283a6aa598501504178'
+				'photo_id' => '709057080661a283a6aa598501504178',
 			]);
 
 		$json = $this->toJson($response);
@@ -60,10 +60,10 @@ class DeleteTest extends ApiTestCase
 
 		$response = (new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'photo_id' => '709057080661a283a6aa598501504178'
+				'photo_id' => '709057080661a283a6aa598501504178',
 			]);
 
-		$responseText = (string)$response->getBody();
+		$responseText = (string) $response->getBody();
 
 		self::assertJson($responseText);
 

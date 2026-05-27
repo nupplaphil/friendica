@@ -11,61 +11,61 @@ use Friendica\Protocol\HTTP\MediaType;
 
 class MediaTypeTest extends \PHPUnit\Framework\TestCase
 {
-	public function dataValid(): array
+	public static function dataValid(): array
 	{
 		return [
 			'HTML UTF-8' => [
-				'expected'     => new MediaType('text', 'html', ['charset' => 'utf-8']),
-				'content-type' => 'text/html; charset=utf-8',
+				'expected'    => new MediaType('text', 'html', ['charset' => 'utf-8']),
+				'contentType' => 'text/html; charset=utf-8',
 			],
 			'HTML Northern Europe' => [
-				'expected'     => new MediaType('text', 'html', ['charset' => 'ISO-8859-4']),
-				'content-type' => 'text/html; charset=ISO-8859-4',
+				'expected'    => new MediaType('text', 'html', ['charset' => 'ISO-8859-4']),
+				'contentType' => 'text/html; charset=ISO-8859-4',
 			],
 			'multipart/form-data' => [
-				'expected'     => new MediaType('multipart', 'form-data', ['boundary' => '---------------------------974767299852498929531610575']),
-				'content-type' => 'multipart/form-data; boundary=---------------------------974767299852498929531610575',
+				'expected'    => new MediaType('multipart', 'form-data', ['boundary' => '---------------------------974767299852498929531610575']),
+				'contentType' => 'multipart/form-data; boundary=---------------------------974767299852498929531610575',
 			],
 			'Multiple parameters' => [
-				'expected'     => new MediaType('application', 'octet-stream', ['charset' => 'ISO-8859-4', 'another' => 'parameter']),
-				'content-type' => 'application/octet-stream; charset=ISO-8859-4 ; another=parameter',
+				'expected'    => new MediaType('application', 'octet-stream', ['charset' => 'ISO-8859-4', 'another' => 'parameter']),
+				'contentType' => 'application/octet-stream; charset=ISO-8859-4 ; another=parameter',
 			],
 			'No parameters' => [
-				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip',
+				'expected'    => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
+				'contentType' => 'application/vnd.adobe.air-application-installer-package+zip',
 			],
 			'No parameters colon' => [
-				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip;',
+				'expected'    => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
+				'contentType' => 'application/vnd.adobe.air-application-installer-package+zip;',
 			],
 			'No parameters space colon' => [
-				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip ;',
+				'expected'    => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
+				'contentType' => 'application/vnd.adobe.air-application-installer-package+zip ;',
 			],
 			'No parameters space colon space' => [
-				'expected'     => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
-				'content-type' => 'application/vnd.adobe.air-application-installer-package+zip ; ',
+				'expected'    => new MediaType('application', 'vnd.adobe.air-application-installer-package+zip'),
+				'contentType' => 'application/vnd.adobe.air-application-installer-package+zip ; ',
 			],
 			'Parameter quoted string' => [
-				'expected'     => new MediaType('text', 'html', ['parameter' => 'Quoted string with a space and a "double-quote"']),
-				'content-type' => 'text/html; parameter="Quoted string with a space and a \"double-quote\""',
-			]
+				'expected'    => new MediaType('text', 'html', ['parameter' => 'Quoted string with a space and a "double-quote"']),
+				'contentType' => 'text/html; parameter="Quoted string with a space and a \"double-quote\""',
+			],
 		];
 	}
 
 	/**
-	 * @dataProvider dataValid
 	 *
 	 * @param MediaType $expected
 	 * @param string    $contentType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataValid')]
 	public function testValid(MediaType $expected, string $contentType)
 	{
 		$this->assertEquals($expected, MediaType::fromContentType($contentType));
 	}
 
-	public function dataInvalid(): array
+	public static function dataInvalid(): array
 	{
 		return [
 			'no slash'                  => ['application'],
@@ -80,11 +80,11 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @dataProvider dataInvalid
 	 *
 	 * @param string $contentType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataInvalid')]
 	public function testInvalid(string $contentType)
 	{
 		$this->expectException(\InvalidArgumentException::class);
@@ -92,12 +92,12 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 		MediaType::fromContentType($contentType);
 	}
 
-	public function dataToString(): array
+	public static function dataToString(): array
 	{
 		return [
 			'HTML UTF-8' => [
-				'content-type' => 'text/html; charset=utf-8',
-				'mediaType'    => new MediaType('text', 'html', ['charset' => 'utf-8']),
+				'expected'  => 'text/html; charset=utf-8',
+				'mediaType' => new MediaType('text', 'html', ['charset' => 'utf-8']),
 			],
 			'HTML Northern Europe' => [
 				'expected'  => 'text/html; charset=ISO-8859-4',
@@ -123,12 +123,12 @@ class MediaTypeTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @dataProvider dataToString
 	 *
 	 * @param string    $expected
 	 * @param MediaType $mediaType
 	 * @return void
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataToString')]
 	public function testToString(string $expected, MediaType $mediaType)
 	{
 		$this->assertEquals($expected, $mediaType->__toString());

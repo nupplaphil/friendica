@@ -25,7 +25,7 @@ class Storage extends \Asika\SimpleConsole\Console
 	/**
 	 * @param StorageManager $storageManager
 	 */
-	public function __construct(private StorageManager $storageManager, array $argv = [])
+	public function __construct(private readonly StorageManager $storageManager, array $argv = [])
 	{
 		parent::__construct($argv);
 	}

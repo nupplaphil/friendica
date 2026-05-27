@@ -320,9 +320,12 @@ function item_process(array $post, array $request, bool $preview, string $return
 		}
 
 		item_post_return(DI::baseUrl(), $return_path);
+	} elseif (!empty($request['scheduled_at'])) {
+		$post['created'] = $scheduled_at;
+		unset($post['edited']);
+		unset($post['commented']);
+		unset($post['changed']);
 	}
-
-	$post['created'] = $scheduled_at;
 
 	if (!empty($post['cancel'])) {
 		DI::logger()->info('mod_item: post cancelled by addon.');

@@ -39,7 +39,7 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private Mode $appMode, private L10n $l10n, $argv = null)
+	public function __construct(private readonly Mode $appMode, private readonly L10n $l10n, $argv = null)
 	{
 		parent::__construct($argv);
 	}

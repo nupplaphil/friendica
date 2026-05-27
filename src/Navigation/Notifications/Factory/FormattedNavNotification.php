@@ -30,7 +30,7 @@ class FormattedNavNotification extends BaseFactory
 	/** @var string */
 	private $tpl;
 
-	public function __construct(private Notification $notification, private \Friendica\App\BaseURL $baseUrl, private \Friendica\Core\L10n $l10n, LoggerInterface $logger, private IHandleUserSessions $userSession)
+	public function __construct(private readonly Notification $notification, private readonly \Friendica\App\BaseURL $baseUrl, private readonly \Friendica\Core\L10n $l10n, LoggerInterface $logger, private readonly IHandleUserSessions $userSession)
 	{
 		parent::__construct($logger);
 

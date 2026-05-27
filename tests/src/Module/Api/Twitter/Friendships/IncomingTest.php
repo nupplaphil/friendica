@@ -33,7 +33,7 @@ class IncomingTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFriendshipsIncomingWithUndefinedCursor()
+	public function testApiFriendshipsIncomingWithUndefinedCursor(): never
 	{
 		self::markTestIncomplete('Needs refactoring of Incoming - replace filter_input() with $request parameter checks');
 

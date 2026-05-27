@@ -87,7 +87,7 @@ class UserTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUserTimelineWithUnallowedUser()
+	public function testApiStatusesUserTimelineWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

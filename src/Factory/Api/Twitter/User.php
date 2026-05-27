@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 class User extends BaseFactory
 {
 	public function __construct(LoggerInterface $logger, /** @var Status entity */
-		private Status $status)
+		private readonly Status $status)
 	{
 		parent::__construct($logger);
 

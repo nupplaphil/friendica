@@ -11,7 +11,7 @@ use Friendica\Test\MockedTestCase;
 
 class CacheTest extends MockedTestCase
 {
-	public function dataTests()
+	public static function dataTests()
 	{
 		return [
 			'normal' => [
@@ -27,8 +27,8 @@ class CacheTest extends MockedTestCase
 					'config' => [
 						'a' => 'value',
 					],
-				]
-			]
+				],
+			],
 		];
 	}
 
@@ -43,9 +43,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the setP() and getP() methods
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetGet($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
@@ -93,9 +92,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the deleteP() method
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testDelete($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
@@ -126,7 +124,7 @@ class CacheTest extends MockedTestCase
 		$diffConfig = [
 			'fakeCat' => [
 				'fakeKey' => 'value',
-			]
+			],
 		];
 
 		self::assertEquals($diffConfig, $configCache->keyDiff($diffConfig));
@@ -134,9 +132,8 @@ class CacheTest extends MockedTestCase
 
 	/**
 	 * Test the keyDiff() method without result
-	 *
-	 * @dataProvider dataTests
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testKeyDiffWithoutResult($data)
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
@@ -159,7 +156,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => 'supersecure',
 				'username' => 'notsecured',
-			]
+			],
 		]);
 
 		self::assertEquals('supersecure', $configCache->get(1, 'database', 'password'));
@@ -178,7 +175,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => 'supersecure',
 				'username' => 'notsecured',
-			]
+			],
 		]);
 
 		self::assertEquals('supersecure', $configCache->get(1, 'database', 'password'));
@@ -197,7 +194,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => '',
 				'username' => '',
-			]
+			],
 		]);
 
 		self::assertEmpty($configCache->get(1, 'database', 'password'));
@@ -212,7 +209,7 @@ class CacheTest extends MockedTestCase
 			'database' => [
 				'password' => new \stdClass(),
 				'username' => '',
-			]
+			],
 		]);
 
 		self::assertNotEmpty($configCache->get(1, 'database', 'password'));

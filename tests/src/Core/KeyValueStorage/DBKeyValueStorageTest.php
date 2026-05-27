@@ -42,7 +42,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		return new DBKeyValueStorage($this->database);
 	}
 
-	/** @dataProvider dataTests */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testUpdatedAt($k, $v)
 	{
 		$instance = $this->getInstance();
@@ -77,7 +77,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		self::assertInstanceOf(IManageKeyValuePairs::class, $instance);
 	}
 
-	public function dataTests(): array
+	public static function dataTests(): array
 	{
 		return [
 			'string'       => ['k' => 'data', 'v' => 'it'],
@@ -91,9 +91,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testGetSetDelete($k, $v)
 	{
 		$instance = $this->getInstance();
@@ -109,9 +107,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		self::assertNull($instance[$k]);
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testSetOverride($k, $v)
 	{
 		$instance = $this->getInstance();
@@ -127,9 +123,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		self::assertEquals('another_value', $instance[$k]);
 	}
 
-	/**
-	 * @dataProvider dataTests
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	public function testOffsetSetDelete($k, $v)
 	{
 		$instance = $this->getInstance();

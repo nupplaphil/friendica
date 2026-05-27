@@ -16,7 +16,7 @@ class SearchTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiSearch()
+	public function testApiSearch(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -36,7 +36,7 @@ class SearchTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiSearchWithCount()
+	public function testApiSearchWithCount(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -56,7 +56,7 @@ class SearchTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiSearchWithRpp()
+	public function testApiSearchWithRpp(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -73,9 +73,9 @@ class SearchTest extends ApiTestCase
 
 	/**
 	 * Test the api_search() function with an q parameter contains hashtag.
-	 * @doesNotPerformAssertions
 	 */
-	public function testApiSearchWithHashtag()
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testApiSearchWithHashtag(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -91,9 +91,9 @@ class SearchTest extends ApiTestCase
 
 	/**
 	 * Test the api_search() function with an exclude_replies parameter.
-	 * @doesNotPerformAssertions
 	 */
-	public function testApiSearchWithExcludeReplies()
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function testApiSearchWithExcludeReplies(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -113,7 +113,7 @@ class SearchTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiSearchWithUnallowedUser()
+	public function testApiSearchWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -127,7 +127,7 @@ class SearchTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiSearchWithoutQuery()
+	public function testApiSearchWithoutQuery(): never
 	{
 		self::markTestIncomplete('Needs Search to not set header during call (like at BaseApi::setLinkHeader');
 

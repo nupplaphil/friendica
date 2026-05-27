@@ -562,7 +562,7 @@ class Event
 	 * @throws NotFoundException
 	 * @throws UnauthorizedException
 	 */
-	public static function getListByDate(int $owner_uid, string $start = null, string $finish = null, ?bool $ignore = false): array
+	public static function getListByDate(int $owner_uid, ?string $start = null, ?string $finish = null, ?bool $ignore = false): array
 	{
 		// Only allow events if there is a valid owner_id.
 		if ($owner_uid == 0) {

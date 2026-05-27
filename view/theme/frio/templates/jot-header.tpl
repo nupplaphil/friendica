@@ -229,7 +229,7 @@
 			const ItemsToDelete = {};
 
 			$('#item-delete-selected').prop('disabled', true);
-			$('#item-delete-selected i').toggleClass('fa-trash fa-hourglass fa-spin');
+			$('#item-delete-selected i').toggleClass('ri-delete-bin-line ri-hourglass-line ri-spin');
 
 			$('.item-select').each(function () {
 				if ($(this).is(':checked')) {
@@ -258,7 +258,7 @@
 					$(ItemsToDelete[key]).remove();
 				}
 
-				$('#item-delete-selected i').toggleClass('fa-trash fa-hourglass fa-spin')
+				$('#item-delete-selected i').toggleClass('ri-delete-bin-line ri-hourglass-line ri-spin')
 				$('#item-delete-selected').prop('disabled', false).hide();
 			});
 		}

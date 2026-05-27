@@ -441,7 +441,7 @@ class Strings
 	 * @return string
 	 * @see substr_replace()
 	 */
-	public static function substringReplace(string $string, string $replacement, int $start, int $length = null): string
+	public static function substringReplace(string $string, string $replacement, int $start, ?int $length = null): string
 	{
 		$string_length = mb_strlen($string);
 

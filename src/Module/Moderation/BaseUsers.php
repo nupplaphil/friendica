@@ -34,7 +34,7 @@ abstract class BaseUsers extends BaseModeration
 
 	public function __construct(
 		Database $database,
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		Page $page,
 		AppHelper $appHelper,
 		SystemMessages $systemMessages,

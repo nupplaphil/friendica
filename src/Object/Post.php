@@ -274,7 +274,11 @@ class Post
 			];
 			$report = [
 				'label' => DI::l10n()->t('Report this post'),
-				'href'  => 'moderation/report/create?' . http_build_query(['cid' => $item['author-id'], 'uri-ids' => [$item['uri-id']]]),
+				'href'  => 'moderation/report/create?' . http_build_query([
+					'cid'     => $item['author-id'],
+					'uri-ids' => [$item['uri-id']],
+					'return'  => DI::args()->getQueryString(),
+				]),
 			];
 			$authorBaseUri = new Uri($item['author-baseurl'] ?? '');
 			if ($authorBaseUri->getHost() && !DI::baseUrl()->isLocalUrl($authorBaseUri)) {
@@ -698,47 +702,47 @@ class Post
 			switch ($element['verb']) {
 				case Activity::ANNOUNCE:
 					$title = DI::l10n()->t('Reshared by: %s', $actors);
-					$icon  = ['fa' => 'fa-retweet', 'icon' => 'icon-retweet'];
+					$icon  = ['fa' => 'ri-repeat-line', 'icon' => 'icon-retweet'];
 					break;
 
 				case Activity::VIEW:
 					$title = DI::l10n()->t('Viewed by: %s', $actors);
-					$icon  = ['fa' => 'fa-eye', 'icon' => 'icon-eye-open'];
+					$icon  = ['fa' => 'ri-eye-line', 'icon' => 'icon-eye-open'];
 					break;
 
 				case Activity::READ:
 					$title = DI::l10n()->t('Read by: %s', $actors);
-					$icon  = ['fa' => 'fa-book', 'icon' => 'icon-book'];
+					$icon  = ['fa' => 'ri-book-line', 'icon' => 'icon-book'];
 					break;
 
 				case Activity::LIKE:
 					$title = DI::l10n()->t('Liked by: %s', $actors);
-					$icon  = ['fa' => 'fa-thumbs-up', 'icon' => 'icon-thumbs-up'];
+					$icon  = ['fa' => 'ri-thumb-up-line', 'icon' => 'icon-thumbs-up'];
 					break;
 
 				case Activity::DISLIKE:
 					$title = DI::l10n()->t('Disliked by: %s', $actors);
-					$icon  = ['fa' => 'fa-thumbs-down', 'icon' => 'icon-thumbs-down'];
+					$icon  = ['fa' => 'ri-thumb-down-line', 'icon' => 'icon-thumbs-down'];
 					break;
 
 				case Activity::ATTEND:
 					$title = DI::l10n()->t('Attended by: %s', $actors);
-					$icon  = ['fa' => 'fa-check', 'icon' => 'icon-ok'];
+					$icon  = ['fa' => 'ri-check-line', 'icon' => 'icon-ok'];
 					break;
 
 				case Activity::ATTENDMAYBE:
 					$title = DI::l10n()->t('Maybe attended by: %s', $actors);
-					$icon  = ['fa' => 'fa-question', 'icon' => 'icon-question'];
+					$icon  = ['fa' => 'ri-question-line', 'icon' => 'icon-question'];
 					break;
 
 				case Activity::ATTENDNO:
 					$title = DI::l10n()->t('Not attended by: %s', $actors);
-					$icon  = ['fa' => 'fa-times', 'icon' => 'icon-remove'];
+					$icon  = ['fa' => 'ri-close-line', 'icon' => 'icon-remove'];
 					break;
 
 				case Activity::POST:
 					$title = DI::l10n()->t('Commented by: %s', $actors);
-					$icon  = ['fa' => 'fa-commenting', 'icon' => 'icon-commenting'];
+					$icon  = ['fa' => 'ri-chat-3-line', 'icon' => 'icon-commenting'];
 					break;
 
 				default:

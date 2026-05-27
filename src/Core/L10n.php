@@ -70,9 +70,10 @@ class L10n
 	 *
 	 * @var string
 	 */
-	private $lang = '';
-
-	private string $locale = '';
+	private string $lang     = '';
+	private array $languages = [];
+	private array $locales   = [];
+	private string $locale   = '';
 
 	/**
 	 * An array of translation strings whose key is the neutral english message.
@@ -404,6 +405,10 @@ class L10n
 	 */
 	public function getAvailableLanguages(): array
 	{
+		if ($this->languages) {
+			return $this->languages;
+		}
+
 		$langs              = [];
 		$strings_file_paths = glob('view/lang/*/strings.php');
 
@@ -417,7 +422,74 @@ class L10n
 				$langs[$path_array[2]] = self::LANG_NAMES[$path_array[2]] ?? $path_array[2];
 			}
 		}
+		$this->languages = $langs;
 		return $langs;
+	}
+
+	/**
+	 * Return the available locales based on the available languages.
+	 *
+	 * This function derives the list of available locales from the list of available languages.
+	 * For each language code, it parses it as a locale and extracts both the language and region parts (if present).
+	 * It then constructs locale strings in the format "language" and "language-region" and collects them in a unique list.
+	 *
+	 * Ex: array('en', 'en-US', 'de', 'de-DE', ...)
+	 *
+	 * @return array
+	 */
+	private function getAvailableLocales(): array
+	{
+		if ($this->locales) {
+			return $this->locales;
+		}
+		$locales = [];
+		foreach (array_keys($this->getAvailableLanguages()) as $key) {
+			$locale = Locale::parseLocale($key);
+			if (isset($locale['language'])) {
+				$locales[] = $locale['language'];
+			}
+			if (isset($locale['language'], $locale['region'])) {
+				$locales[] = Locale::composeLocale($locale);
+			}
+		}
+		$locales = array_unique($locales);
+		sort($locales);
+
+		$this->locales = $locales;
+		return $locales;
+	}
+
+	/**
+	 * Normalise a locale string against the list of available locales.
+	 *
+	 * This function checks if the provided locale string matches any of the available locales using `Locale::lookup()`.
+	 * If a match is found, it returns the matched locale; otherwise, it returns a default locale.
+	 *
+	 * @param string $locale The locale string to normalise (e.g., 'en-US', 'de-DE')
+	 * @return string The normalised locale if found, or the detected locale, the system default or finally 'en-US' as a fallback
+	 */
+	public function normaliseLocale(string $locale): string
+	{
+		$normalised = Locale::lookup($this->getAvailableLocales(), $locale);
+		if ($normalised) {
+			return $normalised;
+		}
+
+		$default_locale = $this->locale ?: $this->config->get('system', 'language', 'en-US');
+
+		$locale_parts = Locale::parseLocale($locale);
+		if (!isset($locale_parts['language'])) {
+			return $default_locale;
+		}
+
+		$iso639 = new \Matriphe\ISO639\ISO639();
+
+		$languages = array_column($iso639->allLanguages(), 0);
+		if (in_array($locale_parts['language'], $languages)) {
+			return $locale_parts['language'];
+		}
+
+		return $default_locale;
 	}
 
 	/**
@@ -659,7 +731,7 @@ class L10n
 			$locale = 'en_US';
 		}
 		$formatter = new IntlDateFormatter(
-			$locale,
+			$this->session->get('language') ?? $this->locale ?: $this->config->get('system', 'language', 'en-US'),
 			$dateType,
 			$timeType,
 			$this->session->get('timezone') ?? null,

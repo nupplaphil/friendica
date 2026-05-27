@@ -28,7 +28,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		$this->setUpVfsDir();
 	}
 
-	public function dataHooks(): array
+	public static function dataHooks(): array
 	{
 		return [
 			'normal' => [
@@ -145,9 +145,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		];
 	}
 
-	/**
-	 * @dataProvider dataHooks
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataHooks')]
 	public function testSetupHooks(string $content, string $addonContent, array $assertStrategies)
 	{
 		vfsStream::newFile(StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php')
@@ -186,7 +184,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		self::expectException(HookConfigException::class);
 		self::expectExceptionMessage(sprintf(
 			'config file %s does not exist.',
-			$this->root->url() . '/' . StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php'
+			$this->root->url() . '/' . StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php',
 		));
 
 		$hookFileManager->loadConfig();
@@ -208,7 +206,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 		self::expectException(HookConfigException::class);
 		self::expectExceptionMessage(sprintf(
 			'Error loading config file %s.',
-			$this->root->url() . '/' . StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php'
+			$this->root->url() . '/' . StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php',
 		));
 
 		$hookFileManager->loadConfig();

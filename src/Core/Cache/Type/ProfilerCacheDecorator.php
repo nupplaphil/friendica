@@ -23,11 +23,11 @@ class ProfilerCacheDecorator implements ICanCache, ICanCacheInMemory
 		/**
 		 * @var ICanCache The original cache driver
 		 */
-		private ICanCache $cache,
+		private readonly ICanCache $cache,
 		/**
 		 * @var Profiler The profiler of Friendica
 		 */
-		private Profiler $profiler,
+		private readonly Profiler $profiler,
 	) {}
 
 	/**

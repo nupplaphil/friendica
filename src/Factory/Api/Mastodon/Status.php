@@ -35,18 +35,18 @@ use Psr\Log\LoggerInterface;
 class Status extends BaseFactory
 {
 	public function __construct(
-		private EventDispatcherInterface $eventDispatcher,
+		private readonly EventDispatcherInterface $eventDispatcher,
 		LoggerInterface $logger,
-		private Database $dba,
-		private Account $mstdnAccountFactory,
-		private Mention $mstdnMentionFactory,
-		private Tag $mstdnTagFactory,
-		private Card $mstdnCardFactory,
-		private Attachment $mstdnAttachmentFactory,
-		private Emoji $mstdnEmojiFactory,
-		private Poll $mstdnPollFactory,
-		private ContentItem $contentItem,
-		private ACLFormatter $aclFormatter,
+		private readonly Database $dba,
+		private readonly Account $mstdnAccountFactory,
+		private readonly Mention $mstdnMentionFactory,
+		private readonly Tag $mstdnTagFactory,
+		private readonly Card $mstdnCardFactory,
+		private readonly Attachment $mstdnAttachmentFactory,
+		private readonly Emoji $mstdnEmojiFactory,
+		private readonly Poll $mstdnPollFactory,
+		private readonly ContentItem $contentItem,
+		private readonly ACLFormatter $aclFormatter,
 	) {
 		parent::__construct($logger);
 	}

@@ -43,7 +43,7 @@ class ReadOnlyFileConfig implements IManageConfigValues
 	}
 
 	/** {@inheritDoc} */
-	public function reload()
+	public function reload(): never
 	{
 		throw new ConfigPersistenceException('reload not allowed.');
 	}

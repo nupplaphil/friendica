@@ -91,13 +91,13 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		self::assertInstanceOf(StorageManager::class, $storageManager);
 	}
 
-	public function dataStorages()
+	public static function dataStorages()
 	{
 		return [
 			'empty' => [
@@ -129,21 +129,19 @@ class StorageManagerTest extends DatabaseTestCase
 				'assertName' => SystemResource::NAME,
 			],
 			'invalid' => [
-				'name'        => 'invalid',
-				'valid'       => false,
-				'interface'   => null,
-				'assert'      => null,
-				'assertName'  => '',
-				'userBackend' => false,
+				'name'       => 'invalid',
+				'valid'      => false,
+				'interface'  => null,
+				'assert'     => null,
+				'assertName' => '',
 			],
 		];
 	}
 
 	/**
 	 * Test the getByName() method
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testGetByName($name, $valid, $interface, $assert, $assertName)
 	{
 		if (!$valid) {
@@ -160,7 +158,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		if ($interface === ICanWriteToStorage::class) {
@@ -176,9 +174,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the isValidBackend() method
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$storageManager = new StorageManager(
@@ -187,7 +184,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		// true in every of the backends
@@ -208,7 +205,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		self::assertEquals(StorageManager::DEFAULT_BACKENDS, $storageManager->listBackends());
@@ -216,9 +213,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the method getBackend()
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testGetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
@@ -231,7 +227,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		$selBackend = $storageManager->getWritableStorageByName($name);
@@ -242,9 +238,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test the method getBackend() with a pre-configured backend
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testPresetBackend($name, $valid, $interface, $assert, $assertName)
 	{
 		$this->config->set('storage', 'name', $name);
@@ -258,7 +253,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		self::assertInstanceOf($assert, $storageManager->getBackend());
@@ -286,7 +281,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 
 		self::assertTrue($storageManager->register(SampleStorageBackend::class));
@@ -295,7 +290,7 @@ class StorageManagerTest extends DatabaseTestCase
 			SampleStorageBackend::getName(),
 		]), $storageManager->listBackends());
 		self::assertEquals(array_merge(StorageManager::DEFAULT_BACKENDS, [
-			SampleStorageBackend::getName()
+			SampleStorageBackend::getName(),
 		]), $this->config->get('storage', 'backends'));
 
 		self::assertTrue($storageManager->unregister(SampleStorageBackend::class));
@@ -328,7 +323,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			$eventDispatcher,
 			$this->l10n,
-			false
+			false,
 		);
 
 		self::assertTrue($storageManager->register(SampleStorageBackend::class));
@@ -337,7 +332,7 @@ class StorageManagerTest extends DatabaseTestCase
 			SampleStorageBackend::getName(),
 		]), $storageManager->listBackends());
 		self::assertEquals(array_merge(StorageManager::DEFAULT_BACKENDS, [
-			SampleStorageBackend::getName()
+			SampleStorageBackend::getName(),
 		]), $this->config->get('storage', 'backends'));
 
 		// inline call to register own class as hook (testing purpose only)
@@ -357,9 +352,8 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/**
 	 * Test moving data to a new storage (currently testing db & filesystem)
-	 *
-	 * @dataProvider dataStorages
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
 	public function testMoveStorage($name, $valid, $interface, $assert, $assertName)
 	{
 		if ($interface !== ICanWriteToStorage::class) {
@@ -374,7 +368,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 		$storage = $storageManager->getWritableStorageByName($name);
 		$storageManager->move($storage);
@@ -405,7 +399,7 @@ class StorageManagerTest extends DatabaseTestCase
 			new NullLogger(),
 			new FakeEventDispatcher(),
 			$this->l10n,
-			false
+			false,
 		);
 		$storage = $storageManager->getWritableStorageByName(SystemResource::getName());
 		$storageManager->move($storage);

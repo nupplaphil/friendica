@@ -16,7 +16,7 @@ class PublicTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesPublicTimeline()
+	public function testApiStatusesPublicTimeline(): never
 	{
 		self::markTestIncomplete('Needs PublicTimeline to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -36,7 +36,7 @@ class PublicTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesPublicTimelineWithExcludeReplies()
+	public function testApiStatusesPublicTimelineWithExcludeReplies(): never
 	{
 		self::markTestIncomplete('Needs PublicTimeline to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -56,7 +56,7 @@ class PublicTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesPublicTimelineWithNegativePage()
+	public function testApiStatusesPublicTimelineWithNegativePage(): never
 	{
 		self::markTestIncomplete('Needs PublicTimeline to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -75,7 +75,7 @@ class PublicTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesPublicTimelineWithUnallowedUser()
+	public function testApiStatusesPublicTimelineWithUnallowedUser(): never
 	{
 		self::markTestIncomplete('Needs PublicTimeline to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -89,7 +89,7 @@ class PublicTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesPublicTimelineWithRss()
+	public function testApiStatusesPublicTimelineWithRss(): never
 	{
 		self::markTestIncomplete('Needs PublicTimeline to not set header during call (like at BaseApi::setLinkHeader');
 

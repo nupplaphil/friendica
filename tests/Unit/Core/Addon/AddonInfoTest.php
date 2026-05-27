@@ -108,9 +108,7 @@ class AddonInfoTest extends TestCase
 		];
 	}
 
-	/**
-	 * @dataProvider getStringData
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('getStringData')]
 	public function testFromStringReturnsCorrectValues(string $addonId, string $raw, array $expected): void
 	{
 		$this->assertAddonInfoData($expected, AddonInfo::fromString($addonId, $raw));
@@ -148,7 +146,7 @@ class AddonInfoTest extends TestCase
 				'version'     => '',
 				'status'      => '',
 			],
-			$expected
+			$expected,
 		);
 
 		$data = [

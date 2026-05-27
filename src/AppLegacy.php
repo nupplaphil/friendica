@@ -59,22 +59,22 @@ final class AppLegacy implements AppHelper
 		/**
 		 * @var Database The Friendica database connection
 		 */
-		private Database $database,
+		private readonly Database $database,
 		/**
 		 * @var IManageConfigValues The config
 		 */
-		private IManageConfigValues $config,
+		private readonly IManageConfigValues $config,
 		/**
 		 * @var Mode The Mode of the Application
 		 */
-		private Mode $mode,
-		private BaseURL $baseURL,
+		private readonly Mode $mode,
+		private readonly BaseURL $baseURL,
 		/**
 		 * @var L10n The translator
 		 */
-		private L10n $l10n,
-		private IManagePersonalConfigValues $pConfig,
-		private IHandleUserSessions $session,
+		private readonly L10n $l10n,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly IHandleUserSessions $session,
 	) {}
 
 	/**

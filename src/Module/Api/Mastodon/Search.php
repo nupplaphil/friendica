@@ -179,6 +179,12 @@ class Search extends BaseApi
 			$table     = SearchIndex::getSearchTable();
 		}
 
+		$condition = DBA::mergeConditions($condition, ["NOT EXISTS(SELECT `post-thread-user`.`uri-id` FROM `post-thread-user`
+			INNER JOIN `contact` AS `ownercontact` ON `ownercontact`.`id` = `post-thread-user`.`owner-id`
+			INNER JOIN `contact` AS `authorcontact` ON `authorcontact`.`id` = `post-thread-user`.`author-id`
+			WHERE `post-thread-user`.`uri-id` = `$table`.`uri-id`
+			AND (`ownercontact`.`unsearchable` OR `authorcontact`.`unsearchable`))"]);
+
 		if (!empty($account_id)) {
 			$condition = DBA::mergeConditions($condition, ["`author-id` = ?", $account_id]);
 		}

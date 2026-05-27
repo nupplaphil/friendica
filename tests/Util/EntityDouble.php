@@ -20,7 +20,7 @@ class EntityDouble extends BaseEntity
 	protected $protInt;
 	protected $protDateTime;
 
-	public function __construct(string $protString, int $protInt, \DateTime $protDateTime, private string $privString)
+	public function __construct(string $protString, int $protInt, \DateTime $protDateTime, private readonly string $privString)
 	{
 		$this->protString   = $protString;
 		$this->protInt      = $protInt;

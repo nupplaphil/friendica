@@ -75,7 +75,7 @@ class Page implements ArrayAccess
 	/**
 	 * @param string $basePath The Page basepath
 	 */
-	public function __construct(private string $basePath, private EventDispatcherInterface $eventDispatcher)
+	public function __construct(private readonly string $basePath, private readonly EventDispatcherInterface $eventDispatcher)
 	{
 		$this->timestamp = microtime(true);
 	}

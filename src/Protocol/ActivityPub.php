@@ -90,6 +90,7 @@ class ActivityPub
 			'conversation'              => 'ostatus:conversation',
 			'directMessage'             => 'litepub:directMessage',
 			'discoverable'              => 'toot:discoverable',
+			'indexable'                 => 'toot:indexable',
 			'PropertyValue'             => 'schema:PropertyValue',
 			'value'                     => 'schema:value',
 		],
@@ -186,6 +187,10 @@ class ActivityPub
 
 		if (!is_null($apcontact['discoverable'])) {
 			$profile['hide'] = !$apcontact['discoverable'];
+		}
+
+		if (!is_null($apcontact['indexable']) && !$apcontact['indexable']) {
+			$profile['hide'] = true;
 		}
 
 		// Remove all "null" fields

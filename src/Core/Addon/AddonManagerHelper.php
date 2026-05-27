@@ -28,7 +28,7 @@ final class AddonManagerHelper implements AddonHelper
 	/** @var string[] */
 	private array $addons = [];
 
-	public function __construct(private string $addonPath, private Database $database, private IManageConfigValues $config, private ICanCache $cache, private LoggerInterface $logger, private Profiler $profiler) {}
+	public function __construct(private readonly string $addonPath, private readonly Database $database, private readonly IManageConfigValues $config, private readonly ICanCache $cache, private readonly LoggerInterface $logger, private readonly Profiler $profiler) {}
 	/**
 	 * Returns the absolute path to the addon folder
 	 *
@@ -116,7 +116,11 @@ final class AddonManagerHelper implements AddonHelper
 
 		$timestamp = @filemtime($addon_file_path);
 
-		@include_once($addon_file_path);
+		try {
+			require_once($addon_file_path);
+		} catch (\Error) {
+			return false;
+		}
 
 		if (function_exists($addonId . '_install')) {
 			$func = $addonId . '_install';

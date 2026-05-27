@@ -80,7 +80,7 @@ class DirectMessageTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFormatMessagesWithoutUserObjects()
+	public function testApiFormatMessagesWithoutUserObjects(): never
 	{
 		self::markTestIncomplete('Needs processing of "getUserObjects" first');
 
