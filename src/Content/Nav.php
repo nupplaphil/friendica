@@ -199,10 +199,8 @@ class Nav
 
 		if ($this->session->isAuthenticated()) {
 			// user menu
-			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/profile', $this->l10n->t('Profile'), '', $this->l10n->t('Your profile page'), 'ri-user-line'];
-			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Conversations'), '', $this->l10n->t('Conversations you started'), 'ri-chat-3-line'];
+			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Posts'), '', $this->l10n->t('Conversations you started'), 'ri-user-line'];
 			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/photos', $this->l10n->t('Photos'), '', $this->l10n->t('Your photos'), 'ri-image-line'];
-			$nav['usermenu'][] = ['calendar/', $this->l10n->t('Calendar'), '', $this->l10n->t('Your calendar'), 'ri-calendar-line'];
 			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Your personal notes'), 'ri-sticky-note-line'];
 
 			// user info
@@ -258,7 +256,7 @@ class Nav
 
 		if (Feature::isEnabled($this->session->getLocalUserId(), Feature::COMMUNITY) && (($this->session->getLocalUserId() || $this->config->get('system', 'community_page_style') != Community::DISABLED_VISITOR)
 			&& !($this->config->get('system', 'community_page_style') == Community::DISABLED))) {
-			$nav['community'] = ['community', $this->l10n->t('Community'), '', $this->l10n->t('Conversations on this and other servers')];
+			$nav['community'] = ['community', $this->l10n->t('Community'), '', $this->l10n->t('Community')];
 		}
 
 		if ($this->session->getLocalUserId()) {
@@ -275,9 +273,9 @@ class Nav
 
 		// The following nav links are only show to logged-in users
 		if ($this->session->getLocalUserNickname()) {
-			$nav['network'] = ['network', $this->l10n->t('Network'), '', $this->l10n->t('Conversations from your friends')];
+			$nav['network'] = ['network', $this->l10n->t('Home'), '', $this->l10n->t('Home')];
 
-			$nav['home'] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Home'), '', $this->l10n->t('Your posts and conversations')];
+			$nav['home'] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('My profile'), '', $this->l10n->t('My posts')];
 
 			// Don't show notifications for public communities
 			if ($this->session->get('page_flags', '') != User::PAGE_FLAGS_COMMUNITY) {

@@ -17,7 +17,7 @@
 					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed visible-sm visible-xs"
 						data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
 						<span class="sr-only">Toggle navigation</span>
-						<i class="fa fa-angle-double-right fa-fw fa-lg" aria-hidden="true"></i>
+						<i class="ri ri-arrow-right-double-line ri-fw ri-lg" aria-hidden="true"></i>
 					</button>
 
 					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
@@ -33,7 +33,7 @@
 								<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
 									type="search" name="q" placeholder="{{$search_placeholder}}">
 								<button class="btn btn-primary btn-md form-button-search" type="submit">
-									<i class="fa fa-search" aria-hidden="true"></i>
+									<i class="ri ri-search-line" aria-hidden="true"></i>
 									<span class="sr-only">{{$nav.search.1}}</span>
 								</button>
 							</div>
@@ -42,7 +42,7 @@
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
 						<span class="sr-only">Toggle Search</span>
-						<i class="fa fa-search fa-fw fa-lg" aria-hidden="true"></i>
+						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>
 					</button>
 				</header>
 				<!-- div for navbar width-->
@@ -61,25 +61,8 @@
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-										class="ri ri-lg ri-message-line ri-fw" aria-hidden="true"></i><span id="net-update"
+									 class="ri ri-lg ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.network.1}}</span><span id="net-update"
 										class="nav-network-badge badge nav-notification"></span></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.channel}}
-							<li class="nav-segment">
-								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
-									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
-										class="ri ri-lg ri-newspaper-line ri-fw" aria-hidden="true"></i></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.home}}
-							<li class="nav-segment">
-								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-user-line ri-fw"
-										aria-hidden="true"></i><span id="home-update"
-										class="nav-home-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
 
@@ -87,15 +70,32 @@
 							<li class="nav-segment">
 								<a accesskey="c" class="nav-menu {{$sel.community}}" href="{{$nav.community.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.community.3}}" title="{{$nav.community.3}}"><i
-										class="ri ri-lg ri-user-community-line ri-fw" aria-hidden="true"></i></a>
+									  class="ri ri-lg ri-user-community-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.community.1}}</span></a>
 							</li>
 						{{/if}}
 
 						{{if $nav.calendar}}
-							<li class="nav-segment hidden-xs">
+							<li class="nav-segment">
 								<a accesskey="e" id="nav-calendar-link" href="{{$nav.calendar.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.1}}" class="nav-menu {{$sel.calendar}}"><i
-										class="ri ri-lg ri-calendar-line ri-fw"></i></a>
+									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.3}}" class="nav-menu {{$sel.calendar}}"><i
+									class="ri ri-lg ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="d-none">{{$nav.calendar.1}}</span></a>
+							</li>
+						{{/if}}
+
+						{{if $nav.channel}}
+							<li class="nav-segment">
+								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
+									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
+										class="ri ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-lg ri-newspaper-line ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
+							</li>
+						{{/if}}
+
+						{{if $nav.home}}
+							<li class="nav-segment hidden-xs">
+								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
+										aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-user-{{if $sel.home}}fill{{else}}line{{/if}} ri-fw"
+										aria-hidden="true"></i> <span class="d-none">{{$nav.home.1}}</span><span id="home-update"
+										class="nav-home-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
 
@@ -111,7 +111,7 @@
 								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
 									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
-										class="ri ri-contacts-line ri-lg ri-fw"></i></a>
+										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i></a>
 							</li>
 						{{/if}}
 
@@ -119,7 +119,7 @@
 							<li class="nav-segment">
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
-									class="nav-menu {{$sel.messages}}"><i class="fa fa-envelope fa-lg fa-fw"
+									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw"
 										aria-hidden="true"></i><span id="mail-update"
 										class="nav-mail-badge badge nav-notification"></span></a>
 							</li>
@@ -165,7 +165,7 @@
 					<button type="button" class="navbar-toggle offcanvas-right-toggle"
 						aria-controls="offcanvasUsermenu" aria-haspopup="true">
 						<span class="sr-only">Toggle navigation</span>
-						<i class="fa fa-ellipsis-v fa-fw fa-lg" aria-hidden="true"></i>
+						<i class="ri ri-more-2-line ri-fw ri-lg" aria-hidden="true"></i>
 					</button>
 
 						{{* The user dropdown menu *}}
@@ -194,7 +194,7 @@
 									{{/if}}
 									{{foreach $nav.usermenu as $usermenu}}
 										<li>
-											<a role="menuitem" class="{{$usermenu.2}}{{if $usermenu.0|str_ends_with:"calendar/"}}visible-xs{{/if}}" href="{{$usermenu.0}}"
+											<a role="menuitem" class="{{$usermenu.2}}" href="{{$usermenu.0}}"
 												title="{{$usermenu.3}}">
 												<i class="ri {{$usermenu.4}}"></i>
 												{{$usermenu.1}}
