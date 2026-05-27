@@ -9,6 +9,10 @@
     Author     : rabuzarus and contributors
 */
 
+:root {
+	--topbar-first-size: 50px;
+}
+
 body {
 	padding-top: 110px;
 	background-color: $background_color;
@@ -257,6 +261,10 @@ details summary {
 	background-color: $link_color;
 	line-height: 1.5;
 	display: none;
+}
+
+#item-delete-selected i {
+	font-size: inherit;
 }
 
 #toggle_mobile_link {
@@ -569,11 +577,9 @@ header #banner #logo-img,
 	width: 100%;
 }
 
-.topbar ul.nav > li > a,
-.topbar ul.nav > li > button {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	line-height: 20px;
+.topbar ul.nav > li {
+	display: grid;
+	align-items: center;
 }
 
 .topbar .dropdown-footer {
@@ -679,11 +685,6 @@ nav.navbar .nav > li > button:focus {
 	width: 32px;
 	border-radius: 3px;
 }
-#topbar-first .nav > .account .dropdown-toggle {
-	padding: 8px 5px 0px;
-	line-height: 1.1em;
-	text-align: left;
-}
 #topbar-first .nav > .account .dropdown-toggle span {
 	font-size: 12px;
 }
@@ -742,7 +743,7 @@ nav.navbar .nav > li > button:focus {
 	z-index: 1035;
 }
 .topbar, #topbar-first-nav-container {
-	height: 50px;
+	height: var(--topbar-first-size);
 }
 .topbar-nav, .topbar-actions, #topbar-first ul.nav {
 		align-items: center;
@@ -858,7 +859,7 @@ nav.navbar .nav > li > button:focus {
 	background-color: #ff8989;
 }
 #offcanvasUsermenu {
-	top: 50px;
+	top: var(--topbar-first-size);
 	background-color: $background_color;
 	border-top: 0;
 	border-right: 0;
@@ -868,7 +869,7 @@ nav.navbar .nav > li > button:focus {
 }
 #offcanvasUsermenu .nav-container {
 	/* required to compensate for moving the container below the topnav bar */
-	margin-bottom: 50px;
+	margin-bottom: var(--topbar-first-size);
 }
 #offcanvasUsermenu li.divider {
 	background-color: transparent;
@@ -953,7 +954,7 @@ nav.navbar .nav > li > button:focus {
 /* second topbar */
 #topbar-second {
 	height: 40px;
-	top: 50px;
+	top: var(--topbar-first-size);
 	background-color: #fff;
 	z-index: 1029;
 	background-image: none;
@@ -2179,6 +2180,7 @@ button[disabled] {
 }
 .wall-item-actions-row {
 	display: flex;
+	padding: 5px;
 }
 .wall-item-actions-row .btn {
 	width: 100%;
@@ -4381,7 +4383,7 @@ div.login-form, .login-content-wrapper,
 		margin-inline: auto!important;
 		position: fixed;
 		inset: 0;
-		top: 50px;
+		top: var(--topbar-first-size);
 		min-width: 80vw!important;
 		max-width: 95vw;
 	}
