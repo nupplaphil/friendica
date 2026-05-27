@@ -4,8 +4,8 @@
 
 matrix:
   include:
-    - PHP_MAJOR_VERSION: 8.4
-      PHP_VERSION: 8.4.20
+    - PHP_MAJOR_VERSION: 8.5
+      PHP_VERSION: 8.5.5
 
 # The phpmd check is just triggered for PRs and pushes to non-stable branches of Friendica
 when:
