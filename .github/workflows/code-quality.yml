@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -38,7 +38,7 @@ jobs:
         run: git clone -b develop --single-branch https://git.friendi.ca/friendica/friendica-addons.git addon
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run PHP-CS-Fixer
         continue-on-error: true
@@ -56,7 +56,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -71,7 +71,7 @@ jobs:
         run: git clone -b develop --single-branch https://git.friendi.ca/friendica/friendica-addons.git addon
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run PHPStan
         run: composer run phpstan
@@ -88,7 +88,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -103,7 +103,7 @@ jobs:
         run: git clone -b develop --single-branch https://git.friendi.ca/friendica/friendica-addons.git addon
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run PHPStan in addons
         run: composer run phpstan-addons
@@ -120,7 +120,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -134,7 +134,7 @@ jobs:
         run: git clone -b develop --single-branch https://git.friendi.ca/friendica/friendica-addons.git addon
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run Rector
         run: composer run rector:check
@@ -151,7 +151,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -166,7 +166,7 @@ jobs:
         run: git clone -b develop --single-branch https://git.friendi.ca/friendica/friendica-addons.git addon
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run PHPMD
         run: vendor/bin/phpmd src/ text .phpmd-ruleset.xml --color
