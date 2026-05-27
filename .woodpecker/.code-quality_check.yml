@@ -4,8 +4,8 @@
 
 matrix:
   include:
-    - PHP_MAJOR_VERSION: 8.5
-      PHP_VERSION: 8.5.5
+    - PHP_MAJOR_VERSION: 8.4
+      PHP_VERSION: 8.4.20
 
 # The phpmd check is just triggered for PRs and pushes to non-stable branches of Friendica
 when:
@@ -48,6 +48,21 @@ steps:
         - '.composer'
     volumes:
       - /tmp/drone-cache:/tmp/cache
+
+  phpstan:
+    image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
+    commands:
+      - bin/composer.phar run phpstan;
+
+  phpstan-addons:
+    image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
+    commands:
+      - bin/composer.phar run phpstan-addons;
+
+  rector:
+    image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
+    commands:
+      - bin/composer.phar run rector:check;
 
   phpmd:
     image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
