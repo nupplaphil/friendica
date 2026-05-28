@@ -12,7 +12,7 @@
  * Author: Ike <http://pirati.ca/profile/heluecht>
  * Author: Beanow <https://fc.oscp.info/profile/beanow>
  * Maintainer: Ike <http://pirati.ca/profile/heluecht>
- * Description: "Vier" is a compact and modern theme. It uses the font awesome font library: https://fontawesome.com
+ * Description: "Vier" is a compact and modern theme. It uses the Remix Icon library: https://remixicon.com
  */
 
 use Friendica\App\Mode;
