@@ -86,8 +86,20 @@ class Router
 	 * @param IHandleUserSessions $userSession
 	 * @param RouteCollector|null $routeCollector
 	 */
-	public function __construct(private readonly array $server, private readonly string $baseRoutesFilepath, private readonly L10n $l10n, private readonly ICanCache $cache, private readonly ICanLock $lock, private readonly IManageConfigValues $config, private readonly Arguments $args, private readonly LoggerInterface $logger, private readonly EventDispatcherInterface $eventDispatcher, private readonly AddonHelper $addonHelper, IHandleUserSessions $userSession, RouteCollector $routeCollector = null)
-	{
+	public function __construct(
+		private readonly array $server,
+		private readonly string $baseRoutesFilepath,
+		private readonly L10n $l10n,
+		private readonly ICanCache $cache,
+		private readonly ICanLock $lock,
+		private readonly IManageConfigValues $config,
+		private readonly Arguments $args,
+		private readonly LoggerInterface $logger,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly AddonHelper $addonHelper,
+		IHandleUserSessions $userSession,
+		?RouteCollector $routeCollector = null,
+	) {
 		$this->isLocalUser = !empty($userSession->getLocalUserId());
 
 		$this->routeCollector = $routeCollector ?? new RouteCollector(new Std(), new GroupCountBased());
