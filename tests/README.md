@@ -81,3 +81,24 @@ Failed tests look like this.  Examine the output before this to see which tests 
 FAILURES!
 Tests: 2, Assertions: 2, Failures: 1.
 ```
+
+## File structure
+
+Tests are divided into test suites and supporting files.
+
+### Test Suites
+
+| Name                  | Location             | Description                                                                                                                                                                                                                    |
+|-----------------------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Unit Tests**        | `tests/Unit/`        | Isolated tests of individual classes or methods without external dependencies (no database, filesystem, or network). All collaborators are replaced with test doubles. Fast, numerous, and the foundation of the test pyramid. |
+| **Functional Tests**  | `tests/Functional/`  | Tests of complete business use cases across multiple layers (e.g., HTTP request → Controller → Application → Domain → Response), usually without a real browser or database.                                                   |
+| **Integration Tests** | `tests/Integration/` | Tests of the interaction between multiple components, including real infrastructure (database, filesystem, external libraries). Especially useful for verifying adapters to external systems.                                  |
+
+### Supporting Test Files
+
+| Name         | Location          | Description                                                                                                                                                 | Example Names                                                                                     |
+|--------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **Fixtures** | `tests/Fixtures/` | Static, predefined test data or initial states (database records, files, API payloads) used as a fixed foundation for tests.                                | `config.php`, `seed.sql`, `stripe-webhook.json`, `valid-invoice.pdf`, `github-user-response.json` |
+| **Fakes**    | `tests/Fakes/`    | Fully functional but simplified implementations of real interfaces (e.g., in-memory versions of repositories) with real logic but without infrastructure.   | `InMemoryUserRepository.php`, `InMemoryEventBus.php`, `FakeClock.php`, `FakeMailer.php`           |
+| **Builder**  | `tests/Builders/` | Test Data Builders – create complex, valid domain objects (aggregates, entities, value objects) using a fluent interface with default values.               | `UserBuilder.php`, `OrderBuilder.php`, `AddressBuilder.php`, `InvoiceBuilder.php`                 |
+| **Helper**   | `tests/Helpers/`  | Reusable helper functions, traits, or base classes to reduce boilerplate in tests (e.g., DB setup, authentication simulation).                              | `DatabaseTestTrait.php`, `AuthenticatesUsers.php`, `AssertsJsonSchema.php`, `TestCase.php`        |
