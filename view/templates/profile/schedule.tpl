@@ -32,7 +32,7 @@
 					{{if $row.item['owner-link'] && $row.item['owner-link'] != $row.item['author-link']}}{{$row.via}}<a aria-haspopup="dialog" href="{{$row.item['owner-link']}}" target="redir" title="{{$row.item['owner-name']}}" class="userinfo click-card wall-item-name-link"><span class="wall-item-name sparkle">{{$row.item['owner-name']}}</span></a>{{/if}}
 				</span>
 				<div class="wall-postinfo">
-					<span class="wall-item-ago" style="margin-left:0;"> 
+					<span class="wall-item-ago" style="margin-left:0;">
 						<span class="icon icon-time"></span><time class="dt-scheduled" datetime="">{{$scheduled_at}} <span class="datetime">{{$row.scheduled_at}}</span></time>
 					</span>
 					{{** lockview() function will not work because post gets ID after going live **}}
@@ -71,7 +71,7 @@
 									<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 									<button type="submit" name="delete" value="{{$row.id}}" title="{{$delete}}" class="icon-trash icon-large" style="float:right;border:none;background:transparent;"></button>
 								</form>
-							</span>						
+							</span>
 						</div>
 					</div>
 				</div>
