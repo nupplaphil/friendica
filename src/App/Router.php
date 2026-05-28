@@ -60,9 +60,6 @@ class Router
 		self::OPTIONS,
 	];
 
-	/** @var RouteCollector */
-	protected $routeCollector;
-
 	/**
 	 * @var array Module parameters
 	 */
@@ -98,11 +95,9 @@ class Router
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly AddonHelper $addonHelper,
 		IHandleUserSessions $userSession,
-		?RouteCollector $routeCollector = null,
+		protected ?RouteCollector $routeCollector = new RouteCollector(new Std(), new GroupCountBased()),
 	) {
 		$this->isLocalUser = !empty($userSession->getLocalUserId());
-
-		$this->routeCollector = $routeCollector ?? new RouteCollector(new Std(), new GroupCountBased());
 
 		if ($this->baseRoutesFilepath && !file_exists($this->baseRoutesFilepath)) {
 			throw new HTTPException\InternalServerErrorException('Routes file path does\'n exist.');

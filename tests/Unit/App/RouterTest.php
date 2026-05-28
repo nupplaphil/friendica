@@ -42,7 +42,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		self::assertInstanceOf(Router::class, $router);
@@ -67,7 +67,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		self::assertInstanceOf(Router::class, $router);
@@ -95,7 +95,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 	}
 
@@ -118,7 +118,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$routeCollector = $router->getRouteCollector();
@@ -146,7 +146,7 @@ class RouterTest extends TestCase
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
-			$providedCollector
+			$providedCollector,
 		);
 
 		self::assertSame($providedCollector, $router->getRouteCollector());
@@ -172,7 +172,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$parameters = $router->getParameters();
@@ -202,7 +202,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$routes = [
@@ -234,7 +234,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$result = $router->loadRoutes([]);
@@ -262,7 +262,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$routes = [
@@ -296,7 +296,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$routes = [
@@ -328,7 +328,7 @@ class RouterTest extends TestCase
 			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
-			$userSession
+			$userSession,
 		);
 
 		$routes = [
