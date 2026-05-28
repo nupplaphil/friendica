@@ -32,7 +32,7 @@ class ModeTest extends TestCase
 
 	public function testMethodsReturnCorrectValuesAfterDetermineWithoutConfigFile()
 	{
-		$root = vfsStream::setup(__FUNCTION__.'_friendica', 0777, []);
+		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, []);
 
 		$mode = (new Mode())->determine(
 			$root->url(),
@@ -51,7 +51,7 @@ class ModeTest extends TestCase
 
 	public function testMethodsReturnCorrectValuesAfterDetermineWithoutDatabaseConnection()
 	{
-		$root = vfsStream::setup(__FUNCTION__.'_friendica', 0777, ['config' => [
+		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
 		]]);
 
@@ -68,7 +68,7 @@ class ModeTest extends TestCase
 
 	public function testMethodsReturnCorrectValuesWithMaintenanceMode()
 	{
-		$root = vfsStream::setup(__FUNCTION__.'_friendica', 0777, ['config' => [
+		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
 		]]);
 
@@ -91,7 +91,7 @@ class ModeTest extends TestCase
 
 	public function testMethodsReturnCorrectValuesWithNormalMode()
 	{
-		$root = vfsStream::setup(__FUNCTION__.'_friendica', 0777, ['config' => [
+		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
 		]]);
 
@@ -177,7 +177,7 @@ class ModeTest extends TestCase
 			'HTTP_X_REQUESTED_WITH' => 'xmlhttprequest',
 		];
 
-		$args = self::createStub(Arguments::class);
+		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createStub(MobileDetect::class);
 
 		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
@@ -193,7 +193,7 @@ class ModeTest extends TestCase
 		// header for ajax call is missing
 		$server = [];
 
-		$args = self::createStub(Arguments::class);
+		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createStub(MobileDetect::class);
 
 		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
@@ -206,7 +206,7 @@ class ModeTest extends TestCase
 	 */
 	public function testIsMobileAndIsTabletReturnsTrue()
 	{
-		$args = self::createStub(Arguments::class);
+		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createMock(MobileDetect::class);
 		$mobileDetect->expects(self::once())->method('isMobile')->willReturn(true);
 		$mobileDetect->expects(self::once())->method('isTablet')->willReturn(true);
@@ -223,7 +223,7 @@ class ModeTest extends TestCase
 	 */
 	public function testIsMobileAndIsTabletReturnsFalse()
 	{
-		$args = self::createStub(Arguments::class);
+		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createMock(MobileDetect::class);
 		$mobileDetect->expects(self::once())->method('isMobile')->willReturn(false);
 		$mobileDetect->expects(self::once())->method('isTablet')->willReturn(false);

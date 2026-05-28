@@ -35,9 +35,8 @@ class BaseURLTest extends TestCase
 	public function testDetermineWithConfigReturnsCorrectUrl(string $url, string $expect)
 	{
 		$config = self::createStub(IManageConfigValues::class);
-		$config->method('get')->willReturnCallback(function(string $category, string $key, mixed $default) use($url): mixed {
-			if ($category === 'system' && $key === 'url')
-			{
+		$config->method('get')->willReturnCallback(function (string $category, string $key, mixed $default) use ($url): mixed {
+			if ($category === 'system' && $key === 'url') {
 				return $url;
 			}
 
@@ -141,7 +140,7 @@ class BaseURLTest extends TestCase
 	#[BackupGlobals(true)]
 	public function testDetermineWithGlobalsReturnsCorrectUrl()
 	{
-		$_SERVER['HTTP_HOST'] = 'localhost';
+		$_SERVER['HTTP_HOST']   = 'localhost';
 		$_SERVER['SERVER_PORT'] = 80;
 
 		$baseUrl = new BaseURL(
@@ -183,9 +182,8 @@ class BaseURLTest extends TestCase
 	public function testRemove(string $url, string $origUrl, string $expect)
 	{
 		$config = self::createStub(IManageConfigValues::class);
-		$config->method('get')->willReturnCallback(function(string $category, string $key, mixed $default) use($url): mixed {
-			if ($category === 'system' && $key === 'url')
-			{
+		$config->method('get')->willReturnCallback(function (string $category, string $key, mixed $default) use ($url): mixed {
+			if ($category === 'system' && $key === 'url') {
 				return $url;
 			}
 

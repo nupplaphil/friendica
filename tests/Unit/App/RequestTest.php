@@ -5,13 +5,13 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\App;
+namespace Friendica\Test\Unit\App;
 
 use Friendica\App\Request;
 use Friendica\Core\Config\Capability\IManageConfigValues;
-use Friendica\Test\MockedTestCase;
+use PHPUnit\Framework\TestCase;
 
-class RequestTest extends MockedTestCase
+class RequestTest extends TestCase
 {
 	public static function dataServerArray(): array
 	{
@@ -102,12 +102,14 @@ class RequestTest extends MockedTestCase
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataServerArray')]
 	public function testRemoteAddress(array $server, array $config, string $assertion)
 	{
-		$configClass = \Mockery::mock(IManageConfigValues::class);
-		$configClass->shouldReceive('get')->with('proxy', 'trusted_proxies', '')->andReturn($config['trusted_proxies']);
-		$configClass->shouldReceive('get')->with('proxy', 'forwarded_for_headers', Request::DEFAULT_FORWARD_FOR_HEADER)->andReturn($config['forwarded_for_headers']);
+		$configClass = self::createMock(IManageConfigValues::class);
+		$configClass->expects(self::atLeast(1))->method('get')->willReturnMap([
+			['proxy', 'trusted_proxies', '', $config['trusted_proxies']],
+			['proxy', 'forwarded_for_headers', Request::DEFAULT_FORWARD_FOR_HEADER, $config['forwarded_for_headers']],
+		]);
 
 		$request = new Request($configClass, $server);
 
-		self::assertEquals($assertion, $request->getRemoteAddress());
+		self::assertSame($assertion, $request->getRemoteAddress());
 	}
 }
