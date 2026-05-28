@@ -33,7 +33,7 @@
 					</h4>
 					<div class="additional-info text-muted">
 						<div class="wall-item-ago" style="margin-left:0;">
-							<small> 
+							<small>
 							<span class="ri ri-time-line"></span><time class="dt-scheduled" datetime="">{{$scheduled_at}} <span class="datetime">{{$row.scheduled_at}}</span></time>
 						{{** lockview() function will not work because post gets ID after going live **}}
 						{{if $row.item.private}}
@@ -84,7 +84,7 @@
 									<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 									<button type="submit" name="delete" value="{{$row.id}}" title="{{$delete}}" class="btn-link navicon ri ri-delete-bin-line" style="float:right;border:none!important;background:transparent!important;box-shadow:none;"></button>
 								</form>
-							</span>						
+							</span>
 						</div>
 					</div>
 		</div>
@@ -98,7 +98,7 @@
 		var target = $this.attr('data-aside');
 		var $canvas = $(target);
 		// only toggle aside if in mobile UI
-		if ( $(window).width() < 990){ 
+		if ( $(window).width() < 990){
 			var data = $canvas.data('bs.offcanvas');
 			var option = data ? 'close' : $this.data();
 			e.stopPropagation();
@@ -111,7 +111,7 @@
 	}
 	// build sidebar table of contents of scheduled posts
 	var posts = document.querySelectorAll('.tread-wrapper');
-	var toc_html  = '<div class="widget"><h3>{{$title}}</h3><ul role="menu">';
+	var toc_html  = '<div class="widget"><h3><i class="ri ri-time-line"></i> {{$title}}</h3><ul role="menu">';
 	for (var p=0; p < posts.length; p++){
 		toc_html += '<li class="menuitem"><a href="{{$baseurl}}/profile/{{$nickname}}/schedule#'+posts[p].id+'" onclick="closeAside(event,this);" data-close="offcanvas" data-aside="aside">'+posts[p].querySelector('.datetime').innerText+'</a></li>';
 	}

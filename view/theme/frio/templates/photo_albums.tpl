@@ -6,7 +6,10 @@
   *}}
 <nav id="sidebar-photos-albums" class="widget">
 	<div class="pull-left">
-		<h3>{{$title}}</h3>
+		<h3>
+			<i class="ri ri-image-line"></i>
+			{{$title}}
+		</h3>
 	</div>
 
 	<div class="pull-right">

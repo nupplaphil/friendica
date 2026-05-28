@@ -640,6 +640,10 @@ nav.navbar {
 	z-index: 1030;
 }
 
+	#topbar-first .topbar-nav i {
+		font-size: 24px;
+	}
+
 button#main-menu {
 	align-items: center;
 	display: flex;
@@ -2582,6 +2586,13 @@ input[type="range"].form-control {
 /* Search form */
 #search-box {
 	padding-right: 0;
+
+	@media(width < 792px) {
+		& #nav-search-input-field {
+			width: 288px!important;
+		}
+		padding-left: 7px;
+	}
 }
 
 .form-control.form-search {
@@ -4390,10 +4401,10 @@ div.login-form, .login-content-wrapper,
 }
 
 	/* Even smaller mobile displays */
-@media (width < 392px) {
+@media (width < 382px) {
 	.topbar-nav .nav-segment a.nav-menu, .topbar-actions .nav-segment a.nav-menu, .topbar-actions .nav-segment button, .topbar-actions .navbar-toggle {
-		padding-left: 0!important;
-		padding-right: 10px!important;
+		padding-left: 5px!important;
+		padding-right: 5px!important;
 	}
 	#topbar-first .offcanvas-right-toggle,
 	#topbar-first #mobile-left-menu {

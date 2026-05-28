@@ -8,7 +8,7 @@
 	{{if $type == "channel"}}
 		{{assign var="icon" value="ri-broadcast-line"}}
 	{{else if $type == "accounttype"}}
-		{{assign var="icon" value="ri-account-box-line"}}
+		{{assign var="icon" value="ri-shapes-line"}}
 	{{else if $type == "rel"}}
 		{{assign var="icon" value="ri-arrow-left-right-line"}}
 	{{else if $type == "circle"}}
