@@ -12,7 +12,7 @@
 	{{else if $type == "rel"}}
 		{{assign var="icon" value="ri-arrow-left-right-line"}}
 	{{else if $type == "circle"}}
-		{{assign var="icon" value="ri-user-community-line"}}
+		{{assign var="icon" value="ri-bubble-chart-line"}}
 	{{else if $type == "nets"}}
 		{{assign var="icon" value="ri-message-2-line"}}
 	{{else}} {{* fallback to type="file" *}}

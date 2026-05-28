@@ -92,7 +92,7 @@
 				{{if $network_label}}
 					<div id="showgroup-button">
 						<a id="showgroup" class="btn btn-labeled btn-primary" href="{{$network_url}}">
-							<span><i class="ri ri-group-line"></i></span>
+							<span><i class="ri ri-discuss-line"></i></span>
 							<span>{{$network_label}}</span>
 						</a>
 					</div>

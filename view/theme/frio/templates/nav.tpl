@@ -6,39 +6,48 @@
   *}}
 {{* we have modified the navmenu (look at function frio_remote_nav() ) to have remote links. *}}
 {{if $userinfo}}
-	<header>
-		<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
-		<div id="banner" class="hidden-sm hidden-xs">
-			<a href="{{$baseurl}}" aria-hidden="true">
-				<div id="logo-img" aria-label="{{$home}}"></div>
-			</a>
-		</div>
-	</header>
 	<nav id="topbar-first" class="topbar" role="menubar">
-		<div class="container">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
-				<!-- div for navbar width-->
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="topbar-nav">
+		<div class="container-fluid">
+			<div id="topbar-first-nav-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+				<header style="display: flex;">
 
 					{{* Buttons for the mobile view *}}
-					{{* Mobile user menu dropdown button *}}
-					<button type="button" class="navbar-toggle offcanvas-right-toggle pull-right"
-						aria-controls="offcanvasUsermenu" aria-haspopup="true">
-						<span class="sr-only">Toggle navigation</span>
-						<i class="ri ri-more-2-line ri-fw ri-lg" aria-hidden="true"></i>
-					</button>
-					<button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse"
-						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
-						<span class="sr-only">Toggle Search</span>
-						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>
-					</button>
 					{{* Mobile left menu dropdown button *}}
-					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed pull-left visible-sm visible-xs"
+					<button type="button" id="mobile-left-menu" class="navbar-toggle collapsed visible-sm visible-xs"
 						data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="ri ri-arrow-right-double-line ri-fw ri-lg" aria-hidden="true"></i>
 					</button>
+
+					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
+					<div id="banner" class="hidden-sm hidden-xs">
+						<a href="{{$baseurl}}" aria-hidden="true">
+							<div id="logo-img" aria-label="{{$home}}"></div>
+						</a>
+					</div>
+					{{* The search box *}}
+					{{if $nav.search}}
+						<form id="search-box" class="navbar-form hidden-xs form-group form-group-search" role="search" method="get" action="{{$nav.search.0}}">
+							<div class="form-group form-group-search">
+								<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
+									type="search" name="q" placeholder="{{$search_placeholder}}">
+								<button class="btn btn-primary btn-md form-button-search" type="submit">
+									<i class="ri ri-search-line" aria-hidden="true"></i>
+									<span class="sr-only">{{$nav.search.1}}</span>
+								</button>
+							</div>
+						</form>
+					{{/if}}
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
+						<span class="sr-only">Toggle Search</span>
+						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>
+					</button>
+				</header>
+				<!-- div for navbar width-->
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="topbar-nav">
 
 					{{* Left section of the NavBar with navigation shortcuts/icons *}}
 					<ul class="nav navbar-left">
@@ -52,25 +61,8 @@
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-										class="ri ri-lg ri-message-line ri-fw" aria-hidden="true"></i><span id="net-update"
+									 class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.network.1}}</span><span id="net-update"
 										class="nav-network-badge badge nav-notification"></span></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.channel}}
-							<li class="nav-segment">
-								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
-									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
-										class="ri ri-lg ri-newspaper-line ri-fw" aria-hidden="true"></i></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.home}}
-							<li class="nav-segment">
-								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-lg ri-user-line ri-fw"
-										aria-hidden="true"></i><span id="home-update"
-										class="nav-home-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
 
@@ -78,7 +70,48 @@
 							<li class="nav-segment">
 								<a accesskey="c" class="nav-menu {{$sel.community}}" href="{{$nav.community.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.community.3}}" title="{{$nav.community.3}}"><i
-										class="ri ri-lg ri-user-community-line ri-fw" aria-hidden="true"></i></a>
+									  class="ri ri-xl ri-earth-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.community.1}}</span></a>
+							</li>
+						{{/if}}
+
+						{{if $nav.calendar}}
+							<li class="nav-segment">
+								<a accesskey="e" id="nav-calendar-link" href="{{$nav.calendar.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
+									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.3}}" class="nav-menu {{$sel.calendar}}"><i
+									class="ri ri-xl ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="d-none">{{$nav.calendar.1}}</span></a>
+							</li>
+						{{/if}}
+
+						{{if $nav.channel}}
+							<li class="nav-segment">
+								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
+									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
+										class="ri ri-xl ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
+							</li>
+						{{/if}}
+
+						{{if $nav.home}}
+							<li class="nav-segment hidden-xs">
+								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
+										aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-xl ri-user-{{if $sel.home}}fill{{else}}line{{/if}} ri-fw"
+										aria-hidden="true"></i> <span class="d-none">{{$nav.home.1}}</span><span id="home-update"
+										class="nav-home-badge badge nav-notification"></span></a>
+							</li>
+						{{/if}}
+
+					</ul>
+				</div>
+
+				{{* This is the right part of the NavBar. It includes the search and the user menu *}}
+				<div class="topbar-actions">
+					<ul class="nav">
+
+						{{if $nav.contacts}}
+							<li class="nav-segment hidden-xs">
+								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
+									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
+									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
+										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i></a>
 							</li>
 						{{/if}}
 
@@ -86,26 +119,9 @@
 							<li class="nav-segment">
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
-									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-line ri-lg ri-fw"
+									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw"
 										aria-hidden="true"></i><span id="mail-update"
 										class="nav-mail-badge badge nav-notification"></span></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.calendar}}
-							<li class="nav-segment hidden-xs">
-								<a accesskey="e" id="nav-calendar-link" href="{{$nav.calendar.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.1}}" class="nav-menu {{$sel.calendar}}"><i
-										class="ri ri-lg ri-calendar-line ri-fw"></i></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.contacts}}
-							<li class="nav-segment hidden-xs">
-								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
-									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
-										class="ri ri-contacts-line ri-lg ri-fw"></i></a>
 							</li>
 						{{/if}}
 
@@ -133,7 +149,6 @@
 												</button>
 											</header>
 										</header>
-
 									</li>
 
 							<li id="nav-notifications-loading" class="loading" style="font-weight: bold; color: #555; padding-left: 10px;">
@@ -146,28 +161,12 @@
 							</li>
 						{{/if}}
 
-					</ul>
-				</div>
-
-				{{* This is the right part of the NavBar. It includes the search and the user menu *}}
-				<div class="topbar-actions pull-right">
-					<ul class="nav">
-
-						{{* The search box *}}
-						{{if $nav.search}}
-							<li id="search-box" class="hidden-xs">
-								<form class="navbar-form" role="search" method="get" action="{{$nav.search.0}}">
-									<div class="form-group form-group-search">
-										<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
-											type="search" name="q" placeholder="{{$search_placeholder}}">
-										<button class="btn btn-primary btn-md form-button-search" type="submit">
-											<i class="ri ri-search-line" aria-hidden="true"></i>
-											<span class="sr-only">{{$nav.search.1}}</span>
-										</button>
-									</div>
-								</form>
-							</li>
-						{{/if}}
+					{{* Mobile user menu dropdown button *}}
+					<button type="button" class="navbar-toggle offcanvas-right-toggle"
+						aria-controls="offcanvasUsermenu" aria-haspopup="true">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="ri ri-more-2-line ri-fw ri-lg" aria-hidden="true"></i>
+					</button>
 
 						{{* The user dropdown menu *}}
 						{{if $userinfo}}
@@ -195,7 +194,7 @@
 									{{/if}}
 									{{foreach $nav.usermenu as $usermenu}}
 										<li>
-											<a role="menuitem" class="{{$usermenu.2}}{{if $usermenu.0|str_ends_with:"calendar/"}}visible-xs{{/if}}" href="{{$usermenu.0}}"
+											<a role="menuitem" class="{{$usermenu.2}}" href="{{$usermenu.0}}"
 												title="{{$usermenu.3}}">
 												<i class="ri {{$usermenu.4}}"></i>
 												{{$usermenu.1}}
@@ -442,7 +441,7 @@
 {{else}}
 	{{* The navbar for users which are not logged in *}}
 	<nav class="navbar navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 		<div class="navbar-header pull-left">
 			<button type="button" class="navbar-toggle collapsed pull-left visible-sm visible-xs"
 					data-toggle="offcanvas" data-target="aside" aria-haspopup="true">
@@ -494,9 +493,9 @@
 
 {{* The second navbar which contains nav points of the actual page - (nav points are actual handled by this theme through js *}}
 <div id="topbar-second" class="topbar">
-	<div class="container">
-		<div class="col-lg-3 col-md-3 hidden-sm hidden-xs" id="nav-short-info"></div>
-		<div class="col-lg-7 col-md-7 col-sm-11 col-xs-10" id="tabmenu"></div>
-		<div class="col-lg-2 col-md-2 col-sm-1 col-xs-2" id="navbar-button"></div>
+	<div class="container-fluid">
+		<div class="col-lg-2 col-md-2 hidden-sm hidden-xs" id="nav-short-info"></div>
+		<div class="col-lg-9 col-md-9 col-sm-11 col-xs-7" id="tabmenu"></div>
+		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-5" id="navbar-button"></div>
 	</div>
 </div>

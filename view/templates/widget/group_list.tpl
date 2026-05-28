@@ -21,7 +21,7 @@
 		<button class="fakelink" onclick="openCloseWidget('group-list-sidebar', 'group-list-sidebar-inflated');"
 			aria-expanded="false">
 			<h3>
-				<i class="ri ri-chat-thread-line" aria-hidden="true"></i>
+				<i class="ri ri-discuss-line" aria-hidden="true"></i>
 				{{$title}}
 			</h3>
 		</button>
@@ -30,7 +30,7 @@
 		<div id="sidebar-group-header" class="sidebar-widget-header">
 			<button class="fakelink" onclick="openCloseWidget('group-list-sidebar', 'group-list-sidebar-inflated');" aria-expanded="true">
 				<h3>
-					<i class="ri ri-chat-thread-line" aria-hidden="true"></i>
+					<i class="ri ri-discuss-line" aria-hidden="true"></i>
 					{{$title}}
 				</h3>
 			</button>

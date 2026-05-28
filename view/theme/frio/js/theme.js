@@ -61,7 +61,7 @@ $(document).ready(function () {
 	$(".field.select > select, .field.custom > select").addClass("form-control");
 
 	// move the tabbar to the second nav bar
-	$("section .tabbar-wrapper").first().appendTo("#topbar-second > .container > #tabmenu");
+	$("section .tabbar-wrapper").first().appendTo("#topbar-second > .container-fluid > #tabmenu");
 
 	// make responsive tabmenu with flexmenu.js
 	// the menupoints which doesn't fit in the second nav bar will moved to a
@@ -76,7 +76,7 @@ $(document).ready(function () {
 	// add Jot button to the second navbar
 	let $jotButton = $("#jotOpen");
 	if ($jotButton.length) {
-		$jotButton.appendTo("#topbar-second > .container > #navbar-button");
+		$jotButton.appendTo("#topbar-second > .container-fluid > #navbar-button");
 		if ($("#jot-popup").is(":hidden")) {
 			$jotButton.hide();
 		}
@@ -136,7 +136,7 @@ $(document).ready(function () {
 
 	// add search-heading to the second navbar
 	if ($(".search-heading").length) {
-		$(".search-heading").appendTo("#topbar-second > .container > #tabmenu");
+		$(".search-heading").appendTo("#topbar-second > .container-fluid > #tabmenu");
 	}
 
 	// add search results heading to the second navbar
@@ -154,7 +154,7 @@ $(document).ready(function () {
 		// insert the plain text in a <h4> heading and give it a class
 		var newText = '<h4 class="search-heading">' + searchText + "</h4>";
 		// append the new heading to the navbar
-		$("#topbar-second > .container > #tabmenu").append(newText);
+		$("#topbar-second > .container-fluid > #tabmenu").append(newText);
 
 		// try to get the value of the original search input to insert it
 		// as value in the nav-search-input
@@ -179,7 +179,7 @@ $(document).ready(function () {
 	}
 
 	// move the "Save the search" button to the second navbar
-	$(".search-content-wrapper #search-save").appendTo("#topbar-second > .container > #navbar-button");
+	$(".search-content-wrapper #search-save").appendTo("#topbar-second > .container-fluid > #navbar-button");
 
 	// append the vcard-short-info to the second nav after passing the element
 	// with .fn (vcard username). Use scrollspy to get the scroll position.
@@ -234,7 +234,7 @@ $(document).ready(function () {
 		// remove the old heading element
 		heading.remove(),
 			// put the new element to the second nav bar
-			$("#topbar-second > .container > #tabmenu").append(newText);
+			$("#topbar-second > .container-fluid > #tabmenu").append(newText);
 	}
 
 	// Dropdown menus with the class "dropdown-head" will display the active tab
