@@ -706,11 +706,14 @@ nav.navbar .nav > li > button:focus {
 	text-decoration: none;
 	text-align: left;
 }
-#topbar-first .topbar-nav .nav-segment .nav-notification {
+#topbar-first .nav-segment .nav-notification {
 	position: absolute;
-	top: 4px;
-	right: -2px;
+	top: 2px;
+	right: -6px;
 	background-color: #ff3535;
+}
+#topbar-first .topbar-nav .nav-segment .nav-notification {
+		right: 8px;
 }
 #topbar-first #intro-update {
 	cursor: pointer;
