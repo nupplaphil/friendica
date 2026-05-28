@@ -47,7 +47,7 @@ class ImagesTest extends MockedTestCase
 					'Date'                          => 'Mon,23Aug202112:39:00GMT',
 					'Connection'                    => 'keep-alive',
 				],
-				'data'      => file_get_contents(__DIR__ . '/../../datasets/curl/image.content'),
+				'data'      => file_get_contents(__DIR__ . '/../../Fixtures/curl/image.content'),
 				'assertion' => [
 					'0'    => '400',
 					'1'    => '400',

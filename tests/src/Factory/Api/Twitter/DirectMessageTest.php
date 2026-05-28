@@ -21,7 +21,7 @@ class DirectMessageTest extends FixtureTestCase
 	 */
 	public function testApiFormatMessages()
 	{
-		$this->loadFixture(__DIR__ . '/../../../../datasets/mail/mail.fixture.php', DI::dba());
+		$this->loadFixture(__DIR__ . '/../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DI::dba()->selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 
@@ -44,7 +44,7 @@ class DirectMessageTest extends FixtureTestCase
 	 */
 	public function testApiFormatMessagesWithHtmlText()
 	{
-		$this->loadFixture(__DIR__ . '/../../../../datasets/mail/mail.fixture.php', DI::dba());
+		$this->loadFixture(__DIR__ . '/../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DI::dba()->selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 
@@ -63,7 +63,7 @@ class DirectMessageTest extends FixtureTestCase
 	 */
 	public function testApiFormatMessagesWithPlainText()
 	{
-		$this->loadFixture(__DIR__ . '/../../../../datasets/mail/mail.fixture.php', DI::dba());
+		$this->loadFixture(__DIR__ . '/../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DI::dba()->selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 
@@ -85,7 +85,7 @@ class DirectMessageTest extends FixtureTestCase
 		self::markTestIncomplete('Needs processing of "getUserObjects" first');
 
 		/*
-		 $this->loadFixture(__DIR__ . '/../../../../datasets/mail/mail.fixture.php', DI::dba());
+		 $this->loadFixture(__DIR__ . '/../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DI::dba()->selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 

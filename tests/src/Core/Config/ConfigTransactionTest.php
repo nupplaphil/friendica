@@ -37,7 +37,7 @@ class ConfigTransactionTest extends FixtureTestCase
 	{
 		return [
 			'default' => [
-				'data' => include dirname(__FILE__, 4) . '/datasets/B.node.config.php',
+				'data' => include dirname(__FILE__, 4) . '/Fixtures/B.node.config.php',
 			]
 		];
 	}

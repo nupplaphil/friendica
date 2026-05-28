@@ -28,7 +28,7 @@ class ParsedLogIteratorTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$logfile = dirname(__DIR__) . '/../../datasets/log/friendica.log.txt';
+		$logfile = dirname(__DIR__) . '/../../Fixtures/log/friendica.log.txt';
 
 		$reader    = new ReversedFileReader();
 		$this->pli = new ParsedLogIterator($reader);
@@ -134,7 +134,7 @@ class ParsedLogIteratorTest extends TestCase
 
 	public function testEmptyLogFile()
 	{
-		$logfile = dirname(__DIR__) . '/../../datasets/log/empty.friendica.log.txt';
+		$logfile = dirname(__DIR__) . '/../../Fixtures/log/empty.friendica.log.txt';
 
 		$reader = new ReversedFileReader();
 		$pli    = new ParsedLogIterator($reader);

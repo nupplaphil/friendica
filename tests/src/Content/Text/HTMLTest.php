@@ -18,7 +18,7 @@ class HTMLTest extends FixtureTestCase
 {
 	public static function dataHTML()
 	{
-		$inputFiles = glob(__DIR__ . '/../../../datasets/content/text/html/*.html');
+		$inputFiles = glob(__DIR__ . '/../../../Fixtures/content/text/html/*.html');
 
 		$data = [];
 
@@ -172,19 +172,19 @@ its surprisingly good",
 	public static function dataCheckRelMeLink(): array
 	{
 		$aSingleRelValue = new \DOMDocument();
-		$aSingleRelValue->load(__DIR__ . '/../../../datasets/dom/relme/a-single-rel-value.html');
+		$aSingleRelValue->load(__DIR__ . '/../../../Fixtures/dom/relme/a-single-rel-value.html');
 
 		$aMultipleRelValueStart = new \DOMDocument();
-		$aMultipleRelValueStart->load(__DIR__ . '/../../../datasets/dom/relme/a-multiple-rel-value-start.html');
+		$aMultipleRelValueStart->load(__DIR__ . '/../../../Fixtures/dom/relme/a-multiple-rel-value-start.html');
 
 		$aMultipleRelValueMiddle = new \DOMDocument();
-		$aMultipleRelValueMiddle->load(__DIR__ . '/../../../datasets/dom/relme/a-multiple-rel-value-middle.html');
+		$aMultipleRelValueMiddle->load(__DIR__ . '/../../../Fixtures/dom/relme/a-multiple-rel-value-middle.html');
 
 		$aMultipleRelValueEnd = new \DOMDocument();
-		$aMultipleRelValueEnd->load(__DIR__ . '/../../../datasets/dom/relme/a-multiple-rel-value-end.html');
+		$aMultipleRelValueEnd->load(__DIR__ . '/../../../Fixtures/dom/relme/a-multiple-rel-value-end.html');
 
 		$linkSingleRelValue = new \DOMDocument();
-		$linkSingleRelValue->load(__DIR__ . '/../../../datasets/dom/relme/link-single-rel-value.html');
+		$linkSingleRelValue->load(__DIR__ . '/../../../Fixtures/dom/relme/link-single-rel-value.html');
 
 		$meUrl = new Uri('https://example.com/profile/me');
 
@@ -227,10 +227,10 @@ its surprisingly good",
 	public static function dataCheckRelMeLinkFail(): array
 	{
 		$aSingleRelValueFail = new \DOMDocument();
-		$aSingleRelValueFail->load(__DIR__ . '/../../../datasets/dom/relme/a-single-rel-value-fail.html');
+		$aSingleRelValueFail->load(__DIR__ . '/../../../Fixtures/dom/relme/a-single-rel-value-fail.html');
 
 		$linkSingleRelValueFail = new \DOMDocument();
-		$linkSingleRelValueFail->load(__DIR__ . '/../../../datasets/dom/relme/link-single-rel-value-fail.html');
+		$linkSingleRelValueFail->load(__DIR__ . '/../../../Fixtures/dom/relme/link-single-rel-value-fail.html');
 
 		$meUrl = new Uri('https://example.com/profile/me');
 
