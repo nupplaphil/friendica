@@ -39,8 +39,22 @@ class Create extends BaseModule
 	/** @var ReportUtil */
 	protected $reportUtil;
 
-	public function __construct(private readonly \Friendica\Moderation\Repository\Report $repository, ReportUtil $reportUtil, private readonly \Friendica\Moderation\Factory\Report $factory, private readonly UserSession $session, private App\Page $page, private readonly SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly \Friendica\Moderation\Repository\Report $repository,
+		ReportUtil $reportUtil,
+		private readonly \Friendica\Moderation\Factory\Report $factory,
+		private readonly UserSession $session,
+		private App\Page $page,
+		private readonly SystemMessages $systemMessages,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->reportUtil = $reportUtil;
 	}

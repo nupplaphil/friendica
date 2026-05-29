@@ -27,7 +27,6 @@ class Login extends BaseModule
 {
 	public function __construct(
 		private readonly Authentication $auth,
-		private readonly IManageConfigValues $config,
 		private readonly IHandleUserSessions $session,
 		L10n $l10n,
 		App\BaseURL $baseUrl,

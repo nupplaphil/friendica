@@ -60,7 +60,7 @@ class Profile extends BaseModule
 				AND `visible` AND (NOT `deleted` OR `gravity` = ?)
 				AND `wall` " . $sql_extra, $appHelper->getProfileOwner(), Item::GRAVITY_ACTIVITY];
 
-		if ($request['force'] && !empty($request['item'])) {
+		if (!empty($request['item'])) {
 			// When the parent is provided, we only fetch this
 			$condition = DBA::mergeConditions($condition, ['parent' => $request['item']]);
 		} elseif ($is_owner || !$last_updated) {

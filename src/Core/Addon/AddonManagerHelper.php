@@ -28,7 +28,14 @@ final class AddonManagerHelper implements AddonHelper
 	/** @var string[] */
 	private array $addons = [];
 
-	public function __construct(private readonly string $addonPath, private readonly Database $database, private readonly IManageConfigValues $config, private readonly ICanCache $cache, private readonly LoggerInterface $logger, private readonly Profiler $profiler) {}
+	public function __construct(
+		private readonly string $addonPath,
+		private readonly Database $database,
+		private readonly IManageConfigValues $config,
+		private readonly ICanCache $cache,
+		private readonly LoggerInterface $logger,
+		private readonly Profiler $profiler,
+	) {}
 	/**
 	 * Returns the absolute path to the addon folder
 	 *
@@ -241,7 +248,7 @@ final class AddonManagerHelper implements AddonHelper
 
 		$result = preg_match("|/\*.*\*/|msU", $raw, $matches);
 
-		if ($result === false || $result === 0 || !is_array($matches) || count($matches) < 1) {
+		if ($result === false || $result === 0 || count($matches) < 1) {
 			throw new InvalidAddonException('Could not find valid comment block in addon file: ' . $addonFile);
 		}
 

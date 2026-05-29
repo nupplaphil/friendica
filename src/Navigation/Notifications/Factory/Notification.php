@@ -27,7 +27,6 @@ class Notification extends BaseFactory implements ICanCreateFromTableRow
 	public function __construct(
 		private readonly \Friendica\App\BaseURL $baseUrl,
 		private readonly \Friendica\Core\L10n $l10n,
-		private readonly \Friendica\Contact\LocalRelationship\Repository\LocalRelationship $localRelationshipRepo,
 		LoggerInterface $logger,
 		private readonly ICanCache $cache,
 	) {

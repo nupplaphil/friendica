@@ -173,12 +173,6 @@ parameters:
 			path: src/Content/Conversation.php
 
 		-
-			message: '#^Offset ''title'' on array\{emoji\: mixed, verb\: string, total\: mixed, count\: int\<0, max\>, title\: array\<int\<0, max\>, string\>\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Content/Conversation.php
-
-		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 1
@@ -249,12 +243,6 @@ parameters:
 			identifier: equal.alwaysFalse
 			count: 1
 			path: src/Content/Text/Markdown.php
-
-		-
-			message: '#^Call to function is_array\(\) with array\{\}\|array\{non\-falsy\-string\} will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Core/Addon/AddonManagerHelper.php
 
 		-
 			message: '#^Offset 1 on array\{non\-falsy\-string, numeric\-string, numeric\-string\} in isset\(\) always exists and is not nullable\.$#'
@@ -599,6 +587,12 @@ parameters:
 			path: src/Module/Contact.php
 
 		-
+			message: '#^Property Friendica\\Module\\Contact\\Unfollow\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Contact/Unfollow.php
+
+		-
 			message: '#^Property Friendica\\Module\\Conversation\\Timeline\:\:\$selectedTab \(string\) on left side of \?\?\= is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -639,6 +633,12 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/Module/Media/Photo/Upload.php
+
+		-
+			message: '#^Property Friendica\\Module\\Moderation\\Report\\Create\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
 
 		-
 			message: '#^Empty array passed to foreach\.$#'

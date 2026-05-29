@@ -122,7 +122,7 @@ class Emailer
 		// @see https://github.com/friendica/friendica/issues/9142
 		$countMessageId = 0;
 		foreach ($email->getAdditionalMailHeader() as $name => $value) {
-			if (strtolower($name) == 'message-id') {
+			if (strtolower((string) $name) == 'message-id') {
 				$countMessageId += count($value);
 			}
 		}

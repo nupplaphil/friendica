@@ -36,6 +36,8 @@ class Import extends \Friendica\BaseModule
 {
 	public const MEMORY_LIMIT = 67108864;
 
+	private bool $dryRun = false;
+
 	public function __construct(
 		private readonly UserSession $session,
 		private readonly PermissionSet $permissionSet,

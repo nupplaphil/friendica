@@ -34,7 +34,6 @@ class Delegation extends BaseModule
 {
 	public function __construct(
 		private readonly EventDispatcherInterface $eventDispatcher,
-		private readonly AppHelper $appHelper,
 		private readonly Introduction $intro,
 		private readonly Notify $notify,
 		private readonly SystemMessages $systemMessages,

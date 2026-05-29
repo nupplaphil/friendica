@@ -61,7 +61,24 @@ class Conversation
 	public const MODE_SEARCH        = 'search';
 	public const MODE_PROFILE       = 'profile';
 
-	public function __construct(private readonly UserGServerRepository $userGServer, private readonly Channel $channel, private readonly UserDefinedChannel $userDefinedChannel, private readonly LoggerInterface $logger, private readonly Profiler $profiler, private readonly Activity $activity, private readonly L10n $l10n, private readonly Item $item, private readonly Arguments $args, private readonly BaseURL $baseURL, private readonly IManageConfigValues $config, private readonly IManagePersonalConfigValues $pConfig, private Page $page, private readonly Mode $mode, private readonly EventDispatcherInterface $eventDispatcher, private readonly IHandleUserSessions $session) {}
+	public function __construct(
+		private readonly UserGServerRepository $userGServer,
+		private readonly Channel $channel,
+		private readonly UserDefinedChannel $userDefinedChannel,
+		private readonly LoggerInterface $logger,
+		private readonly Profiler $profiler,
+		private readonly Activity $activity,
+		private readonly L10n $l10n,
+		private readonly Item $item,
+		private readonly Arguments $args,
+		private readonly BaseURL $baseURL,
+		private readonly IManageConfigValues $config,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private Page $page,
+		private readonly Mode $mode,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly IHandleUserSessions $session,
+	) {}
 
 	/**
 	 * Checks item to see if it is one of the builtin activities (like/dislike, event attendance, consensus items, etc.)
@@ -1043,7 +1060,7 @@ class Conversation
 				}
 				$names = explode($separator, (string) $row['title']);
 
-				$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'] ?? [], $names));
+				$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'], $names));
 				if ($row['private'] === ItemModel::PRIVATE) {
 					$emojis[$row['thr-parent-id']][$emoji]['total'] += count($names);
 				}
