@@ -37,7 +37,7 @@ class StreamLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf(
 			LoggerInterface::class,
-			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
+			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);
 	}
 

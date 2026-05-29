@@ -39,7 +39,7 @@ class SearchTest extends ApiTestCase
 
 		$response = (new Search($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'searchstring' => 'item_body'
+				'searchstring' => 'item_body',
 			]);
 
 		$json = $this->toJson($response);
@@ -60,7 +60,7 @@ class SearchTest extends ApiTestCase
 
 		$response = (new Search($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'searchstring' => 'test'
+				'searchstring' => 'test',
 			]);
 
 		$json = $this->toJson($response);
