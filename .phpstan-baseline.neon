@@ -687,15 +687,3 @@ parameters:
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: src/Module/Profile/Photos.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/RandomProfile.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/Register.php
