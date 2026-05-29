@@ -3711,11 +3711,11 @@ class Diaspora
 		$message = [];
 		if (is_array($msg)) {
 			foreach ($msg as $field => $data) {
-				if ($field == 'diaspora_handle') {
+				if ($field === 'diaspora_handle') {
 					$field = 'author';
 				}
 
-				if ($field == 'target_type') {
+				if ($field === 'target_type') {
 					$field = 'parent_type';
 				}
 
