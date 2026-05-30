@@ -159,6 +159,9 @@ details summary {
 ul#nav-user-menu {
 	font-size: 15.4px;
 }
+ul#nav-user-menu a {
+	padding-block: 10px;
+}
 
 
 /**
