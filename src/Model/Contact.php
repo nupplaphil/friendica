@@ -1265,11 +1265,11 @@ class Contact
 		if ($contact['contact-type'] == Contact::TYPE_COMMUNITY) {
 			$mention_label = DI::l10n()->t('Post to group');
 			$mention_url   = 'compose/0?body=!' . $contact['addr'];
-			$network_label = DI::l10n()->t('View group');
+			$network_label = DI::l10n()->t('Group posts');
 		} else {
 			$mention_label = DI::l10n()->t('Mention');
 			$mention_url   = 'compose/0?body=@' . $contact['addr'];
-			$network_label = DI::l10n()->t('Network Posts');
+			$network_label = DI::l10n()->t('Posts');
 		}
 		$network_url = 'contact/' . $contact['id'] . '/conversations';
 

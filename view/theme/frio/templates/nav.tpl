@@ -252,7 +252,7 @@
 										<li>
 											<a role="menuitem" id="nav-help-link" class="nav-link {{$nav.help.2}}"
 												href="{{$nav.help.0}}" title="{{$nav.help.3}}">
-												<i class="ri ri-question-line ri-fw" aria-hidden="true"></i> {{$nav.help.1}}
+												<i class="ri ri-question-mark ri-fw" aria-hidden="true"></i> {{$nav.help.1}}
 											</a>
 										</li>
 									{{/if}}
