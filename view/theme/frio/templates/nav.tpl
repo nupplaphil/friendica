@@ -39,7 +39,7 @@
 							</div>
 						</form>
 					{{/if}}
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					<button type="button" id="search-mobile-btn" class="navbar-toggle collapsed" data-toggle="collapse"
 						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
 						<span class="sr-only">Toggle Search</span>
 						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>

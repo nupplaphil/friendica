@@ -76,7 +76,7 @@ body a.active,
 	display: none;
 }
 
-i {
+.wall-item-actions i, .widget-action i, .widget i {
 		font-size: 16px;
 }
 
@@ -155,6 +155,11 @@ details summary {
 .table > tbody > td[role="button"] {
 	cursor: pointer;
 }
+
+ul#nav-user-menu {
+	font-size: 15.4px;
+}
+
 
 /**
  * mobile: Larger screens
@@ -1102,6 +1107,7 @@ ul li .intro-wrapper button.intro-action-link {
 	width: 100%;
 	text-align: left;
 }
+
 .nav-pills .dropdown-menu li > a:hover,
 .nav-pills .dropdown-menu li > button:hover,
 .nav-tabs .dropdown-menu li > a:hover,
@@ -1112,11 +1118,28 @@ ul li .intro-wrapper button.intro-action-link {
 .account .dropdown-menu li.selected a,
 #fc-header .dropdown-menu li button:hover,
 #fc-header .dropdown-menu li button:focus,
-.contact-photo-wrapper .dropdown-menu li.selected a {
-	border-left: 3px solid $link_color;
+.contact-photo-wrapper .dropdown-menu li.selected a,
+#offcanvasUsermenu a:hover,
+#offcanvasUsermenu a:focus,
+#search-mobile-btn:hover,
+#search-mobile-btn:focus {
 	color: #fff;
 	background: $nav_icon_hover_color;
 }
+
+/* Also add a border-left on hover to these elements */
+.nav-pills .dropdown-menu li > a:hover,
+.nav-pills .dropdown-menu li > button:hover,
+.nav-tabs .dropdown-menu li > a:hover,
+.account .dropdown-menu li > a:hover,
+.contact-photo-wrapper .dropdown-menu li > a:hover,
+.nav-pills .dropdown-menu li.selected a,
+.nav-tabs .dropdown-menu li.selected a,
+.account .dropdown-menu li.selected a,
+.contact-photo-wrapper .dropdown-menu li.selected a {
+	border-left: 3px solid $link_color;
+}
+
 #photo-edit-link-wrap {
 	color: $font_color_darker;
 	margin-bottom: 15px;
