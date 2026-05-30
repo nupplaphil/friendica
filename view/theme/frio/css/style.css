@@ -1102,19 +1102,6 @@ ul li .intro-wrapper button.intro-action-link {
 	width: 100%;
 	text-align: left;
 }
-.nav-pills .dropdown-menu li a i,
-.nav-pills .dropdown-menu li .btn-link i,
-.nav-tabs .dropdown-menu li a i,
-.nav-tabs .dropdown-menu li .btn-link i,
-.account .dropdown-menu li a i,
-.account .dropdown-menu li .btn-link i,
-.contact-photo-wrapper .dropdown-menu li a i,
-.contact-photo-wrapper .dropdown-menu li .btn-link i {
-	margin-right: 5px;
-	font-size: 14px;
-	display: inline-block;
-	width: 14px;
-}
 .nav-pills .dropdown-menu li > a:hover,
 .nav-pills .dropdown-menu li > button:hover,
 .nav-tabs .dropdown-menu li > a:hover,
@@ -2738,7 +2725,7 @@ body.mod-login .navbar #nav-login {
 	float: left;
 }
 
-/* contacts page */
+/* Contacts page */
 ul.viewcontact_wrapper {
 	margin-left: -15px;
 	margin-right: -15px;
