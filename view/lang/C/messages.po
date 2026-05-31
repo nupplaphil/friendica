@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-06 12:13+0000\n"
+"POT-Creation-Date: 2026-06-06 15:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,7 +147,7 @@ msgid "Your message"
 msgstr ""
 
 #: mod/message.php:189 mod/message.php:346 mod/photos.php:76 mod/photos.php:624
-#: src/Content/Conversation.php:314 src/Module/Post/Edit.php:126
+#: src/Content/Conversation.php:321 src/Module/Post/Edit.php:126
 #: src/Module/Profile/Photos.php:338 src/Module/Profile/Photos.php:358
 #: src/Module/Profile/Photos.php:361
 msgid "Upload photo"
@@ -157,8 +157,8 @@ msgstr ""
 msgid "Insert web link"
 msgstr ""
 
-#: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:347
-#: src/Content/Conversation.php:1590 src/Module/Item/Compose.php:172
+#: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:354
+#: src/Content/Conversation.php:1597 src/Module/Item/Compose.php:172
 #: src/Module/Post/Edit.php:140 src/Object/Post.php:619
 msgid "Please wait"
 msgstr ""
@@ -312,7 +312,7 @@ msgstr ""
 msgid "If you want to add this photo to an album, begin typing its name, and existing albums will be suggested, which you can select. If you choose something new, it will be created."
 msgstr ""
 
-#: mod/photos.php:487 mod/photos.php:806 src/Content/Conversation.php:349
+#: mod/photos.php:487 mod/photos.php:806 src/Content/Conversation.php:356
 #: src/Module/Calendar/Event/Form.php:266 src/Module/Post/Edit.php:180
 msgid "Permissions"
 msgstr ""
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Delete Album"
 msgstr ""
 
-#: mod/photos.php:556 mod/photos.php:655 src/Content/Conversation.php:364
+#: mod/photos.php:556 mod/photos.php:655 src/Content/Conversation.php:371
 #: src/Module/Contact/Follow.php:158 src/Module/Contact/Revoke.php:92
 #: src/Module/Contact/Unfollow.php:95
 #: src/Module/Media/Attachment/Browser.php:64
@@ -429,7 +429,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: mod/photos.php:828 src/Content/Conversation.php:1509 src/Model/Event.php:654
+#: mod/photos.php:828 src/Content/Conversation.php:1516 src/Model/Event.php:654
 #: src/Module/Calendar/Event/Show.php:69
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
@@ -1023,328 +1023,333 @@ msgid_plural "<button type=\"button\" %2$s>%1$d people</button> reshared this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation.php:279
+#: src/Content/Conversation.php:280
 msgid "Visible to <strong>everybody</strong>"
 msgstr ""
 
-#: src/Content/Conversation.php:280 src/Module/Item/Compose.php:166
+#: src/Content/Conversation.php:281 src/Module/Item/Compose.php:166
 #: src/Object/Post.php:1177
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
 
-#: src/Content/Conversation.php:281
+#: src/Content/Conversation.php:282
 msgid "Tag term:"
 msgstr ""
 
-#: src/Content/Conversation.php:282
+#: src/Content/Conversation.php:283
 msgid "Save to Folder"
 msgstr ""
 
-#: src/Content/Conversation.php:283
+#: src/Content/Conversation.php:284
 msgid "Where are you right now?"
 msgstr ""
 
-#: src/Content/Conversation.php:284
+#: src/Content/Conversation.php:285
 msgid "Delete item(s)?"
 msgstr ""
 
-#: src/Content/Conversation.php:285 src/Module/Post/Edit.php:102
+#: src/Content/Conversation.php:286 src/Module/Post/Edit.php:102
 msgid "Post published."
 msgstr ""
 
-#: src/Content/Conversation.php:286 src/Module/Post/Edit.php:103
+#: src/Content/Conversation.php:287 src/Module/Post/Edit.php:103
 msgid "Go to post"
 msgstr ""
 
-#: src/Content/Conversation.php:299 src/Module/Item/Compose.php:140
+#: src/Content/Conversation.php:300 src/Module/Item/Compose.php:140
 msgid "Created at"
 msgstr ""
 
-#: src/Content/Conversation.php:309
+#: src/Content/Conversation.php:310 src/Content/Widget/VCard.php:94
+#: src/Model/Contact.php:1266 src/Model/Profile.php:438
+msgid "Post to group"
+msgstr ""
+
+#: src/Content/Conversation.php:312
 msgid "New Post"
 msgstr ""
 
-#: src/Content/Conversation.php:312 src/Module/Item/Compose.php:155
+#: src/Content/Conversation.php:319 src/Module/Item/Compose.php:155
 msgid "Post"
 msgstr ""
 
-#: src/Content/Conversation.php:313 src/Content/Nav.php:89
+#: src/Content/Conversation.php:320 src/Content/Nav.php:89
 #: src/Module/Post/Edit.php:125 src/Object/Post.php:1166
 msgid "Loading..."
 msgstr ""
 
-#: src/Content/Conversation.php:315 src/Module/Post/Edit.php:127
+#: src/Content/Conversation.php:322 src/Module/Post/Edit.php:127
 msgid "upload photo"
 msgstr ""
 
-#: src/Content/Conversation.php:316 src/Module/Post/Edit.php:128
+#: src/Content/Conversation.php:323 src/Module/Post/Edit.php:128
 msgid "Attach file"
 msgstr ""
 
-#: src/Content/Conversation.php:317 src/Module/Post/Edit.php:129
+#: src/Content/Conversation.php:324 src/Module/Post/Edit.php:129
 msgid "attach file"
 msgstr ""
 
-#: src/Content/Conversation.php:318 src/Module/Item/Compose.php:156
+#: src/Content/Conversation.php:325 src/Module/Item/Compose.php:156
 #: src/Module/Post/Edit.php:168 src/Module/Settings/Profile/Index.php:247
 #: src/Object/Post.php:1167
 msgid "Bold"
 msgstr ""
 
-#: src/Content/Conversation.php:319 src/Module/Item/Compose.php:157
+#: src/Content/Conversation.php:326 src/Module/Item/Compose.php:157
 #: src/Module/Post/Edit.php:169 src/Module/Settings/Profile/Index.php:248
 #: src/Object/Post.php:1168
 msgid "Italic"
 msgstr ""
 
-#: src/Content/Conversation.php:320 src/Module/Item/Compose.php:158
+#: src/Content/Conversation.php:327 src/Module/Item/Compose.php:158
 #: src/Module/Post/Edit.php:170 src/Module/Settings/Profile/Index.php:249
 #: src/Object/Post.php:1169
 msgid "Underline"
 msgstr ""
 
-#: src/Content/Conversation.php:321 src/Module/Item/Compose.php:159
+#: src/Content/Conversation.php:328 src/Module/Item/Compose.php:159
 #: src/Module/Post/Edit.php:171 src/Module/Settings/Profile/Index.php:250
 #: src/Object/Post.php:1171
 msgid "Quote"
 msgstr ""
 
-#: src/Content/Conversation.php:322 src/Module/Item/Compose.php:160
+#: src/Content/Conversation.php:329 src/Module/Item/Compose.php:160
 #: src/Module/Post/Edit.php:172 src/Module/Settings/Profile/Index.php:251
 #: src/Object/Post.php:1172
 msgid "Add emojis"
 msgstr ""
 
-#: src/Content/Conversation.php:323 src/Module/Item/Compose.php:161
+#: src/Content/Conversation.php:330 src/Module/Item/Compose.php:161
 #: src/Object/Post.php:1170
 msgid "Content Warning"
 msgstr ""
 
-#: src/Content/Conversation.php:324 src/Module/Item/Compose.php:162
+#: src/Content/Conversation.php:331 src/Module/Item/Compose.php:162
 #: src/Module/Post/Edit.php:173 src/Module/Settings/Profile/Index.php:252
 #: src/Object/Post.php:1173
 msgid "Code"
 msgstr ""
 
-#: src/Content/Conversation.php:325 src/Module/Item/Compose.php:163
+#: src/Content/Conversation.php:332 src/Module/Item/Compose.php:163
 #: src/Module/Settings/Profile/Index.php:253
 #: src/Module/Settings/Profile/Index.php:254 src/Object/Post.php:1174
 msgid "Image"
 msgstr ""
 
-#: src/Content/Conversation.php:326 src/Module/Item/Compose.php:164
+#: src/Content/Conversation.php:333 src/Module/Item/Compose.php:164
 #: src/Module/Post/Edit.php:174 src/Module/Settings/Profile/Index.php:255
 #: src/Object/Post.php:1175
 msgid "Link"
 msgstr ""
 
-#: src/Content/Conversation.php:327 src/Module/Item/Compose.php:165
+#: src/Content/Conversation.php:334 src/Module/Item/Compose.php:165
 #: src/Module/Post/Edit.php:175 src/Module/Settings/Profile/Index.php:256
 #: src/Object/Post.php:1176
 msgid "Link or Media"
 msgstr ""
 
-#: src/Content/Conversation.php:328 src/Module/Item/Compose.php:168
+#: src/Content/Conversation.php:335 src/Module/Item/Compose.php:168
 #: src/Module/Post/Edit.php:136
 msgid "Set your location"
 msgstr ""
 
-#: src/Content/Conversation.php:329 src/Module/Post/Edit.php:137
+#: src/Content/Conversation.php:336 src/Module/Post/Edit.php:137
 msgid "set location"
 msgstr ""
 
-#: src/Content/Conversation.php:330 src/Module/Post/Edit.php:138
+#: src/Content/Conversation.php:337 src/Module/Post/Edit.php:138
 msgid "Clear browser location"
 msgstr ""
 
-#: src/Content/Conversation.php:331 src/Module/Post/Edit.php:139
+#: src/Content/Conversation.php:338 src/Module/Post/Edit.php:139
 msgid "clear location"
 msgstr ""
 
-#: src/Content/Conversation.php:333 src/Module/Item/Compose.php:173
+#: src/Content/Conversation.php:340 src/Module/Item/Compose.php:173
 #: src/Module/Post/Edit.php:152
 msgid "Set title"
 msgstr ""
 
-#: src/Content/Conversation.php:335 src/Module/Item/Compose.php:174
+#: src/Content/Conversation.php:342 src/Module/Item/Compose.php:174
 #: src/Module/Post/Edit.php:154
 msgid "Set summary, abstract or spoiler text"
 msgstr ""
 
-#: src/Content/Conversation.php:337 src/Module/Item/Compose.php:175
+#: src/Content/Conversation.php:344 src/Module/Item/Compose.php:175
 #: src/Module/Post/Edit.php:156
 msgid "Categories (comma-separated list)"
 msgstr ""
 
-#: src/Content/Conversation.php:338 src/Module/Item/Compose.php:191
+#: src/Content/Conversation.php:345 src/Module/Item/Compose.php:191
 msgid "Sensitive post"
 msgstr ""
 
-#: src/Content/Conversation.php:343 src/Module/Item/Compose.php:196
+#: src/Content/Conversation.php:350 src/Module/Item/Compose.php:196
 msgid "Scheduled at"
 msgstr ""
 
-#: src/Content/Conversation.php:348 src/Module/Post/Edit.php:141
+#: src/Content/Conversation.php:355 src/Module/Post/Edit.php:141
 msgid "Permission settings"
 msgstr ""
 
-#: src/Content/Conversation.php:357 src/Module/Post/Edit.php:150
+#: src/Content/Conversation.php:364 src/Module/Post/Edit.php:150
 msgid "Public post"
 msgstr ""
 
-#: src/Content/Conversation.php:361 src/Module/Calendar/Event/Form.php:261
+#: src/Content/Conversation.php:368 src/Module/Calendar/Event/Form.php:261
 #: src/Module/Item/Compose.php:167 src/Module/Post/Edit.php:162
 #: src/Object/Post.php:1178
 msgid "Preview"
 msgstr ""
 
-#: src/Content/Conversation.php:371 src/Content/Item.php:407
+#: src/Content/Conversation.php:378 src/Content/Item.php:407
 #: src/Content/Widget/VCard.php:120 src/Model/Contact.php:1308
 #: src/Model/Profile.php:474 src/Module/Admin/Logs/View.php:79
 #: src/Module/Post/Edit.php:178
 msgid "Message"
 msgstr ""
 
-#: src/Content/Conversation.php:372 src/Module/Post/Edit.php:179
+#: src/Content/Conversation.php:379 src/Module/Post/Edit.php:179
 msgid "Add file"
 msgstr ""
 
-#: src/Content/Conversation.php:374 src/Module/Post/Edit.php:182
+#: src/Content/Conversation.php:381 src/Module/Post/Edit.php:182
 msgid "Open Compose page"
 msgstr ""
 
-#: src/Content/Conversation.php:544
+#: src/Content/Conversation.php:551
 msgid "remove"
 msgstr ""
 
-#: src/Content/Conversation.php:548
+#: src/Content/Conversation.php:555
 msgid "Delete Selected Items"
 msgstr ""
 
-#: src/Content/Conversation.php:680 src/Content/Conversation.php:683
-#: src/Content/Conversation.php:686 src/Content/Conversation.php:689
-#: src/Content/Conversation.php:692
+#: src/Content/Conversation.php:687 src/Content/Conversation.php:690
+#: src/Content/Conversation.php:693 src/Content/Conversation.php:696
+#: src/Content/Conversation.php:699
 #, php-format
 msgid "You had been addressed (%s)."
 msgstr ""
 
-#: src/Content/Conversation.php:695
+#: src/Content/Conversation.php:702
 #, php-format
 msgid "You are following %s."
 msgstr ""
 
-#: src/Content/Conversation.php:700
+#: src/Content/Conversation.php:707
 #, php-format
 msgid "You subscribed to %s."
 msgstr ""
 
-#: src/Content/Conversation.php:702
+#: src/Content/Conversation.php:709
 msgid "You subscribed to one or more tags in this post."
 msgstr ""
 
-#: src/Content/Conversation.php:722
+#: src/Content/Conversation.php:729
 #, php-format
 msgid "%s reshared this."
 msgstr ""
 
-#: src/Content/Conversation.php:724
+#: src/Content/Conversation.php:731
 msgid "Reshared"
 msgstr ""
 
-#: src/Content/Conversation.php:724
+#: src/Content/Conversation.php:731
 #, php-format
 msgid "Reshared by %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:727
+#: src/Content/Conversation.php:734
 #, php-format
 msgid "%s is participating in this thread."
 msgstr ""
 
-#: src/Content/Conversation.php:730
+#: src/Content/Conversation.php:737
 msgid "Stored for general reasons"
 msgstr ""
 
-#: src/Content/Conversation.php:733
+#: src/Content/Conversation.php:740
 msgid "Global post"
 msgstr ""
 
-#: src/Content/Conversation.php:736
+#: src/Content/Conversation.php:743
 msgid "Sent via an relay server"
 msgstr ""
 
-#: src/Content/Conversation.php:736
+#: src/Content/Conversation.php:743
 #, php-format
 msgid "Sent via the relay server %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:739
+#: src/Content/Conversation.php:746
 msgid "Fetched"
 msgstr ""
 
-#: src/Content/Conversation.php:739
+#: src/Content/Conversation.php:746
 #, php-format
 msgid "Fetched because of %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation.php:742
+#: src/Content/Conversation.php:749
 msgid "Stored because of a child post to complete this thread."
 msgstr ""
 
-#: src/Content/Conversation.php:745
+#: src/Content/Conversation.php:752
 msgid "Local delivery"
 msgstr ""
 
-#: src/Content/Conversation.php:748
+#: src/Content/Conversation.php:755
 msgid "Stored because of your activity (like, comment, bookmark, ...)"
 msgstr ""
 
-#: src/Content/Conversation.php:751
+#: src/Content/Conversation.php:758
 msgid "Distributed"
 msgstr ""
 
-#: src/Content/Conversation.php:754
+#: src/Content/Conversation.php:761
 msgid "Pushed to us"
 msgstr ""
 
-#: src/Content/Conversation.php:761
+#: src/Content/Conversation.php:768
 #, php-format
 msgid "Channel \"%s\": %s"
 msgstr ""
 
-#: src/Content/Conversation.php:763
+#: src/Content/Conversation.php:770
 #, php-format
 msgid "Channel \"%s\""
 msgstr ""
 
-#: src/Content/Conversation.php:1508 src/Object/Post.php:254
+#: src/Content/Conversation.php:1515 src/Object/Post.php:254
 msgid "Select"
 msgstr ""
 
-#: src/Content/Conversation.php:1528
+#: src/Content/Conversation.php:1535
 msgid "Pinned item"
 msgstr ""
 
-#: src/Content/Conversation.php:1549 src/Object/Post.php:554
+#: src/Content/Conversation.php:1556 src/Object/Post.php:554
 #: src/Object/Post.php:555
 #, php-format
 msgid "View %s's profile @ %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1563 src/Object/Post.php:542
+#: src/Content/Conversation.php:1570 src/Object/Post.php:542
 msgid "Categories:"
 msgstr ""
 
-#: src/Content/Conversation.php:1564 src/Object/Post.php:543
+#: src/Content/Conversation.php:1571 src/Object/Post.php:543
 msgid "Filed under:"
 msgstr ""
 
-#: src/Content/Conversation.php:1572 src/Object/Post.php:570
+#: src/Content/Conversation.php:1579 src/Object/Post.php:570
 #, php-format
 msgid "%s from %s"
 msgstr ""
 
-#: src/Content/Conversation.php:1588
+#: src/Content/Conversation.php:1595
 msgid "View in context"
 msgstr ""
 
@@ -2292,11 +2297,6 @@ msgstr ""
 
 #: src/Content/Widget/TrendingTags.php:43
 msgid "Show Less"
-msgstr ""
-
-#: src/Content/Widget/VCard.php:94 src/Model/Contact.php:1266
-#: src/Model/Profile.php:438
-msgid "Post to group"
 msgstr ""
 
 #: src/Content/Widget/VCard.php:99 src/Model/Contact.php:1270

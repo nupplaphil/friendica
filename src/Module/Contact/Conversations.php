@@ -84,10 +84,11 @@ class Conversations extends BaseModule
 
 		if (!$contact['ap-posting-restricted'] && !$raw) {
 			$options = [
-				'lockstate' => ACL::getLockstateForUserId($this->userSession->getLocalUserId()) ? 'lock' : 'unlock',
-				'acl'       => ACL::getFullSelectorHTML($this->page, $this->userSession->getLocalUserId(), true, []),
-				'bang'      => '',
-				'content'   => ($contact['contact-type'] == ModelContact::TYPE_COMMUNITY ? '!' : '@') . ($contact['addr'] ?: $contact['url']),
+				'lockstate'            => ACL::getLockstateForUserId($this->userSession->getLocalUserId()) ? 'lock' : 'unlock',
+				'acl'                  => ACL::getFullSelectorHTML($this->page, $this->userSession->getLocalUserId(), true, []),
+				'bang'                 => '',
+				'content'              => ($contact['contact-type'] == ModelContact::TYPE_COMMUNITY ? '!' : '@') . ($contact['addr'] ?: $contact['url']),
+				'contact_account_type' => $contact['contact-type'],
 			];
 			$output = $this->conversation->statusEditor($options);
 		}
