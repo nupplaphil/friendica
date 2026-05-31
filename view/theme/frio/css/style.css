@@ -157,10 +157,15 @@ details summary {
 }
 
 ul#nav-user-menu {
-	font-size: 15.4px;
+	font-size: 15.3px;
+	padding-block: 0;
+	margin-top: 0;
 }
 ul#nav-user-menu a {
 	padding-block: 10px;
+}
+ul#nav-user-menu li:first-child {
+	margin-top: 0;
 }
 
 
@@ -656,6 +661,7 @@ button#main-menu {
 	align-items: center;
 	display: flex;
 	gap: 5px;
+	padding-block: 0;
 	padding-right: 0;
 }
 #topbar-first-nav-container {
