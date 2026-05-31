@@ -60,9 +60,6 @@ class Router
 		self::OPTIONS,
 	];
 
-	/** @var RouteCollector */
-	protected $routeCollector;
-
 	/**
 	 * @var array Module parameters
 	 */
@@ -86,11 +83,21 @@ class Router
 	 * @param IHandleUserSessions $userSession
 	 * @param RouteCollector|null $routeCollector
 	 */
-	public function __construct(private readonly array $server, private readonly string $baseRoutesFilepath, private readonly L10n $l10n, private readonly ICanCache $cache, private readonly ICanLock $lock, private readonly IManageConfigValues $config, private readonly Arguments $args, private readonly LoggerInterface $logger, private readonly EventDispatcherInterface $eventDispatcher, private readonly AddonHelper $addonHelper, IHandleUserSessions $userSession, RouteCollector $routeCollector = null)
-	{
+	public function __construct(
+		private readonly array $server,
+		private readonly string $baseRoutesFilepath,
+		private readonly L10n $l10n,
+		private readonly ICanCache $cache,
+		private readonly ICanLock $lock,
+		private readonly IManageConfigValues $config,
+		private readonly Arguments $args,
+		private readonly LoggerInterface $logger,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly AddonHelper $addonHelper,
+		IHandleUserSessions $userSession,
+		protected ?RouteCollector $routeCollector = new RouteCollector(new Std(), new GroupCountBased()),
+	) {
 		$this->isLocalUser = !empty($userSession->getLocalUserId());
-
-		$this->routeCollector = $routeCollector ?? new RouteCollector(new Std(), new GroupCountBased());
 
 		if ($this->baseRoutesFilepath && !file_exists($this->baseRoutesFilepath)) {
 			throw new HTTPException\InternalServerErrorException('Routes file path does\'n exist.');

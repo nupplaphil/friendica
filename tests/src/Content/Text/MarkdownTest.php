@@ -15,7 +15,7 @@ class MarkdownTest extends FixtureTestCase
 {
 	public static function dataMarkdown()
 	{
-		$inputFiles = glob(__DIR__ . '/../../../datasets/content/text/markdown/*.md');
+		$inputFiles = glob(__DIR__ . '/../../../Fixtures/content/text/markdown/*.md');
 
 		$data = [];
 

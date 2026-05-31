@@ -29,7 +29,7 @@ class ConfigTransactionTest extends FixtureTestCase
 			$this->root->url(),
 			$this->root->url() . '/addon',
 			$this->root->url() . '/config',
-			$this->root->url() . '/static'
+			$this->root->url() . '/static',
 		);
 	}
 
@@ -37,8 +37,8 @@ class ConfigTransactionTest extends FixtureTestCase
 	{
 		return [
 			'default' => [
-				'data' => include dirname(__FILE__, 4) . '/datasets/B.node.config.php',
-			]
+				'data' => include dirname(__FILE__, 4) . '/Fixtures/B.node.config.php',
+			],
 		];
 	}
 

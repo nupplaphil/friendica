@@ -15,9 +15,9 @@ class CurlResultTest extends TestCase
 {
 	public function testNormal()
 	{
-		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
+		$body        = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
@@ -40,9 +40,9 @@ class CurlResultTest extends TestCase
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirect()
 	{
-		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
+		$body        = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local/test/it', $header . $body, [
@@ -64,9 +64,9 @@ class CurlResultTest extends TestCase
 
 	public function testTimeout()
 	{
-		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.head.php');
-		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
+		$body        = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local/test/it', $header . $body, [
@@ -90,9 +90,9 @@ class CurlResultTest extends TestCase
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testRedirectHeader()
 	{
-		$header      = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.redirect');
-		$headerArray = include(__DIR__ . '/../../../../datasets/curl/about.redirect.php');
-		$body        = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.redirect');
+		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.redirect.php');
+		$body        = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 
 		$curlResult = new CurlResult(new NullLogger(), 'https://test.local/test/it?key=value', $header . $body, [
@@ -113,8 +113,8 @@ class CurlResultTest extends TestCase
 
 	public function testInHeader()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code'    => 200,
@@ -127,8 +127,8 @@ class CurlResultTest extends TestCase
 
 	public function testGetHeaderArray()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 		$curlResult = new \Friendica\Network\HTTPClient\Response\CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code'    => 200,
@@ -144,8 +144,8 @@ class CurlResultTest extends TestCase
 
 	public function testGetHeaderWithParam()
 	{
-		$header = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.head');
-		$body   = file_get_contents(__DIR__ . '/../../../../datasets/curl/about.body');
+		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
+		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
 
 		$curlResult = new CurlResult(new NullLogger(), 'https://test.local', $header . $body, [
 			'http_code'    => 200,

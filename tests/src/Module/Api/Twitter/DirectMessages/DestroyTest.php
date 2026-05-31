@@ -111,7 +111,7 @@ class DestroyTest extends ApiTestCase
 	 */
 	public function testApiDirectMessagesDestroyWithCorrectId()
 	{
-		$this->loadFixture(__DIR__ . '/../../../../../datasets/mail/mail.fixture.php', DI::dba());
+		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DBA::selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 

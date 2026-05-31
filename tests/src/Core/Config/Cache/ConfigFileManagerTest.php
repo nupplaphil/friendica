@@ -82,7 +82,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
-				. 'datasets' . DIRECTORY_SEPARATOR
+				. 'Fixtures' . DIRECTORY_SEPARATOR
 				. 'config' . DIRECTORY_SEPARATOR
 				. 'A.config.php';
 
@@ -120,7 +120,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
-				. 'datasets' . DIRECTORY_SEPARATOR
+				. 'Fixtures' . DIRECTORY_SEPARATOR
 				. 'config' . DIRECTORY_SEPARATOR
 				. 'A.ini.php';
 
@@ -157,7 +157,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
-				. 'datasets' . DIRECTORY_SEPARATOR
+				. 'Fixtures' . DIRECTORY_SEPARATOR
 				. 'config' . DIRECTORY_SEPARATOR
 				. '.htconfig.php';
 
@@ -212,7 +212,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
-				. 'datasets' . DIRECTORY_SEPARATOR
+				. 'Fixtures' . DIRECTORY_SEPARATOR
 				. 'config' . DIRECTORY_SEPARATOR
 				. 'A.config.php';
 
@@ -248,7 +248,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
-				   . 'datasets' . DIRECTORY_SEPARATOR
+				   . 'Fixtures' . DIRECTORY_SEPARATOR
 				   . 'config' . DIRECTORY_SEPARATOR;
 
 		vfsStream::newFile('A.config.php')
@@ -283,7 +283,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
-				   . 'datasets' . DIRECTORY_SEPARATOR
+				   . 'Fixtures' . DIRECTORY_SEPARATOR
 				   . 'config' . DIRECTORY_SEPARATOR;
 
 		vfsStream::newFile('A.ini.php')
@@ -318,7 +318,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
-				   . 'datasets' . DIRECTORY_SEPARATOR
+				   . 'Fixtures' . DIRECTORY_SEPARATOR
 				   . 'config' . DIRECTORY_SEPARATOR;
 
 		vfsStream::newFile('A.ini.php')
@@ -373,7 +373,7 @@ class ConfigFileManagerTest extends MockedTestCase
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
 				   . '..' . DIRECTORY_SEPARATOR
-				   . 'datasets' . DIRECTORY_SEPARATOR
+				   . 'Fixtures' . DIRECTORY_SEPARATOR
 				   . 'config' . DIRECTORY_SEPARATOR;
 
 		vfsStream::newFile('B.config.php')
