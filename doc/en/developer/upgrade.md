@@ -4,7 +4,7 @@ All notable changes to the **Friendica Core** will be documented in this file.
 As an Addon maintainer or Friendica Developer you can inform yourself about all deprecations or breaking changes.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project [promises Backward Compatibility](doc/en/developer/index.md#backward-compatibility).
+and this project [promises Backward Compatibility](index.md#backward-compatibility).
 
 ## [Version 2026.08](https://github.com/friendica/friendica/compare/2026.05...develop) - (unreleased)
 
