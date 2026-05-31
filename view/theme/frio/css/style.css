@@ -4406,12 +4406,33 @@ div.login-form, .login-content-wrapper,
 	/* Even smaller mobile displays */
 @media (width < 382px) {
 	.topbar-nav .nav-segment a.nav-menu, .topbar-actions .nav-segment a.nav-menu, .topbar-actions .nav-segment button, .topbar-actions .navbar-toggle {
-		padding-left: 5px!important;
-		padding-right: 5px!important;
+		padding-left: 6px!important;
+		padding-right: 6px!important;
 	}
 	#topbar-first .offcanvas-right-toggle,
 	#topbar-first #mobile-left-menu {
 		padding-inline-end: 3px;
 		padding-inline-start: 3px;
+	}
+
+	/* Compose adjustments, mostly to improve the bbcode button experience at lower resolutions */
+
+	/* Reduce side padding */
+	.compose-content-wrapper .generic-page-wrapper {
+		padding-inline: 6px;
+	}
+
+	.compose-content-wrapper .generic-page-wrapper .btn-group {
+			display: inline!important;
+			float: unset;
+	}
+
+	.compose-content-wrapper #profile-jot-wrapper .btn-toolbar {
+		margin-right: -5px;
+	}
+
+	.compose-content-wrapper #profile-jot-wrapper .btn-toolbar div {
+		float: unset!important;
+		margin-left: 0;
 	}
 }
