@@ -516,7 +516,7 @@ header #banner #logo-img,
 	z-index: 1060;
 }
 #offcanvasUsermenu {
-	width: 300px;
+	width: clamp(200px, 50vw, 275px);
 	position: fixed;
 	right: 0px;
 	top: 50px;
@@ -649,13 +649,14 @@ nav.navbar {
 }
 
 	#topbar-first .topbar-nav i {
-		font-size: 24px;
+		font-size: 24.4px;
 	}
 
 button#main-menu {
 	align-items: center;
 	display: flex;
 	gap: 5px;
+	padding-right: 0;
 }
 #topbar-first-nav-container {
 		display: flex;

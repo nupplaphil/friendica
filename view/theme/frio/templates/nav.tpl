@@ -228,7 +228,7 @@
 											<a role="menuitem" id="nav-delegation-link"
 												class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
 												href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">
-												<i class="ri ri-contacts-book-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
+												<i class="ri ri-arrow-left-right-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
 											</a>
 										</li>
 									{{/if}}
@@ -372,7 +372,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
-										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-contacts-book-line ri-fw"
+										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-arrow-left-right-line ri-fw"
 											aria-hidden="true"></i> {{$nav.delegation.1}}
 									</a>
 								</li>
