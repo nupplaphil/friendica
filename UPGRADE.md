@@ -12,7 +12,7 @@ and this project [promises Backward Compatibility](doc/Developers-Intro.md#backw
 
 - Dropped support for PHP 7.4, 8.0 and 8.1.
 
-## [Version 2026.05](https://github.com/friendica/friendica/compare/2026.01...2026.05) - (2026-05-20)
+## [Version 2026.05](https://github.com/friendica/friendica/compare/2026.01...2026.05) - 2026-05-20
 
 ### Deprecated
 
@@ -24,9 +24,46 @@ and this project [promises Backward Compatibility](doc/Developers-Intro.md#backw
 
 - New composer script `bin/composer.phar run install:prod` to install all dependencies except the dev-libraries, but with autoloader optimization for production servers.
 - New interface `Friendica\AppHelper` as replacement for `Friendica\App` added.
-- New method `Friendica\DI::appHelper()` added to get the implementation of the `AppHelper`.
+    ```php
+    // before
+    public function __construct(
+        private \Friendica\App $app,
+    ) {}
+
+    // after
+    public function __construct(
+        private \Friendica\AppHelper $appHelper,
+    ) {}
+    ```
+- New method `Friendica\DI::appHelper()` added to get the implementation of the `AppHelper` without constructor injection.
+    ```php
+    // before
+    \Friendica\DI::app()->…();
+
+    // after
+    \Friendica\DI::appHelper()->…();
+    ```
 - New interface `Friendica\Core\Addon\AddonHelper` added as replacement for the `Friendica\Core\Addon` class.
-- New method `Friendica\DI::addonHelper()` added to get the implementation of the `Friendica\Core\Addon\AddonHelper`.
+    ```php
+    // before
+    \Friendica\Addon::isEnabled($addonId);
+
+    // after via constructor injection
+    public function __construct(
+        private \Friendica\Core\Addon\AddonHelper $addonHelper
+    ) {}
+
+    // Now you can use it
+    $this->addonHelper->isAddonEnabled($addonId);
+    ```
+- New method `Friendica\DI::addonHelper()` added to get the implementation of the `Friendica\Core\Addon\AddonHelper` without constructor injection.
+    ```php
+    // before
+    \Friendica\Addon::isEnabled($addonId);
+
+    // after
+    \Friendica\DI::addonHelper()->isAddonEnabled($addonId);
+    ```
 - New class `Friendica\Core\Addon\AddonInfo` added as an value object for the header information about an addon.
 - New interface `Friendica\Core\Logger\Factory\LoggerFactory` added so addons can provide a custom `Psr\Log\LoggerInterface` implementation.
 
@@ -51,8 +88,8 @@ and this project [promises Backward Compatibility](doc/Developers-Intro.md#backw
 - `bin/worker.php` is deprecated in favor of `bin/console worker` by @nupplaphil in [#14659](https://github.com/friendica/friendica/pull/14659)
 - Providing strategies via `strategies.config.php` file in addons is deprecated and will stop working in 5 months, please use PHP hooks instead and remove the `strategies.config.php` file in your addon.
 - Class `Friendica\Core\Addon` is deprecated and will be removed after 5 months, use implementation of `Friendica\Core\Addon\AddonHelper` instead.
-- Class `Friendica\Core\Addon\Model\AddonLoader` is deprecated and will be removed after 5 months, use implementation of `Friendica\Core\Addon\AddonHelper` instead.
-- Interface `Friendica\Core\Addon\Capability\ICanLoadAddons` is deprecated and will be removed after 5 months, use implementation of `\Friendica\Core\Addon\AddonHelper` instead.
+- Class `Friendica\Core\Addon\Model\AddonLoader` is deprecated and will be removed after 5 months, use implementation of `Friendica\Core\Addon\AddonHelper` via constructor injection or `\Friendica\DI::addonHelper()` instead.
+- Interface `Friendica\Core\Addon\Capability\ICanLoadAddons` is deprecated and will be removed after 5 months, use implementation of `\Friendica\Core\Addon\AddonHelper` via constructor injection or `\Friendica\DI::addonHelper()` instead.
 - Class `Friendica\Core\Logger` is deprecated, use constructor injection or `Friendica\Di::logger()` instead.
 - Class `Friendica\Core\Logger\Factory\AbstractLoggerTypeFactory` is deprecated and will be removed after 5 months, implement `\Friendica\Core\Logger\Factory\LoggerFactory` instead.
 - Class `Friendica\Core\Logger\Factory\Logger` is deprecated and will be removed after 5 months, implement `\Friendica\Core\Logger\Factory\LoggerFactory` instead.
@@ -63,4 +100,11 @@ and this project [promises Backward Compatibility](doc/Developers-Intro.md#backw
 ### Removed
 
 - **BREAKING**: `Friendica\DI::app()` was removed, use `Friendica\DI::appHelper()` instead.
+    ```php
+    // before
+    \Friendica\DI::app()->…();
+
+    // after
+    \Friendica\DI::appHelper()->…();
+    ```
 - **BREAKING**: `Friendica\Core\Logger::enableWorker()` and `Friendica\Core\Logger::disableWorker()` were removed.
