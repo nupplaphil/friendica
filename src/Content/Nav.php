@@ -199,9 +199,9 @@ class Nav
 
 		if ($this->session->isAuthenticated()) {
 			// user menu
-			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Posts'), '', $this->l10n->t('Conversations you started'), 'ri-user-line'];
-			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/photos', $this->l10n->t('Photos'), '', $this->l10n->t('Your photos'), 'ri-image-line'];
-			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Your personal notes'), 'ri-sticky-note-line'];
+			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Posts'), '', $this->l10n->t('My posts'), 'ri-chat-1-line'];
+			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/photos', $this->l10n->t('Photos'), '', $this->l10n->t('My photos'), 'ri-image-line'];
+			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Only you can see these'), 'ri-sticky-note-line'];
 
 			// user info
 			$contact  = $this->database->selectFirst('contact', ['id', 'url', 'avatar', 'micro', 'name', 'nick', 'baseurl', 'updated'], ['uid' => $this->session->getLocalUserId(), 'self' => true]);

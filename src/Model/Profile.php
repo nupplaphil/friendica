@@ -437,11 +437,13 @@ class Profile
 		if ($profile['account-type'] == Contact::TYPE_COMMUNITY) {
 			$mention_label = DI::l10n()->t('Post to group');
 			$mention_url   = 'compose/0?body=!' . $profile['addr'];
-			$network_label = DI::l10n()->t('View group');
+			$network_label = DI::l10n()->t('Group posts');
+			$network_icon  = 'ri-discuss-line';
 		} else {
 			$mention_label = DI::l10n()->t('Mention');
 			$mention_url   = 'compose/0?body=@' . $profile['addr'];
-			$network_label = DI::l10n()->t('Network Posts');
+			$network_label = DI::l10n()->t('Posts');
+			$network_icon  = 'ri-chat-1-line';
 		}
 		$network_url = 'contact/' . $cid . '/conversations';
 
@@ -485,6 +487,7 @@ class Profile
 			'$mention_url'                 => $mention_url,
 			'$network_label'               => $network_label,
 			'$network_url'                 => $network_url,
+			'$network_icon'                => $network_icon,
 		]);
 
 		$hook_data = [

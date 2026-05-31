@@ -76,7 +76,7 @@ body a.active,
 	display: none;
 }
 
-i {
+.wall-item-actions i, .widget-action i, .widget i {
 		font-size: 16px;
 }
 
@@ -155,6 +155,19 @@ details summary {
 .table > tbody > td[role="button"] {
 	cursor: pointer;
 }
+
+ul#nav-user-menu {
+	font-size: 15.3px;
+	padding-block: 0;
+	margin-top: 0;
+}
+ul#nav-user-menu a {
+	padding-block: 10px;
+}
+ul#nav-user-menu li:first-child {
+	margin-top: 0;
+}
+
 
 /**
  * mobile: Larger screens
@@ -508,7 +521,7 @@ header #banner #logo-img,
 	z-index: 1060;
 }
 #offcanvasUsermenu {
-	width: 300px;
+	width: clamp(200px, 50vw, 275px);
 	position: fixed;
 	right: 0px;
 	top: 50px;
@@ -641,13 +654,15 @@ nav.navbar {
 }
 
 	#topbar-first .topbar-nav i {
-		font-size: 24px;
+		font-size: 24.4px;
 	}
 
 button#main-menu {
 	align-items: center;
 	display: flex;
 	gap: 5px;
+	padding-block: 0;
+	padding-right: 0;
 }
 #topbar-first-nav-container {
 		display: flex;
@@ -1102,19 +1117,7 @@ ul li .intro-wrapper button.intro-action-link {
 	width: 100%;
 	text-align: left;
 }
-.nav-pills .dropdown-menu li a i,
-.nav-pills .dropdown-menu li .btn-link i,
-.nav-tabs .dropdown-menu li a i,
-.nav-tabs .dropdown-menu li .btn-link i,
-.account .dropdown-menu li a i,
-.account .dropdown-menu li .btn-link i,
-.contact-photo-wrapper .dropdown-menu li a i,
-.contact-photo-wrapper .dropdown-menu li .btn-link i {
-	margin-right: 5px;
-	font-size: 14px;
-	display: inline-block;
-	width: 14px;
-}
+
 .nav-pills .dropdown-menu li > a:hover,
 .nav-pills .dropdown-menu li > button:hover,
 .nav-tabs .dropdown-menu li > a:hover,
@@ -1125,11 +1128,28 @@ ul li .intro-wrapper button.intro-action-link {
 .account .dropdown-menu li.selected a,
 #fc-header .dropdown-menu li button:hover,
 #fc-header .dropdown-menu li button:focus,
-.contact-photo-wrapper .dropdown-menu li.selected a {
-	border-left: 3px solid $link_color;
+.contact-photo-wrapper .dropdown-menu li.selected a,
+#offcanvasUsermenu a:hover,
+#offcanvasUsermenu a:focus,
+#search-mobile-btn:hover,
+#search-mobile-btn:focus {
 	color: #fff;
 	background: $nav_icon_hover_color;
 }
+
+/* Also add a border-left on hover to these elements */
+.nav-pills .dropdown-menu li > a:hover,
+.nav-pills .dropdown-menu li > button:hover,
+.nav-tabs .dropdown-menu li > a:hover,
+.account .dropdown-menu li > a:hover,
+.contact-photo-wrapper .dropdown-menu li > a:hover,
+.nav-pills .dropdown-menu li.selected a,
+.nav-tabs .dropdown-menu li.selected a,
+.account .dropdown-menu li.selected a,
+.contact-photo-wrapper .dropdown-menu li.selected a {
+	border-left: 3px solid $link_color;
+}
+
 #photo-edit-link-wrap {
 	color: $font_color_darker;
 	margin-bottom: 15px;
@@ -2502,7 +2522,6 @@ ul.dropdown-menu li:hover {
 .dropdown-menu li button,
 .tabs .dropdown-menu li a {
 	padding: 6px 20px;
-	font-size: 14px;
 }
 .dropdown-menu li a,
 .dropdown-menu li .btn-link {
@@ -2739,7 +2758,7 @@ body.mod-login .navbar #nav-login {
 	float: left;
 }
 
-/* contacts page */
+/* Contacts page */
 ul.viewcontact_wrapper {
 	margin-left: -15px;
 	margin-right: -15px;

@@ -121,7 +121,7 @@ class VCard
 			'$wallmessage_link' => $wallmessage_link,
 			'$mention'          => $mention_label,
 			'$mention_link'     => $mention_link,
-			'$showgroup'        => DI::l10n()->t('View group'),
+			'$showgroup'        => DI::l10n()->t('Group posts'),
 			'$showgroup_link'   => $showgroup_link,
 		]);
 	}
