@@ -550,3 +550,7 @@ pre, code {
 .table-hover > tbody > tr:hover {
   background-color: var(--bg-tertiary);
 }
+
+.table > tbody > tr.info > td {
+  background-color: var(--bg-secondary);
+}
