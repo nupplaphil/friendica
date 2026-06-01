@@ -251,6 +251,11 @@ button.btn-primary {
   border-top: 1px solid var(--border-color);
 }
 
+.panel-default > .panel-heading {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
 .event-card {
   .event-card-title {
     color: var(--text-primary);
