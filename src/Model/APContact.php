@@ -635,6 +635,10 @@ class APContact
 			return false;
 		}
 
+		if ($apcontact['baseurl'] === 'https://tags.pub') {
+			return true;
+		}
+
 		$path = parse_url((string) $apcontact['url'], PHP_URL_PATH);
 		if (($apcontact['type'] == 'Group') && !empty($apcontact['followers']) && ($apcontact['nick'] == 'relay') && ($path == '/actor')) {
 			return true;

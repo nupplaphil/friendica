@@ -999,6 +999,13 @@ class Item
 		return self::handleCreatedItem($orig_item, $post_user_id, $uid, $notify, $copy_permissions, $parent_origin, $priority, $notify_type, $inserted, $source);
 	}
 
+	/**
+	 * Store event data from item body if present
+	 *
+	 * @param array $item The item array containing potential event data
+	 * @return array The item array with event data
+	 * @throws \Exception
+	 */
 	private static function storeEvent(array $item): array
 	{
 		if (!empty($item['event-id'])) {

@@ -68,6 +68,9 @@ class Cron
 		// Call possible post update functions
 		Worker::add(Worker::PRIORITY_LOW, 'PostUpdate');
 
+		// Update tag relay subscriptions
+		Worker::add(Worker::PRIORITY_LOW, 'UpdateTagRelaySubscriptions');
+
 		// Hourly cron calls
 		if ((DI::keyValue()->get('last_cron_hourly') ?? 0) + 3600 < time()) {
 			// Update trending tags cache for the community page
