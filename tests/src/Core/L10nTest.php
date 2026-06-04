@@ -122,6 +122,11 @@ class L10nTest extends MockedTestCase
 				'server' => [],
 				'assert' => 'en-US',
 			],
+			'null locale falls back to system default' => [
+				'locale' => null,
+				'server' => [],
+				'assert' => 'en-US',
+			],
 		];
 	}
 
