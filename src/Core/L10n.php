@@ -465,11 +465,15 @@ class L10n
 	 * This function checks if the provided locale string matches any of the available locales using `Locale::lookup()`.
 	 * If a match is found, it returns the matched locale; otherwise, it returns a default locale.
 	 *
-	 * @param string $locale The locale string to normalise (e.g., 'en-US', 'de-DE')
+	 * @param string|null $locale The locale string to normalise (e.g., 'en-US', 'de-DE')
 	 * @return string The normalised locale if found, or the detected locale, the system default or finally 'en-US' as a fallback
 	 */
-	public function normaliseLocale(string $locale): string
+	public function normaliseLocale(?string $locale): string
 	{
+		if ($locale === null) {
+			return $this->locale ?: $this->config->get('system', 'language', 'en-US');
+		}
+
 		$normalised = Locale::lookup($this->getAvailableLocales(), $locale);
 		if ($normalised) {
 			return $normalised;
