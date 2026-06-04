@@ -131,7 +131,7 @@ class L10nTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataNormaliseLocale')]
-	public function testNormaliseLocale(string $locale, array $server, string $assert): void
+	public function testNormaliseLocale(?string $locale, array $server, string $assert): void
 	{
 		unset($_GET['lang']);
 
