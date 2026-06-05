@@ -141,7 +141,12 @@ class HttpClient implements ICanSendHttpRequests
 			$conf[HttpClientOptions::HEADERS]['Accept'] = HttpClientAccept::DEFAULT;
 		}
 
-		$conf['sink'] = tempnam(System::getTempPath(), 'http-');
+		// Handle streaming requests - don't use sink for streaming
+		if (empty($opts[HttpClientOptions::STREAM])) {
+			$conf['sink'] = tempnam(System::getTempPath(), 'http-');
+		} else {
+			$conf[RequestOptions::STREAM] = true;
+		}
 
 		try {
 			$this->logger->debug('http request config.', ['url' => $url, 'method' => $method, 'options' => $conf]);
@@ -161,7 +166,9 @@ class HttpClient implements ICanSendHttpRequests
 			$this->logger->info('Invalid Argument for HTTP call.', ['url' => $url, 'method' => $method, 'exception' => $argumentException]);
 			return new CurlResult($this->logger, $url, '', ['http_code' => 500], $argumentException->getCode(), $argumentException->getMessage());
 		} finally {
-			unlink($conf['sink']);
+			if (!empty($conf['sink']) && file_exists($conf['sink'])) {
+				unlink($conf['sink']);
+			}
 			$this->logger->debug('Request stop.', ['url' => $url, 'method' => $method]);
 			$this->profiler->stopRecording();
 		}

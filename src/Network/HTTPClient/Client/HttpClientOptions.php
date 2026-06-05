@@ -59,4 +59,8 @@ class HttpClientOptions
 	 * auth: (array) Authentication settings for specific requests
 	 */
 	const AUTH = RequestOptions::AUTH;
+	/**
+	 * stream: (bool) Return the response as a stream instead of a string
+	 */
+	const STREAM = RequestOptions::STREAM;
 }

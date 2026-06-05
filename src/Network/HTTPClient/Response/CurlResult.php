@@ -10,6 +10,8 @@ namespace Friendica\Network\HTTPClient\Response;
 use Friendica\Network\HTTPClient\Capability\ICanHandleHttpResponses;
 use Friendica\Network\HTTPException\UnprocessableEntityException;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Stream;
+use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -349,5 +351,14 @@ class CurlResult implements ICanHandleHttpResponses
 	public function isTimeout(): bool
 	{
 		return $this->isTimeout;
+	}
+
+	/** {@inheritDoc} */
+	public function getBodyStream(): StreamInterface
+	{
+		$stream = fopen('php://temp', 'r+');
+		fwrite($stream, $this->body);
+		rewind($stream);
+		return new Stream($stream);
 	}
 }

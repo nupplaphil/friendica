@@ -25,23 +25,10 @@ class XSocialRelay extends BaseModule
 
 		$scope = $config->get('system', 'relay_scope');
 
-		$systemTags = [];
-		$userTags = [];
-
-		if ($scope == Relay::SCOPE_TAGS) {
-			$systemTags = Strings::getTagArrayByString($config->get('system', 'relay_server_tags'));
-
-			if ($config->get('system', 'relay_user_tags')) {
-				$userTags = Search::getUserTags();
-			}
-		}
-
-		$tagList = array_unique(array_merge($systemTags, $userTags));
-
 		$relay = [
 			'subscribe' => ($scope != Relay::SCOPE_NONE),
 			'scope'     => $scope,
-			'tags'      => $tagList,
+			'tags'      => ($scope == Relay::SCOPE_TAGS) ? Relay::getSubscribedTags() : [],
 			'protocols' => [
 				'activitypub' => [
 					'actor' => DI::baseUrl() . '/friendica',
