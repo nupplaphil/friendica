@@ -1,13 +1,13 @@
-# ejabberd config for local Friendica development and ExtAuth testing.
+# ejabberd config for the CROSS-HOST model (systemd socket activation).
 #
-# Architecture (same-host / same-container production model — no bridge):
-#   ejabberd → php bin/console.php auth_ejabberd   (direct stdin/stdout)
+# Architecture (ejabberd and Friendica on different hosts):
+#   ejabberd → socat STDIO TCP:9000 → systemd-socket-activate (Friendica host)
+#                                       → php bin/console.php auth_ejabberd
 #
-# This image bundles the PHP CLI next to ejabberd (see ./Dockerfile), so ejabberd spawns
-# the Friendica auth daemon directly via Erlang open_port — exactly as it would on a host
-# where ejabberd and Friendica are installed side by side. No socat, no nc, no TCP bridge.
-# ejabberd keeps `extauth_pool_size` daemons alive and recycles one by closing its stdin,
-# upon which the daemon's read loop terminates naturally.
+# ejabberd spawns `socat STDIO TCP:...` via Erlang open_port (no shell, no PATH). socat is a
+# thin relay only — it does NOT manage the auth daemon. On the Friendica host the daemon is
+# launched per-connection by systemd socket activation (here: the friendica-extauth service
+# running systemd-socket-activate; in production: a friendica-extauth.socket + @.service unit).
 #
 # The vhost "localhost" must match Friendica's SERVER_NAME (.docker/.dist.env).
 
@@ -19,7 +19,6 @@ loglevel: info
 listen:
   - port: 5222
     module: ejabberd_c2s
-    # TLS is optional; clients may connect plaintext for local testing.
     starttls_required: false
 
   - port: 5281
@@ -30,9 +29,8 @@ listen:
 auth_method:
   - external
 # Full path required: ejabberd spawns via Erlang open_port without a shell or PATH.
-# /usr/bin/php is the php85 CLI installed alongside ejabberd (see ./Dockerfile); the
-# Friendica code is mounted at /var/www/html (see compose.ejabberd.yaml).
-extauth_program: "/usr/bin/php /var/www/html/bin/console.php auth_ejabberd"
+# socat relays stdin/stdout over TCP to the systemd-activated daemon on the Friendica host.
+extauth_program: "/usr/bin/socat STDIO TCP:friendica-extauth:9000"
 extauth_pool_size: 3
 # Friendica supports per-account XMPP application passwords; ejabberd's auth cache would
 # silently break them, so it must stay disabled.
