@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 22:48+0000\n"
+"POT-Creation-Date: 2026-06-06 12:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1772,7 +1772,7 @@ msgstr ""
 msgid "Unable to fetch user."
 msgstr ""
 
-#: src/Content/Item.php:1376 src/Core/L10n.php:539
+#: src/Content/Item.php:1376 src/Core/L10n.php:543
 msgid "Undetermined"
 msgstr ""
 
@@ -2682,7 +2682,7 @@ msgstr ""
 msgid "Could not connect to database."
 msgstr ""
 
-#: src/Core/L10n.php:549
+#: src/Core/L10n.php:553
 #, php-format
 msgid "%s (%s)"
 msgstr ""
@@ -7237,6 +7237,10 @@ msgstr ""
 
 #: src/Module/Item/Follow.php:35
 msgid "Unable to follow this item."
+msgstr ""
+
+#: src/Module/Item/Searchtext.php:48
+msgid "No search text found for this item. This can happen when the author has set their account to be non-discoverable or their posts to be non-indexable for searches."
 msgstr ""
 
 #: src/Module/LostPass.php:68
