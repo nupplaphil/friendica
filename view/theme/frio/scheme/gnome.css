@@ -408,6 +408,10 @@ aside {
   li a,
   li .btn-link {
     color: var(--text-primary) !important;
+
+    &:hover {
+      background: var(--bg-tertiary)
+    }
   }
 
   li > a {
