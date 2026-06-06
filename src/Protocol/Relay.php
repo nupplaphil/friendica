@@ -426,4 +426,42 @@ class Relay
 			DI::logger()->debug('Resubscribed', ['profile' => $server['url'], 'success' => $success]);
 		}
 	}
+
+
+	/**
+	 * Update tag relay subscriptions based on configured tags
+	 * Follows new tags and unfollows removed tags
+	 *
+	 * @return void
+	 */
+	public static function updateTagRelaySubscriptions()
+	{
+		if (!DI::config()->get('system', 'relay_auto_subscribe_tags')) {
+			return;
+		}
+
+		$currentTags = Relay::getSubscribedTags();
+		$oldTags     = json_decode(DI::keyValue()->get('relay_subscribed_tags') ?? '[]', true) ?? [];
+
+		// Follow new tags
+		foreach ($currentTags as $tag) {
+			if (!in_array($tag, $oldTags)) {
+				$url = 'https://tags.pub/user/' . urlencode((string) $tag);
+				DI::logger()->info('Following relay tag', ['url' => $url]);
+				ActivityPub\Transmitter::sendRelayFollow($url);
+			}
+		}
+
+		// Unfollow removed tags
+		foreach ($oldTags as $tag) {
+			if (!in_array($tag, $currentTags)) {
+				$url = 'https://tags.pub/user/' . urlencode((string) $tag);
+				DI::logger()->info('Unfollowing relay tag', ['url' => $url]);
+				ActivityPub\Transmitter::sendRelayUndoFollow($url);
+			}
+		}
+
+		// Save current state
+		DI::keyValue()->set('relay_subscribed_tags', json_encode($currentTags));
+	}
 }

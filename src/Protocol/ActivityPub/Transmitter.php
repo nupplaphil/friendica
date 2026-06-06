@@ -58,6 +58,10 @@ class Transmitter
 			$inboxes[$contact['inbox']] = $contact['inbox'];
 		}
 
+		if (DI::config()->get('system', 'relay_auto_subscribe_tags')) {
+			$inboxes['https://tags.pub/user/_____relay_____/inbox'] = 'https://tags.pub/user/_____relay_____/inbox';
+		}
+
 		return $inboxes;
 	}
 
