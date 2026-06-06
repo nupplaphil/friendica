@@ -10,7 +10,6 @@ namespace Friendica;
 use Friendica\App\Router;
 use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\ICanCreateResponses;
-use Friendica\Core\Hook;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Event\ModuleContentEvent;
@@ -52,7 +51,7 @@ abstract class BaseModule implements ICanHandleRequests
 	protected $server;
 	/** @var ICanCreateResponses */
 	protected $response;
-	private EventDispatcherInterface $eventDispatcher;
+	private readonly EventDispatcherInterface $eventDispatcher;
 
 	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [], ?EventDispatcherInterface $eventDispatcher = null)
 	{
@@ -212,7 +211,7 @@ abstract class BaseModule implements ICanHandleRequests
 		$timestamp = microtime(true);
 
 		$this->eventDispatcher->dispatch(
-			new ModuleInitEvent(ModuleInitEvent::MODULE_INIT, $this->args->getModuleName(), static::class)
+			new ModuleInitEvent(ModuleInitEvent::MODULE_INIT, $this->args->getModuleName(), static::class),
 		);
 
 		$this->profiler->set(microtime(true) - $timestamp, 'init');
@@ -226,7 +225,7 @@ abstract class BaseModule implements ICanHandleRequests
 				break;
 			case Router::POST:
 				$request = $this->eventDispatcher->dispatch(
-					new ModulePostEvent(ModulePostEvent::MODULE_POST, $this->args->getModuleName(), static::class, $request)
+					new ModulePostEvent(ModulePostEvent::MODULE_POST, $this->args->getModuleName(), static::class, $request),
 				)->getPost();
 
 				$this->post($request);
@@ -247,7 +246,7 @@ abstract class BaseModule implements ICanHandleRequests
 
 		try {
 			$content = $this->eventDispatcher->dispatch(
-				new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, '')
+				new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, ''),
 			)->getContent();
 			$this->response->addContent($content);
 			$this->response->addContent($this->content($request));

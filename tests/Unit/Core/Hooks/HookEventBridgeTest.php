@@ -608,8 +608,8 @@ class HookEventBridgeTest extends TestCase
 	public static function getModuleInitEventData(): array
 	{
 		return [
-			'Home'          => ['friendica.module_init', 'home_mod_init', 'home', \Friendica\Module\Home::class],
-			'LegacyModule'  => ['friendica.module_init', 'photos_mod_init', 'photos', \Friendica\LegacyModule::class],
+			'Home'         => ['friendica.module_init', 'home_mod_init', 'home', \Friendica\Module\Home::class],
+			'LegacyModule' => ['friendica.module_init', 'photos_mod_init', 'photos', \Friendica\LegacyModule::class],
 		];
 	}
 
@@ -633,8 +633,8 @@ class HookEventBridgeTest extends TestCase
 	public static function getModulePostEventData(): array
 	{
 		return [
-			'Home'          => ['friendica.module_post', 'home_mod_post', 'home', \Friendica\Module\Home::class],
-			'LegacyModule'  => ['friendica.module_post', 'photos_mod_post', 'photos', \Friendica\LegacyModule::class],
+			'Home'         => ['friendica.module_post', 'home_mod_post', 'home', \Friendica\Module\Home::class],
+			'LegacyModule' => ['friendica.module_post', 'photos_mod_post', 'photos', \Friendica\LegacyModule::class],
 		];
 	}
 
@@ -658,8 +658,8 @@ class HookEventBridgeTest extends TestCase
 	public static function getModuleContentEventData(): array
 	{
 		return [
-			'Home'          => ['friendica.module_content', 'Friendica\Module\Home_mod_content', 'home', \Friendica\Module\Home::class],
-			'LegacyModule'  => ['friendica.module_content', 'Friendica\LegacyModule_mod_content', 'photos', \Friendica\LegacyModule::class],
+			'Home'         => ['friendica.module_content', 'Friendica\Module\Home_mod_content', 'home', \Friendica\Module\Home::class],
+			'LegacyModule' => ['friendica.module_content', 'Friendica\LegacyModule_mod_content', 'photos', \Friendica\LegacyModule::class],
 		];
 	}
 

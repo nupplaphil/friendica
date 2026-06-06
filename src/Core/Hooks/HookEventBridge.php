@@ -237,7 +237,7 @@ final class HookEventBridge
 	public static function onCollectRoutesEvent(CollectRoutesEvent $event): void
 	{
 		$event->setRouteCollector(
-			static::callHook($event->getName(), $event->getRouteCollector())
+			static::callHook($event->getName(), $event->getRouteCollector()),
 		);
 	}
 
@@ -437,14 +437,14 @@ final class HookEventBridge
 	public static function onArrayFilterEvent(ArrayFilterEvent $event): void
 	{
 		$event->setArray(
-			static::callHook($event->getName(), $event->getArray())
+			static::callHook($event->getName(), $event->getArray()),
 		);
 	}
 
 	public static function onHtmlFilterEvent(HtmlFilterEvent $event): void
 	{
 		$event->setHtml(
-			static::callHook($event->getName(), $event->getHtml())
+			static::callHook($event->getName(), $event->getHtml()),
 		);
 	}
 
@@ -456,7 +456,7 @@ final class HookEventBridge
 	public static function onModulePostEvent(ModulePostEvent $event): void
 	{
 		$event->setPost(
-			static::callHook($event->getModuleName() . '_mod_post', $event->getPost())
+			static::callHook($event->getModuleName() . '_mod_post', $event->getPost()),
 		);
 	}
 
