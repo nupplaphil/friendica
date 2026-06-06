@@ -17,6 +17,9 @@ use Friendica\Event\CollectRoutesEvent;
 use Friendica\Event\ConfigLoadedEvent;
 use Friendica\Event\Event;
 use Friendica\Event\HtmlFilterEvent;
+use Friendica\Event\ModuleContentEvent;
+use Friendica\Event\ModuleInitEvent;
+use Friendica\Event\ModulePostEvent;
 use PHPUnit\Framework\TestCase;
 
 class HookEventBridgeTest extends TestCase
@@ -110,6 +113,9 @@ class HookEventBridgeTest extends TestCase
 			HtmlFilterEvent::MOD_PROFILE_CONTENT              => 'onHtmlFilterEvent',
 			HtmlFilterEvent::JOT_TOOL                         => 'onHtmlFilterEvent',
 			HtmlFilterEvent::CONTACT_BLOCK_END                => 'onHtmlFilterEvent',
+			ModuleInitEvent::MODULE_INIT                      => 'onModuleInitEvent',
+			ModulePostEvent::MODULE_POST                      => 'onModulePostEvent',
+			ModuleContentEvent::MODULE_CONTENT                => 'onModuleContentEvent',
 		];
 
 		$this->assertSame(
@@ -597,5 +603,84 @@ class HookEventBridgeTest extends TestCase
 		});
 
 		HookEventBridge::onHtmlFilterEvent($event);
+	}
+
+	public static function getModuleInitEventData(): array
+	{
+		return [
+			'Home'          => ['friendica.module_init', 'home_mod_init', 'home', \Friendica\Module\Home::class],
+			'LegacyModule'  => ['friendica.module_init', 'photos_mod_init', 'photos', \Friendica\LegacyModule::class],
+		];
+	}
+
+	#[\PHPUnit\Framework\Attributes\DataProvider('getModuleInitEventData')]
+	public function testOnModuleInitEventCallsHookWithCorrectValue($name, $expected, $moduleName, $moduleClass): void
+	{
+		$event = new ModuleInitEvent($name, $moduleName, $moduleClass);
+
+		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
+
+		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected) {
+			$this->assertSame($expected, $name);
+			$this->assertSame('', $data);
+
+			return $data;
+		});
+
+		HookEventBridge::onModuleInitEvent($event);
+	}
+
+	public static function getModulePostEventData(): array
+	{
+		return [
+			'Home'          => ['friendica.module_post', 'home_mod_post', 'home', \Friendica\Module\Home::class],
+			'LegacyModule'  => ['friendica.module_post', 'photos_mod_post', 'photos', \Friendica\LegacyModule::class],
+		];
+	}
+
+	#[\PHPUnit\Framework\Attributes\DataProvider('getModulePostEventData')]
+	public function testOnModulePostEventCallsHookWithCorrectValue($name, $expected, $moduleName, $moduleClass): void
+	{
+		$event = new ModulePostEvent($name, $moduleName, $moduleClass, ['original']);
+
+		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
+
+		$reflectionProperty->setValue(null, function (string $name, $data) use ($expected) {
+			$this->assertSame($expected, $name);
+			$this->assertSame(['original'], $data);
+
+			return $data;
+		});
+
+		HookEventBridge::onModulePostEvent($event);
+	}
+
+	public static function getModuleContentEventData(): array
+	{
+		return [
+			'Home'          => ['friendica.module_content', 'Friendica\Module\Home_mod_content', 'home', \Friendica\Module\Home::class],
+			'LegacyModule'  => ['friendica.module_content', 'Friendica\LegacyModule_mod_content', 'photos', \Friendica\LegacyModule::class],
+		];
+	}
+
+	#[\PHPUnit\Framework\Attributes\DataProvider('getModuleContentEventData')]
+	public function testOnModuleContentEventCallsHookWithCorrectValue($name, $expected, $moduleName, $moduleClass): void
+	{
+		$event = new ModuleContentEvent($name, $moduleName, $moduleClass, 'original');
+
+		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
+
+		$reflectionProperty->setValue(null, function (string $name, array $data) use ($expected) {
+			$this->assertSame($expected, $name);
+			$this->assertSame(['content' => 'original'], $data);
+
+			$data['content'] = 'changed';
+
+			return $data;
+		});
+
+		HookEventBridge::onModuleContentEvent($event);
+
+		$this->assertSame('changed', $event->getContent());
 	}
 }
