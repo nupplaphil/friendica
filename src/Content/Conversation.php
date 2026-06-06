@@ -250,6 +250,8 @@ class Conversation
 
 	public function statusEditor(array $x = [], int $notes_cid = 0, bool $popup = false): string
 	{
+
+		// The user viewing, not the user being viewed
 		$user = User::getById($this->session->getLocalUserId(), ['uid', 'nickname', 'allow_location', 'default-location']);
 		if (empty($user['uid'])) {
 			return '';
@@ -267,7 +269,6 @@ class Conversation
 		$x['visitor'] ??= 'block';
 		$x['is_owner'] ??= true;
 		$x['profile_uid'] ??= $this->session->getLocalUserId();
-
 
 		$geotag = !empty($x['allow_location']) ? Renderer::replaceMacros(Renderer::getMarkupTemplate('jot_geotag.tpl'), []) : '';
 
@@ -305,8 +306,14 @@ class Conversation
 
 		$tpl = Renderer::getMarkupTemplate('jot.tpl');
 
+		if (isset($x['contact_account_type']) && $x['contact_account_type'] === User::ACCOUNT_TYPE_COMMUNITY) {
+			$new_post = $this->l10n->t('Post to group');
+		} else {
+			$new_post = $this->l10n->t('New Post');
+		}
+
 		$o .= Renderer::replaceMacros($tpl, [
-			'$new_post'            => $this->l10n->t('New Post'),
+			'$new_post'            => $new_post,
 			'$return_path'         => $this->args->getQueryString(),
 			'$action'              => 'item',
 			'$share'               => ($x['button'] ?? '') ?: $this->l10n->t('Post'),
