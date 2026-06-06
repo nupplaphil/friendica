@@ -2159,29 +2159,62 @@ code > .hl-main {
 	margin: 0;
 	padding: 10px 0;
 }
-.wall-item-tags,
-.itemedited {
-	margin: 10px 0;
-	font-size: 13px;
-}
-.wall-item-tags:empty {
-	margin: 0;
-}
 
-.wall-item-tags a {
-	color: $font_color_darker;
-}
-
-.wall-item-tags a:hover {
-	text-decoration: none;
-}
 .wall-item-bottom .label,
 .wall-item-bottom .label a {
 	color: #fff;
 }
-.wall-item-tags .category,
-.wall-item-tags .folder {
-	margin-right: 3px;
+
+/* Tags, mentions, categories and folders */
+
+.wall-item-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	padding-block: 8px;
+}
+
+.tag {
+	font-size: 12.5px;
+	font-weight: normal;
+	padding: 0; /* The padding should be on the link instead, so it's clickable */
+}
+.tag:empty {
+	margin: 0;
+}
+.tag bdi a, .tag:has(.filerm) a:first-child {
+	display: inline-block;
+	padding: 6px 12px;
+}
+
+.filerm {
+	font-size: 16px;
+	padding-block: 3.5px;
+    padding-inline: 6.5px;
+}
+
+.tag a:hover {
+}
+
+.itemedited {
+	margin: 10px 0;
+	font-size: 13px;
+}
+
+/* Tags and mentions hover effect */
+.tag {
+    filter: grayscale(0.5);
+    opacity: 0.8;
+
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+.wall-item-container:hover .tag {
+    filter: grayscale(0);
+    opacity: 1;
 }
 
 /* item social action buttons */
@@ -2263,31 +2296,8 @@ button[disabled] {
 	display: flex;
 	flex-basis: auto;
 }
-/* wall item hover effects */
 
 @media (min-width: 768px) {
-	/* Tags and mentions */
-	.wall-item-container .wall-item-bottom .wall-item-tags span.label {
-		filter: grayscale(0.5);
-		opacity: 0.8;
-
-		-webkit-transition: all 0.25s ease-in-out;
-		-moz-transition: all 0.25s ease-in-out;
-		-o-transition: all 0.25s ease-in-out;
-		-ms-transition: all 0.25s ease-in-out;
-		transition: all 0.25s ease-in-out;
-	}
-
-	.wall-item-container:hover .wall-item-bottom .wall-item-tags span.label {
-		filter: grayscale(0);
-		opacity: 1;
-
-		-webkit-transition: all 0.25s ease-in-out;
-		-moz-transition: all 0.25s ease-in-out;
-		-o-transition: all 0.25s ease-in-out;
-		-ms-transition: all 0.25s ease-in-out;
-		transition: all 0.25s ease-in-out;
-	}
 	/* Like/Comment/etc buttons */
 	.wall-item-container .wall-item-links,
 	.wall-item-container .wall-item-actions button > a {

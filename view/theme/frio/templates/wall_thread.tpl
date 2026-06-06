@@ -286,23 +286,23 @@ as the value of $top_child_total (this is done at the end of this file)
 			<div class="wall-item-tags" lang="{{$item.lang}}">
 		{{if !$item.suppress_tags}}
 			{{foreach $item.hashtags as $tag}}
-				<span class="tag label btn-info sm">{{$tag nofilter}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></span>
+				<span class="tag label label-default">{{$tag nofilter}}</span>
 			{{/foreach}}
 
 			{{foreach $item.mentions as $tag}}
-				<span class="mention label btn-warning sm">{{$tag nofilter}} <i class="ri ri-user-line" aria-hidden="true"></i></span>
+				<span class="tag mention label label-warning">{{$tag nofilter}}</span>
 			{{/foreach}}
 
 			{{*foreach $item.implicit_mentions as $tag}}
-				<span class="mention label label-default sm">{{$tag nofilter}} <i class="ri ri-eye-off-line" aria-hidden="true"></i></span>
+				<span class="tag mention label label-default">{{$tag nofilter}}</span>
 			{{/foreach*}}
 		{{/if}}
 			{{foreach $item.folders as $folder}}
-				<span class="folder label btn-danger sm p-category">{{$folder.name}}{{if $folder.removeurl}} (<a href="{{$folder.removeurl}}" class="filerm" title="{{$remove}}">x</a>){{/if}}</span>
+				<span class="tag folder label label-danger"><a href="{{$folder.url}}">{{$folder.name}}</a>{{if $folder.removeurl}}<a href="{{$folder.removeurl}}" class="filerm" title="{{$remove}}">x</a>{{/if}}</span>
 			{{/foreach}}
 
 			{{foreach $item.categories as $cat}}
-				<span class="category label btn-success sm p-category"><a href="{{$cat.url}}">{{$cat.name}}</a>{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" class="filerm" title="{{$remove}}">x</a>){{/if}}</span>
+				<span class="tag category label btn-success"><a href="{{$cat.url}}">{{$cat.name}}</a>{{if $cat.removeurl}}<a href="{{$cat.removeurl}}" class="filerm" title="{{$remove}}">x</a>{{/if}}</span>
 			{{/foreach}}
 			</div>
 			{{if $item.edited}}<div class="itemedited text-muted">{{$item.edited['label']}} (<span title="{{$item.edited['date']}}">{{$item.edited['relative']}}</span>)</div>{{/if}}

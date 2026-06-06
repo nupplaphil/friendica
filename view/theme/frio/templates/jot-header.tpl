@@ -204,7 +204,7 @@
 			jotActive();
 		});
 
-		$('body').on('click', '.p-category .filerm', function(e){
+		$('body').on('click', '.filerm', function(e){
 			e.preventDefault();
 
 			let $href = $(e.target).attr('href');

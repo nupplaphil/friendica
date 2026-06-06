@@ -132,7 +132,7 @@ class Item
 			foreach (Post\Category::getArrayByURIId($item['uri-id'], $uid, Post\Category::FILE) as $savedFolderName) {
 				$folders[] = [
 					'name'      => $savedFolderName,
-					'url'       => "#",
+					'url'       => '/filed?file=' . $savedFolderName,
 					'removeurl' => $this->userSession->getLocalUserId() == $uid ? 'filerm/' . $item['id'] . '?term=' . rawurlencode((string) $savedFolderName) : '',
 					'first'     => $first,
 					'last'      => false,

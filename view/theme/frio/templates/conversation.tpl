@@ -26,11 +26,8 @@
 {{if !$update}}
 <div id="conversation-end"></div>
     {{if $dropping}}
-<div id="item-delete-selected" class="fakelink" onclick="deleteCheckedItems();">
-	<div id="item-delete-selected-icon" class="icon drophide" title="{{$dropping}}"
-	     onmouseover="imgbright(this);" onmouseout="imgdull(this);"></div>
-	<div id="item-delete-selected-desc">{{$dropping}}</div>
-</div>
-<div id="item-delete-selected-end"></div>
+		<button type="button" id="item-delete-selected" class="btn btn-link" title="{{$dropping}}" onclick="deleteCheckedItems();" data-toggle="tooltip">
+			<i class="ri ri-delete-bin-line" aria-hidden="true"></i>
+		</button>
     {{/if}}
 {{/if}}

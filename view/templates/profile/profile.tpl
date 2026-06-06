@@ -90,9 +90,9 @@
 		<hr class="profile-separator">
 		<dt class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile-label-name text-muted">{{$basic_fields.pub_keywords.label}}</dt>
 		<dd class="col-lg-8 col-md-8 col-sm-8 col-xs-12 profile-entry">
-            {{foreach $basic_fields.pub_keywords.value as $tag}}
-				<a href="{{$tag.url}}" class="tag label btn-info sm">{{$tag.label}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></a>
-            {{/foreach}}
+			{{foreach $basic_fields.pub_keywords.value as $tag}}
+				<a href="{{$tag.url}}" class="tag label label-default">{{$tag.label}}</a>
+			{{/foreach}}
 		</dd>
 	</dl>
 {{/if}}

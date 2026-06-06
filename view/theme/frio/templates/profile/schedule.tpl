@@ -67,13 +67,13 @@
 				<div class="wall-item-links"></div>
 				<div class="wall-item-tags">
 					{{foreach $row.item.hashtags as $tag}}
-						<span class="tag label btn-info sm">{{$tag nofilter}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></span>
+						<span class="tag label label-default">{{$tag nofilter}}</span>
 					{{/foreach}}
 					{{foreach $row.item.mentions as $tag}}
-						<span class="mention label btn-warning sm">{{$tag nofilter}} <i class="ri ri-user-line" aria-hidden="true"></i></span>
+						<span class="tag mention label label-warning">{{$tag nofilter}}</span>
 					{{/foreach}}
 					{{foreach $row.item.implicit_mentions as $tag}}
-						<span class="mention label label-default sm">{{$tag nofilter}} <i class="ri ri-eye-off-line" aria-hidden="true"></i></span>
+						<span class="tag mention label label-default">{{$tag nofilter}}</span>
 					{{/foreach}}
 				</div>
 			</div>
