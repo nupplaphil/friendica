@@ -140,7 +140,7 @@ class JsonLD
 	 */
 	public static function normalize($json)
 	{
-		if (!self::isValidObject($json)) {
+		if (!is_array($json) || !self::isValidObject($json)) {
 			return [];
 		}
 
@@ -218,7 +218,7 @@ class JsonLD
 		}
 
 		$json = json_decode(json_encode($compacted, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), true);
-		if (!self::isValidObject($json)) {
+		if (!is_array($json) || !self::isValidObject($json)) {
 			return [];
 		}
 
