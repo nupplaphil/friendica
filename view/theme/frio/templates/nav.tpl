@@ -235,7 +235,8 @@
 									<li>
 										<a role="menuitem" id="nav-directory-link" class="nav-link {{$nav.directory.2}}"
 											href="{{$nav.directory.0}}" title="{{$nav.directory.3}}">
-											<i class="ri ri-node-tree ri-fw" aria-hidden="true"></i>{{$nav.directory.1}}
+											<i class="ri ri-node-tree ri-fw" aria-hidden="true"></i>
+											{{$nav.directory.1}}
 										</a>
 									</li>
 									<li class="divider"><hr></li>
