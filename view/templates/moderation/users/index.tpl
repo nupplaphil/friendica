@@ -56,7 +56,7 @@
 					<td class="register_date">{{$u.register_date}}</td>
 					<td class="login_date">{{$u.login_date}}</td>
 					<td class="lastitem_date">{{$u.lastitem_date}}</td>
-					<td class="login_date">{{$u.page_type.0}} {{if $u.is_admin}}({{$siteadmin}}){{/if}} {{if $u.account_expired}}({{$accountexpired}}){{/if}} {{if $u.blocked}}{{$blocked}}{{/if}}</td>create
+					<td class="login_date">{{$u.page_type.0}} {{if $u.is_admin}}({{$siteadmin}}){{/if}} {{if $u.account_expired}}({{$accountexpired}}){{/if}} {{if $u.blocked}}{{$blocked}}{{/if}}</td>
 					<td class="checkbox">
 						{{if $u.is_deletable}}
 						<input type="checkbox" class="users_ckbx" id="id_user_{{$u.uid}}" name="user[]" value="{{$u.uid}}"/>
