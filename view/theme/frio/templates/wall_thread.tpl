@@ -283,26 +283,30 @@ as the value of $top_child_total (this is done at the end of this file)
 		<!-- TODO -->
 		<div class="wall-item-bottom">
 			<div class="wall-item-links"></div>
-			<div class="wall-item-tags" lang="{{$item.lang}}">
-		{{if !$item.suppress_tags}}
-			{{foreach $item.hashtags as $tag}}
-				<span class="tag label label-default">{{$tag nofilter}}</span>
-			{{/foreach}}
+			<div class="tags wall-item-tags" lang="{{$item.lang}}">
+			{{if !$item.suppress_tags}}
+				{{foreach $item.hashtags as $tag}}
+					<span class="tag hashtag label border border-default">{{$tag nofilter}}</span>
+				{{/foreach}}
 
-			{{foreach $item.mentions as $tag}}
-				<span class="tag mention label label-warning">{{$tag nofilter}}</span>
-			{{/foreach}}
+				{{foreach $item.mentions as $tag}}
+					<span class="tag mention label border border-primary">{{$tag nofilter}}</span>
+				{{/foreach}}
 
-			{{*foreach $item.implicit_mentions as $tag}}
-				<span class="tag mention label label-default">{{$tag nofilter}}</span>
-			{{/foreach*}}
-		{{/if}}
+				{{*foreach $item.implicit_mentions as $tag}}
+					<span class="tag mention label border border-info">{{$tag nofilter}}</span>
+				{{/foreach*}}
+			{{/if}}
 			{{foreach $item.folders as $folder}}
-				<span class="tag folder label label-danger"><a href="{{$folder.url}}">{{$folder.name}}</a>{{if $folder.removeurl}}<a href="{{$folder.removeurl}}" class="filerm" title="{{$remove}}">x</a>{{/if}}</span>
+				<span class="tag folder label border border-success">
+				  <a href="{{$folder.url}}">{{$folder.name}}</a>{{if $folder.removeurl}}<a href="{{$folder.removeurl}}" class="filerm" title="{{$remove}}"><i class="ri ri-close-circle-line" aria-hidden="true"></i></a>{{/if}}
+				</span>
 			{{/foreach}}
 
 			{{foreach $item.categories as $cat}}
-				<span class="tag category label btn-success"><a href="{{$cat.url}}">{{$cat.name}}</a>{{if $cat.removeurl}}<a href="{{$cat.removeurl}}" class="filerm" title="{{$remove}}">x</a>{{/if}}</span>
+				<span class="tag category label border border-danger">
+					<a href="{{$cat.url}}">{{$cat.name}}</a>{{if $cat.removeurl}}<a href="{{$cat.removeurl}}" class="filerm" title="{{$remove}}"><i class="ri ri-close-circle-line" aria-hidden="true"></i></a>{{/if}}
+				</span>
 			{{/foreach}}
 			</div>
 			{{if $item.edited}}<div class="itemedited text-muted">{{$item.edited['label']}} (<span title="{{$item.edited['date']}}">{{$item.edited['relative']}}</span>)</div>{{/if}}

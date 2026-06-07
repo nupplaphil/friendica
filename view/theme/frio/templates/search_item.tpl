@@ -122,23 +122,25 @@
 			<!-- TODO -->
 			<div class="wall-item-bottom">
 				<div class="wall-item-links"></div>
-				<div class="wall-item-tags">
+				<div class="tags wall-item-tags">
 			{{if !$item.suppress_tags}}
 				{{foreach $item.hashtags as $tag}}
-					<span class="tag label label-default">{{$tag nofilter}}</span>
+					<span class="tag hashtag label border border-default">{{$tag nofilter}}</span>
 				{{/foreach}}
 
 				{{foreach $item.mentions as $tag}}
-					<span class="tag mention label label-warning">{{$tag nofilter}} <i class="ri ri-user-line" aria-hidden="true"></i></span>
+					<span class="tag mention label border border-primary">{{$tag nofilter}}</span>
 				{{/foreach}}
 			{{/if}}
 
+      {{* No implicit mentions unlike wall_thread? *}}
+
 				{{foreach $item.folders as $cat}}
-					<span class="tag folder label label-danger">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}">x</a>) {{/if}} </span>
+					<span class="tag folder label border border-success">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
 				{{/foreach}}
 
 				{{foreach $item.categories as $cat}}
-					<span class="tag category label label-success">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}">x</a>) {{/if}} </span>
+					<span class="tag category label border border-danger">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
 				{{/foreach}}
 				</div>
 				{{if $item.edited}}<div class="itemedited text-muted">{{$item.edited['label']}} (<span title="{{$item.edited['date']}}">{{$item.edited['relative']}}</span>)</div>{{/if}}

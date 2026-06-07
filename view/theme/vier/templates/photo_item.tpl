@@ -28,7 +28,7 @@
 	<div class="wall-item-bottom">
 		<div class="wall-item-links">
 		</div>
-		<div class="wall-item-tags">
+		<div class="wall-item-tags tags">
 			{{foreach $tags as $tag}}
 				<span class='tag'>{{$tag nofilter}}</span>
 			{{/foreach}}

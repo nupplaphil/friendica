@@ -89,9 +89,9 @@
 	<dl id="aprofile-tags" class="row {{$basic_fields.pub_keywords.class|default:'aprofile'}}">
 		<hr class="profile-separator">
 		<dt class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile-label-name text-muted">{{$basic_fields.pub_keywords.label}}</dt>
-		<dd class="col-lg-8 col-md-8 col-sm-8 col-xs-12 profile-entry">
+		<dd class="col-lg-8 col-md-8 col-sm-8 col-xs-12 profile-entry tags">
 			{{foreach $basic_fields.pub_keywords.value as $tag}}
-				<a href="{{$tag.url}}" class="tag label label-default">{{$tag.label}}</a>
+				<a href="{{$tag.url}}" class="tag hashtag label label-default border border-default">{{$tag.label}}</a>
 			{{/foreach}}
 		</dd>
 	</dl>

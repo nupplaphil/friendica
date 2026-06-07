@@ -5,7 +5,7 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <nav>
-	<span id="trending-tags-sidebar-inflated" class="widget inflated fakelink">
+	<span id="trending-tags-sidebar-inflated" class="widget inflated">
 		<button class="fakelink" style="display: flex; justify-content: space-between; width: 100%;" onclick="openCloseWidget('trending-tags-sidebar', 'trending-tags-sidebar-inflated');" aria-expanded="false">
 			<h3>
 				<i class="ri ri-hashtag" aria-hidden="true"></i>

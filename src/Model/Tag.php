@@ -557,7 +557,7 @@ class Tag
 					}
 
 					$return['hashtags'][] = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
-					$return['tags'][]     = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix .  htmlspecialchars((string) $tag['name']) . '</a></bdi>';
+					$return['tags'][]     = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
 					break;
 
 				case self::MENTION:

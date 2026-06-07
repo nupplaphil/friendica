@@ -56,9 +56,9 @@
 	</div>
 </div>
 {{if $profile.tags}}
-	<div class="hover-card-footer">
+	<div class="hover-card-footer tags">
     {{foreach $profile.tags as $tag}}
-	<a href="{{$tag.url}}" class="tag label btn-info sm">{{$tag.label}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></a>
+	<a href="{{$tag.url}}" class="tag label border border-default">{{$tag.label}}</a>
     {{/foreach}}
 	</div>
 {{/if}}
