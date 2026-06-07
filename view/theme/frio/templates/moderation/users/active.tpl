@@ -77,7 +77,7 @@
 					<td>
 						<i class="ri {{$u.page_type.1}}" title="{{$u.page_type.0}}"></i>
 						{{if $u.page_flags_raw==0 && $u.account_type_raw > 0}}
-							<i class="ri {{$u.account_type.1" title"{{u.account_type.0}}"></i>
+							<i class="ri {{$u.account_type.1}}" title="{{$u.account_type.0}}"></i>
 						{{/if}}
 						{{if $u.is_admin}}<i class="ri ri-spy-line text-primary" title="{{$siteadmin}}"></i>{{/if}}
 						{{if $u.account_expired}}<i class="ri ri-time-line text-warning" title="{{$accountexpired}}"></i>{{/if}}
