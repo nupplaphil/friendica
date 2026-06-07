@@ -233,7 +233,7 @@ class Receiver
 	 * @param array  $activity
 	 * @return void
 	 */
-	public static function handlePost(string $object_id, string $actor, array $activity = [])
+	public static function handlePost(string $object_id, string $actor, array $activity = []): void
 	{
 		$item_id = Item::searchByLink($object_id);
 		if ($item_id) {

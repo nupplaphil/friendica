@@ -9,9 +9,7 @@ namespace Friendica\Module\WellKnown;
 
 use Friendica\BaseModule;
 use Friendica\DI;
-use Friendica\Model\Search;
 use Friendica\Protocol\Relay;
-use Friendica\Util\Strings;
 
 /**
  * Node subscription preferences for social relay systems
@@ -31,13 +29,13 @@ class XSocialRelay extends BaseModule
 			'tags'      => ($scope == Relay::SCOPE_TAGS) ? Relay::getSubscribedTags() : [],
 			'protocols' => [
 				'activitypub' => [
-					'actor' => DI::baseUrl() . '/friendica',
-					'receive' => DI::baseUrl() . '/inbox'
+					'actor'   => DI::baseUrl() . '/friendica',
+					'receive' => DI::baseUrl() . '/inbox',
 				],
-				'dfrn'     => [
-					'receive' => DI::baseUrl() . '/dfrn_notify'
-				]
-			]
+				'dfrn' => [
+					'receive' => DI::baseUrl() . '/dfrn_notify',
+				],
+			],
 		];
 
 		if (DI::config()->get("system", "diaspora_enabled")) {

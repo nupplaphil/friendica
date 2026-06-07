@@ -357,6 +357,9 @@ class CurlResult implements ICanHandleHttpResponses
 	public function getBodyStream(): StreamInterface
 	{
 		$stream = fopen('php://temp', 'r+');
+		if ($stream === false) {
+			throw new \RuntimeException('Failed to open php://temp stream');
+		}
 		fwrite($stream, $this->body);
 		rewind($stream);
 		return new Stream($stream);
