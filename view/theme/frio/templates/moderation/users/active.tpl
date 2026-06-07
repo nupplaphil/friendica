@@ -75,23 +75,9 @@
 
 				{{if !in_array($order_users,[$th_users.2.1, $th_users.3.1, $th_users.4.1]) }}
 					<td>
-						<i class="ri
-							{{if $u.page_flags_raw==0}}ri-user-line{{/if}}		{{* PAGE_NORMAL *}}
-							{{if $u.page_flags_raw==1}}ri-megaphone-line{{/if}}		{{* PAGE_SOAPBOX *}}
-							{{if $u.page_flags_raw==2}}ri-team-line{{/if}}		{{* PAGE_COMMUNITY *}}
-							{{if $u.page_flags_raw==3}}ri-heart-line{{/if}}		{{* PAGE_FREELOVE *}}
-							{{if $u.page_flags_raw==4}}ri-broadcast-line{{/if}}		{{* PAGE_BLOG *}}
-							{{if $u.page_flags_raw==5}}ri-spy-line{{/if}}	{{* PAGE_PRVGROUP *}}
-							{{if $u.page_flags_raw==6}}ri-team-line{{/if}}		{{* PAGE_COMM_MAN *}}
-							" title="{{$u.page_flags}}">
-						</i>
+						<i class="ri {{$u.page_type.1}}" title="{{$u.page_type.0}}"></i>
 						{{if $u.page_flags_raw==0 && $u.account_type_raw > 0}}
-						<i class="ri
-							{{if $u.account_type_raw==1}}ri-node-tree{{/if}}		{{* ACCOUNT_TYPE_ORGANISATION *}}
-							{{if $u.account_type_raw==2}}ri-newspaper-line{{/if}}	{{* ACCOUNT_TYPE_NEWS *}}
-							{{if $u.account_type_raw==3}}ri-chat-3-line{{/if}}		{{* ACCOUNT_TYPE_COMMUNITY *}}
-							" title="{{$u.account_type}}">
-						</i>
+							<i class="ri {{$u.account_type.1" title"{{u.account_type.0}}"></i>
 						{{/if}}
 						{{if $u.is_admin}}<i class="ri ri-spy-line text-primary" title="{{$siteadmin}}"></i>{{/if}}
 						{{if $u.account_expired}}<i class="ri ri-time-line text-warning" title="{{$accountexpired}}"></i>{{/if}}
@@ -129,7 +115,7 @@
 					{{if in_array($order_users,[$th_users.2.1, $th_users.3.1, $th_users.4.1]) }}
 						<p>
 							<a href="{{$baseurl}}/moderation/users/active?o={{if $order_direction_users == "+"}}-{{/if}}{{$th_users.5.1}}" class="btn-link table-order">
-								&#8597; {{$th_users.5.0}}</a> : {{$u.page_flags}}{{if $u.page_flags_raw==0 && $u.account_type_raw > 0}}, {{$u.account_type}}{{/if}} {{if $u.is_admin}}({{$siteadmin}}){{/if}} {{if $u.account_expired}}({{$accountexpired}}){{/if}}
+								&#8597; {{$th_users.5.0}}</a> : {{$u.page_type.0}}{{if $u.page_flags_raw==0 && $u.account_type_raw > 0}}, {{$u.account_type.0}}{{/if}} {{if $u.is_admin}}({{$siteadmin}}){{/if}} {{if $u.account_expired}}({{$accountexpired}}){{/if}}
 						</p>
 					{{/if}}
 
