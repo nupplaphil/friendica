@@ -273,7 +273,7 @@ class Create extends BaseModule
 
 			$formSecurityToken = BaseModule::getFormSecurityToken('contact_action');
 
-			$threads = DI::conversation()->getContextLessThreadList($items, ConversationContent::MODE_CONTACT_POSTS, false, false, $formSecurityToken);
+			$threads = DI::conversationHtmlRenderer()->buildContextLessThreadsByItems($items, ConversationContent::MODE_CONTACT_POSTS, false, false, DI::userSession()->getLocalUserId());
 		}
 
 		$tpl = Renderer::getMarkupTemplate('moderation/report/create/pick_posts.tpl');
