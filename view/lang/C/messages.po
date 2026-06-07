@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-06 15:44+0200\n"
+"POT-Creation-Date: 2026-06-07 18:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2902,7 +2902,7 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: src/Model/Contact.php:1797 src/Module/Moderation/BaseUsers.php:147
+#: src/Model/Contact.php:1797 src/Module/Moderation/BaseUsers.php:148
 msgid "Relay"
 msgstr ""
 
@@ -7476,49 +7476,49 @@ msgstr ""
 msgid "List of pending user deletions"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:135 src/Module/Settings/Account.php:432
+#: src/Module/Moderation/BaseUsers.php:136 src/Module/Settings/Account.php:432
 msgid "Normal Account Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:136 src/Module/Settings/Account.php:439
+#: src/Module/Moderation/BaseUsers.php:137 src/Module/Settings/Account.php:439
 msgid "Soapbox Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:137 src/Module/Register.php:140
+#: src/Module/Moderation/BaseUsers.php:138 src/Module/Register.php:140
 #: src/Module/Register.php:151 src/Module/Settings/Account.php:446
 msgid "Public Group"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:138 src/Module/Settings/Account.php:453
+#: src/Module/Moderation/BaseUsers.php:139 src/Module/Settings/Account.php:453
 msgid "Public Group - Restricted"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:139 src/Module/Settings/Account.php:460
+#: src/Module/Moderation/BaseUsers.php:140 src/Module/Settings/Account.php:460
 msgid "Automatic Friend Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:140 src/Module/Register.php:142
+#: src/Module/Moderation/BaseUsers.php:141 src/Module/Register.php:142
 #: src/Module/Register.php:153
 msgid "Private Group"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:143 src/Module/Moderation/Summary.php:37
+#: src/Module/Moderation/BaseUsers.php:144 src/Module/Moderation/Summary.php:37
 #: src/Module/Settings/Account.php:403
 msgid "Personal Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:144 src/Module/Moderation/Summary.php:38
+#: src/Module/Moderation/BaseUsers.php:145 src/Module/Moderation/Summary.php:38
 #: src/Module/Settings/Account.php:410
 msgid "Organisation Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:145 src/Module/Moderation/Summary.php:39
+#: src/Module/Moderation/BaseUsers.php:146 src/Module/Moderation/Summary.php:39
 #: src/Module/Register.php:139 src/Module/Register.php:160
 #: src/Module/Settings/Account.php:417
 msgid "News Page"
 msgstr ""
 
-#: src/Module/Moderation/BaseUsers.php:146 src/Module/Moderation/Summary.php:40
+#: src/Module/Moderation/BaseUsers.php:147 src/Module/Moderation/Summary.php:40
 #: src/Module/Settings/Account.php:424
 msgid "Community Group"
 msgstr ""
