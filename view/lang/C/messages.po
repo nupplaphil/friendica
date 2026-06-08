@@ -158,8 +158,8 @@ msgid "Insert web link"
 msgstr ""
 
 #: mod/message.php:191 mod/message.php:349 src/Content/Conversation.php:152
-#: src/Content/Conversation/HtmlRenderer.php:600
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:642
+#: src/Content/Conversation/HtmlRenderer.php:599
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:635
 #: src/Module/Item/Compose.php:172 src/Module/Post/Edit.php:140
 msgid "Please wait"
 msgstr ""
@@ -430,7 +430,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: mod/photos.php:828 src/Content/Conversation/HtmlRenderer.php:525
+#: mod/photos.php:828 src/Content/Conversation/HtmlRenderer.php:524
 #: src/Model/Event.php:654 src/Module/Calendar/Event/Show.php:69
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
@@ -943,7 +943,7 @@ msgid "Visible to <strong>everybody</strong>"
 msgstr ""
 
 #: src/Content/Conversation.php:79
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:771
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:763
 #: src/Module/Item/Compose.php:166
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
@@ -990,7 +990,7 @@ msgid "Post"
 msgstr ""
 
 #: src/Content/Conversation.php:118
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:760
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:752
 #: src/Content/Nav.php:89 src/Module/Post/Edit.php:125
 msgid "Loading..."
 msgstr ""
@@ -1008,69 +1008,69 @@ msgid "attach file"
 msgstr ""
 
 #: src/Content/Conversation.php:123
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:761
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:753
 #: src/Module/Item/Compose.php:156 src/Module/Post/Edit.php:168
 #: src/Module/Settings/Profile/Index.php:247
 msgid "Bold"
 msgstr ""
 
 #: src/Content/Conversation.php:124
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:762
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:754
 #: src/Module/Item/Compose.php:157 src/Module/Post/Edit.php:169
 #: src/Module/Settings/Profile/Index.php:248
 msgid "Italic"
 msgstr ""
 
 #: src/Content/Conversation.php:125
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:763
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:755
 #: src/Module/Item/Compose.php:158 src/Module/Post/Edit.php:170
 #: src/Module/Settings/Profile/Index.php:249
 msgid "Underline"
 msgstr ""
 
 #: src/Content/Conversation.php:126
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:765
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:757
 #: src/Module/Item/Compose.php:159 src/Module/Post/Edit.php:171
 #: src/Module/Settings/Profile/Index.php:250
 msgid "Quote"
 msgstr ""
 
 #: src/Content/Conversation.php:127
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:766
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:758
 #: src/Module/Item/Compose.php:160 src/Module/Post/Edit.php:172
 #: src/Module/Settings/Profile/Index.php:251
 msgid "Add emojis"
 msgstr ""
 
 #: src/Content/Conversation.php:128
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:764
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:756
 #: src/Module/Item/Compose.php:161
 msgid "Content Warning"
 msgstr ""
 
 #: src/Content/Conversation.php:129
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:767
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:759
 #: src/Module/Item/Compose.php:162 src/Module/Post/Edit.php:173
 #: src/Module/Settings/Profile/Index.php:252
 msgid "Code"
 msgstr ""
 
 #: src/Content/Conversation.php:130
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:768
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:760
 #: src/Module/Item/Compose.php:163 src/Module/Settings/Profile/Index.php:253
 #: src/Module/Settings/Profile/Index.php:254
 msgid "Image"
 msgstr ""
 
 #: src/Content/Conversation.php:131
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:769
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:761
 #: src/Module/Item/Compose.php:164 src/Module/Post/Edit.php:174
 #: src/Module/Settings/Profile/Index.php:255
 msgid "Link"
 msgstr ""
 
 #: src/Content/Conversation.php:132
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:770
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:762
 #: src/Module/Item/Compose.php:165 src/Module/Post/Edit.php:175
 #: src/Module/Settings/Profile/Index.php:256
 msgid "Link or Media"
@@ -1125,7 +1125,7 @@ msgid "Public post"
 msgstr ""
 
 #: src/Content/Conversation.php:166
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:772
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:764
 #: src/Module/Calendar/Event/Form.php:261 src/Module/Item/Compose.php:167
 #: src/Module/Post/Edit.php:162
 msgid "Preview"
@@ -1147,10 +1147,96 @@ msgid "Open Compose page"
 msgstr ""
 
 #: src/Content/Conversation.php:370 src/Content/Conversation.php:371
-#: src/Content/Conversation/HtmlRenderer.php:151
-#: src/Content/Conversation/HtmlRenderer.php:195
+#: src/Content/Conversation/HtmlRenderer.php:150
+#: src/Content/Conversation/HtmlRenderer.php:194
 msgid "Delete Selected Items"
 msgstr ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:49
+msgid "and"
+msgstr ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:52
+#, php-format
+msgid "and %d other people"
+msgstr ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:57
+#, php-format
+msgid "%2$s likes this."
+msgid_plural "%2$s like this."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:58
+#, php-format
+msgid "%2$s doesn't like this."
+msgid_plural "%2$s don't like this."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:59
+#, php-format
+msgid "%2$s attends."
+msgid_plural "%2$s attend."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:60
+#, php-format
+msgid "%2$s doesn't attend."
+msgid_plural "%2$s don't attend."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:61
+#, php-format
+msgid "%2$s attends maybe."
+msgid_plural "%2$s attend maybe."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:62
+#, php-format
+msgid "%2$s reshared this."
+msgid_plural "%2$s reshared this."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:92
+#, php-format
+msgid "<button type=\"button\" %2$s>%1$d person</button> likes this"
+msgid_plural "<button type=\"button\" %2$s>%1$d people</button> like this"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:99
+#, php-format
+msgid "<button type=\"button\" %2$s>%1$d person</button> attends"
+msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:102
+#, php-format
+msgid "<button type=\"button\" %2$s>%1$d person</button> doesn't attend"
+msgid_plural "<button type=\"button\" %2$s>%1$d people</button> don't attend"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:105
+#, php-format
+msgid "<button type=\"button\" %2$s>%1$d person</button> attends maybe"
+msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend maybe"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Content/Conversation/ActivityHtmlFormatter.php:108
+#, php-format
+msgid "<button type=\"button\" %2$s>%1$d person</button> reshared this"
+msgid_plural "<button type=\"button\" %2$s>%1$d people</button> reshared this"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/Content/Conversation/Factory/Channel.php:29
 msgid "For you"
@@ -1289,261 +1375,175 @@ msgstr ""
 msgid "Favourite Posts"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:127
-#: src/Content/Conversation/HtmlRenderer.php:147
-#: src/Content/Conversation/HtmlRenderer.php:191
-#: src/Content/Conversation/HtmlRenderer.php:450
+#: src/Content/Conversation/HtmlRenderer.php:126
+#: src/Content/Conversation/HtmlRenderer.php:146
+#: src/Content/Conversation/HtmlRenderer.php:190
+#: src/Content/Conversation/HtmlRenderer.php:449
 msgid "remove"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:524
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:133
+#: src/Content/Conversation/HtmlRenderer.php:523
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:132
 msgid "Select"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:542
+#: src/Content/Conversation/HtmlRenderer.php:541
 msgid "Pinned item"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:559
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:577
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:578
+#: src/Content/Conversation/HtmlRenderer.php:558
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:570
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:571
 #, php-format
 msgid "View %s's profile @ %s"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:573
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:565
+#: src/Content/Conversation/HtmlRenderer.php:572
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:558
 msgid "Categories:"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:574
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:566
+#: src/Content/Conversation/HtmlRenderer.php:573
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:559
 msgid "Filed under:"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:582
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:593
+#: src/Content/Conversation/HtmlRenderer.php:581
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:586
 #, php-format
 msgid "%s from %s"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:598
+#: src/Content/Conversation/HtmlRenderer.php:597
 msgid "View in context"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:919
-#: src/Content/Conversation/HtmlRenderer.php:922
-#: src/Content/Conversation/HtmlRenderer.php:925
-#: src/Content/Conversation/HtmlRenderer.php:928
-#: src/Content/Conversation/HtmlRenderer.php:931
+#: src/Content/Conversation/HtmlRenderer.php:918
+#: src/Content/Conversation/HtmlRenderer.php:921
+#: src/Content/Conversation/HtmlRenderer.php:924
+#: src/Content/Conversation/HtmlRenderer.php:927
+#: src/Content/Conversation/HtmlRenderer.php:930
 #, php-format
 msgid "You had been addressed (%s)."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:934
+#: src/Content/Conversation/HtmlRenderer.php:933
 #, php-format
 msgid "You are following %s."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:938
+#: src/Content/Conversation/HtmlRenderer.php:937
 msgid "You subscribed to one or more tags in this post."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:938
+#: src/Content/Conversation/HtmlRenderer.php:937
 #, php-format
 msgid "You subscribed to %s."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:956
+#: src/Content/Conversation/HtmlRenderer.php:955
 #, php-format
 msgid "%s reshared this."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:958
+#: src/Content/Conversation/HtmlRenderer.php:957
 msgid "Reshared"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:958
+#: src/Content/Conversation/HtmlRenderer.php:957
 #, php-format
 msgid "Reshared by %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:961
+#: src/Content/Conversation/HtmlRenderer.php:960
 #, php-format
 msgid "%s is participating in this thread."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:964
+#: src/Content/Conversation/HtmlRenderer.php:963
 msgid "Stored for general reasons"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:967
+#: src/Content/Conversation/HtmlRenderer.php:966
 msgid "Global post"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:970
+#: src/Content/Conversation/HtmlRenderer.php:969
 msgid "Sent via an relay server"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:970
+#: src/Content/Conversation/HtmlRenderer.php:969
 #, php-format
 msgid "Sent via the relay server %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:973
+#: src/Content/Conversation/HtmlRenderer.php:972
 msgid "Fetched"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:973
+#: src/Content/Conversation/HtmlRenderer.php:972
 #, php-format
 msgid "Fetched because of %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:976
+#: src/Content/Conversation/HtmlRenderer.php:975
 msgid "Stored because of a child post to complete this thread."
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:979
+#: src/Content/Conversation/HtmlRenderer.php:978
 msgid "Local delivery"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:982
+#: src/Content/Conversation/HtmlRenderer.php:981
 msgid "Stored because of your activity (like, comment, bookmark, ...)"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:985
+#: src/Content/Conversation/HtmlRenderer.php:984
 msgid "Distributed"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:988
+#: src/Content/Conversation/HtmlRenderer.php:987
 msgid "Pushed to us"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:993
+#: src/Content/Conversation/HtmlRenderer.php:992
 #, php-format
 msgid "Channel \"%s\": %s"
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:993
+#: src/Content/Conversation/HtmlRenderer.php:992
 #, php-format
 msgid "Channel \"%s\""
 msgstr ""
 
-#: src/Content/Conversation/HtmlRenderer.php:1348
-msgid "and"
-msgstr ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1351
-#, php-format
-msgid "and %d other people"
-msgstr ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1356
-#, php-format
-msgid "%2$s likes this."
-msgid_plural "%2$s like this."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1357
-#, php-format
-msgid "%2$s doesn't like this."
-msgid_plural "%2$s don't like this."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1358
-#, php-format
-msgid "%2$s attends."
-msgid_plural "%2$s attend."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1359
-#, php-format
-msgid "%2$s doesn't attend."
-msgid_plural "%2$s don't attend."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1360
-#, php-format
-msgid "%2$s attends maybe."
-msgid_plural "%2$s attend maybe."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1361
-#, php-format
-msgid "%2$s reshared this."
-msgid_plural "%2$s reshared this."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1391
-#, php-format
-msgid "<button type=\"button\" %2$s>%1$d person</button> likes this"
-msgid_plural "<button type=\"button\" %2$s>%1$d people</button> like this"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1398
-#, php-format
-msgid "<button type=\"button\" %2$s>%1$d person</button> attends"
-msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1401
-#, php-format
-msgid "<button type=\"button\" %2$s>%1$d person</button> doesn't attend"
-msgid_plural "<button type=\"button\" %2$s>%1$d people</button> don't attend"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1404
-#, php-format
-msgid "<button type=\"button\" %2$s>%1$d person</button> attends maybe"
-msgid_plural "<button type=\"button\" %2$s>%1$d people</button> attend maybe"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/HtmlRenderer.php:1407
-#, php-format
-msgid "<button type=\"button\" %2$s>%1$d person</button> reshared this"
-msgid_plural "<button type=\"button\" %2$s>%1$d people</button> reshared this"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:134
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:133
 msgid "Delete globally"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:134
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:133
 msgid "Remove locally"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:141
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:140
 #, php-format
 msgid "Block %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:146
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:145
 #, php-format
 msgid "Ignore %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:151
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:150
 #, php-format
 msgid "Collapse %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:155
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:154
 msgid "Report this post"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:166
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:165
 #: src/Content/Item.php:411
 #, php-format
 msgid "Ignore %s server"
@@ -1623,102 +1623,102 @@ msgstr ""
 msgid "Share via external services"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:418
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:416
 msgid "This entry was edited"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:439
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:436
 msgid "Turn off related notifications"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:440
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:437
 msgid "Turn on related notifications"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:443
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:440
 msgid "Notifications turned off for this post"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:455
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:452
 msgid "Connector Message"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:468
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:465
 #: src/Module/Calendar/Event/Form.php:196
 msgid "Edit event"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:470
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:467
 #: src/Module/Post/Edit.php:95
 msgid "Edit post"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:480
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:476
 msgid "Pinned to your wall"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:492
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:487
 msgid "Save to folder"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:496
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:491
 msgid "Bookmark"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:497
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:492
 msgid "Remove bookmark"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:500
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:495
 msgid "Starred"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:506
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:501
 msgid "Add tag to post"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:515
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:514
 msgid "Comment this item on your system"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:516
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:515
 msgid "Remote comment"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:579
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:572
 msgid "to"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:580
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:573
 #: src/Module/Profile/Schedule.php:101
 msgid "via"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:581
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:574
 msgid "Wall-to-Wall"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:582
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:575
 msgid "via Wall-To-Wall:"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:620
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:613
 #: src/Content/Item.php:418
 msgid "Raw content"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:636
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:758
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:629
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:750
 #: src/Module/Moderation/Reports.php:242
 msgid "Comment"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:637
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:630
 #, php-format
 msgid "Reply to %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:640
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:633
 #: src/Module/BaseProfile.php:141 src/Module/Contact.php:395
 #: src/Module/Contact.php:533 src/Module/Conversation/Channel.php:94
 #: src/Module/Conversation/Community.php:87
@@ -1727,131 +1727,131 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:659
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:652
 msgid "Notifier task is pending"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:660
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:653
 msgid "Delivery to remote servers is pending"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:661
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:654
 msgid "Delivery to remote servers is underway"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:662
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:655
 msgid "Delivery to remote servers is mostly done"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:663
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:656
 msgid "Delivery to remote servers is done"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:671
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:664
 #, php-format
 msgid "in reply to %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:673
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:666
 msgid "Parent is probably private or not federated."
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:674
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:667
 msgid "Show comments"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:675
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:668
 msgid "Close comments"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:702
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:694
 #, php-format
 msgid "%d comment"
 msgid_plural "%d comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:703
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:695
 msgid "Show more"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:704
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:696
 msgid "Show fewer"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:756
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:748
 #: src/Module/Contact.php:600 src/Module/Item/Compose.php:154
 msgid "This is you"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:759
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:751
 msgid "Post comment"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:828
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:820
 #: src/Module/Profile/Schedule.php:93
 msgid "Private Message"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:829
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:821
 msgid "Public Message"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:830
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:822
 msgid "Unlisted Message"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:868
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:860
 #, php-format
 msgid "Reshared by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:873
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:865
 #, php-format
 msgid "Viewed by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:878
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:870
 #, php-format
 msgid "Read by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:883
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:875
 #, php-format
 msgid "Liked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:888
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:880
 #, php-format
 msgid "Disliked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:893
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:885
 #, php-format
 msgid "Attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:898
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:890
 #, php-format
 msgid "Maybe attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:903
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:895
 #, php-format
 msgid "Not attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:908
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:900
 #, php-format
 msgid "Commented by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:913
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:905
 #, php-format
 msgid "Reacted with %s by: %s"
 msgstr ""
 
-#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:936
+#: src/Content/Conversation/ThreadedPostTemplateRenderer.php:928
 #, php-format
 msgid "Quote shared by: %s"
 msgstr ""

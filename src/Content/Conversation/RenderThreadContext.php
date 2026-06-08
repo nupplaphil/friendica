@@ -10,7 +10,7 @@ namespace Friendica\Content\Conversation;
 /**
  * Lightweight rendering context for threaded conversation templates.
  */
-class RenderThreadContext
+readonly class RenderThreadContext
 {
 	public function __construct(
 		private readonly string $mode,

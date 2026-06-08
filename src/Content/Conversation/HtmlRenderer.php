@@ -32,7 +32,6 @@ use Friendica\Model\Post;
 use Friendica\Model\Post\Category;
 use Friendica\Model\Tag;
 use Friendica\Model\Verb;
-use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Protocol\Activity;
 use Friendica\Security\Security;
 use Friendica\User\Settings\Entity\UserGServer as UserGServerEntity;
@@ -43,7 +42,7 @@ use Friendica\Util\Strings;
 use ImagickException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-class HtmlRenderer
+final class HtmlRenderer
 {
 	/** @var array<string, array> */
 	private array $rootTemplateCache = [];
@@ -321,7 +320,7 @@ class HtmlRenderer
 		foreach ($items as $item) {
 			$this->builtinActivityPuller($item, $convResponses);
 
-			if ($item['network'] === Protocol::MAIL && $viewerUid != $item['uid']) {
+			if ($item['network'] === Protocol::MAIL && $viewerUid !== $item['uid']) {
 				continue;
 			}
 
@@ -486,7 +485,7 @@ class HtmlRenderer
 				continue;
 			}
 
-			if ($item['network'] === Protocol::MAIL && $viewerUid != $item['uid']) {
+			if ($item['network'] === Protocol::MAIL && $viewerUid !== $item['uid']) {
 				continue;
 			}
 
@@ -1324,101 +1323,4 @@ class HtmlRenderer
 		return strcmp((string) $b['created'], (string) $a['created']);
 	}
 
-	/**
-	 * Returns the liker phrase based on a list of likers
-	 *
-	 * @param string $verb   the activity verb
-	 * @param array  $likers a list of likers
-	 *
-	 * @return string the liker phrase
-	 *
-	 * @throws InternalServerErrorException in case either the verb is invalid or the list of likers is empty
-	 */
-	private function getLikerPhrase(string $verb, array $likers): string
-	{
-		$total = count($likers);
-
-		if ($total === 0) {
-			throw new InternalServerErrorException(sprintf('There has to be at least one Liker for verb "%s"', $verb));
-		} elseif ($total === 1) {
-			$likerString = $likers[0];
-		} else {
-			if ($total < $this->config->get('system', 'max_likers')) {
-				$likerString = implode(', ', array_slice($likers, 0, -1));
-				$likerString .= ' ' . $this->l10n->t('and') . ' ' . $likers[count($likers) - 1];
-			} else {
-				$likerString = implode(', ', array_slice($likers, 0, $this->config->get('system', 'max_likers') - 1));
-				$likerString .= ' ' . $this->l10n->t('and %d other people', $total - $this->config->get('system', 'max_likers'));
-			}
-		}
-
-		return match ($verb) {
-			'like'        => $this->l10n->tt('%2$s likes this.', '%2$s like this.', $total, $likerString),
-			'dislike'     => $this->l10n->tt('%2$s doesn\'t like this.', '%2$s don\'t like this.', $total, $likerString),
-			'attendyes'   => $this->l10n->tt('%2$s attends.', '%2$s attend.', $total, $likerString),
-			'attendno'    => $this->l10n->tt('%2$s doesn\'t attend.', '%2$s don\'t attend.', $total, $likerString),
-			'attendmaybe' => $this->l10n->tt('%2$s attends maybe.', '%2$s attend maybe.', $total, $likerString),
-			'announce'    => $this->l10n->tt('%2$s reshared this.', '%2$s reshared this.', $total, $likerString),
-			default       => throw new InternalServerErrorException(sprintf('Unknown verb "%s"', $verb)),
-		};
-	}
-
-	/**
-	 * Format the activity text for an item/photo/video
-	 *
-	 * @param array  $links    array of pre-linked names of actors
-	 * @param string $verb     one of 'like, 'dislike', 'attendyes', 'attendno', 'attendmaybe'
-	 * @param int    $id       item id
-	 * @param string $activity Activity URI
-	 * @param array  $emojis   Array with emoji reactions
-	 * @return string formatted text
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 */
-	public function formatActivity(array $links, string $verb, int $id, string $activity, array $emojis): string
-	{
-		$this->profiler->startRecording('rendering');
-		$expanded = '';
-
-		$phrase = $this->getLikerPhrase($verb, $links);
-		$total  = max(count($links), $emojis[$activity]['total'] ?? 0);
-
-		if ($total > 1) {
-			$spanatts  = "class=\"btn btn-link fakelink\" onclick=\"openClose('{$verb}list-$id');\"";
-			$explikers = $phrase;
-
-			switch ($verb) {
-				case 'like':
-					$phrase = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> likes this', '<button type="button" %2$s>%1$d people</button> like this', $total, $spanatts);
-					break;
-				case 'dislike':
-					$dislike_translation_plural = '<button type="button" %2$s>%1$d people</button> don\'t like this';
-					$phrase                     = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> doesn\'t like this', $dislike_translation_plural, $total, $spanatts);
-					break;
-				case 'attendyes':
-					$phrase = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> attends', '<button type="button" %2$s>%1$d people</button> attend', $total, $spanatts);
-					break;
-				case 'attendno':
-					$phrase = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> doesn\'t attend', '<button type="button" %2$s>%1$d people</button> don\'t attend', $total, $spanatts);
-					break;
-				case 'attendmaybe':
-					$phrase = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> attends maybe', '<button type="button" %2$s>%1$d people</button> attend maybe', $total, $spanatts);
-					break;
-				case 'announce':
-					$phrase = $this->l10n->tt('<button type="button" %2$s>%1$d person</button> reshared this', '<button type="button" %2$s>%1$d people</button> reshared this', $total, $spanatts);
-					break;
-			}
-
-			$expanded .= "\t" . '<p class="wall-item-' . $verb . '-expanded" id="' . $verb . 'list-' . $id . '" style="display: none;" >' . $explikers . '</p>';
-		}
-
-		$output = Renderer::replaceMacros(Renderer::getMarkupTemplate('voting_fakelink.tpl'), [
-			'$phrase' => $phrase,
-			'$type'   => $verb,
-			'$id'     => $id,
-		]);
-		$output .= $expanded;
-
-		$this->profiler->stopRecording();
-		return $output;
-	}
 }

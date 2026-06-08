@@ -49,9 +49,9 @@ class ThreadedPostTemplateRenderer
 		private readonly IManagePersonalConfigValues $pConfig,
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly IHandleUserSessions $session,
-		private readonly AddonHelper $AddonHelper,
+		private readonly AddonHelper $addonHelper,
 		private readonly LoggerInterface $logger,
-		private readonly HtmlRenderer $htmlRenderer,
+		private readonly ActivityHtmlFormatter $activityHtmlFormatter,
 	) {}
 	/**
 	 * Render one threaded root post (including children) to template data.
@@ -182,7 +182,8 @@ class ThreadedPostTemplateRenderer
 		$isevent = false;
 		$attend  = [];
 
-		if (($item['object-type'] ?? '') === Activity\ObjectType::EVENT) {
+		if (($item['object-type'] ?? '') === Activity\ObjectType::EVENT
+			&& in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA])) {
 			if ($renderContext->isWritable()) {
 				$isevent = true;
 				$attend  = [
@@ -200,7 +201,7 @@ class ThreadedPostTemplateRenderer
 	 * Builds temporal data (direction, ago, ago_received).
 	 *
 	 * @param array<string, mixed> $item
-	 * @return array{direction: array, ago: string, ago_received: string}
+	 * @return array{direction: array, ago: string}
 	 */
 	private function buildTemporalData(array $item): array
 	{
@@ -215,7 +216,7 @@ class ThreadedPostTemplateRenderer
 			$ago = $this->l10n->t('%s (Received %s)', $ago, $ago_received);
 		}
 
-		return ['direction' => $direction, 'ago' => $ago, 'ago_received' => $ago_received];
+		return ['direction' => $direction, 'ago' => $ago];
 	}
 
 	/**
@@ -267,14 +268,14 @@ class ThreadedPostTemplateRenderer
 		foreach ($response_verbs as $verb) {
 			$responses[$verb] = [
 				'self'   => $convResponses[$verb][$item['uri-id']]['self'] ?? 0,
-				'output' => !empty($convResponses[$verb][$item['uri-id']]) ? $this->htmlRenderer->formatActivity($convResponses[$verb][$item['uri-id']]['links'], $verb, $item['uri-id'], $verbs[$verb], $emojis) : '',
+				'output' => !empty($convResponses[$verb][$item['uri-id']]) ? $this->activityHtmlFormatter->format($convResponses[$verb][$item['uri-id']]['links'], $verb, $item['uri-id'], $verbs[$verb], $emojis) : '',
 				'total'  => $emojis[$verbs[$verb]]['total'] ?? '',
 				'title'  => $emojis[$verbs[$verb]]['title'] ?? '',
 			];
 			unset($reactions[$verbs[$verb]]);
 		}
 
-		unset($emojis[Activity::POST]);
+		unset($reactions[Activity::POST]);
 
 		return ['emojis' => $emojis, 'reactions' => $reactions, 'responses' => $responses];
 	}
@@ -409,8 +410,6 @@ class ThreadedPostTemplateRenderer
 			$owner_name = $item['owner-name'];
 		}
 
-		$thrParentId = $item['thr-parent-id'] ?? 0;
-
 		$edited = false;
 		if (strtotime((string) ($item['edited'] ?? '')) - strtotime((string) ($item['created'] ?? '')) > 1) {
 			$edited = [
@@ -426,7 +425,6 @@ class ThreadedPostTemplateRenderer
 			'share'    => null,
 			'announce' => null,
 		];
-		$dropping      = false;
 		$pinned        = '';
 		$pin           = false;
 		$star          = false;
@@ -469,7 +467,6 @@ class ThreadedPostTemplateRenderer
 					$edpost = [sprintf('post/%s/edit', $item['id'] ?? 0), $this->l10n->t('Edit post')];
 				}
 			}
-			$dropping = in_array($item['uid'] ?? 0, [0, $this->session->getLocalUserId()]);
 		}
 		if (($item['uid'] ?? 0) === 0) {
 			$edpost = false;
@@ -486,7 +483,6 @@ class ThreadedPostTemplateRenderer
 		$collapse          = $moderationButtons['collapse'];
 		$report            = $moderationButtons['report'];
 		$ignoreServer      = $moderationButtons['ignoreServer'];
-		$dropping          = $moderationButtons['dropping'];
 
 		$filer = $this->session->getLocalUserId() ? $this->l10n->t('Save to folder') : false;
 
@@ -505,6 +501,10 @@ class ThreadedPostTemplateRenderer
 				'add'   => $this->l10n->t('Add tag to post'),
 				'class' => '',
 			];
+		}
+
+		if (!in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA])) {
+			$tagger = '';
 		}
 
 		$comment_html   = '';
@@ -527,7 +527,6 @@ class ThreadedPostTemplateRenderer
 		$temporalData = $this->buildTemporalData($item);
 		$direction    = $temporalData['direction'];
 		$ago          = $temporalData['ago'];
-		$ago_received = $temporalData['ago_received'];
 
 		// process action responses - e.g. like/dislike/attend/agree/whatever
 		$eventData = $this->buildEventData($item, $renderContext);
@@ -542,11 +541,6 @@ class ThreadedPostTemplateRenderer
 		$actionButtons = $this->buildActionButtons($item, $renderContext, $likeable, $shareable, $announceable);
 		$buttons       = $actionButtons['buttons'];
 		$hide_dislike  = $actionButtons['hide_dislike'];
-
-		if (!in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA])) {
-			$isevent = false;
-			$tagger  = '';
-		}
 
 		$locationData  = $this->buildLocationData($item);
 		$location_html = $locationData['location_html'];
@@ -672,7 +666,6 @@ class ThreadedPostTemplateRenderer
 			'isunknown_label'    => $this->l10n->t('Parent is probably private or not federated.'),
 			'show_text'          => $this->l10n->t('Show comments'),
 			'hide_text'          => $this->l10n->t('Close comments'),
-
 		];
 
 		$arr    = ['item' => $item, 'output' => $tmpItem];
@@ -727,7 +720,7 @@ class ThreadedPostTemplateRenderer
 		}
 
 		$qcomment = null;
-		if ($this->AddonHelper->isAddonEnabled('qcomment')) {
+		if ($this->addonHelper->isAddonEnabled('qcomment')) {
 			$words    = $this->pConfig->get($this->session->getLocalUserId(), 'qcomment', 'words');
 			$qcomment = $words ? explode("\n", $words) : [];
 		}
@@ -926,7 +919,7 @@ class ThreadedPostTemplateRenderer
 	 * @param array $quoteshares
 	 * @return array
 	 */
-	private function getQuoteShares($quoteshares)
+	private function getQuoteShares($quoteshares): array
 	{
 		if (empty($quoteshares)) {
 			return [];
