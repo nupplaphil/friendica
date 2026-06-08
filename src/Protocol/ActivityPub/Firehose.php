@@ -165,9 +165,9 @@ class Firehose
 			return;
 		}
 
-		$searchtext = $this->getSearchTextForActivity($content, $author['id'], $tags);
-		$detectedLanguages  = $this->contentItem->getLanguageArray($content, 1, 0, $author['id']);
-		$detectedLanguage   = !empty($detectedLanguages) ? array_key_first($detectedLanguages) : '';
+		$searchtext        = $this->getSearchTextForActivity($content, $author['id'], $tags);
+		$detectedLanguages = $this->contentItem->getLanguageArray($content, 1, 0, $author['id']);
+		$detectedLanguage  = !empty($detectedLanguages) ? array_key_first($detectedLanguages) : '';
 		if ($this->userDefinedChannel->match($searchtext, $detectedLanguage)) {
 			$this->logger->info('Matched channel', ['url' => $url]);
 			$this->handlePost($url, $data);
