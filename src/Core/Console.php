@@ -40,6 +40,7 @@ Commands:
 	help                   Show help about a command, e.g (bin/console help config)
 	jetstream              Interact with the Jetstream daemon
 	worker                 Start worker process
+	fedibuzzrelay          Interact with the FediBuzz relay daemon
 
 	node management
 		archivecontact         Archive a contact when you know that it isn't existing anymore
@@ -95,6 +96,7 @@ HELP;
 		'docbloxerrorchecker'               => Friendica\Console\DocBloxErrorChecker::class,
 		'dbstructure'                       => Friendica\Console\DatabaseStructure::class,
 		'extract'                           => Friendica\Console\Extract::class,
+		'fedibuzzrelay'                     => Friendica\Console\FediBuzzRelay::class,
 		'fixapdeliveryworkertaskparameters' => Friendica\Console\FixAPDeliveryWorkerTaskParameters::class,
 		'globalcommunityblock'              => Friendica\Console\GlobalCommunityBlock::class,
 		'globalcommunitysilence'            => Friendica\Console\GlobalCommunitySilence::class,

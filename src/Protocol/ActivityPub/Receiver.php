@@ -222,6 +222,19 @@ class Receiver
 
 		DI::logger()->debug('Process post from relay server', ['type' => $type, 'object_type' => $object_type, 'object_id' => $object_id, 'actor' => $actor]);
 
+		self::handlePost($object_id, $actor, $activity);
+	}
+
+	/**
+	 * Handle incoming posts from relays
+	 *
+	 * @param string $object_id
+	 * @param string $actor
+	 * @param array  $activity
+	 * @return void
+	 */
+	public static function handlePost(string $object_id, string $actor, array $activity = []): void
+	{
 		$item_id = Item::searchByLink($object_id);
 		if ($item_id) {
 			DI::logger()->info('Relayed message already exists', ['id' => $object_id, 'item' => $item_id, 'actor' => $actor]);

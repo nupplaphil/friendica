@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 /**
  * class for direct interacting with the daemon commands
  */
-final class Daemon
+class Daemon
 {
 	private ?string $pidfile = null;
 	private ?int $pid        = null;
