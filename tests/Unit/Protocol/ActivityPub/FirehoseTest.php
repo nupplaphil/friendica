@@ -29,7 +29,7 @@ class FirehoseTest extends ProtocolTestCase
 		$firehose = Mockery::mock(Firehose::class, [
 			$logger ?? Mockery::mock(LoggerInterface::class),
 			Mockery::mock(HttpClient::class),
-			$contentItem ?? Mockery::mock(ContentItem::class),
+			$contentItem        ?? Mockery::mock(ContentItem::class),
 			$userDefinedChannel ?? Mockery::mock(UserDefinedChannel::class),
 		])->makePartial();
 		$firehose->shouldAllowMockingProtectedMethods();
@@ -49,7 +49,7 @@ class FirehoseTest extends ProtocolTestCase
 
 		return [
 			'mastodon streaming update split over chunks' => [
-				'chunks'             => [
+				'chunks' => [
 					"event: update\n",
 					'data: ' . json_encode($status) . "\n\n",
 				],
@@ -83,7 +83,7 @@ class FirehoseTest extends ProtocolTestCase
 		array $expectedTags,
 		string $expectedContent,
 		string $expectedUrl,
-		array $expectedLanguages
+		array $expectedLanguages,
 	): void {
 		$logger = Mockery::mock(LoggerInterface::class);
 		$logger->shouldReceive('info')->with('Matched post', ['url' => $expectedUrl])->once();
@@ -134,7 +134,7 @@ class FirehoseTest extends ProtocolTestCase
 		string $expectedContent,
 		string $expectedUrl,
 		array $detectedLanguages,
-		string $expectedLanguage
+		string $expectedLanguage,
 	): void {
 		$logger = Mockery::mock(LoggerInterface::class);
 		$logger->shouldReceive('info')->with('Matched channel', ['url' => $expectedUrl])->once();
@@ -271,7 +271,7 @@ class FirehoseTest extends ProtocolTestCase
 		string $expectedContent,
 		string $expectedUrl,
 		array $detectedLanguages,
-		string $expectedLanguage
+		string $expectedLanguage,
 	): void {
 		$logger = Mockery::mock(LoggerInterface::class);
 		$logger->shouldNotReceive('info');
@@ -303,11 +303,11 @@ class FirehoseTest extends ProtocolTestCase
 	{
 		$status = self::loadProtocolJsonFixture('mastodon/streaming/status-no-match');
 		$json   = json_encode($status);
-		$half   = (int)(strlen($json) / 2);
+		$half   = (int) (strlen($json) / 2);
 
 		return [
 			'multi-line data: payload is reassembled correctly' => [
-				'chunks'             => [
+				'chunks' => [
 					"event: update\n"
 					. 'data: ' . substr($json, 0, $half) . "\n"
 					. 'data: ' . substr($json, $half) . "\n\n",
@@ -329,7 +329,7 @@ class FirehoseTest extends ProtocolTestCase
 		string $expectedContactUrl,
 		array $expectedTags,
 		string $expectedContent,
-		string $expectedUrl
+		string $expectedUrl,
 	): void {
 		$logger = Mockery::mock(LoggerInterface::class);
 		$logger->shouldReceive('info')->with('Matched post', ['url' => $expectedUrl])->once();

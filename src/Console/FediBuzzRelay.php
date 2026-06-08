@@ -90,7 +90,7 @@ HELP;
 		$pidfile = $this->config->get('fedibuzzrelay', 'pidfile');
 
 		$daemonMode = $this->getArgument(0);
-		$foreground = (bool)($this->getOption(['f', 'foreground']) ?? false);
+		$foreground = (bool) ($this->getOption(['f', 'foreground']) ?? false);
 
 		if (empty($daemonMode)) {
 			throw new RuntimeException("Please use either 'start', 'stop' or 'status'");
