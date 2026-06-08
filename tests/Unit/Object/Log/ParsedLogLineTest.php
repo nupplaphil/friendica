@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Object\Log;
+namespace Friendica\Test\Unit\Object\Log;
 
 use Friendica\Object\Log\ParsedLogLine;
 use PHPUnit\Framework\TestCase;

@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Model;
+namespace Friendica\Test\Unit\Model;
 
 use Friendica\Model\Tag;
 use PHPUnit\Framework\TestCase;

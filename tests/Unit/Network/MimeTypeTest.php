@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Network;
+namespace Friendica\Test\Unit\Network;
 
 use Friendica\Network\Entity;
 use Friendica\Network\Factory;

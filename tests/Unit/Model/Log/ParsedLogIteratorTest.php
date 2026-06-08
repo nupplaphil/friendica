@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Model\Log;
+namespace Friendica\Test\Unit\Model\Log;
 
 use Friendica\Util\ReversedFileReader;
 use Friendica\Model\Log\ParsedLogIterator;

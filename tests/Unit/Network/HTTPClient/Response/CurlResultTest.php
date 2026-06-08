@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Network\HTTPClient\Response;
+namespace Friendica\Test\Unit\Network\HTTPClient\Response;
 
 use Friendica\Network\HTTPClient\Response\CurlResult;
 use PHPUnit\Framework\TestCase;

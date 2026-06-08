@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Contact\Introduction\Factory;
+namespace Friendica\Test\Unit\Contact\Introduction\Factory;
 
 use Friendica\Contact\Introduction\Factory\Introduction;
 use PHPUnit\Framework\TestCase;
