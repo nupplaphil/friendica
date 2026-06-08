@@ -30,7 +30,9 @@ abstract class LockTestCase extends MockedTestCase
 
 	protected function tearDown(): void
 	{
-		$this->instance->releaseAll(true);
+		if (isset($this->instance)) {
+			$this->instance->releaseAll(true);
+		}
 		parent::tearDown();
 	}
 

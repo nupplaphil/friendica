@@ -24,6 +24,10 @@ class SemaphoreLockTest extends LockTestCase
 {
 	protected function setUp(): void
 	{
+		if (!function_exists('sem_get')) {
+			static::markTestSkipped('Semaphore lock is not supported');
+		}
+
 		/** @var MockInterface|Dice $dice */
 		$dice = Mockery::mock(Dice::class)->makePartial();
 
