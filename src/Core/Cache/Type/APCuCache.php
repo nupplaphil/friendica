@@ -18,7 +18,7 @@ class APCuCache extends AbstractCache implements ICanCacheInMemory
 {
 	use CompareSetTrait;
 	use CompareDeleteTrait;
-	const NAME = 'apcu';
+	public const NAME = 'apcu';
 
 	/**
 	 * @throws InvalidCacheDriverException
@@ -87,12 +87,12 @@ class APCuCache extends AbstractCache implements ICanCacheInMemory
 			return apcu_store(
 				$cacheKey,
 				$cached,
-				$ttl
+				$ttl,
 			);
 		} else {
 			return apcu_store(
 				$cacheKey,
-				$cached
+				$cached,
 			);
 		}
 	}

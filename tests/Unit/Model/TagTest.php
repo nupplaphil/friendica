@@ -26,8 +26,8 @@ class TagTest extends TestCase
 				'![url=https://pirati.ca/profile/test1]Testgruppe 1b[/url]',
 				'!',
 				'https://pirati.ca/profile/test1',
-				'Testgruppe 1b'
-			]
+				'Testgruppe 1b',
+			],
 		];
 
 		self::assertEquals($expected, $tags);

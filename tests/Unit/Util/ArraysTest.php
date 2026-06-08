@@ -127,8 +127,8 @@ class ArraysTest extends TestCase
 				function () {
 					// Should we test this with a callback that actually does something?
 					return true;
-				}
-			)
+				},
+			),
 		);
 	}
 
@@ -147,8 +147,8 @@ class ArraysTest extends TestCase
 				function () {
 					// Should we test this with a callback that actually does something?
 					return true;
-				}
-			)
+				},
+			),
 		);
 	}
 }
