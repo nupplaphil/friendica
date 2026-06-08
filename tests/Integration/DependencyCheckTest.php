@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\Functional;
+namespace Friendica\Test\Integration;
 
 use Friendica\App;
 use Friendica\Core\Cache\Capability\ICanCache;
