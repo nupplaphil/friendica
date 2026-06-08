@@ -32,12 +32,6 @@ class Firehose
 	private const MAX_RETRY_DELAY = 60;
 	private const CAUSER_URL      = 'https://relay.fedi.buzz/instance/relay.fedi.buzz';
 
-	/**
-	 * @param LoggerInterface      $logger
-	 * @param HttpClient           $httpClient
-	 * @param ContentItem          $contentItem
-	 * @param UserDefinedChannel   $userDefinedChannel
-	 */
 	public function __construct(
 		private readonly LoggerInterface $logger,
 		private readonly HttpClient $httpClient,
@@ -50,14 +44,12 @@ class Firehose
 	 */
 	public function streamLoop(): void
 	{
-		$url           = self::FIREHOSE_URL;
-		$retryDelay    = 1;
-		$maxRetryDelay = self::MAX_RETRY_DELAY;
+		$retryDelay = 1;
 
 		while (true) {
 			try {
 				$body = $this->httpClient->get(
-					$url,
+					self::FIREHOSE_URL,
 					HttpClientAccept::STREAMING,
 					[
 						HttpClientOptions::REQUEST => HttpClientRequest::STREAMING,
@@ -73,7 +65,7 @@ class Firehose
 			} catch (\Throwable $e) {
 				$this->logger->info('Connection lost', ['code' => $e->getCode(), 'message' => $e->getMessage(), 'delay' => $retryDelay]);
 				sleep($retryDelay);
-				$retryDelay = min($retryDelay * 2, $maxRetryDelay);
+				$retryDelay = min($retryDelay * 2, self::MAX_RETRY_DELAY);
 			}
 		}
 	}
@@ -97,25 +89,38 @@ class Firehose
 			$buffer = array_pop($lines);
 
 			foreach ($lines as $line) {
-				$line = trim($line);
-				if (str_starts_with($line, 'event: ')) {
-					$currentEvent = substr($line, 7);
-					$currentData  = '';
-				} elseif (str_starts_with($line, 'data: ')) {
-					$currentData .= substr($line, 6);
-				} elseif ($line === '') {
-					$data = json_decode($currentData, true);
-					// @todo Handle other event types.
-					// @see https://docs.joinmastodon.org/methods/streaming/#events-3
-					if ($data !== null && $currentEvent === 'update') {
-						$this->processUpdate($data);
-					}
-					$currentEvent = null;
-					$currentData  = '';
-				}
+				[$currentEvent, $currentData] = $this->parseLine(trim($line), $currentEvent, $currentData);
 			}
 			flush();
 		}
+	}
+
+	/**
+	 * Parse a single stream line and dispatch a complete event when the blank separator is reached.
+	 *
+	 * @return array{0: string|null, 1: string} Updated [$currentEvent, $currentData]
+	 */
+	private function parseLine(string $line, ?string $currentEvent, string $currentData): array
+	{
+		if (str_starts_with($line, 'event: ')) {
+			return [substr($line, 7), ''];
+		}
+
+		if (str_starts_with($line, 'data: ')) {
+			return [$currentEvent, $currentData . substr($line, 6)];
+		}
+
+		if ($line === '') {
+			$data = json_decode($currentData, true);
+			// @todo Handle other event types.
+			// @see https://docs.joinmastodon.org/methods/streaming/#events-3
+			if ($data !== null && $currentEvent === 'update') {
+				$this->processUpdate($data);
+			}
+			return [null, ''];
+		}
+
+		return [$currentEvent, $currentData];
 	}
 
 	/**
@@ -141,13 +146,12 @@ class Firehose
 
 		$content    = trim(($data['spoiler_text'] ?? '') . "\n" . ($data['plain_content'] ?? HTML::toBBCode($data['content'] ?? '')));
 		$author_url = $data['account']['uri'] ?? $data['account']['url'] ?? $data['account']['acct'] ?? '';
-		$author     = Contact::getByURL($author_url, null, ['id', 'unsearchable']);
-		$causer     = self::CAUSER_URL;
+		$author     = $this->getContactByUrl($author_url, ['id', 'unsearchable']);
 		$url        = $data['uri'] ?? $data['url'] ?? '';
 		if (isset($data['language']) && is_string($data['language'])) {
-			$languages = [$data['language']];
+			$declaredLanguages = [$data['language']];
 		} else {
-			$languages = [];
+			$declaredLanguages = [];
 		}
 
 		if (!isset($author['id']) || $author['unsearchable']) {
@@ -155,19 +159,71 @@ class Firehose
 			return;
 		}
 
-		if (Relay::isSolicitedPost($tags, $content, $author['id'], $url, Protocol::ACTIVITYPUB, 0, $languages)) {
+		if ($this->isSolicitedPost($tags, $content, $author['id'], $url, $declaredLanguages)) {
 			$this->logger->info('Matched post', ['url' => $url]);
-			Receiver::handlePost($url, $causer, $data);
+			$this->handlePost($url, $data);
 			return;
 		}
 
-		$searchtext = Engagement::getSearchTextForActivity($content, $author['id'], $tags, [Receiver::PUBLIC_COLLECTION]);
-		$languages  = $this->contentItem->getLanguageArray($content, 1, 0, $author['id']);
-		$language   = !empty($languages) ? array_key_first($languages) : '';
-		if ($this->userDefinedChannel->match($searchtext, $language)) {
+		$searchtext = $this->getSearchTextForActivity($content, $author['id'], $tags);
+		$detectedLanguages  = $this->contentItem->getLanguageArray($content, 1, 0, $author['id']);
+		$detectedLanguage   = !empty($detectedLanguages) ? array_key_first($detectedLanguages) : '';
+		if ($this->userDefinedChannel->match($searchtext, $detectedLanguage)) {
 			$this->logger->info('Matched channel', ['url' => $url]);
-			Receiver::handlePost($url, $causer, $data);
+			$this->handlePost($url, $data);
 			return;
 		}
+	}
+
+	/**
+	 * Get contact by URL for testing purposes
+	 *
+	 * @param string $url
+	 * @param array $fields
+	 * @return array
+	 */
+	protected function getContactByUrl(string $url, array $fields = []): array
+	{
+		return Contact::getByURL($url, null, $fields);
+	}
+
+	/**
+	 * Wrapper for Relay::isSolicitedPost for testing purposes
+	 *
+	 * @param array $tags
+	 * @param string $content
+	 * @param int $authorid
+	 * @param string $url
+	 * @param array $languages
+	 * @return bool
+	 */
+	protected function isSolicitedPost(array $tags, string $content, int $authorid, string $url, array $languages): bool
+	{
+		return Relay::isSolicitedPost($tags, $content, $authorid, $url, Protocol::ACTIVITYPUB, 0, $languages);
+	}
+
+	/**
+	 * Wrapper for Engagement::getSearchTextForActivity for testing purposes
+	 *
+	 * @param string $content
+	 * @param int $authorid
+	 * @param array $tags
+	 * @return string
+	 */
+	protected function getSearchTextForActivity(string $content, int $authorid, array $tags): string
+	{
+		return Engagement::getSearchTextForActivity($content, $authorid, $tags, [Receiver::PUBLIC_COLLECTION]);
+	}
+
+	/**
+	 * Wrapper for Receiver::handlePost for testing purposes
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @return void
+	 */
+	protected function handlePost(string $url, array $data): void
+	{
+		Receiver::handlePost($url, self::CAUSER_URL, $data);
 	}
 }

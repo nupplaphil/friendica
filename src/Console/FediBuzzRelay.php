@@ -22,14 +22,6 @@ use RuntimeException;
  */
 final class FediBuzzRelay extends Console
 {
-	/**
-	 * @param Mode                 $mode
-	 * @param IManageConfigValues  $config
-	 * @param IManageKeyValuePairs $keyValue
-	 * @param SysDaemon            $daemon
-	 * @param Firehose             $firehose
-	 * @param array|null           $argv
-	 */
 	public function __construct(
 		private readonly Mode $mode,
 		private readonly IManageConfigValues $config,
