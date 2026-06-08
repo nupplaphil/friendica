@@ -139,24 +139,30 @@ class Firehose
 			}
 		}
 
-		$content  = trim(($data['spoiler_text'] ?? '') . "\n" . ($data['plain_content'] ?? HTML::toBBCode($data['content'] ?? '')));
-		$authorid = Contact::getIdForURL($data['account']['uri'] ?? $data['account']['url'] ?? $data['account']['acct'] ?? '');
-		$causer   = self::CAUSER_URL;
-		$url      = $data['uri'] ?? $data['url'] ?? '';
+		$content    = trim(($data['spoiler_text'] ?? '') . "\n" . ($data['plain_content'] ?? HTML::toBBCode($data['content'] ?? '')));
+		$author_url = $data['account']['uri'] ?? $data['account']['url'] ?? $data['account']['acct'] ?? '';
+		$author     = Contact::getByURL($author_url, null, ['id', 'unsearchable']);
+		$causer     = self::CAUSER_URL;
+		$url        = $data['uri'] ?? $data['url'] ?? '';
 		if (isset($data['language']) && is_string($data['language'])) {
 			$languages = [$data['language']];
 		} else {
 			$languages = [];
 		}
 
-		if (Relay::isSolicitedPost($tags, $content, $authorid, $url, Protocol::ACTIVITYPUB, 0, $languages)) {
+		if (!isset($author['id']) || $author['unsearchable']) {
+			$this->logger->info('Skipping unsearchable or unknown author', ['url' => $url, 'author-url' => $author_url, 'author' => $author]);
+			return;
+		}
+
+		if (Relay::isSolicitedPost($tags, $content, $author['id'], $url, Protocol::ACTIVITYPUB, 0, $languages)) {
 			$this->logger->info('Matched post', ['url' => $url]);
 			Receiver::handlePost($url, $causer, $data);
 			return;
 		}
 
-		$searchtext = Engagement::getSearchTextForActivity($content, $authorid, $tags, [Receiver::PUBLIC_COLLECTION]);
-		$languages  = $this->contentItem->getLanguageArray($content, 1, 0, $authorid);
+		$searchtext = Engagement::getSearchTextForActivity($content, $author['id'], $tags, [Receiver::PUBLIC_COLLECTION]);
+		$languages  = $this->contentItem->getLanguageArray($content, 1, 0, $author['id']);
 		$language   = !empty($languages) ? array_key_first($languages) : '';
 		if ($this->userDefinedChannel->match($searchtext, $language)) {
 			$this->logger->info('Matched channel', ['url' => $url]);
