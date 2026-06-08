@@ -32,7 +32,6 @@ use GuzzleHttp\Psr7\Uri;
 use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Strings;
 use Friendica\Model\Conversation as ConversationModel;
-use Friendica\Util\Profiler;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 
