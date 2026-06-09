@@ -35,17 +35,18 @@ class DeleteTest extends ApiTestCase
 		$this->expectException(BadRequestException::class);
 		(new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
-				'album' => 'album_name'
+				'album' => 'album_name',
 			]);
 	}
 
 	public function testValidWithDelete()
 	{
-		$this->loadFixture(__DIR__ . '/../../../../../datasets/photo/photo.fixture.php', DI::dba());
+		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/photo/photo.fixture.php', DI::dba());
 
 		$response = (new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
-			->run($this->httpExceptionMock, [
-				'album' => 'test_album']
+			->run(
+				$this->httpExceptionMock,
+				['album' => 'test_album'],
 			);
 
 		$json = $this->toJson($response);

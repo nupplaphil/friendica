@@ -142,12 +142,13 @@ class Site extends BaseAdmin
 		$worker_defer_limit   = (!empty($_POST['worker_defer_limit'])         ? intval($_POST['worker_defer_limit'])       : 15);
 		$worker_fetch_limit   = (!empty($_POST['worker_fetch_limit'])         ? intval($_POST['worker_fetch_limit'])       : 1);
 
-		$relay_directly    = !empty($_POST['relay_directly']);
-		$relay_scope       = (!empty($_POST['relay_scope'])       ? trim((string) $_POST['relay_scope'])        : '');
-		$relay_server_tags = (!empty($_POST['relay_server_tags']) ? trim((string) $_POST['relay_server_tags'])  : '');
-		$relay_deny_tags   = (!empty($_POST['relay_deny_tags'])   ? trim((string) $_POST['relay_deny_tags'])    : '');
-		$relay_max_tags    = (!empty($_POST['relay_max_tags'])    ? intval($_POST['relay_max_tags'])   : 0);
-		$relay_user_tags   = !empty($_POST['relay_user_tags']);
+		$relay_directly            = !empty($_POST['relay_directly']);
+		$relay_scope               = (!empty($_POST['relay_scope'])       ? trim((string) $_POST['relay_scope'])        : '');
+		$relay_server_tags         = (!empty($_POST['relay_server_tags']) ? trim((string) $_POST['relay_server_tags'])  : '');
+		$relay_deny_tags           = (!empty($_POST['relay_deny_tags'])   ? trim((string) $_POST['relay_deny_tags'])    : '');
+		$relay_max_tags            = (!empty($_POST['relay_max_tags'])    ? intval($_POST['relay_max_tags'])   : 0);
+		$relay_user_tags           = !empty($_POST['relay_user_tags']);
+		$relay_auto_subscribe_tags = !empty($_POST["relay_auto_subscribe_tags"]);
 
 		$relay_deny_undetected_language = !empty($_POST['relay_deny_undetected_language']);
 		$relay_language_quality         = (!empty($_POST['relay_language_quality']) ? (float) ($_POST['relay_language_quality']) : 0);
@@ -330,6 +331,7 @@ class Site extends BaseAdmin
 		$transactionConfig->set('system', 'relay_deny_tags', Strings::cleanTags($relay_deny_tags));
 		$transactionConfig->set('system', 'relay_max_tags', $relay_max_tags);
 		$transactionConfig->set('system', 'relay_user_tags', $relay_user_tags);
+		$transactionConfig->set('system', 'relay_auto_subscribe_tags', $relay_auto_subscribe_tags);
 		$transactionConfig->set('system', 'relay_deny_undetected_language', $relay_deny_undetected_language);
 		$transactionConfig->set('system', 'relay_language_quality', $relay_language_quality);
 		$transactionConfig->set('system', 'relay_languages', max($relay_languages, 1));
@@ -598,6 +600,7 @@ class Site extends BaseAdmin
 			'$relay_deny_tags'                => ['relay_deny_tags', DI::l10n()->t('Deny Server tags'), DI::config()->get('system', 'relay_deny_tags'), DI::l10n()->t('Comma separated list of tags that are rejected.')],
 			'$relay_max_tags'                 => ['relay_max_tags', DI::l10n()->t('Maximum amount of tags'), DI::config()->get('system', 'relay_max_tags'), DI::l10n()->t('Maximum amount of tags in a post before it is rejected as spam. The post has to contain at least one link. Posts from subscribed accounts will not be rejected.')],
 			'$relay_user_tags'                => ['relay_user_tags', DI::l10n()->t('Allow user tags'), DI::config()->get('system', 'relay_user_tags'), DI::l10n()->t('If enabled, the tags from the saved searches will used for the "tags" subscription in addition to the "relay_server_tags".')],
+			'$relay_auto_subscribe_tags'      => ['relay_auto_subscribe_tags', DI::l10n()->t('Automatically subscribe to tag relay'), DI::config()->get('system', 'relay_auto_subscribe_tags'), DI::l10n()->t('If enabled, the system will automatically follow and unfollow tags at the tags.pub service based on the configured tags. Additionally, all public posts will be automatically sent to this relay server for distribution.')],
 			'$relay_deny_undetected_language' => ['relay_deny_undetected_language', DI::l10n()->t('Deny undetected languages'), DI::config()->get('system', 'relay_deny_undetected_language'), DI::l10n()->t('If enabled, posts with undetected languages will be rejected.')],
 			'$relay_language_quality'         => ['relay_language_quality', DI::l10n()->t('Language Quality'), DI::config()->get('system', 'relay_language_quality'), DI::l10n()->t('The minimum language quality that is required to accept the post.')],
 			'$relay_languages'                => ['relay_languages', DI::l10n()->t('Number of languages for the language detection'), DI::config()->get('system', 'relay_languages'), DI::l10n()->t('The system detects a list of languages per post. Only if the desired languages are in the list, the message will be accepted. The higher the number, the more posts will be falsely detected.')],

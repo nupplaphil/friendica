@@ -1265,11 +1265,11 @@ class Contact
 		if ($contact['contact-type'] == Contact::TYPE_COMMUNITY) {
 			$mention_label = DI::l10n()->t('Post to group');
 			$mention_url   = 'compose/0?body=!' . $contact['addr'];
-			$network_label = DI::l10n()->t('View group');
+			$network_label = DI::l10n()->t('Group posts');
 		} else {
 			$mention_label = DI::l10n()->t('Mention');
 			$mention_url   = 'compose/0?body=@' . $contact['addr'];
-			$network_label = DI::l10n()->t('Network Posts');
+			$network_label = DI::l10n()->t('Posts');
 		}
 		$network_url = 'contact/' . $contact['id'] . '/conversations';
 
@@ -1824,6 +1824,32 @@ class Contact
 	public static function unblock(int $cid): bool
 	{
 		$return = self::update(['blocked' => false, 'block_reason' => null], ['id' => $cid]);
+
+		return $return;
+	}
+
+	/**
+	 * Hides a contact
+	 *
+	 * @param int $cid Contact id to hide
+	 * @return bool Whether it was successful
+	 */
+	public static function hide(int $cid): bool
+	{
+		$return = self::update(['hidden' => true], ['id' => $cid]);
+
+		return $return;
+	}
+
+	/**
+	 * Unhide a contact
+	 *
+	 * @param int $cid Contact id to unhide
+	 * @return bool Whether it was successful
+	 */
+	public static function unhide(int $cid): bool
+	{
+		$return = self::update(['hidden' => false], ['id' => $cid]);
 
 		return $return;
 	}

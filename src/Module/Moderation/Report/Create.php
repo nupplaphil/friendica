@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -17,6 +17,7 @@ use Friendica\Core\Protocol;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Model\UserSession;
 use Friendica\Core\System;
+use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
@@ -96,9 +97,13 @@ class Create extends BaseModule
 				!empty($request['rule-ids']) ? explode(',', $request['rule-ids']) : [],
 				$this->session->get('report_comment') ?? '',
 				!empty($request['uri-ids']) ? explode(',', $request['uri-ids']) : [],
-				(bool) ($request['forward'] ?? false),
+				(bool) ($request['report_forward'] ?? false),
 			);
-			$this->repository->save($report);
+			$report = $this->repository->save($report);
+
+			if ($report->forward && $report->id) {
+				Worker::add(Worker::PRIORITY_LOW, 'ForwardReport', (int) $report->id);
+			}
 
 			switch ($request['contact_action'] ?? 0) {
 				case self::CONTACT_ACTION_COLLAPSE:
@@ -282,7 +287,7 @@ class Create extends BaseModule
 
 			$formSecurityToken = BaseModule::getFormSecurityToken('contact_action');
 
-			$threads = DI::conversation()->getContextLessThreadList($items, ConversationContent::MODE_CONTACT_POSTS, false, false, $formSecurityToken);
+			$threads = DI::conversationHtmlRenderer()->buildContextLessThreadsByItems($items, ConversationContent::MODE_CONTACT_POSTS, false, false, DI::userSession()->getLocalUserId());
 		}
 
 		$tpl = Renderer::getMarkupTemplate('moderation/report/create/pick_posts.tpl');
@@ -331,7 +336,7 @@ class Create extends BaseModule
 			'$block'    => ['contact_action', $this->t('Block contact'), self::CONTACT_ACTION_BLOCK, $this->t("Their posts won't appear in your Network page anymore, but their replies can appear in forum threads, with their content collapsed by default. They cannot follow you but still can have access to your public posts by other means.")],
 
 			'$display_forward' => !$this->baseUrl->isLocalUrl($contact['url']),
-			'$forward'         => ['report_forward', $this->t('Forward report'), self::CONTACT_ACTION_BLOCK, $forward_translation],
+			'$forward'         => ['report_forward', $this->t('Forward report'), false, $forward_translation],
 
 			'$summary' => $this->getAside($request),
 		]);

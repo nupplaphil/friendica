@@ -360,7 +360,7 @@ class StorageManagerTest extends DatabaseTestCase
 			self::markTestSkipped("No user backend");
 		}
 
-		$this->loadFixture(__DIR__ . '/../../../../datasets/storage/database.fixture.php', $this->database);
+		$this->loadFixture(__DIR__ . '/../../../../Fixtures/storage/database.fixture.php', $this->database);
 
 		$storageManager = new StorageManager(
 			$this->database,

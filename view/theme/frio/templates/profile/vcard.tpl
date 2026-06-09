@@ -68,7 +68,7 @@
 				{{if $subscribe_feed_link}}
 					<div id="subscribe-feed-link-button">
 						<a id="subscribe-feed-link" class="btn btn-labeled btn-primary" href="{{$subscribe_feed_link}}">
-							<span><i class="ri ri-broadcast-line"></i></span>
+							<span><i class="ri ri-rss-line"></i></span>
 							<span>{{$subscribe_feed}}</span>
 						</a>
 					</div>
@@ -90,9 +90,11 @@
 					</div>
 				{{/if}}
 				{{if $network_label}}
+				{{* NOTE: This effectively links to the Contact's posts/conversations URL *}}
+				{{* Despite the naming here this is not currently only used for groups but also other accounts *}}
 					<div id="showgroup-button">
 						<a id="showgroup" class="btn btn-labeled btn-primary" href="{{$network_url}}">
-							<span><i class="ri ri-discuss-line"></i></span>
+							<span><i class="ri {{$network_icon}}"></i></span>
 							<span>{{$network_label}}</span>
 						</a>
 					</div>

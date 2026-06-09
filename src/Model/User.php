@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -1074,8 +1074,11 @@ class User
 	 */
 	public static function isModerator(int $uid): bool
 	{
-		// @todo Replace with a moderator check in the future
-		return self::isSiteAdmin($uid);
+		if (self::isSiteAdmin($uid)) {
+			return true;
+		}
+
+		return in_array($uid, self::getModeratorUids(), true);
 	}
 
 	/**
@@ -2107,6 +2110,61 @@ class User
 	{
 		$condition = [
 			'email'           => self::getAdminEmailList(),
+			'parent-uid'      => null,
+			'blocked'         => false,
+			'verified'        => true,
+			'account_removed' => false,
+			'account_expired' => false,
+		];
+
+		return DBA::selectToArray('user', $fields, $condition, ['order' => ['uid']]);
+	}
+
+	/**
+	 * Returns a list of moderator user IDs from the comma-separated list in the config
+	 *
+	 * @return array
+	 */
+	public static function getModeratorUids(): array
+	{
+		$moderatorUsers = DI::config()->get('system', 'moderator_users');
+		if (empty($moderatorUsers)) {
+			return [];
+		}
+
+		$uids = [];
+		foreach (explode(',', (string) $moderatorUsers) as $moderatorUid) {
+			$moderatorUid = (int) trim($moderatorUid);
+			if ($moderatorUid > 0) {
+				$uids[$moderatorUid] = $moderatorUid;
+			}
+		}
+
+		$uids = array_values($uids);
+		sort($uids);
+
+		return $uids;
+	}
+
+	/**
+	 * Returns the complete list of explicitly assigned moderator user accounts
+	 *
+	 * @param array $fields
+	 * @return array
+	 * @throws Exception
+	 */
+	public static function getModeratorList(array $fields = []): array
+	{
+		$moderatorUids = array_values(array_filter(self::getModeratorUids(), function (int $uid): bool {
+			return $uid !== 0;
+		}));
+		if (empty($moderatorUids)) {
+			return [];
+		}
+
+		$condition = [
+			'uid'             => $moderatorUids,
+			'account-type'    => self::ACCOUNT_TYPE_PERSON,
 			'parent-uid'      => null,
 			'blocked'         => false,
 			'verified'        => true,

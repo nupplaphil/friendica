@@ -9,7 +9,6 @@ namespace Friendica\Test\src\Model\Log;
 
 use Friendica\Util\ReversedFileReader;
 use Friendica\Model\Log\ParsedLogIterator;
-
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,13 +21,13 @@ class ParsedLogIteratorTest extends TestCase
 	public static function assertParsed($parsed, $expected_data)
 	{
 		foreach ($expected_data as $k => $v) {
-			self::assertSame($parsed->$k, $v, '"'.$k.'" does not match expectation');
+			self::assertSame($parsed->$k, $v, '"' . $k . '" does not match expectation');
 		}
 	}
 
 	protected function setUp(): void
 	{
-		$logfile = dirname(__DIR__) . '/../../datasets/log/friendica.log.txt';
+		$logfile = dirname(__DIR__) . '/../../Fixtures/log/friendica.log.txt';
 
 		$reader    = new ReversedFileReader();
 		$this->pli = new ParsedLogIterator($reader);
@@ -65,7 +64,7 @@ class ParsedLogIteratorTest extends TestCase
 				'message' => 'No HTTP_SIGNATURE header',
 				'data'    => null,
 				'source'  => '{"file":"HTTPSignature.php","line":476,"function":"getSigner","uid":"0a3934","process_id":14826}',
-			]
+			],
 		);
 	}
 
@@ -83,7 +82,7 @@ class ParsedLogIteratorTest extends TestCase
 				'message' => 'Spool file does not start with "item-"',
 				'data'    => '{"file":".","worker_id":"560c8b6","worker_cmd":"SpoolPost"}',
 				'source'  => '{"file":"SpoolPost.php","line":40,"function":"execute","uid":"fd8c37","process_id":20846}',
-			]
+			],
 		);
 	}
 
@@ -101,7 +100,7 @@ class ParsedLogIteratorTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => '{"worker_id":"ece8fc8","worker_cmd":"Cron"}',
 				'source'  => '{"file":"Worker.php","line":786,"function":"tooMuchWorkers","uid":"364d3c","process_id":20754}',
-			]
+			],
 		);
 	}
 
@@ -119,7 +118,7 @@ class ParsedLogIteratorTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => '{"worker_id":"ece8fc8","worker_cmd":"Cron"}',
 				'source'  => '{"file":"Worker.php","line":786,"function":"tooMuchWorkers","uid":"364d3c","process_id":20754}',
-			]
+			],
 		);
 	}
 
@@ -134,7 +133,7 @@ class ParsedLogIteratorTest extends TestCase
 
 	public function testEmptyLogFile()
 	{
-		$logfile = dirname(__DIR__) . '/../../datasets/log/empty.friendica.log.txt';
+		$logfile = dirname(__DIR__) . '/../../Fixtures/log/empty.friendica.log.txt';
 
 		$reader = new ReversedFileReader();
 		$pli    = new ParsedLogIterator($reader);

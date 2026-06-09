@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -12,6 +12,7 @@ use Friendica\App\BaseURL;
 use Friendica\AppHelper;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
+use Friendica\Core\Worker;
 use Friendica\Model\Contact;
 use Friendica\Module\Api\ApiResponse;
 use Friendica\Module\BaseApi;
@@ -60,7 +61,11 @@ class Reports extends BaseApi
 			self::getCurrentUserID(),
 		);
 
-		$this->reportRepo->save($report);
+		$report = $this->reportRepo->save($report);
+
+		if ($report->forward && $report->id) {
+			Worker::add(Worker::PRIORITY_LOW, 'ForwardReport', (int) $report->id);
+		}
 
 		$this->jsonExit([]);
 	}

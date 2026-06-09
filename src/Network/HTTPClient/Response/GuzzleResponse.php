@@ -12,6 +12,7 @@ use Friendica\Network\HTTPClient\Capability\ICanHandleHttpResponses;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RedirectMiddleware;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * A content wrapper class for Guzzle call results
@@ -178,5 +179,15 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 	public function getBodyString(): string
 	{
 		return (string) parent::getBody();
+	}
+
+	/**
+	 * Get the response body as a stream
+	 *
+	 * @return StreamInterface
+	 */
+	public function getBodyStream(): StreamInterface
+	{
+		return parent::getBody();
 	}
 }

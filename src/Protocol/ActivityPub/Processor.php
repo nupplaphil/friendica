@@ -2516,6 +2516,7 @@ class Processor
 			$check_id = true;
 		}
 
+		// @todo this is triggered by follow request done by the system user. Question is if we should care.
 		if (empty($uid)) {
 			DI::logger()->notice('User could not be detected', ['activity' => $activity]);
 			Queue::remove($activity);

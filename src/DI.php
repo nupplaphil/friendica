@@ -153,6 +153,16 @@ abstract class DI
 		return self::$dice->create(Content\Conversation::class);
 	}
 
+	public static function conversationHtmlRenderer(): Content\Conversation\HtmlRenderer
+	{
+		return self::$dice->create(Content\Conversation\HtmlRenderer::class);
+	}
+
+	public static function conversationActivityHtmlFormatter(): Content\Conversation\ActivityHtmlFormatter
+	{
+		return self::$dice->create(Content\Conversation\ActivityHtmlFormatter::class);
+	}
+
 	public static function bbCodeVideo(): Content\Text\BBCode\Video
 	{
 		return self::$dice->create(Content\Text\BBCode\Video::class);

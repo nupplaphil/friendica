@@ -402,7 +402,7 @@ class Item
 				$this->l10n->t('View Status')                                 => $status_link,
 				$this->l10n->t('View Profile')                                => $profile_link,
 				$this->l10n->t('View Photos')                                 => $photos_link,
-				$this->l10n->t('Network Posts')                               => $posts_link,
+				$this->l10n->t('Posts')                                       => $posts_link,
 				$this->l10n->t('View Contact')                                => $contact_url,
 				$this->l10n->t('Message')                                     => $pm_url,
 				$this->l10n->t('Collapse')                                    => $collapse_link,

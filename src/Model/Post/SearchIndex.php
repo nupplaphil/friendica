@@ -38,7 +38,7 @@ class SearchIndex
 			return;
 		}
 
-		if (Contact::exists(['unsearchable' => false])) {
+		if (Contact::exists(['id' => $item['owner-id'], 'unsearchable' => true])) {
 			return;
 		}
 

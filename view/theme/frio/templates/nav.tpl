@@ -39,7 +39,7 @@
 							</div>
 						</form>
 					{{/if}}
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					<button type="button" id="search-mobile-btn" class="navbar-toggle collapsed" data-toggle="collapse"
 						data-target="#search-mobile" aria-expanded="false" aria-controls="search-mobile">
 						<span class="sr-only">Toggle Search</span>
 						<i class="ri ri-search-line ri-fw ri-lg" aria-hidden="true"></i>
@@ -228,14 +228,15 @@
 											<a role="menuitem" id="nav-delegation-link"
 												class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
 												href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">
-												<i class="ri ri-contacts-book-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
+												<i class="ri ri-arrow-left-right-line ri-fw" aria-hidden="true"></i> {{$nav.delegation.1}}
 											</a>
 										</li>
 									{{/if}}
 									<li>
 										<a role="menuitem" id="nav-directory-link" class="nav-link {{$nav.directory.2}}"
 											href="{{$nav.directory.0}}" title="{{$nav.directory.3}}">
-											<i class="ri ri-node-tree ri-fw" aria-hidden="true"></i>{{$nav.directory.1}}
+											<i class="ri ri-node-tree ri-fw" aria-hidden="true"></i>
+											{{$nav.directory.1}}
 										</a>
 									</li>
 									<li class="divider"><hr></li>
@@ -252,7 +253,7 @@
 										<li>
 											<a role="menuitem" id="nav-help-link" class="nav-link {{$nav.help.2}}"
 												href="{{$nav.help.0}}" title="{{$nav.help.3}}">
-												<i class="ri ri-question-line ri-fw" aria-hidden="true"></i> {{$nav.help.1}}
+												<i class="ri ri-question-mark ri-fw" aria-hidden="true"></i> {{$nav.help.1}}
 											</a>
 										</li>
 									{{/if}}
@@ -372,7 +373,7 @@
 								<li class="list-group-item">
 									<a role="menuitem"
 										class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
-										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-contacts-book-line ri-fw"
+										href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}"><i class="ri ri-arrow-left-right-line ri-fw"
 											aria-hidden="true"></i> {{$nav.delegation.1}}
 									</a>
 								</li>

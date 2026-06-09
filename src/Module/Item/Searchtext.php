@@ -45,7 +45,7 @@ class Searchtext extends BaseModule
 
 		$search = DBA::selectFirst('post-searchindex', [], ['uri-id' => $item['uri-id']]);
 		if (empty($search)) {
-			throw new HTTPException\NotFoundException();
+			$this->httpExit($this->l10n->t('No search text found for this item. This can happen when the author has set their account to be non-discoverable or their posts to be non-indexable for searches.'));
 		}
 
 		$this->httpExit(Post\Engagement::unescapeKeywords($search['searchtext']));

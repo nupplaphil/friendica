@@ -1636,11 +1636,11 @@ class ParseUrl
 			if (isset($data[$key]) && (empty($siteinfo[$value]) || $overwrite)) {
 				if ($value === 'published') {
 					$siteinfo[$value] = DateTimeFormat::utc($data[$key]);
-
-					continue;
+				} elseif (is_string($data[$key])) {
+					$siteinfo[$value] = trim(strip_tags(html_entity_decode($data[$key], ENT_COMPAT, 'UTF-8')));
+				} else {
+					$siteinfo[$value] = $data[$key];
 				}
-
-				$siteinfo[$value] = trim(strip_tags(html_entity_decode($data[$key], ENT_COMPAT, 'UTF-8')));
 			}
 		}
 
