@@ -1458,8 +1458,11 @@ class Diaspora
 		 * [2] = name (optional)
 		 * [3] = profile URL
 		 */
-
 		foreach ($matches as $match) {
+			if ($match[3] === '') {
+				continue;
+			}
+
 			try {
 				$contact = DI::dsprContact()->getByUrl(new Uri($match[3]));
 				Tag::storeByHash($uriid, $match[1], $contact->name ?: $contact->nick, $contact->url);
