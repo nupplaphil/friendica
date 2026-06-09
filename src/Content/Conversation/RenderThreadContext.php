@@ -13,10 +13,10 @@ namespace Friendica\Content\Conversation;
 readonly class RenderThreadContext
 {
 	public function __construct(
-		private readonly string $mode,
-		private readonly bool $preview,
-		private readonly bool $writable,
-		private readonly int $profileOwner,
+		private string $mode,
+		private bool $preview,
+		private bool $writable,
+		private int $profileOwner,
 	) {}
 
 	public function getMode(): string
