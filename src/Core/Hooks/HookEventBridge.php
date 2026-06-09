@@ -18,6 +18,7 @@ use Friendica\Event\HtmlFilterEvent;
 use Friendica\Event\ModuleContentEvent;
 use Friendica\Event\ModuleInitEvent;
 use Friendica\Event\ModulePostEvent;
+use Friendica\Event\ModulePostRecipientEvent;
 use Friendica\Event\NamedEvent;
 
 /**
@@ -221,6 +222,7 @@ final class HookEventBridge
 			ModuleInitEvent::MODULE_INIT                      => 'onModuleInitEvent',
 			ModulePostEvent::MODULE_POST                      => 'onModulePostEvent',
 			ModuleContentEvent::MODULE_CONTENT                => 'onModuleContentEvent',
+			ModulePostRecipientEvent::MODULE_POST_RECIPIENT   => 'onModulePostRecipientEvent',
 		];
 	}
 
@@ -465,6 +467,13 @@ final class HookEventBridge
 		$arr = ['content' => $event->getContent()];
 		$arr = static::callHook($event->getModuleClass() . '_mod_content', $arr);
 		$event->setContent($arr['content']);
+	}
+
+	public static function onModulePostRecipientEvent(ModulePostRecipientEvent $event): void
+	{
+		$event->setHtml(
+			static::callHook($event->getModuleName() . '_post_recipient', $event->getHtml())
+		);
 	}
 
 	/**
