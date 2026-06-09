@@ -472,7 +472,7 @@ final class HookEventBridge
 	public static function onModulePostRecipientEvent(ModulePostRecipientEvent $event): void
 	{
 		$event->setHtml(
-			static::callHook($event->getModuleName() . '_post_recipient', $event->getHtml())
+			static::callHook($event->getModuleName() . '_post_recipient', $event->getHtml()),
 		);
 	}
 

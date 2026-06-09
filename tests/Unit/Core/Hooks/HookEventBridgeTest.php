@@ -117,7 +117,7 @@ class HookEventBridgeTest extends TestCase
 			ModuleInitEvent::MODULE_INIT                      => 'onModuleInitEvent',
 			ModulePostEvent::MODULE_POST                      => 'onModulePostEvent',
 			ModuleContentEvent::MODULE_CONTENT                => 'onModuleContentEvent',
-			ModulePostRecipientEvent::MODULE_POST_RECIPIENT  => 'onModulePostRecipientEvent',
+			ModulePostRecipientEvent::MODULE_POST_RECIPIENT   => 'onModulePostRecipientEvent',
 		];
 
 		$this->assertSame(
@@ -689,8 +689,8 @@ class HookEventBridgeTest extends TestCase
 	public static function getModulePostRecipientEventData(): array
 	{
 		return [
-			'Home'          => ['friendica.module_post_recipient', 'home_post_recipient', 'home', \Friendica\Module\Home::class],
-			'LegacyModule'  => ['friendica.module_post_recipient', 'photos_post_recipient', 'photos', \Friendica\LegacyModule::class],
+			'Home'         => ['friendica.module_post_recipient', 'home_post_recipient', 'home', \Friendica\Module\Home::class],
+			'LegacyModule' => ['friendica.module_post_recipient', 'photos_post_recipient', 'photos', \Friendica\LegacyModule::class],
 		];
 	}
 
