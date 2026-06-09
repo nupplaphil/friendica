@@ -23,12 +23,6 @@ parameters:
 			path: src/App/Router.php
 
 		-
-			message: '#^Property Friendica\\App\\Router\:\:\$routeCollector \(FastRoute\\RouteCollector\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/App/Router.php
-
-		-
 			message: '#^Property Friendica\\Console\\Addon\:\:\$dba is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
@@ -170,7 +164,13 @@ parameters:
 			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
-			path: src/Content/Conversation.php
+			path: src/Content/Conversation/HtmlRenderer.php
+
+		-
+			message: '#^Offset ''title'' on array\{emoji\: mixed, verb\: string, total\: mixed, count\: int\<0, max\>, title\: array\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Content/Conversation/HtmlRenderer.php
 
 		-
 			message: '#^If condition is always true\.$#'
@@ -407,6 +407,12 @@ parameters:
 			path: src/Database/Database.php
 
 		-
+			message: '#^Property Friendica\\Moderation\\Entity\\Report\:\:\$reporterUid \(int\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 1
+			path: src/Factory/Api/Mastodon/Report.php
+
+		-
 			message: '#^Loose comparison using \!\= between 0 and 0 will always evaluate to false\.$#'
 			identifier: notEqual.alwaysFalse
 			count: 1
@@ -533,6 +539,12 @@ parameters:
 			path: src/Module/Admin/DBSync.php
 
 		-
+			message: '#^Strict comparison using \=\=\= between int\<1, max\> and 0 will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Module/Admin/Roles.php
+
+		-
 			message: '#^Instanceof between Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage and Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 2
@@ -587,6 +599,12 @@ parameters:
 			path: src/Module/Contact.php
 
 		-
+			message: '#^Property Friendica\\Module\\Contact\\Unfollow\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Contact/Unfollow.php
+
+		-
 			message: '#^Property Friendica\\Module\\Conversation\\Timeline\:\:\$selectedTab \(string\) on left side of \?\?\= is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -627,6 +645,12 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/Module/Media/Photo/Upload.php
+
+		-
+			message: '#^Property Friendica\\Module\\Moderation\\Report\\Create\:\:\$page is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
 
 		-
 			message: '#^Empty array passed to foreach\.$#'
@@ -687,3 +711,15 @@ parameters:
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: src/Module/Profile/Photos.php
+
+		-
+			message: '#^While loop condition is always true\.$#'
+			identifier: while.alwaysTrue
+			count: 1
+			path: src/Protocol/ActivityPub/Firehose.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\<mixed, mixed\> and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Util/JsonLD.php
