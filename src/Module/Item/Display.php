@@ -11,6 +11,7 @@ use Friendica\App;
 use Friendica\AppHelper;
 use Friendica\BaseModule;
 use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\HtmlRenderer;
 use Friendica\Content\Item as ContentItem;
 use Friendica\Content\Text\BBCode;
 use Friendica\Core\Config\Capability\IManageConfigValues;
@@ -54,12 +55,14 @@ class Display extends BaseModule
 	protected $contentItem;
 	/** @var Conversation */
 	protected $conversation;
+	/** @var HtmlRenderer */
+	protected $htmlRenderer;
 	/** @var Notification */
 	protected $notification;
 	/** @var Notify */
 	protected $notify;
 
-	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, IHandleUserSessions $session, AppHelper $appHelper, App\Page $page, ContentItem $contentItem, Conversation $conversation, Notification $notification, Notify $notify, array $server, array $parameters = [])
+	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, IHandleUserSessions $session, AppHelper $appHelper, App\Page $page, ContentItem $contentItem, Conversation $conversation, HtmlRenderer $htmlRenderer, Notification $notification, Notify $notify, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -70,6 +73,7 @@ class Display extends BaseModule
 		$this->appHelper    = $appHelper;
 		$this->contentItem  = $contentItem;
 		$this->conversation = $conversation;
+		$this->htmlRenderer = $htmlRenderer;
 		$this->notification = $notification;
 		$this->notify       = $notify;
 	}
@@ -162,7 +166,7 @@ class Display extends BaseModule
 			$output .= "<script> var netargs = '?uri_id=" . $item['uri-id'] . "'; </script>";
 		}
 
-		$output .= $this->getDisplayData($item);
+		$output .= $this->getDisplayData($item, false, 0, false);
 
 		$author              = Contact::getByURLForUser($item['author-link'], $this->session->getLocalUserId());
 		$this->page['title'] = $this->l10n->t("Post by %s", $author['name']);
@@ -283,7 +287,12 @@ class Display extends BaseModule
 			$output .= $this->conversation->statusEditor([], 0, true);
 		}
 
-		$output .= $this->conversation->render([$item], Conversation::MODE_DISPLAY, $updateUid, false, 'commented', $itemUid);
+		if (!$update) {
+			$output .= '<div id="live-display"></div>' . "\r\n"
+				. '<script> var profile_uid = ' . ($this->session->getLocalUserId() ?: 0) . ';</script>';
+		}
+
+		$output .= $this->htmlRenderer->renderThreadByUriId((int) $item['uri-id'], $itemUid, Conversation::MODE_DISPLAY);
 
 		return $output;
 	}

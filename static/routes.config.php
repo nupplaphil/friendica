@@ -469,6 +469,7 @@ return [
 
 	'/item/{id:\d+}' => [
 		'/activity/{verb}' => [Module\Item\Activity::class,    [        R::POST]],
+		'/comments'        => [Module\Item\Comments::class,    [R::GET         ]],
 		'/follow'          => [Module\Item\Follow::class,      [        R::POST]],
 		'/complete'        => [Module\Item\Complete::class,    [        R::POST]],
 		'/ignore'          => [Module\Item\Ignore::class,      [        R::POST]],
