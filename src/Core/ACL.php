@@ -12,6 +12,7 @@ use Friendica\App\Page;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Event\ArrayFilterEvent;
+use Friendica\Event\ModulePostRecipientEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\Circle;
 use Friendica\Model\User;
@@ -59,7 +60,9 @@ class ACL
 			'$selected'      => $selected,
 		]);
 
-		Hook::callAll(DI::args()->getModuleName() . '_post_recipient', $o);
+		$o = DI::eventDispatcher()->dispatch(
+			new ModulePostRecipientEvent(ModulePostRecipientEvent::MODULE_POST_RECIPIENT, DI::args()->getModuleName(), DI::router()->getModuleClass(), $o),
+		)->getHtml();
 
 		return $o;
 	}
