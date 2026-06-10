@@ -41,6 +41,7 @@ use Friendica\Util\Profiler;
 use Friendica\Util\Strings;
 use ImagickException;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 
 final class HtmlRenderer
 {
@@ -63,6 +64,7 @@ final class HtmlRenderer
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly IHandleUserSessions $session,
 		private readonly Page $page,
+		private readonly LoggerInterface $logger,
 		private readonly ThreadedPostTemplateRenderer $postTemplateRenderer,
 	) {}
 
@@ -739,7 +741,7 @@ final class HtmlRenderer
 
 		$condition = DBA::mergeConditions(
 			$condition,
-			["`uid` IN (0, ?) AND (NOT `verb` IN (?, ?, ?) OR `verb` IS NULL)", $uid, Activity::FOLLOW, Activity::VIEW, Activity::READ],
+			["`uid` IN (0, ?) AND (`verb` = ? OR `gravity` IN (?, ?))", $uid, Activity::ANNOUNCE, ItemModel::GRAVITY_COMMENT, ItemModel::GRAVITY_PARENT],
 		);
 		$condition = DBA::mergeConditions($condition, ["(`uid` != ? OR `private` != ?)", 0, ItemModel::PRIVATE]);
 		$condition = DBA::mergeConditions(
@@ -1221,6 +1223,7 @@ final class HtmlRenderer
 
 		$itemArray = [];
 		foreach ($itemList as $item) {
+			$this->logger->debug('Blubb', ['uri-id' => $item['uri-id'], 'parent-uri-id' => $item['parent-uri-id'], 'thr-parent-id' => $item['thr-parent-id'], 'body' => $item['body'], 'gravity' => $item['gravity']]);
 			$itemArray[$item['uri-id']] = $item;
 		}
 
