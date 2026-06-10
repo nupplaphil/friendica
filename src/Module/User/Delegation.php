@@ -9,7 +9,6 @@ namespace Friendica\Module\User;
 
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
-use Friendica\AppHelper;
 use Friendica\BaseModule;
 use Friendica\Contact\Introduction\Repository\Introduction;
 use Friendica\Core\L10n;
@@ -33,8 +32,23 @@ use Psr\Log\LoggerInterface;
  */
 class Delegation extends BaseModule
 {
-	public function __construct(private readonly EventDispatcherInterface $eventDispatcher, private readonly AppHelper $appHelper, private readonly Introduction $intro, private readonly Notify $notify, private readonly SystemMessages $systemMessages, private readonly Authentication $auth, private readonly Database $db, private readonly IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Util\Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly Introduction $intro,
+		private readonly Notify $notify,
+		private readonly SystemMessages $systemMessages,
+		private readonly Authentication $auth,
+		private readonly Database $db,
+		private readonly IHandleUserSessions $session,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Util\Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 

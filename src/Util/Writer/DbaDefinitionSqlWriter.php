@@ -72,10 +72,7 @@ class DbaDefinitionSqlWriter
 
 		if (!empty($tableStructure['indexes'])) {
 			foreach ($tableStructure['indexes'] as $indexName => $fieldNames) {
-				$sql_index = self::createIndex($indexName, $fieldNames, '');
-				if (!is_null($sql_index)) {
-					$sql_rows[] = $sql_index;
-				}
+				$sql_rows[] = self::createIndex($indexName, $fieldNames, '');
 			}
 		}
 

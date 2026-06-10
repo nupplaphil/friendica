@@ -9,7 +9,6 @@ namespace Friendica\Module\Security;
 
 use Friendica\App;
 use Friendica\BaseModule;
-use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Hook;
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
@@ -26,8 +25,18 @@ use Psr\Log\LoggerInterface;
  */
 class Login extends BaseModule
 {
-	public function __construct(private readonly Authentication $auth, private readonly IManageConfigValues $config, private readonly IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly Authentication $auth,
+		private readonly IHandleUserSessions $session,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 

@@ -663,8 +663,16 @@ class Receiver
 			$id            = JsonLD::fetchElement($activity, '@id');
 			$object_id     = JsonLD::fetchElement($activity, 'as:object', '@id');
 
-			if (!empty($published) && $object_id !== null && in_array($type, ['as:Create', 'as:Update']) && in_array($object_type, self::CONTENT_TYPES)
-				&& ($push || ($completion != self::COMPLETION_MANUAL)) && DI::contentItem()->isTooOld($published) && !Post::exists(['uri' => $object_id])) {
+			if (
+				!empty($published)
+				/** @phpstan-ignore notIdentical.alwaysTrue(ignore false positive error of phpstan) */
+				&& $object_id !== null
+				&& in_array($type, ['as:Create', 'as:Update'])
+				&& in_array($object_type, self::CONTENT_TYPES)
+				&& ($push || ($completion != self::COMPLETION_MANUAL))
+				&& DI::contentItem()->isTooOld($published)
+				&& !Post::exists(['uri' => $object_id])
+			) {
 				DI::logger()->debug('Activity is too old. It will not be processed', ['push' => $push, 'completion' => $completion, 'type' => $type,  'object-type' => $object_type, 'published' => $published, 'id' => $id, 'object-id' => $object_id]);
 				return true;
 			}
@@ -1943,24 +1951,30 @@ class Receiver
 
 				$attachments[$mediatype] = ['type' => $mediatype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => null, 'name' => ''];
 			} elseif ($type == Post\Media::HLS) {
-				$attachment = ['type' => $filetype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => null, 'name' => '', 'image' => $icon];
-				if (is_array($player)) {
-					$attachment['player-url']    = $player['embed']  ?? null;
-					$attachment['player-height'] = $player['height'] ?? null;
-					$attachment['player-width']  = $player['width']  ?? null;
+				$attachment = [
+					'type'      => $filetype,
+					'mediaType' => $mediatype,
+					'url'       => $href,
+					'height'    => $height,
+					'width'     => $width,
+					'size'      => null,
+					'name'      => '',
+					'image'     => $icon,
+				];
 
-					if (!$height && !$width) {
-						$attachment['height'] = $attachment['player-height'];
-						$attachment['width']  = $attachment['player-width'];
-					}
+				$attachment['player-url']    = $player['embed']  ?? null;
+				$attachment['player-height'] = $player['height'] ?? null;
+				$attachment['player-width']  = $player['width']  ?? null;
+
+				if (!$height && !$width) {
+					$attachment['height'] = $attachment['player-height'];
+					$attachment['width']  = $attachment['player-width'];
 				}
 
-				if (is_array($embed)) {
-					$attachment['embed-type']   = $embed['type']   ?? null;
-					$attachment['embed-html']   = $embed['html']   ?? null;
-					$attachment['embed-height'] = $embed['height'] ?? null;
-					$attachment['embed-width']  = $embed['width']  ?? null;
-				}
+				$attachment['embed-type']   = $embed['type']   ?? null;
+				$attachment['embed-html']   = $embed['html']   ?? null;
+				$attachment['embed-height'] = $embed['height'] ?? null;
+				$attachment['embed-width']  = $embed['width']  ?? null;
 
 				DI::logger()->info('Adding video attachment', ['attachment' => $attachment]);
 				$attachments[] = $attachment;

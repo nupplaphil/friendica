@@ -263,6 +263,7 @@ class Authentication
 		/**
 		 * @see User::getPasswordRegExp()
 		 */
+		/** @phpstan-ignore identical.alwaysTrue(value of PASSWORD_DEFAULT will be change in a future PHP version) */
 		if (PASSWORD_DEFAULT === PASSWORD_BCRYPT && strlen($password) > 72) {
 			$return_path = '/security/password_too_long?' . http_build_query(['return_path' => $return_path]);
 		}

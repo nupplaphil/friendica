@@ -28,8 +28,22 @@ use Psr\Log\LoggerInterface;
 
 class Channels extends BaseSettings
 {
-	public function __construct(private readonly Factory\UserDefinedChannel $userDefinedChannel, private readonly UserDefinedChannel $channel, App\Page $page, IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly Factory\UserDefinedChannel $userDefinedChannel,
+		private readonly UserDefinedChannel $channel,
+		App\Page $page,
+		IHandleUserSessions $session,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly IManageConfigValues $config,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -179,9 +193,16 @@ class Channels extends BaseSettings
 				'image'        => ["image[$channel->code]", $this->t("Images"), $channel->mediaType & 1],
 				'video'        => ["video[$channel->code]", $this->t("Videos"), $channel->mediaType & 2],
 				'audio'        => ["audio[$channel->code]", $this->t("Audio"), $channel->mediaType & 4],
-				'languages'    => ["languages[$channel->code][]", $this->t('Languages'), $channel->languages ?? $channel_languages, $this->t('Select all languages that you want to see in this channel. "Unspecified" describes all posts for which no language information was detected (e.g. posts with just an image or too little text to be sure of the language). If you want to see all languages, you will need to select all items in the list.'), $languages, 'multiple'],
-				'publish'      => $publish,
-				'delete'       => ["delete[$channel->code]", $this->t("Delete channel") . ' (' . $channel->label . ')', false, $this->t("Check to delete this entry from the channel list")],
+				'languages'    => [
+					"languages[$channel->code][]",
+					$this->t('Languages'),
+					$channel->languages,
+					$this->t('Select all languages that you want to see in this channel. "Unspecified" describes all posts for which no language information was detected (e.g. posts with just an image or too little text to be sure of the language). If you want to see all languages, you will need to select all items in the list.'),
+					$languages,
+					'multiple',
+				],
+				'publish' => $publish,
+				'delete'  => ["delete[$channel->code]", $this->t("Delete channel") . ' (' . $channel->label . ')', false, $this->t("Check to delete this entry from the channel list")],
 			];
 		}
 

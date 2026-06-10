@@ -148,13 +148,13 @@ class Jetstream
 				}
 				$last_timeout = time();
 			}
+
 			try {
 				$this->client->close();
 			} catch (\WebSocket\ConnectionException $e) {
 				$this->logger->error('Error while trying to close the connection', ['code' => $e->getCode(), 'message' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()]);
 			}
 		}
-		$this->logger->notice('Stop listening');
 	}
 
 	/**

@@ -39,8 +39,19 @@ class Register extends BaseModule
 	/** @var Tos */
 	protected $tos;
 
-	public function __construct(private readonly IHandleUserSessions $session, private readonly EventDispatcherInterface $eventDispatcher, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly IHandleUserSessions $session,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		IManageConfigValues $config,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->tos = new Tos($l10n, $baseUrl, $args, $logger, $profiler, $response, $config, $server, $parameters);
@@ -320,6 +331,7 @@ class Register extends BaseModule
 		if (!empty($arr['email'])) {
 			$this->logger->info('Tar pit', $arr);
 			DI::sysmsg()->addNotice(DI::l10n()->t('You have entered too much information.'));
+
 			DI::baseUrl()->redirect('register/');
 		}
 
@@ -327,6 +339,7 @@ class Register extends BaseModule
 			$user = DBA::selectFirst('user', ['email'], ['uid' => DI::userSession()->getLocalUserId()]);
 			if (!DBA::isResult($user)) {
 				DI::sysmsg()->addNotice(DI::l10n()->t('User not found.'));
+
 				DI::baseUrl()->redirect('register');
 			}
 
@@ -344,6 +357,7 @@ class Register extends BaseModule
 			$this->logger->info('Mail mismatch', $arr);
 			DI::sysmsg()->addNotice(DI::l10n()->t('Please enter the identical mail address in the second field.'));
 			$regdata = ['email' => $arr['email'], 'nickname' => $arr['nickname'], 'username' => $arr['username']];
+
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));
 		}
 
@@ -355,8 +369,8 @@ class Register extends BaseModule
 				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname can only contain US-ASCII characters."));
 			}
 			$regdata = ['email' => $arr['email'], 'nickname' => $arr['nickname'], 'username' => $arr['username']];
+
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));
-			return;
 		}
 
 		$arr['blocked']  = $blocked;

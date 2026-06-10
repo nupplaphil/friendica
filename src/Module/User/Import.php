@@ -34,11 +34,26 @@ use Psr\Log\LoggerInterface;
 
 class Import extends \Friendica\BaseModule
 {
-	public const IMPORT_DEBUG = false;
 	public const MEMORY_LIMIT = 67108864;
 
-	public function __construct(private readonly UserSession $session, private readonly PermissionSet $permissionSet, private readonly IManagePersonalConfigValues $pconfig, private readonly Database $database, private readonly SystemMessages $systemMessages, private readonly IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	private bool $dryRun = false;
+
+	public function __construct(
+		private readonly UserSession $session,
+		private readonly PermissionSet $permissionSet,
+		private readonly IManagePersonalConfigValues $pconfig,
+		private readonly Database $database,
+		private readonly SystemMessages $systemMessages,
+		private readonly IManageConfigValues $config,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -91,7 +106,7 @@ class Import extends \Friendica\BaseModule
 
 	private function lastInsertId(): int
 	{
-		if (self::IMPORT_DEBUG) {
+		if ($this->dryRun) {
 			return 1;
 		}
 
@@ -146,7 +161,7 @@ class Import extends \Friendica\BaseModule
 
 		$this->checkCols($table, $arr);
 
-		if (self::IMPORT_DEBUG) {
+		if ($this->dryRun) {
 			return true;
 		}
 

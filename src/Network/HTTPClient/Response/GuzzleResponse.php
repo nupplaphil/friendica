@@ -104,7 +104,7 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 	/** {@inheritDoc} */
 	public function getContentType(): string
 	{
-		$contentTypes = $this->getHeader('Content-Type') ?? [];
+		$contentTypes = $this->getHeader('Content-Type');
 
 		return array_pop($contentTypes) ?? '';
 	}

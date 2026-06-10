@@ -12,7 +12,7 @@ namespace Friendica\Protocol\HTTP;
  *
  * @property-read string $type
  * @property-read string $subType
- * @property-read string $parameters
+ * @property-read string[] $parameters
  */
 final class MediaType implements \Stringable
 {

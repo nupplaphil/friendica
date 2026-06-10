@@ -214,9 +214,7 @@ class Probe
 
 		if ($network != Protocol::ACTIVITYPUB) {
 			$data = self::detect($uri, $network, $uid, $ap_profile);
-			if (!is_array($data)) {
-				$data = [];
-			}
+
 			if (empty($data) || (!empty($ap_profile) && empty($network) && (($data['network'] ?? '') != Protocol::DFRN))) {
 				$networks = $data['networks'] ?? [];
 				unset($data['networks']);
@@ -443,7 +441,7 @@ class Probe
 
 			if (is_null($webfinger)) {
 				$webfinger = self::getWebfinger('http://' . $host . self::WEBFINGER, HttpClientAccept::JRD_JSON, '', $uri);
-				if (self::$isTimeout || is_null($webfinger)) {
+				if (is_null($webfinger)) {
 					return [];
 				}
 				$baseurl = 'http://' . $host;
@@ -1055,7 +1053,6 @@ class Probe
 			&& !empty($data['guid'])
 			&& !empty($data['baseurl'])
 			&& !empty($data['pubkey'])
-			&& $hcard_url !== ''
 		) {
 			$data['network']          = Protocol::DIASPORA;
 			$data['manually-approve'] = false;
@@ -1140,7 +1137,7 @@ class Probe
 
 		if (!empty($hrefParts['path'])) {
 			// Root path case (/path) including relative scheme case (//host/path)
-			if ($hrefParts['path'] && $hrefParts['path'][0] == '/') {
+			if ($hrefParts['path'][0] == '/') {
 				$path = $hrefParts['path'];
 			} else {
 				$path = $path . '/' . $hrefParts['path'];
@@ -1345,6 +1342,7 @@ class Probe
 		$password = '';
 		openssl_private_decrypt(hex2bin((string) $mailacct['pass']), $password, $user['prvkey']);
 		$mbox = Email::connect($mailbox, $mailacct['user'], $password);
+
 		if ($mbox === false) {
 			return [];
 		}
@@ -1397,9 +1395,7 @@ class Probe
 			}
 		}
 
-		if ($mbox !== false) {
-			imap_close($mbox);
-		}
+		imap_close($mbox);
 
 		return $data;
 	}

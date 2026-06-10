@@ -110,9 +110,7 @@ class Xrd extends BaseModule
 			$parts[] = current(explode(';', $part));
 		}
 
-		if ($parts === []) {
-			return $default;
-		} elseif (in_array('application/jrd+json', $parts) && !in_array('application/xrd+xml', $parts)) {
+		if (in_array('application/jrd+json', $parts) && !in_array('application/xrd+xml', $parts)) {
 			return Response::TYPE_JSON;
 		} elseif (!in_array('application/jrd+json', $parts) && in_array('application/xrd+xml', $parts)) {
 			return Response::TYPE_XML;

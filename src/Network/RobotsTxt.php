@@ -132,10 +132,6 @@ class RobotsTxt
 				}
 				continue;
 			}
-
-			if (stripos($line, 'User-Agent:') === 0 && !$isRelevantSection) {
-				break;
-			}
 		}
 
 		return sizeof($this->disallowRules) > 0 || sizeof($this->allowRules) > 0;

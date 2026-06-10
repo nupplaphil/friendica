@@ -26,14 +26,14 @@ class Profile extends BaseModule
 		$appHelper = DI::appHelper();
 
 		// Ensure we've got a profile owner if updating.
-		$appHelper->setProfileOwner((int)($request['p'] ?? 0));
+		$appHelper->setProfileOwner((int) ($request['p'] ?? 0));
 
 		if (DI::config()->get('system', 'block_public') && !DI::userSession()->getLocalUserId() && !DI::userSession()->getRemoteContactID($appHelper->getProfileOwner())) {
 			throw new ForbiddenException();
 		}
 
-		$remote_contact = DI::userSession()->getRemoteContactID($appHelper->getProfileOwner());
-		$is_owner = DI::userSession()->getLocalUserId() == $appHelper->getProfileOwner();
+		$remote_contact   = DI::userSession()->getRemoteContactID($appHelper->getProfileOwner());
+		$is_owner         = DI::userSession()->getLocalUserId() == $appHelper->getProfileOwner();
 		$last_updated_key = "profile:" . $appHelper->getProfileOwner() . ":" . DI::userSession()->getLocalUserId() . ":" . $remote_contact;
 
 		if (!DI::userSession()->isAuthenticated()) {
@@ -60,7 +60,7 @@ class Profile extends BaseModule
 				AND `visible` AND (NOT `deleted` OR `gravity` = ?)
 				AND `wall` " . $sql_extra, $appHelper->getProfileOwner(), Item::GRAVITY_ACTIVITY];
 
-		if ($request['force'] && !empty($request['item'])) {
+		if (!empty($request['item'])) {
 			// When the parent is provided, we only fetch this
 			$condition = DBA::mergeConditions($condition, ['parent' => $request['item']]);
 		} elseif ($is_owner || !$last_updated) {
@@ -68,7 +68,7 @@ class Profile extends BaseModule
 			// items. Otherwise use a timestamp of the last succesful update request.
 			$condition = DBA::mergeConditions($condition, ['unseen' => true]);
 		} else {
-			$gmupdate = gmdate(DateTimeFormat::MYSQL, $last_updated);
+			$gmupdate  = gmdate(DateTimeFormat::MYSQL, $last_updated);
 			$condition = DBA::mergeConditions($condition, ["`received` > ?", $gmupdate]);
 		}
 

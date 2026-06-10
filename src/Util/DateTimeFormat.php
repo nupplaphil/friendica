@@ -221,13 +221,7 @@ class DateTimeFormat
 			return false;
 		}
 
-		try {
-			$now = new DateTime();
-		} catch (\Throwable) {
-			return false;
-		}
-
-		if ($date > $now) {
+		if ($date > new DateTime()) {
 			return false;
 		}
 

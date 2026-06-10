@@ -113,30 +113,26 @@ class ExAuth
 			$sData = fgets(STDIN, $iLength + 1);
 			$this->writeLog(LOG_DEBUG, 'received data: ' . $sData);
 			$aCommand = explode(':', $sData);
-			if (is_array($aCommand)) {
-				switch ($aCommand[0]) {
-					case 'isuser':
-						// Check the existence of a given username
-						$this->isUser($aCommand);
-						break;
-					case 'auth':
-						// Check if the given password is correct
-						$this->auth($aCommand);
-						break;
-					case 'setpass':
-						// We don't accept the setting of passwords here
-						$this->writeLog(LOG_NOTICE, 'setpass command disabled');
-						fwrite(STDOUT, pack('nn', 2, 0));
-						break;
-					default:
-						// We don't know the given command
-						$this->writeLog(LOG_NOTICE, 'unknown command ' . $aCommand[0]);
-						fwrite(STDOUT, pack('nn', 2, 0));
-						break;
-				}
-			} else {
-				$this->writeLog(LOG_NOTICE, 'invalid command string ' . $sData);
-				fwrite(STDOUT, pack('nn', 2, 0));
+
+			switch ($aCommand[0]) {
+				case 'isuser':
+					// Check the existence of a given username
+					$this->isUser($aCommand);
+					break;
+				case 'auth':
+					// Check if the given password is correct
+					$this->auth($aCommand);
+					break;
+				case 'setpass':
+					// We don't accept the setting of passwords here
+					$this->writeLog(LOG_NOTICE, 'setpass command disabled');
+					fwrite(STDOUT, pack('nn', 2, 0));
+					break;
+				default:
+					// We don't know the given command
+					$this->writeLog(LOG_NOTICE, 'unknown command ' . $aCommand[0]);
+					fwrite(STDOUT, pack('nn', 2, 0));
+					break;
 			}
 		}
 	}

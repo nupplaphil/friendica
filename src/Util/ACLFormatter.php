@@ -105,10 +105,8 @@ final class ACLFormatter
 			$item = explode(',', $permissions);
 		}
 
-		if (is_array($item)) {
-			array_walk($item, $this->sanitizeItem(...));
-			$return = implode('', $item);
-		}
-		return $return;
+		array_walk($item, $this->sanitizeItem(...));
+
+		return implode('', $item);
 	}
 }

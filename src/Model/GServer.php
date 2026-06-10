@@ -1365,7 +1365,7 @@ class GServer
 
 		if (!empty($nodeinfo['software'])) {
 			if (isset($nodeinfo['software']['name'])) {
-				$server['platform'] = strtolower($nodeinfo['software']['name']);
+				$server['platform'] = strtolower((string) $nodeinfo['software']['name']);
 			}
 
 			if (!empty($nodeinfo['software']['version']) && isset($server['platform'])) {
@@ -1380,10 +1380,10 @@ class GServer
 				}
 
 				if (isset($nodeinfo['software']['repository'])) {
-					$server['repository'] = strtolower($nodeinfo['software']['repository']);
+					$server['repository'] = strtolower((string) $nodeinfo['software']['repository']);
 				}
 				if (isset($nodeinfo['software']['homepage'])) {
-					$server['homepage'] = strtolower($nodeinfo['software']['homepage']);
+					$server['homepage'] = strtolower((string) $nodeinfo['software']['homepage']);
 				}
 			}
 		}

@@ -39,16 +39,16 @@ abstract class MailBuilder
 	/** @var string[][] */
 	protected $headers;
 
-	/** @var string */
+	/** @var string|null */
 	protected $senderName = null;
 	/** @var string */
 	protected $senderAddress = null;
-	/** @var string */
+	/** @var string|null */
 	protected $senderNoReply = null;
 
-	/** @var string */
+	/** @var string|null */
 	protected $recipientAddress = null;
-	/** @var int */
+	/** @var int|null */
 	protected $recipientUid = null;
 
 	public function __construct(L10n $l10n, BaseURL $baseUrl, IManageConfigValues $config, LoggerInterface $logger)
@@ -237,7 +237,7 @@ abstract class MailBuilder
 
 		$this->senderNoReply ??= $this->senderAddress;
 
-		$msgHtml = $this->getHtmlMessage() ?? '';
+		$msgHtml = $this->getHtmlMessage();
 
 		if (!$raw) {
 			// load the template for private message notifications
@@ -260,9 +260,9 @@ abstract class MailBuilder
 			$this->senderAddress,
 			$this->senderNoReply,
 			$this->recipientAddress,
-			$this->getSubject() ?? '',
+			$this->getSubject(),
 			$msgHtml,
-			$this->getPlaintextMessage() ?? '',
+			$this->getPlaintextMessage(),
 			$this->headers,
 			$this->recipientUid ?? null,
 		);

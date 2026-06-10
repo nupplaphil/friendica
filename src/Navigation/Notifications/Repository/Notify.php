@@ -686,7 +686,7 @@ class Notify extends BaseRepository
 
 	public function shouldShowOnDesktop(NotificationEntity $Notification, string $type = ''): bool
 	{
-		if (is_null($type)) {
+		if ($type === '') {
 			$type = NotificationFactory::getType($Notification);
 		}
 
@@ -694,11 +694,11 @@ class Notify extends BaseRepository
 			return true;
 		}
 
-		if ($this->pConfig->get($Notification->uid, 'system', 'notify_like') && ($type == Notification::TYPE_LIKE)) {
+		if ($this->pConfig->get($Notification->uid, 'system', 'notify_like') && ($type === Notification::TYPE_LIKE)) {
 			return true;
 		}
 
-		if ($this->pConfig->get($Notification->uid, 'system', 'notify_announce') && ($type == Notification::TYPE_RESHARE)) {
+		if ($this->pConfig->get($Notification->uid, 'system', 'notify_announce') && ($type === Notification::TYPE_RESHARE)) {
 			return true;
 		}
 

@@ -115,14 +115,14 @@ class Emailer
 	{
 		Hook::callAll('emailer_send_prepare', $email);
 
-		if (! $email instanceof IEmail) {
+		if (! ($email instanceof IEmail)) {
 			return true;
 		}
 
 		// @see https://github.com/friendica/friendica/issues/9142
 		$countMessageId = 0;
 		foreach ($email->getAdditionalMailHeader() as $name => $value) {
-			if (strtolower($name) == 'message-id') {
+			if (strtolower((string) $name) == 'message-id') {
 				$countMessageId += count($value);
 			}
 		}
@@ -166,7 +166,7 @@ class Emailer
 								. "Content-Transfer-Encoding: base64\n\n"
 								. $textBody . "\n";
 
-		if (!$email_textonly && !is_null($email->getMessage())) {
+		if (!$email_textonly && $email->getMessage() !== '') {
 			$multipartMessageBody
 				.= "--" . $mimeBoundary . "\n"                // text/html section
 				. "Content-Type: text/html; charset=UTF-8\n"

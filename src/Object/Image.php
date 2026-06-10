@@ -25,7 +25,7 @@ use kornrunner\Blurhash\Blurhash;
  */
 class Image implements \Stringable
 {
-	/** @var GdImage|Imagick|resource */
+	/** @var GdImage|Imagick */
 	private $image;
 
 	/*
@@ -34,7 +34,7 @@ class Image implements \Stringable
 	private $imagick;
 	private $width;
 	private $height;
-	private $valid;
+	private $valid = false;
 	private $outputType;
 	private $originType;
 
@@ -70,10 +70,11 @@ class Image implements \Stringable
 		if ($this->isImagick() && (empty($data) || $this->loadData($data))) {
 			$this->valid = !empty($data);
 			return;
-		} else {
-			// Failed to load with Imagick, fallback
-			$this->imagick = false;
 		}
+
+		// Failed to load with Imagick, fallback
+		$this->imagick = false;
+
 		$this->loadData($data);
 	}
 
@@ -207,7 +208,7 @@ class Image implements \Stringable
 
 			$this->width  = $this->image->getImageWidth();
 			$this->height = $this->image->getImageHeight();
-			$this->valid  = !empty($this->image);
+			$this->valid  = true;
 
 			return $this->valid;
 		}
@@ -248,9 +249,6 @@ class Image implements \Stringable
 	 */
 	public function isValid(): bool
 	{
-		if ($this->isImagick()) {
-			return !empty($this->image);
-		}
 		return $this->valid;
 	}
 
@@ -848,7 +846,7 @@ class Image implements \Stringable
 			$this->height = imagesy($this->image);
 		}
 
-		$this->valid = !empty($this->image);
+		$this->valid = true;
 
 		$this->scaleUp(min($width, $height));
 	}

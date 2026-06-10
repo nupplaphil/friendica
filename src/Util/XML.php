@@ -180,13 +180,13 @@ class XML
 	/**
 	 * Convert an XML document to a normalised, case-corrected array used by webfinger
 	 *
-	 * @param object  $xml_element     The XML document
-	 * @param integer $recursion_depth recursion counter for internal use - default 0
-	 *                                 internal use, recursion counter
+	 * @param SimpleXMLElement|mixed   $xml_element     The XML document or other data on recursive use
+	 * @param integer                  $recursion_depth recursion counter for internal use - default 0
+	 *                                                  internal use, recursion counter
 	 *
 	 * @return array|string|null The array from the xml element or the string
 	 */
-	public static function elementToArray($xml_element, int &$recursion_depth = 0)
+	public static function elementToArray(mixed $xml_element, int &$recursion_depth = 0)
 	{
 		// If we're getting too deep, bail out
 		if ($recursion_depth > 512) {
@@ -194,10 +194,7 @@ class XML
 		}
 
 		$xml_element_copy = '';
-		if (!is_string($xml_element)
-			&& !is_array($xml_element)
-			&& ($xml_element instanceof SimpleXMLElement)
-		) {
+		if ($xml_element instanceof SimpleXMLElement) {
 			$xml_element_copy = $xml_element;
 			$xml_element      = get_object_vars($xml_element);
 		}
@@ -266,14 +263,9 @@ class XML
 		libxml_clear_errors();
 
 		if ($namespaces) {
-			$parser = @xml_parser_create_ns("UTF-8", ':');
+			$parser = xml_parser_create_ns("UTF-8", ':');
 		} else {
-			$parser = @xml_parser_create();
-		}
-
-		if (!$parser) {
-			DI::logger()->warning('Xml::toArray: xml_parser_create: no resource');
-			return [];
+			$parser = xml_parser_create();
 		}
 
 		xml_parser_set_option($parser, XML_OPTION_TARGET_ENCODING, 'UTF-8');

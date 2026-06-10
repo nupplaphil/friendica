@@ -499,7 +499,7 @@ class Processor
 			}
 		}
 
-		if (!$item['isGroup'] && !empty($activity['receiver_urls']['as:audience'])) {
+		if (is_array($activity['receiver_urls']['as:audience'])) {
 			foreach ($activity['receiver_urls']['as:audience'] as $audience) {
 				$actor = APContact::getByURL($audience, false);
 				if (($actor['type'] ?? 'Person') == 'Group') {
@@ -1792,7 +1792,7 @@ class Processor
 			$object = self::refetchObjectOnHostDifference($object, $url);
 		}
 
-		if (empty($object) || !is_array($object)) {
+		if (empty($object)) {
 			DI::logger()->notice('Invalid JSON data', ['url' => $url, 'content-type' => $curlResult->getContentType()]);
 			return null;
 		}
@@ -1840,7 +1840,11 @@ class Processor
 		$object_id = JsonLD::fetchElement($ldobject, 'as:object', '@id');
 
 		if (!in_array($type, Receiver::CONTENT_TYPES) && !empty($object_id)) {
-			if (($type == 'as:Announce') && !empty($relay_actor) && ($completion = Receiver::COMPLETION_RELAY)) {
+			if (
+				$type == 'as:Announce'
+				&& !empty($relay_actor)
+				&& $completion === Receiver::COMPLETION_RELAY
+			) {
 				if (Item::searchByLink($object_id)) {
 					return $object_id;
 				}
@@ -2124,8 +2128,8 @@ class Processor
 		$attributed_to = JsonLD::fetchElement($activity['as:object'], 'as:attributedTo', '@id');
 		$authorid      = Contact::getIdForURL($attributed_to);
 
-		$content = JsonLD::fetchElement($activity['as:object'], 'as:name', '@value')           ?? '';
-		$content .= ' ' . JsonLD::fetchElement($activity['as:object'], 'as:summary', '@value') ?? '';
+		$content = (string) JsonLD::fetchElement($activity['as:object'], 'as:name', '@value');
+		$content .= ' ' . (string) JsonLD::fetchElement($activity['as:object'], 'as:summary', '@value');
 		$content .= ' ' . HTML::toBBCode(JsonLD::fetchElement($activity['as:object'], 'as:content', '@value') ?? '');
 
 		$attachments = JsonLD::fetchElementArray($activity['as:object'], 'as:attachment') ?? [];
