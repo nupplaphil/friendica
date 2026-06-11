@@ -726,10 +726,6 @@ final class HtmlRenderer
 			$postChannels[$uriId]    = $parent['channel'] ?? '';
 		}
 
-		$emojis      = $this->getEmojis($uriIds, $uid);
-		$quoteshares = $this->getQuoteShares($uriIds);
-		$counts      = $this->getCounts($uriIds);
-
 		$condition = ['parent-uri-id' => $uriIds];
 		if ($blockAuthors) {
 			$condition['author-hidden'] = false;
