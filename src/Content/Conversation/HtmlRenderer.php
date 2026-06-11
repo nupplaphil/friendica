@@ -41,7 +41,6 @@ use Friendica\Util\Profiler;
 use Friendica\Util\Strings;
 use ImagickException;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerInterface;
 
 final class HtmlRenderer
 {
@@ -64,7 +63,6 @@ final class HtmlRenderer
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly IHandleUserSessions $session,
 		private readonly Page $page,
-		private readonly LoggerInterface $logger,
 		private readonly ThreadedPostTemplateRenderer $postTemplateRenderer,
 	) {}
 
