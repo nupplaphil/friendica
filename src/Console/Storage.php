@@ -10,7 +10,6 @@ namespace Friendica\Console;
 use Asika\SimpleConsole\CommandArgsException;
 use Friendica\Core\Storage\Repository\StorageManager;
 use Friendica\Core\Storage\Exception\ReferenceStorageException;
-use Friendica\Core\Storage\Exception\StorageException;
 use Friendica\Database\DBA;
 use Friendica\Model\Contact;
 use Friendica\Model\Photo;
@@ -94,7 +93,7 @@ HELP;
 		$isregisterd = false;
 		foreach ($this->storageManager->listBackends() as $name) {
 			$issel = ' ';
-			if ($$current::getName() == $name) {
+			if ($current::getName() == $name) {
 				$issel       = '*';
 				$isregisterd = true;
 			};

@@ -75,7 +75,7 @@ abstract class BaseRepository
 		array $params = [],
 		?int $min_id = null,
 		?int $max_id = null,
-		int $limit = self::LIMIT
+		int $limit = self::LIMIT,
 	): BaseCollection {
 		$totalCount = $this->count($condition);
 

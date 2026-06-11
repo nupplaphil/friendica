@@ -19,7 +19,6 @@ use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerInterface;
 
 class RouterTest extends TestCase
 {
