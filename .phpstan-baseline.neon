@@ -5,24 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/App/Page.php
-
-		-
-			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/App/Router.php
-
-		-
-			message: '#^Property Friendica\\App\\Router\:\:\$logger is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/App/Router.php
-
-		-
 			message: '#^Property Friendica\\Console\\Addon\:\:\$dba is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1

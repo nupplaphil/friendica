@@ -75,8 +75,10 @@ class Page implements ArrayAccess
 	/**
 	 * @param string $basePath The Page basepath
 	 */
-	public function __construct(private readonly string $basePath, private readonly EventDispatcherInterface $eventDispatcher)
-	{
+	public function __construct(
+		private readonly string $basePath,
+		private readonly EventDispatcherInterface $eventDispatcher,
+	) {
 		$this->timestamp = microtime(true);
 	}
 
@@ -511,7 +513,7 @@ class Page implements ArrayAccess
 		// add and escape some common but crucial content for direct "echo" in HTML (security)
 		$page['title']   = htmlspecialchars($page['title'] ?? '');
 		$page['section'] = htmlspecialchars($args->get(0) ?? 'generic');
-		$page['module']  = htmlspecialchars($args->getModuleName() ?? '');
+		$page['module']  = htmlspecialchars($args->getModuleName());
 
 		header("X-Friendica-Version: " . App::VERSION);
 		header("Content-type: text/html; charset=utf-8");

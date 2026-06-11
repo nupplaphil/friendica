@@ -30,7 +30,6 @@ use Friendica\Network\HTTPException\MethodNotAllowedException;
 use Friendica\Network\HTTPException\NotFoundException;
 use Friendica\Util\Router\FriendicaGroupCountBased;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * Wrapper for FastRoute\Router
@@ -79,7 +78,6 @@ class Router
 	 * @param ICanLock            $lock
 	 * @param IManageConfigValues $config
 	 * @param Arguments           $args
-	 * @param LoggerInterface     $logger
 	 * @param IHandleUserSessions $userSession
 	 * @param RouteCollector|null $routeCollector
 	 */
@@ -91,7 +89,6 @@ class Router
 		private readonly ICanLock $lock,
 		private readonly IManageConfigValues $config,
 		private readonly Arguments $args,
-		private readonly LoggerInterface $logger,
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly AddonHelper $addonHelper,
 		IHandleUserSessions $userSession,
@@ -179,8 +176,7 @@ class Router
 	private function isGroup(array $config): bool
 	{
 		return
-			is_array($config)
-			&& is_string(array_keys($config)[0])
+			is_string(array_keys($config)[0])
 			// This entry should NOT be a BaseModule
 			&& (!str_starts_with(array_keys($config)[0], 'Friendica\Module'))
 			// The second argument is an array (another routes)
