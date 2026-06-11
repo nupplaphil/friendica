@@ -47,7 +47,7 @@ class Daemon
 	 *
 	 * @return void
 	 */
-	public function init(string $pidfile = null): void
+	public function init(?string $pidfile = null): void
 	{
 		if (!empty($pidfile)) {
 			$this->pid     = null;

@@ -73,8 +73,8 @@ abstract class BaseRepository
 	protected function _selectByBoundaries(
 		array $condition = [],
 		array $params = [],
-		int $min_id = null,
-		int $max_id = null,
+		?int $min_id = null,
+		?int $max_id = null,
 		int $limit = self::LIMIT
 	): BaseCollection {
 		$totalCount = $this->count($condition);

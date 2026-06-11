@@ -60,7 +60,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->andReturn('now')
 			->once();
 
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$console->setArgument(2, 'now');
@@ -73,7 +73,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->andReturn('now')
 			->once();
 
-		$console = new Config($this->appMode, $this->configMock, [$this->consoleArgv]);
+		$console = new Config($this->configMock, [$this->consoleArgv]);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$txt = $this->dumpExecute($console);
@@ -85,7 +85,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->andReturn(null)
 			->once();
 
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$txt = $this->dumpExecute($console);
@@ -101,7 +101,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->andReturn($testArray)
 			->once();
 
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$console->setArgument(2, 'now');
@@ -118,7 +118,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->andReturn('now')
 			->twice();
 
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$console->setArgument(2, 'now');
@@ -129,7 +129,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 
 	public function testTooManyArguments()
 	{
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
 		$console->setArgument(1, 'test');
 		$console->setArgument(2, 'it');
@@ -147,7 +147,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 			->with('test', 'it')
 			->andReturn('now')
 			->once();
-		$console = new Config($this->appMode, $this->configMock, $this->consoleArgv);
+		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'test');
 		$console->setArgument(1, 'it');
 		$console->setOption('v', 1);
@@ -181,7 +181,7 @@ CONF;
 			->with('test', 'it')
 			->andReturn(null)
 			->twice();
-		$console = new Config($this->appMode, $this->configMock, [$this->consoleArgv]);
+		$console = new Config($this->configMock, [$this->consoleArgv]);
 		$console->setArgument(0, 'test');
 		$console->setArgument(1, 'it');
 		$console->setArgument(2, 'now');
@@ -222,7 +222,7 @@ Options
     -v           Show more debug information.
 
 HELP;
-		$console = new Config($this->appMode, $this->configMock, [$this->consoleArgv]);
+		$console = new Config($this->configMock, [$this->consoleArgv]);
 		$console->setOption('help', true);
 
 		$txt = $this->dumpExecute($console);
