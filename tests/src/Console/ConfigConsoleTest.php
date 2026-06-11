@@ -7,7 +7,6 @@
 
 namespace Friendica\Test\src\Console;
 
-use Friendica\App;
 use Friendica\App\Mode;
 use Friendica\Console\Config;
 use Friendica\Core\Config\Capability\IManageConfigValues;
@@ -18,10 +17,6 @@ use Mockery\MockInterface;
 
 class ConfigConsoleTest extends ConsoleTestCase
 {
-	/**
-	 * @var App\Mode|MockInterface $appMode
-	 */
-	private $appMode;
 	/** @var IManageConfigValues|LegacyMockInterface|MockInterface */
 	private $configMock;
 
@@ -34,10 +29,6 @@ class ConfigConsoleTest extends ConsoleTestCase
 				'DBCONFIGAVAILABLE' => 0,
 			],
 		]);
-
-		$this->appMode = Mockery::mock(App\Mode::class);
-		$this->appMode->shouldReceive('has')
-					  ->andReturn(true);
 
 		$this->configMock = Mockery::mock(IManageConfigValues::class);
 	}
