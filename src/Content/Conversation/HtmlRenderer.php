@@ -739,7 +739,7 @@ final class HtmlRenderer
 
 		$condition = DBA::mergeConditions(
 			$condition,
-			["`uid` IN (0, ?) AND (NOT `verb` IN (?, ?, ?) OR `verb` IS NULL)", $uid, Activity::FOLLOW, Activity::VIEW, Activity::READ],
+			["`uid` IN (0, ?) AND (`verb` = ? OR `gravity` IN (?, ?))", $uid, Activity::ANNOUNCE, ItemModel::GRAVITY_COMMENT, ItemModel::GRAVITY_PARENT],
 		);
 		$condition = DBA::mergeConditions($condition, ["(`uid` != ? OR `private` != ?)", 0, ItemModel::PRIVATE]);
 		$condition = DBA::mergeConditions(
