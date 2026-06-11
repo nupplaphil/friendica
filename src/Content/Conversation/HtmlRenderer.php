@@ -689,6 +689,42 @@ final class HtmlRenderer
 		}
 	}
 
+	private function getChildren(array $uriIds, bool $blockAuthors, int $uid): array
+	{
+		$condition = ['parent-uri-id' => $uriIds];
+		if ($blockAuthors) {
+			$condition['author-hidden'] = false;
+		}
+
+		if (!$this->config->get('system', 'legacy_activities')) {
+			$condition = DBA::mergeConditions($condition, ["(`gravity` != ? OR `origin`)", ItemModel::GRAVITY_ACTIVITY]);
+		}
+
+		$condition = DBA::mergeConditions(
+			$condition,
+			["`uid` IN (0, ?) AND (`verb` = ? OR `gravity` IN (?, ?))", $uid, Activity::ANNOUNCE, ItemModel::GRAVITY_COMMENT, ItemModel::GRAVITY_PARENT],
+		);
+		$condition = DBA::mergeConditions($condition, ["(`uid` != ? OR `private` != ?)", 0, ItemModel::PRIVATE]);
+		$condition = DBA::mergeConditions(
+			$condition,
+			[
+				"`visible` AND NOT `deleted` AND NOT `author-blocked` AND NOT `owner-blocked`
+			AND ((NOT `contact-pending` AND (`contact-rel` IN (?, ?))) OR `self` OR `contact-uid` = ?)",
+				Contact::SHARING,
+				Contact::FRIEND,
+				0,
+			],
+		);
+
+		$threadParents = Post::select(['uri-id', 'causer-id'], $condition, ['order' => ['uri-id' => false, 'uid']]);
+		$thrParent     = [];
+		while ($row = Post::fetch($threadParents)) {
+			$thrParent[$row['uri-id']] = $row;
+		}
+		DBA::close($threadParents);
+		return $thrParent;
+	}
+
 	/**
 	 * @param array<int, array> $parents
 	 * @param array<int, int> $ignoredGsids
@@ -726,6 +762,10 @@ final class HtmlRenderer
 			$postChannels[$uriId]    = $parent['channel'] ?? '';
 		}
 
+		$emojis      = $this->getEmojis($uriIds, $uid);
+		$quoteshares = $this->getQuoteShares($uriIds);
+		$counts      = $this->getCounts($uriIds);
+
 		$condition = ['parent-uri-id' => $uriIds];
 		if ($blockAuthors) {
 			$condition['author-hidden'] = false;
@@ -761,6 +801,8 @@ final class HtmlRenderer
 			$thrParent[$row['uri-id']] = $row;
 		}
 		DBA::close($threadParents);
+
+//		$thrParent = $this->getChildren($uriIds, $blockAuthors, $uid);
 
 		$params      = ['order' => ['uri-id' => true, 'uid' => true]];
 		$threadItems = Post::select(array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']), $condition, $params);
@@ -1223,7 +1265,6 @@ final class HtmlRenderer
 
 		$itemArray = [];
 		foreach ($itemList as $item) {
-			$this->logger->debug('Blubb', ['uri-id' => $item['uri-id'], 'parent-uri-id' => $item['parent-uri-id'], 'thr-parent-id' => $item['thr-parent-id'], 'body' => $item['body'], 'gravity' => $item['gravity']]);
 			$itemArray[$item['uri-id']] = $item;
 		}
 
