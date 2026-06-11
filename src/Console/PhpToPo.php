@@ -7,7 +7,6 @@
 
 namespace Friendica\Console;
 
-use Friendica\AppHelper;
 use stdClass;
 
 /**
@@ -20,8 +19,9 @@ class PhpToPo extends \Asika\SimpleConsole\Console
 	private $normBaseMsgIds  = [];
 	public const NORM_REGEXP = "|[\\\]|";
 
-	public function __construct(private readonly AppHelper $appHelper, array $argv = null)
-	{
+	public function __construct(
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 
@@ -78,6 +78,10 @@ HELP;
 
 		// start !
 		include_once($phpfile);
+		/**
+		 * $a will be filled by including $phpfile
+		 * @var stdClass $a
+		 */
 
 		$out = '';
 		$out .= "# FRIENDICA Distributed Social Network\n";

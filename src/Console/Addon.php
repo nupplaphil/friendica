@@ -11,7 +11,6 @@ use Console_Table;
 use Friendica\App\Mode;
 use Friendica\Core\L10n;
 use Friendica\Core\Addon\AddonHelper;
-use Friendica\Database\Database;
 use Friendica\Util\Strings;
 use RuntimeException;
 
@@ -43,8 +42,12 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private readonly Mode $appMode, private readonly L10n $l10n, private readonly Database $dba, private readonly AddonHelper $addonHelper, array $argv = null)
-	{
+	public function __construct(
+		private readonly Mode $appMode,
+		private readonly L10n $l10n,
+		private readonly AddonHelper $addonHelper,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 
 		$this->addonHelper->loadAddons();

@@ -29,19 +29,17 @@ use RuntimeException;
  */
 final class Daemon extends Console
 {
-	/**
-	 * @param Mode                 $mode
-	 * @param IManageConfigValues  $config
-	 * @param IManageKeyValuePairs $keyValue
-	 * @param BasePath             $basePath
-	 * @param System               $system
-	 * @param LoggerInterface      $logger
-	 * @param Database             $dba
-	 * @param SysDaemon            $daemon
-	 * @param array|null           $argv
-	 */
-	public function __construct(private readonly Mode $mode, private readonly IManageConfigValues $config, private readonly IManageKeyValuePairs $keyValue, private readonly BasePath $basePath, private readonly System $system, private readonly LoggerInterface $logger, private readonly Database $dba, private readonly SysDaemon $daemon, array $argv = null)
-	{
+	public function __construct(
+		private readonly Mode $mode,
+		private readonly IManageConfigValues $config,
+		private readonly IManageKeyValuePairs $keyValue,
+		private readonly BasePath $basePath,
+		private readonly System $system,
+		private readonly LoggerInterface $logger,
+		private readonly Database $dba,
+		private readonly SysDaemon $daemon,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 
@@ -96,7 +94,7 @@ HELP;
 		$pidfile = $this->config->get('system', 'pidfile');
 
 		$daemonMode = $this->getArgument(0);
-		$foreground = (bool) $this->getOption(['f', 'foreground']) ?? false;
+		$foreground = (bool) ($this->getOption(['f', 'foreground']) ?? false);
 
 		if (empty($daemonMode)) {
 			throw new CommandArgsException("Please use either 'start', 'stop' or 'status'");
@@ -145,6 +143,7 @@ HELP;
 				$path = $this->basePath->getPath();
 
 				// Now running as a daemon.
+				/** @phpstan-ignore while.alwaysTrue */
 				while (true) {
 					// Check the database structure and possibly fixes it
 					Update::check($path, true);

@@ -8,7 +8,6 @@
 namespace Friendica\Console;
 
 use Friendica\App;
-use Friendica\Database\Database;
 use Friendica\Model\Contact;
 use RuntimeException;
 
@@ -44,8 +43,10 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private readonly App\Mode $appMode, private readonly Database $dba, array $argv = null)
-	{
+	public function __construct(
+		private readonly App\Mode $appMode,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 
