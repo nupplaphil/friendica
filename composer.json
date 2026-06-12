@@ -172,6 +172,7 @@
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:unit": "phpunit -c tests/phpunit.xml --testsuite unit",
 		"test:integration": "phpunit -c tests/phpunit.xml --testsuite integration",
+		"test:functional": "phpunit -c tests/phpunit.xml --testsuite functional",
 		"test:legacy": "phpunit -c tests/phpunit.xml --testsuite legacy",
 		"phpmd": "phpmd src/ text .phpmd-ruleset.xml --color --cache",
 		"phpstan": "phpstan analyze --memory-limit 1024M --configuration .phpstan.neon",
