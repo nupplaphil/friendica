@@ -92,6 +92,9 @@ composer run test:unit
 Functional tests are meant for complete use cases with test doubles or fakes.
 Add new DB-free use-case tests to `tests/Functional/`.
 
+\```
+composer run test: functional
+\```
 Integration tests use real infrastructure or adapter wiring. They usually require
 the `MYSQL_*` variables described above:
 
