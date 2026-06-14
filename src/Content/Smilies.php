@@ -166,6 +166,7 @@ class Smilies
 					array_combine($smilies['texts'], $smilies['icons']),
 					$text,
 					function (string $name, string $image) use ($normalized, &$emojis) {
+						/** @phpstan-ignore function.impossibleType() */
 						if (array_key_exists($name, $normalized)) {
 							return $normalized[$name];
 						}

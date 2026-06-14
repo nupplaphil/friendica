@@ -5,42 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to function array_key_exists\(\) with string and array\{\} will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Content/Smilies.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 2
-			path: src/Content/Text/BBCode.php
-
-		-
-			message: '#^Property Friendica\\Content\\Post\\Entity\\PostMedia\:\:\$url \(Psr\\Http\\Message\\UriInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: src/Content/Text/BBCode.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and false will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 3
-			path: src/Content/Text/BBCode.php
-
-		-
-			message: '#^Ternary operator condition is always true\.$#'
-			identifier: ternary.alwaysTrue
-			count: 1
-			path: src/Content/Text/BBCode.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Content/Text/BBCode.php
-
-		-
 			message: '#^Empty array passed to foreach\.$#'
 			identifier: foreach.emptyArray
 			count: 1
