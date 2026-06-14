@@ -10,13 +10,11 @@ namespace Friendica\Core\Worker;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Model\Contact;
 use Friendica\Model\GServer;
 use Friendica\Model\Post;
 use Friendica\Model\User;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Strings;
 
 /**
  * Contains the class for jobs that are executed in an interval
