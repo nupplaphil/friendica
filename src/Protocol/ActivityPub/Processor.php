@@ -499,7 +499,7 @@ class Processor
 			}
 		}
 
-		if (is_array($activity['receiver_urls']['as:audience'])) {
+		if (isset($activity['receiver_urls']) && isset($activity['receiver_urls']['as:audience']) && is_array($activity['receiver_urls']['as:audience'])) {
 			foreach ($activity['receiver_urls']['as:audience'] as $audience) {
 				$actor = APContact::getByURL($audience, false);
 				if (($actor['type'] ?? 'Person') == 'Group') {
