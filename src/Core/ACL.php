@@ -82,7 +82,7 @@ class ACL
 
 		return Contact::selectToArray(
 			['id', 'name', 'addr', 'micro', 'url', 'nick'],
-			DBA::mergeConditions($condition, ["`notify` != ''"])
+			DBA::mergeConditions($condition, ["`notify` != ''"]),
 		);
 	}
 
@@ -148,9 +148,9 @@ class ACL
 				'deleted' => false,
 				'pending' => false,
 				'network' => Protocol::FEDERATED,
-				'rel'     => [Contact::FOLLOWER, Contact::FRIEND]
+				'rel'     => [Contact::FOLLOWER, Contact::FRIEND],
 			], $condition),
-			$params
+			$params,
 		);
 
 		$acl_yourself         = Contact::selectFirst($fields, ['uid' => $user_id, 'self' => true]);
@@ -162,7 +162,7 @@ class ACL
 			$fields,
 			['uid'     => $user_id, 'self' => false, 'blocked' => false, 'archive' => false, 'deleted' => false,
 				'network' => Protocol::FEDERATED, 'pending' => false, 'contact-type' => Contact::TYPE_COMMUNITY],
-			$params
+			$params,
 		);
 
 		$acl_contacts = array_merge($acl_groups, $acl_contacts);
@@ -196,7 +196,7 @@ class ACL
 				'addr'  => '',
 				'micro' => 'images/twopeople.png',
 				'type'  => 'circle',
-			]
+			],
 		];
 		foreach (Circle::getByUserId($user_id) as $circle) {
 			$acl_circles[] = [
@@ -235,7 +235,7 @@ class ACL
 		bool $for_federation = false,
 		array $default_permissions = [],
 		array $condition = [],
-		$form_prefix = ''
+		$form_prefix = '',
 	) {
 		if (empty($uid)) {
 			return '';
@@ -285,8 +285,8 @@ class ACL
 						'field' => [
 							'pubmail_enable',
 							DI::l10n()->t('Post to Email'),
-							!empty($mailacct['pubmail'])
-						]
+							!empty($mailacct['pubmail']),
+						],
 					];
 
 				}
