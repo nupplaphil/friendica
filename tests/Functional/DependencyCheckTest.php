@@ -10,13 +10,13 @@ namespace Friendica\Test\Functional;
 use Friendica\App;
 use Friendica\Core\Cache\Capability\ICanCache;
 use Friendica\Core\Cache\Capability\ICanCacheInMemory;
-use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Config\Capability\IManageConfigValues;
+use Friendica\Core\Config\Util\ConfigFileManager;
+use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Lock\Capability\ICanLock;
 use Friendica\Database\Database;
 use Friendica\Test\FixtureTestCase;
 use Friendica\Util\BasePath;
-use Friendica\Core\Config\Util\ConfigFileManager;
 use Psr\Log\LoggerInterface;
 
 class DependencyCheckTest extends FixtureTestCase

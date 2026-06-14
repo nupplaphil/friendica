@@ -30,7 +30,9 @@ class APCuCacheTest extends MemoryCacheTestCase
 
 	protected function tearDown(): void
 	{
-		$this->cache->clear(false);
+		if ($this->cache !== null) {
+			$this->cache->clear(false);
+		}
 		parent::tearDown();
 	}
 

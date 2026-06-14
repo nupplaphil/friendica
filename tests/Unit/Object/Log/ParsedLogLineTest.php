@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Object\Log;
+namespace Friendica\Test\Unit\Object\Log;
 
 use Friendica\Object\Log\ParsedLogLine;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,7 @@ class ParsedLogLineTest extends TestCase
 	{
 		$parsed = new ParsedLogLine(0, $logline);
 		foreach ($expected_data as $k => $v) {
-			self::assertSame($parsed->$k, $v, '"'.$k.'" does not match expectation');
+			self::assertSame($parsed->$k, $v, '"' . $k . '" does not match expectation');
 		}
 	}
 
@@ -37,7 +37,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Spool file does not start with "item-"',
 				'data'    => '{"file":".","worker_id":"560c8b6","worker_cmd":"SpoolPost"}',
 				'source'  => '{"file":"SpoolPost.php","line":40,"function":"execute","uid":"fd8c37","process_id":20846}',
-			]
+			],
 		);
 	}
 
@@ -55,7 +55,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'No HTTP_SIGNATURE header',
 				'data'    => null,
 				'source'  => '{"file":"HTTPSignature.php","line":476,"function":"getSigner","uid":"0a3934","process_id":14826}',
-			]
+			],
 		);
 	}
 
@@ -73,7 +73,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => '{"worker_id":"ece8fc8","worker_cmd":"Cron"}',
 				'source'  => '{"file":"Worker.php","line":786,"function":"tooMuchWorkers","uid":"364d3c","process_id":20754}',
-			]
+			],
 		);
 	}
 
@@ -91,7 +91,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'this log line is not formatted as expected',
 				'data'    => null,
 				'source'  => null,
-			]
+			],
 		);
 	}
 
@@ -109,7 +109,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => '{"worker_id":"ece8fc8","worker_cmd":"Cron"}',
 				'source'  => null,
-			]
+			],
 		);
 	}
 
@@ -127,7 +127,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => null,
 				'source'  => '{"file":"Worker.php","line":786,"function":"tooMuchWorkers","uid":"364d3c","process_id":20754}',
-			]
+			],
 		);
 	}
 
@@ -145,7 +145,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10',
 				'data'    => null,
 				'source'  => null,
-			]
+			],
 		);
 	}
 
@@ -163,7 +163,7 @@ class ParsedLogLineTest extends TestCase
 				'message' => 'Load: 0.01/20 - processes: 0/1/6 (0:0, 30:1) - maximum: 10/10 {"invalidjson {really',
 				'data'    => null,
 				'source'  => null,
-			]
+			],
 		);
 	}
 }

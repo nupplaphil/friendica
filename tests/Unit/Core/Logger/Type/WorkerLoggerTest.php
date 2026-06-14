@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Core\Logger\Type;
+namespace Friendica\Test\Unit\Core\Logger\Type;
 
 use Friendica\Core\Logger\Type\WorkerLogger;
 use PHPUnit\Framework\TestCase;

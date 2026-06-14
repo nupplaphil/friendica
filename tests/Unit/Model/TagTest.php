@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Friendica\Test\src\Model;
+namespace Friendica\Test\Unit\Model;
 
 use Friendica\Model\Tag;
 use PHPUnit\Framework\TestCase;
@@ -26,8 +26,8 @@ class TagTest extends TestCase
 				'![url=https://pirati.ca/profile/test1]Testgruppe 1b[/url]',
 				'!',
 				'https://pirati.ca/profile/test1',
-				'Testgruppe 1b'
-			]
+				'Testgruppe 1b',
+			],
 		];
 
 		self::assertEquals($expected, $tags);

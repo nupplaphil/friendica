@@ -41,7 +41,7 @@
  *
  */
 
-namespace Friendica\Test\src\Protocol;
+namespace Friendica\Test\Unit\Protocol;
 
 use Friendica\Protocol\WebFingerUri;
 use PHPUnit\Framework\TestCase;
