@@ -11,7 +11,6 @@ use Friendica\BaseRepository;
 use Friendica\Content\Conversation\Collection\UserDefinedChannels;
 use Friendica\Content\Conversation\Entity\UserDefinedChannel as UserDefinedChannelEntity;
 use Friendica\Content\Conversation\Factory\UserDefinedChannel as UserDefinedChannelFactory;
-use Friendica\Core\Cache\Capability\ICanCache;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Protocol;
 use Friendica\Database\Database;
