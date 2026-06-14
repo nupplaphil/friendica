@@ -24,14 +24,26 @@ use Psr\Log\LoggerInterface;
  */
 class RemoveTag extends BaseModule
 {
-	public function __construct(private readonly SystemMessages $systemMessages, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly IHandleUserSessions $userSession, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly SystemMessages $systemMessages,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		private readonly IHandleUserSessions $userSession,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
 	protected function post(array $request = [])
 	{
-		$this->httpError($this->removeTag($request));
+		$type = 0;
+		$term = '';
+		$this->httpError($this->removeTag($request, $type, $term));
 	}
 
 	protected function content(array $request = []): string
@@ -40,6 +52,8 @@ class RemoveTag extends BaseModule
 			throw new HTTPException\ForbiddenException();
 		}
 
+		$type = 0;
+		$term = '';
 		$this->removeTag($request, $type, $term);
 
 		if ($type == Post\Category::FILE) {
@@ -50,15 +64,15 @@ class RemoveTag extends BaseModule
 	}
 
 	/**
-	 * @param array           $request The $_REQUEST array
-	 * @param string|int|null $type    Output parameter with the computed type
-	 * @param string|null     $term    Output parameter with the computed term
+	 * @param array  $request The $_REQUEST array
+	 * @param int    $type    Output parameter with the computed type
+	 * @param string $term    Output parameter with the computed term
 	 *
 	 * @return int The relevant HTTP code
 	 *
 	 * @throws \Exception
 	 */
-	private function removeTag(array $request, &$type = null, string &$term = null): int
+	private function removeTag(array $request, int &$type, string &$term): int
 	{
 		$item_id = $this->parameters['id'] ?? 0;
 

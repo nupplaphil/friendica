@@ -159,7 +159,7 @@ class Search extends BaseApi
 	 * @param int    $min_id
 	 * @param int    $limit
 	 * @param int    $offset
-	 * @return array|\Friendica\Object\Api\Mastodon\Status Object is result is absolute (exact post match), list if not
+	 * @return \Friendica\Object\Api\Mastodon\Status[] Object is result is absolute (exact post match), list if not
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \Friendica\Network\HTTPException\NotFoundException
 	 * @throws \ImagickException

@@ -25,8 +25,19 @@ use Psr\Log\LoggerInterface;
  */
 class Update extends BaseApi
 {
-	public function __construct(private readonly FriendicaPhoto $friendicaPhoto, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly FriendicaPhoto $friendicaPhoto,
+		\Friendica\Factory\Api\Mastodon\Error $errorFactory,
+		AppHelper $appHelper,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		ApiResponse $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -121,15 +132,14 @@ class Update extends BaseApi
 			$answer = ['result' => 'updated', 'message' => 'Image id `' . $photo_id . '` has been updated.'];
 			$this->response->addFormattedContent('photo_update', ['$result' => $answer], $this->parameters['extension'] ?? null);
 			return;
-		} else {
-			if ($nothingtodo) {
-				$answer = ['result' => 'cancelled', 'message' => 'Nothing to update for image id `' . $photo_id . '`.'];
-				$this->response->addFormattedContent('photo_update', ['$result' => $answer], $this->parameters['extension'] ?? null);
-				return;
-			}
-			throw new HTTPException\InternalServerErrorException('unknown error - update photo entry in database failed');
 		}
 
-		throw new HTTPException\InternalServerErrorException('unknown error - this error on uploading or updating a photo should never happen');
+		if ($nothingtodo) {
+			$answer = ['result' => 'cancelled', 'message' => 'Nothing to update for image id `' . $photo_id . '`.'];
+			$this->response->addFormattedContent('photo_update', ['$result' => $answer], $this->parameters['extension'] ?? null);
+			return;
+		}
+
+		throw new HTTPException\InternalServerErrorException('unknown error - update photo entry in database failed');
 	}
 }

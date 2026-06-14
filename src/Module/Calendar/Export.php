@@ -39,8 +39,19 @@ class Export extends BaseModule
 	/** @var AppHelper */
 	protected $appHelper;
 
-	public function __construct(AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $session, SystemMessages $sysMessages, array $server, array $parameters = [])
-	{
+	public function __construct(
+		AppHelper $appHelper,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		IHandleUserSessions $session,
+		SystemMessages $sysMessages,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->session     = $session;
@@ -94,23 +105,21 @@ class Export extends BaseModule
 		}
 
 		// If nothing went wrong we can echo the export content
-		if ($evexport["success"]) {
-			$this->response->setHeader(sprintf('Content-Disposition: attachment; filename="%s-%s.%s"',
-				$this->t('calendar'),
-				$this->parameters['nickname'],
-				$evexport["extension"]
-			));
+		$this->response->setHeader(sprintf('Content-Disposition: attachment; filename="%s-%s.%s"',
+			$this->t('calendar'),
+			$this->parameters['nickname'],
+			$evexport["extension"]
+		));
 
-			switch ($format) {
-				case static::EXPORT_ICAL:
-					$this->response->setType(Response::TYPE_BLANK, 'text/ics');
-					break;
-				case static::EXPORT_CSV:
-					$this->response->setType(Response::TYPE_BLANK, 'text/csv');
-					break;
-			}
-
-			$this->response->addContent($evexport['content']);
+		switch ($format) {
+			case static::EXPORT_ICAL:
+				$this->response->setType(Response::TYPE_BLANK, 'text/ics');
+				break;
+			case static::EXPORT_CSV:
+				$this->response->setType(Response::TYPE_BLANK, 'text/csv');
+				break;
 		}
+
+		$this->response->addContent($evexport['content']);
 	}
 }
