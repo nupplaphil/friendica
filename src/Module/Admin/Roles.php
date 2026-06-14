@@ -21,8 +21,17 @@ use Psr\Log\LoggerInterface;
 
 class Roles extends BaseAdmin
 {
-	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly IManageConfigValues $config, array $server, array $parameters = [])
-	{
+	public function __construct(
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		private readonly IManageConfigValues $config,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -51,7 +60,15 @@ class Roles extends BaseAdmin
 		switch ($action) {
 			case 'add':
 				$user = User::getById($uid, ['uid', 'nickname', 'blocked', 'verified', 'account_removed', 'account_expired', 'parent-uid', 'account-type']);
-				if (!DBA::isResult($user) || $uid === 0 || (int) $user['account-type'] !== User::ACCOUNT_TYPE_PERSON || !empty($user['parent-uid']) || !empty($user['blocked']) || empty($user['verified']) || !empty($user['account_removed']) || !empty($user['account_expired'])) {
+				if (
+					!DBA::isResult($user)
+					|| (int) $user['account-type'] !== User::ACCOUNT_TYPE_PERSON
+					|| !empty($user['parent-uid'])
+					|| !empty($user['blocked'])
+					|| empty($user['verified'])
+					|| !empty($user['account_removed'])
+					|| !empty($user['account_expired'])
+				) {
 					DI::sysmsg()->addNotice($this->t('The selected user cannot be assigned moderation rights.'));
 					$this->baseUrl->redirect('admin/roles');
 				}

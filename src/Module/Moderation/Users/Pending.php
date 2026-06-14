@@ -21,7 +21,7 @@ class Pending extends BaseUsers
 
 		self::checkFormSecurityTokenRedirectOnError('moderation/users/pending', 'admin_users_pending');
 
-		$pending = $request['pending'] ?? [];
+		$pending = (array) ($request['pending'] ?? []);
 
 		if (!empty($request['page_users_approve'])) {
 			foreach ($pending as $hash) {
@@ -61,13 +61,11 @@ class Pending extends BaseUsers
 				User::allow(Register::getPendingForUser($uid)['hash'] ?? '');
 				$this->systemMessages->addNotice($this->t('Account approved.'));
 				$this->baseUrl->redirect('moderation/users/pending');
-				break;
 			case 'deny':
 				self::checkFormSecurityTokenRedirectOnError('moderation/users/pending', 'admin_users_pending', 't');
 				User::deny(Register::getPendingForUser($uid)['hash'] ?? '');
 				$this->systemMessages->addNotice($this->t('Registration revoked'));
 				$this->baseUrl->redirect('moderation/users/pending');
-				break;
 		}
 
 		$pager = new Pager($this->l10n, $this->args->getQueryString(), 100);

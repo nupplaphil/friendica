@@ -5,30 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Module/Acctlink.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/Admin/DBSync.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between int\<1, max\> and 0 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Module/Admin/Roles.php
-
-		-
-			message: '#^Instanceof between Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage and Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage will always evaluate to true\.$#'
-			identifier: instanceof.alwaysTrue
-			count: 2
-			path: src/Module/Admin/Storage.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
@@ -111,45 +87,3 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/Module/Media/Photo/Upload.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 2
-			path: src/Module/Moderation/Users/Active.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 2
-			path: src/Module/Moderation/Users/Blocked.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 3
-			path: src/Module/Moderation/Users/Index.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 2
-			path: src/Module/Moderation/Users/Pending.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 2
-			path: src/Module/Moderation/Users/Pending.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Module/Notifications/Notification.php
-
-		-
-			message: '#^Property Friendica\\Module\\Notifications\\Ping\:\:\$appHelper is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Module/Notifications/Ping.php

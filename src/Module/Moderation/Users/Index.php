@@ -20,7 +20,7 @@ class Index extends BaseUsers
 
 		self::checkFormSecurityTokenRedirectOnError('moderation/users', 'moderation_users');
 
-		$users = $request['user'] ?? [];
+		$users = (array) ($request['user'] ?? []);
 
 		if (!empty($request['page_users_block'])) {
 			foreach ($users as $uid) {

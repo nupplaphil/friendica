@@ -46,7 +46,7 @@ class Remove extends \Friendica\BaseModule
 		}
 
 		$requestTags = array_key_exists('tag', $request) ? (array) $request['tag'] : [];
-		$tags = [];
+		$tags        = [];
 		foreach ($requestTags as $tag => $checked) {
 			if ($checked) {
 				$tags[] = hex2bin(trim((string) $tag));

@@ -20,7 +20,7 @@ class Active extends BaseUsers
 
 		self::checkFormSecurityTokenRedirectOnError($this->baseUrl, 'moderation_users_active');
 
-		$users = $request['user'] ?? [];
+		$users = (array) ($request['user'] ?? []);
 
 		if (!empty($request['page_users_block'])) {
 			foreach ($users as $uid) {

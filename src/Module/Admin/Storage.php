@@ -109,7 +109,7 @@ class Storage extends BaseAdmin
 				'name'   => $name,
 				'prefix' => $storage_form_prefix,
 				'form'   => $storage_form,
-				'active' => $current_storage_backend instanceof ICanWriteToStorage && $name === $current_storage_backend::getName(),
+				'active' => $name === $current_storage_backend::getName(),
 			];
 		}
 
@@ -128,7 +128,7 @@ class Storage extends BaseAdmin
 			'$form_security_token'   => self::getFormSecurityToken("admin_storage"),
 			'$storagebackend_ro_txt' => !DI::config()->isWritable('storage', 'name') ? DI::l10n()->t('Changing the current backend is prohibited because it is set by an environment variable') : '',
 			'$is_writable'           => DI::config()->isWritable('storage', 'name'),
-			'$storagebackend'        => $current_storage_backend instanceof ICanWriteToStorage ? $current_storage_backend::getName() : DI::l10n()->t('Database (legacy)'),
+			'$storagebackend'        => $current_storage_backend::getName(),
 			'$availablestorageforms' => $available_storage_forms,
 		]);
 	}
