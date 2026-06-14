@@ -12,6 +12,7 @@ use Friendica\Database\DBA;
 use Friendica\Model\Contact;
 use Friendica\Network\HTTPException;
 use Friendica\Util\Strings;
+use Friendica\Model\Tag;
 
 class Hovercard
 {
@@ -31,6 +32,17 @@ class Hovercard
 			$actions = [];
 		}
 
+		$tags = [];
+		if ($contact['keywords']) {
+			// Separator is defined in Module\Settings\Profile\Index::cleanKeywords
+			foreach (explode(', ', (string) $contact['keywords']) as $tag_label) {
+				$tags[] = [
+					'url'   => '/search?tag=' . urlencode($tag_label),
+					'label' => Tag::TAG_CHARACTER[Tag::HASHTAG] . $tag_label,
+				];
+			}
+		}
+
 		$contact_url = Contact::getProfileLink($contact);
 
 		// Move the contact data to the profile array so we can deliver it to
@@ -46,7 +58,7 @@ class Hovercard
 				'location'     => $contact['location'],
 				'about'        => $contact['about'],
 				'network_link' => Strings::formatNetworkName($contact['network'], $contact_url, $contact['gsid']),
-				'tags'         => $contact['keywords'],
+				'tags'         => $tags,
 				'bd'           => $contact['bd'] <= DBA::NULL_DATE ? '' : $contact['bd'],
 				'account_type' => Contact::getAccountType($contact['contact-type']),
 				'contact_type' => $contact['contact-type'],
