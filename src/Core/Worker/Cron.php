@@ -223,24 +223,4 @@ class Cron
 			DI::logger()->info('Optimize end');
 		}
 	}
-
-	/**
-	 * Add missing "intro" records.
-	 *
-	 * @return void
-	 */
-	private static function addIntros()
-	{
-		$contacts = DBA::p("SELECT `uid`, `id`, `created` FROM `contact` WHERE `rel` = ? AND `pending` AND NOT `id` IN (SELECT `contact-id` FROM `intro`)", Contact::FOLLOWER);
-		while ($contact = DBA::fetch($contacts)) {
-			$fields = [
-				'uid'        => $contact['uid'],
-				'contact-id' => $contact['id'],
-				'datetime'   => $contact['created'],
-				'hash'       => Strings::getRandomHex(),
-			];
-			DI::logger()->notice('Adding missing intro', ['fields' => $fields]);
-			DBA::insert('intro', $fields);
-		}
-	}
 }

@@ -415,8 +415,8 @@ final class HookEventBridge
 
 		$id = $data['event']['id'] ?? 0;
 
-		// one-way-event: we don't care about the(int)  returned value
-		static::callHook($event->getName(), $id);
+		// one-way-event: we don't care about the returned value
+		static::callHook($event->getName(), (int) $id);
 	}
 
 	/**
@@ -428,8 +428,8 @@ final class HookEventBridge
 
 		$id = $data['event']['id'] ?? 0;
 
-		// one-way-event: we don't care about the(int)  returned value
-		static::callHook($event->getName(), $id);
+		// one-way-event: we don't care about the  returned value
+		static::callHook($event->getName(), (int) $id);
 	}
 
 	public static function onArrayFilterEvent(ArrayFilterEvent $event): void

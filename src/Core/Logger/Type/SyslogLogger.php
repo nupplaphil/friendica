@@ -59,18 +59,23 @@ class SyslogLogger extends AbstractLogger
 
 	/**
 	 * A error message of the current operation
+	 *
+	 * @phpstan-ignore property.onlyWritten(This property is needed for tests)
 	 */
 	private string $errorMessage;
 
 	/**
 	 * {@inheritdoc}
 	 *
-	 * @param int $logLevel    The minimum loglevel at which this logger will be triggered
-	 * @param int $logOpts
-	 * @param int $logFacility
+	 * @param int $logLevel The minimum loglevel at which this logger will be triggered
 	 */
-	public function __construct(string $channel, IHaveCallIntrospections $introspection, private readonly int $logLevel, private readonly int $logOpts, private readonly int $logFacility)
-	{
+	public function __construct(
+		string $channel,
+		IHaveCallIntrospections $introspection,
+		private readonly int $logLevel,
+		private readonly int $logOpts,
+		private readonly int $logFacility,
+	) {
 		parent::__construct($channel, $introspection);
 	}
 
@@ -135,12 +140,8 @@ class SyslogLogger extends AbstractLogger
 	private function write(int $priority, string $message)
 	{
 		set_error_handler($this->customErrorHandler(...));
-		$opened = openlog(self::IDENT, $this->logOpts, $this->logFacility);
+		openlog(self::IDENT, $this->logOpts, $this->logFacility);
 		restore_error_handler();
-
-		if (!$opened) {
-			throw new LoggerException(sprintf('Can\'t open syslog for ident "%s" and facility "%s": ' . $this->errorMessage, $this->channel, (string) $this->logFacility));
-		}
 
 		$this->syslogWrapper($priority, $message);
 	}
@@ -184,11 +185,7 @@ class SyslogLogger extends AbstractLogger
 	protected function syslogWrapper(int $level, string $entry)
 	{
 		set_error_handler($this->customErrorHandler(...));
-		$written = syslog($level, $entry);
+		syslog($level, $entry);
 		restore_error_handler();
-
-		if (!$written) {
-			throw new LoggerException(sprintf('Can\'t write into syslog for ident "%s" and facility "%s": ' . $this->errorMessage, $this->channel, (string) $this->logFacility));
-		}
 	}
 }

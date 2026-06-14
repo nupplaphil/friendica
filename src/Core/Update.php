@@ -31,7 +31,7 @@ class Update
 	 */
 	public static function getStatus(): int
 	{
-		return (int)DI::config()->get('system', 'update') ?? static::SUCCESS;
+		return (int) DI::config()->get('system', 'update', static::SUCCESS);
 	}
 
 	/**

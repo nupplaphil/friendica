@@ -55,8 +55,7 @@ class Worker
 	private static $lock_duration     = 0;
 	private static $last_update;
 	private static $state;
-	/** @var Process */
-	private static $process;
+	private static Process $process;
 
 	/**
 	 * Processes the tasks that are in the workerqueue table
@@ -151,7 +150,7 @@ class Worker
 			// Quit the worker once every cron interval
 			if (time() > ($starttime + (DI::config()->get('system', 'cron_interval') * 60)) && !self::systemLimitReached()) {
 				DI::logger()->info('Process lifetime reached, respawning.');
-				self::unclaimProcess($process);
+				self::unclaimProcess(self::$process);
 				if (Worker\Daemon::isMode()) {
 					Worker\IPC::SetJobState(true);
 				} else {
