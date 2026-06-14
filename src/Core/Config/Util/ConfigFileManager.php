@@ -41,12 +41,13 @@ class ConfigFileManager
 	 */
 	public const SAMPLE_END = '-sample';
 
-	/**
-	 * @param string $baseDir   The base
-	 * @param string $configDir
-	 * @param string $staticDir
-	 */
-	public function __construct(private readonly string $baseDir, private readonly string $addonDir, private readonly string $configDir, private readonly string $staticDir, private array $server = []) {}
+	public function __construct(
+		private readonly string $baseDir,
+		private readonly string $addonDir,
+		private readonly string $configDir,
+		private readonly string $staticDir,
+		private array $server = [],
+	) {}
 
 	/**
 	 * Load the configuration files into an configuration cache
@@ -225,6 +226,7 @@ class ConfigFileManager
 
 		$a         = new \stdClass();
 		$a->config = [];
+		/** @var \stdClass $a Will be filled via include */
 		include $fullName;
 
 		$htConfigCategories = array_keys($a->config);

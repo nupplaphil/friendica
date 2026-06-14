@@ -5,24 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 1
-			path: src/Core/Config/Util/ConfigFileManager.php
-
-		-
-			message: '#^Offset ''system'' on array\{\}\|array\{database\: non\-empty\-array\{hostname\?\: mixed, username\?\: mixed, password\?\: mixed, database\?\: mixed\}\} in isset\(\) does not exist\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Core/Config/Util/ConfigFileManager.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 1
-			path: src/Core/Config/Util/ConfigFileManager.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 14
