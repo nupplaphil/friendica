@@ -64,7 +64,7 @@ class UpdateContact
 	 */
 	public static function workerLimitReached(): bool
 	{
-		$update_limit = (int)DI::config()->get('system', 'contact_update_limit');
+		$update_limit = (int) DI::config()->get('system', 'contact_update_limit');
 		$updating     = Worker::countWorkersByCommand('UpdateContact');
 		if ($updating >= $update_limit) {
 			DI::logger()->info('The number of currently running jobs exceed the limit', ['updating' => $updating, 'limit' => $update_limit]);

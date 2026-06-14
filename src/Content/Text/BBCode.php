@@ -1271,13 +1271,13 @@ class BBCode
 	 * - 8: Used for Twitter, WP backlink text setting
 	 * - 9: ActivityPub
 	 *
-	 * @param int    $uriid
-	 * @param string $text
+	 * @param ?int    $uriid
+	 * @param ?string $text
 	 * @param int    $simple_html
 	 * @return string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function convertForUriId(int $uriid = null, string $text = null, int $simple_html = self::INTERNAL): string
+	public static function convertForUriId(?int $uriid = null, ?string $text = null, int $simple_html = self::INTERNAL): string
 	{
 		return self::convert($text ?? '', false, $simple_html, false, $uriid ?? 0);
 	}
@@ -1300,7 +1300,7 @@ class BBCode
 	 * - 8: Used for Twitter, WP backlink text setting
 	 * - 9: ActivityPub
 	 *
-	 * @param string $text
+	 * @param ?string $text
 	 * @param bool   $embed
 	 * @param int    $simple_html
 	 * @param bool   $for_plaintext
@@ -1308,7 +1308,7 @@ class BBCode
 	 * @return string Converted code or empty string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function convert(string $text = null, bool $embed = true, int $simple_html = self::INTERNAL, bool $for_plaintext = false, int $uriid = 0): string
+	public static function convert(?string $text = null, bool $embed = true, int $simple_html = self::INTERNAL, bool $for_plaintext = false, int $uriid = 0): string
 	{
 		// Accounting for null default column values
 		if (is_null($text) || $text === '') {
@@ -2541,7 +2541,7 @@ class BBCode
 	 * @return string
 	 * @TODO Rewrite to handle over whole record array
 	 */
-	public static function getShareOpeningTag(string $author, string $profile, string $avatar, string $link, string $posted, string $guid = null, string $uri = null): string
+	public static function getShareOpeningTag(string $author, string $profile, string $avatar, string $link, string $posted, ?string $guid = null, ?string $uri = null): string
 	{
 		DI::profiler()->startRecording('rendering');
 		$header = "[share author='" . str_replace(["'", "[", "]"], ["&#x27;", "&#x5B;", "&#x5D;"], $author)
@@ -2579,7 +2579,7 @@ class BBCode
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @see ParseUrl::getSiteinfoCached
 	 */
-	public static function embedURL(string $url, bool $tryAttachment = true, string $title = null, string $description = null, string $tags = null): string
+	public static function embedURL(string $url, bool $tryAttachment = true, ?string $title = null, ?string $description = null, ?string $tags = null): string
 	{
 		DI::profiler()->startRecording('rendering');
 		DI::logger()->info($url);
