@@ -32,8 +32,8 @@ class Hovercard
 			$actions = [];
 		}
 
+		$tags = [];
 		if ($contact['keywords']) {
-			$tags = [];
 			// Separator is defined in Module\Settings\Profile\Index::cleanKeywords
 			foreach (explode(', ', (string) $contact['keywords']) as $tag_label) {
 				$tags[] = [
