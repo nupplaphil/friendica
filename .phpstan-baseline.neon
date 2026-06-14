@@ -41,24 +41,6 @@ parameters:
 			path: src/Content/Text/BBCode.php
 
 		-
-			message: '#^Loose comparison using \=\= between non\-empty\-string and '''' will always evaluate to false\.$#'
-			identifier: equal.alwaysFalse
-			count: 1
-			path: src/Content/Text/Markdown.php
-
-		-
-			message: '#^Offset 1 on array\{non\-falsy\-string, numeric\-string, numeric\-string\} in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Core/Cache/Type/MemcacheCache.php
-
-		-
-			message: '#^Offset 1 on array\{non\-falsy\-string, numeric\-string, numeric\-string\} in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Core/Cache/Type/MemcachedCache.php
-
-		-
 			message: '#^Empty array passed to foreach\.$#'
 			identifier: foreach.emptyArray
 			count: 1
