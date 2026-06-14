@@ -51,10 +51,15 @@ class PostMedia extends BaseRepository
 	 * @param IManagePersonalConfigValues $pConfig Personal configuration access
 	 * @param IManageConfigValues $config Global configuration access
 	 * @param BaseURL $baseURL Base URL helper
-	 * @param Item $item Item helper
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, PostMediaFactory $factory, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, private readonly BaseURL $baseURL, private readonly Item $item)
-	{
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		PostMediaFactory $factory,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly IManageConfigValues $config,
+		private readonly BaseURL $baseURL,
+	) {
 		parent::__construct($database, $logger, $factory);
 	}
 
