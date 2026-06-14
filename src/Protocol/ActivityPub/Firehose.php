@@ -46,6 +46,7 @@ class Firehose
 	{
 		$retryDelay = 1;
 
+		/** @phpstan-ignore while.alwaysTrue */
 		while (true) {
 			try {
 				$body = $this->httpClient->get(

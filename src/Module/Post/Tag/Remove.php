@@ -20,8 +20,17 @@ use Psr\Log\LoggerInterface;
 
 class Remove extends \Friendica\BaseModule
 {
-	public function __construct(private readonly IHandleUserSessions $session, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly IHandleUserSessions $session,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -36,8 +45,9 @@ class Remove extends \Friendica\BaseModule
 			$this->baseUrl->redirect($request['return'] ?? '');
 		}
 
+		$requestTags = array_key_exists('tag', $request) ? (array) $request['tag'] : [];
 		$tags = [];
-		foreach ($request['tag'] ?? [] as $tag => $checked) {
+		foreach ($requestTags as $tag => $checked) {
 			if ($checked) {
 				$tags[] = hex2bin(trim((string) $tag));
 			}

@@ -153,33 +153,3 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/Module/Notifications/Ping.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between '''' and ''none'' will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Module/Post/Edit.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 1
-			path: src/Module/Post/Tag/Remove.php
-
-		-
-			message: '#^Call to Friendica\\BaseModule\:\:content\(\) on a separate line has no effect\.$#'
-			identifier: staticMethod.resultUnused
-			count: 1
-			path: src/Module/Profile/Photos.php
-
-		-
-			message: '#^While loop condition is always true\.$#'
-			identifier: while.alwaysTrue
-			count: 1
-			path: src/Protocol/ActivityPub/Firehose.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between array\<mixed, mixed\> and false will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Util/JsonLD.php

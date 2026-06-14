@@ -49,8 +49,22 @@ class Edit extends BaseModule
 	/** @var bool */
 	protected $isModal = false;
 
-	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $session, SystemMessages $sysMessages, Page $page, Mode $mode, AppHelper $appHelper, private readonly EventDispatcherInterface $eventDispatcher, array $server, array $parameters = [])
-	{
+	public function __construct(
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		IHandleUserSessions $session,
+		SystemMessages $sysMessages,
+		Page $page,
+		Mode $mode,
+		AppHelper $appHelper,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->session     = $session;
@@ -63,7 +77,9 @@ class Edit extends BaseModule
 
 	protected function content(array $request = []): string
 	{
-		$this->isModal = $request['mode'] ?? '' === 'none';
+		$requestMode = array_key_exists('mode', $request) ? $request['mode'] : '';
+
+		$this->isModal = $requestMode === 'none';
 
 		if (!$this->session->getLocalUserId()) {
 			$this->errorExit($this->t('Permission denied.'), HTTPException\UnauthorizedException::class);

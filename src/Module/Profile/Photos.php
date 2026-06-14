@@ -247,8 +247,6 @@ class Photos extends \Friendica\Module\BaseProfile
 
 	protected function content(array $request = []): string
 	{
-		parent::content($request);
-
 		if ($this->config->get('system', 'block_public') && !$this->session->isAuthenticated()) {
 			throw new HttpException\ForbiddenException($this->t('Public access denied.'));
 		}
