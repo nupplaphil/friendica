@@ -7,30 +7,6 @@ parameters:
 		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
-			count: 14
-			path: src/Core/Hooks/HookEventBridge.php
-
-		-
-			message: '#^Static property Friendica\\Core\\Hooks\\HookEventBridge\:\:\$mockedCallHook \(Closure\|null\) is never assigned Closure so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Core/Hooks/HookEventBridge.php
-
-		-
-			message: '#^Negated boolean expression is always true\.$#'
-			identifier: booleanNot.alwaysTrue
-			count: 1
-			path: src/Core/Installer.php
-
-		-
-			message: '#^Property Friendica\\Core\\Installer\:\:\$phppath \(string\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: src/Core/Installer.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
 			count: 2
 			path: src/Core/Logger/Factory/SyslogLoggerFactory.php
 

@@ -28,12 +28,8 @@ use Friendica\Event\NamedEvent;
  */
 final class HookEventBridge
 {
-	/**
-	 * @internal This allows us to mock the Hook call in tests.
-	 *
-	 * @var \Closure|null
-	 */
-	private static $mockedCallHook = null;
+	/** @phpstan-ignore property.unusedType(This allows us to mock the Hook call in tests.) */
+	private static ?\Closure $mockedCallHook = null;
 
 	/**
 	 * This maps the new event names to the legacy Hook names.
@@ -250,9 +246,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$model = (array) $data['model'] ?? [];
+		$model = $data['model'] ?? [];
 
-		$data['model'] = static::callHook($event->getName(), $model);
+		$data['model'] = static::callHook($event->getName(), (array) $model);
 
 		$event->setArray($data);
 	}
@@ -264,9 +260,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$item = (array) $data['item'] ?? [];
+		$item = $data['item'] ?? [];
 
-		$data['item'] = static::callHook($event->getName(), $item);
+		$data['item'] = static::callHook($event->getName(), (array) $item);
 
 		$event->setArray($data);
 	}
@@ -278,9 +274,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$item = (array) $data['item'] ?? [];
+		$item = $data['item'] ?? [];
 
-		$data['item'] = static::callHook($event->getName(), $item);
+		$data['item'] = static::callHook($event->getName(), (array) $item);
 
 		$event->setArray($data);
 	}
@@ -292,9 +288,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$item = (array) $data['item'] ?? [];
+		$item = $data['item'] ?? [];
 
-		$data['item'] = static::callHook($event->getName(), $item);
+		$data['item'] = static::callHook($event->getName(), (array) $item);
 
 		$event->setArray($data);
 	}
@@ -306,9 +302,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$request = (array) $data['request'] ?? [];
+		$request = $data['request'] ?? [];
 
-		$data['request'] = static::callHook($event->getName(), $request);
+		$data['request'] = static::callHook($event->getName(), (array) $request);
 
 		$event->setArray($data);
 	}
@@ -320,10 +316,10 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$id = (int) $data['id'] ?? 0;
+		$id = $data['id'] ?? 0;
 
 		// one-way-event: we don't care about the returned value
-		static::callHook($event->getName(), $id);
+		static::callHook($event->getName(), (int) $id);
 	}
 
 	/**
@@ -333,9 +329,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$profile = (array) $data['profile'] ?? [];
+		$profile = $data['profile'] ?? [];
 
-		$data['profile'] = static::callHook($event->getName(), $profile);
+		$data['profile'] = static::callHook($event->getName(), (array) $profile);
 
 		$event->setArray($data);
 	}
@@ -347,9 +343,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$bbcode2html = (string) $data['bbcode2html'] ?? '';
+		$bbcode2html = $data['bbcode2html'] ?? '';
 
-		$data['bbcode2html'] = static::callHook($event->getName(), $bbcode2html);
+		$data['bbcode2html'] = static::callHook($event->getName(), (string) $bbcode2html);
 
 		$event->setArray($data);
 	}
@@ -361,9 +357,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$html2bbcode = (string) $data['html2bbcode'] ?? '';
+		$html2bbcode = $data['html2bbcode'] ?? '';
 
-		$data['html2bbcode'] = static::callHook($event->getName(), $html2bbcode);
+		$data['html2bbcode'] = static::callHook($event->getName(), (string) $html2bbcode);
 
 		$event->setArray($data);
 	}
@@ -375,9 +371,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$bbcode2markdown = (string) $data['bbcode2markdown'] ?? '';
+		$bbcode2markdown = $data['bbcode2markdown'] ?? '';
 
-		$data['bbcode2markdown'] = static::callHook($event->getName(), $bbcode2markdown);
+		$data['bbcode2markdown'] = static::callHook($event->getName(), (string) $bbcode2markdown);
 
 		$event->setArray($data);
 	}
@@ -389,9 +385,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$uid = (int) $data['uid'] ?? 0;
+		$uid = $data['uid'] ?? 0;
 
-		$data['uid'] = static::callHook($event->getName(), $uid);
+		$data['uid'] = static::callHook($event->getName(), (int) $uid);
 
 		$event->setArray($data);
 	}
@@ -403,9 +399,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$user = (array) $data['user'] ?? [];
+		$user = $data['user'] ?? [];
 
-		$data['user'] = static::callHook($event->getName(), $user);
+		$data['user'] = static::callHook($event->getName(), (array) $user);
 
 		$event->setArray($data);
 	}
@@ -417,9 +413,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$id = (int) $data['event']['id'] ?? 0;
+		$id = $data['event']['id'] ?? 0;
 
-		// one-way-event: we don't care about the returned value
+		// one-way-event: we don't care about the(int)  returned value
 		static::callHook($event->getName(), $id);
 	}
 
@@ -430,9 +426,9 @@ final class HookEventBridge
 	{
 		$data = $event->getArray();
 
-		$id = (int) $data['event']['id'] ?? 0;
+		$id = $data['event']['id'] ?? 0;
 
-		// one-way-event: we don't care about the returned value
+		// one-way-event: we don't care about the(int)  returned value
 		static::callHook($event->getName(), $id);
 	}
 
