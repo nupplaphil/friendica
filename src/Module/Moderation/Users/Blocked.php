@@ -109,7 +109,7 @@ class Blocked extends BaseUsers
 
 			'$users' => $users,
 			'$count' => $count,
-			'$pager' => $pager->renderFull($count)
+			'$pager' => $pager->renderFull($count),
 		]);
 	}
 

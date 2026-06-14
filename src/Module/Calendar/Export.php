@@ -27,10 +27,10 @@ use Psr\Log\LoggerInterface;
  */
 class Export extends BaseModule
 {
-	const EXPORT_ICAL = 'ical';
-	const EXPORT_CSV  = 'csv';
+	public const EXPORT_ICAL = 'ical';
+	public const EXPORT_CSV  = 'csv';
 
-	const DEFAULT_EXPORT = self::EXPORT_ICAL;
+	public const DEFAULT_EXPORT = self::EXPORT_ICAL;
 
 	/** @var IHandleUserSessions */
 	protected $session;
@@ -105,10 +105,11 @@ class Export extends BaseModule
 		}
 
 		// If nothing went wrong we can echo the export content
-		$this->response->setHeader(sprintf('Content-Disposition: attachment; filename="%s-%s.%s"',
+		$this->response->setHeader(sprintf(
+			'Content-Disposition: attachment; filename="%s-%s.%s"',
 			$this->t('calendar'),
 			$this->parameters['nickname'],
-			$evexport["extension"]
+			$evexport["extension"],
 		));
 
 		switch ($format) {

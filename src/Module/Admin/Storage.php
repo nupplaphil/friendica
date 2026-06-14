@@ -11,7 +11,6 @@ use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Core\Storage\Exception\InvalidClassStorageException;
 use Friendica\Core\Storage\Capability\ICanConfigureStorage;
-use Friendica\Core\Storage\Capability\ICanWriteToStorage;
 use Friendica\Module\BaseAdmin;
 
 class Storage extends BaseAdmin

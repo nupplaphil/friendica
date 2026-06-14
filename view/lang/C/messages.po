@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-14 19:24+0000\n"
+"POT-Creation-Date: 2026-06-14 20:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 #: mod/photos.php:418 src/Model/Event.php:510 src/Module/Attach.php:40
 #: src/Module/BaseApi.php:91 src/Module/BaseNotifications.php:83
 #: src/Module/BaseSettings.php:38 src/Module/Calendar/Event/API.php:75
-#: src/Module/Calendar/Event/Form.php:73 src/Module/Calendar/Export.php:68
+#: src/Module/Calendar/Event/Form.php:73 src/Module/Calendar/Export.php:79
 #: src/Module/Calendar/Show.php:71 src/Module/Circle.php:27
 #: src/Module/Circle.php:76 src/Module/Contact/Advanced.php:46
 #: src/Module/Contact/Follow.php:77 src/Module/Contact/Follow.php:145
@@ -57,8 +57,8 @@ msgstr ""
 #: src/Module/Contact/Unfollow.php:61 src/Module/Contact/Unfollow.php:93
 #: src/Module/FollowConfirm.php:24 src/Module/FriendSuggest.php:44
 #: src/Module/Invite.php:28 src/Module/Invite.php:117
-#: src/Module/Notifications/Notification.php:45
-#: src/Module/Notifications/Notification.php:76 src/Module/Post/Edit.php:85
+#: src/Module/Notifications/Notification.php:58
+#: src/Module/Notifications/Notification.php:89 src/Module/Post/Edit.php:85
 #: src/Module/Profile/Common.php:52 src/Module/Profile/Contacts.php:52
 #: src/Module/Profile/Photos.php:73 src/Module/Profile/Schedule.php:27
 #: src/Module/Profile/Schedule.php:44 src/Module/Register.php:77
@@ -228,7 +228,7 @@ msgstr[1] ""
 
 #: mod/photos.php:42 mod/photos.php:99 mod/photos.php:328
 #: src/Model/Event.php:502 src/Model/Profile.php:212
-#: src/Module/Calendar/Export.php:60 src/Module/Calendar/Show.php:63
+#: src/Module/Calendar/Export.php:71 src/Module/Calendar/Show.php:63
 #: src/Module/Feed.php:52 src/Module/HCard.php:37
 #: src/Module/Profile/Common.php:39 src/Module/Profile/Common.php:48
 #: src/Module/Profile/Contacts.php:38 src/Module/Profile/Contacts.php:46
@@ -426,12 +426,12 @@ msgid "Rotate CCW (left)"
 msgstr ""
 
 #: mod/photos.php:827 src/Model/Event.php:652
-#: src/Module/Calendar/Event/Show.php:67
+#: src/Module/Calendar/Event/Show.php:77
 msgid "Edit"
 msgstr ""
 
 #: mod/photos.php:828 src/Content/Conversation/HtmlRenderer.php:524
-#: src/Model/Event.php:654 src/Module/Calendar/Event/Show.php:69
+#: src/Model/Event.php:654 src/Module/Calendar/Event/Show.php:79
 #: src/Module/Moderation/Users/Active.php:92
 #: src/Module/Moderation/Users/Blocked.php:92
 #: src/Module/Moderation/Users/Index.php:100
@@ -862,14 +862,14 @@ msgstr ""
 msgid "RSS/Atom"
 msgstr ""
 
-#: src/Content/ContactSelector.php:122 src/Module/Admin/Roles.php:119
+#: src/Content/ContactSelector.php:122 src/Module/Admin/Roles.php:136
 #: src/Module/Moderation/Users/Active.php:82
 #: src/Module/Moderation/Users/Blocked.php:82
 #: src/Module/Moderation/Users/Create.php:59
 #: src/Module/Moderation/Users/Deleted.php:69
 #: src/Module/Moderation/Users/Index.php:89
 #: src/Module/Moderation/Users/Index.php:109
-#: src/Module/Moderation/Users/Pending.php:85
+#: src/Module/Moderation/Users/Pending.php:83
 msgid "Email"
 msgstr ""
 
@@ -2554,7 +2554,7 @@ msgstr ""
 msgid "Relationships"
 msgstr ""
 
-#: src/Content/Widget.php:273 src/Module/Circle.php:300
+#: src/Content/Widget.php:273 src/Module/Circle.php:302
 #: src/Module/Contact.php:329
 msgid "All Contacts"
 msgstr ""
@@ -3219,7 +3219,7 @@ msgstr ""
 msgid "Edit circle"
 msgstr ""
 
-#: src/Model/Circle.php:598 src/Module/Circle.php:190
+#: src/Model/Circle.php:598 src/Module/Circle.php:192
 msgid "Contacts not in any circle"
 msgstr ""
 
@@ -3227,8 +3227,8 @@ msgstr ""
 msgid "Create a new circle"
 msgstr ""
 
-#: src/Model/Circle.php:601 src/Module/Circle.php:173 src/Module/Circle.php:195
-#: src/Module/Circle.php:281
+#: src/Model/Circle.php:601 src/Module/Circle.php:173 src/Module/Circle.php:197
+#: src/Module/Circle.php:283
 msgid "Circle Name: "
 msgstr ""
 
@@ -3236,7 +3236,7 @@ msgstr ""
 msgid "Edit circles"
 msgstr ""
 
-#: src/Model/Contact.php:1317 src/Module/Moderation/Users/Pending.php:88
+#: src/Model/Contact.php:1317 src/Module/Moderation/Users/Pending.php:86
 #: src/Module/Notifications/Introductions.php:128
 msgid "Approve"
 msgstr ""
@@ -3507,7 +3507,7 @@ msgstr ""
 msgid "Access to this profile has been restricted."
 msgstr ""
 
-#: src/Model/Event.php:547 src/Module/Calendar/Event/Show.php:52
+#: src/Model/Event.php:547 src/Module/Calendar/Event/Show.php:62
 msgid "Event not found."
 msgstr ""
 
@@ -3515,7 +3515,7 @@ msgstr ""
 msgid "l, F j"
 msgstr ""
 
-#: src/Model/Event.php:653 src/Module/Calendar/Event/Show.php:68
+#: src/Model/Event.php:653 src/Module/Calendar/Event/Show.php:78
 msgid "Duplicate"
 msgstr ""
 
@@ -3615,7 +3615,7 @@ msgid "Poll end: %s"
 msgstr ""
 
 #: src/Model/Item.php:3705 src/Model/Item.php:3706
-#: src/Module/Calendar/Event/Show.php:70
+#: src/Module/Calendar/Event/Show.php:80
 msgid "View related post"
 msgstr ""
 
@@ -3623,7 +3623,7 @@ msgstr ""
 msgid "[no subject]"
 msgstr ""
 
-#: src/Model/Photo.php:1209 src/Module/Media/Photo/Upload.php:137
+#: src/Model/Photo.php:1209 src/Module/Media/Photo/Upload.php:148
 msgid "Wall Photos"
 msgstr ""
 
@@ -4025,10 +4025,10 @@ msgstr ""
 #: src/Module/Admin/Addons/Details.php:137 src/Module/Admin/Addons/Index.php:83
 #: src/Module/Admin/Federation.php:218 src/Module/Admin/Logs/Settings.php:74
 #: src/Module/Admin/Logs/View.php:71 src/Module/Admin/Queue.php:64
-#: src/Module/Admin/Roles.php:113 src/Module/Admin/Site.php:459
+#: src/Module/Admin/Roles.php:130 src/Module/Admin/Site.php:459
 #: src/Module/Admin/Storage.php:119 src/Module/Admin/Summary.php:206
 #: src/Module/Admin/Themes/Details.php:82 src/Module/Admin/Themes/Index.php:103
-#: src/Module/Admin/Tos.php:63 src/Module/Moderation/Users/Pending.php:82
+#: src/Module/Admin/Tos.php:63 src/Module/Moderation/Users/Pending.php:80
 msgid "Administration"
 msgstr ""
 
@@ -4343,7 +4343,7 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-#: src/Module/Admin/Logs/View.php:85 src/Module/Admin/Roles.php:120
+#: src/Module/Admin/Logs/View.php:85 src/Module/Admin/Roles.php:137
 #: src/Module/Debug/ActivityPubConversion.php:49
 msgid "Source"
 msgstr ""
@@ -4414,89 +4414,89 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:43
+#: src/Module/Admin/Roles.php:52
 msgid "Please select a valid user."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:55
+#: src/Module/Admin/Roles.php:72
 msgid "The selected user cannot be assigned moderation rights."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:62
+#: src/Module/Admin/Roles.php:79
 msgid "Moderation rights have been granted."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:73
+#: src/Module/Admin/Roles.php:90
 msgid "Moderation rights have been removed."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:78
+#: src/Module/Admin/Roles.php:95
 msgid "Unknown role action."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:114 src/Module/BaseAdmin.php:76
+#: src/Module/Admin/Roles.php:131 src/Module/BaseAdmin.php:76
 msgid "Roles"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:115
+#: src/Module/Admin/Roles.php:132
 msgid "Manage moderators for this node. Administrator rights are read-only and managed through the node configuration."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:116
+#: src/Module/Admin/Roles.php:133
 msgid "Users with administrator rights (read-only)"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:117
+#: src/Module/Admin/Roles.php:134
 msgid "Users with moderation rights"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:118 src/Module/Admin/Roles.php:130
+#: src/Module/Admin/Roles.php:135 src/Module/Admin/Roles.php:147
 msgid "User"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:121 src/Module/Contact/Profile.php:435
+#: src/Module/Admin/Roles.php:138 src/Module/Contact/Profile.php:435
 #: src/Module/Moderation/Reports.php:342
 #: src/Module/Settings/TwoFactor/Index.php:146
 msgid "Actions"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:122
+#: src/Module/Admin/Roles.php:139
 msgid "No administrators found."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:123
+#: src/Module/Admin/Roles.php:140
 msgid "No users with moderation rights found."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:124
+#: src/Module/Admin/Roles.php:141
 msgid "Administrator"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:125
+#: src/Module/Admin/Roles.php:142
 msgid "Moderator"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:126
+#: src/Module/Admin/Roles.php:143
 msgid "Administrator + Moderator"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:127
+#: src/Module/Admin/Roles.php:144
 msgid "Remove moderation rights"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:128
+#: src/Module/Admin/Roles.php:145
 msgid "Administrators always keep moderation rights."
 msgstr ""
 
-#: src/Module/Admin/Roles.php:129
+#: src/Module/Admin/Roles.php:146
 msgid "Assign moderation rights"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:131
+#: src/Module/Admin/Roles.php:148
 msgid "Grant moderation rights"
 msgstr ""
 
-#: src/Module/Admin/Roles.php:132
+#: src/Module/Admin/Roles.php:149
 msgid "All active users already have moderation rights."
 msgstr ""
 
@@ -5616,10 +5616,6 @@ msgstr ""
 msgid "Changing the current backend is prohibited because it is set by an environment variable"
 msgstr ""
 
-#: src/Module/Admin/Storage.php:131
-msgid "Database (legacy)"
-msgstr ""
-
 #: src/Module/Admin/Summary.php:39
 #, php-format
 msgid "Template engine (%s) error: %s"
@@ -6229,15 +6225,15 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
-#: src/Module/Calendar/Export.php:80
+#: src/Module/Calendar/Export.php:91
 msgid "This calendar format is not supported"
 msgstr ""
 
-#: src/Module/Calendar/Export.php:82
+#: src/Module/Calendar/Export.php:93
 msgid "No exportable data found"
 msgstr ""
 
-#: src/Module/Calendar/Export.php:99
+#: src/Module/Calendar/Export.php:109
 msgid "calendar"
 msgstr ""
 
@@ -6253,7 +6249,7 @@ msgstr ""
 msgid "Could not create circle."
 msgstr ""
 
-#: src/Module/Circle.php:54 src/Module/Circle.php:208 src/Module/Circle.php:243
+#: src/Module/Circle.php:54 src/Module/Circle.php:210 src/Module/Circle.php:245
 msgid "Circle not found."
 msgstr ""
 
@@ -6320,47 +6316,47 @@ msgstr ""
 msgid "Create a circle of contacts/friends."
 msgstr ""
 
-#: src/Module/Circle.php:213
+#: src/Module/Circle.php:215
 msgid "Unable to remove circle."
 msgstr ""
 
-#: src/Module/Circle.php:275
+#: src/Module/Circle.php:277
 msgid "Delete Circle"
 msgstr ""
 
-#: src/Module/Circle.php:282
+#: src/Module/Circle.php:284
 msgid "Public circle"
 msgstr ""
 
-#: src/Module/Circle.php:282
+#: src/Module/Circle.php:284
 msgid "Public circles can be downloaded by others as CSV files."
 msgstr ""
 
-#: src/Module/Circle.php:287
+#: src/Module/Circle.php:289
 msgid "Edit Circle Name"
 msgstr ""
 
-#: src/Module/Circle.php:288
+#: src/Module/Circle.php:290
 msgid "Mark all as read"
 msgstr ""
 
-#: src/Module/Circle.php:298
+#: src/Module/Circle.php:300
 msgid "Members"
 msgstr ""
 
-#: src/Module/Circle.php:301
+#: src/Module/Circle.php:303
 msgid "Circle is empty"
 msgstr ""
 
-#: src/Module/Circle.php:317
+#: src/Module/Circle.php:319
 msgid "Remove contact from circle"
 msgstr ""
 
-#: src/Module/Circle.php:340
+#: src/Module/Circle.php:342
 msgid "Click on a contact to add or remove."
 msgstr ""
 
-#: src/Module/Circle.php:358
+#: src/Module/Circle.php:360
 msgid "Add contact to circle"
 msgstr ""
 
@@ -6548,7 +6544,7 @@ msgstr ""
 #: src/Module/Moderation/Users/Deleted.php:69
 #: src/Module/Moderation/Users/Index.php:89
 #: src/Module/Moderation/Users/Index.php:109
-#: src/Module/Moderation/Users/Pending.php:85 src/Module/Settings/OAuth.php:56
+#: src/Module/Moderation/Users/Pending.php:83 src/Module/Settings/OAuth.php:56
 msgid "Name"
 msgstr ""
 
@@ -6691,10 +6687,10 @@ msgid "The contact could not be added."
 msgstr ""
 
 #: src/Module/Contact/MatchInterests.php:81
-#: src/Module/Media/Attachment/Upload.php:46
-#: src/Module/Media/Attachment/Upload.php:51
-#: src/Module/Media/Photo/Upload.php:50 src/Module/Media/Photo/Upload.php:55
-#: src/Module/Media/Photo/Upload.php:104
+#: src/Module/Media/Attachment/Upload.php:57
+#: src/Module/Media/Attachment/Upload.php:62
+#: src/Module/Media/Photo/Upload.php:61 src/Module/Media/Photo/Upload.php:66
+#: src/Module/Media/Photo/Upload.php:115
 msgid "Invalid request."
 msgstr ""
 
@@ -7208,11 +7204,11 @@ msgstr ""
 msgid "Accounts listed: %s"
 msgstr ""
 
-#: src/Module/Filer/RemoveTag.php:82
+#: src/Module/Filer/RemoveTag.php:96
 msgid "Item was not deleted"
 msgstr ""
 
-#: src/Module/Filer/RemoveTag.php:92
+#: src/Module/Filer/RemoveTag.php:106
 msgid "Item was not removed"
 msgstr ""
 
@@ -7756,30 +7752,30 @@ msgstr ""
 msgid "Browser content"
 msgstr ""
 
-#: src/Module/Media/Attachment/Upload.php:66
+#: src/Module/Media/Attachment/Upload.php:77
 msgid "Sorry, maybe your upload is bigger than the PHP configuration allows"
 msgstr ""
 
-#: src/Module/Media/Attachment/Upload.php:66
+#: src/Module/Media/Attachment/Upload.php:77
 msgid "Or - did you try to upload an empty file?"
 msgstr ""
 
-#: src/Module/Media/Attachment/Upload.php:73
+#: src/Module/Media/Attachment/Upload.php:84
 #, php-format
 msgid "File exceeds size limit of %s"
 msgstr ""
 
-#: src/Module/Media/Attachment/Upload.php:83
+#: src/Module/Media/Attachment/Upload.php:94
 msgid "File upload failed."
 msgstr ""
 
-#: src/Module/Media/Photo/Upload.php:119 src/Module/Media/Photo/Upload.php:120
+#: src/Module/Media/Photo/Upload.php:130 src/Module/Media/Photo/Upload.php:131
 #: src/Module/Profile/Photos.php:209
 #: src/Module/Settings/Profile/Photo/Index.php:52
 msgid "Unable to process image."
 msgstr ""
 
-#: src/Module/Media/Photo/Upload.php:145 src/Module/Profile/Photos.php:231
+#: src/Module/Media/Photo/Upload.php:156 src/Module/Profile/Photos.php:231
 #: src/Module/Settings/Profile/Photo/Index.php:79
 msgid "Image upload failed."
 msgstr ""
@@ -7898,7 +7894,7 @@ msgstr ""
 #: src/Module/Moderation/Users/Active.php:91
 #: src/Module/Moderation/Users/Blocked.php:91
 #: src/Module/Moderation/Users/Index.php:98
-#: src/Module/Moderation/Users/Pending.php:84
+#: src/Module/Moderation/Users/Pending.php:82
 msgid "select all"
 msgstr ""
 
@@ -8962,27 +8958,27 @@ msgstr[1] ""
 msgid "Account approved."
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:68
+#: src/Module/Moderation/Users/Pending.php:67
 msgid "Registration revoked"
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:83
+#: src/Module/Moderation/Users/Pending.php:81
 msgid "User registrations awaiting review"
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:85
+#: src/Module/Moderation/Users/Pending.php:83
 msgid "Request date"
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:86
+#: src/Module/Moderation/Users/Pending.php:84
 msgid "No registrations."
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:87
+#: src/Module/Moderation/Users/Pending.php:85
 msgid "Note from the user"
 msgstr ""
 
-#: src/Module/Moderation/Users/Pending.php:89
+#: src/Module/Moderation/Users/Pending.php:87
 msgid "Deny"
 msgstr ""
 
@@ -9049,7 +9045,7 @@ msgstr ""
 msgid "No more %s notifications."
 msgstr ""
 
-#: src/Module/Notifications/Notification.php:104
+#: src/Module/Notifications/Notification.php:117
 msgid "You must be logged in to show this page."
 msgstr ""
 
@@ -9073,11 +9069,11 @@ msgstr ""
 msgid "Show unread"
 msgstr ""
 
-#: src/Module/Notifications/Ping.php:176
+#: src/Module/Notifications/Ping.php:193
 msgid "{0} requested registration"
 msgstr ""
 
-#: src/Module/Notifications/Ping.php:185
+#: src/Module/Notifications/Ping.php:202
 #, php-format
 msgid "{0} and %d others requested registration"
 msgstr ""
