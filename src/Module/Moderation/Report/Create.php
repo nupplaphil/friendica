@@ -285,8 +285,6 @@ class Create extends BaseModule
 			$fields = array_merge(Item::DISPLAY_FIELDLIST, ['featured']);
 			$items  = Post::toArray(Post::selectForUser(DI::userSession()->getLocalUserId(), $fields, $condition, $params));
 
-			$formSecurityToken = BaseModule::getFormSecurityToken('contact_action');
-
 			$threads = DI::conversationHtmlRenderer()->buildContextLessThreadsByItems($items, ConversationContent::MODE_CONTACT_POSTS, false, false, DI::userSession()->getLocalUserId());
 		}
 
