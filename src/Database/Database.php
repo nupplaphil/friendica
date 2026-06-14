@@ -70,7 +70,6 @@ class Database
 	protected $in_transaction       = false;
 	protected $in_retrial           = false;
 	protected $testmode             = false;
-	private $relation               = [];
 	/** @var DbaDefinition */
 	protected $dbaDefinition;
 	/** @var ViewDefinition */
@@ -304,81 +303,6 @@ class Database
 		$ret  = $this->p("SELECT DATABASE() AS `db`");
 		$data = $this->toArray($ret);
 		return $data[0]['db'];
-	}
-
-	/**
-	 * Analyze a database query and log this if some conditions are met.
-	 *
-	 * @param string $query The database query that will be analyzed
-	 * @return void
-	 * @throws \Exception
-	 */
-	private function logIndex(string $query)
-	{
-
-		if (!$this->config->get('system', 'db_log_index')) {
-			return;
-		}
-
-		// Don't explain an explain statement
-		if (strtolower(substr($query, 0, 7)) == "explain") {
-			return;
-		}
-
-		// Only do the explain on "select", "update" and "delete"
-		if (!in_array(strtolower(substr($query, 0, 6)), ["select", "update", "delete"])) {
-			return;
-		}
-
-		$r = $this->p("EXPLAIN " . $query);
-		if (!$this->isResult($r)) {
-			return;
-		}
-
-		$watchlist = explode(',', (string) $this->config->get('system', 'db_log_index_watch'));
-		$denylist  = explode(',', (string) $this->config->get('system', 'db_log_index_denylist'));
-
-		while ($row = $this->fetch($r)) {
-			if ((intval($this->config->get('system', 'db_loglimit_index')) > 0)) {
-				$log = (in_array($row['key'], $watchlist)
-					&& ($row['rows'] >= intval($this->config->get('system', 'db_loglimit_index'))));
-			} else {
-				$log = false;
-			}
-
-			if ((intval($this->config->get('system', 'db_loglimit_index_high')) > 0) && ($row['rows'] >= intval($this->config->get('system', 'db_loglimit_index_high')))) {
-				$log = true;
-			}
-
-			if (in_array($row['key'], $denylist) || ($row['key'] == "")) {
-				$log = false;
-			}
-
-			if ($log) {
-				$backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-				@file_put_contents(
-					$this->config->get('system', 'db_log_index'),
-					DateTimeFormat::utcNow() . "\t"
-					. $row['key'] . "\t" . $row['rows'] . "\t" . $row['Extra'] . "\t"
-					. basename($backtrace[1]["file"]) . "\t"
-					. $backtrace[1]["line"] . "\t" . $backtrace[2]["function"] . "\t"
-					. substr($query, 0, 4000) . "\n",
-					FILE_APPEND,
-				);
-			}
-		}
-	}
-
-	/**
-	 * Removes every not allowlisted character from the identifier string
-	 *
-	 * @param string $identifier
-	 * @return string sanitized identifier
-	 * @throws \Exception
-	 */
-	private function sanitizeIdentifier(string $identifier): string
-	{
-		return preg_replace('/[^A-Za-z0-9_\-]+/', '', $identifier);
 	}
 
 	public function escape($str)
@@ -982,6 +906,7 @@ class Database
 				$result = $stmt->result_metadata();
 				$fields = $result->fetch_fields();
 
+				/** @phpstan-ignore foreach.emptyArray($cols_num holds references) */
 				foreach ($cols_num as $param => $col) {
 					$columns[$fields[$param]->name] = $col;
 				}

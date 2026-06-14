@@ -5,48 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Database/DBStructure.php
-
-		-
-			message: '#^Call to function is_null\(\) with array will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Database/DBStructure.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Database/DBStructure.php
-
-		-
-			message: '#^Empty array passed to foreach\.$#'
-			identifier: foreach.emptyArray
-			count: 1
-			path: src/Database/Database.php
-
-		-
-			message: '#^Method Friendica\\Database\\Database\:\:logIndex\(\) is unused\.$#'
-			identifier: method.unused
-			count: 1
-			path: src/Database/Database.php
-
-		-
-			message: '#^Method Friendica\\Database\\Database\:\:sanitizeIdentifier\(\) is unused\.$#'
-			identifier: method.unused
-			count: 1
-			path: src/Database/Database.php
-
-		-
-			message: '#^Property Friendica\\Database\\Database\:\:\$relation is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Database/Database.php
-
-		-
 			message: '#^Property Friendica\\Moderation\\Entity\\Report\:\:\$reporterUid \(int\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
