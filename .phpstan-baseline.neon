@@ -5,96 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Model/Circle.php
-
-		-
-			message: '#^Dead catch \- InvalidArgumentException is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 4
-			path: src/Model/Contact.php
-
-		-
-			message: '#^Call to function array_merge\(\) on a separate line has no effect\.$#'
-			identifier: function.resultUnused
-			count: 1
-			path: src/Model/Contact/Introduction.php
-
-		-
-			message: '#^Offset ''platform'' on array\{detection\-method\: int, register_policy\: 0\|2, platform\: string, site_name\?\: mixed, info\?\: mixed\} in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Model/GServer.php
-
-		-
-			message: '#^Call to function is_int\(\) with int\<min, \-1\>\|int\<1, max\> will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Offset ''uri\-id'' on array\{\} in empty\(\) does not exist\.$#'
-			identifier: empty.offset
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Property Friendica\\Content\\Post\\Entity\\PostMedia\:\:\$url \(Psr\\Http\\Message\\UriInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and false will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Call to function is_numeric\(\) with int will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Model/Photo.php
-
-		-
-			message: '#^Method Friendica\\Model\\Photo\:\:fitImageSize\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: src/Model/Photo.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: src/Model/Profile.php
-
-		-
-			message: '#^Negated boolean expression is always false\.$#'
-			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: src/Model/Profile.php
-
-		-
-			message: '#^Property Friendica\\Content\\Conversation\\Entity\\Timeline\:\:\$languages \(array\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/Model/User.php
-
-		-
-			message: '#^Right side of && is always true\.$#'
-			identifier: booleanAnd.rightAlwaysTrue
-			count: 1
-			path: src/Model/User.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 1
@@ -159,12 +69,6 @@ parameters:
 			identifier: booleanAnd.alwaysFalse
 			count: 1
 			path: src/Module/Circle.php
-
-		-
-			message: '#^Dead catch \- InvalidArgumentException is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 1
-			path: src/Module/Contact.php
 
 		-
 			message: '#^Property Friendica\\Module\\Conversation\\Timeline\:\:\$selectedTab \(string\) on left side of \?\?\= is not nullable\.$#'

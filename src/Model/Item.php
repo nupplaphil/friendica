@@ -634,11 +634,11 @@ class Item
 		$defined_permissions = isset($item['allow_cid']) && isset($item['allow_gid']) && isset($item['deny_cid']) && isset($item['deny_gid']) && isset($item['private']);
 
 		// If it is a posting where users should get notifications, then define it as wall posting
-		if ($notify) {
+		if ($notify > 0) {
 			/** @var array<string,mixed> */
 			$item = $itemHelper->prepareOriginPost($item);
 
-			if (is_int($notify) && in_array($notify, Worker::PRIORITIES)) {
+			if (in_array($notify, Worker::PRIORITIES)) {
 				$priority = $notify;
 			}
 
@@ -2396,9 +2396,6 @@ class Item
 
 			$new_body  = $new_body . substr($orig_body, 0, $img_start + $img_st_close) . $image . '[/img]';
 			$orig_body = substr($orig_body, $img_start + $img_st_close + $img_len + strlen('[/img]'));
-			if ($orig_body === false) {
-				$orig_body = '';
-			}
 
 			$img_start    = strpos($orig_body, '[img');
 			$img_st_close = ($img_start !== false ? strpos(substr($orig_body, $img_start), ']') : false);
@@ -3011,7 +3008,7 @@ class Item
 			$quote_uri_id        = $shared['post']['uri-id'];
 			$shared_links[]      = strtolower((string) $shared['post']['uri']);
 			$item['body']        = BBCode::removeSharedData($item['body']);
-		} elseif (empty($shared_item['uri-id']) && empty($item['quote-uri-id']) && ($item['network'] != Protocol::DIASPORA)) {
+		} elseif (empty($item['quote-uri-id']) && ($item['network'] != Protocol::DIASPORA)) {
 			$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::ACTIVITY]);
 			if (!empty($media) && ($media[0]['media-uri-id'] != $item['uri-id'])) {
 				$shared_item = Post::selectFirst($fields, ['uri-id' => $media[0]['media-uri-id'], 'uid' => [$item['uid'], 0]]);
@@ -3184,7 +3181,7 @@ class Item
 			new ArrayFilterEvent(ArrayFilterEvent::PREPARE_POST_END, $hook_data),
 		)->getArray();
 
-		return (string) $hook_data['html'] ?? $s;
+		return array_key_exists('html', $hook_data) ? (string) $hook_data['html'] : $s;
 	}
 
 	/**
@@ -3503,7 +3500,7 @@ class Item
 
 		DI::profiler()->stopRecording();
 
-		if (isset($attachment) && isset($attachment->url) && !in_array(strtolower($attachment->url), $ignore_links)) {
+		if (isset($attachment) && !in_array(strtolower($attachment->url), $ignore_links)) {
 			if (isset($attachment->description) || isset($attachment->preview) || (isset($attachment->name) && !Strings::compareLink($attachment->name, $attachment->url))) {
 				// @todo Use a template
 				$preview_mode = DI::pConfig()->get($uid, 'system', 'preview_mode', BBCode::PREVIEW_AUTO);

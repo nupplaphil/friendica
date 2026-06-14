@@ -685,7 +685,7 @@ class User
 		DBA::close($channels);
 
 		foreach (DI::userDefinedChannel()->select(["NOT `languages` IS NULL"]) as $channel) {
-			foreach ($channel->languages ?? [] as $language) {
+			foreach ($channel->languages as $language) {
 				$languages[$language] = $language;
 			}
 		}
@@ -1429,7 +1429,7 @@ class User
 		}
 
 		$fields = ['def_gid' => $def_gid];
-		if (DI::config()->get('system', 'newuser_private') && $def_gid) {
+		if (DI::config()->get('system', 'newuser_private')) {
 			$fields['allow_gid'] = '<' . $def_gid . '>';
 		}
 

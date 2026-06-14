@@ -1368,7 +1368,7 @@ class GServer
 				$server['platform'] = strtolower((string) $nodeinfo['software']['name']);
 			}
 
-			if (!empty($nodeinfo['software']['version']) && isset($server['platform'])) {
+			if (!empty($nodeinfo['software']['version']) && $server['platform'] !== '') {
 				$server['version'] = $nodeinfo['software']['version'];
 				// Version numbers on Nodeinfo are presented with additional info, e.g.:
 				// 0.6.3.0-p1702cc1c, 0.6.99.0-p1b9ab160 or 3.4.3-2-1191.

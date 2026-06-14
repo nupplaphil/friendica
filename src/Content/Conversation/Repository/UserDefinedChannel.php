@@ -212,7 +212,7 @@ class UserDefinedChannel extends BaseRepository
 		$usercondition = ['uid' => $uids];
 		$condition     = DBA::mergeConditions($usercondition, ["`languages` != ? AND `include-tags` = ? AND `full-text-search` = ? AND `circle` = ?", '', '', '', 0]);
 		foreach ($this->select($condition) as $channel) {
-			if (!empty($channel->languages) && in_array($language, $channel->languages)) {
+			if (in_array($language, $channel->languages)) {
 				return true;
 			}
 		}

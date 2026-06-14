@@ -664,9 +664,6 @@ class Profile
 				}
 
 				$description = BBCode::toPlaintext($rr['desc'], false) . '... ';
-				if (!$description) {
-					$description = DI::l10n()->t('[No description]');
-				}
 
 				$strt = DateTimeFormat::local($rr['start']);
 
@@ -795,7 +792,7 @@ class Profile
 		$permissionSet = DI::permissionSet()->selectOrCreate(
 			new PermissionSet(
 				$profile['uid'],
-				array_column($contacts, 'id') ?? [],
+				array_column($contacts, 'id'),
 			),
 		);
 

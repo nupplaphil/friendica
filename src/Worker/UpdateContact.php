@@ -40,7 +40,7 @@ class UpdateContact
 	 * @param array|int $run_parameters Priority constant or array of options described in Worker::add
 	 * @param int       $contact_id
 	 * @return int
-	 * @throws InternalServerErrorException
+	 * @throws InternalServerErrorException|\InvalidArgumentException
 	 */
 	public static function add($run_parameters, int $contact_id): int
 	{
