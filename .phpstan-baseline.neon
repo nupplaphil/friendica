@@ -5,36 +5,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Property Friendica\\Moderation\\Entity\\Report\:\:\$reporterUid \(int\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
-			count: 1
-			path: src/Factory/Api/Mastodon/Report.php
-
-		-
-			message: '#^Loose comparison using \!\= between 0 and 0 will always evaluate to false\.$#'
-			identifier: notEqual.alwaysFalse
-			count: 1
-			path: src/Factory/Api/Mastodon/ScheduledStatus.php
-
-		-
-			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Media\:\:\$baseUrl is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Factory/Api/Twitter/Media.php
-
-		-
-			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Mention\:\:\$baseUrl is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Factory/Api/Twitter/Mention.php
-
-		-
-			message: '#^Property Friendica\\Factory\\Api\\Twitter\\Status\:\:\$dba is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Factory/Api/Twitter/Status.php
-
-		-
 			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1

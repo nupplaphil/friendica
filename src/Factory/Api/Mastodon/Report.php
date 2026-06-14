@@ -17,8 +17,12 @@ use Psr\Log\LoggerInterface;
 
 class Report extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly Database $database, private readonly Account $mstdnAccountFactory, private readonly Status $mstdnStatusFactory)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly Database $database,
+		private readonly Account $mstdnAccountFactory,
+		private readonly Status $mstdnStatusFactory,
+	) {
 		parent::__construct($logger);
 	}
 
@@ -27,7 +31,7 @@ class Report extends BaseFactory
 		$createdAt   = $report->created->format(DateTimeFormat::JSON);
 		$updatedAt   = $report->edited ? $report->edited->format(DateTimeFormat::JSON) : $createdAt;
 		$actionTaken = $report->status === ReportEntity::STATUS_CLOSED;
-		$reporterUid = $report->reporterUid ?? 0;
+		$reporterUid = (int) $report->reporterUid;
 
 		return new MstdnReport(
 			$report->id,

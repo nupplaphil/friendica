@@ -11,7 +11,6 @@ use Friendica\BaseFactory;
 use Friendica\Content\Item as ContentItem;
 use Friendica\Content\Text\BBCode;
 use Friendica\Content\Text\HTML;
-use Friendica\Database\Database;
 use Friendica\Factory\Api\Friendica\Activities;
 use Friendica\Factory\Api\Twitter\User as TwitterUser;
 use Friendica\Model\Item;
@@ -25,15 +24,17 @@ use Psr\Log\LoggerInterface;
 
 class Status extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly Database $dba, /** @var twitterUser entity */
-		private readonly TwitterUser $twitterUser, /** @var Hashtag entity */
-		private readonly Hashtag $hashtag, /** @var Media entity */
-		private readonly Media $media, /** @var Url entity */
-		private readonly Url $url, /** @var Mention entity */
-		private readonly Mention $mention, /** @var Activities entity */
-		private readonly Activities $activities, /** @var Attachment entity */
-		private readonly Attachment $attachment, private readonly ContentItem $contentItem)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly TwitterUser $twitterUser,
+		private readonly Hashtag $hashtag,
+		private readonly Media $media,
+		private readonly Url $url,
+		private readonly Mention $mention,
+		private readonly Activities $activities,
+		private readonly Attachment $attachment,
+		private readonly ContentItem $contentItem,
+	) {
 		parent::__construct($logger);
 	}
 

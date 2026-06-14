@@ -7,7 +7,6 @@
 
 namespace Friendica\Factory\Api\Twitter;
 
-use Friendica\App\BaseURL;
 use Friendica\BaseFactory;
 use Friendica\Model\Contact;
 use Friendica\Model\Tag;
@@ -16,7 +15,7 @@ use Psr\Log\LoggerInterface;
 
 class Mention extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly BaseURL $baseUrl)
+	public function __construct(LoggerInterface $logger)
 	{
 		parent::__construct($logger);
 	}
