@@ -11,31 +11,29 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
 use Friendica\Network\HTTPException\InternalServerErrorException;
-use Friendica\Util\Profiler;
 
 /**
- * Formats activity HTML for conversation rendering.
- * This class extracts the activity formatting logic to avoid circular dependencies.
+ * Formats activity-related HTML and text.
+ * This class contains pure formatting logic for activity reactions (likes, dislikes, etc.).
  */
-final readonly class ActivityHtmlFormatter
+final readonly class ActivityFormatter
 {
 	public function __construct(
 		private L10n $l10n,
 		private IManageConfigValues $config,
-		private Profiler $profiler,
 	) {}
 
 	/**
-	 * Returns the liker phrase based on a list of likers
+	 * Builds the liker phrase based on a list of likers
 	 *
-	 * @param string $verb   the activity verb
+	 * @param string $verb   the activity verb (like, dislike, attendyes, etc.)
 	 * @param array  $likers a list of likers
 	 *
 	 * @return string the liker phrase
 	 *
 	 * @throws InternalServerErrorException in case either the verb is invalid or the list of likers is empty
 	 */
-	public function getLikerPhrase(string $verb, array $likers): string
+	private function buildLikerText(string $verb, array $likers): string
 	{
 		$total = count($likers);
 
@@ -75,12 +73,11 @@ final readonly class ActivityHtmlFormatter
 	 * @return string formatted text
 	 * @throws InternalServerErrorException
 	 */
-	public function format(array $links, string $verb, int $id, string $activity, array $emojis): string
+	public function formatActivity(array $links, string $verb, int $id, string $activity, array $emojis): string
 	{
-		$this->profiler->startRecording('rendering');
 		$expanded = '';
 
-		$phrase = $this->getLikerPhrase($verb, $links);
+		$phrase = $this->buildLikerText($verb, $links);
 		$total  = max(count($links), $emojis[$activity]['total'] ?? 0);
 
 		if ($total > 1) {
@@ -119,7 +116,6 @@ final readonly class ActivityHtmlFormatter
 		]);
 		$output .= $expanded;
 
-		$this->profiler->stopRecording();
 		return $output;
 	}
 }

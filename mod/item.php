@@ -17,7 +17,7 @@
  * information.
  */
 
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Text\BBCode;
 use Friendica\Core\Protocol;
 use Friendica\Core\System;
@@ -279,7 +279,7 @@ function item_process(array $post, array $request, bool $preview, string $return
 		$post['owner-contact-type'] = Contact::TYPE_PERSON;
 		$post['owner-network']      = Protocol::DFRN;
 
-		$o = DI::conversation()->render([$post], Conversation::MODE_SEARCH, false, true);
+		$o = DI::conversationRenderer()->renderContextLessPosts([$post], ConversationRenderer::MODE_SEARCH, true, DI::userSession()->getLocalUserId());
 
 		System::jsonExit(['preview' => $o]);
 	}

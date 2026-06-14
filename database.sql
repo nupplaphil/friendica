@@ -1,6 +1,6 @@
 -- ------------------------------------------
 -- Friendica 2026.08-dev (Blutwurz)
--- DB_UPDATE_VERSION 1597
+-- DB_UPDATE_VERSION 1598
 -- ------------------------------------------
 
 
@@ -2188,6 +2188,7 @@ CREATE VIEW `channel-post-view` AS SELECT
 	`channel-post`.`uid` AS `uid`,
 	`channel-post`.`uri-id` AS `uri-id`,
 	`channel-post`.`in-timeline` AS `in-timeline`,
+	`post-thread`.`author-id` AS `author-id`,
 	`post-engagement`.`owner-id` AS `contact-id`,
 	`post-engagement`.`owner-id` AS `owner-id`,
 	`post-engagement`.`media-type` AS `media-type`,
@@ -2219,6 +2220,7 @@ CREATE VIEW `system-channel-post-view` AS SELECT
 	`system-channel-post`.`uid` AS `uid`,
 	`system-channel-post`.`uri-id` AS `uri-id`,
 	`system-channel-post`.`in-timeline` AS `in-timeline`,
+	`post-thread`.`author-id` AS `author-id`,
 	`post-engagement`.`owner-id` AS `contact-id`,
 	`post-engagement`.`owner-id` AS `owner-id`,
 	`post-engagement`.`media-type` AS `media-type`,
@@ -3678,6 +3680,7 @@ CREATE VIEW `network-thread-view` AS SELECT
 	`post-thread-user`.`mention` AS `mention`,
 	`post-thread-user`.`network` AS `network`,
 	`post-user`.`protocol` AS `protocol`,
+	`post-thread-user`.`author-id` AS `author-id`,
 	`post-thread-user`.`contact-id` AS `contact-id`,
 	`ownercontact`.`contact-type` AS `contact-type`
 	FROM `post-thread-user`

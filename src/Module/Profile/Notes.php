@@ -7,7 +7,8 @@
 
 namespace Friendica\Module\Profile;
 
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Nav;
 use Friendica\Content\Pager;
 use Friendica\Core\ACL;
@@ -53,9 +54,8 @@ class Notes extends BaseProfile
 	 * @param Mode $mode
 	 * @param IManagePersonalConfigValues $pConfig
 	 * @param IManageConfigValues $config
-	 * @param Conversation $conversation
 	 */
-	public function __construct(protected AppHelper $appHelper, protected UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters, protected Mode $mode, protected IManagePersonalConfigValues $pConfig, protected IManageConfigValues $config, protected Conversation $conversation)
+	public function __construct(protected AppHelper $appHelper, protected UserSession $userSession, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, \Friendica\Module\Response $response, array $server, array $parameters, protected Mode $mode, protected IManagePersonalConfigValues $pConfig, protected IManageConfigValues $config, protected ConversationRenderer $conversationRenderer, protected StatusEditor $statusEditor)
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
@@ -88,7 +88,7 @@ class Notes extends BaseProfile
 			'acl_data'  => '',
 		];
 
-		$o .= $this->conversation->statusEditor($x, $contactId);
+		$o .= $this->statusEditor->renderEditor($x, $contactId);
 
 		$condition = [
 			'uid'        => $this->userSession->getLocalUserId(),
@@ -125,7 +125,7 @@ class Notes extends BaseProfile
 		if (DBA::isResult($r)) {
 			$notes = Post::toArray($r);
 			$count = count($notes);
-			$o .= $this->conversation->render($notes, Conversation::MODE_NOTES, false);
+			$o .= $this->conversationRenderer->renderThreaded($notes, ConversationRenderer::MODE_NOTES, false);
 		}
 
 		$o .= $pager->renderMinimal($count);

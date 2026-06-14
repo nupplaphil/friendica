@@ -13,7 +13,8 @@ use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\AppHelper;
 use Friendica\Content\BoundariesPager;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Conversation\Entity\Channel;
 use Friendica\Content\Conversation\Entity\Network as NetworkEntity;
 use Friendica\Content\Conversation\Factory\Timeline as TimelineFactory;
@@ -74,8 +75,10 @@ class Network extends Timeline
 	protected $systemMessages;
 	/** @var Page */
 	protected $page;
-	/** @var Conversation */
-	protected $conversation;
+	/** @var ConversationRenderer */
+	protected $conversationRenderer;
+	/** @var StatusEditor */
+	protected $statusEditor;
 	/** @var IManagePersonalConfigValues */
 	protected $pConfig;
 	/** @var Database */
@@ -102,7 +105,8 @@ class Network extends Timeline
 		TimelineFactory $timeline,
 		SystemMessages $systemMessages,
 		Mode $mode,
-		Conversation $conversation,
+		ConversationRenderer $conversationRenderer,
+		StatusEditor $statusEditor,
 		Page $page,
 		IHandleUserSessions $session,
 		Database $database,
@@ -138,15 +142,16 @@ class Network extends Timeline
 			$parameters,
 		);
 
-		$this->appHelper          = $appHelper;
-		$this->timeline           = $timeline;
-		$this->systemMessages     = $systemMessages;
-		$this->conversation       = $conversation;
-		$this->page               = $page;
-		$this->channel            = $channelFactory;
-		$this->community          = $community;
-		$this->networkFactory     = $network;
-		$this->userDefinedChannel = $userDefinedChannel;
+		$this->appHelper            = $appHelper;
+		$this->timeline             = $timeline;
+		$this->systemMessages       = $systemMessages;
+		$this->conversationRenderer = $conversationRenderer;
+		$this->statusEditor         = $statusEditor;
+		$this->page                 = $page;
+		$this->channel              = $channelFactory;
+		$this->community            = $community;
+		$this->networkFactory       = $network;
+		$this->userDefinedChannel   = $userDefinedChannel;
 	}
 
 	protected function content(array $request = []): string
@@ -264,7 +269,7 @@ class Network extends Timeline
 				'content'   => '',
 			];
 
-			$o .= $this->conversation->statusEditor($x);
+			$o .= $this->statusEditor->renderEditor($x);
 
 			if ($this->circleId) {
 				$circle = $this->database->selectFirst('group', ['name'], ['id' => $this->circleId, 'uid' => $this->session->getLocalUserId()]);
@@ -290,7 +295,7 @@ class Network extends Timeline
 				$items = $this->getItems();
 			}
 
-			$o .= $this->conversation->render($items, Conversation::MODE_NETWORK, $this->raw, false, $this->getOrder(), $this->session->getLocalUserId());
+			$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_NETWORK, $this->raw, $this->getOrder(), $this->session->getLocalUserId());
 		} catch (\Exception $e) {
 			$this->logger->error('Exception when fetching items', ['code' => $e->getCode(), 'message' => $e->getMessage()]);
 			$o .= $this->l10n->t('Error %d (%s) while fetching the timeline.', $e->getCode(), $e->getMessage());
@@ -546,7 +551,7 @@ class Network extends Timeline
 			$commonCondition = DBA::mergeConditions($commonCondition, array_merge([$query], [$this->session->getLocalUserId()], $filterchannels));
 		}
 
-		$fields    = ['uri-id', 'created', 'received', 'commented', 'channel', 'contact-id'];
+		$fields    = ['uri-id', 'created', 'received', 'commented', 'channel', 'contact-id', 'author-id'];
 		$condition = DBA::mergeConditions($timelineCondition, $commonCondition);
 
 		$timeline = $this->database->getSQL($this->circleId ? 'network-thread-circle-view' : 'network-thread-view', $fields, $condition, $params);

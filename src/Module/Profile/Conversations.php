@@ -12,7 +12,8 @@ use Friendica\App\BaseURL;
 use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\AppHelper;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Nav;
 use Friendica\Content\Pager;
 use Friendica\Content\Widget;
@@ -43,7 +44,7 @@ use Psr\Log\LoggerInterface;
 
 class Conversations extends BaseProfile
 {
-	public function __construct(private readonly Mode $mode, private readonly IManagePersonalConfigValues $pConfig, private readonly Conversation $conversation, private readonly IHandleUserSessions $session, private readonly IManageConfigValues $config, private readonly DateTimeFormat $dateTimeFormat, private Page $page, private readonly AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly Mode $mode, private readonly IManagePersonalConfigValues $pConfig, private readonly ConversationRenderer $conversationRenderer, private readonly StatusEditor $statusEditor, private readonly IHandleUserSessions $session, private readonly IManageConfigValues $config, private readonly DateTimeFormat $dateTimeFormat, private Page $page, private readonly AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
@@ -125,7 +126,7 @@ class Conversations extends BaseProfile
 				'profile_uid'      => $profile['uid'],
 			];
 
-			$o .= $this->conversation->statusEditor($x);
+			$o .= $this->statusEditor->renderEditor($x);
 		}
 
 		// Get permissions SQL - if $remote_contact is true, our remote user has been pre-verified and we already have fetched their circles
@@ -211,7 +212,7 @@ class Conversations extends BaseProfile
 			$items  = array_merge($items, $pinned);
 		}
 
-		$o .= $this->conversation->render($items, Conversation::MODE_PROFILE, false, false, 'pinned_received', $this->session->getLocalUserId());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, false, ConversationRenderer::ORDER_PINNED_RECEIVED, $this->session->getLocalUserId());
 
 		$o .= $pager->renderMinimal(count($items));
 

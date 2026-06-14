@@ -10,8 +10,8 @@ namespace Friendica\Module\Item;
 use Friendica\App;
 use Friendica\AppHelper;
 use Friendica\BaseModule;
-use Friendica\Content\Conversation;
-use Friendica\Content\Conversation\HtmlRenderer;
+use Friendica\Content\Conversation\StatusEditor;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Item as ContentItem;
 use Friendica\Content\Text\BBCode;
 use Friendica\Core\Config\Capability\IManageConfigValues;
@@ -53,16 +53,16 @@ class Display extends BaseModule
 	protected $appHelper;
 	/** @var ContentItem */
 	protected $contentItem;
-	/** @var Conversation */
-	protected $conversation;
-	/** @var HtmlRenderer */
+	/** @var StatusEditor */
+	protected $statusEditor;
+	/** @var ConversationRenderer */
 	protected $htmlRenderer;
 	/** @var Notification */
 	protected $notification;
 	/** @var Notify */
 	protected $notify;
 
-	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, IHandleUserSessions $session, AppHelper $appHelper, App\Page $page, ContentItem $contentItem, Conversation $conversation, HtmlRenderer $htmlRenderer, Notification $notification, Notify $notify, array $server, array $parameters = [])
+	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IManageConfigValues $config, IManagePersonalConfigValues $pConfig, IHandleUserSessions $session, AppHelper $appHelper, App\Page $page, ContentItem $contentItem, StatusEditor $statusEditor, ConversationRenderer $htmlRenderer, Notification $notification, Notify $notify, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -72,7 +72,7 @@ class Display extends BaseModule
 		$this->session      = $session;
 		$this->appHelper    = $appHelper;
 		$this->contentItem  = $contentItem;
-		$this->conversation = $conversation;
+		$this->statusEditor = $statusEditor;
 		$this->htmlRenderer = $htmlRenderer;
 		$this->notification = $notification;
 		$this->notify       = $notify;
@@ -166,7 +166,7 @@ class Display extends BaseModule
 			$output .= "<script> var netargs = '?uri_id=" . $item['uri-id'] . "'; </script>";
 		}
 
-		$output .= $this->getDisplayData($item, false, 0, false);
+		$output .= $this->getDisplayData($item, false, false);
 
 		$author              = Contact::getByURLForUser($item['author-link'], $this->session->getLocalUserId());
 		$this->page['title'] = $this->l10n->t("Post by %s", $author['name']);
@@ -209,7 +209,7 @@ class Display extends BaseModule
 		$this->appHelper->setProfileOwner($item['uid']);
 	}
 
-	protected function getDisplayData(array $item, bool $update = false, int $updateUid = 0, bool $force = false): string
+	protected function getDisplayData(array $item, bool $update = false, bool $force = false): string
 	{
 		$itemUid = $this->session->getLocalUserId();
 
@@ -284,7 +284,7 @@ class Display extends BaseModule
 
 		// We need the editor here to be able to reshare an item.
 		if ($is_owner && !$update) {
-			$output .= $this->conversation->statusEditor([], 0, true);
+			$output .= $this->statusEditor->renderEditor([], 0, true);
 		}
 
 		if (!$update) {
@@ -292,7 +292,7 @@ class Display extends BaseModule
 				. '<script> var profile_uid = ' . ($this->session->getLocalUserId() ?: 0) . ';</script>';
 		}
 
-		$output .= $this->htmlRenderer->renderThreadByUriId((int) $item['uri-id'], $itemUid, Conversation::MODE_DISPLAY);
+		$output .= $this->htmlRenderer->renderThreadByItem($item, $itemUid, ConversationRenderer::MODE_DISPLAY);
 
 		return $output;
 	}

@@ -219,6 +219,14 @@
 				</div>
 
 
+                {{if $item.missing > 0}}
+				<div class="wall-item-bottom">
+					<div class="wall-item-links"></div>
+					<a id="load-more-comments-{{$item.id}}" class="fakelink" href="#" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">{{$item.load_more_comments}}</a>
+					<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading|default:$item.wait|default:'Loading ...'}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.wait}}" /></span>
+				</div>
+                {{/if}}
+
                 {{foreach $item.children as $child}}
                     {{if $item.type == tag}}
                         {{include file="wall_item_tag.tpl" item=$child}}

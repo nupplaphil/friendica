@@ -8,7 +8,7 @@
 namespace Friendica\Module\Update;
 
 use Friendica\BaseModule;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
@@ -21,6 +21,8 @@ use Friendica\Util\DateTimeFormat;
 
 class Profile extends BaseModule
 {
+	public function __construct(private readonly ConversationRenderer $conversationRenderer) {}
+
 	protected function rawContent(array $request = [])
 	{
 		$appHelper = DI::appHelper();
@@ -102,7 +104,7 @@ class Profile extends BaseModule
 			}
 		}
 
-		$o .= DI::conversation()->render($items, Conversation::MODE_PROFILE, $appHelper->getProfileOwner(), false, 'received', $appHelper->getProfileOwner());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, true, ConversationRenderer::ORDER_RECEIVED, $appHelper->getProfileOwner());
 
 		System::htmlUpdateExit($o);
 	}
