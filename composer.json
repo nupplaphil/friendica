@@ -31,7 +31,7 @@
 		"ext-simplexml": "*",
 		"ext-xml": "*",
 		"asika/simple-console": "^1.0",
-		"bacon/bacon-qr-code": "^2.0.0",
+		"bacon/bacon-qr-code": "^3.1",
 		"bower-asset/base64": "^1.0",
 		"divineomega/password_exposed": "^3",
 		"enyo/dropzone": "^5.9",
