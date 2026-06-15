@@ -9,6 +9,7 @@ namespace Friendica\Module\Item;
 
 use Friendica\App;
 use Friendica\BaseModule;
+use Friendica\Content\Conversation;
 use Friendica\Content\Conversation\HtmlRenderer;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
@@ -51,6 +52,6 @@ class Comments extends BaseModule
 		}
 
 		$viewerUid = $this->session->getLocalUserId() ?: null;
-		$this->httpExit($this->htmlRenderer->renderCommentsByUriId($uriId, $viewerUid, $this->config->get('system', 'max_display_comments', 1000)));
+		$this->httpExit($this->htmlRenderer->renderCommentsByUriId($uriId, $viewerUid, $this->config->get('system', 'max_display_comments', 1000), Conversation::MODE_DISPLAY));
 	}
 }

@@ -44,9 +44,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class HtmlRenderer
 {
-	/** @var array<string, array> */
-	private array $rootTemplateCache = [];
-	private bool $assetsRegistered   = false;
+	private bool $assetsRegistered = false;
 
 	public function __construct(
 		private readonly UserGServerRepository $userGServer,
@@ -69,10 +67,14 @@ final class HtmlRenderer
 	/**
 	 * Render the top-level post for the thread identified by the given uri-id.
 	 *
+	 * @param int $uriId The URI ID of the thread
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of the post
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function renderPostByUriId(int $uriId, ?int $uid = null): string
+	public function renderPostByUriId(int $uriId, ?int $uid, string $mode): string
 	{
 		$viewerUid = $this->resolveViewerUid($uid);
 		$root      = $this->getRootTemplateData($uriId, $viewerUid, 0);
@@ -83,16 +85,21 @@ final class HtmlRenderer
 		$post             = $root;
 		$post['children'] = [];
 
-		return $this->renderItemHtml($post);
+		return $this->renderItemHtml($post, $mode);
 	}
 
 	/**
 	 * Render all comments for the thread identified by the given uri-id.
 	 *
+	 * @param int $uriId The URI ID of the thread
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @param int $maxComments Maximum number of comments to render
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of all comments
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function renderCommentsByUriId(int $uriId, ?int $uid, int $maxComments): string
+	public function renderCommentsByUriId(int $uriId, ?int $uid, int $maxComments, string $mode): string
 	{
 		$viewerUid = $this->resolveViewerUid($uid);
 		$root      = $this->getRootTemplateData($uriId, $viewerUid, $maxComments);
@@ -102,26 +109,48 @@ final class HtmlRenderer
 
 		$html = '';
 		foreach ($root['children'] as $child) {
-			$html .= $this->renderItemHtml($child);
+			$html .= $this->renderItemHtml($child, $mode);
 		}
 
 		return $html;
 	}
 
+	/**
+	 * Render the complete thread for the thread identified by the given uri-id.
+	 *
+	 * @param int $uriId The URI ID of the thread
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of the complete thread
+	 * @throws ImagickException
+	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 */
 	public function renderThreadByUriId(int $uriId, ?int $uid, string $mode): string
 	{
 		$maxComments = $mode === ConversationContent::MODE_DISPLAY ? $this->config->get('system', 'max_display_comments', 1000) : $this->config->get('system', 'max_comments', 100);
 		$viewerUid   = $this->resolveViewerUid($uid);
-		$root        = $this->getRootTemplateData($uriId, $viewerUid, $maxComments);
+		$root        = $this->getRootTemplateData($uriId, $viewerUid, $maxComments, $mode);
 		if (empty($root)) {
 			return '';
 		}
 
+		return $this->renderConversation([$root], $mode);
+	}
+
+	/**
+	 * Render the conversation template with the given threads.
+	 *
+	 * @param array<int, array> $threads The thread data to render
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of the conversation
+	 */
+	private function renderConversation(array $threads, string $mode): string
+	{
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('threaded_conversation.tpl'), [
 			'$live_update' => '',
 			'$mode'        => $mode,
 			'$update'      => false,
-			'$threads'     => [$root],
+			'$threads'     => $threads,
 			'$dropping'    => false,
 			'$remove'      => $this->l10n->t('remove'),
 		]);
@@ -130,7 +159,15 @@ final class HtmlRenderer
 	/**
 	 * Render the context-less list view (search/filed/contact-posts style).
 	 *
-	 * @param array<int, array> $items
+	 * @param array<int, array> $items The items to render
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param bool $update Whether this is an AJAX update
+	 * @param bool $preview Whether to render in preview mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param string $liveUpdate The live update URL
+	 * @param string $returnPath The return path for navigation
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @return string The rendered HTML of the context-less timeline
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -154,8 +191,12 @@ final class HtmlRenderer
 	/**
 	 * Build context-less thread rows for modules that still consume `threads` arrays directly.
 	 *
-	 * @param array<int, array> $items
-	 * @return array<int, array>
+	 * @param array<int, array> $items The items to build threads from
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param bool $preview Whether to render in preview mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @return array<int, array> The built thread data
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -170,7 +211,15 @@ final class HtmlRenderer
 	/**
 	 * Render the threaded list view from prefetched items (preview and non-preview compatible).
 	 *
-	 * @param array<int, array> $items
+	 * @param array<int, array> $items The items to render
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param bool $update Whether this is an AJAX update
+	 * @param bool $preview Whether to render in preview mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param string $liveUpdate The live update URL
+	 * @param string $returnPath The return path for navigation
+	 * @param int|null $uid The user ID of the viewer, or null for public view
+	 * @return string The rendered HTML of the threaded timeline
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -184,73 +233,75 @@ final class HtmlRenderer
 			return '';
 		}
 
-		return Renderer::replaceMacros(Renderer::getMarkupTemplate('threaded_conversation.tpl'), [
-			'$return_path' => $returnPath,
-			'$live_update' => $liveUpdate,
-			'$remove'      => $this->l10n->t('remove'),
-			'$mode'        => $mode,
-			'$update'      => $update,
-			'$threads'     => $threads,
-			'$dropping'    => ($pagedrop ? $this->l10n->t('Delete Selected Items') : false),
-		]);
+		return $this->renderConversation($threads, $mode);
 	}
 
 	/**
 	 * Render a timeline from a list of root uri-ids.
 	 *
-	 * @param array<int, int|string> $uriIds
+	 * @param array<int, int|string> $uriIds The URI IDs to render
+	 * @param int $uid The user ID of the viewer
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of the timeline
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
 	public function renderTimelineByUriIds(array $uriIds, int $uid, string $mode): string
 	{
-		$viewerUid = $this->resolveViewerUid($uid);
-		$html      = '';
+		$maxComments = $this->config->get('system', 'max_comments', 100);
+		$viewerUid   = $this->resolveViewerUid($uid);
+		$threads     = [];
 		foreach (array_values(array_unique(array_map(intval(...), $uriIds))) as $uriId) {
 			if ($uriId <= 0) {
 				continue;
 			}
 
-			$html .= $this->renderThreadByUriId($uriId, $viewerUid, $mode);
+			$threads[] = $this->getRootTemplateData($uriId, $viewerUid, $maxComments, $mode);
 		}
 
-		return $html;
+		return $this->renderConversation($threads, $mode);
 	}
 
 	/**
-	 * @return array<string, mixed>|null
+	 * Get the root template data for a thread.
+	 *
+	 * @param int $uriId The URI ID of the thread
+	 * @param int $viewerUid The user ID of the viewer
+	 * @param int $maxComments Maximum number of comments to include
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return array<string, mixed>|null The root template data, or null if not found
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function getRootTemplateData(int $uriId, int $viewerUid, int $maxComments): ?array
+	protected function getRootTemplateData(int $uriId, int $viewerUid, int $maxComments, string $mode = ConversationContent::MODE_DISPLAY): ?array
 	{
-		$cacheKey = $this->buildCacheKey($uriId, $viewerUid);
-		if (isset($this->rootTemplateCache[$cacheKey])) {
-			return $this->rootTemplateCache[$cacheKey];
-		}
-
 		$this->registerAssets();
 
-		$thread = $this->loadDisplayThread($uriId, $viewerUid, $maxComments);
+		$thread = $this->loadThread($uriId, $viewerUid, $maxComments, $mode);
 		if (empty($thread['items'])) {
 			return null;
 		}
 
-		$root = $this->buildRootTemplateData($thread['items'], $thread['profile_owner'], $viewerUid);
+		$root = $this->buildRootTemplateData($thread['items'], $thread['profile_owner'], $viewerUid, $mode);
 		if (empty($root)) {
 			return null;
 		}
 
-		return $this->rootTemplateCache[$cacheKey] = $root;
+		return $root;
 	}
 
 	/**
-	 * @param array<int, array> $items
-	 * @return array<string, mixed>|null
+	 * Build the root template data from items.
+	 *
+	 * @param array<int, array> $items The items to build from
+	 * @param int $profileOwner The ID of the profile owner
+	 * @param int $viewerUid The user ID of the viewer
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return array<string, mixed>|null The root template data, or null if not found
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function buildRootTemplateData(array $items, int $profileOwner, int $viewerUid): ?array
+	protected function buildRootTemplateData(array $items, int $profileOwner, int $viewerUid, string $mode): ?array
 	{
 		$this->appHelper->setProfileOwner($profileOwner);
 
@@ -262,7 +313,7 @@ final class HtmlRenderer
 		$threads = $this->buildThreadTemplateData(
 			$items,
 			$viewerUid,
-			ConversationContent::MODE_DISPLAY,
+			$mode,
 			false,
 			false,
 			BaseModule::getFormSecurityToken('contact_action'),
@@ -275,8 +326,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $items
-	 * @return array<int, array>
+	 * Dispatch the conversation start event.
+	 *
+	 * @param array<int, array> $items The items to dispatch
+	 * @return array<int, array> The filtered items after event dispatch
 	 */
 	protected function dispatchConversationStart(array $items): array
 	{
@@ -293,8 +346,15 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $items
-	 * @return array<int, array>
+	 * Build thread template data from items.
+	 *
+	 * @param array<int, array> $items The items to build from
+	 * @param int $viewerUid The user ID of the viewer
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param bool $preview Whether to render in preview mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param string $formSecurityToken The form security token
+	 * @return array<int, array> The built thread template data
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -366,7 +426,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @return array<string, array>
+	 * Build conversation responses array.
+	 *
+	 * @param int $viewerUid The user ID of the viewer
+	 * @return array<string, array> The conversation responses array
 	 */
 	protected function buildConversationResponses(int $viewerUid): array
 	{
@@ -387,10 +450,16 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @return array{items: array, profile_owner: int}
+	 * Load a thread with children.
+	 *
+	 * @param int $uriId The URI ID of the thread
+	 * @param int $viewerUid The user ID of the viewer
+	 * @param int $maxComments Maximum number of comments to load
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return array{items: array, profile_owner: int} The thread data with items and profile owner
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function loadDisplayThread(int $uriId, int $viewerUid, int $maxComments): array
+	protected function loadThread(int $uriId, int $viewerUid, int $maxComments, string $mode): array
 	{
 		$selected  = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
 		$params    = ['order' => ['uid' => true]];
@@ -423,33 +492,42 @@ final class HtmlRenderer
 		}, $userGservers->getArrayCopy());
 
 		$renderUserId = $viewerUid ?: (int) $item['uid'];
-		$items        = $this->addChildren([$item], false, 'commented', $renderUserId, ConversationContent::MODE_DISPLAY, $ignoredGsids, $maxComments);
+		$items        = $this->addChildren([$item], false, 'commented', $renderUserId, $mode, $ignoredGsids, $maxComments);
 
 		return ['items' => $items, 'profile_owner' => (int) $item['uid']];
 	}
 
+	/**
+	 * Resolve the viewer UID from the given UID or session.
+	 *
+	 * @param int|null $uid The optional user ID, or null to use session
+	 * @return int The resolved viewer UID
+	 */
 	private function resolveViewerUid(?int $uid): int
 	{
 		return $uid ?? (int) $this->session->getLocalUserId();
 	}
 
-	private function buildCacheKey(int $uriId, int $viewerUid): string
-	{
-		return max(0, $viewerUid) . ':' . max(0, $uriId);
-	}
-
 	/**
-	 * @param array<string, mixed> $item
+	 * Render a single item as HTML.
+	 *
+	 * @param array<string, mixed> $item The item data to render
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @return string The rendered HTML of the item
 	 */
-	protected function renderItemHtml(array $item): string
+	protected function renderItemHtml(array $item, string $mode): string
 	{
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate($item['template']), [
 			'$item'   => $item,
-			'$mode'   => ConversationContent::MODE_DISPLAY,
+			'$mode'   => $mode,
 			'$remove' => $this->l10n->t('remove'),
 		]);
 	}
 
+	/**
+	 * Register required assets for the conversation rendering.
+	 * Registers typeahead.js and tagsinput CSS/JS files.
+	 */
 	private function registerAssets(): void
 	{
 		if ($this->assetsRegistered) {
@@ -464,8 +542,15 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $items
-	 * @return array<int, array>
+	 * Build context-less thread list from items.
+	 *
+	 * @param array<int, array> $items The items to build from
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param bool $preview Whether to render in preview mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param string $formSecurityToken The form security token
+	 * @param int $viewerUid The user ID of the viewer
+	 * @return array<int, array> The built thread list
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
@@ -616,8 +701,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<string, mixed> $activity
-	 * @param array<string, array> $convResponses
+	 * Process built-in activity types and update conversation responses.
+	 *
+	 * @param array<string, mixed> $activity The activity data to process
+	 * @param array<string, array> $convResponses The conversation responses array to update (by reference)
 	 * @return void
 	 */
 	private function builtinActivityPuller(array $activity, array &$convResponses): void
@@ -688,14 +775,23 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $parents
-	 * @param array<int, int> $ignoredGsids
-	 * @return array<int, array>
+	 * Add children to the parent items.
+	 *
+	 * @param array<int, array> $parents The parent items
+	 * @param bool $blockAuthors Whether to block hidden authors
+	 * @param string $order The sorting order
+	 * @param int $uid The user ID
+	 * @param string $mode The rendering mode (e.g., ConversationContent::MODE_DISPLAY)
+	 * @param array<int, int> $ignoredGsids The ignored global server IDs
+	 * @param int $maxComments Maximum number of comments to include
+	 * @return array<int, array> The items with children added
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
 	private function addChildren(array $parents, bool $blockAuthors, string $order, int $uid, string $mode, array $ignoredGsids, int $maxComments): array
 	{
 		$this->profiler->startRecording('rendering');
+
+		$self = $uid !== 0 ? Contact::getPublicIdByUserId($uid) : 0;
 
 		$activities      = [];
 		$uriIds          = [];
@@ -881,11 +977,15 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<string, mixed> $row
-	 * @param array<string, mixed> $activity
-	 * @param array<string, mixed> $thrParent
-	 * @param array<string, ChannelEntity> $channels
-	 * @return array<string, mixed>
+	 * Add additional information to a row.
+	 *
+	 * @param array<string, mixed> $row The row data to enhance
+	 * @param array<string, mixed> $activity The activity data
+	 * @param array<string, mixed> $thrParent The thread parent data
+	 * @param string $channel The channel code
+	 * @param int $uid The user ID
+	 * @param array<string, ChannelEntity> $channels The available channels
+	 * @return array<string, mixed> The enhanced row data
 	 */
 	private function addRowInformation(array $row, array $activity, array $thrParent, string $channel, int $uid, array $channels): array
 	{
@@ -1000,8 +1100,11 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, int> $uriIds
-	 * @return array<int, array>
+	 * Get emoji reactions for the given URI IDs.
+	 *
+	 * @param array<int, int> $uriIds The URI IDs to get emojis for
+	 * @param int $uid The user ID of the viewer
+	 * @return array<int, array> The emoji reactions data
 	 */
 	private function getEmojis(array $uriIds, int $uid): array
 	{
@@ -1065,8 +1168,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, int> $uriIds
-	 * @return array<int, int>
+	 * Get comment counts for the given URI IDs.
+	 *
+	 * @param array<int, int> $uriIds The URI IDs to get counts for
+	 * @return array<int, int> The comment counts per URI ID
 	 */
 	private function getCounts(array $uriIds): array
 	{
@@ -1079,8 +1184,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, int> $uriIds
-	 * @return array<int, array>
+	 * Get quote shares for the given URI IDs.
+	 *
+	 * @param array<int, int> $uriIds The URI IDs to get quote shares for
+	 * @return array<int, array> The quote shares data
 	 */
 	private function getQuoteShares(array $uriIds): array
 	{
@@ -1100,9 +1207,12 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $itemList
-	 * @param array<string, mixed> $parent
-	 * @return array<int, array>
+	 * Get children items for a parent item.
+	 *
+	 * @param array<int, array> $itemList The list of all items (passed by reference, modified)
+	 * @param array<string, mixed> $parent The parent item
+	 * @param bool $recursive Whether to recursively get children
+	 * @return array<int, array> The children items
 	 */
 	private function getItemChildren(array &$itemList, array $parent, bool $recursive = true): array
 	{
@@ -1133,8 +1243,10 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $items
-	 * @return array<int, array>
+	 * Sort item children.
+	 *
+	 * @param array<int, array> $items The items to sort
+	 * @return array<int, array> The sorted items
 	 */
 	private function sortItemChildren(array $items): array
 	{
@@ -1152,8 +1264,11 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $children
-	 * @param array<int, array> $itemList
+	 * Add children to the item list.
+	 *
+	 * @param array<int, array> $children The children to add
+	 * @param array<int, array> $itemList The item list to add to (passed by reference)
+	 * @return void
 	 */
 	private function addChildrenToList(array $children, array &$itemList): void
 	{
@@ -1166,8 +1281,11 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<string, mixed> $parent
-	 * @return array<string, mixed>
+	 * Smart flatten conversation structure.
+	 * Flattens nested conversation structures for better readability.
+	 *
+	 * @param array<string, mixed> $parent The parent conversation item
+	 * @return array<string, mixed> The flattened conversation structure
 	 */
 	private function smartFlattenConversation(array $parent): array
 	{
@@ -1207,8 +1325,11 @@ final class HtmlRenderer
 	}
 
 	/**
-	 * @param array<int, array> $itemList
-	 * @return array<int, array>
+	 * Sort conversation items.
+	 *
+	 * @param array<int, array> $itemList The items to sort
+	 * @param string $order The sorting order (e.g., 'received', 'commented', 'created')
+	 * @return array<int, array> The sorted conversation items
 	 */
 	private function convSort(array $itemList, string $order): array
 	{
@@ -1270,6 +1391,14 @@ final class HtmlRenderer
 		return $parents;
 	}
 
+	/**
+	 * Sort threads by featured and received date.
+	 * Featured threads come first, then sorted by received date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrFeaturedReceived(array $a, array $b): int
 	{
 		if ($b['featured'] && !$a['featured']) {
@@ -1281,6 +1410,14 @@ final class HtmlRenderer
 		return strcmp((string) $b['received'], (string) $a['received']);
 	}
 
+	/**
+	 * Sort threads by featured and commented date.
+	 * Featured threads come first, then sorted by commented date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrFeaturedCommented(array $a, array $b): int
 	{
 		if ($b['featured'] && !$a['featured']) {
@@ -1292,6 +1429,14 @@ final class HtmlRenderer
 		return strcmp((string) $b['commented'], (string) $a['commented']);
 	}
 
+	/**
+	 * Sort threads by featured and created date.
+	 * Featured threads come first, then sorted by created date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrFeaturedCreated(array $a, array $b): int
 	{
 		if ($b['featured'] && !$a['featured']) {
@@ -1303,21 +1448,49 @@ final class HtmlRenderer
 		return strcmp((string) $b['created'], (string) $a['created']);
 	}
 
+	/**
+	 * Sort threads by received date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrReceived(array $a, array $b): int
 	{
 		return strcmp((string) $b['received'], (string) $a['received']);
 	}
 
+	/**
+	 * Sort threads by received date ascending (reversed).
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrReceivedRev(array $a, array $b): int
 	{
 		return strcmp((string) $a['received'], (string) $b['received']);
 	}
 
+	/**
+	 * Sort threads by commented date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrCommented(array $a, array $b): int
 	{
 		return strcmp((string) $b['commented'], (string) $a['commented']);
 	}
 
+	/**
+	 * Sort threads by created date descending.
+	 *
+	 * @param array<string, mixed> $a First thread to compare
+	 * @param array<string, mixed> $b Second thread to compare
+	 * @return int Comparison result (-1, 0, 1)
+	 */
 	private function sortThrCreated(array $a, array $b): int
 	{
 		return strcmp((string) $b['created'], (string) $a['created']);
