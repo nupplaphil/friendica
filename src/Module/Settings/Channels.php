@@ -196,7 +196,7 @@ class Channels extends BaseSettings
 				'languages'    => [
 					"languages[$channel->code][]",
 					$this->t('Languages'),
-					$channel->languages,
+					$channel->languages ?: $channel_languages,
 					$this->t('Select all languages that you want to see in this channel. "Unspecified" describes all posts for which no language information was detected (e.g. posts with just an image or too little text to be sure of the language). If you want to see all languages, you will need to select all items in the list.'),
 					$languages,
 					'multiple',
