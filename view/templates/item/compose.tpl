@@ -104,6 +104,9 @@
                     </button>
                     <button type="submit" class="btn btn-primary" id="comment-edit-submit-{{$id}}" name="submit" tabindex="9"><i class="ri ri-send-plane-line"></i> {{$l10n.submit}}</button>
                 </div>
+                <div class="jotplugins">
+                    {{$jotplugins nofilter}}
+                </div>
             </div>
 
             <div id="comment-edit-preview-{{$id}}" class="comment-edit-preview" style="display:none;"></div>
@@ -112,10 +115,6 @@
                 {{if $type == 'post'}}
                     <h3>{{$l10n.visibility_title}}</h3>
                     {{$acl_selector nofilter}}
-
-                    <div class="jotplugins">
-                        {{$jotplugins nofilter}}
-                    </div>
 
         			{{include file="field_checkbox.tpl" field=$sensitive}}
                     {{if $scheduled_at}}{{$scheduled_at nofilter}}{{/if}}
