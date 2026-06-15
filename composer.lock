@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4a26ea161c369103bf6884ca2e18cfe",
+    "content-hash": "439a79b8c8c1dc6c69ed6eea321dd105",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -509,241 +509,6 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.7"
             },
             "time": "2025-09-16T12:23:56+00:00"
-        },
-        {
-            "name": "divineomega/do-file-cache",
-            "version": "v2.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DivineOmega/DO-File-Cache.git",
-                "reference": "23696a8a4c3ebe2ab3d68a35b2698fa103f69334"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DivineOmega/DO-File-Cache/zipball/23696a8a4c3ebe2ab3d68a35b2698fa103f69334",
-                "reference": "23696a8a4c3ebe2ab3d68a35b2698fa103f69334",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-zlib": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^6.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DivineOmega\\DOFileCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "description": "DO File Cache is a PHP File-based Caching Library. Its syntax is designed to closely resemble the PHP memcache extension.",
-            "keywords": [
-                "cache",
-                "caching",
-                "caching library",
-                "file cache",
-                "library",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/DivineOmega/DO-File-Cache/issues",
-                "source": "https://github.com/DivineOmega/DO-File-Cache/tree/master"
-            },
-            "abandoned": "jord-jd/do-file-cache",
-            "time": "2018-12-31T09:36:51+00:00"
-        },
-        {
-            "name": "divineomega/do-file-cache-psr-6",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jord-JD/DO-File-Cache-PSR-6.git",
-                "reference": "18f9807d0491d093e9a12741afb40257d92f017e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jord-JD/DO-File-Cache-PSR-6/zipball/18f9807d0491d093e9a12741afb40257d92f017e",
-                "reference": "18f9807d0491d093e9a12741afb40257d92f017e",
-                "shasum": ""
-            },
-            "require": {
-                "divineomega/do-file-cache": "^2.0.0",
-                "psr/cache": "^1.0"
-            },
-            "require-dev": {
-                "cache/integration-tests": "^0.16.0",
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^5.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DivineOmega\\DOFileCachePSR6\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Jordan Hall",
-                    "email": "jordan@hall05.co.uk"
-                }
-            ],
-            "description": "PSR-6 adapter for DO File Cache",
-            "support": {
-                "issues": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/issues",
-                "source": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/tree/v2.0.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/DivineOmega",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "jord-jd/do-file-cache-psr-6",
-            "time": "2018-07-13T08:32:36+00:00"
-        },
-        {
-            "name": "divineomega/password_exposed",
-            "version": "v3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DivineOmega/password_exposed.git",
-                "reference": "327f93ee5cab54622077bcae721412b55be16720"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DivineOmega/password_exposed/zipball/327f93ee5cab54622077bcae721412b55be16720",
-                "reference": "327f93ee5cab54622077bcae721412b55be16720",
-                "shasum": ""
-            },
-            "require": {
-                "divineomega/do-file-cache-psr-6": "^2.0",
-                "divineomega/psr-18-guzzle-adapter": "^1.0",
-                "nyholm/psr7": "^1.0",
-                "paragonie/certainty": "^2.4",
-                "php": "^7.1||^8.0",
-                "php-http/discovery": "^1.6",
-                "psr/cache": "^1.0",
-                "psr/http-client": "^1.0",
-                "psr/http-factory-implementation": "^1.0",
-                "psr/http-message": "^1.0",
-                "psr/http-message-implementation": "^1.0"
-            },
-            "require-dev": {
-                "fzaninotto/faker": "^1.7",
-                "kriswallsmith/buzz": "^1.0",
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^7.0||^8.0",
-                "symfony/cache": "^4.2.12",
-                "vimeo/psalm": "^4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/PasswordExposedFunction.php"
-                ],
-                "psr-4": {
-                    "DivineOmega\\PasswordExposed\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Jordan Hall",
-                    "email": "jordan@hall05.co.uk"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/DivineOmega/password_exposed/graphs/contributors"
-                }
-            ],
-            "description": "This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.",
-            "homepage": "https://github.com/DivineOmega/password_exposed",
-            "support": {
-                "issues": "https://github.com/DivineOmega/password_exposed/issues",
-                "source": "https://github.com/DivineOmega/password_exposed/releases",
-                "wiki": "https://github.com/DivineOmega/password_exposed/wiki"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/DivineOmega",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "jord-jd/password_exposed",
-            "time": "2021-04-20T09:34:23+00:00"
-        },
-        {
-            "name": "divineomega/psr-18-guzzle-adapter",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DivineOmega/psr-18-guzzle-adapter.git",
-                "reference": "a2bdcddd4d4a17aac460e58d1e064e6bd2de5e57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DivineOmega/psr-18-guzzle-adapter/zipball/a2bdcddd4d4a17aac460e58d1e064e6bd2de5e57",
-                "reference": "a2bdcddd4d4a17aac460e58d1e064e6bd2de5e57",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3||^7.0",
-                "php": "^7.1||^8.0",
-                "psr/http-client": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DivineOmega\\Psr18GuzzleAdapter\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Jordan Hall",
-                    "email": "jordan@hall05.co.uk"
-                }
-            ],
-            "description": "PSR-18 adapter for the Guzzle HTTP client",
-            "support": {
-                "issues": "https://github.com/DivineOmega/psr-18-guzzle-adapter/issues",
-                "source": "https://github.com/DivineOmega/psr-18-guzzle-adapter/tree/v1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/DivineOmega",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "jord-jd/psr-18-guzzle-adapter",
-            "time": "2021-04-20T08:50:57+00:00"
         },
         {
             "name": "enyo/dropzone",
@@ -1545,6 +1310,262 @@
                 "source": "https://github.com/JamesHeinrich/getID3/tree/v1.9.23"
             },
             "time": "2023-10-19T13:18:49+00:00"
+        },
+        {
+            "name": "jord-jd/do-file-cache",
+            "version": "v5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jord-JD/DO-File-Cache.git",
+                "reference": "c77eb7b4930b826e9154cc38d44f666eb05be6a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jord-JD/DO-File-Cache/zipball/c77eb7b4930b826e9154cc38d44f666eb05be6a1",
+                "reference": "c77eb7b4930b826e9154cc38d44f666eb05be6a1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zlib": "*",
+                "php": ">=7.1"
+            },
+            "replace": {
+                "divineomega/do-file-cache": "self.version"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JordJD\\DOFileCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "description": "DO File Cache is a PHP File-based Caching Library. Its syntax is designed to closely resemble the PHP memcache extension.",
+            "keywords": [
+                "cache",
+                "caching",
+                "caching library",
+                "file cache",
+                "library",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/Jord-JD/DO-File-Cache/issues",
+                "source": "https://github.com/Jord-JD/DO-File-Cache/tree/v5.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/DivineOmega",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-15T00:12:16+00:00"
+        },
+        {
+            "name": "jord-jd/do-file-cache-psr-6",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jord-JD/DO-File-Cache-PSR-6.git",
+                "reference": "a264c19e4db1d7bde4e5c551cda7ab42e299f170"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jord-JD/DO-File-Cache-PSR-6/zipball/a264c19e4db1d7bde4e5c551cda7ab42e299f170",
+                "reference": "a264c19e4db1d7bde4e5c551cda7ab42e299f170",
+                "shasum": ""
+            },
+            "require": {
+                "jord-jd/do-file-cache": "^5.0",
+                "psr/cache": "^1.0"
+            },
+            "replace": {
+                "divineomega/do-file-cache-psr-6": "self.version"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JordJD\\DOFileCachePSR6\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jordan Hall",
+                    "email": "jordan@hall05.co.uk"
+                }
+            ],
+            "description": "PSR-6 adapter for DO File Cache",
+            "support": {
+                "issues": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/issues",
+                "source": "https://github.com/Jord-JD/DO-File-Cache-PSR-6/tree/v3.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/DivineOmega",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-15T00:14:00+00:00"
+        },
+        {
+            "name": "jord-jd/password_exposed",
+            "version": "v5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jord-JD/password_exposed.git",
+                "reference": "f9d0e8879432f1e7cf80617b51c16c66071411c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jord-JD/password_exposed/zipball/f9d0e8879432f1e7cf80617b51c16c66071411c7",
+                "reference": "f9d0e8879432f1e7cf80617b51c16c66071411c7",
+                "shasum": ""
+            },
+            "require": {
+                "jord-jd/do-file-cache-psr-6": "^3.0",
+                "jord-jd/psr-18-guzzle-adapter": "^3.0",
+                "nyholm/psr7": "^1.0",
+                "paragonie/certainty": "^2.4",
+                "php": "^7.1||^8.0",
+                "php-http/discovery": "^1.6",
+                "psr/cache": "^1.0 || ^2.0 || ^3.0",
+                "psr/http-client": "^1.0",
+                "psr/http-factory-implementation": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0",
+                "psr/http-message-implementation": "^1.0"
+            },
+            "replace": {
+                "divineomega/password_exposed": "self.version"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.23",
+                "kriswallsmith/buzz": "^1.0",
+                "phpunit/phpunit": "^9.6",
+                "symfony/cache": "^4.2.12",
+                "vimeo/psalm": "^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/PasswordExposedFunction.php"
+                ],
+                "psr-4": {
+                    "JordJD\\PasswordExposed\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jordan Hall",
+                    "email": "jordan@hall05.co.uk"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/Jord-JD/password_exposed/graphs/contributors"
+                }
+            ],
+            "description": "This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.",
+            "homepage": "https://github.com/Jord-JD/password_exposed",
+            "support": {
+                "issues": "https://github.com/Jord-JD/password_exposed/issues",
+                "source": "https://github.com/Jord-JD/password_exposed/releases",
+                "wiki": "https://github.com/Jord-JD/password_exposed/wiki"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/DivineOmega",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-15T21:45:37+00:00"
+        },
+        {
+            "name": "jord-jd/psr-18-guzzle-adapter",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jord-JD/psr-18-guzzle-adapter.git",
+                "reference": "a2d61815d7426153ecac6d1eb72ab62fb3f4261b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jord-JD/psr-18-guzzle-adapter/zipball/a2d61815d7426153ecac6d1eb72ab62fb3f4261b",
+                "reference": "a2d61815d7426153ecac6d1eb72ab62fb3f4261b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3||^7.0",
+                "php": "^7.1||^8.0",
+                "psr/http-client": "^1.0"
+            },
+            "replace": {
+                "divineomega/psr-18-guzzle-adapter": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JordJD\\Psr18GuzzleAdapter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jordan Hall",
+                    "email": "jordan@hall05.co.uk"
+                }
+            ],
+            "description": "PSR-18 adapter for the Guzzle HTTP client",
+            "support": {
+                "issues": "https://github.com/Jord-JD/psr-18-guzzle-adapter/issues",
+                "source": "https://github.com/Jord-JD/psr-18-guzzle-adapter/tree/v3.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/DivineOmega",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-14T22:23:16+00:00"
         },
         {
             "name": "kornrunner/blurhash",
