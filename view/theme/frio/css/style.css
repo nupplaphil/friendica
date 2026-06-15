@@ -1669,6 +1669,21 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 	overflow-y: auto;
 	overflow-y: overlay;
 }
+#profile-jot-plugin-wrapper,
+.jotplugins {
+	position: relative;
+	display: flex;
+	width: 100%;
+	justify-content: flex-start;
+	z-index: 10;
+}
+#profile-jot-plugin-wrapper > div > .btn {
+	padding: 10px 15px;
+}
+.jotplugins > div > .btn {
+	padding: 8px 16px;
+	margin-right: 4px;
+}
 /* ACL */
 .ri.lock:before {
 	font-family: remixicon;
