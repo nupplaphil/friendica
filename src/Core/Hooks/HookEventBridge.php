@@ -15,6 +15,10 @@ use Friendica\Event\CollectRoutesEvent;
 use Friendica\Event\ConfigLoadedEvent;
 use Friendica\Event\Event;
 use Friendica\Event\HtmlFilterEvent;
+use Friendica\Event\ModuleContentEvent;
+use Friendica\Event\ModuleInitEvent;
+use Friendica\Event\ModulePostEvent;
+use Friendica\Event\ModulePostRecipientEvent;
 use Friendica\Event\NamedEvent;
 
 /**
@@ -215,6 +219,10 @@ final class HookEventBridge
 			HtmlFilterEvent::MOD_PROFILE_CONTENT              => 'onHtmlFilterEvent',
 			HtmlFilterEvent::JOT_TOOL                         => 'onHtmlFilterEvent',
 			HtmlFilterEvent::CONTACT_BLOCK_END                => 'onHtmlFilterEvent',
+			ModuleInitEvent::MODULE_INIT                      => 'onModuleInitEvent',
+			ModulePostEvent::MODULE_POST                      => 'onModulePostEvent',
+			ModuleContentEvent::MODULE_CONTENT                => 'onModuleContentEvent',
+			ModulePostRecipientEvent::MODULE_POST_RECIPIENT   => 'onModulePostRecipientEvent',
 		];
 	}
 
@@ -231,7 +239,7 @@ final class HookEventBridge
 	public static function onCollectRoutesEvent(CollectRoutesEvent $event): void
 	{
 		$event->setRouteCollector(
-			static::callHook($event->getName(), $event->getRouteCollector())
+			static::callHook($event->getName(), $event->getRouteCollector()),
 		);
 	}
 
@@ -431,14 +439,40 @@ final class HookEventBridge
 	public static function onArrayFilterEvent(ArrayFilterEvent $event): void
 	{
 		$event->setArray(
-			static::callHook($event->getName(), $event->getArray())
+			static::callHook($event->getName(), $event->getArray()),
 		);
 	}
 
 	public static function onHtmlFilterEvent(HtmlFilterEvent $event): void
 	{
 		$event->setHtml(
-			static::callHook($event->getName(), $event->getHtml())
+			static::callHook($event->getName(), $event->getHtml()),
+		);
+	}
+
+	public static function onModuleInitEvent(ModuleInitEvent $event): void
+	{
+		static::callHook($event->getModuleName() . '_mod_init', '');
+	}
+
+	public static function onModulePostEvent(ModulePostEvent $event): void
+	{
+		$event->setPost(
+			static::callHook($event->getModuleName() . '_mod_post', $event->getPost()),
+		);
+	}
+
+	public static function onModuleContentEvent(ModuleContentEvent $event): void
+	{
+		$arr = ['content' => $event->getContent()];
+		$arr = static::callHook($event->getModuleClass() . '_mod_content', $arr);
+		$event->setContent($arr['content']);
+	}
+
+	public static function onModulePostRecipientEvent(ModulePostRecipientEvent $event): void
+	{
+		$event->setHtml(
+			static::callHook($event->getModuleName() . '_post_recipient', $event->getHtml()),
 		);
 	}
 
