@@ -121,12 +121,12 @@ HELP;
 	 *
 	 * @param Container $container The Friendica container
 	 */
-	public function __construct(protected Container $container, array $argv = null)
+	public function __construct(protected Container $container, ?array $argv = null)
 	{
 		parent::__construct($argv);
 	}
 
-	public static function create(Container $container, array $argv = null): Console
+	public static function create(Container $container, ?array $argv = null): Console
 	{
 		return new self($container, $argv);
 	}

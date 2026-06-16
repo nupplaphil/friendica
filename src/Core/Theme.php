@@ -286,7 +286,7 @@ class Theme
 	 * @param int|null $uid   Current logged-in user id
 	 * @return string|null
 	 */
-	public static function getBackgroundColor(string $theme, int $uid = null)
+	public static function getBackgroundColor(string $theme, ?int $uid = null)
 	{
 		$theme = Strings::sanitizeFilePathItem($theme);
 
@@ -312,7 +312,7 @@ class Theme
 	 * @param int|null $uid   Current logged-in user id
 	 * @return string|null
 	 */
-	public static function getThemeColor(string $theme, int $uid = null)
+	public static function getThemeColor(string $theme, ?int $uid = null)
 	{
 		$theme = Strings::sanitizeFilePathItem($theme);
 

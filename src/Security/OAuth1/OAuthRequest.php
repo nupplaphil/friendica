@@ -21,8 +21,11 @@ class OAuthRequest implements \Stringable
 	/**
 	 * @param array|null $parameters
 	 */
-	public function __construct(private $http_method, $http_url, $parameters = null)
-	{
+	public function __construct(
+		private $http_method,
+		$http_url,
+		$parameters = null,
+	) {
 		if (is_null($parameters)) {
 			$parameters = [];
 		}
@@ -108,7 +111,7 @@ class OAuthRequest implements \Stringable
 	 *
 	 * @return OAuthRequest
 	 */
-	public static function from_consumer_and_token(OAuthConsumer $consumer, $http_method, $http_url, ?array $parameters = null, OAuthToken $token = null)
+	public static function from_consumer_and_token(OAuthConsumer $consumer, $http_method, $http_url, ?array $parameters = null, ?OAuthToken $token = null)
 	{
 		if (is_null($parameters)) {
 			$parameters = [];

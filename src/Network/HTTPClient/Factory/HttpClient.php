@@ -28,8 +28,12 @@ require_once __DIR__ . '/../../../../static/dbstructure.config.php';
 
 class HttpClient extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly IManageConfigValues $config, private readonly Profiler $profiler, private readonly App\BaseURL $baseUrl)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly IManageConfigValues $config,
+		private readonly Profiler $profiler,
+		private readonly App\BaseURL $baseUrl,
+	) {
 		parent::__construct($logger);
 	}
 
@@ -40,7 +44,7 @@ class HttpClient extends BaseFactory
 	 *
 	 * @return ICanSendHttpRequests
 	 */
-	public function createClient(HandlerStack $handlerStack = null): ICanSendHttpRequests
+	public function createClient(?HandlerStack $handlerStack = null): ICanSendHttpRequests
 	{
 		$proxy = $this->config->get('system', 'proxy');
 

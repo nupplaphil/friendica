@@ -722,7 +722,7 @@ class Profile
 	 *
 	 * @throws \Exception
 	 */
-	public static function searchProfiles(int $start = 0, int $count = 100, string $search = null): array
+	public static function searchProfiles(int $start = 0, int $count = 100, ?string $search = null): array
 	{
 		if (!empty($search)) {
 			$publish    = (DI::config()->get('system', 'publish_all') ? '' : "AND `publish` ");

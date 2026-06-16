@@ -180,7 +180,7 @@ class Widget
 	 * @return string
 	 * @throws \Exception
 	 */
-	private static function filter(string $type, string $title, string $desc, string $all, string $baseUrl, array $options, string $selected = null): string
+	private static function filter(string $type, string $title, string $desc, string $all, string $baseUrl, array $options, ?string $selected = null): string
 	{
 		$queryString = parse_url($baseUrl, PHP_URL_QUERY);
 		$queryArray  = [];

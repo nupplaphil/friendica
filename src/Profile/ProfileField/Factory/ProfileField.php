@@ -18,8 +18,10 @@ use Psr\Log\LoggerInterface;
 
 class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 {
-	public function __construct(LoggerInterface $logger, private readonly PermissionSetFactory $permissionSetFactory)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly PermissionSetFactory $permissionSetFactory,
+	) {
 		parent::__construct($logger);
 	}
 
@@ -28,7 +30,7 @@ class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 	 *
 	 * @throws UnexpectedPermissionSetException
 	 */
-	public function createFromTableRow(array $row, PermissionSet $permissionSet = null): Entity\ProfileField
+	public function createFromTableRow(array $row, ?PermissionSet $permissionSet = null): Entity\ProfileField
 	{
 		if (empty($permissionSet)
 			&& (!array_key_exists('psid', $row) || !array_key_exists('allow_cid', $row) || !array_key_exists('allow_gid', $row) || !array_key_exists('deny_cid', $row) || !array_key_exists('deny_gid', $row))
@@ -77,7 +79,7 @@ class ProfileField extends BaseFactory implements ICanCreateFromTableRow
 		string $label,
 		string $value,
 		PermissionSet $permissionSet,
-		int $id = null,
+		?int $id = null,
 	): Entity\ProfileField {
 		return $this->createFromTableRow([
 			'uid'   => $uid,

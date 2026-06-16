@@ -105,7 +105,7 @@ class Login extends BaseModule
 	 * @throws \Friendica\Network\HTTPException\ServiceUnavailableException
 	 * @hooks 'login_hook' string $o
 	 */
-	public static function form(string $return_path = null, bool $register = false): string
+	public static function form(?string $return_path = null, bool $register = false): string
 	{
 		$noid = DI::config()->get('system', 'no_openid');
 

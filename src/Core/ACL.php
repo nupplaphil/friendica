@@ -40,7 +40,7 @@ class ACL
 	 * @return string
 	 * @throws \Exception
 	 */
-	public static function getMessageContactSelectHTML(int $selected = null): string
+	public static function getMessageContactSelectHTML(?int $selected = null): string
 	{
 		$o = '';
 
@@ -114,7 +114,7 @@ class ACL
 	 * @return array Hash of contact id lists
 	 * @throws \Exception
 	 */
-	public static function getDefaultUserPermissions(array $user = null)
+	public static function getDefaultUserPermissions(?array $user = null)
 	{
 		$aclFormatter = DI::aclFormatter();
 
@@ -231,7 +231,7 @@ class ACL
 	 */
 	public static function getFullSelectorHTML(
 		Page $page,
-		int $uid = null,
+		?int $uid = null,
 		bool $for_federation = false,
 		array $default_permissions = [],
 		array $condition = [],

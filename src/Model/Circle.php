@@ -51,7 +51,7 @@ class Circle
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public static function exists(int $circle_id, int $uid = null): bool
+	public static function exists(int $circle_id, ?int $uid = null): bool
 	{
 		$condition = ['id' => $circle_id, 'deleted' => false];
 

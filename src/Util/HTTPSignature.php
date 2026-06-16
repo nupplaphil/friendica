@@ -391,7 +391,7 @@ class HTTPSignature
 	 * @param int     $gsid    Server ID
 	 * @throws \Exception
 	 */
-	public static function setInboxStatus(string $url, bool $success, bool $shared = false, int $gsid = null)
+	public static function setInboxStatus(string $url, bool $success, bool $shared = false, ?int $gsid = null)
 	{
 		$now = DateTimeFormat::utcNow();
 

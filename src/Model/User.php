@@ -985,7 +985,7 @@ class User
 	 * @param string|null $delimiter Whether the regular expression is meant to be wrapper in delimiter characters
 	 * @return string
 	 */
-	public static function getPasswordRegExp(string $delimiter = null): string
+	public static function getPasswordRegExp(?string $delimiter = null): string
 	{
 		$allowed_characters = ':!"#$%&\'()*+,-./;<=>?@[\]^_`{|}~';
 

@@ -27,8 +27,12 @@ final class Worker extends Console
 	 * @param ProcessRepository $processRepo
 	 * @param array|null        $argv
 	 */
-	public function __construct(private readonly Mode $mode, private readonly BasePath $basePath, private readonly ProcessRepository $processRepo, array $argv = null)
-	{
+	public function __construct(
+		private readonly Mode $mode,
+		private readonly BasePath $basePath,
+		private readonly ProcessRepository $processRepo,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 

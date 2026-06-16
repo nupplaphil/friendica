@@ -31,7 +31,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 	 *
 	 * @return string
 	 */
-	public function build_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, \Friendica\Security\OAuth1\OAuthToken $token = null)
+	public function build_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, ?\Friendica\Security\OAuth1\OAuthToken $token = null)
 	{
 		$base_string          = $request->get_signature_base_string();
 		$request->base_string = $base_string;

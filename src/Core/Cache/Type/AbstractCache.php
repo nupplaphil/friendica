@@ -74,7 +74,7 @@ abstract class AbstractCache implements ICanCache
 	 *
 	 * @return string[] The filtered array with just the keys
 	 */
-	protected function filterArrayKeysByPrefix(array $keys, string $prefix = null): array
+	protected function filterArrayKeysByPrefix(array $keys, ?string $prefix = null): array
 	{
 		if (empty($prefix)) {
 			return $keys;
