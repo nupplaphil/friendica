@@ -7,7 +7,6 @@
 
 namespace Friendica\Console;
 
-use Friendica\App\BaseURL;
 use Friendica\Contact\Avatar;
 use Friendica\Core\L10n;
 use Friendica\Model\Contact;
@@ -37,8 +36,12 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private readonly \Friendica\Database\Database $dba, private readonly BaseURL $baseUrl, private readonly L10n $l10n, private readonly IManageConfigValues $config, array $argv = null)
-	{
+	public function __construct(
+		private readonly \Friendica\Database\Database $dba,
+		private readonly L10n $l10n,
+		private readonly IManageConfigValues $config,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 

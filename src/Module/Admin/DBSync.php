@@ -103,6 +103,5 @@ class DBSync extends BaseAdmin
 		}
 
 		DI::baseUrl()->redirect('admin/dbsync');
-		return '';
 	}
 }

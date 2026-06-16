@@ -29,12 +29,11 @@ class StatusTest extends FixtureTestCase
 
 		$this->statusFactory = new Status(
 			DI::logger(),
-			DI::dba(),
 			DI::twitterUser(),
 			new Hashtag(DI::logger()),
-			new Media(DI::logger(), DI::baseUrl()),
+			new Media(DI::logger()),
 			new Url(DI::logger()),
-			new Mention(DI::logger(), DI::baseUrl()),
+			new Mention(DI::logger()),
 			new Activities(DI::logger(), DI::twitterUser()),
 			new Attachment(DI::logger()),
 			DI::contentItem(),

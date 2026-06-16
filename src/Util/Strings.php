@@ -177,7 +177,7 @@ class Strings
 	 *
 	 * @return string		Transformed string.
 	 */
-	public static function deindent(string $text, string $chr = "[\t ]", int $count = null): string
+	public static function deindent(string $text, string $chr = "[\t ]", ?int $count = null): string
 	{
 		$lines = explode("\n", $text);
 

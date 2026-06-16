@@ -19,7 +19,6 @@ use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Log\LoggerInterface;
 
 class RouterTest extends TestCase
 {
@@ -39,7 +38,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -64,7 +62,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -92,7 +89,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -115,7 +111,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -142,7 +137,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -169,7 +163,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			self::createStub(EventDispatcherInterface::class),
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -199,7 +192,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -231,7 +223,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -259,7 +250,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -293,7 +283,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
 			$userSession,
@@ -325,7 +314,6 @@ class RouterTest extends TestCase
 			self::createStub(ICanLock::class),
 			self::createStub(IManageConfigValues::class),
 			self::createStub(Arguments::class),
-			self::createStub(LoggerInterface::class),
 			$eventDispatcher,
 			self::createStub(AddonHelper::class),
 			$userSession,

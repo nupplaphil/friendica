@@ -822,6 +822,7 @@ class Item
 
 	public function addCategories(array $post, string $category): array
 	{
+		$filedas = [];
 		if (!empty($post['file'])) {
 			// get the "fileas" tags for this post
 			$filedas = FileTag::fileToArray($post['file']);
@@ -830,7 +831,7 @@ class Item
 		$list_array   = explode(',', trim($category));
 		$post['file'] = FileTag::arrayToFile($list_array, 'category');
 
-		if (!empty($filedas) && is_array($filedas)) {
+		if (!empty($filedas)) {
 			// append the fileas stuff to the new categories list
 			$post['file'] .= FileTag::arrayToFile($filedas);
 		}

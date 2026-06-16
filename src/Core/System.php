@@ -203,7 +203,7 @@ class System
 		$file      = '';
 		$line      = 0;
 		foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $trace) {
-			if (!isset($trace['file']) || !isset($trace['function']) || !isset($trace['line'])) {
+			if (!isset($trace['file']) || !isset($trace['line'])) {
 				continue;
 			}
 			if (in_array(basename($trace['file']), ['DBA.php', 'Database.php'])) {

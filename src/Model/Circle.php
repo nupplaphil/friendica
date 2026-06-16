@@ -395,7 +395,7 @@ class Circle
 	 */
 	public static function expand(int $uid, array $circle_ids, bool $check_dead = false, bool $expand_followers = true): array
 	{
-		if (!is_array($circle_ids) || !count($circle_ids)) {
+		if (count($circle_ids) === 0) {
 			return [];
 		}
 

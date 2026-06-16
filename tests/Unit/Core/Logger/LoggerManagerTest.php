@@ -75,8 +75,8 @@ class LoggerManagerTest extends TestCase
 	{
 		$config = $this->createStub(IManageConfigValues::class);
 		$config->method('get')->willReturnMap([
-			['system', 'debugging', null, false],
-			['system', 'profiling', null, true],
+			['system', 'debugging', false, false],
+			['system', 'profiling', false, true],
 		]);
 
 		$factory = new LoggerManager(

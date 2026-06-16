@@ -126,7 +126,7 @@ class Avatar
 	private static function storeAvatarCache(Image $image, string $filename, int $size, int $timestamp): string
 	{
 		$image->scaleDown($size);
-		if (is_null($image) || !$image->isValid()) {
+		if (!$image->isValid()) {
 			return '';
 		}
 

@@ -9,7 +9,6 @@ namespace Friendica\Module\Notifications;
 
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
-use Friendica\AppHelper;
 use Friendica\BaseModule;
 use Friendica\Contact\Introduction\Repository\Introduction;
 use Friendica\Content\GroupManager;
@@ -42,8 +41,26 @@ use Psr\Log\LoggerInterface;
 
 class Ping extends BaseModule
 {
-	public function __construct(private readonly AppHelper $appHelper, private readonly Repository\Notify $notify, private readonly ICanCache $cache, private readonly Database $database, private readonly IManagePersonalConfigValues $pconfig, private readonly IManageConfigValues $config, private readonly IHandleUserSessions $session, private readonly SystemMessages $systemMessages, private readonly Repository\Notification $notificationRepo, private readonly Introduction $introductionRepo, private readonly Factory\FormattedNavNotification $formattedNavNotification, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly Repository\Notify $notify,
+		private readonly ICanCache $cache,
+		private readonly Database $database,
+		private readonly IManagePersonalConfigValues $pconfig,
+		private readonly IManageConfigValues $config,
+		private readonly IHandleUserSessions $session,
+		private readonly SystemMessages $systemMessages,
+		private readonly Repository\Notification $notificationRepo,
+		private readonly Introduction $introductionRepo,
+		private readonly Factory\FormattedNavNotification $formattedNavNotification,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 

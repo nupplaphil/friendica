@@ -1148,7 +1148,7 @@ final class HtmlRenderer
 			}
 
 			$names                                          = explode($separator, (string) $row['title']);
-			$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'] ?? [], $names));
+			$emojis[$row['thr-parent-id']][$emoji]['title'] = array_unique(array_merge($emojis[$row['thr-parent-id']][$emoji]['title'], $names));
 			if ($row['private'] === ItemModel::PRIVATE) {
 				$emojis[$row['thr-parent-id']][$emoji]['total'] += count($names);
 			}
@@ -1338,7 +1338,7 @@ final class HtmlRenderer
 	{
 		$this->profiler->startRecording('rendering');
 		$parents = [];
-		if (!(is_array($itemList) && count($itemList))) {
+		if (count($itemList) === 0) {
 			$this->profiler->stopRecording();
 			return $parents;
 		}

@@ -36,8 +36,11 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private readonly Database $dba, private readonly L10n $l10n, array $argv = null)
-	{
+	public function __construct(
+		private readonly Database $dba,
+		private readonly L10n $l10n,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 
@@ -133,7 +136,7 @@ HELP;
 			} else {
 				$this->out($this->l10n->t(' - success'), false);
 			}
-			if ($in_unique_key && $this->dba->exists($table, [$field => $from])) {
+			if ($in_unique_key) {
 				$this->dba->delete($table, [$field => $from]);
 				$this->out($this->l10n->t(' - deleted'), false);
 			}

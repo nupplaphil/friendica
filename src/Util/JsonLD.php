@@ -222,11 +222,6 @@ class JsonLD
 			return [];
 		}
 
-		if ($json === false) {
-			DI::logger()->notice('JSON encode->decode failed', ['orig_json' => $orig_json, 'compacted' => $compacted]);
-			$json = [];
-		}
-
 		return $json;
 	}
 

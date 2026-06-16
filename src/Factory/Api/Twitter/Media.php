@@ -7,7 +7,6 @@
 
 namespace Friendica\Factory\Api\Twitter;
 
-use Friendica\App\BaseURL;
 use Friendica\BaseFactory;
 use Friendica\Network\HTTPException;
 use Friendica\Model\Post;
@@ -15,7 +14,7 @@ use Psr\Log\LoggerInterface;
 
 class Media extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly BaseURL $baseUrl)
+	public function __construct(LoggerInterface $logger)
 	{
 		parent::__construct($logger);
 	}

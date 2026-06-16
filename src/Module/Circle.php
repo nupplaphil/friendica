@@ -148,7 +148,7 @@ class Circle extends BaseModule
 
 		// With no circle number provided we jump to the unassigned contacts as a starting point
 		// @TODO: Replace with parameter from router
-		if (DI::args()->getArgc() == 1) {
+		if (DI::args()->getArgc() === 1) {
 			DI::baseUrl()->redirect('circle/none');
 		}
 
@@ -181,8 +181,10 @@ class Circle extends BaseModule
 		$preselected = [];
 
 		// @TODO: Replace with parameter from router
-		if ((DI::args()->getArgc() == 2) && (DI::args()->getArgv()[1] === 'none')
-			|| (DI::args()->getArgc() == 1) && (DI::args()->getArgv()[0] === 'nocircle')) {
+		if (
+			DI::args()->getArgc() === 2
+			&& (DI::args()->getArgv()[1] === 'none')
+		) {
 			$id       = -1;
 			$nocircle = true;
 			$circle   = [

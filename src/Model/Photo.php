@@ -951,9 +951,6 @@ class Photo
 		}
 
 		$scale = intval(substr($guid, -1, 1));
-		if (!is_numeric($scale)) {
-			return [];
-		}
 
 		$guid = substr($guid, 0, -2);
 		return ['guid' => $guid, 'scale' => $scale];
@@ -1043,7 +1040,7 @@ class Photo
 	 * Tries to resize image to wanted maximum size
 	 *
 	 * @param Image $image Image instance
-	 * @return Image|null Image instance on success, null on error
+	 * @return Image Image instance
 	 */
 	private static function fitImageSize(Image $image)
 	{

@@ -25,8 +25,21 @@ use Psr\Log\LoggerInterface;
 
 class Notification extends BaseModule
 {
-	public function __construct(private readonly Introduction $introductionRepo, private readonly Repository\Notification $notificationRepo, private readonly Factory\Notification $notificationFactory, private readonly Repository\Notify $notifyRepo, private readonly IManagePersonalConfigValues $pconfig, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly Introduction $introductionRepo,
+		private readonly Repository\Notification $notificationRepo,
+		private readonly Factory\Notification $notificationFactory,
+		private readonly Repository\Notify $notifyRepo,
+		private readonly IManagePersonalConfigValues $pconfig,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -112,8 +125,6 @@ class Notification extends BaseModule
 		}
 
 		$this->baseUrl->redirect('notifications/system');
-
-		return '';
 	}
 
 	private function handleNotify(int $notifyId)

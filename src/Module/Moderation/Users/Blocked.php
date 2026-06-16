@@ -20,7 +20,7 @@ class Blocked extends BaseUsers
 
 		self::checkFormSecurityTokenRedirectOnError('/moderation/users/blocked', 'moderation_users_blocked');
 
-		$users = $request['user'] ?? [];
+		$users = (array) ($request['user'] ?? []);
 
 		if (!empty($request['page_users_unblock'])) {
 			foreach ($users as $uid) {
@@ -109,7 +109,7 @@ class Blocked extends BaseUsers
 
 			'$users' => $users,
 			'$count' => $count,
-			'$pager' => $pager->renderFull($count)
+			'$pager' => $pager->renderFull($count),
 		]);
 	}
 

@@ -201,7 +201,7 @@ class DBStructure
 	 */
 	public static function getUpdateStatus(): int
 	{
-		return (int) DI::config()->get('system', 'dbupdate') ?? static::UPDATE_NOT_CHECKED;
+		return (int) DI::config()->get('system', 'dbupdate', static::UPDATE_NOT_CHECKED);
 	}
 
 	/**
@@ -226,7 +226,7 @@ class DBStructure
 	 * @return string Empty string if the update is successful, error messages otherwise
 	 * @throws Exception
 	 */
-	private static function update(bool $verbose, bool $action, bool $install = false, array $tables = null, array $definition = null): string
+	private static function update(bool $verbose, bool $action, bool $install = false, ?array $tables = null, ?array $definition = null): string
 	{
 		$in_maintenance_mode = DI::config()->get('system', 'maintenance');
 
@@ -648,10 +648,6 @@ class DBStructure
 			return false;
 		}
 
-		if (!is_array($columns)) {
-			return false;
-		}
-
 		$table = DBA::escape($table);
 
 		$sql = "ALTER TABLE `" . $table . "`";
@@ -708,7 +704,7 @@ class DBStructure
 			return false;
 		}
 
-		if (is_null($columns) || empty($columns)) {
+		if (empty($columns)) {
 			return self::existsTable($table);
 		}
 

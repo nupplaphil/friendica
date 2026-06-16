@@ -30,7 +30,7 @@ class XML
 	 * @return string
 	 * @throws \Exception
 	 */
-	public static function fromArray(array $array, object &$xml = null, bool $remove_header = false, array $namespaces = [], bool $root = true): string
+	public static function fromArray(array $array, ?object &$xml = null, bool $remove_header = false, array $namespaces = [], bool $root = true): string
 	{
 		if ($root) {
 			foreach ($array as $key => $value) {
@@ -167,11 +167,11 @@ class XML
 	 * @param DOMDocument $doc        XML root
 	 * @param DOMElement  $parent     parent object
 	 * @param string      $element    XML element name
-	 * @param string      $value      XML value
+	 * @param ?string      $value      XML value
 	 * @param array       $attributes Array containing the attributes
 	 * @return void
 	 */
-	public static function addElement(DOMDocument $doc, DOMElement &$parent, string $element, string $value = null, array $attributes = [])
+	public static function addElement(DOMDocument $doc, DOMElement &$parent, string $element, ?string $value = null, array $attributes = [])
 	{
 		$element = self::createElement($doc, $element, $value ?? '', $attributes);
 		$parent->appendChild($element);
@@ -444,10 +444,10 @@ class XML
 	 *
 	 * @param DOMXPath $xpath XPath object
 	 * @param string $element Element name
-	 * @param DOMNode $context Context object or NULL
+	 * @param ?DOMNode $context Context object or NULL
 	 * @return string XML node value or empty string on failure
 	 */
-	public static function getFirstNodeValue(DOMXPath $xpath, string $element, DOMNode $context = null)
+	public static function getFirstNodeValue(DOMXPath $xpath, string $element, ?DOMNode $context = null)
 	{
 		$result = @$xpath->evaluate($element, $context);
 		if (!is_object($result)) {
@@ -467,10 +467,10 @@ class XML
 	 *
 	 * @param DOMXPath $xpath XPath object
 	 * @param string $element Element name
-	 * @param DOMNode $context Context object or NULL
+	 * @param ?DOMNode $context Context object or NULL
 	 * @return mixed|bool First element's attributes field or false on failure
 	 */
-	public static function getFirstAttributes(DOMXPath $xpath, string $element, DOMNode $context = null)
+	public static function getFirstAttributes(DOMXPath $xpath, string $element, ?DOMNode $context = null)
 	{
 		$result = @$xpath->query($element, $context);
 		if (!is_object($result)) {
@@ -490,10 +490,10 @@ class XML
 	 *
 	 * @param DOMXPath $xpath XPath object
 	 * @param string $element Element name
-	 * @param DOMNode $context Context object or NULL
+	 * @param ?DOMNode $context Context object or NULL
 	 * @return string First value or empty string on failure
 	 */
-	public static function getFirstValue(DOMXPath $xpath, string $element, DOMNode $context = null): string
+	public static function getFirstValue(DOMXPath $xpath, string $element, ?DOMNode $context = null): string
 	{
 		$result = @$xpath->query($element, $context);
 		if (!is_object($result)) {

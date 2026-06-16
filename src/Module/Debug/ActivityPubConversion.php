@@ -73,7 +73,7 @@ class ActivityPubConversion extends BaseModule
 				}
 
 				// Don't trust the source if "actor" differs from "attributedTo". The content could be forged.
-				if ($trust_source && ($type == 'as:Create') && is_array($activity['as:object'])) {
+				if ((strval($type) === 'as:Create') && is_array($activity['as:object'])) {
 					$actor         = JsonLD::fetchElement($activity, 'as:actor', '@id');
 					$attributed_to = JsonLD::fetchElement($activity['as:object'], 'as:attributedTo', '@id');
 					$trust_source  = ($actor == $attributed_to);

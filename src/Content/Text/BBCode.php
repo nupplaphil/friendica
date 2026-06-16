@@ -373,11 +373,6 @@ class BBCode
 				}
 				$orig_body = substr($orig_body, $img_end);
 
-				if ($orig_body === false) {
-					// in case the body ends on a closing image tag
-					$orig_body = '';
-				}
-
 				$img_start    = strpos($orig_body, '[img');
 				$img_st_close = ($img_start !== false ? strpos(substr($orig_body, $img_start), ']') : false);
 				$img_end      = ($img_start !== false ? strpos(substr($orig_body, $img_start), '[/img]') : false);
@@ -474,7 +469,7 @@ class BBCode
 			}
 		}
 
-		if (!isset($embed_media) && isset($media->name) && isset($media->url)) {
+		if (!isset($embed_media) && isset($media->name)) {
 			$preview_class = in_array($preview_mode, [self::PREVIEW_AUTO, self::PREVIEW_LARGE]) ? 'attachment-image' : 'attachment-preview';
 
 			$link_attributes = 'target="_blank" rel="noopener noreferrer"';
@@ -639,9 +634,6 @@ class BBCode
 			$start   = substr($text, 0, $pos['start']['open']);
 			$subject = substr($text, $pos['start']['open'], $pos['end']['close'] - $pos['start']['open']);
 			$end     = substr($text, $pos['end']['close']);
-			if ($end === false) {
-				$end = '';
-			}
 
 			$subject = preg_replace($pattern, $replace, $subject);
 			$text    = $start . $subject . $end;
@@ -678,11 +670,6 @@ class BBCode
 			}
 
 			$orig_body = substr($orig_body, $img_end + strlen('[/img]'));
-
-			if ($orig_body === false) {
-				// in case the body ends on a closing image tag
-				$orig_body = '';
-			}
 
 			$img_start    = strpos($orig_body, '[img');
 			$img_st_close = ($img_start !== false ? strpos(substr($orig_body, $img_start), ']') : false);
@@ -849,7 +836,7 @@ class BBCode
 		DI::profiler()->startRecording('rendering');
 		$return = preg_replace_callback(
 			"/\[[zi]mg(.*?)\]([^\[\]]*)\[\/[zi]mg\]/ism",
-			function ($match) use ($simplehtml, $uriid) {
+			function (array $match) use ($simplehtml, $uriid) {
 				$attribute_string = $match[1];
 				$attributes       = [];
 				foreach (['alt', 'width', 'height'] as $field) {
@@ -863,7 +850,8 @@ class BBCode
 						$img_str .= ' ' . $key . '="' . htmlspecialchars($value, ENT_COMPAT) . '"';
 					}
 				}
-				$img_str .= ' ' . empty($attributes['alt']) ? 'class="empty-description"' : 'class="has-alt-description"';
+				/** @phpstan-ignore ternary.alwaysTrue(ignore false positive error) */
+				$img_str .= ' ' . ($attributes['alt'] === '') ? 'class="empty-description"' : 'class="has-alt-description"';
 				return $img_str . '>';
 			},
 			$text,
@@ -968,7 +956,7 @@ class BBCode
 		if (is_null($text)) {
 			$curlResult = DI::httpClient()->head($match[1], [HttpClientOptions::TIMEOUT => DI::config()->get('system', 'xrd_timeout'), HttpClientOptions::REQUEST => HttpClientRequest::CONTENTTYPE]);
 			if ($curlResult->isSuccess()) {
-				$mimetype = $curlResult->getContentType() ?? '';
+				$mimetype = $curlResult->getContentType();
 			} else {
 				$mimetype = '';
 			}
@@ -1066,7 +1054,7 @@ class BBCode
 
 		$curlResult = DI::httpClient()->head($match[1], [HttpClientOptions::TIMEOUT => DI::config()->get('system', 'xrd_timeout'), HttpClientOptions::REQUEST => HttpClientRequest::CONTENTTYPE]);
 		if ($curlResult->isSuccess()) {
-			$mimetype = $curlResult->getContentType() ?? '';
+			$mimetype = $curlResult->getContentType();
 		} else {
 			$mimetype = '';
 		}
@@ -1283,13 +1271,13 @@ class BBCode
 	 * - 8: Used for Twitter, WP backlink text setting
 	 * - 9: ActivityPub
 	 *
-	 * @param int    $uriid
-	 * @param string $text
+	 * @param ?int    $uriid
+	 * @param ?string $text
 	 * @param int    $simple_html
 	 * @return string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function convertForUriId(int $uriid = null, string $text = null, int $simple_html = self::INTERNAL): string
+	public static function convertForUriId(?int $uriid = null, ?string $text = null, int $simple_html = self::INTERNAL): string
 	{
 		return self::convert($text ?? '', false, $simple_html, false, $uriid ?? 0);
 	}
@@ -1312,7 +1300,7 @@ class BBCode
 	 * - 8: Used for Twitter, WP backlink text setting
 	 * - 9: ActivityPub
 	 *
-	 * @param string $text
+	 * @param ?string $text
 	 * @param bool   $embed
 	 * @param int    $simple_html
 	 * @param bool   $for_plaintext
@@ -1320,7 +1308,7 @@ class BBCode
 	 * @return string Converted code or empty string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function convert(string $text = null, bool $embed = true, int $simple_html = self::INTERNAL, bool $for_plaintext = false, int $uriid = 0): string
+	public static function convert(?string $text = null, bool $embed = true, int $simple_html = self::INTERNAL, bool $for_plaintext = false, int $uriid = 0): string
 	{
 		// Accounting for null default column values
 		if (is_null($text) || $text === '') {
@@ -2467,11 +2455,9 @@ class BBCode
 						$contact = Contact::getByURL($match[2]);
 						if (!empty($contact)) {
 							return $match[1] . '[url=' . $contact['url'] . ']' . $contact['name'] . '[/url]';
-						} else {
-							return $match[1] . $match[2];
 						}
-						break;
 
+						return $match[1] . $match[2];
 					case '#':
 					default:
 						return $match[1] . '[url=' . DI::baseUrl() . '/search?tag=' . urlencode($match[2]) . ']' . $match[2] . '[/url]';
@@ -2555,7 +2541,7 @@ class BBCode
 	 * @return string
 	 * @TODO Rewrite to handle over whole record array
 	 */
-	public static function getShareOpeningTag(string $author, string $profile, string $avatar, string $link, string $posted, string $guid = null, string $uri = null): string
+	public static function getShareOpeningTag(string $author, string $profile, string $avatar, string $link, string $posted, ?string $guid = null, ?string $uri = null): string
 	{
 		DI::profiler()->startRecording('rendering');
 		$header = "[share author='" . str_replace(["'", "[", "]"], ["&#x27;", "&#x5B;", "&#x5D;"], $author)
@@ -2593,7 +2579,7 @@ class BBCode
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @see ParseUrl::getSiteinfoCached
 	 */
-	public static function embedURL(string $url, bool $tryAttachment = true, string $title = null, string $description = null, string $tags = null): string
+	public static function embedURL(string $url, bool $tryAttachment = true, ?string $title = null, ?string $description = null, ?string $tags = null): string
 	{
 		DI::profiler()->startRecording('rendering');
 		DI::logger()->info($url);

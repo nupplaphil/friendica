@@ -10,13 +10,11 @@ namespace Friendica\Core\Worker;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
-use Friendica\Model\Contact;
 use Friendica\Model\GServer;
 use Friendica\Model\Post;
 use Friendica\Model\User;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Util\DateTimeFormat;
-use Friendica\Util\Strings;
 
 /**
  * Contains the class for jobs that are executed in an interval
@@ -221,26 +219,6 @@ class Cron
 			DI::logger()->info('Optimize start');
 			DI::deliveryQueueItemRepo()->optimizeStorage();
 			DI::logger()->info('Optimize end');
-		}
-	}
-
-	/**
-	 * Add missing "intro" records.
-	 *
-	 * @return void
-	 */
-	private static function addIntros()
-	{
-		$contacts = DBA::p("SELECT `uid`, `id`, `created` FROM `contact` WHERE `rel` = ? AND `pending` AND NOT `id` IN (SELECT `contact-id` FROM `intro`)", Contact::FOLLOWER);
-		while ($contact = DBA::fetch($contacts)) {
-			$fields = [
-				'uid'        => $contact['uid'],
-				'contact-id' => $contact['id'],
-				'datetime'   => $contact['created'],
-				'hash'       => Strings::getRandomHex(),
-			];
-			DI::logger()->notice('Adding missing intro', ['fields' => $fields]);
-			DBA::insert('intro', $fields);
 		}
 	}
 }

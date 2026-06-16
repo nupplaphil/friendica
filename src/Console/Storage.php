@@ -10,7 +10,6 @@ namespace Friendica\Console;
 use Asika\SimpleConsole\CommandArgsException;
 use Friendica\Core\Storage\Repository\StorageManager;
 use Friendica\Core\Storage\Exception\ReferenceStorageException;
-use Friendica\Core\Storage\Exception\StorageException;
 use Friendica\Database\DBA;
 use Friendica\Model\Contact;
 use Friendica\Model\Photo;
@@ -73,16 +72,12 @@ HELP;
 		switch ($this->args[0]) {
 			case 'list':
 				return $this->doList();
-				break;
 			case 'clear':
 				return $this->clear();
-				break;
 			case 'set':
 				return $this->doSet();
-				break;
 			case 'move':
 				return $this->doMove();
-				break;
 		}
 
 		$this->out(sprintf('Invalid action "%s"', $this->args[0]));
@@ -98,20 +93,16 @@ HELP;
 		$isregisterd = false;
 		foreach ($this->storageManager->listBackends() as $name) {
 			$issel = ' ';
-			if ($current && $current::getName() == $name) {
+			if ($current::getName() === $name) {
 				$issel       = '*';
 				$isregisterd = true;
 			};
 			$this->out(sprintf($rowfmt, $issel, $name));
 		}
 
-		if ($current === '') {
+		if (!$isregisterd) {
 			$this->out();
-			$this->out('This system is using legacy storage system');
-		}
-		if ($current !== '' && !$isregisterd) {
-			$this->out();
-			$this->out('The current storage class (' . $current . ') is not registered!');
+			$this->out('The current storage class (' . $current::getName() . ') is not registered!');
 		}
 		return 0;
 	}
@@ -172,10 +163,6 @@ HELP;
 
 		$current = $this->storageManager->getBackend();
 		$total   = 0;
-
-		if (is_null($current)) {
-			throw new StorageException(sprintf("Cannot move to legacy storage. Please select a storage backend."));
-		}
 
 		do {
 			$moved = $this->storageManager->move($current, $tables, $this->getOption('n', 5000));

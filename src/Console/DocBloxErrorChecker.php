@@ -35,8 +35,10 @@ class DocBloxErrorChecker extends \Asika\SimpleConsole\Console
 	/** @var string */
 	private $basePath;
 
-	public function __construct(AppHelper $appHelper, array $argv = null)
-	{
+	public function __construct(
+		AppHelper $appHelper,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 
 		$this->basePath = $appHelper->getBasePath();
@@ -190,10 +192,7 @@ HELP;
 		//filter working subsets...
 		$parts = array_filter($parts, $this->runs(...));
 		//melt remaining parts together
-		if (is_array($parts)) {
-			return array_reduce($parts, array_merge(...), []);
-		}
-		return [];
+		return array_reduce($parts, array_merge(...), []);
 	}
 
 }

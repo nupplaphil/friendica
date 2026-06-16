@@ -9,7 +9,6 @@ namespace Friendica\Console;
 
 use Asika\SimpleConsole\Console;
 use Exception;
-use Friendica\App\Mode;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Installer;
@@ -77,8 +76,12 @@ Examples
 HELP;
 	}
 
-	public function __construct(private readonly Mode $appMode, private readonly Cache $configCache, private readonly IManageConfigValues $config, private readonly Database $dba, array $argv = null)
-	{
+	public function __construct(
+		private readonly Cache $configCache,
+		private readonly IManageConfigValues $config,
+		private readonly Database $dba,
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 
@@ -158,12 +161,8 @@ HELP;
 				),
 			);
 
-			$php_path = $this->getOption(['b', 'phppath'], !empty('FRIENDICA_PHP_PATH') ? getenv('FRIENDICA_PHP_PATH') : null);
-			if (!empty($php_path)) {
-				$configCache->set('config', 'php_path', $php_path);
-			} else {
-				$configCache->set('config', 'php_path', $installer->getPHPPath());
-			}
+			$php_path = $this->getOption(['b', 'phppath'], !empty(getenv('FRIENDICA_PHP_PATH')) ? getenv('FRIENDICA_PHP_PATH') : null) ?? $installer->getPHPPath();
+			$configCache->set('config', 'php_path', $php_path);
 
 			$configCache->set(
 				'config',

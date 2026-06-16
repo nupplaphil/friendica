@@ -50,8 +50,9 @@ HELP;
 		return $help;
 	}
 
-	public function __construct(private readonly \Friendica\Database\Database $dba, array $argv = null)
-	{
+	public function __construct(
+		?array $argv = null,
+	) {
 		parent::__construct($argv);
 	}
 

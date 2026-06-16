@@ -11,7 +11,6 @@ use Friendica\BaseRepository;
 use Friendica\Content\Conversation\Collection\UserDefinedChannels;
 use Friendica\Content\Conversation\Entity\UserDefinedChannel as UserDefinedChannelEntity;
 use Friendica\Content\Conversation\Factory\UserDefinedChannel as UserDefinedChannelFactory;
-use Friendica\Core\Cache\Capability\ICanCache;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Protocol;
 use Friendica\Database\Database;
@@ -47,10 +46,13 @@ class UserDefinedChannel extends BaseRepository
 	 * @param LoggerInterface $logger Logger instance.
 	 * @param UserDefinedChannelFactory $factory Entity factory.
 	 * @param IManageConfigValues $config Configuration manager.
-	 * @param ICanCache $cache Cache capability.
 	 */
-	public function __construct(Database $database, LoggerInterface $logger, UserDefinedChannelFactory $factory, private readonly IManageConfigValues $config, private readonly ICanCache $cache)
-	{
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		UserDefinedChannelFactory $factory,
+		private readonly IManageConfigValues $config,
+	) {
 		parent::__construct($database, $logger, $factory);
 	}
 
@@ -210,7 +212,7 @@ class UserDefinedChannel extends BaseRepository
 		$usercondition = ['uid' => $uids];
 		$condition     = DBA::mergeConditions($usercondition, ["`languages` != ? AND `include-tags` = ? AND `full-text-search` = ? AND `circle` = ?", '', '', '', 0]);
 		foreach ($this->select($condition) as $channel) {
-			if (!empty($channel->languages) && in_array($language, $channel->languages)) {
+			if (in_array($language, $channel->languages)) {
 				return true;
 			}
 		}
@@ -262,7 +264,7 @@ class UserDefinedChannel extends BaseRepository
 				}
 
 				if (
-					($channel->circle ?? 0)
+					($channel->circle > 0)
 					&& !$this->inCircle($channel->circle, $channel->uid, $owner_id)
 					&& !$this->inCircle($channel->circle, $channel->uid, $reshare_id)
 				) {
@@ -552,7 +554,7 @@ class UserDefinedChannel extends BaseRepository
 	 * Convert include tag list into full-text search tag terms.
 	 *
 	 * @param string $includeTags Comma-separated include tags.
-	 * @return string Full-text search fragment or empty string.
+	 * @return non-empty-string Full-text search fragment or empty string.
 	 */
 	private function addIncludeTags(string $includeTags): string
 	{
@@ -561,11 +563,7 @@ class UserDefinedChannel extends BaseRepository
 			$tagterms .= ' tag:' . $tag;
 		}
 
-		if ($tagterms) {
-			return ' +(' . trim($tagterms) . ')';
-		} else {
-			return '';
-		}
+		return ' +(' . trim($tagterms) . ')';
 	}
 
 	/**
