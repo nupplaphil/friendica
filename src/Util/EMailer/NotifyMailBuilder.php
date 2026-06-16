@@ -56,8 +56,14 @@ class NotifyMailBuilder extends MailBuilder
 	/** @var string The item link */
 	private $itemLink = '';
 
-	public function __construct(L10n $l10n, BaseURL $baseUrl, IManageConfigValues $config, LoggerInterface $logger, string $siteEmailAddress, string $siteName)
-	{
+	public function __construct(
+		L10n $l10n,
+		BaseURL $baseUrl,
+		IManageConfigValues $config,
+		LoggerInterface $logger,
+		string $siteEmailAddress,
+		string $siteName,
+	) {
 		parent::__construct($l10n, $baseUrl, $config, $logger);
 
 		if ($this->config->get('config', 'admin_name')) {
@@ -89,7 +95,7 @@ class NotifyMailBuilder extends MailBuilder
 			$body = $preamble;
 		}
 
-		$this->title = stripslashes($title);
+		$this->title    = stripslashes($title);
 		$this->subject  = $subject;
 		$this->preamble = $preamble;
 		$this->body     = $body;

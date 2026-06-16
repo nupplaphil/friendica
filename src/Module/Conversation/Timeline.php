@@ -86,8 +86,24 @@ class Timeline extends BaseModule
 	/** @var UserDefinedChannel */
 	protected $channelRepository;
 
-	public function __construct(UserDefinedChannel $channel, Mode $mode, IHandleUserSessions $session, Database $database, IManagePersonalConfigValues $pConfig, IManageConfigValues $config, ICanCache $cache, protected ActivityFactory $activityFactory, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server = [], array $parameters = [])
-	{
+	public function __construct(
+		UserDefinedChannel $channel,
+		Mode $mode,
+		IHandleUserSessions $session,
+		Database $database,
+		IManagePersonalConfigValues $pConfig,
+		IManageConfigValues $config,
+		ICanCache $cache,
+		protected ActivityFactory $activityFactory,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server = [],
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->channelRepository = $channel;

@@ -314,7 +314,7 @@ class ClientToServer
 	{
 		$condition = [
 			'gravity' => [Item::GRAVITY_PARENT, Item::GRAVITY_COMMENT],
-			'private' => [Item::PUBLIC, Item::UNLISTED]
+			'private' => [Item::PUBLIC, Item::UNLISTED],
 		];
 
 		if (!empty($requester)) {
@@ -324,7 +324,7 @@ class ClientToServer
 				if (count($permissionSets) > 0) {
 					$condition = ['psid' => array_merge(
 						$permissionSets->column('id'),
-						[DI::permissionSet()->selectPublicForUser($owner['uid'])]
+						[DI::permissionSet()->selectPublicForUser($owner['uid'])],
 					)];
 				}
 			}
@@ -338,7 +338,7 @@ class ClientToServer
 			'parent-network' => Protocol::FEDERATED,
 			'origin'         => true,
 			'deleted'        => false,
-			'visible'        => true
+			'visible'        => true,
 		]);
 
 		$apcontact = APContact::getByURL($owner['url']);
@@ -357,7 +357,7 @@ class ClientToServer
 		$condition = [
 			'gravity' => [Item::GRAVITY_PARENT, Item::GRAVITY_COMMENT],
 			'network' => [Protocol::ACTIVITYPUB, Protocol::DFRN],
-			'uid'     => $uid
+			'uid'     => $uid,
 		];
 
 		return self::getCollection($condition, DI::baseUrl() . '/inbox/' . $owner['nickname'], $page, $max_id, $uid, null);
@@ -370,7 +370,7 @@ class ClientToServer
 			'private'        => Item::PUBLIC,
 			'network'        => [Protocol::ACTIVITYPUB, Protocol::DFRN],
 			'author-blocked' => false,
-			'author-hidden'  => false
+			'author-hidden'  => false,
 		];
 
 		return self::getCollection($condition, DI::baseUrl() . '/inbox', $page, $max_id, $uid, null);

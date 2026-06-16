@@ -51,8 +51,12 @@ abstract class MailBuilder
 	/** @var int|null */
 	protected $recipientUid = null;
 
-	public function __construct(L10n $l10n, BaseURL $baseUrl, IManageConfigValues $config, LoggerInterface $logger)
-	{
+	public function __construct(
+		L10n $l10n,
+		BaseURL $baseUrl,
+		IManageConfigValues $config,
+		LoggerInterface $logger,
+	) {
 		$this->l10n    = $l10n;
 		$this->baseUrl = $baseUrl;
 		$this->config  = $config;

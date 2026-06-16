@@ -27,7 +27,7 @@ class Cache
 	/**
 	 * @var string The default cache if nothing set
 	 */
-	const DEFAULT_TYPE = Type\DatabaseCache::NAME;
+	public const DEFAULT_TYPE = Type\DatabaseCache::NAME;
 	/** @var ICanCreateInstances */
 	protected $instanceCreator;
 	/** @var IManageConfigValues */
@@ -35,8 +35,11 @@ class Cache
 	/** @var Profiler */
 	protected $profiler;
 
-	public function __construct(ICanCreateInstances $instanceCreator, IManageConfigValues $config, Profiler $profiler)
-	{
+	public function __construct(
+		ICanCreateInstances $instanceCreator,
+		IManageConfigValues $config,
+		Profiler $profiler,
+	) {
 		$this->config          = $config;
 		$this->instanceCreator = $instanceCreator;
 		$this->profiler        = $profiler;

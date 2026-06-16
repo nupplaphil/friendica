@@ -28,8 +28,12 @@ require_once __DIR__ . '/../../../../static/dbstructure.config.php';
 
 class HttpClient extends BaseFactory
 {
-	public function __construct(LoggerInterface $logger, private readonly IManageConfigValues $config, private readonly Profiler $profiler, private readonly App\BaseURL $baseUrl)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly IManageConfigValues $config,
+		private readonly Profiler $profiler,
+		private readonly App\BaseURL $baseUrl,
+	) {
 		parent::__construct($logger);
 	}
 

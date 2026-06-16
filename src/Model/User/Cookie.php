@@ -44,8 +44,12 @@ class Cookie
 	 * @param BaseURL             $baseURL
 	 * @param array               $COOKIE The $_COOKIE array
 	 */
-	public function __construct(Request $request, IManageConfigValues $config, BaseURL $baseURL, array $COOKIE = [])
-	{
+	public function __construct(
+		Request $request,
+		IManageConfigValues $config,
+		BaseURL $baseURL,
+		array $COOKIE = [],
+	) {
 		$this->sslEnabled     = $baseURL->getScheme() === 'https';
 		$this->sitePrivateKey = $config->get('system', 'site_prvkey');
 

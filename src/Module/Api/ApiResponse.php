@@ -38,8 +38,15 @@ class ApiResponse extends Response
 	/** @var string */
 	protected $jsonpCallback;
 
-	public function __construct(L10n $l10n, Arguments $args, LoggerInterface $logger, BaseURL $baseUrl, TwitterUser $twitterUser, array $server = [], string $jsonpCallback = '')
-	{
+	public function __construct(
+		L10n $l10n,
+		Arguments $args,
+		LoggerInterface $logger,
+		BaseURL $baseUrl,
+		TwitterUser $twitterUser,
+		array $server = [],
+		string $jsonpCallback = '',
+	) {
 		$this->l10n          = $l10n;
 		$this->args          = $args;
 		$this->logger        = $logger;

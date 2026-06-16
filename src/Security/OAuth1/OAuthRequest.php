@@ -21,8 +21,11 @@ class OAuthRequest implements \Stringable
 	/**
 	 * @param array|null $parameters
 	 */
-	public function __construct(private $http_method, $http_url, $parameters = null)
-	{
+	public function __construct(
+		private $http_method,
+		$http_url,
+		$parameters = null,
+	) {
 		if (is_null($parameters)) {
 			$parameters = [];
 		}
