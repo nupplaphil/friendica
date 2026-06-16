@@ -7,8 +7,6 @@
 
 namespace Friendica\Model;
 
-use DivineOmega\DOFileCachePSR6\CacheItemPool;
-use DivineOmega\PasswordExposed;
 use ErrorException;
 use Exception;
 use Friendica\App;
@@ -36,6 +34,9 @@ use Friendica\Util\Network;
 use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use ImagickException;
+use JordJD\DOFileCachePSR6\CacheItemPool;
+use JordJD\PasswordExposed\Enums\PasswordStatus;
+use JordJD\PasswordExposed\PasswordExposedChecker;
 use LightOpenID;
 
 /**
@@ -930,9 +931,9 @@ class User
 		]);
 
 		try {
-			$passwordExposedChecker = new PasswordExposed\PasswordExposedChecker(null, $cache);
+			$passwordExposedChecker = new PasswordExposedChecker(null, $cache);
 
-			return $passwordExposedChecker->passwordExposed($password) === PasswordExposed\Enums\PasswordStatus::EXPOSED;
+			return $passwordExposedChecker->passwordExposed($password) === PasswordStatus::EXPOSED;
 		} catch (Exception $e) {
 			DI::logger()->error('Password Exposed Exception: ' . $e->getMessage(), [
 				'code'  => $e->getCode(),
