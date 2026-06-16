@@ -153,7 +153,7 @@ class Magic extends BaseModule
 
 		// Try to get an authentication token from the other instance.
 		try {
-			$curlResult = $this->httpClient->request('get', $openwebauth, [HttpClientOptions::HEADERS => $header]);
+			$curlResult = $this->httpClient->request('GET', $openwebauth, [HttpClientOptions::HEADERS => $header]);
 		} catch (Exception $exception) {
 			$this->logger->notice('URL is invalid, redirecting to destination.', ['url' => $openwebauth, 'error' => $exception, 'dest' => $dest]);
 			System::externalRedirect($dest);

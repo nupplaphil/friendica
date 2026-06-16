@@ -38,6 +38,7 @@ class HttpClient implements ICanSendHttpRequests
 	 */
 	public function request(string $method, string $url, array $opts = []): ICanHandleHttpResponses
 	{
+		$method = strtoupper($method);
 		$this->profiler->startRecording('network');
 		$this->logger->debug('Request start.', ['url' => $url, 'method' => $method]);
 
@@ -136,7 +137,7 @@ class HttpClient implements ICanSendHttpRequests
 			}
 		};
 
-		if (empty($conf[HttpClientOptions::HEADERS]['Accept']) && in_array($method, ['get', 'head'])) {
+		if (empty($conf[HttpClientOptions::HEADERS]['Accept']) && in_array($method, ['GET', 'HEAD'])) {
 			$this->logger->info('Accept header was missing, using default.', ['url' => $url]);
 			$conf[HttpClientOptions::HEADERS]['Accept'] = HttpClientAccept::DEFAULT;
 		}
@@ -178,7 +179,7 @@ class HttpClient implements ICanSendHttpRequests
 	 */
 	public function head(string $url, array $opts = []): ICanHandleHttpResponses
 	{
-		return $this->request('head', $url, $opts);
+		return $this->request('HEAD', $url, $opts);
 	}
 
 	/**
@@ -189,7 +190,7 @@ class HttpClient implements ICanSendHttpRequests
 		// In case there is no
 		$opts[HttpClientOptions::ACCEPT_CONTENT] ??= $accept_content;
 
-		return $this->request('get', $url, $opts);
+		return $this->request('GET', $url, $opts);
 	}
 
 	/**
@@ -217,7 +218,7 @@ class HttpClient implements ICanSendHttpRequests
 			$opts[HttpClientOptions::REQUEST] = $request;
 		}
 
-		return $this->request('post', $url, $opts);
+		return $this->request('POST', $url, $opts);
 	}
 
 	/**
