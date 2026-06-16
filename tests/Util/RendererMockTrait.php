@@ -24,7 +24,7 @@ trait RendererMockTrait
 	 * @param string   $return       the return value of the mock (should be defined to have it later for followUp use)
 	 * @param null|int $times        How often the method will get used
 	 */
-	public function mockGetMarkupTemplate(string $templateName, string $return = '', int $times = null)
+	public function mockGetMarkupTemplate(string $templateName, string $return = '', ?int $times = null)
 	{
 		if (!isset($this->rendererMock)) {
 			$this->rendererMock = \Mockery::mock('alias:' . Renderer::class);
@@ -45,7 +45,7 @@ trait RendererMockTrait
 	 * @param string              $return   the return value of the mock
 	 * @param null|int            $times    How often the method will get used
 	 */
-	public function mockReplaceMacros(string $template, $args = null, string $return = '', int $times = null)
+	public function mockReplaceMacros(string $template, $args = null, string $return = '', ?int $times = null)
 	{
 		if (!isset($this->rendererMock)) {
 			$this->rendererMock = \Mockery::mock('alias:' . Renderer::class);

@@ -97,7 +97,7 @@ interface IEmail extends JsonSerializable
 	 *
 	 * @return static
 	 */
-	function withMessage(string $plaintext, string $html = null);
+	function withMessage(string $plaintext, ?string $html = null);
 
 	/**
 	 * @return string

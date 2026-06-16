@@ -515,7 +515,7 @@ class Diaspora
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function dispatch(array $importer, array $msg, SimpleXMLElement $fields = null, int $direction = self::PUSHED)
+	public static function dispatch(array $importer, array $msg, ?SimpleXMLElement $fields = null, int $direction = self::PUSHED)
 	{
 		// The sender is the handle of the contact that sent the message.
 		// This will often be different with relayed messages (for example "like" and "comment")
@@ -1423,7 +1423,7 @@ class Diaspora
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	private static function getUriFromGuid(string $guid, WebFingerUri $person_uri = null): string
+	private static function getUriFromGuid(string $guid, ?WebFingerUri $person_uri = null): string
 	{
 		$item = Post::selectFirst(['uri'], ['guid' => $guid]);
 		if ($item) {

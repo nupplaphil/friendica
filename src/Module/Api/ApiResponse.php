@@ -187,7 +187,7 @@ class ApiResponse extends Response
 	 * @return void
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	public function error(int $code, string $description, string $message, string $format = null)
+	public function error(int $code, string $description, string $message, ?string $format = null)
 	{
 		$error = [
 			'error'   => $message ?: $description,
@@ -211,7 +211,7 @@ class ApiResponse extends Response
 	 * @return void
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	public function addFormattedContent(string $root_element, array $data, string $format = null, int $cid = 0)
+	public function addFormattedContent(string $root_element, array $data, ?string $format = null, int $cid = 0)
 	{
 		$format ??= 'json';
 

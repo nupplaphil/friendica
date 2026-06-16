@@ -40,7 +40,7 @@ class HttpClient extends BaseFactory
 	 *
 	 * @return ICanSendHttpRequests
 	 */
-	public function createClient(HandlerStack $handlerStack = null): ICanSendHttpRequests
+	public function createClient(?HandlerStack $handlerStack = null): ICanSendHttpRequests
 	{
 		$proxy = $this->config->get('system', 'proxy');
 

@@ -28,7 +28,7 @@ class TrustedBrowser
 
 	protected static $table_name = '2fa_trusted_browser';
 
-	public function __construct(Database $database, LoggerInterface $logger, TrustedBrowserFactory $factory = null)
+	public function __construct(Database $database, LoggerInterface $logger, ?TrustedBrowserFactory $factory = null)
 	{
 		$this->db      = $database;
 		$this->logger  = $logger;

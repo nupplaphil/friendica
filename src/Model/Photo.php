@@ -197,7 +197,7 @@ class Photo
 	 * @return array All photos of the user/album
 	 * @throws \Exception
 	 */
-	public static function getBrowsablePhotosForUser(int $uid, string $album = null): array
+	public static function getBrowsablePhotosForUser(int $uid, ?string $album = null): array
 	{
 		$values = [
 			$uid,
@@ -371,7 +371,7 @@ class Photo
 	 * @return array
 	 * @throws \Exception
 	 */
-	public static function createPhotoForExternalResource(string $url, int $uid = 0, string $mimetype = '', string $blurhash = null, int $width = null, int $height = null): array
+	public static function createPhotoForExternalResource(string $url, int $uid = 0, string $mimetype = '', ?string $blurhash = null, ?int $width = null, ?int $height = null): array
 	{
 		if (empty($mimetype)) {
 			$mimetype = Images::guessTypeByExtension($url);
@@ -536,7 +536,7 @@ class Photo
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @see   \Friendica\Database\DBA::update
 	 */
-	public static function update(array $fields, array $conditions, Image $image = null, array $old_fields = []): bool
+	public static function update(array $fields, array $conditions, ?Image $image = null, array $old_fields = []): bool
 	{
 		if (!is_null($image)) {
 			// get photo to update
@@ -1187,7 +1187,7 @@ class Photo
 	 * @return array photo record or empty array on error
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public static function upload(int $uid, array $files, string $album = '', string $allow_cid = null, string $allow_gid = null, string $deny_cid = '', string $deny_gid = '', string $desc = '', string $resource_id = ''): array
+	public static function upload(int $uid, array $files, string $album = '', ?string $allow_cid = null, ?string $allow_gid = null, string $deny_cid = '', string $deny_gid = '', string $desc = '', string $resource_id = ''): array
 	{
 		$user = User::getOwnerDataById($uid);
 		if (empty($user)) {

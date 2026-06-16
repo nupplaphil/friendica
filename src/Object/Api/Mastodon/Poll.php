@@ -47,7 +47,7 @@ class Poll extends BaseDataTransferObject
 	 * @param int   $votes    Number of total votes
 	 * @param array $ownvotes Own vote
 	 */
-	public function __construct(array $question, array $options, bool $expired, int $votes, array $ownvotes = null, bool $voted = null)
+	public function __construct(array $question, array $options, bool $expired, int $votes, ?array $ownvotes = null, ?bool $voted = null)
 	{
 		$this->id           = (string)$question['id'];
 		$this->expires_at   = !empty($question['end-time']) ? DateTimeFormat::utc($question['end-time'], DateTimeFormat::JSON) : null;

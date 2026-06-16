@@ -13,7 +13,7 @@ class FakeInstance implements IAmADecoratedInterface
 	protected $cBool = null;
 	protected $bText = null;
 
-	public function __construct(string $aText = null, bool $cBool = null, string $bText = null)
+	public function __construct(?string $aText = null, ?bool $cBool = null, ?string $bText = null)
 	{
 		$this->aText = $aText;
 		$this->cBool = $cBool;

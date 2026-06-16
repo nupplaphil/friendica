@@ -310,7 +310,7 @@ class ClientToServer
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function getOutbox(array $owner, int $uid, int $page = null, int $max_id = null, string $requester = ''): array
+	public static function getOutbox(array $owner, int $uid, ?int $page = null, ?int $max_id = null, string $requester = ''): array
 	{
 		$condition = [
 			'gravity' => [Item::GRAVITY_PARENT, Item::GRAVITY_COMMENT],
@@ -350,7 +350,7 @@ class ClientToServer
 		return self::getCollection($condition, DI::baseUrl() . '/outbox/' . $owner['nickname'], $page, $max_id, $uid, $apcontact['statuses_count']);
 	}
 
-	public static function getInbox(int $uid, int $page = null, int $max_id = null)
+	public static function getInbox(int $uid, ?int $page = null, ?int $max_id = null)
 	{
 		$owner = User::getOwnerDataById($uid);
 
@@ -363,7 +363,7 @@ class ClientToServer
 		return self::getCollection($condition, DI::baseUrl() . '/inbox/' . $owner['nickname'], $page, $max_id, $uid, null);
 	}
 
-	public static function getPublicInbox(int $uid, int $page = null, int $max_id = null)
+	public static function getPublicInbox(int $uid, ?int $page = null, ?int $max_id = null)
 	{
 		$condition = [
 			'gravity'        => [Item::GRAVITY_PARENT, Item::GRAVITY_COMMENT],
@@ -376,7 +376,7 @@ class ClientToServer
 		return self::getCollection($condition, DI::baseUrl() . '/inbox', $page, $max_id, $uid, null);
 	}
 
-	private static function getCollection(array $condition, string $path, int $page = null, int $max_id = null, int $uid = null, int $total_items = null)
+	private static function getCollection(array $condition, string $path, ?int $page = null, ?int $max_id = null, ?int $uid = null, ?int $total_items = null)
 	{
 		$data = ['@context' => ActivityPub::CONTEXT];
 

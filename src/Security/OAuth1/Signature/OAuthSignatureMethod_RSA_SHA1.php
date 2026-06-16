@@ -38,7 +38,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
 	// Either way should return a string representation of the certificate
 	abstract protected function fetch_private_cert(&$request);
 
-	public function build_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, \Friendica\Security\OAuth1\OAuthToken $token = null)
+	public function build_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, ?\Friendica\Security\OAuth1\OAuthToken $token = null)
 	{
 		$base_string          = $request->get_signature_base_string();
 		$request->base_string = $base_string;
@@ -58,7 +58,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
 		return base64_encode((string) $signature);
 	}
 
-	public function check_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, $signature, \Friendica\Security\OAuth1\OAuthToken $token = null)
+	public function check_signature(OAuthRequest $request, \Friendica\Security\OAuth1\OAuthConsumer $consumer, $signature, ?\Friendica\Security\OAuth1\OAuthToken $token = null)
 	{
 		$decoded_sig = base64_decode($signature);
 

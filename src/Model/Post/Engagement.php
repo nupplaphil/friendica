@@ -345,7 +345,7 @@ class Engagement
 		return $text;
 	}
 
-	public static function getMediaType(int $uri_id, int $quote_uri_id = null): int
+	public static function getMediaType(int $uri_id, ?int $quote_uri_id = null): int
 	{
 		$media = Post\Media::getByURIId($uri_id);
 		$type  = !empty($quote_uri_id) ? self::MEDIA_POST : self::MEDIA_NONE;

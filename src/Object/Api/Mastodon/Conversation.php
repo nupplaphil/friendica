@@ -30,7 +30,7 @@ class Conversation extends BaseDataTransferObject
 	 */
 	protected $last_status = null;
 
-	public function __construct(string $id, array $accounts, bool $unread, Status $last_status = null)
+	public function __construct(string $id, array $accounts, bool $unread, ?Status $last_status = null)
 	{
 		$this->id          = (string)$id;
 		$this->accounts    = $accounts;

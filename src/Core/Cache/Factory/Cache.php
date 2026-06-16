@@ -65,7 +65,7 @@ class Cache
 	 * @throws InvalidCacheDriverException In case the underlying cache driver isn't valid or not configured properly
 	 * @throws CachePersistenceException In case the underlying cache has errors during persistence
 	 */
-	public function createLocal(string $type = null): ICanCache
+	public function createLocal(?string $type = null): ICanCache
 	{
 		return $this->create($type ?? $this->config->get('system', 'cache_driver', self::DEFAULT_TYPE));
 	}

@@ -123,7 +123,7 @@ abstract class MailBuilder
 	 *
 	 * @return static
 	 */
-	public function withSender(string $name, string $address, string $noReply = null)
+	public function withSender(string $name, string $address, ?string $noReply = null)
 	{
 		$this->senderName    = $name;
 		$this->senderAddress = $address;

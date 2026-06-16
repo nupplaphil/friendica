@@ -257,7 +257,7 @@ class Delivery
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	private static function deliverDFRN(string $cmd, array $contact, array $owner, array $items, array $target_item, bool $public_message, bool $top_level, bool $followup, int $server_protocol = null): bool
+	private static function deliverDFRN(string $cmd, array $contact, array $owner, array $items, array $target_item, bool $public_message, bool $top_level, bool $followup, ?int $server_protocol = null): bool
 	{
 		$target_item_id = $target_item['guid'] ?? '' ?: $target_item['id'] ?? null;
 

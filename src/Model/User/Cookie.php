@@ -164,9 +164,9 @@ class Cookie
 	 *
 	 */
 	protected function setCookie(
-		string $value = null,
-		int $expire = null,
-		bool $secure = null,
+		?string $value = null,
+		?int $expire = null,
+		?bool $secure = null,
 	): bool {
 		return setcookie(self::NAME, (string) $value, ['expires' => $expire, 'path' => self::PATH, 'domain' => self::DOMAIN, 'secure' => $secure, 'httponly' => self::HTTPONLY]);
 	}

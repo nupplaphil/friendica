@@ -49,7 +49,7 @@ class DirectMessage extends BaseDataTransferObject
 	 * @param string $text
 	 * @param string $title
 	 */
-	public function __construct(array $mail, User $sender, User $recipient, string $text, string $title = null)
+	public function __construct(array $mail, User $sender, User $recipient, string $text, ?string $title = null)
 	{
 		$this->id                    = (int) $mail['id'];
 		$this->created_at            = DateTimeFormat::utc($mail['created'] ?? 'now', DateTimeFormat::API);

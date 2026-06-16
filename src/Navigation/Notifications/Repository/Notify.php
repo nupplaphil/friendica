@@ -67,7 +67,7 @@ class Notify extends BaseRepository
 		Emailer $emailer,
 		Factory\Notification $notification,
 		private readonly EventDispatcherInterface $eventDispatcher,
-		Factory\Notify $factory = null,
+		?Factory\Notify $factory = null,
 	) {
 		$this->l10n         = $l10n;
 		$this->baseUrl      = $baseUrl;

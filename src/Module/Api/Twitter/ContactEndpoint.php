@@ -41,7 +41,7 @@ abstract class ContactEndpoint extends BaseApi
 	 * @return int
 	 * @throws HTTPException\NotFoundException
 	 */
-	protected static function getUid(int $contact_id = null, string $screen_name = null)
+	protected static function getUid(?int $contact_id = null, ?string $screen_name = null)
 	{
 		$uid = self::getCurrentUserID();
 

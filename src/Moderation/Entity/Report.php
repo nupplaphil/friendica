@@ -74,8 +74,8 @@ final class Report extends \Friendica\BaseEntity
 		protected string $comment = '',
 		/** @var bool Whether this report should be forwarded to the remote server */
 		protected bool $forward = false,
-		Collection\Report\Posts $posts = null,
-		Collection\Report\Rules $rules = null,
+		?Collection\Report\Posts $posts = null,
+		?Collection\Report\Rules $rules = null,
 		/** @var string Remarks shared with the reporter */
 		protected string $publicRemarks = '',
 		/** @var string Remarks shared with the moderation team */

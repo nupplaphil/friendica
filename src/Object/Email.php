@@ -120,7 +120,7 @@ class Email implements IEmail
 	/**
 	 * {@inheritDoc}
 	 */
-	public function withRecipient(string $address, int $uid = null)
+	public function withRecipient(string $address, ?int $uid = null)
 	{
 		$newEmail            = clone $this;
 		$newEmail->toAddress = $address;
@@ -132,7 +132,7 @@ class Email implements IEmail
 	/**
 	 * {@inheritDoc}
 	 */
-	public function withMessage(string $plaintext, string $html = null)
+	public function withMessage(string $plaintext, ?string $html = null)
 	{
 		$newMail          = clone $this;
 		$newMail->msgText = $plaintext;

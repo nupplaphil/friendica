@@ -160,7 +160,7 @@ class StringsTest extends TestCase
 	 * @param int|null $length
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSubstringReplaceMultiByte')]
-	public function testSubstringReplaceMultiByte(string $expected, string $string, string $replacement, int $start, int $length = null)
+	public function testSubstringReplaceMultiByte(string $expected, string $string, string $replacement, int $start, ?int $length = null)
 	{
 		self::assertEquals(
 			$expected,

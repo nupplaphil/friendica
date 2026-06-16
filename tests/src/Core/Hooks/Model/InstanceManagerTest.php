@@ -78,7 +78,7 @@ class InstanceManagerTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testInstanceWithArgs(string $aString = null, bool $cBool = null, string $bString = null)
+	public function testInstanceWithArgs(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 
@@ -112,7 +112,7 @@ class InstanceManagerTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testInstanceWithTwoStrategies(string $aString = null, bool $cBool = null, string $bString = null)
+	public function testInstanceWithTwoStrategies(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 
@@ -175,7 +175,7 @@ class InstanceManagerTest extends MockedTestCase
 	 * Test in case there are already some rules
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testWithGivenRules(string $aString = null, bool $cBool = null, string $bString = null)
+	public function testWithGivenRules(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
 	{
 		$args = [];
 

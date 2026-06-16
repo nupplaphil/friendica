@@ -755,7 +755,7 @@ class Feed
 	 * @param string|null $basepath
 	 * @return string
 	 */
-	private static function getHostname(array $item, string $guid = null, string $basepath = null): string
+	private static function getHostname(array $item, ?string $guid = null, ?string $basepath = null): string
 	{
 		$host = parse_url((string) $item['plink'], PHP_URL_HOST);
 		if (!empty($host)) {

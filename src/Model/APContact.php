@@ -613,7 +613,7 @@ class APContact
 	 * @param int     $gsid   Global server id
 	 * @return void
 	 */
-	private static function unarchiveInbox(string $url, bool $shared, int $gsid = null)
+	private static function unarchiveInbox(string $url, bool $shared, ?int $gsid = null)
 	{
 		if (empty($url)) {
 			return;

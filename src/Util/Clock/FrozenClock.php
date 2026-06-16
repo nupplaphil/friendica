@@ -18,7 +18,7 @@ final class FrozenClock implements \Psr\Clock\ClockInterface
 	/** @var DateTimeImmutable */
 	private $now;
 
-	public function __construct(DateTimeImmutable $now = null)
+	public function __construct(?DateTimeImmutable $now = null)
 	{
 		$this->now = $now ?? new DateTimeImmutable('now', new \DateTimeZone('UTC'));
 	}

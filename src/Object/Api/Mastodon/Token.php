@@ -36,7 +36,7 @@ class Token extends BaseDataTransferObject
 	 * @param string $created_at   Creation date of the token 
 	 * @param string $me           Actor profile of the token owner
 	 */
-	public function __construct(string $access_token, string $token_type, string $scope, string $created_at, string $me = null)
+	public function __construct(string $access_token, string $token_type, string $scope, string $created_at, ?string $me = null)
 	{
 		$this->access_token = $access_token;
 		$this->token_type   = $token_type;

@@ -190,7 +190,7 @@ class Notification extends BaseRepository
 	 * @throws Exception
 	 * @see _selectByBoundaries
 	 */
-	public function selectByBoundaries(array $condition = [], array $params = [], int $min_id = null, int $max_id = null, int $limit = self::LIMIT)
+	public function selectByBoundaries(array $condition = [], array $params = [], ?int $min_id = null, ?int $max_id = null, int $limit = self::LIMIT)
 	{
 		$BaseCollection = parent::_selectByBoundaries($condition, $params, $min_id, $max_id, $limit);
 

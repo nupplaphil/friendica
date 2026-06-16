@@ -19,7 +19,7 @@ final class SystemClock implements \Psr\Clock\ClockInterface
 	/** @var DateTimeZone */
 	private $timezone;
 
-	public function __construct(DateTimeZone $timezone = null)
+	public function __construct(?DateTimeZone $timezone = null)
 	{
 		$this->timezone = $timezone ?? new DateTimeZone('UTC');
 	}

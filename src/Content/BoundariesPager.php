@@ -35,7 +35,7 @@ class BoundariesPager extends Pager
 	 * @param string  $last_item_id  The id† of the last item in the displayed item list
 	 * @param integer $itemsPerPage  An optional number of items per page to override the default value
 	 */
-	public function __construct(L10n $l10n, string $queryString, string $first_item_id = null, string $last_item_id = null, int $itemsPerPage = 50)
+	public function __construct(L10n $l10n, string $queryString, ?string $first_item_id = null, ?string $last_item_id = null, int $itemsPerPage = 50)
 	{
 		parent::__construct($l10n, $queryString, $itemsPerPage);
 

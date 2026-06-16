@@ -29,7 +29,7 @@ class DatabaseException extends Exception
 	 * @param string         $query    The Database error query.
 	 * @param Throwable|null $previous [optional] The previous throwable used for the exception chaining.
 	 */
-	public function __construct(string $message, int $code, string $query, Throwable $previous = null)
+	public function __construct(string $message, int $code, string $query, ?Throwable $previous = null)
 	{
 		parent::__construct(sprintf('"%s" at "%s"', $message, $query) , $code, $previous);
 		$this->query = $query;

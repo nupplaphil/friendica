@@ -147,7 +147,7 @@ class Transmitter
 	 * @return array of owners
 	 * @throws \Exception
 	 */
-	public static function getContacts(array $owner, array $rel, string $module, int $page = null, string $requester = null, bool $nocache = false): array
+	public static function getContacts(array $owner, array $rel, string $module, ?int $page = null, ?string $requester = null, bool $nocache = false): array
 	{
 		if (empty($page)) {
 			$cachekey = self::CACHEKEY_CONTACTS . $module . ':' . $owner['uid'];
@@ -238,7 +238,7 @@ class Transmitter
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function getFeatured(array $owner, int $page = null, bool $nocache = false): array
+	public static function getFeatured(array $owner, ?int $page = null, bool $nocache = false): array
 	{
 		if (empty($page)) {
 			$cachekey = self::CACHEKEY_FEATURED . $owner['uid'];

@@ -220,7 +220,7 @@ class Timeline extends BaseModule
 		return $tabs;
 	}
 
-	public function getChannelItemsForAPI(string $channel, int $uid, int $limit, int $min = null, int $max = null): array
+	public function getChannelItemsForAPI(string $channel, int $uid, int $limit, ?int $min = null, ?int $max = null): array
 	{
 		$this->itemsPerPage = $limit;
 		$this->itemUriId    = 0;

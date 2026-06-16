@@ -315,7 +315,7 @@ class Temporal
 	 *
 	 * @return string with relative date
 	 */
-	public static function getRelativeDate(string $posted_date = null, bool $compare_time = true, ClockInterface $clock = null): string
+	public static function getRelativeDate(?string $posted_date = null, bool $compare_time = true, ?ClockInterface $clock = null): string
 	{
 		if (empty($posted_date) || $posted_date <= DBA::NULL_DATETIME) {
 			return DI::l10n()->t('never');
