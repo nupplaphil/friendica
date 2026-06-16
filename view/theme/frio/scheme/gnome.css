@@ -466,6 +466,10 @@ aside {
   }
 }
 
+.nav .open > .btn-link {
+  background-color: var(--bg-tertiary) !important;
+}
+
 .wall-item-name-link {
   color: var(--text-primary);
   font-weight: bold;
