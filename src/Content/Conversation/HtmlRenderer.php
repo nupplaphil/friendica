@@ -256,7 +256,10 @@ final class HtmlRenderer
 				continue;
 			}
 
-			$threads[] = $this->getRootTemplateData($uriId, $viewerUid, $maxComments, $mode);
+			$thread = $this->getRootTemplateData($uriId, $viewerUid, $maxComments, $mode);
+			if (!is_null($thread)) {
+				$threads[] = $thread;
+			}
 		}
 
 		return $this->renderConversation($threads, $mode);
