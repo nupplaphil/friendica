@@ -80,14 +80,14 @@ class GuzzleResponse extends Response implements ICanHandleHttpResponses, Respon
 
 	private function checkRedirect(ResponseInterface $response)
 	{
-		$headersRedirect = $response->getHeader(RedirectMiddleware::HISTORY_HEADER) ?? [];
+		$headersRedirect = $response->getHeader(RedirectMiddleware::HISTORY_HEADER);
 
 		if (count($headersRedirect) > 0) {
 			$this->redirectUrl   = end($headersRedirect);
 			$this->isRedirectUrl = true;
 
 			$this->redirectIsPermanent = true;
-			foreach (($response->getHeader(RedirectMiddleware::STATUS_HISTORY_HEADER) ?? []) as $history) {
+			foreach (($response->getHeader(RedirectMiddleware::STATUS_HISTORY_HEADER)) as $history) {
 				if (preg_match('/30(2|3|4|7)/', $history)) {
 					$this->redirectIsPermanent = false;
 				}
