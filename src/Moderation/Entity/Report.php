@@ -52,10 +52,6 @@ final class Report extends \Friendica\BaseEntity
 
 	public const RESOLUTION_ACCEPTED = 0;
 	public const RESOLUTION_REJECTED = 1;
-	/** @var Collection\Report\Rules List of terms of service rule lines being possibly violated */
-	protected $rules;
-	/** @var Collection\Report\Posts List of URI IDs of posts supporting the report */
-	protected $posts;
 
 	public function __construct(
 		/** @var int ID of the contact making a moderation report */
@@ -74,8 +70,8 @@ final class Report extends \Friendica\BaseEntity
 		protected string $comment = '',
 		/** @var bool Whether this report should be forwarded to the remote server */
 		protected bool $forward = false,
-		?Collection\Report\Posts $posts = null,
-		?Collection\Report\Rules $rules = null,
+		protected ?Collection\Report\Posts $posts = new Collection\Report\Posts(),
+		protected ?Collection\Report\Rules $rules = new Collection\Report\Rules(),
 		/** @var string Remarks shared with the reporter */
 		protected string $publicRemarks = '',
 		/** @var string Remarks shared with the moderation team */
@@ -91,8 +87,5 @@ final class Report extends \Friendica\BaseEntity
 		/** @var int|null Last editor user ID if any */
 		protected ?int $lastEditorUid = null,
 		protected ?int $id = null,
-	) {
-		$this->posts = $posts ?? new Collection\Report\Posts();
-		$this->rules = $rules ?? new Collection\Report\Rules();
-	}
+	) {}
 }
