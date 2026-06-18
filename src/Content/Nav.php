@@ -306,6 +306,8 @@ class Nav
 		// Show the link to the admin configuration page if user is admin
 		if ($this->session->isSiteAdmin()) {
 			$nav['admin']      = ['admin/', $this->l10n->t('Admin'), '', $this->l10n->t('Site setup and configuration')];
+		}
+		if ($this->session->isModerator()) {
 			$nav['moderation'] = ['moderation/', $this->l10n->t('Moderation'), '', $this->l10n->t('Content and user moderation')];
 		}
 
