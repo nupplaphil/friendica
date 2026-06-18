@@ -72,7 +72,7 @@ class Timeline extends \Friendica\BaseEntity
 		?string $fullTextSearch = null,
 		?int $mediaType = null,
 		?int $circle = null,
-		array $languages = [],
+		?array $languages = null,
 		?bool $publish = null,
 		?bool $valid = null,
 		?int $minSize = null,
