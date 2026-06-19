@@ -90,7 +90,7 @@ class Conversation
 		if ($x['is_owner'] == false) {
 			return $o;
 		}
-		
+
 		$jotplugins = $this->eventDispatcher->dispatch(
 			new HtmlFilterEvent(HtmlFilterEvent::JOT_TOOL, ''),
 		)->getHtml();
