@@ -567,7 +567,7 @@ class L10n
 	 * */
 	public function langToLocaleCode($lang)
 	{
-		return preg_replace_callback("/([a-z]+)-([a-z]+)/", fn ($m) => $m[1] . "_" . strtoupper($m[2]), $lang);
+		return preg_replace_callback("/([a-z]+)-([a-z]+)/", fn ($m): string => $m[1] . "_" . strtoupper((string) $m[2]), $lang);
 	}
 
 	/**
