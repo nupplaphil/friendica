@@ -2174,7 +2174,7 @@ class BBCode
 		// sanitizes src attributes (http and redir URLs for displaying in a web page, cid used for inline images in emails)
 		$allowed_src_protocols = ['//', 'http://', 'https://', 'contact/redir/', 'cid:'];
 
-		array_walk($allowed_src_protocols, function (&$value) {
+		array_walk($allowed_src_protocols, function (&$value): void {
 			$value = preg_quote($value, '#');
 		});
 
@@ -2194,7 +2194,7 @@ class BBCode
 		$allowed_link_protocols[] = 'https://';
 		$allowed_link_protocols[] = 'contact/redir/';
 
-		array_walk($allowed_link_protocols, function (&$value) {
+		array_walk($allowed_link_protocols, function (&$value): void {
 			$value = preg_quote($value, '#');
 		});
 
@@ -2386,7 +2386,7 @@ class BBCode
 		DI::profiler()->startRecording('rendering');
 		$ret = [];
 
-		self::performWithEscapedTags($string, ['noparse', 'pre', 'code', 'img', 'attachment'], function ($string) use (&$ret) {
+		self::performWithEscapedTags($string, ['noparse', 'pre', 'code', 'img', 'attachment'], function ($string) use (&$ret): void {
 			// Convert hashtag links to hashtags
 			$string = preg_replace('/#\[url\=([^\[\]]*)\](.*?)\[\/url\]/ism', '#$2 ', (string) $string);
 

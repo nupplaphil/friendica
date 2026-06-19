@@ -140,7 +140,7 @@ HELP;
 		if ($daemonMode == "start") {
 			$this->out("Starting Jetstream daemon");
 
-			$this->daemon->start(function () {
+			$this->daemon->start(function (): void {
 				$this->jetstream->listen();
 			}, $foreground);
 

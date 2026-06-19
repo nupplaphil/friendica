@@ -231,7 +231,7 @@ HELP;
 		$table = new Console_Table();
 		$table->setHeaders(['ID', 'UID', 'Network', 'Name', 'Nick', 'URL', 'E-Mail', 'Created', 'Updated', 'Blocked', 'Deleted']);
 
-		$addRow = function ($row) use (&$table) {
+		$addRow = function ($row) use (&$table): void {
 			$table->addRow([
 				$row['id'],
 				$row['uid'],

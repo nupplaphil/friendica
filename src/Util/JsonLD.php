@@ -119,7 +119,7 @@ class JsonLD
 	{
 		$valid = true;
 
-		array_walk_recursive($data, function (&$value, $key) use ($data, &$valid) {
+		array_walk_recursive($data, function (&$value, $key) use ($data, &$valid): void {
 			$suspicious = ['@graph', '@included', '@reverse'];
 			if (in_array((string) $key, $suspicious) || in_array((string) $value, $suspicious)) {
 				DI::logger()->warning('Document with suspicious commands.', ['key' => $key, 'value' => $value, 'document' => $data]);
@@ -249,7 +249,7 @@ class JsonLD
 		}
 
 		// Issue 14448: Peertube transmits an unexpected type and schema URL.
-		array_walk_recursive($json['@context'], function (&$value, $key) {
+		array_walk_recursive($json['@context'], function (&$value, $key): void {
 			if ($key == '@type' && $value == '@json') {
 				DI::logger()->debug('"@json" converted to "@id"');
 				$value = '@id';
@@ -266,7 +266,7 @@ class JsonLD
 		});
 
 		// Bookwyrm transmits "id" fields with "null", which isn't allowed.
-		array_walk_recursive($json, function (&$value, $key) {
+		array_walk_recursive($json, function (&$value, $key): void {
 			if ($key == 'id' && is_null($value)) {
 				DI::logger()->debug('Fixed null id');
 				$value = '';

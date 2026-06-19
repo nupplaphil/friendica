@@ -129,7 +129,7 @@ final class MediaType implements \Stringable
 	{
 		$parameters = $this->parameters;
 
-		array_walk($parameters, function (&$value, $key) {
+		array_walk($parameters, function (&$value, $key): void {
 			$value = '; ' . $key . '=' . (self::isToken($value) ? $value : '"' . addcslashes($value, '"\\') . '"');
 		});
 

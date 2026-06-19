@@ -98,7 +98,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 		$this->configMock->shouldReceive('get')->andReturnUsing(function ($cat, $key) {
 			return $this->configCache->get($cat, $key);
 		});
-		$this->configMock->shouldReceive('load')->andReturnUsing(function ($config, $overwrite = false) {
+		$this->configMock->shouldReceive('load')->andReturnUsing(function ($config, $overwrite = false): void {
 			$this->configCache->load($config, $overwrite);
 		});
 
@@ -558,7 +558,7 @@ CONF;
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 
-		$option = function ($var, $cat, $key) use ($data, $console) {
+		$option = function ($var, $cat, $key) use ($data, $console): void {
 			if (!empty($data[$cat][$key])) {
 				$console->setOption($var, $data[$cat][$key]);
 			}

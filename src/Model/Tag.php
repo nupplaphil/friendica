@@ -670,7 +670,7 @@ class Tag
 			return '';
 		}
 
-		array_walk($blocked, function (&$value) {
+		array_walk($blocked, function (&$value): void {
 			$value = "'" . DBA::escape(trim($value)) . "'";
 		});
 		return ' AND NOT `name` IN (' . implode(',', $blocked) . ')';

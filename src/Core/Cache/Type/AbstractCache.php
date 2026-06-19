@@ -55,7 +55,7 @@ abstract class AbstractCache implements ICanCache
 			return [];
 		} else {
 			// Keys are prefixed with the node hostname, let's remove it
-			array_walk($keys, function (&$value) {
+			array_walk($keys, function (&$value): void {
 				$value = preg_replace('/^' . $this->hostName . ':/', '', $value);
 			});
 

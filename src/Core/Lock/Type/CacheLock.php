@@ -122,7 +122,7 @@ class CacheLock extends AbstractLock
 			throw new LockPersistenceException(sprintf('Cannot get locks with prefix %s', $prefix), $exception);
 		}
 
-		array_walk($locks, function (&$lock) {
+		array_walk($locks, function (&$lock): void {
 			$lock = substr($lock, strlen(self::CACHE_PREFIX));
 		});
 

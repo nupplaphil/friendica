@@ -198,7 +198,7 @@ class Widget
 			$baseUrl = trim($baseUrl, '?') . '?';
 		}
 
-		array_walk($options, function (&$value) {
+		array_walk($options, function (&$value): void {
 			$value['ref'] = rawurlencode((string) $value['ref']);
 		});
 

@@ -62,7 +62,7 @@ class HttpClient extends BaseFactory
 			RequestInterface $request,
 			ResponseInterface $response,
 			UriInterface $uri,
-		) use ($logger) {
+		) use ($logger): void {
 			$logger->info('Curl redirect.', ['url' => $request->getUri(), 'to' => $uri, 'method' => $request->getMethod()]);
 		};
 
