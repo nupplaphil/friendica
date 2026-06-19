@@ -119,14 +119,14 @@ G1vVmRgkLDqhc4+r3wDz3qy6JpV7tg==
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataParseSigned')]
-	public function testParseSigheader(string $signature, array $assertion)
+	public function testParseSigheader(string $signature, array $assertion): void
 	{
 		$headers = HTTPSignature::parseSigheader($signature);
 		self::assertEquals($assertion, $headers);
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataHeader')]
-	public function testSignHeader(string $privKey, string $keyId, array $header, string $signature)
+	public function testSignHeader(string $privKey, string $keyId, array $header, string $signature): void
 	{
 		$signed = HTTPSignature::createSig($header, $privKey, $keyId);
 		self::assertEquals($signature, $signed['Authorization'][0]);

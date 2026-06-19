@@ -33,7 +33,7 @@ class DependencyCheckTest extends FixtureTestCase
 	/**
 	 * Test the creation of the BasePath
 	 */
-	public function testBasePath()
+	public function testBasePath(): void
 	{
 		/** @var BasePath $basePath */
 		$basePath = $this->dice->create(BasePath::class, [$this->root->url()]);
@@ -49,7 +49,7 @@ class DependencyCheckTest extends FixtureTestCase
 	 * Test the initial config cache
 	 * Should not need any other files
 	 */
-	public function testConfigFileLoader()
+	public function testConfigFileLoader(): void
 	{
 		/** @var ConfigFileManager $configFileManager */
 		$configFileManager = $this->dice->create(ConfigFileManager::class);
@@ -64,7 +64,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertArrayHasKey('system', $configCache->getAll());
 	}
 
-	public function testDatabase()
+	public function testDatabase(): void
 	{
 		/** @var Database $database */
 		$database = $this->dice->create(Database::class);
@@ -80,7 +80,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertTrue($database->connected(), 'The database is not connected');
 	}
 
-	public function testAppMode()
+	public function testAppMode(): void
 	{
 		/** @var App\Mode $mode */
 		$mode = $this->dice->create(App\Mode::class);
@@ -94,7 +94,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertTrue($mode->isNormal(), 'Not in normal mode');
 	}
 
-	public function testConfiguration()
+	public function testConfiguration(): void
 	{
 		/** @var IManageConfigValues $config */
 		$config = $this->dice->create(IManageConfigValues::class);
@@ -104,7 +104,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertNotEmpty($config->get('database', 'username'));
 	}
 
-	public function testLogger()
+	public function testLogger(): void
 	{
 		/** @var LoggerInterface $logger */
 		$logger = $this->dice->create(LoggerInterface::class, [['$channel' => 'test']]);
@@ -112,7 +112,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertInstanceOf(LoggerInterface::class, $logger);
 	}
 
-	public function testCache()
+	public function testCache(): void
 	{
 		/** @var ICanCache $cache */
 		$cache = $this->dice->create(ICanCache::class);
@@ -121,7 +121,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertInstanceOf(ICanCache::class, $cache);
 	}
 
-	public function testMemoryCache()
+	public function testMemoryCache(): void
 	{
 		/** @var ICanCacheInMemory $cache */
 		$cache = $this->dice->create(ICanCacheInMemory::class);
@@ -130,7 +130,7 @@ class DependencyCheckTest extends FixtureTestCase
 		self::assertInstanceOf(ICanCache::class, $cache);
 	}
 
-	public function testLock()
+	public function testLock(): void
 	{
 		/** @var ICanLock $cache */
 		$lock = $this->dice->create(ICanLock::class);

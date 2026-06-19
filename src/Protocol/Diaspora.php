@@ -942,7 +942,7 @@ class Diaspora
 	{
 		preg_replace_callback(
 			"=diaspora://.*?/post/([0-9A-Za-z\-_@.:]{15,254}[0-9A-Za-z])=ism",
-			function ($match) use ($item) {
+			function ($match) use ($item): void {
 				self::fetchGuidSub($match, $item);
 			},
 			(string) $item['body'],
@@ -950,7 +950,7 @@ class Diaspora
 
 		preg_replace_callback(
 			"&\[url=/?posts/([^\[\]]*)\](.*)\[\/url\]&Usi",
-			function ($match) use ($item) {
+			function ($match) use ($item): void {
 				self::fetchGuidSub($match, $item);
 			},
 			(string) $item['body'],

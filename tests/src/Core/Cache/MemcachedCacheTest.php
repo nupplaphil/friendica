@@ -53,7 +53,7 @@ class MemcachedCacheTest extends MemoryCacheTestCase
 		static::markTestIncomplete('Race condition because of too fast getAllKeys() which uses a workaround');
 	}
 
-	public function testStats()
+	public function testStats(): void
 	{
 		$stats = $this->instance->getStats();
 

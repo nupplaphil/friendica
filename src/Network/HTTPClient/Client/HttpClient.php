@@ -128,7 +128,7 @@ class HttpClient implements ICanSendHttpRequests
 			$conf[RequestOptions::AUTH] = $opts[HttpClientOptions::AUTH];
 		}
 
-		$conf[RequestOptions::ON_HEADERS] = function (ResponseInterface $response) use ($opts) {
+		$conf[RequestOptions::ON_HEADERS] = function (ResponseInterface $response) use ($opts): void {
 			if (
 				!empty($opts[HttpClientOptions::CONTENT_LENGTH])
 				&& (int) $response->getHeaderLine('Content-Length') > $opts[HttpClientOptions::CONTENT_LENGTH]

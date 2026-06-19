@@ -160,7 +160,7 @@ abstract class ContactEndpoint extends BaseApi
 		}
 
 		if ($stringify_ids) {
-			array_walk($ids, function (&$contactId) {
+			array_walk($ids, function (&$contactId): void {
 				$contactId = (string) $contactId;
 			});
 		}

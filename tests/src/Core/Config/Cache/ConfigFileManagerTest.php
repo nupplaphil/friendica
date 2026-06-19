@@ -28,7 +28,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test the loadConfigFiles() method with default values
 	 */
-	public function testLoadConfigFiles()
+	public function testLoadConfigFiles(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -50,7 +50,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	 * Test the loadConfigFiles() method with a wrong local.config.php
 	 *
 	 */
-	public function testLoadConfigWrong()
+	public function testLoadConfigWrong(): void
 	{
 		$this->expectExceptionMessageMatches("/Error loading config file \w+/");
 		$this->expectException(\Exception::class);
@@ -74,7 +74,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test the loadConfigFiles() method with a local.config.php file
 	 */
-	public function testLoadConfigFilesLocal()
+	public function testLoadConfigFilesLocal(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -112,7 +112,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test the loadConfigFile() method with a local.ini.php file
 	 */
-	public function testLoadConfigFilesINI()
+	public function testLoadConfigFilesINI(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -149,7 +149,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test the loadConfigFile() method with a .htconfig.php file
 	 */
-	public function testLoadConfigFilesHtconfig()
+	public function testLoadConfigFilesHtconfig(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -196,7 +196,7 @@ class ConfigFileManagerTest extends MockedTestCase
 		self::assertEquals('1', $configCache->get('system', 'no_regfullname'));
 	}
 
-	public function testLoadAddonConfig()
+	public function testLoadAddonConfig(): void
 	{
 		$structure = [
 			'addon' => [
@@ -240,7 +240,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * test loading multiple config files - the last config should work
 	 */
-	public function testLoadMultipleConfigs()
+	public function testLoadMultipleConfigs(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -275,7 +275,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * test loading multiple config files - the last config should work (INI-version)
 	 */
-	public function testLoadMultipleInis()
+	public function testLoadMultipleInis(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -310,7 +310,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test that sample-files (e.g. local-sample.config.php) is never loaded
 	 */
-	public function testNotLoadingSamples()
+	public function testNotLoadingSamples(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -346,7 +346,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test that using a wrong configuration directory leads to the "normal" config path
 	 */
-	public function testWrongEnvDir()
+	public function testWrongEnvDir(): void
 	{
 		$this->delConfigFile('local.config.php');
 
@@ -365,7 +365,7 @@ class ConfigFileManagerTest extends MockedTestCase
 	/**
 	 * Test that a different location of the configuration directory produces the expected output
 	 */
-	public function testRightEnvDir()
+	public function testRightEnvDir(): void
 	{
 		$this->delConfigFile('local.config.php');
 

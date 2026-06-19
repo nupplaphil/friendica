@@ -19,7 +19,7 @@ class SentTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesBoxWithVerbose()
+	public function testApiDirectMessagesBoxWithVerbose(): void
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
@@ -39,7 +39,7 @@ class SentTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesBoxWithRss()
+	public function testApiDirectMessagesBoxWithRss(): void
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 

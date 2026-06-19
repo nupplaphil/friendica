@@ -27,7 +27,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
-	public function testCompareSet($value1, $value2, $value3, $value4)
+	public function testCompareSet($value1, $value2, $value3, $value4): void
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -41,7 +41,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
-	public function testNegativeCompareSet($value1, $value2, $value3, $value4)
+	public function testNegativeCompareSet($value1, $value2, $value3, $value4): void
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -56,7 +56,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
-	public function testCompareDelete($value1, $value2, $value3, $value4)
+	public function testCompareDelete($value1, $value2, $value3, $value4): void
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -68,7 +68,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
-	public function testNegativeCompareDelete($value1, $value2, $value3, $value4)
+	public function testNegativeCompareDelete($value1, $value2, $value3, $value4): void
 	{
 		self::assertNull($this->instance->get('value1'));
 
@@ -83,7 +83,7 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSimple')]
-	public function testAdd($value1, $value2, $value3, $value4)
+	public function testAdd($value1, $value2, $value3, $value4): void
 	{
 		self::assertNull($this->instance->get('value1'));
 

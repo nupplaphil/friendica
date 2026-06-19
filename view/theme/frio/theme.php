@@ -37,7 +37,7 @@ const FRIO_CUSTOM_SCHEME  = '---';
  * This script can be included even when the app is in maintenance mode which requires us to avoid any config call
  */
 
-function frio_init(AppHelper $appHelper)
+function frio_init(AppHelper $appHelper): void
 {
 	global $frio;
 	$frio = 'view/theme/frio';
@@ -55,7 +55,7 @@ EOT;
 	}
 }
 
-function frio_install()
+function frio_install(): void
 {
 	Hook::register('prepare_body_final', 'view/theme/frio/theme.php', 'frio_item_photo_links');
 	Hook::register('item_photo_menu', 'view/theme/frio/theme.php', 'frio_item_photo_menu');
@@ -77,7 +77,7 @@ function frio_install()
  *
  * @param array $body_info The item and its html output
  */
-function frio_item_photo_links(&$body_info)
+function frio_item_photo_links(&$body_info): void
 {
 	$occurence = 0;
 	$p         = Plaintext::getBoundariesPosition($body_info['html'], '<a', '>');
@@ -112,7 +112,7 @@ function frio_item_photo_links(&$body_info)
  *
  * @param array $arr Contains item data and the original photo_menu
  */
-function frio_item_photo_menu(&$arr)
+function frio_item_photo_menu(&$arr): void
 {
 	foreach ($arr['menu'] as $k => $v) {
 		if (str_starts_with((string) $v, 'message/new/')) {
@@ -133,7 +133,7 @@ function frio_item_photo_menu(&$arr)
  *
  * @param array $args Contains contact data and the original photo_menu
  */
-function frio_contact_photo_menu(&$args)
+function frio_contact_photo_menu(&$args): void
 {
 	$cid = $args['contact']['id'];
 
@@ -181,7 +181,7 @@ function frio_contact_photo_menu(&$args)
  * @param array $nav_info The original nav info array: nav, banner, userinfo, sitelocation
  * @throws Exception
  */
-function frio_remote_nav(array &$nav_info)
+function frio_remote_nav(array &$nav_info): void
 {
 	if (DI::mode()->has(Mode::MAINTENANCEDISABLED)) {
 		// get the homelink from $_SESSION
@@ -231,7 +231,7 @@ function frio_remote_nav(array &$nav_info)
 	}
 }
 
-function frio_display_item(&$arr)
+function frio_display_item(&$arr): void
 {
 	// Add follow to the item menu
 	$followThread = [];

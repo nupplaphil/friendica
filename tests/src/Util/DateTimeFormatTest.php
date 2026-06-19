@@ -55,7 +55,7 @@ class DateTimeFormatTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataYearMonth')]
-	public function testIsYearMonth(string $input, bool $assert)
+	public function testIsYearMonth(string $input, bool $assert): void
 	{
 		$dtFormat = new DateTimeFormat();
 
@@ -67,7 +67,7 @@ class DateTimeFormatTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDate()
+	public function testApiDate(): void
 	{
 		self::assertEquals('Wed Oct 10 00:00:00 +0000 1990', DateTimeFormat::utc('1990-10-10', DateTimeFormat::API));
 	}
@@ -178,7 +178,7 @@ class DateTimeFormatTest extends MockedTestCase
 	 * @throws \Exception
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataFix')]
-	public function testFix($expectedDate, $dateString)
+	public function testFix($expectedDate, $dateString): void
 	{
 		$fixed = DateTimeFormat::fix($dateString);
 
@@ -191,7 +191,7 @@ class DateTimeFormatTest extends MockedTestCase
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function testConvertRelative()
+	public function testConvertRelative(): void
 	{
 		$now  = DateTimeFormat::utcNow('U');
 		$date = DateTimeFormat::utc('now - 3 days', 'U');
@@ -250,7 +250,7 @@ class DateTimeFormatTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvert')]
-	public function testConvert($expected, string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL)
+	public function testConvert($expected, string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL): void
 	{
 		$this->assertSame($expected, DateTimeFormat::convert($s, $tz_to, $tz_from, $format));
 	}
@@ -270,7 +270,7 @@ class DateTimeFormatTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvertNow')]
-	public function testConvertNow(string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL)
+	public function testConvertNow(string $s = 'now', string $tz_to = 'UTC', string $tz_from = 'UTC', string $format = DateTimeFormat::MYSQL): void
 	{
 		$this->assertSame(date(DateTimeFormat::MYSQL), DateTimeFormat::convert($s, $tz_to, $tz_from, $format));
 	}

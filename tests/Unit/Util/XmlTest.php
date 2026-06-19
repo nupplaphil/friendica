@@ -18,7 +18,7 @@ class XmlTest extends TestCase
 	/**
 	 * escape and unescape
 	 */
-	public function testEscapeUnescape()
+	public function testEscapeUnescape(): void
 	{
 		$text   = "<tag>I want to break\n this!11!<?hard?></tag>";
 		$xml    = XML::escape($text);
@@ -29,7 +29,7 @@ class XmlTest extends TestCase
 	/**
 	 * escape and put in a document
 	 */
-	public function testEscapeDocument()
+	public function testEscapeDocument(): void
 	{
 		$tag        = "<tag>I want to break</tag>";
 		$xml        = XML::escape($tag);

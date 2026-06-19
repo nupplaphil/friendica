@@ -20,7 +20,7 @@ class UserTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUserTimeline()
+	public function testApiStatusesUserTimeline(): void
 	{
 		$response = (new UserTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
@@ -45,7 +45,7 @@ class UserTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUserTimelineWithNegativePage()
+	public function testApiStatusesUserTimelineWithNegativePage(): void
 	{
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
@@ -71,7 +71,7 @@ class UserTimelineTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUserTimelineWithRss()
+	public function testApiStatusesUserTimelineWithRss(): void
 	{
 		$response = (new UserTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], [
 			'extension' => ICanCreateResponses::TYPE_RSS,

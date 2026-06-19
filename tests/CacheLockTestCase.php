@@ -19,7 +19,7 @@ abstract class CacheLockTestCase extends LockTestCase
 	/**
 	 * Test if the getStats() result is identically to the getCacheStats()
 	 */
-	public function testGetStats()
+	public function testGetStats(): void
 	{
 		self::assertSame(array_keys($this->getCache()->getStats()), array_keys($this->instance->getCacheStats()));
 	}

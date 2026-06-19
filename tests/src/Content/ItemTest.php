@@ -135,7 +135,7 @@ class ItemTest extends MockedTestCase
 	 * @param string $summary
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataRedundantSummary')]
-	public function testRedundantSummary(bool $expected, string $body, string $summary)
+	public function testRedundantSummary(bool $expected, string $body, string $summary): void
 	{
 		$item = $this->createItem();
 

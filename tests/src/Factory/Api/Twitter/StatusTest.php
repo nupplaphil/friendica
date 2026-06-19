@@ -45,7 +45,7 @@ class StatusTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiConvertItem()
+	public function testApiConvertItem(): void
 	{
 		$status = $this->statusFactory
 			->createFromItemId(13, ApiTestCase::SELF_USER['id'])
@@ -106,7 +106,7 @@ class StatusTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetEntitiesWithIncludeEntities()
+	public function testApiGetEntitiesWithIncludeEntities(): void
 	{
 		$status = $this->statusFactory
 			->createFromItemId(13, ApiTestCase::SELF_USER['id'], true)
@@ -123,7 +123,7 @@ class StatusTest extends FixtureTestCase
 	/**
 	 * Test the api_format_items() function.
 	 */
-	public function testApiFormatItems()
+	public function testApiFormatItems(): void
 	{
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);

@@ -35,7 +35,7 @@ class FilesystemStorageTest extends StorageTestCase
 	/**
 	 * Test the exception in case of missing directory permissions during put new files
 	 */
-	public function testMissingDirPermissionsDuringPut()
+	public function testMissingDirPermissionsDuringPut(): void
 	{
 		$this->expectException(StorageException::class);
 		$this->expectExceptionMessageMatches("/Filesystem storage failed to create \".*\". Check you write permissions./");
@@ -50,7 +50,7 @@ class FilesystemStorageTest extends StorageTestCase
 	/**
 	 * Test the exception in case the directory isn't writeable
 	 */
-	public function testMissingDirPermissions()
+	public function testMissingDirPermissions(): void
 	{
 		$this->expectException(StorageException::class);
 		$this->expectExceptionMessageMatches("/Path \".*\" does not exist or is not writeable./");
@@ -81,7 +81,7 @@ class FilesystemStorageTest extends StorageTestCase
 	/**
 	 * Test the backend storage of the Filesystem Storage class
 	 */
-	public function testDirectoryTree()
+	public function testDirectoryTree(): void
 	{
 		$instance = $this->getInstance();
 

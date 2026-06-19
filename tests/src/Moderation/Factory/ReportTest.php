@@ -132,7 +132,7 @@ class ReportTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromTableRow')]
-	public function testCreateFromTableRow(ClockInterface $clock, array $row, Collection\Report\Posts $posts, Collection\Report\Rules $rules, Entity\Report $assertion)
+	public function testCreateFromTableRow(ClockInterface $clock, array $row, Collection\Report\Posts $posts, Collection\Report\Rules $rules, Entity\Report $assertion): void
 	{
 		$factory = new Factory\Report(new NullLogger(), $clock);
 
@@ -247,7 +247,7 @@ class ReportTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromReportsRequest')]
-	public function testCreateFromReportsRequest(ClockInterface $clock, array $rules, int $reporterId, int $cid, int $gsid, string $comment, string $category, bool $forward, array $postUriIds, array $ruleIds, ?int $uid, Entity\Report $assertion)
+	public function testCreateFromReportsRequest(ClockInterface $clock, array $rules, int $reporterId, int $cid, int $gsid, string $comment, string $category, bool $forward, array $postUriIds, array $ruleIds, ?int $uid, Entity\Report $assertion): void
 	{
 		$factory = new Factory\Report(new NullLogger(), $clock);
 

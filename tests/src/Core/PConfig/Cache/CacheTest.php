@@ -45,7 +45,7 @@ class CacheTest extends MockedTestCase
 	 * Test the setP() and getP() methods
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetGet($data)
+	public function testSetGet($data): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 		$uid         = 345;
@@ -63,7 +63,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the getP() method with a category
 	 */
-	public function testGetCat()
+	public function testGetCat(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 		$uid         = 345;
@@ -94,7 +94,7 @@ class CacheTest extends MockedTestCase
 	 * Test the deleteP() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDelete($data)
+	public function testDelete($data): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 		$uid         = 345;
@@ -117,7 +117,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the keyDiff() method with result
 	 */
-	public function testKeyDiffWithResult()
+	public function testKeyDiffWithResult(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 
@@ -134,7 +134,7 @@ class CacheTest extends MockedTestCase
 	 * Test the keyDiff() method without result
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testKeyDiffWithoutResult($data)
+	public function testKeyDiffWithoutResult($data): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 
@@ -148,7 +148,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the default hiding of passwords inside the cache
 	 */
-	public function testPasswordHide()
+	public function testPasswordHide(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 
@@ -167,7 +167,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test disabling the hiding of passwords inside the cache
 	 */
-	public function testPasswordShow()
+	public function testPasswordShow(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache(false);
 
@@ -186,7 +186,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test a empty password
 	 */
-	public function testEmptyPassword()
+	public function testEmptyPassword(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 
@@ -201,7 +201,7 @@ class CacheTest extends MockedTestCase
 		self::assertEmpty($configCache->get(1, 'database', 'username'));
 	}
 
-	public function testWrongTypePassword()
+	public function testWrongTypePassword(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 
@@ -231,7 +231,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test two different UID configs and make sure that there is no overlapping possible
 	 */
-	public function testTwoUid()
+	public function testTwoUid(): void
 	{
 		$configCache = new \Friendica\Core\PConfig\ValueObject\Cache();
 

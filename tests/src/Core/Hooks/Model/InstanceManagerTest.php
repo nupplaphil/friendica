@@ -38,7 +38,7 @@ class InstanceManagerTest extends MockedTestCase
 		parent::tearDown();
 	}
 
-	public function testEqualButNotSameInstance()
+	public function testEqualButNotSameInstance(): void
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 
@@ -78,7 +78,7 @@ class InstanceManagerTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testInstanceWithArgs(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
+	public function testInstanceWithArgs(?string $aString = null, ?bool $cBool = null, ?string $bString = null): void
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 
@@ -112,7 +112,7 @@ class InstanceManagerTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testInstanceWithTwoStrategies(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
+	public function testInstanceWithTwoStrategies(?string $aString = null, ?bool $cBool = null, ?string $bString = null): void
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 
@@ -149,7 +149,7 @@ class InstanceManagerTest extends MockedTestCase
 	/**
 	 * Test the exception in case the interface was already registered
 	 */
-	public function testDoubleRegister()
+	public function testDoubleRegister(): void
 	{
 		self::expectException(HookRegisterArgumentException::class);
 		self::expectExceptionMessage(sprintf('A class with the name %s is already set for the interface %s', 'fake', IAmADecoratedInterface::class));
@@ -162,7 +162,7 @@ class InstanceManagerTest extends MockedTestCase
 	/**
 	 * Test the exception in case the name of the instance isn't registered
 	 */
-	public function testWrongInstanceName()
+	public function testWrongInstanceName(): void
 	{
 		self::expectException(HookInstanceException::class);
 		self::expectExceptionMessage(sprintf('The class with the name %s isn\'t registered for the class or interface %s', 'fake', IAmADecoratedInterface::class));
@@ -175,7 +175,7 @@ class InstanceManagerTest extends MockedTestCase
 	 * Test in case there are already some rules
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testWithGivenRules(?string $aString = null, ?bool $cBool = null, ?string $bString = null)
+	public function testWithGivenRules(?string $aString = null, ?bool $cBool = null, ?string $bString = null): void
 	{
 		$args = [];
 
@@ -220,7 +220,7 @@ class InstanceManagerTest extends MockedTestCase
 	/**
 	 * @see https://github.com/friendica/friendica/issues/13318
 	 */
-	public function testCaseInsensitiveNames()
+	public function testCaseInsensitiveNames(): void
 	{
 		$instance = new DiceInstanceManager(new Dice(), $this->hookFileManager);
 

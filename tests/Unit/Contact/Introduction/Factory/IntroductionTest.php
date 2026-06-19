@@ -78,7 +78,7 @@ class IntroductionTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
-	public function testCreateFromTableRow(array $input, array $assertion)
+	public function testCreateFromTableRow(array $input, array $assertion): void
 	{
 		$factory = new Introduction(new NullLogger());
 
@@ -87,7 +87,7 @@ class IntroductionTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
-	public function testCreateNew(array $input, array $assertion)
+	public function testCreateNew(array $input, array $assertion): void
 	{
 		$factory = new Introduction(new NullLogger());
 
@@ -101,7 +101,7 @@ class IntroductionTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataRow')]
-	public function testCreateDummy(array $input, array $assertion)
+	public function testCreateDummy(array $input, array $assertion): void
 	{
 		$factory = new Introduction(new NullLogger());
 

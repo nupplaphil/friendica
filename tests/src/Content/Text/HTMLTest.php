@@ -41,7 +41,7 @@ class HTMLTest extends FixtureTestCase
 	 * @throws Exception
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataHTML')]
-	public function testToPlaintext(string $input, string $expected)
+	public function testToPlaintext(string $input, string $expected): void
 	{
 		$output = HTML::toPlaintext($input, 0);
 
@@ -103,7 +103,7 @@ its surprisingly good",
 	 * @throws InternalServerErrorException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataHTMLText')]
-	public function testToBBCode(string $expectedBBCode, string $html)
+	public function testToBBCode(string $expectedBBCode, string $html): void
 	{
 		$actual = HTML::toBBCode($html);
 
@@ -152,7 +152,7 @@ its surprisingly good",
 	 * @throws \DOMException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataXpathQuote')]
-	public function testXpathQuote(string $value)
+	public function testXpathQuote(string $value): void
 	{
 		$dom              = new \DOMDocument();
 		$element          = $dom->createElement('test');
@@ -219,7 +219,7 @@ its surprisingly good",
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheckRelMeLink')]
-	public function testCheckRelMeLink(\DOMDocument $doc, UriInterface $meUrl)
+	public function testCheckRelMeLink(\DOMDocument $doc, UriInterface $meUrl): void
 	{
 		$this->assertTrue(HTML::checkRelMeLink($doc, $meUrl));
 	}
@@ -253,7 +253,7 @@ its surprisingly good",
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheckRelMeLinkFail')]
-	public function testCheckRelMeLinkFail(\DOMDocument $doc, UriInterface $meUrl)
+	public function testCheckRelMeLinkFail(\DOMDocument $doc, UriInterface $meUrl): void
 	{
 		$this->assertFalse(HTML::checkRelMeLink($doc, $meUrl));
 	}
@@ -1507,7 +1507,7 @@ Served from: blog.austria-insiderinfo.com @ 2023-01-07 10:50:10 by W3 Total Cach
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataExtractCharset')]
-	public function testExtractCharset(?string $expected, string $html)
+	public function testExtractCharset(?string $expected, string $html): void
 	{
 		$doc = new \DOMDocument();
 		@$doc->loadHTML($html, LIBXML_NOERROR);

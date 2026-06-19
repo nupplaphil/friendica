@@ -98,7 +98,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 		$this->configMock->shouldReceive('get')->andReturnUsing(function ($cat, $key) {
 			return $this->configCache->get($cat, $key);
 		});
-		$this->configMock->shouldReceive('load')->andReturnUsing(function ($config, $overwrite = false) {
+		$this->configMock->shouldReceive('load')->andReturnUsing(function ($config, $overwrite = false): void {
 			$this->configCache->load($config, $overwrite);
 		});
 
@@ -357,7 +357,7 @@ FIN;
 	 * Test the automatic installation without any parameter/setting
 	 * Should stuck because of missing hostname
 	 */
-	public function testEmpty()
+	public function testEmpty(): void
 	{
 		$console = new AutomaticInstallation($this->consoleArgv);
 
@@ -370,7 +370,7 @@ FIN;
 	 * Test the automatic installation without any parameter/setting
 	 * except URL
 	 */
-	public function testEmptyWithURL()
+	public function testEmptyWithURL(): void
 	{
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
@@ -395,7 +395,7 @@ FIN;
 	 * Test the automatic installation with a prepared config file
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
-	public function testWithConfig(array $data)
+	public function testWithConfig(array $data): void
 	{
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
@@ -472,7 +472,7 @@ CONF;
 	 * Includes saving the DB credentials to the file
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
-	public function testWithEnvironmentAndSave(array $data)
+	public function testWithEnvironmentAndSave(array $data): void
 	{
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
@@ -510,7 +510,7 @@ CONF;
 	 * Don't save the db credentials to the file
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
-	public function testWithEnvironmentWithoutSave(array $data)
+	public function testWithEnvironmentWithoutSave(array $data): void
 	{
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
@@ -546,7 +546,7 @@ CONF;
 	 * Test the automatic installation with arguments
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
-	public function testWithArguments(array $data)
+	public function testWithArguments(array $data): void
 	{
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
@@ -558,7 +558,7 @@ CONF;
 
 		$console = new AutomaticInstallation($this->consoleArgv);
 
-		$option = function ($var, $cat, $key) use ($data, $console) {
+		$option = function ($var, $cat, $key) use ($data, $console): void {
 			if (!empty($data[$cat][$key])) {
 				$console->setOption($var, $data[$cat][$key]);
 			}
@@ -584,7 +584,7 @@ CONF;
 	/**
 	 * Test the automatic installation with a wrong database connection
 	 */
-	public function testNoDatabaseConnection()
+	public function testNoDatabaseConnection(): void
 	{
 		$this->mockConnect(false, 1);
 
@@ -602,7 +602,7 @@ CONF;
 		self::assertConfig(['config' => ['hostname' => 'friendica.local'], 'system' => ['url' => 'http://friendica.local', 'ssl_policy' => 0]], false, true, false, true);
 	}
 
-	public function testGetHelp()
+	public function testGetHelp(): void
 	{
 		// Usable to purposely fail if new commands are added without taking tests into account
 		$theHelp = <<<HELP

@@ -18,7 +18,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConfigLoad')]
-	public function testLoad(int $uid, array $data, array $possibleCats, array $load)
+	public function testLoad(int $uid, array $data, array $possibleCats, array $load): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(true)
@@ -35,7 +35,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataDoubleLoad')]
-	public function testCacheLoadDouble(int $uid, array $data1, array $data2, array $expect)
+	public function testCacheLoadDouble(int $uid, array $data1, array $data2, array $expect): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(true)
@@ -65,7 +65,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetGetWithoutDB(int $uid, $data)
+	public function testSetGetWithoutDB(int $uid, $data): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(false)
@@ -75,7 +75,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetGetWithDB(int $uid, $data)
+	public function testSetGetWithDB(int $uid, $data): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(true)
@@ -85,7 +85,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testGetWithRefresh(int $uid, $data)
+	public function testGetWithRefresh(int $uid, $data): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(true)
@@ -113,7 +113,7 @@ class JitPConfigTest extends PConfigTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDeleteWithoutDB(int $uid, $data)
+	public function testDeleteWithoutDB(int $uid, $data): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(false)
@@ -122,7 +122,7 @@ class JitPConfigTest extends PConfigTestCase
 		parent::testDeleteWithoutDB($uid, $data);
 	}
 
-	public function testDeleteWithDB()
+	public function testDeleteWithDB(): void
 	{
 		$this->configModel->shouldReceive('isConnected')
 						  ->andReturn(true)

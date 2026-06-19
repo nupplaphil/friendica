@@ -161,7 +161,7 @@ class Router
 	 */
 	private function addGroup(string $groupRoute, array $routes, RouteCollector $routeCollector)
 	{
-		$routeCollector->addGroup($groupRoute, function (RouteCollector $routeCollector) use ($routes) {
+		$routeCollector->addGroup($groupRoute, function (RouteCollector $routeCollector) use ($routes): void {
 			$this->addRoutes($routeCollector, $routes);
 		});
 	}

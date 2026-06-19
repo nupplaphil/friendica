@@ -34,23 +34,23 @@ class ParsedLogIteratorTest extends TestCase
 		$this->pli->open($logfile);
 	}
 
-	public function testIsIterable()
+	public function testIsIterable(): void
 	{
 		self::assertIsIterable($this->pli);
 	}
 
-	public function testEverything()
+	public function testEverything(): void
 	{
 		self::assertCount(3, iterator_to_array($this->pli, false));
 	}
 
-	public function testLimit()
+	public function testLimit(): void
 	{
 		$this->pli->withLimit(2);
 		self::assertCount(2, iterator_to_array($this->pli, false));
 	}
 
-	public function testFilterByLevel()
+	public function testFilterByLevel(): void
 	{
 		$this->pli->withFilters(['level' => 'INFO']);
 		$pls = iterator_to_array($this->pli, false);
@@ -68,7 +68,7 @@ class ParsedLogIteratorTest extends TestCase
 		);
 	}
 
-	public function testFilterByContext()
+	public function testFilterByContext(): void
 	{
 		$this->pli->withFilters(['context' => 'worker']);
 		$pls = iterator_to_array($this->pli, false);
@@ -86,7 +86,7 @@ class ParsedLogIteratorTest extends TestCase
 		);
 	}
 
-	public function testFilterCombined()
+	public function testFilterCombined(): void
 	{
 		$this->pli->withFilters(['level' => 'NOTICE', 'context' => 'worker']);
 		$pls = iterator_to_array($this->pli, false);
@@ -104,7 +104,7 @@ class ParsedLogIteratorTest extends TestCase
 		);
 	}
 
-	public function testSearch()
+	public function testSearch(): void
 	{
 		$this->pli->withSearch("maximum");
 		$pls = iterator_to_array($this->pli, false);
@@ -122,7 +122,7 @@ class ParsedLogIteratorTest extends TestCase
 		);
 	}
 
-	public function testFilterAndSearch()
+	public function testFilterAndSearch(): void
 	{
 		$this->pli
 			->withFilters(['context' => 'worker'])
@@ -131,7 +131,7 @@ class ParsedLogIteratorTest extends TestCase
 		self::assertCount(0, $pls);
 	}
 
-	public function testEmptyLogFile()
+	public function testEmptyLogFile(): void
 	{
 		$logfile = dirname(__DIR__) . '/../../Fixtures/log/empty.friendica.log.txt';
 

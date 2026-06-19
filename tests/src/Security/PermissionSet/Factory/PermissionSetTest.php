@@ -109,7 +109,7 @@ class PermissionSetTest extends MockedTestCase
 	 * Test the createFromTableRow method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInput')]
-	public function testCreateFromTableRow(array $input, array $assertion)
+	public function testCreateFromTableRow(array $input, array $assertion): void
 	{
 		$permissionSet = $this->permissionSet->createFromTableRow($input);
 
@@ -120,7 +120,7 @@ class PermissionSetTest extends MockedTestCase
 	 * Test the createFromString method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInput')]
-	public function testCreateFromString(array $input, array $assertion)
+	public function testCreateFromString(array $input, array $assertion): void
 	{
 		$permissionSet = $this->permissionSet->createFromString(
 			$input['uid'],

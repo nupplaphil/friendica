@@ -75,7 +75,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	/**
 	 * Test if the logger works correctly
 	 */
-	public function testNormal()
+	public function testNormal(): void
 	{
 		$logger = $this->getInstance();
 		$logger->emergency('working!');
@@ -91,7 +91,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	/**
 	 * Test if a log entry is correctly interpolated
 	 */
-	public function testPsrInterpolate()
+	public function testPsrInterpolate(): void
 	{
 		$logger = $this->getInstance();
 
@@ -105,7 +105,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	/**
 	 * Test if a log entry contains all necessary information
 	 */
-	public function testContainsInformation()
+	public function testContainsInformation(): void
 	{
 		$logger = $this->getInstance();
 		$logger->emergency('A test');
@@ -119,7 +119,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	/**
 	 * Test if the minimum level is working
 	 */
-	public function testMinimumLevel()
+	public function testMinimumLevel(): void
 	{
 		$logger = $this->getInstance(LogLevel::NOTICE);
 
@@ -140,7 +140,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	 * Test with different logging data
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDifferentTypes($function, $message, array $context)
+	public function testDifferentTypes($function, $message, array $context): void
 	{
 		$logger = $this->getInstance();
 		$logger->$function($message, $context);
@@ -155,7 +155,7 @@ abstract class LoggerTestCase extends MockedTestCase
 	/**
 	 * Test a message with an exception
 	 */
-	public function testExceptionHandling()
+	public function testExceptionHandling(): void
 	{
 		$e         = new \Exception("Test String", 123);
 		$eFollowUp = new \Exception("FollowUp", 456, $e);
@@ -171,7 +171,7 @@ abstract class LoggerTestCase extends MockedTestCase
 		self::assertStringContainsString(@json_encode($assertion, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), $this->getContent());
 	}
 
-	public function testNoObjectHandling()
+	public function testNoObjectHandling(): void
 	{
 		$logger = $this->getInstance();
 		$logger->alert('test', ['e' => ['test' => 'test']]);

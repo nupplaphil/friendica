@@ -26,7 +26,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdate()
+	public function testApiStatusesUpdate(): void
 	{
 		$_FILES = [
 			'media' => [
@@ -60,7 +60,7 @@ class UpdateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiStatusesUpdateWithHtml()
+	public function testApiStatusesUpdateWithHtml(): void
 	{
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [

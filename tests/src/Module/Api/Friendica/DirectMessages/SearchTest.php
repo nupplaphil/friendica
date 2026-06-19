@@ -15,7 +15,7 @@ use Psr\Log\NullLogger;
 
 class SearchTest extends ApiTestCase
 {
-	public function testEmpty()
+	public function testEmpty(): void
 	{
 		$directMessage = new DirectMessage(new NullLogger(), DI::dba(), DI::twitterUser());
 
@@ -31,7 +31,7 @@ class SearchTest extends ApiTestCase
 		self::assertEquals($assert, $json);
 	}
 
-	public function testMail()
+	public function testMail(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 
@@ -54,7 +54,7 @@ class SearchTest extends ApiTestCase
 		}
 	}
 
-	public function testNothingFound()
+	public function testNothingFound(): void
 	{
 		$directMessage = new DirectMessage(new NullLogger(), DI::dba(), DI::twitterUser());
 

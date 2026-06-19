@@ -83,7 +83,7 @@ class StorageManagerTest extends DatabaseTestCase
 	/**
 	 * Test plain instancing first
 	 */
-	public function testInstance()
+	public function testInstance(): void
 	{
 		$storageManager = new StorageManager(
 			$this->database,
@@ -142,7 +142,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 * Test the getByName() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
-	public function testGetByName($name, $valid, $interface, $assert, $assertName)
+	public function testGetByName($name, $valid, $interface, $assert, $assertName): void
 	{
 		if (!$valid) {
 			$this->expectException(InvalidClassStorageException::class);
@@ -176,7 +176,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 * Test the isValidBackend() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
-	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName)
+	public function testIsValidBackend($name, $valid, $interface, $assert, $assertName): void
 	{
 		$storageManager = new StorageManager(
 			$this->database,
@@ -197,7 +197,7 @@ class StorageManagerTest extends DatabaseTestCase
 	/**
 	 * Test the method listBackends() with default setting
 	 */
-	public function testListBackends()
+	public function testListBackends(): void
 	{
 		$storageManager = new StorageManager(
 			$this->database,
@@ -215,7 +215,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 * Test the method getBackend()
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
-	public function testGetBackend($name, $valid, $interface, $assert, $assertName)
+	public function testGetBackend($name, $valid, $interface, $assert, $assertName): void
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			static::markTestSkipped('only works for ICanWriteToStorage');
@@ -240,7 +240,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 * Test the method getBackend() with a pre-configured backend
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
-	public function testPresetBackend($name, $valid, $interface, $assert, $assertName)
+	public function testPresetBackend($name, $valid, $interface, $assert, $assertName): void
 	{
 		$this->config->set('storage', 'name', $name);
 		if ($interface !== ICanWriteToStorage::class) {
@@ -266,7 +266,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 *
 	 * @see SampleStorageBackend
 	 */
-	public function testRegisterUnregisterBackends()
+	public function testRegisterUnregisterBackends(): void
 	{
 		/// @todo Remove dice once "Hook" is dynamic and mockable
 		$dice = (new Dice())
@@ -301,7 +301,7 @@ class StorageManagerTest extends DatabaseTestCase
 	/**
 	 * tests that an active backend cannot get unregistered
 	 */
-	public function testUnregisterActiveBackend()
+	public function testUnregisterActiveBackend(): void
 	{
 		/// @todo Remove dice once "Hook" is dynamic and mockable
 		$dice = (new Dice())
@@ -354,7 +354,7 @@ class StorageManagerTest extends DatabaseTestCase
 	 * Test moving data to a new storage (currently testing db & filesystem)
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStorages')]
-	public function testMoveStorage($name, $valid, $interface, $assert, $assertName)
+	public function testMoveStorage($name, $valid, $interface, $assert, $assertName): void
 	{
 		if ($interface !== ICanWriteToStorage::class) {
 			self::markTestSkipped("No user backend");
@@ -388,7 +388,7 @@ class StorageManagerTest extends DatabaseTestCase
 	/**
 	 * Test moving data to a WRONG storage
 	 */
-	public function testWrongWritableStorage()
+	public function testWrongWritableStorage(): void
 	{
 		$this->expectException(InvalidClassStorageException::class);
 		$this->expectExceptionMessage('Backend SystemResource is not valid');

@@ -100,7 +100,7 @@ class RequestTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataServerArray')]
-	public function testRemoteAddress(array $server, array $config, string $assertion)
+	public function testRemoteAddress(array $server, array $config, string $assertion): void
 	{
 		$configClass = self::createMock(IManageConfigValues::class);
 		$configClass->expects(self::atLeast(1))->method('get')->willReturnMap([

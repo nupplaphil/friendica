@@ -70,7 +70,7 @@ class MimeTypeTest extends TestCase
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreateFromContentType')]
-	public function testCreateFromContentType(Entity\MimeType $expected, string $contentType)
+	public function testCreateFromContentType(Entity\MimeType $expected, string $contentType): void
 	{
 		$factory = new Factory\MimeType(new NullLogger());
 
@@ -109,7 +109,7 @@ class MimeTypeTest extends TestCase
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataToString')]
-	public function testToString(string $expected, Entity\MimeType $mimeType)
+	public function testToString(string $expected, Entity\MimeType $mimeType): void
 	{
 		$this->assertEquals($expected, $mimeType->__toString());
 	}
@@ -129,7 +129,7 @@ class MimeTypeTest extends TestCase
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataRoundtrip')]
-	public function testRoundtrip(string $expected)
+	public function testRoundtrip(string $expected): void
 	{
 		$factory = new Factory\MimeType(new NullLogger());
 

@@ -28,7 +28,7 @@ class CreateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithInvalidId()
+	public function testApiFavoritesCreateDestroyWithInvalidId(): void
 	{
 		$this->expectException(BadRequestException::class);
 
@@ -41,7 +41,7 @@ class CreateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithCreateAction()
+	public function testApiFavoritesCreateDestroyWithCreateAction(): void
 	{
 		$response = (new Create(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
@@ -58,7 +58,7 @@ class CreateTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithCreateActionAndRss()
+	public function testApiFavoritesCreateDestroyWithCreateActionAndRss(): void
 	{
 		$response = (new Create(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => ICanCreateResponses::TYPE_RSS]))
 			->run($this->httpExceptionMock, [

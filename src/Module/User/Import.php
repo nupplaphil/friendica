@@ -248,7 +248,7 @@ class Import extends \Friendica\BaseModule
 		unset($account['user']['account_expires_on']);
 		unset($account['user']['expire_notification_sent']);
 
-		array_walk($account['user'], function (&$user) use ($oldBaseUrl, $oldAddr, $newBaseUrl, $newAddr) {
+		array_walk($account['user'], function (&$user) use ($oldBaseUrl, $oldAddr, $newBaseUrl, $newAddr): void {
 			$user = str_replace([$oldBaseUrl, $oldAddr], [$newBaseUrl, $newAddr], $user);
 		});
 
@@ -265,9 +265,9 @@ class Import extends \Friendica\BaseModule
 
 		$errorCount = 0;
 
-		array_walk($account['contact'], function (&$contact) use (&$errorCount, $oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr) {
+		array_walk($account['contact'], function (&$contact) use (&$errorCount, $oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr): void {
 			if ($contact['uid'] == $oldUid && $contact['self'] == '1') {
-				array_walk($contact, function (&$field) use ($oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr) {
+				array_walk($contact, function (&$field) use ($oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr): void {
 					$field = str_replace([$oldBaseUrl, $oldAddr], [$newBaseUrl, $newAddr], $field);
 					foreach (['profile', 'avatar', 'micro'] as $key) {
 						$field = str_replace($oldBaseUrl . '/photo/' . $key . '/' . $oldUid . '.jpg', $newBaseUrl . '/photo/' . $key . '/' . $newUid . '.jpg', $field);
@@ -307,7 +307,7 @@ class Import extends \Friendica\BaseModule
 			$this->systemMessages->addNotice($this->tt('%d contact not imported', '%d contacts not imported', $errorCount));
 		}
 
-		array_walk($account['circle'], function (&$circle) use ($newUid) {
+		array_walk($account['circle'], function (&$circle) use ($newUid): void {
 			$circle['uid'] = $newUid;
 			if ($this->dbImportAssoc('group', $circle) === false) {
 				$this->logger->warning('Error inserting circle', ['name' => $circle['name'], 'error' => $this->database->errorMessage()]);
@@ -343,7 +343,7 @@ class Import extends \Friendica\BaseModule
 			unset($profile['id']);
 			$profile['uid'] = $newUid;
 
-			array_walk($profile, function (&$field) use ($oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr) {
+			array_walk($profile, function (&$field) use ($oldUid, $oldBaseUrl, $oldAddr, $newUid, $newBaseUrl, $newAddr): void {
 				$field = str_replace([$oldBaseUrl, $oldAddr], [$newBaseUrl, $newAddr], $field);
 				foreach (['profile', 'avatar'] as $key) {
 					$field = str_replace($oldBaseUrl . '/photo/' . $key . '/' . $oldUid . '.jpg', $newBaseUrl . '/photo/' . $key . '/' . $newUid . '.jpg', $field);

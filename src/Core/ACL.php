@@ -167,7 +167,7 @@ class ACL
 
 		$acl_contacts = array_merge($acl_groups, $acl_contacts);
 
-		array_walk($acl_contacts, function (&$value) {
+		array_walk($acl_contacts, function (&$value): void {
 			$value['type'] = 'contact';
 		});
 

@@ -16,7 +16,7 @@ class ListsTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_f() function.
 	 */
-	public function testApiStatusesFWithBlocks()
+	public function testApiStatusesFWithBlocks(): void
 	{
 		$response = (new Lists(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);

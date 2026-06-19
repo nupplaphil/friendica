@@ -56,7 +56,7 @@ class PlaintextTest extends FixtureTestCase
 	 * @throws InternalServerErrorException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataMessage')]
-	public function testSplitMessage(string $text, array $expected)
+	public function testSplitMessage(string $text, array $expected): void
 	{
 		$item = [
 			'uri-id' => -1,

@@ -53,14 +53,14 @@ class ActivityTest extends MockedTestCase
 	 * Test the different, possible matchings
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataMatch')]
-	public function testMatch(string $haystack, string $needle, bool $assert)
+	public function testMatch(string $haystack, string $needle, bool $assert): void
 	{
 		$activity = new Activity();
 
 		self::assertEquals($assert, $activity->match($haystack, $needle));
 	}
 
-	public function testIsHidden()
+	public function testIsHidden(): void
 	{
 		$activity = new Activity();
 

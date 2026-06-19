@@ -71,7 +71,7 @@ class ImagesTest extends MockedTestCase
 	 * Test the Images::getInfoFromURL() method (only remote images, not local/relative!)
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataImages')]
-	public function testGetInfoFromRemoteURL(string $url, array $headers, string $data, array $assertion)
+	public function testGetInfoFromRemoteURL(string $url, array $headers, string $data, array $assertion): void
 	{
 		$this->httpRequestHandler->setHandler(new MockHandler([
 			new Response(200, $headers, $data),
@@ -181,7 +181,7 @@ class ImagesTest extends MockedTestCase
 	 * Test the Images::getScalingDimensions() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataScalingDimensions')]
-	public function testGetScalingDimensions(int $width, int $height, int $max, array $assertion)
+	public function testGetScalingDimensions(int $width, int $height, int $max, array $assertion): void
 	{
 		$result = Images::getScalingDimensions($width, $height, $max);
 

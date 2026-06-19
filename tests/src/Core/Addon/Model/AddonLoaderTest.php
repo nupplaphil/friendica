@@ -115,7 +115,7 @@ EOF;
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataHooks')]
-	public function testAddonLoader(array $structure, array $enabledAddons, array $files, array $assertion)
+	public function testAddonLoader(array $structure, array $enabledAddons, array $files, array $assertion): void
 	{
 		vfsStream::create($structure)->at($this->root);
 
@@ -141,7 +141,7 @@ EOF;
 	/**
 	 * Test the exception in case of a wrong addon content
 	 */
-	public function testWrongContent()
+	public function testWrongContent(): void
 	{
 		$filename     = 'addon/testaddon1/static/hooks.config.php';
 		$wrongContent = "<?php return 'wrong';";
@@ -171,7 +171,7 @@ EOF;
 	/**
 	 * Test that nothing happens in case there are wrong addons files, but they're not used
 	 */
-	public function testNoHooksConfig()
+	public function testNoHooksConfig(): void
 	{
 		$filename     = 'addon/testaddon1/static/hooks.config.php';
 		$wrongContent = "<?php return 'wrong';";

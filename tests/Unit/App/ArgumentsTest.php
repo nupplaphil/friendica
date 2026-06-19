@@ -25,7 +25,7 @@ class ArgumentsTest extends TestCase
 	/**
 	 * Test the default argument without any determinations
 	 */
-	public function testDefault()
+	public function testDefault(): void
 	{
 		$arguments = new App\Arguments();
 
@@ -185,7 +185,7 @@ class ArgumentsTest extends TestCase
 	 * Test all variants of argument determination
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataArguments')]
-	public function testDetermine(array $server, array $get, array $expect)
+	public function testDetermine(array $server, array $get, array $expect): void
 	{
 		$arguments = (new App\Arguments())
 			->determine($server, $get);
@@ -197,7 +197,7 @@ class ArgumentsTest extends TestCase
 	 * Test if the get/has methods are working for the determined arguments
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataArguments')]
-	public function testGetHas(array $server, array $get, array $expect)
+	public function testGetHas(array $server, array $get, array $expect): void
 	{
 		$arguments = (new App\Arguments())
 			->determine($server, $get);
@@ -252,7 +252,7 @@ class ArgumentsTest extends TestCase
 	 * Test the ZRL and OWT stripping
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStripped')]
-	public function testStrippedQueries(array $server, array $get, string $expect)
+	public function testStrippedQueries(array $server, array $get, string $expect): void
 	{
 		$arguments = (new App\Arguments())->determine($server, $get);
 
@@ -262,7 +262,7 @@ class ArgumentsTest extends TestCase
 	/**
 	 * Test that arguments are immutable
 	 */
-	public function testImmutable()
+	public function testImmutable(): void
 	{
 		$argument = new App\Arguments();
 

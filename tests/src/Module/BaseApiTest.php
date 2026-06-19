@@ -40,7 +40,7 @@ class BaseApiTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiUser()
+	public function testApiUser(): void
 	{
 		self::assertEquals(parent::SELF_USER['id'], BaseApi::getCurrentUserID());
 	}

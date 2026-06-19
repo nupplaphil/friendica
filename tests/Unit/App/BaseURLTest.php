@@ -32,7 +32,7 @@ class BaseURLTest extends TestCase
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('provideInputTestData')]
 	#[BackupGlobals(true)]
-	public function testDetermineWithConfigReturnsCorrectUrl(string $url, string $expect)
+	public function testDetermineWithConfigReturnsCorrectUrl(string $url, string $expect): void
 	{
 		$config = self::createStub(IManageConfigValues::class);
 		$config->method('get')->willReturnCallback(function (string $category, string $key, mixed $default) use ($url): mixed {
@@ -124,7 +124,7 @@ class BaseURLTest extends TestCase
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('provideServerTestData')]
 	#[BackupGlobals(true)]
-	public function testDetermineWithServerArrayReturnsCorrectUrl(array $server, string $expect)
+	public function testDetermineWithServerArrayReturnsCorrectUrl(array $server, string $expect): void
 	{
 		$_SERVER = array_merge($_SERVER, $server);
 
@@ -138,7 +138,7 @@ class BaseURLTest extends TestCase
 	}
 
 	#[BackupGlobals(true)]
-	public function testDetermineWithGlobalsReturnsCorrectUrl()
+	public function testDetermineWithGlobalsReturnsCorrectUrl(): void
 	{
 		$_SERVER['HTTP_HOST']   = 'localhost';
 		$_SERVER['SERVER_PORT'] = 80;
@@ -179,7 +179,7 @@ class BaseURLTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('provideRemoveTestData')]
-	public function testRemove(string $url, string $origUrl, string $expect)
+	public function testRemove(string $url, string $origUrl, string $expect): void
 	{
 		$config = self::createStub(IManageConfigValues::class);
 		$config->method('get')->willReturnCallback(function (string $category, string $key, mixed $default) use ($url): mixed {
@@ -198,7 +198,7 @@ class BaseURLTest extends TestCase
 	/**
 	 * Test that redirect to external domains fails
 	 */
-	public function testRedirectWithExternalDomainThrowsException()
+	public function testRedirectWithExternalDomainThrowsException(): void
 	{
 		$config = self::createConfiguredStub(IManageConfigValues::class, [
 			'get' => 'https://friendica.local',

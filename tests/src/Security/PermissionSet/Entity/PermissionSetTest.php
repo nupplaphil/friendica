@@ -30,7 +30,7 @@ class PermissionSetTest extends MockedTestCase
 	 * Test if the call "withAllowedContacts()" creates a clone
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dateAllowedContacts')]
-	public function testWithAllowedContacts(int $id, array $allow_cid, array $allow_gid, array $deny_cid, array $deny_gid, array $update_cid)
+	public function testWithAllowedContacts(int $id, array $allow_cid, array $allow_gid, array $deny_cid, array $deny_gid, array $update_cid): void
 	{
 		$permissionSetOrig = new PermissionSet(
 			$id,

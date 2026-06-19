@@ -60,7 +60,7 @@ class SemaphoreLockTest extends LockTestCase
 	 * Test if semaphore locking works even when trying to release locks, where the file exists
 	 * but it shouldn't harm locking
 	 */
-	public function testMissingFileNotOverriding()
+	public function testMissingFileNotOverriding(): void
 	{
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);
@@ -78,7 +78,7 @@ class SemaphoreLockTest extends LockTestCase
 	 *
 	 * @see https://github.com/friendica/friendica/issues/7298#issuecomment-521996540
 	 */
-	public function testMissingFileOverriding()
+	public function testMissingFileOverriding(): void
 	{
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);
@@ -91,7 +91,7 @@ class SemaphoreLockTest extends LockTestCase
 	/**
 	 * Test acquire lock even the semaphore file exists, but isn't used
 	 */
-	public function testOverrideSemFile()
+	public function testOverrideSemFile(): void
 	{
 		$file = System::getTempPath() . '/test.sem';
 		touch($file);

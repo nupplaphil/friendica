@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class JsonLDTest extends TestCase
 {
-	public function testFetchElementArrayNotFound()
+	public function testFetchElementArrayNotFound(): void
 	{
 		$object = [];
 
@@ -23,7 +23,7 @@ class JsonLDTest extends TestCase
 		self::assertNull($data);
 	}
 
-	public function testFetchElementArrayFoundEmptyArray()
+	public function testFetchElementArrayFoundEmptyArray(): void
 	{
 		$object = ['field' => []];
 
@@ -31,7 +31,7 @@ class JsonLDTest extends TestCase
 		self::assertSame([[]], $data);
 	}
 
-	public function testFetchElementArrayFoundID()
+	public function testFetchElementArrayFoundID(): void
 	{
 		$object = ['field' => ['value1', ['@id' => 'value2'], ['@id' => 'value3']]];
 
@@ -39,7 +39,7 @@ class JsonLDTest extends TestCase
 		self::assertSame(['value1', 'value2', 'value3'], $data);
 	}
 
-	public function testFetchElementArrayFoundID2()
+	public function testFetchElementArrayFoundID2(): void
 	{
 		$object = ['field' => [['subfield11' => 'value11', 'subfield12' => 'value12'],
 			['subfield21' => 'value21', 'subfield22' => 'value22'],
@@ -49,7 +49,7 @@ class JsonLDTest extends TestCase
 		self::assertSame(['value3', 'value4'], $data);
 	}
 
-	public function testFetchElementArrayFoundArrays()
+	public function testFetchElementArrayFoundArrays(): void
 	{
 		$object = ['field' => [['subfield11' => 'value11', 'subfield12' => 'value12'],
 			['subfield21' => 'value21', 'subfield22' => 'value22']]];
@@ -61,7 +61,7 @@ class JsonLDTest extends TestCase
 		self::assertSame($expect, $data);
 	}
 
-	public function testFetchElementArrayTypeValue()
+	public function testFetchElementArrayTypeValue(): void
 	{
 		$object = ['field' => [['subfield11' => 'value11', 'subfield12' => 'value12'],
 			['subfield21' => 'value21', 'subfield22' => 'value22']]];
@@ -72,7 +72,7 @@ class JsonLDTest extends TestCase
 		self::assertSame($expect, $data);
 	}
 
-	public function testFetchElementNotFound()
+	public function testFetchElementNotFound(): void
 	{
 		$object = [];
 
@@ -80,7 +80,7 @@ class JsonLDTest extends TestCase
 		self::assertNull($data);
 	}
 
-	public function testFetchElementFound()
+	public function testFetchElementFound(): void
 	{
 		$object = ['field' => 'value'];
 
@@ -88,7 +88,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('value', $data);
 	}
 
-	public function testFetchElementFoundEmptyString()
+	public function testFetchElementFoundEmptyString(): void
 	{
 		$object = ['field' => ''];
 
@@ -96,7 +96,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('', $data);
 	}
 
-	public function testFetchElementKeyFoundEmptyArray()
+	public function testFetchElementKeyFoundEmptyArray(): void
 	{
 		$object = ['field' => ['content' => []]];
 
@@ -104,7 +104,7 @@ class JsonLDTest extends TestCase
 		self::assertSame([], $data);
 	}
 
-	public function testFetchElementFoundID()
+	public function testFetchElementFoundID(): void
 	{
 		$object = ['field' => ['field2' => 'value2', '@id' => 'value', 'field3' => 'value3']];
 
@@ -112,7 +112,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('value', $data);
 	}
 
-	public function testFetchElementType()
+	public function testFetchElementType(): void
 	{
 		$object = ['source' => ['content' => 'body', 'mediaType' => 'text/bbcode']];
 
@@ -120,7 +120,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('body', $data);
 	}
 
-	public function testFetchElementTypeValueNotFound()
+	public function testFetchElementTypeValueNotFound(): void
 	{
 		$object = ['source' => ['content' => 'body', 'mediaType' => 'text/html']];
 
@@ -128,7 +128,7 @@ class JsonLDTest extends TestCase
 		self::assertNull($data);
 	}
 
-	public function testFetchElementTypeNotFound()
+	public function testFetchElementTypeNotFound(): void
 	{
 		$object = ['source' => ['content' => 'body', 'mediaType' => 'text/html']];
 
@@ -136,7 +136,7 @@ class JsonLDTest extends TestCase
 		self::assertNull($data);
 	}
 
-	public function testFetchElementKeyWithoutType()
+	public function testFetchElementKeyWithoutType(): void
 	{
 		$object = ['source' => ['content' => 'body', 'mediaType' => 'text/bbcode']];
 
@@ -144,7 +144,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('body', $data);
 	}
 
-	public function testFetchElementTypeArray()
+	public function testFetchElementTypeArray(): void
 	{
 		$object = ['source' => [['content' => 'body2', 'mediaType' => 'text/html'],
 			['content' => 'body', 'mediaType' => 'text/bbcode']]];
@@ -153,7 +153,7 @@ class JsonLDTest extends TestCase
 		self::assertSame('body', $data);
 	}
 
-	public function testFetchElementTypeValueArrayNotFound()
+	public function testFetchElementTypeValueArrayNotFound(): void
 	{
 		$object = ['source' => [['content' => 'body2', 'mediaType' => 'text/html'],
 			['content' => 'body', 'mediaType' => 'text/bbcode']]];
@@ -162,7 +162,7 @@ class JsonLDTest extends TestCase
 		self::assertNull($data);
 	}
 
-	public function testFetchElementTypeArrayNotFound()
+	public function testFetchElementTypeArrayNotFound(): void
 	{
 		$object = ['source' => [['content' => 'body2', 'mediaType' => 'text/html'],
 			['content' => 'body', 'mediaType' => 'text/bbcode']]];

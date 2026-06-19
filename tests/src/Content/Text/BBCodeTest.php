@@ -131,7 +131,7 @@ class BBCodeTest extends FixtureTestCase
 	 * @throws InternalServerErrorException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataLinks')]
-	public function testAutoLinking(string $data, bool $assertHTML)
+	public function testAutoLinking(string $data, bool $assertHTML): void
 	{
 		$output = BBCode::convert($data);
 		$assert = $this->HTMLPurifier->purify('<a href="' . $data . '" target="_blank" rel="noopener noreferrer">' . Strings::getStyledURL($data) . '</a>');
@@ -281,7 +281,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @throws InternalServerErrorException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataBBCodes')]
-	public function testConvert(string $expectedHtml, string $text, bool $embed = true, int $simpleHtml = BBCode::INTERNAL, bool $forPlaintext = false)
+	public function testConvert(string $expectedHtml, string $text, bool $embed = true, int $simpleHtml = BBCode::INTERNAL, bool $forPlaintext = false): void
 	{
 		// This assumes system.remove_multiplicated_lines = false
 		$actual = BBCode::convert($text, $embed, $simpleHtml, $forPlaintext);
@@ -330,7 +330,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @throws InternalServerErrorException
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataBBCodesToMarkdown')]
-	public function testToMarkdown(string $expected, string $text, $for_diaspora = true)
+	public function testToMarkdown(string $expected, string $text, $for_diaspora = true): void
 	{
 		$actual = BBCode::toMarkdown($text, $for_diaspora);
 
@@ -353,7 +353,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetTags')]
-	public function testGetTags(array $expected, string $text)
+	public function testGetTags(array $expected, string $text): void
 	{
 		$actual = BBCode::getTags($text);
 
@@ -380,7 +380,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataExpandTags')]
-	public function testExpandTags(string $expected, string $text)
+	public function testExpandTags(string $expected, string $text): void
 	{
 		$actual = BBCode::expandTags($text);
 
@@ -436,7 +436,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataExpandVideoLinks')]
-	public function testExpandVideoLinks(string $expected, string $text)
+	public function testExpandVideoLinks(string $expected, string $text): void
 	{
 		$actual = BBCode::expandVideoLinks($text);
 
@@ -506,7 +506,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @param string $addon    Optional addon we're searching the abstract for
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetAbstract')]
-	public function testGetAbstract(string $expected, string $text, string $addon)
+	public function testGetAbstract(string $expected, string $text, string $addon): void
 	{
 		$actual = BBCode::getAbstract($text, $addon);
 
@@ -558,7 +558,7 @@ Karl Marx - Die ursprüngliche Akkumulation
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStripAbstract')]
-	public function testStripAbstract(string $expected, string $text)
+	public function testStripAbstract(string $expected, string $text): void
 	{
 		$actual = BBCode::stripAbstract($text);
 
@@ -690,7 +690,7 @@ Lucas: For the right price, yes.[/share]',
 	 * @param string $text    Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataFetchShareAttributes')]
-	public function testFetchShareAttributes(array $expected, string $text)
+	public function testFetchShareAttributes(array $expected, string $text): void
 	{
 		$actual = BBCode::fetchShareAttributes($text);
 
@@ -713,7 +713,7 @@ Lucas: For the right price, yes.[/share]',
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataProfileLink')]
-	public function testProfileLink(string $expected, string $text)
+	public function testProfileLink(string $expected, string $text): void
 	{
 		$actual = BBCode::convertForUriId(0, $text);
 
@@ -814,7 +814,7 @@ Lucas: For the right price, yes.[/share]',
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvertAttachment')]
-	public function testConvertAttachment(string $expected, array $data)
+	public function testConvertAttachment(string $expected, array $data): void
 	{
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
@@ -839,7 +839,7 @@ Lucas: For the right price, yes.[/share]',
 	 * @param string $text     Input text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('datasetMentionsToNicknames')]
-	public function testsetMentionsToNicknames(string $expected, string $text)
+	public function testsetMentionsToNicknames(string $expected, string $text): void
 	{
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 

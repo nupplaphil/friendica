@@ -27,7 +27,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithInvalidId()
+	public function testApiFavoritesCreateDestroyWithInvalidId(): void
 	{
 		$this->expectException(BadRequestException::class);
 
@@ -40,7 +40,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithDestroyAction()
+	public function testApiFavoritesCreateDestroyWithDestroyAction(): void
 	{
 		$response = (new Destroy(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [

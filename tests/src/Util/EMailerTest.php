@@ -64,7 +64,7 @@ class EMailerTest extends MockedTestCase
 		parent::tearDown();
 	}
 
-	public function testEmail()
+	public function testEmail(): void
 	{
 		$this->pConfig->shouldReceive('get')->withArgs(['1', 'system', 'email_textonly'])->andReturn(false)->once();
 
@@ -97,7 +97,7 @@ class EMailerTest extends MockedTestCase
 		self::assertEquals("-f sender@friendica.local", EmailerSpy::$MAIL_DATA['parameters']);
 	}
 
-	public function testTwoMessageIds()
+	public function testTwoMessageIds(): void
 	{
 		$this->pConfig->shouldReceive('get')->withArgs(['1', 'system', 'email_textonly'])->andReturn(false)->once();
 

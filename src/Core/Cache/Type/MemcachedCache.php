@@ -56,7 +56,7 @@ class MemcachedCache extends AbstractCache implements ICanCacheInMemory
 
 		$memcached_hosts = $config->get('system', 'memcached_hosts');
 
-		array_walk($memcached_hosts, function (&$value) {
+		array_walk($memcached_hosts, function (&$value): void {
 			if (is_string($value)) {
 				$value = array_map(trim(...), explode(',', $value));
 			}

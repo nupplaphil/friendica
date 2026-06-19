@@ -51,7 +51,7 @@ class DocWriter
 				$lengths['fields'] = max($lengths['fields'], strlen($fieldlist));
 			}
 
-			array_walk_recursive($indexes, function (&$value, $key) use ($lengths) {
+			array_walk_recursive($indexes, function (&$value, $key) use ($lengths): void {
 				$value = str_pad((string) $value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 
@@ -110,7 +110,7 @@ class DocWriter
 				}
 			}
 
-			array_walk_recursive($fields, function (&$value, $key) use ($lengths) {
+			array_walk_recursive($fields, function (&$value, $key) use ($lengths): void {
 				$value = str_pad((string) $value, $lengths[$key], $value === '-' ? '-' : ' ');
 			});
 

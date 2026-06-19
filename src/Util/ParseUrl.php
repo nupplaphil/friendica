@@ -672,7 +672,7 @@ class ParseUrl
 	private static function checkMedia(string $page_url, array $siteinfo): array
 	{
 		if (!empty($siteinfo['images'])) {
-			array_walk($siteinfo['images'], function (&$image) use ($page_url) {
+			array_walk($siteinfo['images'], function (&$image) use ($page_url): void {
 				/*
 				 * According to the specifications someone could place a picture
 				 * URL into the content field as well. But this doesn't seem to
@@ -703,7 +703,7 @@ class ParseUrl
 
 		foreach (['audio', 'video'] as $element) {
 			if (!empty($siteinfo[$element])) {
-				array_walk($siteinfo[$element], function (&$media) use ($page_url) {
+				array_walk($siteinfo[$element], function (&$media) use ($page_url): void {
 					$url         = '';
 					$embed       = '';
 					$content     = '';
@@ -882,7 +882,7 @@ class ParseUrl
 			}
 		}
 
-		array_walk_recursive($siteinfo, function (&$element) {
+		array_walk_recursive($siteinfo, function (&$element): void {
 			if (is_string($element)) {
 				$element = trim(strip_tags(html_entity_decode($element, ENT_COMPAT, 'UTF-8')));
 			}

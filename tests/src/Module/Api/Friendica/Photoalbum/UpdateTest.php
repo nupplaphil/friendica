@@ -22,14 +22,14 @@ class UpdateTest extends ApiTestCase
 		$this->useHttpMethod(Router::POST);
 	}
 
-	public function testEmpty()
+	public function testEmpty(): void
 	{
 		$this->expectException(BadRequestException::class);
 		(new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);
 	}
 
-	public function testTooFewArgs()
+	public function testTooFewArgs(): void
 	{
 		$this->expectException(BadRequestException::class);
 		(new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
@@ -38,7 +38,7 @@ class UpdateTest extends ApiTestCase
 			]);
 	}
 
-	public function testWrongUpdate()
+	public function testWrongUpdate(): void
 	{
 		$this->expectException(BadRequestException::class);
 		(new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
@@ -53,7 +53,7 @@ class UpdateTest extends ApiTestCase
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}
 
-	public function testValid()
+	public function testValid(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/photo/photo.fixture.php', DI::dba());
 

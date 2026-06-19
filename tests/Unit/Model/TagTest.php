@@ -15,7 +15,7 @@ class TagTest extends TestCase
 	/**
 	 *
 	 */
-	public function testGetFromBody()
+	public function testGetFromBody(): void
 	{
 		$body = '![url=https://pirati.ca/profile/test1]Testgruppe 1b[/url] Test, please ignore';
 

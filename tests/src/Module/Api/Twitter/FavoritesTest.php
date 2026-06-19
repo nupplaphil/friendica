@@ -20,7 +20,7 @@ class FavoritesTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavorites()
+	public function testApiFavorites(): void
 	{
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
@@ -43,7 +43,7 @@ class FavoritesTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFavoritesWithRss()
+	public function testApiFavoritesWithRss(): void
 	{
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);

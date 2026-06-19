@@ -22,7 +22,7 @@ class DeleteTest extends ApiTestCase
 		$this->useHttpMethod(Router::POST);
 	}
 
-	public function testEmpty()
+	public function testEmpty(): void
 	{
 		$this->expectException(BadRequestException::class);
 		(new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))->run($this->httpExceptionMock);
@@ -33,13 +33,13 @@ class DeleteTest extends ApiTestCase
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}
 
-	public function testWrong()
+	public function testWrong(): void
 	{
 		$this->expectException(BadRequestException::class);
 		(new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))->run($this->httpExceptionMock, ['photo_id' => 1]);
 	}
 
-	public function testValidWithPost()
+	public function testValidWithPost(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/photo/photo.fixture.php', DI::dba());
 
@@ -54,7 +54,7 @@ class DeleteTest extends ApiTestCase
 		self::assertEquals('photo with id `709057080661a283a6aa598501504178` has been deleted from server.', $json->message);
 	}
 
-	public function testValidWithDelete()
+	public function testValidWithDelete(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/photo/photo.fixture.php', DI::dba());
 

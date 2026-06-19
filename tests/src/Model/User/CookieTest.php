@@ -44,7 +44,7 @@ class CookieTest extends MockedTestCase
 	/**
 	 * Test if we can create a basic cookie instance
 	 */
-	public function testInstance()
+	public function testInstance(): void
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
 		$this->config->shouldReceive('get')->with('system', 'site_prvkey')->andReturn('1235')->once();
@@ -110,7 +110,7 @@ class CookieTest extends MockedTestCase
 	 * Test the get() method of the cookie class
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGet')]
-	public function testGet(array $cookieData, bool $hasValues, $uid, $hash, $ip)
+	public function testGet(array $cookieData, bool $hasValues, $uid, $hash, $ip): void
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
 		$this->config->shouldReceive('get')->with('system', 'site_prvkey')->andReturn('1235')->once();
@@ -170,7 +170,7 @@ class CookieTest extends MockedTestCase
 	 * Test the check() method of the cookie class
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCheck')]
-	public function testCheck(string $serverPrivateKey, string $userPrivateKey, string $password, string $assertHash, bool $assertTrue)
+	public function testCheck(string $serverPrivateKey, string $userPrivateKey, string $password, string $assertHash, bool $assertTrue): void
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
 		$this->config->shouldReceive('get')->with('system', 'site_prvkey')->andReturn($serverPrivateKey)->once();
@@ -230,7 +230,7 @@ class CookieTest extends MockedTestCase
 	 * Test the set() method of the cookie class
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
-	public function testSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray)
+	public function testSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray): void
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
 		$this->config->shouldReceive('get')->with('system', 'site_prvkey')->andReturn($serverKey)->once();
@@ -256,7 +256,7 @@ class CookieTest extends MockedTestCase
 	 * Test the set() method of the cookie class
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
-	public function testDoubleSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray)
+	public function testDoubleSet($serverKey, $uid, $password, $privateKey, $assertHash, $remoteIp, $serverArray): void
 	{
 		$this->baseUrl->shouldReceive('getScheme')->andReturn('https')->once();
 		$this->config->shouldReceive('get')->with('system', 'site_prvkey')->andReturn($serverKey)->once();
@@ -278,7 +278,7 @@ class CookieTest extends MockedTestCase
 	/**
 	 * Test the clear() method of the cookie class
 	 */
-	public function testClear()
+	public function testClear(): void
 	{
 		StaticCookie::$_COOKIE = [
 			Cookie::NAME => 'test',

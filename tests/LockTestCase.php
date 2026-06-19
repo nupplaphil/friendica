@@ -36,7 +36,7 @@ abstract class LockTestCase extends MockedTestCase
 		parent::tearDown();
 	}
 
-	public function testLock()
+	public function testLock(): void
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -44,7 +44,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('bar'));
 	}
 
-	public function testDoubleLock()
+	public function testDoubleLock(): void
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -53,7 +53,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertTrue($this->instance->acquire('foo', 1));
 	}
 
-	public function testReleaseLock()
+	public function testReleaseLock(): void
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
 		self::assertTrue($this->instance->acquire('foo', 1));
@@ -62,7 +62,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('foo'));
 	}
 
-	public function testReleaseAll()
+	public function testReleaseAll(): void
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
 		self::assertTrue($this->instance->acquire('bar', 1));
@@ -79,7 +79,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('nice'));
 	}
 
-	public function testReleaseAfterUnlock()
+	public function testReleaseAfterUnlock(): void
 	{
 		self::assertFalse($this->instance->isLocked('foo'));
 		self::assertFalse($this->instance->isLocked('bar'));
@@ -100,7 +100,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('nice'));
 	}
 
-	public function testReleaseWitTTL()
+	public function testReleaseWitTTL(): void
 	{
 		self::assertFalse($this->instance->isLocked('test'));
 		self::assertTrue($this->instance->acquire('test', 1, 10));
@@ -109,7 +109,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertFalse($this->instance->isLocked('test'));
 	}
 
-	public function testGetLocks()
+	public function testGetLocks(): void
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
 		self::assertTrue($this->instance->acquire('bar', 1));
@@ -126,7 +126,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertContains('nice', $locks);
 	}
 
-	public function testGetLocksWithPrefix()
+	public function testGetLocksWithPrefix(): void
 	{
 		self::assertTrue($this->instance->acquire('foo', 1));
 		self::assertTrue($this->instance->acquire('test1', 1));
@@ -143,7 +143,7 @@ abstract class LockTestCase extends MockedTestCase
 		self::assertNotContains('foo', $locks);
 	}
 
-	public function testLockTTL()
+	public function testLockTTL(): void
 	{
 		static::markTestSkipped('taking too much time without mocking');
 
@@ -171,7 +171,7 @@ abstract class LockTestCase extends MockedTestCase
 	/**
 	 * Test if releasing a non-existing lock doesn't throw errors
 	 */
-	public function testReleaseLockWithoutLock()
+	public function testReleaseLockWithoutLock(): void
 	{
 		self::assertFalse($this->instance->isLocked('wrongLock'));
 		self::assertFalse($this->instance->release('wrongLock'));

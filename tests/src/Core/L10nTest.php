@@ -94,7 +94,7 @@ class L10nTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataDetectLanguage')]
-	public function testDetectLanguage(array $server, array $get, string $default, string $assert)
+	public function testDetectLanguage(array $server, array $get, string $default, string $assert): void
 	{
 		self::assertEquals($assert, L10n::detectLanguage($server, $get, $default));
 	}

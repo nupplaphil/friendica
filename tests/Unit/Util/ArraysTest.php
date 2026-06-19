@@ -18,7 +18,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if an empty array and an empty delimiter returns an empty string.
 	 */
-	public function testEmptyArrayEmptyDelimiter()
+	public function testEmptyArrayEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([], '');
 		self::assertEmpty($str);
@@ -27,7 +27,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if an empty array and a non-empty delimiter returns an empty string.
 	 */
-	public function testEmptyArrayNonEmptyDelimiter()
+	public function testEmptyArrayNonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([], ',');
 		self::assertEmpty($str);
@@ -36,7 +36,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a non-empty array and an empty delimiter returns the value (1).
 	 */
-	public function testNonEmptyArrayEmptyDelimiter()
+	public function testNonEmptyArrayEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([1], '');
 		self::assertSame($str, '1');
@@ -45,7 +45,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a non-empty array and an empty delimiter returns the value (12).
 	 */
-	public function testNonEmptyArray2EmptyDelimiter()
+	public function testNonEmptyArray2EmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([1, 2], '');
 		self::assertSame($str, '12');
@@ -54,7 +54,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a non-empty array and a non-empty delimiter returns the value (1).
 	 */
-	public function testNonEmptyArrayNonEmptyDelimiter()
+	public function testNonEmptyArrayNonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([1], ',');
 		self::assertSame($str, '1');
@@ -63,7 +63,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a non-empty array and a non-empty delimiter returns the value (1,2).
 	 */
-	public function testNonEmptyArray2NonEmptyDelimiter()
+	public function testNonEmptyArray2NonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([1, 2], ',');
 		self::assertSame($str, '1,2');
@@ -72,7 +72,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a 2-dim array and an empty delimiter returns the expected string.
 	 */
-	public function testEmptyMultiArray2EmptyDelimiter()
+	public function testEmptyMultiArray2EmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([[1], []], '');
 		self::assertSame($str, '{1}{}');
@@ -81,7 +81,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a 2-dim array and an empty delimiter returns the expected string.
 	 */
-	public function testEmptyMulti2Array2EmptyDelimiter()
+	public function testEmptyMulti2Array2EmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([[1], [2]], '');
 		self::assertSame($str, '{1}{2}');
@@ -90,7 +90,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a 2-dim array and a non-empty delimiter returns the expected string.
 	 */
-	public function testEmptyMultiArray2NonEmptyDelimiter()
+	public function testEmptyMultiArray2NonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([[1], []], ',');
 		self::assertSame($str, '{1},{}');
@@ -99,7 +99,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a 2-dim array and a non-empty delimiter returns the expected string.
 	 */
-	public function testEmptyMulti2Array2NonEmptyDelimiter()
+	public function testEmptyMulti2Array2NonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([[1], [2]], ',');
 		self::assertSame($str, '{1},{2}');
@@ -108,7 +108,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Tests if a 3-dim array and a non-empty delimiter returns the expected string.
 	 */
-	public function testEmptyMulti3Array2NonEmptyDelimiter()
+	public function testEmptyMulti3Array2NonEmptyDelimiter(): void
 	{
 		$str = Arrays::recursiveImplode([[1], [2, [3]]], ',');
 		self::assertSame($str, '{1},{2,{3}}');
@@ -117,7 +117,7 @@ class ArraysTest extends TestCase
 	/**
 	 * Test the Arrays::walkRecursive() function.
 	 */
-	public function testApiWalkRecursive()
+	public function testApiWalkRecursive(): void
 	{
 		$array = ['item1'];
 		self::assertEquals(
@@ -137,7 +137,7 @@ class ArraysTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function testApiWalkRecursiveWithArray()
+	public function testApiWalkRecursiveWithArray(): void
 	{
 		$array = [['item1'], ['item2']];
 		self::assertEquals(

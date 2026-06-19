@@ -48,7 +48,7 @@ class CacheTest extends MockedTestCase
 	 * Test the loadConfigArray() method without override
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testLoadConfigArray($data)
+	public function testLoadConfigArray($data): void
 	{
 		$configCache = new Cache();
 		$configCache->load($data);
@@ -60,7 +60,7 @@ class CacheTest extends MockedTestCase
 	 * Test the loadConfigArray() method with overrides
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testLoadConfigArrayOverride($data)
+	public function testLoadConfigArrayOverride($data): void
 	{
 		$override = [
 			'system' => [
@@ -99,7 +99,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the loadConfigArray() method with only a category
 	 */
-	public function testLoadConfigArrayWithOnlyCategory()
+	public function testLoadConfigArrayWithOnlyCategory(): void
 	{
 		$configCache = new Cache();
 
@@ -121,7 +121,7 @@ class CacheTest extends MockedTestCase
 	 * Test the getAll() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testGetAll($data)
+	public function testGetAll($data): void
 	{
 		$configCache = new Cache();
 		$configCache->load($data);
@@ -136,7 +136,7 @@ class CacheTest extends MockedTestCase
 	 * Test the set() and get() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetGet($data)
+	public function testSetGet($data): void
 	{
 		$configCache = new Cache();
 
@@ -152,7 +152,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the get() method without a value
 	 */
-	public function testGetEmpty()
+	public function testGetEmpty(): void
 	{
 		$configCache = new Cache();
 
@@ -162,7 +162,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the get() method with a category
 	 */
-	public function testGetCat()
+	public function testGetCat(): void
 	{
 		$configCache = new Cache([
 			'system' => [
@@ -190,7 +190,7 @@ class CacheTest extends MockedTestCase
 	 * Test the delete() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDelete($data)
+	public function testDelete($data): void
 	{
 		$configCache = new Cache($data);
 
@@ -207,7 +207,7 @@ class CacheTest extends MockedTestCase
 	 * Test the keyDiff() method with result
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testKeyDiffWithResult($data)
+	public function testKeyDiffWithResult($data): void
 	{
 		$configCache = new Cache($data);
 
@@ -224,7 +224,7 @@ class CacheTest extends MockedTestCase
 	 * Test the keyDiff() method without result
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testKeyDiffWithoutResult($data)
+	public function testKeyDiffWithoutResult($data): void
 	{
 		$configCache = new Cache($data);
 
@@ -236,7 +236,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test the default hiding of passwords inside the cache
 	 */
-	public function testPasswordHide()
+	public function testPasswordHide(): void
 	{
 		$configCache = new Cache([
 			'database' => [
@@ -253,7 +253,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test disabling the hiding of passwords inside the cache
 	 */
-	public function testPasswordShow()
+	public function testPasswordShow(): void
 	{
 		$configCache = new Cache([
 			'database' => [
@@ -270,7 +270,7 @@ class CacheTest extends MockedTestCase
 	/**
 	 * Test a empty password
 	 */
-	public function testEmptyPassword()
+	public function testEmptyPassword(): void
 	{
 		$configCache = new Cache([
 			'database' => [
@@ -284,7 +284,7 @@ class CacheTest extends MockedTestCase
 		self::assertEmpty($configCache->get('database', 'username'));
 	}
 
-	public function testWrongTypePassword()
+	public function testWrongTypePassword(): void
 	{
 		$configCache = new Cache([
 			'database' => [
@@ -311,7 +311,7 @@ class CacheTest extends MockedTestCase
 	 * Test the set() method with overrides
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetOverrides($data)
+	public function testSetOverrides($data): void
 	{
 
 		$configCache = new Cache();
@@ -334,7 +334,7 @@ class CacheTest extends MockedTestCase
 	 * @return void
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetData($data)
+	public function testSetData($data): void
 	{
 		$configCache = new Cache();
 		$configCache->load($data, Cache::SOURCE_FILE);
@@ -346,7 +346,7 @@ class CacheTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testMerge($data)
+	public function testMerge($data): void
 	{
 		$configCache = new Cache();
 		$configCache->load($data, Cache::SOURCE_FILE);
@@ -508,7 +508,7 @@ class CacheTest extends MockedTestCase
 	 * Tests that the Cache can return a whole category at once
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
-	public function testGetCategory($data, string $category, mixed $assertion)
+	public function testGetCategory($data, string $category, mixed $assertion): void
 	{
 		$cache = new Cache($data);
 
@@ -519,7 +519,7 @@ class CacheTest extends MockedTestCase
 	 * Test that the cache can get merged with different categories
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
-	public function testCatMerge($data, string $category, mixed $assertion)
+	public function testCatMerge($data, string $category, mixed $assertion): void
 	{
 		$cache = new Cache($data);
 
@@ -538,7 +538,7 @@ class CacheTest extends MockedTestCase
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDeleteRemovesKey($data)
+	public function testDeleteRemovesKey($data): void
 	{
 		$cache = new Cache();
 		$cache->load($data, Cache::SOURCE_FILE);
@@ -562,7 +562,7 @@ class CacheTest extends MockedTestCase
 	 * Test that deleted keys are working with merge
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDeleteAndMergeWithDefault($data)
+	public function testDeleteAndMergeWithDefault($data): void
 	{
 		$cache = new Cache();
 		$cache->load($data, Cache::SOURCE_FILE);

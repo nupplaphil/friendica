@@ -401,7 +401,7 @@ class UserDefinedChannel extends BaseRepository
 		if (empty($tags)) {
 			return false;
 		}
-		array_walk($tags, function (&$value) {
+		array_walk($tags, function (&$value): void {
 			$value = mb_strtolower($value);
 		});
 		foreach (explode(',', $tagList) as $tag) {

@@ -1428,7 +1428,7 @@ class Database
 			}
 		}
 
-		array_walk($fields, function (&$value, $key) use ($options) {
+		array_walk($fields, function (&$value, $key) use ($options): void {
 			$field = $value;
 			$value = DBA::quoteIdentifier($field);
 

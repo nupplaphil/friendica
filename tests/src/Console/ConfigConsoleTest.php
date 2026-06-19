@@ -33,7 +33,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 		$this->configMock = Mockery::mock(IManageConfigValues::class);
 	}
 
-	public function testSetGetKeyValue()
+	public function testSetGetKeyValue(): void
 	{
 		$this->configMock
 			->shouldReceive('set')
@@ -83,7 +83,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 		self::assertEquals("config.test => NULL\n", $txt);
 	}
 
-	public function testSetArrayValue()
+	public function testSetArrayValue(): void
 	{
 		$testArray = [1, 2, 3];
 		$this->configMock
@@ -101,7 +101,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 		self::assertEquals("[Error] config.test is an array and can't be set using this command.\n", $txt);
 	}
 
-	public function testSetExistingValue()
+	public function testSetExistingValue(): void
 	{
 		$this->configMock
 			->shouldReceive('get')
@@ -118,7 +118,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 		self::assertEquals("[Error] config.test already set to now.\n", $txt);
 	}
 
-	public function testTooManyArguments()
+	public function testTooManyArguments(): void
 	{
 		$console = new Config($this->configMock, $this->consoleArgv);
 		$console->setArgument(0, 'config');
@@ -131,7 +131,7 @@ class ConfigConsoleTest extends ConsoleTestCase
 		self::assertEquals($assertion, $firstline);
 	}
 
-	public function testVerbose()
+	public function testVerbose(): void
 	{
 		$this->configMock
 			->shouldReceive('get')
@@ -160,7 +160,7 @@ CONF;
 		self::assertEquals($assertion, $txt);
 	}
 
-	public function testUnableToSet()
+	public function testUnableToSet(): void
 	{
 		$this->configMock
 			->shouldReceive('set')
@@ -180,7 +180,7 @@ CONF;
 		self::assertSame("Unable to set test.it\n", $txt);
 	}
 
-	public function testGetHelp()
+	public function testGetHelp(): void
 	{
 		// Usable to purposely fail if new commands are added without taking tests into account
 		$theHelp = <<<HELP

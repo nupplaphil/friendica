@@ -28,7 +28,7 @@ class EventDispatcherTest extends TestCase
 	{
 		$eventDispatcher = new EventDispatcher();
 
-		$eventDispatcher->addListener('test', function (NamedEvent $event) {
+		$eventDispatcher->addListener('test', function (NamedEvent $event): void {
 			$this->assertSame('test', $event->getName());
 		});
 

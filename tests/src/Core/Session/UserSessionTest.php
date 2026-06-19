@@ -53,7 +53,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataLocalUserId')]
-	public function testGetLocalUserId(array $data, $expected)
+	public function testGetLocalUserId(array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->getLocalUserId());
@@ -104,7 +104,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetRemoteUserId')]
-	public function testGetRemoteUserId(array $data, $expected)
+	public function testGetRemoteUserId(array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->getRemoteUserId());
@@ -125,7 +125,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetRemoteContactId')]
-	public function testGetRemoteContactId(int $uid, array $data, $expected)
+	public function testGetRemoteContactId(int $uid, array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->getRemoteContactID($uid));
@@ -158,7 +158,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataGetUserIdForVisitorContactID')]
-	public function testGetUserIdForVisitorContactID(int $cid, array $data, $expected)
+	public function testGetUserIdForVisitorContactID(int $cid, array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertSame($expected, $userSession->getUserIDForVisitorContactID($cid));
@@ -196,7 +196,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataAuthenticated')]
-	public function testIsAuthenticated(array $data, $expected)
+	public function testIsAuthenticated(array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->isAuthenticated());
@@ -241,7 +241,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsVisitor')]
-	public function testIsVisitor(array $data, $expected)
+	public function testIsVisitor(array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->isVisitor());
@@ -292,7 +292,7 @@ class UserSessionTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsUnauthenticated')]
-	public function testIsUnauthenticated(array $data, $expected)
+	public function testIsUnauthenticated(array $data, $expected): void
 	{
 		$userSession = new UserSession(new ArraySession($data));
 		$this->assertEquals($expected, $userSession->isUnauthenticated());

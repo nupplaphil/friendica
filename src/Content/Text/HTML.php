@@ -943,7 +943,7 @@ class HTML
 
 		$config->set('HTML.SafeIframe', true);
 
-		array_walk($allowedIframeDomains, function (&$domain) {
+		array_walk($allowedIframeDomains, function (&$domain): void {
 			// Allow the domain and all its eventual sub-domains
 			$domain = '(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)*' . preg_quote(trim($domain, '/'), '%');
 		});

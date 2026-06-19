@@ -36,7 +36,7 @@ class APCuCacheTest extends MemoryCacheTestCase
 		parent::tearDown();
 	}
 
-	public function testStats()
+	public function testStats(): void
 	{
 		$stats = $this->instance->getStats();
 

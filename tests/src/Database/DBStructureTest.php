@@ -26,7 +26,7 @@ class DBStructureTest extends DatabaseTestCase
 		DI::init($dice);
 	}
 
-	public function testExists()
+	public function testExists(): void
 	{
 		self::assertTrue(DBStructure::existsTable('user'));
 		self::assertFalse(DBStructure::existsTable('nonexistent'));
@@ -36,7 +36,7 @@ class DBStructureTest extends DatabaseTestCase
 		self::assertFalse(DBStructure::existsColumn('user', ['uid', 'nonsense']));
 	}
 
-	public function testRename()
+	public function testRename(): void
 	{
 		$fromColumn = 'email';
 		$toColumn   = 'email_key';

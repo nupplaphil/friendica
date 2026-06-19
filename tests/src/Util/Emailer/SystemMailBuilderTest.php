@@ -33,9 +33,9 @@ class SystemMailBuilderTest extends MockedTestCase
 
 		$this->setUpVfsDir();
 
-		$this->config  = \Mockery::mock(IManageConfigValues::class);
+		$this->config = \Mockery::mock(IManageConfigValues::class);
 		$this->config->shouldReceive('get')->with('config', 'admin_name')->andReturn('Admin');
-		$this->l10n    = \Mockery::mock(L10n::class);
+		$this->l10n = \Mockery::mock(L10n::class);
 		$this->l10n->shouldReceive('t')->andReturnUsing(function ($msg) {
 			return $msg;
 		});
@@ -47,7 +47,7 @@ class SystemMailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder instance can get created
 	 */
-	public function testBuilderInstance()
+	public function testBuilderInstance(): void
 	{
 		$builder = new SystemMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger(), 'moreply@friendica.local', 'FriendicaSite');
 
