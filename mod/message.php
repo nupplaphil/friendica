@@ -22,7 +22,7 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Strings;
 use Friendica\Util\Temporal;
 
-function message_init()
+function message_init(): void
 {
 	$tabs               = '';
 	DI::page()['title'] = DI::l10n()->t('Messages');
@@ -50,7 +50,7 @@ function message_init()
 	]);
 }
 
-function message_post()
+function message_post(): void
 {
 	if (!DI::userSession()->getLocalUserId()) {
 		DI::sysmsg()->addNotice(DI::l10n()->t('Permission denied.'));

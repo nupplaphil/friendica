@@ -28,7 +28,7 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Images;
 use Friendica\Util\Strings;
 
-function photos_init()
+function photos_init(): void
 {
 	if (DI::config()->get('system', 'block_public') && !DI::userSession()->isAuthenticated()) {
 		return;
@@ -92,7 +92,7 @@ function photos_init()
 	return;
 }
 
-function photos_post()
+function photos_post(): void
 {
 	$user = User::getByNickname(DI::args()->getArgv()[1]);
 	if (!DBA::isResult($user)) {

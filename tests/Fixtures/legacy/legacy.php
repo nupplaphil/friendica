@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-function legacy_init()
+function legacy_init(): void
 {
 	// I don't do nothing
 }

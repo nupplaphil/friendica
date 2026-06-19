@@ -18,7 +18,7 @@ use Friendica\DI;
  *
  * @todo Check if this is really needed.
  */
-function load_page(AppHelper $appHelper)
+function load_page(AppHelper $appHelper): void
 {
 	if (isset($_GET['mode']) && ($_GET['mode'] == 'minimal')) {
 		require 'view/theme/frio/minimal.php';

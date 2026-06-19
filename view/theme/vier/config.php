@@ -44,7 +44,7 @@ function theme_content(AppHelper $appHelper)
 			$show_services, $show_friends, $show_lastusers);
 }
 
-function theme_post(AppHelper $appHelper)
+function theme_post(AppHelper $appHelper): void
 {
 	if (!DI::userSession()->getLocalUserId()) {
 		return;
@@ -91,7 +91,7 @@ function theme_admin(AppHelper $appHelper) {
 	return $o;
 }
 
-function theme_admin_post() {
+function theme_admin_post(): void {
 	if (isset($_POST['vier-settings-submit'])){
 		DI::config()->set('vier', 'style', $_POST['vier_style']);
 		DI::config()->set('vier', 'show_pages', $_POST['vier_show_pages']);

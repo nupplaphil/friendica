@@ -28,7 +28,7 @@ use Friendica\Util\Strings;
  * This script can be included even when the app is in maintenance mode which requires us to avoid any config call
  */
 
-function vier_init()
+function vier_init(): void
 {
 	Renderer::setActiveTemplateEngine('smarty3');
 
@@ -115,7 +115,7 @@ function get_vier_config($key, $default = false, $admin = false)
 	return $default;
 }
 
-function vier_community_info()
+function vier_community_info(): void
 {
 	$show_pages     = get_vier_config("show_pages", 1);
 	$show_profiles  = get_vier_config("show_profiles", 1);
