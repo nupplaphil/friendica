@@ -19,7 +19,7 @@ class InboxTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesBoxWithInbox()
+	public function testApiDirectMessagesBoxWithInbox(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 

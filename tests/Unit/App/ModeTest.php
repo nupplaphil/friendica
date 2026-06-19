@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class ModeTest extends TestCase
 {
-	public function testMethodsReturnCorrectValuesByDefault()
+	public function testMethodsReturnCorrectValuesByDefault(): void
 	{
 		$mode = new Mode();
 
@@ -30,7 +30,7 @@ class ModeTest extends TestCase
 		self::assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
 	}
 
-	public function testMethodsReturnCorrectValuesAfterDetermineWithoutConfigFile()
+	public function testMethodsReturnCorrectValuesAfterDetermineWithoutConfigFile(): void
 	{
 		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, []);
 
@@ -49,7 +49,7 @@ class ModeTest extends TestCase
 		self::assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
 	}
 
-	public function testMethodsReturnCorrectValuesAfterDetermineWithoutDatabaseConnection()
+	public function testMethodsReturnCorrectValuesAfterDetermineWithoutDatabaseConnection(): void
 	{
 		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
@@ -66,7 +66,7 @@ class ModeTest extends TestCase
 		self::assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
 	}
 
-	public function testMethodsReturnCorrectValuesWithMaintenanceMode()
+	public function testMethodsReturnCorrectValuesWithMaintenanceMode(): void
 	{
 		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
@@ -89,7 +89,7 @@ class ModeTest extends TestCase
 		self::assertFalse($mode->has(Mode::MAINTENANCEDISABLED));
 	}
 
-	public function testMethodsReturnCorrectValuesWithNormalMode()
+	public function testMethodsReturnCorrectValuesWithNormalMode(): void
 	{
 		$root = vfsStream::setup(__FUNCTION__ . '_friendica', 0777, ['config' => [
 			'local.config.php' => file_get_contents(realpath(dirname(__FILE__, 4) . '/config/local-sample.config.php')),
@@ -115,7 +115,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test that modes are immutable
 	 */
-	public function testDetermineReturnsNewModeInstance()
+	public function testDetermineReturnsNewModeInstance(): void
 	{
 		$mode = new Mode();
 
@@ -127,7 +127,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test if not called by index is backend
 	 */
-	public function testIsBackendReturnsTrue()
+	public function testIsBackendReturnsTrue(): void
 	{
 		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createStub(MobileDetect::class);
@@ -140,7 +140,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test is called by index but module is backend
 	 */
-	public function testIsBackendWithBackendModuleReturnsTrue()
+	public function testIsBackendWithBackendModuleReturnsTrue(): void
 	{
 		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getModuleName')->willReturn(Mode::BACKEND_MODULES[0]);
@@ -155,7 +155,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test is called by index and module is not backend
 	 */
-	public function testIsBackendWithDefaultModuleReturnsFalse()
+	public function testIsBackendWithDefaultModuleReturnsFalse(): void
 	{
 		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getModuleName')->willReturn(Arguments::DEFAULT_MODULE);
@@ -170,7 +170,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test if the call is an ajax call
 	 */
-	public function testIsAjaxReturnsTrue()
+	public function testIsAjaxReturnsTrue(): void
 	{
 		// This is the server environment variable to determine ajax calls
 		$server = [
@@ -188,7 +188,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test if the call is not nan ajax call
 	 */
-	public function testIsAjaxReturnsFalse()
+	public function testIsAjaxReturnsFalse(): void
 	{
 		// header for ajax call is missing
 		$server = [];
@@ -204,7 +204,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test if the call is a mobile and is a tablet call
 	 */
-	public function testIsMobileAndIsTabletReturnsTrue()
+	public function testIsMobileAndIsTabletReturnsTrue(): void
 	{
 		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createMock(MobileDetect::class);
@@ -221,7 +221,7 @@ class ModeTest extends TestCase
 	/**
 	 * Test if the call is not a mobile and is not a tablet call
 	 */
-	public function testIsMobileAndIsTabletReturnsFalse()
+	public function testIsMobileAndIsTabletReturnsFalse(): void
 	{
 		$args         = self::createStub(Arguments::class);
 		$mobileDetect = self::createMock(MobileDetect::class);

@@ -43,7 +43,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testUpdatedAt($k, $v)
+	public function testUpdatedAt($k, $v): void
 	{
 		$instance = $this->getInstance();
 
@@ -70,7 +70,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 		self::assertGreaterThanOrEqual($updateAt, $updateAtAfter);
 	}
 
-	public function testInstance()
+	public function testInstance(): void
 	{
 		$instance = $this->getInstance();
 
@@ -92,7 +92,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testGetSetDelete($k, $v)
+	public function testGetSetDelete($k, $v): void
 	{
 		$instance = $this->getInstance();
 
@@ -108,7 +108,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetOverride($k, $v)
+	public function testSetOverride($k, $v): void
 	{
 		$instance = $this->getInstance();
 
@@ -124,7 +124,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testOffsetSetDelete($k, $v)
+	public function testOffsetSetDelete($k, $v): void
 	{
 		$instance = $this->getInstance();
 

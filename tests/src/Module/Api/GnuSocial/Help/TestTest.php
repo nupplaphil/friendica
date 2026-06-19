@@ -14,7 +14,7 @@ use Friendica\Test\ApiTestCase;
 
 class TestTest extends ApiTestCase
 {
-	public function testJson()
+	public function testJson(): void
 	{
 		$response = (new Test(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
@@ -28,7 +28,7 @@ class TestTest extends ApiTestCase
 		self::assertEquals('ok', $json);
 	}
 
-	public function testXml()
+	public function testXml(): void
 	{
 		$response = (new Test(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'xml']))
 			->run($this->httpExceptionMock);

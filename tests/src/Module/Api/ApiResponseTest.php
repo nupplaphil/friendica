@@ -17,7 +17,7 @@ use Psr\Log\NullLogger;
 
 class ApiResponseTest extends MockedTestCase
 {
-	public function testErrorWithJson()
+	public function testErrorWithJson(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$args = \Mockery::mock(Arguments::class);
@@ -31,7 +31,7 @@ class ApiResponseTest extends MockedTestCase
 		self::assertEquals('{"error":"error_message","code":"200 OK","request":""}', $response->getContent());
 	}
 
-	public function testErrorWithXml()
+	public function testErrorWithXml(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$args = \Mockery::mock(Arguments::class);
@@ -56,7 +56,7 @@ class ApiResponseTest extends MockedTestCase
 		);
 	}
 
-	public function testErrorWithRss()
+	public function testErrorWithRss(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$args = \Mockery::mock(Arguments::class);
@@ -81,7 +81,7 @@ class ApiResponseTest extends MockedTestCase
 		);
 	}
 
-	public function testErrorWithAtom()
+	public function testErrorWithAtom(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$args = \Mockery::mock(Arguments::class);
@@ -106,7 +106,7 @@ class ApiResponseTest extends MockedTestCase
 		);
 	}
 
-	public function testUnsupported()
+	public function testUnsupported(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -126,7 +126,7 @@ class ApiResponseTest extends MockedTestCase
 		self::assertEquals('{"error":"API endpoint %s %s is not implemented but might be in the future.","code":"501 Not Implemented","request":""}', $response->getContent());
 	}
 
-	public function testUnsupportedUserAgent()
+	public function testUnsupportedUserAgent(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -151,7 +151,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiReformatXml()
+	public function testApiReformatXml(): void
 	{
 		$item = true;
 		$key  = '';
@@ -164,7 +164,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiReformatXmlWithStatusnetKey()
+	public function testApiReformatXmlWithStatusnetKey(): void
 	{
 		$item = '';
 		$key  = 'statusnet_api';
@@ -177,7 +177,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiReformatXmlWithFriendicaKey()
+	public function testApiReformatXmlWithFriendicaKey(): void
 	{
 		$item = '';
 		$key  = 'friendica_api';
@@ -190,7 +190,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiCreateXml()
+	public function testApiCreateXml(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -219,7 +219,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiCreateXmlWithoutNamespaces()
+	public function testApiCreateXmlWithoutNamespaces(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -246,7 +246,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFormatData()
+	public function testApiFormatData(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -263,7 +263,7 @@ class ApiResponseTest extends MockedTestCase
 		self::assertEquals($data, $response->formatData('root_element', 'json', $data));
 	}
 
-	public function testApiExitWithJson()
+	public function testApiExitWithJson(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -280,7 +280,7 @@ class ApiResponseTest extends MockedTestCase
 		self::assertEquals('["some_data"]', $response->getContent());
 	}
 
-	public function testApiExitWithJsonP()
+	public function testApiExitWithJsonP(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {
@@ -302,7 +302,7 @@ class ApiResponseTest extends MockedTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFormatDataWithXml()
+	public function testApiFormatDataWithXml(): void
 	{
 		$l10n = \Mockery::mock(L10n::class);
 		$l10n->shouldReceive('t')->andReturnUsing(function ($args) {

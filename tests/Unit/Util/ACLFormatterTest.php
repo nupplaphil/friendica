@@ -99,7 +99,7 @@ class ACLFormatterTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataExpand')]
-	public function testExpand($input, array $assert)
+	public function testExpand($input, array $assert): void
 	{
 		self::assertAcl($input, $assert);
 	}
@@ -107,7 +107,7 @@ class ACLFormatterTest extends TestCase
 	/**
 	 * Test nullable expand (=> no ACL set)
 	 */
-	public function testExpandNull()
+	public function testExpandNull(): void
 	{
 		$aclFormatter = new ACLFormatter();
 
@@ -165,7 +165,7 @@ class ACLFormatterTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataAclToString')]
-	public function testAclToString($input, string $assert)
+	public function testAclToString($input, string $assert): void
 	{
 		$aclFormatter = new ACLFormatter();
 

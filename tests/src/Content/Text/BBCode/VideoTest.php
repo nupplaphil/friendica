@@ -54,7 +54,7 @@ class VideoTest extends MockedTestCase
 	 * Test if the BBCode is successfully transformed for video links
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataVideo')]
-	public function testTransform(string $input, string $assert)
+	public function testTransform(string $input, string $assert): void
 	{
 		$bbCodeVideo = new Video();
 

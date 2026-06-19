@@ -39,12 +39,12 @@ class ProfilerCacheDecoratorTest extends MemoryCacheTestCase
 		return true;
 	}
 
-	public function testGetStats()
+	public function testGetStats(): void
 	{
 		self::assertEmpty($this->cache->getStats());
 	}
 
-	public function testGetName()
+	public function testGetName(): void
 	{
 		self::assertStringEndsWith(' (with profiler)', $this->instance->getName());
 	}

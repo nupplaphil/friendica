@@ -41,7 +41,7 @@ class ProfilerLoggerTest extends MockedTestCase
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testProfiling($function, $message, array $context)
+	public function testProfiling($function, $message, array $context): void
 	{
 		$logger = new ProfilerLogger($this->logger, $this->profiler);
 
@@ -56,7 +56,7 @@ class ProfilerLoggerTest extends MockedTestCase
 	 * Test the log() function
 	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testProfilingLog()
+	public function testProfilingLog(): void
 	{
 		$logger = new ProfilerLogger($this->logger, $this->profiler);
 

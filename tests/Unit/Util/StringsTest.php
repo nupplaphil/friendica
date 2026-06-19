@@ -18,7 +18,7 @@ class StringsTest extends TestCase
 	/**
 	 * randomnames should be random, even length
 	 */
-	public function testRandomEven()
+	public function testRandomEven(): void
 	{
 		$randomname1 = Strings::getRandomName(10);
 		$randomname2 = Strings::getRandomName(10);
@@ -29,7 +29,7 @@ class StringsTest extends TestCase
 	/**
 	 * randomnames should be random, odd length
 	 */
-	public function testRandomOdd()
+	public function testRandomOdd(): void
 	{
 		$randomname1 = Strings::getRandomName(9);
 		$randomname2 = Strings::getRandomName(9);
@@ -40,7 +40,7 @@ class StringsTest extends TestCase
 	/**
 	 * try to fail ramdonnames
 	 */
-	public function testRandomNameNoLength()
+	public function testRandomNameNoLength(): void
 	{
 		$randomname1 = Strings::getRandomName(0);
 		self::assertEquals(0, strlen($randomname1));
@@ -51,7 +51,7 @@ class StringsTest extends TestCase
 	 *
 	 * @todo What's correct behaviour here? An exception?
 	 */
-	public function testRandomNameNegativeLength()
+	public function testRandomNameNegativeLength(): void
 	{
 		$randomname1 = Strings::getRandomName(-23);
 		self::assertEquals(0, strlen($randomname1));
@@ -60,7 +60,7 @@ class StringsTest extends TestCase
 	/**
 	 * test with a length, that may be too short
 	 */
-	public function testRandomNameLength1()
+	public function testRandomNameLength1(): void
 	{
 		$randomname1 = Strings::getRandomName(1);
 		self::assertEquals(1, strlen($randomname1));
@@ -72,7 +72,7 @@ class StringsTest extends TestCase
 	/**
 	 * test, that tags are escaped
 	 */
-	public function testEscapeHtml()
+	public function testEscapeHtml(): void
 	{
 		$invalidstring = '<submit type="button" onclick="alert(\'failed!\');" />';
 
@@ -109,7 +109,7 @@ class StringsTest extends TestCase
 	 * @param bool   $valid Whether testing on valid or invalid
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataIsHex')]
-	public function testIsHex(string $input, bool $valid = false)
+	public function testIsHex(string $input, bool $valid = false): void
 	{
 		self::assertEquals($valid, Strings::isHex($input));
 	}
@@ -118,7 +118,7 @@ class StringsTest extends TestCase
 	 * Tests that Strings::substringReplace behaves the same as substr_replace with ASCII strings in all the possible
 	 * numerical parameter configurations (positive, negative, zero, out of bounds either side, null)
 	 */
-	public function testSubstringReplaceASCII()
+	public function testSubstringReplaceASCII(): void
 	{
 		for ($start = -10; $start <= 10; $start += 5) {
 			self::assertEquals(
@@ -160,7 +160,7 @@ class StringsTest extends TestCase
 	 * @param int|null $length
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSubstringReplaceMultiByte')]
-	public function testSubstringReplaceMultiByte(string $expected, string $string, string $replacement, int $start, ?int $length = null)
+	public function testSubstringReplaceMultiByte(string $expected, string $string, string $replacement, int $start, ?int $length = null): void
 	{
 		self::assertEquals(
 			$expected,
@@ -173,7 +173,7 @@ class StringsTest extends TestCase
 		);
 	}
 
-	public function testPerformWithEscapedBlocks()
+	public function testPerformWithEscapedBlocks(): void
 	{
 		$originalText = '[noparse][/noparse][nobb]nobb[/nobb][noparse]noparse[/noparse]';
 
@@ -184,7 +184,7 @@ class StringsTest extends TestCase
 		self::assertEquals($originalText, $text);
 	}
 
-	public function testPerformWithEscapedBlocksNested()
+	public function testPerformWithEscapedBlocksNested(): void
 	{
 		$originalText = '[noparse][/noparse][nobb]nobb[/nobb][noparse]noparse[/noparse]';
 
@@ -199,7 +199,7 @@ class StringsTest extends TestCase
 		self::assertEquals($originalText, $text);
 	}
 
-	public function testCleanTags()
+	public function testCleanTags(): void
 	{
 		$rawTags = 'Open, #Source, Friendica Software; Federation #Fediverse';
 		$cleaned = 'federation,fediverse,friendica,open,software,source';
@@ -207,7 +207,7 @@ class StringsTest extends TestCase
 		self::assertEquals($cleaned, Strings::cleanTags($rawTags));
 	}
 
-	public function testgetTagArrayByString()
+	public function testgetTagArrayByString(): void
 	{
 		$list = 'Open, #Source, Friendica Software; Federation #Fediverse';
 		$tags = ['federation', 'fediverse', 'friendica', 'open', 'software', 'source'];

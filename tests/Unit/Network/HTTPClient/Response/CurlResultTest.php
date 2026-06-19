@@ -13,7 +13,7 @@ use Psr\Log\NullLogger;
 
 class CurlResultTest extends TestCase
 {
-	public function testNormal()
+	public function testNormal(): void
 	{
 		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
@@ -38,7 +38,7 @@ class CurlResultTest extends TestCase
 
 	#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
-	public function testRedirect()
+	public function testRedirect(): void
 	{
 		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
@@ -62,7 +62,7 @@ class CurlResultTest extends TestCase
 		self::assertSame('https://test.other/test/it', $curlResult->getRedirectUrl());
 	}
 
-	public function testTimeout()
+	public function testTimeout(): void
 	{
 		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.head.php');
@@ -88,7 +88,7 @@ class CurlResultTest extends TestCase
 
 	#[\PHPUnit\Framework\Attributes\PreserveGlobalState(false)]
 	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
-	public function testRedirectHeader()
+	public function testRedirectHeader(): void
 	{
 		$header      = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.redirect');
 		$headerArray = include(__DIR__ . '/../../../../Fixtures/curl/about.redirect.php');
@@ -111,7 +111,7 @@ class CurlResultTest extends TestCase
 		self::assertSame('https://test.other/some/?key=value', $curlResult->getRedirectUrl());
 	}
 
-	public function testInHeader()
+	public function testInHeader(): void
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
@@ -125,7 +125,7 @@ class CurlResultTest extends TestCase
 		self::assertFalse($curlResult->inHeader('wrongHeader'));
 	}
 
-	public function testGetHeaderArray()
+	public function testGetHeaderArray(): void
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');
@@ -142,7 +142,7 @@ class CurlResultTest extends TestCase
 		self::assertArrayHasKey('vary', $headers);
 	}
 
-	public function testGetHeaderWithParam()
+	public function testGetHeaderWithParam(): void
 	{
 		$header = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.head');
 		$body   = file_get_contents(__DIR__ . '/../../../../Fixtures/curl/about.body');

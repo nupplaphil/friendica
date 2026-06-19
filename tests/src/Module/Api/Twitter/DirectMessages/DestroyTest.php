@@ -27,7 +27,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroy()
+	public function testApiDirectMessagesDestroy(): void
 	{
 		$this->expectException(\Friendica\Network\HTTPException\BadRequestException::class);
 
@@ -40,7 +40,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithVerbose()
+	public function testApiDirectMessagesDestroyWithVerbose(): void
 	{
 		$response = (new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
@@ -75,7 +75,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithId()
+	public function testApiDirectMessagesDestroyWithId(): void
 	{
 		$this->expectException(\Friendica\Network\HTTPException\BadRequestException::class);
 		(new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
@@ -89,7 +89,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithIdAndVerbose()
+	public function testApiDirectMessagesDestroyWithIdAndVerbose(): void
 	{
 		$response = (new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
@@ -109,7 +109,7 @@ class DestroyTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesDestroyWithCorrectId()
+	public function testApiDirectMessagesDestroyWithCorrectId(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 		$ids = DBA::selectToArray('mail', ['id']);

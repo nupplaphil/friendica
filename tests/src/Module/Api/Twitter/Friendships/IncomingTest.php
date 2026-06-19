@@ -18,7 +18,7 @@ class IncomingTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiFriendshipsIncoming()
+	public function testApiFriendshipsIncoming(): void
 	{
 		$response = (new Incoming(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);

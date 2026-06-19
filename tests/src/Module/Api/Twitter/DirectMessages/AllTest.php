@@ -19,7 +19,7 @@ class AllTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesBoxWithAll()
+	public function testApiDirectMessagesBoxWithAll(): void
 	{
 		$this->loadFixture(__DIR__ . '/../../../../../Fixtures/mail/mail.fixture.php', DI::dba());
 

@@ -20,7 +20,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test if the instance is "really" implementing the interface
 	 */
-	public function testInstance()
+	public function testInstance(): void
 	{
 		$instance = $this->getInstance();
 		self::assertInstanceOf(ICanReadFromStorage::class, $instance);
@@ -29,7 +29,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test basic put, get and delete operations
 	 */
-	public function testPutGetDelete()
+	public function testPutGetDelete(): void
 	{
 		$instance = $this->getInstance();
 
@@ -44,7 +44,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test a delete with an invalid reference
 	 */
-	public function testInvalidDelete()
+	public function testInvalidDelete(): void
 	{
 		self::expectException(ReferenceStorageException::class);
 
@@ -56,7 +56,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test a get with an invalid reference
 	 */
-	public function testInvalidGet()
+	public function testInvalidGet(): void
 	{
 		self::expectException(ReferenceStorageException::class);
 
@@ -68,7 +68,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test an update with a given reference
 	 */
-	public function testUpdateReference()
+	public function testUpdateReference(): void
 	{
 		$instance = $this->getInstance();
 
@@ -84,7 +84,7 @@ abstract class StorageTestCase extends MockedTestCase
 	/**
 	 * Test that an invalid update results in an insert
 	 */
-	public function testInvalidUpdate()
+	public function testInvalidUpdate(): void
 	{
 		$instance = $this->getInstance();
 

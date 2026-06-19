@@ -68,7 +68,7 @@ class MailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder instance can get created
 	 */
-	public function testBuilderInstance()
+	public function testBuilderInstance(): void
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 
@@ -89,7 +89,7 @@ class MailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder can create a "simple" raw mail
 	 */
-	public function testBuilderWithRawEmail()
+	public function testBuilderWithRawEmail(): void
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 
@@ -117,7 +117,7 @@ class MailBuilderTest extends MockedTestCase
 	 * Test if the builder throws an exception in case no recipient
 	 *
 	 */
-	public function testBuilderWithEmptyMail()
+	public function testBuilderWithEmptyMail(): void
 	{
 		$this->expectException(UnprocessableEntityException::class);
 		$this->expectExceptionMessage("Recipient address is missing.");
@@ -130,7 +130,7 @@ class MailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder throws an exception in case no sender
 	 */
-	public function testBuilderWithEmptySender()
+	public function testBuilderWithEmptySender(): void
 	{
 		$this->expectException(UnprocessableEntityException::class);
 		$this->expectExceptionMessage("Sender address or name is missing.");
@@ -145,7 +145,7 @@ class MailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder is capable of creating "empty" mails if needed (not the decision of the builder if so ..)
 	 */
-	public function testBuilderWithoutMessage()
+	public function testBuilderWithoutMessage(): void
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 
@@ -166,7 +166,7 @@ class MailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder sets for the text the same as for
 	 */
-	public function testBuilderWithJustPreamble()
+	public function testBuilderWithJustPreamble(): void
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 

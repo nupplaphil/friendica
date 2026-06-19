@@ -21,7 +21,7 @@ class TemporalTest extends TestCase
 	/**
 	 * Checks for getRelativeDate()
 	 */
-	public function testGetRelativeDate()
+	public function testGetRelativeDate(): void
 	{
 		$clock = new FrozenClock();
 

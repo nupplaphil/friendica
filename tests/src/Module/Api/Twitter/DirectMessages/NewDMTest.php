@@ -27,7 +27,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNew()
+	public function testApiDirectMessagesNew(): void
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
@@ -59,7 +59,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithUserId()
+	public function testApiDirectMessagesNewWithUserId(): void
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
@@ -79,7 +79,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithScreenName()
+	public function testApiDirectMessagesNewWithScreenName(): void
 	{
 		DI::session()->set('nickname', 'selfcontact');
 
@@ -103,7 +103,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithTitle()
+	public function testApiDirectMessagesNewWithTitle(): void
 	{
 		DI::session()->set('nickname', 'selfcontact');
 
@@ -129,7 +129,7 @@ class NewDMTest extends ApiTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiDirectMessagesNewWithRss()
+	public function testApiDirectMessagesNewWithRss(): void
 	{
 		DI::session()->set('nickname', 'selfcontact');
 

@@ -176,7 +176,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Test the configuration initialization
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConfigLoad')]
-	public function testSetUp(array $data, array $possibleCats, array $load)
+	public function testSetUp(array $data, array $possibleCats, array $load): void
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 
@@ -194,7 +194,7 @@ class ConfigTest extends DatabaseTestCase
 	 * @param array $load
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConfigLoad')]
-	public function testReload(array $data, array $possibleCats, array $load)
+	public function testReload(array $data, array $possibleCats, array $load): void
 	{
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());
 
@@ -276,7 +276,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Test the configuration load() method with overwrite
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataDoubleLoad')]
-	public function testCacheLoadDouble(array $data1, array $data2, array $expect = [])
+	public function testCacheLoadDouble(array $data1, array $data2, array $expect = []): void
 	{
 		$this->loadDirectFixture($this->configToDbArray($data1), $this->getDbInstance());
 
@@ -300,7 +300,7 @@ class ConfigTest extends DatabaseTestCase
 	/**
 	 * Test the configuration load without result
 	 */
-	public function testLoadWrong()
+	public function testLoadWrong(): void
 	{
 		$this->testedConfig = new ReadOnlyFileConfig(new Cache());
 		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
@@ -312,7 +312,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Test the configuration get() and set() methods
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testSetGet($data)
+	public function testSetGet($data): void
 	{
 		$this->testedConfig = $this->getInstance();
 		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
@@ -326,7 +326,7 @@ class ConfigTest extends DatabaseTestCase
 	/**
 	 * Test the configuration get() method with wrong value and no db
 	 */
-	public function testGetWrongWithoutDB()
+	public function testGetWrongWithoutDB(): void
 	{
 		$this->testedConfig = $this->getInstance();
 		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
@@ -348,7 +348,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Test the configuration delete() method without a model/db
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTests')]
-	public function testDelete($data)
+	public function testDelete($data): void
 	{
 		$this->configCache->load(['test' => ['it' => $data]], Cache::SOURCE_FILE);
 
@@ -366,7 +366,7 @@ class ConfigTest extends DatabaseTestCase
 	/**
 	 * Test the configuration get() and set() method where the db value has a higher prio than the config file
 	 */
-	public function testSetGetHighPrio()
+	public function testSetGetHighPrio(): void
 	{
 		$this->testedConfig = $this->getInstance();
 		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
@@ -382,7 +382,7 @@ class ConfigTest extends DatabaseTestCase
 	/**
 	 * Test the configuration get() and set() method where the db value has a lower prio than the env
 	 */
-	public function testSetGetLowPrio()
+	public function testSetGetLowPrio(): void
 	{
 		$this->loadDirectFixture(['config' => [['cat' => 'config', 'k' => 'test', 'v' => 'it']]], $this->getDbInstance());
 
@@ -515,7 +515,7 @@ class ConfigTest extends DatabaseTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTestCat')]
-	public function testGetCategory(array $data, string $category, array $assertion)
+	public function testGetCategory(array $data, string $category, array $assertion): void
 	{
 		$this->configCache = new Cache($data);
 		$config            = new ReadOnlyFileConfig($this->configCache);
@@ -542,7 +542,7 @@ class ConfigTest extends DatabaseTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSerialized')]
-	public function testSerializedValues($value, $assertion)
+	public function testSerializedValues($value, $assertion): void
 	{
 		$config = $this->getInstance();
 
@@ -599,7 +599,7 @@ class ConfigTest extends DatabaseTestCase
 	 * Tests if environment variables can change the permission to write a config key
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataEnv')]
-	public function testIsWritable(array $data, array $server, array $assertDisabled)
+	public function testIsWritable(array $data, array $server, array $assertDisabled): void
 	{
 		$this->setConfigFile('static' . DIRECTORY_SEPARATOR . 'env.config.php', true);
 		$this->loadDirectFixture($this->configToDbArray($data), $this->getDbInstance());

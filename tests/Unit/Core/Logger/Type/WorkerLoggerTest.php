@@ -63,7 +63,7 @@ class WorkerLoggerTest extends TestCase
 	 * Test the WorkerLogger with different log calls
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataTest')]
-	public function testLogMethod($func, $msg, $context = [])
+	public function testLogMethod($func, $msg, $context = []): void
 	{
 		$logger = $this->createMock(LoggerInterface::class);
 
@@ -83,7 +83,7 @@ class WorkerLoggerTest extends TestCase
 	/**
 	 * Test the WorkerLogger with
 	 */
-	public function testLog()
+	public function testLog(): void
 	{
 		$logger = $this->createMock(LoggerInterface::class);
 
@@ -103,7 +103,7 @@ class WorkerLoggerTest extends TestCase
 	/**
 	 * Test the WorkerLogger after setting a worker function
 	 */
-	public function testChangedId()
+	public function testChangedId(): void
 	{
 		$logger = $this->createMock(LoggerInterface::class);
 
@@ -135,7 +135,7 @@ class WorkerLoggerTest extends TestCase
 		$workLogger->log('debug', 'a test', $context2);
 	}
 
-	public function testReplaceDefaultContextReturnsOldDefaultContext()
+	public function testReplaceDefaultContextReturnsOldDefaultContext(): void
 	{
 		$logger = $this->createStub(LoggerInterface::class);
 

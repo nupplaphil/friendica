@@ -55,7 +55,7 @@ class GServerTest extends \PHPUnit\Framework\TestCase
 	 * @throws \Exception
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCleanUri')]
-	public function testCleanUri(UriInterface $expected, UriInterface $dirtyUri)
+	public function testCleanUri(UriInterface $expected, UriInterface $dirtyUri): void
 	{
 		$this->assertEquals($expected, GServer::cleanUri($dirtyUri));
 	}

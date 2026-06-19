@@ -55,7 +55,7 @@ class SyslogLoggerTest extends LoggerTestCase
 	/**
 	 * Test when the minimum level is not valid
 	 */
-	public function testWrongMinimumLevel()
+	public function testWrongMinimumLevel(): void
 	{
 		$this->expectException(LogLevelException::class);
 		$this->expectExceptionMessageMatches("/The level \".*\" is not valid./");
@@ -66,7 +66,7 @@ class SyslogLoggerTest extends LoggerTestCase
 	/**
 	 * Test when the minimum level is not valid
 	 */
-	public function testWrongLogLevel()
+	public function testWrongLogLevel(): void
 	{
 		$this->expectException(LogLevelException::class);
 		$this->expectExceptionMessageMatches("/The level \".*\" is not valid./");
@@ -80,7 +80,7 @@ class SyslogLoggerTest extends LoggerTestCase
 	 * Test the close() method
 	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testClose()
+	public function testClose(): void
 	{
 		$logger = $this->getInstance();
 		$logger->emergency('test');

@@ -58,7 +58,7 @@ class StreamLoggerTest extends LoggerTestCase
 	/**
 	 * Test when a file isn't set
 	 */
-	public function testNoUrl()
+	public function testNoUrl(): void
 	{
 		$this->expectException(LoggerArgumentException::class);
 		$this->expectExceptionMessage(' is not a valid logfile');
@@ -74,7 +74,7 @@ class StreamLoggerTest extends LoggerTestCase
 	/**
 	 * Test when a file cannot be opened
 	 */
-	public function testWrongUrl()
+	public function testWrongUrl(): void
 	{
 		$this->expectException(LoggerArgumentException::class);
 
@@ -108,7 +108,7 @@ class StreamLoggerTest extends LoggerTestCase
 	/**
 	 * Test when the minimum level is not valid
 	 */
-	public function testWrongMinimumLevel()
+	public function testWrongMinimumLevel(): void
 	{
 		$this->expectException(LogLevelException::class);
 		$this->expectExceptionMessageMatches("/The level \".*\" is not valid./");
@@ -119,7 +119,7 @@ class StreamLoggerTest extends LoggerTestCase
 	/**
 	 * Test when the minimum level is not valid
 	 */
-	public function testWrongLogLevel()
+	public function testWrongLogLevel(): void
 	{
 		$this->expectException(LogLevelException::class);
 		$this->expectExceptionMessageMatches("/The level \".*\" is not valid./");

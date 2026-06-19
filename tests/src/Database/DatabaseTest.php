@@ -43,7 +43,7 @@ class DatabaseTest extends FixtureTestCase
 	/**
 	 * Test, if directly updating a field is possible
 	 */
-	public function testUpdateIncrease()
+	public function testUpdateIncrease(): void
 	{
 		$db = $this->getDbInstance();
 
@@ -55,7 +55,7 @@ class DatabaseTest extends FixtureTestCase
 	/**
 	 * Test if combining directly field updates with normal updates is working
 	 */
-	public function testUpdateWithField()
+	public function testUpdateWithField(): void
 	{
 		$db = $this->getDbInstance();
 
@@ -86,7 +86,7 @@ class DatabaseTest extends FixtureTestCase
 		self::assertEquals(1, $db->selectFirst('gserver', ['registered-users'], ['nurl' => 'http://friendica.local'])['registered-users']);
 	}
 
-	public function testUpdateWithArray()
+	public function testUpdateWithArray(): void
 	{
 		$db = $this->getDbInstance();
 

@@ -32,7 +32,7 @@ class ArrayCacheTest extends MemoryCacheTestCase
 		return true;
 	}
 
-	public function testGetStats()
+	public function testGetStats(): void
 	{
 		self::assertEmpty($this->cache->getStats());
 	}

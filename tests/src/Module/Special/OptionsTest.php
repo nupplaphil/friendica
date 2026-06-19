@@ -27,7 +27,7 @@ class OptionsTest extends FixtureTestCase
 		$this->httpExceptionMock = \Mockery::mock(HTTPException::class);
 	}
 
-	public function testOptionsAll()
+	public function testOptionsAll(): void
 	{
 		$this->useHttpMethod(Router::OPTIONS);
 
@@ -43,7 +43,7 @@ class OptionsTest extends FixtureTestCase
 		self::assertEquals(implode(',', Router::ALLOWED_METHODS), $response->getHeaderLine('Allow'));
 	}
 
-	public function testOptionsSpecific()
+	public function testOptionsSpecific(): void
 	{
 		$this->useHttpMethod(Router::OPTIONS);
 

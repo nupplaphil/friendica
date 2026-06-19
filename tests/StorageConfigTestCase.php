@@ -20,7 +20,7 @@ abstract class StorageConfigTestCase extends MockedTestCase
 	/**
 	 * Test if the "getOption" is asserted
 	 */
-	public function testGetOptions()
+	public function testGetOptions(): void
 	{
 		$instance = $this->getInstance();
 

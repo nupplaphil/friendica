@@ -40,7 +40,7 @@ class NotificationTest extends ApiTestCase
 		*/
 	}
 
-	public function testWithXmlResult()
+	public function testWithXmlResult(): void
 	{
 		$date    = DateTimeFormat::local('2020-01-01 12:12:02');
 		$dateRel = Temporal::getRelativeDate('2020-01-01 12:12:02');
@@ -62,7 +62,7 @@ XML;
 		], $response->getHeaders());
 	}
 
-	public function testWithJsonResult()
+	public function testWithJsonResult(): void
 	{
 		$response = (new Notification(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);

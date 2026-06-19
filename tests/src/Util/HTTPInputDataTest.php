@@ -122,7 +122,7 @@ class HTTPInputDataTest extends MockedTestCase
 	 * @see HTTPInputData::process()
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataStream')]
-	public function testHttpInput(string $contentType, string $input, array $expected)
+	public function testHttpInput(string $contentType, string $input, array $expected): void
 	{
 		$httpInput = new HTTPInputDataDouble(['CONTENT_TYPE' => $contentType]);
 		$httpInput->setPhpInputContent($input);

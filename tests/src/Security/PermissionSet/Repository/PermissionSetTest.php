@@ -31,7 +31,7 @@ class PermissionSetTest extends FixtureTestCase
 		$this->factory    = DI::permissionSetFactory();
 	}
 
-	public function testSelectOneByIdPublic()
+	public function testSelectOneByIdPublic(): void
 	{
 		$permissionSet = $this->repository->selectPublicForUser(1);
 
@@ -47,7 +47,7 @@ class PermissionSetTest extends FixtureTestCase
 	/**
 	 * Test create/update PermissionSets
 	 */
-	public function testSaving()
+	public function testSaving(): void
 	{
 		$permissionSet = $this->factory->createFromString(42, '', '<~>');
 
@@ -349,7 +349,7 @@ class PermissionSetTest extends FixtureTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
-	public function testSelectContactId(array $group_member, array $permissionSets, array $assertions)
+	public function testSelectContactId(array $group_member, array $permissionSets, array $assertions): void
 	{
 		/** @var Database $db */
 		$db = $this->dice->create(Database::class);
@@ -369,7 +369,7 @@ class PermissionSetTest extends FixtureTestCase
 		}
 	}
 
-	public function testSelectOneByIdInvalid()
+	public function testSelectOneByIdInvalid(): void
 	{
 		self::expectException(PermissionSetNotFoundException::class);
 		self::expectExceptionMessage('PermissionSet with id -1 for user 42 doesn\'t exist.');
@@ -378,7 +378,7 @@ class PermissionSetTest extends FixtureTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataSet')]
-	public function testSelectOneById(array $group_member, array $permissionSets, array $assertions)
+	public function testSelectOneById(array $group_member, array $permissionSets, array $assertions): void
 	{
 		if (count($permissionSets) === 0) {
 			self::markTestSkipped('Nothing to assert.');

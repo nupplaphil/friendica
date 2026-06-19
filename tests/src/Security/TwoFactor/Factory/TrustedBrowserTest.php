@@ -15,7 +15,7 @@ use Psr\Log\NullLogger;
 
 class TrustedBrowserTest extends MockedTestCase
 {
-	public function testCreateFromTableRowSuccess()
+	public function testCreateFromTableRowSuccess(): void
 	{
 		$factory = new TrustedBrowser(new NullLogger());
 
@@ -33,7 +33,7 @@ class TrustedBrowserTest extends MockedTestCase
 		$this->assertEquals($row, $trustedBrowser->toArray());
 	}
 
-	public function testCreateFromTableRowMissingData()
+	public function testCreateFromTableRowMissingData(): void
 	{
 		$this->expectException(\TypeError::class);
 
@@ -53,7 +53,7 @@ class TrustedBrowserTest extends MockedTestCase
 		$this->assertEquals($row, $trustedBrowser->toArray());
 	}
 
-	public function testCreateForUserWithUserAgent()
+	public function testCreateForUserWithUserAgent(): void
 	{
 		$factory = new TrustedBrowser(new NullLogger());
 

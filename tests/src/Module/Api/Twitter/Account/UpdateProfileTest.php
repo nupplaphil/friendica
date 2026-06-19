@@ -17,7 +17,7 @@ class UpdateProfileTest extends ApiTestCase
 	/**
 	 * Test the api_account_update_profile() function.
 	 */
-	public function testApiAccountUpdateProfile()
+	public function testApiAccountUpdateProfile(): void
 	{
 		$this->useHttpMethod(Router::POST);
 

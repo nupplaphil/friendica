@@ -20,7 +20,7 @@ class EmojiTest extends FixtureTestCase
 		DI::config()->set('system', 'no_smilies', false);
 	}
 
-	public function testBuiltInCollection()
+	public function testBuiltInCollection(): void
 	{
 		$emoji      = DI::mstdnEmoji();
 		$collection = $emoji->createCollectionFromSmilies(Smilies::getList())->getArrayCopy(true);

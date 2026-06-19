@@ -146,7 +146,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataHooks')]
-	public function testSetupHooks(string $content, string $addonContent, array $assertStrategies)
+	public function testSetupHooks(string $content, string $addonContent, array $assertStrategies): void
 	{
 		vfsStream::newFile(StrategiesFileManager::STATIC_DIR . '/' . StrategiesFileManager::CONFIG_NAME . '.config.php')
 			->withContent($content)
@@ -175,7 +175,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 	/**
 	 * Test the exception in case the strategies.config.php file is missing
 	 */
-	public function testMissingStrategiesFile()
+	public function testMissingStrategiesFile(): void
 	{
 		$config          = \Mockery::mock(IManageConfigValues::class);
 		$instanceManager = \Mockery::mock(ICanRegisterStrategies::class);
@@ -193,7 +193,7 @@ class StrategiesFileManagerTest extends MockedTestCase
 	/**
 	 * Test the exception in case the strategies.config.php file is wrong
 	 */
-	public function testWrongStrategiesFile()
+	public function testWrongStrategiesFile(): void
 	{
 		$config          = \Mockery::mock(IManageConfigValues::class);
 		$instanceManager = \Mockery::mock(ICanRegisterStrategies::class);

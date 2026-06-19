@@ -14,7 +14,7 @@ use Friendica\Test\ApiTestCase;
 
 class RateLimitStatusTest extends ApiTestCase
 {
-	public function testWithJson()
+	public function testWithJson(): void
 	{
 		$response = (new RateLimitStatus(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
@@ -30,7 +30,7 @@ class RateLimitStatusTest extends ApiTestCase
 		self::assertIsInt($result->reset_time_in_seconds);
 	}
 
-	public function testWithXml()
+	public function testWithXml(): void
 	{
 		$response = (new RateLimitStatus(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'xml']))
 			->run($this->httpExceptionMock);

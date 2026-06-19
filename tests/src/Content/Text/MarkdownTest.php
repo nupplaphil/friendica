@@ -38,7 +38,7 @@ class MarkdownTest extends FixtureTestCase
 	 * @throws Exception
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdown')]
-	public function testConvert(string $input, string $expected)
+	public function testConvert(string $input, string $expected): void
 	{
 		$output = Markdown::convert($input);
 
@@ -63,7 +63,7 @@ class MarkdownTest extends FixtureTestCase
 	 * @param string $markdown       Markdown text
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataMarkdownText')]
-	public function testToBBCode(string $expectedBBCode, string $markdown)
+	public function testToBBCode(string $expectedBBCode, string $markdown): void
 	{
 		$actual = Markdown::toBBCode($markdown);
 

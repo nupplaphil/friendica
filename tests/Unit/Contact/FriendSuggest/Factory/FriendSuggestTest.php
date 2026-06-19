@@ -85,7 +85,7 @@ class FriendSuggestTest extends TestCase
 		self::assertLessThanOrEqual($to->getTimestamp(), $created->getTimestamp());
 	}
 
-	public function testCreateNew()
+	public function testCreateNew(): void
 	{
 		$factory = new FriendSuggest(new NullLogger());
 
@@ -112,14 +112,14 @@ class FriendSuggestTest extends TestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataCreate')]
-	public function testCreateFromTableRow(array $input, Entity\FriendSuggest $assertion)
+	public function testCreateFromTableRow(array $input, Entity\FriendSuggest $assertion): void
 	{
 		$factory = new FriendSuggest(new NullLogger());
 
 		$this->assertFriendSuggest($assertion, $factory->createFromTableRow($input));
 	}
 
-	public function testCreateFromMinimalTableRowDefaultsMissingFields()
+	public function testCreateFromMinimalTableRowDefaultsMissingFields(): void
 	{
 		$factory = new FriendSuggest(new NullLogger());
 
@@ -142,7 +142,7 @@ class FriendSuggestTest extends TestCase
 		$this->assertCreatedBetween($friendSuggest->created, $createdBefore, $createdAfter);
 	}
 
-	public function testCreateEmpty()
+	public function testCreateEmpty(): void
 	{
 		$factory = new FriendSuggest(new NullLogger());
 

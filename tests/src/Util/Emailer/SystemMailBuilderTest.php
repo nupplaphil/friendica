@@ -47,7 +47,7 @@ class SystemMailBuilderTest extends MockedTestCase
 	/**
 	 * Test if the builder instance can get created
 	 */
-	public function testBuilderInstance()
+	public function testBuilderInstance(): void
 	{
 		$builder = new SystemMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger(), 'moreply@friendica.local', 'FriendicaSite');
 

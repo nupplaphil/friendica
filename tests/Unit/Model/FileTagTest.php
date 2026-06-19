@@ -57,7 +57,7 @@ class FileTagTest extends TestCase
 	 * @param string $file
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataArrayToFile')]
-	public function testArrayToFile(array $array, string $type, string $file)
+	public function testArrayToFile(array $array, string $type, string $file): void
 	{
 		self::assertEquals($file, FileTag::arrayToFile($array, $type));
 	}
@@ -117,7 +117,7 @@ class FileTagTest extends TestCase
 	 * @param array  $array
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataFileToArray')]
-	public function testFileToArray(string $file, string $type, array $array)
+	public function testFileToArray(string $file, string $type, array $array): void
 	{
 		self::assertEquals($array, FileTag::fileToArray($file, $type));
 	}

@@ -42,7 +42,7 @@ class ConfigTransactionTest extends FixtureTestCase
 		];
 	}
 
-	public function testInstance()
+	public function testInstance(): void
 	{
 		$config            = new DatabaseConfig($this->dice->create(Database::class), new Cache());
 		$configTransaction = new ConfigTransaction($config);
@@ -51,7 +51,7 @@ class ConfigTransactionTest extends FixtureTestCase
 		self::assertInstanceOf(ConfigTransaction::class, $configTransaction);
 	}
 
-	public function testConfigTransaction()
+	public function testConfigTransaction(): void
 	{
 		$config = new DatabaseConfig($this->dice->create(Database::class), new Cache());
 		$config->set('config', 'key1', 'value1');
@@ -92,7 +92,7 @@ class ConfigTransactionTest extends FixtureTestCase
 	/**
 	 * This test asserts that in empty transactions, no saveData is called, thus no config file writing was performed
 	 */
-	public function testNothingToDo()
+	public function testNothingToDo(): void
 	{
 		$this->configFileManager = \Mockery::spy(ConfigFileManager::class);
 

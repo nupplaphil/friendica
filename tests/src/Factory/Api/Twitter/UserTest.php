@@ -35,7 +35,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetUser()
+	public function testApiGetUser(): void
 	{
 		$user = (new User(DI::logger(), DI::twitterStatus()))
 			->createFromUserId(ApiTestCase::SELF_USER['id'])
@@ -118,7 +118,7 @@ class UserTest extends FixtureTestCase
 	 *
 	 * @return void
 	 */
-	public function testApiGetUserWithWrongGetId()
+	public function testApiGetUserWithWrongGetId(): void
 	{
 		$this->expectException(NotFoundException::class);
 

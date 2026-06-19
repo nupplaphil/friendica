@@ -54,7 +54,7 @@ class UserTest extends MockedTestCase
 		];
 	}
 
-	public function testIdentitiesEmpty()
+	public function testIdentitiesEmpty(): void
 	{
 		$this->dbMock->shouldReceive('selectFirst')->with('user',
 			['uid', 'nickname', 'username', 'parent-uid'],['uid' => $this->parent['uid'], 'verified' => true, 'blocked' => false, 'account_removed' => false, 'account_expired' => false], [])->andReturn($this->parent)->once();
@@ -65,7 +65,7 @@ class UserTest extends MockedTestCase
 		self::assertEquals([], $record);
 	}
 
-	public function testIdentitiesAsParent()
+	public function testIdentitiesAsParent(): void
 	{
 		$parentSelect               = $this->parent;
 		$parentSelect['parent-uid'] = null;
@@ -102,7 +102,7 @@ class UserTest extends MockedTestCase
 		], $record, 'testIdentitiesAsParent: ' . print_r($record, true));
 	}
 
-	public function testIdentitiesAsChild()
+	public function testIdentitiesAsChild(): void
 	{
 		$childSelect               = $this->child;
 		$childSelect['parent-uid'] = $this->parent['uid'];
