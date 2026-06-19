@@ -86,6 +86,11 @@ class Conversation
 			'$is_mobile'     => $this->mode->isMobile(),
 		]);
 
+		// If user is not owner do not insert jot composer, use Mention modal instead
+		if ($x['is_owner'] == false){
+			return $o;
+		}
+		
 		$jotplugins = $this->eventDispatcher->dispatch(
 			new HtmlFilterEvent(HtmlFilterEvent::JOT_TOOL, ''),
 		)->getHtml();
