@@ -25,14 +25,14 @@ class ServerBlockConsoleTest extends ConsoleTestCase
 		[
 			'domain' => 'pod.ordoevangelistarum.com',
 			'reason' => 'Illegal content',
-		]
+		],
 	];
 	/**
 	 * @var DomainPatternBlocklist|Mockery\LegacyMockInterface|Mockery\MockInterface
 	 */
 	private $blocklistMock;
 
-	protected function setUp() : void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -59,7 +59,7 @@ class ServerBlockConsoleTest extends ConsoleTestCase
 			->once();
 
 		$console = new ServerBlock($this->blocklistMock, $this->consoleArgv);
-		$txt = $this->dumpExecute($console);
+		$txt     = $this->dumpExecute($console);
 
 		$php_eol = PHP_EOL;
 

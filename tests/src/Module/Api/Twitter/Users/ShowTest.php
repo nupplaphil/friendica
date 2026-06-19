@@ -42,11 +42,11 @@ class ShowTest extends ApiTestCase
 	public function testApiUsersShowWithXml(): void
 	{
 		$response = (new Show(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], [
-			'extension' => ICanCreateResponses::TYPE_XML
+			'extension' => ICanCreateResponses::TYPE_XML,
 		]))->run($this->httpExceptionMock);
 
 		self::assertEquals(ICanCreateResponses::TYPE_XML, $response->getHeaderLine(ICanCreateResponses::X_HEADER));
 
-		self::assertXml((string)$response->getBody(), 'statuses');
+		self::assertXml((string) $response->getBody(), 'statuses');
 	}
 }

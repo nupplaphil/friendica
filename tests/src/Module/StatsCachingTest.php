@@ -179,7 +179,7 @@ class StatsCachingTest extends FixtureTestCase
 			'memory_usage' => [
 				'used_memory' => 3,
 				'free_memory' => 4,
-			]
+			],
 		]);
 
 		$response = (new StatsCaching(DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], $this->config, $this->cache, $this->lock, []))

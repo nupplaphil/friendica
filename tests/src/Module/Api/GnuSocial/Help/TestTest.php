@@ -23,7 +23,7 @@ class TestTest extends ApiTestCase
 
 		self::assertEquals([
 			'Content-type'                => ['application/json'],
-			ICanCreateResponses::X_HEADER => ['json']
+			ICanCreateResponses::X_HEADER => ['json'],
 		], $response->getHeaders());
 		self::assertEquals('ok', $json);
 	}
@@ -35,7 +35,7 @@ class TestTest extends ApiTestCase
 
 		self::assertEquals([
 			'Content-type'                => ['text/xml'],
-			ICanCreateResponses::X_HEADER => ['xml']
+			ICanCreateResponses::X_HEADER => ['xml'],
 		], $response->getHeaders());
 		self::assertXml($response->getBody(), 'ok');
 	}

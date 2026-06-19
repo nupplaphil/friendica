@@ -27,19 +27,19 @@ class LockConsoleTest extends ConsoleTestCase
 	 */
 	private $lockMock;
 
-	protected function setUp() : void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
 		Mockery::getConfiguration()->setConstantsMap([
 			Mode::class => [
-				'DBCONFIGAVAILABLE' => 0
-			]
+				'DBCONFIGAVAILABLE' => 0,
+			],
 		]);
 
 		$this->appMode = Mockery::mock(App\Mode::class);
 		$this->appMode->shouldReceive('has')
-		        ->andReturn(true);
+				->andReturn(true);
 
 		$this->lockMock = Mockery::mock(ICanLock::class);
 	}

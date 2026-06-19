@@ -23,7 +23,7 @@ class RateLimitStatusTest extends ApiTestCase
 
 		self::assertEquals([
 			'Content-type'                => ['application/json'],
-			ICanCreateResponses::X_HEADER => ['json']
+			ICanCreateResponses::X_HEADER => ['json'],
 		], $response->getHeaders());
 		self::assertEquals(150, $result->remaining_hits);
 		self::assertEquals(150, $result->hourly_limit);
@@ -37,7 +37,7 @@ class RateLimitStatusTest extends ApiTestCase
 
 		self::assertEquals([
 			'Content-type'                => ['text/xml'],
-			ICanCreateResponses::X_HEADER => ['xml']
+			ICanCreateResponses::X_HEADER => ['xml'],
 		], $response->getHeaders());
 		self::assertXml($response->getBody(), 'hash');
 	}

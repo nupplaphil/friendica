@@ -21,7 +21,7 @@ class VersionTest extends ApiTestCase
 
 		self::assertEquals([
 			'Content-type'                => ['application/json'],
-			ICanCreateResponses::X_HEADER => ['json']
+			ICanCreateResponses::X_HEADER => ['json'],
 		], $response->getHeaders());
 		self::assertEquals('"0.9.7"', $response->getBody());
 	}

@@ -42,7 +42,7 @@ class CryptoTest extends TestCase
 			E6VXs4mFWpDHJ4q01QIDAQAB
 			-----END PUBLIC KEY-----
 			TXT),
-			Crypto::rsaToPem(base64_decode($key))
+			Crypto::rsaToPem(base64_decode($key)),
 		);
 	}
 }

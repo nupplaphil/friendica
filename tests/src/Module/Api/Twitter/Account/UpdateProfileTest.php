@@ -24,7 +24,7 @@ class UpdateProfileTest extends ApiTestCase
 		$response = (new UpdateProfile(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'name'        => 'new_name',
-				'description' => 'new_description'
+				'description' => 'new_description',
 			]);
 
 		$json = $this->toJson($response);

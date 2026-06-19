@@ -33,7 +33,7 @@ class OptionsTest extends FixtureTestCase
 
 		$response = (new Options(DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))->run($this->httpExceptionMock);
 
-		self::assertEmpty((string)$response->getBody());
+		self::assertEmpty((string) $response->getBody());
 		self::assertEquals(204, $response->getStatusCode());
 		self::assertEquals('No Content', $response->getReasonPhrase());
 		self::assertEquals([
@@ -51,7 +51,7 @@ class OptionsTest extends FixtureTestCase
 			'AllowedMethods' => [Router::GET, Router::POST],
 		]))->run($this->httpExceptionMock);
 
-		self::assertEmpty((string)$response->getBody());
+		self::assertEmpty((string) $response->getBody());
 		self::assertEquals(204, $response->getStatusCode());
 		self::assertEquals('No Content', $response->getReasonPhrase());
 		self::assertEquals([
