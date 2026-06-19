@@ -21,11 +21,9 @@
 			</h3>
 		</button>
 
-		<div class="tag-cloud">
+		<div class="tag-cloud tags">
 			{{foreach $tags as $tag}}
-				<span class="tags">
-					<span class="tag{{$tag.level}}">#</span><a href="{{$tag.url}}" class="tag{{$tag.level}}">{{$tag.name}}</a>
-				</span>
+				<a href="{{$tag.url}}" class="tag hashtag tag{{$tag.level}} label border border-default">#{{$tag.name}}</a>
 			{{/foreach}}
 		</div>
 		<div class="tagblock-widget-end clear"></div>

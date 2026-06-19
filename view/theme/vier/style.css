@@ -1883,6 +1883,13 @@ profile-jot-form #jot-title, #profile-jot-form #jot-category {
 	/* padding-right: 8px; */
 	color: rgb(153,153,153);
 }
+
+.tagblock .tag-cloud .tag {
+	display: unset;
+}
+.tagblock .tag-cloud .tag:hover {
+	color: black;
+}
 .wwto {
 	position: absolute !important;
 	width: 25px;
