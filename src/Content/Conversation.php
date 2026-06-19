@@ -87,7 +87,7 @@ class Conversation
 		]);
 
 		// If user is not owner do not insert jot composer, use Mention modal instead
-		if ($x['is_owner'] == false){
+		if ($x['is_owner'] == false) {
 			return $o;
 		}
 		
