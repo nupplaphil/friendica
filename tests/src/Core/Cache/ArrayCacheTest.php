@@ -25,11 +25,10 @@ class ArrayCacheTest extends MemoryCacheTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testTTL()
+	public function testTTL(): void
 	{
 		// Array Cache doesn't support TTL
 		self::markTestSkipped("Array Cache doesn't support TTL");
-		return true;
 	}
 
 	public function testGetStats(): void
