@@ -164,6 +164,7 @@
 		"php-mock/php-mock-phpunit": "^2.15",
 		"phpmd/phpmd": "^2.15",
 		"phpstan/phpstan": "^2.1.39",
+		"phpstan/phpstan-phpunit": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0.10",
 		"phpunit/phpunit": "^11.5",
 		"rector/rector": "^2.2"

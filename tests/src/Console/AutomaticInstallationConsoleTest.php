@@ -38,9 +38,9 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	private $assertFileDb;
 
 	/**
-	 * @var \Friendica\Core\Config\ValueObject\Cache The configuration cache to check after each test
+	 * @var Cache The configuration cache to check after each test
 	 */
-	private $configCache;
+	private Cache $configCache;
 
 	/**
 	 * @var App\Mode
@@ -349,7 +349,7 @@ FIN;
 		self::assertConfigEntry('system', 'default_timezone', $assertion, ($default) ? Installer::DEFAULT_TZ : null);
 		self::assertConfigEntry('system', 'language', $assertion, ($default) ? Installer::DEFAULT_LANG : null);
 		self::assertConfigEntry('system', 'url', $assertion);
-		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? App\BaseURL::DEFAULT_SSL_SCHEME : null);
+		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? 0 : null);
 		self::assertConfigEntry('system', 'basepath', ($realBasepath) ? $this->root->url() : $assertion);
 	}
 

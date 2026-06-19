@@ -19,6 +19,9 @@ use Mockery;
 #[\PHPUnit\Framework\Attributes\Group('REDIS')]
 class RedisCacheLockTest extends CacheLockTestCase
 {
+	private RedisCache $cache;
+	private CacheLock $lock;
+
 	protected function setUp(): void
 	{
 		$configMock = Mockery::mock(IManageConfigValues::class);

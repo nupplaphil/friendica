@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - .phpstan-baseline.neon
 
@@ -19,12 +20,17 @@ parameters:
         - bin/worker.php
         - index.php
         - src/
+        - static/
+        - tests/
 
     scanDirectories:
         - mod
         - static
         - vendor
         - view
+
+    excludePaths:
+        - vendor/rector/
 
     dynamicConstantNames:
         - DB_UPDATE_VERSION
@@ -34,18 +40,3 @@ parameters:
     # See all rules at https://github.com/phpstan/phpstan-strict-rules/blob/2.0.x/rules.neon
     strictRules:
         allRules: false
-
-    ignoreErrors:
-        -
-            # #Fixme: Ignore type mismatch of BaseRepository::$factory in child classes
-            message: '#^PHPDoc type Friendica\\.+ of property Friendica\\.+\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-            identifier: property.phpDocType
-            count: 13
-            path: src
-
-        -
-            # #Fixme: Ignore type mismatch of BaseModule::$response in BaseApi module
-            message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
-            identifier: property.phpDocType
-            count: 1
-            path: src/Module/BaseApi.php

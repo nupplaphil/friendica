@@ -4,3 +4,1388 @@
 
 parameters:
 	ignoreErrors:
+		-
+			message: '#^PHPDoc type Friendica\\Contact\\FriendSuggest\\Factory\\FriendSuggest of property Friendica\\Contact\\FriendSuggest\\Repository\\FriendSuggest\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Contact/FriendSuggest/Repository/FriendSuggest.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Contact\\Introduction\\Factory\\Introduction of property Friendica\\Contact\\Introduction\\Repository\\Introduction\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Contact/Introduction/Repository/Introduction.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Contact\\LocalRelationship\\Factory\\LocalRelationship of property Friendica\\Contact\\LocalRelationship\\Repository\\LocalRelationship\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Contact/LocalRelationship/Repository/LocalRelationship.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Content\\Conversation\\Factory\\UserDefinedChannel of property Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Content/Conversation/Repository/UserDefinedChannel.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Content\\Post\\Factory\\PostMedia of property Friendica\\Content\\Post\\Repository\\PostMedia\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Core\\Worker\\Factory\\Process of property Friendica\\Core\\Worker\\Repository\\Process\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Core/Worker/Repository/Process.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Moderation\\Factory\\Report of property Friendica\\Moderation\\Repository\\Report\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Moderation/Repository/Report.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Module/BaseApi.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Navigation\\Notifications\\Factory\\Notification of property Friendica\\Navigation\\Notifications\\Repository\\Notification\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Navigation/Notifications/Repository/Notification.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Navigation\\Notifications\\Factory\\Notify of property Friendica\\Navigation\\Notifications\\Repository\\Notify\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Navigation/Notifications/Repository/Notify.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Profile\\ProfileField\\Factory\\ProfileField of property Friendica\\Profile\\ProfileField\\Repository\\ProfileField\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Profile/ProfileField/Repository/ProfileField.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Protocol\\Diaspora\\Factory\\DiasporaContact of property Friendica\\Protocol\\Diaspora\\Repository\\DiasporaContact\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Protocol/Diaspora/Repository/DiasporaContact.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Security\\PermissionSet\\Factory\\PermissionSet of property Friendica\\Security\\PermissionSet\\Repository\\PermissionSet\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Security/PermissionSet/Repository/PermissionSet.php
+
+		-
+			message: '#^PHPDoc type Friendica\\User\\Settings\\Factory\\UserGServer of property Friendica\\User\\Settings\\Repository\\UserGServer\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/User/Settings/Repository/UserGServer.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$config IManageConfigValues\)\: Unexpected token "\$config", expected type at offset 9 on line 1$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: tests/ApiTestCase.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Core\\Lock\\Capability\\ICanLock\:\:getCacheStats\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/CacheLockTestCase.php
+
+		-
+			message: '#^Access to undefined constant Friendica\\Core\\Cache\\Capability\\ICanCache\:\:NAME\.$#'
+			identifier: classConstant.notFound
+			count: 1
+			path: tests/CacheTestCase.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/CacheTestCase.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/FixtureTestCase.php
+
+		-
+			message: '#^Variable \$cache in PHPDoc tag @var does not match assigned variable \$lock\.$#'
+			identifier: varTag.differentVariable
+			count: 1
+			path: tests/Functional/DependencyCheckTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/LockTestCase.php
+
+		-
+			message: '#^PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCacheInMemory of property Friendica\\Test\\MemoryCacheTestCase\:\:\$instance is not the same as PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCache of overridden property Friendica\\Test\\CacheTestCase\:\:\$instance\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: tests/MemoryCacheTestCase.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/PConfigTestCase.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\App\\\\Router'' and Friendica\\App\\Router will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''DELETE'' and ''DELETE'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''GET'' and ''GET'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''OPTIONS'' and ''OPTIONS'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''PATCH'' and ''PATCH'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''POST'' and ''POST'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''PUT'' and ''PUT'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with array\{''DELETE'', ''GET'', ''PATCH'', ''POST'', ''PUT'', ''OPTIONS''\} and array\{''DELETE'', ''GET'', ''PATCH'', ''POST'', ''PUT'', ''OPTIONS''\} will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/App/RouterTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\App'' and Friendica\\App will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/AppTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 15
+			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 15
+			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Addon\\\\AddonInfo'' and Friendica\\Core\\Addon\\AddonInfo will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/Unit/Core/Addon/AddonInfoTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Addon\\\\AddonInfo'' and Friendica\\Core\\Addon\\AddonInfo will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/Addon/AddonManagerHelperTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Container'' and Friendica\\Core\\DiceContainer will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/DiceContainerTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/Logger/Factory/DelegatingLoggerFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/Logger/Factory/StreamLoggerFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/Logger/Factory/SyslogLoggerFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Core/Logger/LoggerManagerTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ArrayFilterEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ArrayFilterEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\CollectRoutesEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/CollectRoutesEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ConfigLoadedEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ConfigLoadedEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\EventDispatcher\\\\EventDispatcherInterface'' and Friendica\\Event\\EventDispatcher will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/EventDispatcherTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\Event will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/EventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\HtmlFilterEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/HtmlFilterEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModuleContentEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ModuleContentEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModuleInitEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ModuleInitEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModulePostEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ModulePostEventTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModulePostRecipientEvent will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Event/ModulePostRecipientEventTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with arguments '''', '''' and ''\$qrcode_image must…'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Module/Settings/TwoFactor/VerifyQrCodeTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 9
+			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
+
+		-
+			message: '#^Method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:streamForChunks\(\) should return Psr\\Http\\Message\\StreamInterface but returns Mockery\\MockInterface\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
+
+		-
+			message: '#^Static property Friendica\\Test\\Util\\Database\\StaticDatabase\:\:\$staticConnection \(Friendica\\Test\\Util\\Database\\ExtendedPDO\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 2
+			path: tests/Util/Database/StaticDatabase.php
+
+		-
+			message: '#^Property Friendica\\Test\\Util\\EntityDouble\:\:\$privString is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: tests/Util/EntityDouble.php
+
+		-
+			message: '#^Access to an undefined property Friendica\\Test\\Util\\HTTPInputDataDouble\:\:\$injectedContentType\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Util/HTTPInputDataDouble.php
+
+		-
+			message: '#^Method Friendica\\Test\\Util\\Hooks\\InstanceMocks\\FakeInstanceDecorator\:\:getCBool\(\) should return bool\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/Util/Hooks/InstanceMocks/FakeInstanceDecorator.php
+
+		-
+			message: '#^Parameter &\$consumed by\-ref type of method Friendica\\Test\\Util\\Intercept\:\:filter\(\) expects int, \(float\|int\) given\.$#'
+			identifier: parameterByRef.type
+			count: 1
+			path: tests/Util/Intercept.php
+
+		-
+			message: '#^Property Friendica\\Test\\Util\\SampleStorageBackend\:\:\$l10n is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: tests/Util/SampleStorageBackend.php
+
+		-
+			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\MockInterface\.$#'
+			identifier: varTag.type
+			count: 1
+			path: tests/Util/SampleStorageBackendInstance.php
+
+		-
+			message: '#^Method Friendica\\Test\\Util\\SerializableObjectDouble\:\:unserialize\(\) with return type void returns string but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: tests/Util/SerializableObjectDouble.php
+
+		-
+			message: '#^Non\-abstract class Friendica\\Test\\Util\\SerializableObjectDouble implements the Serializable interface, but does not implement __serialize\(\)\.$#'
+			identifier: class.serializable
+			count: 1
+			path: tests/Util/SerializableObjectDouble.php
+
+		-
+			message: '#^Non\-abstract class Friendica\\Test\\Util\\SerializableObjectDouble implements the Serializable interface, but does not implement __unserialize\(\)\.$#'
+			identifier: class.serializable
+			count: 1
+			path: tests/Util/SerializableObjectDouble.php
+
+		-
+			message: '#^Static property Friendica\\Test\\Util\\StaticCookie\:\:\$_EXPIRE \(int\) does not accept null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Util/StaticCookie.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockConnect\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockConnected\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockExistsTable\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockUpdate\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Class Friendica\\Console\\AutomaticInstallation constructor invoked with 1 parameter, 3\-4 required\.$#'
+			identifier: arguments.count
+			count: 8
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$appMode is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$assertFile is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$assertFileDb is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$configCache is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dba is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Dice\\Dice so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Mockery\\MockInterface so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$rendererMock \(Mockery\\MockInterface\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 2
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 10
+			path: tests/src/Console/ConfigConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/src/Console/LockConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 8
+			path: tests/src/Console/LockConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Console/ServerBlockConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/src/Console/ServerBlockConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Console/ServerBlockConsoleTest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between ''\-''\|''\:''\|''_''\|''A'' and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: tests/src/Content/SmiliesTest.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$text$#'
+			identifier: parameter.notFound
+			count: 1
+			path: tests/src/Content/Text/BBCodeTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/src/Core/Addon/Model/AddonLoaderTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Addon/Model/AddonLoaderTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Cache/DatabaseCacheTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\CacheTestCase\:\:\$cache \(Friendica\\Core\\Cache\\Capability\\ICanCacheInMemory\) does not accept Friendica\\Core\\Cache\\Type\\DatabaseCache\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Core/Cache/DatabaseCacheTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Cache/MemcacheCacheTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Cache/MemcachedCacheTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/Cache/RedisCacheTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:getChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\ValueObject\\\\Cache'' and Friendica\\Core\\Config\\ValueObject\\Cache will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Method Friendica\\Core\\Config\\Capability\\IManageConfigValues\:\:get\(\) invoked with 4 parameters, 1\-3 required\.$#'
+			identifier: arguments.count
+			count: 3
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\Capability\\\\ISetConfigValuesTransactionally'' and Friendica\\Core\\Config\\Model\\ConfigTransaction will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\Model\\\\ConfigTransaction'' and Friendica\\Core\\Config\\Model\\ConfigTransaction will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Core\\Config\\ConfigTransactionTest\:\:\$configFileManager \(Friendica\\Core\\Config\\Util\\ConfigFileManager\) does not accept Mockery\\MockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Variable \$tempData on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: tests/src/Core/Config/ConfigTransactionTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Hooks/Model/InstanceManagerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 9
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\LegacyMockInterface\:\:addRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Core\\InstallerTest\:\:\$dice \(Dice\\Dice&Mockery\\MockInterface\) does not accept Mockery\\LegacyMockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Variable \$dice in PHPDoc tag @var does not exist\.$#'
+			identifier: varTag.variableNotFound
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\KeyValueStorage\\\\Capability\\\\IManageKeyValuePairs'' and Friendica\\Core\\KeyValueStorage\\Capability\\IManageKeyValuePairs will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
+
+		-
+			message: '#^Method Friendica\\Test\\src\\Core\\Lock\\APCuCacheLockTest\:\:getInstance\(\) should return Friendica\\Core\\Lock\\Type\\CacheLock but returns Friendica\\Core\\Lock\\Capability\\ICanLock\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/src/Core/Lock/APCuCacheLockTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Lock/MemcacheCacheLockTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Lock/MemcachedCacheLockTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/Lock/RedisCacheLockTest.php
+
+		-
+			message: '#^Class Friendica\\Core\\Lock\\Type\\CacheLock referenced with incorrect case\: Friendica\\Core\\Lock\\Type\\CAcheLock\.$#'
+			identifier: class.nameCase
+			count: 1
+			path: tests/src/Core/Lock/RedisCacheLockTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/Lock/SemaphoreLockTest.php
+
+		-
+			message: '#^PHPDoc tag @var with type Dice\\Dice\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
+			identifier: varTag.type
+			count: 1
+			path: tests/src/Core/Lock/SemaphoreLockTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/Logger/ProfilerLoggerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/Logger/StreamLoggerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Logger/StreamLoggerTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: tests/src/Core/Logger/StreamLoggerTest.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: tests/src/Core/Logger/SyslogLoggerFactoryWrapper.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/Logger/SyslogLoggerTest.php
+
+		-
+			message: '#^Call to an undefined method Psr\\Log\\LoggerInterface\:\:close\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Logger/SyslogLoggerTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Core\\Logger\\SyslogLoggerTest\:\:\$logger \(Friendica\\Test\\src\\Core\\Logger\\SyslogLoggerWrapper\) does not accept Psr\\Log\\LoggerInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Core/Logger/SyslogLoggerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:times\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/src/Core/PConfig/JitPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/src/Core/PConfig/JitPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Core/PConfig/PreloadPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:times\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Core/PConfig/PreloadPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:twice\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/PConfig/PreloadPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/src/Core/PConfig/PreloadPConfigTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Storage/DatabaseStorageTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
+
+		-
+			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
+			identifier: varTag.type
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Storage\\\\Repository\\\\StorageManager'' and Friendica\\Core\\Storage\\Repository\\StorageManager will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Core\\Storage\\Repository\\StorageManagerTest\:\:\$l10n \(Friendica\\Core\\L10n\) does not accept Mockery\\MockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/SystemTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/SystemTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/src/Database/DBStructureTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Database/DatabaseTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 11
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Factory/Api/Twitter/DirectMessageTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 2
+			path: tests/src/Factory/Api/Twitter/StatusTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 4
+			path: tests/src/Factory/Api/Twitter/UserTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 3
+			path: tests/src/Model/Post/MediaTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/src/Model/User/CookieTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 20
+			path: tests/src/Model/User/CookieTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
+			identifier: staticMethod.impossibleType
+			count: 1
+			path: tests/src/Model/User/CookieTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Model\\\\User\\\\Cookie'' and Friendica\\Model\\User\\Cookie will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 3
+			path: tests/src/Model/User/CookieTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Model\\\\User\\\\Cookie'' and Friendica\\Test\\Util\\StaticCookie will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 3
+			path: tests/src/Model/User/CookieTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 18
+			path: tests/src/Model/UserTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/src/Model/UserTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\LegacyMockInterface\:\:addRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Model/UserTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 8
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 2
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Accounts/VerifyCredentialsTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 3
+			path: tests/src/Module/Api/Mastodon/ConversationsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 5
+			path: tests/src/Module/Api/Mastodon/SearchTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 4
+			path: tests/src/Module/Api/Mastodon/Timelines/HomeTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 5
+			path: tests/src/Module/Api/Mastodon/Timelines/PublicTimelineTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Blocks/ListsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/DirectMessages/DestroyTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/DirectMessages/NewDMTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/DirectMessages/SentTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Favorites/CreateTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Favorites/DestroyTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/FavoritesTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Followers/ListsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Friends/ListsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Friendships/IncomingTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Lists/StatusesTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/DestroyTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/MentionsTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/NetworkPublicTimelineTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/RetweetTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/ShowTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 4
+			path: tests/src/Module/Api/Twitter/Statuses/UpdateTest.php
+
+		-
+			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: tests/src/Module/Api/Twitter/Statuses/UserTimelineTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Module/StatsCachingTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Module/StatsCachingTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Network/ProbeTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/src/Network/ProbeTest.php
+
+		-
+			message: '#^Access to an undefined property Friendica\\Profile\\ProfileField\\Entity\\ProfileField\:\:\$wrong\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
+
+		-
+			message: '#^Expression "\$entity\-\>wrong" on a separate line does not do anything\.$#'
+			identifier: expr.resultUnused
+			count: 1
+			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNotNull\(\) with array will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/src/Protocol/ActivityPub/TransmitterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with 0 and mixed will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Binary operation "\-" between string and string results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: tests/src/Util/DateTimeFormatTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/EMailerTest.php
+
+		-
+			message: '#^PHPDoc tag @var with type Friendica\\Object\\EMail\\IEmail is not subtype of native type null\.$#'
+			identifier: varTag.nativeType
+			count: 2
+			path: tests/src/Util/EMailerTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Util\\EMailerTest\:\:\$hookMock \(Mockery\\MockInterface\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: tests/src/Util/EMailerTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/Emailer/MailBuilderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\MailBuilder'' and Friendica\\Test\\Util\\SampleMailBuilder will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Util/Emailer/MailBuilderTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\MailBuilderTest\:\:\$defaultHeaders \(string\) does not accept array\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Util/Emailer/MailBuilderTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\MailBuilder'' and Friendica\\Util\\EMailer\\SystemMailBuilder will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\SystemMailBuilder'' and Friendica\\Util\\EMailer\\SystemMailBuilder will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$baseUrl \(Friendica\\App\\BaseURL\) does not accept Mockery\\MockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$config \(Friendica\\Core\\Config\\Capability\\IManageConfigValues\) does not accept Mockery\\MockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$l10n \(Friendica\\Core\\L10n\) does not accept Mockery\\MockInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/ImagesTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/ProfilerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Util/ProfilerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/src/Util/ProfilerTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\Profiler'' and Friendica\\Util\\Profiler will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Util/ProfilerTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:times\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Worker/ExpireReportsTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:twice\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Worker/ExpireReportsTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 12
+			path: tests/src/Worker/ExpireReportsTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/src/Worker/ExpireReportsTest.php
