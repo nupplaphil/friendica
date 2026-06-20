@@ -131,7 +131,7 @@ class VCard
 			'$unfollow_link'       => $unfollow_link,
 			'$wallmessage'         => DI::l10n()->t('Message'),
 			'$wallmessage_link'    => $wallmessage_link,
-			'$always_open_compose' => $always_open_compose,						   
+			'$always_open_compose' => $always_open_compose,
 			'$mention'             => $mention_label,
 			'$mention_link'        => $mention_link,
 			'$showgroup'           => DI::l10n()->t('Group posts'),
