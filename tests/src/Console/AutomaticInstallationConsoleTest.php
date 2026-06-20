@@ -352,18 +352,56 @@ FIN;
 	{
 		putenv('FRIENDICA_URL');
 
-		$cache = self::createStub(Cache::class);
-		$cache->method('get')->willReturnMap([
-			['system', 'basepath', $this->root->url()],
-		]);
+		$phpPath = '/usr/bin/php';
 
-		$installer = self::createStub(Installer::class);
+		$cacheStorage = [
+			'system' => [
+				'basepath' => $this->root->url(),
+			],
+		];
+
+		$cache = $this->createMock(Cache::class);
+		$cache->expects(self::exactly(2))->method('get')
+			->willReturnCallback(function (string $cat, string $key, mixed $default_value = null) use (&$cacheStorage) {
+				return $cacheStorage[$cat][$key] ?? $default_value;
+			});
+		$cache->expects(self::exactly(8))->method('set')
+			->willReturnCallback(function (string $cat, string $key, mixed $value) use (&$cacheStorage, $phpPath) {
+				$cacheStorage[$cat][$key] = $value;
+
+				match (true) {
+					$cat === 'database' && $key === 'hostname'    => self::assertSame(Installer::DEFAULT_HOST, $value),
+					$cat === 'database' && $key === 'database'    => self::assertSame('', $value),
+					$cat === 'database' && $key === 'username'    => self::assertSame('', $value),
+					$cat === 'database' && $key === 'password'    => self::assertSame('', $value),
+					$cat === 'config'  && $key === 'php_path'     => self::assertSame($phpPath, $value),
+					$cat === 'config'  && $key === 'admin_email'  => self::assertSame('', $value),
+					$cat === 'system'  && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
+					$cat === 'system'  && $key === 'language'     => self::assertSame(Installer::DEFAULT_LANG, $value),
+					default => self::fail("Unexpected set('$cat', '$key', ...)"),
+				};
+
+				return true;
+			});
+
+		$installer = $this->createPartialMock(Installer::class, [
+			'setUpCache',
+			'checkFunctions',
+			'checkImagick',
+			'checkLocalIni',
+			'checkSmarty3',
+			'checkKeys',
+			'checkPHP',
+			'getPHPPath',
+		]);
+		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath) {});
 		$installer->method('checkFunctions')->willReturn(true);
 		$installer->method('checkImagick')->willReturn(true);
 		$installer->method('checkLocalIni')->willReturn(true);
 		$installer->method('checkSmarty3')->willReturn(true);
 		$installer->method('checkKeys')->willReturn(true);
 		$installer->method('checkPHP')->willReturn(true);
+		$installer->method('getPHPPath')->willReturn($phpPath);
 
 		$console = new AutomaticInstallation(
 			$cache,
@@ -400,22 +438,24 @@ FIN;
 	{
 		putenv('FRIENDICA_URL');
 
-		$phpPath = trim(shell_exec('which php'));
+		$phpPath = '/usr/bin/php';
 		$basePath = rtrim($this->root->url(), '/');
 
 		$configCacheStorage = [
 			'system' => [
 				'basepath' => $basePath,
 			],
+			'config' => [
+				'php_path' => $phpPath,
+			],
 		];
 		$configCache = $this->createMock(Cache::class);
-		$configCache->expects(self::exactly(11))->method('set')
-			->willReturnCallback(function (string $cat, string $key, mixed $value) use (&$configCacheStorage, $phpPath, $basePath) {
+		$configCache->expects(self::exactly(9))->method('set')
+			->willReturnCallback(function (string $cat, string $key, mixed $value) use (&$configCacheStorage, $phpPath) {
 				$configCacheStorage[$cat][$key] = $value;
 
 				match (true) {
 					$cat === 'config' && $key === 'php_path'      => self::assertSame($phpPath, $value),
-					$cat === 'system' && $key === 'basepath'      => self::assertSame($basePath, $value),
 					$cat === 'database' && $key === 'hostname'    => self::assertSame(Installer::DEFAULT_HOST, $value),
 					$cat === 'database' && $key === 'database'    => self::assertSame('', $value),
 					$cat === 'database' && $key === 'username'    => self::assertSame('', $value),
@@ -436,6 +476,7 @@ FIN;
 			});
 
 		$installer = $this->createPartialMock(Installer::class, [
+			'setUpCache',
 			'checkFunctions',
 			'checkImagick',
 			'checkLocalIni',
@@ -448,6 +489,8 @@ FIN;
 			'getPHPPath',
 		]);
 
+		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath) {});
+
 		$installer->method('checkFunctions')->willReturn(true);
 		$installer->method('checkImagick')->willReturn(true);
 		$installer->method('checkLocalIni')->willReturn(true);
@@ -456,7 +499,7 @@ FIN;
 		$installer->method('checkPHP')->willReturn(true);
 		$installer->method('checkDB')->willReturn(true);
 		$installer->method('installDatabase')->willReturn(true);
-		$installer->method('getPHPPath')->willReturn(trim(shell_exec('which php')));
+		$installer->method('getPHPPath')->willReturn($phpPath);
 		$installer->method('createConfig')->willReturnCallback(function (Cache $configCache) {
 			$basepath = $configCache->get('system', 'basepath');
 			file_put_contents($basepath . '/config/local.config.php', 'test');
