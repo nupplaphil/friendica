@@ -370,15 +370,15 @@ FIN;
 				$cacheStorage[$cat][$key] = $value;
 
 				match (true) {
-					$cat === 'database' && $key === 'hostname'    => self::assertSame(Installer::DEFAULT_HOST, $value),
-					$cat === 'database' && $key === 'database'    => self::assertSame('', $value),
-					$cat === 'database' && $key === 'username'    => self::assertSame('', $value),
-					$cat === 'database' && $key === 'password'    => self::assertSame('', $value),
-					$cat === 'config'  && $key === 'php_path'     => self::assertSame($phpPath, $value),
-					$cat === 'config'  && $key === 'admin_email'  => self::assertSame('', $value),
-					$cat === 'system'  && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
-					$cat === 'system'  && $key === 'language'     => self::assertSame(Installer::DEFAULT_LANG, $value),
-					default => self::fail("Unexpected set('$cat', '$key', ...)"),
+					$cat === 'database' && $key === 'hostname'       => self::assertSame(Installer::DEFAULT_HOST, $value),
+					$cat === 'database' && $key === 'database'       => self::assertSame('', $value),
+					$cat === 'database' && $key === 'username'       => self::assertSame('', $value),
+					$cat === 'database' && $key === 'password'       => self::assertSame('', $value),
+					$cat === 'config' && $key === 'php_path'         => self::assertSame($phpPath, $value),
+					$cat === 'config' && $key === 'admin_email'      => self::assertSame('', $value),
+					$cat === 'system' && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
+					$cat === 'system' && $key === 'language'         => self::assertSame(Installer::DEFAULT_LANG, $value),
+					default                                          => self::fail("Unexpected set('$cat', '$key', ...)"),
 				};
 
 				return true;
@@ -394,7 +394,7 @@ FIN;
 			'checkPHP',
 			'getPHPPath',
 		]);
-		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath) {});
+		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath): void {});
 		$installer->method('checkFunctions')->willReturn(true);
 		$installer->method('checkImagick')->willReturn(true);
 		$installer->method('checkLocalIni')->willReturn(true);
@@ -438,7 +438,7 @@ FIN;
 	{
 		putenv('FRIENDICA_URL');
 
-		$phpPath = '/usr/bin/php';
+		$phpPath  = '/usr/bin/php';
 		$basePath = rtrim($this->root->url(), '/');
 
 		$configCacheStorage = [
@@ -455,16 +455,16 @@ FIN;
 				$configCacheStorage[$cat][$key] = $value;
 
 				match (true) {
-					$cat === 'config' && $key === 'php_path'      => self::assertSame($phpPath, $value),
-					$cat === 'database' && $key === 'hostname'    => self::assertSame(Installer::DEFAULT_HOST, $value),
-					$cat === 'database' && $key === 'database'    => self::assertSame('', $value),
-					$cat === 'database' && $key === 'username'    => self::assertSame('', $value),
-					$cat === 'database' && $key === 'password'    => self::assertSame('', $value),
-					$cat === 'config'  && $key === 'admin_email'  => self::assertSame('', $value),
-					$cat === 'system'  && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
-					$cat === 'system'  && $key === 'language'     => self::assertSame(Installer::DEFAULT_LANG, $value),
-					$cat === 'system'  && $key === 'url'          => self::assertSame('http://friendica.local', $value),
-					default                                       => self::fail("Unexpected set('$cat', '$key', ...)"),
+					$cat === 'config' && $key === 'php_path'         => self::assertSame($phpPath, $value),
+					$cat === 'database' && $key === 'hostname'       => self::assertSame(Installer::DEFAULT_HOST, $value),
+					$cat === 'database' && $key === 'database'       => self::assertSame('', $value),
+					$cat === 'database' && $key === 'username'       => self::assertSame('', $value),
+					$cat === 'database' && $key === 'password'       => self::assertSame('', $value),
+					$cat === 'config' && $key === 'admin_email'      => self::assertSame('', $value),
+					$cat === 'system' && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
+					$cat === 'system' && $key === 'language'         => self::assertSame(Installer::DEFAULT_LANG, $value),
+					$cat === 'system' && $key === 'url'              => self::assertSame('http://friendica.local', $value),
+					default                                          => self::fail("Unexpected set('$cat', '$key', ...)"),
 				};
 
 				return true;
@@ -489,7 +489,7 @@ FIN;
 			'getPHPPath',
 		]);
 
-		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath) {});
+		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath): void {});
 
 		$installer->method('checkFunctions')->willReturn(true);
 		$installer->method('checkImagick')->willReturn(true);
@@ -500,7 +500,7 @@ FIN;
 		$installer->method('checkDB')->willReturn(true);
 		$installer->method('installDatabase')->willReturn(true);
 		$installer->method('getPHPPath')->willReturn($phpPath);
-		$installer->method('createConfig')->willReturnCallback(function (Cache $configCache) {
+		$installer->method('createConfig')->willReturnCallback(function (Cache $configCache): void {
 			$basepath = $configCache->get('system', 'basepath');
 			file_put_contents($basepath . '/config/local.config.php', 'test');
 		});
