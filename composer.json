@@ -169,6 +169,7 @@
 		"rector/rector": "^2.2"
 	},
 	"scripts": {
+		"addons:phpstan": "phpstan analyze --memory-limit 1024M --configuration addon/.tests/.phpstan.neon",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:unit": "phpunit -c tests/phpunit.xml --testsuite unit",
 		"test:integration": "phpunit -c tests/phpunit.xml --testsuite integration",
@@ -176,7 +177,6 @@
 		"test:legacy": "phpunit -c tests/phpunit.xml --testsuite legacy",
 		"phpmd": "phpmd src/ text .phpmd-ruleset.xml --color --cache",
 		"phpstan": "phpstan analyze --memory-limit 1024M --configuration .phpstan.neon",
-		"phpstan-addons": "phpstan analyze --memory-limit 1024M --configuration .phpstan-addons.neon",
 		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './view/asset/*' -print0 | xargs -0 -n1 php -l",
 		"docker:translate": "docker run --rm -v $PWD:/data -w /data friendicaci/transifex bin/run_xgettext.sh",
 		"lang:recreate": "bin/run_xgettext.sh",
