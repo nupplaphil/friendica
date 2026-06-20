@@ -497,7 +497,7 @@ aside {
   color: var(--text-primary);
 
   &:hover {
-    color: var(--text-secondary);
+    color: var(--accent-color);
     background: var(--bg-tertiary);
     transition: none;
   }
