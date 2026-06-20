@@ -85,7 +85,7 @@ final readonly class PostTemplateBuilder
 	 */
 	private function buildThreadTemplateData(array $item, bool $preview, bool $writable, int $profileOwner, array $convResponses, string $formSecurityToken, int $threadLevel, array $threadParents): ?array
 	{
-		if (($item['network'] ?? '') === Protocol::MAIL && $this->session->getLocalUserId() != ($item['uid'] ?? 0)) {
+		if (($item['network'] ?? '') === Protocol::MAIL && $this->session->getLocalUserId() !== ($item['uid'] ?? 0)) {
 			return null;
 		}
 
@@ -195,8 +195,8 @@ final readonly class PostTemplateBuilder
 		$osparkle  = '';
 
 		$privacy   = $this->fetchPrivacy($item);
-		$lock      = (($item['private'] ?? ItemModel::PUBLIC) == ItemModel::PRIVATE) ? $privacy : false;
-		$connector = !in_array($item['network'] ?? '', Protocol::NATIVE_SUPPORT) && (($item['protocol'] ?? '') != \Friendica\Model\Conversation::PARCEL_JETSTREAM)
+		$lock      = (($item['private'] ?? ItemModel::PUBLIC) === ItemModel::PRIVATE) ? $privacy : false;
+		$connector = !in_array($item['network'] ?? '', Protocol::NATIVE_SUPPORT) && (($item['protocol'] ?? '') !== \Friendica\Model\Conversation::PARCEL_JETSTREAM)
 			? $this->l10n->t('Connector Message')
 			: false;
 
@@ -244,7 +244,7 @@ final readonly class PostTemplateBuilder
 		];
 
 		$tagger = '';
-		if ($this->session->getLocalUserId() && $profileOwner == $this->session->getLocalUserId() && !empty($item['uid'])) {
+		if ($this->session->getLocalUserId() && $profileOwner === $this->session->getLocalUserId() && !empty($item['uid'])) {
 			$tagger = [
 				'add'   => $this->l10n->t('Add tag to post'),
 				'class' => '',
@@ -341,7 +341,7 @@ final readonly class PostTemplateBuilder
 			'location_html'          => $location_html,
 			'indent'                 => $indent,
 			'shiny'                  => $shiny,
-			'owner_self'             => ($item['author-link'] ?? '') == $this->session->get('my_url'),
+			'owner_self'             => ($item['author-link'] ?? '') === $this->session->get('my_url'),
 			'owner_url'              => $owner_url,
 			'owner_photo'            => $this->baseURL->remove($this->item->getOwnerAvatar($item)),
 			'owner_name'             => $owner_name,
@@ -469,7 +469,7 @@ final readonly class PostTemplateBuilder
 	 */
 	private function determineActionPermissions(array $item, int $profileOwner): array
 	{
-		$shareable    = in_array($profileOwner, [0, $this->session->getLocalUserId()]) && ($item['private'] ?? ItemModel::PUBLIC) != ItemModel::PRIVATE;
+		$shareable    = in_array($profileOwner, [0, $this->session->getLocalUserId()]) && ($item['private'] ?? ItemModel::PUBLIC) !== ItemModel::PRIVATE;
 		$announceable = $shareable && in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA, Protocol::TWITTER, Protocol::TUMBLR, Protocol::ATPROTO]);
 		$commentable  = ($item['network'] ?? '') !== Protocol::TUMBLR;
 		$likeable     = true;
@@ -604,7 +604,7 @@ final readonly class PostTemplateBuilder
 
 		$ago          = !empty($item['created']) ? $this->l10n->relativeDateTime($item['created']) : '';
 		$ago_received = !empty($item['received']) ? $this->l10n->relativeDateTime($item['received']) : '';
-		if ($this->config->get('system', 'show_received') && !empty($item['created']) && !empty($item['received']) && (abs(strtotime((string) $item['created']) - strtotime((string) $item['received'])) > $this->config->get('system', 'show_received_seconds')) && ($ago != $ago_received)) {
+		if ($this->config->get('system', 'show_received') && !empty($item['created']) && !empty($item['received']) && (abs(strtotime((string) $item['created']) - strtotime((string) $item['received'])) > $this->config->get('system', 'show_received_seconds')) && ($ago !== $ago_received)) {
 			$ago = $this->l10n->t('%s (Received %s)', $ago, $ago_received);
 		}
 
@@ -853,7 +853,7 @@ final readonly class PostTemplateBuilder
 			return $text;
 		}
 
-		if (!empty($item['author-addr']) && ($item['author-addr'] != ($owner['addr'] ?? '')) && (($item['gravity'] ?? 0) !== ItemModel::GRAVITY_PARENT || !in_array($item['network'] ?? '', [Protocol::DIASPORA]))) {
+		if (!empty($item['author-addr']) && ($item['author-addr'] !== ($owner['addr'] ?? '')) && (($item['gravity'] ?? 0) !== ItemModel::GRAVITY_PARENT || !in_array($item['network'] ?? '', [Protocol::DIASPORA]))) {
 			$text .= '@' . $item['author-addr'] . ' ';
 		}
 
@@ -865,8 +865,8 @@ final readonly class PostTemplateBuilder
 			}
 
 			$profile = Contact::getByURL($term['url'], false, ['addr', 'contact-type']);
-			if (!empty($profile['addr']) && (($profile['contact-type'] ?? Contact::TYPE_UNKNOWN) != Contact::TYPE_COMMUNITY)
-				&& ($profile['addr'] != ($owner['addr'] ?? '')) && !strstr($text, (string) $profile['addr'])) {
+			if (!empty($profile['addr']) && (($profile['contact-type'] ?? Contact::TYPE_UNKNOWN) !== Contact::TYPE_COMMUNITY)
+				&& ($profile['addr'] !== ($owner['addr'] ?? '')) && !strstr($text, (string) $profile['addr'])) {
 				$text .= '@' . $profile['addr'] . ' ';
 			}
 		}
@@ -895,7 +895,7 @@ final readonly class PostTemplateBuilder
 		}
 
 		$uid = $profileOwner;
-		if (!empty($item['uid']) && $uid != $item['uid']) {
+		if (!empty($item['uid']) && $uid !== $item['uid']) {
 			$uid = $item['uid'];
 		}
 

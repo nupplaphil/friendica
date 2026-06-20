@@ -65,7 +65,7 @@ final readonly class ConversationDataProvider
 			return null;
 		}
 
-		if (($item['gravity'] ?? null) == ItemModel::GRAVITY_PARENT) {
+		if (($item['gravity'] ?? null) === ItemModel::GRAVITY_PARENT) {
 			return $item;
 		}
 
@@ -104,8 +104,14 @@ final readonly class ConversationDataProvider
 		}
 
 		$renderUserId = $viewerUid ?: (int) $resolvedItem['uid'];
-		$sinceId      = $item['gravity'] != ItemModel::GRAVITY_PARENT ? $item['uri-id'] : 0;
-		$sinceDate    = $item['gravity'] != ItemModel::GRAVITY_PARENT ? $item['created'] : '';
+
+		if ($mode === ConversationRenderer::MODE_COMMENTS) {
+			$sinceId   = $item['gravity'] !== ItemModel::GRAVITY_PARENT ? $item['uri-id'] : 0;
+			$sinceDate = $item['gravity'] !== ItemModel::GRAVITY_PARENT ? $item['created'] : '';
+		} else {
+			$sinceId   = 0;
+			$sinceDate = '';
+		}
 
 		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $renderUserId, $mode, $sinceId, $sinceDate, $existing);
 
@@ -168,7 +174,7 @@ final readonly class ConversationDataProvider
 		if (in_array($mode, [ConversationRenderer::MODE_CHANNEL, ConversationRenderer::MODE_COMMUNITY, ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_PROFILE])) {
 			$writable = true;
 		} else {
-			$writable = $items[0]['writable'] || (($items[0]['uid'] == 0) && in_array($items[0]['network'], Protocol::FEDERATED));
+			$writable = $items[0]['writable'] || (($items[0]['uid'] === 0) && in_array($items[0]['network'], Protocol::FEDERATED));
 		}
 
 		if (!$viewerUid) {
@@ -188,7 +194,7 @@ final readonly class ConversationDataProvider
 			}
 
 			$item['pagedrop'] = $pagedrop;
-			if ($item['gravity'] == ItemModel::GRAVITY_PARENT) {
+			if ($item['gravity'] === ItemModel::GRAVITY_PARENT) {
 				$parentItems[] = $item;
 			}
 		}
@@ -311,7 +317,7 @@ final readonly class ConversationDataProvider
 		$uriId         = 0;
 
 		foreach ($parents as $parent) {
-			if (!empty($parent['thr-parent-id']) && !empty($parent['gravity']) && ($parent['gravity'] == ItemModel::GRAVITY_ACTIVITY)) {
+			if (!empty($parent['thr-parent-id']) && !empty($parent['gravity']) && ($parent['gravity'] === ItemModel::GRAVITY_ACTIVITY)) {
 				$uriId = $parent['thr-parent-id'];
 				if (!empty($parent['author-id'])) {
 					$activities[$uriId] = ['causer-id' => $parent['author-id']];
@@ -537,7 +543,7 @@ final readonly class ConversationDataProvider
 
 		$rows = DBA::p($sql, $condition);
 		while ($row = DBA::fetch($rows)) {
-			$emoji = $row['gravity'] == ItemModel::GRAVITY_ACTIVITY ? ($row['body'] ?: $row['verb']) : '';
+			$emoji = $row['gravity'] === ItemModel::GRAVITY_ACTIVITY ? ($row['body'] ?: $row['verb']) : '';
 			if (!isset($emojis[$row['thr-parent-id']][$emoji]['title'])) {
 				continue;
 			}
@@ -619,7 +625,7 @@ final readonly class ConversationDataProvider
 	{
 		$children = [];
 		foreach ($rows as $row) {
-			if ($row['thr-parent-id'] == $startUriId) {
+			if ($row['thr-parent-id'] === $startUriId) {
 				$children[] = $row['uri-id'];
 				unset($row['uri-id']);
 			}
@@ -768,7 +774,7 @@ final readonly class ConversationDataProvider
 		$commentCounter  = [];
 		$activityCounter = [];
 		while ($row = Post::fetch($threadItems)) {
-			if (!empty($rows[$row['uri-id']]) && ($row['uid'] == 0)) {
+			if (!empty($rows[$row['uri-id']]) && ($row['uid'] === 0)) {
 				continue;
 			}
 
@@ -779,7 +785,7 @@ final readonly class ConversationDataProvider
 				continue;
 			}
 
-			if (($mode != ConversationRenderer::MODE_CONTACTS) && !$row['origin']) {
+			if (($mode !== ConversationRenderer::MODE_CONTACTS) && !$row['origin']) {
 				$row['featured'] = false;
 			}
 
@@ -787,13 +793,13 @@ final readonly class ConversationDataProvider
 				if (!isset($commentCounter[$row['parent-uri-id']])) {
 					$commentCounter[$row['parent-uri-id']] = 0;
 				}
-				if (($row['gravity'] == ItemModel::GRAVITY_COMMENT) && (++$commentCounter[$row['parent-uri-id']] > $maxComments)) {
+				if (($row['gravity'] === ItemModel::GRAVITY_COMMENT) && (++$commentCounter[$row['parent-uri-id']] > $maxComments)) {
 					continue;
 				}
 				if (!isset($activityCounter[$row['parent-uri-id']])) {
 					$activityCounter[$row['parent-uri-id']] = 0;
 				}
-				if (($row['gravity'] == ItemModel::GRAVITY_ACTIVITY) && (++$activityCounter[$row['parent-uri-id']] > $maxComments)) {
+				if (($row['gravity'] === ItemModel::GRAVITY_ACTIVITY) && (++$activityCounter[$row['parent-uri-id']] > $maxComments)) {
 					continue;
 				}
 			}
@@ -813,7 +819,7 @@ final readonly class ConversationDataProvider
 	{
 		$indexed = [];
 		foreach ($rows as $row) {
-			if (!empty($indexed[$row['uri-id']]) && ($row['uid'] == 0)) {
+			if (!empty($indexed[$row['uri-id']]) && ($row['uid'] === 0)) {
 				continue;
 			}
 			$indexed[$row['uri-id']] = $row;
@@ -839,14 +845,14 @@ final readonly class ConversationDataProvider
 		}
 
 		if (!empty($activity)) {
-			if ($row['gravity'] == ItemModel::GRAVITY_PARENT) {
+			if ($row['gravity'] === ItemModel::GRAVITY_PARENT) {
 				$row['post-reason']   = ItemModel::PR_ANNOUNCEMENT;
 				$row                  = array_merge($row, $activity);
 				$contact              = Contact::getById($activity['causer-id'], ['url', 'name', 'thumb']);
 				$row['causer-link']   = $contact['url'];
 				$row['causer-avatar'] = $contact['thumb'];
 				$row['causer-name']   = $contact['name'];
-			} elseif (($row['gravity'] == ItemModel::GRAVITY_ACTIVITY) && ($row['verb'] == Activity::ANNOUNCE) && ($row['author-id'] == $activity['causer-id'])) {
+			} elseif (($row['gravity'] === ItemModel::GRAVITY_ACTIVITY) && ($row['verb'] === Activity::ANNOUNCE) && ($row['author-id'] === $activity['causer-id'])) {
 				return $row;
 			}
 		}
@@ -953,19 +959,19 @@ final readonly class ConversationDataProvider
 	{
 		$children = [];
 		foreach ($itemList as $index => $item) {
-			if ($item['gravity'] != ItemModel::GRAVITY_PARENT) {
+			if ($item['gravity'] !== ItemModel::GRAVITY_PARENT) {
 				if ($recursive) {
 					$thrParent = $item['thr-parent-id'];
-					if ($thrParent == '') {
+					if ($thrParent === '') {
 						$thrParent = $item['parent-uri-id'];
 					}
 
-					if ($thrParent == $parent['uri-id']) {
+					if ($thrParent === $parent['uri-id']) {
 						$item['children'] = $this->fetchChildItems($itemList, $item);
 						$children[]       = $item;
 						unset($itemList[$index]);
 					}
-				} elseif ($item['parent-uri-id'] == $parent['uri-id']) {
+				} elseif ($item['parent-uri-id'] === $parent['uri-id']) {
 					$children[] = $item;
 					unset($itemList[$index]);
 				}
@@ -1020,7 +1026,7 @@ final readonly class ConversationDataProvider
 	 */
 	private function smartFlattenConversation(array $parent): array
 	{
-		if (!isset($parent['children']) || count($parent['children']) == 0) {
+		if (!isset($parent['children']) || count($parent['children']) === 0) {
 			return $parent;
 		}
 
@@ -1033,7 +1039,7 @@ final readonly class ConversationDataProvider
 
 				$childPostCount     = count(array_filter($child['children'], $countPostClosure));
 				$remainingPostCount = count(array_filter(array_slice($parent['children'], $index), $countPostClosure));
-				if ($childPostCount == 1 && $remainingPostCount == 1) {
+				if ($childPostCount === 1 && $remainingPostCount === 1) {
 					$childIndex = 0;
 					while (($childIndex < count($child['children'])) && ($child['children'][$childIndex]['verb'] !== Activity::POST)) {
 						$childIndex++;
@@ -1072,7 +1078,7 @@ final readonly class ConversationDataProvider
 		}
 
 		foreach ($itemArray as $item) {
-			if ($item['gravity'] == ItemModel::GRAVITY_PARENT) {
+			if ($item['gravity'] === ItemModel::GRAVITY_PARENT) {
 				$parents[] = $item;
 			}
 		}
@@ -1229,7 +1235,7 @@ final readonly class ConversationDataProvider
 		$threadUriIds = [];
 		$answers      = [];
 		foreach ($rows as $row) {
-			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] == $row['uri-id']) {
+			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] === $row['uri-id']) {
 				continue;
 			}
 			$threadUriIds[]                   = $row['uri-id'];
@@ -1249,7 +1255,7 @@ final readonly class ConversationDataProvider
 		$threadUriIds = [];
 		$answerCounts = [];
 		foreach ($rows as $row) {
-			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] == $row['uri-id']) {
+			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] === $row['uri-id']) {
 				continue;
 			}
 			$threadUriIds[]                      = $row['uri-id'];
@@ -1356,7 +1362,7 @@ final readonly class ConversationDataProvider
 					return;
 			}
 
-			if (!empty($activity['verb']) && $this->activity->match($activity['verb'], $verb) && ($activity['gravity'] != ItemModel::GRAVITY_PARENT)) {
+			if (!empty($activity['verb']) && $this->activity->match($activity['verb'], $verb) && ($activity['gravity'] !== ItemModel::GRAVITY_PARENT)) {
 				$author = [
 					'uid'     => 0,
 					'id'      => $activity['author-id'],
@@ -1372,7 +1378,7 @@ final readonly class ConversationDataProvider
 					$activity['thr-parent-id'] = $activity['parent-uri-id'];
 				}
 
-				if (($verb == Activity::ANNOUNCE) && !empty($threadParent['causer-id']) && ($threadParent['causer-id'] == $activity['author-id'])) {
+				if (($verb === Activity::ANNOUNCE) && !empty($threadParent['causer-id']) && ($threadParent['causer-id'] === $activity['author-id'])) {
 					continue;
 				}
 
@@ -1385,7 +1391,7 @@ final readonly class ConversationDataProvider
 					continue;
 				}
 
-				if ($this->session->getPublicContactId() == $activity['author-id']) {
+				if ($this->session->getPublicContactId() === $activity['author-id']) {
 					$convResponses[$mode][$activity['thr-parent-id']]['self'] = 1;
 				}
 

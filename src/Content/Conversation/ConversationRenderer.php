@@ -88,12 +88,14 @@ final class ConversationRenderer
 		$this->profiler->startRecording('rendering');
 		$this->registerAssets();
 
+		$viewerUid = $this->resolveViewerUid($uid);
+
 		$live_update_div = '';
 
 		if ($mode === self::MODE_NETWORK) {
 			if (!$update) {
 				$live_update_div = '<div id="live-network"></div>' . "\r\n"
-					. "<script> var profile_uid = " . $_SESSION['uid']
+					. "<script> var profile_uid = " . $viewerUid
 					. "; var netargs = '" . substr($this->args->getCommand(), 8)
 					. '?f='
 					. (!empty($_GET['contactid']) ? '&contactid=' . rawurlencode((string) ($_GET['contactid'] ?? '')) : '')
@@ -118,20 +120,20 @@ final class ConversationRenderer
 
 				if ($tab === 'posts') {
 					$live_update_div = '<div id="live-profile"></div>' . "\r\n"
-						. "<script> var profile_uid = " . $uid
+						. "<script> var profile_uid = " . $viewerUid
 						. "; var netargs = '?f='; </script>\r\n";
 				}
 			}
 		} elseif ($mode === self::MODE_NOTES) {
 			if (!$update) {
 				$live_update_div = '<div id="live-notes"></div>' . "\r\n"
-					. "<script> var profile_uid = " . $this->session->getLocalUserId()
+					. "<script> var profile_uid = " . $viewerUid
 					. "; var netargs = '?f='; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_DISPLAY) {
 			if (!$update) {
 				$live_update_div = '<div id="live-display"></div>' . "\r\n"
-					. "<script> var profile_uid = " . ($this->session->getLocalUserId() ?: 0) . ";"
+					. "<script> var profile_uid = " . ($viewerUid ?: 0) . ";"
 					. "</script>";
 			}
 		} elseif ($mode === self::MODE_CHANNEL) {
@@ -160,7 +162,7 @@ final class ConversationRenderer
 			}
 		}
 
-		$page_dropping = $this->session->getLocalUserId() && $this->pConfig->get($this->session->getLocalUserId(), 'system', 'show_page_drop', true) && $this->session->getLocalUserId() == $uid;
+		$page_dropping = $viewerUid && $this->pConfig->get($viewerUid, 'system', 'show_page_drop', true);
 
 		if (!$update) {
 			$_SESSION['return_path'] = $this->args->getQueryString();
@@ -174,7 +176,7 @@ final class ConversationRenderer
 
 		$items = $cb['items'];
 
-		$timelineHtml = $this->renderTimelineByItems($items, $uid, $mode, $order);
+		$timelineHtml = $this->renderTimelineByItems($items, $viewerUid, $mode, $order);
 		$html         = $live_update_div . $timelineHtml;
 
 		if (!$update) {
@@ -277,6 +279,9 @@ final class ConversationRenderer
 	{
 		$this->profiler->startRecording('rendering');
 		$this->registerAssets();
+
+		$viewerUid = $this->resolveViewerUid($uid);
+
 		$live_update_div = '';
 
 		if ($mode === self::MODE_SEARCH) {
@@ -301,7 +306,7 @@ final class ConversationRenderer
 			false,
 			$live_update_div,
 			$this->args->getQueryString(),
-			$uid,
+			$viewerUid,
 		);
 
 		$this->profiler->stopRecording();
@@ -322,9 +327,7 @@ final class ConversationRenderer
 	 */
 	private function renderTimelineByItems(array $items, int $uid, string $mode, string $order): string
 	{
-		$viewerUid = $this->resolveViewerUid($uid);
-
-		$roots = $this->dataProvider->getRootTemplateDataFromItems($items, $viewerUid, $mode, $order);
+		$roots = $this->dataProvider->getRootTemplateDataFromItems($items, $uid, $mode, $order);
 		if (empty($roots)) {
 			return '';
 		}
@@ -367,9 +370,8 @@ final class ConversationRenderer
 	 */
 	private function renderContextLessTimelineByItems(array $items, string $mode, bool $update, bool $preview, bool $pagedrop, string $liveUpdate, string $returnPath, int $uid): string
 	{
-		$viewerUid         = $this->resolveViewerUid($uid);
 		$formSecurityToken = BaseModule::getFormSecurityToken('contact_action');
-		$threads           = $this->buildContextLessThreadList($items, $mode, $preview, $pagedrop, $formSecurityToken, $viewerUid);
+		$threads           = $this->buildContextLessThreadList($items, $mode, $preview, $pagedrop, $formSecurityToken, $uid);
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('conversation.tpl'), [
 			'$live_update' => $liveUpdate,

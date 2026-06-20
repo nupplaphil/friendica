@@ -123,7 +123,7 @@ final readonly class SystemChannelPost
 			$activity_time += (microtime(true) - $timestamp2);
 
 			$isSharer   = in_array($relationState[$uid] ?? null, [Contact::SHARING, Contact::FRIEND]);
-			$isFollower = ($relationState[$uid] ?? null) == Contact::FOLLOWER;
+			$isFollower = ($relationState[$uid] ?? null) === Contact::FOLLOWER;
 
 			foreach ($channels as $channel) {
 				if (isset($existing[$uid]) && in_array($channel, $existing[$uid])) {
@@ -137,7 +137,7 @@ final readonly class SystemChannelPost
 				$store = false;
 				switch ($channel) {
 					case Channel::WHATSHOT:
-						$store = ($engagement['comments'] > $activities->medianComments || $engagement['activities'] > $activities->medianActivities || $engagement['views'] > $activities->medianViews) && $engagement['contact-type'] != Contact::TYPE_COMMUNITY;
+						$store = ($engagement['comments'] > $activities->medianComments || $engagement['activities'] > $activities->medianActivities || $engagement['views'] > $activities->medianViews) && $engagement['contact-type'] !== Contact::TYPE_COMMUNITY;
 						break;
 
 					case Channel::FORYOU:
@@ -149,7 +149,7 @@ final readonly class SystemChannelPost
 						}
 
 						if (!$store && isset($forYouuserContacts[$uid])) {
-							$store = $forYouuserContacts[$uid]['channel-frequency'] == Contact\User::FREQUENCY_ALWAYS || $forYouuserContacts[$uid]['notify_new_posts'];
+							$store = $forYouuserContacts[$uid]['channel-frequency'] === Contact\User::FREQUENCY_ALWAYS || $forYouuserContacts[$uid]['notify_new_posts'];
 						}
 						break;
 
