@@ -170,6 +170,7 @@
 	},
 	"scripts": {
 		"addons:phpstan": "phpstan analyze --memory-limit 1024M --configuration addon/.tests/.phpstan.neon",
+		"addons:test": "phpunit -c addon/.tests/phpunit.xml",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:unit": "phpunit -c tests/phpunit.xml --testsuite unit",
 		"test:integration": "phpunit -c tests/phpunit.xml --testsuite integration",

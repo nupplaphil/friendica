@@ -55,11 +55,6 @@ steps:
     commands:
       - bin/composer.phar run phpstan;
 
-  phpstan-addons:
-    image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
-    commands:
-      - bin/composer.phar run phpstan-addons;
-
   rector:
     image: friendicaci/php${PHP_MAJOR_VERSION}:php${PHP_VERSION}
     commands:

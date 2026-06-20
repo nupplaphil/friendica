@@ -13,8 +13,3 @@ if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
 
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 require __DIR__ . '/../vendor/autoload.php';
-
-// Backward compatibility
-if (!class_exists(TestCase::class)) {
-	class_alias(\PHPUnit\Framework\TestCase::class, TestCase::class);
-}
