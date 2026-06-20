@@ -83,7 +83,7 @@
 				{{/if}}
 				{{if $profile.addr}}
 					<div id="jotOpen" class="pull-right">
-						<button type="button" id="mention-link" class="action-button btn btn-labeled btn-primary" onclick="openWallMessage('{{$mention_url}}')">
+						<button type="button" id="mention-link" class="action-button btn btn-labeled btn-primary" onclick="{{if $always_open_compose}}window.location.href='{{$mention_url}}'{{else}}openWallMessage('{{$mention_url}}'){{/if}}">
 							<i class="ri ri-lg ri-pencil-line"></i>
 							<span>{{$mention_label}}</span>
 						</button>
