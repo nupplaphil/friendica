@@ -10,18 +10,23 @@ namespace Friendica\Test\src\Console;
 use Dice\Dice;
 use Friendica\App;
 use Friendica\Console\AutomaticInstallation;
+use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Installer;
 use Friendica\Core\L10n;
+use Friendica\Core\Lock\Capability\ICanLock;
+use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Database\Database;
 use Friendica\DI;
 use Friendica\Test\ConsoleTestCase;
 use Friendica\Test\Util\RendererMockTrait;
 use Friendica\Test\Util\VFSTrait;
+use Friendica\Util\Profiler;
 use Mockery;
 use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamFile;
+use Psr\Log\LoggerInterface;
 
 class AutomaticInstallationConsoleTest extends ConsoleTestCase
 {
@@ -59,12 +64,9 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 
 	public function setUp(): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		parent::setUp();
 
 		$this->setUpVfsDir();
-		;
 
 		if ($this->root->hasChild('config' . DIRECTORY_SEPARATOR . 'local.config.php')) {
 			$this->root->getChild('config')
@@ -79,7 +81,33 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 				   ->with(L10n::class)
 				   ->andReturn($l10nMock);
 
+		$this->dice->shouldReceive('create')
+				   ->with(Database::class)
+				   ->andReturn(self::createStub(Database::class));
+
+		$this->dice->shouldReceive('create')
+				   ->with(IManageConfigValues::class)
+				   ->andReturn(self::createStub(IManageConfigValues::class));
+
+		$this->dice->shouldReceive('create')
+				   ->with(Profiler::class)
+				   ->andReturn(self::createStub(Profiler::class));
+
+		$this->dice->shouldReceive('create')
+				   ->with(LoggerInterface::class)
+				   ->andReturn(self::createStub(LoggerInterface::class));
+
+		$this->dice->shouldReceive('create')
+				   ->with(ICanLock::class)
+				   ->andReturn(self::createStub(ICanLock::class));
+
+		$this->dice->shouldReceive('create')
+				   ->with(IHandleUserSessions::class)
+				   ->andReturn(self::createStub(IHandleUserSessions::class));
+
 		DI::init($this->dice);
+
+		return;
 
 		$this->configCache = new Cache();
 		$this->configCache->set('system', 'basepath', $this->root->url());
@@ -277,30 +305,6 @@ FIN;
 		self::assertEquals($finished, $txt);
 	}
 
-	private function assertStuckURL($txt)
-	{
-		$finished = <<<FIN
-Initializing setup...
-
- Complete!
-
-
-Checking environment...
-
- NOTICE: Not checking .htaccess/URL-Rewrite during CLI installation.
-
- Complete!
-
-
-Creating config file...
-
-The Friendica URL has to be set during CLI installation.
-
-FIN;
-
-		self::assertEquals($finished, $txt);
-	}
-
 	/**
 	 * Asserts one config entry
 	 *
@@ -349,7 +353,7 @@ FIN;
 		self::assertConfigEntry('system', 'default_timezone', $assertion, ($default) ? Installer::DEFAULT_TZ : null);
 		self::assertConfigEntry('system', 'language', $assertion, ($default) ? Installer::DEFAULT_LANG : null);
 		self::assertConfigEntry('system', 'url', $assertion);
-		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? 0 : null);
+		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? 2 : null);
 		self::assertConfigEntry('system', 'basepath', ($realBasepath) ? $this->root->url() : $assertion);
 	}
 
@@ -359,11 +363,46 @@ FIN;
 	 */
 	public function testEmpty(): void
 	{
-		$console = new AutomaticInstallation($this->consoleArgv);
+		putenv('FRIENDICA_URL');
+
+		$cache = self::createStub(Cache::class);
+		$cache->method('get')->willReturnMap([
+			['system', 'basepath', $this->root->url()],
+		]);
+
+		$installer = self::createStub(Installer::class);
+		$installer->method('checkFunctions')->willReturn(true);
+		$installer->method('checkImagick')->willReturn(true);
+		$installer->method('checkLocalIni')->willReturn(true);
+		$installer->method('checkSmarty3')->willReturn(true);
+		$installer->method('checkKeys')->willReturn(true);
+		$installer->method('checkPHP')->willReturn(true);
+
+		$console = new AutomaticInstallation(
+			$cache,
+			self::createStub(IManageConfigValues::class),
+			self::createStub(Database::class),
+			$installer,
+			$this->consoleArgv,
+		);
 
 		$txt = $this->dumpExecute($console);
 
-		self::assertStuckURL($txt);
+		$expected = <<<TEXT
+			Initializing setup...
+			 Complete!
+
+			Checking environment...
+			 NOTICE: Not checking .htaccess/URL-Rewrite during CLI installation.
+
+			 Complete!
+
+			Creating config file...
+			The Friendica URL has to be set during CLI installation.
+
+			TEXT;
+
+		self::assertSame($expected, $txt);
 	}
 
 	/**
@@ -372,6 +411,8 @@ FIN;
 	 */
 	public function testEmptyWithURL(): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -397,6 +438,8 @@ FIN;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithConfig(array $data): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -474,6 +517,8 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentAndSave(array $data): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -512,6 +557,8 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentWithoutSave(array $data): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -548,6 +595,8 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithArguments(array $data): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -586,6 +635,8 @@ CONF;
 	 */
 	public function testNoDatabaseConnection(): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		$this->mockConnect(false, 1);
 
 		$this->mockGetMarkupTemplate('local.config.tpl', 'testTemplate', 1);
@@ -604,6 +655,8 @@ CONF;
 
 	public function testGetHelp(): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		// Usable to purposely fail if new commands are added without taking tests into account
 		$theHelp = <<<HELP
 Installation - Install Friendica automatically
