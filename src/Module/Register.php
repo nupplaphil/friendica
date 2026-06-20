@@ -274,6 +274,7 @@ class Register extends BaseModule
 		)->getArray();
 
 		$additional_account = false;
+		$regdata            = ['type' => $arr['post']['register_type'], 'nickname' => $arr['post']['nickname'], 'username' => $arr['post']['username']];
 
 		if (!DI::userSession()->getLocalUserId() && !empty($arr['post']['parent_password'])) {
 			DI::sysmsg()->addNotice(DI::l10n()->t('Permission denied.'));
@@ -283,13 +284,11 @@ class Register extends BaseModule
 				Model\User::getIdFromPasswordAuthentication(DI::userSession()->getLocalUserId(), $arr['post']['parent_password']);
 			} catch (\Exception) {
 				DI::sysmsg()->addNotice(DI::l10n()->t("Password doesn't match."));
-				$regdata = ['nickname' => $arr['post']['nickname'], 'username' => $arr['post']['username']];
 				DI::baseUrl()->redirect('register?' . http_build_query($regdata));
 			}
 			$additional_account = true;
 		} elseif (DI::userSession()->getLocalUserId()) {
 			DI::sysmsg()->addNotice(DI::l10n()->t('Please enter your password.'));
-			$regdata = ['nickname' => $arr['post']['nickname'], 'username' => $arr['post']['username']];
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));
 		}
 
@@ -353,10 +352,10 @@ class Register extends BaseModule
 			$arr['email'] = $arr['field1'];
 		}
 
+		$regdata = ['type' => $arr['register_type'], 'email' => $arr['email'], 'nickname' => $arr['nickname'], 'username' => $arr['username']];
 		if ($arr['email'] != $arr['repeat']) {
 			$this->logger->info('Mail mismatch', $arr);
 			DI::sysmsg()->addNotice(DI::l10n()->t('Please enter the identical mail address in the second field.'));
-			$regdata = ['email' => $arr['email'], 'nickname' => $arr['nickname'], 'username' => $arr['username']];
 
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));
 		}
@@ -368,7 +367,6 @@ class Register extends BaseModule
 			} else {
 				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname can only contain US-ASCII characters."));
 			}
-			$regdata = ['email' => $arr['email'], 'nickname' => $arr['nickname'], 'username' => $arr['username']];
 
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));
 		}
