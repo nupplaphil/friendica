@@ -11,6 +11,39 @@
 
 :root {
 	--topbar-first-size: 50px;
+
+	/* Mostly just bootstraps own colours, available here to use them for things that there aren't helper classes for in Bootstrap 3, like border colour */
+	--default: #ededed; /* Not default */
+	--primary: $nav_bg; /* Not default */
+	--info: #5bc0de;
+	--success: #5cb85c;
+	--warning: #f0ad4e;
+	--danger: #d9534f;
+	/* Darker variants for when its text/thin borders on white background */
+	--success-darker: color-mix(in oklab, var(--success), black 20%);
+	--info-darker: color-mix(in oklab, var(--info), black 20%);
+	--warning-darker: color-mix(in oklab, var(--warning), black 20%);
+}
+
+/* Helper classes that should no longer be needed once Bootstrap is updated to at least 4 */
+.border {
+	border: 1px solid var(--border-color, #666);
+}
+
+.border-primary {
+	--border-color: var(--primary);
+}
+.border-info {
+	--border-color: var(--info-darker);
+}
+.border-success {
+	--border-color: var(--success-darker);
+}
+.border-warning {
+	--border-color: var(--warning);
+}
+.border-danger {
+	--border-color: var(--danger);
 }
 
 body {
@@ -2159,29 +2192,106 @@ code > .hl-main {
 	margin: 0;
 	padding: 10px 0;
 }
-.wall-item-tags,
+
+.wall-item-bottom .label,
+.wall-item-bottom .label a {
+	color: black;
+}
+
+/* Tags, mentions, categories and folders */
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	padding-block: 8px;
+}
+
+.tag {
+	font-size: 12.5px;
+	font-weight: normal;
+	padding: 0; /* The padding should be on the link instead, so it's clickable */
+}
+
+/* Some tags are currently anchors while others are spans containing anchors - ideally they were all just anchors */
+
+/* Use somewhat darker colours for some of these to work better against white */
+.tags .border-primary a {
+	color: var(--primary);
+}
+.tags .border-success a {
+	color: var(--success-darker);
+}
+.tags .border-info a {
+	color: var(--info-darker);
+}
+.tags .border-warning a {
+	color: var(--warning-darker);
+}
+.tags .border-danger a {
+	color: var(--danger);
+}
+
+.tag.category, .tag.folder, .filerm {
+	display: flex;
+}
+
+.tag bdi a, .tag:has(.filerm) a:first-child, a.tag {
+	display: inline-block;
+	padding: 6px 12px;
+}
+
+.tag.label .filerm {
+	align-items: center;
+	font-size: 15.5px;
+	padding-block: 0;
+	padding-inline: 6.5px;
+}
+
 .itemedited {
 	margin: 10px 0;
 	font-size: 13px;
 }
-.wall-item-tags:empty {
-	margin: 0;
-}
 
-.wall-item-tags a {
-	color: $font_color_darker;
+/* Tags and mentions hover effect */
+.tag {
+    filter: grayscale(0.2);
+    opacity: 0.8;
 }
-
-.wall-item-tags a:hover {
-	text-decoration: none;
+.wall-item-container:hover .tag, .tags .tag {
+    filter: grayscale(0);
+    opacity: 1;
 }
-.wall-item-bottom .label,
-.wall-item-bottom .label a {
-	color: #fff;
+.tag a:hover, a.tag:hover {
+  text-decoration: none;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
-.wall-item-tags .category,
-.wall-item-tags .folder {
-	margin-right: 3px;
+.tags .border-primary a:hover, .tags .border-primary .tag:hover {
+	color: white;
+	background: var(--primary);
+}
+.tags .border-default a:hover, .tags .border-default:hover {
+	background: $font_color;
+	color: white;
+}
+.tag.border-success a:hover, .tags .border-success:hover {
+	background: var(--success);
+	color: white;
+}
+.tag.border-info a:hover, .tags .border-info:hover {
+	background: var(--info);
+}
+.tag.border-warning a:hover, .tags .border-warning:hover {
+	background: var(--warning);
+	color: white;
+}
+.tag.border-danger a:hover, .tag .border-danger:hover {
+	background: var(--danger);
+	color: white;
 }
 
 /* item social action buttons */
@@ -2263,31 +2373,8 @@ button[disabled] {
 	display: flex;
 	flex-basis: auto;
 }
-/* wall item hover effects */
 
 @media (min-width: 768px) {
-	/* Tags and mentions */
-	.wall-item-container .wall-item-bottom .wall-item-tags span.label {
-		filter: grayscale(0.5);
-		opacity: 0.8;
-
-		-webkit-transition: all 0.25s ease-in-out;
-		-moz-transition: all 0.25s ease-in-out;
-		-o-transition: all 0.25s ease-in-out;
-		-ms-transition: all 0.25s ease-in-out;
-		transition: all 0.25s ease-in-out;
-	}
-
-	.wall-item-container:hover .wall-item-bottom .wall-item-tags span.label {
-		filter: grayscale(0);
-		opacity: 1;
-
-		-webkit-transition: all 0.25s ease-in-out;
-		-moz-transition: all 0.25s ease-in-out;
-		-o-transition: all 0.25s ease-in-out;
-		-ms-transition: all 0.25s ease-in-out;
-		transition: all 0.25s ease-in-out;
-	}
 	/* Like/Comment/etc buttons */
 	.wall-item-container .wall-item-links,
 	.wall-item-container .wall-item-actions button > a {

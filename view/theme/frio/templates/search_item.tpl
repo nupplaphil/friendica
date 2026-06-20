@@ -122,23 +122,25 @@
 			<!-- TODO -->
 			<div class="wall-item-bottom">
 				<div class="wall-item-links"></div>
-				<div class="wall-item-tags">
+				<div class="tags wall-item-tags">
 			{{if !$item.suppress_tags}}
 				{{foreach $item.hashtags as $tag}}
-					<span class="tag label btn-info sm">{{$tag nofilter}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></span>
+					<span class="tag hashtag label border border-default">{{$tag nofilter}}</span>
 				{{/foreach}}
 
 				{{foreach $item.mentions as $tag}}
-					<span class="mention label btn-warning sm">{{$tag nofilter}} <i class="ri ri-user-line" aria-hidden="true"></i></span>
+					<span class="tag mention label border border-primary">{{$tag nofilter}}</span>
 				{{/foreach}}
 			{{/if}}
 
+      {{* No implicit mentions unlike wall_thread? *}}
+
 				{{foreach $item.folders as $cat}}
-					<span class="folder label btn-danger sm">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}">x</a>) {{/if}} </span>
+					<span class="tag folder label border border-success">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
 				{{/foreach}}
 
 				{{foreach $item.categories as $cat}}
-					<span class="category label btn-success sm">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}">x</a>) {{/if}} </span>
+					<span class="tag category label border border-danger">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
 				{{/foreach}}
 				</div>
 				{{if $item.edited}}<div class="itemedited text-muted">{{$item.edited['label']}} (<span title="{{$item.edited['date']}}">{{$item.edited['relative']}}</span>)</div>{{/if}}
@@ -152,14 +154,14 @@
 					{{* Buttons for like and dislike *}}
 					{{if $item.vote}}
 						{{if $item.vote.like}}
-					<button type="button" class="btn btn-defaultbutton-likes{{if $item.responses.like.self}} active" aria-pressed="true{{/if}}" id="like-{{$item.id}}" title="{{$item.vote.like.0}}" onclick="doActivityItemAction({{$item.id}}, 'like'{{if $item.responses.like.self}}, true{{/if}});"></button>
+					<button type="button" class="btn btn-default button-likes{{if $item.responses.like.self}} active" aria-pressed="true{{/if}}" id="like-{{$item.id}}" title="{{$item.vote.like.0}}" onclick="doActivityItemAction({{$item.id}}, 'like'{{if $item.responses.like.self}}, true{{/if}});"></button>
 						{{/if}}
 						{{if $item.vote.like AND $item.vote.dislike}}
 					<span class="separator"aria-hidden="true">•</span>
 						{{/if}}
 
 						{{if $item.vote.dislike}}
-					<button type="button" class="btn btn-defaultbutton-likes{{if $item.responses.like.self}} active" aria-pressed="true{{/if}}" id="dislike-{{$item.id}}" title="{{$item.vote.dislike.0}}" onclick="doActivityItemAction({{$item.id}}, 'dislike'{{if $item.responses.dislike.self}}, true{{/if}});"></button>
+					<button type="button" class="btn btn-default button-likes{{if $item.responses.like.self}} active" aria-pressed="true{{/if}}" id="dislike-{{$item.id}}" title="{{$item.vote.dislike.0}}" onclick="doActivityItemAction({{$item.id}}, 'dislike'{{if $item.responses.dislike.self}}, true{{/if}});"></button>
 						{{/if}}
 						{{if ($item.vote.like OR $item.vote.dislike) AND $item.comment_html}}
 					<span class="separator"aria-hidden="true">•</span>
@@ -277,9 +279,9 @@
 					{{* Event attendance buttons *}}
 				{{if $item.isevent}}
 					<span class="vote-event">
-						<button type="button" class="btn btn-defaultbutton-event{{if $item.responses.attendyes.self}} active" aria-pressed="true{{/if}}" id="attendyes-{{$item.id}}" title="{{$item.attend.0}}" onclick="doActivityItemAction({{$item.id}}, 'attendyes'{{if $item.responses.attendyes.self}}, true{{/if}});"><i class="ri ri-check-line" aria-hidden="true"><span class="sr-only">{{$item.attend.0}}</span></i></button>
-						<button type="button" class="btn btn-defaultbutton-event{{if $item.responses.attendno.self}} active" aria-pressed="true{{/if}}" id="attendno-{{$item.id}}" title="{{$item.attend.1}}" onclick="doActivityItemAction({{$item.id}}, 'attendno'{{if $item.responses.attendno.self}}, true{{/if}});"><i class="ri ri-close-line" aria-hidden="true"><span class="sr-only">{{$item.attend.1}}</span></i></button>
-						<button type="button" class="btn btn-defaultbutton-event{{if $item.responses.attendmaybe.self}} active" aria-pressed="true{{/if}}" id="attendmaybe-{{$item.id}}" title="{{$item.attend.2}}" onclick="doActivityItemAction({{$item.id}}, 'attendmaybe'{{if $item.responses.attendmaybe.self}}, true{{/if}});"><i class="ri ri-question-line" aria-hidden="true"><span class="sr-only">{{$item.attend.2}}</span></i></button>
+						<button type="button" class="btn btn-default button-event{{if $item.responses.attendyes.self}} active" aria-pressed="true{{/if}}" id="attendyes-{{$item.id}}" title="{{$item.attend.0}}" onclick="doActivityItemAction({{$item.id}}, 'attendyes'{{if $item.responses.attendyes.self}}, true{{/if}});"><i class="ri ri-check-line" aria-hidden="true"><span class="sr-only">{{$item.attend.0}}</span></i></button>
+						<button type="button" class="btn btn-default button-event{{if $item.responses.attendno.self}} active" aria-pressed="true{{/if}}" id="attendno-{{$item.id}}" title="{{$item.attend.1}}" onclick="doActivityItemAction({{$item.id}}, 'attendno'{{if $item.responses.attendno.self}}, true{{/if}});"><i class="ri ri-close-line" aria-hidden="true"><span class="sr-only">{{$item.attend.1}}</span></i></button>
+						<button type="button" class="btn btn-default button-event{{if $item.responses.attendmaybe.self}} active" aria-pressed="true{{/if}}" id="attendmaybe-{{$item.id}}" title="{{$item.attend.2}}" onclick="doActivityItemAction({{$item.id}}, 'attendmaybe'{{if $item.responses.attendmaybe.self}}, true{{/if}});"><i class="ri ri-question-line" aria-hidden="true"><span class="sr-only">{{$item.attend.2}}</span></i></button>
 					</span>
 				{{/if}}
 

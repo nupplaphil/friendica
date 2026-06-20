@@ -556,8 +556,8 @@ class Tag
 						$item['body'] = str_replace($orig_tag, $tag['url'], $item['body']);
 					}
 
-					$return['hashtags'][] = '<bdi>' . $prefix . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
-					$return['tags'][]     = '<bdi>' . $prefix . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
+					$return['hashtags'][] = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
+					$return['tags'][]     = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
 					break;
 
 				case self::MENTION:
@@ -567,8 +567,8 @@ class Tag
 					} else {
 						$tag['url'] = Contact::magicLink($tag['url']);
 					}
-					$return['mentions'][] = '<bdi>' . $prefix . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
-					$return['tags'][]     = '<bdi>' . $prefix . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
+					$return['mentions'][] = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
+					$return['tags'][]     = '<bdi>' . '<a href="' . $tag['url'] . '" target="_blank" rel="noopener noreferrer">' . $prefix . htmlspecialchars((string) $tag['name']) . '</a></bdi>';
 					break;
 
 				case self::IMPLICIT_MENTION:

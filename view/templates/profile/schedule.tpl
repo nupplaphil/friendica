@@ -5,7 +5,7 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <div class="generic-page-wrapper scheduled-posts-wrapper">
-	<h1>{{$title}}</h1>
+<h2>{{$title}}</h2>
 {{foreach $schedule as $row}}
 <div id="tread-wapper-{{$row.item['uri-id']}}" class="tread-wrapper h-entry {{$row.item.network}}">
 	<div class="wall-item-container {{$row.item.network}} thread_level_0" id="item-{{$row.item.guid}}">
@@ -51,7 +51,7 @@
 				<div class="wall-item-body e-content {{if !$row.item.title}}p-name{{/if}}" dir="auto">{{$row.item['rendered-html'] nofilter}}</div>
 				<div class="wall-item-bottom">
 					<div class="wall-item-links"></div>
-					<div class="wall-item-tags">
+					<div class="tags wall-item-tags">
 						{{foreach $row.item.hashtags as $tag}}
 							<span class="tag hashtag">{{$tag nofilter}}</span>
 						{{/foreach}}

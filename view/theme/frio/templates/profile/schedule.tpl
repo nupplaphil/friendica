@@ -5,7 +5,7 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <div class="generic-page-wrapper scheduled-posts-wrapper" style="background-color:transparent !important;box-shadow:none !important;border:none !important;">
-	<h1>{{$title}}</h1>
+<h2>{{$title}}</h2>
 {{foreach $schedule as $row}}
 <div id="tread-wapper-{{$row.item['uri-id']}}" class="tread-wrapper toplevel_item {{$row.item.network}} panel-default panel">
 	<div class="item-{{$row.item['uri-id']}} wall-item-container {{$row.item.network}} thread_level_1 panel-body h-entry" id="item-{{$row.item.guid}}">
@@ -65,15 +65,15 @@
 			</div>
 			<div class="wall-item-bottom">
 				<div class="wall-item-links"></div>
-				<div class="wall-item-tags">
+				<div class="tags wall-item-tags">
 					{{foreach $row.item.hashtags as $tag}}
-						<span class="tag label btn-info sm">{{$tag nofilter}} <i class="ri ri-flashlight-line" aria-hidden="true"></i></span>
+						<span class="tag hashtag label border border-default">{{$tag nofilter}}</span>
 					{{/foreach}}
 					{{foreach $row.item.mentions as $tag}}
-						<span class="mention label btn-warning sm">{{$tag nofilter}} <i class="ri ri-user-line" aria-hidden="true"></i></span>
+						<span class="tag mention label border border-primary">{{$tag nofilter}}</span>
 					{{/foreach}}
 					{{foreach $row.item.implicit_mentions as $tag}}
-						<span class="mention label label-default sm">{{$tag nofilter}} <i class="ri ri-eye-off-line" aria-hidden="true"></i></span>
+						<span class="tag mention label border border-info">{{$tag nofilter}}</span>
 					{{/foreach}}
 				</div>
 			</div>

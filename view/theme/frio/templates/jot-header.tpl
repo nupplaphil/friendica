@@ -204,13 +204,14 @@
 			jotActive();
 		});
 
-		$('body').on('click', '.p-category .filerm', function(e){
+		$('body').on('click', '.tag .filerm', function(e){
 			e.preventDefault();
 
-			let $href = $(e.target).attr('href');
+			let t = e.currentTarget
+			let $href = $(t).attr('href');
 			// Prevents arbitrary Ajax requests
 			if ($href.substr(0, 7) === 'filerm/') {
-				$(e.target).parent().removeClass('btn-success btn-danger');
+				$(t).parent().fadeOut(500)
 				$.post($href)
 				.done(function() {
 					liking = 1;
