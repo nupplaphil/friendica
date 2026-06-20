@@ -2213,6 +2213,10 @@ code > .hl-main {
 	padding: 0; /* The padding should be on the link instead, so it's clickable */
 }
 
+.hovercard .tag {
+	color: $font_color;
+}
+
 /* Some tags are currently anchors while others are spans containing anchors - ideally they were all just anchors */
 
 /* Use somewhat darker colours for some of these to work better against white */

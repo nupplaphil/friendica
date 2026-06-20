@@ -18,7 +18,7 @@
 	{{else}} {{* fallback to type="file" *}}
 		{{assign var="icon" value="ri-folder-line"}}
 	{{/if}}
-	<span id="{{$type}}-sidebar-inflated" class="widget inflated fakelink">
+	<span id="{{$type}}-sidebar-inflated" class="widget inflated">
 		<button class="fakelink" onclick="openCloseWidget('{{$type}}-sidebar', '{{$type}}-sidebar-inflated');" aria-expanded="false">
 			<h3>
 				<i class="ri {{$icon}}" aria-hidden="true"></i>
