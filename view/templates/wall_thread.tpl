@@ -223,7 +223,7 @@
 				<div class="wall-item-bottom">
 					<div class="wall-item-links"></div>
 					<a id="load-more-comments-{{$item.id}}" class="fakelink" href="#" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">{{$item.load_more_comments}}</a>
-					<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading|default:$item.wait|default:'Loading ...'}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.wait}}" /></span>
+					<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.loading}}" /></span>
 				</div>
                 {{/if}}
 
