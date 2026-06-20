@@ -39,7 +39,6 @@ final class PostTemplateBuilder
 	public function __construct(
 		private readonly L10n $l10n,
 		private readonly IManageConfigValues $config,
-		private readonly IHandleUserSessions $session,
 		private readonly App\Arguments $arguments,
 		private readonly BaseURL $baseURL,
 		private readonly IManagePersonalConfigValues $pConfig,
