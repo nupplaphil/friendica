@@ -72,7 +72,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 			$this->root->getChild('config')
 				->removeChild('local.config.php');
 		}
-		$this->dice = Mockery::mock(Dice::class)->makePartial();
+		$this->dice = Mockery::mock(Dice::class);
 
 		$l10nMock = Mockery::mock(L10n::class);
 		$l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
