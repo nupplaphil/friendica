@@ -66,7 +66,7 @@
 			{{/if}}
 			{{if $mention_link}}
 				<div id="jotOpen" class="pull-right">
-					<button type="button" id="mention-link" class="action-button btn btn-labeled btn-primary{{if !$always_open_compose}} modal-open{{/if}}" onclick="openWallMessage('{{$mention_link}}')" aria-label="{{$mention}}" oncontextmenu="openWallMessage('compose/0')">
+					<button type="button" id="mention-link" class="action-button btn btn-labeled btn-primary{{if !$always_open_compose}} modal-open{{/if}}" onclick="{{if $always_open_compose}}window.location.href='{{$mention_link}}'{{else}}openWallMessage('{{$mention_link}}'){{/if}}" aria-label="{{$mention}}" oncontextmenu="openWallMessage('compose/0')">
 						<i class="ri ri-lg ri-pencil-line"></i>
 						<span>{{$mention}}</span>
 					</button>
