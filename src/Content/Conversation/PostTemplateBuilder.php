@@ -16,7 +16,6 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Protocol;
-use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Event\ArrayFilterEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\Item as ItemModel;
