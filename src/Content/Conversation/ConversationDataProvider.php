@@ -714,8 +714,8 @@ final readonly class ConversationDataProvider
 	 * @param array $parentAuthors Array of parent authors (uri-id => author-id)
 	 * @param int $self The own public contact ID
 	 * @return array Thread items that only contain the author or the current user
-	 * 
-	 * @todo Future improvements could be keeping all comments by the $self user and 
+	 *
+	 * @todo Future improvements could be keeping all comments by the $self user and
 	 * fetching all comments the $self user commented on.
 	 * Additionally the last x comments by any contact could be fetched and have to be marked as "keep".
 	 */
