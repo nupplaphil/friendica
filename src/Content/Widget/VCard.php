@@ -62,6 +62,7 @@ class VCard
 		$showgroup_link   = '';
 
 		$photo = Contact::getPhoto($contact);
+		$always_open_compose = false;
 
 		if (DI::userSession()->getLocalUserId()) {
 			if (Contact\User::isIsBlocked($contact['id'], DI::userSession()->getLocalUserId())) {
@@ -97,6 +98,8 @@ class VCard
 				$wallmessage_link = 'message/new/' . $id;
 			}
 
+			$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose','1');
+
 			if ($contact['contact-type'] == Contact::TYPE_COMMUNITY) {
 				if (!$hide_mention) {
 					$mention_label = DI::l10n()->t('Post to group');
@@ -127,6 +130,7 @@ class VCard
 			'$unfollow_link'    => $unfollow_link,
 			'$wallmessage'      => DI::l10n()->t('Message'),
 			'$wallmessage_link' => $wallmessage_link,
+			'$always_open_compose' => $always_open_compose,						   
 			'$mention'          => $mention_label,
 			'$mention_link'     => $mention_link,
 			'$showgroup'        => DI::l10n()->t('Group posts'),
