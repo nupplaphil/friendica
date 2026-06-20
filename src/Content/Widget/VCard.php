@@ -14,6 +14,7 @@ use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Util\Strings;
+use Friendica\Core\Theme;
 
 /**
  * VCard widget
@@ -35,6 +36,13 @@ class VCard
 		if (!isset($contact['network']) || !isset($contact['id'])) {
 			DI::logger()->warning('Incomplete contact', ['contact' => $contact]);
 		}
+
+		$page = DI::page();
+
+		$page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
+		$page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
+		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
+		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
 
 		$contact_url = Contact::getProfileLink($contact);
 
