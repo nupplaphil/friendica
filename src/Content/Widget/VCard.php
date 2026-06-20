@@ -62,6 +62,7 @@ class VCard
 		$showgroup_link   = '';
 
 		$photo = Contact::getPhoto($contact);
+
 		$always_open_compose = false;
 
 		if (DI::userSession()->getLocalUserId()) {
@@ -98,7 +99,7 @@ class VCard
 				$wallmessage_link = 'message/new/' . $id;
 			}
 
-			$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose','1');
+			$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', '1');
 
 			if ($contact['contact-type'] == Contact::TYPE_COMMUNITY) {
 				if (!$hide_mention) {
@@ -113,28 +114,28 @@ class VCard
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('widget/vcard.tpl'), [
-			'$contact'          => $contact,
-			'$photo'            => $photo,
-			'$url'              => Contact::magicLinkByContact($contact, $contact_url),
-			'$about'            => BBCode::convertForUriId($contact['uri-id'] ?? 0, $contact['about'] ?? ''),
-			'$xmpp'             => DI::l10n()->t('XMPP:'),
-			'$matrix'           => DI::l10n()->t('Matrix:'),
-			'$location'         => DI::l10n()->t('Location:'),
-			'$network_link'     => $network_link,
-			'$network_svg'      => $network_svg,
-			'$network'          => DI::l10n()->t('Network:'),
-			'$account_type'     => Contact::getAccountType($contact['contact-type']),
-			'$follow'           => DI::l10n()->t('Follow'),
-			'$follow_link'      => $follow_link,
-			'$unfollow'         => DI::l10n()->t('Unfollow'),
-			'$unfollow_link'    => $unfollow_link,
-			'$wallmessage'      => DI::l10n()->t('Message'),
-			'$wallmessage_link' => $wallmessage_link,
+			'$contact'             => $contact,
+			'$photo'               => $photo,
+			'$url'                 => Contact::magicLinkByContact($contact, $contact_url),
+			'$about'               => BBCode::convertForUriId($contact['uri-id'] ?? 0, $contact['about'] ?? ''),
+			'$xmpp'                => DI::l10n()->t('XMPP:'),
+			'$matrix'              => DI::l10n()->t('Matrix:'),
+			'$location'            => DI::l10n()->t('Location:'),
+			'$network_link'        => $network_link,
+			'$network_svg'         => $network_svg,
+			'$network'             => DI::l10n()->t('Network:'),
+			'$account_type'        => Contact::getAccountType($contact['contact-type']),
+			'$follow'              => DI::l10n()->t('Follow'),
+			'$follow_link'         => $follow_link,
+			'$unfollow'            => DI::l10n()->t('Unfollow'),
+			'$unfollow_link'       => $unfollow_link,
+			'$wallmessage'         => DI::l10n()->t('Message'),
+			'$wallmessage_link'    => $wallmessage_link,
 			'$always_open_compose' => $always_open_compose,						   
-			'$mention'          => $mention_label,
-			'$mention_link'     => $mention_link,
-			'$showgroup'        => DI::l10n()->t('Group posts'),
-			'$showgroup_link'   => $showgroup_link,
+			'$mention'             => $mention_label,
+			'$mention_link'        => $mention_link,
+			'$showgroup'           => DI::l10n()->t('Group posts'),
+			'$showgroup_link'      => $showgroup_link,
 		]);
 	}
 }
