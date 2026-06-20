@@ -493,6 +493,16 @@ aside {
   }
 }
 
+.wall-item-bottom .label a {
+  color: var(--text-primary);
+
+  &:hover {
+    color: var(--accent-color);
+    background: var(--bg-tertiary);
+    transition: none;
+  }
+}
+
 .comment-edit-form {
   .preview {
     background-color: var(--bg-secondary) !important;
