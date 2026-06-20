@@ -34,20 +34,22 @@ use Psr\Log\LoggerInterface;
  * Builds post template data from item data.
  * This class contains logic for building template arrays from item data for rendering.
  */
-final readonly class PostTemplateBuilder
+final class PostTemplateBuilder
 {
 	public function __construct(
-		private L10n $l10n,
-		private IManageConfigValues $config,
-		private IHandleUserSessions $session,
-		private App\Arguments $arguments,
-		private BaseURL $baseURL,
-		private IManagePersonalConfigValues $pConfig,
-		private EventDispatcherInterface $eventDispatcher,
-		private \Friendica\Core\Addon\AddonHelper $addonHelper,
-		private LoggerInterface $logger,
-		private Item $item,
-		private ActivityFormatter $activityFormatter,
+		private readonly L10n $l10n,
+		private readonly IManageConfigValues $config,
+		private readonly IHandleUserSessions $session,
+		private readonly App\Arguments $arguments,
+		private readonly BaseURL $baseURL,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly \Friendica\Core\Addon\AddonHelper $addonHelper,
+		private readonly LoggerInterface $logger,
+		private readonly Item $item,
+		private readonly ActivityFormatter $activityFormatter,
+		private int $uid = 0,
+		private ?string $remote_comment = null,
 	) {}
 
 	/**
@@ -56,18 +58,21 @@ final readonly class PostTemplateBuilder
 	 * @param array<string, mixed> $item
 	 * @param bool $preview
 	 * @param bool $writable
-	 * @param int $profileOwner
+	 * @param int $uid
 	 * @param array<string, array> $convResponses
 	 * @param string $formSecurityToken
 	 * @return array<string, mixed>|null
 	 */
-	public function renderThreadRoot(array $item, bool $preview, bool $writable, int $profileOwner, array $convResponses, string $formSecurityToken): ?array
+	public function renderThreadRoot(array $item, bool $preview, bool $writable, int $uid, array $convResponses, string $formSecurityToken, ?string $remote_comment = null): ?array
 	{
 		if (!isset($item['uri-id'], $item['guid'], $item['id'])) {
 			return null;
 		}
 
-		return $this->buildThreadTemplateData($item, $preview, $writable, $profileOwner, $convResponses, $formSecurityToken, 1, []);
+		$this->uid            = $uid;
+		$this->remote_comment = $remote_comment;
+
+		return $this->buildThreadTemplateData($item, $preview, $writable, $uid, $convResponses, $formSecurityToken, 1, []);
 	}
 
 	/**
@@ -85,7 +90,7 @@ final readonly class PostTemplateBuilder
 	 */
 	private function buildThreadTemplateData(array $item, bool $preview, bool $writable, int $profileOwner, array $convResponses, string $formSecurityToken, int $threadLevel, array $threadParents): ?array
 	{
-		if (($item['network'] ?? '') === Protocol::MAIL && $this->session->getLocalUserId() !== ($item['uid'] ?? 0)) {
+		if (($item['network'] ?? '') === Protocol::MAIL && $this->uid !== ($item['uid'] ?? 0)) {
 			return null;
 		}
 
@@ -95,7 +100,7 @@ final readonly class PostTemplateBuilder
 
 		$profileName = $item['author-name'] ?? ($item['author-link'] ?? '');
 		$profileUrl  = $item['author-link'] ?? '';
-		if ($this->session->isAuthenticated() && !empty($item['author-id'])) {
+		if ($this->uid !== 0 && !empty($item['author-id'])) {
 			$author = [
 				'uid'     => 0,
 				'id'      => $item['author-id'],
@@ -113,8 +118,8 @@ final readonly class PostTemplateBuilder
 
 		$categories = [];
 		$folders    = [];
-		if ($this->session->getLocalUserId()) {
-			[$categories, $folders] = $this->item->determineCategoriesTerms($item, $this->session->getLocalUserId());
+		if ($this->uid) {
+			[$categories, $folders] = $this->item->determineCategoriesTerms($item, $this->uid);
 		}
 
 		if (!empty($item['body']) && !empty($item['content-warning']) && $this->item->redundantSummary($item['body'], $item['content-warning'])) {
@@ -175,8 +180,8 @@ final readonly class PostTemplateBuilder
 		$pin           = false;
 		$star          = false;
 		$ignore_thread = false;
-		if ($threadLevel === 1 && $this->session->getLocalUserId()) {
-			$ignored = Post\ThreadUser::getIgnored($item['uri-id'] ?? 0, $this->session->getLocalUserId());
+		if ($threadLevel === 1 && $this->uid) {
+			$ignored = Post\ThreadUser::getIgnored($item['uri-id'] ?? 0, $this->uid);
 			if ($ignored) {
 				$ignore_thread = [
 					'do'        => $this->l10n->t('Turn off related notifications'),
@@ -207,13 +212,11 @@ final readonly class PostTemplateBuilder
 		$likeable     = $permissions['likeable'];
 
 		$edpost = false;
-		if ($this->session->getLocalUserId()) {
-			if (Strings::compareLink($this->session->get('my_url'), $item['author-link'] ?? '')) {
-				if (!empty($item['event-id'])) {
-					$edpost = ['calendar/event/edit/' . $item['event-id'], $this->l10n->t('Edit event')];
-				} else {
-					$edpost = [sprintf('post/%s/edit', $item['id'] ?? 0), $this->l10n->t('Edit post')];
-				}
+		if ($this->uid && $item['origin']) {
+			if (!empty($item['event-id'])) {
+				$edpost = ['calendar/event/edit/' . $item['event-id'], $this->l10n->t('Edit event')];
+			} else {
+				$edpost = [sprintf('post/%s/edit', $item['id'] ?? 0), $this->l10n->t('Edit post')];
 			}
 		}
 		if (($item['uid'] ?? 0) === 0) {
@@ -232,7 +235,7 @@ final readonly class PostTemplateBuilder
 		$report            = $moderationButtons['report'];
 		$ignoreServer      = $moderationButtons['ignoreServer'];
 
-		$filer = $this->session->getLocalUserId() ? $this->l10n->t('Save to folder') : false;
+		$filer = $this->uid ? $this->l10n->t('Save to folder') : false;
 
 		$isstarred = (($item['starred'] ?? false) ? 'starred' : 'unstarred');
 		$star      = [
@@ -244,7 +247,7 @@ final readonly class PostTemplateBuilder
 		];
 
 		$tagger = '';
-		if ($this->session->getLocalUserId() && $profileOwner === $this->session->getLocalUserId() && !empty($item['uid'])) {
+		if ($this->uid && $profileOwner === $this->uid && !empty($item['uid'])) {
 			$tagger = [
 				'add'   => $this->l10n->t('Add tag to post'),
 				'class' => '',
@@ -255,13 +258,13 @@ final readonly class PostTemplateBuilder
 			$tagger = '';
 		}
 
-		$comment_html   = '';
-		$remote_comment = '';
-		if (!$this->session->getLocalUserId() && ($item['network'] ?? '') !== Protocol::DIASPORA && !empty($this->session->get('remote_comment'))) {
-			$remote_comment = [
+		$comment_html          = '';
+		$remote_comment_output = '';
+		if (!$this->uid && ($item['network'] ?? '') !== Protocol::DIASPORA && $this->remote_comment) {
+			$remote_comment_output = [
 				$this->l10n->t('Comment this item on your system'),
 				$this->l10n->t('Remote comment'),
-				str_replace('{uri}', urlencode((string) ($item['uri'] ?? '')), $this->session->get('remote_comment')),
+				str_replace('{uri}', urlencode((string) ($item['uri'] ?? '')), $this->remote_comment),
 			];
 			$buttons = [];
 		} elseif ($commentable) {
@@ -341,7 +344,7 @@ final readonly class PostTemplateBuilder
 			'location_html'          => $location_html,
 			'indent'                 => $indent,
 			'shiny'                  => $shiny,
-			'owner_self'             => ($item['author-link'] ?? '') === $this->session->get('my_url'),
+			'owner_self'             => $item['origin'],
 			'owner_url'              => $owner_url,
 			'owner_photo'            => $this->baseURL->remove($this->item->getOwnerAvatar($item)),
 			'owner_name'             => $owner_name,
@@ -381,7 +384,7 @@ final readonly class PostTemplateBuilder
 			'switchcomment'          => $this->l10n->t('Comment'),
 			'reply_label'            => $this->l10n->t('Reply to %s', $profileName),
 			'comment_html'           => $comment_html,
-			'remote_comment'         => $remote_comment,
+			'remote_comment'         => $remote_comment_output,
 			'menu'                   => $this->l10n->t('More'),
 			'previewing'             => $preview ? ' preview ' : '',
 			'wait'                   => $this->l10n->t('Please wait'),
@@ -391,7 +394,7 @@ final readonly class PostTemplateBuilder
 			'author_gsid'            => $item['author-gsid'] ?? 0,
 			'network'                => $item['network']     ?? '',
 			'network_name'           => ContactSelector::networkToName($item['author-network'] ?? '', $item['network'] ?? '', $item['author-gsid'] ?? 0),
-			'network_svg'            => ContactSelector::networkToSVG($item['network'] ?? '', $item['author-gsid'] ?? 0, '', $this->session->getLocalUserId()),
+			'network_svg'            => ContactSelector::networkToSVG($item['network'] ?? '', $item['author-gsid'] ?? 0, '', $this->uid),
 			'received'               => $item['received']  ?? '',
 			'commented'              => $item['commented'] ?? '',
 			'created_date'           => $item['created']   ?? '',
@@ -469,12 +472,12 @@ final readonly class PostTemplateBuilder
 	 */
 	private function determineActionPermissions(array $item, int $profileOwner): array
 	{
-		$shareable    = in_array($profileOwner, [0, $this->session->getLocalUserId()]) && ($item['private'] ?? ItemModel::PUBLIC) !== ItemModel::PRIVATE;
+		$shareable    = in_array($profileOwner, [0, $this->uid]) && ($item['private'] ?? ItemModel::PUBLIC) !== ItemModel::PRIVATE;
 		$announceable = $shareable && in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA, Protocol::TWITTER, Protocol::TUMBLR, Protocol::ATPROTO]);
 		$commentable  = ($item['network'] ?? '') !== Protocol::TUMBLR;
 		$likeable     = true;
 
-		if ($commentable && $this->session->getLocalUserId() && !empty($item['author-id']) && Contact\User::isIsBlocked($item['author-id'], $this->session->getLocalUserId())) {
+		if ($commentable && $this->uid && !empty($item['author-id']) && Contact\User::isIsBlocked($item['author-id'], $this->uid)) {
 			$commentable = false;
 		}
 
@@ -516,8 +519,8 @@ final readonly class PostTemplateBuilder
 		$origin   = !empty($item['origin']) || !empty($item['parent-origin']);
 		$dropping = false;
 
-		if ($this->session->getLocalUserId()) {
-			$dropping = in_array($item['uid'] ?? 0, [0, $this->session->getLocalUserId()]);
+		if ($this->uid) {
+			$dropping = in_array($item['uid'] ?? 0, [0, $this->uid]);
 			$drop     = [
 				'dropping' => $dropping,
 				'pagedrop' => !empty($item['pagedrop']),
@@ -526,7 +529,7 @@ final readonly class PostTemplateBuilder
 			];
 		}
 
-		if (empty($item['self']) && $this->session->getLocalUserId()) {
+		if (empty($item['self']) && $this->uid) {
 			$block = [
 				'blocking'  => true,
 				'label'     => $this->l10n->t('Block %s', $item['author-name'] ?? ''),
@@ -705,7 +708,7 @@ final readonly class PostTemplateBuilder
 			}
 		}
 
-		$hide_dislike = $this->pConfig->get($this->session->getLocalUserId(), 'system', 'hide_dislike');
+		$hide_dislike = $this->uid ? $this->pConfig->get($this->uid, 'system', 'hide_dislike') : false;
 
 		if ($hide_dislike) {
 			$buttons['dislike'] = false;
@@ -838,18 +841,18 @@ final readonly class PostTemplateBuilder
 	 */
 	private function getDefaultText(array $item): string
 	{
-		if (!$this->session->getLocalUserId()) {
+		if (!$this->uid) {
 			return '';
 		}
 
-		$owner = User::getOwnerDataById($this->session->getLocalUserId());
+		$owner = User::getOwnerDataById($this->uid);
 		$text  = '';
 
-		if (!empty($item['content-warning']) && Feature::isEnabled($this->session->getLocalUserId(), Feature::ADD_ABSTRACT)) {
+		if (!empty($item['content-warning']) && Feature::isEnabled($this->uid, Feature::ADD_ABSTRACT)) {
 			$text = '[abstract=' . Protocol::ACTIVITYPUB . ']' . $item['content-warning'] . "[/abstract]\n";
 		}
 
-		if (!Feature::isEnabled($this->session->getLocalUserId(), Feature::EXPLICIT_MENTIONS)) {
+		if (!Feature::isEnabled($this->uid, Feature::EXPLICIT_MENTIONS)) {
 			return $text;
 		}
 
@@ -884,13 +887,13 @@ final readonly class PostTemplateBuilder
 	 */
 	private function getCommentBox(array $item, bool $writable, int $profileOwner): string
 	{
-		if (!$this->session->getLocalUserId() || !$writable) {
+		if (!$this->uid || !$writable) {
 			return '';
 		}
 
 		$qcomment = null;
 		if ($this->addonHelper->isAddonEnabled('qcomment')) {
-			$words    = $this->pConfig->get($this->session->getLocalUserId(), 'qcomment', 'words');
+			$words    = $this->pConfig->get($this->uid, 'qcomment', 'words');
 			$qcomment = $words ? explode("\n", $words) : [];
 		}
 
@@ -899,7 +902,7 @@ final readonly class PostTemplateBuilder
 			$uid = $item['uid'];
 		}
 
-		$owner    = User::getOwnerDataById($this->session->getLocalUserId());
+		$owner    = User::getOwnerDataById($this->uid);
 		$default  = $this->getDefaultText($item);
 		$template = \Friendica\Core\Renderer::getMarkupTemplate('comment_item.tpl');
 

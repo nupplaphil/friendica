@@ -155,7 +155,7 @@ final readonly class ConversationDataProvider
 	 * Build thread template data from items.
 	 *
 	 * @param array<int, array> $items The items to build from
-	 * @param int $viewerUid The user ID of the viewer
+	 * @param int $uid The user ID of the viewer
 	 * @param string $mode The rendering mode (e.g., ConversationRenderer::MODE_DISPLAY)
 	 * @param bool $preview Whether to render in preview mode
 	 * @param bool $pagedrop Whether to enable page drop functionality
@@ -163,13 +163,13 @@ final readonly class ConversationDataProvider
 	 * @return array<int, array> The built thread template data
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function buildThreadTemplatesFromItems(array $items, int $viewerUid, string $mode, bool $preview, bool $pagedrop, string $formSecurityToken): array
+	public function buildThreadTemplatesFromItems(array $items, int $uid, string $mode, bool $preview, bool $pagedrop, string $formSecurityToken): array
 	{
 		if (!$items) {
 			return [];
 		}
 
-		$convResponses = $this->buildConversationResponses($viewerUid);
+		$convResponses = $this->buildConversationResponses($uid);
 
 		if (in_array($mode, [ConversationRenderer::MODE_CHANNEL, ConversationRenderer::MODE_COMMUNITY, ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_PROFILE])) {
 			$writable = true;
@@ -177,7 +177,7 @@ final readonly class ConversationDataProvider
 			$writable = $items[0]['writable'] || (($items[0]['uid'] === 0) && in_array($items[0]['network'], Protocol::FEDERATED));
 		}
 
-		if (!$viewerUid) {
+		if (!$uid) {
 			$writable = false;
 		}
 
@@ -185,7 +185,7 @@ final readonly class ConversationDataProvider
 		foreach ($items as $item) {
 			$this->processActivityReactions($item, $convResponses);
 
-			if ($item['network'] === Protocol::MAIL && $viewerUid !== $item['uid']) {
+			if ($item['network'] === Protocol::MAIL && $uid !== $item['uid']) {
 				continue;
 			}
 
@@ -199,29 +199,9 @@ final readonly class ConversationDataProvider
 			}
 		}
 
-		$profileOwner = 0;
-		switch ($mode) {
-			case ConversationRenderer::MODE_NETWORK:
-			case ConversationRenderer::MODE_NOTES:
-				$profileOwner = (int) $this->session->getLocalUserId();
-				$writable     = true;
-				break;
-			case ConversationRenderer::MODE_PROFILE:
-			case ConversationRenderer::MODE_DISPLAY:
-			case ConversationRenderer::MODE_COMMENTS:
-				$profileOwner = (int) $this->appHelper->getProfileOwner();
-				$writable     = Security::canWriteToUserWall($profileOwner) || $writable;
-				break;
-			case ConversationRenderer::MODE_CHANNEL:
-			case ConversationRenderer::MODE_COMMUNITY:
-			case ConversationRenderer::MODE_CONTACTS:
-				$profileOwner = 0;
-				break;
-		}
-
 		$threads = [];
 		foreach ($parentItems as $item) {
-			$templateData = $this->postTemplateBuilder->renderThreadRoot($item, $preview, $writable, $profileOwner, $convResponses, $formSecurityToken);
+			$templateData = $this->postTemplateBuilder->renderThreadRoot($item, $preview, $writable, $uid, $convResponses, $formSecurityToken, $this->session->get('remote_comment', null));
 			if ($templateData !== null) {
 				$threads[] = $templateData;
 			}
