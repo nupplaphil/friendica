@@ -206,6 +206,7 @@
 </script>
 
 {{include file="field_checkbox.tpl" field=$always_open_compose}}
+{{include file="field_checkbox.tpl" field=$enable_advancedcomposer}}
 
 {{if $admin_theme_settings}}
 <div class="settings-submit-wrapper pull-right">

@@ -144,9 +144,18 @@ class Compose extends BaseModule
 			$created_at = '';
 		}
 
+		// Initialize Advanced Composer
+		$advancedComposer = $this->pConfig->get($this->session->getLocalUserId(), 'frio', 'enable_advancedcomposer', $this->config->get('frio', 'enable_advancedcomposer', false));
+		if ($advancedComposer) {
+			$html = $this->getAdvancedComposerHtml();
+		} else {
+			$html = '';
+		}
+
 		$tpl = Renderer::getMarkupTemplate('item/compose.tpl');
-		return Renderer::replaceMacros($tpl, [
-			'$l10n' => [
+		return $html . Renderer::replaceMacros($tpl, [
+			'$enableAdvancedComposer' => $advancedComposer,
+			'$l10n'                   => [
 				'compose_title'        => $compose_title,
 				'default'              => '',
 				'summary'              => $this->l10n->t('Summary'),
@@ -170,6 +179,10 @@ class Compose extends BaseModule
 				'location_unavailable' => $this->l10n->t('Location services are unavailable on your device'),
 				'location_disabled'    => $this->l10n->t('Location services are disabled. Please check the website\'s permissions on your device'),
 				'wait'                 => $this->l10n->t('Please wait'),
+				'btnAssistant'         => $this->l10n->t('Writing Assistant'),
+				'btnZen'               => $this->l10n->t('Distraction-Free'),
+				'btnEpZen'             => $this->l10n->t('Image Descriptions'),
+				'btnFocusPreview'      => $this->l10n->t('Focus Preview'),
 				'placeholdertitle'     => $this->l10n->t('Set title'),
 				'placeholdersummary'   => Feature::isEnabled($this->session->getLocalUserId(), Feature::SUMMARY) ? $this->l10n->t('Set summary, abstract or spoiler text') : '',
 				'placeholdercategory'  => Feature::isEnabled($this->session->getLocalUserId(), Feature::CATEGORIES) ? $this->l10n->t('Categories (comma-separated list)') : '',
@@ -217,6 +230,109 @@ class Compose extends BaseModule
 				'deny_cid'  => $contact_deny_list,
 				'deny_gid'  => $circle_deny_list,
 			]),
+		]);
+	}
+
+	/**
+	 * Generate Advanced Composer HTML
+	 * Uses user settings from display configuration
+	 * This is an adoption for the Friendica core of the work done by Jools here:
+	 * https://git.friendica.dev/Jools/friendica-addons/src/branch/main/easycompose
+	 *
+	 * @return string HTML for Advanced Composer integration
+	 */
+	private function getAdvancedComposerHtml(): string
+	{
+		// Register Advanced Composer CSS and JS
+		$this->page->registerStylesheet(Theme::getPathForFile('css/advancedcomposer.css'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer.js'));
+
+		// Advanced Composer localization strings
+		$advancedComposerL10n = [
+			'title'                  => $this->l10n->t('Advanced Composer'),
+			'subtitle'               => $this->l10n->t('Writing & Accessibility Assistant'),
+			'structureTitle'         => $this->l10n->t('Structure & Balance'),
+			'a11yTitle'              => $this->l10n->t('Accessibility Checklist'),
+			'readabilityTitle'       => $this->l10n->t('Readability & Style'),
+			'lblParagraphs'          => $this->l10n->t('Paragraph Structure'),
+			'lblSentenceLength'      => $this->l10n->t('Text Balance'),
+			'lblLinks'               => $this->l10n->t('Link Density'),
+			'lblHashtags'            => $this->l10n->t('Hashtag Density'),
+			'lblParaBalanced'        => $this->l10n->t('Balanced'),
+			'lblParaOneBlock'        => $this->l10n->t('One block'),
+			'lblParaCompact'         => $this->l10n->t('Very compact'),
+			'lblParaStructured'      => $this->l10n->t('Well structured'),
+			'lblParaShort'           => $this->l10n->t('Short post'),
+			'lblBalanceEasy'         => $this->l10n->t('Easy to read'),
+			'lblBalanceNested'       => $this->l10n->t('Complex'),
+			'lblBalanceMedium'       => $this->l10n->t('Medium'),
+			'lblLinkSubtle'          => $this->l10n->t('Subtle'),
+			'lblLinkDense'           => $this->l10n->t('Very dense'),
+			'lblLinkMany'            => $this->l10n->t('Many links'),
+			'lblHashtagSubtle'       => $this->l10n->t('Subtle'),
+			'lblHashtagDense'        => $this->l10n->t('Very dense'),
+			'lblHashtagMany'         => $this->l10n->t('Many tags'),
+			'a11yAltOk'              => $this->l10n->t('All images have descriptions (Alt-Text)'),
+			'a11yAltWarn'            => $this->l10n->t('Images missing descriptions (Alt-Text) detected!'),
+			'a11yEmojiOk'            => $this->l10n->t('No emoji overload (max 4 consecutive)'),
+			'a11yEmojiWarn'          => $this->l10n->t('Emoji overload detected (hurts screen readers)'),
+			'a11yParagraphOk'        => $this->l10n->t('Good text structuring (paragraphs used)'),
+			'a11yParagraphWarn'      => $this->l10n->t('No paragraphs found (hard to read)'),
+			'a11yParagraphNeutral'   => $this->l10n->t('No paragraphs required for short texts'),
+			'tipExcellent'           => $this->l10n->t('Your post is beautifully readable and accessible!'),
+			'tipNoParagraphs'        => $this->l10n->t('Tip: Adding double line breaks to create paragraphs makes long texts much easier to scan.'),
+			'tipLongSentences'       => $this->l10n->t('Tip: Some sentences are very long (> 25 words). Shortening them increases reading flow!'),
+			'tipShouting'            => $this->l10n->t('Tip: Typing in ALL CAPS feels like shouting. Consider using standard capitalization.'),
+			'tipTooManyHashtags'     => $this->l10n->t('Tip: Too many hashtags make the text feel restless. Try to focus on the key ones.'),
+			'tipEmojiFlood'          => $this->l10n->t('Tip: Emoji clusters can be disruptive for visitors using assistive technology.'),
+			'tipMissingAlt'          => $this->l10n->t('Tip: An image is missing a description (Alt-Text). Adding a brief text ensures everyone can participate!'),
+			'tipTooLong'             => $this->l10n->t('Tip: Text is extremely long. Real-time analysis paused for performance.'),
+			'previewTooLongTitle'    => $this->l10n->t('Preview Paused'),
+			'previewTooLongDesc'     => $this->l10n->t('The post is extremely long. The live preview has been paused to keep your browser tab responsive.'),
+			'chars'                  => $this->l10n->t('characters'),
+			'distractionFree'        => $this->l10n->t('Distraction-free mode'),
+			'btnAssistant'           => $this->l10n->t('Writing Assistant'),
+			'btnZen'                 => $this->l10n->t('Distraction-Free'),
+			'btnEpZen'               => $this->l10n->t('Image Descriptions'),
+			'btnPreview'             => $this->l10n->t('Preview'),
+			'btnRefresh'             => $this->l10n->t('Refresh Preview'),
+			'btnPublish'             => $this->l10n->t('Publish'),
+			'btnFocusPreview'        => $this->l10n->t('Focus Preview'),
+			'btnDesktop'             => $this->l10n->t('Desktop'),
+			'btnMobile'              => $this->l10n->t('Mobile'),
+			'btnBackToEditor'        => $this->l10n->t('Back to Editor'),
+			'btnLoadingPreview'      => $this->l10n->t('Loading Preview...'),
+			'previewTimestamp'       => $this->l10n->t('Just now · Preview'),
+			'lblYou'                 => $this->l10n->t('You'),
+			'brandText'              => $this->l10n->t('Advanced Composer (deactivatable in settings)'),
+			'avatarFallback'         => $this->l10n->t('👤'),
+			'helpToggleLabel'        => $this->l10n->t('How does the analysis work?'),
+			'helpPrivacyBadge'       => $this->l10n->t('No external services · All processing on your own instance'),
+			'helpPrivacyDetail'      => $this->l10n->t('Text analysis runs entirely in your browser - no data is sent anywhere for analysis. No third-party APIs, no cookies, no tracking. The optional post preview works exactly like Friendica\'s built-in preview button: your draft is sent to your own Friendica instance for rendering. The only server-side storage is your personal enable/disable preference in the standard Friendica settings.'),
+			'helpParaTitle'          => $this->l10n->t('Paragraph Structure'),
+			'helpParaBody'           => $this->l10n->t('Counts how many paragraphs your post contains (separated by blank lines). A single unbroken block of text scores low (30 %) because readers find it hard to scan. Two or more paragraphs score 100 %. Posts under 600 characters are always rated "Short post" regardless of structure.'),
+			'helpBalanceTitle'       => $this->l10n->t('Text Balance'),
+			'helpBalanceBody'        => $this->l10n->t('Measures average sentence length and flags sentences longer than 25 words. An average above 24 words scores 40 % ("Complex"), above 16 words scores 75 % ("Medium"), everything else scores 100 % ("Easy to read"). Shorter sentences improve readability for all audiences.'),
+			'helpLinkTitle'          => $this->l10n->t('Link Density'),
+			'helpLinkBody'           => $this->l10n->t('Counts all http/https URLs in your post. More than 5 links scores 30 % ("Very dense") - posts that are mostly links feel like spam to readers and federation filters. Up to 3 links scores 100 % ("Subtle").'),
+			'helpHashtagTitle'       => $this->l10n->t('Hashtag Density'),
+			'helpHashtagBody'        => $this->l10n->t('Counts #hashtags. More than 6 scores 30 % ("Very dense"). Posts with fewer, focused hashtags reach more people than hashtag-stuffed ones. Up to 3 hashtags scores 100 % ("Subtle").'),
+			'helpAltTitle'           => $this->l10n->t('Alt-Text Check'),
+			'helpAltBody'            => $this->l10n->t('Checks every [img] BBCode tag in your post for an alt text description. Alt text is essential for screen readers and users with visual impairments - it ensures everyone can participate in the conversation.'),
+			'helpEmojiTitle'         => $this->l10n->t('Emoji Check'),
+			'helpEmojiBody'          => $this->l10n->t('Detects sequences of 5 or more consecutive emoji. Screen readers read every emoji aloud by name ("grinning face", "thumbs up" ...), so a long cluster becomes an exhausting wall of words for blind users. Up to 4 consecutive emoji is fine.'),
+			'helpParagraphA11yTitle' => $this->l10n->t('Paragraph Check (Accessibility)'),
+			'helpParagraphA11yBody'  => $this->l10n->t('For posts longer than 300 characters, checks whether at least one paragraph break exists. Screen readers and cognitive-accessibility tools benefit greatly from structured text. Short posts are always rated neutral.'),
+			'btnClose'               => $this->l10n->t('Close'),
+			'btnCloseSymbol'         => $this->l10n->t('\u00d7'),
+			'placeholder'            => $this->l10n->t('Image description'),
+		];
+
+		$advancedComposerL10nJson = json_encode($advancedComposerL10n, JSON_UNESCAPED_UNICODE);
+
+		$tpl = Renderer::getMarkupTemplate('item/advancedcomposer.tpl');
+		return Renderer::replaceMacros($tpl, [
+			'$advancedComposerL10nJson' => $advancedComposerL10nJson,
 		]);
 	}
 }
