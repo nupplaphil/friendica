@@ -401,21 +401,51 @@ parameters:
 			path: tests/Util/StaticCookie.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 9
+			message: '#^Access to undefined constant Friendica\\App\\BaseURL\:\:DEFAULT_SSL_SCHEME\.$#'
+			identifier: classConstant.notFound
+			count: 1
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockConnect\(\)\.$#'
 			identifier: method.notFound
-			count: 1
+			count: 6
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockConnected\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockExistsTable\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockUpdate\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
+			identifier: method.notFound
+			count: 2
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
 			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Class Friendica\\Console\\AutomaticInstallation constructor invoked with 1 parameter, 3\-4 required\.$#'
+			identifier: arguments.count
+			count: 8
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
@@ -449,6 +479,24 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Dice\\Dice so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Mockery\\MockInterface so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
 			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$rendererMock \(Mockery\\MockInterface\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 2
@@ -457,12 +505,6 @@ parameters:
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
-			count: 7
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
-			message: '#^Method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest::assertStuckDB\(\) is unused\.$#'
-			identifier: method.unused
 			count: 1
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 

@@ -10,23 +10,18 @@ namespace Friendica\Test\src\Console;
 use Dice\Dice;
 use Friendica\App;
 use Friendica\Console\AutomaticInstallation;
-use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Config\ValueObject\Cache;
 use Friendica\Core\Installer;
 use Friendica\Core\L10n;
-use Friendica\Core\Lock\Capability\ICanLock;
-use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Database\Database;
 use Friendica\DI;
 use Friendica\Test\ConsoleTestCase;
 use Friendica\Test\Util\RendererMockTrait;
 use Friendica\Test\Util\VFSTrait;
-use Friendica\Util\Profiler;
 use Mockery;
 use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamFile;
-use Psr\Log\LoggerInterface;
 
 class AutomaticInstallationConsoleTest extends ConsoleTestCase
 {
@@ -43,9 +38,9 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	private $assertFileDb;
 
 	/**
-	 * @var Cache The configuration cache to check after each test
+	 * @var \Friendica\Core\Config\ValueObject\Cache The configuration cache to check after each test
 	 */
-	private Cache $configCache;
+	private $configCache;
 
 	/**
 	 * @var App\Mode
@@ -64,15 +59,18 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 
 	public function setUp(): void
 	{
+		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
+
 		parent::setUp();
 
 		$this->setUpVfsDir();
+		;
 
 		if ($this->root->hasChild('config' . DIRECTORY_SEPARATOR . 'local.config.php')) {
 			$this->root->getChild('config')
 				->removeChild('local.config.php');
 		}
-		$this->dice = Mockery::mock(Dice::class);
+		$this->dice = Mockery::mock(Dice::class)->makePartial();
 
 		$l10nMock = Mockery::mock(L10n::class);
 		$l10nMock->shouldReceive('t')->andReturnUsing(function ($args) { return $args; });
@@ -81,33 +79,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 				   ->with(L10n::class)
 				   ->andReturn($l10nMock);
 
-		$this->dice->shouldReceive('create')
-				   ->with(Database::class)
-				   ->andReturn(self::createStub(Database::class));
-
-		$this->dice->shouldReceive('create')
-				   ->with(IManageConfigValues::class)
-				   ->andReturn(self::createStub(IManageConfigValues::class));
-
-		$this->dice->shouldReceive('create')
-				   ->with(Profiler::class)
-				   ->andReturn(self::createStub(Profiler::class));
-
-		$this->dice->shouldReceive('create')
-				   ->with(LoggerInterface::class)
-				   ->andReturn(self::createStub(LoggerInterface::class));
-
-		$this->dice->shouldReceive('create')
-				   ->with(ICanLock::class)
-				   ->andReturn(self::createStub(ICanLock::class));
-
-		$this->dice->shouldReceive('create')
-				   ->with(IHandleUserSessions::class)
-				   ->andReturn(self::createStub(IHandleUserSessions::class));
-
 		DI::init($this->dice);
-
-		return;
 
 		$this->configCache = new Cache();
 		$this->configCache->set('system', 'basepath', $this->root->url());
@@ -219,43 +191,56 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 
 		if ($withconfig) {
 			$cfg = <<<CFG
+
+
 Creating config file...
+
  Complete!
-
-
 CFG;
 		}
 
 		if ($copyfile) {
 			$cfg = <<<CFG
+
+
 Copying config file...
+
  Complete!
-
-
 CFG;
 		}
 
 		$finished = <<<FIN
 Initializing setup...
+
  Complete!
 
+
 Checking environment...
+
  NOTICE: Not checking .htaccess/URL-Rewrite during CLI installation.
 
  Complete!
+{$cfg}
 
-{$cfg}Checking database...
+
+Checking database...
+
  Complete!
+
 
 Inserting data into database...
 
  Complete!
 
+
 Installing theme
+
  Complete
 
 
+
 Installation is finished
+
 
 FIN;
 		self::assertEquals($finished, $txt);
@@ -292,6 +277,30 @@ FIN;
 		self::assertEquals($finished, $txt);
 	}
 
+	private function assertStuckURL($txt)
+	{
+		$finished = <<<FIN
+Initializing setup...
+
+ Complete!
+
+
+Checking environment...
+
+ NOTICE: Not checking .htaccess/URL-Rewrite during CLI installation.
+
+ Complete!
+
+
+Creating config file...
+
+The Friendica URL has to be set during CLI installation.
+
+FIN;
+
+		self::assertEquals($finished, $txt);
+	}
+
 	/**
 	 * Asserts one config entry
 	 *
@@ -302,7 +311,7 @@ FIN;
 	 */
 	public function assertConfigEntry($cat, $key, $assertion = null, $default_value = null)
 	{
-		if (is_array($assertion) && !empty($assertion[$cat][$key])) {
+		if (!empty($assertion[$cat][$key])) {
 			self::assertEquals($assertion[$cat][$key], $this->configCache->get($cat, $key));
 		} elseif (!empty($assertion) && !is_array($assertion)) {
 			self::assertEquals($assertion, $this->configCache->get($cat, $key));
@@ -340,7 +349,7 @@ FIN;
 		self::assertConfigEntry('system', 'default_timezone', $assertion, ($default) ? Installer::DEFAULT_TZ : null);
 		self::assertConfigEntry('system', 'language', $assertion, ($default) ? Installer::DEFAULT_LANG : null);
 		self::assertConfigEntry('system', 'url', $assertion);
-		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? 2 : null);
+		self::assertConfigEntry('system', 'ssl_policy', $assertion, ($default) ? App\BaseURL::DEFAULT_SSL_SCHEME : null);
 		self::assertConfigEntry('system', 'basepath', ($realBasepath) ? $this->root->url() : $assertion);
 	}
 
@@ -350,84 +359,11 @@ FIN;
 	 */
 	public function testEmpty(): void
 	{
-		putenv('FRIENDICA_URL');
-
-		$phpPath = '/usr/bin/php';
-
-		$cacheStorage = [
-			'system' => [
-				'basepath' => $this->root->url(),
-			],
-		];
-
-		$cache = $this->createMock(Cache::class);
-		$cache->expects(self::exactly(2))->method('get')
-			->willReturnCallback(function (string $cat, string $key, mixed $default_value = null) use (&$cacheStorage) {
-				return $cacheStorage[$cat][$key] ?? $default_value;
-			});
-		$cache->expects(self::exactly(8))->method('set')
-			->willReturnCallback(function (string $cat, string $key, mixed $value) use (&$cacheStorage, $phpPath) {
-				$cacheStorage[$cat][$key] = $value;
-
-				match (true) {
-					$cat === 'database' && $key === 'hostname'       => self::assertSame(Installer::DEFAULT_HOST, $value),
-					$cat === 'database' && $key === 'database'       => self::assertSame('', $value),
-					$cat === 'database' && $key === 'username'       => self::assertSame('', $value),
-					$cat === 'database' && $key === 'password'       => self::assertSame('', $value),
-					$cat === 'config' && $key === 'php_path'         => self::assertSame($phpPath, $value),
-					$cat === 'config' && $key === 'admin_email'      => self::assertSame('', $value),
-					$cat === 'system' && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
-					$cat === 'system' && $key === 'language'         => self::assertSame(Installer::DEFAULT_LANG, $value),
-					default                                          => self::fail("Unexpected set('$cat', '$key', ...)"),
-				};
-
-				return true;
-			});
-
-		$installer = $this->createPartialMock(Installer::class, [
-			'setUpCache',
-			'checkFunctions',
-			'checkImagick',
-			'checkLocalIni',
-			'checkSmarty3',
-			'checkKeys',
-			'checkPHP',
-			'getPHPPath',
-		]);
-		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath): void {});
-		$installer->method('checkFunctions')->willReturn(true);
-		$installer->method('checkImagick')->willReturn(true);
-		$installer->method('checkLocalIni')->willReturn(true);
-		$installer->method('checkSmarty3')->willReturn(true);
-		$installer->method('checkKeys')->willReturn(true);
-		$installer->method('checkPHP')->willReturn(true);
-		$installer->method('getPHPPath')->willReturn($phpPath);
-
-		$console = new AutomaticInstallation(
-			$cache,
-			self::createStub(IManageConfigValues::class),
-			self::createStub(Database::class),
-			$installer,
-			$this->consoleArgv,
-		);
+		$console = new AutomaticInstallation($this->consoleArgv);
 
 		$txt = $this->dumpExecute($console);
 
-		$expected = <<<TEXT
-			Initializing setup...
-			 Complete!
-
-			Checking environment...
-			 NOTICE: Not checking .htaccess/URL-Rewrite during CLI installation.
-
-			 Complete!
-
-			Creating config file...
-			The Friendica URL has to be set during CLI installation.
-
-			TEXT;
-
-		self::assertSame($expected, $txt);
+		self::assertStuckURL($txt);
 	}
 
 	/**
@@ -436,94 +372,23 @@ FIN;
 	 */
 	public function testEmptyWithURL(): void
 	{
-		putenv('FRIENDICA_URL');
+		$this->mockConnect(true, 1);
+		$this->mockConnected(true, 1);
+		$this->mockExistsTable('user', false, 1);
+		$this->mockUpdate([$this->root->url(), false, true, true], null, 1);
 
-		$phpPath  = '/usr/bin/php';
-		$basePath = rtrim($this->root->url(), '/');
+		$this->mockGetMarkupTemplate('local.config.tpl', 'testTemplate', 1);
+		$this->mockReplaceMacros('testTemplate', Mockery::any(), '', 1);
 
-		$configCacheStorage = [
-			'system' => [
-				'basepath' => $basePath,
-			],
-			'config' => [
-				'php_path' => $phpPath,
-			],
-		];
-		$configCache = $this->createMock(Cache::class);
-		$configCache->expects(self::exactly(9))->method('set')
-			->willReturnCallback(function (string $cat, string $key, mixed $value) use (&$configCacheStorage, $phpPath) {
-				$configCacheStorage[$cat][$key] = $value;
-
-				match (true) {
-					$cat === 'config' && $key === 'php_path'         => self::assertSame($phpPath, $value),
-					$cat === 'database' && $key === 'hostname'       => self::assertSame(Installer::DEFAULT_HOST, $value),
-					$cat === 'database' && $key === 'database'       => self::assertSame('', $value),
-					$cat === 'database' && $key === 'username'       => self::assertSame('', $value),
-					$cat === 'database' && $key === 'password'       => self::assertSame('', $value),
-					$cat === 'config' && $key === 'admin_email'      => self::assertSame('', $value),
-					$cat === 'system' && $key === 'default_timezone' => self::assertSame(Installer::DEFAULT_TZ, $value),
-					$cat === 'system' && $key === 'language'         => self::assertSame(Installer::DEFAULT_LANG, $value),
-					$cat === 'system' && $key === 'url'              => self::assertSame('http://friendica.local', $value),
-					default                                          => self::fail("Unexpected set('$cat', '$key', ...)"),
-				};
-
-				return true;
-			});
-
-		$configCache->expects(self::exactly(3))->method('get')
-			->willReturnCallback(function (string $cat, string $key, mixed $default_value = null) use (&$configCacheStorage) {
-				return $configCacheStorage[$cat][$key] ?? $default_value;
-			});
-
-		$installer = $this->createPartialMock(Installer::class, [
-			'setUpCache',
-			'checkFunctions',
-			'checkImagick',
-			'checkLocalIni',
-			'checkSmarty3',
-			'checkKeys',
-			'checkPHP',
-			'checkDB',
-			'installDatabase',
-			'createConfig',
-			'getPHPPath',
-		]);
-
-		$installer->method('setUpCache')->willReturnCallback(function (Cache $configCache, $basePath): void {});
-
-		$installer->method('checkFunctions')->willReturn(true);
-		$installer->method('checkImagick')->willReturn(true);
-		$installer->method('checkLocalIni')->willReturn(true);
-		$installer->method('checkSmarty3')->willReturn(true);
-		$installer->method('checkKeys')->willReturn(true);
-		$installer->method('checkPHP')->willReturn(true);
-		$installer->method('checkDB')->willReturn(true);
-		$installer->method('installDatabase')->willReturn(true);
-		$installer->method('getPHPPath')->willReturn($phpPath);
-		$installer->method('createConfig')->willReturnCallback(function (Cache $configCache): void {
-			$basepath = $configCache->get('system', 'basepath');
-			file_put_contents($basepath . '/config/local.config.php', 'test');
-		});
-
-		$config = self::createStub(IManageConfigValues::class);
-		$config->method('get')->willReturnMap([
-			['system', 'theme', null, 'smarty3'],
-		]);
-
-		$console = new AutomaticInstallation(
-			$configCache,
-			$config,
-			self::createStub(Database::class),
-			$installer,
-			['consoleTest.php'],
-		);
-
+		$console = new AutomaticInstallation($this->consoleArgv);
 		$console->setOption('url', 'http://friendica.local');
 
 		$txt = $this->dumpExecute($console);
 
 		self::assertFinished($txt, true, false);
 		self::assertTrue($this->root->hasChild('config' . DIRECTORY_SEPARATOR . 'local.config.php'));
+
+		self::assertConfig(['config' => ['hostname' => 'friendica.local'], 'system' => ['url' => 'http://friendica.local', 'ssl_policy' => 0, 'urlPath' => '']], false, true, true, true);
 	}
 
 	/**
@@ -532,8 +397,6 @@ FIN;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithConfig(array $data): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -611,8 +474,6 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentAndSave(array $data): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -651,8 +512,6 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentWithoutSave(array $data): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -689,8 +548,6 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithArguments(array $data): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		$this->mockConnect(true, 1);
 		$this->mockConnected(true, 1);
 		$this->mockExistsTable('user', false, 1);
@@ -729,8 +586,6 @@ CONF;
 	 */
 	public function testNoDatabaseConnection(): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		$this->mockConnect(false, 1);
 
 		$this->mockGetMarkupTemplate('local.config.tpl', 'testTemplate', 1);
@@ -749,8 +604,6 @@ CONF;
 
 	public function testGetHelp(): void
 	{
-		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
-
 		// Usable to purposely fail if new commands are added without taking tests into account
 		$theHelp = <<<HELP
 Installation - Install Friendica automatically

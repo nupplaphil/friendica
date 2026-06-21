@@ -80,7 +80,6 @@ HELP;
 		private readonly Cache $configCache,
 		private readonly IManageConfigValues $config,
 		private readonly Database $dba,
-		private readonly Installer $installer,
 		?array $argv = null,
 	) {
 		parent::__construct($argv);
@@ -91,20 +90,22 @@ HELP;
 		// Initialise the app
 		$this->out("Initializing setup...");
 
+		$installer = new Installer();
+
 		$configCache  = $this->configCache;
 		$basePathConf = $configCache->get('system', 'basepath');
 		$basepath     = new BasePath($basePathConf);
-		$this->installer->setUpCache($configCache, $basepath->getPath());
+		$installer->setUpCache($configCache, $basepath->getPath());
 
 		$this->out(" Complete!\n");
 
 		// Check Environment
 		$this->out("Checking environment...");
 
-		$this->installer->resetChecks();
+		$installer->resetChecks();
 
-		if (!$this->runBasicChecks($this->installer, $configCache)) {
-			$errorMessage = $this->extractErrors($this->installer->getChecks());
+		if (!$this->runBasicChecks($installer, $configCache)) {
+			$errorMessage = $this->extractErrors($installer->getChecks());
 			throw new RuntimeException($errorMessage);
 		}
 
@@ -160,7 +161,7 @@ HELP;
 				),
 			);
 
-			$php_path = $this->getOption(['b', 'phppath'], !empty(getenv('FRIENDICA_PHP_PATH')) ? getenv('FRIENDICA_PHP_PATH') : null) ?? $this->installer->getPHPPath();
+			$php_path = $this->getOption(['b', 'phppath'], !empty(getenv('FRIENDICA_PHP_PATH')) ? getenv('FRIENDICA_PHP_PATH') : null) ?? $installer->getPHPPath();
 			$configCache->set('config', 'php_path', $php_path);
 
 			$configCache->set(
@@ -202,7 +203,7 @@ HELP;
 				$configCache->set('system', 'url', $url);
 			}
 
-			$this->installer->createConfig($configCache);
+			$installer->createConfig($configCache);
 		}
 
 		$this->out(" Complete!\n");
@@ -210,10 +211,10 @@ HELP;
 		// Check database connection
 		$this->out("Checking database...");
 
-		$this->installer->resetChecks();
+		$installer->resetChecks();
 
-		if (!$this->installer->checkDB($this->dba)) {
-			$errorMessage = $this->extractErrors($this->installer->getChecks());
+		if (!$installer->checkDB($this->dba)) {
+			$errorMessage = $this->extractErrors($installer->getChecks());
 			throw new RuntimeException($errorMessage);
 		}
 
@@ -222,10 +223,10 @@ HELP;
 		// Install database
 		$this->out("Inserting data into database...\n");
 
-		$this->installer->resetChecks();
+		$installer->resetChecks();
 
-		if (!$this->installer->installDatabase()) {
-			$errorMessage = $this->extractErrors($this->installer->getChecks());
+		if (!$installer->installDatabase()) {
+			$errorMessage = $this->extractErrors($installer->getChecks());
 			throw new RuntimeException($errorMessage);
 		}
 
