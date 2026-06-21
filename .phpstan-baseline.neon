@@ -257,12 +257,6 @@ parameters:
 			path: tests/Util/EntityDouble.php
 
 		-
-			message: '#^Access to an undefined property Friendica\\Test\\Util\\HTTPInputDataDouble\:\:\$injectedContentType\.$#'
-			identifier: property.notFound
-			count: 1
-			path: tests/Util/HTTPInputDataDouble.php
-
-		-
 			message: '#^Method Friendica\\Test\\Util\\Hooks\\InstanceMocks\\FakeInstanceDecorator\:\:getCBool\(\) should return bool\|null but returns string\.$#'
 			identifier: return.type
 			count: 1
@@ -289,18 +283,6 @@ parameters:
 		-
 			message: '#^Method Friendica\\Test\\Util\\SerializableObjectDouble\:\:unserialize\(\) with return type void returns string but should not return anything\.$#'
 			identifier: return.void
-			count: 1
-			path: tests/Util/SerializableObjectDouble.php
-
-		-
-			message: '#^Non\-abstract class Friendica\\Test\\Util\\SerializableObjectDouble implements the Serializable interface, but does not implement __serialize\(\)\.$#'
-			identifier: class.serializable
-			count: 1
-			path: tests/Util/SerializableObjectDouble.php
-
-		-
-			message: '#^Non\-abstract class Friendica\\Test\\Util\\SerializableObjectDouble implements the Serializable interface, but does not implement __unserialize\(\)\.$#'
-			identifier: class.serializable
 			count: 1
 			path: tests/Util/SerializableObjectDouble.php
 

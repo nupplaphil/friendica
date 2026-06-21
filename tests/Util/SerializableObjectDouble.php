@@ -18,4 +18,14 @@ class SerializableObjectDouble implements \Serializable
 	{
 		return '\'unserialized\'';
 	}
+
+	public function __serialize(): array
+	{
+		return ['data' => 'serialized'];
+	}
+
+	public function __unserialize(string $data): void
+	{
+		return;
+	}
 }
