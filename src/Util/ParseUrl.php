@@ -1757,6 +1757,44 @@ class ParseUrl
 	}
 
 	/**
+	 * Fetch the services that are supported by song.link
+	 *
+	 * @param string $url media url
+	 * @return array with the detected services
+	 */
+	public static function fetchSongLinkServices(string $url): array
+	{
+		$songlink = 'https://song.link/' . urlencode($url);
+		$http     = DI::httpClient()->get($songlink);
+		if (!$http->isSuccess()) {
+			return ['embed' => '', 'services' => []];
+		}
+
+		$body  = $http->getBodyString();
+		$embed = $http->getRedirectUrl();
+
+		$dom = new DOMDocument();
+		libxml_use_internal_errors(true);
+		$dom->loadHTML($body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		libxml_clear_errors();
+
+		$xpath = new DOMXPath($dom);
+		$links = $xpath->query('//a[@href]');
+
+		$result = [];
+		foreach ($links as $link) {
+			// sichere Variante: prüfe ob es ein DOMElement ist und hole Attribut
+			if ($link instanceof DOMElement) {
+				$href = $link->getAttribute('href');
+				if (! in_array($href, ['', '/'])) {
+					$result[parse_url($href, PHP_URL_HOST)] = $href;
+				}
+			}
+		}
+		return ['embed' => $embed, 'services' => $result];
+	}
+
+	/**
 	 * Try to obtain a better embed player using the song.link service.
 	 *
 	 * If a better player is available via song.link (e.g. a non-YouTube
@@ -1768,43 +1806,35 @@ class ParseUrl
 	 */
 	private static function getSongLinkPlayer(array $siteinfo): array
 	{
-		$service    = 'https://api.song.link/v1-alpha.1/links?url=' . urlencode((string) $siteinfo['url']);
-		$curlResult = DI::httpClient()->get($service, HttpClientAccept::HTML, [HttpClientOptions::REQUEST => HttpClientRequest::SITEINFO]);
-		if (!$curlResult->isSuccess()) {
-			DI::logger()->debug('No song.link data', ['url' => $siteinfo['url'], 'code' => $curlResult->getReturnCode(), 'message' => $curlResult->getBodyString()]);
+		$service = self::fetchSongLinkServices($siteinfo['url']);
+		if (count($service['services']) === 0) {
+			DI::logger()->debug('No song.link data', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
 
-		$data = json_decode($curlResult->getBodyString());
-		if (!isset($data->linksByPlatform->youtube)) {
-			DI::logger()->debug('No Youtube link in returned data', ['url' => $siteinfo['url']]);
+		if (count($service['services']) === 2 && isset($service['services']['www.youtube.com']) && isset($service['services']['music.youtube.com'])) {
+			DI::logger()->debug('Only Youtube links in returned data', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
 
-		$data2 = json_decode(json_encode($data), true);
-		if (sizeof($data2['linksByPlatform']) <= 2) {
-			DI::logger()->debug('Only Youtube links in returned data', ['url' => $siteinfo['url']]);
+		if (count($service['services']) === 1) {
+			DI::logger()->debug('Only a single service, then we can use the original embed', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
 
-		if (!isset($data->pageUrl)) {
-			DI::logger()->debug('No pageUrl in returned data', ['url' => $siteinfo['url']]);
+		if ($service['embed'] === $siteinfo['url']) {
+			DI::logger()->debug('ParseUrl is already pageUrl', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
 
-		if ($data->pageUrl === $siteinfo['url']) {
-			DI::logger()->debug('ParseUrl is already pageUrl', ['url' => $siteinfo['url']]);
-			return $siteinfo;
-		}
-
-		$data = self::getSiteinfo($data->pageUrl, '', 1, false);
+		$data = self::getSiteinfo($service['embed'], '', 1, false);
 		if (!isset($data['player']['embed'])) {
-			DI::logger()->debug('No embed player', ['url' => $siteinfo['url']]);
+			DI::logger()->debug('No embed player', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
 
 		$siteinfo['player'] = $data['player'];
-		DI::logger()->debug('Embed player found', ['url' => $siteinfo['url']]);
+		DI::logger()->debug('Embed player found', ['url' => $siteinfo['url'], 'service' => $service]);
 
 		return $siteinfo;
 	}
