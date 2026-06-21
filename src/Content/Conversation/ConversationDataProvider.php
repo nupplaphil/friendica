@@ -135,7 +135,7 @@ final readonly class ConversationDataProvider
 			return [];
 		}
 
-		$renderUserId = $viewerUid ?: (int) $items[0]['uid'];
+		$renderUserId = $viewerUid ?: (int) ($items[0]['uid'] ?? 0);
 
 		// Einmaliger Aufruf von addChildren mit ALLEN Items
 		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $renderUserId, $mode);
@@ -1384,17 +1384,4 @@ final readonly class ConversationDataProvider
 			}
 		}
 	}
-
-	/**
-	 * Build thread template data from items.
-	 *
-	 * @param array<int, array> $items The items to build from
-	 * @param int $viewerUid The user ID of the viewer
-	 * @param string $mode The rendering mode (e.g., ConversationRenderer::MODE_DISPLAY)
-	 * @param bool $preview Whether to render in preview mode
-	 * @param bool $pagedrop Whether to enable page drop functionality
-	 * @param string $formSecurityToken The form security token
-	 * @return array<int, array> The built thread template data
-	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 */
 }
