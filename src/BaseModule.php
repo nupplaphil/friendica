@@ -53,8 +53,17 @@ abstract class BaseModule implements ICanHandleRequests
 	protected $response;
 	private readonly EventDispatcherInterface $eventDispatcher;
 
-	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [], ?EventDispatcherInterface $eventDispatcher = null)
-	{
+	public function __construct(
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+		?EventDispatcherInterface $eventDispatcher = null,
+	) {
 		$this->parameters      = $parameters;
 		$this->l10n            = $l10n;
 		$this->baseUrl         = $baseUrl;

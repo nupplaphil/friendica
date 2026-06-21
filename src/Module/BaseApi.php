@@ -62,8 +62,18 @@ class BaseApi extends BaseModule
 	/** @var \Friendica\Factory\Api\Mastodon\Error */
 	protected $errorFactory;
 
-	public function __construct(\Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		\Friendica\Factory\Api\Mastodon\Error $errorFactory,
+		AppHelper $appHelper,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		ApiResponse $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
 		$this->appHelper    = $appHelper;

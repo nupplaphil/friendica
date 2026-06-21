@@ -11,18 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\$config IManageConfigValues\)\: Unexpected token "\$config", expected type at offset 9 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: tests/ApiTestCase.php
-
-		-
-			message: '#^Call to an undefined method Friendica\\Core\\Lock\\Capability\\ICanLock\:\:getCacheStats\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/CacheLockTestCase.php
-
-		-
 			message: '#^Access to undefined constant Friendica\\Core\\Cache\\Capability\\ICanCache\:\:NAME\.$#'
 			identifier: classConstant.notFound
 			count: 1
@@ -686,12 +674,6 @@ parameters:
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
 			identifier: method.notFound
 			count: 4
-			path: tests/src/Core/Lock/RedisCacheLockTest.php
-
-		-
-			message: '#^Class Friendica\\Core\\Lock\\Type\\CacheLock referenced with incorrect case\: Friendica\\Core\\Lock\\Type\\CAcheLock\.$#'
-			identifier: class.nameCase
-			count: 1
 			path: tests/src/Core/Lock/RedisCacheLockTest.php
 
 		-

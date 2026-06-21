@@ -57,7 +57,7 @@ class RedisCacheLockTest extends CacheLockTestCase
 		parent::setUp();
 	}
 
-	protected function getInstance(): CAcheLock
+	protected function getInstance(): CacheLock
 	{
 		return $this->lock;
 	}

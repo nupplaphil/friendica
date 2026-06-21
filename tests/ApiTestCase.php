@@ -199,7 +199,7 @@ abstract class ApiTestCase extends FixtureTestCase
 			$func();
 		}
 
-		/** @var $config IManageConfigValues */
+		/** @var IManageConfigValues $config */
 		$config = $this->dice->create(IManageConfigValues::class);
 
 		$config->set('addons', $addon, [
