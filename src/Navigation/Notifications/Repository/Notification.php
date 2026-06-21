@@ -18,6 +18,7 @@ use Friendica\Model\Verb;
 use Friendica\Navigation\Notifications\Collection\Notifications as NotificationsCollection;
 use Friendica\Navigation\Notifications\Entity\Notification as NotificationEntity;
 use Friendica\Navigation\Notifications\Factory;
+use Friendica\Navigation\Notifications\Factory\Notification as NotificationFactory;
 use Friendica\Network\HTTPException\NotFoundException;
 use Friendica\Protocol\Activity;
 use Friendica\Util\DateTimeFormat;
@@ -25,18 +26,19 @@ use Psr\Log\LoggerInterface;
 
 class Notification extends BaseRepository
 {
-	/** @var Factory\Notification  */
-	protected $factory;
-
 	protected static $table_name = 'notification';
 
 	public function __construct(
 		private readonly IManagePersonalConfigValues $pconfig,
 		Database $database,
 		LoggerInterface $logger,
-		Factory\Notification $factory,
+		private readonly NotificationFactory $entityFactory,
 	) {
-		parent::__construct($database, $logger, $factory);
+		parent::__construct($database, $logger, $entityFactory);
+	}
+
+	protected function getFactory(): NotificationFactory {
+		return $this->entityFactory;
 	}
 
 	/**
@@ -46,7 +48,7 @@ class Notification extends BaseRepository
 	{
 		$fields = $this->_selectFirstRowAsArray($condition, $params);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	private function select(array $condition, array $params = []): NotificationsCollection
@@ -172,7 +174,7 @@ class Notification extends BaseRepository
 		}
 
 		foreach ($rows as $fields) {
-			$entities[] = $this->factory->createFromTableRow($fields);
+			$entities[] = $this->getFactory()->createFromTableRow($fields);
 		}
 
 		return $entities;

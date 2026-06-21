@@ -5,88 +5,10 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^PHPDoc type Friendica\\Contact\\FriendSuggest\\Factory\\FriendSuggest of property Friendica\\Contact\\FriendSuggest\\Repository\\FriendSuggest\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Contact/FriendSuggest/Repository/FriendSuggest.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Contact\\Introduction\\Factory\\Introduction of property Friendica\\Contact\\Introduction\\Repository\\Introduction\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Contact/Introduction/Repository/Introduction.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Contact\\LocalRelationship\\Factory\\LocalRelationship of property Friendica\\Contact\\LocalRelationship\\Repository\\LocalRelationship\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Contact/LocalRelationship/Repository/LocalRelationship.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Content\\Conversation\\Factory\\UserDefinedChannel of property Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Content/Conversation/Repository/UserDefinedChannel.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Content\\Post\\Factory\\PostMedia of property Friendica\\Content\\Post\\Repository\\PostMedia\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Content/Post/Repository/PostMedia.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Core\\Worker\\Factory\\Process of property Friendica\\Core\\Worker\\Repository\\Process\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Core/Worker/Repository/Process.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Moderation\\Factory\\Report of property Friendica\\Moderation\\Repository\\Report\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Moderation/Repository/Report.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
 			path: src/Module/BaseApi.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Navigation\\Notifications\\Factory\\Notification of property Friendica\\Navigation\\Notifications\\Repository\\Notification\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Navigation/Notifications/Repository/Notification.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Navigation\\Notifications\\Factory\\Notify of property Friendica\\Navigation\\Notifications\\Repository\\Notify\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Navigation/Notifications/Repository/Notify.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Profile\\ProfileField\\Factory\\ProfileField of property Friendica\\Profile\\ProfileField\\Repository\\ProfileField\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Profile/ProfileField/Repository/ProfileField.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Protocol\\Diaspora\\Factory\\DiasporaContact of property Friendica\\Protocol\\Diaspora\\Repository\\DiasporaContact\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Protocol/Diaspora/Repository/DiasporaContact.php
-
-		-
-			message: '#^PHPDoc type Friendica\\Security\\PermissionSet\\Factory\\PermissionSet of property Friendica\\Security\\PermissionSet\\Repository\\PermissionSet\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/Security/PermissionSet/Repository/PermissionSet.php
-
-		-
-			message: '#^PHPDoc type Friendica\\User\\Settings\\Factory\\UserGServer of property Friendica\\User\\Settings\\Repository\\UserGServer\:\:\$factory is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateFromTableRow of overridden property Friendica\\BaseRepository\:\:\$factory\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: src/User/Settings/Repository/UserGServer.php
 
 		-
 			message: '#^PHPDoc tag @var has invalid value \(\$config IManageConfigValues\)\: Unexpected token "\$config", expected type at offset 9 on line 1$#'

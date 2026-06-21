@@ -39,7 +39,11 @@ abstract class BaseRepository
 	/** @var LoggerInterface */
 	protected $logger;
 
-	/** @var ICanCreateFromTableRow */
+	/**
+	 * @var ICanCreateFromTableRow
+	 *
+	 * @deprecated 2026.08 Implement getFactory() instead
+	 */
 	protected $factory;
 
 	public function __construct(Database $database, LoggerInterface $logger, ICanCreateFromTableRow $factory)
@@ -47,6 +51,15 @@ abstract class BaseRepository
 		$this->db      = $database;
 		$this->logger  = $logger;
 		$this->factory = $factory;
+	}
+
+	/**
+	 * Returns the TableRowFactor
+	 *
+	 * @deprecated 2026.08 This method will become abstract in a future release, implement it in your child class instead.
+	 */
+	protected function getFactory(): ICanCreateFromTableRow {
+		return $this->factory;
 	}
 
 	/**
@@ -123,7 +136,7 @@ abstract class BaseRepository
 
 		$Entities = new BaseCollection();
 		foreach ($rows as $fields) {
-			$Entities[] = $this->factory->createFromTableRow($fields);
+			$Entities[] = $this->getFactory()->createFromTableRow($fields);
 		}
 
 		return $Entities;
@@ -158,7 +171,7 @@ abstract class BaseRepository
 
 		$fields = $this->_selectFirstRowAsArray($condition, $params);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	/**

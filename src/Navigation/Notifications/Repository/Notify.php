@@ -24,6 +24,7 @@ use Friendica\Navigation\Notifications\Entity\Notification as NotificationEntity
 use Friendica\Navigation\Notifications\Entity\Notify as NotifyEntity;
 use Friendica\Navigation\Notifications\Exception;
 use Friendica\Navigation\Notifications\Factory;
+use Friendica\Navigation\Notifications\Factory\Notify as NotifyFactory;
 use Friendica\Network\HTTPException;
 use Friendica\Object\Api\Mastodon\Notification;
 use Friendica\Protocol\Activity;
@@ -37,9 +38,6 @@ use Psr\Log\LoggerInterface;
  */
 class Notify extends BaseRepository
 {
-	/** @var Factory\Notify  */
-	protected $factory;
-
 	/** @var L10n  */
 	protected $l10n;
 
@@ -67,7 +65,7 @@ class Notify extends BaseRepository
 		Emailer $emailer,
 		Factory\Notification $notification,
 		private readonly EventDispatcherInterface $eventDispatcher,
-		?Factory\Notify $factory = null,
+		private readonly ?NotifyFactory $entityFactory = null,
 	) {
 		$this->l10n         = $l10n;
 		$this->baseUrl      = $baseUrl;
@@ -75,7 +73,11 @@ class Notify extends BaseRepository
 		$this->emailer      = $emailer;
 		$this->notification = $notification;
 
-		parent::__construct($database, $logger, $factory ?? new Factory\Notify($logger));
+		parent::__construct($database, $logger, $entityFactory ?? new NotifyFactory($logger));
+	}
+
+	protected function getFactory(): NotifyFactory {
+		return $this->entityFactory;
 	}
 
 	/**
@@ -85,7 +87,7 @@ class Notify extends BaseRepository
 	{
 		$fields = $this->_selectFirstRowAsArray($condition, $params);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	private function select(array $condition, array $params = []): Collection\Notifies
@@ -584,7 +586,7 @@ class Notify extends BaseRepository
 		$notify_id = 0;
 
 		if ($show_in_notification_page) {
-			$Notify = $this->factory->createFromParams($params, $itemlink, $item_id, $uri_id, $parent_id, $parent_uri_id);
+			$Notify = $this->getFactory()->createFromParams($params, $itemlink, $item_id, $uri_id, $parent_id, $parent_uri_id);
 			try {
 				$Notify = $this->save($Notify);
 			} catch (Exception\NotificationCreationInterceptedException) {

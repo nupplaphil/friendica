@@ -20,14 +20,18 @@ use Psr\Log\LoggerInterface;
 
 class FriendSuggest extends BaseRepository
 {
-	/** @var FriendSuggestFactory */
-	protected $factory;
-
 	protected static $table_name = 'fsuggest';
 
-	public function __construct(Database $database, LoggerInterface $logger, FriendSuggestFactory $factory)
-	{
-		parent::__construct($database, $logger, $factory);
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		private readonly FriendSuggestFactory $entityFactory,
+	) {
+		parent::__construct($database, $logger, $entityFactory);
+	}
+
+	protected function getFactory(): FriendSuggestFactory {
+		return $this->entityFactory;
 	}
 
 	private function convertToTableRow(FriendSuggestEntity $fsuggest): array
@@ -51,7 +55,7 @@ class FriendSuggest extends BaseRepository
 	{
 		$fields = $this->_selectFirstRowAsArray($condition, $params);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	/**
