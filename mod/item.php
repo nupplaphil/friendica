@@ -279,7 +279,7 @@ function item_process(array $post, array $request, bool $preview, string $return
 		$post['owner-contact-type'] = Contact::TYPE_PERSON;
 		$post['owner-network']      = Protocol::DFRN;
 
-		$o = DI::conversationRenderer()->renderContextLessPosts([$post], ConversationRenderer::MODE_SEARCH, true, DI::userSession()->getLocalUserId());
+		$o = DI::conversationRenderer()->renderFlat([$post], ConversationRenderer::MODE_SEARCH, true, DI::userSession()->getLocalUserId());
 
 		System::jsonExit(['preview' => $o]);
 	}

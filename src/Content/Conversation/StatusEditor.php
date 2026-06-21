@@ -24,24 +24,44 @@ use Friendica\Model\User;
 use Friendica\Util\Crypto;
 use Friendica\Util\Profiler;
 use Friendica\Util\Temporal;
+use Friendica\Core\Theme;
 
 /**
  * Renders the status editor (JOT - Just One Thought) form.
  * This class handles the rendering of the post creation/editing form.
  */
-final readonly class StatusEditor
+final class StatusEditor
 {
+	private bool $assetsRegistered = false;
+
 	public function __construct(
-		private L10n $l10n,
-		private IManageConfigValues $config,
-		private IManagePersonalConfigValues $pConfig,
-		private EventDispatcherInterface $eventDispatcher,
-		private IHandleUserSessions $session,
+		private readonly L10n $l10n,
+		private readonly IManageConfigValues $config,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly IHandleUserSessions $session,
 		private Page $page,
-		private Mode $mode,
-		private Arguments $args,
-		private Profiler $profiler,
+		private readonly Mode $mode,
+		private readonly Arguments $args,
+		private readonly Profiler $profiler,
 	) {}
+
+	/**
+	 * Register required assets for the status editor.
+	 * Registers typeahead.js and tagsinput CSS/JS files.
+	 */
+	public function registerAssets(): void
+	{
+		if ($this->assetsRegistered) {
+			return;
+		}
+
+		$this->page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
+		$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
+		$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+		$this->assetsRegistered = true;
+	}
 
 	/**
 	 * Render the status editor form (JOT).

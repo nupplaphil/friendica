@@ -8,7 +8,6 @@
 namespace Friendica\Content\Conversation;
 
 use Friendica\App\BaseURL;
-use Friendica\App\Page;
 use Friendica\BaseModule;
 use Friendica\Content\ContactSelector;
 use Friendica\Content\Item;
@@ -17,7 +16,6 @@ use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Protocol;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
-use Friendica\Core\Theme;
 use Friendica\Event\ArrayFilterEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\Item as ItemModel;
@@ -34,7 +32,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
  * This is the main entry point for rendering conversations and threads.
  * It delegates to ConversationDataProvider and PostTemplateBuilder for the actual work.
  */
-final class ConversationRenderer
+final readonly class ConversationRenderer
 {
 	public const MODE_CHANNEL       = 'channel';
 	public const MODE_COMMENTS      = 'comments';
@@ -55,19 +53,17 @@ final class ConversationRenderer
 	public const ORDER_PINNED_RECEIVED  = 'pinned_received';
 	public const ORDER_PINNED_CREATED   = 'pinned_created';
 
-	private bool $assetsRegistered = false;
-
 	public function __construct(
-		private readonly L10n $l10n,
-		private readonly Item $item,
-		private readonly BaseURL $baseURL,
-		private readonly IManagePersonalConfigValues $pConfig,
-		private readonly EventDispatcherInterface $eventDispatcher,
-		private readonly IHandleUserSessions $session,
-		private readonly Page $page,
-		private readonly ConversationDataProvider $dataProvider,
-		private readonly Profiler $profiler,
-		private readonly \Friendica\App\Arguments $args,
+		private L10n $l10n,
+		private Item $item,
+		private BaseURL $baseURL,
+		private IManagePersonalConfigValues $pConfig,
+		private EventDispatcherInterface $eventDispatcher,
+		private IHandleUserSessions $session,
+		private ConversationDataProvider $dataProvider,
+		private Profiler $profiler,
+		private \Friendica\App\Arguments $args,
+		private StatusEditor $statusEditor,
 	) {}
 
 	/**
@@ -86,7 +82,7 @@ final class ConversationRenderer
 	public function renderThreaded(array $items, string $mode, bool $update = false, string $order = self::ORDER_COMMENTED, int $uid = 0): string
 	{
 		$this->profiler->startRecording('rendering');
-		$this->registerAssets();
+		$this->statusEditor->registerAssets();
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
@@ -208,7 +204,7 @@ final class ConversationRenderer
 	public function renderCommentsByUriId(int $uriId, int $uid, array $existing = []): string
 	{
 		$this->profiler->startRecording('rendering');
-		$this->registerAssets();
+		$this->statusEditor->registerAssets();
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
@@ -249,7 +245,7 @@ final class ConversationRenderer
 	public function renderThreadByItem(array $item, int $uid, string $mode): string
 	{
 		$this->profiler->startRecording('rendering');
-		$this->registerAssets();
+		$this->statusEditor->registerAssets();
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
@@ -278,7 +274,7 @@ final class ConversationRenderer
 	public function renderFlat(array $items, string $mode, bool $preview, int $uid = 0): string
 	{
 		$this->profiler->startRecording('rendering');
-		$this->registerAssets();
+		$this->statusEditor->registerAssets();
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
@@ -551,23 +547,6 @@ final class ConversationRenderer
 			'$mode'   => $mode,
 			'$remove' => $this->l10n->t('remove'),
 		]);
-	}
-
-	/**
-	 * Register required assets for the conversation rendering.
-	 * Registers typeahead.js and tagsinput CSS/JS files.
-	 */
-	private function registerAssets(): void
-	{
-		if ($this->assetsRegistered) {
-			return;
-		}
-
-		$this->page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-		$this->page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-		$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-		$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
-		$this->assetsRegistered = true;
 	}
 
 	/**
