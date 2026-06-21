@@ -106,7 +106,7 @@ jobs:
         uses: "ramsey/composer-install@v4"
 
       - name: Run PHPStan in addons
-        run: composer run phpstan-addons
+        run: 'composer run addons:phpstan'
 
   rector:
     name: Rector (PHP ${{ matrix.php }})
