@@ -1,0 +1,572 @@
+# Frontend Guidelines
+
+* [Developer Intro](index)
+* [Your First Change in Friendica](first-change)
+* [Smarty Templates](smarty3-templates)
+
+---
+
+## Navigation by role
+
+**Find your starting point here before reading further.**
+
+| I want to…                             | Read                                                                                                              |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Fix a colour, spacing, or layout issue | [§5 CSS and Themes](#css)                                                                                         |
+| Change or create a Smarty template     | [§1 Templates](#templates) + [§2 XSS](#xss) + [§3 Translations](#translations)                                    |
+| Add or change JavaScript behaviour     | [§6 JavaScript](#javascript) + [§6.6 DOM-XSS](#dom-xss)                                                           |
+| Add or change a form                   | [§4 Forms](#forms) + [First Change Steps 4–6](first-change#request) (input validation, auth, CSRF) |
+| Pull new data from PHP into a page     | [First Change](first-change) + [§1 Templates](#templates)                                                         |
+| Build or change a `Content/` renderer (PHP) | [PHP Architecture §2.4 Presentation layer](php-architecture#presentation-layer-content)                       |
+| Add accessibility to an element        | [§7 Accessibility](#accessibility)                                                                                |
+
+---
+
+<a name="templates" id="templates"></a>
+## 1. Templates
+
+### 1.1 File locations
+
+| Purpose         | Location                       |
+|-----------------|--------------------------------|
+| Core templates  | `view/templates/`              |
+| Frio overrides  | `view/theme/frio/templates/`   |
+| Vier overrides  | `view/theme/vier/templates/`   |
+| Addon templates | `addon/{addonname}/templates/` |
+
+Core templates in `view/templates/` are the **fallback** used by any theme that does not provide its own override.
+If a theme has its own copy of a template (e.g. `view/theme/frio/templates/example.tpl`), a change to the core `view/templates/example.tpl` will **not** be visible in that theme.
+Check whether the active theme overrides a template before editing the core version.
+
+### 1.2 Rendering from PHP
+
+```php
+$tpl = Renderer::getMarkupTemplate('mymodule/index.tpl');
+return Renderer::replaceMacros($tpl, [
+    '$title'               => $this->t('Page Title'),
+    '$items'               => $items,
+    '$form_security_token' => self::getFormSecurityToken('my-action'),
+]);
+```
+
+By Friendica convention, template variable keys are prefixed with `$`.
+
+### 1.3 Smarty syntax
+
+Friendica uses double curly braces `{{ }}`:
+
+```smarty
+{{* Comment — not shown in output *}}
+
+{{$title}}
+
+{{if $condition}}
+    ...
+{{elseif $other}}
+    ...
+{{else}}
+    ...
+{{/if}}
+
+{{foreach $items as $item}}
+    {{$item.name}}        {{* dot notation for array/object access *}}
+    {{$item['key']}}      {{* bracket notation also works *}}
+{{/foreach}}
+```
+
+---
+
+<a name="xss" id="xss"></a>
+## 2. Output Escaping and XSS Prevention
+
+> **Read this section before touching any template.**
+> One wrong `nofilter` can expose every user of the instance to a cross-site scripting attack.
+
+### 2.1 Auto-escaping is ON — rely on it for all normal variables
+
+Friendica sets `escape_html = true` in `src/Render/FriendicaSmarty.php`.
+Every `{{$variable}}` is HTML-escaped automatically.
+This is your primary XSS defense — **for normal HTML text and ordinary HTML attribute values.**
+
+```smarty
+{{* Safe — HTML text context *}}
+<span>{{$username}}</span>
+
+{{* Safe — ordinary attribute value *}}
+<input type="text" value="{{$current_value}}">
+```
+
+> HTML-escaping is **not** enough for every context. Do **not** interpolate
+> dynamic values directly into:
+> - JavaScript (`<script>var x = "{{$v}}";</script>`) — use the JSON pattern in [§6.3](#javascript)
+> - CSS or `style` attributes
+> - URL attributes without scheme validation ([§2.2](#xss))
+> - event-handler attributes (`onclick`, etc.)
+> - raw HTML via `nofilter`
+
+### 2.2 External URLs need PHP-side scheme validation first
+
+Auto-escaping protects HTML attribute syntax but does NOT stop `javascript:` URLs in `href` or `src`.
+Before passing any external or user-supplied URL to a template:
+
+```php
+// ✓ Validate in PHP — use the project helper
+use Friendica\Util\Network;
+
+if (!Network::isValidHttpUrl($rawUrl)) {
+    $rawUrl = '';
+}
+```
+
+> `Network::isValidHttpUrl()` checks for an `http`/`https` scheme and a host.
+> It does **not** check for private IP ranges, loopback, or DNS rebinding — do not use it as a clearance to fetch the URL from the server.
+
+Internal paths generated by the router or `BaseURL` (e.g. `settings/server`) do not need validation.
+
+### 2.3 `nofilter` — only for approved rendering paths
+
+```smarty
+{{* Only for HTML that has gone through an approved renderer or sanitizer *}}
+<div class="wall-item-body">{{$rendered_html nofilter}}</div>
+```
+
+The key question is not where the data *came from* but whether it went through a *trusted rendering path* — for example `Item::prepareBody()`.
+
+**Never** use `nofilter` for raw user input, content from remote servers without sanitization, or strings assembled by concatenation.
+
+---
+
+<a name="translations" id="translations"></a>
+## 3. Translations
+
+### 3.1 All user-visible strings — PHP, templates, AND JavaScript — must be translated
+
+**In PHP modules:**
+
+```php
+$this->t('Permission denied.')
+$this->t('Welcome, %s!', $username)        // substitution
+$this->tt('%d item', '%d items', $count)   // plural
+```
+
+**Pass translated values to templates; never hardcode English in `.tpl` or `.js` files:**
+
+```php
+'$l10n' => [
+    'title'  => $this->t('Settings'),
+    'submit' => $this->t('Save changes'),
+    'saved'  => $this->t('Settings saved.'),  // also used by JS via §6.3
+],
+```
+
+```smarty
+<h1>{{$l10n.title}}</h1>
+<button type="submit">{{$l10n.submit}}</button>
+```
+
+### 3.2 No string concatenation across word boundaries
+
+```php
+// ✗
+$this->t('Hello') . ', ' . $username . '!';
+
+// ✓
+$this->t('Hello, %s!', $username);
+```
+
+---
+
+<a name="forms" id="forms"></a>
+## 4. Forms
+
+> ### Form Safety Minimum
+>
+> Before submitting a form change, verify all five — even if you only touched the template:
+>
+> 1. The server checks **authentication and authorization** ([First Change Step 5](first-change#auth))
+> 2. Every mutating form **has and verifies a CSRF token** ([§4.2](#forms) and [First Change Step 6](first-change#csrf))
+> 3. Input **type, required state, and length** are validated in the Module ([First Change Step 4](first-change#request))
+> 4. **Business rules** are handled by a Service, not the Module or template
+> 5. Dynamic output stays **escaped** — no new `nofilter` ([§2](#xss))
+
+
+### 4.1 Standard form field templates
+
+Friendica provides Smarty include templates for consistent form fields.
+The array is positional and **the structure differs between templates and between core and frio overrides**.
+Always inspect the actual template file before passing dynamic values — some slots are rendered with `nofilter`.
+
+**`field_input.tpl` only — verified slot map:**
+
+| Index | Meaning                                | Frio nofilter? | Core nofilter? |
+|-------|----------------------------------------|----------------|----------------|
+| 0     | Field name (HTML `name`)               | —              | —              |
+| 1     | Label                                  | **Yes**        | No             |
+| 2     | Current value                          | No             | No             |
+| 3     | Help text                              | **Yes**        | **Yes**        |
+| 4     | Required flag / tooltip text           | No             | No             |
+| 5     | Extra HTML attributes                  | **Yes**        | **Yes**        |
+| 6     | Input type (`'text'`, `'email'`, etc.) | —              | —              |
+| 7     | Placeholder text                       | No             | No             |
+
+> **Security — `nofilter` slots in field templates:**
+> In frio's `field_input.tpl`, slots 1, 3, and 5 are rendered raw.
+> In the core template, slots 3 and 5 are rendered raw.
+> This map is only for `field_input.tpl`.
+> Other templates (checkbox, textarea, password, select\_raw…) have different slot meanings and raw slots — inspect each template before use.
+>
+> **Rules:**
+> - Index 1 (label): a `$this->t()` literal — never user or remote data
+> - Index 3 (help text): trusted translated HTML or plain text only
+> - Index 4 (required tooltip): use `$this->t('Required')`, not the string `'required'`
+> - Index 5 (extra attributes): only hardcoded attribute strings, never dynamic values
+>
+> **A "translated string" is not automatically safe.** Translation with substitution does NOT HTML-escape the substituted values:
+>
+> ```php
+> // ✗ Unsafe in a nofilter slot — $remoteName is not escaped by t()
+> $this->t('Account: %s', $remoteName);
+> ```
+>
+> Never put user- or remote-derived values into a `nofilter` slot, even through `t()`.
+> For dynamic content, use a normally auto-escaped template slot instead, or split the template so the dynamic part is output without `nofilter`.
+
+```php
+// ✓ Safe usage
+'$email' => [
+    'email',                          // 0: name
+    $this->t('Email address'),        // 1: label — trusted translated string ✓
+    $currentEmail,                    // 2: value — auto-escaped ✓
+    $this->t('Your login email.'),    // 3: help — trusted translated string ✓
+    $this->t('Required'),             // 4: tooltip — translated ✓
+    '',                               // 5: extra attributes — empty is safest ✓
+    'email',                          // 6: type
+    $this->t('name@example.com'),     // 7: placeholder — translated ✓
+],
+```
+
+```smarty
+{{include file="field_input.tpl" field=$email}}
+```
+
+**Available field templates** (verified against `view/templates/` and
+`view/theme/frio/templates/`):
+`field_checkbox.tpl`, `field_colorinput.tpl` (frio only), `field_combobox.tpl`,
+`field_custom.tpl`, `field_datetime.tpl`, `field_fileinput.tpl` (frio only),
+`field_input.tpl`, `field_intcheckbox.tpl`, `field_openid.tpl`,
+`field_password.tpl`, `field_radio.tpl`, `field_select.tpl`,
+`field_select_raw.tpl`, `field_textarea.tpl`, `field_themeselect.tpl`
+
+### 4.2 Every mutating form MUST have a CSRF token
+
+```smarty
+<form method="post" action="{{$baseurl}}/my-path">
+    <input type="hidden" name="form_security_token" value="{{$form_security_token}}">
+    ...
+</form>
+```
+
+See [First Change — CSRF](first-change#csrf) for the PHP side.
+
+---
+
+<a name="css" id="css"></a>
+## 5. CSS and Themes
+
+### 5.1 Frio and Vier — two themes, separate codebases
+
+| Theme    | Location           | Status                                                                                                                                                                                   |
+|----------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **frio** | `view/theme/frio/` | Default; actively maintained                                                                                                                                                             |
+| **vier** | `view/theme/vier/` | Ships with Friendica, but the user documentation describes it as "no longer officially maintained". Check the current project review policy before requiring vier-specific work in a PR. |
+
+A CSS change in `view/theme/frio/css/style.css` does **not** affect vier, and vice versa.
+If your fix should apply to both themes, you need separate changes in each.
+
+### 5.2 How to add styles — three strategies
+
+**Strategy A: Page-specific stylesheet for new theme-overridable components**
+
+Register a stylesheet for one page via injected `App\Page`, resolving the path with `Theme::getPathForFile()`.
+Use this when a new component needs a base stylesheet that themes may override.
+For narrow fixes in existing theme CSS, use Strategy B or C instead.
+This is a new-page pattern, not a broad existing convention in the repository.
+
+If you choose it, create a path under `css/module/`:
+- base fallback: `view/css/module/mymodule.css`
+- frio override: `view/theme/frio/css/module/mymodule.css`
+- vier override: `view/theme/vier/css/module/mymodule.css`
+
+```php
+use Friendica\App;
+use Friendica\Core\Theme;
+
+// In your module constructor — see first-change.md for the full constructor.
+// BaseSettings and BaseModeration already provide $this->page.
+// In a plain BaseModule subclass, inject App\Page yourself and store it.
+
+protected function content(array $request = []): string
+{
+    // getPathForFile() searches view/theme/{current}/ → view/theme/{parent}/ → view/
+    // and returns the FIRST match, or '' if nothing is found — always check before registering.
+    $stylesheet = Theme::getPathForFile('css/module/mymodule.css');
+    if ($stylesheet !== '') {
+        $this->page->registerStylesheet($stylesheet);
+    }
+}
+```
+
+> **A theme copy fully replaces the base file — it does not cascade.**
+> Because `getPathForFile()` returns only the first match, a `view/theme/frio/css/module/mymodule.css` shadows the base `view/css/module/mymodule.css` entirely.
+> If a theme override should keep the base rules, `@import` or duplicate them.
+
+> **Avoid `DI::page()` in new code** — inject `App\Page` through the constructor instead.
+
+**Strategy B: Frio-specific CSS fix**
+
+Edit `view/theme/frio/css/style.css`. This does not affect vier.
+
+**Strategy C: Vier-specific CSS fix**
+
+Edit `view/theme/vier/style.css`. This does not affect frio.
+
+### 5.3 Frio color system
+
+Frio generates much of its CSS dynamically from admin-configured color values in `style.php`.
+Most theme colors are still emitted as literal values or PHP template variables, not as reusable CSS custom properties.
+The stable layout variable you are most likely to need is:
+
+```css
+:root {
+    --topbar-first-size: 50px;  /* defined in view/theme/frio/css/style.css */
+}
+```
+
+When writing frio CSS:
+- Use `var(--topbar-first-size)` for layout that depends on the topbar height
+- For colors, copy patterns from existing `style.css` or scheme files — do not invent global CSS variables without adding them deliberately
+- Test the four frio schemes (light, dark, black, gnome); color changes also need the custom scheme and the accent-color variants (the `scheme_accent` setting)
+
+### 5.4 Static presentation styles belong in CSS, not inline
+
+Inline `style=""` attributes are hard to theme and maintain. Use CSS classes instead.
+
+---
+
+<a name="javascript" id="javascript"></a>
+## 6. JavaScript
+
+### 6.1 File locations
+
+| Purpose            | Location                      |
+|--------------------|-------------------------------|
+| Core JS            | `view/js/main.js`, `view/js/` |
+| Page-specific JS   | `view/js/module/{page-name}/` |
+| Frio JS            | `view/theme/frio/js/`         |
+| Vendored libraries | `view/js/` or `view/asset/`   |
+
+### 6.2 Use the existing IIFE pattern — not ES modules
+
+Scripts load as `<script type="text/javascript" src="...">`. ES module syntax
+(`export` / `import`) is not supported and causes errors.
+
+```javascript
+// SPDX-License-Identifier: AGPL-3.0-or-later
+(function () {
+    'use strict';
+
+    function init() {
+        document.querySelectorAll('.my-element').forEach(function (el) {
+            el.addEventListener('click', handleClick);
+        });
+    }
+
+    function handleClick(event) {
+        // ...
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+})();
+```
+
+Register via injected `App\Page`:
+
+```php
+use Friendica\Core\Theme;
+
+$script = Theme::getPathForFile('js/module/my-feature/index.js');
+if ($script !== '') {
+    $this->page->registerFooterScript($script);
+}
+```
+
+### 6.3 Pass translations to JavaScript via the template
+
+Never hardcode English strings in `.js` files.
+Encode translated strings as JSON in PHP and read them in JavaScript:
+
+```php
+// In PHP:
+'$strings_json' => json_encode([
+    'saved'  => $this->t('Settings saved.'),
+    'failed' => $this->t('Saving failed.'),
+], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+```
+
+```smarty
+{{* nofilter is safe here: value came directly from json_encode() with JSON_HEX_* flags *}}
+<script type="application/json" id="my-strings">{{$strings_json nofilter}}</script>
+```
+
+```javascript
+var strings = JSON.parse(
+    document.getElementById('my-strings').textContent
+);
+// strings.saved, strings.failed are now available
+```
+
+### 6.4 Pass structured data via JSON script block
+
+```php
+'$config_json' => json_encode(
+    $widgetConfig,
+    JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR
+),
+```
+
+```smarty
+<script type="application/json" id="my-config">{{$config_json nofilter}}</script>
+```
+
+```javascript
+var config = JSON.parse(document.getElementById('my-config').textContent);
+```
+
+The `JSON_HEX_*` flags escape `<`, `>`, `&`, `'`, `"` — the JSON cannot break out of the `<script>` element.
+
+### 6.5 Pass small scalar values via data attributes
+
+```smarty
+<div id="my-widget" data-uid="{{$uid}}" data-url="{{$validated_url}}"></div>
+```
+
+```javascript
+var uid = document.getElementById('my-widget').dataset.uid;
+```
+
+<a name="dom-xss" id="dom-xss"></a>
+### 6.6 DOM-XSS — safe JavaScript DOM manipulation
+
+Receiving JSON safely is not enough.
+Inserting data into the DOM can also be an XSS vector.
+Follow these rules whenever you put a value into the page via JavaScript:
+
+```javascript
+// ✓ — textContent creates a text node; no markup parsing, no XSS
+element.textContent = config.displayName;
+
+// ✓ For text attributes — safe
+anchor.setAttribute('title', config.label);
+
+// ✓ For URL attributes — safe only after PHP-side scheme validation
+anchor.setAttribute('href', validatedUrl);
+
+// ✗ Never set event-handler attributes from data
+element.setAttribute('onclick', config.code);
+
+// ✗ Never with untrusted data — innerHTML parses markup and can create
+// executable DOM content (event handlers, dangerous URLs, SVG scripts)
+element.innerHTML = config.displayName;
+
+// ✗ Never — insertAdjacentHTML with untrusted content
+element.insertAdjacentHTML('beforeend', data.html);
+
+// ✗ Never — building HTML strings from data
+var html = '<span>' + config.name + '</span>';
+element.innerHTML = html;
+```
+
+**Rule:** Use `textContent` for text. Use `createElement` + `setAttribute` +
+`appendChild` when you need to build elements. Never use `innerHTML`,
+`insertAdjacentHTML`, or string concatenation into HTML with untrusted data.
+
+For content that is intentionally pre-rendered HTML (e.g. from `Item::prepareBody()` fetched via API), use a specifically approved sanitizer before setting `innerHTML`.
+
+### 6.7 No new inline event handlers
+
+```smarty
+{{* ✗ *}}
+<button onclick="doSomething()">Click</button>
+
+{{* ✓ *}}
+<button type="button" class="my-action">Click</button>
+```
+
+```javascript
+document.querySelectorAll('.my-action').forEach(function (btn) {
+    btn.addEventListener('click', handleAction);
+});
+```
+
+---
+
+<a name="accessibility" id="accessibility"></a>
+## 7. Accessibility
+
+Target [WCAG 2.1 AA](https://www.w3.org/WAI/WCAG21/quickref/). The rules below come up most in Friendica frontend work; the §8 checklist enforces them.
+
+| Rule                                          | Do                                                              | Avoid                                                                |
+|-----------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------|
+| Use native elements (keyboard-accessible)     | `<button type="button">`, `<a href="…">`, `<input>`            | `<div class="clickable">` (an `<a>` without `href` isn't focusable) |
+| `alt` on every image                          | `alt="{{$display_name}}"` informative · `alt=""` decorative    | missing `alt`                                                       |
+| Keep a visible focus ring                     | a custom focus style if you override the default               | `outline: none` with no replacement                                 |
+| Don't rely on colour alone to convey meaning  | pair colour with an icon or text                               | colour as the only signal                                           |
+
+**Dynamic updates** — announce changes with an ARIA live region:
+
+```smarty
+<div role="status" aria-live="polite" id="notification-count">{{$notification_count}}</div>
+```
+
+**Contrast** — verify ≥ 4.5:1 (normal text) / 3:1 (large) in **every** scheme your change touches: frio light/dark/black/gnome (plus the custom scheme and accent colours for colour changes) and vier. Reusing a theme variable does not guarantee contrast.
+
+---
+
+<a name="checklist" id="checklist"></a>
+## 8. Frontend checklist before pushing
+
+```bash
+# PHP checks (templates are rendered by PHP)
+composer run lint
+composer run phpstan
+
+# Note: lint and phpstan do NOT check JavaScript syntax, CSS, Smarty,
+# accessibility, or browser behaviour. Those require manual testing.
+```
+
+**Manual checks:**
+
+| Change type                     | Minimum testing                                                                                      |
+|---------------------------------|------------------------------------------------------------------------------------------------------|
+| Frio-only CSS file              | Affected frio schemes (light / dark / black / gnome) — no need to test vier                          |
+| Vier-only CSS file              | Vier                                                                                                 |
+| Core template                   | Check first whether frio/vier override it; test only the themes where the change is actually visible |
+| Core JS loaded by all themes    | Every theme in which the script is loaded                                                            |
+| New form or interactive element | The theme(s) it appears in + keyboard + focus + contrast                                             |
+| Structural / semantic change    | Affected theme(s) + keyboard + screen-reader spot-check                                              |
+| Colour change                   | Every scheme/theme actually affected; verify contrast ≥ 4.5:1 (normal text)                          |
+
+**Code checklist:**
+
+- [ ] No hardcoded English strings in `.tpl` or `.js` files visible to users
+- [ ] `nofilter` only for output from an approved rendering path
+- [ ] For every field template used: checked the actual core AND active-theme template file for `nofilter` slots; labels and help text in raw slots are trusted translated strings; raw attribute slots contain only hardcoded server-generated values, never user or remote content
+- [ ] External URLs validated with `Network::isValidHttpUrl()` before output
+- [ ] JSON-to-JS uses `json_encode()` with all four `JSON_HEX_*` flags
+- [ ] DOM manipulation uses `textContent` / `createElement`, never `innerHTML` with untrusted data
+- [ ] Mutating form has CSRF token in template and verified in `post()`
+- [ ] No new `onclick=""` inline handlers
+- [ ] Native HTML elements are used where possible; custom elements have ARIA + keyboard handling
+- [ ] Images have `alt` attributes
+- [ ] Focus indicators aren’t removed without replacement
+- [ ] CSS changes registered via `App\Page` or placed in the correct theme file
