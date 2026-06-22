@@ -99,7 +99,7 @@ class VCard
 				$wallmessage_link = 'message/new/' . $id;
 			}
 
-			$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', true);
+			$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', false);
 
 			if ($contact['contact-type'] == Contact::TYPE_COMMUNITY) {
 				if (!$hide_mention) {
