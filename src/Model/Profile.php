@@ -442,6 +442,8 @@ class Profile
 			DI::logger()->warning('Missing hidewall key in profile array', ['profile' => $profile]);
 		}
 
+		$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', false);
+
 		if ($profile['account-type'] == Contact::TYPE_COMMUNITY) {
 			$mention_label = DI::l10n()->t('Post to group');
 			$mention_url   = 'compose/0?body=!' . $profile['addr'];
@@ -491,6 +493,7 @@ class Profile
 			'$updated'                     => $updated,
 			'$diaspora'                    => $diaspora,
 			'$contact_block'               => $contact_block,
+			'$always_open_compose'         => $always_open_compose,
 			'$mention_label'               => $mention_label,
 			'$mention_url'                 => $mention_url,
 			'$network_label'               => $network_label,
