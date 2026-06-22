@@ -442,7 +442,7 @@ class Profile
 			DI::logger()->warning('Missing hidewall key in profile array', ['profile' => $profile]);
 		}
 
-		$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', true);
+		$always_open_compose = DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'frio', 'always_open_compose', false);
 
 		if ($profile['account-type'] == Contact::TYPE_COMMUNITY) {
 			$mention_label = DI::l10n()->t('Post to group');
