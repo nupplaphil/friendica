@@ -478,31 +478,57 @@ class Page implements ArrayAccess
 			$this->page['nav'] = $nav->getHtml();
 		}
 
+		// Handle SPA requests - return content with navigation but without footer
+		if ($mode->isSpa()) {
+			// For SPA requests, return content + navigation but without footer
+			// This keeps the footer static (important for XMPP addon)
+
+			// Build the response content from all page components except footer
+			$htmlHead = $this->page['htmlhead'] ?? '';
+			$nav      = $this->page['nav']      ?? '';
+			$content  = $this->page['content']  ?? '';
+			$title    = htmlspecialchars($this->page['title'] ?? '', ENT_QUOTES, 'UTF-8');
+
+			// Set SPA-specific header
+			$response = $response->withHeader('X-Friendica-SPA', 'true');
+
+			// Build the response HTML
+			$responseHtml = "<title>{$title}</title>{$htmlHead}{$nav}{$content}";
+
+			$response = $response->withBody(Utils::streamFor($responseHtml));
+			return $response;
+		}
+
 		// Build the page - now that we have all the components
 		if (isset($_GET["mode"]) && (($_GET["mode"] == "raw") || ($_GET["mode"] == "minimal"))) {
-			$doc = new DOMDocument();
-
-			$target = new DOMDocument();
-			$target->loadXML("<root></root>");
-
 			$content = mb_convert_encoding($this->page["content"], 'HTML-ENTITIES', "UTF-8");
 
-			/// @TODO one day, kill those error-suppressing @ stuff, or PHP should ban it
-			@$doc->loadHTML($content);
+			// Skip DOM parsing if content is empty (prevents ValueError in PHP 8+)
+			if (!empty($content)) {
+				$doc = new DOMDocument();
 
-			$xpath = new DOMXPath($doc);
+				$target = new DOMDocument();
+				$target->loadXML("<root></root>");
 
-			$list = $xpath->query("//*[contains(@id,'tread-wrapper-')]");  /* */
+				/// @TODO one day, kill those error-suppressing @ stuff, or PHP should ban it
+				@$doc->loadHTML($content);
 
-			foreach ($list as $item) {
-				$item = $target->importNode($item, true);
+				$xpath = new DOMXPath($doc);
 
-				// And then append it to the target
-				$target->documentElement->appendChild($item);
+				$list = $xpath->query("//*[contains(@id,'tread-wrapper-')]");  /* */
+
+				foreach ($list as $item) {
+					$item = $target->importNode($item, true);
+
+					// And then append it to the target
+					$target->documentElement->appendChild($item);
+				}
+
+				$content = $target->saveHTML();
 			}
 
 			if ($_GET["mode"] == "raw") {
-				$response->withBody(Utils::streamFor($target->saveHTML()));
+				$response->withBody(Utils::streamFor($content));
 				System::echoResponse($response);
 				System::exit();
 			}

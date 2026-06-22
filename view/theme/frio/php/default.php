@@ -95,7 +95,7 @@ if ($minimal) {
 } else {
 	// the style for all other pages
 	?>
-		<main>
+		<main id="spa-content">
 			<div class="container">
 				<div class="row">
 <?php
@@ -146,7 +146,7 @@ if ($minimal) {
 			<div id="back-to-top" title="<?php echo DI::l10n()->t('Back to top')?>">⇧</div>
 		</main>
 
-		<footer>
+		<footer id="page-footer">
 			<?php echo $page['footer'] ?? ''; ?>
 		</footer>
 <?php } ?> <!-- End of condition if $minimal else the rest -->

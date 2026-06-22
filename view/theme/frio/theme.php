@@ -53,6 +53,16 @@ function frio_init(AppHelper $appHelper): void
 			</script>
 EOT;
 	}
+
+	if (DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'system', 'enable_spa', false)) {
+		// Load SPA router for client-side routing on /network, /display, /profile
+		// This keeps the footer static (important for XMPP addon) and provides smooth transitions
+		$baseUrl = DI::baseUrl();
+		DI::page()['htmlhead'] .= <<< EOT
+			<link rel="stylesheet" type="text/css" href="{$baseUrl}/view/js/spa-router.css" media="all" />
+			<script type="text/javascript" src="{$baseUrl}/view/js/spa-router.js"></script>
+EOT;
+	}
 }
 
 function frio_install(): void

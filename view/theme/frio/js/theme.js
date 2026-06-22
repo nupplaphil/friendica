@@ -6,7 +6,55 @@
 
 var jotcache = ""; //The jot cache. We use it as cache to restore old/original jot content
 
-$(document).ready(function () {
+function syncSecondNavTabmenu() {
+	// Move page tabbar into second navbar after initial load and SPA navigations
+	var $tabbar = $("section .tabbar-wrapper").first();
+	var $tabmenu = $("#topbar-second > .container-fluid > #tabmenu");
+
+	if ($tabbar.length && $tabmenu.length) {
+		$tabbar.appendTo($tabmenu);
+	}
+
+	// Initialize responsive overflow menu for newly injected tab bars only once per element
+	$("ul.tabs.flex-nav").each(function () {
+		var $tabs = $(this);
+		if ($tabs.data("spa-flexmenu-initialized")) {
+			return;
+		}
+
+		$tabs.flexMenu({
+			cutoff: 2,
+			popupClass: "dropdown-menu pull-right",
+			popupAbsolute: false,
+			target: ".flex-target",
+		});
+
+		$tabs.data("spa-flexmenu-initialized", true);
+	});
+}
+
+function syncSecondNavJotButton() {
+	var $jotButton = $("#jotOpen");
+	if (!$jotButton.length) {
+		return;
+	}
+
+	$jotButton.appendTo("#topbar-second > .container-fluid > #navbar-button");
+
+	if ($("#jot-popup").is(":hidden")) {
+		$jotButton.hide();
+	}
+
+	if ($jotButton.hasClass("modal-open")) {
+		$jotButton.off("click.spa-jot").on("click.spa-jot", function (e) {
+			e.preventDefault();
+			jotShow();
+		});
+	}
+}
+
+// Initialize theme functionality (called on initial load and after SPA navigation)
+function initTheme() {
 	// Destroy unused perfect scrollbar in aside element
 	$("aside").perfectScrollbar("destroy");
 
@@ -56,33 +104,11 @@ $(document).ready(function () {
 	$(".field.select, .field.custom").addClass("form-group");
 	$(".field.select > select, .field.custom > select").addClass("form-control");
 
-	// move the tabbar to the second nav bar
-	$("section .tabbar-wrapper").first().appendTo("#topbar-second > .container-fluid > #tabmenu");
-
-	// make responsive tabmenu with flexmenu.js
-	// the menupoints which doesn't fit in the second nav bar will moved to a
-	// dropdown menu. Look at common_tabs.tpl
-	$("ul.tabs.flex-nav").flexMenu({
-		cutoff: 2,
-		popupClass: "dropdown-menu pull-right",
-		popupAbsolute: false,
-		target: ".flex-target",
-	});
+	// move/init tabbar in second nav bar
+	syncSecondNavTabmenu();
 
 	// add Jot button to the second navbar
-	let $jotButton = $("#jotOpen");
-	if ($jotButton.length) {
-		$jotButton.appendTo("#topbar-second > .container-fluid > #navbar-button");
-		if ($("#jot-popup").is(":hidden")) {
-			$jotButton.hide();
-		}
-		if ($jotButton.hasClass('modal-open')) {
-			$jotButton.on("click", function (e) {
-				e.preventDefault();
-				jotShow();
-			});
-		}
-	}
+	syncSecondNavJotButton();
 
 	let $body = $("body");
 
@@ -395,47 +421,61 @@ $(document).ready(function () {
 		showHideEventMap(this);
 	});
 
-	// Comment form submit
-	$body.on("submit", ".comment-edit-form", function (e) {
-		let $form = $(this);
-		let id = $form.data("item-id");
+	// Comment form submit - only register once to prevent duplicate submissions
+	if (typeof frioCommentFormHandlerRegistered === 'undefined') {
+		frioCommentFormHandlerRegistered = true;
+		console.log('[Theme] Registering comment form submit handler (once)');
+		$body.on("submit", ".comment-edit-form", function (e) {
+			console.log('[Theme] Comment form submit handler triggered for form with data-item-id:', $(this).data("item-id"));
+			let $form = $(this);
+			let id = $form.data("item-id");
 
-		// Compose page form exception: id is always 0 and form must not be submitted asynchronously
-		if (id === 0) {
-			return;
-		}
+			// Compose page form exception: id is always 0 and form must not be submitted asynchronously
+			if (id === 0) {
+				console.log('[Theme] Comment form: Compose page (id=0), skipping async submit');
+				return;
+			}
 
-		e.preventDefault();
+			e.preventDefault();
 
-		let $commentSubmit = $form.find(".comment-edit-submit").button("loading");
+			let $commentSubmit = $form.find(".comment-edit-submit").button("loading");
 
-		unpause();
-		commentBusy = true;
+			unpause();
+			commentBusy = true;
+			console.log('[Theme] Comment form: Starting AJAX post for id:', id);
 
-		$.post("item", $form.serialize(), "json")
-			.then(function (data) {
-				if (data.success) {
-					$("#comment-edit-wrapper-" + id).hide();
-					let $textarea = $("#comment-edit-text-" + id);
-					$textarea.val("");
-					if ($textarea.get(0)) {
-						commentClose($textarea.get(0), id);
+			$.post("item", $form.serialize(), "json")
+				.then(function (data) {
+					console.log('[Theme] Comment form: AJAX response received for id:', id);
+					if (data.success) {
+						console.log('[Theme] Comment form: Comment posted successfully');
+						$("#comment-edit-wrapper-" + id).hide();
+						let $textarea = $("#comment-edit-text-" + id);
+						$textarea.val("");
+						if ($textarea.get(0)) {
+							commentClose($textarea.get(0), id);
+						}
+						if (timer) {
+							clearTimeout(timer);
+						}
+						timer = setTimeout(NavUpdate, 10);
+						force_update = true;
+						update_item = id;
 					}
-					if (timer) {
-						clearTimeout(timer);
+					if (data.reload) {
+						console.log('[Theme] Comment form: Server requested reload');
+						window.location.href = data.reload;
 					}
-					timer = setTimeout(NavUpdate, 10);
-					force_update = true;
-					update_item = id;
-				}
-				if (data.reload) {
-					window.location.href = data.reload;
-				}
-			})
-			.always(function () {
-				$commentSubmit.button("reset");
-			});
-	});
+				})
+				.always(function () {
+					console.log('[Theme] Comment form: AJAX completed, resetting button and commentBusy');
+					commentBusy = false;
+					$commentSubmit.button("reset");
+				});
+		});
+	} else {
+		console.log('[Theme] Comment form submit handler already registered, skipping duplicate registration');
+	}
 
 	try {
 		navigator.canShare({ url: "#", });
@@ -445,6 +485,16 @@ $(document).ready(function () {
 
 	// initialize autosize for the textareas
 	autosize($("textarea.text-autosize"));
+}
+
+// Register theme initialization for initial page load and SPA navigation
+$(document).ready(initTheme);
+window.addEventListener("theme:reload", initTheme);
+
+// Keep existing spa:navigate handler for tabmenu syncing
+window.addEventListener("spa:navigate", function () {
+	syncSecondNavTabmenu();
+	syncSecondNavJotButton();
 });
 
 function openClose(theID) {
