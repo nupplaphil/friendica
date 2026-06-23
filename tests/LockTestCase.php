@@ -147,7 +147,7 @@ abstract class LockTestCase extends MockedTestCase
 	{
 		static::markTestSkipped('taking too much time without mocking');
 
-		self::assertFalse($this->instance->isLocked('foo'));
+		self::assertFalse($this->instance->isLocked('foo')); // @phpstan-ignore deadCode.unreachable (skipped test)
 		self::assertFalse($this->instance->isLocked('bar'));
 
 		// TODO [nupplaphil] - Because of the Datetime-Utils for the database, we have to wait a FULL second between the checks to invalidate the db-locks/cache

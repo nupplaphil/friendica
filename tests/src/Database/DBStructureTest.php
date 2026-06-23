@@ -55,7 +55,7 @@ class DBStructureTest extends DatabaseTestCase
 	public function testChangePrimaryKey(): never
 	{
 		static::markTestSkipped('rename primary key with autoincrement and foreign key support necessary first');
-		$oldID = 'client_id';
+		$oldID = 'client_id'; // @phpstan-ignore deadCode.unreachable (skipped test)
 		$newID = 'pw';
 
 		self::assertTrue(DBStructure::rename('clients', [ $newID ], DBStructure::RENAME_PRIMARY_KEY));

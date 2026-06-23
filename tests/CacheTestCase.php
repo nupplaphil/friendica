@@ -162,7 +162,7 @@ abstract class CacheTestCase extends MockedTestCase
 	{
 		static::markTestSkipped('taking too much time without mocking');
 
-		self::assertNull($this->instance->get('value1'));
+		self::assertNull($this->instance->get('value1')); // @phpstan-ignore deadCode.unreachable (skipped test)
 
 		$value = 'foobar';
 		$this->instance->set('value1', $value, 1);

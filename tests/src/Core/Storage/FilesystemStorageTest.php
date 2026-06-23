@@ -67,7 +67,7 @@ class FilesystemStorageTest extends StorageTestCase
 	{
 		static::markTestIncomplete("Cannot catch file_put_content() error due vfsStream failure");
 
-		$this->expectException(StorageException::class);
+		$this->expectException(StorageException::class); // @phpstan-ignore deadCode.unreachable (skipped test)
 		$this->expectExceptionMessageMatches("/Filesystem storage failed to save data to \".*\". Check your write permissions/");
 
 		vfsStream::create(['storage' => ['f0' => ['c0' => ['k0i0' => '']]]], $this->root);

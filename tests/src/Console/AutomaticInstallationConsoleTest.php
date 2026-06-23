@@ -61,7 +61,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	{
 		static::markTestSkipped('Needs class \'Installer\' as constructing argument for console tests');
 
-		parent::setUp();
+		parent::setUp(); // @phpstan-ignore deadCode.unreachable (skipped test)
 
 		$this->setUpVfsDir();
 		;

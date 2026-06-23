@@ -11,18 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/CacheTestCase.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/LockTestCase.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCacheInMemory of property Friendica\\Test\\MemoryCacheTestCase\:\:\$instance is not the same as PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCache of overridden property Friendica\\Test\\CacheTestCase\:\:\$instance\.$#'
 			identifier: property.phpDocType
 			count: 1
@@ -371,12 +359,6 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
 			identifier: method.notFound
 			count: 10
@@ -611,12 +593,6 @@ parameters:
 			path: tests/src/Core/Logger/StreamLoggerTest.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 2
-			path: tests/src/Core/Logger/StreamLoggerTest.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 2
@@ -689,12 +665,6 @@ parameters:
 			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Storage\\\\Repository\\\\StorageManager'' and Friendica\\Core\\Storage\\Repository\\StorageManager will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -717,12 +687,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/SystemTest.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/src/Database/DBStructureTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
@@ -981,12 +945,6 @@ parameters:
 			identifier: method.notFound
 			count: 5
 			path: tests/src/Module/StatsCachingTest.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: tests/src/Network/ProbeTest.php
 
 		-
 			message: '#^Access to an undefined property Friendica\\Profile\\ProfileField\\Entity\\ProfileField\:\:\$wrong\.$#'

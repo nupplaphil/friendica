@@ -99,7 +99,7 @@ class StreamLoggerTest extends LoggerTestCase
 
 		static::markTestIncomplete('We need a platform independent way to set directory to readonly');
 
-		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test');
+		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test'); // @phpstan-ignore deadCode.unreachable (skipped test)
 		$logger        = $loggerFactory->create($this->config);
 
 		$logger->emergency('not working');
@@ -137,7 +137,7 @@ class StreamLoggerTest extends LoggerTestCase
 	{
 		static::markTestSkipped('vfsStream isn\'t compatible with chdir, so not testable.');
 
-		$logfile = vfsStream::newFile('friendica.log')
+		$logfile = vfsStream::newFile('friendica.log') // @phpstan-ignore deadCode.unreachable (skipped test)
 							->at($this->root);
 
 		chdir($this->root->getChild('logs')->url());
