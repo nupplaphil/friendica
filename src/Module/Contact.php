@@ -638,6 +638,7 @@ class Contact extends BaseModule
 			'details'           => $contact['location'],
 			'tags'              => $contact['keywords'],
 			'about'             => $contact['about'],
+			'account_type_name' => Model\Contact::getAccountType($contact['contact-type']),
 			'account_type'      => $contact['contact-type'],
 			'manually_approve'  => $contact['manually-approve'],
 			'private'           => $contact['prv'],
