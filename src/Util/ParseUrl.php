@@ -1760,7 +1760,7 @@ class ParseUrl
 	 * Fetch the services that are supported by song.link
 	 *
 	 * @param string $url media url
-	 * @return array{embed: string, services: array<host,url>} with the detected services
+	 * @return array{embed: string, services: array<string, string>} with the detected services
 	 */
 	private static function fetchSongLinkServices(string $url): array
 	{
