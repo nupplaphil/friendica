@@ -61,7 +61,7 @@
 			{{else}}
 				{{$acct_icon = ''}}
 			{{/if}}
-			{{if $account_type_name}}<div class="account-type" data-acct="{{$account_type}}" data-flag="{{$page_flags}}">(<i class="ri {{$acct_icon}}" aria-hidden="true"></i> {{$account_type_name}})</div>{{/if}}				{{* pengy *}}
+			{{if $account_type_name}}<div class="account-type" data-acct="{{$account_type}}" data-flag="{{$page_flags}}">(<i class="ri {{$acct_icon}}" aria-hidden="true"></i> {{$account_type_name}})</div>{{/if}}
 
 		</div>
 
