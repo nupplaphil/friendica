@@ -47,17 +47,26 @@ class ExpireReportsTest extends MockedTestCase
 
 		$database->expects($this->exactly(4))
 			->method('fetch')
-			->willReturnMap([
-				[$closedResult, ['id' => 11]],
-				[$closedResult, false],
-				[$openResult,   ['id' => 22]],
-				[$openResult,   false],
-			]);
+			->willReturnCallback(function ($result) use ($closedResult, $openResult) {
+				static $closedCalls = 0;
+				static $openCalls   = 0;
+
+				if ($result === $closedResult) {
+					return ++$closedCalls === 1 ? ['id' => 11] : false;
+				}
+
+				if ($result === $openResult) {
+					return ++$openCalls === 1 ? ['id' => 22] : false;
+				}
+
+				return false;
+			});
 
 		$database->expects($this->exactly(2))
 			->method('close')
-			->willReturnCallback(function ($result) use ($closedResult, $openResult): void {
+			->willReturnCallback(function ($result) use ($closedResult, $openResult): bool {
 				self::assertTrue($result === $closedResult || $result === $openResult);
+				return true;
 			});
 
 		$database->expects($this->exactly(6))
@@ -67,10 +76,10 @@ class ExpireReportsTest extends MockedTestCase
 				$expectedCalls = [
 					['report-rule', ['rid' => 11]],
 					['report-post', ['rid' => 11]],
-					['report',      ['id'  => 11]],
+					['report',      ['id' => 11]],
 					['report-rule', ['rid' => 22]],
 					['report-post', ['rid' => 22]],
-					['report',      ['id'  => 22]],
+					['report',      ['id' => 22]],
 				];
 
 				self::assertSame($expectedCalls[$calls][0], func_get_arg(0));
