@@ -23,7 +23,7 @@ abstract class CacheTestCase extends MockedTestCase
 	protected $instance;
 
 	/**
-	 * @var \Friendica\Core\Cache\Capability\ICanCacheInMemory
+	 * @var \Friendica\Core\Cache\Capability\ICanCache
 	 */
 	protected $cache;
 

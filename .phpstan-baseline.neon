@@ -17,12 +17,6 @@ parameters:
 			path: tests/CacheTestCase.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/FixtureTestCase.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
@@ -317,12 +311,6 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
 			message: '#^Class Friendica\\Console\\AutomaticInstallation constructor invoked with 1 parameter, 3\-4 required\.$#'
 			identifier: arguments.count
 			count: 8
@@ -419,12 +407,6 @@ parameters:
 			path: tests/src/Console/ServerBlockConsoleTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Console/ServerBlockConsoleTest.php
-
-		-
 			message: '#^Strict comparison using \!\=\= between ''\-''\|''\:''\|''_''\|''A'' and '''' will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
@@ -443,22 +425,10 @@ parameters:
 			path: tests/src/Core/Addon/Model/AddonLoaderTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
+			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
 			identifier: method.notFound
 			count: 1
-			path: tests/src/Core/Addon/Model/AddonLoaderTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Cache/DatabaseCacheTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\CacheTestCase\:\:\$cache \(Friendica\\Core\\Cache\\Capability\\ICanCacheInMemory\) does not accept Friendica\\Core\\Cache\\Type\\DatabaseCache\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Core/Cache/DatabaseCacheTest.php
+			path: tests/src/Core/Cache/ArrayCacheTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
@@ -471,6 +441,12 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/Cache/MemcachedCacheTest.php
+
+		-
+			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
@@ -489,18 +465,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Config/ConfigTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\ValueObject\\\\Cache'' and Friendica\\Core\\Config\\ValueObject\\Cache will always evaluate to true\.$#'
@@ -563,12 +527,6 @@ parameters:
 			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
-
-		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
 			identifier: method.notFound
 			count: 5
@@ -587,12 +545,6 @@ parameters:
 			path: tests/src/Core/InstallerTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/InstallerTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Core\\InstallerTest\:\:\$dice \(Dice\\Dice&Mockery\\MockInterface\) does not accept Mockery\\LegacyMockInterface\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -605,12 +557,6 @@ parameters:
 			path: tests/src/Core/InstallerTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\KeyValueStorage\\\\Capability\\\\IManageKeyValuePairs'' and Friendica\\Core\\KeyValueStorage\\Capability\\IManageKeyValuePairs will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -621,12 +567,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: tests/src/Core/Lock/APCuCacheLockTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
@@ -668,12 +608,6 @@ parameters:
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
 			identifier: method.notFound
 			count: 4
-			path: tests/src/Core/Logger/StreamLoggerTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
 			path: tests/src/Core/Logger/StreamLoggerTest.php
 
 		-
@@ -743,19 +677,7 @@ parameters:
 			path: tests/src/Core/PConfig/PreloadPConfigTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Storage/DatabaseStorageTest.php
-
-		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
@@ -767,22 +689,10 @@ parameters:
 			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageTest.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
 			path: tests/src/Core/Storage/FilesystemStorageTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Storage\\\\Repository\\\\StorageManager'' and Friendica\\Core\\Storage\\Repository\\StorageManager will always evaluate to true\.$#'
@@ -813,12 +723,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: tests/src/Database/DBStructureTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Database/DatabaseTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
@@ -1079,18 +983,6 @@ parameters:
 			path: tests/src/Module/StatsCachingTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Network/ProbeTest.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
@@ -1133,12 +1025,6 @@ parameters:
 			path: tests/src/Util/DateTimeFormatTest.php
 
 		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/EMailerTest.php
-
-		-
 			message: '#^PHPDoc tag @var with type Friendica\\Object\\EMail\\IEmail is not subtype of native type null\.$#'
 			identifier: varTag.nativeType
 			count: 2
@@ -1149,12 +1035,6 @@ parameters:
 			identifier: isset.property
 			count: 1
 			path: tests/src/Util/EMailerTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/Emailer/MailBuilderTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\MailBuilder'' and Friendica\\Test\\Util\\SampleMailBuilder will always evaluate to true\.$#'
@@ -1176,12 +1056,6 @@ parameters:
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
@@ -1215,12 +1089,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:removeChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/ImagesTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
