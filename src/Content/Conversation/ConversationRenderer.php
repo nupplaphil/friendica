@@ -317,7 +317,6 @@ final readonly class ConversationRenderer
 	/**
 	 * Extracts the part of a path after the first slash.
 	 *
-	 * @param string $path The input path
 	 * @return string The part after the first slash, or empty string if no slash exists
 	 */
 	private function getCommandAfterFirstSlash(): string
