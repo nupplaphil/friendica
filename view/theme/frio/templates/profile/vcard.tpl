@@ -32,6 +32,8 @@
 	<div class="panel-body">
 		<div class="profile-header">
 			<h3 class="fn p-name" dir="auto">{{$profile.name}}</h3>
+			{{if $is_admin}}<span class="badge badge-admin"><i class="ri ri-medal-2-fill" aria-hidden="true"></i> {{$admin_title}}</span>{{/if}}
+			{{if $is_mod}}<span class="badge badge-mod"><i class="ri ri-shield-user-line" aria-hidden="true"></i> {{$moderator_title}}</span>{{/if}}
 
 			{{if $profile.addr}}<div class="p-addr">{{include file="sub/punct_wrap.tpl" text=$profile.addr}}</div>{{/if}}
 			{{if $is_owner }}
