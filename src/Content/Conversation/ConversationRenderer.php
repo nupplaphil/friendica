@@ -89,77 +89,7 @@ final readonly class ConversationRenderer
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
-		$live_update_div = '';
-
-		if ($mode === self::MODE_NETWORK) {
-			if (!$update) {
-				$live_update_div = '<div id="live-network"></div>' . "\r\n"
-					. "<script> var profile_uid = " . $viewerUid
-					. "; var netargs = '" . $this->getCommandAfterFirstSlash()
-					. '?f='
-					. (!empty($request['contactid']) ? '&contactid=' . rawurlencode((string) ($request['contactid'] ?? '')) : '')
-					. (!empty($request['search'])    ? '&search=' . rawurlencode((string) ($request['search'] ?? '')) : '')
-					. (!empty($request['star'])      ? '&star=' . rawurlencode((string) ($request['star'] ?? '')) : '')
-					. (!empty($request['order'])     ? '&order=' . rawurlencode((string) ($request['order'] ?? '')) : '')
-					. (!empty($request['bmark'])     ? '&bmark=' . rawurlencode((string) ($request['bmark'] ?? '')) : '')
-					. (!empty($request['liked'])     ? '&liked=' . rawurlencode((string) ($request['liked'] ?? '')) : '')
-					. (!empty($request['conv'])      ? '&conv=' . rawurlencode((string) ($request['conv'] ?? '')) : '')
-					. (!empty($request['nets'])      ? '&nets=' . rawurlencode((string) ($request['nets'] ?? '')) : '')
-					. (!empty($request['cmin'])      ? '&cmin=' . rawurlencode((string) ($request['cmin'] ?? '')) : '')
-					. (!empty($request['cmax'])      ? '&cmax=' . rawurlencode((string) ($request['cmax'] ?? '')) : '')
-					. (!empty($request['file'])      ? '&file=' . rawurlencode((string) ($request['file'] ?? '')) : '')
-					. (!empty($request['channel'])   ? '&channel=' . rawurlencode((string) ($request['channel'] ?? '')) : '')
-					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
-					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
-					. "'; </script>\r\n";
-			}
-		} elseif ($mode === self::MODE_PROFILE) {
-			if (!$update) {
-				$tab = !empty($request['tab']) ? trim((string) ($request['tab'] ?? '')) : 'posts';
-
-				if ($tab === 'posts') {
-					$live_update_div = '<div id="live-profile"></div>' . "\r\n"
-						. "<script> var profile_uid = " . $viewerUid
-						. "; var netargs = '?f='; </script>\r\n";
-				}
-			}
-		} elseif ($mode === self::MODE_NOTES) {
-			if (!$update) {
-				$live_update_div = '<div id="live-notes"></div>' . "\r\n"
-					. "<script> var profile_uid = " . $viewerUid
-					. "; var netargs = '?f='; </script>\r\n";
-			}
-		} elseif ($mode === self::MODE_DISPLAY) {
-			if (!$update) {
-				$live_update_div = '<div id="live-display"></div>' . "\r\n"
-					. "<script> var profile_uid = " . ($viewerUid ?: 0) . ";"
-					. "</script>";
-			}
-		} elseif ($mode === self::MODE_CHANNEL) {
-			if (!$update) {
-				$live_update_div = '<div id="live-channel"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
-					. '?f='
-					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
-					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
-					. "'; </script>\r\n";
-			}
-		} elseif ($mode === self::MODE_COMMUNITY) {
-			if (!$update) {
-				$live_update_div = '<div id="live-community"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
-					. '?f='
-					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
-					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
-					. "'; </script>\r\n";
-			}
-		} elseif ($mode === self::MODE_CONTACTS) {
-			if (!$update) {
-				$live_update_div = '<div id="live-contact"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
-					. "?f='; </script>\r\n";
-			}
-		}
+		$live_update_div = $this->getLiveUpdateHtml($mode, $update, $viewerUid, $request);
 
 		$page_dropping = $viewerUid && $this->pConfig->get($viewerUid, 'system', 'show_page_drop', true);
 
@@ -310,6 +240,78 @@ final readonly class ConversationRenderer
 
 		$this->profiler->stopRecording();
 		return $html;
+	}
+
+	/**
+	 * Build the live update HTML div based on the mode and request parameters.
+	 *
+	 * @param string $mode The rendering mode
+	 * @param bool $update Whether this is an update
+	 * @param int $viewerUid The viewer user ID
+	 * @param array $request The request parameters
+	 * @return string The live update HTML
+	 */
+	private function getLiveUpdateHtml(string $mode, bool $update, int $viewerUid, array $request): string
+	{
+		if ($update) {
+			return '';
+		}
+
+		$live_update_div = '';
+
+		if ($mode === self::MODE_NETWORK) {
+			$live_update_div = '<div id="live-network"></div>' . "\r\n"
+				. "<script> var profile_uid = " . $viewerUid
+				. "; var netargs = '" . $this->getCommandAfterFirstSlash()
+				. '?f='
+				. (!empty($request['contactid']) ? '&contactid=' . rawurlencode((string) ($request['contactid'] ?? '')) : '')
+				. (!empty($request['search'])    ? '&search=' . rawurlencode((string) ($request['search'] ?? '')) : '')
+				. (!empty($request['star'])      ? '&star=' . rawurlencode((string) ($request['star'] ?? '')) : '')
+				. (!empty($request['order'])     ? '&order=' . rawurlencode((string) ($request['order'] ?? '')) : '')
+				. (!empty($request['bmark'])     ? '&bmark=' . rawurlencode((string) ($request['bmark'] ?? '')) : '')
+				. (!empty($request['liked'])     ? '&liked=' . rawurlencode((string) ($request['liked'] ?? '')) : '')
+				. (!empty($request['conv'])      ? '&conv=' . rawurlencode((string) ($request['conv'] ?? '')) : '')
+				. (!empty($request['nets'])      ? '&nets=' . rawurlencode((string) ($request['nets'] ?? '')) : '')
+				. (!empty($request['cmin'])      ? '&cmin=' . rawurlencode((string) ($request['cmin'] ?? '')) : '')
+				. (!empty($request['cmax'])      ? '&cmax=' . rawurlencode((string) ($request['cmax'] ?? '')) : '')
+				. (!empty($request['file'])      ? '&file=' . rawurlencode((string) ($request['file'] ?? '')) : '')
+				. (!empty($request['channel'])   ? '&channel=' . rawurlencode((string) ($request['channel'] ?? '')) : '')
+				. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+				. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
+				. "'; </script>\r\n";
+		} elseif ($mode === self::MODE_PROFILE && (!isset($request['tab']) || $request['tab'] === 'posts')) {
+			$live_update_div = '<div id="live-profile"></div>' . "\r\n"
+				. "<script> var profile_uid = " . $viewerUid
+				. "; var netargs = '?f='; </script>\r\n";
+		} elseif ($mode === self::MODE_NOTES) {
+			$live_update_div = '<div id="live-notes"></div>' . "\r\n"
+				. "<script> var profile_uid = " . $viewerUid
+				. "; var netargs = '?f='; </script>\r\n";
+		} elseif ($mode === self::MODE_DISPLAY) {
+			$live_update_div = '<div id="live-display"></div>' . "\r\n"
+				. "<script> var profile_uid = " . ($viewerUid ?: 0) . ";"
+				. "</script>";
+		} elseif ($mode === self::MODE_CHANNEL) {
+			$live_update_div = '<div id="live-channel"></div>' . "\r\n"
+				. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
+				. '?f='
+				. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+				. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
+				. "'; </script>\r\n";
+		} elseif ($mode === self::MODE_COMMUNITY) {
+			$live_update_div = '<div id="live-community"></div>' . "\r\n"
+				. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
+				. '?f='
+				. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+				. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
+				. "'; </script>\r\n";
+		} elseif ($mode === self::MODE_CONTACTS) {
+			$live_update_div = '<div id="live-contact"></div>' . "\r\n"
+				. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
+				. "?f='; </script>\r\n";
+		}
+
+		return $live_update_div;
 	}
 
 	/**
