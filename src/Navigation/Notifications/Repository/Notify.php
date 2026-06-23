@@ -67,13 +67,14 @@ class Notify extends BaseRepository
 		private readonly EventDispatcherInterface $eventDispatcher,
 		private readonly ?NotifyFactory $entityFactory = null,
 	) {
-		$this->l10n         = $l10n;
-		$this->baseUrl      = $baseUrl;
-		$this->config       = $config;
-		$this->emailer      = $emailer;
-		$this->notification = $notification;
+		$this->l10n          = $l10n;
+		$this->baseUrl       = $baseUrl;
+		$this->config        = $config;
+		$this->emailer       = $emailer;
+		$this->notification  = $notification;
+		$this->entityFactory = $entityFactory ?? new NotifyFactory($logger);
 
-		parent::__construct($database, $logger, $entityFactory ?? new NotifyFactory($logger));
+		parent::__construct($database, $logger, $this->entityFactory);
 	}
 
 	protected function getFactory(): NotifyFactory {
