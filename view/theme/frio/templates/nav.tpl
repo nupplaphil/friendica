@@ -271,11 +271,10 @@
 										<li>
 											<a accesskey="a" role="menuitem" id="nav-admin-link"
 												class="nav-link {{$nav.admin.2}}" href="{{$nav.admin.0}}"
-												title="{{$nav.admin.3}}"><i class="ri ri-admin-line ri-fw" aria-hidden="true"></i>
+												title="{{$nav.admin.3}}"><i class="ri ri-medal-2-fill ri-fw" aria-hidden="true"></i>
 												{{$nav.admin.1}}
 											</a>
-										</li>
-									{{/if}}
+										</li>									{{/if}}
 									{{if $nav.moderation}}
 										<li>
 											<a accesskey="m" role="menuitem" id="nav-moderation-link"
