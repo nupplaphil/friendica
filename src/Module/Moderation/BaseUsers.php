@@ -148,16 +148,31 @@ abstract class BaseUsers extends BaseModeration
 				User::ACCOUNT_TYPE_RELAY        => [$this->t('Relay'), ""],
 			];
 
-			$user['page_flags_raw'] = $user['page-flags'];
-			$user['page_type']      = $page_types[$user['page-flags']];
+			$moderator     = false;
+			$administrator = false;
+			if (User::isMOderator($user['uid'])){
+				$moderator = true;
+			}
+			if (User::isSiteAdmin($user['uid'])){
+				$administrator = true;
+				$moderator     = false;
+				// do not show admin for sub-accounts of admin
+				if ($user['parent-uid']){
+					$administrator = false;
+				}
+			}
+			$user['is_mod']   = $moderator;
+			$user['is_admin'] = $administrator;
 
-			$user['account_type_raw'] = ($user['page_flags_raw'] == 0) ? $user['account-type'] : -1;
-			$user['account_type']     = ($user['page_flags_raw'] == 0) ? $account_types[$user['account-type']] : '';
+			$user['page_flags_raw'] = $user['page-flags'];
+			$user['page_flags']     = $page_types[$user['page-flags']];
+
+			$user['account_type_raw'] = $user['account-type'];
+			$user['account_type']     = $account_types[$user['account-type']];
 
 			$user['register_date'] = Temporal::getRelativeDate($user['register_date']);
 			$user['login_date']    = Temporal::getRelativeDate($user['last-activity'], false);
 			$user['lastitem_date'] = Temporal::getRelativeDate($user['last-item']);
-			$user['is_admin']      = in_array($user['email'], $adminlist);
 			$user['is_deletable']  = !$user['account_removed'] && intval($user['uid']) != $this->session->getLocalUserId();
 			$user['deleted']       = $user['account_removed'] ? Temporal::getRelativeDate($user['account_expires_on']) : false;
 
