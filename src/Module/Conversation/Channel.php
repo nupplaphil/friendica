@@ -126,7 +126,7 @@ class Channel extends Timeline
 			return $o;
 		}
 
-		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_CHANNEL, $this->raw, $order, $this->session->getLocalUserId());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_CHANNEL, $this->raw, $order, $this->session->getLocalUserId(), $request);
 
 		$pager = new BoundariesPager(
 			$this->l10n,

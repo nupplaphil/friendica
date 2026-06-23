@@ -212,7 +212,7 @@ class Conversations extends BaseProfile
 			$items  = array_merge($items, $pinned);
 		}
 
-		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, false, ConversationRenderer::ORDER_PINNED_RECEIVED, $this->session->getLocalUserId());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, false, ConversationRenderer::ORDER_PINNED_RECEIVED, $this->session->getLocalUserId(), $request);
 
 		$o .= $pager->renderMinimal(count($items));
 

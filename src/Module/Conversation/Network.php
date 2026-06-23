@@ -295,7 +295,7 @@ class Network extends Timeline
 				$items = $this->getItems();
 			}
 
-			$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_NETWORK, $this->raw, $this->getOrder(), $this->session->getLocalUserId());
+			$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_NETWORK, $this->raw, $this->getOrder(), $this->session->getLocalUserId(), $request);
 		} catch (\Exception $e) {
 			$this->logger->error('Exception when fetching items', ['code' => $e->getCode(), 'message' => $e->getMessage()]);
 			$o .= $this->l10n->t('Error %d (%s) while fetching the timeline.', $e->getCode(), $e->getMessage());

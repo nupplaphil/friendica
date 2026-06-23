@@ -117,7 +117,7 @@ class Community extends Timeline
 			return $o;
 		}
 
-		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_COMMUNITY, $this->raw, ConversationRenderer::ORDER_RECEIVED, $this->session->getLocalUserId());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_COMMUNITY, $this->raw, ConversationRenderer::ORDER_RECEIVED, $this->session->getLocalUserId(), $request);
 
 		$pager = new BoundariesPager(
 			$this->l10n,

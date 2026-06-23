@@ -104,7 +104,7 @@ class Profile extends BaseModule
 			}
 		}
 
-		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, true, ConversationRenderer::ORDER_RECEIVED, $appHelper->getProfileOwner());
+		$o .= $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_PROFILE, true, ConversationRenderer::ORDER_RECEIVED, $appHelper->getProfileOwner(), $request);
 
 		System::htmlUpdateExit($o);
 	}

@@ -125,7 +125,7 @@ class Notes extends BaseProfile
 		if (DBA::isResult($r)) {
 			$notes = Post::toArray($r);
 			$count = count($notes);
-			$o .= $this->conversationRenderer->renderThreaded($notes, ConversationRenderer::MODE_NOTES, false);
+			$o .= $this->conversationRenderer->renderThreaded($notes, ConversationRenderer::MODE_NOTES, false, ConversationRenderer::ORDER_COMMENTED, 0, $request);
 		}
 
 		$o .= $pager->renderMinimal($count);

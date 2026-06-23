@@ -1767,7 +1767,7 @@ class Contact
 			$items  = array_merge($items, $pinned);
 		}
 
-		$o = DI::conversationRenderer()->renderThreaded($items, ConversationRenderer::MODE_CONTACTS, $update || $raw, ConversationRenderer::ORDER_PINNED_CREATED, $uid);
+		$o = DI::conversationRenderer()->renderThreaded($items, ConversationRenderer::MODE_CONTACTS, $update || $raw, ConversationRenderer::ORDER_PINNED_CREATED, $uid, $request);
 
 		if (!$update) {
 			if (DI::pConfig()->get($uid, 'system', 'infinite_scroll', true)) {

@@ -77,11 +77,12 @@ final readonly class ConversationRenderer
 	 * @param bool $update Asynchronous update rendering
 	 * @param string $order One of self::ORDER_*
 	 * @param int $uid
+	 * @param array $request
 	 * @return string
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function renderThreaded(array $items, string $mode, bool $update = false, string $order = self::ORDER_COMMENTED, int $uid = 0): string
+	public function renderThreaded(array $items, string $mode, bool $update = false, string $order = self::ORDER_COMMENTED, int $uid = 0, array $request = []): string
 	{
 		$this->profiler->startRecording('rendering');
 		$this->statusEditor->registerAssets();
@@ -94,27 +95,27 @@ final readonly class ConversationRenderer
 			if (!$update) {
 				$live_update_div = '<div id="live-network"></div>' . "\r\n"
 					. "<script> var profile_uid = " . $viewerUid
-					. "; var netargs = '" . substr($this->args->getCommand(), 8)
+					. "; var netargs = '" . $this->getCommandAfterFirstSlash()
 					. '?f='
-					. (!empty($_GET['contactid']) ? '&contactid=' . rawurlencode((string) ($_GET['contactid'] ?? '')) : '')
-					. (!empty($_GET['search'])    ? '&search=' . rawurlencode((string) ($_GET['search'] ?? '')) : '')
-					. (!empty($_GET['star'])      ? '&star=' . rawurlencode((string) ($_GET['star'] ?? '')) : '')
-					. (!empty($_GET['order'])     ? '&order=' . rawurlencode((string) ($_GET['order'] ?? '')) : '')
-					. (!empty($_GET['bmark'])     ? '&bmark=' . rawurlencode((string) ($_GET['bmark'] ?? '')) : '')
-					. (!empty($_GET['liked'])     ? '&liked=' . rawurlencode((string) ($_GET['liked'] ?? '')) : '')
-					. (!empty($_GET['conv'])      ? '&conv=' . rawurlencode((string) ($_GET['conv'] ?? '')) : '')
-					. (!empty($_GET['nets'])      ? '&nets=' . rawurlencode((string) ($_GET['nets'] ?? '')) : '')
-					. (!empty($_GET['cmin'])      ? '&cmin=' . rawurlencode((string) ($_GET['cmin'] ?? '')) : '')
-					. (!empty($_GET['cmax'])      ? '&cmax=' . rawurlencode((string) ($_GET['cmax'] ?? '')) : '')
-					. (!empty($_GET['file'])      ? '&file=' . rawurlencode((string) ($_GET['file'] ?? '')) : '')
-					. (!empty($_GET['channel'])   ? '&channel=' . rawurlencode((string) ($_GET['channel'] ?? '')) : '')
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($_GET['no_sharer'] ?? '')) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) ($_GET['accounttype'] ?? '')) : '')
+					. (!empty($request['contactid']) ? '&contactid=' . rawurlencode((string) ($request['contactid'] ?? '')) : '')
+					. (!empty($request['search'])    ? '&search=' . rawurlencode((string) ($request['search'] ?? '')) : '')
+					. (!empty($request['star'])      ? '&star=' . rawurlencode((string) ($request['star'] ?? '')) : '')
+					. (!empty($request['order'])     ? '&order=' . rawurlencode((string) ($request['order'] ?? '')) : '')
+					. (!empty($request['bmark'])     ? '&bmark=' . rawurlencode((string) ($request['bmark'] ?? '')) : '')
+					. (!empty($request['liked'])     ? '&liked=' . rawurlencode((string) ($request['liked'] ?? '')) : '')
+					. (!empty($request['conv'])      ? '&conv=' . rawurlencode((string) ($request['conv'] ?? '')) : '')
+					. (!empty($request['nets'])      ? '&nets=' . rawurlencode((string) ($request['nets'] ?? '')) : '')
+					. (!empty($request['cmin'])      ? '&cmin=' . rawurlencode((string) ($request['cmin'] ?? '')) : '')
+					. (!empty($request['cmax'])      ? '&cmax=' . rawurlencode((string) ($request['cmax'] ?? '')) : '')
+					. (!empty($request['file'])      ? '&file=' . rawurlencode((string) ($request['file'] ?? '')) : '')
+					. (!empty($request['channel'])   ? '&channel=' . rawurlencode((string) ($request['channel'] ?? '')) : '')
+					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_PROFILE) {
 			if (!$update) {
-				$tab = !empty($_GET['tab']) ? trim((string) ($_GET['tab'] ?? '')) : 'posts';
+				$tab = !empty($request['tab']) ? trim((string) ($request['tab'] ?? '')) : 'posts';
 
 				if ($tab === 'posts') {
 					$live_update_div = '<div id="live-profile"></div>' . "\r\n"
@@ -137,25 +138,25 @@ final readonly class ConversationRenderer
 		} elseif ($mode === self::MODE_CHANNEL) {
 			if (!$update) {
 				$live_update_div = '<div id="live-channel"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . substr($this->args->getCommand(), 8)
+					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
 					. '?f='
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($_GET['no_sharer'] ?? '')) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) ($_GET['accounttype'] ?? '')) : '')
+					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_COMMUNITY) {
 			if (!$update) {
 				$live_update_div = '<div id="live-community"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . substr($this->args->getCommand(), 10)
+					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
 					. '?f='
-					. (!empty($_GET['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($_GET['no_sharer'] ?? '')) : '')
-					. (!empty($_GET['accounttype']) ? '&accounttype=' . rawurlencode((string) ($_GET['accounttype'] ?? '')) : '')
+					. (!empty($request['no_sharer']) ? '&no_sharer=' . rawurlencode((string) ($request['no_sharer'] ?? '')) : '')
+					. (!empty($request['accounttype']) ? '&accounttype=' . rawurlencode((string) ($request['accounttype'] ?? '')) : '')
 					. "'; </script>\r\n";
 			}
 		} elseif ($mode === self::MODE_CONTACTS) {
 			if (!$update) {
 				$live_update_div = '<div id="live-contact"></div>' . "\r\n"
-					. "<script> var profile_uid = -1; var netargs = '" . substr($this->args->getCommand(), 8)
+					. "<script> var profile_uid = -1; var netargs = '" . $this->getCommandAfterFirstSlash()
 					. "?f='; </script>\r\n";
 			}
 		}
@@ -309,6 +310,22 @@ final readonly class ConversationRenderer
 
 		$this->profiler->stopRecording();
 		return $html;
+	}
+
+	/**
+	 * Extracts the part of a path after the first slash.
+	 *
+	 * @param string $path The input path
+	 * @return string The part after the first slash, or empty string if no slash exists
+	 */
+	private function getCommandAfterFirstSlash(): string
+	{
+		$command = $this->args->getCommand();
+		$pos     = strpos($command, '/');
+		if ($pos === false) {
+			return '';
+		}
+		return substr($command, $pos + 1);
 	}
 
 	/**

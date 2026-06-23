@@ -30,7 +30,7 @@ class Channel extends ChannelModule
 				$items = $this->getCommunityItems();
 			}
 
-			$o = $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_CHANNEL, true, ConversationRenderer::ORDER_CREATED, $this->session->getLocalUserId());
+			$o = $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_CHANNEL, true, ConversationRenderer::ORDER_CREATED, $this->session->getLocalUserId(), $request);
 		}
 
 		System::htmlUpdateExit($o);

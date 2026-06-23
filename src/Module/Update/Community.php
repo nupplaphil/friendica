@@ -36,7 +36,7 @@ class Community extends CommunityModule
 
 		$o = '';
 		if ($this->update || $this->force) {
-			$o = $this->conversationRenderer->renderThreaded($this->getCommunityItems(), ConversationRenderer::MODE_COMMUNITY, true, ConversationRenderer::ORDER_COMMENTED, DI::userSession()->getLocalUserId());
+			$o = $this->conversationRenderer->renderThreaded($this->getCommunityItems(), ConversationRenderer::MODE_COMMUNITY, true, ConversationRenderer::ORDER_COMMENTED, DI::userSession()->getLocalUserId(), $request);
 		}
 
 		System::htmlUpdateExit($o);

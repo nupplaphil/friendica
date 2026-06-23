@@ -40,7 +40,7 @@ class Network extends NetworkModule
 			$items = [];
 		}
 
-		$o = $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_NETWORK, true, $this->getOrder(), $this->session->getLocalUserId());
+		$o = $this->conversationRenderer->renderThreaded($items, ConversationRenderer::MODE_NETWORK, true, $this->getOrder(), $this->session->getLocalUserId(), $request);
 
 		System::htmlUpdateExit($o);
 	}
