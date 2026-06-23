@@ -602,22 +602,48 @@ class Contact extends BaseModule
 			$sparkle  = '';
 		}
 
+		$administrator = false;
+		$moderator     = false;
+		if (Model\Contact::isLocalById($contact['id'])){
+				$local_id = Model\User::getIdForUrl($contact['url']);
+				// check if contact is a Moderator
+				if (Model\User::isModerator($local_id)){
+					$moderator = true;
+				}
+				// check if contact is an Admin
+				if (Model\User::isSiteAdmin($local_id)){
+					$administrator = true;
+					$moderator = false;
+					// do not show as Admin if this is a sub-account of an Admin
+					$check = Model\User::getById($local_id,['parent-uid']);
+					if ($check['parent-uid']){
+						$administrator = false;
+					}
+				}
+		}
+
 		return [
-			'id'           => $contact['id'],
-			'url'          => $url,
-			'img_hover'    => DI::l10n()->t('Visit %s\'s profile [%s]', $contact['name'], $contact['url']),
-			'photo_menu'   => Model\Contact::photoMenu($contact, DI::userSession()->getLocalUserId()),
-			'thumb'        => Model\Contact::getThumb($contact, true),
-			'alt_text'     => $alt_text,
-			'name'         => $contact['name'],
-			'nick'         => $contact['nick'],
-			'details'      => $contact['location'],
-			'tags'         => $contact['keywords'],
-			'about'        => $contact['about'],
-			'account_type' => Model\Contact::getAccountType($contact['contact-type']),
-			'sparkle'      => $sparkle,
-			'itemurl'      => ($contact['addr'] ?? '') ?: $contact['url'],
-			'network'      => ContactSelector::networkToName($contact['network'], $contact['protocol'], $contact['gsid']),
+			'id'                => $contact['id'],
+			'is_admin'          => $administrator,
+			'adming_title'      => DI::l10n()->t('Administrator'),
+			'is_mod'            => $moderator,
+			'moderator_title'   => DI::l10n()->t('Moderator'),
+			'url'               => $url,
+			'img_hover'         => DI::l10n()->t('Visit %s\'s profile [%s]', $contact['name'], $contact['url']),
+			'photo_menu'        => Model\Contact::photoMenu($contact, DI::userSession()->getLocalUserId()),
+			'thumb'             => Model\Contact::getThumb($contact, true),
+			'alt_text'          => $alt_text,
+			'name'              => $contact['name'],
+			'nick'              => $contact['nick'],
+			'details'           => $contact['location'],
+			'tags'              => $contact['keywords'],
+			'about'             => $contact['about'],
+			'account_type'      => $contact['contact-type'],
+			'manually_approve'  => $contact['manually-approve'],
+			'private'           => $contact['prv'],
+			'sparkle'           => $sparkle,
+			'itemurl'           => ($contact['addr'] ?? '') ?: $contact['url'],
+			'network'           => ContactSelector::networkToName($contact['network'], $contact['protocol'], $contact['gsid']),
 		];
 	}
 }
