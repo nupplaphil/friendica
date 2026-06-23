@@ -39,7 +39,8 @@ class SampleStorageBackend implements ICanWriteToStorage
 	 * You can add here every dynamic class as dependency you like and add them to a private field
 	 * Friendica automatically creates these classes and passes them as argument to the constructor
 	 */
-	public function __construct(private readonly L10n $l10n) {}
+	public function __construct(private readonly L10n $l10n) // @phpstan-ignore property.onlyWritten
+	{}
 
 	public function get(string $reference): string
 	{

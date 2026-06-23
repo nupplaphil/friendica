@@ -11,12 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCacheInMemory of property Friendica\\Test\\MemoryCacheTestCase\:\:\$instance is not the same as PHPDoc type Friendica\\Core\\Cache\\Capability\\ICanCache of overridden property Friendica\\Test\\CacheTestCase\:\:\$instance\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: tests/MemoryCacheTestCase.php
-
-		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
 			identifier: method.notFound
 			count: 5
@@ -215,18 +209,6 @@ parameters:
 			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
 
 		-
-			message: '#^Static property Friendica\\Test\\Util\\Database\\StaticDatabase\:\:\$staticConnection \(Friendica\\Test\\Util\\Database\\ExtendedPDO\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 2
-			path: tests/Util/Database/StaticDatabase.php
-
-		-
-			message: '#^Property Friendica\\Test\\Util\\EntityDouble\:\:\$privString is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: tests/Util/EntityDouble.php
-
-		-
 			message: '#^Method Friendica\\Test\\Util\\Hooks\\InstanceMocks\\FakeInstanceDecorator\:\:getCBool\(\) should return bool\|null but returns string\.$#'
 			identifier: return.type
 			count: 1
@@ -239,12 +221,6 @@ parameters:
 			path: tests/Util/Intercept.php
 
 		-
-			message: '#^Property Friendica\\Test\\Util\\SampleStorageBackend\:\:\$l10n is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: tests/Util/SampleStorageBackend.php
-
-		-
 			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\MockInterface\.$#'
 			identifier: varTag.type
 			count: 1
@@ -255,12 +231,6 @@ parameters:
 			identifier: return.void
 			count: 1
 			path: tests/Util/SerializableObjectDouble.php
-
-		-
-			message: '#^Static property Friendica\\Test\\Util\\StaticCookie\:\:\$_EXPIRE \(int\) does not accept null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/Util/StaticCookie.php
 
 		-
 			message: '#^Access to undefined constant Friendica\\App\\BaseURL\:\:DEFAULT_SSL_SCHEME\.$#'

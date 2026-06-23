@@ -20,10 +20,7 @@ use PDOException;
  */
 class StaticDatabase extends Database
 {
-	/**
-	 * @var ExtendedPDO
-	 */
-	private static $staticConnection;
+	private static ?ExtendedPDO $staticConnection;
 
 	/** @var bool  */
 	private $_locked = false;
