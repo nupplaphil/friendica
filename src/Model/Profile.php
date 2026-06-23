@@ -28,6 +28,8 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use Friendica\Core\Theme;
+use Friendica\Model\Contact;
+use Friendica\Model\User;
 
 class Profile
 {
@@ -457,8 +459,32 @@ class Profile
 			$member_since = [ DI::l10n()->t('Joined:'), DI::l10n()->mediumDate($p['register_date']) ];
 		}
 
+		$administrator = false;
+		$moderator     = false;
+		if (Contact::isLocalById($profile['id'])){
+				$local_id = User::getIdForUrl($profile['url']);
+				// check if contact is a Moderator
+				if (User::isModerator($local_id)){
+					$moderator = true;
+				}
+				// check if contact is an Admin
+				if (User::isSiteAdmin($local_id)){
+					$administrator = true;
+					$moderator = false;
+					// do not show as Admin if this is a sub-account of an Admin
+					$check = User::getById($local_id,['parent-uid']);
+					if ($check['parent-uid']){
+						$administrator = false;
+					}
+				}
+		}
+	
 		$tpl = Renderer::getMarkupTemplate('profile/vcard.tpl');
 		$o .= Renderer::replaceMacros($tpl, [
+			'is_admin'           => $administrator,
+			'admin_title'        => DI::l10n()->t('Administrator'),
+			'is_mod'             => $moderator,
+			'moderator_title'    => DI::l10n()->t('Moderator'),
 			'$is_owner'          => DI::userSession()->getLocalUserId() == $profile['uid'],
 			'$profile'           => $p,
 			'$edit_profile_link' => [
@@ -478,7 +504,9 @@ class Profile
 			'$subscribe_feed_link'         => $profile['hidewall'] ?? 0 ? '' : $profile['poll'],
 			'$wallmessage'                 => DI::l10n()->t('Message'),
 			'$wallmessage_link'            => $wallmessage_link,
-			'$account_type'                => $account_type,
+			'$account_type_name'           => $account_type_name,
+			'$account_type'                => $profile['account-type'],
+			'$page_flags'                  => $profile['page-flags'],
 			'$location'                    => $location,
 			'$homepage'                    => $homepage,
 			'$homepage_verified'           => DI::l10n()->t('This website has been verified to belong to the same person.'),
