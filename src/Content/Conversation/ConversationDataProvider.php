@@ -286,7 +286,7 @@ final readonly class ConversationDataProvider
 			return $userGServer->gsid;
 		}, $userGservers->getArrayCopy());
 
-		$maxComments = $mode === ConversationRenderer::MODE_DISPLAY ? $this->config->get('system', 'max_display_comments', 1000) : $this->config->get('system', 'max_comments', 100);
+		$maxComments = $mode === ConversationRenderer::MODE_DISPLAY ? $this->config->get('system', 'max_display_comments') : $this->config->get('system', 'max_comments');
 
 		$self = $uid !== 0 ? (int) Contact::getPublicIdByUserId($uid) : 0;
 
@@ -623,10 +623,10 @@ final readonly class ConversationDataProvider
 	 * Collect all descendant URI IDs from a starting URI ID using BFS.
 	 *
 	 * @param array<int, array> $rows All rows with uri-id and thr-parent-id
-	 * @param int|string $startUriId The starting URI ID
-	 * @return array<int|string> All descendant URI IDs
+	 * @param int $startUriId The starting URI ID
+	 * @return array<int> All descendant URI IDs
 	 */
-	private function collectDescendants(array $rows, $startUriId): array
+	private function collectDescendants(array $rows, int $startUriId): array
 	{
 		$descendants    = [];
 		$uriToThrParent = [];
@@ -1212,7 +1212,7 @@ final readonly class ConversationDataProvider
 	 * Get answers per thread.
 	 *
 	 * @param array $rows Array of row data
-	 * @return array Associative array mapping thread parent IDs to their answer URIs
+	 * @return array<int, int[]> Associative array mapping thread parent IDs to their answer URIs
 	 */
 	private function getAnswersPerThread(array $rows): array
 	{
@@ -1232,7 +1232,7 @@ final readonly class ConversationDataProvider
 	 * Counts the number of answers per thread parent ID from the given rows.
 	 *
 	 * @param array $rows Array of row data with 'uri-id' and 'thr-parent-id' keys
-	 * @return array Associative array mapping thread parent IDs to their answer counts
+	 * @return array<int, int> Associative array mapping thread parent IDs to their answer counts
 	 */
 	private function countAnswersPerThread(array $rows): array
 	{
@@ -1252,7 +1252,7 @@ final readonly class ConversationDataProvider
 	 * Extracts post totals from emoji array for entries with verb 'http://activitystrea.ms/schema/1.0/post'.
 	 *
 	 * @param array $emojis Array of emoji data with structure [uriId][verb][data]
-	 * @return array Associative array mapping URI IDs to their post totals
+	 * @return array<int, int> Associative array mapping URI IDs to their post totals
 	 */
 	private function getPostTotalsFromEmojis(array $emojis): array
 	{
@@ -1273,7 +1273,7 @@ final readonly class ConversationDataProvider
 	 *
 	 * @param array $rows Array of row data with 'uri-id' and 'thr-parent-id' keys
 	 * @param array $emojis Array of emoji data with structure [uriId][verb][data]
-	 * @return array Associative array mapping URI IDs to their reply counts
+	 * @return array<int, int> Associative array mapping URI IDs to their reply counts
 	 */
 	private function calculateMissingReplyCounts(array $rows, array $emojis): array
 	{
