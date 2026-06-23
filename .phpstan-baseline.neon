@@ -479,18 +479,6 @@ parameters:
 			path: tests/src/Core/Config/ConfigTransactionTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Core\\Config\\ConfigTransactionTest\:\:\$configFileManager \(Friendica\\Core\\Config\\Util\\ConfigFileManager\) does not accept Mockery\\MockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
-
-		-
 			message: '#^Variable \$tempData on left side of \?\? is never defined\.$#'
 			identifier: nullCoalesce.variable
 			count: 1
@@ -1072,26 +1060,4 @@ parameters:
 			count: 1
 			path: tests/src/Util/ProfilerTest.php
 
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:times\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Worker/ExpireReportsTest.php
 
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:twice\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Worker/ExpireReportsTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 12
-			path: tests/src/Worker/ExpireReportsTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Worker/ExpireReportsTest.php
