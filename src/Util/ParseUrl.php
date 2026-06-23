@@ -1760,13 +1760,13 @@ class ParseUrl
 	 * Fetch the services that are supported by song.link
 	 *
 	 * @param string $url media url
-	 * @return array with the detected services
+	 * @return array{embed: string, services: array<host,url>} with the detected services
 	 */
-	public static function fetchSongLinkServices(string $url): array
+	private static function fetchSongLinkServices(string $url): array
 	{
 		$songlink = 'https://song.link/' . urlencode($url);
-		$http     = DI::httpClient()->get($songlink);
-		if (!$http->isSuccess()) {
+		$http     = DI::httpClient()->get($songlink, HttpClientAccept::HTML, [HttpClientOptions::REQUEST => HttpClientRequest::SITEINFO]);
+		if (!$http->isSuccess() || $http->getRedirectUrl() === '') {
 			return ['embed' => '', 'services' => []];
 		}
 
@@ -1783,11 +1783,11 @@ class ParseUrl
 
 		$result = [];
 		foreach ($links as $link) {
-			// sichere Variante: prüfe ob es ein DOMElement ist und hole Attribut
 			if ($link instanceof DOMElement) {
 				$href = $link->getAttribute('href');
-				if (! in_array($href, ['', '/'])) {
-					$result[parse_url($href, PHP_URL_HOST)] = $href;
+				$host = parse_url($href, PHP_URL_HOST);
+				if (!empty($host)) {
+					$result[$host] = $href;
 				}
 			}
 		}
@@ -1807,7 +1807,7 @@ class ParseUrl
 	private static function getSongLinkPlayer(array $siteinfo): array
 	{
 		$service = self::fetchSongLinkServices($siteinfo['url']);
-		if (count($service['services']) === 0) {
+		if (count($service['services']) === 0 || $service['embed'] === '') {
 			DI::logger()->debug('No song.link data', ['url' => $siteinfo['url'], 'service' => $service]);
 			return $siteinfo;
 		}
