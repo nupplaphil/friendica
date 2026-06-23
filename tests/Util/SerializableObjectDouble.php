@@ -24,7 +24,7 @@ class SerializableObjectDouble implements \Serializable
 		return ['data' => 'serialized'];
 	}
 
-	public function __unserialize(string $data): void
+	public function __unserialize(array $data): void
 	{
 		return;
 	}
