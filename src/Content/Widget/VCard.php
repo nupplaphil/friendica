@@ -14,6 +14,7 @@ use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Util\Strings;
+use Friendica\Core\User;
 
 /**
  * VCard widget
@@ -107,8 +108,31 @@ class VCard
 			}
 		}
 
+		$administrator = false;
+		$moderator     = false;
+		if (Contact::isLocalById($contact['id'])){
+				$local_id = User::getIdForUrl($contact['url']);
+				// check if contact is a Moderator
+				if (User::isModerator($local_id)){
+					$moderator = true;
+				}
+				// check if contact is an Admin
+				if (User::isSiteAdmin($local_id)){
+					$administrator = true;
+					$moderator = false;
+					// do not show as Admin if this is a sub-account of an Admin
+					$check = User::getById($local_id,['parent-uid']);
+					if ($check['parent-uid']){
+						$administrator = false;
+					}
+				}
+		}
+
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('widget/vcard.tpl'), [
 			'$contact'             => $contact,
+			'$is_admin'            => $administrator,
+			'$admin_title'         => DI::l10n()->t('Administrator'),
+			'$is_mod'              => $moderator,
 			'$photo'               => $photo,
 			'$url'                 => Contact::magicLinkByContact($contact, $contact_url),
 			'$about'               => BBCode::convertForUriId($contact['uri-id'] ?? 0, $contact['about'] ?? ''),
@@ -118,7 +142,9 @@ class VCard
 			'$network_link'        => $network_link,
 			'$network_svg'         => $network_svg,
 			'$network'             => DI::l10n()->t('Network:'),
-			'$account_type'        => Contact::getAccountType($contact['contact-type']),
+			'$account_type_name'   => Contact::getAccountType($contact['contact-type']),
+			'$account_type'        => $contact['contact-type'],
+			'$manually_approve'    => $contact['manually-approve'],
 			'$follow'              => DI::l10n()->t('Follow'),
 			'$follow_link'         => $follow_link,
 			'$unfollow'            => DI::l10n()->t('Unfollow'),
