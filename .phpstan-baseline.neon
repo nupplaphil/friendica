@@ -11,12 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Access to undefined constant Friendica\\Core\\Cache\\Capability\\ICanCache\:\:NAME\.$#'
-			identifier: classConstant.notFound
-			count: 1
-			path: tests/CacheTestCase.php
-
-		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
 			identifier: deadCode.unreachable
 			count: 1
@@ -27,12 +21,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/FixtureTestCase.php
-
-		-
-			message: '#^Variable \$cache in PHPDoc tag @var does not match assigned variable \$lock\.$#'
-			identifier: varTag.differentVariable
-			count: 1
-			path: tests/Functional/DependencyCheckTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
