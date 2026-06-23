@@ -58,7 +58,8 @@ abstract class BaseRepository
 	 *
 	 * @deprecated 2026.08 This method will become abstract in a future release, implement it in your child class instead.
 	 */
-	protected function getFactory(): ICanCreateFromTableRow {
+	protected function getFactory(): ICanCreateFromTableRow
+	{
 		return $this->factory;
 	}
 

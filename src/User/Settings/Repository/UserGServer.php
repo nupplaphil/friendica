@@ -100,7 +100,8 @@ class UserGServer extends BaseRepository
 		}
 	}
 
-	protected function getFactory(): UserGServerFactory {
+	protected function getFactory(): UserGServerFactory
+	{
 		return $this->entityFactory;
 	}
 

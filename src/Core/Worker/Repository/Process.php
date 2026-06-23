@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
  */
 class Process extends BaseRepository
 {
-	const NODE_ENV = 'NODE_ENV';
+	public const NODE_ENV = 'NODE_ENV';
 
 	protected static $table_name = 'process';
 
@@ -54,7 +54,7 @@ class Process extends BaseRepository
 					'pid'      => $pid,
 					'command'  => $command,
 					'hostname' => $this->currentHost,
-					'created'  => DateTimeFormat::utcNow()
+					'created'  => DateTimeFormat::utcNow(),
 				])) {
 					throw new ProcessPersistenceException(sprintf('The process with PID %s already exists.', $pid));
 				}
@@ -86,7 +86,8 @@ class Process extends BaseRepository
 		}
 	}
 
-	protected function getFactory(): ProcessFactory {
+	protected function getFactory(): ProcessFactory
+	{
 		return $this->entityFactory;
 	}
 

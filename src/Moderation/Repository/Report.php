@@ -93,7 +93,8 @@ final class Report extends \Friendica\BaseRepository
 		return $Report;
 	}
 
-	protected function getFactory(): ReportFactory {
+	protected function getFactory(): ReportFactory
+	{
 		return $this->entityFactory;
 	}
 

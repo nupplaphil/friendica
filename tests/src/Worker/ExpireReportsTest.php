@@ -56,7 +56,7 @@ class ExpireReportsTest extends MockedTestCase
 
 		$database->expects($this->exactly(2))
 			->method('close')
-			->willReturnCallback(function ($result) use ($closedResult, $openResult) {
+			->willReturnCallback(function ($result) use ($closedResult, $openResult): void {
 				self::assertTrue($result === $closedResult || $result === $openResult);
 			});
 

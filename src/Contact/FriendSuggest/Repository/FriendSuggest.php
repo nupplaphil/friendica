@@ -30,7 +30,8 @@ class FriendSuggest extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
-	protected function getFactory(): FriendSuggestFactory {
+	protected function getFactory(): FriendSuggestFactory
+	{
 		return $this->entityFactory;
 	}
 

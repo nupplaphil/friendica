@@ -37,7 +37,8 @@ class PermissionSet extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
-	protected function getFactory(): PermissionSetFactory {
+	protected function getFactory(): PermissionSetFactory
+	{
 		return $this->entityFactory;
 	}
 

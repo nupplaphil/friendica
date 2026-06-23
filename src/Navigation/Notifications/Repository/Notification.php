@@ -17,7 +17,6 @@ use Friendica\Model\Post\UserNotification;
 use Friendica\Model\Verb;
 use Friendica\Navigation\Notifications\Collection\Notifications as NotificationsCollection;
 use Friendica\Navigation\Notifications\Entity\Notification as NotificationEntity;
-use Friendica\Navigation\Notifications\Factory;
 use Friendica\Navigation\Notifications\Factory\Notification as NotificationFactory;
 use Friendica\Network\HTTPException\NotFoundException;
 use Friendica\Protocol\Activity;
@@ -37,7 +36,8 @@ class Notification extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
-	protected function getFactory(): NotificationFactory {
+	protected function getFactory(): NotificationFactory
+	{
 		return $this->entityFactory;
 	}
 

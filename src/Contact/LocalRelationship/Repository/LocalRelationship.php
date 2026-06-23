@@ -61,7 +61,8 @@ class LocalRelationship extends BaseRepository
 		return $this->exists(['uid' => $uid, 'cid' => $cid]);
 	}
 
-	protected function getFactory(): LocalRelationshipFactory {
+	protected function getFactory(): LocalRelationshipFactory
+	{
 		return $this->entityFactory;
 	}
 

@@ -79,7 +79,8 @@ class Notify extends BaseRepository
 		parent::__construct($database, $logger, $this->entityFactory);
 	}
 
-	protected function getFactory(): NotifyFactory {
+	protected function getFactory(): NotifyFactory
+	{
 		return $this->entityFactory;
 	}
 

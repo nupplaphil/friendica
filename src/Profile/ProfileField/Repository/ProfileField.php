@@ -39,7 +39,8 @@ class ProfileField extends BaseRepository
 		$this->permissionSetRepository = $permissionSetRepository;
 	}
 
-	protected function getFactory(): ProfileFieldFactory {
+	protected function getFactory(): ProfileFieldFactory
+	{
 		return $this->entityFactory;
 	}
 
@@ -99,7 +100,7 @@ class ProfileField extends BaseRepository
 			'order'   => $profileField->order,
 			'created' => $profileField->created->format(DateTimeFormat::MYSQL),
 			'edited'  => $profileField->edited->format(DateTimeFormat::MYSQL),
-			'psid'    => $profileField->permissionSet->id
+			'psid'    => $profileField->permissionSet->id,
 		];
 	}
 
@@ -119,7 +120,7 @@ class ProfileField extends BaseRepository
 
 			return $this->select([
 				'uid'  => $uid,
-				'psid' => $publicPermissionSet->id
+				'psid' => $publicPermissionSet->id,
 			]);
 		} catch (\Exception $exception) {
 			throw new ProfileFieldPersistenceException(sprintf('Cannot select public ProfileField for user "%d"', $uid), $exception);
@@ -136,7 +137,7 @@ class ProfileField extends BaseRepository
 		try {
 			return $this->select(
 				['uid' => $uid],
-				['order' => ['order']]
+				['order' => ['order']],
 			);
 		} catch (\Exception $exception) {
 			throw new ProfileFieldPersistenceException(sprintf('Cannot select ProfileField for user "%d"', $uid), $exception);
@@ -162,7 +163,7 @@ class ProfileField extends BaseRepository
 
 		return $this->select(
 			['uid' => $uid, 'psid' => $permissionSetIds],
-			['order' => ['order']]
+			['order' => ['order']],
 		);
 	}
 
@@ -254,7 +255,7 @@ class ProfileField extends BaseRepository
 				$foundProfileFieldOld->update(
 					$profileField->value,
 					$order,
-					$profileField->permissionSet
+					$profileField->permissionSet,
 				);
 
 				$savedProfileFields->append($this->save($foundProfileFieldOld));

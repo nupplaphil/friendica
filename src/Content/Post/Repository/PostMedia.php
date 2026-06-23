@@ -53,7 +53,8 @@ class PostMedia extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
-	protected function getFactory(): PostMediaFactory {
+	protected function getFactory(): PostMediaFactory
+	{
 		return $this->entityFactory;
 	}
 
