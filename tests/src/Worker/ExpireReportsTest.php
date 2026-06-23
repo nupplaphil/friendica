@@ -62,7 +62,7 @@ class ExpireReportsTest extends MockedTestCase
 
 		$database->expects($this->exactly(6))
 			->method('delete')
-			->willReturnCallback(function () {
+			->willReturnCallback(function (): bool {
 				static $calls  = 0;
 				$expectedCalls = [
 					['report-rule', ['rid' => 11]],
@@ -76,6 +76,8 @@ class ExpireReportsTest extends MockedTestCase
 				self::assertSame($expectedCalls[$calls][0], func_get_arg(0));
 				self::assertSame($expectedCalls[$calls][1], func_get_arg(1));
 				$calls++;
+
+				return true;
 			});
 
 		$logger->expects($this->exactly(2))
