@@ -50,7 +50,7 @@ class Hovercard
 		$administrator = false;
 		$moderator     = false;
 		if (Contact::isLocalById($contact['id'])) {
-			$local_id = User::getIdForUrl($contact['url']);
+			$local_id = User::getIdForURL($contact['url']);
 			// check if contact is a Moderator
 			if (User::isModerator($local_id)) {
 				$moderator = true;
