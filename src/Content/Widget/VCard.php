@@ -14,7 +14,7 @@ use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Util\Strings;
-use Friendica\Core\User;
+use Friendica\Model\User;
 
 /**
  * VCard widget
@@ -111,7 +111,7 @@ class VCard
 		$administrator = false;
 		$moderator     = false;
 		if (Contact::isLocalById($contact['id'])) {
-			$local_id = User::getIdForUrl($contact['url']);
+			$local_id = User::getIdForURL($contact['url']);
 			// check if contact is a Moderator
 			if (User::isModerator($local_id)) {
 				$moderator = true;
