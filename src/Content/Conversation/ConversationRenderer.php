@@ -289,7 +289,7 @@ final readonly class ConversationRenderer
 				. "; var netargs = '?f='; </script>\r\n";
 		} elseif ($mode === self::MODE_DISPLAY) {
 			$live_update_div = '<div id="live-display"></div>' . "\r\n"
-				. "<script> var profile_uid = " . ($viewerUid ?: 0) . ";"
+				. "<script> var profile_uid = " . $viewerUid . ";"
 				. "</script>";
 		} elseif ($mode === self::MODE_CHANNEL) {
 			$live_update_div = '<div id="live-channel"></div>' . "\r\n"

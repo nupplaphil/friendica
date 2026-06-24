@@ -180,12 +180,13 @@ final class PostTemplateBuilder
 		$ignore_thread = false;
 		if ($threadLevel === 1 && $this->uid) {
 			$ignored = Post\ThreadUser::getIgnored($item['uri-id'] ?? 0, $this->uid);
-			if ($ignored) {
+			if ($ignored || $item['mention']) {
 				$ignore_thread = [
 					'do'        => $this->l10n->t('Turn off related notifications'),
 					'undo'      => $this->l10n->t('Turn on related notifications'),
-					'classdo'   => 'hidden',
-					'classundo' => '',
+					'toggle'    => $this->l10n->t('Toggle notifications for this post'),
+					'classdo'   => $ignored ? 'hidden' : '',
+					'classundo' => $ignored ? '' : 'hidden',
 					'ignored'   => $this->l10n->t('Notifications turned off for this post'),
 				];
 			}
