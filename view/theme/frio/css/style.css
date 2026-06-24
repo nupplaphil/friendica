@@ -1269,27 +1269,7 @@ aside .widget li.selected a {
 	color: $font_color;
 }
 
-/* group-list widget */
-aside > #datebrowse-sidebar li.posted-date-selector-months {
-	margin-bottom: 10px;
-	padding: 0;
-	width: 100%;
-}
-aside > #datebrowse-sidebar li.posted-date-selector-months:hover {
-	border-left: none !important;
-	background-color: transparent !important;
-}
-aside > #datebrowse-sidebar .posted-date-selector-months > ul {
-	margin: 0;
-}
-aside > #datebrowse-sidebar .posted-date-selector-months > ul > li {
-	padding-left: 30px;
-}
-aside > #datebrowse-sidebar .posted-date-selector-months > ul > li:hover {
-	padding-left: 27px;
-}
-
-.group-list-img {
+.sidebar-widget-list img {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	opacity: 0.5;
@@ -1300,10 +1280,22 @@ aside > #datebrowse-sidebar .posted-date-selector-months > ul > li:hover {
 	-ms-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
 }
-#group-list-sidebar-ul li:hover a > .group-list-img {
+
+.widget .sidebar-widget-list li:hover a > img {
 	-webkit-filter: unset;
 	filter: unset;
 	opacity: unset;
+}
+
+/* Widget caret expand/collapse symbols */
+.widget .fakelink[aria-expanded="false"] h3::before {
+	font-family: remixicon;
+	content: "\EA6E";
+}
+
+.widget .fakelink[aria-expanded="true"] h3::before {
+	font-family: remixicon;
+	content: "\EA4E";
 }
 
 /* help page widget */
@@ -1474,13 +1466,7 @@ aside #follow-sidebar .form-group-search .form-button-search {
 	padding: 2px 8px;
 }
 
-div#sidebar-circle-header h3,
-div#sidebar-group-header h3 {
-	float: left;
-}
-
-div#sidebar-circle-list,
-div#sidebar-group-list {
+div.sidebar-widget-list {
 	clear: both;
 }
 
@@ -3557,17 +3543,6 @@ details.profile-jot-net[open] summary:before {
 
 .fakelink > h3:before {
 	padding-right: 10px;
-}
-span.widget > .fakelink > h3:before {
-	font-family: remixicon;
-	content: "\ea6e"; /* Right Pointer */
-	margin-left: 4px;
-}
-div.widget > .fakelink > h3:before,
-#sidebar-circle-header > .fakelink > h3:before,
-#sidebar-group-header > .fakelink > h3:before {
-	font-family: remixicon;
-	content: "\ea4e"; /* Down Pointer */
 }
 
 .widget button.fakelink {

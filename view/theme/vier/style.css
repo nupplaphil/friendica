@@ -418,37 +418,19 @@ pre code {
 	background-color: #737373;
 	opacity: 0.4;
 }
-#saved-search-ul .tool:hover,
-#nets-sidebar .tool:hover,
-#sidebar-circle-list .tool:hover {
+#sidebar-widget-list .tool:hover {
 	background: #EEE;
 }
-/*#sidebar-circle-list .notify {
-	min-width: 10px;
-	text-align: center;
-	color: #FFF;
-	background-color: #CB4437;
-	font: bold 10px Arial;
-	padding: 3px;
-	border-radius: 10px;
-	display: none;
-}*/
 #sidebar-circle-list .notify {
 	display: none;
 }
 #sidebar-circle-list .notify.show {
 	display: inline-block;
 }
-.tool .label {
-	/* float: left; */
-}
 .tool .action {
 	float: right;
 }
-.tool a {
-	/* color: #000; */
-}
-.tool a:hover, .widget a:hover, #nets-sidebar a:hover, #group-widget-collapse:hover, .admin.link a:hover, aside h4 a:hover, right_aside h4 a:hover {
+.tool a:hover, .widget a:hover, #group-widget-collapse:hover, .admin.link a:hover, aside h4 a:hover, right_aside h4 a:hover {
 	/* text-decoration: underline; */
 	text-decoration: none;
 	color: black;
@@ -473,10 +455,6 @@ pre code {
 
 #message-new a {
 	color: black;
-}
-
-.sidebar-circle-element {
-	/* color: #000; */
 }
 
 .widget .selected, .group-selected {

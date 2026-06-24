@@ -40,14 +40,10 @@ $(document).ready(function () {
 		return false;
 	});
 
+	// TODO: Make PHP add the selected class to the relevant HTML element(s) and remove these
 	// add the class "selected" to circle widgets li if li > a does have the class circle-selected
 	if ($("#sidebar-circle-ul li a").hasClass("circle-selected")) {
 		$("#sidebar-circle-ul li a.circle-selected").parent("li").addClass("selected");
-	}
-
-	// add the class "selected" to groups widgets li if li > a does have the class group-selected
-	if ($("#group-list-sidebar-ul li a").hasClass("group-selected")) {
-		$("#group-list-sidebar-ul li a.group-selected").parent("li").addClass("selected");
 	}
 
 	// add the class "active" to tabmenuli if li > a does have the class active
