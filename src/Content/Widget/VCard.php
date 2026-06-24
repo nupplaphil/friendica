@@ -119,7 +119,7 @@ class VCard
 			// check if contact is an Admin
 			if (User::isSiteAdmin($local_id)) {
 				$administrator = true;
-				$moderator = false;
+				$moderator     = false;
 				// do not show as Admin if this is a sub-account of an Admin
 				$check = User::getById($local_id,['parent-uid']);
 				if ($check['parent-uid']) {
