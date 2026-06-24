@@ -580,3 +580,7 @@ code {
     background-color: var(--bg-secondary);
   }
 }
+
+.notif-text {
+  color: var(--text-primary);
+}
