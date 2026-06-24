@@ -60,7 +60,7 @@ class Hovercard
 				$administrator = true;
 				$moderator     = false;
 				// do not show as Admin if this is a sub-account of an Admin
-				$check = User::getById($local_id,['parent-uid']);
+				$check = User::getById($local_id, ['parent-uid']);
 				if ($check['parent-uid']) {
 					$administrator = false;
 				}
