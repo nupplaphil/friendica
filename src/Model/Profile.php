@@ -462,7 +462,7 @@ class Profile
 		$administrator = false;
 		$moderator     = false;
 		if (Contact::isLocalById($profile['id'])) {
-			$local_id = User::getIdForUrl($profile['url']);
+			$local_id = User::getIdForURL($profile['url']);
 			// check if contact is a Moderator
 			if (User::isModerator($local_id)) {
 				$moderator = true;
