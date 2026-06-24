@@ -348,8 +348,8 @@ class Profile
 			$change_profile_picture_text = "";
 		}
 
-		// Fetch the account type
-		$account_type = Contact::getAccountType($profile['account-type']);
+		// Fetch the account type name string
+		$account_type_name = Contact::getAccountType($profile['account-type']);
 
 		if (!empty($profile['address']) || !empty($profile['location'])) {
 			$location = DI::l10n()->t('Location:');
@@ -470,7 +470,7 @@ class Profile
 				$administrator = true;
 				$moderator     = false;
 				// do not show as Admin if this is a sub-account of an Admin
-				$check = User::getById($local_id,['parent-uid']);
+				$check = User::getById($local_id, ['parent-uid']);
 				if ($check['parent-uid']) {
 					$administrator = false;
 				}
