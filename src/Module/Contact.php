@@ -615,7 +615,7 @@ class Contact extends BaseModule
 				$administrator = true;
 				$moderator     = false;
 				// do not show as Admin if this is a sub-account of an Admin
-				$check = Model\User::getById($local_id,['parent-uid']);
+				$check = Model\User::getById($local_id, ['parent-uid']);
 				if ($check['parent-uid']) {
 					$administrator = false;
 				}
