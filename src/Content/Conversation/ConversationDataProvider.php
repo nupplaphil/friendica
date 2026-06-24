@@ -1,7 +1,9 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+declare(strict_types=1);
+
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -18,7 +20,6 @@ use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Protocol;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Database\DBA;
-use Friendica\Security\Security;
 use Friendica\Event\ArrayFilterEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\Item as ItemModel;
@@ -710,7 +711,7 @@ final readonly class ConversationDataProvider
 	 * Filter thread items and keeps only entries whose parents are in the author list.
 	 * Recursively removes URI IDs whose parent is not in the list, and filters the rows accordingly.
 	 *
-	 * @param mixed $threadItems The result set of thread items
+	 * @param object $threadItems The result set of thread items
 	 * @param array $parentAuthors Array of parent authors (uri-id => author-id)
 	 * @param int $self The own public contact ID
 	 * @return array Thread items that only contain the author or the current user
@@ -719,7 +720,7 @@ final readonly class ConversationDataProvider
 	 * fetching all comments the $self user commented on.
 	 * Additionally the last x comments by any contact could be fetched and have to be marked as "keep".
 	 */
-	private function filterThreadItemsByAuthorParents($threadItems, array $parentAuthors, int $self): array
+	private function filterThreadItemsByAuthorParents(object $threadItems, array $parentAuthors, int $self): array
 	{
 		$authorUriIds = [];
 		$rows         = [];
@@ -752,6 +753,15 @@ final readonly class ConversationDataProvider
 		return $this->indexRowsByUriId($rows);
 	}
 
+	/**
+	 * Fetch rows from the thread items, applying filters for ignored GSIDs and comment limits.
+	 *
+	 * @param object $threadItems The result set of thread items
+	 * @param string $mode The rendering mode
+	 * @param array $ignoredGsids Array of ignored GSIDs
+	 * @param int $maxComments Maximum number of comments to include per parent
+	 * @return array Filtered rows indexed by uri-id
+	 */
 	private function getRows(object $threadItems, string $mode, array $ignoredGsids, int $maxComments): array
 	{
 		$rows            = [];

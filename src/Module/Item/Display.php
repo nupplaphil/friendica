@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -287,12 +287,7 @@ class Display extends BaseModule
 			$output .= $this->statusEditor->renderEditor([], 0, true);
 		}
 
-		if (!$update) {
-			$output .= '<div id="live-display"></div>' . "\r\n"
-				. '<script> var profile_uid = ' . ($this->session->getLocalUserId() ?: 0) . ';</script>';
-		}
-
-		$output .= $this->htmlRenderer->renderThreadByItem($item, $itemUid, ConversationRenderer::MODE_DISPLAY);
+		$output .= $this->htmlRenderer->renderThreadByItem($item, $update, $itemUid, ConversationRenderer::MODE_DISPLAY);
 
 		return $output;
 	}

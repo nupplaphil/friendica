@@ -1,7 +1,9 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+declare(strict_types=1);
+
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -554,7 +556,7 @@ final class PostTemplateBuilder
 			];
 
 			$authorBaseUri = new Uri($item['author-baseurl'] ?? '');
-			if ($authorBaseUri->getHost() && !$this->baseURL->isLocalUrl($authorBaseUri)) {
+			if ($authorBaseUri->getHost() && !$this->baseURL->isLocalUrl((string) $authorBaseUri)) {
 				$ignoreServer = [
 					'label' => $this->l10n->t('Ignore %s server', $authorBaseUri->getHost()),
 				];
