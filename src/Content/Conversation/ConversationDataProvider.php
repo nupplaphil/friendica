@@ -138,10 +138,8 @@ final readonly class ConversationDataProvider
 
 		$renderUserId = $viewerUid ?: (int) ($items[0]['uid'] ?? 0);
 
-		// Einmaliger Aufruf von addChildren mit ALLEN Items
 		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $renderUserId, $mode);
 
-		// buildThreadTemplatesFromItems aufrufen (nicht buildRootTemplateData)
 		return $this->buildThreadTemplatesFromItems(
 			$itemsWithChildren,
 			$viewerUid,
@@ -172,6 +170,8 @@ final readonly class ConversationDataProvider
 
 		$convResponses = $this->buildConversationResponses($uid);
 
+		$pcid = Contact::getPublicIdByUserId($uid);
+
 		if (in_array($mode, [ConversationRenderer::MODE_CHANNEL, ConversationRenderer::MODE_COMMUNITY, ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_PROFILE])) {
 			$writable = true;
 		} else {
@@ -184,7 +184,7 @@ final readonly class ConversationDataProvider
 
 		$parentItems = [];
 		foreach ($items as $item) {
-			$this->processActivityReactions($item, $convResponses);
+			$this->processActivityReactions($item, $convResponses, $pcid);
 
 			if ($item['network'] === Protocol::MAIL && $uid !== $item['uid']) {
 				continue;
@@ -331,7 +331,7 @@ final readonly class ConversationDataProvider
 		$quoteshares = $this->getQuoteShares($uriIds);
 		$counts      = $this->getCounts($uriIds);
 
-		$compactTimeline = !in_array($mode, [ConversationRenderer::MODE_DISPLAY, ConversationRenderer::MODE_COMMENTS]) && $this->pConfig->get($this->session->getLocalUserId(), 'system', 'compact_timeline');
+		$compactTimeline = !in_array($mode, [ConversationRenderer::MODE_DISPLAY, ConversationRenderer::MODE_COMMENTS]) && $this->pConfig->get($uid, 'system', 'compact_timeline');
 		$partialLoad     = $mode === ConversationRenderer::MODE_COMMENTS && $sinceId > 0;
 
 		if (!$this->config->get('system', 'legacy_activities')) {
@@ -483,7 +483,7 @@ final readonly class ConversationDataProvider
 			}
 		}
 
-		$items = $this->sortConversationItems($items, $order);
+		$items = $this->sortConversationItems($items, $order, $uid);
 
 		return $items;
 	}
@@ -880,7 +880,7 @@ final readonly class ConversationDataProvider
 				$row['direction'] = ['direction' => 4, 'title' => empty($tags) ? $this->l10n->t('You subscribed to one or more tags in this post.') : $this->l10n->t('You subscribed to %s.', implode(', ', $tags))];
 				break;
 			case ItemModel::PR_ANNOUNCEMENT:
-				if (!empty($row['causer-id']) && $this->pConfig->get($this->session->getLocalUserId(), 'system', 'display_resharer')) {
+				if (!empty($row['causer-id']) && $this->pConfig->get($uid, 'system', 'display_resharer')) {
 					$row['owner-id']     = $row['causer-id'];
 					$row['owner-link']   = $row['causer-link'];
 					$row['owner-avatar'] = $row['causer-avatar'];
@@ -1057,9 +1057,10 @@ final readonly class ConversationDataProvider
 	 *
 	 * @param array<int, array> $itemList The items to sort
 	 * @param string $order One of ConversationRenderer::ORDER_*
+	 * @param int $uid The user ID of the viewer
 	 * @return array<int, array> The sorted conversation items
 	 */
-	private function sortConversationItems(array $itemList, string $order): array
+	private function sortConversationItems(array $itemList, string $order, int $uid): array
 	{
 		$parents = [];
 		if (count($itemList) === 0) {
@@ -1101,7 +1102,7 @@ final readonly class ConversationDataProvider
 			$parents[$index]['children'] = $this->sortItemChildren($parents[$index]['children']);
 		}
 
-		if (!$this->pConfig->get($this->session->getLocalUserId(), 'system', 'no_smart_threading', 0)) {
+		if (!$this->pConfig->get($uid, 'system', 'no_smart_threading', 0)) {
 			foreach ($parents as $index => $parent) {
 				$parents[$index] = $this->smartFlattenConversation($parent);
 			}
@@ -1326,9 +1327,10 @@ final readonly class ConversationDataProvider
 	 *
 	 * @param array<string, mixed> $activity The activity data to process
 	 * @param array<string, array> $convResponses The conversation responses array to update (by reference)
+	 * @param int $pcid Public contact id of the current user
 	 * @return void
 	 */
-	private function processActivityReactions(array $activity, array &$convResponses): void
+	private function processActivityReactions(array $activity, array &$convResponses, int $pcid): void
 	{
 		$threadParent = $activity['thr-parent-row'] ?? [];
 
@@ -1385,7 +1387,7 @@ final readonly class ConversationDataProvider
 					continue;
 				}
 
-				if ($this->session->getPublicContactId() === $activity['author-id']) {
+				if ($pcid === $activity['author-id']) {
 					$convResponses[$mode][$activity['thr-parent-id']]['self'] = 1;
 				}
 
