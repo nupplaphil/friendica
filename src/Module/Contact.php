@@ -605,7 +605,7 @@ class Contact extends BaseModule
 		$administrator = false;
 		$moderator     = false;
 		if (Model\Contact::isLocalById($contact['id'])) {
-			$local_id = Model\User::getIdForUrl($contact['url']);
+			$local_id = Model\User::getIdForURL($contact['url']);
 			// check if contact is a Moderator
 			if (Model\User::isModerator($local_id)) {
 				$moderator = true;
