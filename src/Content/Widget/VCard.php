@@ -110,22 +110,22 @@ class VCard
 
 		$administrator = false;
 		$moderator     = false;
-		if (Contact::isLocalById($contact['id'])){
-				$local_id = User::getIdForUrl($contact['url']);
-				// check if contact is a Moderator
-				if (User::isModerator($local_id)){
-					$moderator = true;
+		if (Contact::isLocalById($contact['id'])) {
+			$local_id = User::getIdForUrl($contact['url']);
+			// check if contact is a Moderator
+			if (User::isModerator($local_id)) {
+				$moderator = true;
+			}
+			// check if contact is an Admin
+			if (User::isSiteAdmin($local_id)) {
+				$administrator = true;
+				$moderator = false;
+				// do not show as Admin if this is a sub-account of an Admin
+				$check = User::getById($local_id,['parent-uid']);
+				if ($check['parent-uid']) {
+					$administrator = false;
 				}
-				// check if contact is an Admin
-				if (User::isSiteAdmin($local_id)){
-					$administrator = true;
-					$moderator = false;
-					// do not show as Admin if this is a sub-account of an Admin
-					$check = User::getById($local_id,['parent-uid']);
-					if ($check['parent-uid']){
-						$administrator = false;
-					}
-				}
+			}
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('widget/vcard.tpl'), [
