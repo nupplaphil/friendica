@@ -263,16 +263,20 @@ final readonly class ConversationRenderer
 			self::MODE_NOTES     => [],
 		];
 
+		// MODE_DISPLAY must receive an empty netargs string, all other modes must receive at least "?f="
 		if (!isset($paramsByMode[$mode])) {
 			return '';
 		}
 
-		$filteredRequest      = array_intersect_key($request, array_flip($paramsByMode[$mode]));
+		$filteredRequest = array_intersect_key($request, array_flip($paramsByMode[$mode]));
+
+		// Although the parameter "f" is always empty, it is crucial for the update mechanism.
+		// Without it, the page reload doesn't work.
 		$filteredRequest['f'] = '';
 
 		$query = http_build_query($filteredRequest, '', '&', PHP_QUERY_RFC3986);
 
-		return $this->getCommandAfterFirstSlash() . '?' . $query;
+		return $this->getCommandAfterFirstSlash($mode) . '?' . $query;
 	}
 
 	/**
@@ -318,10 +322,15 @@ final readonly class ConversationRenderer
 	/**
 	 * Extracts the part of a path after the first slash.
 	 *
+	 * @param string $mode The rendering mode
 	 * @return string The part after the first slash, or empty string if no slash exists
 	 */
-	private function getCommandAfterFirstSlash(): string
+	private function getCommandAfterFirstSlash(string $mode): string
 	{
+		if (!in_array($mode, [self::MODE_NETWORK, self::MODE_CHANNEL, self::MODE_COMMUNITY, self::MODE_CONTACTS])) {
+			return '';
+		}
+
 		$command = $this->args->getCommand();
 		$pos     = strpos($command, '/');
 		if ($pos === false) {
