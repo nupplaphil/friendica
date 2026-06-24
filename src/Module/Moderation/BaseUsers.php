@@ -150,14 +150,14 @@ abstract class BaseUsers extends BaseModeration
 
 			$moderator     = false;
 			$administrator = false;
-			if (User::isMOderator($user['uid'])){
+			if (User::isMOderator($user['uid'])) {
 				$moderator = true;
 			}
-			if (User::isSiteAdmin($user['uid'])){
+			if (User::isSiteAdmin($user['uid'])) {
 				$administrator = true;
 				$moderator     = false;
 				// do not show admin for sub-accounts of admin
-				if ($user['parent-uid']){
+				if ($user['parent-uid']) {
 					$administrator = false;
 				}
 			}
