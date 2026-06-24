@@ -28,8 +28,6 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use Friendica\Core\Theme;
-use Friendica\Model\Contact;
-use Friendica\Model\User;
 
 class Profile
 {
@@ -470,7 +468,7 @@ class Profile
 			// check if contact is an Admin
 			if (User::isSiteAdmin($local_id)) {
 				$administrator = true;
-				$moderator = false;
+				$moderator     = false;
 				// do not show as Admin if this is a sub-account of an Admin
 				$check = User::getById($local_id,['parent-uid']);
 				if ($check['parent-uid']) {
