@@ -129,7 +129,6 @@ abstract class BaseUsers extends BaseModeration
 
 	protected function setupUserCallback(): \Closure
 	{
-		$adminlist = User::getAdminEmailList();
 		return function ($user) use ($adminlist) {
 			$page_types = [
 				// NOTE: Currently no PAGE_FLAGS_BLOG here, unlike Model/User.php?
@@ -150,7 +149,7 @@ abstract class BaseUsers extends BaseModeration
 
 			$moderator     = false;
 			$administrator = false;
-			if (User::isMOderator($user['uid'])) {
+			if (User::isModerator($user['uid'])) {
 				$moderator = true;
 			}
 			if (User::isSiteAdmin($user['uid'])) {
