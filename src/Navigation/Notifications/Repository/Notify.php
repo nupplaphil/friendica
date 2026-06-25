@@ -55,8 +55,6 @@ class Notify extends BaseRepository
 
 	protected static $table_name = 'notify';
 
-	private readonly NotifyFactory $entityFactory;
-
 	public function __construct(
 		Database $database,
 		LoggerInterface $logger,
@@ -67,15 +65,13 @@ class Notify extends BaseRepository
 		Emailer $emailer,
 		Factory\Notification $notification,
 		private readonly EventDispatcherInterface $eventDispatcher,
-		?NotifyFactory $entityFactory = null,
+		private readonly NotifyFactory $entityFactory,
 	) {
 		$this->l10n         = $l10n;
 		$this->baseUrl      = $baseUrl;
 		$this->config       = $config;
 		$this->emailer      = $emailer;
 		$this->notification = $notification;
-
-		$this->entityFactory = $entityFactory ?? new NotifyFactory($logger);
 		parent::__construct($database, $logger, $this->entityFactory);
 	}
 
