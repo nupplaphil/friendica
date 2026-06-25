@@ -12,7 +12,7 @@ use Friendica\App\BaseURL;
 use Friendica\App\Page;
 use Friendica\BaseModule;
 use Friendica\Contact\LocalRelationship\Repository\LocalRelationship;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Nav;
 use Friendica\Content\Widget\VCard;
 use Friendica\Core\ACL;
@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
  */
 class Conversations extends BaseModule
 {
-	public function __construct(L10n $l10n, private readonly LocalRelationship $localRelationship, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private Page $page, private readonly Conversation $conversation, private readonly IHandleUserSessions $userSession, $server, array $parameters = [])
+	public function __construct(L10n $l10n, private readonly LocalRelationship $localRelationship, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private Page $page, private readonly StatusEditor $statusEditor, private readonly IHandleUserSessions $userSession, $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
@@ -90,7 +90,7 @@ class Conversations extends BaseModule
 				'content'              => ($contact['contact-type'] == ModelContact::TYPE_COMMUNITY ? '!' : '@') . ($contact['addr'] ?: $contact['url']),
 				'contact_account_type' => $contact['contact-type'],
 			];
-			$output = $this->conversation->statusEditor($options);
+			$output = $this->statusEditor->renderEditor($options);
 		}
 
 		Contact::setPageTitle($contact);

@@ -263,12 +263,7 @@ class Profile
 	 */
 	public static function getVCardHtml(array $profile, bool $block, bool $show_contacts, int $view_as_contact_id = 0): string
 	{
-		$page = DI::page();
-
-		$page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-		$page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+		DI::statusEditor()->registerAssets();
 
 		$o        = '';
 		$location = false;

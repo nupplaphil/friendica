@@ -11,7 +11,7 @@ use Exception;
 use Friendica\Contact\Avatar;
 use Friendica\Contact\Header;
 use Friendica\Contact\Introduction\Exception\IntroductionNotFoundException;
-use Friendica\Content\Conversation as ConversationContent;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Pager;
 use Friendica\Content\Text\HTML;
 use Friendica\Core\Protocol;
@@ -1688,7 +1688,7 @@ class Contact
 		$fields = array_merge(Item::DISPLAY_FIELDLIST, ['featured']);
 		$items  = Post::toArray(Post::selectForUser($uid, $fields, $condition, $params));
 
-		$o = DI::conversation()->render($items, ConversationContent::MODE_CONTACT_POSTS, isset($request['mode']) && ($request['mode'] == 'raw'));
+		$o = DI::conversationRenderer()->renderFlat($items, ConversationRenderer::MODE_CONTACT_POSTS, false);
 
 		if (DI::pConfig()->get($uid, 'system', 'infinite_scroll', true)) {
 			$o .= HTML::scrollLoader($request);
@@ -1749,8 +1749,8 @@ class Contact
 			$cid, Item::GRAVITY_ACTIVITY, Verb::getID(Activity::ANNOUNCE), Conversation::PARCEL_DIASPORA,
 		]);
 
-		$sql1 = "SELECT `uri-id`, `created` FROM `post-thread-user-view` WHERE " . array_shift($condition1);
-		$sql2 = "SELECT `thr-parent-id` AS `uri-id`, `created` FROM `post-user-view` WHERE " . array_shift($condition2);
+		$sql1 = "SELECT `uri-id`, `created`, `author-id` FROM `post-thread-user-view` WHERE " . array_shift($condition1);
+		$sql2 = "SELECT `thr-parent-id` AS `uri-id`, `created`, `author-id` FROM `post-user-view` WHERE " . array_shift($condition2);
 
 		$union = array_merge($condition1, $condition2);
 		$sql   = $sql1 . " UNION " . $sql2;
@@ -1767,7 +1767,7 @@ class Contact
 			$items  = array_merge($items, $pinned);
 		}
 
-		$o = DI::conversation()->render($items, ConversationContent::MODE_CONTACTS, $update || $raw, false, 'pinned_created', $uid);
+		$o = DI::conversationRenderer()->renderThreaded($items, ConversationRenderer::MODE_CONTACTS, $update || $raw, ConversationRenderer::ORDER_PINNED_CREATED, $uid, $request);
 
 		if (!$update) {
 			if (DI::pConfig()->get($uid, 'system', 'infinite_scroll', true)) {

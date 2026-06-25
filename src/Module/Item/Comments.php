@@ -9,8 +9,7 @@ namespace Friendica\Module\Item;
 
 use Friendica\App;
 use Friendica\BaseModule;
-use Friendica\Content\Conversation;
-use Friendica\Content\Conversation\HtmlRenderer;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
@@ -27,7 +26,7 @@ class Comments extends BaseModule
 	public function __construct(
 		private readonly IHandleUserSessions $session,
 		private readonly IManageConfigValues $config,
-		private readonly HtmlRenderer $htmlRenderer,
+		private readonly ConversationRenderer $htmlRenderer,
 		L10n $l10n,
 		App\BaseURL $baseUrl,
 		App\Arguments $args,
@@ -51,7 +50,8 @@ class Comments extends BaseModule
 			throw new HTTPException\BadRequestException($this->t('Parameter id is missing.'));
 		}
 
-		$viewerUid = $this->session->getLocalUserId() ?: null;
-		$this->httpExit($this->htmlRenderer->renderCommentsByUriId($uriId, $viewerUid, $this->config->get('system', 'max_display_comments', 1000), Conversation::MODE_DISPLAY));
+		$viewerUid = $this->session->getLocalUserId();
+		$existing  = !empty($request['existing']) ? array_map(intval(...), explode(',', $request['existing'])) : [];
+		$this->httpExit($this->htmlRenderer->renderCommentsByUriId($uriId, $viewerUid, $existing));
 	}
 }

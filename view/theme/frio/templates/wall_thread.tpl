@@ -770,6 +770,15 @@ as the value of $top_child_total (this is done at the end of this file)
 		</div><!--./media-body from for comments-->
 		{{/if}}
 	</article>
+
+	{{if $item.missing > 0}}
+	<div class="wall-item-bottom">
+		<div class="wall-item-links"></div>
+		<button type="button" id="load-more-comments-{{$item.id}}" class="btn-link fakelink" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">{{$item.load_more_comments}}</button>
+		<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.loading}}" /></span>
+	</div>
+	{{/if}}
+
 	{{foreach $item.children as $child}}
 		{{include file="{{$item.template}}" item=$child}}
 	{{/foreach}}

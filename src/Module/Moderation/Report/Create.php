@@ -9,7 +9,7 @@ namespace Friendica\Module\Moderation\Report;
 
 use Friendica\App;
 use Friendica\BaseModule;
-use Friendica\Content\Conversation as ConversationContent;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Pager;
 use Friendica\Content\Text\BBCode;
 use Friendica\Core\L10n;
@@ -47,6 +47,7 @@ class Create extends BaseModule
 		private readonly UserSession $session,
 		private App\Page $page,
 		private readonly SystemMessages $systemMessages,
+		private readonly ConversationRenderer $conversationRenderer,
 		L10n $l10n,
 		App\BaseURL $baseUrl,
 		App\Arguments $args,
@@ -285,7 +286,7 @@ class Create extends BaseModule
 			$fields = array_merge(Item::DISPLAY_FIELDLIST, ['featured']);
 			$items  = Post::toArray(Post::selectForUser(DI::userSession()->getLocalUserId(), $fields, $condition, $params));
 
-			$threads = DI::conversationHtmlRenderer()->buildContextLessThreadsByItems($items, ConversationContent::MODE_CONTACT_POSTS, false, false, DI::userSession()->getLocalUserId());
+			$threads = $this->conversationRenderer->renderFlat($items, ConversationRenderer::MODE_CONTACT_POSTS, false, DI::userSession()->getLocalUserId());
 		}
 
 		$tpl = Renderer::getMarkupTemplate('moderation/report/create/pick_posts.tpl');

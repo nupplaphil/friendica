@@ -185,7 +185,7 @@ class UserDefinedChannel extends BaseRepository
 	 */
 	private function isValid(string $searchtext): bool
 	{
-		if ($searchtext == '') {
+		if ($searchtext === '') {
 			return true;
 		}
 
@@ -378,7 +378,7 @@ class UserDefinedChannel extends BaseRepository
 	 */
 	private function inCircle(int $circleId, int $uid, int $cid): bool
 	{
-		if ($cid == 0) {
+		if ($cid === 0) {
 			return false;
 		}
 
@@ -479,9 +479,9 @@ class UserDefinedChannel extends BaseRepository
 		$condition = [];
 
 		if (!empty($channel->circle)) {
-			if ($channel->circle == UserDefinedChannelEntity::CIRCLE_FOLLOWING) {
+			if ($channel->circle === UserDefinedChannelEntity::CIRCLE_FOLLOWING) {
 				$condition = ["`owner-id` IN (SELECT `pid` FROM `account-user-view` WHERE `uid` = ? AND `rel` IN (?, ?))", $uid, Contact::SHARING, Contact::FRIEND];
-			} elseif ($channel->circle == UserDefinedChannelEntity::CIRCLE_FOLLOWERS) {
+			} elseif ($channel->circle === UserDefinedChannelEntity::CIRCLE_FOLLOWERS) {
 				$condition = ["`owner-id` IN (SELECT `pid` FROM `account-user-view` WHERE `uid` = ? AND `rel` = ?)", $uid, Contact::FOLLOWER];
 			} elseif ($channel->circle > 0) {
 				$condition = DBA::mergeConditions($condition, ["`owner-id` IN (SELECT `pid` FROM `group_member` INNER JOIN `account-user-view` ON `group_member`.`contact-id` = `account-user-view`.`id` WHERE `gid` = ? AND `account-user-view`.`uid` = ?)", $channel->circle, $uid]);

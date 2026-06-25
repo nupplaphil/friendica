@@ -13,7 +13,8 @@ use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\AppHelper;
 use Friendica\BaseModule;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
@@ -40,7 +41,8 @@ class Index extends BaseModule
 	public function __construct(
 		private readonly Mode $mode,
 		private readonly IManagePersonalConfigValues $pConfig,
-		private readonly Conversation $conversation,
+		private readonly ConversationRenderer $conversationRenderer,
+		private readonly StatusEditor $statusEditor,
 		private readonly DateTimeFormat $dateTimeFormat,
 		private readonly ProfileField $profileField,
 		private readonly Page $page,
@@ -68,6 +70,6 @@ class Index extends BaseModule
 
 	protected function content(array $request = []): string
 	{
-		return (new Conversations($this->mode, $this->pConfig, $this->conversation, $this->session, $this->config, $this->dateTimeFormat, $this->page, $this->appHelper, $this->l10n, $this->baseUrl, $this->args, $this->logger, $this->profiler, $this->response, $this->server, $this->parameters))->content();
+		return (new Conversations($this->mode, $this->pConfig, $this->conversationRenderer, $this->statusEditor, $this->session, $this->config, $this->dateTimeFormat, $this->page, $this->appHelper, $this->l10n, $this->baseUrl, $this->args, $this->logger, $this->profiler, $this->response, $this->server, $this->parameters))->content();
 	}
 }

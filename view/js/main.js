@@ -933,6 +933,65 @@ function showHideComments(id) {
 	}
 }
 
+// Load more comments for a specific post
+function loadMoreComments(uriId, itemId, existing) {
+	var button = $('#load-more-comments-' + itemId);
+	var loadingText = $('#load-more-loading-' + itemId);
+	
+	if (button.hasClass('loading') || commentBusy) {
+		return;
+	}
+	
+	// Hide button, show loading text (which contains the rotator)
+	button.addClass('loading').prop('disabled', true).hide();
+	loadingText.show();
+	commentBusy = true;
+	
+	// Parse existing JSON string if it's a string, or use as-is if already an array
+	var existingArray = typeof existing === 'string' ? JSON.parse(existing) : existing;
+	
+	$.get({
+		url: 'item/' + uriId + '/comments',
+		data: {
+			'mode': 'raw',
+			'existing': existingArray.join(',')
+		}
+	})
+	.done(function(data) {
+		loadingText.hide();
+		if ($(data).length > 0) {
+			var $data = $(data);
+			// Find all elements with id starting with "item-comments-" or "item-"
+			var allItems = $data.find('[id^="item-comments-"], [id^="item-"]').addBack('[id^="item-comments-"], [id^="item-"]');
+			
+			// Filter to only keep items that don't already exist on the page
+			var newItems = allItems.filter(function() {
+				var id = $(this).attr('id');
+				return id && $('#' + id).length === 0;
+			});
+			
+			if (newItems.length > 0) {
+				// Replace the button with the new comments
+				button.replaceWith(newItems);
+			} else {
+				// No new comments to add
+				button.hide();
+			}
+		} else {
+			// No more comments to load
+			button.hide();
+		}
+	})
+	.fail(function() {
+		// Show error feedback
+		button.removeClass('loading').prop('disabled', false).show();
+		loadingText.hide();
+	})
+	.always(function() {
+		commentBusy = false;
+	});
+}
+
 function preview_post() {
 	$("#jot-preview-content").show();
 	$.post(

@@ -8,7 +8,7 @@
 namespace Friendica\Module\Search;
 
 use Friendica\App;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Nav;
 use Friendica\Content\Pager;
 use Friendica\Content\Text\HTML;
@@ -35,7 +35,7 @@ class Index extends BaseSearch
 	/** @var string  */
 	private $remoteAddress;
 
-	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, App\Request $request, array $server, array $parameters = [])
+	public function __construct(L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, App\Request $request, private readonly ConversationRenderer $conversationRenderer, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -207,7 +207,7 @@ class Index extends BaseSearch
 
 		$this->logger->info('Start Conversation.', ['q' => $search]);
 
-		$o .= DI::conversation()->render($items, Conversation::MODE_SEARCH, false, false, 'commented', DI::userSession()->getLocalUserId());
+		$o .= $this->conversationRenderer->renderFlat($items, ConversationRenderer::MODE_SEARCH, false, DI::userSession()->getLocalUserId());
 
 		if (DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'system', 'infinite_scroll', true)) {
 			$o .= HTML::scrollLoader($request);

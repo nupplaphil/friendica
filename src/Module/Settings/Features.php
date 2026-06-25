@@ -8,7 +8,7 @@
 namespace Friendica\Module\Settings;
 
 use Friendica\App;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Feature;
 use Friendica\Core\L10n;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
@@ -76,7 +76,7 @@ class Features extends BaseSettings
 			'$form_security_token' => BaseSettings::getFormSecurityToken('settings_features'),
 			'$title'               => $this->t('Additional Features'),
 			'$sortable'            => $this->t('Drag to reorder, use arrow buttons on each item, or tab to item with keyboard and move up/down with arrow keys'),
-			'$network_mode'        => Conversation::MODE_NETWORK,
+			'$network_mode'        => ConversationRenderer::MODE_NETWORK,
 			'$reset'               => [
 				'0' => 'feature_resetorder',
 				'1' => $this->t('Reset order'),

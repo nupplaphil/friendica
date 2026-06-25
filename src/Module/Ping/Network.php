@@ -12,7 +12,8 @@ use Friendica\App\BaseURL;
 use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\AppHelper;
-use Friendica\Content\Conversation;
+use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Conversation\Factory\Timeline as TimelineFactory;
 use Friendica\Content\Conversation\Factory\Activity as ActivityFactory;
 use Friendica\Content\Conversation\Repository\UserDefinedChannel;
@@ -49,7 +50,8 @@ class Network extends NetworkModule
 		TimelineFactory $timeline,
 		SystemMessages $systemMessages,
 		Mode $mode,
-		Conversation $conversation,
+		ConversationRenderer $conversationRenderer,
+		StatusEditor $statusEditor,
 		Page $page,
 		IHandleUserSessions $session,
 		Database $database,
@@ -77,7 +79,8 @@ class Network extends NetworkModule
 			$timeline,
 			$systemMessages,
 			$mode,
-			$conversation,
+			$conversationRenderer,
+			$statusEditor,
 			$page,
 			$session,
 			$database,
