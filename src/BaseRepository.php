@@ -60,6 +60,8 @@ abstract class BaseRepository
 	 */
 	protected function getFactory(): ICanCreateFromTableRow
 	{
+		@trigger_error('`' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, implement it in your child class instead.', E_USER_DEPRECATED);
+
 		return $this->factory;
 	}
 
