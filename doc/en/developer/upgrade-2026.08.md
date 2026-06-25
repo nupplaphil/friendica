@@ -14,6 +14,20 @@ Mandatory (Breaking changes)
 
 This section contains backward compatibility breaks, make sure your code is compatible with these entries before upgrading.
 
+- The icon library has been changed from Font Awesome to Remix Icons. Theme developers must replace `fa-*` CSS classes with their `ri-*` equivalents.
+
+   The Font Awesome dependency has been removed. Any theme or addon that relies on Font Awesome must either include it themselves or migrate to Remix Icons.
+
+   *Before*
+   ```html
+   <i class="fa fa-search"></i>
+   ```
+
+   *After*
+   ```html
+   <i class="ri-search-line"></i>
+   ```
+
 Optional (Deprecations)
 -----------------------
 
