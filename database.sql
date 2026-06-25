@@ -3711,6 +3711,7 @@ CREATE VIEW `network-thread-circle-view` AS SELECT
 	`post-thread-user`.`mention` AS `mention`,
 	`post-thread-user`.`network` AS `network`,
 	`post-user`.`protocol` AS `protocol`,
+	`post-thread-user`.`author-id` AS `author-id`,
 	`post-thread-user`.`contact-id` AS `contact-id`,
 	`ownercontact`.`contact-type` AS `contact-type`
 	FROM `post-thread-user`

@@ -1536,6 +1536,7 @@ return [
 			"mention"      => ["post-thread-user", "mention"],
 			"network"      => ["post-thread-user", "network"],
 			"protocol"     => ["post-user", "protocol"],
+			"author-id"    => ["post-thread-user", "author-id"],
 			"contact-id"   => ["post-thread-user", "contact-id"],
 			"contact-type" => ["ownercontact", "contact-type"],
 		],
