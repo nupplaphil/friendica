@@ -95,17 +95,6 @@ and this project [promises Backward Compatibility](index.md#backward-compatibili
 ### Removed
 
 - **BREAKING**: The themes `duepuntozero`, `smoothly` and `quattro` are removed. Switch to a supported theme like `frio` or `vier`.
-- **BREAKING**: `Friendica\Module\BaseApi::logAndJsonUnauthorizedError()` was removed, use `logAndJsonError()` instead.
-
-   *Before*
-   ```php
-   $this->logAndJsonUnauthorizedError($errorno, $error);
-   ```
-
-   *After*
-   ```php
-   $this->logAndJsonError($errorno, $error);
-   ```
 
 ## [Version 2026.01](https://github.com/friendica/friendica/compare/2024.12-1...2026.01) - 2026-01-27
 

@@ -12,17 +12,6 @@ Mandatory (Breaking changes)
 This section contains backward compatibility breaks, make sure your code is compatible with these entries before upgrading.
 
 - The themes `duepuntozero`, `smoothly` and `quattro` are removed. Switch to a supported theme like `frio` or `vier`.
-- `BaseApi::logAndJsonUnauthorizedError()` was removed, use `logAndJsonError()` instead.
-
-   *Before*
-   ```php
-   $this->logAndJsonUnauthorizedError($errorno, $error);
-   ```
-
-   *After*
-   ```php
-   $this->logAndJsonError($errorno, $error);
-   ```
 
 Optional (Deprecations)
 ----------------------
