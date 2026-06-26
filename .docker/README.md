@@ -25,7 +25,7 @@ docker compose exec php bin/console autoinstall -av -f .docker/autoinstall.confi
 ```bash
 docker compose logs -f php
 docker compose logs -f nginx
-docker compose logs -f mariadb
+docker compose logs -f db
 ```
 
 ### Stop environment:
