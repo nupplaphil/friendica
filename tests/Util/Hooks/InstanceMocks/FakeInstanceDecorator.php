@@ -11,14 +11,14 @@ class FakeInstanceDecorator implements IAmADecoratedInterface
 {
 	public static $countInstance = 0;
 
-	const PREFIX = 'prefix1';
+	public const PREFIX = 'prefix1';
 
 	/** @var IAmADecoratedInterface */
 	protected $orig;
 
 	public function __construct(IAmADecoratedInterface $orig)
 	{
-		$this->orig   = $orig;
+		$this->orig = $orig;
 
 		self::$countInstance++;
 	}

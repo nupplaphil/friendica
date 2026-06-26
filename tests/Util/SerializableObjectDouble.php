@@ -14,9 +14,7 @@ class SerializableObjectDouble implements \Serializable
 		return '\'serialized\'';
 	}
 
-	public function unserialize($data)
-	{
-	}
+	public function unserialize($data) {}
 
 	public function __serialize(): array
 	{

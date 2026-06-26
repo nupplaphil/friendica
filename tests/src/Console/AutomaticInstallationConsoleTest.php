@@ -22,13 +22,13 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 {
 	private Cache $configCache;
 
-	private IManageConfigValues $configMock;
+	private \PHPUnit\Framework\MockObject\MockObject $configMock;
 
-	private Database $dba;
+	private \PHPUnit\Framework\MockObject\Stub $dba;
 
-	private $dice;
+	private \PHPUnit\Framework\MockObject\MockObject $dice;
 
-	private Installer $installerMock;
+	private \PHPUnit\Framework\MockObject\MockObject $installerMock;
 
 	private vfsStreamDirectory $root;
 
@@ -106,7 +106,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 			return $this->configCache->get($cat, $key);
 		});
 
-		$this->dba = $this->createMock(Database::class);
+		$this->dba = $this->createStub(Database::class);
 
 		// Clear environment variables that might leak from the container
 		putenv('FRIENDICA_URL');
