@@ -81,7 +81,7 @@ class MailBuilderTest extends MockedTestCase
 	 * @todo Create test once "Renderer" and "BBCode" are dynamic
 	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testBuilderWithNonRawEmail(): never
+	public function testBuilderWithNonRawEmail(): void
 	{
 		static::markTestIncomplete('Cannot easily mock Renderer and BBCode, so skipping tests wit them');
 	}

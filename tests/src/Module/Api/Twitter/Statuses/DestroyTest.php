@@ -39,7 +39,7 @@ class DestroyTest extends ApiTestCase
 	 * Test the api_statuses_destroy() function without an authenticated user.
 	 *
 	 */
-	public function testApiStatusesDestroyWithoutAuthenticatedUser(): never
+	public function testApiStatusesDestroyWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

@@ -69,7 +69,7 @@ class NetworkPublicTimelineTest extends ApiTestCase
 	 * Test the api_statuses_networkpublic_timeline() function with an unallowed user.
 	 *
 	 */
-	public function testApiStatusesNetworkpublicTimelineWithUnallowedUser(): never
+	public function testApiStatusesNetworkpublicTimelineWithUnallowedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

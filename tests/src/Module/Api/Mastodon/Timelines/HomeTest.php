@@ -15,7 +15,7 @@ class HomeTest extends ApiTestCase
 	 * Test the api_statuses_home_timeline() function.
 	 *
 	 */
-	public function testApiStatusesHomeTimeline(): never
+	public function testApiStatusesHomeTimeline(): void
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -35,7 +35,7 @@ class HomeTest extends ApiTestCase
 	 * Test the api_statuses_home_timeline() function with a negative page parameter.
 	 *
 	 */
-	public function testApiStatusesHomeTimelineWithNegativePage(): never
+	public function testApiStatusesHomeTimelineWithNegativePage(): void
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -53,7 +53,7 @@ class HomeTest extends ApiTestCase
 	 * Test the api_statuses_home_timeline() with an unallowed user.
 	 *
 	 */
-	public function testApiStatusesHomeTimelineWithUnallowedUser(): never
+	public function testApiStatusesHomeTimelineWithUnallowedUser(): void
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -68,7 +68,7 @@ class HomeTest extends ApiTestCase
 	 * Test the api_statuses_home_timeline() function with an RSS result.
 	 *
 	 */
-	public function testApiStatusesHomeTimelineWithRss(): never
+	public function testApiStatusesHomeTimelineWithRss(): void
 	{
 		self::markTestIncomplete('Needs Home to not set header during call (like at BaseApi::setLinkHeader');
 

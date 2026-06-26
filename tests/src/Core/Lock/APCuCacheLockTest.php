@@ -9,7 +9,6 @@ namespace Friendica\Test\src\Core\Lock;
 
 use Friendica\Core\Cache\Capability\ICanCacheInMemory;
 use Friendica\Core\Cache\Type\APCuCache;
-use Friendica\Core\Lock\Capability\ICanLock;
 use Friendica\Core\Lock\Type\CacheLock;
 use Friendica\Test\CacheLockTestCase;
 
@@ -17,7 +16,7 @@ use Friendica\Test\CacheLockTestCase;
 class APCuCacheLockTest extends CacheLockTestCase
 {
 	private APCuCache $cache;
-	private ICanLock $lock;
+	private CacheLock $lock;
 
 	protected function setUp(): void
 	{
@@ -31,7 +30,7 @@ class APCuCacheLockTest extends CacheLockTestCase
 		parent::setUp();
 	}
 
-	protected function getInstance(): ICanLock
+	protected function getInstance(): CacheLock
 	{
 		return $this->lock;
 	}

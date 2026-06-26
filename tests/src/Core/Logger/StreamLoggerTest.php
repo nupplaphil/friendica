@@ -92,7 +92,7 @@ class StreamLoggerTest extends LoggerTestCase
 	/**
 	 * Test when the directory cannot get created
 	 */
-	public function testWrongDir(): never
+	public function testWrongDir(): void
 	{
 		$this->expectException(\UnexpectedValueException::class);
 		$this->expectExceptionMessageMatches("/Directory .* cannot get created: .* /");
@@ -133,7 +133,7 @@ class StreamLoggerTest extends LoggerTestCase
 	 * Test a relative path
 	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testRealPath(): never
+	public function testRealPath(): void
 	{
 		static::markTestSkipped('vfsStream isn\'t compatible with chdir, so not testable.');
 

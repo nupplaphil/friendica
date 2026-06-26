@@ -59,7 +59,7 @@ class UserSessionTest extends MockedTestCase
 		$this->assertEquals($expected, $userSession->getLocalUserId());
 	}
 
-	public function testPublicContactId(): never
+	public function testPublicContactId(): void
 	{
 		$this->markTestSkipped('Needs Contact::getIdForURL testable first');
 	}

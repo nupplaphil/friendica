@@ -376,7 +376,7 @@ class ConfigTest extends DatabaseTestCase
 
 		// now you have to get the new variable entry because of the new set the get refresh succeed as well
 		self::assertTrue($this->testedConfig->set('config', 'test', '123'));
-		self::assertEquals('123', $this->testedConfig->get('config', 'test', '', true));
+		self::assertEquals('123', $this->testedConfig->get('config', 'test'));
 	}
 
 	/**
@@ -393,7 +393,7 @@ class ConfigTest extends DatabaseTestCase
 		$this->testedConfig->getCache()->set('config', 'test', 'prio', Cache::SOURCE_ENV);
 		// You can set a config value, but if there's a value with a higher priority (environment), this value will persist when retrieving
 		self::assertTrue($this->testedConfig->set('config', 'test', '123'));
-		self::assertEquals('prio', $this->testedConfig->get('config', 'test', '', true));
+		self::assertEquals('prio', $this->testedConfig->get('config', 'test'));
 	}
 
 

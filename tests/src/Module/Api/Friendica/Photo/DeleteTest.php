@@ -28,7 +28,7 @@ class DeleteTest extends ApiTestCase
 		(new Delete(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))->run($this->httpExceptionMock);
 	}
 
-	public function testWithoutAuthenticatedUser(): never
+	public function testWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}

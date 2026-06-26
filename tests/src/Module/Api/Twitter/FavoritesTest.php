@@ -61,7 +61,7 @@ class FavoritesTest extends ApiTestCase
 	 * Test the api_favorites() function with an unallowed user.
 	 *
 	 */
-	public function testApiFavoritesWithUnallowedUser(): never
+	public function testApiFavoritesWithUnallowedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

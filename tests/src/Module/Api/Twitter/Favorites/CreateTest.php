@@ -74,7 +74,7 @@ class CreateTest extends ApiTestCase
 	 * Test the api_favorites_create_destroy() function without an authenticated user.
 	 *
 	 */
-	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): never
+	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

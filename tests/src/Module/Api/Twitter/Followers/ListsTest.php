@@ -30,7 +30,7 @@ class ListsTest extends ApiTestCase
 	 * Test the api_statuses_followers() function an undefined cursor GET variable.
 	 *
 	 */
-	public function testApiStatusesFollowersWithUndefinedCursor(): never
+	public function testApiStatusesFollowersWithUndefinedCursor(): void
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

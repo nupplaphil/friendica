@@ -16,7 +16,7 @@ use Friendica\Util\Temporal;
 
 class NotificationTest extends ApiTestCase
 {
-	public function testEmpty(): never
+	public function testEmpty(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -28,7 +28,7 @@ class NotificationTest extends ApiTestCase
 		*/
 	}
 
-	public function testWithoutAuthenticatedUser(): never
+	public function testWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

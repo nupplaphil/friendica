@@ -77,7 +77,7 @@ class ShowTest extends ApiTestCase
 	 * Test the api_statuses_show() function with an unallowed user.
 	 *
 	 */
-	public function testApiStatusesShowWithUnallowedUser(): never
+	public function testApiStatusesShowWithUnallowedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

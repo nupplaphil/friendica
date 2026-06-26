@@ -76,7 +76,7 @@ class UpdateTest extends ApiTestCase
 	 * Test the api_statuses_update() function without an authenticated user.
 	 *
 	 */
-	public function testApiStatusesUpdateWithoutAuthenticatedUser(): never
+	public function testApiStatusesUpdateWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 
@@ -92,7 +92,7 @@ class UpdateTest extends ApiTestCase
 	 * Test the api_statuses_update() function with a parent status.
 	 *
 	 */
-	public function testApiStatusesUpdateWithParent(): never
+	public function testApiStatusesUpdateWithParent(): void
 	{
 		$this->markTestIncomplete('This triggers an exit() somewhere and kills PHPUnit.');
 	}
@@ -101,7 +101,7 @@ class UpdateTest extends ApiTestCase
 	 * Test the api_statuses_update() function with a media_ids parameter.
 	 *
 	 */
-	public function testApiStatusesUpdateWithMediaIds(): never
+	public function testApiStatusesUpdateWithMediaIds(): void
 	{
 		$this->markTestIncomplete();
 	}
@@ -110,7 +110,7 @@ class UpdateTest extends ApiTestCase
 	 * Test the api_statuses_update() function with the throttle limit reached.
 	 *
 	 */
-	public function testApiStatusesUpdateWithDayThrottleReached(): never
+	public function testApiStatusesUpdateWithDayThrottleReached(): void
 	{
 		$this->markTestIncomplete();
 	}

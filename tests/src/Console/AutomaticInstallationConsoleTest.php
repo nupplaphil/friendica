@@ -247,10 +247,10 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	 */
 	public function testEmptyWithURL(): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(true);
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('installDatabase')
 			->willReturn(true);
 
@@ -271,10 +271,10 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithConfig(array $data): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(true);
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('installDatabase')
 			->willReturn(true);
 
@@ -351,10 +351,10 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentAndSave(array $data): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(true);
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('installDatabase')
 			->willReturn(true);
 
@@ -388,10 +388,10 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithEnvironmentWithoutSave(array $data): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(true);
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('installDatabase')
 			->willReturn(true);
 
@@ -423,10 +423,10 @@ CONF;
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataInstaller')]
 	public function testWithArguments(array $data): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(true);
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('installDatabase')
 			->willReturn(true);
 
@@ -460,10 +460,10 @@ CONF;
 	 */
 	public function testNoDatabaseConnection(): void
 	{
-		$this->installerMock->expects(self::exactly(1)) // @phpstan-ignore method.notFound
+		$this->installerMock->expects(self::exactly(1))
 			->method('checkDB')
 			->willReturn(false);
-		$this->installerMock->method('getChecks')->willReturn([ // @phpstan-ignore method.notFound
+		$this->installerMock->method('getChecks')->willReturn([
 			['title' => 'Could not connect to database.', 'required' => true, 'status' => false, 'help' => ''],
 		]);
 

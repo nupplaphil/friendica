@@ -330,7 +330,7 @@ class ApiResponseTest extends MockedTestCase
 	 * Test the api_rss_extra() function.
 	 *
 	 */
-	public function testApiRssExtra(): never
+	public function testApiRssExtra(): void
 	{
 		self::markTestIncomplete('Cannot mock it yet.');
 
@@ -371,7 +371,7 @@ class ApiResponseTest extends MockedTestCase
 	 * Test the api_rss_extra() function without any user info.
 	 *
 	 */
-	public function testApiRssExtraWithoutUserInfo(): never
+	public function testApiRssExtraWithoutUserInfo(): void
 	{
 		self::markTestIncomplete('Cannot mock it yet.');
 
