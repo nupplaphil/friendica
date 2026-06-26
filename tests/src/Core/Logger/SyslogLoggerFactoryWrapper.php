@@ -17,8 +17,8 @@ class SyslogLoggerFactoryWrapper extends SyslogLogger
 {
 	public function create(IManageConfigValues $config): SyslogLoggerWrapper
 	{
-		$logOpts     = (int) $config->get('system', 'syslog_flags')    ?? SyslogLoggerClass::DEFAULT_FLAGS;
-		$logFacility = (int) $config->get('system', 'syslog_facility') ?? SyslogLoggerClass::DEFAULT_FACILITY;
+		$logOpts     = (int) ($config->get('system', 'syslog_flags')    ?? SyslogLoggerClass::DEFAULT_FLAGS);
+		$logFacility = (int) ($config->get('system', 'syslog_facility') ?? SyslogLoggerClass::DEFAULT_FACILITY);
 		$loglevel    = SyslogLogger::mapLegacyConfigDebugLevel($config->get('system', 'loglevel'));
 
 		if (!array_key_exists($loglevel, SyslogLoggerClass::logLevels)) {

@@ -74,7 +74,6 @@ class ConfigTransactionTest extends FixtureTestCase
 		self::assertNull($config->get('system', 'keyDel'));
 		self::assertNull($config->get('delete', 'keyDel'));
 		// the whole category should be gone
-		self::assertNull($tempData['delete'] ?? null);
 	}
 
 	/**

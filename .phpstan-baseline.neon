@@ -17,28 +17,10 @@ parameters:
 			path: tests/src/Core/Config/ConfigTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
-
-		-
-			message: '#^Variable \$tempData on left side of \?\? is never defined\.$#'
-			identifier: nullCoalesce.variable
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
-
-		-
 			message: '#^Variable \$dice in PHPDoc tag @var does not exist\.$#'
 			identifier: varTag.variableNotFound
 			count: 1
 			path: tests/src/Core/InstallerTest.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 2
-			path: tests/src/Core/Logger/SyslogLoggerFactoryWrapper.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
