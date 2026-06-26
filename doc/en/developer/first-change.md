@@ -74,7 +74,7 @@ protected function content(array $request = []): string
 ## Step 3 — A canonical module showing the target pattern
 
 Use this as your starting point for new modules.
-It shows the target pattern from the [Architecture Guidelines](php-architecture): constructor injection, no superglobals, no direct DB access, explicit auth and CSRF checks, typed input.
+It shows the target pattern from the [Architecture Guidelines](php-architecture): constructor injection, no superglobals, no direct DB access, explicit auth and CSRF ([Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf)) checks, typed input.
 Replace the illustrative `WidgetService` with your own before using it.
 
 ```php
@@ -507,4 +507,4 @@ Several predate the current guidelines and use `DI::`, `$_REQUEST`, or `DBA::` d
 | Entity / Factory / Repository | `src/Navigation/Notifications/`                                  | Modern DDD pattern                                  | Predates the `declare(strict_types=1)` rule ([Architecture §4.4](php-architecture)) — new classes still require it                                                                    |
 | Unit test structure           | `tests/Unit/Contact/FriendSuggest/Factory/FriendSuggestTest.php` | Test isolation and data-provider structure          | `dataCreate()` predates the return-type rule                                                                                                                                          |
 
-For request handling, DI, and CSRF, **p refer the skeleton in [Step 3](#skeleton)** over any of these files.
+For request handling, DI, and CSRF, **prefer the skeleton in [Step 3](#skeleton)** over any of these files.
