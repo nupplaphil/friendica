@@ -46,4 +46,4 @@ parameters:
             message: '#^Call to an undefined method Mockery[\\\\](?:ExpectationInterface(?:[|]Mockery[\\\\]HigherOrderMessage)?|LegacyMockInterface)::(?:with|once|times|twice|withAnyArgs|andReturnUsing|addRules)\(\)\.$#'
             identifier: method.notFound
             path: tests/
-            count: 249
+            count: 247

@@ -80,6 +80,7 @@ HELP;
 		private readonly Cache $configCache,
 		private readonly IManageConfigValues $config,
 		private readonly Database $dba,
+		private readonly ?Installer $installer = null,
 		?array $argv = null,
 	) {
 		parent::__construct($argv);
@@ -90,7 +91,7 @@ HELP;
 		// Initialise the app
 		$this->out("Initializing setup...");
 
-		$installer = new Installer();
+		$installer = $this->installer ?? new Installer();
 
 		$configCache  = $this->configCache;
 		$basePathConf = $configCache->get('system', 'basepath');
