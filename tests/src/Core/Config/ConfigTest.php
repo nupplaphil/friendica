@@ -340,8 +340,8 @@ class ConfigTest extends DatabaseTestCase
 		// with default value
 		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default'));
 
-		// with default value and refresh
-		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default', true));
+		// with default value
+		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default'));
 	}
 
 	/**

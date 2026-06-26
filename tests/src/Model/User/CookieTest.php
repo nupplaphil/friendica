@@ -299,7 +299,7 @@ class CookieTest extends MockedTestCase
 
 		$cookie->clear();
 
-		self::assertEmpty(StaticCookie::$_COOKIE[Cookie::NAME]);
+		self::assertSame('', StaticCookie::$_COOKIE[Cookie::NAME]); // @phpstan-ignore staticMethod.impossibleType
 		self::assertEquals(-3600, StaticCookie::$_EXPIRE);
 	}
 }

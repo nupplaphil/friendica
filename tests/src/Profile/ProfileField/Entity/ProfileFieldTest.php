@@ -164,7 +164,7 @@ class ProfileFieldTest extends MockedTestCase
 		$entity = new ProfileField($uid, $order, $label, $value, $created, $edited, $this->permissionSetFactory->createFromTableRow($permissionSet), $id);
 
 		self::expectException(ProfileFieldNotFoundException::class);
-		$entity->wrong;
+		$entity->wrong; // @phpstan-ignore property.notFound, expr.resultUnused
 	}
 
 	/**

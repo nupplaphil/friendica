@@ -10,33 +10,3 @@ parameters:
 			count: 1
 			path: src/Module/BaseApi.php
 
-		-
-			message: '#^Method Friendica\\Core\\Config\\Capability\\IManageConfigValues\:\:get\(\) invoked with 4 parameters, 1\-3 required\.$#'
-			identifier: arguments.count
-			count: 3
-			path: tests/src/Core/Config/ConfigTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
-			identifier: staticMethod.impossibleType
-			count: 1
-			path: tests/src/Model/User/CookieTest.php
-
-		-
-			message: '#^Access to an undefined property Friendica\\Profile\\ProfileField\\Entity\\ProfileField\:\:\$wrong\.$#'
-			identifier: property.notFound
-			count: 1
-			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
-
-		-
-			message: '#^Expression "\$entity\-\>wrong" on a separate line does not do anything\.$#'
-			identifier: expr.resultUnused
-			count: 1
-			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
-
-		-
-			message: '#^Binary operation "\-" between string and string results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: tests/src/Util/DateTimeFormatTest.php
-
