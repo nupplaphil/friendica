@@ -34,7 +34,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf( // @phpstan-ignore method.alreadyNarrowedType
 			LoggerInterface::class,
-			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
+			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);
 	}
 
@@ -49,7 +49,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf(
 			NullLogger::class,
-			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
+			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);
 	}
 
@@ -69,7 +69,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf(
 			NullLogger::class,
-			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
+			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);
 	}
 }

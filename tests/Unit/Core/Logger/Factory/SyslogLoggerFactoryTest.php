@@ -36,7 +36,7 @@ class SyslogLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf( // @phpstan-ignore method.alreadyNarrowedType
 			LoggerInterface::class,
-			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
+			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);
 	}
 

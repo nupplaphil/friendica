@@ -44,7 +44,7 @@ class TransmitterTest extends FixtureTestCase
 		$emojis = array_fill_keys(['like', 'friendica', 'p', 'embarrassed', 'smileyheart333'], true);
 		$this->assertEquals(count($emojis), count($note['tag']));
 		foreach ($note['tag'] as $emoji) {
-			$this->assertTrue(array_key_exists($emoji['name'], $emojis));
+			$this->assertArrayHasKey($emoji['name'], $emojis);
 			$this->assertEquals('Emoji', $emoji['type']);
 		}
 	}

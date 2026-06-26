@@ -47,8 +47,8 @@ class FilesystemStorageConfigTest extends StorageConfigTestCase
 			'storagepath' => [
 				'input', 'Storage base path',
 				$this->root->getChild('storage')->url(),
-				'Folder where uploaded files are saved. For maximum security, This should be a path outside web server folder tree'
-			]
+				'Folder where uploaded files are saved. For maximum security, This should be a path outside web server folder tree',
+			],
 		], $storage->getOptions());
 	}
 }
