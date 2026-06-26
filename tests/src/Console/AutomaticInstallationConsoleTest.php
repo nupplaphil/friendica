@@ -691,7 +691,7 @@ FIN;
 			$this->configMock,
 			$this->dba,
 			$this->installerMock,
-			$argv,
+			$argv ?? $this->consoleArgv,
 		);
 	}
 
