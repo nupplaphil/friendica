@@ -11,36 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 5
-			path: tests/PConfigTestCase.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 15
-			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 15
-			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 9
-			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
-
-		-
 			message: '#^Method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:streamForChunks\(\) should return Psr\\Http\\Message\\StreamInterface but returns Mockery\\MockInterface\.$#'
 			identifier: return.type
 			count: 1
@@ -98,12 +68,6 @@ parameters:
 			message: '#^Call to an undefined method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:mockUpdate\(\)\.$#'
 			identifier: method.notFound
 			count: 5
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 2
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
@@ -167,36 +131,6 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 10
-			path: tests/src/Console/ConfigConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/src/Console/LockConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 8
-			path: tests/src/Console/LockConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Console/ServerBlockConsoleTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/src/Console/ServerBlockConsoleTest.php
-
-		-
 			message: '#^Strict comparison using \!\=\= between ''\-''\|''\:''\|''_''\|''A'' and '''' will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
@@ -209,46 +143,16 @@ parameters:
 			path: tests/src/Content/Text/BBCodeTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/src/Core/Addon/Model/AddonLoaderTest.php
-
-		-
 			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/Cache/ArrayCacheTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Cache/MemcacheCacheTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Cache/MemcachedCacheTest.php
-
-		-
 			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/Cache/RedisCacheTest.php
 
 		-
 			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:getChild\(\)\.$#'
@@ -275,36 +179,6 @@ parameters:
 			path: tests/src/Core/Config/ConfigTransactionTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Hooks/Model/InstanceManagerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
-			identifier: method.notFound
-			count: 5
-			path: tests/src/Core/InstallerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 9
-			path: tests/src/Core/InstallerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\LegacyMockInterface\:\:addRules\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/InstallerTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Core\\InstallerTest\:\:\$dice \(Dice\\Dice&Mockery\\MockInterface\) does not accept Mockery\\LegacyMockInterface\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -323,58 +197,16 @@ parameters:
 			path: tests/src/Core/Lock/APCuCacheLockTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Lock/MemcacheCacheLockTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Lock/MemcachedCacheLockTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/Lock/RedisCacheLockTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/Lock/SemaphoreLockTest.php
-
-		-
 			message: '#^PHPDoc tag @var with type Dice\\Dice\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
 			identifier: varTag.type
 			count: 1
 			path: tests/src/Core/Lock/SemaphoreLockTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/Logger/ProfilerLoggerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/Logger/StreamLoggerTest.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 2
 			path: tests/src/Core/Logger/SyslogLoggerFactoryWrapper.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/Logger/SyslogLoggerTest.php
 
 		-
 			message: '#^Call to an undefined method Psr\\Log\\LoggerInterface\:\:close\(\)\.$#'
@@ -389,48 +221,6 @@ parameters:
 			path: tests/src/Core/Logger/SyslogLoggerTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:times\(\)\.$#'
-			identifier: method.notFound
-			count: 7
-			path: tests/src/Core/PConfig/JitPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 7
-			path: tests/src/Core/PConfig/JitPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Core/PConfig/PreloadPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:times\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Core/PConfig/PreloadPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:twice\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/PConfig/PreloadPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/src/Core/PConfig/PreloadPConfigTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
-
-		-
 			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
 			identifier: varTag.type
 			count: 1
@@ -441,30 +231,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/SystemTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/SystemTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 11
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
 
 		-
 			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
@@ -491,46 +257,10 @@ parameters:
 			path: tests/src/Model/Post/MediaTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/src/Model/User/CookieTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 20
-			path: tests/src/Model/User/CookieTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
 			identifier: staticMethod.impossibleType
 			count: 1
 			path: tests/src/Model/User/CookieTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 18
-			path: tests/src/Model/UserTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/src/Model/UserTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\LegacyMockInterface\:\:addRules\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Model/UserTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
-			identifier: method.notFound
-			count: 8
-			path: tests/src/Module/Api/ApiResponseTest.php
 
 		-
 			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
@@ -543,18 +273,6 @@ parameters:
 			identifier: return.phpDocType
 			count: 1
 			path: tests/src/Module/Api/Mastodon/Accounts/VerifyCredentialsTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
 
 		-
 			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
@@ -689,26 +407,8 @@ parameters:
 			path: tests/src/Module/Api/Twitter/Statuses/UserTimelineTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Module/StatsCachingTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 5
-			path: tests/src/Module/StatsCachingTest.php
-
-		-
 			message: '#^Access to an undefined property Friendica\\Profile\\ProfileField\\Entity\\ProfileField\:\:\$wrong\.$#'
 			identifier: property.notFound
-			count: 1
-			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
 			count: 1
 			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
 
@@ -743,18 +443,6 @@ parameters:
 			path: tests/src/Util/Emailer/MailBuilderTest.php
 
 		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:andReturnUsing\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$baseUrl \(Friendica\\App\\BaseURL\) does not accept Mockery\\MockInterface\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -771,23 +459,3 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:once\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/ProfilerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/ProfilerTest.php
-
-		-
-			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/src/Util/ProfilerTest.php
-
-
