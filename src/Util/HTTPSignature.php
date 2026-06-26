@@ -275,7 +275,7 @@ class HTTPSignature
 		$host           = strtolower(parse_url($target, PHP_URL_HOST));
 		$path           = parse_url($target, PHP_URL_PATH);
 		$digest         = 'SHA-256=' . base64_encode(hash('sha256', $content, true));
-		$content_length = strlen($content);
+		$content_length = (string) strlen($content);
 		$date           = DateTimeFormat::utcNow(DateTimeFormat::HTTP);
 
 		$headers = [
