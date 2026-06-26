@@ -48,7 +48,7 @@ class UpdateTest extends ApiTestCase
 			]);
 	}
 
-	public function testWithoutAuthenticatedUser(): never
+	public function testWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 	}

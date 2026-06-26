@@ -39,7 +39,7 @@ class ProfilerTest extends MockedTestCase
 					->twice();
 		$profiler = new Profiler($config);
 
-		self::assertInstanceOf(Profiler::class, $profiler);
+		self::assertInstanceOf(Profiler::class, $profiler); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	/**

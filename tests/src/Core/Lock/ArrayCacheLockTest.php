@@ -36,7 +36,7 @@ class ArrayCacheLockTest extends CacheLockTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testLockTTL(): never
+	public function testLockTTL(): void
 	{
 		self::markTestSkipped("ArrayCache doesn't support TTL");
 	}

@@ -356,6 +356,6 @@ class FirehoseTest extends ProtocolTestCase
 		$stream->shouldReceive('eof')->andReturn(...array_merge(array_fill(0, count($chunks), false), [true]));
 		$stream->shouldReceive('read')->with(8192)->andReturn(...$chunks);
 
-		return $stream;
+		return $stream; // @phpstan-ignore return.type
 	}
 }

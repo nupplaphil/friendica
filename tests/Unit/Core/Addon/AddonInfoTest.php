@@ -16,7 +16,7 @@ class AddonInfoTest extends TestCase
 {
 	public function testFromStringCreatesObject(): void
 	{
-		$this->assertInstanceOf(AddonInfo::class, AddonInfo::fromString('addonId', ''));
+		$this->assertInstanceOf(AddonInfo::class, AddonInfo::fromString('addonId', '')); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getStringData(): array
@@ -116,7 +116,7 @@ class AddonInfoTest extends TestCase
 
 	public function testFromArrayCreatesObject(): void
 	{
-		$this->assertInstanceOf(AddonInfo::class, AddonInfo::fromArray([]));
+		$this->assertInstanceOf(AddonInfo::class, AddonInfo::fromArray([])); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public function testGetterReturningCorrectValues(): void

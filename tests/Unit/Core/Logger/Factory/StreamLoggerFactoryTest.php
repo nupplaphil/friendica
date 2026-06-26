@@ -35,7 +35,7 @@ class StreamLoggerFactoryTest extends TestCase
 			$this->createStub(FileSystemUtil::class),
 		);
 
-		$this->assertInstanceOf(
+		$this->assertInstanceOf( // @phpstan-ignore method.alreadyNarrowedType
 			LoggerInterface::class,
 			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT),
 		);

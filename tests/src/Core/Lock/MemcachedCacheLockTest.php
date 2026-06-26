@@ -58,13 +58,13 @@ class MemcachedCacheLockTest extends CacheLockTestCase
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testGetLocks(): never
+	public function testGetLocks(): void
 	{
 		static::markTestIncomplete('Race condition because of too fast getLocks() which uses a workaround');
 	}
 
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testGetLocksWithPrefix(): never
+	public function testGetLocksWithPrefix(): void
 	{
 		static::markTestIncomplete('Race condition because of too fast getLocks() which uses a workaround');
 	}

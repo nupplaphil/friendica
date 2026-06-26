@@ -39,9 +39,8 @@ class RetweetTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_repeat() function without an authenticated user.
 	 *
-	 * @return void
 	 */
-	public function testApiStatusesRepeatWithoutAuthenticatedUser(): never
+	public function testApiStatusesRepeatWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

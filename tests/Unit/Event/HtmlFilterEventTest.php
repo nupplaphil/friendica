@@ -19,7 +19,7 @@ class HtmlFilterEventTest extends TestCase
 	{
 		$event = new HtmlFilterEvent('test', 'original');
 
-		$this->assertInstanceOf(NamedEvent::class, $event);
+		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getPublicConstants(): array

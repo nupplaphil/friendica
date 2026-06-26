@@ -216,8 +216,12 @@ class ConfigFileManagerTest extends MockedTestCase
 				. 'config' . DIRECTORY_SEPARATOR
 				. 'A.config.php';
 
+		/** @var \org\bovigo\vfs\vfsStreamDirectory $addonDir */
+		$addonDir = $this->root->getChild('addon');
+		/** @var \org\bovigo\vfs\vfsStreamDirectory $testDir */
+		$testDir = $addonDir->getChild('test');
 		vfsStream::newFile('test.config.php')
-				 ->at($this->root->getChild('addon')->getChild('test')->getChild('config'))
+				 ->at($testDir->getChild('config'))
 				 ->setContent(file_get_contents($file));
 
 		$configFileLoader = new ConfigFileManager(

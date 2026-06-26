@@ -196,7 +196,7 @@ class DateTimeFormatTest extends MockedTestCase
 		$now  = DateTimeFormat::utcNow('U');
 		$date = DateTimeFormat::utc('now - 3 days', 'U');
 
-		$this->assertEquals(259200, $now - $date);
+		$this->assertEquals(259200, (int) $now - (int) $date);
 	}
 
 	public static function dataConvert()

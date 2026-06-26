@@ -14,7 +14,7 @@ class StatusesTest extends ApiTestCase
 	/**
 	 * Test the api_status_show() function.
 	 */
-	public function testApiStatusShowWithJson(): never
+	public function testApiStatusShowWithJson(): void
 	{
 		self::markTestIncomplete('Needs Statuses to not set header during call (like at BaseApi::setLinkHeader');
 
@@ -25,7 +25,7 @@ class StatusesTest extends ApiTestCase
 	/**
 	 * Test the api_status_show() function with an XML result.
 	 */
-	public function testApiStatusShowWithXml(): never
+	public function testApiStatusShowWithXml(): void
 	{
 		self::markTestIncomplete('Needs Statuses to not set header during call (like at BaseApi::setLinkHeader');
 

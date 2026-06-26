@@ -55,9 +55,8 @@ class DestroyTest extends ApiTestCase
 	/**
 	 * Test the api_favorites_create_destroy() function without an authenticated user.
 	 *
-	 * @return void
 	 */
-	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): never
+	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

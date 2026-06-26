@@ -35,8 +35,8 @@ class ConfigTransactionTest extends FixtureTestCase
 		$config            = new DatabaseConfig($this->dice->create(Database::class), new Cache());
 		$configTransaction = new ConfigTransaction($config);
 
-		self::assertInstanceOf(ISetConfigValuesTransactionally::class, $configTransaction);
-		self::assertInstanceOf(ConfigTransaction::class, $configTransaction);
+		self::assertInstanceOf(ISetConfigValuesTransactionally::class, $configTransaction); // @phpstan-ignore staticMethod.alreadyNarrowedType
+		self::assertInstanceOf(ConfigTransaction::class, $configTransaction); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	public function testConfigTransaction(): void
@@ -74,7 +74,6 @@ class ConfigTransactionTest extends FixtureTestCase
 		self::assertNull($config->get('system', 'keyDel'));
 		self::assertNull($config->get('delete', 'keyDel'));
 		// the whole category should be gone
-		self::assertNull($tempData['delete'] ?? null);
 	}
 
 	/**

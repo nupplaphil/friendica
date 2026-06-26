@@ -16,7 +16,7 @@ use Friendica\Test\FixtureTestCase;
 
 class ContactEndpointTest extends FixtureTestCase
 {
-	public function testIds(): never
+	public function testIds(): void
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');
 
@@ -62,7 +62,7 @@ class ContactEndpointTest extends FixtureTestCase
 	 * @throws NotFoundException
 	 */
 	#[\PHPUnit\Framework\Attributes\Depends('testIds')]
-	public function testIdsStringify(): never
+	public function testIdsStringify(): void
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');
 
@@ -75,7 +75,7 @@ class ContactEndpointTest extends FixtureTestCase
 		*/
 	}
 
-	public function testIdsPagination(): never
+	public function testIdsPagination(): void
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');
 
@@ -161,7 +161,7 @@ class ContactEndpointTest extends FixtureTestCase
 	 * @throws \ImagickException
 	 */
 	#[\PHPUnit\Framework\Attributes\Depends('testIds')]
-	public function testList(): never
+	public function testList(): void
 	{
 		self::markTestIncomplete('Needs overall refactoring due changed method signature - Calling MrPetovan for help ;-)');
 

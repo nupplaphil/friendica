@@ -195,7 +195,7 @@ class SmiliesTest extends FixtureTestCase
 		foreach ([':-[', ':-D', 'o.O'] as $emoji) {
 			foreach (['A', '_', ':', '-'] as $prefix) {
 				foreach (['', ' ', 'A', ':', '-'] as $suffix) {
-					$no_smile = ($prefix !== '' && ctype_alnum($prefix)) || ($suffix !== '' && ctype_alnum($suffix));
+					$no_smile = ctype_alnum($prefix) || ($suffix !== '' && ctype_alnum($suffix));
 					$s        = $prefix . $emoji . $suffix;
 					$data[]   = [
 						'expected' => $no_smile ? $s : 'alt="' . $emoji . '"',

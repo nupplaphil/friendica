@@ -63,7 +63,7 @@ class FilesystemStorageTest extends StorageTestCase
 	 * Test the exception in case of missing file permissions
 	 *
 	 */
-	public function testMissingFilePermissions(): never
+	public function testMissingFilePermissions(): void
 	{
 		static::markTestIncomplete("Cannot catch file_put_content() error due vfsStream failure");
 

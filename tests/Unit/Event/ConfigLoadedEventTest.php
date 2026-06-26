@@ -20,7 +20,7 @@ class ConfigLoadedEventTest extends TestCase
 	{
 		$event = new ConfigLoadedEvent('test', $this->createStub(ConfigFileManager::class));
 
-		$this->assertInstanceOf(NamedEvent::class, $event);
+		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getPublicConstants(): array

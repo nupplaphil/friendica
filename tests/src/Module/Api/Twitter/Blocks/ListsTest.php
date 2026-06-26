@@ -29,9 +29,8 @@ class ListsTest extends ApiTestCase
 	/**
 	 * Test the api_blocks_list() function an undefined cursor GET variable.
 	 *
-	 * @return void
 	 */
-	public function testApiBlocksListWithUndefinedCursor(): never
+	public function testApiBlocksListWithUndefinedCursor(): void
 	{
 		self::markTestIncomplete('Needs refactoring of Lists - replace filter_input() with $request parameter checks');
 

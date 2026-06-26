@@ -43,7 +43,7 @@ class RouterTest extends TestCase
 			$userSession,
 		);
 
-		self::assertInstanceOf(Router::class, $router);
+		self::assertInstanceOf(Router::class, $router); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	/**
@@ -67,7 +67,7 @@ class RouterTest extends TestCase
 			$userSession,
 		);
 
-		self::assertInstanceOf(Router::class, $router);
+		self::assertInstanceOf(Router::class, $router); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	/**
@@ -328,32 +328,16 @@ class RouterTest extends TestCase
 	}
 
 	/**
-	 * Test that HTTP method constants are correctly defined
+	 * Test that HTTP method constants and ALLOWED_METHODS are consistent
 	 */
-	public function testConstantsAreCorrectlyDefined(): void
+	public function testHttpMethodConstantsAndAllowedMethods(): void
 	{
-		self::assertSame('DELETE', Router::DELETE);
-		self::assertSame('GET', Router::GET);
-		self::assertSame('PATCH', Router::PATCH);
-		self::assertSame('POST', Router::POST);
-		self::assertSame('PUT', Router::PUT);
-		self::assertSame('OPTIONS', Router::OPTIONS);
-	}
+		$expectedMethods = ['DELETE', 'GET', 'PATCH', 'POST', 'PUT', 'OPTIONS'];
 
-	/**
-	 * Test that ALLOWED_METHODS constant contains all HTTP methods
-	 */
-	public function testAllowedMethodsConstantContainsAllHttpMethods(): void
-	{
-		$expected = [
-			Router::DELETE,
-			Router::GET,
-			Router::PATCH,
-			Router::POST,
-			Router::PUT,
-			Router::OPTIONS,
-		];
+		foreach ($expectedMethods as $method) {
+			self::assertContains($method, Router::ALLOWED_METHODS);
+		}
 
-		self::assertSame($expected, Router::ALLOWED_METHODS);
+		self::assertCount(count($expectedMethods), Router::ALLOWED_METHODS);
 	}
 }

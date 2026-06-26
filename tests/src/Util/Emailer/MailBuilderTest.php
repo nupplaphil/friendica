@@ -34,7 +34,7 @@ class MailBuilderTest extends MockedTestCase
 	/** @var BaseURL|MockInterface */
 	private $baseUrl;
 
-	/** @var string */
+	/** @var array */
 	private $defaultHeaders;
 
 	protected function setUp(): void
@@ -72,7 +72,7 @@ class MailBuilderTest extends MockedTestCase
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 
-		self::assertInstanceOf(MailBuilder::class, $builder);
+		self::assertInstanceOf(MailBuilder::class, $builder); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	/**
@@ -81,7 +81,7 @@ class MailBuilderTest extends MockedTestCase
 	 * @todo Create test once "Renderer" and "BBCode" are dynamic
 	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
-	public function testBuilderWithNonRawEmail(): never
+	public function testBuilderWithNonRawEmail(): void
 	{
 		static::markTestIncomplete('Cannot easily mock Renderer and BBCode, so skipping tests wit them');
 	}

@@ -31,9 +31,8 @@ class IncomingTest extends ApiTestCase
 	/**
 	 * Test the api_friendships_incoming() function an undefined cursor GET variable.
 	 *
-	 * @return void
 	 */
-	public function testApiFriendshipsIncomingWithUndefinedCursor(): never
+	public function testApiFriendshipsIncomingWithUndefinedCursor(): void
 	{
 		self::markTestIncomplete('Needs refactoring of Incoming - replace filter_input() with $request parameter checks');
 

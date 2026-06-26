@@ -19,7 +19,7 @@ class ModuleContentEventTest extends TestCase
 	{
 		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'content');
 
-		$this->assertInstanceOf(NamedEvent::class, $event);
+		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getPublicConstants(): array

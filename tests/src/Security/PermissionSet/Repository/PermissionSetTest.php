@@ -40,7 +40,7 @@ class PermissionSetTest extends FixtureTestCase
 		self::assertEmpty($permissionSet->allow_gid);
 		self::assertEmpty($permissionSet->deny_cid);
 		self::assertEmpty($permissionSet->deny_gid);
-		self::assertEmpty(PermissionSetRepository::PUBLIC, $permissionSet->id);
+		self::assertSame(PermissionSetRepository::PUBLIC, $permissionSet->id);
 		self::assertEquals(1, $permissionSet->uid);
 	}
 

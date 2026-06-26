@@ -19,7 +19,7 @@ class ModulePostRecipientEventTest extends TestCase
 	{
 		$event = new ModulePostRecipientEvent('test', 'moduleName', \stdClass::class, 'html');
 
-		$this->assertInstanceOf(NamedEvent::class, $event);
+		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getPublicConstants(): array

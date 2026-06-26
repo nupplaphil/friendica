@@ -52,9 +52,8 @@ class SentTest extends ApiTestCase
 	/**
 	 * Test the api_direct_messages_box() function without an authenticated user.
 	 *
-	 * @return void
 	 */
-	public function testApiDirectMessagesBoxWithUnallowedUser(): never
+	public function testApiDirectMessagesBoxWithUnallowedUser(): void
 	{
 		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
 

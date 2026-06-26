@@ -33,9 +33,8 @@ class VerifyCredentialsTest extends ApiTestCase
 	/**
 	 * Test the api_account_verify_credentials() function without an authenticated user.
 	 *
-	 * @return void
 	 */
-	public function testApiAccountVerifyCredentialsWithoutAuthenticatedUser(): never
+	public function testApiAccountVerifyCredentialsWithoutAuthenticatedUser(): void
 	{
 		self::markTestIncomplete('Needs dynamic BasicAuth first');
 

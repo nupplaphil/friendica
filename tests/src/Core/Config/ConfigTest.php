@@ -303,7 +303,7 @@ class ConfigTest extends DatabaseTestCase
 	public function testLoadWrong(): void
 	{
 		$this->testedConfig = new ReadOnlyFileConfig(new Cache());
-		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache()); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEmpty($this->testedConfig->getCache()->getAll());
 	}
@@ -340,8 +340,8 @@ class ConfigTest extends DatabaseTestCase
 		// with default value
 		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default'));
 
-		// with default value and refresh
-		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default', true));
+		// with default value
+		self::assertEquals('default', $this->testedConfig->get('test', 'it', 'default'));
 	}
 
 	/**
@@ -353,7 +353,7 @@ class ConfigTest extends DatabaseTestCase
 		$this->configCache->load(['test' => ['it' => $data]], Cache::SOURCE_FILE);
 
 		$this->testedConfig = new DatabaseConfig($this->getDbInstance(), $this->configCache);
-		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache()); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEquals($data, $this->testedConfig->get('test', 'it'));
 		self::assertEquals($data, $this->testedConfig->getCache()->get('test', 'it'));
@@ -376,7 +376,7 @@ class ConfigTest extends DatabaseTestCase
 
 		// now you have to get the new variable entry because of the new set the get refresh succeed as well
 		self::assertTrue($this->testedConfig->set('config', 'test', '123'));
-		self::assertEquals('123', $this->testedConfig->get('config', 'test', '', true));
+		self::assertEquals('123', $this->testedConfig->get('config', 'test'));
 	}
 
 	/**
@@ -393,7 +393,7 @@ class ConfigTest extends DatabaseTestCase
 		$this->testedConfig->getCache()->set('config', 'test', 'prio', Cache::SOURCE_ENV);
 		// You can set a config value, but if there's a value with a higher priority (environment), this value will persist when retrieving
 		self::assertTrue($this->testedConfig->set('config', 'test', '123'));
-		self::assertEquals('prio', $this->testedConfig->get('config', 'test', '', true));
+		self::assertEquals('prio', $this->testedConfig->get('config', 'test'));
 	}
 
 
