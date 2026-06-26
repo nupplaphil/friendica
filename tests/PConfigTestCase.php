@@ -44,7 +44,6 @@ abstract class PConfigTestCase extends MockedTestCase
 		}
 	}
 
-
 	protected function setUp(): void
 	{
 		parent::setUp();

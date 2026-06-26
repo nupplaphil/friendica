@@ -80,7 +80,10 @@ trait VFSTrait
 	protected function delConfigFile(string $filename, bool $static = false)
 	{
 		if ($this->root->hasChild(($static ? 'static' : 'config') . '/' . $filename)) {
-			$this->root->getChild(($static ? 'static' : 'config'))->removeChild($filename);
+			$dir = $this->root->getChild(($static ? 'static' : 'config'));
+			if ($dir instanceof vfsStreamDirectory) {
+				$dir->removeChild($filename);
+			}
 		}
 	}
 }

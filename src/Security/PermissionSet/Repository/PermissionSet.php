@@ -26,14 +26,20 @@ class PermissionSet extends BaseRepository
 	/** @var int Virtual permission set id for public permission */
 	public const PUBLIC = 0;
 
-	/** @var PermissionSetFactory */
-	protected $factory;
-
 	protected static $table_name = 'permissionset';
 
-	public function __construct(Database $database, LoggerInterface $logger, PermissionSetFactory $factory, private readonly ACLFormatter $aclFormatter)
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		private readonly PermissionSetFactory $entityFactory,
+		private readonly ACLFormatter $aclFormatter,
+	) {
+		parent::__construct($database, $logger, $entityFactory);
+	}
+
+	protected function getFactory(): PermissionSetFactory
 	{
-		parent::__construct($database, $logger, $factory);
+		return $this->entityFactory;
 	}
 
 	/**
@@ -44,7 +50,7 @@ class PermissionSet extends BaseRepository
 	{
 		$fields = parent::_selectFirstRowAsArray($condition, $params);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	/**
@@ -79,7 +85,7 @@ class PermissionSet extends BaseRepository
 	public function selectOneById(int $id, int $uid): PermissionSetEntity
 	{
 		if ($id === self::PUBLIC) {
-			return $this->factory->createFromString($uid);
+			return $this->getFactory()->createFromString($uid);
 		}
 
 		try {
@@ -162,7 +168,7 @@ class PermissionSet extends BaseRepository
 			throw new PermissionSetPersistenceException(sprintf('No "self" contact found for user %d', $uid));
 		}
 
-		return $this->selectOrCreate($this->factory->createFromString(
+		return $this->selectOrCreate($this->getFactory()->createFromString(
 			$uid,
 			$this->aclFormatter->toString($self_contact['id']),
 		));
@@ -175,7 +181,7 @@ class PermissionSet extends BaseRepository
 	 */
 	public function selectPublicForUser(int $uid): PermissionSetEntity
 	{
-		return $this->factory->createFromString($uid, '', '', '', '', self::PUBLIC);
+		return $this->getFactory()->createFromString($uid, '', '', '', '', self::PUBLIC);
 	}
 
 	/**

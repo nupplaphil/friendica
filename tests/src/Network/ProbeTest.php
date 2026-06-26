@@ -249,7 +249,7 @@ xQIDAQAB
 		 *
 		 */
 
-		$container = [];
+		$container = []; // @phpstan-ignore deadCode.unreachable (skipped test)
 		$history   = Middleware::history($container);
 
 		$this->httpRequestHandler->push($history);

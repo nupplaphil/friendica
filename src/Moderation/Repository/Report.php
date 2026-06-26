@@ -33,14 +33,14 @@ final class Report extends \Friendica\BaseRepository
 		ReportEntity::RESOLUTION_REJECTED,
 	];
 
-	/** @var ReportFactory */
-	protected $factory;
-
-	public function __construct(Database $database, LoggerInterface $logger, ReportFactory $factory, protected PostFactory $postFactory, protected RuleFactory $ruleFactory)
-	{
-		parent::__construct($database, $logger, $factory);
-
-		$this->factory = $factory;
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		private readonly ReportFactory $entityFactory,
+		protected PostFactory $postFactory,
+		protected RuleFactory $ruleFactory,
+	) {
+		parent::__construct($database, $logger, $entityFactory);
 	}
 
 	public function selectOneById(int $lastInsertId): ReportEntity
@@ -93,6 +93,11 @@ final class Report extends \Friendica\BaseRepository
 		return $Report;
 	}
 
+	protected function getFactory(): ReportFactory
+	{
+		return $this->entityFactory;
+	}
+
 	/**
 	 * @throws NotFoundException
 	 */
@@ -106,7 +111,7 @@ final class Report extends \Friendica\BaseRepository
 		$reportPosts = new PostsCollection(array_map($this->postFactory->createFromTableRow(...), $this->db->selectToArray('report-post', ['uri-id', 'status'], ['rid' => $condition['id'] ?? 0])));
 		$reportRules = new RulesCollection(array_map($this->ruleFactory->createFromTableRow(...), $this->db->selectToArray('report-rule', ['line-id', 'text'], ['rid' => $condition['id'] ?? 0])));
 
-		return $this->factory->createFromTableRow($fields, $reportPosts, $reportRules);
+		return $this->getFactory()->createFromTableRow($fields, $reportPosts, $reportRules);
 	}
 
 	/**

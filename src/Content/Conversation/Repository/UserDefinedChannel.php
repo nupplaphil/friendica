@@ -36,24 +36,21 @@ class UserDefinedChannel extends BaseRepository
 {
 	protected static $table_name = 'channel';
 
-	/** @var UserDefinedChannelFactory */
-	protected $factory;
-
 	/**
 	 * UserDefinedChannel repository constructor.
-	 *
-	 * @param Database $database Database access layer.
-	 * @param LoggerInterface $logger Logger instance.
-	 * @param UserDefinedChannelFactory $factory Entity factory.
-	 * @param IManageConfigValues $config Configuration manager.
 	 */
 	public function __construct(
 		Database $database,
 		LoggerInterface $logger,
-		UserDefinedChannelFactory $factory,
+		private readonly UserDefinedChannelFactory $entityFactory,
 		private readonly IManageConfigValues $config,
 	) {
-		parent::__construct($database, $logger, $factory);
+		parent::__construct($database, $logger, $entityFactory);
+	}
+
+	protected function getFactory(): UserDefinedChannelFactory
+	{
+		return $this->entityFactory;
 	}
 
 	/**
@@ -68,7 +65,7 @@ class UserDefinedChannel extends BaseRepository
 
 		$Entities = new UserDefinedChannels();
 		foreach ($rows as $fields) {
-			$Entities[] = $this->factory->createFromTableRow($fields);
+			$Entities[] = $this->getFactory()->createFromTableRow($fields);
 		}
 
 		return $Entities;
@@ -98,7 +95,7 @@ class UserDefinedChannel extends BaseRepository
 	{
 		$fields = $this->_selectFirstRowAsArray(['id' => $id, 'uid' => $uid]);
 
-		return $this->factory->createFromTableRow($fields);
+		return $this->getFactory()->createFromTableRow($fields);
 	}
 
 	/**

@@ -16,7 +16,7 @@ class StaticCookie extends Cookie
 {
 	/** @var array static Cookie array mock */
 	public static $_COOKIE = [];
-	/** @var int The last expire time set */
+	/** @var int|null The last expire time set */
 	public static $_EXPIRE;
 
 	/**

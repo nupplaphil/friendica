@@ -132,7 +132,7 @@ class DependencyCheckTest extends FixtureTestCase
 
 	public function testLock(): void
 	{
-		/** @var ICanLock $cache */
+		/** @var ICanLock $lock */
 		$lock = $this->dice->create(ICanLock::class);
 
 		self::assertInstanceOf(ICanLock::class, $lock);
