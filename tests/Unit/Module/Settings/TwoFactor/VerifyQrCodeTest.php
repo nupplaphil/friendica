@@ -71,6 +71,6 @@ class VerifyQrCodeTest extends TestCase
 			);
 		}
 
-		self::assertSame('', $qrcode_image, '$qrcode_image must stay empty on failure so the page still renders');
+		self::assertSame('', $qrcode_image, '$qrcode_image must stay empty on failure so the page still renders'); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 }

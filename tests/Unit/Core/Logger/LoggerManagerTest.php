@@ -43,7 +43,7 @@ class LoggerManagerTest extends TestCase
 			$this->createStub(LoggerFactory::class),
 		);
 
-		$this->assertInstanceOf(LoggerInterface::class, $factory->getLogger());
+		$this->assertInstanceOf(LoggerInterface::class, $factory->getLogger()); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public function testGetLoggerReturnsSameObject(): void

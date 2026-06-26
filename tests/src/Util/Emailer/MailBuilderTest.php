@@ -72,7 +72,7 @@ class MailBuilderTest extends MockedTestCase
 	{
 		$builder = new SampleMailBuilder($this->l10n, $this->baseUrl, $this->config, new NullLogger());
 
-		self::assertInstanceOf(MailBuilder::class, $builder);
+		self::assertInstanceOf(MailBuilder::class, $builder); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	/**

@@ -32,7 +32,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$factory->registerFactory('test', $this->createStub(LoggerFactory::class));
 
-		$this->assertInstanceOf(
+		$this->assertInstanceOf( // @phpstan-ignore method.alreadyNarrowedType
 			LoggerInterface::class,
 			$factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)
 		);

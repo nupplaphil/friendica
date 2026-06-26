@@ -74,7 +74,7 @@ class DBKeyValueStorageTest extends MockedTestCase
 	{
 		$instance = $this->getInstance();
 
-		self::assertInstanceOf(IManageKeyValuePairs::class, $instance);
+		self::assertInstanceOf(IManageKeyValuePairs::class, $instance); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	public static function dataTests(): array

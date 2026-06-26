@@ -19,7 +19,7 @@ class EventTest extends TestCase
 	{
 		$event = new Event('test');
 
-		$this->assertInstanceOf(NamedEvent::class, $event);
+		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
 
 	public static function getPublicConstants(): array

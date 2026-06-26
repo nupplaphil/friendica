@@ -303,7 +303,7 @@ class ConfigTest extends DatabaseTestCase
 	public function testLoadWrong(): void
 	{
 		$this->testedConfig = new ReadOnlyFileConfig(new Cache());
-		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache()); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEmpty($this->testedConfig->getCache()->getAll());
 	}
@@ -353,7 +353,7 @@ class ConfigTest extends DatabaseTestCase
 		$this->configCache->load(['test' => ['it' => $data]], Cache::SOURCE_FILE);
 
 		$this->testedConfig = new DatabaseConfig($this->getDbInstance(), $this->configCache);
-		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache());
+		self::assertInstanceOf(Cache::class, $this->testedConfig->getCache()); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEquals($data, $this->testedConfig->get('test', 'it'));
 		self::assertEquals($data, $this->testedConfig->getCache()->get('test', 'it'));

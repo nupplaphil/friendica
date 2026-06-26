@@ -94,7 +94,7 @@ class StorageManagerTest extends DatabaseTestCase
 			false,
 		);
 
-		self::assertInstanceOf(StorageManager::class, $storageManager);
+		self::assertInstanceOf(StorageManager::class, $storageManager); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	public static function dataStorages()

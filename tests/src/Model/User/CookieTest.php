@@ -54,7 +54,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, static::SERVER_ARRAY);
 
 		$cookie = new Cookie($request, $this->config, $this->baseUrl);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 	}
 
 	public static function dataGet()
@@ -120,7 +120,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, static::SERVER_ARRAY);
 
 		$cookie = new Cookie($request, $this->config, $this->baseUrl, $cookieData);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		if (isset($uid)) {
 			self::assertEquals($uid, $cookie->get('uid'));
@@ -180,7 +180,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, static::SERVER_ARRAY);
 
 		$cookie = new Cookie($request, $this->config, $this->baseUrl);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEquals($assertTrue, $cookie->comparePrivateDataHash($assertHash, $password, $userPrivateKey));
 	}
@@ -242,7 +242,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, $serverArray);
 
 		$cookie = new StaticCookie($request, $this->config, $this->baseUrl);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		$cookie->setMultiple([
 			'uid'  => $uid,
@@ -267,7 +267,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, $serverArray);
 
 		$cookie = new StaticCookie($request, $this->config, $this->baseUrl, $serverArray);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		$cookie->set('uid', $uid);
 		$cookie->set('hash', $assertHash);
@@ -292,7 +292,7 @@ class CookieTest extends MockedTestCase
 		$request = new Request($this->config, static::SERVER_ARRAY);
 
 		$cookie = new StaticCookie($request, $this->config, $this->baseUrl);
-		self::assertInstanceOf(Cookie::class, $cookie);
+		self::assertInstanceOf(Cookie::class, $cookie); // @phpstan-ignore staticMethod.alreadyNarrowedType
 
 		self::assertEquals('test', StaticCookie::$_COOKIE[Cookie::NAME]);
 		self::assertEquals(null, StaticCookie::$_EXPIRE);

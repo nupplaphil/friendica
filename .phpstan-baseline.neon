@@ -17,60 +17,6 @@ parameters:
 			path: tests/PConfigTestCase.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\App\\\\Router'' and Friendica\\App\\Router will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 2
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''DELETE'' and ''DELETE'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''GET'' and ''GET'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''OPTIONS'' and ''OPTIONS'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''PATCH'' and ''PATCH'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''POST'' and ''POST'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''PUT'' and ''PUT'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with array\{''DELETE'', ''GET'', ''PATCH'', ''POST'', ''PUT'', ''OPTIONS''\} and array\{''DELETE'', ''GET'', ''PATCH'', ''POST'', ''PUT'', ''OPTIONS''\} will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/App/RouterTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\App'' and Friendica\\App will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/AppTest.php
-
-		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\:\:once\(\)\.$#'
 			identifier: method.notFound
 			count: 15
@@ -87,114 +33,6 @@ parameters:
 			identifier: method.notFound
 			count: 15
 			path: tests/Unit/Console/FediBuzzRelayConsoleTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Addon\\\\AddonInfo'' and Friendica\\Core\\Addon\\AddonInfo will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 2
-			path: tests/Unit/Core/Addon/AddonInfoTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Addon\\\\AddonInfo'' and Friendica\\Core\\Addon\\AddonInfo will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/Addon/AddonManagerHelperTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Container'' and Friendica\\Core\\DiceContainer will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/DiceContainerTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/Logger/Factory/DelegatingLoggerFactoryTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/Logger/Factory/StreamLoggerFactoryTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/Logger/Factory/SyslogLoggerFactoryTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Log\\\\LoggerInterface'' and Psr\\Log\\LoggerInterface will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Core/Logger/LoggerManagerTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ArrayFilterEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ArrayFilterEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\CollectRoutesEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/CollectRoutesEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ConfigLoadedEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ConfigLoadedEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\EventDispatcher\\\\EventDispatcherInterface'' and Friendica\\Event\\EventDispatcher will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/EventDispatcherTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\Event will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/EventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\HtmlFilterEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/HtmlFilterEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModuleContentEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ModuleContentEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModuleInitEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ModuleInitEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModulePostEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ModulePostEventTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Event\\\\NamedEvent'' and Friendica\\Event\\ModulePostRecipientEvent will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Event/ModulePostRecipientEventTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with arguments '''', '''' and ''\$qrcode_image must…'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/Module/Settings/TwoFactor/VerifyQrCodeTest.php
 
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
@@ -419,28 +257,10 @@ parameters:
 			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\ValueObject\\\\Cache'' and Friendica\\Core\\Config\\ValueObject\\Cache will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 2
-			path: tests/src/Core/Config/ConfigTest.php
-
-		-
 			message: '#^Method Friendica\\Core\\Config\\Capability\\IManageConfigValues\:\:get\(\) invoked with 4 parameters, 1\-3 required\.$#'
 			identifier: arguments.count
 			count: 3
 			path: tests/src/Core/Config/ConfigTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\Capability\\\\ISetConfigValuesTransactionally'' and Friendica\\Core\\Config\\Model\\ConfigTransaction will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Config\\\\Model\\\\ConfigTransaction'' and Friendica\\Core\\Config\\Model\\ConfigTransaction will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/Config/ConfigTransactionTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
@@ -495,12 +315,6 @@ parameters:
 			identifier: varTag.variableNotFound
 			count: 1
 			path: tests/src/Core/InstallerTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\KeyValueStorage\\\\Capability\\\\IManageKeyValuePairs'' and Friendica\\Core\\KeyValueStorage\\Capability\\IManageKeyValuePairs will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
 
 		-
 			message: '#^Method Friendica\\Test\\src\\Core\\Lock\\APCuCacheLockTest\:\:getInstance\(\) should return Friendica\\Core\\Lock\\Type\\CacheLock but returns Friendica\\Core\\Lock\\Capability\\ICanLock\.$#'
@@ -623,12 +437,6 @@ parameters:
 			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Core\\\\Storage\\\\Repository\\\\StorageManager'' and Friendica\\Core\\Storage\\Repository\\StorageManager will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Core\\Storage\\Repository\\StorageManagerTest\:\:\$l10n \(Friendica\\Core\\L10n\) does not accept Mockery\\MockInterface\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -698,18 +506,6 @@ parameters:
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
 			identifier: staticMethod.impossibleType
 			count: 1
-			path: tests/src/Model/User/CookieTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Model\\\\User\\\\Cookie'' and Friendica\\Model\\User\\Cookie will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 3
-			path: tests/src/Model/User/CookieTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Model\\\\User\\\\Cookie'' and Friendica\\Test\\Util\\StaticCookie will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 3
 			path: tests/src/Model/User/CookieTest.php
 
 		-
@@ -923,18 +719,6 @@ parameters:
 			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNotNull\(\) with array will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/src/Protocol/ActivityPub/TransmitterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with 0 and mixed will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
 			message: '#^Binary operation "\-" between string and string results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -953,12 +737,6 @@ parameters:
 			path: tests/src/Util/EMailerTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\MailBuilder'' and Friendica\\Test\\Util\\SampleMailBuilder will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Util/Emailer/MailBuilderTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\MailBuilderTest\:\:\$defaultHeaders \(string\) does not accept array\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -973,18 +751,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:with\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\MailBuilder'' and Friendica\\Util\\EMailer\\SystemMailBuilder will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\EMailer\\\\SystemMailBuilder'' and Friendica\\Util\\EMailer\\SystemMailBuilder will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
 
@@ -1022,12 +788,6 @@ parameters:
 			message: '#^Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage\:\:withAnyArgs\(\)\.$#'
 			identifier: method.notFound
 			count: 4
-			path: tests/src/Util/ProfilerTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Friendica\\\\Util\\\\Profiler'' and Friendica\\Util\\Profiler will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
 			path: tests/src/Util/ProfilerTest.php
 
 

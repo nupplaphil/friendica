@@ -51,7 +51,7 @@ class AddonManagerHelperTest extends TestCase
 
 		$info = $addonManagerHelper->getAddonInfo('helloaddon');
 
-		$this->assertInstanceOf(AddonInfo::class, $info);
+		$this->assertInstanceOf(AddonInfo::class, $info); // @phpstan-ignore method.alreadyNarrowedType
 
 		$this->assertEquals('Hello Addon', $info->getName());
 	}
