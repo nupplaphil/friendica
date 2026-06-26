@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
 
 class SyslogLoggerFactoryWrapper extends SyslogLogger
 {
-	public function create(IManageConfigValues $config): LoggerInterface
+	public function create(IManageConfigValues $config): SyslogLoggerWrapper
 	{
 		$logOpts     = (int) $config->get('system', 'syslog_flags')    ?? SyslogLoggerClass::DEFAULT_FLAGS;
 		$logFacility = (int) $config->get('system', 'syslog_facility') ?? SyslogLoggerClass::DEFAULT_FACILITY;

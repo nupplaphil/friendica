@@ -11,24 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Cache/ArrayCacheTest.php
-
-		-
-			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
-
-		-
-			message: '#^Call to an undefined method org\\bovigo\\vfs\\vfsStreamContent\:\:getChild\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
-
-		-
 			message: '#^Method Friendica\\Core\\Config\\Capability\\IManageConfigValues\:\:get\(\) invoked with 4 parameters, 1\-3 required\.$#'
 			identifier: arguments.count
 			count: 3
@@ -63,18 +45,6 @@ parameters:
 			identifier: nullCoalesce.expr
 			count: 2
 			path: tests/src/Core/Logger/SyslogLoggerFactoryWrapper.php
-
-		-
-			message: '#^Call to an undefined method Psr\\Log\\LoggerInterface\:\:close\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/Logger/SyslogLoggerTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Core\\Logger\\SyslogLoggerTest\:\:\$logger \(Friendica\\Test\\src\\Core\\Logger\\SyslogLoggerWrapper\) does not accept Psr\\Log\\LoggerInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Core/Logger/SyslogLoggerTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'

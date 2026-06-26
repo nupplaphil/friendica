@@ -15,6 +15,9 @@ abstract class MemoryCacheTestCase extends CacheTestCase
 	/** @var \Friendica\Core\Cache\Capability\ICanCacheInMemory */
 	protected $instance; // @phpstan-ignore property.phpDocType
 
+	/** @var \Friendica\Core\Cache\Capability\ICanCacheInMemory */
+	protected $cache; // @phpstan-ignore property.phpDocType
+
 	protected function setUp(): void
 	{
 		parent::setUp();

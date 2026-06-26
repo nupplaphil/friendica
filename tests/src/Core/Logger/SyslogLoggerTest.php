@@ -40,6 +40,7 @@ class SyslogLoggerTest extends LoggerTestCase
 
 	/**
 	 * {@inheritdoc}
+	 * @return SyslogLoggerWrapper
 	 */
 	protected function getInstance($level = LogLevel::DEBUG)
 	{
