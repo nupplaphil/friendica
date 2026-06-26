@@ -6,19 +6,21 @@
 
 ---
 
-## Navigation by role
+<a name="at-a-glance" id="at-a-glance"></a>
+## At a glance
 
-**Find your starting point here before reading further.**
+Find your area, check the rule, and read the linked section for the background and examples.
 
-| I want to…                             | Read                                                                                                              |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Fix a colour, spacing, or layout issue | [§5 CSS and Themes](#css)                                                                                         |
-| Change or create a Smarty template     | [§1 Templates](#templates) + [§2 XSS](#xss) + [§3 Translations](#translations)                                    |
-| Add or change JavaScript behaviour     | [§6 JavaScript](#javascript) + [§6.6 DOM-XSS](#dom-xss)                                                           |
-| Add or change a form                   | [§4 Forms](#forms) + [First Change Steps 4–6](first-change#request) (input validation, auth, CSRF) |
-| Pull new data from PHP into a page     | [First Change](first-change) + [§1 Templates](#templates)                                                         |
-| Build or change a `Content/` renderer (PHP) | [PHP Architecture §2.4 Presentation layer](php-architecture#presentation-layer-content)                       |
-| Add accessibility to an element        | [§7 Accessibility](#accessibility)                                                                                |
+- [ ] **Templates** — find the PHP behind the template and what data it passes; keep output escaped → [§1](#templates), [§2](#xss)
+- [ ] **External or user-supplied URLs** — validated in PHP before output → [§2.2](#xss)
+- [ ] **User-visible strings** — all translated (PHP, templates, JS) → [§3](#translations)
+- [ ] **Forms** — CSRF token present and verified; input validated and authorised → [§4](#forms), [First Change Steps 4–6](first-change#request)
+- [ ] **CSS / themes** — data in PHP, structure in templates, appearance in CSS → [§5](#css)
+- [ ] **JavaScript** — JSON→JS via `json_encode()` + `JSON_HEX_*`; DOM updates via `textContent` → [§6](#javascript)
+- [ ] **Accessibility** — native elements, `alt` text, visible focus → [§7](#accessibility)
+- [ ] **Backend / `Content/` renderer (PHP)** — presentation logic belongs here, not in the Module → [PHP Architecture §2.4](php-architecture#presentation-layer-content)
+
+Before pushing, run the per-change testing matrix → [§8](#checklist).
 
 ---
 
@@ -74,6 +76,24 @@ Friendica uses double curly braces `{{ }}`:
 {{/foreach}}
 ```
 
+### 1.4 Finding the PHP file behind a template (and vice versa)
+
+Friendica does not name templates after their module, so the link between a page, its template, and the variables it receives is not obvious.
+Two reliable ways to trace it:
+
+**From something visible on the page → the template → the PHP.**
+Pick a unique marker in the rendered HTML (an `id`, a class, an icon name) using your browser's dev tools, then `grep` for it to find the template, then `grep` the template's file name to find the PHP that renders it:
+
+```bash
+grep -rn "ri-hashtag" view/          # marker → template file
+grep -rn "tag_cloud.tpl" src/ mod/   # template name → the PHP that loads it
+```
+
+**From a URL → the PHP → the template.**
+Look up the URL pattern in `static/routes.config.php` to find the Module class, then read that class: the `Renderer::getMarkupTemplate('…')` call names the template, and the `replaceMacros()` array shows exactly which `$variables` are passed into it.
+
+The template variables a page receives are defined in that PHP file — read it to see what data is available before changing the template.
+
 ---
 
 <a name="xss" id="xss"></a>
@@ -86,7 +106,7 @@ Friendica uses double curly braces `{{ }}`:
 
 Friendica sets `escape_html = true` in `src/Render/FriendicaSmarty.php`.
 Every `{{$variable}}` is HTML-escaped automatically.
-This is your primary XSS defense — **for normal HTML text and ordinary HTML attribute values.**
+This is your primary [XSS](#abbreviations) defense — **for normal HTML text and ordinary HTML attribute values.**
 
 ```smarty
 {{* Safe — HTML text context *}}
@@ -96,13 +116,14 @@ This is your primary XSS defense — **for normal HTML text and ordinary HTML at
 <input type="text" value="{{$current_value}}">
 ```
 
-> HTML-escaping is **not** enough for every context. Do **not** interpolate
-> dynamic values directly into:
-> - JavaScript (`<script>var x = "{{$v}}";</script>`) — use the JSON pattern in [§6.3](#javascript)
-> - CSS or `style` attributes
-> - URL attributes without scheme validation ([§2.2](#xss))
-> - event-handler attributes (`onclick`, etc.)
-> - raw HTML via `nofilter`
+> HTML-escaping is **not** enough for every context, because it only neutralizes HTML syntax (`<`, `>`, `&`, `"`).
+> It does nothing inside other languages.
+> Do **not** interpolate dynamic values directly into:
+> - JavaScript (`<script>var x = "{{$v}}";</script>`) — a `"` or `</script>` in the value breaks out of the string into executable code; use the JSON pattern in [§6.3](#javascript)
+> - CSS or `style` attributes — CSS syntax survives HTML-escaping, so a value can inject `url(...)` exfiltration or layout-breaking rules
+> - URL attributes without scheme validation — a `javascript:` or `data:` URL stays intact through HTML-escaping and runs on click ([§2.2](#xss))
+> - event-handler attributes (`onclick`, etc.) — the attribute value is JavaScript, not HTML, so HTML-escaping leaves the injected code executable
+> - raw HTML via `nofilter` — this disables escaping entirely, so any markup in the value is rendered as-is
 
 ### 2.2 External URLs need PHP-side scheme validation first
 
@@ -181,81 +202,59 @@ $this->t('Hello, %s!', $username);
 
 > ### Form Safety Minimum
 >
-> Before submitting a form change, verify all five — even if you only touched the template:
+> **If you only changed the template or CSS**, you own the two markup-level items:
 >
-> 1. The server checks **authentication and authorization** ([First Change Step 5](first-change#auth))
-> 2. Every mutating form **has and verifies a CSRF token** ([§4.2](#forms) and [First Change Step 6](first-change#csrf))
-> 3. Input **type, required state, and length** are validated in the Module ([First Change Step 4](first-change#request))
-> 4. **Business rules** are handled by a Service, not the Module or template
-> 5. Dynamic output stays **escaped** — no new `nofilter` ([§2](#xss))
+> - The form **includes a CSRF token** field ([§4.2](#forms))
+> - Dynamic output stays **escaped** — no new `nofilter` ([§2](#xss))
+>
+> **Full form requirements** — the server-side items below.
+> Confirm them yourself if you wrote the PHP:
+>
+> - The server checks **authentication and authorization** ([First Change Step 5](first-change#auth))
+> - The CSRF token is **verified** in `post()` ([First Change Step 6](first-change#csrf))
+> - Input **type, required state, and length** are validated in the Module ([First Change Step 4](first-change#request))
+> - **Business rules** are handled by a Service, not the Module or template
 
 
 ### 4.1 Standard form field templates
 
-Friendica provides Smarty include templates for consistent form fields.
-The array is positional and **the structure differs between templates and between core and frio overrides**.
-Always inspect the actual template file before passing dynamic values — some slots are rendered with `nofilter`.
+Friendica provides Smarty include templates for consistent form fields (`field_input.tpl`, `field_checkbox.tpl`, `field_select.tpl`, …; the full set lives in `view/templates/` and `view/theme/frio/templates/`).
+Each takes a single **positional array**, and the slot order, meaning, and escaping **differ between templates and between core and frio overrides**.
 
-**`field_input.tpl` only — verified slot map:**
+**Always open the actual template file before passing dynamic values.**
+Some slots — typically the label, help text, and extra-attributes slots — are rendered with `nofilter` (raw, unescaped), and exactly which ones varies by template and theme.
 
-| Index | Meaning                                | Frio nofilter? | Core nofilter? |
-|-------|----------------------------------------|----------------|----------------|
-| 0     | Field name (HTML `name`)               | —              | —              |
-| 1     | Label                                  | **Yes**        | No             |
-| 2     | Current value                          | No             | No             |
-| 3     | Help text                              | **Yes**        | **Yes**        |
-| 4     | Required flag / tooltip text           | No             | No             |
-| 5     | Extra HTML attributes                  | **Yes**        | **Yes**        |
-| 6     | Input type (`'text'`, `'email'`, etc.) | —              | —              |
-| 7     | Placeholder text                       | No             | No             |
+Security rules that hold regardless of the exact slot layout:
 
-> **Security — `nofilter` slots in field templates:**
-> In frio's `field_input.tpl`, slots 1, 3, and 5 are rendered raw.
-> In the core template, slots 3 and 5 are rendered raw.
-> This map is only for `field_input.tpl`.
-> Other templates (checkbox, textarea, password, select\_raw…) have different slot meanings and raw slots — inspect each template before use.
->
-> **Rules:**
-> - Index 1 (label): a `$this->t()` literal — never user or remote data
-> - Index 3 (help text): trusted translated HTML or plain text only
-> - Index 4 (required tooltip): use `$this->t('Required')`, not the string `'required'`
-> - Index 5 (extra attributes): only hardcoded attribute strings, never dynamic values
->
-> **A "translated string" is not automatically safe.** Translation with substitution does NOT HTML-escape the substituted values:
->
-> ```php
-> // ✗ Unsafe in a nofilter slot — $remoteName is not escaped by t()
-> $this->t('Account: %s', $remoteName);
-> ```
->
-> Never put user- or remote-derived values into a `nofilter` slot, even through `t()`.
-> For dynamic content, use a normally auto-escaped template slot instead, or split the template so the dynamic part is output without `nofilter`.
+- Put only **trusted, server-generated** values into a raw slot — a `$this->t()` literal or a hardcoded attribute string. Never user- or remote-derived data.
+- **A translated string is not automatically safe.** `t()` with substitution does **not** HTML-escape the substituted value:
+
+  ```php
+  // ✗ Unsafe in a nofilter slot — $remoteName is not escaped by t()
+  $this->t('Account: %s', $remoteName);
+  ```
+
+  For dynamic content, use a normally auto-escaped slot, or split the template so the dynamic part is output without `nofilter`.
+
+Example using `field_input.tpl` (open the file to confirm the current slot order):
 
 ```php
-// ✓ Safe usage
+// ✓ Safe usage — every value is a trusted translated string or an auto-escaped value
 '$email' => [
-    'email',                          // 0: name
-    $this->t('Email address'),        // 1: label — trusted translated string ✓
-    $currentEmail,                    // 2: value — auto-escaped ✓
-    $this->t('Your login email.'),    // 3: help — trusted translated string ✓
-    $this->t('Required'),             // 4: tooltip — translated ✓
-    '',                               // 5: extra attributes — empty is safest ✓
-    'email',                          // 6: type
-    $this->t('name@example.com'),     // 7: placeholder — translated ✓
+    'email',                       // name
+    $this->t('Email address'),     // label
+    $currentEmail,                 // current value (auto-escaped)
+    $this->t('Your login email.'), // help text
+    $this->t('Required'),          // required tooltip
+    '',                            // extra attributes — empty is safest
+    'email',                       // input type
+    $this->t('name@example.com'),  // placeholder
 ],
 ```
 
 ```smarty
 {{include file="field_input.tpl" field=$email}}
 ```
-
-**Available field templates** (verified against `view/templates/` and
-`view/theme/frio/templates/`):
-`field_checkbox.tpl`, `field_colorinput.tpl` (frio only), `field_combobox.tpl`,
-`field_custom.tpl`, `field_datetime.tpl`, `field_fileinput.tpl` (frio only),
-`field_input.tpl`, `field_intcheckbox.tpl`, `field_openid.tpl`,
-`field_password.tpl`, `field_radio.tpl`, `field_select.tpl`,
-`field_select_raw.tpl`, `field_textarea.tpl`, `field_themeselect.tpl`
 
 ### 4.2 Every mutating form MUST have a CSRF token
 
@@ -272,6 +271,15 @@ See [First Change — CSRF](first-change#csrf) for the PHP side.
 
 <a name="css" id="css"></a>
 ## 5. CSS and Themes
+
+> **Keep the three layers separate.**
+>
+> - Data and content manipulation belong in the **PHP** (Module/Service/Presentation)
+> - structure and markup in the **template**
+> - appearance in the **CSS**
+>
+> Don't emit formatted HTML, hardcoded styles, or pre-joined strings from PHP when the template or stylesheet could do the presentation — e.g. pass a list as an array the template can render as a `<ul>`, comma-separated text, or anything else, instead of a fixed comma-separated string.
+> This keeps a change of look possible in the template or stylesheet alone, which is what makes themes and schemes practical to build.
 
 ### 5.1 Frio and Vier — two themes, separate codebases
 
@@ -330,22 +338,13 @@ Edit `view/theme/frio/css/style.css`. This does not affect vier.
 
 Edit `view/theme/vier/style.css`. This does not affect frio.
 
-### 5.3 Frio color system
+### 5.3 Frio colors
 
-Frio generates much of its CSS dynamically from admin-configured color values in `style.php`.
-Most theme colors are still emitted as literal values or PHP template variables, not as reusable CSS custom properties.
-The stable layout variable you are most likely to need is:
+Frio colors are **not** exposed as reusable CSS custom properties — they are emitted as literal values or PHP template variables per scheme. When writing frio CSS, copy color patterns from the existing `style.css` or scheme files rather than inventing global CSS variables.
 
-```css
-:root {
-    --topbar-first-size: 50px;  /* defined in view/theme/frio/css/style.css */
-}
-```
+The one stable layout variable you are likely to need is `--topbar-first-size` (defined in `view/theme/frio/css/style.css`); use `var(--topbar-first-size)` for layout that depends on the topbar height.
 
-When writing frio CSS:
-- Use `var(--topbar-first-size)` for layout that depends on the topbar height
-- For colors, copy patterns from existing `style.css` or scheme files — do not invent global CSS variables without adding them deliberately
-- Test the four frio schemes (light, dark, black, gnome); color changes also need the custom scheme and the accent-color variants (the `scheme_accent` setting)
+Test color changes across the four frio schemes (light, dark, black, gnome), the custom scheme, and the accent-color variants (the `scheme_accent` setting).
 
 ### 5.4 Static presentation styles belong in CSS, not inline
 
@@ -367,8 +366,9 @@ Inline `style=""` attributes are hard to theme and maintain. Use CSS classes ins
 
 ### 6.2 Use the existing IIFE pattern — not ES modules
 
-Scripts load as `<script type="text/javascript" src="...">`. ES module syntax
-(`export` / `import`) is not supported and causes errors.
+Scripts load as `<script type="text/javascript" src="...">`. Wrap your code in an
+[IIFE](#abbreviations) — the `(function () { ... })()` wrapper shown below.
+[ES](#abbreviations) module syntax (`export` / `import`) is not supported and causes errors.
 
 ```javascript
 // SPDX-License-Identifier: AGPL-3.0-or-later
@@ -515,12 +515,12 @@ document.querySelectorAll('.my-action').forEach(function (btn) {
 
 Target [WCAG 2.1 AA](https://www.w3.org/WAI/WCAG21/quickref/). The rules below come up most in Friendica frontend work; the §8 checklist enforces them.
 
-| Rule                                          | Do                                                              | Avoid                                                                |
-|-----------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------|
-| Use native elements (keyboard-accessible)     | `<button type="button">`, `<a href="…">`, `<input>`            | `<div class="clickable">` (an `<a>` without `href` isn't focusable) |
-| `alt` on every image                          | `alt="{{$display_name}}"` informative · `alt=""` decorative    | missing `alt`                                                       |
-| Keep a visible focus ring                     | a custom focus style if you override the default               | `outline: none` with no replacement                                 |
-| Don't rely on colour alone to convey meaning  | pair colour with an icon or text                               | colour as the only signal                                           |
+| Rule                                         | Do                                                          | Avoid                                                               |
+|----------------------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| Use native elements (keyboard-accessible)    | `<button type="button">`, `<a href="…">`, `<input>`         | `<div class="clickable">` (an `<a>` without `href` isn't focusable) |
+| `alt` on every image                         | `alt="{{$display_name}}"` informative · `alt=""` decorative | missing `alt`                                                       |
+| Keep a visible focus ring                    | a custom focus style if you override the default            | `outline: none` with no replacement                                 |
+| Don't rely on colour alone to convey meaning | pair colour with an icon or text                            | colour as the only signal                                           |
 
 **Dynamic updates** — announce changes with an ARIA live region:
 
@@ -534,6 +534,8 @@ Target [WCAG 2.1 AA](https://www.w3.org/WAI/WCAG21/quickref/). The rules below c
 
 <a name="checklist" id="checklist"></a>
 ## 8. Frontend checklist before pushing
+
+The rule checklist lives at the top ([At a glance](#at-a-glance)); this section covers the automated and manual checks to run before pushing.
 
 ```bash
 # PHP checks (templates are rendered by PHP)
@@ -556,17 +558,14 @@ composer run phpstan
 | Structural / semantic change    | Affected theme(s) + keyboard + screen-reader spot-check                                              |
 | Colour change                   | Every scheme/theme actually affected; verify contrast ≥ 4.5:1 (normal text)                          |
 
-**Code checklist:**
+---
 
-- [ ] No hardcoded English strings in `.tpl` or `.js` files visible to users
-- [ ] `nofilter` only for output from an approved rendering path
-- [ ] For every field template used: checked the actual core AND active-theme template file for `nofilter` slots; labels and help text in raw slots are trusted translated strings; raw attribute slots contain only hardcoded server-generated values, never user or remote content
-- [ ] External URLs validated with `Network::isValidHttpUrl()` before output
-- [ ] JSON-to-JS uses `json_encode()` with all four `JSON_HEX_*` flags
-- [ ] DOM manipulation uses `textContent` / `createElement`, never `innerHTML` with untrusted data
-- [ ] Mutating form has CSRF token in template and verified in `post()`
-- [ ] No new `onclick=""` inline handlers
-- [ ] Native HTML elements are used where possible; custom elements have ARIA + keyboard handling
-- [ ] Images have `alt` attributes
-- [ ] Focus indicators aren’t removed without replacement
-- [ ] CSS changes registered via `App\Page` or placed in the correct theme file
+<a name="abbreviations" id="abbreviations"></a>
+## Abbreviations
+
+| Abbr.    | Term                                          | Reference                                                           |
+|----------|-----------------------------------------------|---------------------------------------------------------------------|
+| **CSRF** | Cross-Site Request Forgery                    | [OWASP](https://owasp.org/www-community/attacks/csrf)               |
+| **XSS**  | Cross-Site Scripting                          | [OWASP](https://owasp.org/www-community/attacks/xss/)               |
+| **IIFE** | Immediately Invoked Function Expression       | [MDN](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)       |
+| **ES**   | ECMAScript (the JavaScript language standard) | [MDN](https://developer.mozilla.org/en-US/docs/Glossary/ECMAScript) |
