@@ -11,12 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:streamForChunks\(\) should return Psr\\Http\\Message\\StreamInterface but returns Mockery\\MockInterface\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
-
-		-
 			message: '#^Method Friendica\\Test\\Util\\Hooks\\InstanceMocks\\FakeInstanceDecorator\:\:getCBool\(\) should return bool\|null but returns string\.$#'
 			identifier: return.type
 			count: 1
@@ -27,12 +21,6 @@ parameters:
 			identifier: parameterByRef.type
 			count: 1
 			path: tests/Util/Intercept.php
-
-		-
-			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\MockInterface\.$#'
-			identifier: varTag.type
-			count: 1
-			path: tests/Util/SampleStorageBackendInstance.php
 
 		-
 			message: '#^Method Friendica\\Test\\Util\\SerializableObjectDouble\:\:unserialize\(\) with return type void returns string but should not return anything\.$#'
@@ -107,27 +95,9 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Dice\\Dice so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice \(Dice\\Dice\|Mockery\\MockInterface\) is never assigned Mockery\\MockInterface so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$dice is unused\.$#'
 			identifier: property.unused
 			count: 1
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:\$rendererMock \(Mockery\\MockInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 2
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
@@ -179,12 +149,6 @@ parameters:
 			path: tests/src/Core/Config/ConfigTransactionTest.php
 
 		-
-			message: '#^Property Friendica\\Test\\src\\Core\\InstallerTest\:\:\$dice \(Dice\\Dice&Mockery\\MockInterface\) does not accept Mockery\\LegacyMockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Core/InstallerTest.php
-
-		-
 			message: '#^Variable \$dice in PHPDoc tag @var does not exist\.$#'
 			identifier: varTag.variableNotFound
 			count: 1
@@ -195,12 +159,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: tests/src/Core/Lock/APCuCacheLockTest.php
-
-		-
-			message: '#^PHPDoc tag @var with type Dice\\Dice\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
-			identifier: varTag.type
-			count: 1
-			path: tests/src/Core/Lock/SemaphoreLockTest.php
 
 		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
@@ -219,18 +177,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Core/Logger/SyslogLoggerTest.php
-
-		-
-			message: '#^PHPDoc tag @var with type Friendica\\Core\\L10n\|Mockery\\MockInterface is not subtype of type Mockery\\LegacyMockInterface\.$#'
-			identifier: varTag.type
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Core\\Storage\\Repository\\StorageManagerTest\:\:\$l10n \(Friendica\\Core\\L10n\) does not accept Mockery\\MockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
 
 		-
 			message: '#^PHPDoc tag @return with type void is incompatible with native type never\.$#'
@@ -431,31 +377,7 @@ parameters:
 			path: tests/src/Util/EMailerTest.php
 
 		-
-			message: '#^Property Friendica\\Test\\src\\Util\\EMailerTest\:\:\$hookMock \(Mockery\\MockInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/src/Util/EMailerTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\MailBuilderTest\:\:\$defaultHeaders \(string\) does not accept array\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Util/Emailer/MailBuilderTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$baseUrl \(Friendica\\App\\BaseURL\) does not accept Mockery\\MockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$config \(Friendica\\Core\\Config\\Capability\\IManageConfigValues\) does not accept Mockery\\MockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\SystemMailBuilderTest\:\:\$l10n \(Friendica\\Core\\L10n\) does not accept Mockery\\MockInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php

@@ -28,7 +28,7 @@ class SemaphoreLockTest extends LockTestCase
 			static::markTestSkipped('Semaphore lock is not supported');
 		}
 
-		/** @var MockInterface|Dice $dice */
+		/** @var Dice&MockInterface $dice */
 		$dice = Mockery::mock(Dice::class)->makePartial();
 
 		$app = Mockery::mock(App::class);

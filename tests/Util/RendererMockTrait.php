@@ -13,7 +13,7 @@ use Mockery\MockInterface;
 trait RendererMockTrait
 {
 	/**
-	 * @var MockInterface The Interface for mocking a renderer
+	 * @var ?MockInterface The Interface for mocking a renderer
 	 */
 	private $rendererMock;
 

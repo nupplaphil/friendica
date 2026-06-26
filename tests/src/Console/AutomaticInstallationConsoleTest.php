@@ -53,7 +53,7 @@ class AutomaticInstallationConsoleTest extends ConsoleTestCase
 	private $dba;
 
 	/**
-	 * @var Dice|MockInterface
+	 * @var Dice&MockInterface
 	 */
 	private $dice;
 

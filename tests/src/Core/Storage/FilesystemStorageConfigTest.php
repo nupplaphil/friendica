@@ -31,7 +31,7 @@ class FilesystemStorageConfigTest extends StorageConfigTestCase
 
 	protected function getInstance()
 	{
-		/** @var MockInterface|L10n $l10n */
+		/** @var L10n&MockInterface $l10n */
 		$l10n   = \Mockery::mock(L10n::class)->makePartial();
 		$config = \Mockery::mock(IManageConfigValues::class);
 		$config->shouldReceive('get')

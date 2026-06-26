@@ -12,6 +12,7 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Hook;
 use Friendica\Core\L10n;
 use Friendica\Core\Session\Capability\IHandleSessions;
+use Mockery\MockInterface;
 use Friendica\Core\Session\Type\Memory;
 use Friendica\Core\Storage\Exception\InvalidClassStorageException;
 use Friendica\Core\Storage\Capability\ICanReadFromStorage;
@@ -39,7 +40,7 @@ class StorageManagerTest extends DatabaseTestCase
 
 	/** @var IManageConfigValues */
 	private $config;
-	/** @var L10n */
+	/** @var L10n|MockInterface */
 	private $l10n;
 
 	/** @var Database */

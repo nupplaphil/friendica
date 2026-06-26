@@ -11,6 +11,7 @@ use Friendica\App\BaseURL;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Test\MockedTestCase;
+use Mockery\MockInterface;
 use Friendica\Test\Util\VFSTrait;
 use Friendica\Util\EMailer\MailBuilder;
 use Friendica\Util\EMailer\SystemMailBuilder;
@@ -20,11 +21,11 @@ class SystemMailBuilderTest extends MockedTestCase
 {
 	use VFSTrait;
 
-	/** @var IManageConfigValues */
+	/** @var IManageConfigValues|MockInterface */
 	private $config;
-	/** @var L10n */
+	/** @var L10n|MockInterface */
 	private $l10n;
-	/** @var BaseURL */
+	/** @var BaseURL|MockInterface */
 	private $baseUrl;
 
 	protected function setUp(): void

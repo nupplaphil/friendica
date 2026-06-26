@@ -11,7 +11,7 @@ use Mockery\MockInterface;
 
 function create_instance(&$data): void
 {
-	/** @var L10n|MockInterface $l10n */
+	/** @var L10n&MockInterface $l10n */
 	$l10n = \Mockery::mock(L10n::class);
 
 	if ($data['name'] == SampleStorageBackend::getName()) {

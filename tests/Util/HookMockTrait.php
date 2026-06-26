@@ -14,7 +14,7 @@ trait HookMockTrait
 {
 
 	/**
-	 * @var MockInterface The Interface for mocking a renderer
+	 * @var ?MockInterface The Interface for mocking a renderer
 	 */
 	private $hookMock;
 
