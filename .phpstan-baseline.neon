@@ -35,12 +35,6 @@ parameters:
 			path: tests/src/Core/InstallerTest.php
 
 		-
-			message: '#^Method Friendica\\Test\\src\\Core\\Lock\\APCuCacheLockTest\:\:getInstance\(\) should return Friendica\\Core\\Lock\\Type\\CacheLock but returns Friendica\\Core\\Lock\\Capability\\ICanLock\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/src/Core/Lock/APCuCacheLockTest.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 2
@@ -76,8 +70,3 @@ parameters:
 			count: 2
 			path: tests/src/Util/EMailerTest.php
 
-		-
-			message: '#^Property Friendica\\Test\\src\\Util\\Emailer\\MailBuilderTest\:\:\$defaultHeaders \(string\) does not accept array\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/src/Util/Emailer/MailBuilderTest.php

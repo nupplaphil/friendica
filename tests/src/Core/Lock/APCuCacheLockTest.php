@@ -31,7 +31,7 @@ class APCuCacheLockTest extends CacheLockTestCase
 		parent::setUp();
 	}
 
-	protected function getInstance(): CacheLock
+	protected function getInstance(): ICanLock
 	{
 		return $this->lock;
 	}

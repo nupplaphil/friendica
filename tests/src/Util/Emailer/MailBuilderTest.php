@@ -34,7 +34,7 @@ class MailBuilderTest extends MockedTestCase
 	/** @var BaseURL|MockInterface */
 	private $baseUrl;
 
-	/** @var string */
+	/** @var array */
 	private $defaultHeaders;
 
 	protected function setUp(): void
