@@ -476,7 +476,7 @@ class Timeline extends BaseModule
 		}
 
 		$items    = [];
-		$fields   = ['uri-id', 'owner-id', 'comments', 'activities'];
+		$fields   = ['uri-id', 'owner-id', 'author-id', 'comments', 'activities'];
 		$fields[] = $this->order;
 		$result   = $this->database->select($table, $fields, $condition, $params);
 		if ($this->database->errorNo()) {
