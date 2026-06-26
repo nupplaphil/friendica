@@ -56,7 +56,6 @@ class DestroyTest extends ApiTestCase
 	/**
 	 * Test the api_direct_messages_destroy() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser(): never
 	{

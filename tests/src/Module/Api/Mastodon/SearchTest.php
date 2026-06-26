@@ -14,7 +14,6 @@ class SearchTest extends ApiTestCase
 	/**
 	 * Test the api_search() function.
 	 *
-	 * @return void
 	 */
 	public function testApiSearch(): never
 	{
@@ -34,7 +33,6 @@ class SearchTest extends ApiTestCase
 	/**
 	 * Test the api_search() function a count parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiSearchWithCount(): never
 	{
@@ -54,7 +52,6 @@ class SearchTest extends ApiTestCase
 	/**
 	 * Test the api_search() function with an rpp parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiSearchWithRpp(): never
 	{
@@ -111,7 +108,6 @@ class SearchTest extends ApiTestCase
 	/**
 	 * Test the api_search() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiSearchWithUnallowedUser(): never
 	{
@@ -125,7 +121,6 @@ class SearchTest extends ApiTestCase
 	/**
 	 * Test the api_search() function without any GET query parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiSearchWithoutQuery(): never
 	{

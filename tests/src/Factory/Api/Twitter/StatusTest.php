@@ -58,7 +58,6 @@ class StatusTest extends FixtureTestCase
 	/**
 	 * Test the api_convert_item() function with an empty item body.
 	 *
-	 * @return void
 	 */
 	public function testApiConvertItemWithoutBody(): never
 	{
@@ -82,7 +81,6 @@ class StatusTest extends FixtureTestCase
 	/**
 	 * Test the api_convert_item() function with the title in the body.
 	 *
-	 * @return void
 	 */
 	public function testApiConvertItemWithTitleInBody(): never
 	{

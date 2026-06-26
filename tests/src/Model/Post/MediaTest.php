@@ -14,7 +14,6 @@ class MediaTest extends MockedTestCase
 	/**
 	 * Test the api_get_attachments() function.
 	 *
-	 * @return void
 	 */
 	public function testApiGetAttachments(): never
 	{
@@ -27,7 +26,6 @@ class MediaTest extends MockedTestCase
 	/**
 	 * Test the api_get_attachments() function with an img tag.
 	 *
-	 * @return void
 	 */
 	public function testApiGetAttachmentsWithImage(): never
 	{
@@ -40,7 +38,6 @@ class MediaTest extends MockedTestCase
 	/**
 	 * Test the api_get_attachments() function with an img tag and an AndStatus user agent.
 	 *
-	 * @return void
 	 */
 	public function testApiGetAttachmentsWithImageAndAndStatus(): never
 	{

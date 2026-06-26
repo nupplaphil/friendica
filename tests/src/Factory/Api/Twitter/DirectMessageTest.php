@@ -78,7 +78,6 @@ class DirectMessageTest extends FixtureTestCase
 	/**
 	 * Test the api_format_messages() function with the getUserObjects GET parameter set to false.
 	 *
-	 * @return void
 	 */
 	public function testApiFormatMessagesWithoutUserObjects(): never
 	{

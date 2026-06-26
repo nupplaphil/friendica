@@ -68,7 +68,6 @@ class NetworkPublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_networkpublic_timeline() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesNetworkpublicTimelineWithUnallowedUser(): never
 	{

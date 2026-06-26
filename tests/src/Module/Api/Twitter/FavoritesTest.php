@@ -60,7 +60,6 @@ class FavoritesTest extends ApiTestCase
 	/**
 	 * Test the api_favorites() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiFavoritesWithUnallowedUser(): never
 	{

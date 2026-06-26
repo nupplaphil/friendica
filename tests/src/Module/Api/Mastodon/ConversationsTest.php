@@ -14,7 +14,6 @@ class ConversationsTest extends ApiTestCase
 	/**
 	 * Test the api_conversation_show() function.
 	 *
-	 * @return void
 	 */
 	public function testApiConversationShow(): never
 	{
@@ -27,7 +26,6 @@ class ConversationsTest extends ApiTestCase
 	/**
 	 * Test the api_conversation_show() function with an ID.
 	 *
-	 * @return void
 	 */
 	public function testApiConversationShowWithId(): never
 	{
@@ -48,7 +46,6 @@ class ConversationsTest extends ApiTestCase
 	/**
 	 * Test the api_conversation_show() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiConversationShowWithUnallowedUser(): never
 	{

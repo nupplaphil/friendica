@@ -70,7 +70,6 @@ class StatusesTest extends ApiTestCase
 	/**
 	 * Test the api_lists_statuses() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiListsStatusesWithUnallowedUser(): never
 	{

@@ -47,7 +47,6 @@ class UserTest extends FixtureTestCase
 	/**
 	 * Test the api_get_user() function with a Frio schema.
 	 *
-	 * @return void
 	 */
 	public function testApiGetUserWithFrioSchema(): never
 	{
@@ -69,7 +68,6 @@ class UserTest extends FixtureTestCase
 	/**
 	 * Test the api_get_user() function with an empty Frio schema.
 	 *
-	 * @return void
 	 */
 	public function testApiGetUserWithEmptyFrioSchema(): never
 	{
@@ -91,7 +89,6 @@ class UserTest extends FixtureTestCase
 	/**
 	 * Test the api_get_user() function with a custom Frio schema.
 	 *
-	 * @return void
 	 */
 	public function testApiGetUserWithCustomFrioSchema(): never
 	{
@@ -130,7 +127,6 @@ class UserTest extends FixtureTestCase
 	/**
 	 * Test the api_user() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiUserWithUnallowedUser(): never
 	{

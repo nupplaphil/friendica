@@ -14,7 +14,6 @@ class PublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_public_timeline() function.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesPublicTimeline(): never
 	{
@@ -34,7 +33,6 @@ class PublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_public_timeline() function with the exclude_replies parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesPublicTimelineWithExcludeReplies(): never
 	{
@@ -54,7 +52,6 @@ class PublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_public_timeline() function with a negative page parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesPublicTimelineWithNegativePage(): never
 	{
@@ -73,7 +70,6 @@ class PublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_public_timeline() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesPublicTimelineWithUnallowedUser(): never
 	{
@@ -87,7 +83,6 @@ class PublicTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_public_timeline() function with an RSS result.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesPublicTimelineWithRss(): never
 	{

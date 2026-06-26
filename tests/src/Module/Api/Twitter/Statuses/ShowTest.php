@@ -76,7 +76,6 @@ class ShowTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_show() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesShowWithUnallowedUser(): never
 	{

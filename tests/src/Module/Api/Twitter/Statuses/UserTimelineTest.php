@@ -85,7 +85,6 @@ class UserTimelineTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_user_timeline() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesUserTimelineWithUnallowedUser(): never
 	{

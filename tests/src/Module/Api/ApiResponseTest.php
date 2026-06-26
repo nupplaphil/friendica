@@ -329,7 +329,6 @@ class ApiResponseTest extends MockedTestCase
 	/**
 	 * Test the api_rss_extra() function.
 	 *
-	 * @return void
 	 */
 	public function testApiRssExtra(): never
 	{
@@ -371,7 +370,6 @@ class ApiResponseTest extends MockedTestCase
 	/**
 	 * Test the api_rss_extra() function without any user info.
 	 *
-	 * @return void
 	 */
 	public function testApiRssExtraWithoutUserInfo(): never
 	{

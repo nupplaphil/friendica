@@ -53,7 +53,6 @@ class MentionsTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_mentions() function with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesMentionsWithUnallowedUser(): never
 	{

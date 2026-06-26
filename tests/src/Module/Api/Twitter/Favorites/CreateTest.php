@@ -73,7 +73,6 @@ class CreateTest extends ApiTestCase
 	/**
 	 * Test the api_favorites_create_destroy() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiFavoritesCreateDestroyWithoutAuthenticatedUser(): never
 	{

@@ -75,7 +75,6 @@ class UpdateTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_update() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesUpdateWithoutAuthenticatedUser(): never
 	{
@@ -92,7 +91,6 @@ class UpdateTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_update() function with a parent status.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesUpdateWithParent(): never
 	{
@@ -102,7 +100,6 @@ class UpdateTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_update() function with a media_ids parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesUpdateWithMediaIds(): never
 	{
@@ -112,7 +109,6 @@ class UpdateTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_update() function with the throttle limit reached.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesUpdateWithDayThrottleReached(): never
 	{

@@ -29,7 +29,6 @@ class ListsTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_followers() function an undefined cursor GET variable.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesFollowersWithUndefinedCursor(): never
 	{

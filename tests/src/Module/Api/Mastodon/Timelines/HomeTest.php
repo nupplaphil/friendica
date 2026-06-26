@@ -14,7 +14,6 @@ class HomeTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_home_timeline() function.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesHomeTimeline(): never
 	{
@@ -35,7 +34,6 @@ class HomeTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_home_timeline() function with a negative page parameter.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesHomeTimelineWithNegativePage(): never
 	{
@@ -54,7 +52,6 @@ class HomeTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_home_timeline() with an unallowed user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesHomeTimelineWithUnallowedUser(): never
 	{
@@ -70,7 +67,6 @@ class HomeTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_home_timeline() function with an RSS result.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesHomeTimelineWithRss(): never
 	{

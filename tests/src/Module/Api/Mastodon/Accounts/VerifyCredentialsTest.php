@@ -33,7 +33,6 @@ class VerifyCredentialsTest extends ApiTestCase
 	/**
 	 * Test the api_account_verify_credentials() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiAccountVerifyCredentialsWithoutAuthenticatedUser(): never
 	{

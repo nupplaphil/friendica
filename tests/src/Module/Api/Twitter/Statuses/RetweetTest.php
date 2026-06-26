@@ -39,7 +39,6 @@ class RetweetTest extends ApiTestCase
 	/**
 	 * Test the api_statuses_repeat() function without an authenticated user.
 	 *
-	 * @return void
 	 */
 	public function testApiStatusesRepeatWithoutAuthenticatedUser(): never
 	{
