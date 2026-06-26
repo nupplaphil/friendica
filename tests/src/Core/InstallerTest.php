@@ -42,7 +42,6 @@ class InstallerTest extends MockedTestCase
 
 		$this->l10nMock = Mockery::mock(L10n::class);
 
-		/** @var Dice&MockInterface $dice */
 		$this->dice = Mockery::mock(Dice::class)->makePartial(); // @phpstan-ignore assign.propertyType
 		$this->dice = $this->dice->addRules(include __DIR__ . '/../../../static/dependencies.config.php');
 

@@ -101,9 +101,9 @@ class EMailerTest extends MockedTestCase
 	{
 		$this->pConfig->shouldReceive('get')->withArgs(['1', 'system', 'email_textonly'])->andReturn(false)->once();
 
-		/** @var IEmail $preparedEmail */
+		/** @var IEmail|null $preparedEmail */
 		$preparedEmail = null;
-		/** @var IEmail $sentEMail */
+		/** @var IEmail|null $sentEMail */
 		$sentEMail = null;
 
 		$this->mockHookCallAll('emailer_send_prepare', $preparedEmail);

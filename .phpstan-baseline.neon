@@ -17,12 +17,6 @@ parameters:
 			path: tests/src/Core/Config/ConfigTest.php
 
 		-
-			message: '#^Variable \$dice in PHPDoc tag @var does not exist\.$#'
-			identifier: varTag.variableNotFound
-			count: 1
-			path: tests/src/Core/InstallerTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertEmpty\(\) with ''test'' will always evaluate to false\.$#'
 			identifier: staticMethod.impossibleType
 			count: 1
@@ -45,10 +39,4 @@ parameters:
 			identifier: binaryOp.invalid
 			count: 1
 			path: tests/src/Util/DateTimeFormatTest.php
-
-		-
-			message: '#^PHPDoc tag @var with type Friendica\\Object\\EMail\\IEmail is not subtype of native type null\.$#'
-			identifier: varTag.nativeType
-			count: 2
-			path: tests/src/Util/EMailerTest.php
 
