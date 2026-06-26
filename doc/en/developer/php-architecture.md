@@ -27,7 +27,7 @@ Before reading further, use this table to find the right place for your code:
 | Turn a database row into a typed object                                                                     | **Factory** (`src/*/Factory/`)                 |
 | Hold a typed list of entities                                                                               | **Collection** (`src/*/Collection/`)           |
 | Represent an immutable value                                                                                | **Value Object** — standalone `readonly class` |
-| Turn domain objects into template data or HTML ([§2.4](#presentation-layer-content))                         | **Presentation** (`src/Content/<Feature>/`)    |
+| Turn domain objects into template data or HTML ([§2.4](#presentation-layer-content))                        | **Presentation** (`src/Content/<Feature>/`)    |
 
 **Decision tree:**
 
@@ -35,7 +35,7 @@ Before reading further, use this table to find the right place for your code:
 Is it HTTP-specific (request, response, redirect)?   → Module
 Does it touch the database?
     One domain object + its consistent data          → Repository
-    Complex read across tables                       → Read Repository
+    Complex read across tables                       → Read Repository/Data Provider
 Does it contain business decisions?                  → Service
 Does it create a typed object from raw data?         → Factory
 Does it turn domain data into template data / HTML?  → Presentation
@@ -119,12 +119,12 @@ final class ProfileService
 
 What moved where:
 
-| Code                                       | Layer      | Reason                              |
-|--------------------------------------------|------------|-------------------------------------|
-| Session check, CSRF, input filtering       | Module     | HTTP-layer concerns                 |
-| Basic input validation (length, emptiness) | Module     | Cheap fail-fast before service call |
-| Domain rules ("is this nickname allowed?") | Service    | Business logic                      |
-| The actual DB call                         | Repository | Persistence layer                   |
+| Code                                                              | Layer      | Reason                              |
+|-------------------------------------------------------------------|------------|-------------------------------------|
+| Session check, CSRF ([Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf)), input filtering | Module     | HTTP-layer concerns                 |
+| Basic input validation (length, emptiness)                        | Module     | Cheap fail-fast before service call |
+| Domain rules ("is this nickname allowed?")                        | Service    | Business logic                      |
+| The actual DB call                                                | Repository | Persistence layer                   |
 
 
 ---
@@ -237,16 +237,16 @@ Use constructor injection or a Factory.
 
 ### 2.1 Responsibility by layer
 
-| Layer             | Responsibility                                            | Must not                              |
-|-------------------|----------------------------------------------------------|---------------------------------------|
-| `Module`          | HTTP, input validation, auth, CSRF, ownership (uid match) | Business rules, DB calls, rendering   |
-| `Service`         | Orchestrate a use case + its business rules              | SQL, HTTP, rendering                  |
-| `Repository`      | Read/write one aggregate                                 | Business rules, HTTP                  |
-| `Read Repository` | Complex/multi-table reads, projections                   | Business rules, HTTP                  |
-| `Factory`         | Create typed objects from raw data                       | Persistence, HTTP                     |
-| `Entity`          | Domain data + its own invariants                         | External deps, DB access              |
-| `Collection`      | Typed list of Entities                                   | Business rules                        |
-| `Presentation`    | Template data / HTML ([§2.4](#presentation-layer-content)) | SQL, request access, domain mutation |
+| Layer             | Responsibility                                             | Must not                                                                                                                               |
+|-------------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `Module`          | HTTP, input validation, auth, CSRF, ownership (uid match)  | Business rules, DB calls, HTML/markup building (it may call the renderer with prepared data — see [§2.4](#presentation-layer-content)) |
+| `Service`         | Orchestrate a use case + its business rules                | SQL, HTTP, rendering                                                                                                                   |
+| `Repository`      | Read/write one aggregate                                   | Business rules, HTTP                                                                                                                   |
+| `Read Repository` | Complex/multi-table reads, projections                     | Business rules, HTTP                                                                                                                   |
+| `Factory`         | Create typed objects from raw data                         | Persistence, HTTP                                                                                                                      |
+| `Entity`          | Domain data + its own invariants                           | External deps, DB access                                                                                                               |
+| `Collection`      | Typed list of Entities                                     | Business rules                                                                                                                         |
+| `Presentation`    | Template data / HTML ([§2.4](#presentation-layer-content)) | SQL, request access, domain mutation                                                                                                   |
 
 #### The `Service` layer
 
@@ -330,11 +330,11 @@ If one domain is reused by several unrelated presentation surfaces, introduce a 
 
 A new presentation class follows every rule in this document, plus three of its own:
 
-| Rule | Why |
-|------|-----|
-| **No SQL** — DB reads for the feature go in the package's `Repository/` (a Read Repository for complex reads), not in the renderer | A renderer that queries is doing two jobs; the read is not testable or reusable |
-| **No request access** — the Module reads `$request` and passes typed values in | `$_GET`/`$_POST` in a renderer couples it to HTTP and breaks unit testing ([§2.3](#request-not-superglobals)) |
-| **Build data, not markup strings** — hand data to Smarty (`Renderer::replaceMacros`); do not concatenate HTML or `<script>` strings in PHP | String building is where request access and XSS leak into the render layer |
+| Rule                                                                                                                                       | Why                                                                                                           |
+|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| **No SQL** — DB reads for the feature go in the package's `Repository/` (a Read Repository for complex reads), not in the renderer         | A renderer that queries is doing two jobs; the read is not testable or reusable                               |
+| **No request access** — the Module reads `$request` and passes typed values in                                                             | `$_GET`/`$_POST` in a renderer couples it to HTTP and breaks unit testing ([§2.3](#request-not-superglobals)) |
+| **Build data, not markup strings** — hand data to Smarty (`Renderer::replaceMacros`); do not concatenate HTML or `<script>` strings in PHP | String building is where request access and XSS leak into the render layer                                    |
 
 #### Pass a typed view model to the template (SHOULD)
 
@@ -642,25 +642,9 @@ public function testCreateFromTableRow(array $input, Entity\FriendSuggest $asser
 
 ## 9. Tooling Reference
 
-Run automatic modifications **first**, review the diff, then validate:
-
-```bash
-# Automatic changes (Rector + CS-Fixer + translation recreation)
-# Modifies files — review with git diff before committing
-composer run rectify
-
-# Validate
-composer run lint          # syntax check (parse errors)
-composer run cs:check      # code style, read-only
-composer run phpstan       # static type analysis (level 4)
-composer run phpmd         # complexity
-
-# Tests
-composer run test:unit     # fast, no database required
-composer run test:integration  # requires a database
-```
-
-For the full suite list and the `MYSQL_*` database environment variables the harness needs, see [Tests](tests).
+Run automatic fixes first, review the diff, then validate.
+The full command sequence — `rectify` → `lint` → `cs:check` → `phpstan` → `phpmd` → tests — is in [Your First Change — Step 11](first-change#checks).
+For the test suites and the `MYSQL_*` database variables the harness needs, see [Tests](tests).
 
 **PHPStan level:** Level 4 with partial strict rules.
 PHPStan does not enforce architectural boundaries such as `DI::` or `DBA::` in the wrong layer — those are reviewed manually.
@@ -708,13 +692,25 @@ $posts = $this->postRepo->selectByUser($uid); // could return thousands
 $posts = $this->postRepo->selectByUserWithPagination($uid, $pager);
 ```
 
-### 10.4 Check for race conditions and locking in multi-step operations
+### 10.4 Check for race conditions and locking in multistep operations
 
 When a sequence of DB operations must be atomic (read → check → write), consider whether a concurrent request can produce an inconsistent result.
 
 **Application-side existence checks alone are not concurrency-safe.**
-Prefer a database-enforced `UNIQUE` constraint as the final integrity boundary.
-For critical write paths, use an explicit transaction, handle duplicate-key errors, or use an atomic `INSERT ... ON DUPLICATE KEY UPDATE`.
+A concurrent request can interleave a "does this row already exist?" read followed by an insert, so two requests both pass the check and both write.
+Make the database the final integrity boundary with a `UNIQUE` constraint, and let the insert resolve the conflict atomically instead of hand-writing SQL.
+
+Friendica's `insert` command already supports this via its `$duplicate_mode` argument — you do not need a raw `INSERT ... ON DUPLICATE KEY UPDATE`:
+
+```php
+// Insert or update the existing row on a UNIQUE-key clash (upsert):
+DBA::insert('contact', $fields, Database::INSERT_UPDATE);
+
+// Insert or silently skip if the row already exists:
+DBA::insert('contact', $fields, Database::INSERT_IGNORE);
+```
+
+For a longer read → modify → write sequence that must be all-or-nothing, wrap it in an explicit transaction (`DBA::transaction()` / `DBA::commit()`).
 
 ## 11. Interface Naming
 
@@ -738,17 +734,17 @@ Match the style of the namespace you are working in.
 
 Brief definitions for readers coming from procedural or database-centric backgrounds.
 
-| Term                    | One-sentence definition                                                                                 | Friendica example                                                                                  |
-|-------------------------|---------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| **Entity**              | A domain object that has identity and may change over time                                              | `Navigation\Notifications\Entity\Notification`                                                     |
-| **Value Object**        | An immutable data holder defined by its values, not identity                                            | A normalised URI or validated email address — two objects with the same value are considered equal |
-| **Aggregate**           | A cluster of data that must stay consistent together                                                    | A notification with its actor, target URI, and read state                                          |
-| **Factory**             | A class whose only job is to create typed objects from raw data                                         | `Navigation\Notifications\Factory\Notification::createFromTableRow()`                              |
-| **Repository**          | A class that loads and saves one kind of aggregate to/from the DB                                       | `Navigation\Notifications\Repository\Notification`                                                 |
-| **Read Repository**     | Like a Repository, but optimised for complex read queries (newer pattern — no core example yet)         | A class that returns `array{id: int, url: string}[]` from a multi-table join                       |
-| **Service**             | Orchestrates a use case and holds its business rules; no SQL (named by what it does, not `*Service`)    | `Protocol\ActivityPub\Firehose` — injects a repository, orchestrates and decides, no SQL of its own |
-| **Collection**          | A typed list of Entities with helper methods                                                            | `Navigation\Notifications\Collection\Notifications`                                                |
-| **Presentation**        | Turns domain objects into template data or HTML; no SQL, no request access                             | `Content\Conversation\` renderers and formatters                                                   |
+| Term                | One-sentence definition                                                                              | Friendica example                                                                                   |
+|---------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Entity**          | A domain object that has identity and may change over time                                           | `Navigation\Notifications\Entity\Notification`                                                      |
+| **Value Object**    | An immutable data holder defined by its values, not identity                                         | A normalised URI or validated email address — two objects with the same value are considered equal  |
+| **Aggregate**       | A cluster of data that must stay consistent together                                                 | A notification with its actor, target URI, and read state                                           |
+| **Factory**         | A class whose only job is to create typed objects from raw data                                      | `Navigation\Notifications\Factory\Notification::createFromTableRow()`                               |
+| **Repository**      | A class that loads and saves one kind of aggregate to/from the DB                                    | `Navigation\Notifications\Repository\Notification`                                                  |
+| **Read Repository** | Like a Repository, but optimised for complex read queries (newer pattern — no core example yet)      | `Content\Conversation\ConversationDataProvider`                                                     |
+| **Service**         | Orchestrates a use case and holds its business rules; no SQL (named by what it does, not `*Service`) | `Protocol\ActivityPub\Firehose` — injects a repository, orchestrates and decides, no SQL of its own |
+| **Collection**      | A typed list of Entities with helper methods                                                         | `Navigation\Notifications\Collection\Notifications`                                                 |
+| **Presentation**    | Turns domain objects into template data or HTML; no SQL, no request access                           | `Content\Conversation\` renderers and formatters                                                    |
 
 ---
 
