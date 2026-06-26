@@ -40,6 +40,6 @@ class FakeInstanceDecorator implements IAmADecoratedInterface
 
 	public function getCBool(): ?bool
 	{
-		return static::PREFIX . $this->orig->getCBool();
+		return $this->orig->getCBool();
 	}
 }

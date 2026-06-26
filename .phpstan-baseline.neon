@@ -11,24 +11,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Method Friendica\\Test\\Util\\Hooks\\InstanceMocks\\FakeInstanceDecorator\:\:getCBool\(\) should return bool\|null but returns string\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/Util/Hooks/InstanceMocks/FakeInstanceDecorator.php
-
-		-
-			message: '#^Parameter &\$consumed by\-ref type of method Friendica\\Test\\Util\\Intercept\:\:filter\(\) expects int, \(float\|int\) given\.$#'
-			identifier: parameterByRef.type
-			count: 1
-			path: tests/Util/Intercept.php
-
-		-
-			message: '#^Method Friendica\\Test\\Util\\SerializableObjectDouble\:\:unserialize\(\) with return type void returns string but should not return anything\.$#'
-			identifier: return.void
-			count: 1
-			path: tests/Util/SerializableObjectDouble.php
-
-		-
 			message: '#^Access to undefined constant Friendica\\App\\BaseURL\:\:DEFAULT_SSL_SCHEME\.$#'
 			identifier: classConstant.notFound
 			count: 1
@@ -99,18 +81,6 @@ parameters:
 			identifier: property.unused
 			count: 1
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between ''\-''\|''\:''\|''_''\|''A'' and '''' will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: tests/src/Content/SmiliesTest.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$text$#'
-			identifier: parameter.notFound
-			count: 1
-			path: tests/src/Content/Text/BBCodeTest.php
 
 		-
 			message: '#^Call to an undefined method Friendica\\Core\\Cache\\Capability\\ICanCache\:\:getStats\(\)\.$#'

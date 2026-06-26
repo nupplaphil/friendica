@@ -811,7 +811,7 @@ Lucas: For the right price, yes.[/share]',
 	/**
 	 *
 	 * @param string $expected Expected BBCode output
-	 * @param string $text     Input text
+	 * @param array  $data     Input data
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataConvertAttachment')]
 	public function testConvertAttachment(string $expected, array $data): void
