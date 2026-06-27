@@ -712,6 +712,22 @@ DBA::insert('contact', $fields, Database::INSERT_IGNORE);
 
 For a longer read → modify → write sequence that must be all-or-nothing, wrap it in an explicit transaction (`DBA::transaction()` / `DBA::commit()`).
 
+### 10.5 Schema changes and data migrations — what goes where
+
+| What you are doing                                              | Where it goes                                                                                              |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Add or change a table or column                                | `static/dbstructure.config.php`                                                                            |
+| Add or change a database view                                  | `static/dbview.config.php`                                                                                 |
+| Migrate data, **critical** — must finish during the update     | `update_<version>()` in `update.php` (use `pre_update_<version>()` if it must run *before* the structure change) |
+| Migrate data, **heavy but non-critical** — can run afterwards  | `update<version>()` in `src/Database/PostUpdate.php` — the cron worker runs it in the background           |
+
+The choice between the last two is about timing: `update.php` runs **synchronously** as part of the update (use it only when the data must be correct before the new code serves requests); `PostUpdate` runs **in the background** afterwards (use it for large back-fills that would otherwise block the upgrade).
+
+After any of the above:
+
+1. Increment `DB_UPDATE_VERSION` in `static/dbstructure.config.php` — the migration function/method name must match that number.
+2. Regenerate the committed `database.sql` with `composer run db:update-structure`.
+
 ## 11. Interface Naming
 
 The `ICan` / `IHandle` / `IManage` convention is used in Capability namespaces:
