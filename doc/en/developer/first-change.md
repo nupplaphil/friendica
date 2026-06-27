@@ -455,7 +455,7 @@ Dice resolves concrete classes with typed constructors automatically.
 
 ```bash
 # 1. Apply automatic fixes (Rector + CS-Fixer + translations). Modifies files.
-composer run rectify
+composer run rectify   # shorthand: bin/rectify.sh
 
 # 2. Review what changed
 git diff
