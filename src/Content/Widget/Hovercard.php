@@ -7,17 +7,19 @@
 
 namespace Friendica\Content\Widget;
 
+use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
 use Friendica\Database\DBA;
 use Friendica\Model\Contact;
 use Friendica\Network\HTTPException;
 use Friendica\Util\Strings;
 use Friendica\Model\Tag;
-use Friendica\DI;
 use Friendica\Model\User;
 
-class Hovercard
+readonly class Hovercard
 {
+	public function __construct(private L10n $l10n) {}
+
 	/**
 	 * @param array $contact
 	 * @param int   $localUid Used to show user actions
@@ -26,7 +28,7 @@ class Hovercard
 	 * @throws HTTPException\ServiceUnavailableException
 	 * @throws \ImagickException
 	 */
-	public static function getHTML(array $contact, int $localUid = 0): string
+	public function getHTML(array $contact, int $localUid = 0): string
 	{
 		if ($localUid) {
 			$actions = Contact::photoMenu($contact, $localUid);
@@ -72,9 +74,9 @@ class Hovercard
 		return Renderer::replaceMacros($tpl, [
 			'$profile' => [
 				'is_admin'          => $administrator,
-				'admin_title'       => DI::l10n()->t('Administrator'),
+				'admin_title'       => $this->l10n->t('Administrator'),
 				'is_mod'            => $moderator,
-				'moderator_title'   => DI::l10n()->t('Moderator'),
+				'moderator_title'   => $this->l10n->t('Moderator'),
 				'name'              => $contact['name'],
 				'nick'              => $contact['nick'],
 				'addr'              => $contact['addr'] ?: $contact_url,
