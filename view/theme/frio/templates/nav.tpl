@@ -57,6 +57,16 @@
 						<li class="sr-only">
 							<a class="sr-only" href="{{$baseurl}}">{{$home}}</a>
 						</li>
+
+						{{if $nav.back}}
+							<!-- Link back home to one's own instance, only visible to visitors -->
+							<li class="nav-segment">
+								<a accesskey="b" class="nav-menu" href="{{$nav.back.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
+										aria-label="{{$nav.back.3}}" title="{{$nav.back.3}}"><i class="ri ri-xl ri-arrow-go-back-line ri-fw"
+										aria-hidden="true"></i> <span class="d-none">{{$nav.back.1}}</span></a>
+							</li>
+						{{/if}}
+
 						{{if $nav.network}}
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
@@ -83,19 +93,11 @@
 						{{/if}}
 
 						{{if $nav.channel}}
+							<!-- Note: This is currently never displayed -->
 							<li class="nav-segment">
 								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
 										class="ri ri-xl ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
-							</li>
-						{{/if}}
-
-						{{if $nav.home}}
-							<li class="nav-segment hidden-xs">
-								<a accesskey="p" class="nav-menu {{$sel.home}}" href="{{$nav.home.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
-										aria-label="{{$nav.home.3}}" title="{{$nav.home.3}}"><i class="ri ri-xl ri-user-{{if $sel.home}}fill{{else}}line{{/if}} ri-fw"
-										aria-hidden="true"></i> <span class="d-none">{{$nav.home.1}}</span><span id="home-update"
-										class="nav-home-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
 
@@ -111,7 +113,7 @@
 								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
 									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
-										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i></a>
+										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i> <span class="d-none">{{$nav.contacts.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -120,7 +122,7 @@
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
 									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw"
-										aria-hidden="true"></i><span id="mail-update"
+										aria-hidden="true"></i> <span class="d-none">{{$nav.messages.1}}</span><span id="mail-update"
 										class="nav-mail-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
@@ -132,7 +134,7 @@
 									type="button" aria-haspopup="true" aria-expanded="false"
 									aria-controls="nav-notifications-menu">
 									<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
-									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>
+									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>  <span class="d-none">{{$nav.notifications.1}}</span>
 								</button>
 								{{* The notifications dropdown menu. There are two parts of menu. The second is at the bottom of this file. It is loaded via js. Look at nav-notifications-template *}}
 								<ul id="nav-notifications-menu" class="dropdown-menu menu-popup" role="menu"

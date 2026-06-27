@@ -16,12 +16,14 @@
 				<i class="icons icon-reorder"></i>
 			</a>
 		</li>
-		{{if $nav.home}}
-			<li role="menuitem" id="nav-home-link" class="nav-menu {{$sel.home}}">
-				<a accesskey="p" class="{{$nav.home.2}}" href="{{$nav.home.0}}" title="{{$nav.home.3}}">
-					<span class="desktop-view">{{$nav.home.1}}</span>
-					<i class="icon s22 icon-home mobile-view"><span class="sr-only">{{$nav.home.1}}</span></i>
-					<span id="home-update" class="nav-notification"></span>
+
+		{{if $nav.back}}
+			<!-- Link back home to one's own instance, only visible to visitors -->
+			<li role="menuitem" id="nav-back-link" class="nav-menu">
+				<a accesskey="b" class="{{$nav.back.2}}" href="{{$nav.back.0}}" title="{{$nav.back.3}}">
+					<span class="desktop-view">{{$nav.back.1}}</span>
+					<i class="ri ri-xl ri-arrow-go-back-line ri-fw" aria-hidden="true"></i>
+					<span class="sr-only">{{$nav.back.1}}</span>
 				</a>
 			</li>
 		{{/if}}
@@ -41,6 +43,7 @@
 			</li>
 		{{/if}}
 		{{if $nav.channel}}
+			<!-- Note: This is currently never displayed -->
 			<li role="menuitem" id="nav-channel-link" class="nav-menu {{$sel.channel}}">
 				<a accesskey="l" class="{{$nav.channel.2}} desktop-view" href="{{$nav.channel.0}}" title="{{$nav.channel.3}}">{{$nav.channel.1}}</a>
 				<a class="{{$nav.channel.2}} mobile-view" href="{{$nav.channel.0}}" title="{{$nav.channel.3}}"><i class="icon s22 icon-bullseye"></i></a>

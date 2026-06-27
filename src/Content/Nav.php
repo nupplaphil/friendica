@@ -19,7 +19,6 @@ use Friendica\Event\HtmlFilterEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\User;
 use Friendica\Module\Conversation\Community;
-use Friendica\Module\Home;
 use Friendica\Module\Security\Login;
 use Friendica\Network\HTTPException;
 use Friendica\Security\OpenWebAuth;
@@ -32,7 +31,6 @@ class Nav
 		'community'     => null,
 		'channel'       => null,
 		'network'       => null,
-		'home'          => null,
 		'profiles'      => null,
 		'introductions' => null,
 		'notifications' => null,
@@ -175,7 +173,6 @@ class Nav
 			'apps'          => null,
 			'community'     => null,
 			'channel'       => null,
-			'home'          => null,
 			'calendar'      => null,
 			'login'         => null,
 			'logout'        => null,
@@ -209,16 +206,6 @@ class Nav
 				'icon' => Contact::getMicro($contact),
 				'name' => $contact['name'],
 			];
-		}
-
-		// "Home" should also take you home from an authenticated remote profile connection
-		$homelink = $this->session->getMyUrl();
-		if (!$homelink) {
-			$homelink = $this->session->get('visitor_home', '');
-		}
-
-		if ($this->router->getModuleClass() != Home::class && !$this->session->getLocalUserId()) {
-			$nav['home'] = [$homelink, $this->l10n->t('Home'), '', $this->l10n->t('Home Page')];
 		}
 
 		if (\Friendica\Module\Register::getPolicy() === \Friendica\Module\Register::OPEN && !$this->session->isAuthenticated()) {
@@ -274,8 +261,6 @@ class Nav
 		// The following nav links are only show to logged-in users
 		if ($this->session->getLocalUserNickname()) {
 			$nav['network'] = ['network', $this->l10n->t('Home'), '', $this->l10n->t('Home')];
-
-			$nav['home'] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('My profile'), '', $this->l10n->t('My posts')];
 
 			// Don't show notifications for public communities
 			if ($this->session->get('page_flags', '') != User::PAGE_FLAGS_COMMUNITY) {
