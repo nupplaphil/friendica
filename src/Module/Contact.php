@@ -602,25 +602,7 @@ class Contact extends BaseModule
 			$sparkle  = '';
 		}
 
-		$administrator = false;
-		$moderator     = false;
-		if (Model\Contact::isLocalById($contact['id'])) {
-			$local_id = Model\User::getIdForURL($contact['url']);
-			// check if contact is a Moderator
-			if (Model\User::isModerator($local_id)) {
-				$moderator = true;
-			}
-			// check if contact is an Admin
-			if (Model\User::isSiteAdmin($local_id)) {
-				$administrator = true;
-				$moderator     = false;
-				// do not show as Admin if this is a sub-account of an Admin
-				$check = Model\User::getById($local_id, ['parent-uid']);
-				if ($check['parent-uid']) {
-					$administrator = false;
-				}
-			}
-		}
+		[$administrator, $moderator] = Model\Contact::getType($contact['id'], $contact['url']);
 
 		return [
 			'id'                => $contact['id'],
