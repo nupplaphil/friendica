@@ -148,7 +148,8 @@ final readonly class ConversationRenderer
 			return '';
 		}
 
-		$root = $this->dataProvider->getRootTemplateDataFromItem($item, $viewerUid, self::MODE_COMMENTS, $existing);
+		$page_dropping = $viewerUid && $this->pConfig->get($viewerUid, 'system', 'show_page_drop', true);
+		$root          = $this->dataProvider->getRootTemplateDataFromItem($item, $viewerUid, self::MODE_COMMENTS, $existing, $page_dropping);
 		if (empty($root['children'])) {
 			$this->profiler->stopRecording();
 			return '';
@@ -185,13 +186,14 @@ final readonly class ConversationRenderer
 
 		$live_update_div = $this->getLiveUpdateHtml($mode, $update, $viewerUid, []);
 
-		$root = $this->dataProvider->getRootTemplateDataFromItem($item, $viewerUid, $mode);
+		$page_dropping = $viewerUid && $this->pConfig->get($viewerUid, 'system', 'show_page_drop', true);
+		$root          = $this->dataProvider->getRootTemplateDataFromItem($item, $viewerUid, $mode, [], $page_dropping);
 		if (empty($root)) {
 			$this->profiler->stopRecording();
 			return '';
 		}
 
-		$html = $this->renderThreadedTemplate([$root], $mode, $update, false);
+		$html = $this->renderThreadedTemplate([$root], $mode, $update, $page_dropping);
 		$this->profiler->stopRecording();
 		return $live_update_div . $html;
 	}
@@ -353,12 +355,13 @@ final readonly class ConversationRenderer
 	 */
 	private function renderTimelineByItems(array $items, int $uid, string $mode, string $order): string
 	{
-		$roots = $this->dataProvider->getRootTemplateDataFromItems($items, $uid, $mode, $order);
+		$page_dropping = $uid && $this->pConfig->get($uid, 'system', 'show_page_drop', true);
+		$roots         = $this->dataProvider->getRootTemplateDataFromItems($items, $uid, $mode, $order, $page_dropping);
 		if (empty($roots)) {
 			return '';
 		}
 
-		return $this->renderThreadedTemplate($roots, $mode, false, false);
+		return $this->renderThreadedTemplate($roots, $mode, false, $page_dropping);
 	}
 
 	/**
