@@ -14,7 +14,6 @@ use Friendica\Core\Renderer;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Util\Strings;
-use Friendica\Model\User;
 
 /**
  * VCard widget
