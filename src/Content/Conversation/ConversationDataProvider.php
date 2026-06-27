@@ -93,16 +93,20 @@ final readonly class ConversationDataProvider
 	 * @param int $viewerUid The user ID of the viewer
 	 * @param string $mode The rendering mode
 	 * @param array $existing Existing comment URI IDs to exclude
+	 * @param bool $pagedrop Whether to enable page drop functionality
 	 * @return array<string, mixed>|null The root template data, or null if not found
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function getRootTemplateDataFromItem(array $item, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, array $existing = []): ?array
+	public function getRootTemplateDataFromItem(array $item, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, array $existing = [], bool $pagedrop = false): ?array
 	{
 		// Resolve to parent if this is a comment
 		$resolvedItem = $this->fetchParentItem($item, $viewerUid);
 		if ($resolvedItem === null) {
 			return null;
 		}
+
+		// Set pagedrop for the resolved parent item
+		$resolvedItem['pagedrop'] = $pagedrop;
 
 		$renderUserId = $viewerUid ?: (int) $resolvedItem['uid'];
 
@@ -114,9 +118,9 @@ final readonly class ConversationDataProvider
 			$sinceDate = '';
 		}
 
-		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $renderUserId, $mode, $sinceId, $sinceDate, $existing);
+		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $renderUserId, $mode, $sinceId, $sinceDate, $existing, $pagedrop);
 
-		return $this->buildRootTemplateData($items, (int) $resolvedItem['uid'], $viewerUid, $mode);
+		return $this->buildRootTemplateData($items, (int) $resolvedItem['uid'], $viewerUid, $mode, $pagedrop);
 	}
 
 	/**
@@ -127,25 +131,32 @@ final readonly class ConversationDataProvider
 	 * @param int $viewerUid The user ID of the viewer
 	 * @param string $mode The rendering mode
 	 * @param string $order One of ConversationRenderer::ORDER_*
+	 * @param bool $pagedrop Whether to enable page drop functionality
 	 * @return array<int, array> The thread template data for all items
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function getRootTemplateDataFromItems(array $items, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, string $order = ConversationRenderer::ORDER_COMMENTED): array
+	public function getRootTemplateDataFromItems(array $items, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, string $order = ConversationRenderer::ORDER_COMMENTED, bool $pagedrop = false): array
 	{
 		if (empty($items)) {
 			return [];
 		}
 
+		// Set pagedrop for parent items before passing to populateThreadWithChildren
+		foreach ($items as &$item) {
+			$item['pagedrop'] = $pagedrop;
+		}
+		unset($item);
+
 		$renderUserId = $viewerUid ?: (int) ($items[0]['uid'] ?? 0);
 
-		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $renderUserId, $mode);
+		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $renderUserId, $mode, 0, '', [], $pagedrop);
 
 		return $this->buildThreadTemplatesFromItems(
 			$itemsWithChildren,
 			$viewerUid,
 			$mode,
 			false,
-			false,
+			$pagedrop,
 			BaseModule::getFormSecurityToken('contact_action'),
 		);
 	}
@@ -218,9 +229,10 @@ final readonly class ConversationDataProvider
 	 * @param int $profileOwner The ID of the profile owner
 	 * @param int $viewerUid The user ID of the viewer
 	 * @param string $mode The rendering mode
+	 * @param bool $pagedrop Whether to enable page drop functionality
 	 * @return array<string, mixed>|null The root template data, or null if not found
 	 */
-	private function buildRootTemplateData(array $items, int $profileOwner, int $viewerUid, string $mode): ?array
+	private function buildRootTemplateData(array $items, int $profileOwner, int $viewerUid, string $mode, bool $pagedrop = false): ?array
 	{
 		$this->appHelper->setProfileOwner($profileOwner);
 
@@ -234,7 +246,7 @@ final readonly class ConversationDataProvider
 			$viewerUid,
 			$mode,
 			false,
-			false,
+			$pagedrop,
 			BaseModule::getFormSecurityToken('contact_action'),
 		);
 		if (empty($threads[0])) {
@@ -277,10 +289,11 @@ final readonly class ConversationDataProvider
 	 * @param string $mode The rendering mode
 	 * @param int $sinceId Only load comments with id > sinceId
 	 * @param array $existing Existing comment URI IDs to exclude
+	 * @param bool $pagedrop Whether to enable page drop functionality
 	 * @return array<int, array> The items with children added
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	private function populateThreadWithChildren(array $parents, bool $blockAuthors, string $order, int $uid, string $mode, int $sinceId = 0, string $sinceDate = '', array $existing = []): array
+	private function populateThreadWithChildren(array $parents, bool $blockAuthors, string $order, int $uid, string $mode, int $sinceId = 0, string $sinceDate = '', array $existing = [], bool $pagedrop = false): array
 	{
 		$userGservers = $this->userGServer->listIgnoredByUser($uid);
 		$ignoredGsids = array_map(static function (UserGServerEntity $userGServer) {
@@ -297,7 +310,14 @@ final readonly class ConversationDataProvider
 		$postChannels  = [];
 		$uriId         = 0;
 
+		// Initialize items array with parent items, ensuring they have pagedrop set
+		$items = [];
 		foreach ($parents as $parent) {
+			// Ensure parent has pagedrop set
+			if (!isset($parent['pagedrop'])) {
+				$parent['pagedrop'] = $pagedrop;
+			}
+			$items[$parent['uri-id']] = $parent;
 			if (!empty($parent['thr-parent-id']) && !empty($parent['gravity']) && ($parent['gravity'] === ItemModel::GRAVITY_ACTIVITY)) {
 				$uriId = $parent['thr-parent-id'];
 				if (!empty($parent['author-id'])) {
@@ -403,7 +423,6 @@ final readonly class ConversationDataProvider
 			$replyCount = [];
 		}
 
-		$items       = [];
 		$quoteUriIds = [];
 		$authors     = [];
 
@@ -467,6 +486,7 @@ final readonly class ConversationDataProvider
 			$items[$key]['quoteshares'] = $quoteshares[$key] ?? [];
 			$items[$key]['missing']     = $replyCount[$key]  ?? 0;
 			$items[$key]['existing']    = $answers[$key]     ?? [];
+			$items[$key]['pagedrop']    = $pagedrop;
 
 			$alwaysDisplay                        = in_array($mode, [ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_CONTACT_POSTS]);
 			$items[$key]['user-blocked-author']   = !$alwaysDisplay && in_array($row['author-id'], $blocks);
