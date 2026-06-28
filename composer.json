@@ -187,6 +187,15 @@
 		"cs:fix": "php-cs-fixer fix",
 		"rector:check": "@rector:run --dry-run",
 		"rector:run": "rector --config=\".rector.php\"",
+		"qa": [
+			"@phpstan",
+			"@addons:phpstan",
+			"@test:unit",
+			"@test:legacy",
+			"@rector:check",
+			"@phpmd",
+			"@cs:check"
+		],
 		"rectify": [
 			"@rector:run",
 			"@cs:fix",
