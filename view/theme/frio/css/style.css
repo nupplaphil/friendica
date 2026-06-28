@@ -2228,7 +2228,7 @@ code > .hl-main {
 
 .tag bdi a, .tag:has(.filerm) a:first-child, a.tag {
 	display: inline-block;
-	padding: 6px 12px;
+	padding: 6px 10px;
 }
 
 .tag.label .filerm {
