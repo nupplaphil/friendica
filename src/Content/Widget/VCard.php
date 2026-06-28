@@ -107,8 +107,14 @@ class VCard
 			}
 		}
 
+		[$administrator, $moderator] = Contact::getType($contact['id'], $contact['url']);
+
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('widget/vcard.tpl'), [
 			'$contact'             => $contact,
+			'$is_admin'            => $administrator,
+			'$admin_title'         => DI::l10n()->t('Administrator'),
+			'$is_mod'              => $moderator,
+			'$moderator_title'     => DI::l10n()->t('Moderator'),
 			'$photo'               => $photo,
 			'$url'                 => Contact::magicLinkByContact($contact, $contact_url),
 			'$about'               => BBCode::convertForUriId($contact['uri-id'] ?? 0, $contact['about'] ?? ''),
@@ -118,7 +124,9 @@ class VCard
 			'$network_link'        => $network_link,
 			'$network_svg'         => $network_svg,
 			'$network'             => DI::l10n()->t('Network:'),
-			'$account_type'        => Contact::getAccountType($contact['contact-type']),
+			'$account_type_name'   => Contact::getAccountType($contact['contact-type']),
+			'$account_type'        => $contact['contact-type'],
+			'$manually_approve'    => $contact['manually-approve'],
 			'$follow'              => DI::l10n()->t('Follow'),
 			'$follow_link'         => $follow_link,
 			'$unfollow'            => DI::l10n()->t('Unfollow'),

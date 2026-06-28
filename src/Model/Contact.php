@@ -3890,4 +3890,37 @@ class Contact
 	{
 		return DBA::exists('contact', $condition);
 	}
+
+	/**
+	 * Returns the type of the given contact
+	 *
+	 * @param int    $id  The contact id
+	 * @param string $url The contact url
+	 * @return bool[] [administrator, moderator]
+	 * @throws \Exception
+	 */
+	public static function getType(int $id, string $url): array
+	{
+		$administrator = false;
+		$moderator     = false;
+		if (Contact::isLocalById($id)) {
+			$local_id = User::getIdForURL($url);
+			// check if contact is a Moderator
+			if (User::isModerator($local_id)) {
+				$moderator = true;
+			}
+			// check if contact is an Admin
+			if (User::isSiteAdmin($local_id)) {
+				$administrator = true;
+				$moderator     = false;
+				// do not show as Admin if this is a subaccount of an Admin
+				$check = User::getById($local_id, ['parent-uid']);
+				if ($check['parent-uid']) {
+					$administrator = false;
+				}
+			}
+		}
+
+		return [$administrator, $moderator];
+	}
 }

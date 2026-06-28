@@ -348,8 +348,8 @@ class Profile
 			$change_profile_picture_text = "";
 		}
 
-		// Fetch the account type
-		$account_type = Contact::getAccountType($profile['account-type']);
+		// Fetch the account type name string
+		$account_type_name = Contact::getAccountType($profile['account-type']);
 
 		if (!empty($profile['address']) || !empty($profile['location'])) {
 			$location = DI::l10n()->t('Location:');
@@ -457,8 +457,14 @@ class Profile
 			$member_since = [ DI::l10n()->t('Joined:'), DI::l10n()->mediumDate($p['register_date']) ];
 		}
 
+		[$administrator, $moderator] = Contact::getType($profile['id'], $profile['url']);
+
 		$tpl = Renderer::getMarkupTemplate('profile/vcard.tpl');
 		$o .= Renderer::replaceMacros($tpl, [
+			'is_admin'           => $administrator,
+			'admin_title'        => DI::l10n()->t('Administrator'),
+			'is_mod'             => $moderator,
+			'moderator_title'    => DI::l10n()->t('Moderator'),
 			'$is_owner'          => DI::userSession()->getLocalUserId() == $profile['uid'],
 			'$profile'           => $p,
 			'$edit_profile_link' => [
@@ -478,7 +484,9 @@ class Profile
 			'$subscribe_feed_link'         => $profile['hidewall'] ?? 0 ? '' : $profile['poll'],
 			'$wallmessage'                 => DI::l10n()->t('Message'),
 			'$wallmessage_link'            => $wallmessage_link,
-			'$account_type'                => $account_type,
+			'$account_type_name'           => $account_type_name,
+			'$account_type'                => $profile['account-type'],
+			'$page_flags'                  => $profile['page-flags'],
 			'$location'                    => $location,
 			'$homepage'                    => $homepage,
 			'$homepage_verified'           => DI::l10n()->t('This website has been verified to belong to the same person.'),

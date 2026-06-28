@@ -602,22 +602,31 @@ class Contact extends BaseModule
 			$sparkle  = '';
 		}
 
+		[$administrator, $moderator] = Model\Contact::getType($contact['id'], $contact['url']);
+
 		return [
-			'id'           => $contact['id'],
-			'url'          => $url,
-			'img_hover'    => DI::l10n()->t('Visit %s\'s profile [%s]', $contact['name'], $contact['url']),
-			'photo_menu'   => Model\Contact::photoMenu($contact, DI::userSession()->getLocalUserId()),
-			'thumb'        => Model\Contact::getThumb($contact, true),
-			'alt_text'     => $alt_text,
-			'name'         => $contact['name'],
-			'nick'         => $contact['nick'],
-			'details'      => $contact['location'],
-			'tags'         => $contact['keywords'],
-			'about'        => $contact['about'],
-			'account_type' => Model\Contact::getAccountType($contact['contact-type']),
-			'sparkle'      => $sparkle,
-			'itemurl'      => ($contact['addr'] ?? '') ?: $contact['url'],
-			'network'      => ContactSelector::networkToName($contact['network'], $contact['protocol'], $contact['gsid']),
+			'id'                => $contact['id'],
+			'is_admin'          => $administrator,
+			'adming_title'      => DI::l10n()->t('Administrator'),
+			'is_mod'            => $moderator,
+			'moderator_title'   => DI::l10n()->t('Moderator'),
+			'url'               => $url,
+			'img_hover'         => DI::l10n()->t('Visit %s\'s profile [%s]', $contact['name'], $contact['url']),
+			'photo_menu'        => Model\Contact::photoMenu($contact, DI::userSession()->getLocalUserId()),
+			'thumb'             => Model\Contact::getThumb($contact, true),
+			'alt_text'          => $alt_text,
+			'name'              => $contact['name'],
+			'nick'              => $contact['nick'],
+			'details'           => $contact['location'],
+			'tags'              => $contact['keywords'],
+			'about'             => $contact['about'],
+			'account_type_name' => Model\Contact::getAccountType($contact['contact-type']),
+			'account_type'      => $contact['contact-type'],
+			'manually_approve'  => $contact['manually-approve'],
+			'private'           => $contact['prv'],
+			'sparkle'           => $sparkle,
+			'itemurl'           => ($contact['addr'] ?? '') ?: $contact['url'],
+			'network'           => ContactSelector::networkToName($contact['network'], $contact['protocol'], $contact['gsid']),
 		];
 	}
 }

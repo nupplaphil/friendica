@@ -75,12 +75,38 @@
 
 				{{if !in_array($order_users,[$th_users.2.1, $th_users.3.1, $th_users.4.1]) }}
 					<td>
-						<i class="ri {{$u.page_type.1}}" title="{{$u.page_type.0}}"></i>
 						{{if $u.page_flags_raw==0 && $u.account_type_raw > 0}}
-							<i class="ri {{$u.account_type.1}}" title="{{$u.account_type.0}}"></i>
+							{{if $u.account_type_raw==1}}
+								{{$acct_icon = "ri-building-4-line"}} {{* ACCOUNT_TYPE_ORGANISATION *}}
+							{{else if $u.account_type_raw==2}}
+								{{$acct_icon = "ri-newspaper-line"}}  {{* ACCOUNT_TYPE_NEWS *}}
+							{{else if $u.account_type_raw==4}}
+								{{$acct_icon = "ri-broadcast-line"}}
+							{{else}}
+								{{$acct_icon = ""}}
+							{{/if}}
+						{{else}}
+							{{if $u.page_flags_raw==0}}
+								{{$acct_icon = "ri-user-line"}}		  {{* PERSON NORMAL *}}
+							{{else if $u.page_flags_raw==1}}
+								{{$acct_icon = "ri-megaphone-line"}}  {{* PERSON SOAPBOX *}}
+							{{else if $u.page_flags_raw==2}}
+								{{$acct_icon = "ri-team-line"}}		  {{* PUBLIC GROUP *}}
+							{{else if $u.page_flags_raw==3}}
+								{{$acct_icon = "ri-heart-line"}}	  {{* PERSON FREELOVE *}}
+							{{else if $u.page_flags_raw==4}}
+								{{$acct_icon = "ri-broadcast-line"}}  {{* PAGE BLOG *}}
+							{{else if $u.page_flags_raw==5}}
+								{{$acct_icon = "ri-spy-line"}}	      {{* GROUP PRIVATE *}}
+							{{else if $u.page_flags_raw==6}}
+								{{$acct_icon = "ri-group-3-line"}}	  {{* GROUP RESTRICTED *}}
+							{{else}}
+								{{$acct_icon = ""}}
+							{{/if}}
 						{{/if}}
-						{{if $u.is_admin}}<i class="ri ri-spy-line text-primary" title="{{$siteadmin}}"></i>{{/if}}
-						{{if $u.account_expired}}<i class="ri ri-time-line text-warning" title="{{$accountexpired}}"></i>{{/if}}
+						<span class="acct-type"><i class="ri {{$acct_icon}}" aria-hidden="true" data-acct="{{$u.account_type_raw}}" data-flag="{{$u.page_flags_raw}}" title="{{if $u.page_flags && $u.page_flags_raw !=0}}{{$u.page_flags}}{{else}}{{$u.account_type}}{{/if}}"></i> <span>{{if $u.page_flags && $u.page_flags_raw !=0}}{{$u.page_flags}}{{else}}{{$u.account_type}}{{/if}}</span></span>
+						{{if $u.is_admin}}<span class="acct-type"><i class="ri ri-medal-2-fill text-primary" title="{{$siteadmin}}"></i> <span>{{$siteadmin}}</span>{{else if $u.is_mod}}<span class="acct-type"><i class="ri ri-shield-user-line" title="{{$moderator}}"></i> <span>{{$moderator}}</span>{{/if}}
+						{{if $u.account_expired}}<span class="acct-type"><i class="ri ri-time-line text-warning" title="{{$accountexpired}}"></i> <span>{{$accountexpired}}</span></span>{{/if}}
 					</td>
 				{{/if}}
 

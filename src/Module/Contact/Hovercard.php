@@ -13,7 +13,6 @@ use Friendica\Content\Widget;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
-use Friendica\Core\System;
 use Friendica\Model\Contact;
 use Friendica\Module\Response;
 use Friendica\Network\HTTPException;
@@ -25,7 +24,7 @@ use Psr\Log\LoggerInterface;
  */
 class Hovercard extends BaseModule
 {
-	public function __construct(private readonly IHandleUserSessions $userSession, private readonly IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
+	public function __construct(private readonly IHandleUserSessions $userSession, private readonly IManageConfigValues $config, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, private readonly Widget\Hovercard $hovercard, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
@@ -64,6 +63,6 @@ class Hovercard extends BaseModule
 			throw new HTTPException\NotFoundException();
 		}
 
-		$this->httpExit(Widget\Hovercard::getHTML($contact, $this->userSession->getLocalUserId()));
+		$this->httpExit($this->hovercard->getHTML($contact, $this->userSession->getLocalUserId()));
 	}
 }

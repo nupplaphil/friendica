@@ -110,6 +110,14 @@ img {
 #adminpage table#users img { width: 16px; height: 16px; }
 #adminpage table tr:hover { background-color: #eeeeee; }
 #adminpage .selectall { text-align: right; }
+#adminpage table#users tr { box-shadow: 0 0 1px rgb(128,128,128); }
+#adminpage table#users td.acct-type-col {
+	white-space: normal !important;
+	word-break: break-word !important;
+}
+#adminpage table#users span.acct-type {
+	display: block;
+}
 /* icons */
 
 /*
@@ -383,6 +391,23 @@ pre code {
 	border-radius: 4px;
 	opacity: 0.3;
 }
+.vcard .badge-admin,
+.badge-admin {
+	margin: 10px 0;
+	background-color: #eebc1d;
+	opacity: 1;
+}
+.vcard .badge-mod,
+.badge-mod {
+	margin: 10px 0;
+	background-color: #32cd32;
+	opacity: 1;
+}
+	/* icon is slightly larger on vcard */
+	.vcard .badge-admin i,
+	.vcard .badge-mod i {
+		vertical-align: middle;
+	}
 #panel {
 	position: absolute;
 	width: 10em;

@@ -93,6 +93,7 @@ class Blocked extends BaseUsers
 			'$blocked'        => $this->t('User blocked'),
 			'$unblock'        => $this->t('Unblock'),
 			'$siteadmin'      => $this->t('Site admin'),
+			'$moderator'      => $this->t('Moderator'),
 			'$accountexpired' => $this->t('Account expired'),
 
 			'$th_users'              => $th_users,

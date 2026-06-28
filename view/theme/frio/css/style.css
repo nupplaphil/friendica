@@ -505,6 +505,24 @@ aside .badge {
 .sidebar-circle-li .badge {
 	margin-top: 6px;
 }
+.profile-header .badge {
+	opacity: 1;
+	display: block;
+	width: fit-content;
+	margin: 10px auto;
+}
+.profile-header .badge-admin,
+.badge-admin {
+	background-color: #eebc1d;
+}
+.profile-header .badge-mod,
+.badge-mod {
+	background-color: #32cd32;
+}
+	.vcard .badge-admin i,
+	.vcard .badge-mod i {
+		vertical-align: middle;
+	}
 
 /* disabled elements */
 .community-content-wrapper > h3,
@@ -3809,6 +3827,18 @@ li.addon {
 #admin-users #users tr.blocked {
 	background-color: #f8efc0;
 }
+	#admin-users #users span.acct-type span,
+	#admin-users-blocked #users span.acct-type span {
+		display: none;
+	}
+	#admin-users #users tr.opened span.acct-type,
+	#admin-users-blocked #users tr.opened span.acct-type {
+		display: block;
+	}
+		#admin-users #users tr.opened span.acct-type span,
+		#admin-users-blocked #users tr.opened span.acct-type span {
+			display: inline;
+		}
 .adminpage .table-hover > tbody > tr:hover + tr.details {
 	background-color: #f5f5f5;
 }
