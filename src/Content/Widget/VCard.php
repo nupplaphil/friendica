@@ -114,6 +114,7 @@ class VCard
 			'$is_admin'            => $administrator,
 			'$admin_title'         => DI::l10n()->t('Administrator'),
 			'$is_mod'              => $moderator,
+			'$moderator_title'     => DI::l10n()->t('Moderator'),
 			'$photo'               => $photo,
 			'$url'                 => Contact::magicLinkByContact($contact, $contact_url),
 			'$about'               => BBCode::convertForUriId($contact['uri-id'] ?? 0, $contact['about'] ?? ''),
