@@ -91,8 +91,6 @@ final readonly class ConversationRenderer
 
 		$live_update_div = $this->getLiveUpdateHtml($mode, $update, $viewerUid, $request);
 
-		$page_dropping = $viewerUid && $this->pConfig->get($viewerUid, 'system', 'show_page_drop', true);
-
 		if (!$update) {
 			$_SESSION['return_path'] = $this->args->getQueryString();
 		}
@@ -105,19 +103,11 @@ final readonly class ConversationRenderer
 
 		$items = $cb['items'];
 
-		$timelineHtml = $this->renderTimelineByItems($items, $viewerUid, $mode, $order);
+		$timelineHtml = $this->renderTimelineByItems($items, $viewerUid, $mode, $order, $update);
 		$html         = $live_update_div . $timelineHtml;
 
 		if (!$update) {
 			$html .= "<div id=\"conversation-end\"></div>\n\n";
-			if ($page_dropping) {
-				$html .= '<div id="item-delete-selected" class="fakelink" onclick="deleteCheckedItems();">'
-					. '<div id="item-delete-selected-icon" class="icon drophide" title="' . $this->l10n->t('Delete Selected Items') . '" onmouseover="imgbright(this);" onmouseout="imgdull(this);"></div>'
-					. '<div id="item-delete-selected-desc">' . $this->l10n->t('Delete Selected Items') . '</div>'
-					. '</div>'
-					. '<img id="item-delete-selected-rotator" class="like-rotator" src="images/rotator.gif" style="display: none;" />'
-					. '<div id="item-delete-selected-end"></div>';
-			}
 		}
 
 		$this->profiler->stopRecording();
@@ -353,7 +343,7 @@ final readonly class ConversationRenderer
 	 * @throws ImagickException
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	private function renderTimelineByItems(array $items, int $uid, string $mode, string $order): string
+	private function renderTimelineByItems(array $items, int $uid, string $mode, string $order, bool $update): string
 	{
 		$page_dropping = $uid && $this->pConfig->get($uid, 'system', 'show_page_drop', true);
 		$roots         = $this->dataProvider->getRootTemplateDataFromItems($items, $uid, $mode, $order, $page_dropping);
@@ -361,7 +351,7 @@ final readonly class ConversationRenderer
 			return '';
 		}
 
-		return $this->renderThreadedTemplate($roots, $mode, false, $page_dropping);
+		return $this->renderThreadedTemplate($roots, $mode, $update, $page_dropping);
 	}
 
 	/**
