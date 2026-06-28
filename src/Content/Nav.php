@@ -196,7 +196,6 @@ class Nav
 
 		if ($this->session->isAuthenticated()) {
 			// user menu
-			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Posts'), '', $this->l10n->t('My posts'), 'ri-chat-1-line'];
 			$nav['usermenu'][] = ['profile/' . $this->session->getLocalUserNickname() . '/photos', $this->l10n->t('Photos'), '', $this->l10n->t('My photos'), 'ri-image-line'];
 			$nav['usermenu'][] = ['notes/', $this->l10n->t('Personal notes'), '', $this->l10n->t('Only you can see these'), 'ri-sticky-note-line'];
 
@@ -205,6 +204,7 @@ class Nav
 			$userinfo = [
 				'icon' => Contact::getMicro($contact),
 				'name' => $contact['name'],
+				'link' => 'profile/' . $this->session->getLocalUserNickname(),
 			];
 		}
 
@@ -261,6 +261,9 @@ class Nav
 		// The following nav links are only show to logged-in users
 		if ($this->session->getLocalUserNickname()) {
 			$nav['network'] = ['network', $this->l10n->t('Home'), '', $this->l10n->t('Home')];
+
+			// Only used by Vier
+			$nav['my_profile'] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Profile'), '', ''];
 
 			// Don't show notifications for public communities
 			if ($this->session->get('page_flags', '') != User::PAGE_FLAGS_COMMUNITY) {
