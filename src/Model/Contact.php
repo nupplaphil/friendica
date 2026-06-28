@@ -1688,7 +1688,7 @@ class Contact
 		$fields = array_merge(Item::DISPLAY_FIELDLIST, ['featured']);
 		$items  = Post::toArray(Post::selectForUser($uid, $fields, $condition, $params));
 
-		$o = DI::conversationRenderer()->renderFlat($items, ConversationRenderer::MODE_CONTACT_POSTS, false);
+		$o = DI::conversationRenderer()->renderFlat($items, ConversationRenderer::MODE_CONTACT_POSTS, false, $uid);
 
 		if (DI::pConfig()->get($uid, 'system', 'infinite_scroll', true)) {
 			$o .= HTML::scrollLoader($request);
