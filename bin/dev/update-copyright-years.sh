@@ -11,10 +11,14 @@ echo "▶ Updating Friendica copyright years to 2010-${NEW_YEAR}..."
 
 find "$PROJECT_ROOT" \( \
   -path "$PROJECT_ROOT/vendor" -prune -o \
+  -path "$PROJECT_ROOT/addon" -prune -o \
   -path "$PROJECT_ROOT/node_modules" -prune -o \
+  -path "$PROJECT_ROOT/view/asset" -prune -o \
+  -path "$PROJECT_ROOT/view/smarty3/compiled" -prune -o \
+  -path "$PROJECT_ROOT/storage" -prune -o \
   -path "$PROJECT_ROOT/.git" -prune -o \
-  -type f -print \) | \
-  xargs sed -i "/[Ff]riendica/s/2010[ ]*-[ ]*20[0-9][0-9]/2010-${NEW_YEAR}/g"
+  -type f -print0 \) | \
+  xargs -0 sed -i "/[Ff]riendica/s/2010[ ]*-[ ]*20[0-9][0-9]/2010-${NEW_YEAR}/g"
 
 sed -i "/[Ff]riendica/s/2010-20[0-9][0-9]/2010-${NEW_YEAR}/g" "$PROJECT_ROOT/REUSE.toml"
 
