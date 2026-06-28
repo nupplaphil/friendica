@@ -436,10 +436,6 @@ final class PostTemplateBuilder
 			$nextThreadParents[$item['uri-id']] = ['guid' => $item['guid'], 'name' => $item['author-name'] ?? ''];
 
 			foreach ($item['children'] as $child) {
-				if (!is_array($child) || empty($child['uri-id'])) {
-					continue;
-				}
-
 				$nextThreadParents[$child['uri-id']] = ['guid' => $child['guid'] ?? '', 'name' => $child['author-name'] ?? ''];
 				$childData                           = $this->buildThreadTemplateData($child, $preview, $writable, $profileOwner, $convResponses, $formSecurityToken, $threadLevel + 1, $nextThreadParents);
 				if ($childData !== null) {
@@ -451,9 +447,9 @@ final class PostTemplateBuilder
 				$children[0]['num_comments']           = $this->l10n->tt('%d comment', '%d comments', $item['counts'] ?? 0);
 				$children[0]['show_text']              = $this->l10n->t('Show more');
 				$children[0]['hide_text']              = $this->l10n->t('Show fewer');
-				if (($threadLevel > 1) && isset($children[$nb_children - 1])) {
+				if ($threadLevel > 1) {
 					$children[$nb_children - 1]['comment_lastcollapsed'] = true;
-				} elseif (isset($children[$nb_children - 3])) {
+				} else {
 					$children[$nb_children - 3]['comment_lastcollapsed'] = true;
 				}
 			}
