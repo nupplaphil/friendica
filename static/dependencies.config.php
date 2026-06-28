@@ -35,12 +35,6 @@ return (function (string $basepath, array $getVars, array $serverVars, array $co
 			// one instance for the whole execution
 			'shared' => true,
 		],
-		\Friendica\Core\Addon\Capability\ICanLoadAddons::class => [
-			'instanceOf'      => \Friendica\Core\Addon\Model\AddonLoader::class,
-			'constructParams' => [
-				$basepath,
-			],
-		],
 		\Friendica\Core\Addon\AddonHelper::class => [
 			'instanceOf'      => \Friendica\Core\Addon\AddonManagerHelper::class,
 			'constructParams' => [
