@@ -431,7 +431,6 @@ final class PostTemplateBuilder
 
 		$children = [];
 		if (!empty($item['children']) && is_array($item['children'])) {
-			$nb_children                        = count($item['children']);
 			$nextThreadParents                  = $threadParents;
 			$nextThreadParents[$item['uri-id']] = ['guid' => $item['guid'], 'name' => $item['author-name'] ?? ''];
 
@@ -442,6 +441,7 @@ final class PostTemplateBuilder
 					$children[] = $childData;
 				}
 			}
+			$nb_children = count($children);
 			if ((($nb_children > 2) || ($threadLevel > 1)) && isset($children[0])) {
 				$children[0]['comment_firstcollapsed'] = true;
 				$children[0]['num_comments']           = $this->l10n->tt('%d comment', '%d comments', $item['counts'] ?? 0);
