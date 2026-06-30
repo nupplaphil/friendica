@@ -973,10 +973,6 @@ final readonly class ConversationDataProvider
 	{
 		$children = [];
 		foreach ($itemList as $index => $item) {
-			if (!is_array($item) || empty($item['uri-id'])) {
-				continue;
-			}
-
 			if ($item['gravity'] !== ItemModel::GRAVITY_PARENT) {
 				if ($recursive) {
 					$thrParent = $item['thr-parent-id'];
