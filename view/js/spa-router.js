@@ -773,6 +773,12 @@ function reinitializeDynamicContent() {
   // Trigger infinite scroll reinitialization for network pages
   const initInfiniteScrollEvent = new CustomEvent('spa:initInfiniteScroll');
   window.dispatchEvent(initInfiniteScrollEvent);
+  
+  // Trigger NavUpdate to check for unread posts immediately after SPA navigation
+  if (typeof NavUpdate === 'function') {
+    console.log('[SPA Router] Calling NavUpdate after navigation');
+    NavUpdate();
+  }
 }
 
 /**
