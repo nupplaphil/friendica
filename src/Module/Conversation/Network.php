@@ -26,6 +26,7 @@ use Friendica\Content\Conversation\Factory\Community as CommunityFactory;
 use Friendica\Content\Conversation\Factory\Network as NetworkFactory;
 use Friendica\Content\Feature;
 use Friendica\Content\GroupManager;
+use Friendica\Content\PagesManager;
 use Friendica\Content\Nav;
 use Friendica\Content\Widget;
 use Friendica\Content\Text\HTML;
@@ -179,6 +180,7 @@ class Network extends Timeline
 			$widgetorder = [
 				Feature::CIRCLES,
 				Feature::GROUPS,
+				Feature::PAGES,
 				Feature::ARCHIVE,
 				Feature::NETWORKS,
 				Feature::ACCOUNTS,
@@ -198,6 +200,9 @@ class Network extends Timeline
 						break;
 					case Feature::GROUPS:
 						$this->page['aside'] .= GroupManager::widget($this->session->getLocalUserId());
+						break;
+					case Feature::PAGES:
+						$this->page['aside'] .= PagesManager::widget($this->session->getLocalUserId());
 						break;
 					case Feature::ARCHIVE:
 						$this->page['aside'] .= Widget::postedByYear($module . '/archive', $this->session->getLocalUserId(), false);
