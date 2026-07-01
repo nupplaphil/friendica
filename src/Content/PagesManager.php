@@ -186,7 +186,7 @@ class PagesManager
 	/**
 	 * count unread page items
 	 *
-	 * Count unread items of connected groups and private pages
+	 * Count unread items of connected pages
 	 *
 	 * @return array
 	 *    'id' => contact id
