@@ -21,7 +21,7 @@
 <nav id="pages-sidebar" class="widget">
 	<button class="widget-btn fakelink" onclick="openCloseWidget('pages-sidebar');" aria-expanded="false">
 		<h3>
-			<i class="ri ri-discuss-line" aria-hidden="true"></i>
+			<i class="ri ri-file-copy-line" aria-hidden="true"></i>
 			{{$title}}
 		</h3>
 	</button>
