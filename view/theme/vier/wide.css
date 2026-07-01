@@ -8,10 +8,6 @@ right_aside {
   display: block;
 }
 
-aside #group-sidebar {
-  display: none;
-}
-
 right_aside span.sbox {
   margin-left: 10px;
 }
