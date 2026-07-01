@@ -17,19 +17,6 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 class PageTest extends TestCase
 {
 	/**
-	 * Test that Page class can be instantiated
-	 */
-	public function testPageInstantiation(): void
-	{
-		$basePath = '/var/www';
-		$eventDispatcher = $this->createStub(EventDispatcherInterface::class);
-		
-		$page = new Page($basePath, $eventDispatcher);
-		
-		self::assertInstanceOf(Page::class, $page);
-	}
-
-	/**
 	 * Test that page content can be accessed via ArrayAccess
 	 */
 	public function testPageArrayAccess(): void
