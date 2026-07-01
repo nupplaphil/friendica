@@ -16,7 +16,6 @@
  */
 
 use Friendica\App\Mode;
-use Friendica\Content\GroupManager;
 use Friendica\Core\Renderer;
 use Friendica\Core\Search;
 use Friendica\Database\DBA;
