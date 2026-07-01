@@ -245,7 +245,17 @@ class Compose extends BaseModule
 	{
 		// Register Advanced Composer CSS and JS
 		$this->page->registerStylesheet(Theme::getPathForFile('css/advancedcomposer.css'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-lib.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-layout.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-analysis.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-panel.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-watchers.js'));
 		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-toggle.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-distraction.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-preview.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-focus-preview.js'));
+		$this->page->registerFooterScript(Theme::getPathForFile('js/advancedcomposer-ep-zen.js'));
 
 		// Advanced Composer localization strings
 		$advancedComposerL10n = [

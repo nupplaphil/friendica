@@ -103,16 +103,16 @@
                         <i class="ri ri-eye-line"></i> <span id="preview-btn-text-{{$id}}">{{$l10n.preview}}</span>
                     </button>
                     {{if $enableAdvancedComposer}}
-                    <button type="button" class="btn btn-default" id="easy-compose-toggle" title="{{$l10n.btnAssistant}}">
+                    <button type="button" class="btn btn-default" id="easy-compose-toggle" title="{{$l10n.btnAssistant}}" onclick="AdvancedComposerTogglePanel()">
                         <i class="ri ri-quill-pen-line"></i> <span class="ec-btn-text">{{$l10n.btnAssistant}}</span>
                     </button>
-                    <button type="button" class="btn btn-default" id="easy-compose-distraction-toggle" title="{{$l10n.btnZen}}">
+                    <button type="button" class="btn btn-default" id="easy-compose-distraction-toggle" title="{{$l10n.btnZen}}" onclick="AdvancedComposerToggleDistractionFree()">
                         <i class="ri ri-fullscreen-line"></i> <span class="ec-btn-text">{{$l10n.btnZen}}</span>
                     </button>
-                    <button type="button" class="btn btn-default" id="easy-compose-focus-preview-toggle" title="{{$l10n.btnFocusPreview}}">
+                    <button type="button" class="btn btn-default" id="easy-compose-focus-preview-toggle" title="{{$l10n.btnFocusPreview}}" onclick="AdvancedComposerOpenFocusPreview()">
                         <i class="ri ri-eye-line"></i> <span class="ec-btn-text">{{$l10n.btnFocusPreview}}</span>
                     </button>
-                    <button type="button" class="btn btn-default ec-hidden" id="easy-compose-ep-zen-toggle" title="{{$l10n.btnEpZen}}">
+                    <button type="button" class="btn btn-default ec-hidden" id="easy-compose-ep-zen-toggle" title="{{$l10n.btnEpZen}}" onclick="AdvancedComposerToggleEpZen()">
                         <i class="ri ri-image-line"></i> <span class="ec-btn-text">{{$l10n.btnEpZen}}</span>
                     </button>
                     {{/if}}
