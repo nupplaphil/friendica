@@ -9,40 +9,87 @@
  */
 
 /* ============================================
-   LOADING INDICATOR
+   LOADING INDICATOR - Multi-Status
    ============================================ */
 
+/* Base loading indicator container */
 #spa-loading-indicator {
   position: fixed;
-  top: auto;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.25);
+  height: 17px; /* 3px bar + 14px for text */
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  overflow: hidden;
-  transition: opacity 0.2s ease;
+  transition: opacity 180ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--spa-loading-bg, rgba(0, 0, 0, 0.85));
 }
 
 #spa-loading-indicator.active {
   opacity: 1;
+  pointer-events: none;
 }
 
+/* Progress bar base */
 #spa-loading-indicator .spa-progress {
   width: 42%;
-  height: 100%;
+  height: 3px;
   background: linear-gradient(90deg, #00d4ff, #00ffa2);
-  box-shadow: 0 0 10px rgba(0, 255, 162, 0.85);
+  box-shadow: 0 0 10px rgba(0, 255, 162, 0.5);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* Status text */
+#spa-loading-indicator .spa-status-text {
+  color: var(--spa-loading-text, rgba(255, 255, 255, 0.9));
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin-top: 2px;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Loading bar animation */
+@keyframes spa-loading-bar {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(260%); }
+}
+
+/* Status-specific progress bar styles */
+#spa-loading-indicator.connecting .spa-progress {
+  background: linear-gradient(90deg, #ff9800, #ffc107);
+  width: 15% !important;
+  animation: none;
+}
+
+#spa-loading-indicator.waiting .spa-progress {
+  background: linear-gradient(90deg, #2196f3, #03a9f4);
+  width: 42%;
   animation: spa-loading-bar 1.1s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
   transform: translateX(-120%);
 }
 
-@keyframes spa-loading-bar {
-  0% { transform: translateX(-120%); }
-  100% { transform: translateX(260%); }
+#spa-loading-indicator.receiving .spa-progress {
+  background: linear-gradient(90deg, #00bcd4, #0097a7);
+  width: 70% !important;
+  animation: none;
+}
+
+#spa-loading-indicator.rendering .spa-progress {
+  background: linear-gradient(90deg, #8bc34a, #4caf50);
+  width: 90% !important;
+  animation: none;
+}
+
+#spa-loading-indicator.complete .spa-progress {
+  background: linear-gradient(90deg, #4caf50, #2e7d32);
+  width: 100% !important;
+  animation: none;
 }
 
 /* ============================================

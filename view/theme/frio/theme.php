@@ -58,8 +58,21 @@ EOT;
 		// Load SPA router for client-side routing on /network, /display, /profile
 		// This keeps the footer static (important for XMPP addon) and provides smooth transitions
 		$baseUrl = DI::baseUrl();
+
+		// Set loading indicator translations for SPA (English base, will be translated by l10n)
+		$spaConnecting = DI::l10n()->t('Connecting ...');
+		$spaReceiving  = DI::l10n()->t('Receiving data ...');
+		$spaRendering  = DI::l10n()->t('Building page ...');
+
 		DI::page()['htmlhead'] .= <<< EOT
 			<link rel="stylesheet" type="text/css" href="{$baseUrl}/view/js/spa-router.css" media="all" />
+			<script type="text/javascript">
+				window.spaLoadingTexts = {
+					connecting: "{$spaConnecting}",
+					receiving: "{$spaReceiving}",
+					rendering: "{$spaRendering}"
+				};
+			</script>
 			<script type="text/javascript" src="{$baseUrl}/view/js/spa-router.js"></script>
 EOT;
 	}
