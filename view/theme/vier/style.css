@@ -471,7 +471,7 @@ pre code {
 	opacity: 1;
 }
 
-.sidebar-circle-li:hover, #sidebar-new-circle:hover, #sidebar-edit-circles:hover, #sidebar-new-group:hover, #group-widget-collapse:hover,
+.sidebar-circle-li:hover, #sidebar-new-circle:hover, #sidebar-edit-circles:hover, #sidebar-new-group:hover, #sidebar-new-pages:hover, #group-widget-collapse:hover,
 #pages-widget-collapse,#sidebar-uncircled:hover, .side-link:hover, .nets-ul li:hover, #group-list-sidebar li:hover, #group-list-sidebar-right li:hover,
 #pages-list-sidebar li:hover, #pages-list-sidebar-right li:hover, .nets-all:hover, .saved-search-li:hover, li.tool:hover, .admin.link:hover, 
 aside h4 a:hover, right_aside h4 a:hover, #message-new:hover, #sidebar-photos-albums li:hover, .photos-upload-link:hover, .textcomplete-item.active {
@@ -488,7 +488,7 @@ aside h4 a:hover, right_aside h4 a:hover, #message-new:hover, #sidebar-photos-al
 	font-weight: bold;
 }
 
-#group-widget-showmore, #sidebar-new-circle, #sidebar-edit-circles, #sidebar-new-group, #group-widget-collapse, #group-list-rsidebar-right, #sidebar-uncircled,
+#group-widget-showmore, #sidebar-new-circle, #sidebar-edit-circles, #sidebar-new-group, #sidebar-new-pages, #group-widget-collapse, #group-list-rsidebar-right, #sidebar-uncircled,
 .side-link, #peoplefind-desc, #connect-desc, .nets-all, .admin.link, #message-new {
 	padding-left: 10px;
 	padding-top: 3px;
