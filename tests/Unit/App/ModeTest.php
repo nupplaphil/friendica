@@ -243,7 +243,7 @@ class ModeTest extends TestCase
 			'HTTP_X_FRIENDICA_SPA' => 'true',
 		];
 
-		$args         = self::createStub(Arguments::class);
+		$args = self::createStub(Arguments::class);
 		$args->method('getQueryParam')->willReturn(null);
 		$mobileDetect = self::createStub(MobileDetect::class);
 
@@ -259,7 +259,7 @@ class ModeTest extends TestCase
 	{
 		$server = [];
 
-		$args         = self::createMock(Arguments::class);
+		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('true');
 		$mobileDetect = self::createStub(MobileDetect::class);
 
@@ -275,7 +275,7 @@ class ModeTest extends TestCase
 	{
 		$server = [];
 
-		$args         = self::createMock(Arguments::class);
+		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('');
 		$mobileDetect = self::createStub(MobileDetect::class);
 
@@ -291,7 +291,7 @@ class ModeTest extends TestCase
 	{
 		$server = [];
 
-		$args         = self::createMock(Arguments::class);
+		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn(null);
 		$mobileDetect = self::createStub(MobileDetect::class);
 
@@ -307,7 +307,7 @@ class ModeTest extends TestCase
 	{
 		$server = [];
 
-		$args         = self::createMock(Arguments::class);
+		$args = self::createMock(Arguments::class);
 		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('1');
 		$mobileDetect = self::createStub(MobileDetect::class);
 
@@ -325,7 +325,7 @@ class ModeTest extends TestCase
 			'HTTP_X_FRIENDICA_SPA' => 'true',
 		];
 
-		$args         = self::createMock(Arguments::class);
+		$args = self::createMock(Arguments::class);
 		// Query param won't be checked if header is present
 		$args->expects(self::never())->method('getQueryParam');
 		$mobileDetect = self::createStub(MobileDetect::class);
