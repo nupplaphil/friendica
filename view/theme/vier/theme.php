@@ -194,12 +194,6 @@ function vier_community_info(): void
 		$aside['$nv'] = $nv;
 	}
 
-	//Community_Pages at right_aside
-	if ($show_pages && DI::userSession()->getLocalUserId()) {
-		$aside['$page'] = GroupManager::widget(DI::userSession()->getLocalUserId());
-	}
-	// END Community Page
-
 	// helpers
 	if ($show_helpers) {
 		$r = [];
