@@ -67,7 +67,7 @@ class PagesManager
 		$fields   = ['id', 'url', 'alias', 'name', 'micro', 'thumb', 'avatar', 'network', 'uid'];
 		$contacts = DBA::select('account-user-view', $fields, $condition, $params);
 		if (!$contacts) {
-			return $groupList;
+			return $pagesList;
 		}
 
 		while ($contact = DBA::fetch($contacts)) {
