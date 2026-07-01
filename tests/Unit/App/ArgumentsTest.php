@@ -270,4 +270,66 @@ class ArgumentsTest extends TestCase
 
 		self::assertNotSame($argument, $argNew);
 	}
+
+	/**
+	 * Test the getQueryParam method with various query parameters
+	 */
+	public function testGetQueryParam(): void
+	{
+		// Test with simple query parameter
+		$arguments = new App\Arguments('arg1=value1&arg2=value2', 'test', 'test', ['test'], 1);
+		self::assertEquals('value1', $arguments->getQueryParam('arg1'));
+		self::assertEquals('value2', $arguments->getQueryParam('arg2'));
+		self::assertNull($arguments->getQueryParam('nonexistent'));
+	}
+
+	/**
+	 * Test getQueryParam with empty query string
+	 */
+	public function testGetQueryParamEmpty(): void
+	{
+		$arguments = new App\Arguments('', '', '', [], 0);
+		self::assertNull($arguments->getQueryParam('any'));
+	}
+
+	/**
+	 * Test getQueryParam with URL-encoded parameters
+	 */
+	public function testGetQueryParamEncoded(): void
+	{
+		$arguments = new App\Arguments('param=hello%20world&other=test%2Bvalue', 'test', 'test', ['test'], 1);
+		self::assertEquals('hello world', $arguments->getQueryParam('param'));
+		self::assertEquals('test+value', $arguments->getQueryParam('other'));
+	}
+
+	/**
+	 * Test getQueryParam with special characters
+	 */
+	public function testGetQueryParamSpecialChars(): void
+	{
+		$arguments = new App\Arguments('email=test%40example.com&name=John%20Doe', 'test', 'test', ['test'], 1);
+		self::assertEquals('test@example.com', $arguments->getQueryParam('email'));
+		self::assertEquals('John Doe', $arguments->getQueryParam('name'));
+	}
+
+	/**
+	 * Test getQueryParam with multiple values for same parameter (last value should be returned)
+	 * Note: parse_str() with duplicate parameter names will use the last value
+	 */
+	public function testGetQueryParamMultipleValues(): void
+	{
+		$arguments = new App\Arguments('param=value1&param=value2', 'test', 'test', ['test'], 1);
+		// parse_str() uses the last value when parameter names are duplicated
+		self::assertEquals('value2', $arguments->getQueryParam('param'));
+	}
+
+	/**
+	 * Test getQueryParam with empty parameter value
+	 */
+	public function testGetQueryParamEmptyValue(): void
+	{
+		$arguments = new App\Arguments('param=&other=value', 'test', 'test', ['test'], 1);
+		self::assertEquals('', $arguments->getQueryParam('param'));
+		self::assertEquals('value', $arguments->getQueryParam('other'));
+	}
 }

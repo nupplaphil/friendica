@@ -233,4 +233,105 @@ class ModeTest extends TestCase
 		self::assertFalse($mode->isMobile());
 		self::assertFalse($mode->isTablet());
 	}
+
+	/**
+	 * Test SPA detection via header
+	 */
+	public function testIsSpaReturnsTrueWithHeader(): void
+	{
+		$server = [
+			'HTTP_X_FRIENDICA_SPA' => 'true',
+		];
+
+		$args         = self::createStub(Arguments::class);
+		$args->method('getQueryParam')->willReturn(null);
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertTrue($mode->isSpa());
+	}
+
+	/**
+	 * Test SPA detection via query parameter
+	 */
+	public function testIsSpaReturnsTrueWithQueryParam(): void
+	{
+		$server = [];
+
+		$args         = self::createMock(Arguments::class);
+		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('true');
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertTrue($mode->isSpa());
+	}
+
+	/**
+	 * Test SPA detection via query parameter with empty value
+	 */
+	public function testIsSpaReturnsTrueWithEmptyQueryParam(): void
+	{
+		$server = [];
+
+		$args         = self::createMock(Arguments::class);
+		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('');
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertTrue($mode->isSpa());
+	}
+
+	/**
+	 * Test no SPA detection when header and query param are missing
+	 */
+	public function testIsSpaReturnsFalse(): void
+	{
+		$server = [];
+
+		$args         = self::createMock(Arguments::class);
+		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn(null);
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertFalse($mode->isSpa());
+	}
+
+	/**
+	 * Test SPA detection with different query parameter value
+	 */
+	public function testIsSpaReturnsTrueWithDifferentQueryValue(): void
+	{
+		$server = [];
+
+		$args         = self::createMock(Arguments::class);
+		$args->expects(self::once())->method('getQueryParam')->with('spa')->willReturn('1');
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertTrue($mode->isSpa());
+	}
+
+	/**
+	 * Test that header takes precedence over query parameter for SPA detection
+	 */
+	public function testIsSpaHeaderTakesPrecedence(): void
+	{
+		$server = [
+			'HTTP_X_FRIENDICA_SPA' => 'true',
+		];
+
+		$args         = self::createMock(Arguments::class);
+		// Query param won't be checked if header is present
+		$args->expects(self::never())->method('getQueryParam');
+		$mobileDetect = self::createStub(MobileDetect::class);
+
+		$mode = (new Mode())->determineRunMode(true, $server, $args, $mobileDetect);
+
+		self::assertTrue($mode->isSpa());
+	}
 }
