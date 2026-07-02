@@ -27,7 +27,6 @@ const supportsSPA = window.history && window.history.pushState && window.fetch;
 
 // Track the final URL after redirects for display page detection
 let lastFinalUrl = null;
-let currentLoadingState = null;
 
 // ============================================
 // CONFIGURATION
@@ -44,151 +43,8 @@ const SPA_CONFIG = {
   ],
   spaHeader: 'X-Friendica-SPA',
   spaParam: 'spa',
-  loadingIndicatorId: 'spa-loading-indicator',
-  loadingBarHeight: 3,
-  fadeOutDuration: 180,
   scrollToTopOnNavigate: true
 };
-
-// Loading states for multi-status indicator
-const LOADING_STATES = {
-  CONNECTING: 'connecting',
-  WAITING: 'waiting',
-  RECEIVING: 'receiving',
-  RENDERING: 'rendering',
-  COMPLETE: 'complete'
-};
-
-// ============================================
-// LOADING INDICATOR
-// ============================================
-
-/**
- * Get computed style value safely
- * @param {HTMLElement} element - The element
- * @param {string} property - The CSS property
- * @returns {string} The computed value or empty string
- */
-function getComputedStyleValue(element, property) {
-  if (element && window.getComputedStyle) {
-    try {
-      return window.getComputedStyle(element)[property];
-    } catch (e) {
-      console.warn('[SPA Router] Could not get computed style for', property, e);
-    }
-  }
-  return '';
-}
-
-/**
- * Create loading indicator element with multi-status support
- * Sets CSS variables for colors from theme, all styles are in spa-router.css
- */
-function createLoadingIndicator() {
-  const indicator = document.createElement('div');
-  indicator.id = SPA_CONFIG.loadingIndicatorId;
-  indicator.className = 'spa-loading';
-  indicator.innerHTML = `
-    <div class="spa-progress"></div>
-    <div class="spa-status-text"></div>
-  `;
-  
-  // Get colors from #topbar-first for theme consistency
-  sourceElement = document.getElementById('topbar-first');
-  
-  // Get background and text colors from source element
-  if (sourceElement) {
-    let bgColor = getComputedStyleValue(sourceElement, 'background-color');
-    let textColor = getComputedStyleValue(sourceElement, 'color');
-    
-    // If background is transparent, check parent
-    if (bgColor === '' || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-      const parent = sourceElement.parentElement;
-      if (parent) {
-        bgColor = getComputedStyleValue(parent, 'background-color');
-      }
-    }
-    
-    // Set CSS variables on the indicator element
-    if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
-      indicator.style.setProperty('--spa-loading-bg', bgColor);
-    }
-    if (textColor) {
-      indicator.style.setProperty('--spa-loading-text', textColor);
-    }
-  }
-  
-  document.body.appendChild(indicator);
-}
-
-/**
- * Get loading text from global translations (set by PHP)
- * @param {string} key - The text key (connecting, receiving, rendering)
- * @returns {string} The translated text from window.spaLoadingTexts
- */
-function getLoadingText(key) {
-  // All texts MUST be provided by PHP via window.spaLoadingTexts
-  if (window.spaLoadingTexts && window.spaLoadingTexts[key]) {
-    return window.spaLoadingTexts[key];
-  }
-  // No fallback - texts must be provided by PHP
-  console.warn('[SPA Router] Loading text missing for key:', key);
-  return '';
-}
-
-/**
- * Set loading state with text
- * @param {string} state - One of LOADING_STATES
- * @param {string} text - Status text to display (optional, uses getLoadingText if not provided)
- */
-function setLoadingState(state, text = '') {
-  const indicator = document.getElementById(SPA_CONFIG.loadingIndicatorId);
-  if (!indicator) return;
-
-  // Remove all state classes
-  Object.values(LOADING_STATES).forEach(s => {
-    indicator.classList.remove(s);
-  });
-
-  // Set new state
-  currentLoadingState = state;
-  indicator.classList.add(state);
-
-  // Update text - use provided text or get from translations
-  const statusText = indicator.querySelector('.spa-status-text');
-  if (statusText) {
-    statusText.textContent = text || getLoadingText(state);
-  }
-
-  // Show indicator if not already visible and not complete
-  if (state !== LOADING_STATES.COMPLETE) {
-    indicator.classList.add('active');
-  }
-}
-
-/**
- * Show loading indicator with connecting state
- */
-function showLoading() {
-  setLoadingState(LOADING_STATES.CONNECTING);
-}
-
-/**
- * Hide loading indicator
- */
-function hideLoading() {
-  const indicator = document.getElementById(SPA_CONFIG.loadingIndicatorId);
-  if (indicator) {
-    indicator.classList.remove('active');
-    // Reset state classes after hiding
-    setTimeout(() => {
-      Object.values(LOADING_STATES).forEach(s => {
-        indicator.classList.remove(s);
-      });
-      currentLoadingState = null;
-    }, SPA_CONFIG.fadeOutDuration);
-  }
-}
 
 // ============================================
 // ROUTE HANDLING
@@ -361,14 +217,14 @@ function loadContent(url) {
       console.log('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
     }
     
-    setLoadingState(LOADING_STATES.RECEIVING);
+    showReceiving();
     
     const checkedResponse = checkResponseStatus(response);
     const html = await checkedResponse.text();
     
     console.log('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
     
-    setLoadingState(LOADING_STATES.RENDERING);
+    showRendering();
     
     // Validate that html is a string
     if (typeof html !== 'string') {
@@ -828,9 +684,6 @@ function initSPARouter() {
     console.log('[SPA Router] Not supported or disabled');
     return;
   }
-  
-  // Create loading indicator
-  createLoadingIndicator();
   
   // Initial load handler
   window.addEventListener('DOMContentLoaded', handleInitialLoad);

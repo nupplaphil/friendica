@@ -262,6 +262,12 @@ class Page implements ArrayAccess
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),
 			'$stylesheets'    => $this->stylesheets,
+			'$loading'        => [
+				'connecting' => $l10n->t('Connecting ...'),
+				'waiting'    => $l10n->t('Waiting ...'),
+				'receiving'  => $l10n->t('Receiving data ...'),
+				'rendering'  => $l10n->t('Processing ...'),
+			],
 
 			// Dropzone
 			'$max_imagesize' => round(Images::getMaxUploadBytes() / 1000000, 0),

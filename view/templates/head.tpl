@@ -75,7 +75,17 @@ window.onload = function(){
 	const updateContent = {{$update_content}};
 	const localUser = {{if $local_user}}{{$local_user}}{{else}}false{{/if}};
 </script>
+<script type="text/javascript" src="view/js/loading-indicator.js?v={{$VERSION}}"></script>
 <script type="text/javascript" src="view/js/main.js?v={{$VERSION}}"></script>
+<script>
+// Loading indicator translations
+window.spaLoadingTexts = {
+	connecting: "{{$loading.connecting}}",
+	waiting: "{{$loading.waiting}}",
+	receiving: "{{$loading.receiving}}",
+	rendering: "{{$loading.rendering}}"
+};
+</script>
 <script>
 	// Lifted from https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
     jQuery.fn.putCursorAtEnd = function() {

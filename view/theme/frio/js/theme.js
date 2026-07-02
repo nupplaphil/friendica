@@ -443,6 +443,7 @@ function initTheme() {
 			unpause();
 			commentBusy = true;
 			console.log('[Theme] Comment form: Starting AJAX post for id:', id);
+			showLoading();
 
 			$.post("item", $form.serialize(), "json")
 				.then(function (data) {
@@ -469,6 +470,7 @@ function initTheme() {
 				})
 				.always(function () {
 					console.log('[Theme] Comment form: AJAX completed, resetting button and commentBusy');
+					hideLoading();
 					commentBusy = false;
 					$commentSubmit.button("reset");
 				});
@@ -813,6 +815,7 @@ function htmlToText(htmlString) {
  * @param {boolean} un    Whether to perform an activity removal instead of creation
  */
 function doActivityItemAction(ident, verb, un) {
+	showLoading();
 	_verb = un ? 'un' + verb : verb;
 	var thumbsClass = '';
 	switch (verb) {
@@ -909,6 +912,7 @@ function doActivityItemAction(ident, verb, un) {
 			$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 			$.jGrowl(aActErr[verb] + '<br>(' + aErrType['srvErr'] + ')', {sticky: false, theme: 'info', life: 5000});
 		}
+		hideLoading();
 	})
 	.error(function(data){
 		// Server could not be reached successfully
@@ -917,6 +921,7 @@ function doActivityItemAction(ident, verb, un) {
 		$('button[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 		$('a[id^=' + verb + '-' + ident.toString() + '] i:first-child').addClass(thumbsClass);
 		$.jGrowl(aActErr[verb] + '<br>(' + aErrType['netErr'] + ')', {sticky: false, theme: 'info', life: 5000});
+		hideLoading();
 	});
 }
 
@@ -996,7 +1001,9 @@ function hasClass(elem, cls) {
 function sendOnCtrlEnter(e, submit) {
 	if ((e.ctrlKey || e.metaKey) && (e.keyCode == 13 || e.keyCode == 10)) {
 		console.log("Ctrl + Enter");
+		showLoading();
 		$("#" + submit).trigger('click');
+		hideLoading();
 	}
 }
 // @license-end

@@ -537,8 +537,14 @@ function insertBBCodeInTextarea(BBCode, textarea) {
 
 function NavUpdate() {
 	if (!stopped) {
+		if (force_update) {
+			showLoading();
+		}
 		var pingCmd = 'ping';
 		$.get(pingCmd, function(data) {
+			if (force_update) {
+				hideLoading();
+			}
 			if (data.result) {
 				// send nav-update event
 				$('#topbar-first').trigger('nav-update', data.result);
@@ -570,6 +576,13 @@ function NavUpdate() {
 						window.location.href = window.location.href;
 					}
 				}
+			}
+			if (force_update) {
+				hideLoading();
+			}
+		}).fail(function() {
+			if (force_update) {
+				hideLoading();
 			}
 		});
 	}
@@ -683,10 +696,12 @@ function liveUpdate(src) {
 	prev = 'live-' + src;
 
 	in_progress = true;
+	showLoading();
 
 	var orgHeight = $("section").height();
 
 	var update_url = getUpdateUrl(src);
+	showReceiving();
 	console.log('[Main] liveUpdate: calling getUpdateUrl for src=' + src + ', result url=' + update_url);
 
 	if (force_update) {
@@ -694,10 +709,12 @@ function liveUpdate(src) {
 	}
 
 	$.get('update_' + update_url, function(data) {
+		showRendering();
 		in_progress = false;
 		update_item = 0;
 
 		if ($('.wall-item-body', data).length == 0) {
+			hideLoading();
 			return;
 		}
 
@@ -707,8 +724,14 @@ function liveUpdate(src) {
 			document.dispatchEvent(new Event('postprocess_liveupdate'));
 
 			// Update the scroll position.
-			$(window).scrollTop($(window).scrollTop() + $("section").height() - orgHeight);
+			$(window).scrollTop($(window).scrollTop() + $("section").height() - orgHeight, 200, function() {
+				hideLoading();
+			});
 		});
+		hideLoading();
+	}).fail(function() {
+		hideLoading();
+		in_progress = false;
 	});
 }
 
@@ -918,6 +941,7 @@ function post_comment(id) {
 	unpause();
 	commentBusy = true;
 	console.log('[Main] post_comment: Setting commentBusy=true, starting post');
+	showLoading();
 	$('body').css('cursor', 'wait');
 	$.post(
 		"item",
@@ -943,11 +967,11 @@ function post_comment(id) {
 				console.log('[Main] post_comment: Server requested reload');
 				window.location.href=data.reload;
 			}
-		},
-		"json"
+		}
 	)
 	.always(function() {
 		console.log('[Main] post_comment: AJAX completed, setting commentBusy=false');
+		hideLoading();
 		commentBusy = false;
 		$('body').css('cursor', 'auto');
 	});
@@ -955,6 +979,7 @@ function post_comment(id) {
 }
 
 function preview_comment(id) {
+	showLoading();
 	$("#comment-edit-preview-" + id).show();
 	$.post(
 		"item",
@@ -964,9 +989,11 @@ function preview_comment(id) {
 				$("#comment-edit-preview-" + id).html(data.preview);
 				$("#comment-edit-preview-" + id + " a").click(function() {return false;});
 			}
-		},
-		"json"
-	);
+		}
+	)
+	.always(function() {
+		hideLoading();
+	});
 	return true;
 }
 
@@ -995,6 +1022,7 @@ function loadMoreComments(uriId, itemId, existing) {
 	button.addClass('loading').prop('disabled', true).hide();
 	loadingText.show();
 	commentBusy = true;
+	showLoading();
 	
 	// Parse existing JSON string if it's a string, or use as-is if already an array
 	var existingArray = typeof existing === 'string' ? JSON.parse(existing) : existing;
@@ -1008,6 +1036,7 @@ function loadMoreComments(uriId, itemId, existing) {
 	})
 	.done(function(data) {
 		loadingText.hide();
+		showReceiving();
 		if ($(data).length > 0) {
 			var $data = $(data);
 			// Find all elements with id starting with "item-comments-" or "item-"
@@ -1030,9 +1059,11 @@ function loadMoreComments(uriId, itemId, existing) {
 			// No more comments to load
 			button.hide();
 		}
+		hideLoading();
 	})
 	.fail(function() {
 		// Show error feedback
+		hideLoading();
 		button.removeClass('loading').prop('disabled', false).show();
 		loadingText.hide();
 	})
@@ -1042,6 +1073,7 @@ function loadMoreComments(uriId, itemId, existing) {
 }
 
 function preview_post() {
+	showLoading();
 	$("#jot-preview-content").show();
 	$.post(
 		"item",
@@ -1052,9 +1084,11 @@ function preview_post() {
 				$("#jot-preview-content" + " a").click(function() {return false;});
 				document.dispatchEvent(new Event('postprocess_liveupdate'));
 			}
-		},
-		"json"
-	);
+		}
+	)
+	.always(function() {
+		hideLoading();
+	});
 	return true;
 }
 
@@ -1079,6 +1113,7 @@ function loadScrollContent() {
 	}
 	
 	lockLoadContent = true;
+	showLoading();
 
 	$("#scroll-loader").fadeIn('normal');
 
@@ -1123,6 +1158,7 @@ function loadScrollContent() {
 		}
 	})
 	.done(function(data) {
+		showReceiving();
 		$("#scroll-loader").hide();
 		if ($(data).length > 0) {
 			$(data).insertBefore('#conversation-end');
@@ -1131,6 +1167,11 @@ function loadScrollContent() {
 		}
 
 		document.dispatchEvent(new Event('postprocess_liveupdate'));
+		hideLoading();
+	})
+	.fail(function() {
+		hideLoading();
+		$("#scroll-loader").hide();
 	})
 	.always(function () {
 		$("#scroll-loader").hide();
