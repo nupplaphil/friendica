@@ -112,6 +112,20 @@ function handleLinkClick(e) {
     console.log('[SPA Router] Click: Modal link, allowing default/modal behavior');
     return;
   }
+
+  // Ignore links with data-fancybox attribute (for Fancybox lightbox)
+  // These are handled by Fancybox JavaScript
+  if (link.hasAttribute('data-fancybox')) {
+    console.log('[SPA Router] Click: Fancybox link, allowing default/fancybox behavior');
+    return;
+  }
+
+  // Ignore links with inline event handlers (onclick, etc.)
+  // These are handled by custom JavaScript and should not use SPA
+  if (link.hasAttribute("onclick") || link.onclick || link.hasAttribute("data-spa-ignore")) {
+    console.log("[SPA Router] Click: Link has event handler or data-spa-ignore, allowing default behavior");
+    return;
+  }
   
   console.log('[SPA Router] Click: Found anchor, href=', href);
   
