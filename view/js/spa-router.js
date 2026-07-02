@@ -282,17 +282,7 @@ function loadContent(url) {
       finalUrl: finalUrl,
       error: error
     });
-    
-    // Show error in alert so user can see it (temporarily for debugging)
-    const errorInfo = 'SPA Error:\n' +
-      'Message: ' + (error.message || 'Unknown error') + '\n' +
-      'Name: ' + (error.name || 'Unknown') + '\n' +
-      'URL: ' + url + '\n' +
-      'Final URL: ' + finalUrl + '\n' +
-      'Fetch URL: ' + fetchUrl.toString();
-    console.error('[SPA Router] Error info for alert:\n', errorInfo);
-    alert(errorInfo);
-    
+        
     // Fallback: Full page reload
     console.log('[SPA Router] Falling back to full page reload for URL:', url);
     console.log('[SPA Router] LoadContent: Error handling completed');
