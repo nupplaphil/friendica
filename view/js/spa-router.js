@@ -35,11 +35,14 @@ let lastFinalUrl = null;
 const SPA_CONFIG = {
   enabled: true,
   routes: [
+    '/community',
+    '/contact',
+    '/display',
+    '/message',
     '/network',
     '/notification',
-    '/display',
     '/profile',
-    '/community'
+    '/search',
   ],
   spaHeader: 'X-Friendica-SPA',
   spaParam: 'spa',
