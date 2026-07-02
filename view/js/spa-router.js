@@ -103,6 +103,13 @@ function handleLinkClick(e) {
     return;
   }
   
+  // Ignore links that are meant to open modals (e.g., modal-open class)
+  // These are handled by separate modal JavaScript handlers
+  if (link.classList.contains('modal-open')) {
+    console.log('[SPA Router] Click: Modal link, allowing default/modal behavior');
+    return;
+  }
+  
   console.log('[SPA Router] Click: Found anchor, href=', href);
   
   if (!isInternalLink(link)) {
