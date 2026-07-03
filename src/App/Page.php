@@ -453,7 +453,7 @@ class Page implements ArrayAccess
 
 		if (function_exists(str_replace('-', '_', $currentTheme) . '_init')) {
 			$func = str_replace('-', '_', $currentTheme) . '_init';
-			$func($appHelper);
+			$func($appHelper, $pconfig, $session, $this, $mode);
 		}
 
 		/* Create the page head after setting the language
