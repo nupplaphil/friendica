@@ -95,19 +95,6 @@ class Arguments
 		return $this->argc;
 	}
 
-	/**
-	 * Get a query parameter value
-	 *
-	 * @param string $param The parameter name
-	 * @return string|null The parameter value or null if not found
-	 */
-	public function getQueryParam(string $param): ?string
-	{
-		$queryParameters = [];
-		parse_str($this->queryString, $queryParameters);
-		return $queryParameters[$param] ?? null;
-	}
-
 	public function setArgv(array $argv)
 	{
 		$this->argv = $argv;
