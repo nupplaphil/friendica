@@ -57,12 +57,8 @@ EOT;
 	if (DI::pConfig()->get(DI::userSession()->getLocalUserId(), 'system', 'enable_spa', false)) {
 		// Load SPA router for client-side routing on /network, /display, /profile
 		// This keeps the footer static (important for XMPP addon) and provides smooth transitions
-		$baseUrl = DI::baseUrl();
-
-		DI::page()['htmlhead'] .= <<< EOT
-			<link rel="stylesheet" type="text/css" href="{$baseUrl}/view/js/spa-router.css" media="all" />
-			<script type="text/javascript" src="{$baseUrl}/view/js/spa-router.js"></script>
-EOT;
+		DI::page()->registerStylesheet($appHelper->getBasePath() . '/view/js/spa-router.css');
+		DI::page()->registerFooterScript($appHelper->getBasePath() . '/view/js/spa-router.js');
 	}
 }
 
