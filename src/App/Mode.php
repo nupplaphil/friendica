@@ -83,10 +83,6 @@ class Mode
 		 * @var bool True, if the call is from a tablet device
 		 */
 		private readonly bool $isTablet = false,
-		/**
-		 * @var bool True, if the call is a SPA (Single Page Application) request
-		 */
-		private readonly bool $isSpa = false,
 	) {}
 
 	/**
@@ -124,7 +120,7 @@ class Mode
 
 		$mode |= Mode::MAINTENANCEDISABLED;
 
-		return new Mode($mode, $this->isBackend, $this->isAjax, $this->isMobile, $this->isTablet, $this->isSpa);
+		return new Mode($mode, $this->isBackend, $this->isAjax, $this->isMobile, $this->isTablet);
 	}
 
 	/**
@@ -150,11 +146,7 @@ class Mode
 		$isTablet  = $mobileDetect->isTablet();
 		$isAjax    = strtolower($server['HTTP_X_REQUESTED_WITH'] ?? '') == 'xmlhttprequest';
 
-		// SPA detection - check for header or query parameter
-		$isSpa = (isset($server['HTTP_X_FRIENDICA_SPA']) && $server['HTTP_X_FRIENDICA_SPA'] === 'true')
-				|| $args->getQueryParam('spa') !== null;
-
-		return new Mode($this->mode, $isBackend, $isAjax, $isMobile, $isTablet, $isSpa);
+		return new Mode($this->mode, $isBackend, $isAjax, $isMobile, $isTablet);
 	}
 
 	/**
@@ -256,15 +248,5 @@ class Mode
 	public function isTablet(): bool
 	{
 		return $this->isTablet;
-	}
-
-	/**
-	 * Check if request was a SPA (Single Page Application) request.
-	 *
-	 * @return bool true if it was an SPA request
-	 */
-	public function isSpa(): bool
-	{
-		return $this->isSpa;
 	}
 }
