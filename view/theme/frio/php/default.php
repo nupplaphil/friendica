@@ -95,7 +95,7 @@ if ($minimal) {
 } else {
 	// the style for all other pages
 	?>
-		<main id="spa-content">
+		<main>
 			<div class="container">
 				<div class="row">
 <?php

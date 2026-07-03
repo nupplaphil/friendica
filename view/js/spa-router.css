@@ -131,15 +131,6 @@ footer *,
 }
 
 /* ============================================
-   CONTENT AREA MARKERS (for SPA swapping)
-   ============================================ */
-
-/* Main content area that will be swapped */
-.spa-content {
-  /* This class can be added to the main content container */
-}
-
-/* ============================================
    FALLBACK & ACCESSIBILITY
    ============================================ */
 
