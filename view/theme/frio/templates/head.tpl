@@ -120,10 +120,10 @@
 	<script>
 	// Loading indicator translations
 	window.spaLoadingTexts = {
-		connecting: "{{$loading.connecting}}",
-		waiting: "{{$loading.waiting}}",
+		fetching: "{{$loading.fetching}}",
 		receiving: "{{$loading.receiving}}",
-		rendering: "{{$loading.rendering}}"
+		processing: "{{$loading.processing}}",
+		posting: "{{$loading.posting}}"
 	};
 	</script>
 

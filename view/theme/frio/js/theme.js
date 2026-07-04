@@ -443,7 +443,7 @@ function initTheme() {
 			unpause();
 			commentBusy = true;
 			console.log('[Theme] Comment form: Starting AJAX post for id:', id);
-			showLoading();
+			showPosting();
 
 			$.post("item", $form.serialize(), "json")
 				.then(function (data) {
@@ -815,7 +815,7 @@ function htmlToText(htmlString) {
  * @param {boolean} un    Whether to perform an activity removal instead of creation
  */
 function doActivityItemAction(ident, verb, un) {
-	showLoading();
+	showPosting();
 	_verb = un ? 'un' + verb : verb;
 	var thumbsClass = '';
 	switch (verb) {
@@ -1001,7 +1001,7 @@ function hasClass(elem, cls) {
 function sendOnCtrlEnter(e, submit) {
 	if ((e.ctrlKey || e.metaKey) && (e.keyCode == 13 || e.keyCode == 10)) {
 		console.log("Ctrl + Enter");
-		showLoading();
+		showPosting();
 		$("#" + submit).trigger('click');
 		hideLoading();
 	}

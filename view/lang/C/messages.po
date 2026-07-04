@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 04:03+0000\n"
+"POT-Creation-Date: 2026-07-04 05:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgid "Permission denied."
 msgstr ""
 
 #: mod/message.php:28 mod/message.php:124 src/Content/Nav.php:273
-#: view/theme/frio/theme.php:238
+#: view/theme/frio/theme.php:237
 msgid "Messages"
 msgstr ""
 
@@ -543,19 +543,19 @@ msgid "You can't upload any more files."
 msgstr ""
 
 #: src/App/Page.php:266
-msgid "Connecting ..."
+msgid "Fetching ..."
 msgstr ""
 
 #: src/App/Page.php:267
-msgid "Waiting ..."
-msgstr ""
-
-#: src/App/Page.php:268
 msgid "Receiving data ..."
 msgstr ""
 
-#: src/App/Page.php:269
+#: src/App/Page.php:268
 msgid "Processing ..."
+msgstr ""
+
+#: src/App/Page.php:269
+msgid "Posting ..."
 msgstr ""
 
 #: src/App/Page.php:345
@@ -2098,11 +2098,11 @@ msgstr ""
 msgid "%1$s tagged %2$s's %3$s with %4$s"
 msgstr ""
 
-#: src/Content/Item.php:400 view/theme/frio/theme.php:259
+#: src/Content/Item.php:400 view/theme/frio/theme.php:258
 msgid "Turn on notifications for this post"
 msgstr ""
 
-#: src/Content/Item.php:401 view/theme/frio/theme.php:276
+#: src/Content/Item.php:401 view/theme/frio/theme.php:275
 msgid "Fetch more replies"
 msgstr ""
 
@@ -2122,7 +2122,7 @@ msgstr ""
 
 #: src/Content/Item.php:405 src/Content/Nav.php:199 src/Model/Contact.php:1272
 #: src/Model/Profile.php:450 src/Module/BaseProfile.php:42
-#: src/Module/Contact.php:488 view/theme/frio/theme.php:229
+#: src/Module/Contact.php:488 view/theme/frio/theme.php:228
 msgid "Posts"
 msgstr ""
 
@@ -2180,7 +2180,7 @@ msgid "Nothing new here"
 msgstr ""
 
 #: src/Content/Nav.php:92 src/Content/Nav.php:263 src/Module/Help.php:68
-#: view/theme/frio/theme.php:236
+#: view/theme/frio/theme.php:235
 msgid "Home"
 msgstr ""
 
@@ -2210,18 +2210,18 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/Content/Nav.php:199 view/theme/frio/theme.php:229
+#: src/Content/Nav.php:199 view/theme/frio/theme.php:228
 msgid "My posts"
 msgstr ""
 
 #: src/Content/Nav.php:200 src/Module/BaseProfile.php:50
 #: src/Module/Media/Attachment/Browser.php:67
 #: src/Module/Media/Photo/Browser.php:62 src/Module/Media/Photo/Browser.php:79
-#: view/theme/frio/theme.php:230
+#: view/theme/frio/theme.php:229
 msgid "Photos"
 msgstr ""
 
-#: src/Content/Nav.php:200 view/theme/frio/theme.php:230
+#: src/Content/Nav.php:200 view/theme/frio/theme.php:229
 msgid "My photos"
 msgstr ""
 
@@ -2287,7 +2287,7 @@ msgstr ""
 #: src/Content/Text/HTML.php:880 src/Module/BaseProfile.php:112
 #: src/Module/BaseProfile.php:115 src/Module/Contact.php:181
 #: src/Module/Contact.php:402 src/Module/Contact.php:512
-#: view/theme/frio/theme.php:240
+#: view/theme/frio/theme.php:239
 msgid "Contacts"
 msgstr ""
 
@@ -2298,8 +2298,8 @@ msgstr ""
 #: src/Content/Nav.php:250 src/Module/BaseProfile.php:70
 #: src/Module/BaseProfile.php:73 src/Module/BaseProfile.php:81
 #: src/Module/BaseProfile.php:84 src/Module/Calendar/Show.php:113
-#: src/Module/Settings/Display.php:427 view/theme/frio/theme.php:231
-#: view/theme/frio/theme.php:237
+#: src/Module/Settings/Display.php:427 view/theme/frio/theme.php:230
+#: view/theme/frio/theme.php:236
 msgid "Calendar"
 msgstr ""
 
@@ -2379,7 +2379,7 @@ msgstr ""
 #: src/Content/Nav.php:286 src/Module/Admin/Addons/Details.php:140
 #: src/Module/Admin/Themes/Details.php:85 src/Module/BaseAdmin.php:89
 #: src/Module/BaseSettings.php:177 src/Module/Welcome.php:39
-#: view/theme/frio/theme.php:239
+#: view/theme/frio/theme.php:238
 msgid "Settings"
 msgstr ""
 
@@ -2387,7 +2387,7 @@ msgstr ""
 msgid "Account settings"
 msgstr ""
 
-#: src/Content/Nav.php:288 view/theme/frio/theme.php:240
+#: src/Content/Nav.php:288 view/theme/frio/theme.php:239
 msgid "Manage/edit friends and contacts"
 msgstr ""
 
@@ -12607,23 +12607,23 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: view/theme/frio/theme.php:211
+#: view/theme/frio/theme.php:210
 msgid "Guest"
 msgstr ""
 
-#: view/theme/frio/theme.php:214
+#: view/theme/frio/theme.php:213
 msgid "Visitor"
 msgstr ""
 
-#: view/theme/frio/theme.php:231
+#: view/theme/frio/theme.php:230
 msgid "Your calendar"
 msgstr ""
 
-#: view/theme/frio/theme.php:235
+#: view/theme/frio/theme.php:234
 msgid "Back home"
 msgstr ""
 
-#: view/theme/frio/theme.php:235
+#: view/theme/frio/theme.php:234
 msgid "Back to my instance"
 msgstr ""
 

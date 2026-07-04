@@ -146,7 +146,6 @@ function handleLinkClick(e) {
 
   console.log('[SPA Router] Click: Preventing default, navigating to', href);
   e.preventDefault();
-  showLoading();
   navigateTo(href);
 }
 
@@ -176,7 +175,6 @@ function navigateTo(url) {
   // Check if route is SPA-capable
   if (!isSPARoute(path)) {
     console.log('[SPA Router] Navigate: Not an SPA route, falling back to full reload');
-    hideLoading();
     window.location.href = url;
     return;
   }
@@ -222,6 +220,7 @@ function loadContent(url) {
     abortController.abort();
   }, 30000);
 
+  showFetching();
   fetch(fetchUrl, {
     headers: {
       'Accept': 'text/html'
@@ -248,7 +247,7 @@ function loadContent(url) {
     
     console.log('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
     
-    showRendering();
+    showProcessing();
     
     // Validate that html is a string
     if (typeof html !== 'string') {
@@ -677,7 +676,6 @@ function handlePopState(e) {
     });
     window.dispatchEvent(beforeEvent);
     
-    showLoading();
     loadContent(window.location.href);
   } else {
     console.log('[SPA Router] PopState: Not an SPA state, ignoring');

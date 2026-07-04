@@ -110,8 +110,6 @@
 		.on('submit', '#profile-jot-form', function (e) {
 			e.preventDefault();
 
-			showLoading();
-
 			// Disable jot submit buttons during processing
 			let $share = $('#profile-jot-submit').button('loading');
 			let $sharePreview = $('#profile-jot-preview-submit').button('loading');
@@ -129,6 +127,8 @@
 					existingPostIds.add($(this).attr('id'));
 				});
 			}
+
+			showPosting();
 
 			$.ajax({
 				url: 'item',

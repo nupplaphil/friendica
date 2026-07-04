@@ -15,11 +15,10 @@
 // ============================================
 
 var LOADING_STATES = {
-  CONNECTING: 'connecting',
-  WAITING: 'waiting',
+  FETCHING: 'fetching',
   RECEIVING: 'receiving',
-  RENDERING: 'rendering',
-  COMPLETE: 'complete'
+  PROCESSING: 'processing',
+  POSTING: 'posting',
 };
 
 var loadingIndicator = null;
@@ -141,25 +140,23 @@ function setLoadingState(state, text) {
     statusText.textContent = text || getLoadingText(state);
   }
 
-  if (state !== LOADING_STATES.COMPLETE) {
-    loadingIndicator.classList.add('active');
-  }
+  loadingIndicator.classList.add('active');
 }
 
-function showLoading(state) {
-  setLoadingState(state || LOADING_STATES.CONNECTING);
-}
-
-function showWaiting() {
-  setLoadingState(LOADING_STATES.WAITING);
+function showFetching() {
+  setLoadingState(LOADING_STATES.FETCHING);
 }
 
 function showReceiving() {
   setLoadingState(LOADING_STATES.RECEIVING);
 }
 
-function showRendering() {
-  setLoadingState(LOADING_STATES.RENDERING);
+function showProcessing() {
+  setLoadingState(LOADING_STATES.PROCESSING);
+}
+
+function showPosting() {
+  setLoadingState(LOADING_STATES.POSTING);
 }
 
 function hideLoading() {
@@ -185,10 +182,10 @@ if (typeof module !== 'undefined' && module.exports) {
     createLoadingIndicator: createLoadingIndicator,
     getLoadingText: getLoadingText,
     setLoadingState: setLoadingState,
-    showLoading: showLoading,
-    showWaiting: showWaiting,
+    showFetching: showFetching,
     showReceiving: showReceiving,
-    showRendering: showRendering,
+    showProcessing: showProcessing,
+    showPosting: showPosting,
     hideLoading: hideLoading
   };
 }

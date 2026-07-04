@@ -538,16 +538,20 @@ function insertBBCodeInTextarea(BBCode, textarea) {
 function NavUpdate() {
 	if (!stopped) {
 		if (force_update) {
-			showLoading();
+			showFetching();
 		}
 		var pingCmd = 'ping';
 		$.get(pingCmd, function(data) {
-			if (force_update) {
-				hideLoading();
-			}
 			if (data.result) {
+				if (force_update) {
+					showProcessing();
+				}
 				// send nav-update event
 				$('#topbar-first').trigger('nav-update', data.result);
+
+				if (force_update) {
+					hideLoading();
+				}
 
 				// start live update
 				console.log('[Main] Starting live updates for sources: network, profile, channel, community, notes, display, contact');
@@ -565,9 +569,18 @@ function NavUpdate() {
 				} else if (!$('#live-display').length) {
 					console.log('[Main] No live-network element or on display page, using ping_network fallback');
 					var update_url = 'ping_network?ping=1';
+					if (force_update) {
+						showFetching();
+					}
 					$.get(update_url, function(net) {
+						if (force_update) {
+							showProcessing();
+						}
 						updateCounter('net', net);
 					});
+					if (force_update) {
+						hideLoading();
+					}
 				}
 
 				if ($('#live-photos').length) {
@@ -576,9 +589,6 @@ function NavUpdate() {
 						window.location.href = window.location.href;
 					}
 				}
-			}
-			if (force_update) {
-				hideLoading();
 			}
 		}).fail(function() {
 			if (force_update) {
@@ -696,20 +706,19 @@ function liveUpdate(src) {
 	prev = 'live-' + src;
 
 	in_progress = true;
-	showLoading();
 
 	var orgHeight = $("section").height();
 
 	var update_url = getUpdateUrl(src);
-	showReceiving();
 	console.log('[Main] liveUpdate: calling getUpdateUrl for src=' + src + ', result url=' + update_url);
 
 	if (force_update) {
 		force_update = false;
 	}
 
+	showFetching();
 	$.get('update_' + update_url, function(data) {
-		showRendering();
+		showProcessing();
 		in_progress = false;
 		update_item = 0;
 
@@ -941,7 +950,7 @@ function post_comment(id) {
 	unpause();
 	commentBusy = true;
 	console.log('[Main] post_comment: Setting commentBusy=true, starting post');
-	showLoading();
+	showPosting();
 	$('body').css('cursor', 'wait');
 	$.post(
 		"item",
@@ -979,7 +988,7 @@ function post_comment(id) {
 }
 
 function preview_comment(id) {
-	showLoading();
+	showPosting();
 	$("#comment-edit-preview-" + id).show();
 	$.post(
 		"item",
@@ -1022,7 +1031,7 @@ function loadMoreComments(uriId, itemId, existing) {
 	button.addClass('loading').prop('disabled', true).hide();
 	loadingText.show();
 	commentBusy = true;
-	showLoading();
+	showFetching();
 	
 	// Parse existing JSON string if it's a string, or use as-is if already an array
 	var existingArray = typeof existing === 'string' ? JSON.parse(existing) : existing;
@@ -1036,7 +1045,7 @@ function loadMoreComments(uriId, itemId, existing) {
 	})
 	.done(function(data) {
 		loadingText.hide();
-		showReceiving();
+		showProcessing();
 		if ($(data).length > 0) {
 			var $data = $(data);
 			// Find all elements with id starting with "item-comments-" or "item-"
@@ -1073,7 +1082,7 @@ function loadMoreComments(uriId, itemId, existing) {
 }
 
 function preview_post() {
-	showLoading();
+	showPosting();
 	$("#jot-preview-content").show();
 	$.post(
 		"item",
@@ -1113,7 +1122,6 @@ function loadScrollContent() {
 	}
 	
 	lockLoadContent = true;
-	showLoading();
 
 	$("#scroll-loader").fadeIn('normal');
 
@@ -1147,6 +1155,7 @@ function loadScrollContent() {
 
 	// get the raw content from the next page and insert this content
 	// right before "#conversation-end"
+	showFetching();
 	$.get({
 		url: infinite_scroll.reload_uri,
 		data: {
@@ -1158,7 +1167,7 @@ function loadScrollContent() {
 		}
 	})
 	.done(function(data) {
-		showReceiving();
+		showProcessing();
 		$("#scroll-loader").hide();
 		if ($(data).length > 0) {
 			$(data).insertBefore('#conversation-end');
@@ -1170,12 +1179,13 @@ function loadScrollContent() {
 		hideLoading();
 	})
 	.fail(function() {
-		hideLoading();
 		$("#scroll-loader").hide();
+		hideLoading();
 	})
 	.always(function () {
 		$("#scroll-loader").hide();
 		lockLoadContent = false;
+		hideLoading();
 	});
 }
 

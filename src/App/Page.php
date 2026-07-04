@@ -263,10 +263,10 @@ class Page implements ArrayAccess
 			'$block_public'   => intval($config->get('system', 'block_public')),
 			'$stylesheets'    => $this->stylesheets,
 			'$loading'        => [
-				'connecting' => $l10n->t('Connecting ...'),
-				'waiting'    => $l10n->t('Waiting ...'),
+				'fetching'   => $l10n->t('Fetching ...'),
 				'receiving'  => $l10n->t('Receiving data ...'),
-				'rendering'  => $l10n->t('Processing ...'),
+				'processing' => $l10n->t('Processing ...'),
+				'posting'    => $l10n->t('Posting ...'),
 			],
 
 			// Dropzone
