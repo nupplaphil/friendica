@@ -3532,7 +3532,7 @@ msgid "No events to display"
 msgstr ""
 
 #: src/Model/Event.php:506 src/Module/Feed.php:56
-#: src/Module/Update/Profile.php:44
+#: src/Module/Update/Profile.php:64
 msgid "Access to this profile has been restricted."
 msgstr ""
 

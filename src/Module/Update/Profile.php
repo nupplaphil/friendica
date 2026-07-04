@@ -7,8 +7,11 @@
 
 namespace Friendica\Module\Update;
 
+use Friendica\App\Arguments;
+use Friendica\App\BaseURL;
 use Friendica\BaseModule;
 use Friendica\Content\Conversation\ConversationRenderer;
+use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\DI;
@@ -16,12 +19,29 @@ use Friendica\Model\Item;
 use Friendica\Model\Post;
 use Friendica\Model\Profile as ProfileModel;
 use Friendica\Model\User;
+use Friendica\Module\Response;
 use Friendica\Network\HTTPException\ForbiddenException;
 use Friendica\Util\DateTimeFormat;
+use Friendica\Util\Profiler;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 
 class Profile extends BaseModule
 {
-	public function __construct(private readonly ConversationRenderer $conversationRenderer) {}
+	public function __construct(
+		private readonly ConversationRenderer $conversationRenderer,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+		?EventDispatcherInterface $eventDispatcher = null,
+	) {
+		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters, $eventDispatcher);
+	}
 
 	protected function rawContent(array $request = [])
 	{

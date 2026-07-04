@@ -7,22 +7,42 @@
 
 namespace Friendica\Module\Search;
 
+use Friendica\App\Arguments;
+use Friendica\App\BaseURL;
 use Friendica\Content\Conversation\ConversationRenderer;
 use Friendica\Content\Nav;
 use Friendica\Content\Pager;
 use Friendica\Content\Text\HTML;
 use Friendica\Content\Widget;
+use Friendica\Core\L10n;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Item;
 use Friendica\Model\Post;
 use Friendica\Model\Post\Category;
 use Friendica\Module\BaseSearch;
+use Friendica\Module\Response;
 use Friendica\Module\Security\Login;
+use Friendica\Util\Profiler;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 
 class Filed extends BaseSearch
 {
-	public function __construct(private readonly ConversationRenderer $conversationRenderer) {}
+	public function __construct(
+		private readonly ConversationRenderer $conversationRenderer,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+		?EventDispatcherInterface $eventDispatcher = null,
+	) {
+		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters, $eventDispatcher);
+	}
 
 	protected function content(array $request = []): string
 	{
