@@ -60,7 +60,7 @@ final readonly class ConversationDataProvider
 	 * @param int $viewerUid The user ID of the viewer
 	 * @return array|null The parent item, or null if not found
 	 */
-	public function fetchParentItem(array $item, int $viewerUid): ?array
+	private function fetchParentItem(array $item, int $viewerUid): ?array
 	{
 		if (empty($item)) {
 			return null;
@@ -75,7 +75,7 @@ final readonly class ConversationDataProvider
 			return null;
 		}
 
-		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
+		$selected = ['uri-id', 'author-id'];
 		$params   = ['order' => ['uid' => true]];
 
 		$parentItem = Post::selectFirstForUser($viewerUid, $selected, ['uri-id' => $parentUriId, 'uid' => [0, $viewerUid]], $params);
@@ -105,11 +105,6 @@ final readonly class ConversationDataProvider
 			return null;
 		}
 
-		// Set pagedrop for the resolved parent item
-		$resolvedItem['pagedrop'] = $pagedrop;
-
-		$renderUserId = $viewerUid ?: (int) $resolvedItem['uid'];
-
 		if ($mode === ConversationRenderer::MODE_COMMENTS) {
 			$sinceId   = $item['gravity'] !== ItemModel::GRAVITY_PARENT ? $item['uri-id'] : 0;
 			$sinceDate = $item['gravity'] !== ItemModel::GRAVITY_PARENT ? $item['created'] : '';
@@ -118,7 +113,7 @@ final readonly class ConversationDataProvider
 			$sinceDate = '';
 		}
 
-		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $renderUserId, $mode, $sinceId, $sinceDate, $existing, $pagedrop);
+		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $viewerUid, $mode, $sinceId, $sinceDate, $existing, $pagedrop);
 
 		return $this->buildRootTemplateData($items, (int) $resolvedItem['uid'], $viewerUid, $mode, $pagedrop);
 	}
@@ -141,15 +136,7 @@ final readonly class ConversationDataProvider
 			return [];
 		}
 
-		// Set pagedrop for parent items before passing to populateThreadWithChildren
-		foreach ($items as &$item) {
-			$item['pagedrop'] = $pagedrop;
-		}
-		unset($item);
-
-		$renderUserId = $viewerUid ?: (int) ($items[0]['uid'] ?? 0);
-
-		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $renderUserId, $mode, 0, '', [], $pagedrop);
+		$itemsWithChildren = $this->populateThreadWithChildren($items, false, $order, $viewerUid, $mode, 0, '', [], $pagedrop);
 
 		return $this->buildThreadTemplatesFromItems(
 			$itemsWithChildren,
@@ -173,7 +160,7 @@ final readonly class ConversationDataProvider
 	 * @return array<int, array> The built thread template data
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function buildThreadTemplatesFromItems(array $items, int $uid, string $mode, bool $preview, bool $pagedrop, string $formSecurityToken): array
+	private function buildThreadTemplatesFromItems(array $items, int $uid, string $mode, bool $preview, bool $pagedrop, string $formSecurityToken): array
 	{
 		if (!$items) {
 			return [];
@@ -183,15 +170,7 @@ final readonly class ConversationDataProvider
 
 		$pcid = Contact::getPublicIdByUserId($uid);
 
-		if (in_array($mode, [ConversationRenderer::MODE_CHANNEL, ConversationRenderer::MODE_COMMUNITY, ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_PROFILE])) {
-			$writable = true;
-		} else {
-			$writable = $items[0]['writable'] || (($items[0]['uid'] === 0) && in_array($items[0]['network'], Protocol::FEDERATED));
-		}
-
-		if (!$uid) {
-			$writable = false;
-		}
+		$writable = $uid !== 0;
 
 		$parentItems = [];
 		foreach ($items as $item) {
@@ -312,11 +291,7 @@ final readonly class ConversationDataProvider
 
 		// Initialize items array with parent items, ensuring they have pagedrop set
 		$items = [];
-		foreach ($parents as $parent) {
-			// Ensure parent has pagedrop set
-			if (!isset($parent['pagedrop'])) {
-				$parent['pagedrop'] = $pagedrop;
-			}
+		foreach ($this->addMissingRows($parents) as $parent) {
 			$items[$parent['uri-id']] = $parent;
 			if (!empty($parent['thr-parent-id']) && !empty($parent['gravity']) && ($parent['gravity'] === ItemModel::GRAVITY_ACTIVITY)) {
 				$uriId = $parent['thr-parent-id'];
@@ -506,6 +481,30 @@ final readonly class ConversationDataProvider
 		$items = $this->sortConversationItems($items, $order, $uid);
 
 		return $items;
+	}
+
+	/**
+	 * Add missing rows to the given array of rows.
+	 *
+	 * @param array<int, array> $rows The rows to add missing data to
+	 * @return array<int, array> The rows with missing data added
+	 */
+	private function addMissingRows(array $rows): array
+	{
+		$posts = Post::selectPosts(['uri-id', 'thr-parent-id', 'gravity', 'author-id', 'commented', 'received', 'created'], ['uri-id' => array_column($rows, 'uri-id')]);
+
+		$filler = [];
+		while ($post = Post::fetch($posts)) {
+			$filler[$post['uri-id']] = $post;
+		}
+		DBA::close($posts);
+
+		$added = [];
+		foreach ($rows as $row) {
+			$added[$row['uri-id']] = array_merge($row, $filler[$row['uri-id']] ?? []);
+		}
+
+		return $added;
 	}
 
 	/**
@@ -854,10 +853,6 @@ final readonly class ConversationDataProvider
 	 */
 	private function addRowInformation(array $row, array $activity, array $thrParent, string $channel, int $uid, array $channels): array
 	{
-		if (!$row['writable']) {
-			$row['writable'] = in_array($row['network'], Protocol::FEDERATED);
-		}
-
 		if (!empty($activity)) {
 			if ($row['gravity'] === ItemModel::GRAVITY_PARENT) {
 				$row['post-reason']   = ItemModel::PR_ANNOUNCEMENT;
