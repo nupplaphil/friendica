@@ -136,11 +136,11 @@
       {{* No implicit mentions unlike wall_thread? *}}
 
 				{{foreach $item.folders as $cat}}
-					<span class="tag folder label border border-success">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
+					<span class="tag folder label border border-success"><a href="{{$cat.url}}">{{$cat.name}}</a> {{if $cat.removeurl}}<a class="filerm" href="{{$cat.removeurl}}" title="{{$remove}}"><i class="ri ri-close-circle-line"></i></a>{{/if}}</span>
 				{{/foreach}}
 
 				{{foreach $item.categories as $cat}}
-					<span class="tag category label border border-danger">{{$cat.name}}{{if $cat.removeurl}} (<a href="{{$cat.removeurl}}" title="{{$remove}}"></a>) {{/if}} </span>
+					<span class="tag category label border border-danger"><a href="{{$cat.url}}">{{$cat.name}}</a> {{if $cat.removeurl}}<a class="filerm" href="{{$cat.removeurl}}" title="{{$remove}}"><i class="ri ri-close-circle-line"></i></a>{{/if}}</span>
 				{{/foreach}}
 				</div>
 				{{if $item.edited}}<div class="itemedited text-muted">{{$item.edited['label']}} (<span title="{{$item.edited['date']}}">{{$item.edited['relative']}}</span>)</div>{{/if}}
