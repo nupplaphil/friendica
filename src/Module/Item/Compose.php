@@ -338,6 +338,8 @@ class Compose extends BaseModule
 			'placeholder'            => $this->l10n->t('Image description'),
 		];
 
+		$advancedComposerL10n = array_map(fn ($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'), $advancedComposerL10n);
+
 		$advancedComposerL10nJson = json_encode($advancedComposerL10n, JSON_UNESCAPED_UNICODE);
 
 		$tpl = Renderer::getMarkupTemplate('item/advancedcomposer.tpl');
