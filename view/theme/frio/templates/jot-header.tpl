@@ -128,6 +128,8 @@
 				});
 			}
 
+			showPosting();
+
 			$.ajax({
 				url: 'item',
 				data: formData,
@@ -142,6 +144,8 @@
 				resetFormModifiedFlag(); // Reset formModified after successful submission
 			})
 			.always(function() {
+				hideLoading();
+
 				// Reset the post_id_random to avoid duplicate post errors
 				let new_post_id_random = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - (Number.MAX_SAFE_INTEGER / 10))) + Number.MAX_SAFE_INTEGER / 10;
 				$('#profile-jot-form [name=post_id_random]').val(new_post_id_random);

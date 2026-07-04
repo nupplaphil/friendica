@@ -14,6 +14,7 @@
  */
 
 use Friendica\App\Mode;
+use Friendica\App\Page;
 use Friendica\AppHelper;
 use Friendica\Content\Text\Plaintext;
 use Friendica\Core\Hook;
@@ -23,6 +24,8 @@ use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Model\Item;
+use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
+use Friendica\Core\Session\Capability\IHandleUserSessions;
 
 const FRIO_SCHEME_ACCENT_BLUE   = '#1e87c2';
 const FRIO_SCHEME_ACCENT_RED    = '#b50404';
@@ -37,7 +40,7 @@ const FRIO_CUSTOM_SCHEME  = '---';
  * This script can be included even when the app is in maintenance mode which requires us to avoid any config call
  */
 
-function frio_init(AppHelper $appHelper): void
+function frio_init(AppHelper $appHelper, IManagePersonalConfigValues $pConfig, IHandleUserSessions $userSession, Page $page, Mode $mode): void
 {
 	global $frio;
 	$frio = 'view/theme/frio';
@@ -46,12 +49,19 @@ function frio_init(AppHelper $appHelper): void
 
 	// if the device is a mobile device set js is_mobile
 	// variable so the js scripts can use this information
-	if (DI::mode()->isMobile() || DI::mode()->isMobile()) {
-		DI::page()['htmlhead'] .= <<< EOT
+	if ($mode->isMobile()) {
+		$page['htmlhead'] .= <<< EOT
 			<script type="text/javascript">
 				var is_mobile = 1;
 			</script>
 EOT;
+	}
+
+	if ($pConfig->get($userSession->getLocalUserId(), 'system', 'enable_spa', false)) {
+		// Load SPA router for client-side routing on /network, /display, /profile
+		// This keeps the footer static (important for XMPP addon) and provides smooth transitions
+		$page->registerStylesheet($appHelper->getBasePath() . '/view/js/spa-router.css');
+		$page->registerFooterScript($appHelper->getBasePath() . '/view/js/spa-router.js');
 	}
 }
 

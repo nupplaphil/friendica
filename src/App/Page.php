@@ -262,6 +262,12 @@ class Page implements ArrayAccess
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),
 			'$stylesheets'    => $this->stylesheets,
+			'$loading'        => [
+				'fetching'   => $l10n->t('Fetching ...'),
+				'receiving'  => $l10n->t('Receiving data ...'),
+				'processing' => $l10n->t('Processing ...'),
+				'posting'    => $l10n->t('Posting ...'),
+			],
 
 			// Dropzone
 			'$max_imagesize' => round(Images::getMaxUploadBytes() / 1000000, 0),
@@ -447,7 +453,7 @@ class Page implements ArrayAccess
 
 		if (function_exists(str_replace('-', '_', $currentTheme) . '_init')) {
 			$func = str_replace('-', '_', $currentTheme) . '_init';
-			$func($appHelper);
+			$func($appHelper, $pconfig, $session, $this, $mode);
 		}
 
 		/* Create the page head after setting the language
