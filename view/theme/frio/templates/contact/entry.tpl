@@ -123,7 +123,6 @@
 					{{if $contact.is_admin}}<span class="badge badge-admin"><i class="ri ri-medal-2-fill" aria-hidden="true"></i> {{$contact.admin_title}}</span>{{/if}}
 					{{if $contact.is_mod}}<span class="badge badge-mod"><i class="ri ri-shield-user-line" aria-hidden="true"></i> {{$contact.moderator_title}}</span>{{/if}}
 					{{* @todo this needs some changing in core because $contact.account_type contains a translated string which may not be the same in every language *}}
-					</h4>
 				</div>
 				{{if $contact.alt_text}}<div class="contact-entry-details contact-entry-rel" id="contact-entry-rel-{{$contact.id}}">{{$contact.alt_text}}</div>{{/if}}
 				{{if $contact.itemurl}}<div class="contact-entry-details contact-entry-url" id="contact-entry-url-{{$contact.id}}">{{$contact.itemurl}}</div>{{/if}}
