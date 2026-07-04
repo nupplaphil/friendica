@@ -57,12 +57,7 @@ final readonly class HibpPasswordExposedChecker implements PasswordExposedChecke
 				);
 				$this->cache->set($cacheKey, $response, Duration::MONTH);
 			} catch (Exception $e) {
-				$this->logger->error('PasswordExposed check failed: ' . $e->getMessage(), [
-					'code'  => $e->getCode(),
-					'file'  => $e->getFile(),
-					'line'  => $e->getLine(),
-					'trace' => $e->getTraceAsString(),
-				]);
+				$this->logger->error('PasswordExposed check failed', ['exception' => $e]);
 				return false;
 			}
 		}
