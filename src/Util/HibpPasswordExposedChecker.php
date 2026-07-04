@@ -16,6 +16,9 @@ use Friendica\Network\HTTPClient\Capability\ICanSendHttpRequests;
 use Friendica\Network\HTTPClient\Client\HttpClientAccept;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Checks if a plaintext password has been exposed in a public data dump
+ */
 final readonly class HibpPasswordExposedChecker implements PasswordExposedChecker
 {
 	public function __construct(
@@ -24,6 +27,18 @@ final readonly class HibpPasswordExposedChecker implements PasswordExposedChecke
 		private LoggerInterface $logger,
 	) {}
 
+	/**
+	 * Checks passwords against the Have I Been Pwned k-anonymity API
+	 *
+	 * Uses the SHA-1 k-anonymity model where only the first 5 characters
+	 * of the password hash are sent to HIBP.
+	 *
+	 * Results are cached. Network errors are logged and return false (fail-open).
+	 *
+	 * @param string $password The plaintext password to check
+	 *
+	 * @return bool True if exposed, false if not or if the check fails
+	 */
 	public function isExposed(string $password): bool
 	{
 		$hash     = strtoupper(sha1($password));
