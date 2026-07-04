@@ -314,6 +314,9 @@ return (function(string $basepath, array $getVars, array $serverVars, array $coo
 				$getVars['callback'] ?? '',
 			],
 		],
+		\Friendica\Util\PasswordExposedChecker::class => [
+			'instanceOf' => \Friendica\Util\HibpPasswordExposedChecker::class,
+		],
 	];
 })(
 	dirname(__FILE__, 2),

@@ -16,7 +16,7 @@ use Friendica\Network\HTTPClient\Capability\ICanSendHttpRequests;
 use Friendica\Network\HTTPClient\Client\HttpClientAccept;
 use Psr\Log\LoggerInterface;
 
-final class HibpPasswordExposedChecker implements PasswordExposedChecker
+final readonly class HibpPasswordExposedChecker implements PasswordExposedChecker
 {
 	public function __construct(
 		private ICanSendHttpRequests $httpClient,
@@ -53,7 +53,7 @@ final class HibpPasswordExposedChecker implements PasswordExposedChecker
 			}
 		}
 
-		foreach (explode("\n", $response) as $line) {
+		foreach (explode("\n", (string) $response) as $line) {
 			$line = trim($line);
 			if (str_starts_with($line, $suffix . ':')) {
 				return true;

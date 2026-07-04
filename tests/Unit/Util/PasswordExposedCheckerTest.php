@@ -50,7 +50,7 @@ class PasswordExposedCheckerTest extends TestCase
 			->method('set')
 			->with('PasswordExposed:' . $prefix, $hibpResponse, Duration::MONTH);
 
-		$logger = $this->createMock(LoggerInterface::class);
+		$logger = $this->createStub(LoggerInterface::class);
 
 		$checker = new HibpPasswordExposedChecker($httpClient, $cache, $logger);
 
@@ -86,7 +86,7 @@ class PasswordExposedCheckerTest extends TestCase
 			->method('set')
 			->with('PasswordExposed:' . $prefix, $hibpResponse, Duration::MONTH);
 
-		$logger = $this->createMock(LoggerInterface::class);
+		$logger = $this->createStub(LoggerInterface::class);
 
 		$checker = new HibpPasswordExposedChecker($httpClient, $cache, $logger);
 
@@ -150,7 +150,7 @@ class PasswordExposedCheckerTest extends TestCase
 		$cache->expects($this->never())
 			->method('set');
 
-		$logger = $this->createMock(LoggerInterface::class);
+		$logger = $this->createStub(LoggerInterface::class);
 
 		$checker = new HibpPasswordExposedChecker($httpClient, $cache, $logger);
 
@@ -177,7 +177,7 @@ class PasswordExposedCheckerTest extends TestCase
 		$cache->expects($this->never())
 			->method('set');
 
-		$logger = $this->createMock(LoggerInterface::class);
+		$logger = $this->createStub(LoggerInterface::class);
 
 		$checker = new HibpPasswordExposedChecker($httpClient, $cache, $logger);
 

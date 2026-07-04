@@ -658,6 +658,11 @@ abstract class DI
 	/**
 	 * @internal The EventDispatcher should never called outside of the core, like in addons or themes
 	 */
+	public static function passwordExposedChecker(): Util\PasswordExposedChecker
+	{
+		return self::$dice->create(Util\PasswordExposedChecker::class);
+	}
+
 	public static function eventDispatcher(): \Psr\EventDispatcher\EventDispatcherInterface
 	{
 		return self::$dice->create(\Psr\EventDispatcher\EventDispatcherInterface::class);
