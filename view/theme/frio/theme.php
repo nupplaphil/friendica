@@ -219,13 +219,13 @@ function frio_remote_nav(array &$nav_info): void
 			$nav_info['userinfo'] = [
 				'icon' => Contact::getMicro($remoteUser),
 				'name' => $remoteUser['name'],
+				'link' => $server_url . '/profile/' . $remoteUser['nick'],
 			];
 			$server_url = $remoteUser['baseurl'];
 		}
 
 		if (!DI::userSession()->getLocalUserId() && !empty($server_url) && !is_null($remoteUser)) {
 			// user menu
-			$nav_info['nav']['usermenu'][] = [$server_url . '/profile/' . $remoteUser['nick'], DI::l10n()->t('Posts'), '', DI::l10n()->t('My posts')];
 			$nav_info['nav']['usermenu'][] = [$server_url . '/profile/' . $remoteUser['nick'] . '/photos', DI::l10n()->t('Photos'), '', DI::l10n()->t('My photos')];
 			$nav_info['nav']['usermenu'][] = [$server_url . '/calendar/', DI::l10n()->t('Calendar'), '', DI::l10n()->t('Your calendar')];
 

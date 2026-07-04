@@ -56,6 +56,16 @@
 			</li>
 		{{/if}}
 
+		{{if $nav.my_profile}}
+			<li role="menuitem" id="nav-my-profile-link" class="nav-menu {{$sel.my_profile}}">
+				<a accesskey="p" class="{{$nav.my_profile.2}}" href="{{$nav.my_profile.0}}" title="{{$nav.my_profile.3}}">
+					<span class="desktop-view">{{$nav.my_profile.1}}</span>
+					<i class="ri ri-xl ri-user-line ri-fw mobile-view" aria-hidden="true"></i>
+					<span id="my-profile-update" class="nav-notification"></span>
+				</a>
+			</li>
+		{{/if}}
+
 		<li role="menu" aria-haspopup="true" id="nav-site-linkmenu" class="nav-menu-icon"><a><span class="icon s22 icon-question"><span class="sr-only">{{$nav.help.3}}</span></span></a>
 			<ul id="nav-site-menu" class="menu-popup">
 				{{if $nav.help}} <li role="menuitem"><a class="{{$nav.help.2}}" href="{{$nav.help.0}}" title="{{$nav.help.3}}">{{$nav.help.1}}</a></li>{{/if}}
@@ -98,7 +108,8 @@
 					{{if $nav.contacts}}<li role="menuitem"><a class="{{$nav.contacts.2}}" href="{{$nav.contacts.0}}" title="{{$nav.contacts.3}}">{{$nav.contacts.1}}</a></li>{{/if}}
 					{{if $nav.messages}}<li role="menuitem"><a class="{{$nav.messages.2}}" href="{{$nav.messages.0}}" title="{{$nav.messages.3}}">{{$nav.messages.1}} <span id="mail-update-li" class="nav-notification"></span></a></li>{{/if}}
 					{{if $nav.delegation}}<li role="menuitem"><a class="{{$nav.delegation.2}}" href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">{{$nav.delegation.1}}</a></li>{{/if}}
-					{{if $nav.usermenu.1}}<li role="menuitem"><a class="{{$nav.usermenu.1.2}}" href="{{$nav.usermenu.1.0}}" title="{{$nav.usermenu.1.3}}">{{$nav.usermenu.1.1}}</a></li>{{/if}}
+					{{* This is a link to Photos: *}}
+					{{if $nav.usermenu.0}}<li role="menuitem"><a class="{{$nav.usermenu.0.2}}" href="{{$nav.usermenu.0.0}}" title="{{$nav.usermenu.0.3}}">{{$nav.usermenu.0.1}}</a></li>{{/if}}
 					{{if $nav.settings}}<li role="menuitem"><a class="{{$nav.settings.2}}" href="{{$nav.settings.0}}" title="{{$nav.settings.3}}">{{$nav.settings.1}}</a></li>{{/if}}
 					{{if $nav.admin}}
 					<li role="menuitem">

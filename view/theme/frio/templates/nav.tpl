@@ -194,6 +194,13 @@
 											<li class="divider"><hr></li>
 										{{/if}}
 									{{/if}}
+
+									<li class="profile-link">
+										<a href="{{$userinfo.link}}">
+											<img src="{{$userinfo.icon}}" alt="{{$userinfo.name}}">&nbsp;
+											{{$userinfo.name}}{{if $nav.remote}} ({{$nav.remote}}){{/if}}
+										</a>
+									</li>
 									{{foreach $nav.usermenu as $usermenu}}
 										<li>
 											<a role="menuitem" class="{{$usermenu.2}}" href="{{$usermenu.0}}"
@@ -204,17 +211,6 @@
 										</li>
 									{{/foreach}}
 									<li class="divider visible-xs"><hr></li>
-									{{if $nav.messages}}
-										<li class="visible-xs">
-											<a role="menuitem"
-												class="nav-commlink {{$nav.messages.2}} {{$sel.messages}}"
-												href="{{$nav.messages.0}}" title="{{$nav.messages.3}}">
-												<i class="ri ri-mail-line ri-fw" aria-hidden="true"></i>
-												{{$nav.messages.1}} <span id="mail-update-li"
-													class="nav-mail-badge badge nav-notification"></span>
-											</a>
-										</li>
-									{{/if}}
 									{{if $nav.contacts}}
 										<li class="visible-xs">
 											<a role="menuitem" id="nav-menu-contacts-link"
@@ -335,10 +331,11 @@
 									<li role="menuitem" class="nav-sitename list-group-item">{{$nav.sitename}}</li>
 								{{/if}}
 							{{/if}}
-							<li class="list-group-item">
-								<img src="{{$userinfo.icon}}" alt="{{$userinfo.name}}"
-									style="max-width:15px; max-height:15px; min-width:15px; min-height:15px; width:15px; height:15px;">&nbsp;
-								{{$userinfo.name}}{{if $nav.remote}} ({{$nav.remote}}){{/if}}
+							<li class="list-group-item profile-link">
+								<a href="{{$userinfo.link}}">
+									<img src="{{$userinfo.icon}}" alt="{{$userinfo.name}}">&nbsp;
+									{{$userinfo.name}}{{if $nav.remote}} ({{$nav.remote}}){{/if}}
+								</a>
 							</li>
 							{{foreach $nav.usermenu as $usermenu}}
 								<li class="list-group-item">
@@ -349,7 +346,7 @@
 									</a>
 								</li>
 							{{/foreach}}
-							{{if $nav.contacts || $nav.messages || $nav.delegation}}
+							{{if $nav.contacts || $nav.delegation}}
 								<li class="divider"><hr></li>
 							{{/if}}
 							{{if $nav.contacts}}
@@ -358,15 +355,6 @@
 										class="nav-link {{$nav.contacts.2}}" href="{{$nav.contacts.0}}"
 										title="{{$nav.contacts.3}}"><i class="ri ri-contacts-line ri-fw" aria-hidden="true"></i>
 										{{$nav.contacts.1}}
-									</a>
-								</li>
-							{{/if}}
-							{{if $nav.messages}}
-								<li class="list-group-item">
-									<a role="menuitem"
-										class="nav-link {{$nav.messages.2}} {{$sel.messages}}" href="{{$nav.messages.0}}"
-										title="{{$nav.messages.3}}"><i class="ri ri-mail-line ri-fw" aria-hidden="true"></i>
-										{{$nav.messages.1}}
 									</a>
 								</li>
 							{{/if}}
