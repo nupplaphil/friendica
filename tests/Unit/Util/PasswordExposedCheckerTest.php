@@ -37,7 +37,7 @@ class PasswordExposedCheckerTest extends TestCase
 				HttpClientAccept::TEXT,
 				10,
 				'',
-				''
+				'',
 			)
 			->willReturn($hibpResponse);
 
@@ -73,7 +73,7 @@ class PasswordExposedCheckerTest extends TestCase
 				HttpClientAccept::TEXT,
 				10,
 				'',
-				''
+				'',
 			)
 			->willReturn($hibpResponse);
 
@@ -107,7 +107,7 @@ class PasswordExposedCheckerTest extends TestCase
 				HttpClientAccept::TEXT,
 				10,
 				'',
-				''
+				'',
 			)
 			->willThrowException(new Exception('Connection failed'));
 

@@ -22,8 +22,7 @@ final readonly class HibpPasswordExposedChecker implements PasswordExposedChecke
 		private ICanSendHttpRequests $httpClient,
 		private ICanCache $cache,
 		private LoggerInterface $logger,
-	) {
-	}
+	) {}
 
 	public function isExposed(string $password): bool
 	{
@@ -39,7 +38,7 @@ final readonly class HibpPasswordExposedChecker implements PasswordExposedChecke
 				$response = $this->httpClient->fetch(
 					'https://api.pwnedpasswords.com/range/' . $prefix,
 					HttpClientAccept::TEXT,
-					10
+					10,
 				);
 				$this->cache->set($cacheKey, $response, Duration::MONTH);
 			} catch (Exception $e) {

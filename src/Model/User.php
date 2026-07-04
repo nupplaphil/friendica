@@ -34,7 +34,6 @@ use Friendica\Util\Network;
 use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use ImagickException;
-use Friendica\Util\HibpPasswordExposedChecker;
 use LightOpenID;
 
 /**
