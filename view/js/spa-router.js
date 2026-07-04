@@ -188,7 +188,7 @@ function navigateTo(url) {
   window.dispatchEvent(beforeEvent);
   
   // Update History API
-  history.pushState({ path, spa: true }, '', url);
+  history.pushState({ path, spa: true, __friendicaSPA: true }, '', url);
   
   // Load content
   loadContent(url);
@@ -258,7 +258,7 @@ function loadContent(url) {
     // Update history with the final URL if there were redirects
     if (finalUrl !== fetchUrl.toString()) {
       console.log('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
-      history.replaceState({ path: new URL(finalUrl).pathname, spa: true }, '', finalUrl);
+      history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
     }
     
     // Replace content of the three main containers
@@ -667,7 +667,7 @@ function handleInitialLoad() {
  */
 function handlePopState(e) {
   console.log('[SPA Router] PopState: state=', e.state);
-  if (e.state && e.state.spa) {
+  if (e.state && e.state.spa && e.state.__friendicaSPA) {
     console.log('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
     
     // Dispatch event to pause live updates before popstate navigation
@@ -678,7 +678,7 @@ function handlePopState(e) {
     
     loadContent(window.location.href);
   } else {
-    console.log('[SPA Router] PopState: Not an SPA state, ignoring');
+    console.log('[SPA Router] PopState: Not an SPA state or not from our router, ignoring');
   }
 }
 
