@@ -842,12 +842,6 @@ parameters:
 			path: src/Protocol/DFRN.php
 
 		-
-			message: '#^Call to deprecated function openssl_free_key\(\)\.$#'
-			identifier: function.deprecated
-			count: 2
-			path: src/Security/OAuth1/Signature/OAuthSignatureMethod_RSA_SHA1.php
-
-		-
 			message: '''
 				#^Access to constant on deprecated class Friendica\\Core\\Addon\\Model\\AddonLoader\:
 				2026\.01 Use implementation of `\\Friendica\\Core\\Addon\\AddonHelper` instead\.$#
