@@ -109,7 +109,7 @@ class GServer
 	 */
 	public static function getID(string $url, bool $no_check = false): ?int
 	{
-		$url = self::cleanURL($url);
+		$url = (string) self::cleanUri(new Uri($url));
 
 		if (empty($url)) {
 			return null;
@@ -359,7 +359,7 @@ class GServer
 	 */
 	public static function check(string $server_url, string $network = '', bool $force = false, bool $only_nodeinfo = false): bool
 	{
-		$server_url = self::cleanURL($server_url);
+		$server_url = (string) self::cleanUri(new Uri($server_url));
 		if ($server_url == '') {
 			return false;
 		}
@@ -569,7 +569,7 @@ class GServer
 		$original_url = $url;
 
 		// Remove URL content that is not supposed to exist for a server url
-		$url = rtrim(self::cleanURL($url), '/');
+		$url = rtrim((string) self::cleanUri(new Uri($url)), '/');
 		if (empty($url)) {
 			DI::logger()->notice('Empty URL.');
 			return false;

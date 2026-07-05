@@ -183,15 +183,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method cleanURL\(\) of class Friendica\\Model\\GServer\:
-				2023\.03 Use cleanUri instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: src/Database/PostUpdate.php
-
-		-
-			message: '''
 				#^Access to deprecated property \$factory of class Friendica\\BaseRepository\:
 				2026\.08 Implement getFactory\(\) instead$#
 			'''
@@ -213,15 +204,6 @@ parameters:
 			identifier: function.deprecated
 			count: 4
 			path: src/Model/Event.php
-
-		-
-			message: '''
-				#^Call to deprecated method cleanURL\(\) of class Friendica\\Model\\GServer\:
-				2023\.03 Use cleanUri instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: src/Model/GServer.php
 
 		-
 			message: '''
