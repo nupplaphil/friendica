@@ -380,10 +380,12 @@ class ItemTest extends ApiTestCase
 		try {
 			drop_item(999999);
 			self::fail('Expected a redirect (FoundException)');
+			/** @phpstan-ignore catch.neverThrown (PHPStan can't trace the throw through DI::baseUrl()->redirect() -> System::externalRedirect(); empirically verified by this passing test) */
 		} catch (HTTPException\FoundException) {
 			// expected
 		}
 
+		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
 		self::assertContains('Item not found.', DI::sysmsg()->getNotices());
 	}
 
@@ -405,10 +407,12 @@ class ItemTest extends ApiTestCase
 		try {
 			drop_item(2);
 			self::fail('Expected a redirect (FoundException)');
+			/** @phpstan-ignore catch.neverThrown (PHPStan can't trace the throw through DI::baseUrl()->redirect() -> System::externalRedirect(); empirically verified by this passing test) */
 		} catch (HTTPException\FoundException) {
 			// expected
 		}
 
+		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
 		self::assertContains('Item not found.', DI::sysmsg()->getNotices());
 	}
 
@@ -420,10 +424,12 @@ class ItemTest extends ApiTestCase
 		try {
 			drop_item(2);
 			self::fail('Expected a redirect (FoundException)');
+			/** @phpstan-ignore catch.neverThrown (PHPStan can't trace the throw through DI::baseUrl()->redirect() -> System::externalRedirect(); empirically verified by this passing test) */
 		} catch (HTTPException\FoundException) {
 			// expected
 		}
 
+		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
 		$item = DBA::selectFirst('post-user', ['deleted', 'hidden'], ['id' => 2]);
 		self::assertEquals(1, $item['hidden']);
 		self::assertEquals(1, $item['deleted']);
@@ -437,10 +443,12 @@ class ItemTest extends ApiTestCase
 		try {
 			drop_item(1);
 			self::fail('Expected a redirect (FoundException)');
+			/** @phpstan-ignore catch.neverThrown (PHPStan can't trace the throw through DI::baseUrl()->redirect() -> System::externalRedirect(); empirically verified by this passing test) */
 		} catch (HTTPException\FoundException) {
 			// expected
 		}
 
+		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
 		$item = DBA::selectFirst('post-user', ['deleted'], ['id' => 1]);
 		self::assertEquals(1, $item['deleted']);
 	}
@@ -460,10 +468,12 @@ class ItemTest extends ApiTestCase
 		try {
 			drop_item(7);
 			self::fail('Expected a redirect (FoundException)');
+			/** @phpstan-ignore catch.neverThrown (PHPStan can't trace the throw through DI::baseUrl()->redirect() -> System::externalRedirect(); empirically verified by this passing test) */
 		} catch (HTTPException\FoundException) {
 			// expected
 		}
 
+		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
 		self::assertContains('Permission denied.', DI::sysmsg()->getNotices());
 
 		$item = DBA::selectFirst('post-user', ['deleted'], ['id' => 7]);
