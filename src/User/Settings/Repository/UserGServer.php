@@ -106,6 +106,7 @@ class UserGServer extends BaseRepository
 		return $this->entityFactory;
 	}
 
+	/** @not-deprecated */
 	protected function _selectOne(array $condition, array $params = [], bool $hydrate = true): UserGServerEntity
 	{
 		$fields = $this->db->selectFirst(static::$table_name, [], $condition, $params);

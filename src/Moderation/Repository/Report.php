@@ -101,6 +101,8 @@ final class Report extends \Friendica\BaseRepository
 
 	/**
 	 * @throws NotFoundException
+	 *
+	 * @not-deprecated
 	 */
 	protected function _selectOne(array $condition, array $params = []): ReportEntity
 	{
