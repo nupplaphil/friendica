@@ -882,7 +882,7 @@ nav.navbar .nav > li > button:focus {
 
 /* Notification Menu */
 #topbar-first .topbar-actions #nav-notifications-menu {
-	max-height: 600px;
+	max-height: 60vh;
 	margin-left: -300px;
 	width: 350px;
 }
