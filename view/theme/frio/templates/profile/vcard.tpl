@@ -125,9 +125,9 @@
 			<div class="location detail">
 				<span class="location-label icon"><i class="ri ri-map-pin-line" title="{{$location}}"></i></span>
 				<span class="adr">
-					{{if $profile.address}}<p class="street-address p-street-address">{{$profile.address nofilter}}</p>
+					{{if $profile.address}}<span class="street-address p-street-address">{{$profile.address nofilter}}</span>
 					{{/if}}
-					{{if $profile.location}}<p class="p-location">{{$profile.location}}</p>{{/if}}
+					{{if $profile.location}}<span class="p-location">{{$profile.location}}</span>{{/if}}
 				</span>
 			</div>
 		{{/if}}
