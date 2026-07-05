@@ -11,6 +11,8 @@ use Friendica\App;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\Hook;
 use Friendica\Core\L10n;
+use Friendica\Event\ArrayFilterEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
@@ -28,8 +30,23 @@ use Psr\Log\LoggerInterface;
 
 class Connectors extends BaseSettings
 {
-	public function __construct(private readonly SystemMessages $systemMessages, private readonly Database $database, private readonly IManagePersonalConfigValues $pconfig, private readonly IManageConfigValues $config, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly SystemMessages $systemMessages,
+		private readonly Database $database,
+		private readonly IManagePersonalConfigValues $pconfig,
+		private readonly IManageConfigValues $config,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		IHandleUserSessions $session,
+		App\Page $page,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -97,7 +114,7 @@ class Connectors extends BaseSettings
 			}
 		}
 
-		Hook::callAll('connector_settings_post', $request);
+		$this->eventDispatcher->dispatch(new ArrayFilterEvent(ArrayFilterEvent::CONNECTOR_SETTINGS_POST, $request));
 		$this->baseUrl->redirect($this->args->getQueryString());
 	}
 

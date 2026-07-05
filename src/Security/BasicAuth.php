@@ -8,7 +8,6 @@
 namespace Friendica\Security;
 
 use Exception;
-use Friendica\Core\Hook;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Event\ArrayFilterEvent;
@@ -173,7 +172,7 @@ class BasicAuth
 
 		DI::auth()->setForUser($record, false, false, false);
 
-		Hook::callAll('logged_in', $record);
+		DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::LOGGED_IN, $record));
 
 		self::$current_user_id = DI::userSession()->getLocalUserId();
 

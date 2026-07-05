@@ -10,6 +10,7 @@ namespace Friendica\Worker;
 use Exception;
 use Friendica\Core\Hook;
 use Friendica\Core\Protocol;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
@@ -394,7 +395,7 @@ class Notifier
 
 			Hook::fork($appHelper->getQueueValue('priority'), 'notifier_normal', $target_item);
 
-			Hook::callAll('notifier_end', $target_item);
+			DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::NOTIFIER_END, $target_item));
 
 			// Workaround for pure connector posts
 			if ($cmd == Delivery::POST) {

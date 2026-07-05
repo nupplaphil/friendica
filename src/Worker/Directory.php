@@ -7,8 +7,8 @@
 
 namespace Friendica\Worker;
 
-use Friendica\Core\Hook;
 use Friendica\Core\Search;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
@@ -37,7 +37,9 @@ class Directory
 
 		$arr = ['url' => $url];
 
-		Hook::callAll('globaldir_update', $arr);
+		$arr = DI::eventDispatcher()->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::GLOBAL_DIR_UPDATE, $arr),
+		)->getArray();
 
 		DI::logger()->info('Updating directory: ' . $arr['url']);
 		if (strlen((string) $arr['url'])) {

@@ -7,8 +7,8 @@
 
 namespace Friendica\Render;
 
-use Friendica\Core\Hook;
 use Friendica\DI;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Network\HTTPException\ServiceUnavailableException;
 use Friendica\Util\Strings;
 
@@ -73,7 +73,9 @@ final class FriendicaSmartyEngine extends TemplateEngine
 			'template' => basename($this->smarty->filename ?? ''),
 			'vars'     => $vars,
 		];
-		Hook::callAll('template_vars', $arr);
+		$arr = DI::eventDispatcher()->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::TEMPLATE_VARS, $arr),
+		)->getArray();
 		$vars = $arr['vars'];
 
 		$this->smarty->clearAllAssign();

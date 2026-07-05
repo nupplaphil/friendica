@@ -8,8 +8,9 @@
 namespace Friendica\Module\Settings;
 
 use Friendica\App;
-use Friendica\Core\Hook;
 use Friendica\Core\L10n;
+use Friendica\Event\ArrayFilterEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Core\System;
@@ -32,8 +33,20 @@ use Psr\Log\LoggerInterface;
  **/
 class UserExport extends BaseSettings
 {
-	public function __construct(private readonly DbaDefinition $dbaDefinition, IHandleUserSessions $session, App\Page $page, L10n $l10n, App\BaseURL $baseUrl, App\Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		private readonly DbaDefinition $dbaDefinition,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		IHandleUserSessions $session,
+		App\Page $page,
+		L10n $l10n,
+		App\BaseURL $baseUrl,
+		App\Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
@@ -73,7 +86,9 @@ class UserExport extends BaseSettings
 			['settings/userexport/backup?t=' . $t, $this->l10n->t('Export all'), $this->l10n->t('Export your account info, contacts and all your items as json. Could be a very big file, and could take a lot of time. Use this to make a full backup of your account (photos are not exported)')],
 			['settings/userexport/contact?t=' . $t, $this->l10n->t('Export Contacts to CSV'), $this->l10n->t('Export the list of the accounts you are following as CSV file. Compatible to e.g. Mastodon.')],
 		];
-		Hook::callAll('uexport_options', $options);
+		$options = $this->eventDispatcher->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::USER_EXPORT_OPTIONS, $options),
+		)->getArray();
 
 		$tpl = Renderer::getMarkupTemplate('settings/userexport.tpl');
 		return Renderer::replaceMacros($tpl, [

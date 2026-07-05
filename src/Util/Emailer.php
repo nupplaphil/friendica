@@ -9,9 +9,10 @@ namespace Friendica\Util;
 
 use Friendica\App\BaseURL;
 use Friendica\Core\Config\Capability\IManageConfigValues;
-use Friendica\Core\Hook;
 use Friendica\Core\L10n;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Object\EMail\IEmail;
 use Friendica\Protocol\Email;
@@ -35,6 +36,7 @@ class Emailer
 		private readonly BaseURL $baseUrl,
 		private readonly LoggerInterface $logger,
 		private readonly L10n $l10n,
+		private readonly ?EventDispatcherInterface $eventDispatcher = null,
 	) {
 		$this->siteEmailAddress = $this->config->get('config', 'sender_email');
 		if (empty($this->siteEmailAddress)) {
@@ -113,7 +115,12 @@ class Emailer
 	 */
 	public function send(IEmail $email): bool
 	{
-		Hook::callAll('emailer_send_prepare', $email);
+		if ($this->eventDispatcher) {
+			$emailData = $this->eventDispatcher->dispatch(
+				new ArrayFilterEvent(ArrayFilterEvent::EMAILER_SEND_PREPARE, ['email' => $email]),
+			)->getArray();
+			$email = $emailData['email'] ?? null;
+		}
 
 		if (! ($email instanceof IEmail)) {
 			return true;
@@ -192,7 +199,11 @@ class Emailer
 			'sent'       => false,
 		];
 
-		Hook::callAll('emailer_send', $hookdata);
+		if ($this->eventDispatcher) {
+			$hookdata = $this->eventDispatcher->dispatch(
+				new ArrayFilterEvent(ArrayFilterEvent::EMAILER_SEND, $hookdata),
+			)->getArray();
+		}
 
 		if ($hookdata['sent']) {
 			return true;

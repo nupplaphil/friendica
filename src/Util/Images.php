@@ -7,8 +7,8 @@
 
 namespace Friendica\Util;
 
-use Friendica\Core\Hook;
 use Friendica\DI;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Model\Photo;
 use Friendica\Network\HTTPClient\Client\HttpClientAccept;
 use Friendica\Network\HTTPClient\Client\HttpClientRequest;
@@ -372,7 +372,7 @@ class Images
 
 			if ($ocr) {
 				$media = ['img_str' => $img_str];
-				Hook::callAll('ocr-detection', $media);
+				$media = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::OCR_DETECTION, $media))->getArray();
 				if (!empty($media['description'])) {
 					$data['description'] = $media['description'];
 				}

@@ -22,8 +22,9 @@ use Friendica\Content\Conversation\Factory\Network as NetworkFactory;
 use Friendica\Content\Conversation\Factory\Timeline as TimelineFactory;
 use Friendica\Content\Conversation\Repository;
 use Friendica\Core\Config\Capability\IManageConfigValues;
-use Friendica\Core\Hook;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Core\L10n;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Renderer;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
@@ -54,8 +55,28 @@ class Display extends BaseSettings
 	/** @var TimelineFactory */
 	protected $timeline;
 
-	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, NetworkFactory $network, CommunityFactory $community, ChannelFactory $channel, TimelineFactory $timeline, private readonly SystemMessages $systemMessages, private readonly AppHelper $appHelper, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, IHandleUserSessions $session, Page $page, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		Repository\UserDefinedChannel $userDefinedChannel,
+		NetworkFactory $network,
+		CommunityFactory $community,
+		ChannelFactory $channel,
+		TimelineFactory $timeline,
+		private readonly SystemMessages $systemMessages,
+		private readonly AppHelper $appHelper,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly IManageConfigValues $config,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		IHandleUserSessions $session,
+		Page $page,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		Response $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($session, $page, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->timeline           = $timeline;
 		$this->channel            = $channel;
@@ -195,7 +216,7 @@ class Display extends BaseSettings
 			$this->systemMessages->addNotice($this->t('The theme you chose isn\'t available.'));
 		}
 
-		Hook::callAll('display_settings_post', $request);
+		$this->eventDispatcher->dispatch(new ArrayFilterEvent(ArrayFilterEvent::DISPLAY_SETTINGS_POST, $request));
 
 		$this->baseUrl->redirect('settings/display');
 	}
