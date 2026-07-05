@@ -607,7 +607,7 @@ class Contact extends BaseModule
 		return [
 			'id'                => $contact['id'],
 			'is_admin'          => $administrator,
-			'adming_title'      => DI::l10n()->t('Administrator'),
+			'admin_title'       => DI::l10n()->t('Administrator'),
 			'is_mod'            => $moderator,
 			'moderator_title'   => DI::l10n()->t('Moderator'),
 			'url'               => $url,
