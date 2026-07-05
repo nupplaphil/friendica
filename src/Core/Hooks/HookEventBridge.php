@@ -487,8 +487,8 @@ final class HookEventBridge
 	 */
 	public static function onLoginFormEvent(ArrayFilterEvent $event): void
 	{
-		$data = $event->getArray();
-		$html = $data['html'] ?? '';
+		$data         = $event->getArray();
+		$html         = $data['html'] ?? '';
 		$data['html'] = static::callHook($event->getName(), $html);
 		$event->setArray($data);
 	}
@@ -500,7 +500,7 @@ final class HookEventBridge
 	 */
 	public static function onEmailerSendPrepareEvent(ArrayFilterEvent $event): void
 	{
-		$data = $event->getArray();
+		$data          = $event->getArray();
 		$data['email'] = static::callHook($event->getName(), $data['email'] ?? null);
 		$event->setArray($data);
 	}

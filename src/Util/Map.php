@@ -20,7 +20,7 @@ class Map
 		$coord = trim((string) $coord);
 		$coord = str_replace([',','/','  '], [' ',' ',' '], $coord);
 		$arr   = ['lat' => trim(substr($coord, 0, strpos($coord, ' '))), 'lon' => trim(substr($coord, strpos($coord, ' ') + 1)), 'mode' => $html_mode, 'html' => ''];
-		$arr = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::GENERATE_MAP, $arr))->getArray();
+		$arr   = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::GENERATE_MAP, $arr))->getArray();
 		return $arr['html'] ?: $coord;
 	}
 

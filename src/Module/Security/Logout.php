@@ -48,9 +48,9 @@ class Logout extends BaseModule
 	) {
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
-		$this->cache           = $cache;
-		$this->cookie          = $cookie;
-		$this->session         = $session;
+		$this->cache   = $cache;
+		$this->cookie  = $cookie;
+		$this->session = $session;
 	}
 
 	protected function post(array $request = [])
