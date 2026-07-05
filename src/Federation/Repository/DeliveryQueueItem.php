@@ -41,7 +41,7 @@ final class DeliveryQueueItem extends \Friendica\BaseRepository
 			self::$table_name,
 			[],
 			["`gsid` = ? AND `failed` < ?", $gsid, $maxFailedCount],
-			['order' => ['created']]
+			['order' => ['created']],
 		);
 		while ($deliveryQueueItem = $this->db->fetch($deliveryQueueItems)) {
 			$Entities[] = $this->getFactory()->createFromTableRow($deliveryQueueItem);
@@ -85,7 +85,7 @@ final class DeliveryQueueItem extends \Friendica\BaseRepository
 	{
 		return $this->db->delete(self::$table_name, [
 			'uri-id' => $deliveryQueueItem->postUriId,
-			'gsid'   => $deliveryQueueItem->targetServerId
+			'gsid'   => $deliveryQueueItem->targetServerId,
 		]);
 	}
 
@@ -97,11 +97,11 @@ final class DeliveryQueueItem extends \Friendica\BaseRepository
 	public function incrementFailed(Entity\DeliveryQueueItem $deliveryQueueItem): bool
 	{
 		return $this->db->update(self::$table_name, [
-			"`failed` = `failed` + 1"
+			"`failed` = `failed` + 1",
 		], [
 			"`uri-id` = ? AND `gsid` = ?",
 			$deliveryQueueItem->postUriId,
-			$deliveryQueueItem->targetServerId
+			$deliveryQueueItem->targetServerId,
 		]);
 	}
 
