@@ -60,7 +60,7 @@ interface ICanHandleHttpResponses
 	/**
 	 * Returns the headers as an associated array
 	 * @see MessageInterface::getHeaders()
-	 * @deprecated
+	 * @deprecated 2021.10 Use getHeaders() instead
 	 *
 	 * @return string[][] associated header array
 	 */

@@ -133,9 +133,9 @@ EOF;
 		$config = \Mockery::mock(IManageConfigValues::class);
 		$config->shouldReceive('get')->with('addons')->andReturn($configArray)->once();
 
-		$addonLoader = new AddonLoader($this->root->url(), $config);
+		$addonLoader = new AddonLoader($this->root->url(), $config); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated class)
 
-		self::assertEquals($assertion, $addonLoader->getActiveAddonConfig('hooks'));
+		self::assertEquals($assertion, $addonLoader->getActiveAddonConfig('hooks')); // @phpstan-ignore method.deprecatedClass (testing the deprecated method on AddonLoader)
 	}
 
 	/**
@@ -160,12 +160,12 @@ EOF;
 		$config = \Mockery::mock(IManageConfigValues::class);
 		$config->shouldReceive('get')->with('addons')->andReturn($configArray)->once();
 
-		$addonLoader = new AddonLoader($this->root->url(), $config);
+		$addonLoader = new AddonLoader($this->root->url(), $config); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated class)
 
 		self::expectException(AddonInvalidConfigFileException::class);
 		self::expectExceptionMessage(sprintf('Error loading config file %s', $this->root->getChild($filename)->url()));
 
-		$addonLoader->getActiveAddonConfig('hooks');
+		$addonLoader->getActiveAddonConfig('hooks'); // @phpstan-ignore method.deprecatedClass (testing the deprecated method on AddonLoader)
 	}
 
 	/**
@@ -190,7 +190,7 @@ EOF;
 		$config = \Mockery::mock(IManageConfigValues::class);
 		$config->shouldReceive('get')->with('addons')->andReturn($configArray)->once();
 
-		$addonLoader = new AddonLoader($this->root->url(), $config);
-		self::assertEmpty($addonLoader->getActiveAddonConfig('anythingElse'));
+		$addonLoader = new AddonLoader($this->root->url(), $config); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated class)
+		self::assertEmpty($addonLoader->getActiveAddonConfig('anythingElse')); // @phpstan-ignore method.deprecatedClass (testing the deprecated method on AddonLoader)
 	}
 }
