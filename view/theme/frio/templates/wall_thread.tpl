@@ -76,7 +76,6 @@ as the value of $top_child_total (this is done at the end of this file)
 	{{if $item.reshared}}
 		<span class="wall-item-announce wall-item-responses time" id="wall-item-announce-{{$item.id}}"><i class="ri ri-repeat-line" aria-hidden="true"></i> {{$item.reshared nofilter}}</span>
 	{{/if}}
-		<p>
 		{{* The avatar picture and the photo-menu *}}
 		<div class="dropdown pull-left"><!-- Dropdown -->
 			{{if $item.thread_level==1}}
