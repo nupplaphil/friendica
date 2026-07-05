@@ -1,12 +1,1034 @@
-# SPDX-FileCopyrightText: 2010 - 2024 the Friendica project
-#
-# SPDX-License-Identifier: CC0-1.0
-
 parameters:
 	ignoreErrors:
+		-
+			message: '#^Call to deprecated method getDice\(\) of class Friendica\\Core\\DiceContainer\.$#'
+			identifier: method.deprecated
+			count: 1
+			path: src/App.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 2
+			path: src/App.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: src/App/Mode.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 4
+			path: src/App/Page.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: src/App/Router.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: src/BaseModule.php
+
+		-
+			message: '''
+				#^Access to deprecated property \$factory of class Friendica\\BaseRepository\:
+				2026\.08 Implement getFactory\(\) instead$#
+			'''
+			identifier: property.deprecated
+			count: 1
+			path: src/BaseRepository.php
+
+		-
+			message: '''
+				#^Call to deprecated method getFactory\(\) of class Friendica\\BaseRepository\:
+				2026\.08 This method will become abstract in a future release, implement it in your child class instead\.$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: src/BaseRepository.php
+
+		-
+			message: '''
+				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: src/Core/ACL.php
+
+		-
+			message: '''
+				#^Call to deprecated method loadINIConfigFile\(\) of class Friendica\\Core\\Config\\Util\\ConfigFileManager\:
+				2018\.12 since version 2018\.12$#
+			'''
+			identifier: method.deprecated
+			count: 2
+			path: src/Core/Config/Util/ConfigFileManager.php
+
+		-
+			message: '''
+				#^Call to deprecated method loadLegacyConfig\(\) of class Friendica\\Core\\Config\\Util\\ConfigFileManager\:
+				2018\.09 since version 2018\.09$#
+			'''
+			identifier: method.deprecated
+			count: 2
+			path: src/Core/Config/Util/ConfigFileManager.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Logger\:
+				2026\.01 Use constructor injection or `DI\:\:logger\(\)` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Core/Logger/Capability/IHaveCallIntrospections.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\Logger\:
+				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Core/Logger/Capability/IHaveCallIntrospections.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Logger\:
+				2026\.01 Use constructor injection or `DI\:\:logger\(\)` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Core/Logger/Util/Introspection.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Navigation\\Notifications\\Factory\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\Notification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Return type of method Friendica\\DI\:\:formattedNotificationFactory\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: return.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Return type of method Friendica\\DI\:\:notify\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: return.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Return type of method Friendica\\DI\:\:notifyFactory\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Factory\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\Notification instead$#
+			'''
+			identifier: return.deprecatedClass
+			count: 1
+			path: src/DI.php
+
+		-
+			message: '''
+				#^Call to deprecated method cleanURL\(\) of class Friendica\\Model\\GServer\:
+				2023\.03 Use cleanUri instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 3
+			path: src/Database/PostUpdate.php
+
+		-
+			message: '''
+				#^Access to deprecated property \$factory of class Friendica\\BaseRepository\:
+				2026\.08 Implement getFactory\(\) instead$#
+			'''
+			identifier: property.deprecated
+			count: 1
+			path: src/Federation/Repository/DeliveryQueueItem.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Model/APContact.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Model/Contact.php
+
+		-
+			message: '''
+				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '#^Call to deprecated function strftime\(\)\.$#'
+			identifier: function.deprecated
+			count: 4
+			path: src/Model/Event.php
+
+		-
+			message: '''
+				#^Call to deprecated method cleanURL\(\) of class Friendica\\Model\\GServer\:
+				2023\.03 Use cleanUri instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 3
+			path: src/Model/GServer.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 8
+			path: src/Model/GServer.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Call to method deleteForItem\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Model/Mail.php
+
+		-
+			message: '''
+				#^Call to method createFromNotification\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Model/Subscription.php
+
+		-
+			message: '''
+				#^Call to method shouldShowOnDesktop\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Model/Subscription.php
+
+		-
+			message: '''
+				#^Call to method selectAllForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$itemId of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Access to property \$otype of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Access to property \$uid of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Access to property \$uriId of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Call to method save\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Call to method selectOneById\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Call to method setSeen\(\) of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Friendica/Notification/Seen.php
+
+		-
+			message: '''
+				#^Call to method existsForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Call to method setAllSeenForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Parameter \$notify of method Friendica\\Module\\Api\\Mastodon\\Statuses\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
 		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
 			path: src/Module/BaseApi.php
+
+		-
+			message: '''
+				#^Fetching class constant HOME of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 3
+			path: src/Module/BaseNotifications.php
+
+		-
+			message: '''
+				#^Fetching class constant INTRO of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 3
+			path: src/Module/BaseNotifications.php
+
+		-
+			message: '''
+				#^Fetching class constant NETWORK of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 3
+			path: src/Module/BaseNotifications.php
+
+		-
+			message: '''
+				#^Fetching class constant PERSONAL of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 3
+			path: src/Module/BaseNotifications.php
+
+		-
+			message: '''
+				#^Fetching class constant SYSTEM of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 3
+			path: src/Module/BaseNotifications.php
+
+		-
+			message: '''
+				#^Call to method setAllSeenForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Item/Display.php
+
+		-
+			message: '''
+				#^Parameter \$notify of method Friendica\\Module\\Item\\Display\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/Item/Display.php
+
+		-
+			message: '''
+				#^Access to property \$link of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$uid of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$uriId of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method save\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method selectOneById\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method setAllSeenForRelatedNotify\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method setAllSeenForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method setSeen\(\) of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Parameter \$notifyRepo of method Friendica\\Module\\Notifications\\Notification\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notification.php
+
+		-
+			message: '''
+				#^Call to method getHomeList\(\) of deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Call to method getNetworkList\(\) of deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Call to method getPersonalList\(\) of deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Call to method getSystemList\(\) of deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Fetching class constant HOME of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Fetching class constant NETWORK of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Fetching class constant PERSONAL of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Fetching class constant SYSTEM of deprecated class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNotification instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Parameter \$formattedNotifyFactory of method Friendica\\Module\\Notifications\\Notifications\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Notifications.php
+
+		-
+			message: '''
+				#^Call to method shouldShowOnDesktop\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Ping.php
+
+		-
+			message: '''
+				#^Parameter \$notify of method Friendica\\Module\\Notifications\\Ping\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/Notifications/Ping.php
+
+		-
+			message: '''
+				#^Call to deprecated method httpExit\(\) of class Friendica\\Core\\System\:
+				since 2023\.09 Use BaseModule\-\>httpExit\(\) instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 3
+			path: src/Module/Ping/Network.php
+
+		-
+			message: '''
+				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Register.php
+
+		-
+			message: '''
+				#^Call to method setAllSeenForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/Update/Display.php
+
+		-
+			message: '''
+				#^Call to method countForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Module/User/Delegation.php
+
+		-
+			message: '''
+				#^Parameter \$notify of method Friendica\\Module\\User\\Delegation\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Module/User/Delegation.php
+
+		-
+			message: '''
+				#^Call to method setSeen\(\) of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Navigation/Notifications/Collection/Notifies.php
+
+		-
+			message: '''
+				#^Call to method formatMessage\(\) of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: staticMethod.deprecatedClass
+			count: 1
+			path: src/Navigation/Notifications/Factory/FormattedNavNotification.php
+
+		-
+			message: '''
+				#^Call to deprecated method getConfig\(\) of class GuzzleHttp\\Client\:
+				ClientInterface\:\:getConfig will be removed in guzzlehttp/guzzle\:8\.0\.$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: src/Network/HTTPClient/Client/HttpClient.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Network/HTTPClient/Client/HttpClient.php
+
+		-
+			message: '''
+				#^Call to deprecated method getHeaderArray\(\) of class Friendica\\Network\\HTTPClient\\Response\\CurlResult\:
+				2021\.10 Use getHeaders\(\) instead$#
+			'''
+			identifier: method.deprecated
+			count: 3
+			path: src/Network/HTTPClient/Response/CurlResult.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '''
+				#^Access to property \$date of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 2
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$id of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$itemId of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$link of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$msg of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$msg_cache of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$name of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$name_cache of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$otype of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$parent of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$photo of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$seen of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$type of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$uid of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$uriId of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$url of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Access to property \$verb of deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: property.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Parameter \$notify of method Friendica\\Object\\Api\\Friendica\\Notification\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Entity\\Notify\:
+				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Entity\\Notification instead$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/Object/Api/Friendica/Notification.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Object/Api/Mastodon/Relationship.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Protocol/Delivery.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Call to deprecated function openssl_free_key\(\)\.$#'
+			identifier: function.deprecated
+			count: 2
+			path: src/Security/OAuth1/Signature/OAuthSignatureMethod_RSA_SHA1.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Worker/AddContact.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Worker/UpdateBlockedServers.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Worker/UpdateGServer.php
+
+		-
+			message: '''
+				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
+				2023\.03 Use isUriBlocked instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Worker/UpdateServerPeers.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Addon\\Model\\AddonLoader\:
+				2026\.01 Use implementation of `\\Friendica\\Core\\Addon\\AddonHelper` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: static/dependencies.config.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\StreamLogger\:
+				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: static/dependencies.config.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\SyslogLogger\:
+				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: static/dependencies.config.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated interface Friendica\\Core\\Addon\\Capability\\ICanLoadAddons\:
+				2026\.01 Use implementation of `\\Friendica\\Core\\Addon\\AddonHelper` instead\.$#
+			'''
+			identifier: classConstant.deprecatedInterface
+			count: 1
+			path: static/dependencies.config.php
 
