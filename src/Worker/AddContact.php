@@ -14,6 +14,7 @@ use Friendica\Model\Contact;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Network\HTTPException\NotFoundException;
 use Friendica\Util\Network;
+use GuzzleHttp\Psr7\Uri;
 
 class AddContact
 {
@@ -67,7 +68,7 @@ class AddContact
 	 */
 	public static function add($run_parameters, int $uid, string $url, string $circle = ''): int
 	{
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			return 0;
 		}
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2010 - 2024 the Friendica project
+#
+# SPDX-License-Identifier: CC0-1.0
+
 parameters:
 	ignoreErrors:
 		-
@@ -197,24 +201,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/APContact.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Model/Contact.php
-
-		-
-			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -236,24 +222,6 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 3
 			path: src/Model/GServer.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 8
-			path: src/Model/GServer.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Model/Item.php
 
 		-
 			message: '''
@@ -713,30 +681,12 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Network/HTTPClient/Client/HttpClient.php
-
-		-
-			message: '''
 				#^Call to deprecated method getHeaderArray\(\) of class Friendica\\Network\\HTTPClient\\Response\\CurlResult\:
 				2021\.10 Use getHeaders\(\) instead$#
 			'''
 			identifier: method.deprecated
 			count: 3
 			path: src/Network/HTTPClient/Response/CurlResult.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Network/Probe.php
 
 		-
 			message: '''
@@ -902,33 +852,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Object/Api/Mastodon/Relationship.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Protocol/ActivityPub/Processor.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Protocol/ActivityPub/Transmitter.php
-
-		-
-			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -937,64 +860,10 @@ parameters:
 			path: src/Protocol/DFRN.php
 
 		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Protocol/Delivery.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
 			message: '#^Call to deprecated function openssl_free_key\(\)\.$#'
 			identifier: function.deprecated
 			count: 2
 			path: src/Security/OAuth1/Signature/OAuthSignatureMethod_RSA_SHA1.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Worker/AddContact.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Worker/UpdateBlockedServers.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Worker/UpdateGServer.php
-
-		-
-			message: '''
-				#^Call to deprecated method isUrlBlocked\(\) of class Friendica\\Util\\Network\:
-				2023\.03 Use isUriBlocked instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Worker/UpdateServerPeers.php
 
 		-
 			message: '''
@@ -1031,4 +900,3 @@ parameters:
 			identifier: classConstant.deprecatedInterface
 			count: 1
 			path: static/dependencies.config.php
-

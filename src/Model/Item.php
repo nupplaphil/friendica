@@ -552,7 +552,7 @@ class Item
 			return false;
 		}
 
-		if (!empty($item['author-link']) && Network::isUrlBlocked($item['author-link'])) {
+		if (!empty($item['author-link']) && Network::isUriBlocked(new Uri($item['author-link']))) {
 			DI::logger()->notice('Author server is blocked', ['author-link' => $item['author-link'], 'item-uri' => $item['uri']]);
 			return false;
 		}
@@ -562,7 +562,7 @@ class Item
 			return false;
 		}
 
-		if (!empty($item['owner-link']) && Network::isUrlBlocked($item['owner-link'])) {
+		if (!empty($item['owner-link']) && Network::isUriBlocked(new Uri($item['owner-link']))) {
 			DI::logger()->notice('Owner server is blocked', ['owner-link' => $item['owner-link'], 'item-uri' => $item['uri']]);
 			return false;
 		}

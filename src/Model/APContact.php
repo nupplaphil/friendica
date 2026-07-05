@@ -107,7 +107,7 @@ class APContact
 	 */
 	public static function getByURL(string $url, ?bool $update = null): array
 	{
-		if (empty($url) || Network::isUrlBlocked($url)) {
+		if (empty($url) || Network::isUriBlocked(new Uri($url))) {
 			DI::logger()->info('Domain is blocked', ['url' => $url]);
 			return [];
 		}

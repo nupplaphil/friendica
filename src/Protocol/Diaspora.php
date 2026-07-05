@@ -859,7 +859,7 @@ class Diaspora
 		//}
 
 		// Contact server is blocked
-		if (Network::isUrlBlocked($contact['url'])) {
+		if (Network::isUriBlocked(new Uri($contact['url']))) {
 			return false;
 			// We don't seem to like that person
 		} elseif ($contact['blocked']) {

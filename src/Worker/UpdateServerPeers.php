@@ -16,6 +16,7 @@ use Friendica\Network\HTTPClient\Client\HttpClientOptions;
 use Friendica\Network\HTTPClient\Client\HttpClientRequest;
 use Friendica\Util\Network;
 use Friendica\Util\Strings;
+use GuzzleHttp\Psr7\Uri;
 
 class UpdateServerPeers
 {
@@ -53,7 +54,7 @@ class UpdateServerPeers
 		$total = 0;
 		$added = 0;
 		foreach ($peers as $peer) {
-			if (Network::isUrlBlocked('https://' . $peer)) {
+			if (Network::isUriBlocked(new Uri('https://' . $peer))) {
 				// Ignore blocked systems as soon as possible in the loop to avoid being slowed down by tar pits
 				continue;
 			}

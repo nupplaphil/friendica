@@ -474,7 +474,7 @@ class Probe
 	 */
 	private static function getWebfinger(string $template, string $type, string $uri, string $addr): ?array
 	{
-		if (Network::isUrlBlocked($template)) {
+		if (Network::isUriBlocked(new Uri($template))) {
 			DI::logger()->info('Domain is blocked', ['url' => $template]);
 			return null;
 		}

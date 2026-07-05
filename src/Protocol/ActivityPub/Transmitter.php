@@ -34,6 +34,7 @@ use Friendica\Util\Map;
 use Friendica\Util\Network;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
+use GuzzleHttp\Psr7\Uri;
 
 /**
  * ActivityPub Transmitter Protocol class
@@ -1080,7 +1081,7 @@ class Transmitter
 			$blindcopy = in_array($element, ['bcc']);
 
 			foreach ($permissions[$element] as $receiver) {
-				if (empty($receiver) || Network::isUrlBlocked($receiver)) {
+				if (empty($receiver) || Network::isUriBlocked(new Uri($receiver))) {
 					continue;
 				}
 

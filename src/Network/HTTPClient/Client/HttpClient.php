@@ -78,7 +78,7 @@ class HttpClient implements ICanSendHttpRequests
 		$parts['path'] = implode('/', $parts2);
 		$url           = (string) Uri::fromParts((array) $parts);
 
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			$this->logger->info('Domain is blocked.', ['url' => $url]);
 			$this->profiler->stopRecording();
 			return CurlResult::createErrorCurl($this->logger, $url);
@@ -232,7 +232,7 @@ class HttpClient implements ICanSendHttpRequests
 			$this->logger->debug('Local link', ['url' => $url]);
 		}
 
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			$this->logger->info('Domain is blocked.', ['url' => $url]);
 			return $url;
 		}

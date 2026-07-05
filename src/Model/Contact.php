@@ -39,6 +39,7 @@ use Friendica\Worker\AddContact;
 use Friendica\Worker\ContactDiscovery;
 use Friendica\Worker\ContactDiscoveryForUser;
 use Friendica\Worker\UpdateContact;
+use GuzzleHttp\Psr7\Uri;
 
 /**
  * functions for interacting with a contact
@@ -1592,7 +1593,7 @@ class Contact
 			return false;
 		}
 
-		if (Network::isUrlBlocked($blocked['url'])) {
+		if (Network::isUriBlocked(new Uri($blocked['url']))) {
 			return true;
 		}
 
@@ -3139,7 +3140,7 @@ class Contact
 			return $result;
 		}
 
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			$result['message'] = DI::l10n()->t('Blocked domain');
 			return $result;
 		}

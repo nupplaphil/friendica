@@ -39,6 +39,7 @@ use Friendica\Util\JsonLD;
 use Friendica\Util\Network;
 use Friendica\Util\Strings;
 use Friendica\Worker\FetchMissingActivity;
+use GuzzleHttp\Psr7\Uri;
 
 /**
  * ActivityPub Processor Protocol class
@@ -703,7 +704,7 @@ class Processor
 	 */
 	public static function isActivityGone(string $url): bool
 	{
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			return true;
 		}
 
@@ -1762,7 +1763,7 @@ class Processor
 	 */
 	public static function fetchMissingActivity(string $url, array $child = [], string $relay_actor = '', int $completion = Receiver::COMPLETION_MANUAL, int $uid = 0): ?string
 	{
-		if (Network::isUrlBlocked($url)) {
+		if (Network::isUriBlocked(new Uri($url))) {
 			return null;
 		}
 
