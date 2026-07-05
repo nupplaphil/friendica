@@ -116,13 +116,13 @@ class Network extends NetworkModule
 		$this->parseRequest($request);
 
 		if ($this->force || !is_null($this->maxId)) {
-			System::httpExit('');
+			$this->httpExit('');
 		}
 
 		$lockkey = 'network-ping-' . $this->session->getLocalUserId();
 		if (!$this->lock->acquire($lockkey, 0)) {
 			$this->logger->debug('Ping-1-lock', ['uid' => $this->session->getLocalUserId()]);
-			System::httpExit('');
+			$this->httpExit('');
 		}
 
 		$this->setPing(true);
@@ -137,6 +137,6 @@ class Network extends NetworkModule
 		}
 		$this->lock->release($lockkey);
 		$count = count($items);
-		System::httpExit(($count < 100) ? $count : '99+');
+		$this->httpExit(($count < 100) ? $count : '99+');
 	}
 }

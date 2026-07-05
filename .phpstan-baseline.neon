@@ -573,15 +573,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method httpExit\(\) of class Friendica\\Core\\System\:
-				since 2023\.09 Use BaseModule\-\>httpExit\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: src/Module/Ping/Network.php
-
-		-
-			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -642,15 +633,6 @@ parameters:
 			identifier: method.deprecated
 			count: 1
 			path: src/Network/HTTPClient/Client/HttpClient.php
-
-		-
-			message: '''
-				#^Call to deprecated method getHeaderArray\(\) of class Friendica\\Network\\HTTPClient\\Response\\CurlResult\:
-				2021\.10 Use getHeaders\(\) instead$#
-			'''
-			identifier: method.deprecated
-			count: 3
-			path: src/Network/HTTPClient/Response/CurlResult.php
 
 		-
 			message: '''
