@@ -19,6 +19,7 @@ use Friendica\Model\Item;
 use Friendica\Model\Post;
 use Friendica\Model\User;
 use Friendica\Util\Network;
+use GuzzleHttp\Psr7\Uri;
 
 class Delivery
 {
@@ -195,7 +196,7 @@ class Delivery
 			return true;
 		}
 
-		if (Network::isUrlBlocked($contact['url'])) {
+		if (Network::isUriBlocked(new Uri($contact['url']))) {
 			self::setFailedQueue($cmd, $target_item);
 			return true;
 		}

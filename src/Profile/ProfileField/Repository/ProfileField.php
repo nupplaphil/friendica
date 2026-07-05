@@ -39,6 +39,7 @@ class ProfileField extends BaseRepository
 		$this->permissionSetRepository = $permissionSetRepository;
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): ProfileFieldFactory
 	{
 		return $this->entityFactory;

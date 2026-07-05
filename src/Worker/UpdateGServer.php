@@ -77,7 +77,7 @@ class UpdateGServer
 	public static function add($run_parameters, string $serverUrl, bool $onlyNodeInfo = false): int
 	{
 		// Dropping the worker task if the server domain is blocked
-		if (Network::isUrlBlocked($serverUrl)) {
+		if (Network::isUriBlocked(new Uri($serverUrl))) {
 			GServer::setBlockedByUrl($serverUrl);
 			return 0;
 		}

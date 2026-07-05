@@ -48,6 +48,7 @@ class UserDefinedChannel extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): UserDefinedChannelFactory
 	{
 		return $this->entityFactory;

@@ -109,7 +109,7 @@ class GServer
 	 */
 	public static function getID(string $url, bool $no_check = false): ?int
 	{
-		$url = self::cleanURL($url);
+		$url = (string) self::cleanUri(new Uri($url));
 
 		if (empty($url)) {
 			return null;
@@ -119,7 +119,7 @@ class GServer
 		if (DBA::isResult($gserver)) {
 			DI::logger()->debug('Got ID for URL', ['id' => $gserver['id'], 'url' => $url]);
 
-			if (Network::isUrlBlocked($url)) {
+			if (Network::isUriBlocked(new Uri($url))) {
 				self::setBlockedById($gserver['id']);
 			} else {
 				self::setUnblockedById($gserver['id']);
@@ -359,12 +359,12 @@ class GServer
 	 */
 	public static function check(string $server_url, string $network = '', bool $force = false, bool $only_nodeinfo = false): bool
 	{
-		$server_url = self::cleanURL($server_url);
+		$server_url = (string) self::cleanUri(new Uri($server_url));
 		if ($server_url == '') {
 			return false;
 		}
 
-		if (Network::isUrlBlocked($server_url)) {
+		if (Network::isUriBlocked(new Uri($server_url))) {
 			DI::logger()->info('Server is blocked', ['url' => $server_url]);
 			self::setBlockedByUrl($server_url);
 			return false;
@@ -403,7 +403,7 @@ class GServer
 			return;
 		}
 
-		$blocked = Network::isUrlBlocked($gserver['url']);
+		$blocked = Network::isUriBlocked(new Uri($gserver['url']));
 		if ($gserver['failed']) {
 			$fields = ['failed' => false, 'blocked' => $blocked, 'last_contact' => DateTimeFormat::utcNow()];
 			if (!empty($network) && !in_array($gserver['network'], Protocol::FEDERATED)) {
@@ -431,7 +431,7 @@ class GServer
 	{
 		$gserver = DBA::selectFirst('gserver', ['url', 'failed', 'next_contact'], ['id' => $gsid]);
 		if (DBA::isResult($gserver) && !$gserver['failed']) {
-			self::update(['failed' => true, 'blocked' => Network::isUrlBlocked($gserver['url']), 'last_failure' => DateTimeFormat::utcNow()], ['id' => $gsid]);
+			self::update(['failed' => true, 'blocked' => Network::isUriBlocked(new Uri($gserver['url'])), 'last_failure' => DateTimeFormat::utcNow()], ['id' => $gsid]);
 			DI::logger()->info('Set failed status for server', ['url' => $gserver['url']]);
 
 			if (strtotime((string) $gserver['next_contact']) < time()) {
@@ -481,7 +481,7 @@ class GServer
 		if (DBA::isResult($gserver)) {
 			$next_update = self::getNextUpdateDate(false, $gserver['created'], $gserver['last_contact']);
 			self::update(
-				['url'          => $url, 'failed' => true, 'blocked' => Network::isUrlBlocked($url), 'last_failure' => DateTimeFormat::utcNow(),
+				['url'          => $url, 'failed' => true, 'blocked' => Network::isUriBlocked(new Uri($url)), 'last_failure' => DateTimeFormat::utcNow(),
 					'next_contact' => $next_update, 'network' => Protocol::PHANTOM, 'detection-method' => null],
 				['nurl' => $nurl],
 			);
@@ -569,7 +569,7 @@ class GServer
 		$original_url = $url;
 
 		// Remove URL content that is not supposed to exist for a server url
-		$url = rtrim(self::cleanURL($url), '/');
+		$url = rtrim((string) self::cleanUri(new Uri($url)), '/');
 		if (empty($url)) {
 			DI::logger()->notice('Empty URL.');
 			return false;
@@ -578,7 +578,7 @@ class GServer
 		// If the URL mismatches, then we mark the old entry as failure
 		if (!Strings::compareLink($url, $original_url)) {
 			self::setFailureByUrl($original_url);
-			if (!self::getID($url, true) && !Network::isUrlBlocked($url)) {
+			if (!self::getID($url, true) && !Network::isUriBlocked(new Uri($url))) {
 				self::detect($url, $network, $only_nodeinfo);
 			}
 			return false;
@@ -600,7 +600,7 @@ class GServer
 				DI::logger()->debug('Found redirect. Mark old entry as failure', ['old' => $url, 'new' => $valid_url]);
 				self::setFailureByUrl($url);
 				$target_id = self::getID($valid_url, true);
-				if (!$target_id && !Network::isUrlBlocked($valid_url)) {
+				if (!$target_id && !Network::isUriBlocked(new Uri($valid_url))) {
 					self::detect($valid_url, $network, $only_nodeinfo);
 					$target_id = self::getID($valid_url, true);
 				}
@@ -618,7 +618,7 @@ class GServer
 				$valid_url = (string) Uri::fromParts($parts);
 
 				self::setFailureByUrl($url);
-				if (!self::getID($valid_url, true) && !Network::isUrlBlocked($valid_url)) {
+				if (!self::getID($valid_url, true) && !Network::isUriBlocked(new Uri($valid_url))) {
 					self::detect($valid_url, $network, $only_nodeinfo);
 				}
 				return false;

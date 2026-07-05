@@ -93,6 +93,7 @@ final class Report extends \Friendica\BaseRepository
 		return $Report;
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): ReportFactory
 	{
 		return $this->entityFactory;
@@ -100,6 +101,8 @@ final class Report extends \Friendica\BaseRepository
 
 	/**
 	 * @throws NotFoundException
+	 *
+	 * @not-deprecated
 	 */
 	protected function _selectOne(array $condition, array $params = []): ReportEntity
 	{

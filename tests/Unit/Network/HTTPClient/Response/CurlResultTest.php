@@ -136,7 +136,7 @@ class CurlResultTest extends TestCase
 			'url'          => 'https://test.local',
 		]);
 
-		$headers = $curlResult->getHeaderArray();
+		$headers = $curlResult->getHeaderArray(); // @phpstan-ignore method.deprecated (testing the deprecated method itself)
 
 		self::assertNotEmpty($headers);
 		self::assertArrayHasKey('vary', $headers);

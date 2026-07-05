@@ -10,6 +10,7 @@ namespace Friendica\Object\Api\Mastodon;
 use Friendica\BaseDataTransferObject;
 use Friendica\Model\Contact;
 use Friendica\Util\Network;
+use GuzzleHttp\Psr7\Uri;
 
 /**
  * Class Relationship
@@ -79,7 +80,7 @@ class Relationship extends BaseDataTransferObject
 		$this->showing_reblogs      = true;
 		$this->notifying            = false;
 		$this->blocking             = $blocked;
-		$this->domain_blocking      = Network::isUrlBlocked($contactRecord['url'] ?? '');
+		$this->domain_blocking      = Network::isUriBlocked(new Uri($contactRecord['url'] ?? ''));
 		$this->blocked_by           = false;
 		$this->note                 = '';
 

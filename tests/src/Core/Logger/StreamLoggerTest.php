@@ -43,8 +43,8 @@ class StreamLoggerTest extends LoggerTestCase
 		$this->config->shouldReceive('get')->with('system', 'logfile')->andReturn($this->logfile->url())->once();
 		$this->config->shouldReceive('get')->with('system', 'loglevel')->andReturn($level)->once();
 
-		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test');
-		return $loggerFactory->create($this->config);
+		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test'); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated StreamLogger)
+		return $loggerFactory->create($this->config); // @phpstan-ignore method.deprecatedClass (testing deprecated create() on StreamLogger)
 	}
 
 	/**
@@ -65,8 +65,8 @@ class StreamLoggerTest extends LoggerTestCase
 
 		$this->config->shouldReceive('get')->with('system', 'logfile')->andReturn('')->once();
 
-		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test');
-		$logger        = $loggerFactory->create($this->config);
+		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test'); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated StreamLogger)
+		$logger        = $loggerFactory->create($this->config); // @phpstan-ignore method.deprecatedClass (testing deprecated create() on StreamLogger)
 
 		$logger->emergency('not working');
 	}
@@ -83,8 +83,8 @@ class StreamLoggerTest extends LoggerTestCase
 
 		$this->config->shouldReceive('get')->with('system', 'logfile')->andReturn($logfile->url())->once();
 
-		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test');
-		$logger        = $loggerFactory->create($this->config);
+		$loggerFactory = new \Friendica\Core\Logger\Factory\StreamLogger($this->introspection, 'test'); // @phpstan-ignore method.deprecatedClass, new.deprecatedClass (testing the deprecated StreamLogger)
+		$logger        = $loggerFactory->create($this->config); // @phpstan-ignore method.deprecatedClass (testing deprecated create() on StreamLogger)
 
 		$logger->emergency('not working');
 	}

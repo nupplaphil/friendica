@@ -50,11 +50,11 @@ abstract class BaseRepository
 	{
 		$this->db      = $database;
 		$this->logger  = $logger;
-		$this->factory = $factory;
+		$this->factory = $factory; // @phpstan-ignore property.deprecated (self-call in deprecated flow)
 	}
 
 	/**
-	 * Returns the TableRowFactor
+	 * Returns the TableRowFactory
 	 *
 	 * @deprecated 2026.08 This method will become abstract in a future release, implement it in your child class instead.
 	 */

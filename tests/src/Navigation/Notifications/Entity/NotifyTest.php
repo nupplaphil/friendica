@@ -26,6 +26,6 @@ class NotifyTest extends FixtureTestCase
 	#[\PHPUnit\Framework\Attributes\DataProvider('dataFormatNotify')]
 	public function testFormatNotify(string $name, string $message, string $assertion): void
 	{
-		self::assertEquals($assertion, Notify::formatMessage($name, $message));
+		self::assertEquals($assertion, Notify::formatMessage($name, $message)); // @phpstan-ignore staticMethod.deprecatedClass (testing the deprecated Notify::formatMessage)
 	}
 }

@@ -248,29 +248,13 @@ class CurlResult implements ICanHandleHttpResponses
 
 		$header = strtolower(trim($header));
 
-		$headers = $this->getHeaderArray();
+		$headers = $this->getHeaders();
 
 		return $headers[$header] ?? [];
 	}
 
 	/** {@inheritDoc} */
 	public function getHeaders(): array
-	{
-		return $this->getHeaderArray();
-	}
-
-	/** {@inheritDoc} */
-	public function inHeader(string $field): bool
-	{
-		$field = strtolower(trim($field));
-
-		$headers = $this->getHeaderArray();
-
-		return array_key_exists($field, $headers);
-	}
-
-	/** {@inheritDoc} */
-	public function getHeaderArray(): array
 	{
 		if (!empty($this->header_fields)) {
 			return $this->header_fields;
@@ -291,6 +275,22 @@ class CurlResult implements ICanHandleHttpResponses
 		}
 
 		return $this->header_fields;
+	}
+
+	/** {@inheritDoc} */
+	public function inHeader(string $field): bool
+	{
+		$field = strtolower(trim($field));
+
+		$headers = $this->getHeaders();
+
+		return array_key_exists($field, $headers);
+	}
+
+	/** {@inheritDoc} */
+	public function getHeaderArray(): array
+	{
+		return $this->getHeaders();
 	}
 
 	/** {@inheritDoc} */

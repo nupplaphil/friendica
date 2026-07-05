@@ -30,6 +30,7 @@ class Introduction extends BaseRepository
 		parent::__construct($database, $logger, $entityFactory);
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): IntroductionFactory
 	{
 		return $this->entityFactory;
