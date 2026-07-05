@@ -19,11 +19,12 @@
 </div><!--./tread-wrapper-->
 {{/foreach}}
 {{if !$update}}
-<div id="conversation-end"></div>
+  <div id="conversation-end"></div>
 
-{{if $dropping}}
-<button type="button" id="item-delete-selected" class="btn btn-link" title="{{$dropping}}" onclick="deleteCheckedItems();" data-toggle="tooltip">
-	<i class="ri ri-delete-bin-line" aria-hidden="true"></i>
-</button>
-{{/if}}
+  {{if $dropping}}
+    <button type="button" id="item-delete-selected" class="btn btn-primary" onclick="deleteCheckedItems();">
+      <i class="ri ri-delete-bin-line" aria-hidden="true"></i>
+      <span>{{$dropping}}</span>
+    </button>
+  {{/if}}
 {{/if}}

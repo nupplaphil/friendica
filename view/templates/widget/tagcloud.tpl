@@ -13,7 +13,7 @@
 		</h3>
 	</button>
 
-	<div class="tag-cloud" class="sidebar-widget-list">
+	<div class="tag-cloud sidebar-widget-list">
 		{{foreach $tags as $tag}}
 				<a href="{{$tag.url}}" class="tag{{$tag.level}}">#{{$tag.name}}</a>
 		{{/foreach}}

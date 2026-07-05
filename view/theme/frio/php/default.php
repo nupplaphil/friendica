@@ -143,7 +143,7 @@ if ($minimal) {
 				</div><!--row-->
 			</div><!-- container -->
 
-			<div id="back-to-top" title="<?php echo DI::l10n()->t('Back to top')?>">⇧</div>
+			<button id="back-to-top" class="btn btn-primary" data-toggle="tooltip" title="<?php echo DI::l10n()->t('Back to top')?>">⇧</button>
 		</main>
 
 		<footer id="page-footer">
