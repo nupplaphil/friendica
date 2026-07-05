@@ -54,7 +54,7 @@ abstract class BaseRepository
 	}
 
 	/**
-	 * Returns the TableRowFactor
+	 * Returns the TableRowFactory
 	 *
 	 * @deprecated 2026.08 This method will become abstract in a future release, implement it in your child class instead.
 	 */

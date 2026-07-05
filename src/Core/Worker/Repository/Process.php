@@ -86,6 +86,7 @@ class Process extends BaseRepository
 		}
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): ProcessFactory
 	{
 		return $this->entityFactory;

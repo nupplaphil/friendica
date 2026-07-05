@@ -268,6 +268,7 @@ class DiasporaContact extends BaseRepository
 		return $diasporaContact['url'] ?? null;
 	}
 
+	/** @not-deprecated */
 	protected function getFactory(): DiasporaContactFactory
 	{
 		return $this->entityFactory;
