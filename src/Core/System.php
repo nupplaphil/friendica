@@ -512,7 +512,11 @@ class System
 	 */
 	public static function externalRedirect($url, $code = 302)
 	{
-		if (empty(parse_url($url, PHP_URL_SCHEME))) {
+		// Use a regex to detect the presence of a URI scheme, because PHP's
+		// parse_url() returns false/null for some valid custom-scheme URIs such
+		// as native-app callback URIs (e.g. "icecubesapp://", "mona://").
+		// RFC 3986 scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+		if (!preg_match('/^[a-zA-Z][a-zA-Z0-9+\-.]*:/', $url)) {
 			DI::logger()->warning('No fully qualified URL provided', ['url' => $url]);
 			DI::baseUrl()->redirect($url);
 		}
