@@ -575,7 +575,9 @@ class HTML
 		$doc                     = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
 
-		$message = mb_convert_encoding($message, 'HTML-ENTITIES', "UTF-8");
+		// mb_convert_encoding($s, 'HTML-ENTITIES', 'UTF-8') is deprecated since PHP 8.2.
+		// mb_encode_numericentity() produces the same numeric-entity output without the warning.
+		$message = mb_encode_numericentity($message, [0x80, 0x10FFFF, 0, 0x1FFFFF], 'UTF-8');
 
 		if (empty($message)) {
 			DI::profiler()->stopRecording();
