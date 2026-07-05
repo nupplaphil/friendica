@@ -45,7 +45,7 @@
 				</div>
 			{{/if}}
 
-			{{if $profile.about}}<div class="title" dir="auto">{{$profile.about nofilter}}</div>{{/if}}
+			{{if $profile.about}}<div class="title p-about" dir="auto">{{$profile.about nofilter}}</div>{{/if}}
 			{{if $account_type == 1 }}
 				{{$acct_icon = "ri-building-4-line"}}
 			{{else if $account_type == 2}}

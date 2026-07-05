@@ -23,7 +23,7 @@
 					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
 					<div id="banner" class="hidden-sm hidden-xs">
 						<a href="{{$baseurl}}" aria-hidden="true">
-							<div id="logo-img" aria-label="{{$home}}"></div>
+							<i id="logo-img" aria-label="{{$home}}" class="ri ri-friendica-fill ri-fw ri-lg" aria-hidden="true"></i>
 						</a>
 					</div>
 					{{* The search box *}}
@@ -32,8 +32,8 @@
 							<div class="form-group form-group-search">
 								<input accesskey="s" id="nav-search-input-field" class="form-control form-search"
 									type="search" name="q" placeholder="{{$search_placeholder}}">
-								<button class="btn btn-primary btn-md form-button-search" type="submit">
-									<i class="ri ri-search-line" aria-hidden="true"></i>
+								<button class="btn btn-primary form-button-search" type="submit">
+									<i class="ri ri-search-line ri-lg" aria-hidden="true"></i>
 									<span class="sr-only">{{$nav.search.1}}</span>
 								</button>
 							</div>
@@ -177,7 +177,7 @@
 									data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false"
 									aria-controls="nav-user-menu">
 									<div aria-hidden="true" class="user-title pull-left hidden-xs hidden-sm hidden-md">
-										<strong>{{$userinfo.name}}</strong><br>
+										{{$userinfo.name}}<br>
 										{{if $nav.remote}}<span class="truncate">{{$nav.remote}}</span>{{/if}}
 									</div>
 
@@ -440,7 +440,7 @@
 			</button>
 			<a class="navbar-brand" href="#">
 				<div id="navbrand-container">
-					<div id="logo-img"></div>
+					<i id="logo-img" aria-label="{{$home}}" class="ri ri-friendica-fill ri-fw ri-lg" aria-hidden="true"></i>
 					<div id="navbar-brand-text"> Friendica</div>
 				</div>
 			</a>

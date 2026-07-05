@@ -25,12 +25,10 @@
 
 {{if !$update}}
 <div id="conversation-end"></div>
-    {{if $dropping}}
-<div id="item-delete-selected" class="fakelink" onclick="deleteCheckedItems();">
-	<div id="item-delete-selected-icon" class="ri ri-delete-bin-line drophide" title="{{$dropping}}"
-	     onmouseover="imgbright(this);" onmouseout="imgdull(this);"></div>
-	<div id="item-delete-selected-desc">{{$dropping}}</div>
-</div>
-<div id="item-delete-selected-end"></div>
-    {{/if}}
+{{if $dropping}}
+    <button id="item-delete-selected" class="btn btn-primary" onclick="deleteCheckedItems();">
+      <i id="item-delete-selected-icon" class="ri ri-delete-bin-line drophide"></i>
+      <span>{{$dropping}}</span>
+    </button>
+{{/if}}
 {{/if}}

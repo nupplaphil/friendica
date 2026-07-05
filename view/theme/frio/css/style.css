@@ -10,7 +10,7 @@
 */
 
 :root {
-	--topbar-first-size: 50px;
+	--topbar-first-size: 55px;
 
 	/* Mostly just bootstraps own colours, available here to use them for things that there aren't helper classes for in Bootstrap 3, like border colour */
 	--default: #ededed; /* Not default */
@@ -282,8 +282,6 @@ ul#nav-user-menu {
 
 #back-to-top {
 	display: none;
-	cursor: pointer;
-	color: $nav_icon_color;
 	position: fixed;
 	z-index: 49;
 	right: 20px;
@@ -292,8 +290,6 @@ ul#nav-user-menu {
 	font-size: 2.9em;
 	padding: 0 12px 0 12px;
 	border-radius: 10px;
-	background-color: $nav_bg;
-	line-height: 1.5;
 }
 
 @media (max-width: 768px) {
@@ -307,18 +303,11 @@ ul#nav-user-menu {
 }
 
 #item-delete-selected {
-	cursor: pointer;
-	color: white;
 	position: fixed;
 	z-index: 49;
-	right: 20px;
-	top: 100px;
+	right: 15px;
+	top: calc(var(--topbar-first-size) + 50px);
 	opacity: 0.8;
-	font-size: 2.9em;
-	padding: 0 12px 0 12px;
-	border-radius: 10px;
-	background-color: $link_color;
-	line-height: 1.5;
 	display: none;
 }
 
@@ -514,6 +503,9 @@ btn-eventnav:hover {
 aside .badge {
 	opacity: 0.7;
 }
+#sidebar-circle-ul {
+	display: grid;
+}
 .group-widget-entry .badge,
 .sidebar-circle-li .badge {
 	margin-top: 6px;
@@ -547,15 +539,14 @@ header #site-location {
 	display: none;
 }
 header #banner {
-	padding-top: 12.5px;
+	display: flex;
+	align-items: center;
 	width: min-content;
 }
 header #banner #logo-img,
 .navbar-brand #logo-img {
-	-webkit-mask-image: url("img/friendica-25.png");
-	background-color: $nav_icon_color;
-	height: 25px;
-	width: 25px;
+	font-size: 36px;
+	color: White;
 }
 
 #navbrand-container {
@@ -712,13 +703,13 @@ header #banner #logo-img,
 nav.navbar {
 	background-color: $nav_bg;
 	color: $nav_icon_color;
-	font-size: 15px;
+	font-size: 16px;
 	top: 0;
 	z-index: 1030;
 }
 
 	#topbar-first .topbar-nav i {
-		font-size: 24.4px;
+		font-size: 27.5px;
 	}
 
 button#main-menu {
@@ -1031,6 +1022,7 @@ nav.navbar .nav > li > button:focus {
 }
 
 #search-box #nav-search-input-field {
+	height: 38px;
 	width: 296px;
 }
 
@@ -1183,6 +1175,10 @@ ul li .intro-wrapper button.intro-action-link {
 	text-align: left;
 }
 
+.tooltip {
+		font-size: 15px;
+}
+
 .nav-pills .dropdown-menu li > a:hover,
 .nav-pills .dropdown-menu li > button:hover,
 .nav-tabs .dropdown-menu li > a:hover,
@@ -1241,7 +1237,7 @@ aside .widget,
 	border-radius: 4px;
 	position: relative;
 	margin-bottom: 20px;
-	padding: 10px;
+	padding: 10px 15px;
 	overflow: auto;
 }
 aside .widget h3,
@@ -1367,7 +1363,6 @@ aside .vcard .tool .action {
 	width: 45px;
 	height: 45px;
 	background: rgba(0, 0, 0, 0.5);
-	text-align: center;
 	border-radius: 3px;
 	opacity: 0;
 	-webkit-transition: all 0.25s ease-in-out;
@@ -1385,37 +1380,30 @@ aside .vcard #profile-photo-wrapper:hover .tool .action {
 aside .vcard #profile-photo-wrapper.crop-preview {
 	padding: 0;
 }
+aside .vcard .panel-body {
+	text-align: center;
+}
 aside .vcard .profile-header {
 	padding: 5px 0px 20px 0px;
 }
 aside .vcard .fn {
 	font-weight: bold;
 	padding: 5px 0px 5px 0px;
-	text-align: center;
 }
 aside .vcard .p-addr {
 	font-style: italic;
 	padding-bottom: 7px;
-	text-align: center;
 	word-wrap: break-word;
 }
 aside .vcard .title {
 	margin-top: 10px;
-}
-aside .vcard .detail {
-	display: table;
-	padding: 2px 0;
+	text-align: left;
 }
 aside .xmpp, aside .matrix {
 	display: table;
 }
 aside .member-since {
 	padding-top: 5px;
-}
-aside .vcard .icon {
-	display: table-cell;
-	padding-right: 10px;
-	width: 30px;
 }
 #profile-extra-links {
 	display: flex;
@@ -1424,7 +1412,7 @@ aside .vcard .icon {
 	overflow: auto;
 	margin-bottom: 10px;
 }
-#profile-extra-links a, #profile-extra-links button {
+aside .vcard a.btn, aside .vcard button {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -1546,6 +1534,10 @@ aside #circle-sidebar li .circle-edit-tool {
 }
 aside #circle-sidebar li .circle-edit-tool:first-child {
 	padding-right: 0px;
+}
+
+.x-network {
+	font-size: 15px;
 }
 
 /* contact block widget */
@@ -2340,7 +2332,6 @@ button[disabled] {
 	box-shadow: none;
 	color: $link_color;
 	font-weight: bold;
-	text-decoration: underline;
 }
 .wall-item-actions-left {
 	display: table-cell;
@@ -2748,20 +2739,16 @@ input[type="range"].form-control {
 	position: relative;
 }
 
-#search-box .ri-search-line {
-	font-size: 1.1em;
-}
-
 /* Both desktop and mobile - multiple search fields */
 .form-group-search .form-button-search {
 	border-radius: 30px;
-	padding: 3px 10px;
+	padding: 5px 10px;
 	position: absolute;
 	right: 4px;
 	top: 2px;
 }
 #search-box .form-button-search {
-	top: 1px;
+	top: 2px;
 }
 
 #search-box .navbar-form {
@@ -2858,6 +2845,10 @@ body.mod-home nav.navbar .nav > li > a:hover {
 body.mod-home .navbar #nav-login,
 body.mod-login .navbar #nav-login {
 	display: none;
+}
+
+body.mod-home .navbar .navbar-toggle {
+	display: none!important;
 }
 
 .mod-lostpass #content {

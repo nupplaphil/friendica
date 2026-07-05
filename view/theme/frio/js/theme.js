@@ -88,12 +88,6 @@ function initTheme() {
 		return false;
 	});
 
-	// TODO: Make PHP add the selected class to the relevant HTML element(s) and remove these
-	// add the class "selected" to circle widgets li if li > a does have the class circle-selected
-	if ($("#sidebar-circle-ul li a").hasClass("circle-selected")) {
-		$("#sidebar-circle-ul li a.circle-selected").parent("li").addClass("selected");
-	}
-
 	// add the class "active" to tabmenuli if li > a does have the class active
 	if ($("#tabmenu ul li a").hasClass("active")) {
 		$("#tabmenu ul li a.active").parent("li").addClass("active");
