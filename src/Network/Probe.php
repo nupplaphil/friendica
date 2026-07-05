@@ -11,8 +11,8 @@ use DOMDocument;
 use DOMXPath;
 use Exception;
 use Friendica\Content\Text\HTML;
-use Friendica\Core\Hook;
 use Friendica\Core\Protocol;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
@@ -529,7 +529,9 @@ class Probe
 			'result'  => null,
 		];
 
-		Hook::callAll('probe_detect', $hookData);
+		$hookData = DI::eventDispatcher()->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::PROBE_DETECT, $hookData),
+		)->getArray();
 
 		if (isset($hookData['result'])) {
 			return is_array($hookData['result']) ? $hookData['result'] : [];

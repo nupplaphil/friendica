@@ -7,8 +7,8 @@
 
 namespace Friendica\Util;
 
-use Friendica\Core\Hook;
 use Friendica\DI;
+use Friendica\Event\ArrayFilterEvent;
 use phpseclib3\Crypt\PublicKeyLoader;
 
 /**
@@ -183,7 +183,7 @@ class Crypto
 			return $result;
 		} else {
 			$x = ['data' => $data, 'pubkey' => $pubkey, 'alg' => $alg, 'result' => $data];
-			Hook::callAll('other_encapsulate', $x);
+			$x = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::OTHER_ENCAPSULATE, $x))->getArray();
 
 			return $x['result'];
 		}
@@ -269,7 +269,7 @@ class Crypto
 			return self::$fn(Strings::base64UrlDecode($data['data']), $k, $i);
 		} else {
 			$x = ['data' => $data, 'prvkey' => $prvkey, 'alg' => $alg, 'result' => $data];
-			Hook::callAll('other_unencapsulate', $x);
+			$x = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::OTHER_UNENCAPSULATE, $x))->getArray();
 
 			return $x['result'];
 		}

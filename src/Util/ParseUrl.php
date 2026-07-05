@@ -12,8 +12,8 @@ use DOMXPath;
 use DOMElement;
 use Friendica\Content\Text\HTML;
 use Friendica\Protocol\HTTP\MediaType;
-use Friendica\Core\Hook;
 use Friendica\Database\Database;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Network\HTTPClient\Client\HttpClientAccept;
@@ -570,7 +570,9 @@ class ParseUrl
 
 		DI::logger()->info('Siteinfo fetched', ['url' => $url, 'siteinfo' => $siteinfo]);
 
-		Hook::callAll('getsiteinfo', $siteinfo);
+		$siteinfo = DI::eventDispatcher()->dispatch(
+			new ArrayFilterEvent(ArrayFilterEvent::GET_SITE_INFO, $siteinfo),
+		)->getArray();
 
 		ksort($siteinfo);
 

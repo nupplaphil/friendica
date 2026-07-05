@@ -7,8 +7,8 @@
 
 namespace Friendica\Protocol;
 
-use Friendica\Core\Hook;
 use Friendica\Content\Text\BBCode;
+use Friendica\Event\ArrayFilterEvent;
 use Friendica\Content\Text\HTML;
 use Friendica\Core\Protocol;
 use Friendica\DI;
@@ -142,7 +142,7 @@ class Email
 
 			if (!empty($html)) {
 				$message = ['text' => '', 'html' => $html, 'item' => $ret];
-				Hook::callAll('email_getmessage', $message);
+				$message = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::EMAIL_GET_MESSAGE, $message))->getArray();
 				$ret = $message['item'];
 				if (empty($ret['body'])) {
 					$ret['body'] = HTML::toBBCode($message['html']);
@@ -153,7 +153,7 @@ class Email
 				$text = self::messageGetPart($mbox, $uid, $struc, 0, 'plain');
 
 				$message = ['text' => $text, 'html' => '', 'item' => $ret];
-				Hook::callAll('email_getmessage', $message);
+				$message = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::EMAIL_GET_MESSAGE, $message))->getArray();
 				$ret         = $message['item'];
 				$ret['body'] = $message['text'];
 			}
@@ -173,7 +173,7 @@ class Email
 			}
 
 			$message = ['text' => trim($text), 'html' => trim($html), 'item' => $ret];
-			Hook::callAll('email_getmessage', $message);
+			$message = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::EMAIL_GET_MESSAGE, $message))->getArray();
 			$ret = $message['item'];
 
 			if (empty($ret['body']) && !empty($message['html'])) {
@@ -199,7 +199,7 @@ class Email
 		$ret['body'] = Strings::escapeHtml($ret['body']);
 		$ret['body'] = BBCode::limitBodySize($ret['body']);
 
-		Hook::callAll('email_getmessage_end', $ret);
+		$ret = DI::eventDispatcher()->dispatch(new ArrayFilterEvent(ArrayFilterEvent::EMAIL_GET_MESSAGE_END, $ret))->getArray();
 
 		return $ret;
 	}
