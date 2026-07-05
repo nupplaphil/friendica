@@ -1234,7 +1234,7 @@ aside .widget,
 	border-radius: 4px;
 	position: relative;
 	margin-bottom: 20px;
-	padding: 10px;
+	padding: 10px 15px;
 	overflow: auto;
 }
 aside .widget h3,
@@ -1531,6 +1531,10 @@ aside #circle-sidebar li .circle-edit-tool {
 }
 aside #circle-sidebar li .circle-edit-tool:first-child {
 	padding-right: 0px;
+}
+
+.x-network {
+	font-size: 15px;
 }
 
 /* contact block widget */
