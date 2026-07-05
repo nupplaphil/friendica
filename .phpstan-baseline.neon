@@ -93,33 +93,6 @@ parameters:
 
 		-
 			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Logger\:
-				2026\.01 Use constructor injection or `DI\:\:logger\(\)` instead$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/Core/Logger/Capability/IHaveCallIntrospections.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\Logger\:
-				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/Core/Logger/Capability/IHaveCallIntrospections.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Logger\:
-				2026\.01 Use constructor injection or `DI\:\:logger\(\)` instead$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/Core/Logger/Util/Introspection.php
-
-		-
-			message: '''
 				#^Access to constant on deprecated class Friendica\\Navigation\\Notifications\\Factory\\FormattedNotify\:
 				2022\.05 Use \\Friendica\\Navigation\\Notifications\\Factory\\FormattedNotification instead$#
 			'''

@@ -287,7 +287,11 @@ class CurlResult implements ICanHandleHttpResponses
 		return array_key_exists($field, $headers);
 	}
 
-
+	/** {@inheritDoc} */
+	public function getHeaderArray(): array
+	{
+		return $this->getHeaders();
+	}
 
 	/** {@inheritDoc} */
 	public function isSuccess(): bool

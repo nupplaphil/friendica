@@ -15,8 +15,8 @@ interface IHaveCallIntrospections
 	 * @var string[]
 	 */
 	public const IGNORE_CLASS_LIST = [
-		\Friendica\Core\Logger::class,
-		\Friendica\Core\Logger\Factory\Logger::class,
+		\Friendica\Core\Logger::class, // @phpstan-ignore classConstant.deprecatedClass
+		\Friendica\Core\Logger\Factory\Logger::class, // @phpstan-ignore classConstant.deprecatedClass
 		'Friendica\\Core\\Logger\\Type',
 		\Friendica\Util\Profiler::class,
 	];
