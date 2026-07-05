@@ -50,7 +50,7 @@ abstract class BaseRepository
 	{
 		$this->db      = $database;
 		$this->logger  = $logger;
-		$this->factory = $factory;
+		$this->factory = $factory; // @phpstan-ignore property.deprecated (self-call in deprecated flow)
 	}
 
 	/**

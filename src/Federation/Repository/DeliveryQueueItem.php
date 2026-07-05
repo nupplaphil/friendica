@@ -19,9 +19,18 @@ final class DeliveryQueueItem extends \Friendica\BaseRepository
 {
 	protected static $table_name = 'delivery-queue';
 
-	public function __construct(Database $database, LoggerInterface $logger, Factory\DeliveryQueueItem $factory)
+	public function __construct(
+		Database $database,
+		LoggerInterface $logger,
+		private readonly Factory\DeliveryQueueItem $entityFactory,
+	) {
+		parent::__construct($database, $logger, $entityFactory);
+	}
+
+	/** @not-deprecated */
+	protected function getFactory(): Factory\DeliveryQueueItem
 	{
-		parent::__construct($database, $logger, $factory);
+		return $this->entityFactory;
 	}
 
 	public function selectByServerId(int $gsid, int $maxFailedCount): Collection\DeliveryQueueItems
@@ -35,7 +44,7 @@ final class DeliveryQueueItem extends \Friendica\BaseRepository
 			['order' => ['created']]
 		);
 		while ($deliveryQueueItem = $this->db->fetch($deliveryQueueItems)) {
-			$Entities[] = $this->factory->createFromTableRow($deliveryQueueItem);
+			$Entities[] = $this->getFactory()->createFromTableRow($deliveryQueueItem);
 		}
 
 		$this->db->close($deliveryQueueItems);

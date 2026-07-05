@@ -57,15 +57,6 @@ parameters:
 
 		-
 			message: '''
-				#^Access to deprecated property \$factory of class Friendica\\BaseRepository\:
-				2026\.08 Implement getFactory\(\) instead$#
-			'''
-			identifier: property.deprecated
-			count: 1
-			path: src/BaseRepository.php
-
-		-
-			message: '''
 				#^Call to deprecated method getFactory\(\) of class Friendica\\BaseRepository\:
 				2026\.08 This method will become abstract in a future release, implement it in your child class instead\.$#
 			'''
@@ -180,15 +171,6 @@ parameters:
 			identifier: return.deprecatedClass
 			count: 1
 			path: src/DI.php
-
-		-
-			message: '''
-				#^Access to deprecated property \$factory of class Friendica\\BaseRepository\:
-				2026\.08 Implement getFactory\(\) instead$#
-			'''
-			identifier: property.deprecated
-			count: 1
-			path: src/Federation/Repository/DeliveryQueueItem.php
 
 		-
 			message: '''
