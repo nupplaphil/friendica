@@ -32,7 +32,7 @@ class SyslogLoggerFactoryWrapper extends SyslogLogger
 			$this->introspection, // @phpstan-ignore property.deprecatedClass (testing deprecated property from AbstractLoggerTypeFactory)
 			$loglevel,
 			$logOpts,
-			$logFacility
+			$logFacility,
 		);
 	}
 }
