@@ -730,16 +730,15 @@ After any of the above:
 
 ## 11. Interface Naming
 
-The `ICan` / `IHandle` / `IManage` convention is used in Capability namespaces:
+The `I` convention is used in Capability namespaces:
 
 ```
-ICanCache                    IHandleUserSessions
-ICanCreateFromTableRow       IManagePersonalConfigValues
-ICanLock
+ICacheStore           IUserSessionStore
+ITableRowMapper       IPersonalConfigStore
+ILockable             IRequestHandler
 ```
 
-This applies to Capability interfaces that describe what a class does.
-It does not apply universally.
+This is a convention which is not implemented yet, but anytime soon.
 Other interfaces may follow standard PHP naming (`Container`, `LoggerInterface`, `EventDispatcherInterface`).
 Match the style of the namespace you are working in.
 
