@@ -102,7 +102,21 @@
                     <button type="button" class="btn btn-default" onclick="preview_comment_toggle({{$id}}, '{{$l10n.preview}}');" id="comment-edit-preview-link-{{$id}}" tabindex="8">
                         <i class="ri ri-eye-line"></i> <span id="preview-btn-text-{{$id}}">{{$l10n.preview}}</span>
                     </button>
-                    <button type="submit" class="btn btn-primary" id="comment-edit-submit-{{$id}}" name="submit" tabindex="9"><i class="ri ri-send-plane-line"></i> {{$l10n.submit}}</button>
+                    {{if $enableAdvancedComposer}}
+                    <button type="button" class="btn btn-default" id="easy-compose-toggle" title="{{$l10n.btnAssistant}}" onclick="AdvancedComposerTogglePanel()">
+                        <i class="ri ri-quill-pen-line"></i> <span class="ec-btn-text">{{$l10n.btnAssistant}}</span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="easy-compose-distraction-toggle" title="{{$l10n.btnZen}}" onclick="AdvancedComposerToggleDistractionFree()">
+                        <i class="ri ri-fullscreen-line"></i> <span class="ec-btn-text">{{$l10n.btnZen}}</span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="easy-compose-focus-preview-toggle" title="{{$l10n.btnFocusPreview}}" onclick="AdvancedComposerOpenFocusPreview()">
+                        <i class="ri ri-eye-line"></i> <span class="ec-btn-text">{{$l10n.btnFocusPreview}}</span>
+                    </button>
+                    <button type="button" class="btn btn-default ec-hidden" id="easy-compose-ep-zen-toggle" title="{{$l10n.btnEpZen}}" onclick="AdvancedComposerToggleEpZen()">
+                        <i class="ri ri-image-line"></i> <span class="ec-btn-text">{{$l10n.btnEpZen}}</span>
+                    </button>
+                    {{/if}}
+                    <button type="submit" class="btn btn-primary pull-right" id="comment-edit-submit-{{$id}}" name="submit" tabindex="9"><i class="ri ri-send-plane-line"></i> {{$l10n.submit}}</button>
                 </div>
                 <div class="jotplugins">
                     {{$jotplugins nofilter}}
