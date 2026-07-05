@@ -503,6 +503,9 @@ btn-eventnav:hover {
 aside .badge {
 	opacity: 0.7;
 }
+#sidebar-circle-ul {
+	display: grid;
+}
 .group-widget-entry .badge,
 .sidebar-circle-li .badge {
 	margin-top: 6px;
