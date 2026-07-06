@@ -102,35 +102,35 @@ function handleLinkClick(e) {
   
   // Ignore anchor-only links (e.g., href="#" or href="#back-to-top")
   if (href && href.startsWith('#')) {
-    console.log('[SPA Router] Click: Anchor link, allowing default behavior');
+    console.debug('[SPA Router] Click: Anchor link, allowing default behavior');
     return;
   }
   
   // Ignore links that are meant to open modals (e.g., modal-open class)
   // These are handled by separate modal JavaScript handlers
   if (link.classList.contains('modal-open')) {
-    console.log('[SPA Router] Click: Modal link, allowing default/modal behavior');
+    console.debug('[SPA Router] Click: Modal link, allowing default/modal behavior');
     return;
   }
 
   // Ignore links with data-fancybox attribute (for Fancybox lightbox)
   // These are handled by Fancybox JavaScript
   if (link.hasAttribute('data-fancybox')) {
-    console.log('[SPA Router] Click: Fancybox link, allowing default/fancybox behavior');
+    console.debug('[SPA Router] Click: Fancybox link, allowing default/fancybox behavior');
     return;
   }
 
   // Ignore links with inline event handlers (onclick, etc.)
   // These are handled by custom JavaScript and should not use SPA
   if (link.hasAttribute("onclick") || link.onclick || link.hasAttribute("data-spa-ignore")) {
-    console.log("[SPA Router] Click: Link has event handler or data-spa-ignore, allowing default behavior");
+    console.debug("[SPA Router] Click: Link has event handler or data-spa-ignore, allowing default behavior");
     return;
   }
   
-  console.log('[SPA Router] Click: Found anchor, href=', href);
+  console.debug('[SPA Router] Click: Found anchor, href=', href);
   
   if (!isInternalLink(link)) {
-    console.log('[SPA Router] Click: Not an internal link, skipping');
+    console.debug('[SPA Router] Click: Not an internal link, skipping');
     return;
   }
 
@@ -140,11 +140,11 @@ function handleLinkClick(e) {
   
   // Allow middle-click, ctrl-click, cmd-click to open in new tab
   if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) {
-    console.log('[SPA Router] Click: Modified click (middle/ctrl/cmd/shift), skipping');
+    console.debug('[SPA Router] Click: Modified click (middle/ctrl/cmd/shift), skipping');
     return;
   }
 
-  console.log('[SPA Router] Click: Preventing default, navigating to', href);
+  console.debug('[SPA Router] Click: Preventing default, navigating to', href);
   e.preventDefault();
   navigateTo(href);
 }
@@ -153,7 +153,7 @@ function handleLinkClick(e) {
  * Jump to top instantly, ignoring CSS smooth scroll.
  */
 function scrollToTopInstant() {
-  console.log('[SPA Router] scrollToTopInstant: scrolling to top');
+  console.debug('[SPA Router] scrollToTopInstant: scrolling to top');
   const html = document.documentElement;
   const previousBehavior = html.style.scrollBehavior;
 
@@ -167,19 +167,19 @@ function scrollToTopInstant() {
  * @param {string} url - The URL to navigate to
  */
 function navigateTo(url) {
-  console.log('[SPA Router] Navigate: url=', url);
+  console.debug('[SPA Router] Navigate: url=', url);
   
   const path = new URL(url, window.location.href).pathname;
-  console.log('[SPA Router] Navigate: parsed path=', path);
+  console.debug('[SPA Router] Navigate: parsed path=', path);
   
   // Check if route is SPA-capable
   if (!isSPARoute(path)) {
-    console.log('[SPA Router] Navigate: Not an SPA route, falling back to full reload');
+    console.debug('[SPA Router] Navigate: Not an SPA route, falling back to full reload');
     window.location.href = url;
     return;
   }
   
-  console.log('[SPA Router] Navigate: SPA route detected, pushing state and loading content');
+  console.debug('[SPA Router] Navigate: SPA route detected, pushing state and loading content');
   
   // Dispatch event to pause live updates before navigation
   const beforeEvent = new CustomEvent('spa:beforeNavigate', {
@@ -203,11 +203,11 @@ function navigateTo(url) {
  * @param {string} url - The URL to load
  */
 function loadContent(url) {
-  console.log('[SPA Router] LoadContent: url=', url);
+  console.debug('[SPA Router] LoadContent: url=', url);
   
   // Use normal URL without SPA parameter - server returns full HTML
   const fetchUrl = new URL(url, window.location.href);
-  console.log('[SPA Router] LoadContent: fetching URL=', fetchUrl.toString());
+  console.debug('[SPA Router] LoadContent: fetching URL=', fetchUrl.toString());
   
   // Track the final URL after all redirects
   let finalUrl = fetchUrl.toString();
@@ -216,7 +216,7 @@ function loadContent(url) {
   
   // Set timeout
   timeoutId = setTimeout(() => {
-    console.log('[SPA Router] LoadContent: Timeout after 30000ms');
+    console.debug('[SPA Router] LoadContent: Timeout after 30000ms');
     abortController.abort();
   }, 30000);
 
@@ -232,12 +232,12 @@ function loadContent(url) {
   .then(async (response) => {
     clearTimeout(timeoutId);
     
-    console.log('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
+    console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
     
     // Get the final URL after any redirects - with automatic following, response.url contains it
     if (response.url && response.url !== fetchUrl.toString()) {
       finalUrl = response.url;
-      console.log('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
+      console.debug('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
     }
     
     showReceiving();
@@ -245,7 +245,7 @@ function loadContent(url) {
     const checkedResponse = checkResponseStatus(response);
     const html = await checkedResponse.text();
     
-    console.log('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
+    console.debug('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
     
     showProcessing();
     
@@ -257,7 +257,7 @@ function loadContent(url) {
     
     // Update history with the final URL if there were redirects
     if (finalUrl !== fetchUrl.toString()) {
-      console.log('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
+      console.debug('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
       history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
     }
     
@@ -266,7 +266,7 @@ function loadContent(url) {
     replaceContainerContent(html, finalUrl);
     hideLoading();
     
-    console.log('[SPA Router] LoadContent: Process completed successfully');
+    console.debug('[SPA Router] LoadContent: Process completed successfully');
     return html;
   })
   .catch(error => {
@@ -283,8 +283,8 @@ function loadContent(url) {
     });
         
     // Fallback: Full page reload
-    console.log('[SPA Router] Falling back to full page reload for URL:', url);
-    console.log('[SPA Router] LoadContent: Error handling completed');
+    console.debug('[SPA Router] Falling back to full page reload for URL:', url);
+    console.debug('[SPA Router] LoadContent: Error handling completed');
     window.location.href = url;
   });
 }
@@ -316,7 +316,7 @@ function executeInlineScripts(html) {
   tempDiv.innerHTML = html;
   
   const scripts = tempDiv.querySelectorAll('script:not([src])');
-  console.log('[SPA Router] executeInlineScripts: Found ' + scripts.length + ' inline scripts');
+  console.debug('[SPA Router] executeInlineScripts: Found ' + scripts.length + ' inline scripts');
   // Convert NodeList to Array for compatibility with older browsers
   const scriptsArray = Array.prototype.slice.call(scripts);
   scriptsArray.forEach((script, index) => {
@@ -328,19 +328,19 @@ function executeInlineScripts(html) {
           scriptContent.startsWith('const ') ||
           scriptContent.trim().startsWith('infinite_scroll =') ||
           scriptContent.includes('infinite_scroll =')) {
-        console.log('[SPA Router] executeInlineScripts: Executing var/let/const or infinite_scroll #' + index + ': ' + scriptContent.substring(0, 150));
+        console.debug('[SPA Router] executeInlineScripts: Executing var/let/const or infinite_scroll #' + index + ': ' + scriptContent.substring(0, 150));
         try {
           // Execute script in global scope by creating and removing a script element
           const scriptEl = document.createElement('script');
           scriptEl.textContent = scriptContent;
           document.head.appendChild(scriptEl);
           document.head.removeChild(scriptEl);
-          console.log('[SPA Router] Executed inline script #' + index);
+          console.debug('[SPA Router] Executed inline script #' + index);
         } catch (e) {
           console.error('[SPA Router] Error executing inline script #' + index + ':', e);
         }
       } else {
-        console.log('[SPA Router] executeInlineScripts: Skipping non-declaration script #' + index + ': ' + scriptContent.substring(0, 80));
+        console.debug('[SPA Router] executeInlineScripts: Skipping non-declaration script #' + index + ': ' + scriptContent.substring(0, 80));
       }
     }
   });
@@ -372,7 +372,7 @@ function cleanupTooltips() {
     // Convert NodeList to Array for compatibility with older browsers
     const elementsArray = Array.prototype.slice.call(elements);
     elementsArray.forEach(el => {
-      console.log('[SPA Router] Cleanup: Removing tooltip element:', selector);
+      console.debug('[SPA Router] Cleanup: Removing tooltip element:', selector);
       el.remove();
     });
   });
@@ -385,7 +385,7 @@ function cleanupTooltips() {
  * @param {string} finalUrl - The final URL after following redirects (optional)
  */
 function replaceContainerContent(html, finalUrl = null) {
-  console.log('[SPA Router] ReplaceContent: Processing HTML, finalUrl:', finalUrl);
+  console.debug('[SPA Router] ReplaceContent: Processing HTML, finalUrl:', finalUrl);
   
   // Clean up any existing tooltips first to prevent ghost elements
   cleanupTooltips();
@@ -399,15 +399,15 @@ function replaceContainerContent(html, finalUrl = null) {
   // Store the final URL for scrollToDisplayGuid
   if (finalUrl) {
     lastFinalUrl = finalUrl;
-    console.log('[SPA Router] ReplaceContent: Set lastFinalUrl to:', lastFinalUrl);
+    console.debug('[SPA Router] ReplaceContent: Set lastFinalUrl to:', lastFinalUrl);
   } else {
     lastFinalUrl = window.location.href;
-    console.log('[SPA Router] ReplaceContent: Set lastFinalUrl to window.location.href:', lastFinalUrl);
+    console.debug('[SPA Router] ReplaceContent: Set lastFinalUrl to window.location.href:', lastFinalUrl);
   }
   
   // If response is a full HTML document, extract only the body content
   if (html && html.includes && html.includes('<body')) {
-    console.log('[SPA Router] ReplaceContent: Extracting body content');
+    console.debug('[SPA Router] ReplaceContent: Extracting body content');
     const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
     if (bodyMatch) {
       html = bodyMatch[1];
@@ -436,13 +436,13 @@ function replaceContainerContent(html, finalUrl = null) {
   // Extract and set title from HTML
   const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
   if (titleMatch && titleMatch[1]) {
-    console.log('[SPA Router] ReplaceContent: Setting title to', titleMatch[1]);
+    console.debug('[SPA Router] ReplaceContent: Setting title to', titleMatch[1]);
     document.title = titleMatch[1];
   }
   
   // Extract head elements (link, script, style) and move them to document head
   const headElements = tempDiv.querySelectorAll('link, script, style');
-  console.log('[SPA Router] ReplaceContent: Found', headElements.length, 'head elements');
+  console.debug('[SPA Router] ReplaceContent: Found', headElements.length, 'head elements');
   // Convert NodeList to Array for compatibility with older browsers
   const headElementsArray = Array.prototype.slice.call(headElements);
   headElementsArray.forEach(el => {
@@ -450,7 +450,7 @@ function replaceContainerContent(html, finalUrl = null) {
       `${el.tagName.toLowerCase()}[${el.src ? 'src' : el.href ? 'href' : 'data-spa-processed'}="${el.src || el.href || ''}"]`
     );
     if (!existing && !el.getAttribute('data-spa-processed')) {
-      console.log('[SPA Router] ReplaceContent: Adding head element:', el.tagName, el.src || el.href || '(inline)');
+      console.debug('[SPA Router] ReplaceContent: Adding head element:', el.tagName, el.src || el.href || '(inline)');
       const clone = el.cloneNode(true);
       clone.setAttribute('data-spa-processed', 'true');
       document.head.appendChild(clone);
@@ -464,24 +464,24 @@ function replaceContainerContent(html, finalUrl = null) {
     { selector: 'main', newContent: tempDiv.querySelector('main') }
   ];
   
-  console.log('[SPA Router] ReplaceContent: Checking containers...');
+  console.debug('[SPA Router] ReplaceContent: Checking containers...');
   
   // Replace content of each container
   containers.forEach(({ selector, newContent }) => {
     if (newContent) {
-      console.log('[SPA Router] ReplaceContent: Found new content for', selector);
+      console.debug('[SPA Router] ReplaceContent: Found new content for', selector);
       
       // Debug: Show content preview for topbar-second
       if (selector === 'div#topbar-second') {
         const preview = newContent.innerHTML.substring(0, 300).replace(/\n/g, ' ').replace(/\s+/g, ' ');
-        console.log('[SPA Router] div#topbar-second content:', 
+        console.debug('[SPA Router] div#topbar-second content:', 
                     'length=', newContent.innerHTML.length, 
                     'preview="', preview, '"');
       }
       
       const oldContainer = document.querySelector(selector);
       if (oldContainer) {
-        console.log('[SPA Router] ReplaceContent: Found old container for', selector, '- replacing innerHTML');
+        console.debug('[SPA Router] ReplaceContent: Found old container for', selector, '- replacing innerHTML');
 
         // Check if this is a display page with GUID - if so, don't scroll to top
         // Use finalUrl if provided (for redirects), otherwise use window.location.pathname
@@ -493,10 +493,10 @@ function replaceContainerContent(html, finalUrl = null) {
             return displayIndex >= 0 && displayIndex + 1 < pathParts.length && pathParts[displayIndex + 1];
           })();
         
-        console.log('[SPA Router] ReplaceContent: effectivePath:', effectivePath, 'isDisplayPageWithGuid:', isDisplayPageWithGuid);
+        console.debug('[SPA Router] ReplaceContent: effectivePath:', effectivePath, 'isDisplayPageWithGuid:', isDisplayPageWithGuid);
 
         if (selector === 'main' && SPA_CONFIG.scrollToTopOnNavigate && !isDisplayPageWithGuid) {
-          console.log('[SPA Router] ReplaceContent: Scrolling to top (not display page with GUID)');
+          console.debug('[SPA Router] ReplaceContent: Scrolling to top (not display page with GUID)');
           oldContainer.style.visibility = 'hidden';
           try {
             scrollToTopInstant();
@@ -505,7 +505,7 @@ function replaceContainerContent(html, finalUrl = null) {
             oldContainer.style.visibility = '';
           }
         } else if (selector === 'main' && isDisplayPageWithGuid) {
-          console.log('[SPA Router] ReplaceContent: NOT scrolling to top (display page with GUID)');
+          console.debug('[SPA Router] ReplaceContent: NOT scrolling to top (display page with GUID)');
           // Replace the inner HTML of the container
           oldContainer.innerHTML = newContent.innerHTML;
         } else {
@@ -522,22 +522,22 @@ function replaceContainerContent(html, finalUrl = null) {
   
   // Handle scroll-loader element separately (it might be outside the main container)
   const scrollLoaderNew = tempDiv.querySelector('#scroll-loader');
-  console.log('[SPA Router] ReplaceContent: scrollLoaderNew found:', !!scrollLoaderNew);
+  console.debug('[SPA Router] ReplaceContent: scrollLoaderNew found:', !!scrollLoaderNew);
   if (scrollLoaderNew) {
     const scrollLoaderOld = document.getElementById('scroll-loader');
-    console.log('[SPA Router] ReplaceContent: scrollLoaderOld found:', !!scrollLoaderOld);
+    console.debug('[SPA Router] ReplaceContent: scrollLoaderOld found:', !!scrollLoaderOld);
     if (scrollLoaderOld) {
-      console.log('[SPA Router] ReplaceContent: Replacing scroll-loader element');
+      console.debug('[SPA Router] ReplaceContent: Replacing scroll-loader element');
       scrollLoaderOld.innerHTML = scrollLoaderNew.innerHTML;
     } else {
-      console.log('[SPA Router] ReplaceContent: Adding scroll-loader element');
+      console.debug('[SPA Router] ReplaceContent: Adding scroll-loader element');
       document.body.appendChild(scrollLoaderNew.cloneNode(true));
     }
   } else {
-    console.log('[SPA Router] ReplaceContent: No scroll-loader element found in new content');
+    console.debug('[SPA Router] ReplaceContent: No scroll-loader element found in new content');
   }
   
-  console.log('[SPA Router] ReplaceContent: Calling reinitializeDynamicContent');
+  console.debug('[SPA Router] ReplaceContent: Calling reinitializeDynamicContent');
   
   // Re-initialize dynamic content (event listeners, etc.)
   reinitializeDynamicContent();
@@ -555,7 +555,7 @@ function replaceContainerContent(html, finalUrl = null) {
 function spaScrollToItem(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
-    console.log('[SPA Router] Scrolling to element with fallback function:', elementId);
+    console.debug('[SPA Router] Scrolling to element with fallback function:', elementId);
     const headerOffset = 100;
     const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
     window.scrollTo({
@@ -579,31 +579,31 @@ function spaScrollToItem(elementId) {
 function scrollToDisplayGuid() {
   // Use the stored final URL if available (for redirects), otherwise use window.location.pathname
   const effectivePath = lastFinalUrl ? new URL(lastFinalUrl).pathname : window.location.pathname;
-  console.log('[SPA Router] scrollToDisplayGuid: effectivePath:', effectivePath);
+  console.debug('[SPA Router] scrollToDisplayGuid: effectivePath:', effectivePath);
   
   if (effectivePath.includes('/display/')) {
     const pathParts = effectivePath.split('/');
-    console.log('[SPA Router] scrollToDisplayGuid: pathParts:', pathParts);
+    console.debug('[SPA Router] scrollToDisplayGuid: pathParts:', pathParts);
     // Find the display path part: /display/{guid} or /display/{guid}/...
     // The GUID is the part right after /display/
     const displayIndex = pathParts.indexOf('display');
-    console.log('[SPA Router] scrollToDisplayGuid: displayIndex:', displayIndex);
+    console.debug('[SPA Router] scrollToDisplayGuid: displayIndex:', displayIndex);
     
     if (displayIndex >= 0 && displayIndex + 1 < pathParts.length) {
       const itemGuid = pathParts[displayIndex + 1];
-      console.log('[SPA Router] scrollToDisplayGuid: itemGuid:', itemGuid);
+      console.debug('[SPA Router] scrollToDisplayGuid: itemGuid:', itemGuid);
       
       if (itemGuid) {
         const elementId = 'item-' + itemGuid;
-        console.log('[SPA Router] scrollToDisplayGuid: elementId:', elementId, 'scrollToItem exists:', typeof scrollToItem === 'function');
+        console.debug('[SPA Router] scrollToDisplayGuid: elementId:', elementId, 'scrollToItem exists:', typeof scrollToItem === 'function');
         
         // Use setTimeout to allow DOM to settle after content replacement
         setTimeout(() => {
           const element = document.getElementById(elementId);
-          console.log('[SPA Router] scrollToDisplayGuid: element found:', !!element);
+          console.debug('[SPA Router] scrollToDisplayGuid: element found:', !!element);
           
           if (element) {
-            console.log('[SPA Router] scrollToDisplayGuid: scrolling to element');
+            console.debug('[SPA Router] scrollToDisplayGuid: scrolling to element');
             if (typeof scrollToItem === 'function') {
               scrollToItem(elementId);
             } else {
@@ -615,11 +615,11 @@ function scrollToDisplayGuid() {
           }
         }, 100);
       } else {
-        console.log('[SPA Router] scrollToDisplayGuid: No GUID found in path');
+        console.debug('[SPA Router] scrollToDisplayGuid: No GUID found in path');
       }
     }
   } else {
-    console.log('[SPA Router] scrollToDisplayGuid: Not a display path');
+    console.debug('[SPA Router] scrollToDisplayGuid: Not a display path');
   }
   
   // Reset the lastFinalUrl after processing
@@ -642,15 +642,15 @@ function reinitializeDynamicContent() {
   // Execute widget initialization scripts (stored during replaceContainerContent)
   // This ensures initWidget() is called after the widget elements exist in the DOM
   if (window.__spa_widgetInitScripts && window.__spa_widgetInitScripts.length > 0) {
-    console.log('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_widgetInitScripts.length + ' widget init scripts');
+    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_widgetInitScripts.length + ' widget init scripts');
     window.__spa_widgetInitScripts.forEach((scriptContent, index) => {
       try {
-        console.log('[SPA Router] reinitializeDynamicContent: Executing widget init script #' + index + ': ' + scriptContent.substring(0, 150));
+        console.debug('[SPA Router] reinitializeDynamicContent: Executing widget init script #' + index + ': ' + scriptContent.substring(0, 150));
         const scriptEl = document.createElement('script');
         scriptEl.textContent = scriptContent;
         document.head.appendChild(scriptEl);
         document.head.removeChild(scriptEl);
-        console.log('[SPA Router] Executed widget init script #' + index);
+        console.debug('[SPA Router] Executed widget init script #' + index);
       } catch (e) {
         console.error('[SPA Router] Error executing widget init script #' + index + ':', e);
       }
@@ -678,7 +678,7 @@ function reinitializeDynamicContent() {
   
   // Trigger NavUpdate to check for unread posts immediately after SPA navigation
   if (typeof NavUpdate === 'function') {
-    console.log('[SPA Router] Calling NavUpdate after navigation');
+    console.debug('[SPA Router] Calling NavUpdate after navigation');
     NavUpdate();
   }
 }
@@ -699,9 +699,9 @@ function handleInitialLoad() {
  * @param {Event} e - Popstate event
  */
 function handlePopState(e) {
-  console.log('[SPA Router] PopState: state=', e.state);
+  console.debug('[SPA Router] PopState: state=', e.state);
   if (e.state && e.state.spa && e.state.__friendicaSPA) {
-    console.log('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
+    console.debug('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
     
     // Dispatch event to pause live updates before popstate navigation
     const beforeEvent = new CustomEvent('spa:beforeNavigate', {
@@ -711,7 +711,7 @@ function handlePopState(e) {
     
     loadContent(window.location.href);
   } else {
-    console.log('[SPA Router] PopState: Not an SPA state or not from our router, ignoring');
+    console.debug('[SPA Router] PopState: Not an SPA state or not from our router, ignoring');
   }
 }
 
@@ -723,10 +723,10 @@ function handlePopState(e) {
  * Initialize SPA Router
  */
 function initSPARouter() {
-  console.log('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled);
+  console.debug('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled);
   
   if (!supportsSPA || !SPA_CONFIG.enabled) {
-    console.log('[SPA Router] Not supported or disabled');
+    console.debug('[SPA Router] Not supported or disabled');
     return;
   }
   
@@ -739,7 +739,7 @@ function initSPARouter() {
   // Browser navigation (back/forward)
   window.addEventListener('popstate', handlePopState);
   
-  console.log('[SPA Router] Initialized successfully');
+  console.debug('[SPA Router] Initialized successfully');
 }
 
 // ============================================
@@ -748,7 +748,7 @@ function initSPARouter() {
 
 // Check if browser supports required features
 if (!supportsSPA) {
-  console.log('[SPA Router] Browser does not support SPA features. Using fallback.');
+  console.debug('[SPA Router] Browser does not support SPA features. Using fallback.');
 } else {
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
