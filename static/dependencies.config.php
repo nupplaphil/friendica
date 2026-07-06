@@ -314,7 +314,7 @@ return (function (string $basepath, array $getVars, array $serverVars, array $co
 				$getVars['callback'] ?? '',
 			],
 		],
-		\Friendica\Util\PasswordExposedChecker::class => [
+		\Friendica\Util\IPasswordExposedChecker::class => [
 			'instanceOf' => \Friendica\Util\HibpPasswordExposedChecker::class,
 		],
 	];

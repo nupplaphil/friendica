@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Checks if a plaintext password has been exposed in a public data dump
  */
-final readonly class HibpPasswordExposedChecker implements PasswordExposedChecker
+final readonly class HibpPasswordExposedChecker implements IPasswordExposedChecker
 {
 	public function __construct(
 		private ICanSendHttpRequests $httpClient,

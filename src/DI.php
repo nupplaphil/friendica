@@ -655,9 +655,9 @@ abstract class DI
 		return self::$dice->create(Content\Post\Factory\PostMedia::class);
 	}
 
-	public static function passwordExposedChecker(): Util\PasswordExposedChecker
+	public static function passwordExposedChecker(): Util\IPasswordExposedChecker
 	{
-		return self::$dice->create(Util\PasswordExposedChecker::class);
+		return self::$dice->create(Util\IPasswordExposedChecker::class);
 	}
 
 	/**

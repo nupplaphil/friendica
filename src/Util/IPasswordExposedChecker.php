@@ -12,7 +12,7 @@ namespace Friendica\Util;
 /**
  * Checks if a plaintext password has been exposed in the public
  */
-interface PasswordExposedChecker
+interface IPasswordExposedChecker
 {
 	/**
 	 * Checks if the provided password has been exposed
