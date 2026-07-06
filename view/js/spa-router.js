@@ -414,11 +414,24 @@ function replaceContainerContent(html, finalUrl = null) {
     }
   }
   
-  // Execute inline scripts to set global variables (like profile_uid, netargs)
-  executeInlineScripts(html);
-  
+  // Extract initWidget calls to execute after DOM insertion (when widgets exist)
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
+  
+  const widgetInitScripts = [];
+  const scripts = tempDiv.querySelectorAll('script:not([src])');
+  Array.prototype.slice.call(scripts).forEach((script) => {
+    const scriptContent = script.textContent.trim();
+    if (scriptContent.includes('initWidget(')) {
+      widgetInitScripts.push(scriptContent);
+    }
+  });
+  
+  // Store widget init scripts to execute after DOM insertion
+  window.__spa_widgetInitScripts = widgetInitScripts;
+  
+  // Execute other inline scripts (variables, infinite_scroll, etc.)
+  executeInlineScripts(html);
   
   // Extract and set title from HTML
   const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
@@ -625,6 +638,26 @@ function reinitializeDynamicContent() {
     // Links already have the handler from event delegation, but
     // we need to ensure any new dynamic content works
   });
+  
+  // Execute widget initialization scripts (stored during replaceContainerContent)
+  // This ensures initWidget() is called after the widget elements exist in the DOM
+  if (window.__spa_widgetInitScripts && window.__spa_widgetInitScripts.length > 0) {
+    console.log('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_widgetInitScripts.length + ' widget init scripts');
+    window.__spa_widgetInitScripts.forEach((scriptContent, index) => {
+      try {
+        console.log('[SPA Router] reinitializeDynamicContent: Executing widget init script #' + index + ': ' + scriptContent.substring(0, 150));
+        const scriptEl = document.createElement('script');
+        scriptEl.textContent = scriptContent;
+        document.head.appendChild(scriptEl);
+        document.head.removeChild(scriptEl);
+        console.log('[SPA Router] Executed widget init script #' + index);
+      } catch (e) {
+        console.error('[SPA Router] Error executing widget init script #' + index + ':', e);
+      }
+    });
+    // Clear the stored scripts after execution
+    window.__spa_widgetInitScripts = [];
+  }
   
   // Scroll to item with GUID on display pages
   scrollToDisplayGuid();
