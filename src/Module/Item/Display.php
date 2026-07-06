@@ -254,7 +254,7 @@ class Display extends BaseModule
 		$condition = ["`uri-id` = ? AND `uid` IN (0, ?) " . $sql_extra, $item['uri-id'], $itemUid];
 		$fields    = [
 			'parent-uri-id', 'body', 'title', 'author-name', 'author-avatar', 'plink', 'author-id',
-			'owner-id', 'contact-id',
+			'owner-id', 'contact-id', 'uid',
 		];
 
 		$item = Post::selectFirstForUser($pageUid, $fields, $condition);

@@ -1750,8 +1750,8 @@ class Contact
 			$cid, Item::GRAVITY_ACTIVITY, Verb::getID(Activity::ANNOUNCE), Conversation::PARCEL_DIASPORA,
 		]);
 
-		$sql1 = "SELECT `uri-id`, `created`, `author-id` FROM `post-thread-user-view` WHERE " . array_shift($condition1);
-		$sql2 = "SELECT `thr-parent-id` AS `uri-id`, `created`, `author-id` FROM `post-user-view` WHERE " . array_shift($condition2);
+		$sql1 = "SELECT `uri-id`, `created` FROM `post-thread-user-view` WHERE " . array_shift($condition1);
+		$sql2 = "SELECT `thr-parent-id` AS `uri-id`, `created` FROM `post-user-view` WHERE " . array_shift($condition2);
 
 		$union = array_merge($condition1, $condition2);
 		$sql   = $sql1 . " UNION " . $sql2;
@@ -1763,7 +1763,7 @@ class Contact
 		$raw = isset($request['mode']) && ($request['mode'] == 'raw');
 
 		if (!$raw && !$update && ($pager->getStart() == 0)) {
-			$fields = ['uri-id', 'thr-parent-id', 'gravity', 'author-id', 'created'];
+			$fields = ['uri-id', 'created'];
 			$pinned = Post\Collection::selectToArrayForContact($cid, Post\Collection::FEATURED, $fields);
 			$items  = array_merge($items, $pinned);
 		}

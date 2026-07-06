@@ -551,7 +551,7 @@ class Network extends Timeline
 			$commonCondition = DBA::mergeConditions($commonCondition, array_merge([$query], [$this->session->getLocalUserId()], $filterchannels));
 		}
 
-		$fields    = ['uri-id', 'created', 'received', 'commented', 'channel', 'contact-id', 'author-id'];
+		$fields    = ['uri-id', 'created', 'received', 'commented', 'channel', 'contact-id'];
 		$condition = DBA::mergeConditions($timelineCondition, $commonCondition);
 
 		$timeline = $this->database->getSQL($this->circleId ? 'network-thread-circle-view' : 'network-thread-view', $fields, $condition, $params);

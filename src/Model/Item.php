@@ -94,7 +94,7 @@ class Item
 		'owner-id', 'owner-link', 'owner-alias', 'owner-name', 'owner-avatar', 'owner-network', 'owner-contact-type', 'owner-updated', 'owner-gsid',
 		'causer-id', 'causer-link', 'causer-alias', 'causer-name', 'causer-avatar', 'causer-contact-type', 'causer-network', 'causer-gsid',
 		'contact-id', 'contact-uid', 'contact-link', 'contact-name', 'contact-avatar',
-		'writable', 'restrictions', 'self', 'cid', 'alias', 'post-reason',
+		'writable', 'restrictions', 'self', 'cid', 'alias', 'post-reason', 'post-type', 'featured',
 		'event-created', 'event-edited', 'event-start', 'event-finish',
 		'event-summary', 'event-desc', 'event-location', 'event-type',
 		'event-nofinish', 'event-ignore', 'event-id',

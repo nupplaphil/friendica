@@ -75,7 +75,7 @@ final readonly class ConversationDataProvider
 			return null;
 		}
 
-		$selected = ['uri-id', 'author-id'];
+		$selected = ItemModel::DISPLAY_FIELDLIST;
 		$params   = ['order' => ['uid' => true]];
 
 		$parentItem = Post::selectFirstForUser($viewerUid, $selected, ['uri-id' => $parentUriId, 'uid' => [0, $viewerUid]], $params);
@@ -291,7 +291,7 @@ final readonly class ConversationDataProvider
 
 		// Initialize items array with parent items, ensuring they have pagedrop set
 		$items = [];
-		foreach ($this->addMissingRows($parents) as $parent) {
+		foreach ($this->addMissingRows($parents, $uid) as $parent) {
 			$items[$parent['uri-id']] = $parent;
 			if (!empty($parent['thr-parent-id']) && !empty($parent['gravity']) && ($parent['gravity'] === ItemModel::GRAVITY_ACTIVITY)) {
 				$uriId = $parent['thr-parent-id'];
@@ -417,7 +417,7 @@ final readonly class ConversationDataProvider
 			$items[$row['uri-id']] = $this->addRowInformation($row, $activities[$row['uri-id']] ?? [], $thrParent[$row['thr-parent-id']] ?? [], $postChannels[$row['thr-parent-id']] ?? '', $uid, $channels);
 		}
 
-		$quotes = Post::select(array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']), ['quote-uri-id' => array_column($quoteUriIds, 'uri-id'), 'body' => '', 'uid' => 0]);
+		$quotes = Post::select(ItemModel::DISPLAY_FIELDLIST, ['quote-uri-id' => array_column($quoteUriIds, 'uri-id'), 'body' => '', 'uid' => 0]);
 		while ($quote = Post::fetch($quotes)) {
 			$row                  = $quote;
 			$row['uid']           = $uid;
@@ -487,14 +487,18 @@ final readonly class ConversationDataProvider
 	 * Add missing rows to the given array of rows.
 	 *
 	 * @param array<int, array> $rows The rows to add missing data to
+	 * @param int $uid The user ID of the viewer
 	 * @return array<int, array> The rows with missing data added
 	 */
-	private function addMissingRows(array $rows): array
+	private function addMissingRows(array $rows, int $uid): array
 	{
-		$posts = Post::selectPosts(['uri-id', 'thr-parent-id', 'gravity', 'author-id', 'commented', 'received', 'created'], ['uri-id' => array_column($rows, 'uri-id')]);
+		$posts = Post::select(ItemModel::DISPLAY_FIELDLIST, ['uri-id' => array_column($rows, 'uri-id'), 'uid' => [0, $uid]]);
 
 		$filler = [];
 		while ($post = Post::fetch($posts)) {
+			if (isset($filler[$post['uri-id']]) && $post['uid'] === 0) {
+				continue;
+			}
 			$filler[$post['uri-id']] = $post;
 		}
 		DBA::close($posts);
