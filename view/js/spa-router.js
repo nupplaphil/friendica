@@ -150,16 +150,28 @@ function handleLinkClick(e) {
 }
 
 /**
- * Jump to top instantly, ignoring CSS smooth scroll.
+ * Set focus to content area for accessibility
+ * Scrolls to top and sets focus on the content element
+ * This is better for screen readers and keyboard navigation
  */
 function scrollToTopInstant() {
-  console.debug('[SPA Router] scrollToTopInstant: scrolling to top');
+  console.debug('[SPA Router] scrollToTopInstant: focusing on content element for accessibility');
+  const contentElement = document.getElementById('content');
+  
+  // Save previous scroll behavior
   const html = document.documentElement;
   const previousBehavior = html.style.scrollBehavior;
-
+  
+  // Scroll to top instantly
   html.style.scrollBehavior = 'auto';
   window.scrollTo(0, 0);
   html.style.scrollBehavior = previousBehavior;
+  
+  // Set focus to content element for accessibility
+  if (contentElement) {
+    contentElement.setAttribute('tabindex', '-1'); // Make element focusable
+    contentElement.focus();
+  }
 }
 
 /**
