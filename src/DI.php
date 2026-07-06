@@ -662,7 +662,6 @@ abstract class DI
 
 	/**
 	 * @internal The EventDispatcher should never called outside of the core, like in addons or themes
-	 * @deprecated 2026.01 Use constructor injection instead
 	 */
 	public static function eventDispatcher(): \Psr\EventDispatcher\EventDispatcherInterface
 	{
