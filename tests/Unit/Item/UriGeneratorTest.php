@@ -60,6 +60,11 @@ class UriGeneratorTest extends TestCase
 				'host'   => null,
 				'expect' => '00000000-7c8359f4-6497fff7346911ed',
 			],
+			'malformedUri' => [
+				'uri'    => ':',
+				'host'   => null,
+				'expect' => '00000000-e8d2695d-895d8fcf12ecd431',
+			],
 		];
 	}
 
