@@ -216,12 +216,12 @@ function frio_remote_nav(array &$nav_info): void
 		}
 
 		if (DBA::isResult($remoteUser)) {
+			$server_url           = $remoteUser['baseurl'];
 			$nav_info['userinfo'] = [
 				'icon' => Contact::getMicro($remoteUser),
 				'name' => $remoteUser['name'],
 				'link' => $server_url . '/profile/' . $remoteUser['nick'],
 			];
-			$server_url = $remoteUser['baseurl'];
 		}
 
 		if (!DI::userSession()->getLocalUserId() && !empty($server_url) && !is_null($remoteUser)) {

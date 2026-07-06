@@ -185,7 +185,7 @@ class Conversations extends BaseProfile
 		$pager  = new Pager($this->l10n, $this->args->getQueryString(), $itemspage_network);
 		$params = ['limit' => [$pager->getStart(), $pager->getItemsPerPage()], 'order' => ['received' => true]];
 
-		$items_stmt = Post::selectOrigin(['uri-id', 'thr-parent-id', 'gravity', 'author-id', 'received'], $condition, $params);
+		$items_stmt = Post::selectOrigin(['uri-id'], $condition, $params);
 
 		// Set a time stamp for this page. We will make use of it when we
 		// search for new items (update routine)
