@@ -777,39 +777,3 @@ parameters:
 			identifier: method.deprecatedClass
 			count: 1
 			path: src/Protocol/DFRN.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Addon\\Model\\AddonLoader\:
-				2026\.01 Use implementation of `\\Friendica\\Core\\Addon\\AddonHelper` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: static/dependencies.config.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\StreamLogger\:
-				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: static/dependencies.config.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class Friendica\\Core\\Logger\\Factory\\SyslogLogger\:
-				2026\.01 Implement `\\Friendica\\Core\\Logger\\Factory\\LoggerFactory` instead$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: static/dependencies.config.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated interface Friendica\\Core\\Addon\\Capability\\ICanLoadAddons\:
-				2026\.01 Use implementation of `\\Friendica\\Core\\Addon\\AddonHelper` instead\.$#
-			'''
-			identifier: classConstant.deprecatedInterface
-			count: 1
-			path: static/dependencies.config.php
