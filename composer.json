@@ -40,7 +40,6 @@
 		"guzzlehttp/guzzle": "^7.11",
 		"guzzlehttp/oauth-subscriber": "^0.9.1",
 		"james-heinrich/getid3": "^1.9",
-		"jord-jd/password_exposed": "^5.0",
 		"kornrunner/blurhash": "^1.2",
 		"league/html-to-markdown": "^4.8",
 		"level-2/dice": "^4",

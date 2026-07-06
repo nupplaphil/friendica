@@ -34,9 +34,6 @@ use Friendica\Util\Network;
 use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use ImagickException;
-use JordJD\DOFileCachePSR6\CacheItemPool;
-use JordJD\PasswordExposed\Enums\PasswordStatus;
-use JordJD\PasswordExposed\PasswordExposedChecker;
 use LightOpenID;
 
 /**
@@ -925,25 +922,7 @@ class User
 	 */
 	public static function isPasswordExposed(string $password): bool
 	{
-		$cache = new CacheItemPool();
-		$cache->changeConfig([
-			'cacheDirectory' => System::getTempPath() . '/password-exposed-cache/',
-		]);
-
-		try {
-			$passwordExposedChecker = new PasswordExposedChecker(null, $cache);
-
-			return $passwordExposedChecker->passwordExposed($password) === PasswordStatus::EXPOSED;
-		} catch (Exception $e) {
-			DI::logger()->error('Password Exposed Exception: ' . $e->getMessage(), [
-				'code'  => $e->getCode(),
-				'file'  => $e->getFile(),
-				'line'  => $e->getLine(),
-				'trace' => $e->getTraceAsString(),
-			]);
-
-			return false;
-		}
+		return DI::passwordExposedChecker()->isExposed($password);
 	}
 
 	/**

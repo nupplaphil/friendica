@@ -655,6 +655,11 @@ abstract class DI
 		return self::$dice->create(Content\Post\Factory\PostMedia::class);
 	}
 
+	public static function passwordExposedChecker(): Util\IPasswordExposedChecker
+	{
+		return self::$dice->create(Util\IPasswordExposedChecker::class);
+	}
+
 	/**
 	 * @internal The EventDispatcher should never called outside of the core, like in addons or themes
 	 */
