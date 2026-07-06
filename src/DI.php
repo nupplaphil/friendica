@@ -572,6 +572,15 @@ abstract class DI
 	}
 
 	//
+	// "Item" namespace instances
+	//
+
+	public static function itemUriGenerator(): Item\UriGenerator
+	{
+		return self::$dice->create(Item\UriGenerator::class);
+	}
+
+	//
 	// "Protocol" namespace instances
 	//
 

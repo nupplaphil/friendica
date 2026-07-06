@@ -1913,30 +1913,12 @@ class Item
 	 * @param string|null $host hostname for the GUID prefix
 	 * @return string Unique guid
 	 * @throws \Exception
+	 *
+	 * @deprecated 2026.08 Use \Friendica\Item\UriGenerator::guidFromUri instead
 	 */
 	public static function guidFromUri(string $uri, ?string $host = null): string
 	{
-		// Our regular guid routine is using this kind of prefix as well
-		// We have to avoid that different routines could accidentally create the same value
-		$parsed = parse_url($uri);
-
-		// Remove the scheme to make sure that "https" and "http" doesn't make a difference
-		unset($parsed['scheme']);
-
-		$hostPart = $host ?: $parsed['host'] ?? '';
-		if (!$hostPart) {
-			DI::logger()->warning('Empty host GUID part', ['uri' => $uri, 'host' => $host, 'parsed' => $parsed]);
-		}
-
-		// Glue it together to be able to make a hash from it
-		if (!empty($parsed)) {
-			$host_id = implode('/', (array) $parsed);
-		} else {
-			$host_id = $uri;
-		}
-
-		// Use a mixture of several hashes to provide some GUID like experience
-		return hash('crc32', (string) $hostPart) . '-' . hash('joaat', $host_id) . '-' . hash('fnv164', $host_id);
+		return DI::itemUriGenerator()->guidFromUri($uri, $host);
 	}
 
 	/**
@@ -1946,14 +1928,12 @@ class Item
 	 *
 	 * @return string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
+	 *
+	 * @deprecated 2026.08 Use \Friendica\Item\UriGenerator::newURI instead
 	 */
 	public static function newURI(string $guid = ''): string
 	{
-		if ($guid == '') {
-			$guid = System::createUUID();
-		}
-
-		return DI::baseUrl() . '/objects/' . $guid;
+		return DI::itemUriGenerator()->newURI($guid);
 	}
 
 	/**
@@ -2279,7 +2259,7 @@ class Item
 			$old_uri_id       = $datarray['uri-id'] ?? 0;
 			$datarray['guid'] = System::createUUID();
 			unset($datarray['plink']);
-			$datarray['uri']    = self::newURI($datarray['guid']);
+			$datarray['uri']    = DI::itemUriGenerator()->newURI($datarray['guid']);
 			$datarray['uri-id'] = ItemURI::getIdByURI($datarray['uri']);
 			$datarray['extid']  = Protocol::DFRN;
 			$urlpart            = parse_url((string) $datarray2['author-link']);
@@ -2735,7 +2715,7 @@ class Item
 
 		$new_item = [
 			'guid'        => System::createUUID(),
-			'uri'         => self::newURI(),
+			'uri'         => DI::itemUriGenerator()->newURI(),
 			'uid'         => $uid,
 			'contact-id'  => $owner['id'],
 			'wall'        => $item['wall'],
