@@ -89,7 +89,7 @@ div.login-form {
 
 header #banner #logo-img,
 .navbar-brand #logo-img {
-  background-color: var(--text-primary);
+  color: var(--text-primary);
 }
 
 #topbar-first,
