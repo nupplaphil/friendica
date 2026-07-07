@@ -47,7 +47,7 @@
 		"matriphe/iso-639": "^1.2",
 		"mattwright/urlresolver": "^2.0",
 		"michelf/php-markdown": "^1.7",
-		"minishlink/web-push": "^6.0",
+		"minishlink/web-push": "^10",
 		"mobiledetect/mobiledetectlib": "^3.74",
 		"mpratt/embera": "~2.0",
 		"nikic/fast-route": "^1.3",
