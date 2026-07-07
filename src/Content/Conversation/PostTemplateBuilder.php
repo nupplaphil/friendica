@@ -471,7 +471,7 @@ final class PostTemplateBuilder
 	{
 		$shareable    = in_array($profileOwner, [0, $this->uid]) && ($item['private'] ?? ItemModel::PUBLIC) !== ItemModel::PRIVATE;
 		$announceable = $shareable && in_array($item['network'] ?? '', [Protocol::ACTIVITYPUB, Protocol::DFRN, Protocol::DIASPORA, Protocol::TWITTER, Protocol::TUMBLR, Protocol::ATPROTO]);
-		$commentable  = ($item['network'] ?? '') !== Protocol::TUMBLR;
+		$commentable  = !in_array($item['network'], [Protocol::TUMBLR, Protocol::FEED]);
 		$likeable     = true;
 
 		if ($commentable && $this->uid && !empty($item['author-id']) && Contact\User::isIsBlocked($item['author-id'], $this->uid)) {
