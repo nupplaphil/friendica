@@ -90,7 +90,7 @@ class FriendicaExtension extends BaseDataTransferObject
 		?string $sitename,
 		?FriendicaDeliveryData $delivery_data,
 		?FriendicaVisibility $visibility,
-		?string $content
+		?string $content,
 	) {
 		$this->title          = $title;
 		$this->changed_at     = $changed_at ? DateTimeFormat::utc($changed_at, DateTimeFormat::JSON) : null;

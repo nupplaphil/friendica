@@ -12,6 +12,4 @@ namespace Friendica\Core\Addon\Exception;
 /**
  * Exception in case an addon is invalid
  */
-final class InvalidAddonException extends \RuntimeException
-{
-}
+final class InvalidAddonException extends \RuntimeException {}

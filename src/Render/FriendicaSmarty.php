@@ -15,7 +15,7 @@ use Friendica\Core\Renderer;
  */
 class FriendicaSmarty extends Smarty
 {
-	const SMARTY3_TEMPLATE_FOLDER = 'templates';
+	public const SMARTY3_TEMPLATE_FOLDER = 'templates';
 
 	public $filename;
 

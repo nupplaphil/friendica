@@ -25,7 +25,7 @@ class Delete extends BaseApi
 
 		$request = $this->getRequest([
 			'gid'  => 0,
-			'name' => ''
+			'name' => '',
 		], $request);
 
 		// params

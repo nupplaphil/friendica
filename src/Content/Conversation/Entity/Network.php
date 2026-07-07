@@ -9,9 +9,9 @@ namespace Friendica\Content\Conversation\Entity;
 
 final class Network extends Timeline
 {
-	const STAR      = 'star';
-	const MENTION   = 'mention';
-	const RECEIVED  = 'received';
-	const COMMENTED = 'commented';
-	const CREATED   = 'created';
+	public const STAR      = 'star';
+	public const MENTION   = 'mention';
+	public const RECEIVED  = 'received';
+	public const COMMENTED = 'commented';
+	public const CREATED   = 'created';
 }

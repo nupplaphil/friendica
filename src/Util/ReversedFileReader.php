@@ -14,8 +14,8 @@ namespace Friendica\Util;
  */
 class ReversedFileReader implements \Iterator
 {
-	const BUFFER_SIZE = 4096;
-	const SEPARATOR   = "\n";
+	public const BUFFER_SIZE = 4096;
+	public const SEPARATOR   = "\n";
 
 	/** @var resource */
 	private $fh = null;

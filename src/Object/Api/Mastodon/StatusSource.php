@@ -33,7 +33,7 @@ class StatusSource extends BaseDataTransferObject
 	 */
 	public function __construct(int $id, string $text, string $spoiler_text)
 	{
-		$this->id           = (string)$id;
+		$this->id           = (string) $id;
 		$this->text         = $text;
 		$this->spoiler_text = $spoiler_text;
 	}

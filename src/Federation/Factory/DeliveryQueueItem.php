@@ -23,7 +23,7 @@ final class DeliveryQueueItem extends \Friendica\BaseFactory implements \Friendi
 			$row['command'],
 			$row['cid'],
 			$row['uid'],
-			$row['failed']
+			$row['failed'],
 		);
 	}
 
@@ -35,7 +35,7 @@ final class DeliveryQueueItem extends \Friendica\BaseFactory implements \Friendi
 			$created,
 			$cmd,
 			$cid,
-			$uid
+			$uid,
 		);
 	}
 }

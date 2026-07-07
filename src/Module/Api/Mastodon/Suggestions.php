@@ -7,7 +7,6 @@
 
 namespace Friendica\Module\Api\Mastodon;
 
-use Friendica\Core\System;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Module\BaseApi;
@@ -36,7 +35,7 @@ class Suggestions extends BaseApi
 		foreach ($suggestions as $suggestion) {
 			$accounts[] = [
 				'source'  => 'past_interactions',
-				'account' => DI::mstdnAccount()->createFromContactId($suggestion['id'], $uid)
+				'account' => DI::mstdnAccount()->createFromContactId($suggestion['id'], $uid),
 			];
 		}
 

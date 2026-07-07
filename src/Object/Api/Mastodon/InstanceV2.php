@@ -76,7 +76,7 @@ class InstanceV2 extends BaseDataTransferObject
 		Registrations       $registrations,
 		Contact             $contact,
 		FriendicaExtensions $friendica_extensions,
-		array $rules
+		array $rules,
 	) {
 		$this->domain        = $domain;
 		$this->title         = $title;

@@ -34,16 +34,16 @@ class Config extends BaseApi
 				'broughtbyurl' => '',
 				'timezone'     => DI::config()->get('system', 'default_timezone'),
 				'closed'       => Register::getPolicy() === Register::CLOSED,
-				'inviteonly'   => (bool)DI::config()->get('system', 'invitation_only'),
-				'private'      => (bool)DI::config()->get('system', 'block_public'),
+				'inviteonly'   => (bool) DI::config()->get('system', 'invitation_only'),
+				'private'      => (bool) DI::config()->get('system', 'block_public'),
 				'textlimit'    => (string) DI::config()->get('config', 'api_import_size', DI::config()->get('config', 'max_import_size')),
 				'sslserver'    => null,
 				'ssl'          => DI::baseUrl()->getScheme() === 'https' ? 'always' : '0',
 				'friendica'    => [
-					'FRIENDICA_PLATFORM'    => App::PLATFORM,
-					'FRIENDICA_VERSION'     => App::VERSION,
-					'DB_UPDATE_VERSION'     => DB_UPDATE_VERSION,
-				]
+					'FRIENDICA_PLATFORM' => App::PLATFORM,
+					'FRIENDICA_VERSION'  => App::VERSION,
+					'DB_UPDATE_VERSION'  => DB_UPDATE_VERSION,
+				],
 			],
 		];
 

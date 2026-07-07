@@ -31,7 +31,7 @@ class PullDirectory
 			return;
 		}
 
-		$now = (int)(DI::keyValue()->get('last-directory-sync') ?? 0);
+		$now = (int) (DI::keyValue()->get('last-directory-sync') ?? 0);
 
 		DI::logger()->info('Synchronization started.', ['now' => $now, 'directory' => $directory]);
 

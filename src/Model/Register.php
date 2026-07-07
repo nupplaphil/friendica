@@ -90,8 +90,8 @@ class Register
 		$code = Strings::getRandomName(8) . random_int(1000, 9999);
 
 		$fields = [
-			'hash' => $code,
-			'created' => DateTimeFormat::utcNow()
+			'hash'    => $code,
+			'created' => DateTimeFormat::utcNow(),
 		];
 
 		DBA::insert('register', $fields);
@@ -129,7 +129,7 @@ class Register
 			'uid'      => $uid,
 			'password' => '', // Obsolete, slated for deletion
 			'language' => $language,
-			'note'     => $note
+			'note'     => $note,
 		];
 
 		if (!DBA::insert('register', $fields)) {

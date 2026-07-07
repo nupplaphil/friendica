@@ -15,16 +15,16 @@
 <!DOCTYPE html>
 <html lang="<?php echo Friendica\DI::l10n()->getCurrentLang(); ?>">
 <head>
-  <title><?php if(!empty($page['title'])) {
+  <title><?php if (!empty($page['title'])) {
   	echo $page['title'];
   } ?></title>
   <script>var baseurl="<?php echo Friendica\DI::baseUrl() ?>";</script>
-  <?php if(!empty($page['htmlhead'])) {
+  <?php if (!empty($page['htmlhead'])) {
   	echo $page['htmlhead'];
   } ?>
 </head>
 <body class="minimal">
-	<section><?php if(!empty($page['content'])) {
+	<section><?php if (!empty($page['content'])) {
 		echo $page['content'];
 	} ?>
 		<div id="page-footer">

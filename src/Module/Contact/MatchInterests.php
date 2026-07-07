@@ -34,7 +34,7 @@ use Psr\Log\LoggerInterface;
  */
 class MatchInterests extends BaseModule
 {
-	const FETCH_PER_PAGE = 100;
+	public const FETCH_PER_PAGE = 100;
 
 	/** @var IHandleUserSessions */
 	protected $session;
@@ -87,7 +87,7 @@ class MatchInterests extends BaseModule
 		if (empty($profile['pub_keywords']) && empty($profile['prv_keywords'])) {
 			$o = Renderer::replaceMacros(Renderer::getMarkupTemplate('contact/list.tpl'), [
 				'$title'           => $this->t('Profile Match'),
-				'$additional_text' => $this->t('No keywords to match. Please add keywords to your profile.')
+				'$additional_text' => $this->t('No keywords to match. Please add keywords to your profile.'),
 			]);
 			return $o;
 		}

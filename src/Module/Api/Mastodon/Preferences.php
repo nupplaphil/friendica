@@ -7,7 +7,6 @@
 
 namespace Friendica\Module\Api\Mastodon;
 
-use Friendica\Core\System;
 use Friendica\DI;
 use Friendica\Model\User;
 use Friendica\Module\BaseApi;
@@ -37,7 +36,7 @@ class Preferences extends BaseApi
 		$sensitive = false;
 		$language  = $user['language'];
 		$media     = DI::pConfig()->get($uid, 'nsfw', 'disable') ? 'show_all' : 'default';
-		$spoilers  = (bool)DI::pConfig()->get($uid, 'system', 'disable_cw');
+		$spoilers  = (bool) DI::pConfig()->get($uid, 'system', 'disable_cw');
 
 		$preferences = new \Friendica\Object\Api\Mastodon\Preferences($visibility, $sensitive, $language, $media, $spoilers);
 

@@ -44,7 +44,7 @@ class QuoteAuthorization extends BaseModule
 			'id'                => $local['uri'] . '/quote_authorization/' . $this->parameters['remote'],
 			'attributedTo'      => $local['author-link'],
 			'interactingObject' => $remote['uri'],
-			'interactionTarget' => $local['uri']
+			'interactionTarget' => $local['uri'],
 		];
 
 		// Relaxed CORS header for public items

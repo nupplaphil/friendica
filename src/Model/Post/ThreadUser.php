@@ -31,7 +31,7 @@ class ThreadUser
 
 		// Additionally assign the key fields
 		$fields['uri-id'] = $uri_id;
-		$fields['uid'] = $uid;
+		$fields['uid']    = $uid;
 
 		return DBA::insert('post-thread-user', $fields, Database::INSERT_IGNORE);
 	}
@@ -90,7 +90,7 @@ class ThreadUser
 		if (empty($threaduser)) {
 			return false;
 		}
-		return (bool)$threaduser['ignored'];
+		return (bool) $threaduser['ignored'];
 	}
 
 	/**

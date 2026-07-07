@@ -37,7 +37,7 @@ final class Complete extends BaseModule
 			'status'  => 'ok',
 			'item_id' => $itemId,
 			'verb'    => 'complete',
-			'state'   => 1
+			'state'   => 1,
 		];
 
 		DI::logger()->debug('Complete thread executed.', ['parameters' => $this->parameters]);

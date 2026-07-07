@@ -79,7 +79,7 @@ class FriendSuggest extends BaseModule
 			$contact['url'],
 			$contact['request'],
 			$contact['avatar'],
-			$note
+			$note,
 		));
 
 		Worker::add(Worker::PRIORITY_HIGH, 'Notifier', Delivery::SUGGESTION, $suggest->id);
@@ -135,7 +135,7 @@ class FriendSuggest extends BaseModule
 				'',
 				$formattedContacts,
 			],
-			'$submit'          => $this->t('Submit'),
+			'$submit' => $this->t('Submit'),
 		]);
 	}
 }

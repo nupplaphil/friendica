@@ -9,6 +9,6 @@ namespace Friendica\Content\Conversation\Entity;
 
 final class Community extends Timeline
 {
-	const LOCAL  = 'local';
-	const GLOBAL = 'global';
+	public const LOCAL  = 'local';
+	public const GLOBAL = 'global';
 }

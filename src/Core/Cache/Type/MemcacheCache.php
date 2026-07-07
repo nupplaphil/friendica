@@ -22,7 +22,7 @@ class MemcacheCache extends AbstractCache implements ICanCacheInMemory
 	use CompareSetTrait;
 	use CompareDeleteTrait;
 	use MemcacheCommandTrait;
-	const NAME = 'memcache';
+	public const NAME = 'memcache';
 
 	/**
 	 * @var Memcache
@@ -115,13 +115,13 @@ class MemcacheCache extends AbstractCache implements ICanCacheInMemory
 				$cacheKey,
 				serialize($value),
 				MEMCACHE_COMPRESSED,
-				time() + $ttl
+				time() + $ttl,
 			);
 		} else {
 			return $this->memcache->set(
 				$cacheKey,
 				serialize($value),
-				MEMCACHE_COMPRESSED
+				MEMCACHE_COMPRESSED,
 			);
 		}
 	}

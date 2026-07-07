@@ -32,7 +32,7 @@ class OpenWebAuthToken
 			'uid'     => $uid,
 			'token'   => $token,
 			'meta'    => $meta,
-			'created' => DateTimeFormat::utcNow()
+			'created' => DateTimeFormat::utcNow(),
 		];
 		return DBA::insert('openwebauth-token', $fields);
 	}

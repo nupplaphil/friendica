@@ -14,7 +14,7 @@ use Friendica\Core\KeyValueStorage\Capability\IManageKeyValuePairs;
  */
 abstract class AbstractKeyValueStorage implements IManageKeyValuePairs
 {
-	const NAME = '';
+	public const NAME = '';
 
 	/** {@inheritDoc} */
 	public function get(string $key)

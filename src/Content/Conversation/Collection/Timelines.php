@@ -9,6 +9,4 @@ namespace Friendica\Content\Conversation\Collection;
 
 use Friendica\BaseCollection;
 
-class Timelines extends BaseCollection
-{
-}
+class Timelines extends BaseCollection {}

@@ -15,7 +15,7 @@ class Post extends \Friendica\BaseFactory implements ICanCreateFromTableRow
 	{
 		return new \Friendica\Moderation\Entity\Report\Post(
 			$row['uri-id'],
-			$row['status']
+			$row['status'],
 		);
 	}
 }

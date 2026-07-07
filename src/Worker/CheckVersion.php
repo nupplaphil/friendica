@@ -37,11 +37,11 @@ class CheckVersion
 				// don't check
 				return;
 		}
-		DI::logger()->info("Checking VERSION from: ".$checked_url);
+		DI::logger()->info("Checking VERSION from: " . $checked_url);
 
 		// fetch the VERSION file
 		$gitversion = DBA::escape(trim(DI::httpClient()->fetch($checked_url, HttpClientAccept::TEXT)));
-		DI::logger()->notice("Upstream VERSION is: ".$gitversion);
+		DI::logger()->notice("Upstream VERSION is: " . $gitversion);
 
 		DI::keyValue()->set('git_friendica_version', $gitversion);
 

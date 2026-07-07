@@ -51,7 +51,7 @@ class Introductions extends BaseNotifications
 	 */
 	public function getNotifications()
 	{
-		$id  = (int)$this->args->get(2, 0);
+		$id  = (int) $this->args->get(2, 0);
 		$all = $this->args->get(2) == 'all';
 
 		$notifications = [

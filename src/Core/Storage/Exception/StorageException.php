@@ -12,6 +12,4 @@ use Exception;
 /**
  * Storage Exception for unexpected failures
  */
-class StorageException extends Exception
-{
-}
+class StorageException extends Exception {}

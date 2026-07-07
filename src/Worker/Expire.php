@@ -50,7 +50,7 @@ class Expire
 			Worker::add(
 				['priority' => $appHelper->getQueueValue('priority'), 'created' => $appHelper->getQueueValue('created'), 'dont_fork' => true],
 				'Expire',
-				(int)$row['uid']
+				(int) $row['uid'],
 			);
 		}
 		DBA::close($r);
@@ -62,7 +62,7 @@ class Expire
 				['priority' => $appHelper->getQueueValue('priority'), 'created' => $appHelper->getQueueValue('created'), 'dont_fork' => true],
 				'Expire',
 				'hook',
-				$hook[1]
+				$hook[1],
 			);
 		}
 

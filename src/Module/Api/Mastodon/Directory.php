@@ -44,7 +44,7 @@ class Directory extends BaseApi
 
 		$params = [
 			'limit' => [$request['offset'], $request['limit']],
-			'order' => [($request['order'] == 'active') ? 'last-item' : 'created' => true]
+			'order' => [($request['order'] == 'active') ? 'last-item' : 'created' => true],
 		];
 
 		$accounts = [];

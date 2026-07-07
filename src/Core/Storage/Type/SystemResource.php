@@ -19,10 +19,10 @@ use Friendica\Core\Storage\Capability\ICanReadFromStorage;
  */
 class SystemResource implements ICanReadFromStorage
 {
-	const NAME = 'SystemResource';
+	public const NAME = 'SystemResource';
 
 	// Valid folders to look for resources
-	const VALID_FOLDERS = ["images"];
+	public const VALID_FOLDERS = ["images"];
 
 	/**
 	 * @inheritDoc

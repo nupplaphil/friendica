@@ -25,7 +25,7 @@ use Friendica\Util\Strings;
  */
 class Filesystem implements ICanWriteToStorage
 {
-	const NAME = 'Filesystem';
+	public const NAME = 'Filesystem';
 
 	/** @var string */
 	private $basePath;

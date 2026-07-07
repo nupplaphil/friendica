@@ -9,6 +9,4 @@ namespace Friendica\Test\Util;
 
 use Friendica\BaseCollection;
 
-class CollectionDouble extends BaseCollection
-{
-}
+class CollectionDouble extends BaseCollection {}

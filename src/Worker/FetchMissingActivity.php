@@ -16,7 +16,7 @@ use Friendica\Protocol\ActivityPub\Receiver;
 
 class FetchMissingActivity
 {
-	const WORKER_DEFER_LIMIT = 5;
+	public const WORKER_DEFER_LIMIT = 5;
 
 	/**
 	 * Fetch missing activities

@@ -7,6 +7,4 @@
 
 namespace Friendica\Navigation\Notifications\Exception;
 
-class NotificationCreationInterceptedException extends \Exception
-{
-}
+class NotificationCreationInterceptedException extends \Exception {}

@@ -13,7 +13,7 @@ use Friendica\Model\Contact;
 
 class Block
 {
-	const WORKER_DEFER_LIMIT = 5;
+	public const WORKER_DEFER_LIMIT = 5;
 
 	/**
 	 * Issue asynchronous block message to remote servers.

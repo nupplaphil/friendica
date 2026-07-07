@@ -8,7 +8,6 @@
 namespace Friendica\Module\ActivityPub;
 
 use Friendica\BaseModule;
-use Friendica\Core\System;
 use Friendica\Model\Contact;
 use Friendica\Model\User;
 use Friendica\Protocol\ActivityPub;
@@ -29,7 +28,7 @@ class Following extends BaseModule
 			throw new \Friendica\Network\HTTPException\NotFoundException();
 		}
 
-		$page = !empty($request['page']) ? (int)$request['page'] : null;
+		$page = !empty($request['page']) ? (int) $request['page'] : null;
 
 		$following = ActivityPub\Transmitter::getContacts($owner, [Contact::SHARING, Contact::FRIEND], 'following', $page);
 

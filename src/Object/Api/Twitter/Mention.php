@@ -36,8 +36,8 @@ class Mention extends BaseDataTransferObject
 	 */
 	public function __construct(array $tag, array $contact, array $indices)
 	{
-		$this->id          = (int)($contact['id'] ?? 0);
-		$this->id_str      = (string)($contact['id'] ?? 0);
+		$this->id          = (int) ($contact['id'] ?? 0);
+		$this->id_str      = (string) ($contact['id'] ?? 0);
 		$this->indices     = $indices;
 		$this->name        = $tag['name'];
 		$this->screen_name = $contact['nick'];

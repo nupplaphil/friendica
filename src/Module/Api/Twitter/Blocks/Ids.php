@@ -7,7 +7,6 @@
 
 namespace Friendica\Module\Api\Twitter\Blocks;
 
-use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\Module\Api\Twitter\ContactEndpoint;
 use Friendica\Module\BaseApi;
@@ -36,7 +35,7 @@ class Ids extends ContactEndpoint
 
 		$condition = ['uid' => $uid, 'blocked' => true];
 
-		$total_count = (int)DBA::count('user-contact', $condition);
+		$total_count = (int) DBA::count('user-contact', $condition);
 
 		if (!empty($max_id)) {
 			$condition = DBA::mergeConditions($condition, ["`cid` < ?", $max_id]);

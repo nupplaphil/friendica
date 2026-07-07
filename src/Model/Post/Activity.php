@@ -24,7 +24,7 @@ class Activity
 		$fields = [
 			'uri-id'   => $uri_id,
 			'activity' => $source,
-			'received' => DateTimeFormat::utcNow()
+			'received' => DateTimeFormat::utcNow(),
 		];
 
 		return DBA::insert('post-activity', $fields, Database::INSERT_IGNORE);

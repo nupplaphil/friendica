@@ -64,7 +64,7 @@ class Source extends BaseDataTransferObject
 		?bool  $hide_collections,
 		bool   $discoverable,
 		bool   $indexable,
-		Role   $role
+		Role   $role,
 	) {
 		$this->attribution_domains   = $attribution_domains;
 		$this->note                  = $note;

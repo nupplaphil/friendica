@@ -17,7 +17,7 @@ use Friendica\Event\ArrayFilterEvent;
 class ViewDefinition
 {
 	/** @var string the relative path to the database view config file */
-	const DBSTRUCTURE_RELATIVE_PATH = '/static/dbview.config.php';
+	public const DBSTRUCTURE_RELATIVE_PATH = '/static/dbview.config.php';
 
 	/** @var array The complete view definition as an array */
 	protected $definition;

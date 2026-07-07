@@ -38,7 +38,7 @@ class Home extends BaseModule
 		$eventDispatcher = DI::eventDispatcher();
 
 		$eventDispatcher->dispatch(
-			new Event(Event::HOME_INIT)
+			new Event(Event::HOME_INIT),
 		);
 
 		if (DI::userSession()->getLocalUserId() && (DI::userSession()->getLocalUserNickname())) {

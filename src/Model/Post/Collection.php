@@ -16,7 +16,7 @@ use Friendica\Protocol\ActivityPub;
 
 class Collection
 {
-	const FEATURED = 0;
+	public const FEATURED = 0;
 
 	/**
 	 * Add a post to a collection

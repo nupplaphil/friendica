@@ -44,9 +44,9 @@ class Mentions extends BaseApi
 		$condition = [
 			Item::GRAVITY_PARENT, Item::GRAVITY_COMMENT,
 			$uid,
-			Post\UserNotification::TYPE_EXPLICIT_TAGGED | Post\UserNotification::TYPE_IMPLICIT_TAGGED |
-			Post\UserNotification::TYPE_THREAD_COMMENT | Post\UserNotification::TYPE_DIRECT_COMMENT |
-			Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT,
+			Post\UserNotification::TYPE_EXPLICIT_TAGGED | Post\UserNotification::TYPE_IMPLICIT_TAGGED
+			| Post\UserNotification::TYPE_THREAD_COMMENT | Post\UserNotification::TYPE_DIRECT_COMMENT
+			| Post\UserNotification::TYPE_DIRECT_THREAD_COMMENT,
 			$uid, $since_id,
 		];
 

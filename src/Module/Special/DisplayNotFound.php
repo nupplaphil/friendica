@@ -32,7 +32,7 @@ class DisplayNotFound extends \Friendica\BaseModule
 				'desc1'   => $this->t("Unfortunately, the requested conversation isn't available to you."),
 				'desc2'   => $this->t('Possible reasons include:'),
 				'reasons' => $reasons,
-			]
+			],
 		]);
 	}
 }

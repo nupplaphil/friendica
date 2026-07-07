@@ -10,6 +10,4 @@ namespace Friendica\Core\Storage\Exception;
 /**
  * Storage Exception in case of invalid references
  */
-class ReferenceStorageException extends StorageException
-{
-}
+class ReferenceStorageException extends StorageException {}

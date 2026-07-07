@@ -12,8 +12,8 @@ namespace Friendica\Model\Notification;
  */
 class ObjectType
 {
-	const PERSON = 'person';
-	const MAIL   = 'mail';
-	const ITEM   = 'item';
-	const INTRO  = 'intro';
+	public const PERSON = 'person';
+	public const MAIL   = 'mail';
+	public const ITEM   = 'item';
+	public const INTRO  = 'intro';
 }

@@ -35,7 +35,7 @@ class ProfileUpdate
 		$inboxes = ActivityPub\Transmitter::fetchTargetInboxesforUser($uid);
 
 		foreach ($inboxes as $inbox => $receivers) {
-			DI::logger()->info('Profile update for user ' . $uid . ' to ' . $inbox .' via ActivityPub');
+			DI::logger()->info('Profile update for user ' . $uid . ' to ' . $inbox . ' via ActivityPub');
 			Worker::add(
 				['priority' => $appHelper->getQueueValue('priority'), 'created' => $appHelper->getQueueValue('created'), 'dont_fork' => true],
 				'APDelivery',
@@ -43,7 +43,7 @@ class ProfileUpdate
 				0,
 				$inbox,
 				$uid,
-				$receivers
+				$receivers,
 			);
 		}
 

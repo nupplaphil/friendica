@@ -24,7 +24,7 @@ class Process extends BaseFactory implements ICanCreateFromTableRow
 			$row['pid'],
 			$row['command'],
 			$this->determineHost($row['hostname'] ?? null),
-			new \DateTime($row['created'] ?? 'now', new \DateTimeZone('UTC'))
+			new \DateTime($row['created'] ?? 'now', new \DateTimeZone('UTC')),
 		);
 	}
 }

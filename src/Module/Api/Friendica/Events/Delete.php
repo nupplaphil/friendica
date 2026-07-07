@@ -25,7 +25,7 @@ class Delete extends BaseApi
 		$uid = self::getCurrentUserID();
 
 		$request = $this->getRequest([
-			'id' => 0
+			'id' => 0,
 		], $request);
 
 		// params

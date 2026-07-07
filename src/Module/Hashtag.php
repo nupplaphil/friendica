@@ -8,7 +8,6 @@
 namespace Friendica\Module;
 
 use Friendica\BaseModule;
-use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\Util\Strings;
 
@@ -29,7 +28,7 @@ class Hashtag extends BaseModule
 			'tag',
 			['name'],
 			["`name` LIKE ?", Strings::escapeHtml($request['t']) . "%"],
-			['order' => ['name'], 'limit' => 100]
+			['order' => ['name'], 'limit' => 100],
 		);
 		while ($tag = DBA::fetch($taglist)) {
 			$result[] = ['text' => $tag['name']];

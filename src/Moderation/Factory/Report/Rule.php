@@ -15,7 +15,7 @@ class Rule extends \Friendica\BaseFactory implements ICanCreateFromTableRow
 	{
 		return new \Friendica\Moderation\Entity\Report\Rule(
 			$row['line-id'],
-			$row['text']
+			$row['text'],
 		);
 	}
 }

@@ -7,6 +7,4 @@
 
 namespace Friendica\Profile\ProfileField\Exception;
 
-class UnexpectedPermissionSetException extends \Exception
-{
-}
+class UnexpectedPermissionSetException extends \Exception {}

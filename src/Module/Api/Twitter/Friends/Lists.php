@@ -39,7 +39,7 @@ class Lists extends ContactEndpoint
 
 			$condition = ['uid' => $uid, 'self' => false, 'pending' => false, 'rel' => [Contact::SHARING, Contact::FRIEND]];
 
-			$total_count = (int)DBA::count('contact', $condition);
+			$total_count = (int) DBA::count('contact', $condition);
 
 			if (!empty($max_id)) {
 				$condition = DBA::mergeConditions($condition, ["`pid` < ?", $max_id]);
@@ -66,7 +66,7 @@ class Lists extends ContactEndpoint
 
 			$condition = ['relation-cid' => $cid, 'follows' => true];
 
-			$total_count = (int)DBA::count('contact-relation', $condition);
+			$total_count = (int) DBA::count('contact-relation', $condition);
 
 			if (!empty($max_id)) {
 				$condition = DBA::mergeConditions($condition, ["`cid` < ?", $max_id]);

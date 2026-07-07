@@ -11,11 +11,10 @@ use Friendica\Core\Protocol;
 use Friendica\Core\Worker;
 use Friendica\Model\Contact;
 use Friendica\Model\User;
-use Friendica\Network\HTTPException;
 
 class RevokeFollow
 {
-	const WORKER_DEFER_LIMIT = 5;
+	public const WORKER_DEFER_LIMIT = 5;
 
 	/**
 	 * Issue asynchronous follow revocation message to remote servers.

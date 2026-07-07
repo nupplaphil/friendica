@@ -29,8 +29,8 @@ class Probe extends BaseModule
 
 		if (!empty($addr)) {
 			$addr = NetworkProbe::cleanURI($addr);
-			$res = NetworkProbe::uri($addr, '', 0);
-			$res = print_r($res, true);
+			$res  = NetworkProbe::uri($addr, '', 0);
+			$res  = print_r($res, true);
 		}
 
 		$tpl = Renderer::getMarkupTemplate('probe.tpl');
@@ -42,9 +42,9 @@ class Probe extends BaseModule
 				DI::l10n()->t('Lookup address'),
 				$addr,
 				'',
-				DI::l10n()->t('Required')
+				DI::l10n()->t('Required'),
 			],
-			'$res'    => $res,
+			'$res' => $res,
 		]);
 	}
 }

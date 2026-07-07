@@ -7,6 +7,4 @@
 
 namespace Friendica\Navigation\Notifications\Exception;
 
-class NoMessageException extends \Exception
-{
-}
+class NoMessageException extends \Exception {}

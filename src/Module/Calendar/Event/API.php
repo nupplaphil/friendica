@@ -41,12 +41,12 @@ use Psr\Log\LoggerInterface;
  */
 class API extends BaseModule
 {
-	const ACTION_CREATE   = 'create';
-	const ACTION_DELETE   = 'delete';
-	const ACTION_IGNORE   = 'ignore';
-	const ACTION_UNIGNORE = 'unignore';
+	public const ACTION_CREATE   = 'create';
+	public const ACTION_DELETE   = 'delete';
+	public const ACTION_IGNORE   = 'ignore';
+	public const ACTION_UNIGNORE = 'unignore';
 
-	const ALLOWED_ACTIONS = [
+	public const ALLOWED_ACTIONS = [
 		self::ACTION_CREATE,
 		self::ACTION_DELETE,
 		self::ACTION_IGNORE,
@@ -128,9 +128,9 @@ class API extends BaseModule
 	protected function createEvent(array $request)
 	{
 		$eventId = !empty($request['event_id']) ? intval($request['event_id']) : 0;
-		$uid     = (int)$this->session->getLocalUserId();
+		$uid     = (int) $this->session->getLocalUserId();
 		// No overwriting event.cid on edit
-		$cid     = !empty($request['cid']) && !$eventId ? intval($request['cid']) : 0;
+		$cid = !empty($request['cid']) && !$eventId ? intval($request['cid']) : 0;
 
 		$strStartDateTime  = Strings::escapeHtml($request['start_text'] ?? '');
 		$strFinishDateTime = Strings::escapeHtml($request['finish_text'] ?? '');
@@ -247,10 +247,10 @@ class API extends BaseModule
 		$newItem = Event::getItemArrayForId($eventId, [
 			'network'   => Protocol::DFRN,
 			'protocol'  => Conversation::PARCEL_DIRECT,
-			'direction' => Conversation::PUSH
+			'direction' => Conversation::PUSH,
 		]);
 		if (Item::insert($newItem)) {
-			$uriId = (int)$newItem['uri-id'];
+			$uriId = (int) $newItem['uri-id'];
 		} else {
 			$uriId = 0;
 		}

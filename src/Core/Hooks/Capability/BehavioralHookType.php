@@ -18,6 +18,6 @@ interface BehavioralHookType
 	 *
 	 * @see https://refactoring.guru/design-patterns/strategy
 	 */
-	const STRATEGY = 'strategy';
-	const EVENT    = 'event';
+	public const STRATEGY = 'strategy';
+	public const EVENT    = 'event';
 }

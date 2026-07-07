@@ -27,7 +27,7 @@ class TrustedBrowser extends BaseFactory
 			$uid,
 			$userAgent,
 			$trusted,
-			DateTimeFormat::utcNow()
+			DateTimeFormat::utcNow(),
 		);
 	}
 
@@ -39,7 +39,7 @@ class TrustedBrowser extends BaseFactory
 			$row['user_agent'],
 			$row['trusted'],
 			$row['created'],
-			$row['last_used']
+			$row['last_used'],
 		);
 	}
 }

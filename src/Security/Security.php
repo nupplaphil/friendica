@@ -111,7 +111,7 @@ class Security
 				intval($remote_contact),
 				DBA::escape($circleIds),
 				intval($remote_contact),
-				DBA::escape($circleIds)
+				DBA::escape($circleIds),
 			);
 		}
 		return $sql;

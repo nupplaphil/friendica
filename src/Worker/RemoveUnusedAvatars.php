@@ -28,7 +28,7 @@ class RemoveUnusedAvatars
 			AND NOT `id` IN (SELECT `causer-id` FROM `post-user` WHERE `causer-id` IS NOT NULL AND `causer-id` = `contact`.`id`)
 			AND NOT `id` IN (SELECT `cid` FROM `post-tag` WHERE `cid` = `contact`.`id`)
 			AND NOT `id` IN (SELECT `contact-id` FROM `post-user` WHERE `contact-id` = `contact`.`id`)",
-			0, 0, '', '', '', 0
+			0, 0, '', '', '', 0,
 		];
 
 		$total = DBA::count('contact', $condition);

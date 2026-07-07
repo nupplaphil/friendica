@@ -22,10 +22,10 @@ use PDOException;
  */
 class User
 {
-	const FREQUENCY_DEFAULT = 0;
-	const FREQUENCY_NEVER   = 1;
-	const FREQUENCY_ALWAYS  = 2;
-	const FREQUENCY_REDUCED = 3;
+	public const FREQUENCY_DEFAULT = 0;
+	public const FREQUENCY_NEVER   = 1;
+	public const FREQUENCY_ALWAYS  = 2;
+	public const FREQUENCY_REDUCED = 3;
 	/**
 	 * Insert a user-contact for a given contact array
 	 *

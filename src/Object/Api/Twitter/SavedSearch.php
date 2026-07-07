@@ -7,7 +7,6 @@
 
 namespace Friendica\Object\Api\Twitter;
 
-use Friendica\App\BaseURL;
 use Friendica\BaseDataTransferObject;
 use Friendica\Util\DateTimeFormat;
 
@@ -39,8 +38,8 @@ class SavedSearch extends BaseDataTransferObject
 	public function __construct(array $search)
 	{
 		$this->created_at = DateTimeFormat::utcNow(DateTimeFormat::JSON);
-		$this->id         = (int)$search['id'];
-		$this->id_str     = (string)$search['id'];
+		$this->id         = (int) $search['id'];
+		$this->id_str     = (string) $search['id'];
 		$this->name       = $search['term'];
 		$this->position   = null;
 		$this->query      = $search['term'];

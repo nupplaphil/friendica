@@ -16,6 +16,6 @@ use Friendica\Core\Cache\Type\DatabaseCache;
  */
 abstract class Type
 {
-	const DATABASE  = DatabaseCache::NAME;
-	const SEMAPHORE = 'semaphore';
+	public const DATABASE  = DatabaseCache::NAME;
+	public const SEMAPHORE = 'semaphore';
 }

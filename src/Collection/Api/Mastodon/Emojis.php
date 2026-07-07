@@ -9,7 +9,4 @@ namespace Friendica\Collection\Api\Mastodon;
 
 use Friendica\BaseCollection;
 
-class Emojis extends BaseCollection
-{
-
-}
+class Emojis extends BaseCollection {}

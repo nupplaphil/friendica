@@ -20,21 +20,21 @@ class Config
 	 *
 	 * @var string
 	 */
-	const CONFIG_DIR_ENV = 'FRIENDICA_CONFIG_DIR';
+	public const CONFIG_DIR_ENV = 'FRIENDICA_CONFIG_DIR';
 
 	/**
 	 * The Sub directory of the config-files
 	 *
 	 * @var string
 	 */
-	const CONFIG_DIR = 'config';
+	public const CONFIG_DIR = 'config';
 
 	/**
 	 * The Sub directory of the static config-files
 	 *
 	 * @var string
 	 */
-	const STATIC_DIR = 'static';
+	public const STATIC_DIR = 'static';
 
 	/**
 	 * @param string $basePath The basepath of FRIENDICA

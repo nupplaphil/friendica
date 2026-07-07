@@ -120,7 +120,7 @@ class Notifications extends BaseNotifications
 				$notificationTemplate = Renderer::getMarkupTemplate($notificationTemplates[$notificationArray['label']]);
 
 				$notificationContent[] = Renderer::replaceMacros($notificationTemplate, [
-					'$notification' => $notificationArray
+					'$notification' => $notificationArray,
 				]);
 			}
 		} else {

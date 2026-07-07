@@ -55,13 +55,13 @@ class RemoveUnusedContacts
 			AND NOT EXISTS(SELECT `author-id` FROM `mail` WHERE `author-id` = `contact`.`id`)
 			AND NOT EXISTS(SELECT `contact-id` FROM `mail` WHERE `contact-id` = `contact`.`id`)
 			AND NOT EXISTS(SELECT `contact-id` FROM `group_member` WHERE `contact-id` = `contact`.`id`)
-			AND `created` < ?", 0, 0, 0, DateTimeFormat::utc('now - 7 days')
+			AND `created` < ?", 0, 0, 0, DateTimeFormat::utc('now - 7 days'),
 		];
 
 		if (!DI::config()->get('remove_all_unused_contacts')) {
 			$condition2 = [
 				"(NOT `network` IN (?, ?, ?, ?, ?, ?) OR `archive`)",
-				Protocol::DFRN, Protocol::DIASPORA, Protocol::OSTATUS, Protocol::FEED, Protocol::MAIL, Protocol::ACTIVITYPUB
+				Protocol::DFRN, Protocol::DIASPORA, Protocol::OSTATUS, Protocol::FEED, Protocol::MAIL, Protocol::ACTIVITYPUB,
 			];
 
 			$condition = DBA::mergeConditions($condition2, $condition);

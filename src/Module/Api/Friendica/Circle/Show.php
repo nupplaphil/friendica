@@ -50,7 +50,7 @@ class Show extends BaseApi
 				$user_element = 'users';
 				$k            = 0;
 				foreach ($members as $member) {
-					$users[$k++.':user'] = DI::twitterUser()->createFromContactId($member['contact-id'], $uid, true)->toArray();
+					$users[$k++ . ':user'] = DI::twitterUser()->createFromContactId($member['contact-id'], $uid, true)->toArray();
 				}
 			} else {
 				$user_element = 'user';

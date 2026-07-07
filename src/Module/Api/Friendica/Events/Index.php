@@ -29,8 +29,8 @@ class Index extends BaseApi
 		], $request);
 
 		$condition = ["`id` > ? AND `uid` = ?", $request['since_id'], $uid];
-		$params = ['limit' => $request['count']];
-		$events = DBA::selectToArray('event', [], $condition, $params);
+		$params    = ['limit' => $request['count']];
+		$events    = DBA::selectToArray('event', [], $condition, $params);
 
 		$items = [];
 		foreach ($events as $event) {
@@ -51,7 +51,7 @@ class Index extends BaseApi
 				'allow_cid'  => $event['allow_cid'],
 				'allow_gid'  => $event['allow_gid'],
 				'deny_cid'   => $event['deny_cid'],
-				'deny_gid'   => $event['deny_gid']
+				'deny_gid'   => $event['deny_gid'],
 			];
 		}
 

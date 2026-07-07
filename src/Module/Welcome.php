@@ -21,8 +21,8 @@ class Welcome extends BaseModule
 		$config             = DI::config();
 		DI::page()['title'] = DI::l10n()->t('Welcome to Friendica');
 
-		$mail_disabled = ((function_exists('imap_open') &&
-							 (!$config->get('system', 'imap_disabled'))));
+		$mail_disabled = ((function_exists('imap_open')
+							 && (!$config->get('system', 'imap_disabled'))));
 		$newuser_private = $config->get('system', 'newuser_private');
 
 		$tpl = Renderer::getMarkupTemplate('welcome.tpl');

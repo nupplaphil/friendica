@@ -28,13 +28,13 @@ use Throwable;
 class Session
 {
 	/** @var string The plain, PHP internal session management */
-	const HANDLER_NATIVE = 'native';
+	public const HANDLER_NATIVE = 'native';
 	/** @var string Using the database for session management */
-	const HANDLER_DATABASE = 'database';
+	public const HANDLER_DATABASE = 'database';
 	/** @var string Using the cache for session management */
-	const HANDLER_CACHE = 'cache';
+	public const HANDLER_CACHE = 'cache';
 
-	const HANDLER_DEFAULT = self::HANDLER_DATABASE;
+	public const HANDLER_DEFAULT = self::HANDLER_DATABASE;
 
 	/**
 	 * @param Mode                $mode

@@ -51,7 +51,7 @@ class Delete extends BaseModeration
 			'$intro2' => $this->t('You need to know the GUID of the item. You can find it e.g. by looking at the display URL. The last part of http://example.com/display/123456 is the GUID, here 123456.'),
 
 			'$deleteitemguid'      => ['deleteitemguid', $this->t("GUID"), '', $this->t("The GUID of the item you want to delete."), $this->t('Required'), 'autofocus'],
-			'$form_security_token' => self::getFormSecurityToken("moderation_deleteitem")
+			'$form_security_token' => self::getFormSecurityToken("moderation_deleteitem"),
 		]);
 	}
 }

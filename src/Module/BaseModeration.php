@@ -116,7 +116,7 @@ abstract class BaseModeration extends BaseModule
 			'$subpages'  => $aside_sub,
 			'$admtxt'    => $this->t('Moderation'),
 			'$h_pending' => $this->t('User registrations waiting for confirmation'),
-			'$modurl'    => 'moderation/'
+			'$modurl'    => 'moderation/',
 		]);
 
 		return '';

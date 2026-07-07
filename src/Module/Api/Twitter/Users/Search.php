@@ -37,7 +37,7 @@ class Search extends BaseApi
 					$request['q'],
 					$request['q'],
 					$request['q'],
-				]
+				],
 			);
 
 			if (DBA::isResult($contacts)) {
