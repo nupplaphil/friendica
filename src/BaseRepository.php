@@ -164,20 +164,6 @@ abstract class BaseRepository
 	}
 
 	/**
-	 * @deprecated 2026.01 Use `\Friendica\BaseRepository::_selectFirstRowAsArray()` instead
-	 *
-	 * @throws NotFoundException
-	 */
-	protected function _selectOne(array $condition, array $params = []): BaseEntity
-	{
-		@trigger_error('`' . __METHOD__ . '()` is deprecated since 2026.01 and will be removed after 5 months, use `\Friendica\BaseRepository::_selectFirstRowAsArray()` instead.', E_USER_DEPRECATED);
-
-		$fields = $this->_selectFirstRowAsArray($condition, $params);
-
-		return $this->getFactory()->createFromTableRow($fields);
-	}
-
-	/**
 	 * @param array $condition
 	 * @param array $params
 	 * @return int

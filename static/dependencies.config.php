@@ -35,12 +35,6 @@ return (function (string $basepath, array $getVars, array $serverVars, array $co
 			// one instance for the whole execution
 			'shared' => true,
 		],
-		\Friendica\Core\Addon\Capability\ICanLoadAddons::class => [
-			'instanceOf'      => \Friendica\Core\Addon\Model\AddonLoader::class,
-			'constructParams' => [
-				$basepath,
-			],
-		],
 		\Friendica\Core\Addon\AddonHelper::class => [
 			'instanceOf'      => \Friendica\Core\Addon\AddonManagerHelper::class,
 			'constructParams' => [
@@ -189,18 +183,6 @@ return (function (string $basepath, array $getVars, array $serverVars, array $co
 		],
 		'$SyslogLoggerFactory' => [
 			'instanceOf' => \Friendica\Core\Logger\Factory\SyslogLoggerFactory::class,
-		],
-		\Friendica\Core\Logger\Type\SyslogLogger::class => [
-			'instanceOf' => \Friendica\Core\Logger\Factory\SyslogLogger::class,
-			'call'       => [
-				['create', [], Dice::CHAIN_CALL],
-			],
-		],
-		\Friendica\Core\Logger\Type\StreamLogger::class => [
-			'instanceOf' => \Friendica\Core\Logger\Factory\StreamLogger::class,
-			'call'       => [
-				['create', [], Dice::CHAIN_CALL],
-			],
 		],
 		\Psr\EventDispatcher\EventDispatcherInterface::class => [
 			'instanceOf' => \Friendica\Event\EventDispatcher::class,

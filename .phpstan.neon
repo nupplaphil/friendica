@@ -16,9 +16,6 @@ parameters:
     paths:
         - bin/auth_ejabberd.php
         - bin/console.php
-        - bin/daemon.php
-        - bin/jetstream.php
-        - bin/worker.php
         - index.php
         - src/
         - static/
@@ -47,4 +44,4 @@ parameters:
             message: '#^Call to an undefined method Mockery[\\\\](?:ExpectationInterface(?:[|]Mockery[\\\\]HigherOrderMessage)?|LegacyMockInterface)::(?:with|once|times|twice|withAnyArgs|andReturnUsing|addRules)\(\)\.$#'
             identifier: method.notFound
             path: tests/
-            count: 247
+            count: 236

@@ -65,7 +65,7 @@ class Introspection implements IHaveCallIntrospections
 			'line'       => $trace[$i - 1]['line'] ?? null,
 			'function'   => $trace[$i]['function'] ?? null,
 			'request-id' => $this->requestId,
-			'stack'      => System::callstack(15, 1, [\Friendica\Core\Logger\Type\StreamLogger::class, \Friendica\Core\Logger\Type\AbstractLogger::class, \Friendica\Core\Logger\Type\WorkerLogger::class, \Friendica\Core\Logger::class]), // @phpstan-ignore classConstant.deprecatedClass
+			'stack'      => System::callstack(15, 1, [\Friendica\Core\Logger\Type\StreamLogger::class, \Friendica\Core\Logger\Type\AbstractLogger::class, \Friendica\Core\Logger\Type\WorkerLogger::class]),
 		];
 	}
 

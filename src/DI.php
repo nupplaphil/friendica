@@ -279,16 +279,6 @@ abstract class DI
 	}
 
 	/**
-	 * @deprecated 2026.01 Use `DI::loggerManager()` and `DI::logger()` instead
-	 */
-	public static function workerLogger(): Core\Logger\Type\WorkerLogger
-	{
-		@trigger_error('`' . __METHOD__ . '()` is deprecated since 2026.01 and will be removed after 5 months, use `DI::logger()` instead.', E_USER_DEPRECATED);
-
-		return self::$dice->create(Core\Logger\Type\WorkerLogger::class);
-	}
-
-	/**
 	 * @internal Only for use in Friendica\Core\Worker class
 	 *
 	 * @see Friendica\Core\Worker::execFunction()
