@@ -126,6 +126,7 @@ function initLoadingIndicator() {
  * @param {string} text
  */
 function setLoadingState(state, text) {
+  console.debug('[Loading] Setting state:', state, 'with text:', text);
   if (!loadingIndicator) createLoadingIndicator();
 
   Object.values(LOADING_STATES).forEach(function(s) {
@@ -160,6 +161,7 @@ function showPosting() {
 }
 
 function hideLoading() {
+  console.debug('[Loading] Hiding loading indicator');
   if (!loadingIndicator) return;
 
   loadingIndicator.classList.remove('active');

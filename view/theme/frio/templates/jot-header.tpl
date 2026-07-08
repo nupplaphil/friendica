@@ -67,17 +67,6 @@
 	aStr.postPublished = '{{$postPublished}}';
 	aStr.goToPost = '{{$goToPost}}';
 
-	function goToElement(elementId) {
-		let $element = $('#' + elementId);
-		if ($element.length) {
-			window.scrollTo(0, $element.offset().top - 100);
-			$element.addClass('highlight-post');
-			setTimeout(function() {
-				$element.removeClass('highlight-post');
-			}, 2000);
-		}
-	}
-
 	$(document).ready(function() {
 
 		/* enable editor on focus and click */

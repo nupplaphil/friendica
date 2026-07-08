@@ -44,8 +44,6 @@ const SPA_CONFIG = {
     '/profile',
     '/search',
   ],
-  spaHeader: 'X-Friendica-SPA',
-  spaParam: 'spa',
   scrollToTopOnNavigate: true
 };
 
@@ -115,8 +113,10 @@ function handleLinkClick(e) {
 
   // Ignore links with data-fancybox attribute (for Fancybox lightbox)
   // These are handled by Fancybox JavaScript
+  // Push a state marker so we can detect back navigation from Fancybox
   if (link.hasAttribute('data-fancybox')) {
-    console.debug('[SPA Router] Click: Fancybox link, allowing default/fancybox behavior');
+    console.debug('[SPA Router] Click: Fancybox link, pushing marker state and allowing default/fancybox behavior');
+    history.pushState({ __fancyboxMarker: true }, '', window.location.href);
     return;
   }
 
@@ -199,8 +199,8 @@ function navigateTo(url) {
   });
   window.dispatchEvent(beforeEvent);
   
-  // Update History API
-  history.pushState({ path, spa: true, __friendicaSPA: true }, '', url);
+  // Update History API - mark as visited so popstate can distinguish our states from external ones (Fancybox)
+  history.pushState({ path, spa: true, __friendicaSPA: true, __visited: true }, '', url);
   
   // Load content
   loadContent(url);
@@ -270,7 +270,9 @@ function loadContent(url) {
     // Update history with the final URL if there were redirects
     if (finalUrl !== fetchUrl.toString()) {
       console.debug('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
-      history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
+      const redirectPath = new URL(finalUrl).pathname;
+      // Mark as visited so popstate can distinguish our states from external ones (Fancybox)
+      history.replaceState({ path: redirectPath, spa: true, __friendicaSPA: true, __visited: true }, '', finalUrl);
     }
     
     // Replace content of the three main containers
@@ -311,51 +313,6 @@ function checkResponseStatus(response) {
     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
   }
   return response;
-}
-
-// ============================================
-// SCRIPT EXECUTION
-// ============================================
-
-/**
- * Execute inline script tags from HTML to set global variables
- * Only executes variable declarations (var, let, const) to avoid issues with
- * event handlers that reference DOM elements or jQuery objects no longer valid after SPA navigation.
- * @param {string} html - The HTML content
- */
-function executeInlineScripts(html) {
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-  
-  const scripts = tempDiv.querySelectorAll('script:not([src])');
-  console.debug('[SPA Router] executeInlineScripts: Found ' + scripts.length + ' inline scripts');
-  // Convert NodeList to Array for compatibility with older browsers
-  const scriptsArray = Array.prototype.slice.call(scripts);
-  scriptsArray.forEach((script, index) => {
-    const scriptContent = script.textContent.trim();
-    if (scriptContent) {
-      // Only execute variable declarations (var, let, const) and important assignments
-      if (scriptContent.startsWith('var ') ||
-          scriptContent.startsWith('let ') ||
-          scriptContent.startsWith('const ') ||
-          scriptContent.trim().startsWith('infinite_scroll =') ||
-          scriptContent.includes('infinite_scroll =')) {
-        console.debug('[SPA Router] executeInlineScripts: Executing var/let/const or infinite_scroll #' + index + ': ' + scriptContent.substring(0, 150));
-        try {
-          // Execute script in global scope by creating and removing a script element
-          const scriptEl = document.createElement('script');
-          scriptEl.textContent = scriptContent;
-          document.head.appendChild(scriptEl);
-          document.head.removeChild(scriptEl);
-          console.debug('[SPA Router] Executed inline script #' + index);
-        } catch (e) {
-          console.error('[SPA Router] Error executing inline script #' + index + ':', e);
-        }
-      } else {
-        console.debug('[SPA Router] executeInlineScripts: Skipping non-declaration script #' + index + ': ' + scriptContent.substring(0, 80));
-      }
-    }
-  });
 }
 
 // ============================================
@@ -426,24 +383,45 @@ function replaceContainerContent(html, finalUrl = null) {
     }
   }
   
-  // Extract initWidget calls to execute after DOM insertion (when widgets exist)
+  // Extract inline scripts - separate global (var/let/const/infinite_scroll) from body scripts
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
-  
-  const widgetInitScripts = [];
+
+  const globalScripts = [];
+  const bodyScripts = [];
+
   const scripts = tempDiv.querySelectorAll('script:not([src])');
   Array.prototype.slice.call(scripts).forEach((script) => {
     const scriptContent = script.textContent.trim();
-    if (scriptContent.includes('initWidget(')) {
-      widgetInitScripts.push(scriptContent);
+    if (!scriptContent) return;
+
+    if (scriptContent.startsWith('var ') ||
+        scriptContent.startsWith('let ') ||
+        scriptContent.startsWith('const ') ||
+        scriptContent.trim().startsWith('infinite_scroll =') ||
+        scriptContent.includes('infinite_scroll =')) {
+      globalScripts.push(scriptContent);
+    } else {
+      // All other inline scripts (including initWidget) are body scripts
+      bodyScripts.push(scriptContent);
     }
   });
-  
-  // Store widget init scripts to execute after DOM insertion
-  window.__spa_widgetInitScripts = widgetInitScripts;
-  
-  // Execute other inline scripts (variables, infinite_scroll, etc.)
-  executeInlineScripts(html);
+
+  // Execute global scripts immediately (variable declarations)
+  globalScripts.forEach((scriptContent, index) => {
+    try {
+      console.debug('[SPA Router] Executing global script #' + index + ': ' + scriptContent.substring(0, 150));
+      const scriptEl = document.createElement('script');
+      scriptEl.textContent = scriptContent;
+      document.head.appendChild(scriptEl);
+      document.head.removeChild(scriptEl);
+    } catch (e) {
+      console.error('[SPA Router] Error executing global script #' + index + ':', e);
+    }
+  });
+
+  // Store body scripts to execute after DOM insertion
+  window.__spa_bodyScripts = bodyScripts;
   
   // Extract and set title from HTML
   const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
@@ -651,24 +629,23 @@ function reinitializeDynamicContent() {
     // we need to ensure any new dynamic content works
   });
   
-  // Execute widget initialization scripts (stored during replaceContainerContent)
-  // This ensures initWidget() is called after the widget elements exist in the DOM
-  if (window.__spa_widgetInitScripts && window.__spa_widgetInitScripts.length > 0) {
-    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_widgetInitScripts.length + ' widget init scripts');
-    window.__spa_widgetInitScripts.forEach((scriptContent, index) => {
+  // Execute body scripts (including widget init scripts) after DOM insertion
+  if (window.__spa_bodyScripts && window.__spa_bodyScripts.length > 0) {
+    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_bodyScripts.length + ' body scripts');
+    window.__spa_bodyScripts.forEach((scriptContent, index) => {
       try {
-        console.debug('[SPA Router] reinitializeDynamicContent: Executing widget init script #' + index + ': ' + scriptContent.substring(0, 150));
+        console.debug('[SPA Router] reinitializeDynamicContent: Executing body script #' + index + ': ' + scriptContent.substring(0, 150));
         const scriptEl = document.createElement('script');
         scriptEl.textContent = scriptContent;
         document.head.appendChild(scriptEl);
         document.head.removeChild(scriptEl);
-        console.debug('[SPA Router] Executed widget init script #' + index);
+        console.debug('[SPA Router] Executed body script #' + index);
       } catch (e) {
-        console.error('[SPA Router] Error executing widget init script #' + index + ':', e);
+        console.error('[SPA Router] Error executing body script #' + index + ':', e);
       }
     });
     // Clear the stored scripts after execution
-    window.__spa_widgetInitScripts = [];
+    window.__spa_bodyScripts = [];
   }
   
   // Scroll to item with GUID on display pages
@@ -711,7 +688,36 @@ function handleInitialLoad() {
  * @param {Event} e - Popstate event
  */
 function handlePopState(e) {
-  console.debug('[SPA Router] PopState: state=', e.state);
+  console.debug('[SPA Router] PopState: state=', e.state, 'hash=', window.location.hash);
+  
+  // Check if this is a Fancybox marker state (created when clicking a Fancybox link)
+  if (e.state && e.state.__fancyboxMarker) {
+    console.debug('[SPA Router] PopState: Fancybox marker state detected, ignoring to let Fancybox handle navigation');
+    return;
+  }
+  
+  // Check if Fancybox lightbox is currently open (via various possible DOM elements)
+  // Fancybox 2: .fancybox-wrap
+  // Fancybox 3: .fancybox-container, .fancybox-bg, .fancybox-is-open
+  const fancyboxSelectors = [
+    '.fancybox-wrap',
+    '.fancybox-container', 
+    '.fancybox-bg',
+    '.fancybox-is-open',
+    '.fancybox-stage',
+    '[class*="fancybox"]'
+  ];
+  
+  const fancyboxActive = fancyboxSelectors.some(selector => document.querySelector(selector) !== null);
+  
+  // Also check if there are any open modal/dialog elements that might be from Fancybox
+  const modalBackdrop = document.querySelector('.modal-backdrop, .fb-backdrop, [class*="backdrop"]');
+  
+  if (fancyboxActive || modalBackdrop !== null) {
+    console.debug('[SPA Router] PopState: Fancybox or modal is active, ignoring to let it handle closing');
+    return;
+  }
+  
   if (e.state && e.state.spa && e.state.__friendicaSPA) {
     console.debug('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
     

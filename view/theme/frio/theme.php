@@ -60,7 +60,6 @@ EOT;
 	if ($pConfig->get($userSession->getLocalUserId(), 'system', 'enable_spa', false)) {
 		// Load SPA router for client-side routing on /network, /display, /profile
 		// This keeps the footer static (important for XMPP addon) and provides smooth transitions
-		$page->registerStylesheet($appHelper->getBasePath() . '/view/js/spa-router.css');
 		$page->registerFooterScript($appHelper->getBasePath() . '/view/js/spa-router.js');
 	}
 }

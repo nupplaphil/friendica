@@ -126,6 +126,7 @@
 		posting: "{{$loading.posting}}"
 	};
 	</script>
+	<link rel="stylesheet" href="view/loading-indicator.css?v={{$VERSION}}" type="text/css" media="all" />
 
 	<script type="text/javascript"
 		src="view/theme/frio/frameworks/bootstrap/js/bootstrap.min.js?v={{$VERSION}}"></script>

@@ -86,6 +86,7 @@ window.spaLoadingTexts = {
 	posting: "{{$loading.posting}}"
 };
 </script>
+<link rel="stylesheet" href="view/loading-indicator?v={{$VERSION}}" type="text/css" media="all" />
 <script>
 	// Lifted from https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
     jQuery.fn.putCursorAtEnd = function() {
