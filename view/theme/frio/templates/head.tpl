@@ -120,21 +120,19 @@
 	<script>
 	// Loading indicator translations
 	window.spaLoadingTexts = {
-		fetching: "{{$loading.fetching}}",
-		receiving: "{{$loading.receiving}}",
-		processing: "{{$loading.processing}}",
-		posting: "{{$loading.posting}}"
+		fetching: "{{$loading.fetching nofilter}}",
+		receiving: "{{$loading.receiving nofilter}}",
+		processing: "{{$loading.processing nofilter}}",
+		posting: "{{$loading.posting nofilter}}"
 	};
 	
 	// SPA error translations
 	window.spaErrorTexts = {
-		timeout: "{{$spaErrors.timeout}}",
-		timeout_message: "{{$spaErrors.timeout_message}}",
-		close: "{{$spaErrors.close}}",
-		delay_title: "{{$spaErrors.delay_title}}",
-		delay_10s: "{{$spaErrors.delay_10s}}",
-		delay_30s: "{{$spaErrors.delay_30s}}",
-		delay_60s: "{{$spaErrors.delay_60s}}"
+		timeout: "{{$spaErrors.timeout nofilter}}",
+		timeout_message: "{{$spaErrors.timeout_message nofilter}}",
+		close: "{{$spaErrors.close nofilter}}",
+		delay_title: "{{$spaErrors.delay_title nofilter}}",
+		delay_messages: {{$spaErrors.delay_messages_json nofilter}}
 	};
 	</script>
 	<link rel="stylesheet" href="view/loading-indicator.css?v={{$VERSION}}" type="text/css" media="all" />

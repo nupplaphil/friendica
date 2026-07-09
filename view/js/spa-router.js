@@ -226,8 +226,8 @@ function updateDelayModalMessage(newMessage) {
 }
 
 /**
- * Show loading delay modal with progressive messages
- * Shows a modal after 10s, updates message at 30s and 60s from request start
+ * Show loading delay modal with rotating random messages
+ * Shows a modal after 3s, rotates messages every 3s
  */
 function showLoadingDelayModal() {
   console.debug('[SPA Router] showLoadingDelayModal: Displaying delay modal');
@@ -239,9 +239,15 @@ function showLoadingDelayModal() {
   }
   
   // Get translated texts from PHP
-  const title = window.spaErrorTexts.delay_title;
-  const message10s = window.spaErrorTexts.delay_10s;
-  const closeText = window.spaErrorTexts.close;
+  const spaTexts = window.spaErrorTexts;
+  const title = spaTexts.delay_title;
+  const closeText = spaTexts.close;
+  const messages = spaTexts.delay_messages;
+  
+  // Select a random initial message
+  let initialMessage = '';
+  const randomIndex = Math.floor(Math.random() * messages.length);
+  initialMessage = messages[randomIndex];
   
   // Create modal overlay
   const modal = document.createElement('div');
@@ -258,7 +264,7 @@ function showLoadingDelayModal() {
   
   // Message element that will be updated
   const messageElement = document.createElement('p');
-  messageElement.textContent = message10s;
+  messageElement.textContent = initialMessage;
   
   content.appendChild(heading);
   content.appendChild(messageElement);
@@ -290,11 +296,8 @@ function showLoadingDelayModal() {
 function dismissDelayModal() {
   const modal = document.getElementById('spa-delay-modal');
   if (modal) {
-    if (modal._timeout30s) {
-      clearTimeout(modal._timeout30s);
-    }
-    if (modal._timeout60s) {
-      clearTimeout(modal._timeout60s);
+    if (modal._messageRotationInterval) {
+      clearInterval(modal._messageRotationInterval);
     }
     modal.remove();
     console.debug('[SPA Router] dismissDelayModal: Modal removed');
@@ -320,9 +323,10 @@ function showTimeoutModal() {
   }
   
   // Get translated texts from PHP
-  const title = window.spaErrorTexts.timeout;
-  const message = window.spaErrorTexts.timeout_message;
-  const closeText = window.spaErrorTexts.close;
+  const spaTexts = window.spaErrorTexts;
+  const title = spaTexts.timeout;
+  const message = spaTexts.timeout_message;
+  const closeText = spaTexts.close;
   
   // Create modal overlay
   const modal = document.createElement('div');
@@ -420,24 +424,29 @@ function loadContent(url) {
   // Track the final URL after all redirects
   let finalUrl = fetchUrl.toString();
   let delayModalTimeoutId;
-  let messageUpdate30s;
-  let messageUpdate60s;
+  let messageRotationInterval;
   
-  // Set delay modal timeouts
+  // Set delay modal timeout and message rotation
   delayModalTimeoutId = setTimeout(() => {
-    console.debug('[SPA Router] LoadContent: Showing delay modal after 10000ms');
+    console.debug('[SPA Router] LoadContent: Showing delay modal after 5000ms');
     showLoadingDelayModal();
-  }, 10000);
-  
-  messageUpdate30s = setTimeout(() => {
-    console.debug('[SPA Router] LoadContent: Updating delay modal to 30s message');
-    updateDelayModalMessage(window.spaErrorTexts.delay_30s);
-  }, 30000);
-  
-  messageUpdate60s = setTimeout(() => {
-    console.debug('[SPA Router] LoadContent: Updating delay modal to 60s message');
-    updateDelayModalMessage(window.spaErrorTexts.delay_60s);
-  }, 60000);
+    
+    // Start rotating messages every 5 seconds
+    // Store the interval on the modal element for cleanup
+    const modal = document.getElementById('spa-delay-modal');
+    if (modal) {
+      modal._messageRotationInterval = setInterval(() => {
+        const spaTexts = window.spaErrorTexts || {};
+        const messages = spaTexts.delay_messages || [];
+        if (messages && messages.length > 0) {
+          const randomIndex = Math.floor(Math.random() * messages.length);
+          const randomMessage = messages[randomIndex];
+          console.debug('[SPA Router] LoadContent: Rotating delay modal message to:', randomMessage);
+          updateDelayModalMessage(randomMessage);
+        }
+      }, 3000);
+    }
+  }, 3000);
 
   showFetching();
   fetch(fetchUrl, {
@@ -448,8 +457,10 @@ function loadContent(url) {
   })
   .then(async (response) => {
     clearTimeout(delayModalTimeoutId);
-    clearTimeout(messageUpdate30s);
-    clearTimeout(messageUpdate60s);
+    const modal = document.getElementById('spa-delay-modal');
+    if (modal && modal._messageRotationInterval) {
+      clearInterval(modal._messageRotationInterval);
+    }
     dismissDelayModal();
     
     console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
@@ -506,8 +517,10 @@ function loadContent(url) {
   .catch(error => {
     clearTimeout(timeoutId);
     clearTimeout(delayModalTimeoutId);
-    clearTimeout(messageUpdate30s);
-    clearTimeout(messageUpdate60s);
+    const modal = document.getElementById('spa-delay-modal');
+    if (modal && modal._messageRotationInterval) {
+      clearInterval(modal._messageRotationInterval);
+    }
     dismissDelayModal();
     
     hideLoading();

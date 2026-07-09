@@ -274,9 +274,96 @@ class Page implements ArrayAccess
 				'timeout_message'  => $l10n->t('The request took too long. Please try again.'),
 				'close'            => $l10n->t('Close'),
 				'delay_title'      => $l10n->t('Please wait'),
-				'delay_10s'        => $l10n->t('This is taking longer than expected, please be patient'),
-				'delay_30s'        => $l10n->t("We're almost there, please wait a little longer"),
-				'delay_60s'        => $l10n->t("It shouldn't be much longer now"),
+				'delay_messages_json' => json_encode([
+					// Generic
+					$l10n->t('Please be patient'),
+					$l10n->t('The server elves are working hard...'),
+					// Coffee references
+					$l10n->t('The coffee machine is warming up...'),
+					$l10n->t('The coffee bean is just falling into the grinder...'),
+					$l10n->t('The coffee machine has inserted a new filter...'),
+					$l10n->t('The coffee beans are being freshly ground...'),
+					$l10n->t('The turbocharger is starting in 3... 2... 1...'),
+					// Star Trek
+					$l10n->t('The warp core is being recalibrated...'),
+					$l10n->t('The flux compensator needs a moment...'),
+					$l10n->t('The warp drive is powering up...'),
+					$l10n->t('The flux compensator is compensating the fluxes...'),
+					$l10n->t('The subspace communication is being established...'),
+					$l10n->t('The warp core is reaching critical temperature...'),
+					$l10n->t('The hyperspace fold drive is preparing...'),
+					$l10n->t('The flux compensator is compensating a lot right now...'),
+					$l10n->t('The warp bubble is forming...'),
+					$l10n->t('The impulse drive is being tested...'),
+					$l10n->t('The flux compensator needs more energy...'),
+					$l10n->t('The warp core is stabilizing...'),
+					// The Hitchhiker's Guide to the Galaxy
+					$l10n->t('The infinite improbability drive is calculating the best route...'),
+					$l10n->t('Bistr-O-Math is loading the current version...'),
+					$l10n->t('The infinite improbability drive is generating a probable reality...'),
+					$l10n->t('Bistr-O-Math is calculating with all variables...'),
+					$l10n->t('The infinite improbability drive is finding the most improbable solution...'),
+					$l10n->t('Bistr-O-Math is solving a particularly complex equation...'),
+					$l10n->t('The infinite improbability drive has taken a break...'),
+					$l10n->t('Bistr-O-Math is checking the calculations...'),
+					// Generic Sci-Fi
+					$l10n->t('The quantum fluctuations are stabilizing...'),
+					$l10n->t('The jump coordinates are being determined...'),
+					// Star Wars
+					$l10n->t('The hyperdrive is spinning up...'),
+					$l10n->t('The Force is guiding the data transmission...'),
+					$l10n->t('R2-D2 is recalculating the jump coordinates...'),
+					$l10n->t('The hyperspace coordinates are being calculated...'),
+					$l10n->t('The hyperspace fold drive is preparing...'),
+					// Warhammer 40k
+					$l10n->t('The Machine Spirit is awakening...'),
+					$l10n->t('The Warp is stabilizing for safe transit...'),
+					$l10n->t('The Adeptus Mechanicus is blessing the circuits...'),
+					// Doctor Who
+					$l10n->t('The TARDIS is materializing your request...'),
+					$l10n->t('The Doctor is recalculating the time vortex...'),
+					$l10n->t('Allons-y, loading in progress...'),
+					// Futurama
+					$l10n->t('Good news, everyone! The server is responding...'),
+					$l10n->t('Bender is optimizing the database query...'),
+					$l10n->t('The Planet Express delivery is in progress...'),
+					// Rick and Morty
+					$l10n->t('Burp... the quantum computer is processing, Morty...'),
+					$l10n->t('The portal to the right dimension is opening...'),
+					$l10n->t('Wubba lubba dub dub! Just a moment...'),
+					// Discworld / Scheibenwelt
+					$l10n->t('The Librarian is finding the right book... Ook.'),
+					$l10n->t('Death is consulting his hourglass...'),
+					$l10n->t('The magic is flowing through the Octagram...'),
+					// The Elder Scrolls
+					$l10n->t('Fus Ro Dah! The page is loading...'),
+					$l10n->t('The Elder Scrolls are being consulted...'),
+					$l10n->t('The Dragonborn is resting at the inn...'),
+					// Portal
+					$l10n->t('The Aperture Science test is initializing...'),
+					$l10n->t('GLaDOS is recalculating test parameters...'),
+					$l10n->t('The companion cube is being positioned...'),
+					// Half-Life
+					$l10n->t('The HEV suit systems are coming online...'),
+					$l10n->t('Dr. Kleiner is adjusting the teleporter...'),
+					$l10n->t('The Combine forces are being held at bay...'),
+					// Dungeons & Dragons
+					$l10n->t('The DM is rolling for your loading time...'),
+					$l10n->t('The party is resting at the campfire...'),
+					$l10n->t('Rolling for initiative on page load...'),
+					// The IT Crowd
+					$l10n->t('Have you tried turning it off and on again?'),
+					$l10n->t('Jenkins is fixing the server issue...'),
+					$l10n->t('The firewall is being reconfigured by Roy...'),
+					// Silicon Valley
+					$l10n->t('Pied Piper is compressing your request...'),
+					$l10n->t('The algorithm is finding the optimal path...'),
+					$l10n->t('Richard is explaining it to Big Head...'),
+					// Matrix
+					$l10n->t('The Oracle is seeing the future of your request...'),
+					$l10n->t('Neo is bending the loading time...'),
+					$l10n->t('Following the white rabbit through the code...'),
+				], JSON_UNESCAPED_UNICODE),
 			],
 
 			// Dropzone
