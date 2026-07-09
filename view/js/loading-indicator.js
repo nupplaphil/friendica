@@ -23,11 +23,13 @@ var LOADING_STATES = {
 
 var loadingIndicator = null;
 var currentLoadingState = null;
+var messageRotationInterval = null;
 
 var LOADING_CONFIG = {
   indicatorId: 'spa-loading-indicator',
   barHeight: 3,
-  fadeOutDuration: 180
+  fadeOutDuration: 180,
+  messageRotationDelay: 3000 // 3 seconds for message rotation
 };
 
 // ============================================
@@ -53,7 +55,7 @@ function getComputedStyleValue(element, property) {
 
 /**
  * Get loading text from PHP translations
- * All texts MUST be provided by PHP via window.spaLoadingTexts
+ * All texts are provided by PHP via window.spaLoadingTexts
  * @param {string} key
  * @returns {string}
  */
@@ -63,6 +65,44 @@ function getLoadingText(key) {
   }
   console.warn('[Loading] Loading text missing for key:', key);
   return '';
+}
+
+/**
+ * Get a random message from delay messages array
+ * @returns {string}
+ */
+function getRandomDelayMessage() {
+  const messages = window.spaLoadingTexts.delay_messages || [];
+  if (messages && messages.length > 0) {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
+  }
+  return '';
+}
+
+/**
+ * Start rotating delay messages in the status text
+ */
+function startMessageRotation() {
+  // Clear any existing rotation
+  if (messageRotationInterval) {
+    clearInterval(messageRotationInterval);
+    messageRotationInterval = null;
+  }
+  
+  // Start new rotation after initial delay
+  messageRotationInterval = setTimeout(() => {
+    const statusText = loadingIndicator && loadingIndicator.querySelector('.spa-status-text');
+    if (statusText) {
+      // Set first random message
+      statusText.textContent = getRandomDelayMessage();
+      
+      // Then rotate every 3 seconds
+      messageRotationInterval = setInterval(() => {
+        statusText.textContent = getRandomDelayMessage();
+      }, LOADING_CONFIG.messageRotationDelay);
+    }
+  }, LOADING_CONFIG.messageRotationDelay);
 }
 
 // ============================================
@@ -121,7 +161,7 @@ function initLoadingIndicator() {
 // ============================================
 
 /**
- * Set loading state with optional text
+ * Set loading state with optional text and start message rotation
  * @param {string} state
  * @param {string} text
  */
@@ -137,7 +177,10 @@ function setLoadingState(state, text) {
 
   var statusText = loadingIndicator.querySelector('.spa-status-text');
   if (statusText) {
+    // Set initial state text
     statusText.textContent = text || getLoadingText(state);
+    // Start message rotation after initial delay
+    startMessageRotation();
   }
 
   loadingIndicator.classList.add('active');
@@ -161,6 +204,16 @@ function showPosting() {
 
 function hideLoading() {
   if (!loadingIndicator) return;
+
+  // Clear message rotation interval
+  if (messageRotationInterval) {
+    if (typeof messageRotationInterval === 'number') {
+      clearTimeout(messageRotationInterval);
+    } else {
+      clearInterval(messageRotationInterval);
+    }
+    messageRotationInterval = null;
+  }
 
   loadingIndicator.classList.remove('active');
   setTimeout(function() {

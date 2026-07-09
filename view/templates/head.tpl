@@ -78,12 +78,13 @@ window.onload = function(){
 <script type="text/javascript" src="view/js/loading-indicator.js?v={{$VERSION}}"></script>
 <script type="text/javascript" src="view/js/main.js?v={{$VERSION}}"></script>
 <script>
-// Loading indicator translations
+// Loading indicator translations with delay messages
 window.spaLoadingTexts = {
 	fetching: "{{$loading.fetching nofilter}}",
 	receiving: "{{$loading.receiving nofilter}}",
 	processing: "{{$loading.processing nofilter}}",
-	posting: "{{$loading.posting nofilter}}"
+	posting: "{{$loading.posting nofilter}}",
+	delay_messages: {{$loading.delay_messages_json nofilter}}
 };
 
 // SPA error translations
@@ -91,8 +92,7 @@ window.spaErrorTexts = {
 	timeout: "{{$spaErrors.timeout nofilter}}",
 	timeout_message: "{{$spaErrors.timeout_message nofilter}}",
 	close: "{{$spaErrors.close nofilter}}",
-	delay_title: "{{$spaErrors.delay_title nofilter}}",
-	delay_messages: {{$spaErrors.delay_messages_json nofilter}}
+	delay_title: "{{$spaErrors.delay_title nofilter}}"
 };
 </script>
 <link rel="stylesheet" href="view/loading-indicator?v={{$VERSION}}" type="text/css" media="all" />
