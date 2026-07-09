@@ -85,8 +85,20 @@ window.spaLoadingTexts = {
 	processing: "{{$loading.processing}}",
 	posting: "{{$loading.posting}}"
 };
+
+// SPA error translations
+window.spaErrorTexts = {
+	timeout: "{{$spaErrors.timeout}}",
+	timeout_message: "{{$spaErrors.timeout_message}}",
+	close: "{{$spaErrors.close}}",
+	delay_title: "{{$spaErrors.delay_title}}",
+	delay_10s: "{{$spaErrors.delay_10s}}",
+	delay_30s: "{{$spaErrors.delay_30s}}",
+	delay_60s: "{{$spaErrors.delay_60s}}"
+};
 </script>
 <link rel="stylesheet" href="view/loading-indicator?v={{$VERSION}}" type="text/css" media="all" />
+<link rel="stylesheet" href="view/spa-router.css?v={{$VERSION}}" type="text/css" media="all" />
 <script>
 	// Lifted from https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
     jQuery.fn.putCursorAtEnd = function() {

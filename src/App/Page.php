@@ -269,6 +269,16 @@ class Page implements ArrayAccess
 				'posting'    => $l10n->t('Posting ...'),
 			],
 
+			'$spaErrors'      => [
+				'timeout'          => $l10n->t('Timeout'),
+				'timeout_message'  => $l10n->t('The request took too long. Please try again.'),
+				'close'            => $l10n->t('Close'),
+				'delay_title'      => $l10n->t('Please wait'),
+				'delay_10s'        => $l10n->t('This is taking longer than expected, please be patient'),
+				'delay_30s'        => $l10n->t("We're almost there, please wait a little longer"),
+				'delay_60s'        => $l10n->t("It shouldn't be much longer now"),
+			],
+
 			// Dropzone
 			'$max_imagesize' => round(Images::getMaxUploadBytes() / 1000000, 0),
 

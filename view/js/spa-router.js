@@ -211,6 +211,202 @@ function navigateTo(url) {
 // ============================================
 
 /**
+ * Update delay modal message
+ * @param {string} newMessage - The new message to display
+ */
+function updateDelayModalMessage(newMessage) {
+  const modal = document.getElementById('spa-delay-modal');
+  if (modal) {
+    const messageElement = modal.querySelector('.spa-modal-content p');
+    if (messageElement) {
+      messageElement.textContent = newMessage;
+      console.debug('[SPA Router] updateDelayModalMessage: Updated to:', newMessage);
+    }
+  }
+}
+
+/**
+ * Show loading delay modal with progressive messages
+ * Shows a modal after 10s, updates message at 30s and 60s from request start
+ */
+function showLoadingDelayModal() {
+  console.debug('[SPA Router] showLoadingDelayModal: Displaying delay modal');
+  
+  // Check if modal already exists
+  if (document.getElementById('spa-delay-modal')) {
+    console.debug('[SPA Router] showLoadingDelayModal: Modal already exists');
+    return;
+  }
+  
+  // Get translated texts from PHP
+  const title = window.spaErrorTexts.delay_title;
+  const message10s = window.spaErrorTexts.delay_10s;
+  const closeText = window.spaErrorTexts.close;
+  
+  // Create modal overlay
+  const modal = document.createElement('div');
+  modal.id = 'spa-delay-modal';
+  modal.className = 'spa-modal-overlay';
+  
+  // Create modal content
+  const content = document.createElement('div');
+  content.className = 'spa-modal-content';
+  
+  // Create heading
+  const heading = document.createElement('h2');
+  heading.textContent = title;
+  
+  // Message element that will be updated
+  const messageElement = document.createElement('p');
+  messageElement.textContent = message10s;
+  
+  content.appendChild(heading);
+  content.appendChild(messageElement);
+  
+  const closeButton = document.createElement('button');
+  closeButton.textContent = closeText;
+  closeButton.className = 'btn btn-primary spa-modal-close-btn';
+  closeButton.onclick = function() {
+    dismissDelayModal();
+  };
+  content.appendChild(closeButton);
+  
+  modal.appendChild(content);
+  
+  // Close modal when clicking on overlay (outside content)
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      dismissDelayModal();
+    }
+  });
+  
+  // Add modal to body
+  document.body.appendChild(modal);
+}
+
+/**
+ * Dismiss the loading delay modal
+ */
+function dismissDelayModal() {
+  const modal = document.getElementById('spa-delay-modal');
+  if (modal) {
+    if (modal._timeout30s) {
+      clearTimeout(modal._timeout30s);
+    }
+    if (modal._timeout60s) {
+      clearTimeout(modal._timeout60s);
+    }
+    modal.remove();
+    console.debug('[SPA Router] dismissDelayModal: Modal removed');
+  }
+}
+
+/**
+ * Show timeout modal overlay
+ * Displays a modal dialog that can be clicked away
+ */
+function showTimeoutModal() {
+  console.debug('[SPA Router] showTimeoutModal: Displaying timeout overlay');
+  
+  hideLoading();
+  
+  // Dismiss any existing delay modal first
+  dismissDelayModal();
+  
+  // Check if modal already exists
+  if (document.getElementById('spa-timeout-modal')) {
+    console.debug('[SPA Router] showTimeoutModal: Modal already exists');
+    return;
+  }
+  
+  // Get translated texts from PHP
+  const title = window.spaErrorTexts.timeout;
+  const message = window.spaErrorTexts.timeout_message;
+  const closeText = window.spaErrorTexts.close;
+  
+  // Create modal overlay
+  const modal = document.createElement('div');
+  modal.id = 'spa-timeout-modal';
+  modal.className = 'spa-modal-overlay';
+  
+  // Create modal content
+  const content = document.createElement('div');
+  content.className = 'spa-modal-content';
+  
+  // Create heading
+  const heading = document.createElement('h2');
+  heading.textContent = title;
+  
+  // Create message paragraph
+  const messageElement = document.createElement('p');
+  messageElement.textContent = message;
+  
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = closeText;
+  closeButton.className = 'btn btn-primary spa-modal-close-btn';
+  closeButton.onclick = function() {
+    dismissTimeoutModal();
+  };
+  
+  content.appendChild(heading);
+  content.appendChild(messageElement);
+  content.appendChild(closeButton);
+  
+  modal.appendChild(content);
+  
+  // Close modal when clicking on overlay (outside content)
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      dismissTimeoutModal();
+    }
+  });
+  
+  // Add modal to body
+  document.body.appendChild(modal);
+  
+  // Also listen for Escape key
+  const escapeHandler = function(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      dismissTimeoutModal();
+    }
+  };
+  document.addEventListener('keydown', escapeHandler);
+  
+  // Store reference to clean up
+  modal._escapeHandler = escapeHandler;
+}
+
+/**
+ * Dismiss the timeout modal
+ */
+function dismissTimeoutModal() {
+  const modal = document.getElementById('spa-timeout-modal');
+  if (modal) {
+    if (modal._escapeHandler) {
+      document.removeEventListener('keydown', modal._escapeHandler);
+    }
+    modal.remove();
+    console.debug('[SPA Router] dismissTimeoutModal: Modal removed');
+  }
+}
+
+/**
+ * Handle HTTP error responses
+ * @param {number} status - HTTP status code
+ * @param {string} url - The original request URL
+ */
+function handleHttpError(status, url) {
+  console.debug('[SPA Router] handleHttpError: status=', status, 'url=', url);
+  
+  // 401: redirect to login
+  if (status === 401) {
+    console.debug('[SPA Router] handleHttpError: 401 Unauthorized - redirecting to login');
+    window.location.href = '/login?return=' + encodeURIComponent(url);
+  }
+}
+
+/**
  * Load content via AJAX
  * @param {string} url - The URL to load
  */
@@ -223,26 +419,38 @@ function loadContent(url) {
   
   // Track the final URL after all redirects
   let finalUrl = fetchUrl.toString();
-  let timeoutId;
-  const abortController = new AbortController();
+  let delayModalTimeoutId;
+  let messageUpdate30s;
+  let messageUpdate60s;
   
-  // Set timeout
-  timeoutId = setTimeout(() => {
-    console.debug('[SPA Router] LoadContent: Timeout after 30000ms');
-    abortController.abort();
+  // Set delay modal timeouts
+  delayModalTimeoutId = setTimeout(() => {
+    console.debug('[SPA Router] LoadContent: Showing delay modal after 10000ms');
+    showLoadingDelayModal();
+  }, 10000);
+  
+  messageUpdate30s = setTimeout(() => {
+    console.debug('[SPA Router] LoadContent: Updating delay modal to 30s message');
+    updateDelayModalMessage(window.spaErrorTexts.delay_30s);
   }, 30000);
+  
+  messageUpdate60s = setTimeout(() => {
+    console.debug('[SPA Router] LoadContent: Updating delay modal to 60s message');
+    updateDelayModalMessage(window.spaErrorTexts.delay_60s);
+  }, 60000);
 
   showFetching();
   fetch(fetchUrl, {
     headers: {
       'Accept': 'text/html'
     },
-    credentials: 'include', // Send cookies for same-origin requests
-    signal: abortController.signal
-    // Note: redirect: 'follow' is the default behavior, no need to specify
+    credentials: 'include' // Send cookies for same-origin requests
   })
   .then(async (response) => {
-    clearTimeout(timeoutId);
+    clearTimeout(delayModalTimeoutId);
+    clearTimeout(messageUpdate30s);
+    clearTimeout(messageUpdate60s);
+    dismissDelayModal();
     
     console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
     
@@ -252,10 +460,24 @@ function loadContent(url) {
       console.debug('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
     }
     
+    // Special handling for 401 and 504
+    if (response.status === 401) {
+      console.debug('[SPA Router] LoadContent: 401 Unauthorized - redirecting to login');
+      handleHttpError(401, url);
+      return null;
+    }
+    
+    if (response.status === 504) {
+      console.debug('[SPA Router] LoadContent: 504 Gateway Timeout - showing modal');
+      showTimeoutModal();
+      return null;
+    }
+    
+    // For all other responses (including other HTTP errors like 404, 500, etc.)
+    // load the server's error page content via SPA
     showReceiving();
     
-    const checkedResponse = checkResponseStatus(response);
-    const html = await checkedResponse.text();
+    const html = await response.text();
     
     console.debug('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
     
@@ -282,6 +504,12 @@ function loadContent(url) {
     return html;
   })
   .catch(error => {
+    clearTimeout(timeoutId);
+    clearTimeout(delayModalTimeoutId);
+    clearTimeout(messageUpdate30s);
+    clearTimeout(messageUpdate60s);
+    dismissDelayModal();
+    
     hideLoading();
     console.error('[SPA Router] Error loading content:', error);
     console.error('[SPA Router] Error stack:', error.stack);
@@ -293,24 +521,22 @@ function loadContent(url) {
       finalUrl: finalUrl,
       error: error
     });
-        
-    // Fallback: Full page reload
-    console.debug('[SPA Router] Falling back to full page reload for URL:', url);
-    console.debug('[SPA Router] LoadContent: Error handling completed');
-    window.location.href = url;
+    
+    // Handle timeout errors with modal - only for server 504, not for client timeout
+    // Client timeout (AbortError) just dismisses the delay modal, does not show timeout modal
+    if (error.name === 'AbortError') {
+      console.debug('[SPA Router] LoadContent: AbortError (client timeout) - dismissing delay modal only');
+      // Don't show timeout modal for client timeout, only dismiss delay modal
+    } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+      // Network error - fall back to full reload
+      console.debug('[SPA Router] LoadContent: Network error - falling back to reload');
+      window.location.href = url;
+    } else {
+      // Fallback: Full page reload for other errors
+      console.debug('[SPA Router] Falling back to full page reload for URL:', url);
+      window.location.href = url;
+    }
   });
-}
-
-/**
- * Check if response is successful
- * @param {Response} response - Fetch response
- * @returns {Response} The response if OK
- */
-function checkResponseStatus(response) {
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-  return response;
 }
 
 // ============================================

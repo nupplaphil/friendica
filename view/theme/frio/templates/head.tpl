@@ -125,8 +125,20 @@
 		processing: "{{$loading.processing}}",
 		posting: "{{$loading.posting}}"
 	};
+	
+	// SPA error translations
+	window.spaErrorTexts = {
+		timeout: "{{$spaErrors.timeout}}",
+		timeout_message: "{{$spaErrors.timeout_message}}",
+		close: "{{$spaErrors.close}}",
+		delay_title: "{{$spaErrors.delay_title}}",
+		delay_10s: "{{$spaErrors.delay_10s}}",
+		delay_30s: "{{$spaErrors.delay_30s}}",
+		delay_60s: "{{$spaErrors.delay_60s}}"
+	};
 	</script>
 	<link rel="stylesheet" href="view/loading-indicator.css?v={{$VERSION}}" type="text/css" media="all" />
+	<link rel="stylesheet" href="view/spa-router.css?v={{$VERSION}}" type="text/css" media="all" />
 
 	<script type="text/javascript"
 		src="view/theme/frio/frameworks/bootstrap/js/bootstrap.min.js?v={{$VERSION}}"></script>
