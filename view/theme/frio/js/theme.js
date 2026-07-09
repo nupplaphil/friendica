@@ -750,47 +750,6 @@ String.prototype.rtrim = function () {
 	return trimmed;
 };
 
-/**
- * Scroll the screen to the item element whose id is provided, then highlights it
- *
- * Note: jquery.color.js is required
- *
- * @param {string} elementId The item element id
- * @returns {undefined}
- */
-function scrollToItem(elementId) {
-	if (typeof elementId === "undefined") {
-		return;
-	}
-
-	var $el = $("#" + elementId + " > .media");
-	// Test if the Item exists
-	if (!$el.length) {
-		return;
-	}
-
-	// Define the colors which are used for highlighting
-	var colWhite = { backgroundColor: "#7f7f7f" };
-	var colShiny = { backgroundColor: "#7e763a" };
-
-	// Get the Item Position (we need to substract 100 to match correct position
-	var itemPos = $el.offset().top - 100;
-
-	// Scroll to the DIV with the ID (GUID)
-	$("html, body")
-		.animate(
-			{
-				scrollTop: itemPos,
-			},
-			400,
-		)
-		.promise()
-		.done(function () {
-			// Highlight post/comment with ID  (GUID)
-			$el.animate(colWhite, 1000).animate(colShiny).animate({ backgroundColor: "transparent" }, 600);
-		});
-}
-
 // format a html string to pure text
 function htmlToText(htmlString) {
 	// Replace line breaks with spaces

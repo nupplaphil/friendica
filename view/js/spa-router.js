@@ -199,9 +199,9 @@ function navigateTo(url) {
   });
   window.dispatchEvent(beforeEvent);
   
-  // Update History API - mark as visited so popstate can distinguish our states from external ones (Fancybox)
-  history.pushState({ path, spa: true, __friendicaSPA: true, __visited: true }, '', url);
-  
+  // Update History API
+  history.pushState({ path, spa: true, __friendicaSPA: true }, '', url);
+
   // Load content
   loadContent(url);
 }
@@ -270,9 +270,7 @@ function loadContent(url) {
     // Update history with the final URL if there were redirects
     if (finalUrl !== fetchUrl.toString()) {
       console.debug('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
-      const redirectPath = new URL(finalUrl).pathname;
-      // Mark as visited so popstate can distinguish our states from external ones (Fancybox)
-      history.replaceState({ path: redirectPath, spa: true, __friendicaSPA: true, __visited: true }, '', finalUrl);
+      history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
     }
     
     // Replace content of the three main containers
@@ -365,7 +363,7 @@ function replaceContainerContent(html, finalUrl = null) {
     html = '';
   }
   
-  // Store the final URL for scrollToDisplayGuid
+  // Store the final URL for potential redirect handling
   if (finalUrl) {
     lastFinalUrl = finalUrl;
     console.debug('[SPA Router] ReplaceContent: Set lastFinalUrl to:', lastFinalUrl);
@@ -538,85 +536,6 @@ function replaceContainerContent(html, finalUrl = null) {
 // ============================================
 
 /**
- * Fallback scroll to element function
- * Used when theme.js scrollToItem is not available
- * @param {string} elementId - The element ID to scroll to
- */
-function spaScrollToItem(elementId) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    console.debug('[SPA Router] Scrolling to element with fallback function:', elementId);
-    const headerOffset = 100;
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-    window.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth'
-    });
-    // Highlight the element briefly
-    element.style.backgroundColor = '#7e763a';
-    setTimeout(() => {
-      element.style.backgroundColor = '';
-    }, 2000);
-  } else {
-    console.warn('[SPA Router] Element not found:', elementId);
-  }
-}
-
-/**
- * Scroll to item with GUID on display pages
- * This handles auto-scroll for /display/{guid} URLs
- */
-function scrollToDisplayGuid() {
-  // Use the stored final URL if available (for redirects), otherwise use window.location.pathname
-  const effectivePath = lastFinalUrl ? new URL(lastFinalUrl).pathname : window.location.pathname;
-  console.debug('[SPA Router] scrollToDisplayGuid: effectivePath:', effectivePath);
-  
-  if (effectivePath.includes('/display/')) {
-    const pathParts = effectivePath.split('/');
-    console.debug('[SPA Router] scrollToDisplayGuid: pathParts:', pathParts);
-    // Find the display path part: /display/{guid} or /display/{guid}/...
-    // The GUID is the part right after /display/
-    const displayIndex = pathParts.indexOf('display');
-    console.debug('[SPA Router] scrollToDisplayGuid: displayIndex:', displayIndex);
-    
-    if (displayIndex >= 0 && displayIndex + 1 < pathParts.length) {
-      const itemGuid = pathParts[displayIndex + 1];
-      console.debug('[SPA Router] scrollToDisplayGuid: itemGuid:', itemGuid);
-      
-      if (itemGuid) {
-        const elementId = 'item-' + itemGuid;
-        console.debug('[SPA Router] scrollToDisplayGuid: elementId:', elementId, 'scrollToItem exists:', typeof scrollToItem === 'function');
-        
-        // Use setTimeout to allow DOM to settle after content replacement
-        setTimeout(() => {
-          const element = document.getElementById(elementId);
-          console.debug('[SPA Router] scrollToDisplayGuid: element found:', !!element);
-          
-          if (element) {
-            console.debug('[SPA Router] scrollToDisplayGuid: scrolling to element');
-            if (typeof scrollToItem === 'function') {
-              scrollToItem(elementId);
-            } else {
-              // Fallback if theme.js scrollToItem is not available
-              spaScrollToItem(elementId);
-            }
-          } else {
-            console.warn('[SPA Router] scrollToDisplayGuid: element not found!');
-          }
-        }, 100);
-      } else {
-        console.debug('[SPA Router] scrollToDisplayGuid: No GUID found in path');
-      }
-    }
-  } else {
-    console.debug('[SPA Router] scrollToDisplayGuid: Not a display path');
-  }
-  
-  // Reset the lastFinalUrl after processing
-  lastFinalUrl = null;
-}
-
-/**
  * Re-initialize dynamic content after SPA navigation
  * This is important for elements that need event listeners
  */
@@ -647,9 +566,6 @@ function reinitializeDynamicContent() {
     // Clear the stored scripts after execution
     window.__spa_bodyScripts = [];
   }
-  
-  // Scroll to item with GUID on display pages
-  scrollToDisplayGuid();
   
   // Dispatch custom events for other scripts to hook into
   const spaNavigateEvent = new CustomEvent('spa:navigate', {

@@ -553,19 +553,46 @@ function triggerLiveUpdates(force, guid) {
 	}
 }
 
-function goToElement(elementId) {
-	console.debug('[Main] goToElement called with elementId:', elementId);
-	let $element = $('#' + elementId);
-	if (!$element.length) {
+/**
+ * Scroll the screen to the item element whose id is provided, then highlights it
+ *
+ * Note: jquery.color.js is required
+ *
+ * @param {string} elementId The item element id
+ * @returns {undefined}
+ */
+function scrollToItem(elementId) {
+	if (typeof elementId === "undefined") {
 		return false;
 	}
 
-	window.scrollTo(0, $element.offset().top - 100);
-	$element.addClass('highlight-post');
-	setTimeout(function() {
-		$element.removeClass('highlight-post');
-	}, 2000);
-	return true;
+	var $el = $("#" + elementId + " > .media");
+	// Test if the Item exists
+	if (!$el.length) {
+		return false;
+	}
+
+	// Define the colors which are used for highlighting
+	var colWhite = { backgroundColor: "#7f7f7f" };
+	var colShiny = { backgroundColor: "#7e763a" };
+
+	// Get the Item Position (we need to substract 100 to match correct position
+	var itemPos = $el.offset().top - 100;
+
+	// Scroll to the DIV with the ID (GUID)
+	$("html, body")
+		.animate(
+			{
+				scrollTop: itemPos,
+			},
+			400,
+		)
+		.promise()
+		.done(function () {
+			// Highlight post/comment with ID  (GUID)
+			$el.animate(colWhite, 1000).animate(colShiny).animate({ backgroundColor: "transparent" }, 600);
+			return true;
+		});
 }
 
 function NavUpdate() {
@@ -766,7 +793,7 @@ function liveUpdate(src, force, guid) {
 				document.dispatchEvent(new Event('postprocess_liveupdate'));
 
 				// Update the scroll position.
-				if (!guid || !goToElement("item-" + guid)) {
+				if (!guid || !scrollToItem("item-" + guid)) {
 					$(window).animate({scrollTop: $(window).scrollTop() + $("section").height() - orgHeight}, 200);
 				}
 			})
