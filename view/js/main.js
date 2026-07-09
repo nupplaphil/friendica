@@ -797,11 +797,8 @@ function liveUpdate(src, force, guid) {
 					$(window).animate({scrollTop: $(window).scrollTop() + $("section").height() - orgHeight}, 200);
 				}
 			})
-			.always(function() {
-				hideLoading();
-			});
 		})
-		.fail(function() {
+		.always(function() {
 			in_progress = false;
 			hideLoading();
 		});

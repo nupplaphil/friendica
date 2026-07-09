@@ -29,7 +29,7 @@ var LOADING_CONFIG = {
   indicatorId: 'spa-loading-indicator',
   barHeight: 3,
   fadeOutDuration: 180,
-  messageRotationDelay: 3000 // 3 seconds for message rotation
+  messageRotationDelay: 2000 // 2 seconds for message rotation
 };
 
 // ============================================
@@ -97,7 +97,7 @@ function startMessageRotation() {
       // Set first random message
       statusText.textContent = getRandomDelayMessage();
       
-      // Then rotate every 3 seconds
+      // Then rotate every 2 seconds
       messageRotationInterval = setInterval(() => {
         statusText.textContent = getRandomDelayMessage();
       }, LOADING_CONFIG.messageRotationDelay);
