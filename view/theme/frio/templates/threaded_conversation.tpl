@@ -8,14 +8,14 @@
 {{if $mode == display}}
 <script type="text/javascript">
 // Display module: Scroll to item by GUID
-const itemGuid = window.location.pathname.split("/").pop();
-const scrollToDisplayGuid = () => scrollToItem("item-" + itemGuid);
+window.itemGuid = window.location.pathname.split("/").pop();
+window.scrollToDisplayGuid = () => scrollToItem("item-" + window.itemGuid);
 
 // 1. Try immediately (works for SPA after content replacement)
-scrollToDisplayGuid();
+window.scrollToDisplayGuid();
 
 // 2. Try on window.load (works for non-SPA)
-$(window).load(scrollToDisplayGuid);
+$(window).load(window.scrollToDisplayGuid);
 
 // 3. Listen for SPA navigation
 window.addEventListener('spa:navigate', (e) => {
