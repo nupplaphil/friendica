@@ -211,17 +211,6 @@ function navigateTo(url) {
 // ============================================
 
 /**
- * Dismiss any loading delay modal
- */
-function dismissDelayModal() {
-  const modal = document.getElementById('spa-delay-modal');
-  if (modal) {
-    modal.remove();
-    console.debug('[SPA Router] dismissDelayModal: Modal removed');
-  }
-}
-
-/**
  * Show timeout modal overlay
  * Displays a modal dialog that can be clicked away
  */
@@ -229,9 +218,6 @@ function showTimeoutModal() {
   console.debug('[SPA Router] showTimeoutModal: Displaying timeout overlay');
   
   hideLoading();
-  
-  // Dismiss any existing delay modal first
-  dismissDelayModal();
   
   // Check if modal already exists
   if (document.getElementById('spa-timeout-modal')) {

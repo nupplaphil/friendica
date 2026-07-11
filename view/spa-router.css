@@ -37,11 +37,6 @@
 	margin-top: 15px;
 }
 
-/* Loading Delay Modal - Specific Styles */
-#spa-delay-modal h2 {
-	color: #5bc0de;
-}
-
 /* Timeout Modal - Specific Styles */
 #spa-timeout-modal h2 {
 	color: #d9534f;
