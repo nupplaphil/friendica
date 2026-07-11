@@ -164,6 +164,7 @@
 		src="view/theme/frio/frameworks/sticky-kit/jquery.sticky-kit.min.js?v={{$VERSION}}"></script>
 
 	{{* own js files *}}
+	<script type="text/javascript" src="view/theme/frio/js/jot.js?v={{$VERSION}}"></script>
 	<script type="text/javascript" src="view/theme/frio/js/theme.js?v={{$VERSION}}"></script>
 	<script type="text/javascript" src="view/theme/frio/js/modal.js?v={{$VERSION}}"></script>
 	<script type="text/javascript" src="view/js/ajaxupload.js?v={{$VERSION}}"></script>

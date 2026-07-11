@@ -82,5 +82,57 @@ var linkPreview;
 		}
 	};
 
+	/**
+	 * Show the jot modal with cached content.
+	 * This function is called when the jot button is clicked.
+	 * 
+	 * @requires jQuery
+	 * @requires jotcache (global variable from theme.js)
+	 * @requires linkPreview (global variable)
+	 * @requires toggleJotNav (global function from modal.js)
+	 * 
+	 * @returns {void}
+	 */
+	window.jotShow = function () {
+		var modal = $('#jot-modal').modal();
+		// eslint-disable-next-line no-var
+		var jotcache = window.jotcache || $("#jot-sections");
+
+		// Auto focus on the first enabled field in the modal
+		modal.on('shown.bs.modal', function (e) {
+			$('#jot-modal-content').find('select:not([disabled]), input:not([type=hidden]):not([disabled]), textarea:not([disabled])').first().focus();
+		});
+
+		modal
+			.find('#jot-modal-content')
+			.append(jotcache)
+			.modal('show');
+
+		// Jot attachment live preview.
+		if (typeof linkPreview !== "undefined") {
+			linkPreview = $('#profile-jot-text').linkPreview();
+		}
+	};
+
+	/**
+	 * Activate the jot text section in the jot modal.
+	 * 
+	 * @requires jQuery
+	 * @requires toggleJotNav (global function from modal.js)
+	 * 
+	 * @returns {void}
+	 */
+	window.jotActive = function () {
+		// Make sure jot text does have really the active class (we do this because there are some
+		// other events which trigger jot text (we need to do this for the desktop and mobile
+		// jot nav
+		var elem = $("#jot-modal .jot-nav #jot-text-lnk");
+		var elemMobile = $("#jot-modal .jot-nav #jot-text-lnk-mobile");
+		if (typeof window.toggleJotNav === "function") {
+			window.toggleJotNav(elem[0]);
+			window.toggleJotNav(elemMobile[0]);
+		}
+	};
+
 })(jQuery, window);
 // @license-end
