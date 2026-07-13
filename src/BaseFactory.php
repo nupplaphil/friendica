@@ -12,7 +12,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Factories act as an intermediary to avoid direct Entity instantiation.
  *
- * @see BaseModel
  * @see BaseCollection
  */
 abstract class BaseFactory
