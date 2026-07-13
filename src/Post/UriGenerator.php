@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace Friendica\Item;
+namespace Friendica\Post;
 
 use Friendica\App\BaseURL;
 use Friendica\Core\System;
 use Psr\Log\LoggerInterface;
 
 /**
- * Creates GUIDs and URIs for items
+ * Creates GUIDs and URIs for posts
  */
 final readonly class UriGenerator
 {

@@ -572,12 +572,12 @@ abstract class DI
 	}
 
 	//
-	// "Item" namespace instances
+	// "Post" namespace instances
 	//
 
-	public static function itemUriGenerator(): Item\UriGenerator
+	public static function postUriGenerator(): Post\UriGenerator
 	{
-		return self::$dice->create(Item\UriGenerator::class);
+		return self::$dice->create(Post\UriGenerator::class);
 	}
 
 	//

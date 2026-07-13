@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Friendica\Test\Unit\Item;
+namespace Friendica\Test\Unit\Post;
 
 use Dice\Dice;
 use Friendica\App\BaseURL;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\DI;
-use Friendica\Item\UriGenerator;
+use Friendica\Post\UriGenerator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;

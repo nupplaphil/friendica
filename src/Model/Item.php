@@ -1914,11 +1914,11 @@ class Item
 	 * @return string Unique guid
 	 * @throws \Exception
 	 *
-	 * @deprecated 2026.08 Use \Friendica\Item\UriGenerator::guidFromUri instead
+	 * @deprecated 2026.08 Use \Friendica\Post\UriGenerator::guidFromUri instead
 	 */
 	public static function guidFromUri(string $uri, ?string $host = null): string
 	{
-		return DI::itemUriGenerator()->guidFromUri($uri, $host);
+		return DI::postUriGenerator()->guidFromUri($uri, $host);
 	}
 
 	/**
@@ -1929,11 +1929,11 @@ class Item
 	 * @return string
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 *
-	 * @deprecated 2026.08 Use \Friendica\Item\UriGenerator::newURI instead
+	 * @deprecated 2026.08 Use \Friendica\Post\UriGenerator::newURI instead
 	 */
 	public static function newURI(string $guid = ''): string
 	{
-		return DI::itemUriGenerator()->newURI($guid);
+		return DI::postUriGenerator()->newURI($guid);
 	}
 
 	/**
@@ -2259,7 +2259,7 @@ class Item
 			$old_uri_id       = $datarray['uri-id'] ?? 0;
 			$datarray['guid'] = System::createUUID();
 			unset($datarray['plink']);
-			$datarray['uri']    = DI::itemUriGenerator()->newURI($datarray['guid']);
+			$datarray['uri']    = DI::postUriGenerator()->newURI($datarray['guid']);
 			$datarray['uri-id'] = ItemURI::getIdByURI($datarray['uri']);
 			$datarray['extid']  = Protocol::DFRN;
 			$urlpart            = parse_url((string) $datarray2['author-link']);
@@ -2715,7 +2715,7 @@ class Item
 
 		$new_item = [
 			'guid'        => System::createUUID(),
-			'uri'         => DI::itemUriGenerator()->newURI(),
+			'uri'         => DI::postUriGenerator()->newURI(),
 			'uid'         => $uid,
 			'contact-id'  => $owner['id'],
 			'wall'        => $item['wall'],
