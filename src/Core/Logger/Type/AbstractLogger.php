@@ -25,7 +25,7 @@ use Stringable;
  */
 abstract class AbstractLogger implements LoggerInterface
 {
-	const NAME = '';
+	public const NAME = '';
 
 	/**
 	 * The output channel of this logger

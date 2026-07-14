@@ -46,12 +46,13 @@ trait LoggerDataTrait
 			],
 			'info' => [
 				'function' => 'info',
-				'message'  => new class() implements Stringable {
-					public function __toString(): string {
+				'message'  => new class () implements Stringable {
+					public function __toString(): string
+					{
 						return 'test with Stringable';
 					}
 				},
-				'context'  => ['a' => 'context'],
+				'context' => ['a' => 'context'],
 			],
 			'debug' => [
 				'function' => 'debug',
