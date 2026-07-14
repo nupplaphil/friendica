@@ -57,6 +57,6 @@ final class Notes extends ProfileModule
 			throw new NotFoundException();
 		}
 
-		System::htmlUpdateExit($this->conversationRenderer->renderThreaded(Post::toArray($r), ConversationRenderer::MODE_NOTES, true, ConversationRenderer::ORDER_COMMENTED, 0, $request));
+		System::htmlUpdateExit($this->conversationRenderer->renderThreaded(Post::toArray($r), ConversationRenderer::MODE_NOTES, true, ConversationRenderer::ORDER_COMMENTED, $this->userSession->getLocalUserId(), $request));
 	}
 }
