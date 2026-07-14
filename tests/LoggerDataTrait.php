@@ -7,6 +7,8 @@
 
 namespace Friendica\Test;
 
+use Stringable;
+
 trait LoggerDataTrait
 {
 	public static function dataTests()
@@ -44,7 +46,11 @@ trait LoggerDataTrait
 			],
 			'info' => [
 				'function' => 'info',
-				'message'  => null,
+				'message'  => new class() implements Stringable {
+					public function __toString(): string {
+						return 'test with Stringable';
+					}
+				},
 				'context'  => ['a' => 'context'],
 			],
 			'debug' => [
