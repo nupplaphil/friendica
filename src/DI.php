@@ -572,6 +572,15 @@ abstract class DI
 	}
 
 	//
+	// "Post" namespace instances
+	//
+
+	public static function postUriGenerator(): Post\UriGenerator
+	{
+		return self::$dice->create(Post\UriGenerator::class);
+	}
+
+	//
 	// "Protocol" namespace instances
 	//
 
