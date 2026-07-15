@@ -20,6 +20,26 @@ if (!Element.prototype.matches) {
 		};
 }
 
+/**
+ * Register a function to be called on initial page load and after SPA navigation
+ * This provides a unified way to handle initialization for both traditional page loads
+ * and Single Page Application (SPA) content updates.
+ *
+ * @param {Function} fn - The function to execute on page load and SPA navigation
+ * @example
+ * function initMyModule() {
+ *     // Initialization code
+ * }
+ * onPageLoad(initMyModule);
+ */
+function onPageLoad(fn) {
+	if (typeof fn !== 'function') {
+		return;
+	}
+	$(document).ready(fn);
+	window.addEventListener('theme:reload', fn);
+}
+
 function resizeIframe(obj) {
 	_resizeIframe(obj, 0);
 }

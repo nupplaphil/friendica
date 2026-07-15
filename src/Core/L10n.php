@@ -82,7 +82,7 @@ class L10n
 	 */
 	private $strings = [];
 
-	public function __construct(private IManageConfigValues $config, private Database $dba, private IHandleSessions $session, array $server, array $get)
+	public function __construct(private IManageConfigValues $config, private Database $dba, private IHandleSessions $session, private array $server, array $get)
 	{
 		$this->loadTranslationTable(L10n::detectLanguage($server, $get, $this->config->get('system', 'language', self::DEFAULT)));
 		$this->setLocale($server);
@@ -740,5 +740,28 @@ class L10n
 		);
 
 		return $formatter->format(new DateTime($datestring));
+	}
+
+	/**
+	 * Return the delay messages for the current language as array
+	 *
+	 * Loads delay messages from static files in /static/delay-messages/
+	 * based on the current language. Falls back to English if the language
+	 * specific file doesn't exist.
+	 *
+	 * @return array Array of delay messages
+	 */
+	public function getDelayMessages(): array
+	{
+		$delayMessages = [];
+		$delayFile     = __DIR__ . '/../../static/delay-messages/' . $this->lang . '.php';
+
+		if (file_exists($delayFile)) {
+			$delayMessages = include $delayFile;
+		} elseif ($this->lang !== 'en' && file_exists(__DIR__ . '/../../static/delay-messages/en.php')) {
+			$delayMessages = include __DIR__ . '/../../static/delay-messages/en.php';
+		}
+
+		return $delayMessages;
 	}
 }

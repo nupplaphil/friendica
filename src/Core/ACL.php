@@ -44,12 +44,7 @@ class ACL
 	{
 		$o = '';
 
-		$page = DI::page();
-
-		$page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-		$page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+		DI::statusEditor()->registerAssets();
 
 		$contacts = self::getValidMessageRecipientsForUser(DI::userSession()->getLocalUserId());
 
@@ -247,10 +242,7 @@ class ACL
 
 		$input_group_id++;
 
-		$page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-		$page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+		DI::statusEditor()->registerAssets();
 
 		// Defaults user permissions
 		if (empty($default_permissions)) {

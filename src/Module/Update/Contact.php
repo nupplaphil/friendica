@@ -12,6 +12,7 @@ namespace Friendica\Module\Update;
 
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Core\L10n;
 use Friendica\Core\Session\Model\UserSession;
 use Friendica\Core\System;
@@ -35,6 +36,7 @@ final class Contact extends ContactModule
 	/**
 	 * Contact update module constructor.
 	 *
+	 * @param StatusEditor $statusEditor
 	 * @param L10n $l10n
 	 * @param BaseURL $baseUrl
 	 * @param Arguments $args
@@ -45,9 +47,9 @@ final class Contact extends ContactModule
 	 * @param array $parameters
 	 * @param UserSession $userSession
 	 */
-	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters, private readonly UserSession $userSession)
+	public function __construct(private readonly StatusEditor $statusEditor, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters, private readonly UserSession $userSession)
 	{
-		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
+		parent::__construct($statusEditor, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
 	/**

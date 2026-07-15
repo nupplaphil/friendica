@@ -34,15 +34,8 @@ let lastFinalUrl = null;
 
 const SPA_CONFIG = {
   enabled: true,
-  routes: [
-    '/community',
-    '/contact',
-    '/display',
-    '/message',
-    '/network',
-    '/notification',
-    '/profile',
-    '/search',
+  excludedRoutes: [
+    '/delegation',
   ],
   scrollToTopOnNavigate: true
 };
@@ -57,7 +50,7 @@ const SPA_CONFIG = {
  * @returns {boolean} True if route should use SPA
  */
 function isSPARoute(path) {
-  return SPA_CONFIG.routes.some(route => {
+  return !SPA_CONFIG.excludedRoutes.some(route => {
     // Exact match or starts with route + /
     return path === route || path.startsWith(route + '/');
   });

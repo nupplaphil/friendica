@@ -7,14 +7,17 @@
 
 namespace Friendica\Module;
 
+use Friendica\App\Arguments;
+use Friendica\App\BaseURL;
 use Friendica\BaseModule;
 use Friendica\Content\ContactSelector;
+use Friendica\Content\Conversation\StatusEditor;
 use Friendica\Content\Nav;
 use Friendica\Content\Pager;
 use Friendica\Content\Widget;
+use Friendica\Core\L10n;
 use Friendica\Core\Protocol;
 use Friendica\Core\Renderer;
-use Friendica\Core\Theme;
 use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
@@ -23,7 +26,9 @@ use Friendica\Model\User;
 use Friendica\Module\Security\Login;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Network\HTTPException\NotFoundException;
+use Friendica\Util\Profiler;
 use Friendica\Worker\UpdateContact;
+use Psr\Log\LoggerInterface;
 
 /**
  *  Manages and show Contacts and their content
@@ -36,6 +41,11 @@ class Contact extends BaseModule
 	public const TAB_CONTACTS      = 4;
 	public const TAB_ADVANCED      = 5;
 	public const TAB_MEDIA         = 6;
+
+	public function __construct(private readonly StatusEditor $statusEditor, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, array $server, array $parameters)
+	{
+		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
+	}
 
 	private static function batchActions()
 	{
@@ -180,10 +190,7 @@ class Contact extends BaseModule
 		// Default page title when not viewing a specific contact
 		$page['title'] = DI::l10n()->t('Contacts');
 
-		$page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-		$page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-		$page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+		$this->statusEditor->registerAssets();
 
 		$vcard_widget      = '';
 		$findpeople_widget = Widget::findPeople();
