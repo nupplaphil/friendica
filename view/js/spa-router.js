@@ -301,7 +301,7 @@ function handleHttpError(status, url) {
   // 401: redirect to login
   if (status === 401) {
     console.debug('[SPA Router] handleHttpError: 401 Unauthorized - redirecting to login');
-    window.location.href = '/login?return=' + encodeURIComponent(url);
+    window.location.href = '/login?return_path=' + encodeURIComponent(url);
   }
 }
 

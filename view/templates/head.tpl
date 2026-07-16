@@ -95,7 +95,7 @@ window.spaErrorTexts = {
 	delay_title: "{{$spaErrors.delay_title nofilter}}"
 };
 </script>
-<link rel="stylesheet" href="view/loading-indicator?v={{$VERSION}}" type="text/css" media="all" />
+<link rel="stylesheet" href="view/loading-indicator.css?v={{$VERSION}}" type="text/css" media="all" />
 <link rel="stylesheet" href="view/spa-router.css?v={{$VERSION}}" type="text/css" media="all" />
 <script>
 	// Lifted from https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/

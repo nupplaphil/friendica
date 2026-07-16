@@ -813,7 +813,7 @@ function liveUpdate(src, force, guid) {
 				document.dispatchEvent(new Event('postprocess_liveupdate'));
 
 				// Update the scroll position.
-				if (!guid) {
+				if (guid) {
 					scrollToItem("item-" + guid);
 				}
 			})
