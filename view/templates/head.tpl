@@ -78,14 +78,25 @@ window.onload = function(){
 <script type="text/javascript" src="view/js/loading-indicator.js?v={{$VERSION}}"></script>
 <script type="text/javascript" src="view/js/main.js?v={{$VERSION}}"></script>
 <script>
-// Loading indicator translations
+// Loading indicator translations with delay messages
 window.spaLoadingTexts = {
-	fetching: "{{$loading.fetching}}",
-	receiving: "{{$loading.receiving}}",
-	processing: "{{$loading.processing}}",
-	posting: "{{$loading.posting}}"
+	fetching: "{{$loading.fetching nofilter}}",
+	receiving: "{{$loading.receiving nofilter}}",
+	processing: "{{$loading.processing nofilter}}",
+	posting: "{{$loading.posting nofilter}}",
+	delay_messages: {{$loading.delay_messages_json nofilter}}
+};
+
+// SPA error translations
+window.spaErrorTexts = {
+	timeout: "{{$spaErrors.timeout nofilter}}",
+	timeout_message: "{{$spaErrors.timeout_message nofilter}}",
+	close: "{{$spaErrors.close nofilter}}",
+	delay_title: "{{$spaErrors.delay_title nofilter}}"
 };
 </script>
+<link rel="stylesheet" href="view/loading-indicator.css?v={{$VERSION}}" type="text/css" media="all" />
+<link rel="stylesheet" href="view/spa-router.css?v={{$VERSION}}" type="text/css" media="all" />
 <script>
 	// Lifted from https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
     jQuery.fn.putCursorAtEnd = function() {

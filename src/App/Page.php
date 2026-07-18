@@ -263,10 +263,18 @@ class Page implements ArrayAccess
 			'$block_public'   => intval($config->get('system', 'block_public')),
 			'$stylesheets'    => $this->stylesheets,
 			'$loading'        => [
-				'fetching'   => $l10n->t('Fetching ...'),
-				'receiving'  => $l10n->t('Receiving data ...'),
-				'processing' => $l10n->t('Processing ...'),
-				'posting'    => $l10n->t('Posting ...'),
+				'fetching'            => $l10n->t('Fetching...'),
+				'receiving'           => $l10n->t('Receiving data...'),
+				'processing'          => $l10n->t('Processing...'),
+				'posting'             => $l10n->t('Posting...'),
+				'delay_messages_json' => json_encode($l10n->getDelayMessages(), JSON_UNESCAPED_UNICODE),
+			],
+
+			'$spaErrors' => [
+				'timeout'         => $l10n->t('Timeout'),
+				'timeout_message' => $l10n->t('The request took too long. Please try again.'),
+				'close'           => $l10n->t('Close'),
+				'delay_title'     => $l10n->t('Please wait'),
 			],
 
 			// Dropzone

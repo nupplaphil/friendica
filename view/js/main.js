@@ -20,6 +20,26 @@ if (!Element.prototype.matches) {
 		};
 }
 
+/**
+ * Register a function to be called on initial page load and after SPA navigation
+ * This provides a unified way to handle initialization for both traditional page loads
+ * and Single Page Application (SPA) content updates.
+ *
+ * @param {Function} fn - The function to execute on page load and SPA navigation
+ * @example
+ * function initMyModule() {
+ *     // Initialization code
+ * }
+ * onPageLoad(initMyModule);
+ */
+function onPageLoad(fn) {
+	if (typeof fn !== 'function') {
+		return;
+	}
+	$(document).ready(fn);
+	window.addEventListener('theme:reload', fn);
+}
+
 function resizeIframe(obj) {
 	_resizeIframe(obj, 0);
 }
@@ -535,71 +555,131 @@ function insertBBCodeInTextarea(BBCode, textarea) {
 	textarea.focus();
 }
 
+function triggerLiveUpdates(force, guid) {
+	if (force) {
+		showProcessing();
+	}
+	force_update = force;
+	console.debug('[Main] triggerLiveUpdates called with force:', force, 'guid:', guid);
+	['network', 'profile', 'channel', 'community', 'notes', 'display', 'contact'].forEach(function (src) {
+		console.debug('[Main] Checking live-' + src + ', exists=' + $('#live-' + src).length + ', force=' + force + ', updateContent=' + updateContent + ', isDisplay=' + $('#live-display').length);
+		if ($('#live-' + src).length && (force || (updateContent && src !== 'display'))) {
+			console.debug('[Main] Triggering liveUpdate for: ' + src + ', guid=' + guid);
+			liveUpdate(src, force, guid);
+		}
+	});
+	if (force) {
+		hideLoading();
+	}
+}
+
+/**
+ * Scroll the screen to the item element whose id is provided, then highlights it
+ *
+ * Note: jquery.color.js is required
+ *
+ * @param {string} elementId The item element id
+ * @returns {undefined}
+ */
+function scrollToItem(elementId) {
+	if (typeof elementId === "undefined") {
+		return false;
+	}
+
+	var $el = $("#" + elementId + " > .media");
+	// Test if the Item exists
+	if (!$el.length) {
+		return false;
+	}
+
+	// Define the colors which are used for highlighting
+	var colWhite = { backgroundColor: "#7f7f7f" };
+	var colShiny = { backgroundColor: "#7e763a" };
+
+	// Get the Item Position (we need to substract 100 to match correct position
+	var itemPos = $el.offset().top - 100;
+
+	// Scroll to the DIV with the ID (GUID)
+	$("html, body")
+		.animate(
+			{
+				scrollTop: itemPos,
+			},
+			400,
+		)
+		.promise()
+		.done(function () {
+			// Highlight post/comment with ID  (GUID)
+			$el.animate(colWhite, 1000).animate(colShiny).animate({ backgroundColor: "transparent" }, 600);
+			return true;
+		});
+}
+
 function NavUpdate() {
 	if (!stopped) {
 		if (force_update) {
 			showFetching();
 		}
 		var pingCmd = 'ping';
-		$.get(pingCmd, function(data) {
-			if (data.result) {
-				if (force_update) {
-					showProcessing();
-				}
-				// send nav-update event
-				$('#topbar-first').trigger('nav-update', data.result);
-
-				if (force_update) {
-					hideLoading();
-				}
-
-				// start live update
-				console.debug('[Main] Starting live updates for sources: network, profile, channel, community, notes, display, contact');
-				['network', 'profile', 'channel', 'community', 'notes', 'display', 'contact'].forEach(function (src) {
-					console.debug('[Main] Checking live-' + src + ', exists=' + $('#live-' + src).length + ', force_update=' + force_update + ', updateContent=' + updateContent + ', isDisplay=' + $('#live-display').length);
-					if ($('#live-' + src).length && (force_update || (updateContent && src !== 'display'))) {
-						console.debug('[Main] Triggering liveUpdate for: ' + src);
-						liveUpdate(src);
-					}
-				});
-
-				if ($('#live-network').length && !$('#live-display').length) {
-					console.debug('[Main] Triggering networkUpdate');
-					networkUpdate();
-				} else if (!$('#live-display').length) {
-					console.debug('[Main] No live-network element or on display page, using ping_network fallback');
-					var update_url = 'ping_network?ping=1';
+		$.get(pingCmd)
+			.done(function(data) {
+				if (data.result) {
 					if (force_update) {
-						showFetching();
+						showProcessing();
 					}
-					$.get(update_url, function(net) {
-						if (force_update) {
-							showProcessing();
-						}
-						updateCounter('net', net);
-					});
+					// send nav-update event
+					$('#topbar-first').trigger('nav-update', data.result);
+
 					if (force_update) {
 						hideLoading();
 					}
-				}
 
-				if ($('#live-photos').length) {
-					if (liking) {
-						liking = 0;
-						window.location.href = window.location.href;
+					// start live update
+					console.debug('[Main] Starting live updates for sources: network, profile, channel, community, notes, display, contact');
+					triggerLiveUpdates(force_update);
+
+					if ($('#live-network').length && !$('#live-display').length) {
+						console.debug('[Main] Triggering networkUpdate');
+						networkUpdate(force_update);
+					} else if (!$('#live-display').length) {
+						console.debug('[Main] No live-network element or on display page, using ping_network fallback');
+						var update_url = 'ping_network?ping=1';
+						if (force_update) {
+							showFetching();
+						}
+						$.get(update_url)
+							.done(function(net) {
+								if (force_update) {
+									showProcessing();
+								}
+								updateCounter('net', net);
+							})
+							.always(function() {
+								if (force_update) {
+									hideLoading();
+								}
+							});
+					}
+
+					if ($('#live-photos').length) {
+						if (liking) {
+							liking = 0;
+							window.location.href = window.location.href;
+						}
 					}
 				}
-			}
-		}).fail(function() {
-			if (force_update) {
-				hideLoading();
-			}
-		});
+			})
+			.fail(function() {
+				if (force_update) {
+					hideLoading();
+				}
+			});
 	}
 	timer = setTimeout(NavUpdate, 30000);
 }
 
-function updateConvItems(data) {
+function updateConvItems(data, guid) {
+	console.debug('[Main] updateConvItems called, guid:', guid);
 	// add a new thread
 	$('.toplevel_item',data).each(function() {
 		var ident = $(this).attr('id');
@@ -684,8 +764,8 @@ function getUpdateUrl(src)
 	return update_url;
 }
 
-function liveUpdate(src) {
-	console.debug('[Main] liveUpdate called for src=' + src + ', stopped=' + stopped + ', profile_uid=' + (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined') + ', in_progress=' + in_progress);
+function liveUpdate(src, force, guid) {
+	console.debug('[Main] liveUpdate called for src:', src, 'guid:', guid, 'stopped:', stopped, 'profile_uid:', (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined'), 'in_progress:', in_progress);
 	if ((src == null) || stopped || !profile_uid) {
 		console.debug('[Main] liveUpdate skipped: src=null or stopped or no profile_uid');
 		$('.like-rotator').hide(); return;
@@ -696,7 +776,7 @@ function liveUpdate(src) {
 		if (livetime) {
 			clearTimeout(livetime);
 		}
-		livetime = setTimeout(function() {liveUpdate(src)}, 5000);
+		livetime = setTimeout(function() {liveUpdate(src, force, guid)}, 5000);
 		return;
 	}
 
@@ -717,37 +797,49 @@ function liveUpdate(src) {
 	}
 
 	showFetching();
-	$.get('update_' + update_url, function(data) {
-		showProcessing();
-		in_progress = false;
-		update_item = 0;
+	$.get('update_' + update_url)
+		.done(function(data) {
+			showProcessing();
+			in_progress = false;
+			update_item = 0;
 
-		if ($('.wall-item-body', data).length == 0) {
+			if ($('.wall-item-body', data).length == 0) {
+				return;
+			}
+
+			$('.wall-item-body', data).imagesLoaded(function() {
+				updateConvItems(data, guid);
+
+				document.dispatchEvent(new Event('postprocess_liveupdate'));
+
+				// Update the scroll position.
+				if (guid) {
+					scrollToItem("item-" + guid);
+				}
+			})
+		})
+		.always(function() {
+			in_progress = false;
 			hideLoading();
-			return;
-		}
-
-		$('.wall-item-body', data).imagesLoaded(function() {
-			updateConvItems(data);
-
-			document.dispatchEvent(new Event('postprocess_liveupdate'));
-
-			// Update the scroll position.
-			$(window).scrollTop($(window).scrollTop() + $("section").height() - orgHeight, 200, function() {
-				hideLoading();
-			});
 		});
-		hideLoading();
-	}).fail(function() {
-		hideLoading();
-		in_progress = false;
-	});
 }
 
-function networkUpdate() {
-	$.get('ping_' + getUpdateUrl('network'), function(net) {
-		updateCounter('net', net);
-	});
+function networkUpdate(force) {
+	if (force) {
+		showFetching();
+	}
+	$.get('ping_' + getUpdateUrl('network'))
+		.done(function(net) {
+			if (force) {
+				showProcessing();
+			}
+			updateCounter('net', net);
+		})
+		.always(function() {
+			if (force) {
+				hideLoading();
+			}
+		});
 }
 
 function updateCounter(type, counter) {
@@ -764,9 +856,9 @@ function updateCounter(type, counter) {
 	$('#' + type + '-update').text(counter);
 }
 
-function updateItem(itemNo) {
-	force_update = true;
+function updateItem(itemNo, guid) {
 	update_item = itemNo;
+	triggerLiveUpdates(true, guid);
 }
 
 function imgbright(node) {
@@ -795,36 +887,50 @@ function imgdull(node) {
 function doActivityItem(ident, verb, un) {
 	unpause();
 	$('#like-rotator-' + ident.toString()).show();
+	showPosting();
 	verb = un ? 'un' + verb : verb;
-	$.post('item/' + ident.toString() + '/activity/' + verb, NavUpdate);
+	$.post('item/' + ident.toString() + '/activity/' + verb)
+		.done(function() { 
+			showProcessing();
+			updateItem(ident.toString()); 
+		})
+		.always(function() { hideLoading(); });
 	liking = 1;
-	force_update = true;
-	update_item = ident.toString();
 }
 
 function doFollowThread(ident) {
 	unpause();
 	$('#like-rotator-' + ident.toString()).show();
-	$.post('item/' + ident.toString() + '/follow', NavUpdate);
+	showPosting();
+	$.post('item/' + ident.toString() + '/follow')
+		.done(function() { 
+			showProcessing();
+			updateItem(ident.toString()); 
+		})
+		.always(function() { hideLoading(); });
 	liking = 1;
-	force_update = true;
-	update_item = ident.toString();
 }
 
 function doCompleteThread(ident) {
 	unpause();
 	$('#like-rotator-' + ident.toString()).show();
-	$.post('item/' + ident.toString() + '/complete', NavUpdate);
+	showPosting();
+	$.post('item/' + ident.toString() + '/complete')
+		.done(function() { 
+			showProcessing();
+			updateItem(ident.toString()); 
+		})
+		.always(function() { hideLoading(); });
 	liking = 1;
-	force_update = true;
-	update_item = ident.toString();
 }
 
 function doStar(ident) {
 	ident = ident.toString();
 	$('#like-rotator-' + ident).show();
+	showPosting();
 	$.post('item/' + ident + '/star')
-	.then(function(data) {
+		.done(function(data) {
+		showProcessing();
 		if (data.state === 1) {
 			$('#starred-' + ident)
 				.addClass('starred')
@@ -841,14 +947,16 @@ function doStar(ident) {
 	})
 	.always(function () {
 		$('#like-rotator-' + ident).hide();
+		hideLoading();
 	});
 }
 
 function doPin(ident) {
 	ident = ident.toString();
 	$('#like-rotator-' + ident).show();
+	showPosting();
 	$.post('item/' + ident + '/pin')
-	.then(function(data) {
+		.done(function(data) {
 		if (data.state === 1) {
 			$('#pinned-' + ident)
 				.addClass('pinned')
@@ -865,28 +973,34 @@ function doPin(ident) {
 	})
 	.always(function () {
 		$('#like-rotator-' + ident).hide();
+		hideLoading();
 	});
 }
 
 function doIgnoreThread(ident) {
 	ident = ident.toString();
 	$('#like-rotator-' + ident).show();
-	$.post('item/' + ident + '/ignore', function(data) {
-		if (data.state === 1) {
-			$('#ignored-' + ident)
-				.addClass('ignored')
-				.removeClass('unignored');
-			$('#ignore-' + ident).addClass('hidden');
-			$('#unignore-' + ident).removeClass('hidden');
-		} else {
-			$('#ignored-' + ident)
-				.addClass('unignored')
-				.removeClass('ignored');
-			$('#ignore-' + ident).removeClass('hidden');
-			$('#unignore-' + ident).addClass('hidden');
-		}
-		$('#like-rotator-' + ident).hide();
-	});
+	showPosting();
+	$.post('item/' + ident + '/ignore')
+		.done(function(data) {
+			if (data.state === 1) {
+				$('#ignored-' + ident)
+					.addClass('ignored')
+					.removeClass('unignored');
+				$('#ignore-' + ident).addClass('hidden');
+				$('#unignore-' + ident).removeClass('hidden');
+			} else {
+				$('#ignored-' + ident)
+					.addClass('unignored')
+					.removeClass('ignored');
+				$('#ignore-' + ident).removeClass('hidden');
+				$('#unignore-' + ident).addClass('hidden');
+			}
+			$('#like-rotator-' + ident).hide();
+		})
+		.always(function() {
+			hideLoading();
+		});
 }
 
 function getPosition(e) {
@@ -908,15 +1022,27 @@ function getPosition(e) {
 }
 
 function displaySearchText(id) {
-	$.get('item/' + id + '/searchtext', function(data) {
-		alert(data);
-	});
+	showFetching();
+	$.get('item/' + id + '/searchtext')
+		.done(function(data) {
+			hideLoading();
+			alert(data);
+		})
+		.fail(function() {
+			hideLoading();
+		});
 }
 
 function displayLanguage(id) {
-	$.get('item/' + id + '/language', function(data) {
-		alert(data);
-	});
+	showFetching();
+	$.get('item/' + id + '/language')
+		.done(function(data) {
+			hideLoading();
+			alert(data);
+		})
+		.fail(function() {
+			hideLoading();
+		});
 }
 
 var lockvisible = false;
@@ -929,12 +1055,18 @@ function lockview(event, type, id) {
 		$('#panel').hide();
 	} else {
 		lockvisible = true;
-		$.get('permission/tooltip/' + type + '/' + id, function(data) {
-			$('#panel')
-				.html(data)
-				.css({'left': cursor.x + 5 , 'top': cursor.y + 5})
-				.show();
-		});
+		showFetching();
+		$.get('permission/tooltip/' + type + '/' + id)
+			.done(function(data) {
+				showProcessing();
+				$('#panel')
+					.html(data)
+					.css({'left': cursor.x + 5 , 'top': cursor.y + 5})
+					.show();
+			})
+			.always(function() {
+				hideLoading();
+			});
 	}
 }
 
@@ -954,8 +1086,10 @@ function post_comment(id) {
 	$('body').css('cursor', 'wait');
 	$.post(
 		"item",
-		$("#comment-edit-form-" + id).serialize(),
-		function(data) {
+		$("#comment-edit-form-" + id).serialize()
+	)
+		.done(function(data) {
+			showProcessing();
 			console.debug('[Main] post_comment: AJAX response received for id:', id);
 			if (data.success) {
 				console.debug('[Main] post_comment: Comment posted successfully');
@@ -968,17 +1102,15 @@ function post_comment(id) {
 				if (timer) {
 					clearTimeout(timer);
 				}
-				timer = setTimeout(NavUpdate,10);
-				force_update = true;
-				update_item = id;
+				console.debug('[Main] post_comment: Calling triggerLiveUpdates with guid:', data.guid ?? null);
+				updateItem(id, data.guid ?? null);
 			}
 			if (data.reload) {
 				console.debug('[Main] post_comment: Server requested reload');
 				window.location.href=data.reload;
 			}
-		}
-	)
-	.always(function() {
+		})
+		.always(function() {
 		console.debug('[Main] post_comment: AJAX completed, setting commentBusy=false');
 		hideLoading();
 		commentBusy = false;
@@ -992,15 +1124,16 @@ function preview_comment(id) {
 	$("#comment-edit-preview-" + id).show();
 	$.post(
 		"item",
-		$("#comment-edit-form-" + id).serialize() + '&preview=1',
-		function(data) {
+		$("#comment-edit-form-" + id).serialize() + '&preview=1'
+	)
+		.done(function(data) {
+			showProcessing();
 			if (data.preview) {
 				$("#comment-edit-preview-" + id).html(data.preview);
 				$("#comment-edit-preview-" + id + " a").click(function() {return false;});
 			}
-		}
-	)
-	.always(function() {
+		})
+		.always(function() {
 		hideLoading();
 	});
 	return true;
@@ -1086,16 +1219,17 @@ function preview_post() {
 	$("#jot-preview-content").show();
 	$.post(
 		"item",
-		$("#profile-jot-form").serialize() + '&preview=1',
-		function(data) {
+		$("#profile-jot-form").serialize() + '&preview=1'
+	)
+		.done(function(data) {
+			showProcessing();
 			if (data.preview) {
 				$("#jot-preview-content").html(data.preview);
 				$("#jot-preview-content" + " a").click(function() {return false;});
 				document.dispatchEvent(new Event('postprocess_liveupdate'));
 			}
-		}
-	)
-	.always(function() {
+		})
+		.always(function() {
 		hideLoading();
 	});
 	return true;
@@ -1176,11 +1310,9 @@ function loadScrollContent() {
 		}
 
 		document.dispatchEvent(new Event('postprocess_liveupdate'));
-		hideLoading();
 	})
 	.fail(function() {
 		$("#scroll-loader").hide();
-		hideLoading();
 	})
 	.always(function () {
 		$("#scroll-loader").hide();
@@ -1213,10 +1345,16 @@ function bin2hex(s) {
 }
 
 function circleChangeMember(gid, cid, sec_token) {
+	showFetching();
 	$('body .fakelink').css('cursor', 'wait');
-	$.get('circle/' + gid + '/' + cid + "?t=" + sec_token, function(data) {
+	$.get('circle/' + gid + '/' + cid + "?t=" + sec_token)
+		.done(function(data) {
+			showProcessing();
 			$('#circle-update-wrapper').html(data);
 			$('body .fakelink').css('cursor', 'auto');
+		})
+		.always(function() {
+		hideLoading();
 	});
 }
 
@@ -1229,14 +1367,16 @@ function contactCircleChangeMember(checkbox, gid, cid) {
 		url = 'circle/' + gid + '/remove/' + cid;
 	}
 	$('body').css('cursor', 'wait');
+	showPosting();
 	$.post(url)
-	.error(function () {
-		// Restores previous state in case of error
-		checkbox.checked = !checkbox.checked;
-	})
-	.always(function() {
-		$('body').css('cursor', 'auto');
-	});
+		.fail(function () {
+			// Restores previous state in case of error
+			checkbox.checked = !checkbox.checked;
+		})
+		.always(function() {
+			$('body').css('cursor', 'auto');
+			hideLoading();
+		});
 
 	return true;
 }
@@ -1250,12 +1390,18 @@ function checkboxhighlight(box) {
 }
 
 function notificationMarkAll() {
-	$.get('notification/mark/all', function(data) {
-		if (timer) {
-			clearTimeout(timer);
-		}
-		timer = setTimeout(NavUpdate,1000);
-		force_update = true;
+	showFetching();
+	$.get('notification/mark/all')
+		.done(function(data) {
+			showProcessing();
+			if (timer) {
+				clearTimeout(timer);
+			}
+			timer = setTimeout(NavUpdate,1000);
+			force_update = true;
+		})
+		.always(function() {
+		hideLoading();
 	});
 }
 
@@ -1281,7 +1427,10 @@ Array.prototype.remove = function(item) {
 
 function previewTheme(elm) {
 	theme = $(elm).val();
-	$.getJSON('pretheme?theme=' + theme,function(data) {
+	showFetching();
+	$.getJSON('pretheme?theme=' + theme)
+		.done(function(data) {
+			showProcessing();
 			$('#theme-preview').html(`
 		<div id="theme-desc">${data.desc}</div>
 		<div id="theme-credits">${data.credits}</div>
@@ -1290,7 +1439,10 @@ function previewTheme(elm) {
 		</a>
 		<div id="theme-version">${data.version}</div>
 	`);
-	});
+		})
+		.always(function() {
+			hideLoading();
+		});
 }
 
 // notification permission settings in localstorage

@@ -34,18 +34,9 @@ let lastFinalUrl = null;
 
 const SPA_CONFIG = {
   enabled: true,
-  routes: [
-    '/community',
-    '/contact',
-    '/display',
-    '/message',
-    '/network',
-    '/notification',
-    '/profile',
-    '/search',
+  excludedRoutes: [
+    '/delegation',
   ],
-  spaHeader: 'X-Friendica-SPA',
-  spaParam: 'spa',
   scrollToTopOnNavigate: true
 };
 
@@ -59,7 +50,7 @@ const SPA_CONFIG = {
  * @returns {boolean} True if route should use SPA
  */
 function isSPARoute(path) {
-  return SPA_CONFIG.routes.some(route => {
+  return !SPA_CONFIG.excludedRoutes.some(route => {
     // Exact match or starts with route + /
     return path === route || path.startsWith(route + '/');
   });
@@ -115,8 +106,10 @@ function handleLinkClick(e) {
 
   // Ignore links with data-fancybox attribute (for Fancybox lightbox)
   // These are handled by Fancybox JavaScript
+  // Push a state marker so we can detect back navigation from Fancybox
   if (link.hasAttribute('data-fancybox')) {
-    console.debug('[SPA Router] Click: Fancybox link, allowing default/fancybox behavior');
+    console.debug('[SPA Router] Click: Fancybox link, pushing marker state and allowing default/fancybox behavior');
+    history.pushState({ __fancyboxMarker: true }, '', window.location.href);
     return;
   }
 
@@ -201,7 +194,7 @@ function navigateTo(url) {
   
   // Update History API
   history.pushState({ path, spa: true, __friendicaSPA: true }, '', url);
-  
+
   // Load content
   loadContent(url);
 }
@@ -209,6 +202,108 @@ function navigateTo(url) {
 // ============================================
 // CONTENT LOADING
 // ============================================
+
+/**
+ * Show timeout modal overlay
+ * Displays a modal dialog that can be clicked away
+ */
+function showTimeoutModal() {
+  console.debug('[SPA Router] showTimeoutModal: Displaying timeout overlay');
+  
+  hideLoading();
+  
+  // Check if modal already exists
+  if (document.getElementById('spa-timeout-modal')) {
+    console.debug('[SPA Router] showTimeoutModal: Modal already exists');
+    return;
+  }
+  
+  // Get translated texts from PHP
+  const title = window.spaErrorTexts.timeout;
+  const message = window.spaErrorTexts.timeout_message;
+  const closeText = window.spaErrorTexts.close;
+  
+  // Create modal overlay
+  const modal = document.createElement('div');
+  modal.id = 'spa-timeout-modal';
+  modal.className = 'spa-modal-overlay';
+  
+  // Create modal content
+  const content = document.createElement('div');
+  content.className = 'spa-modal-content';
+  
+  // Create heading
+  const heading = document.createElement('h2');
+  heading.textContent = title;
+  
+  // Create message paragraph
+  const messageElement = document.createElement('p');
+  messageElement.textContent = message;
+  
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = closeText;
+  closeButton.className = 'btn btn-primary spa-modal-close-btn';
+  closeButton.onclick = function() {
+    dismissTimeoutModal();
+  };
+  
+  content.appendChild(heading);
+  content.appendChild(messageElement);
+  content.appendChild(closeButton);
+  
+  modal.appendChild(content);
+  
+  // Close modal when clicking on overlay (outside content)
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      dismissTimeoutModal();
+    }
+  });
+  
+  // Add modal to body
+  document.body.appendChild(modal);
+  
+  // Also listen for Escape key
+  const escapeHandler = function(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      dismissTimeoutModal();
+    }
+  };
+  document.addEventListener('keydown', escapeHandler);
+  
+  // Store reference to clean up
+  modal._escapeHandler = escapeHandler;
+}
+
+/**
+ * Dismiss the timeout modal
+ */
+function dismissTimeoutModal() {
+  const modal = document.getElementById('spa-timeout-modal');
+  if (modal) {
+    if (modal._escapeHandler) {
+      document.removeEventListener('keydown', modal._escapeHandler);
+    }
+    modal.remove();
+    console.debug('[SPA Router] dismissTimeoutModal: Modal removed');
+  }
+}
+
+/**
+ * Handle HTTP error responses
+ * @param {number} status - HTTP status code
+ * @param {string} url - The original request URL
+ */
+function handleHttpError(status, url) {
+  console.debug('[SPA Router] handleHttpError: status=', status, 'url=', url);
+  
+  // 401: redirect to login
+  if (status === 401) {
+    console.debug('[SPA Router] handleHttpError: 401 Unauthorized - redirecting to login');
+    window.location.href = '/login?return_path=' + encodeURIComponent(url);
+  }
+}
 
 /**
  * Load content via AJAX
@@ -223,26 +318,15 @@ function loadContent(url) {
   
   // Track the final URL after all redirects
   let finalUrl = fetchUrl.toString();
-  let timeoutId;
-  const abortController = new AbortController();
-  
-  // Set timeout
-  timeoutId = setTimeout(() => {
-    console.debug('[SPA Router] LoadContent: Timeout after 30000ms');
-    abortController.abort();
-  }, 30000);
 
   showFetching();
   fetch(fetchUrl, {
     headers: {
       'Accept': 'text/html'
     },
-    credentials: 'include', // Send cookies for same-origin requests
-    signal: abortController.signal
-    // Note: redirect: 'follow' is the default behavior, no need to specify
+    credentials: 'include' // Send cookies for same-origin requests
   })
   .then(async (response) => {
-    clearTimeout(timeoutId);
     
     console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
     
@@ -252,10 +336,24 @@ function loadContent(url) {
       console.debug('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
     }
     
+    // Special handling for 401 and 504
+    if (response.status === 401) {
+      console.debug('[SPA Router] LoadContent: 401 Unauthorized - redirecting to login');
+      handleHttpError(401, url);
+      return null;
+    }
+    
+    if (response.status === 504) {
+      console.debug('[SPA Router] LoadContent: 504 Gateway Timeout - showing modal');
+      showTimeoutModal();
+      return null;
+    }
+    
+    // For all other responses (including other HTTP errors like 404, 500, etc.)
+    // load the server's error page content via SPA
     showReceiving();
     
-    const checkedResponse = checkResponseStatus(response);
-    const html = await checkedResponse.text();
+    const html = await response.text();
     
     console.debug('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
     
@@ -293,67 +391,20 @@ function loadContent(url) {
       finalUrl: finalUrl,
       error: error
     });
-        
-    // Fallback: Full page reload
-    console.debug('[SPA Router] Falling back to full page reload for URL:', url);
-    console.debug('[SPA Router] LoadContent: Error handling completed');
-    window.location.href = url;
-  });
-}
-
-/**
- * Check if response is successful
- * @param {Response} response - Fetch response
- * @returns {Response} The response if OK
- */
-function checkResponseStatus(response) {
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-  return response;
-}
-
-// ============================================
-// SCRIPT EXECUTION
-// ============================================
-
-/**
- * Execute inline script tags from HTML to set global variables
- * Only executes variable declarations (var, let, const) to avoid issues with
- * event handlers that reference DOM elements or jQuery objects no longer valid after SPA navigation.
- * @param {string} html - The HTML content
- */
-function executeInlineScripts(html) {
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-  
-  const scripts = tempDiv.querySelectorAll('script:not([src])');
-  console.debug('[SPA Router] executeInlineScripts: Found ' + scripts.length + ' inline scripts');
-  // Convert NodeList to Array for compatibility with older browsers
-  const scriptsArray = Array.prototype.slice.call(scripts);
-  scriptsArray.forEach((script, index) => {
-    const scriptContent = script.textContent.trim();
-    if (scriptContent) {
-      // Only execute variable declarations (var, let, const) and important assignments
-      if (scriptContent.startsWith('var ') ||
-          scriptContent.startsWith('let ') ||
-          scriptContent.startsWith('const ') ||
-          scriptContent.trim().startsWith('infinite_scroll =') ||
-          scriptContent.includes('infinite_scroll =')) {
-        console.debug('[SPA Router] executeInlineScripts: Executing var/let/const or infinite_scroll #' + index + ': ' + scriptContent.substring(0, 150));
-        try {
-          // Execute script in global scope by creating and removing a script element
-          const scriptEl = document.createElement('script');
-          scriptEl.textContent = scriptContent;
-          document.head.appendChild(scriptEl);
-          document.head.removeChild(scriptEl);
-          console.debug('[SPA Router] Executed inline script #' + index);
-        } catch (e) {
-          console.error('[SPA Router] Error executing inline script #' + index + ':', e);
-        }
-      } else {
-        console.debug('[SPA Router] executeInlineScripts: Skipping non-declaration script #' + index + ': ' + scriptContent.substring(0, 80));
-      }
+    
+    // Handle timeout errors with modal - only for server 504, not for client timeout
+    // Client timeout (AbortError) just dismisses the delay modal, does not show timeout modal
+    if (error.name === 'AbortError') {
+      console.debug('[SPA Router] LoadContent: AbortError (client timeout) - dismissing delay modal only');
+      // Don't show timeout modal for client timeout, only dismiss delay modal
+    } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+      // Network error - fall back to full reload
+      console.debug('[SPA Router] LoadContent: Network error - falling back to reload');
+      window.location.href = url;
+    } else {
+      // Fallback: Full page reload for other errors
+      console.debug('[SPA Router] Falling back to full page reload for URL:', url);
+      window.location.href = url;
     }
   });
 }
@@ -408,7 +459,7 @@ function replaceContainerContent(html, finalUrl = null) {
     html = '';
   }
   
-  // Store the final URL for scrollToDisplayGuid
+  // Store the final URL for potential redirect handling
   if (finalUrl) {
     lastFinalUrl = finalUrl;
     console.debug('[SPA Router] ReplaceContent: Set lastFinalUrl to:', lastFinalUrl);
@@ -426,24 +477,45 @@ function replaceContainerContent(html, finalUrl = null) {
     }
   }
   
-  // Extract initWidget calls to execute after DOM insertion (when widgets exist)
+  // Extract inline scripts - separate global (var/let/const/infinite_scroll) from body scripts
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
-  
-  const widgetInitScripts = [];
+
+  const globalScripts = [];
+  const bodyScripts = [];
+
   const scripts = tempDiv.querySelectorAll('script:not([src])');
   Array.prototype.slice.call(scripts).forEach((script) => {
     const scriptContent = script.textContent.trim();
-    if (scriptContent.includes('initWidget(')) {
-      widgetInitScripts.push(scriptContent);
+    if (!scriptContent) return;
+
+    if (scriptContent.startsWith('var ') ||
+        scriptContent.startsWith('let ') ||
+        scriptContent.startsWith('const ') ||
+        scriptContent.trim().startsWith('infinite_scroll =') ||
+        scriptContent.includes('infinite_scroll =')) {
+      globalScripts.push(scriptContent);
+    } else {
+      // All other inline scripts (including initWidget) are body scripts
+      bodyScripts.push(scriptContent);
     }
   });
-  
-  // Store widget init scripts to execute after DOM insertion
-  window.__spa_widgetInitScripts = widgetInitScripts;
-  
-  // Execute other inline scripts (variables, infinite_scroll, etc.)
-  executeInlineScripts(html);
+
+  // Execute global scripts immediately (variable declarations)
+  globalScripts.forEach((scriptContent, index) => {
+    try {
+      console.debug('[SPA Router] Executing global script #' + index + ': ' + scriptContent.substring(0, 150));
+      const scriptEl = document.createElement('script');
+      scriptEl.textContent = scriptContent;
+      document.head.appendChild(scriptEl);
+      document.head.removeChild(scriptEl);
+    } catch (e) {
+      console.error('[SPA Router] Error executing global script #' + index + ':', e);
+    }
+  });
+
+  // Store body scripts to execute after DOM insertion
+  window.__spa_bodyScripts = bodyScripts;
   
   // Extract and set title from HTML
   const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
@@ -560,85 +632,6 @@ function replaceContainerContent(html, finalUrl = null) {
 // ============================================
 
 /**
- * Fallback scroll to element function
- * Used when theme.js scrollToItem is not available
- * @param {string} elementId - The element ID to scroll to
- */
-function spaScrollToItem(elementId) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    console.debug('[SPA Router] Scrolling to element with fallback function:', elementId);
-    const headerOffset = 100;
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-    window.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth'
-    });
-    // Highlight the element briefly
-    element.style.backgroundColor = '#7e763a';
-    setTimeout(() => {
-      element.style.backgroundColor = '';
-    }, 2000);
-  } else {
-    console.warn('[SPA Router] Element not found:', elementId);
-  }
-}
-
-/**
- * Scroll to item with GUID on display pages
- * This handles auto-scroll for /display/{guid} URLs
- */
-function scrollToDisplayGuid() {
-  // Use the stored final URL if available (for redirects), otherwise use window.location.pathname
-  const effectivePath = lastFinalUrl ? new URL(lastFinalUrl).pathname : window.location.pathname;
-  console.debug('[SPA Router] scrollToDisplayGuid: effectivePath:', effectivePath);
-  
-  if (effectivePath.includes('/display/')) {
-    const pathParts = effectivePath.split('/');
-    console.debug('[SPA Router] scrollToDisplayGuid: pathParts:', pathParts);
-    // Find the display path part: /display/{guid} or /display/{guid}/...
-    // The GUID is the part right after /display/
-    const displayIndex = pathParts.indexOf('display');
-    console.debug('[SPA Router] scrollToDisplayGuid: displayIndex:', displayIndex);
-    
-    if (displayIndex >= 0 && displayIndex + 1 < pathParts.length) {
-      const itemGuid = pathParts[displayIndex + 1];
-      console.debug('[SPA Router] scrollToDisplayGuid: itemGuid:', itemGuid);
-      
-      if (itemGuid) {
-        const elementId = 'item-' + itemGuid;
-        console.debug('[SPA Router] scrollToDisplayGuid: elementId:', elementId, 'scrollToItem exists:', typeof scrollToItem === 'function');
-        
-        // Use setTimeout to allow DOM to settle after content replacement
-        setTimeout(() => {
-          const element = document.getElementById(elementId);
-          console.debug('[SPA Router] scrollToDisplayGuid: element found:', !!element);
-          
-          if (element) {
-            console.debug('[SPA Router] scrollToDisplayGuid: scrolling to element');
-            if (typeof scrollToItem === 'function') {
-              scrollToItem(elementId);
-            } else {
-              // Fallback if theme.js scrollToItem is not available
-              spaScrollToItem(elementId);
-            }
-          } else {
-            console.warn('[SPA Router] scrollToDisplayGuid: element not found!');
-          }
-        }, 100);
-      } else {
-        console.debug('[SPA Router] scrollToDisplayGuid: No GUID found in path');
-      }
-    }
-  } else {
-    console.debug('[SPA Router] scrollToDisplayGuid: Not a display path');
-  }
-  
-  // Reset the lastFinalUrl after processing
-  lastFinalUrl = null;
-}
-
-/**
  * Re-initialize dynamic content after SPA navigation
  * This is important for elements that need event listeners
  */
@@ -651,28 +644,24 @@ function reinitializeDynamicContent() {
     // we need to ensure any new dynamic content works
   });
   
-  // Execute widget initialization scripts (stored during replaceContainerContent)
-  // This ensures initWidget() is called after the widget elements exist in the DOM
-  if (window.__spa_widgetInitScripts && window.__spa_widgetInitScripts.length > 0) {
-    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_widgetInitScripts.length + ' widget init scripts');
-    window.__spa_widgetInitScripts.forEach((scriptContent, index) => {
+  // Execute body scripts (including widget init scripts) after DOM insertion
+  if (window.__spa_bodyScripts && window.__spa_bodyScripts.length > 0) {
+    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_bodyScripts.length + ' body scripts');
+    window.__spa_bodyScripts.forEach((scriptContent, index) => {
       try {
-        console.debug('[SPA Router] reinitializeDynamicContent: Executing widget init script #' + index + ': ' + scriptContent.substring(0, 150));
+        console.debug('[SPA Router] reinitializeDynamicContent: Executing body script #' + index + ': ' + scriptContent.substring(0, 150));
         const scriptEl = document.createElement('script');
         scriptEl.textContent = scriptContent;
         document.head.appendChild(scriptEl);
         document.head.removeChild(scriptEl);
-        console.debug('[SPA Router] Executed widget init script #' + index);
+        console.debug('[SPA Router] Executed body script #' + index);
       } catch (e) {
-        console.error('[SPA Router] Error executing widget init script #' + index + ':', e);
+        console.error('[SPA Router] Error executing body script #' + index + ':', e);
       }
     });
     // Clear the stored scripts after execution
-    window.__spa_widgetInitScripts = [];
+    window.__spa_bodyScripts = [];
   }
-  
-  // Scroll to item with GUID on display pages
-  scrollToDisplayGuid();
   
   // Dispatch custom events for other scripts to hook into
   const spaNavigateEvent = new CustomEvent('spa:navigate', {
@@ -711,7 +700,36 @@ function handleInitialLoad() {
  * @param {Event} e - Popstate event
  */
 function handlePopState(e) {
-  console.debug('[SPA Router] PopState: state=', e.state);
+  console.debug('[SPA Router] PopState: state=', e.state, 'hash=', window.location.hash);
+  
+  // Check if this is a Fancybox marker state (created when clicking a Fancybox link)
+  if (e.state && e.state.__fancyboxMarker) {
+    console.debug('[SPA Router] PopState: Fancybox marker state detected, ignoring to let Fancybox handle navigation');
+    return;
+  }
+  
+  // Check if Fancybox lightbox is currently open (via various possible DOM elements)
+  // Fancybox 2: .fancybox-wrap
+  // Fancybox 3: .fancybox-container, .fancybox-bg, .fancybox-is-open
+  const fancyboxSelectors = [
+    '.fancybox-wrap',
+    '.fancybox-container', 
+    '.fancybox-bg',
+    '.fancybox-is-open',
+    '.fancybox-stage',
+    '[class*="fancybox"]'
+  ];
+  
+  const fancyboxActive = fancyboxSelectors.some(selector => document.querySelector(selector) !== null);
+  
+  // Also check if there are any open modal/dialog elements that might be from Fancybox
+  const modalBackdrop = document.querySelector('.modal-backdrop, .fb-backdrop, [class*="backdrop"]');
+  
+  if (fancyboxActive || modalBackdrop !== null) {
+    console.debug('[SPA Router] PopState: Fancybox or modal is active, ignoring to let it handle closing');
+    return;
+  }
+  
   if (e.state && e.state.spa && e.state.__friendicaSPA) {
     console.debug('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
     

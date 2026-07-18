@@ -19,7 +19,6 @@ use Friendica\Core\ACL;
 use Friendica\Core\L10n;
 use Friendica\Core\Protocol;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
-use Friendica\Core\Theme;
 use Friendica\Model\Contact as ModelContact;
 use Friendica\Module\Contact;
 use Friendica\Module\Response;
@@ -69,11 +68,7 @@ class Conversations extends BaseModule
 		$raw = isset($request['mode']) && ($request['mode'] == 'raw');
 
 		if (!$raw) {
-			// Load necessary libraries for the status editor
-			$this->page->registerFooterScript(Theme::getPathForFile('asset/typeahead.js/dist/typeahead.bundle.js'));
-			$this->page->registerFooterScript(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.js'));
-			$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput.css'));
-			$this->page->registerStylesheet(Theme::getPathForFile('js/friendica-tagsinput/friendica-tagsinput-typeahead.css'));
+			$this->statusEditor->registerAssets();
 
 			$this->page['aside'] .= VCard::getHTML($contact, true);
 		}

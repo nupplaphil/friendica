@@ -221,7 +221,7 @@ function item_insert(int $uid, array $request, bool $preview, string $return_pat
 
 	DI::logger()->debug('post_complete');
 
-	item_post_return(DI::baseUrl(), $return_path);
+	item_post_return(DI::baseUrl(), $return_path, $post);
 	// NOTREACHED
 }
 
@@ -344,7 +344,7 @@ function item_process(array $post, array $request, bool $preview, string $return
 	return $post;
 }
 
-function item_post_return($baseurl, $return_path): void
+function item_post_return(string $baseurl, string $return_path, array $item = []): void
 {
 	if ($return_path) {
 		DI::baseUrl()->redirect($return_path);
@@ -353,6 +353,10 @@ function item_post_return($baseurl, $return_path): void
 	$json = ['success' => 1];
 	if (!empty($_REQUEST['jsreload'])) {
 		$json['reload'] = $baseurl . '/' . $_REQUEST['jsreload'];
+	}
+
+	if (isset($item['guid'])) {
+		$json['guid'] = $item['guid'];
 	}
 
 	DI::logger()->debug('post_json', ['json' => $json]);
