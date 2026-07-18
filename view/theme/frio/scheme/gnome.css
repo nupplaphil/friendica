@@ -584,3 +584,34 @@ code {
 .notif-text {
   color: var(--text-primary);
 }
+
+.load-more-comments {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--bg-tertiary);
+  border-radius: 6px;
+  color: var(--text-disabled);
+  font-size: 13px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  text-decoration: none;
+  font-weight: 400;
+
+  &:hover {
+    border-top: 1px solid var(--bg-tertiary);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    overflow: hidden;
+  }
+
+  &:active {
+    background: var(--bg-tertiary);
+  }
+  &:focus {
+    outline: 2px solid #3584e4;
+    outline-offset: -2px;
+  }
+}
