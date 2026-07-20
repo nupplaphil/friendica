@@ -175,7 +175,7 @@ class Cache
 		if ($this->hidePasswordOutput
 			&& $key == 'password'
 			&& is_string($value)) {
-			$this->config[$cat][$key] = new HiddenString((string) $value);
+			$this->config[$cat][$key] = new HiddenString((string) $value, false);
 		} elseif (is_string($value)) {
 			$this->config[$cat][$key] = self::toConfigValue($value);
 		} else {
