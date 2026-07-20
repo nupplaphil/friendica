@@ -9,7 +9,7 @@ use ParagonIE\HiddenString\HiddenString;
 
 return [
 	'object' => [
-		'toString' => new HiddenString('test'),
+		'toString' => new HiddenString('test', false),
 		'serializable' => new SerializableObjectDouble(),
 	],
 ];

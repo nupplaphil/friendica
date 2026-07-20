@@ -93,7 +93,7 @@ class Cache
 		if ($this->hidePasswordOutput
 			&& $key == 'password'
 			&& !empty($value) && is_string($value)) {
-			$this->config[$uid][$cat][$key] = new HiddenString((string) $value);
+			$this->config[$uid][$cat][$key] = new HiddenString((string) $value, false);
 		} else {
 			$this->config[$uid][$cat][$key] = $value;
 		}

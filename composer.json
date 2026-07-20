@@ -67,7 +67,7 @@
 		"npm-asset/remixicon": "^4.6",
 		"npm-asset/typeahead.js": "^0.11.1",
 		"oomphinc/composer-installers-extender": "^2.0",
-		"paragonie/hidden-string": "^1.0",
+		"paragonie/hidden-string": "^2.2",
 		"patrickschur/language-detection": "^5.0.0",
 		"pear/console_table": "^1.3",
 		"php-ffmpeg/php-ffmpeg": "^1.4",
