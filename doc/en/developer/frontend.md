@@ -338,13 +338,17 @@ Edit `view/theme/frio/css/style.css`. This does not affect vier.
 
 Edit `view/theme/vier/style.css`. This does not affect frio.
 
-### 5.3 Frio colors
+### 5.3 Frio colors and schemes
 
-Frio colors are **not** exposed as reusable CSS custom properties — they are emitted as literal values or PHP template variables per scheme. When writing frio CSS, copy color patterns from the existing `style.css` or scheme files rather than inventing global CSS variables.
+Frio exposes a few status colors as CSS custom properties in `style.css` (`--primary`, `--info`, `--success`, `--warning`, `--danger`, …), but there is no complete design-token system.
+Most colors are still emitted as literal values or PHP template variables per scheme.
+So reuse an existing variable where one fits, but copy color patterns from `style.css` or the scheme files rather than inventing new global variables.
 
-The one stable layout variable you are likely to need is `--topbar-first-size` (defined in `view/theme/frio/css/style.css`); use `var(--topbar-first-size)` for layout that depends on the topbar height.
+A scheme (light / dark / black / gnome) is the user's **explicit choice**, not the operating system's — vier's light/dark variants work the same way.
+So **don't** add dark mode with `@media (prefers-color-scheme: dark)` in a base or component stylesheet: the OS preference is a different signal as the chosen scheme.
+Assuming they match would hand a light-scheme user a dark component, or the reverse.
 
-Test color changes across the four frio schemes (light, dark, black, gnome), the custom scheme, and the accent-color variants (the `scheme_accent` setting).
+Test color changes across all four frio schemes, the custom scheme, and the accent-color variants (`scheme_accent`).
 
 ### 5.4 Static presentation styles belong in CSS, not inline
 
@@ -400,51 +404,31 @@ if ($script !== '') {
 }
 ```
 
-### 6.3 Pass translations to JavaScript via the template
+### 6.3 Pass data and translations to JS via a JSON block
 
-Never hardcode English strings in `.js` files.
-Encode translated strings as JSON in PHP and read them in JavaScript:
+In new code, don't hardcode English strings in `.js` files and don't inject PHP values straight into a `<script>`.
+Encode any data — translated strings or structured config — as JSON with the `JSON_HEX_*` flags, then read it in JS:
 
 ```php
-// In PHP:
-'$strings_json' => json_encode([
+'$data_json' => json_encode([
     'saved'  => $this->t('Settings saved.'),
     'failed' => $this->t('Saving failed.'),
 ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
 ```
 
 ```smarty
-{{* nofilter is safe here: value came directly from json_encode() with JSON_HEX_* flags *}}
-<script type="application/json" id="my-strings">{{$strings_json nofilter}}</script>
+{{* nofilter is safe here: the value came straight from json_encode() with JSON_HEX_* flags *}}
+<script type="application/json" id="my-data">{{$data_json nofilter}}</script>
 ```
 
 ```javascript
-var strings = JSON.parse(
-    document.getElementById('my-strings').textContent
-);
-// strings.saved, strings.failed are now available
+var data = JSON.parse(document.getElementById('my-data').textContent);
+// data.saved, data.failed
 ```
 
-### 6.4 Pass structured data via JSON script block
+The `JSON_HEX_*` flags escape `<`, `>`, `&`, `'`, `"`, so the JSON cannot break out of the `<script>` element.
 
-```php
-'$config_json' => json_encode(
-    $widgetConfig,
-    JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR
-),
-```
-
-```smarty
-<script type="application/json" id="my-config">{{$config_json nofilter}}</script>
-```
-
-```javascript
-var config = JSON.parse(document.getElementById('my-config').textContent);
-```
-
-The `JSON_HEX_*` flags escape `<`, `>`, `&`, `'`, `"` — the JSON cannot break out of the `<script>` element.
-
-### 6.5 Pass small scalar values via data attributes
+### 6.4 Pass small scalar values via data attributes
 
 ```smarty
 <div id="my-widget" data-uid="{{$uid}}" data-url="{{$validated_url}}"></div>
@@ -455,7 +439,7 @@ var uid = document.getElementById('my-widget').dataset.uid;
 ```
 
 <a name="dom-xss" id="dom-xss"></a>
-### 6.6 DOM-XSS — safe JavaScript DOM manipulation
+### 6.5 DOM-XSS — safe JavaScript DOM manipulation
 
 Receiving JSON safely is not enough.
 Inserting data into the DOM can also be an XSS vector.
@@ -492,7 +476,7 @@ element.innerHTML = html;
 
 For content that is intentionally pre-rendered HTML (e.g. from `Item::prepareBody()` fetched via API), use a specifically approved sanitizer before setting `innerHTML`.
 
-### 6.7 No new inline event handlers
+### 6.6 No new inline event handlers
 
 ```smarty
 {{* ✗ *}}
