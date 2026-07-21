@@ -6,6 +6,7 @@
 
 This document defines what new PHP code in `src/` should look like.
 It is also the reference for Friendica's Domain-Driven Design building blocks — Entity, Factory, Repository, Collection — defined in §2 and the [Key Terms appendix](#key-terms).
+The [layered model](#target-architecture) section shows how these building blocks group into the four tiers `src/` is converging on.
 
 **Scope:** These rules apply to new classes and new methods.
 A small bug fix in legacy code does not require a full migration of the surrounding area.
@@ -43,6 +44,8 @@ Does it turn domain data into template data / HTML?  → Presentation
 
 > **A note against overengineering:** A small read-only feature does not require creating an Entity, Factory, Collection, and Repository if a focused Read Repository returning a documented array shape is enough.
 > Use the full pattern when the entity genuinely has behavior or when multiple callers need the same typed object.
+
+For how these blocks group into the four tiers `src/` is converging on — the same "where does my code go?" one zoom-level out — see [The layered model](#target-architecture) below.
 
 ---
 
@@ -184,6 +187,43 @@ The one thing you are **not** required to do: clean up the legacy file you extra
 
 ---
 
+<a name="target-architecture" id="target-architecture"></a>
+## The target architecture
+
+The Quick decision card above places one class; this is the shape all of `src/` is moving toward — the same building blocks, grouped into four **tiers** by what each may depend on.
+It is the destination the [incremental migration above](#migrating-legacy) aims at, so a boundary you draw today points the right way.
+
+**The direction rule (our main heuristic):** code dependencies point the same way as the foreign keys — never back, no cycles.
+It is not imported theory, it is our own schema: the small tables everything points at (`item-uri`, `user`, `contact`) are the core **nouns**, the tables pointing at them are **features**, code that only delivers or displays is **delivery**, and the plumbing is the **base**.
+So `Model\Contact` must not know about `Notifications` — just as the `contact` table does not point at `notification`, but the other way round.
+
+```
+  Tier 3 · Delivery   Modules · Content renderers · Workers · Protocol adapters · Console   (nothing depends on these)
+     ▼   feature ↔ feature: cross-feature effects via the event bus (src/Event/), not direct imports
+  Tier 2 · Features   <Feature> = Service + Entity/Factory/Repository (write) + Read Repository (read)
+     ▼
+  Tier 1 · Domain     Contact · Post (item-uri) · User   (the big Model/ classes today)
+     ▼
+  Tier 0 · Base       Database · Cache · Lock · Logger · Config · shared enums / value objects
+```
+
+The [§2 building blocks](#layers) are what you write *inside* a tier — the tier only decides who may depend on whom:
+
+| Building block                                                                | Tier                                                               |
+|-------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `Module`, `Worker`, `Console`, `Protocol` adapters, and the **renderer/presenter** classes in `Content/` | **Delivery**                                                       |
+| `Service`, `Repository`, `Read Repository`, `Factory`, `Entity`, `Collection` | **Features** — or **Domain** for a core noun (Contact, Item, User) |
+| `Database`, `Cache`, `Logger`, `Config`, shared enums / value objects         | **Base**                                                           |
+
+**A tier is a property of a class, not a folder.**
+Names stay flat — there is no physical `src/Domain/` parent (it would rename every namespace and break every import).
+Folders like `Core/`, `Model/`, `Protocol/` still mix tiers, and one folder can span tiers: `Content/<Feature>/` keeps that feature's Delivery renderers next to its Feature/Domain classes ([§2.4](#presentation-layer-content)).
+Those mixed folders are what we untangle over time.
+
+These tiers are boundaries for **new** code; existing violations are unwound by baseline-backed follow-up work — how much exists today, and the order to get there, is tracked in [issue #15981](https://github.com/friendica/friendica/issues/15981), not here.
+
+---
+
 ## 1. Dependency Injection
 
 ### 1.1 New classes MUST use constructor injection
@@ -233,7 +273,11 @@ Use constructor injection or a Factory.
 
 ---
 
+<a name="layers" id="layers"></a>
 ## 2. Layer Separation
+
+The layers below are the building blocks from the [layered model](#target-architecture); each class built from them lives in a single tier.
+These rules keep each block in its lane, which is what keeps the tier dependencies clean.
 
 ### 2.1 Responsibility by layer
 
@@ -260,6 +304,7 @@ Reference: `Protocol\ActivityPub\Firehose` — injected dependencies (incl. the 
 2. **Orchestration** that changes state or enforces a policy → **Service**; that only assembles data for display → **Presentation** ([§2.4](#presentation-layer-content)).
 3. **Auth**: "logged in?", CSRF, own-uid ownership → **Module**; "may this user do X?" (domain policy) → **Service** / **Entity**.
 
+<a name="db-access" id="db-access"></a>
 ### 2.2 DB access MUST stay inside Repositories
 
 `DBA::` and direct use of the injected `Database` object for application queries belong only in Repository classes.
@@ -290,6 +335,11 @@ Do not force complex reads into an entity Repository to satisfy this rule, and d
 
 **Legacy exception:** `DBA::` calls in `mod/` and in `src/Model/` classes are expected.
 Do not add new `DBA::` calls into otherwise clean classes.
+
+**Each table should have one owning Repository — the only class that writes it** (read the owner off the schema: the primary key, the foreign key the row hangs off, or the `uid` for per-user copies).
+This is the target direction, not a rule you can always satisfy today: for a core table the owner is often still a static `Model` class, so new write code routes through the owning Repository once it exists, and otherwise extracts the smallest owner seam or notes the migration exception in the PR — it just does not add a fresh `DBA::` write on a core table (`user`, `contact`, `post*`) from an unrelated class.
+Schema migrations (`update.php`, `PostUpdate`, `DBStructure`) and low-level database-maintenance jobs write directly by design; ordinary application Workers do not — they go through the owning Repository like any other code.
+Derived tables (`post-engagement`, `post-searchindex`) are rebuilt by the read side, never written by hand.
 
 <a name="request-not-superglobals" id="request-not-superglobals"></a>
 ### 2.3 Modules MUST use `$request` — not superglobals
@@ -324,6 +374,7 @@ In Friendica this layer lives mostly under `src/Content/` (and `src/Object/`).
 Presentation code may call read repositories and orchestrate formatters and template rendering, but it should not make business decisions; if the answer changes domain state or decides whether an action is allowed, that belongs in a Service or Entity.
 
 **`Content/<Feature>/` is a feature package, not a layer bucket.** It holds the feature's domain (`Entity/`, `Repository/`, `Factory/`, `Collection/`) *and* its presentation classes together — this package-by-feature layout is intended.
+In tier terms the renderers are Delivery while the `Entity/`/`Repository/` are the feature's Feature (or Domain) classes — one folder, each class keeping its own tier ([the layered model](#target-architecture)).
 Keep new conversation code under `Content/Conversation/`, new notification code under `Navigation/Notifications/`, and so on.
 Do not split a feature across a top-level `Presentation/` vs `Domain/` tree by default.
 If one domain is reused by several unrelated presentation surfaces, introduce a shared domain package deliberately and keep the presentation adapters near their surfaces.
@@ -352,6 +403,7 @@ Prefer a typed view-model object over an untyped `array` for structured presenta
 
 Static calls hide coupling, cannot be injected into a constructor, and are harder to replace with test doubles than instance methods.
 The large static classes in `src/Model/` (Contact, User, Item, Post) are a known problem, not a model to follow.
+In the [target architecture](#target-architecture) these nouns belong in Tier-1 **Domain**; the static classes are temporary shims that shrink as it is adopted.
 
 **Acceptable static use:**
 - Pure functions with no dependencies and no side effects
