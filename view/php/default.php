@@ -18,7 +18,7 @@
   <script>var baseurl="<?php echo Friendica\DI::baseUrl() ?>";</script>
   <?php if(!empty($page['htmlhead'])) echo $page['htmlhead'] ?>
 </head>
-<body>
+<body class="mod-<?php echo $page['module'] ?>">
 	<?php if(!empty($page['nav'])) echo $page['nav']; ?>
 	<aside><?php if(!empty($page['aside'])) echo $page['aside']; ?></aside>
 	<section>
