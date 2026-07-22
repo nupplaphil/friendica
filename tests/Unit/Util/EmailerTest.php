@@ -52,7 +52,7 @@ class EmailerTest extends TestCase
 
 		$this->eventDispatcher->addListener(
 			ArrayFilterEvent::EMAILER_SEND_PREPARE,
-			function (ArrayFilterEvent $event) use (&$dispatched) {
+			function (ArrayFilterEvent $event) use (&$dispatched): void {
 				$dispatched[] = $event->getArray();
 			},
 		);
@@ -69,7 +69,7 @@ class EmailerTest extends TestCase
 
 		$this->eventDispatcher->addListener(
 			ArrayFilterEvent::EMAILER_SEND,
-			function (ArrayFilterEvent $event) use (&$dispatched) {
+			function (ArrayFilterEvent $event) use (&$dispatched): void {
 				$dispatched[] = $event->getArray();
 			},
 		);
@@ -89,7 +89,7 @@ class EmailerTest extends TestCase
 	{
 		$this->eventDispatcher->addListener(
 			ArrayFilterEvent::EMAILER_SEND,
-			function (ArrayFilterEvent $event) {
+			function (ArrayFilterEvent $event): void {
 				$data         = $event->getArray();
 				$data['sent'] = true;
 				$event->setArray($data);
@@ -107,7 +107,7 @@ class EmailerTest extends TestCase
 	{
 		$this->eventDispatcher->addListener(
 			ArrayFilterEvent::EMAILER_SEND_PREPARE,
-			function (ArrayFilterEvent $event) {
+			function (ArrayFilterEvent $event): void {
 				$event->setArray(['email' => null]);
 			},
 		);
@@ -125,10 +125,10 @@ class EmailerTest extends TestCase
 	private function createEmailer(): EmailerSpy
 	{
 		$config = $this->createStub(IManageConfigValues::class);
-		$config->method('get')->willReturnCallback(fn (string $cat, string $key) => match ([$cat, $key]) {
+		$config->method('get')->willReturnCallback(fn (string $cat, string $key): string|true => match ([$cat, $key]) {
 			['config', 'sender_email'] => 'test@friendica.local',
-			['config', 'sitename']     => 'Friendica Social Network',
-			default                    => true,
+			['config', 'sitename'] => 'Friendica Social Network',
+			default => true,
 		});
 
 		$baseUrl = $this->createStub(BaseURL::class);

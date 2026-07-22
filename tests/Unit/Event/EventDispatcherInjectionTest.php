@@ -88,7 +88,7 @@ class EventDispatcherInjectionTest extends TestCase
 				continue;
 			}
 
-			yield substr($file->getPathname(), strlen($src) + 1) => $matches[1];
+			yield substr((string) $file->getPathname(), strlen($src) + 1) => $matches[1];
 		}
 	}
 }
