@@ -330,6 +330,14 @@ function loadContent(url) {
     
     console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
     
+    // Check Content-Type header - only text/html is allowed for SPA
+    const contentType = response.headers.get('Content-Type') || response.headers.get('content-type') || '';
+    if (!contentType.includes('text/html')) {
+      console.debug('[SPA Router] LoadContent: Invalid Content-Type:', contentType, '- falling back to full reload');
+      window.location.href = url;
+      return null;
+    }
+    
     // Get the final URL after any redirects - with automatic following, response.url contains it
     if (response.url && response.url !== fetchUrl.toString()) {
       finalUrl = response.url;
