@@ -1269,7 +1269,7 @@ final readonly class ConversationDataProvider
 		$threadUriIds = [];
 		$answerCounts = [];
 		foreach ($rows as $row) {
-			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] === $row['uri-id']) {
+			if (in_array($row['uri-id'], $threadUriIds) || $row['thr-parent-id'] === $row['uri-id'] || !in_array($row['gravity'], [ItemModel::GRAVITY_PARENT, ItemModel::GRAVITY_COMMENT])) {
 				continue;
 			}
 			$threadUriIds[]                      = $row['uri-id'];
