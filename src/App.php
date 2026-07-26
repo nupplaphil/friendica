@@ -10,6 +10,7 @@ namespace Friendica;
 use Dice\Dice;
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
+use Friendica\BaseModule;
 use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\App\Request;
@@ -38,6 +39,7 @@ use Friendica\Database\Definition\ViewDefinition;
 use Friendica\Event\ConfigLoadedEvent;
 use Friendica\Event\Event;
 use Friendica\Module\Maintenance;
+use Friendica\Module\Response;
 use Friendica\Module\Special\HTTPException as ModuleHTTPException;
 use Friendica\Network\HTTPException;
 use Friendica\Protocol\ATProtocol\DID;
@@ -590,7 +592,26 @@ class App
 
 			// Let the module run its internal process (init, get, post, ...)
 			$timestamp = microtime(true);
-			$response  = $module->handleRequest($this->psrRequest);
+			try {
+				$response = $module->handleRequest($this->psrRequest);
+			} catch (HTTPException $e) {
+				// In case of System::externalRedirects(), we don't want to prettyprint the exception
+				// just redirect to the new location
+				if (($e instanceof HTTPException\FoundException)
+					|| ($e instanceof HTTPException\MovedPermanentlyException)
+					|| ($e instanceof HTTPException\TemporaryRedirectException)) {
+					throw $e;
+				}
+
+				if ($module instanceof BaseModule) {
+					$errorResponse = $module->getResponse();
+				} else {
+					$errorResponse = new Response();
+				}
+				$errorResponse->setStatus($e->getCode(), $e->getMessage());
+				$errorResponse->addContent($httpException->content($e));
+				$response = $errorResponse->generate();
+			}
 			$this->profiler->set(microtime(true) - $timestamp, 'content');
 
 			// Wrapping HTML responses in the theme template

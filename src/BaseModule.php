@@ -186,6 +186,14 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	protected function get(array $request = []) {}
 
 	/**
+	 * @internal Used by App::runFrontend() to set error responses on the module's response instance
+	 */
+	public function getResponse(): ICanCreateResponses
+	{
+		return $this->response;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
@@ -292,6 +300,9 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 		$this->profiler->set(microtime(true) - $timestamp, 'content');
 	}
 
+	/**
+	 * @throws HTTPException
+	 */
 	public function handleRequest(ServerRequestInterface $request): ResponseInterface
 	{
 		$httpInput  = new HTTPInputData($request->getServerParams());
@@ -306,7 +317,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 			is_array($parsedBody) ? $parsedBody : [],
 		);
 
-		return $this->run(DI::getDice()->create(ModuleHTTPException::class), $requestArray);
+		$this->dispatch($requestArray);
+		return $this->response->generate();
 	}
 
 	/**
