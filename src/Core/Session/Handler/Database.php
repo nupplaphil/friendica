@@ -44,7 +44,7 @@ class Database extends AbstractSessionHandler
 			$this->sessionExists = $this->dba->isResult($session);
 			return $this->sessionExists ? $session['data'] : '';
 		} catch (\Exception $exception) {
-			$this->logger->warning('Cannot read session.', ['id' => $id, 'exception' => $exception]);
+			$this->logger->warning('Cannot read session.', ['id' => $id, 'uri' => $this->server['REQUEST_URI'] ?? '', 'exception' => $exception]);
 			return '';
 		}
 	}
