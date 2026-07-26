@@ -476,6 +476,16 @@ function replaceContainerContent(html, finalUrl = null) {
     console.debug('[SPA Router] ReplaceContent: Set lastFinalUrl to window.location.href:', lastFinalUrl);
   }
   
+  // Extract title from full HTML before body extraction
+  const titleTempDiv = document.createElement('div');
+  titleTempDiv.innerHTML = html;
+  const titleElement = titleTempDiv.querySelector('title');
+  if (titleElement) {
+    console.debug('[SPA Router] ReplaceContent: Setting title to', titleElement.textContent);
+    document.title = titleElement.textContent;
+    originalTitle = document.title;
+  }
+
   // If response is a full HTML document, extract only the body content
   if (html && html.includes && html.includes('<body')) {
     console.debug('[SPA Router] ReplaceContent: Extracting body content');
@@ -524,13 +534,6 @@ function replaceContainerContent(html, finalUrl = null) {
 
   // Store body scripts to execute after DOM insertion
   window.__spa_bodyScripts = bodyScripts;
-  
-  // Extract and set title from HTML
-  const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-  if (titleMatch && titleMatch[1]) {
-    console.debug('[SPA Router] ReplaceContent: Setting title to', titleMatch[1]);
-    document.title = titleMatch[1];
-  }
   
   // Extract head elements (link, script, style) and move them to document head
   const headElements = tempDiv.querySelectorAll('link, script, style');

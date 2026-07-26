@@ -155,6 +155,10 @@ var last_popup_button = null;
 var lockLoadContent = false;
 var originalTitle = document.title;
 
+// Scroll to item deduplication flags
+var scrollToItemInProgress = false;
+var lastScrollToItemId = null;
+
 const urlRegex = /^(?:https?:\/\/|\s)[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})(?:\/+[a-z0-9_.:;-]*)*(?:\?[&%|+a-z0-9_=,.:;-]*)?(?:[&%|+&a-z0-9_=,:;.-]*)(?:[!#\/&%|+a-z0-9_=,:;.-]*)}*$/i;
 
 $(function() {
@@ -585,12 +589,22 @@ function scrollToItem(elementId) {
 	if (typeof elementId === "undefined") {
 		return false;
 	}
-
+	
+	// Prevent multiple calls for the same element
+	if (scrollToItemInProgress && lastScrollToItemId === elementId) {
+		console.debug('[Main] scrollToItem: Already in progress for ' + elementId + ', skipping duplicate call');
+		return false;
+	}
+	
 	var $el = $("#" + elementId + " > .media");
 	// Test if the Item exists
 	if (!$el.length) {
 		return false;
 	}
+
+	// Set tracking flags
+	scrollToItemInProgress = true;
+	lastScrollToItemId = elementId;
 
 	// Define the colors which are used for highlighting
 	var colWhite = { backgroundColor: "#7f7f7f" };
@@ -611,6 +625,12 @@ function scrollToItem(elementId) {
 		.done(function () {
 			// Highlight post/comment with ID  (GUID)
 			$el.animate(colWhite, 1000).animate(colShiny).animate({ backgroundColor: "transparent" }, 600);
+			
+			// Reset flags after animation completes
+			setTimeout(function() {
+				scrollToItemInProgress = false;
+				lastScrollToItemId = null;
+			}, 2000); // Match animation duration (1000+600ms)
 			return true;
 		});
 }
