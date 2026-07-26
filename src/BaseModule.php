@@ -10,6 +10,7 @@ namespace Friendica;
 use Friendica\App\Router;
 use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\ICanCreateResponses;
+use Friendica\Capabilities\IRequestHandler;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Event\ModuleContentEvent;
@@ -19,9 +20,11 @@ use Friendica\Model\User;
 use Friendica\Module\Response;
 use Friendica\Module\Special\HTTPException as ModuleHTTPException;
 use Friendica\Network\HTTPException;
+use Friendica\Util\HTTPInputData;
 use Friendica\Util\Profiler;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -33,7 +36,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author Hypolite Petovan <hypolite@mrpetovan.com>
  */
-abstract class BaseModule implements ICanHandleRequests
+abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 {
 	/** @var array */
 	protected $parameters = [];
@@ -275,6 +278,23 @@ abstract class BaseModule implements ICanHandleRequests
 		$this->profiler->set(microtime(true) - $timestamp, 'content');
 
 		return $this->response->generate();
+	}
+
+	public function handleRequest(ServerRequestInterface $request): ResponseInterface
+	{
+		$httpInput  = new HTTPInputData($request->getServerParams());
+		$httpinput  = $httpInput->process();
+		$queryVars  = $request->getQueryParams();
+		$parsedBody = $request->getParsedBody();
+
+		$requestArray = array_merge(
+			$httpinput['variables'] ?? [],
+			$httpinput['files'] ?? [],
+			$queryVars,
+			is_array($parsedBody) ? $parsedBody : [],
+		);
+
+		return $this->run(DI::getDice()->create(ModuleHTTPException::class), $requestArray);
 	}
 
 	/**
