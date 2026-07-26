@@ -190,6 +190,33 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
+		try {
+			$this->dispatch($request);
+		} catch (HTTPException $e) {
+			// In case of System::externalRedirects(), we don't want to prettyprint the exception
+			// just redirect to the new location
+			if (($e instanceof HTTPException\FoundException)
+				|| ($e instanceof HTTPException\MovedPermanentlyException)
+				|| ($e instanceof HTTPException\TemporaryRedirectException)) {
+				throw $e;
+			}
+
+			$this->response->setStatus($e->getCode(), $e->getMessage());
+			$this->response->addContent($httpException->content($e));
+		}
+
+		return $this->response->generate();
+	}
+
+	/**
+	 * Dispatches the module CORS headers, events and method handling
+	 *
+	 * @param array $request The request data
+	 * @return void
+	 * @throws HTTPException
+	 */
+	protected function dispatch(array $request): void
+	{
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
 		if (str_starts_with($this->args->getQueryString(), '.well-known/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
@@ -256,28 +283,13 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 		// templating and is expected to exit on its own if it is set.
 		$this->rawContent($request);
 
-		try {
-			$content = $this->eventDispatcher->dispatch(
-				new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, ''),
-			)->getContent();
-			$this->response->addContent($content);
-			$this->response->addContent($this->content($request));
-		} catch (HTTPException $e) {
-			// In case of System::externalRedirects(), we don't want to prettyprint the exception
-			// just redirect to the new location
-			if (($e instanceof HTTPException\FoundException)
-				|| ($e instanceof HTTPException\MovedPermanentlyException)
-				|| ($e instanceof HTTPException\TemporaryRedirectException)) {
-				throw $e;
-			}
-
-			$this->response->setStatus($e->getCode(), $e->getMessage());
-			$this->response->addContent($httpException->content($e));
-		}
+		$content = $this->eventDispatcher->dispatch(
+			new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, ''),
+		)->getContent();
+		$this->response->addContent($content);
+		$this->response->addContent($this->content($request));
 
 		$this->profiler->set(microtime(true) - $timestamp, 'content');
-
-		return $this->response->generate();
 	}
 
 	public function handleRequest(ServerRequestInterface $request): ResponseInterface
