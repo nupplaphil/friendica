@@ -16,6 +16,7 @@ use Friendica\App\Request;
 use Friendica\App\Router;
 use Friendica\Capabilities\ICanCreateResponses;
 use Friendica\Capabilities\ICanHandleRequests;
+use Friendica\Capabilities\IRequestHandler;
 use Friendica\Content\Nav;
 use Friendica\Core\Addon\AddonHelper;
 use Friendica\Core\Config\Factory\Config;
@@ -128,6 +129,9 @@ class App
 	 */
 	private $appHelper;
 
+	/** @var ServerRequestInterface */
+	private $psrRequest;
+
 	private function __construct(private readonly Container $container) {}
 
 	/**
@@ -135,6 +139,8 @@ class App
 	 */
 	public function processRequest(ServerRequestInterface $request, float $start_time): void
 	{
+		$this->psrRequest = $request;
+
 		$this->container->addRule(Mode::class, [
 			'call' => [
 				['determineRunMode', [false, $request->getServerParams()], Dice::CHAIN_CALL],
@@ -584,7 +590,7 @@ class App
 
 			// Let the module run its internal process (init, get, post, ...)
 			$timestamp = microtime(true);
-			$response  = $module->run($httpException, $input);
+			$response  = $module->handleRequest($this->psrRequest);
 			$this->profiler->set(microtime(true) - $timestamp, 'content');
 
 			// Wrapping HTML responses in the theme template
@@ -603,7 +609,7 @@ class App
 		$page->logRuntime($this->config, 'runFrontend');
 	}
 
-	private function createModuleInstance(?string $moduleClass = null): ICanHandleRequests
+	private function createModuleInstance(?string $moduleClass = null): ICanHandleRequests&IRequestHandler
 	{
 		/** @var Router $router */
 		$router = $this->container->create(Router::class);
@@ -615,7 +621,7 @@ class App
 
 		$stamp = microtime(true);
 
-		/** @var ICanHandleRequests $module */
+		/** @var ICanHandleRequests&IRequestHandler $module */
 		$module = $this->container->create($moduleClass, $parameters);
 
 		if ($dice_profiler_threshold > 0) {
