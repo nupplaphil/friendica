@@ -40,7 +40,7 @@ class Database extends AbstractSessionHandler
 		}
 
 		try {
-			$session = $this->dba->selectFirst('session', ['data'], ['sid' => $id]);
+			$session             = $this->dba->selectFirst('session', ['data'], ['sid' => $id]);
 			$this->sessionExists = $this->dba->isResult($session);
 			return $this->sessionExists ? $session['data'] : '';
 		} catch (\Exception $exception) {
