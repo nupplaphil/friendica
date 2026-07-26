@@ -223,7 +223,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * @return void
 	 * @throws HTTPException
 	 */
-	protected function dispatch(array $request): void
+	final protected function dispatch(array $request): void
 	{
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
 		if (str_starts_with($this->args->getQueryString(), '.well-known/')) {
