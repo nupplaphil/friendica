@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2010 - 2024 the Friendica project
-#
-# SPDX-License-Identifier: CC0-1.0
-
 parameters:
 	ignoreErrors:
 		-
@@ -63,6 +59,168 @@ parameters:
 			identifier: method.deprecated
 			count: 1
 			path: src/BaseRepository.php
+
+		-
+			message: '''
+				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Content/Item.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Content/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Post/Factory/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Post/Repository/PostMedia.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Content/Text/Plaintext.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Text/Plaintext.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Content/Text/Plaintext.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Content/Text/Plaintext.php
 
 		-
 			message: '''
@@ -147,6 +305,159 @@ parameters:
 
 		-
 			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Factory/Api/Mastodon/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Mastodon/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Factory/Api/Mastodon/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Factory/Api/Mastodon/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Mastodon/Card.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Mastodon/Status.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Attachment.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Factory/Api/Twitter/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Url.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant PLAIN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_PLAIN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Url.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TEXT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TEXT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Factory/Api/Twitter/Url.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Attach.php
+
+		-
+			message: '''
+				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -155,9 +466,54 @@ parameters:
 			path: src/Model/Contact.php
 
 		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Contact.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Contact.php
+
+		-
 			message: '#^Call to deprecated function strftime\(\)\.$#'
 			identifier: function.deprecated
 			count: 4
+			path: src/Model/Event.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
 			path: src/Model/Event.php
 
 		-
@@ -171,12 +527,291 @@ parameters:
 
 		-
 			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Item.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Model/ItemHelper.php
+
+		-
+			message: '''
+				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Model/Mail.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Model/Mail.php
+
+		-
+			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
 			identifier: method.deprecatedClass
 			count: 1
 			path: src/Model/Mail.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Engagement.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACCOUNT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACCOUNT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 9
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant APPLICATION of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_APPLICATION instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 5
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 5
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 6
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 9
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 11
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant JSON of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_JSON instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 8
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant LD of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_LD instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 4
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant PLAIN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_PLAIN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TEXT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TEXT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 13
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 6
+			path: src/Model/Post/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant XML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_XML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Model/Post/Media.php
 
 		-
 			message: '''
@@ -270,6 +905,123 @@ parameters:
 
 		-
 			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Accounts/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Accounts/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Accounts/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Accounts/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant APPLICATION of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_APPLICATION instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Media.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACCOUNT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACCOUNT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant ACTIVITY of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_ACTIVITY instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TEXT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TEXT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 4
+			path: src/Module/Api/Mastodon/Search.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
 				#^Call to method existsForUser\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -288,12 +1040,219 @@ parameters:
 
 		-
 			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
 				#^Parameter \$notify of method Friendica\\Module\\Api\\Mastodon\\Statuses\:\:__construct\(\) has typehint with deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
 			identifier: parameter.deprecatedClass
 			count: 1
 			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Home.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Home.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Home.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Home.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/ListTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/ListTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/ListTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/ListTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/PublicTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/PublicTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/PublicTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/PublicTimeline.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Tag.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Tag.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Tag.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Timelines/Tag.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Mastodon/Trends/Links.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Api/Twitter/Statuses/Update.php
 
 		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
@@ -546,6 +1505,78 @@ parameters:
 
 		-
 			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/ParseUrl.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/ParseUrl.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Module/ParseUrl.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/ParseUrl.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/ParseUrl.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Module/Photo.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Module/Photo.php
+
+		-
+			message: '''
+				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
+				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Module/Post/Tag/Add.php
+
+		-
+			message: '''
 				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
 				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
 			'''
@@ -771,93 +1802,138 @@ parameters:
 
 		-
 			message: '''
-				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
-				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
 			'''
-			identifier: method.deprecatedClass
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Protocol/DFRN.php
+			path: src/Object/Api/Twitter/Media.php
 
 		-
 			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ATProtocol/Processor.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
 			count: 2
-			path: src/Content/Item.php
+			path: src/Protocol/ATProtocol/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Content/Item.php
+			path: src/Protocol/ATProtocol/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Model/Contact.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Model/Event.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Model/ItemHelper.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Model/Mail.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Model/Mail.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Module/Api/Mastodon/Statuses.php
+			path: src/Protocol/ActivityPub/Processor.php
 
 		-
 			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
 			'''
-			identifier: staticMethod.deprecated
+			identifier: classConstant.deprecated
 			count: 1
-			path: src/Module/Post/Tag/Add.php
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HLS of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HLS instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
 
 		-
 			message: '''
@@ -867,6 +1943,141 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '''
+				#^Call to method createFromArray\(\) of deprecated class Friendica\\Navigation\\Notifications\\Repository\\Notify\:
+				2022\.05 Use `\\Friendica\\Navigation\\Notifications\\Repository\\Notification` instead$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 3
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/Diaspora.php
 
 		-
 			message: '''
@@ -884,4 +2095,67 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant AUDIO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_AUDIO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant DOCUMENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_DOCUMENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant IMAGE of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_IMAGE instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant TORRENT of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_TORRENT instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant UNKNOWN of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_UNKNOWN instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '''
+				#^Fetching deprecated class constant VIDEO of class Friendica\\Model\\Post\\Media\:
+				2027\.01 Use PostMedia\:\:TYPE_VIDEO instead$#
+			'''
+			identifier: classConstant.deprecated
+			count: 2
 			path: src/Protocol/Feed.php
