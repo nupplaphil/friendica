@@ -14,20 +14,17 @@ use Friendica\DI;
 use Friendica\Model\Item;
 use Friendica\Model\User;
 use Friendica\Module\BaseApi;
-use Friendica\Module\Special\HTTPException;
 use Friendica\Protocol\ActivityPub;
 use Friendica\Util\HTTPSignature;
 use Friendica\Util\Network;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * ActivityPub Inbox
  */
 class Inbox extends BaseApi
 {
-	public function run(HTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
+	protected function checkScope(): void
 	{
-		return parent::run($httpException, $request, false);
 	}
 
 	protected function rawContent(array $request = [])

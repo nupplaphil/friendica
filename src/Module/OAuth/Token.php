@@ -10,10 +10,8 @@ namespace Friendica\Module\OAuth;
 use Friendica\Database\DBA;
 use Friendica\Model\User;
 use Friendica\Module\BaseApi;
-use Friendica\Module\Special\HTTPException;
 use Friendica\Security\OAuth;
 use Friendica\Util\DateTimeFormat;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @see https://docs.joinmastodon.org/methods/oauth/#token
@@ -21,9 +19,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Token extends BaseApi
 {
-	public function run(HTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
+	protected function checkScope(): void
 	{
-		return parent::run($httpException, $request, false);
 	}
 
 	protected function post(array $request = [])

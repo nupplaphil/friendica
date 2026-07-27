@@ -217,6 +217,16 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	}
 
 	/**
+	 * Hook for modules to perform scope or permission checks before dispatch
+	 *
+	 * @return void
+	 * @throws HTTPException
+	 */
+	protected function checkScope(): void
+	{
+	}
+
+	/**
 	 * Dispatches the module CORS headers, events and method handling
 	 *
 	 * @param array $request The request data
@@ -225,6 +235,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	final protected function dispatch(array $request): void
 	{
+		$this->checkScope();
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
 		if (str_starts_with($this->args->getQueryString(), '.well-known/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');

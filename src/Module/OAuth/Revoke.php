@@ -9,17 +9,14 @@ namespace Friendica\Module\OAuth;
 
 use Friendica\Database\DBA;
 use Friendica\Module\BaseApi;
-use Friendica\Module\Special\HTTPException;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @see https://docs.joinmastodon.org/spec/oauth/
  */
 class Revoke extends BaseApi
 {
-	public function run(HTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
+	protected function checkScope(): void
 	{
-		return parent::run($httpException, $request, false);
 	}
 
 	protected function post(array $request = [])

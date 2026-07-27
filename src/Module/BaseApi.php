@@ -81,6 +81,25 @@ class BaseApi extends BaseModule
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	protected function checkScope(): void
+	{
+		switch ($this->args->getMethod()) {
+			case Router::DELETE:
+			case Router::PATCH:
+			case Router::POST:
+			case Router::PUT:
+				$this->checkAllowedScope(self::SCOPE_WRITE);
+
+				if (!self::getCurrentUserID()) {
+					throw new HTTPException\ForbiddenException($this->t('Permission denied.'));
+				}
+				break;
+		}
+	}
+
+	/**
 	 * Additionally checks, if the caller is permitted to do this action
 	 *
 	 * {@inheritDoc}
@@ -90,18 +109,7 @@ class BaseApi extends BaseModule
 	public function run(ModuleHTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
 	{
 		if ($scopecheck) {
-			switch ($this->args->getMethod()) {
-				case Router::DELETE:
-				case Router::PATCH:
-				case Router::POST:
-				case Router::PUT:
-					$this->checkAllowedScope(self::SCOPE_WRITE);
-
-					if (!self::getCurrentUserID()) {
-						throw new HTTPException\ForbiddenException($this->t('Permission denied.'));
-					}
-					break;
-			}
+			$this->checkScope();
 		}
 
 		return parent::run($httpException, $request);
