@@ -10,7 +10,6 @@ namespace Friendica;
 use Dice\Dice;
 use Friendica\App\Arguments;
 use Friendica\App\BaseURL;
-use Friendica\BaseModule;
 use Friendica\App\Mode;
 use Friendica\App\Page;
 use Friendica\App\Request;

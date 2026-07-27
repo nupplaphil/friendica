@@ -222,9 +222,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * @return void
 	 * @throws HTTPException
 	 */
-	protected function checkScope(): void
-	{
-	}
+	protected function checkScope(): void {}
 
 	/**
 	 * Dispatches the module CORS headers, events and method handling
@@ -323,7 +321,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 
 		$requestArray = array_merge(
 			$httpinput['variables'] ?? [],
-			$httpinput['files'] ?? [],
+			$httpinput['files']     ?? [],
 			$queryVars,
 			is_array($parsedBody) ? $parsedBody : [],
 		);

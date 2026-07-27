@@ -19,9 +19,7 @@ use Friendica\Util\DateTimeFormat;
  */
 class Token extends BaseApi
 {
-	protected function checkScope(): void
-	{
-	}
+	protected function checkScope(): void {}
 
 	protected function post(array $request = [])
 	{

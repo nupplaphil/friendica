@@ -18,9 +18,7 @@ use Friendica\Util\Network;
  */
 class Apps extends BaseApi
 {
-	protected function checkScope(): void
-	{
-	}
+	protected function checkScope(): void {}
 
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException

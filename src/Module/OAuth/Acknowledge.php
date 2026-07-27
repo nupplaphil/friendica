@@ -16,9 +16,7 @@ use Friendica\Module\BaseApi;
  */
 class Acknowledge extends BaseApi
 {
-	protected function checkScope(): void
-	{
-	}
+	protected function checkScope(): void {}
 
 	protected function post(array $request = [])
 	{
