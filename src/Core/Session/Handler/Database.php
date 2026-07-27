@@ -40,19 +40,13 @@ class Database extends AbstractSessionHandler
 		}
 
 		try {
-			$session = $this->dba->selectFirst('session', ['data'], ['sid' => $id]);
-			if ($this->dba->isResult($session)) {
-				$this->sessionExists = true;
-				return $session['data'];
-			}
+			$session             = $this->dba->selectFirst('session', ['data'], ['sid' => $id]);
+			$this->sessionExists = $this->dba->isResult($session);
+			return $this->sessionExists ? $session['data'] : '';
 		} catch (\Exception $exception) {
-			$this->logger->warning('Cannot read session.', ['id' => $id, 'exception' => $exception]);
+			$this->logger->warning('Cannot read session.', ['id' => $id, 'uri' => $this->server['REQUEST_URI'] ?? '', 'exception' => $exception]);
 			return '';
 		}
-
-		$this->logger->notice('no data for session', ['session_id' => $id, 'uri' => $this->server['REQUEST_URI'] ?? '']);
-
-		return '';
 	}
 
 	/**
@@ -74,7 +68,8 @@ class Database extends AbstractSessionHandler
 		}
 
 		if (!$data) {
-			return $this->destroy($id);
+			$this->destroy($id);
+			return true;
 		}
 
 		$expire         = time() + static::EXPIRE;

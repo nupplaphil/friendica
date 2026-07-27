@@ -63,7 +63,8 @@ class Cache extends AbstractSessionHandler
 		}
 
 		if (!$data) {
-			return $this->destroy($id);
+			$this->destroy($id);
+			return true;
 		}
 
 		try {
