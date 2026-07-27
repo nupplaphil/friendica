@@ -198,7 +198,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
-		$this->dispatch($request);
+		$this->dispatch($request, $httpException);
 
 		return $this->response->generate();
 	}
@@ -214,11 +214,12 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * Dispatches the module CORS headers, events and method handling
 	 *
-	 * @param array $request The request data
+	 * @param array                              $request The request data
+	 * @param ModuleHTTPException|null $httpException Optional exception renderer for the content phase
 	 * @return void
 	 * @throws HTTPException
 	 */
-	final protected function dispatch(array $request): void
+	final protected function dispatch(array $request, ?ModuleHTTPException $httpException = null): void
 	{
 		$this->checkScope();
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
@@ -287,11 +288,27 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 		// templating and is expected to exit on its own if it is set.
 		$this->rawContent($request);
 
-		$content = $this->eventDispatcher->dispatch(
-			new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, ''),
-		)->getContent();
-		$this->response->addContent($content);
-		$this->response->addContent($this->content($request));
+		try {
+			$content = $this->eventDispatcher->dispatch(
+				new ModuleContentEvent(ModuleContentEvent::MODULE_CONTENT, $this->args->getModuleName(), static::class, ''),
+			)->getContent();
+			$this->response->addContent($content);
+			$this->response->addContent($this->content($request));
+		} catch (HTTPException $e) {
+			if ($e instanceof HTTPException\FoundException
+				|| $e instanceof HTTPException\MovedPermanentlyException
+				|| $e instanceof HTTPException\TemporaryRedirectException
+			) {
+				throw $e;
+			}
+
+			if ($httpException) {
+				$this->response->setStatus($e->getCode(), $e->getMessage());
+				$this->response->addContent($httpException->content($e));
+			} else {
+				throw $e;
+			}
+		}
 
 		$this->profiler->set(microtime(true) - $timestamp, 'content');
 	}
