@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Friendica\Test\Unit\Core\Session\Handler;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use SessionHandlerInterface;
@@ -43,7 +44,7 @@ abstract class SessionHandlerTestCase extends TestCase
 	/**
 	 * A backend failure has to end up in the log exactly once; the message itself is backend-specific and stays with the concrete test case.
 	 */
-	protected function loggerExpectingOneWarning(): LoggerInterface
+	protected function loggerExpectingOneWarning(): LoggerInterface&MockObject
 	{
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger->expects(self::once())->method('warning');

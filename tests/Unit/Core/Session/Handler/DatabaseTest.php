@@ -13,6 +13,7 @@ use Friendica\Core\Session\Handler\AbstractSessionHandler;
 use Friendica\Core\Session\Handler\Database as DatabaseSessionHandler;
 use Friendica\Database\Database;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SessionHandlerInterface;
@@ -36,7 +37,7 @@ class DatabaseTest extends SessionHandlerTestCase
 	/**
 	 * Mocks the database with a realistic `isResult()` so that the handler sees the same truthiness rules as in production.
 	 */
-	private function createDatabaseMock(): Database
+	private function createDatabaseMock(): Database&MockObject
 	{
 		$dba = $this->createMock(Database::class);
 		$dba->method('isResult')->willReturnCallback(fn ($result): bool => is_array($result) && count($result) > 0);
@@ -49,7 +50,7 @@ class DatabaseTest extends SessionHandlerTestCase
 	 *
 	 * @param array<int, array{method: string, table: string, fields: array<string, mixed>, condition: array<int|string, mixed>}> $calls
 	 */
-	private function recordWrites(Database $dba, array &$calls): void
+	private function recordWrites(Database&MockObject $dba, array &$calls): void
 	{
 		$dba->method('insert')->willReturnCallback(function (string $table, array $fields) use (&$calls): bool {
 			$calls[] = ['method' => 'insert', 'table' => $table, 'fields' => $fields, 'condition' => []];
