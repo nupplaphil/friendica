@@ -48,6 +48,18 @@ class ItemTest extends ApiTestCase
 		return $this->getFunctionMock('Friendica\Core', 'header');
 	}
 
+	/**
+	 * Whether the logged in user (uid 42) can still see the given `post-user` row.
+	 *
+	 * Deletion in Friendica only sets a flag, so "gone" means "no longer returned by the user facing
+	 * query" - Post::selectFirstForUser() adds the `NOT deleted` condition (Post::exists() doesn't) and
+	 * is also what drop_item() itself uses to locate an item.
+	 */
+	private function isVisibleForUser(int $id): bool
+	{
+		return DBA::isResult(Post::selectFirstForUser(42, ['id'], ['id' => $id]));
+	}
+
 	private function setArgs(string $pagename): void
 	{
 		$server                   = $_SERVER;
@@ -391,11 +403,10 @@ class ItemTest extends ApiTestCase
 
 	/**
 	 * Finding: drop_item()'s `if ($item['deleted']) { return ''; }` branch (mod/item.php) is
-	 * currently dead code. Post::selectFirstForUser() reads through `post-user-view`, whose
-	 * underlying query already excludes rows with `deleted = 1` - so a deleted item is never
-	 * found in the first place, and drop_item() takes the "item not found" path instead of the
-	 * early-return-empty-string path. Characterizing the *actual* current behavior here rather
-	 * than the behavior the dead code suggests.
+	 * currently dead code. Post::selectFirstForUser() adds `NOT deleted` to every query against
+	 * `post-user-view` - so a deleted item is never found in the first place, and drop_item() takes
+	 * the "item not found" path instead of the early-return-empty-string path. Characterizing the
+	 * *actual* current behavior here rather than the behavior the dead code suggests.
 	 */
 	public function testDropItemAlreadyDeletedIsTreatedAsNotFound(): void
 	{
@@ -416,10 +427,16 @@ class ItemTest extends ApiTestCase
 		self::assertContains('Item not found.', DI::sysmsg()->getNotices());
 	}
 
+	/**
+	 * Dropping a single comment must not touch the rest of the thread: only that comment disappears,
+	 * the parent (post-user id 1) and its sibling comments (ids 4 and 5) stay readable.
+	 */
 	public function testDropItemOwnerDeletesCommentAndRedirectsToParentDisplay(): void
 	{
 		$header = $this->mockRedirectHeader();
 		$header->expects(self::once())->with('Location: https://friendica.local/display/1');
+
+		self::assertTrue($this->isVisibleForUser(2), 'The comment must exist before the drop.');
 
 		try {
 			drop_item(2);
@@ -433,12 +450,31 @@ class ItemTest extends ApiTestCase
 		$item = DBA::selectFirst('post-user', ['deleted', 'hidden'], ['id' => 2]);
 		self::assertEquals(1, $item['hidden']);
 		self::assertEquals(1, $item['deleted']);
+
+		// The comment is gone from the user's point of view ...
+		self::assertFalse($this->isVisibleForUser(2), 'The dropped comment must be gone.');
+
+		// ... while the rest of the thread is untouched.
+		self::assertTrue($this->isVisibleForUser(1), 'The parent must survive dropping one of its comments.');
+		self::assertTrue($this->isVisibleForUser(4), 'A sibling comment must survive dropping another comment.');
+		self::assertTrue($this->isVisibleForUser(5), 'A sibling comment must survive dropping another comment.');
 	}
 
-	public function testDropItemDeletesTopLevelPostAndRedirectsToNetwork(): void
+	/**
+	 * Dropping a top-level post takes the whole thread with it: Item::markForDeletionById() ends in a
+	 * markForDeletion() call over the parent's children, so the comments must disappear along with it.
+	 */
+	public function testDropItemDeletesTopLevelPostWithItsCommentsAndRedirectsToNetwork(): void
 	{
 		$header = $this->mockRedirectHeader();
 		$header->expects(self::once())->with('Location: https://friendica.local/network');
+
+		// Fixture thread: post-user id 1 is the parent of the comments 2, 4 and 5 (all uid 42).
+		$thread = [1, 2, 4, 5];
+
+		foreach ($thread as $id) {
+			self::assertTrue($this->isVisibleForUser($id), sprintf('Item %d must exist before the drop.', $id));
+		}
 
 		try {
 			drop_item(1);
@@ -449,8 +485,13 @@ class ItemTest extends ApiTestCase
 		}
 
 		/** @phpstan-ignore deadCode.unreachable (see the catch.neverThrown suppression above) */
-		$item = DBA::selectFirst('post-user', ['deleted'], ['id' => 1]);
-		self::assertEquals(1, $item['deleted']);
+		foreach ($thread as $id) {
+			$item = DBA::selectFirst('post-user', ['deleted'], ['id' => $id]);
+			self::assertEquals(1, $item['deleted'], sprintf('Item %d must be marked as deleted.', $id));
+
+			// Neither the parent nor any of its comments are readable anymore.
+			self::assertFalse($this->isVisibleForUser($id), sprintf('Item %d must be gone after dropping the parent.', $id));
+		}
 	}
 
 	/**
