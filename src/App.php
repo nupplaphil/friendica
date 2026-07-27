@@ -603,13 +603,13 @@ class App
 				}
 
 				if ($module instanceof BaseModule) {
-					$errorResponse = $module->getResponse();
+					$responseBuilder = $module->getResponseBuilder();
 				} else {
-					$errorResponse = new Response();
+					$responseBuilder = new Response();
 				}
-				$errorResponse->setStatus($e->getCode(), $e->getMessage());
-				$errorResponse->addContent($httpException->content($e));
-				$response = $errorResponse->generate();
+				$responseBuilder->setStatus($e->getCode(), $e->getMessage());
+				$responseBuilder->addContent($httpException->content($e));
+				$response = $responseBuilder->generate();
 			}
 			$this->profiler->set(microtime(true) - $timestamp, 'content');
 

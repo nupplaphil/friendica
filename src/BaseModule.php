@@ -188,7 +188,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * @internal Used by App::runFrontend() to set error responses on the module's response instance
 	 */
-	public function getResponse(): ICanCreateResponses
+	public function getResponseBuilder(): ICanCreateResponses
 	{
 		return $this->response;
 	}
