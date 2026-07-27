@@ -196,7 +196,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @deprecated Use {@see IRequestHandler::handleRequest()} instead
+	 * @deprecated 2026.08 Use {@see IRequestHandler::handleRequest()} instead
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{

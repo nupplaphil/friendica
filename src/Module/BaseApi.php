@@ -104,14 +104,14 @@ class BaseApi extends BaseModule
 	 *
 	 * {@inheritDoc}
 	 *
+	 * @param bool $scopecheck Deprecated parameter kept for BC promise, scope is now checked via dispatch()
+	 *
 	 * @throws HTTPException\ForbiddenException
+	 *
+	 * @deprecated 2026.08 Use {@see IRequestHandler::handleRequest()} instead
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
 	{
-		if ($scopecheck) {
-			$this->checkScope();
-		}
-
 		return parent::run($httpException, $request);
 	}
 
