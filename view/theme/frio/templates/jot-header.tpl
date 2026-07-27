@@ -140,6 +140,9 @@
 				// Reset the form for jot reuse in the same page
 				e.target.reset();
 				$('#jot-modal').modal('hide');
+				// Ensure modal backdrop is removed (fixes lingering backdrop issue)
+				$(".modal-backdrop").remove();
+				$("body").removeClass("modal-open");
 				resetFormModifiedFlag(); // Reset formModified after successful submission
 			})
 			.always(function() {
