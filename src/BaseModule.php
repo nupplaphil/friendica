@@ -198,20 +198,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
-		try {
-			$this->dispatch($request);
-		} catch (HTTPException $e) {
-			// In case of System::externalRedirects(), we don't want to prettyprint the exception
-			// just redirect to the new location
-			if (($e instanceof HTTPException\FoundException)
-				|| ($e instanceof HTTPException\MovedPermanentlyException)
-				|| ($e instanceof HTTPException\TemporaryRedirectException)) {
-				throw $e;
-			}
-
-			$this->response->setStatus($e->getCode(), $e->getMessage());
-			$this->response->addContent($httpException->content($e));
-		}
+		$this->dispatch($request);
 
 		return $this->response->generate();
 	}
