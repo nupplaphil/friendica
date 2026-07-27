@@ -252,7 +252,7 @@ class ExpirePosts
 			  m3.`thr-parent-id` IS NULL
 			LIMIT ?',
 			$item['uri-id'],
-			$limit,
+			(int) $limit,
 		];
 		$pass = 0;
 		do {
