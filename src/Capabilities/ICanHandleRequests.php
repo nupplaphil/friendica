@@ -23,6 +23,8 @@ interface ICanHandleRequests
 	 * @return ResponseInterface responding to the request handling
 	 *
 	 * @throws HTTPException\InternalServerErrorException
+	 *
+	 * @deprecated Use {@see IRequestHandler::handleRequest()} instead
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface;
 }
