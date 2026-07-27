@@ -79,30 +79,6 @@ parameters:
 			path: src/Content/Item.php
 
 		-
-			message: '#^Call to method build\(\) on an unknown class Friendica\\Content\\Nav\\NavInfoProvider\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Content/Nav/NavRenderer.php
-
-		-
-			message: '#^Call to method buildAppMenu\(\) on an unknown class Friendica\\Content\\Nav\\NavInfoProvider\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Content/Nav/NavRenderer.php
-
-		-
-			message: '#^Parameter \$navViewModel of method Friendica\\Content\\Nav\\NavRenderer\:\:__construct\(\) has invalid type Friendica\\Content\\Nav\\NavInfoProvider\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Content/Nav/NavRenderer.php
-
-		-
-			message: '#^Property Friendica\\Content\\Nav\\NavRenderer\:\:\$navViewModel has unknown class Friendica\\Content\\Nav\\NavInfoProvider as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Content/Nav/NavRenderer.php
-
-		-
 			message: '''
 				#^Fetching deprecated class constant HTML of class Friendica\\Model\\Post\\Media\:
 				2027\.01 Use PostMedia\:\:TYPE_HTML instead$#
@@ -2183,21 +2159,3 @@ parameters:
 			identifier: classConstant.deprecated
 			count: 2
 			path: src/Protocol/Feed.php
-
-		-
-			message: '#^Call to method build\(\) on an unknown class Friendica\\Content\\Nav\\NavInfoProvider\.$#'
-			identifier: class.notFound
-			count: 20
-			path: tests/Unit/Content/NavViewModelTest.php
-
-		-
-			message: '#^Instantiated class Friendica\\Content\\Nav\\NavInfoProvider not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/Unit/Content/NavViewModelTest.php
-
-		-
-			message: '#^Method Friendica\\Test\\Unit\\Content\\NavViewModelTest\:\:buildViewModel\(\) has invalid return type Friendica\\Content\\Nav\\NavInfoProvider\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/Unit/Content/NavViewModelTest.php
