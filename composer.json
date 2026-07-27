@@ -120,6 +120,7 @@
 		"platform": {
 			"php": "8.2"
 		},
+		"process-timeout": 0,
 		"sort-packages": true,
 		"autoloader-suffix": "Friendica",
 		"preferred-install": "dist",
