@@ -13,7 +13,6 @@ use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Model\Photo as MPhoto;
-use Friendica\Model\Post;
 use Friendica\Core\Storage\Type\ExternalResource;
 use Friendica\Core\Storage\Type\SystemResource;
 use Friendica\Core\System;

@@ -8,7 +8,6 @@
 namespace Friendica\Object\Api\Twitter;
 
 use Friendica\BaseDataTransferObject;
-use Friendica\Model\Post;
 use Friendica\Content\Post\Entity\PostMedia;
 
 /**
@@ -49,7 +48,7 @@ class Media extends BaseDataTransferObject
 		$this->display_url     = $media['url'];
 		$this->expanded_url    = $media['url'];
 		$this->id              = $media['id'];
-		$this->id_str          = (string)$media['id'];
+		$this->id_str          = (string) $media['id'];
 		$this->indices         = $indices;
 		$this->media_url       = $media['url'];
 		$this->media_url_https = $media['url'];
@@ -70,7 +69,7 @@ class Media extends BaseDataTransferObject
 					'h'      => $media['height'],
 					'resize' => 'fit',
 					'w'      => $media['width'],
-				]
+				],
 			];
 		}
 	}
