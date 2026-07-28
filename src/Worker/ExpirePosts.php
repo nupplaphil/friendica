@@ -189,7 +189,7 @@ class ExpirePosts
 	 */
 	private static function deleteUnusedItemUri()
 	{
-		$limit = DI::config()->get('system', 'dbclean-expire-limit');
+		$limit = (int) DI::config()->get('system', 'dbclean-expire-limit');
 		if (empty($limit)) {
 			return;
 		}
@@ -252,7 +252,7 @@ class ExpirePosts
 			  m3.`thr-parent-id` IS NULL
 			LIMIT ?',
 			$item['uri-id'],
-			(int) $limit,
+			$limit,
 		];
 		$pass = 0;
 		do {
