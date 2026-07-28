@@ -190,7 +190,7 @@ class ExpirePosts
 	private static function deleteUnusedItemUri()
 	{
 		$limit = (int) DI::config()->get('system', 'dbclean-expire-limit');
-		if (empty($limit)) {
+		if ($limit == 0) {
 			return;
 		}
 
