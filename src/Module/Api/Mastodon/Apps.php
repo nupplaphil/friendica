@@ -18,6 +18,9 @@ use Friendica\Util\Network;
  */
 class Apps extends BaseApi
 {
+	/**
+	 * @internal
+	 */
 	protected function checkScope(): void {}
 
 	/**

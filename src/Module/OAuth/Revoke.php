@@ -15,6 +15,9 @@ use Friendica\Module\BaseApi;
  */
 class Revoke extends BaseApi
 {
+	/**
+	 * @internal
+	 */
 	protected function checkScope(): void {}
 
 	protected function post(array $request = [])

@@ -208,7 +208,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * Hook for modules to perform scope or permission checks before dispatch
 	 *
-	 * @return void
+	 * @internal
+	 *
 	 * @throws HTTPException
 	 */
 	protected function checkScope(): void {}

@@ -23,6 +23,9 @@ use Friendica\Util\Network;
  */
 class Inbox extends BaseApi
 {
+	/**
+	 * @internal
+	 */
 	protected function checkScope(): void {}
 
 	protected function rawContent(array $request = [])
