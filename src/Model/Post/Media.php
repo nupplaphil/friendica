@@ -44,37 +44,37 @@ use GuzzleHttp\Psr7\Uri;
  */
 class Media
 {
-	/** @deprecated 2027.01 Use PostMedia::TYPE_UNKNOWN instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_UNKNOWN instead */
 	public const UNKNOWN = PostMedia::TYPE_UNKNOWN;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_IMAGE instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_IMAGE instead */
 	public const IMAGE = PostMedia::TYPE_IMAGE;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_VIDEO instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_VIDEO instead */
 	public const VIDEO = PostMedia::TYPE_VIDEO;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_AUDIO instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_AUDIO instead */
 	public const AUDIO = PostMedia::TYPE_AUDIO;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_TEXT instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_TEXT instead */
 	public const TEXT = PostMedia::TYPE_TEXT;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_APPLICATION instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_APPLICATION instead */
 	public const APPLICATION = PostMedia::TYPE_APPLICATION;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_TORRENT instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_TORRENT instead */
 	public const TORRENT = PostMedia::TYPE_TORRENT;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_HTML instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_HTML instead */
 	public const HTML = PostMedia::TYPE_HTML;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_XML instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_XML instead */
 	public const XML = PostMedia::TYPE_XML;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_PLAIN instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_PLAIN instead */
 	public const PLAIN = PostMedia::TYPE_PLAIN;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_ACTIVITY instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_ACTIVITY instead */
 	public const ACTIVITY = PostMedia::TYPE_ACTIVITY;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_ACCOUNT instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_ACCOUNT instead */
 	public const ACCOUNT = PostMedia::TYPE_ACCOUNT;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_HLS instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_HLS instead */
 	public const HLS = PostMedia::TYPE_HLS;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_JSON instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_JSON instead */
 	public const JSON = PostMedia::TYPE_JSON;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_LD instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_LD instead */
 	public const LD = PostMedia::TYPE_LD;
-	/** @deprecated 2027.01 Use PostMedia::TYPE_DOCUMENT instead */
+	/** @deprecated 2026.08 Use PostMedia::TYPE_DOCUMENT instead */
 	public const DOCUMENT = PostMedia::TYPE_DOCUMENT;
 
 	/**
