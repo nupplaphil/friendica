@@ -11,6 +11,7 @@ use DOMDocument;
 use DOMElement;
 use Friendica\Model\Photo;
 use Friendica\Model\Post;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * Tumblr Neue Post Format
@@ -407,7 +408,7 @@ class NPF
 	 */
 	private static function addLinkBlockForUriId(int $uri_id, int $level, array $npf): array
 	{
-		foreach (Post\Media::getByURIId($uri_id, [Post\Media::HTML]) as $link) {
+		foreach (Post\Media::getByURIId($uri_id, [PostMedia::TYPE_HTML]) as $link) {
 			$host = parse_url((string) $link['url'], PHP_URL_HOST);
 			if (in_array($host, ['www.youtube.com', 'youtu.be'])) {
 				$block = [
@@ -501,7 +502,7 @@ class NPF
 			if (empty($attributes['alt']) && !empty($photos[0]['desc'])) {
 				$block['alt_text'] = $photos[0]['desc'];
 			}
-		} elseif ($media = Post\Media::getByURL($uri_id, $attributes['src'], [Post\Media::IMAGE])) {
+		} elseif ($media = Post\Media::getByURL($uri_id, $attributes['src'], [PostMedia::TYPE_IMAGE])) {
 			$block['media'][] = [
 				'type'   => $media['mimetype'],
 				'url'    => $media['url'],
@@ -545,10 +546,10 @@ class NPF
 
 		$block = [];
 
-		$media = Post\Media::getByURL($uri_id, $attributes['src'], [Post\Media::AUDIO, Post\Media::VIDEO]);
+		$media = Post\Media::getByURL($uri_id, $attributes['src'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO]);
 		if (!empty($media)) {
 			switch ($media['type']) {
-				case Post\Media::AUDIO:
+				case PostMedia::TYPE_AUDIO:
 					$block = [
 						'type'  => 'audio',
 						'media' => [
@@ -566,7 +567,7 @@ class NPF
 					$block = self::addPoster($media, $block);
 					break;
 
-				case Post\Media::VIDEO:
+				case PostMedia::TYPE_VIDEO:
 					$block = [
 						'type'  => 'video',
 						'media' => [

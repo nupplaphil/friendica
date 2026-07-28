@@ -11,6 +11,7 @@ use Friendica\BaseFactory;
 use Friendica\Network\HTTPException;
 use Friendica\Model\Post;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Attachment extends BaseFactory
 {
@@ -28,7 +29,7 @@ class Attachment extends BaseFactory
 	public function createFromUriId(int $uriId): array
 	{
 		$attachments = [];
-		foreach (Post\Media::getByURIId($uriId, [Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::IMAGE]) as $attachment) {
+		foreach (Post\Media::getByURIId($uriId, [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO, PostMedia::TYPE_IMAGE]) as $attachment) {
 			$object        = new \Friendica\Object\Api\Twitter\Attachment($attachment);
 			$attachments[] = $object->toArray();
 		}

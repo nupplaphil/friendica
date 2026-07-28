@@ -35,6 +35,7 @@ use Friendica\Util\Network;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
 use GuzzleHttp\Psr7\Uri;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * ActivityPub Transmitter Protocol class
@@ -1610,13 +1611,13 @@ class Transmitter
 		$attachments = [];
 
 		$urls = [];
-		foreach (Post\Media::getByURIId($item['uri-id'], [Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO, Post\Media::DOCUMENT, Post\Media::TORRENT, Post\Media::HTML]) as $attachment) {
+		foreach (Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO, PostMedia::TYPE_DOCUMENT, PostMedia::TYPE_TORRENT, PostMedia::TYPE_HTML]) as $attachment) {
 			if (in_array($attachment['url'], $urls)) {
 				continue;
 			}
 			$urls[] = $attachment['url'];
 
-			if ($attachment['type'] == Post\Media::HTML) {
+			if ($attachment['type'] == PostMedia::TYPE_HTML) {
 				$attach = [
 					'type'    => 'Link',
 					'href'    => $attachment['url'],
@@ -1732,7 +1733,7 @@ class Transmitter
 		// But to not risk compatibility issues we currently perform the changes only for communities.
 		if ($item['gravity'] == Item::GRAVITY_PARENT) {
 			$isCommunityPost = !empty(Tag::getByURIId($item['uri-id'], [Tag::EXCLUSIVE_MENTION]));
-			$links           = Post\Media::getByURIId($item['uri-id'], [Post\Media::HTML]);
+			$links           = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_HTML]);
 			if ($isCommunityPost && (count($links) == 1)) {
 				$link = $links[0]['url'];
 			}

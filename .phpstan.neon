@@ -41,13 +41,6 @@ parameters:
 
     ignoreErrors:
 
-        # Deprecated since 2027.01: PostMedia::CONST -> PostMedia::TYPE_CONST
-        -
-            message: '#^Fetching deprecated class constant \w+ of class Friendica\\Model\\Post\\Media#'
-            identifier: classConstant.deprecated
-            path: src/
-            count: 259
-
         # Deprecated since 2022.05: Notify -> Notification, FormattedNotify -> FormattedNotification
         -
             message: '#deprecated class Friendica\\Navigation\\Notifications\\(?:Repository\\Notify|Entity\\Notify|Factory\\Notify|Factory\\FormattedNotify|ValueObject\\FormattedNotify)#'

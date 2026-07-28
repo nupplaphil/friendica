@@ -39,6 +39,7 @@ use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
 use GuzzleHttp\Psr7\Uri;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * This class contain functions to create and send DFRN XML files
@@ -679,7 +680,7 @@ class DFRN
 	 */
 	private static function getAttachment($doc, $root, array $item)
 	{
-		foreach (Post\Media::getByURIId($item['uri-id'], [Post\Media::DOCUMENT, Post\Media::TORRENT]) as $attachment) {
+		foreach (Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_DOCUMENT, PostMedia::TYPE_TORRENT]) as $attachment) {
 			$attributes = ['rel' => 'enclosure',
 				'href'              => $attachment['url'],
 				'type'              => $attachment['mimetype']];
@@ -1682,7 +1683,7 @@ class DFRN
 						break;
 
 					case 'enclosure':
-						Post\Media::insert(['uri-id' => $item['uri-id'], 'type' => Post\Media::DOCUMENT,
+						Post\Media::insert(['uri-id' => $item['uri-id'], 'type' => PostMedia::TYPE_DOCUMENT,
 							'url'                       => $href, 'mimetype' => $type, 'size' => $length, 'description' => $title]);
 						break;
 				}

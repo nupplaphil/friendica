@@ -26,6 +26,7 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Strings;
 use Psr\Log\LoggerInterface;
 use stdClass;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * Class to process AT protocol messages
@@ -667,7 +668,7 @@ class Processor
 				foreach ($embed->images as $image) {
 					$media = [
 						'uri-id'      => $item['uri-id'],
-						'type'        => Post\Media::IMAGE,
+						'type'        => PostMedia::TYPE_IMAGE,
 						'url'         => $image->fullsize,
 						'preview'     => $image->thumb,
 						'description' => $image->alt,
@@ -681,7 +682,7 @@ class Processor
 			case 'app.bsky.embed.video#view':
 				$media = [
 					'uri-id'      => $item['uri-id'],
-					'type'        => Post\Media::HLS,
+					'type'        => PostMedia::TYPE_HLS,
 					'url'         => $embed->playlist,
 					'preview'     => $embed->thumbnail,
 					'description' => $embed->alt                 ?? '',
@@ -694,7 +695,7 @@ class Processor
 			case 'app.bsky.embed.external#view':
 				$media = [
 					'uri-id'      => $item['uri-id'],
-					'type'        => Post\Media::HTML,
+					'type'        => PostMedia::TYPE_HTML,
 					'url'         => $embed->external->uri,
 					'preview'     => $embed->external->thumb ?? null,
 					'name'        => $embed->external->title,
@@ -768,7 +769,7 @@ class Processor
 
 		$media = [
 			'uri-id'      => $item['uri-id'],
-			'type'        => Post\Media::HTML,
+			'type'        => PostMedia::TYPE_HTML,
 			'url'         => 'https://bsky.app/starter-pack/' . $matches[1] . '/' . $matches[2],
 			'name'        => $record->record->name,
 			'description' => $record->record->description ?? '',

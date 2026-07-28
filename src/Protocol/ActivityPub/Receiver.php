@@ -31,6 +31,7 @@ use Friendica\Util\LDSignature;
 use Friendica\Util\Network;
 use Friendica\Util\ParseUrl;
 use Friendica\Util\Strings;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * ActivityPub Receiver Protocol class
@@ -1932,9 +1933,9 @@ class Receiver
 			$height = JsonLD::fetchElement($url, 'as:height', '@value');
 			$width  = JsonLD::fetchElement($url, 'as:width', '@value');
 
-			if ($type == Post\Media::AUDIO) {
+			if ($type == PostMedia::TYPE_AUDIO) {
 				$attachments[] = ['type' => $filetype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => null, 'name' => '', 'image' => $icon];
-			} elseif ($type == Post\Media::VIDEO) {
+			} elseif ($type == PostMedia::TYPE_VIDEO) {
 				// PeerTube audio-only track
 				if (!$height) {
 					continue;
@@ -1943,14 +1944,14 @@ class Receiver
 				$size = (int) JsonLD::fetchElement($url, 'pt:size', '@value');
 
 				$attachments[] = ['type' => $filetype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => $size, 'name' => '', 'image' => $icon];
-			} elseif ($type == Post\Media::TORRENT) {
+			} elseif ($type == PostMedia::TYPE_TORRENT) {
 				// For Torrent links we always store the highest resolution
 				if (!empty($attachments[$mediatype]['height']) && ($height < $attachments[$mediatype]['height'])) {
 					continue;
 				}
 
 				$attachments[$mediatype] = ['type' => $mediatype, 'mediaType' => $mediatype, 'url' => $href, 'height' => $height, 'width' => $width, 'size' => null, 'name' => ''];
-			} elseif ($type == Post\Media::HLS) {
+			} elseif ($type == PostMedia::TYPE_HLS) {
 				$attachment = [
 					'type'      => $filetype,
 					'mediaType' => $mediatype,

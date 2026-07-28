@@ -17,6 +17,7 @@ use Friendica\Model\Post\SearchIndex;
 use Friendica\Model\Tag;
 use Friendica\Module\BaseApi;
 use Friendica\Util\Network;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * @see https://docs.joinmastodon.org/methods/search/
@@ -94,12 +95,12 @@ class Search extends BaseApi
 	{
 		$result = ['accounts' => [], 'statuses' => [], 'hashtags' => []];
 
-		$data = ['uri-id' => -1, 'type' => Post\Media::UNKNOWN, 'url' => $q];
+		$data = ['uri-id' => -1, 'type' => PostMedia::TYPE_UNKNOWN, 'url' => $q];
 		if (Network::isValidHttpUrl($q)) {
 			$data = Post\Media::fetchAdditionalData($data);
 		}
 
-		if ((empty($type) || ($type == 'statuses')) && in_array($data['type'], [Post\Media::HTML, Post\Media::ACTIVITY, Post\Media::UNKNOWN])) {
+		if ((empty($type) || ($type == 'statuses')) && in_array($data['type'], [PostMedia::TYPE_HTML, PostMedia::TYPE_ACTIVITY, PostMedia::TYPE_UNKNOWN])) {
 			if (Network::isValidHttpUrl($q)) {
 				$q = Network::convertToIdn($q);
 			}
@@ -111,7 +112,7 @@ class Search extends BaseApi
 			}
 		}
 
-		if ((empty($type) || ($type == 'accounts')) && in_array($data['type'], [Post\Media::HTML, Post\Media::ACCOUNT, Post\Media::UNKNOWN])) {
+		if ((empty($type) || ($type == 'accounts')) && in_array($data['type'], [PostMedia::TYPE_HTML, PostMedia::TYPE_ACCOUNT, PostMedia::TYPE_UNKNOWN])) {
 			$id = Contact::getIdForURL($q, 0, false);
 			if ($id) {
 				$result['accounts'] = [DI::mstdnAccount()->createFromContactId($id, $uid)];
@@ -119,7 +120,7 @@ class Search extends BaseApi
 			}
 		}
 
-		if (in_array($data['type'], [Post\Media::HTML, Post\Media::TEXT, Post\Media::ACCOUNT, Post\Media::ACTIVITY, Post\Media::UNKNOWN])) {
+		if (in_array($data['type'], [PostMedia::TYPE_HTML, PostMedia::TYPE_TEXT, PostMedia::TYPE_ACCOUNT, PostMedia::TYPE_ACTIVITY, PostMedia::TYPE_UNKNOWN])) {
 			$this->jsonExit($result);
 		}
 	}

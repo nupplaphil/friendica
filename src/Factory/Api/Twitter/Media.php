@@ -11,6 +11,7 @@ use Friendica\BaseFactory;
 use Friendica\Network\HTTPException;
 use Friendica\Model\Post;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Media extends BaseFactory
 {
@@ -29,8 +30,8 @@ class Media extends BaseFactory
 	public function createFromUriId(int $uriId, string $text): array
 	{
 		$attachments = [];
-		foreach (Post\Media::getByURIId($uriId, [Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO]) as $attachment) {
-			if ($attachment['type'] == Post\Media::IMAGE) {
+		foreach (Post\Media::getByURIId($uriId, [PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO]) as $attachment) {
+			if ($attachment['type'] == PostMedia::TYPE_IMAGE) {
 				$url = Post\Media::getUrlForId($attachment['id']);
 			} elseif (!empty($attachment['preview'])) {
 				$url = Post\Media::getPreviewUrlForId($attachment['id']);

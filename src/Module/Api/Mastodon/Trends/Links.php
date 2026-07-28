@@ -13,6 +13,7 @@ use Friendica\DI;
 use Friendica\Model\Post;
 use Friendica\Module\BaseApi;
 use Friendica\Util\DateTimeFormat;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * @see https://docs.joinmastodon.org/methods/trends/#links
@@ -30,7 +31,7 @@ class Links extends BaseApi
 		], $request);
 
 		$condition = ["EXISTS(SELECT `id` FROM `post-media` WHERE `post-media`.`uri-id` = `post-thread-view`.`uri-id` AND `type` = ? AND NOT `name` IS NULL AND NOT `description` IS NULL) AND NOT `private` AND `commented` > ? AND `created` > ?",
-			Post\Media::HTML, DateTimeFormat::utc('now -1 day'), DateTimeFormat::utc('now -1 week')];
+			PostMedia::TYPE_HTML, DateTimeFormat::utc('now -1 day'), DateTimeFormat::utc('now -1 week')];
 		$condition = DBA::mergeConditions($condition, ['network' => Protocol::FEDERATED]);
 
 		$trending = [];

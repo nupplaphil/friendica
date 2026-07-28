@@ -40,6 +40,7 @@ use Friendica\Util\Network;
 use Friendica\Util\Strings;
 use Friendica\Worker\FetchMissingActivity;
 use GuzzleHttp\Psr7\Uri;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * ActivityPub Processor Protocol class
@@ -154,7 +155,7 @@ class Processor
 		}
 
 		$data                  = ['uri-id' => $uriid];
-		$data['type']          = Post\Media::UNKNOWN;
+		$data['type']          = PostMedia::TYPE_UNKNOWN;
 		$data['url']           = $attachment['url'];
 		$data['mimetype']      = $attachment['mediaType']     ?? null;
 		$data['height']        = $attachment['height']        ?? null;
@@ -247,7 +248,7 @@ class Processor
 		$item['changed'] = DateTimeFormat::utcNow();
 		$item['edited']  = DateTimeFormat::utc($activity['updated']);
 
-		Post\Media::deleteByURIId($item['uri-id'], [Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::IMAGE, Post\Media::HTML, Post\Media::HLS, Post\Media::TORRENT]);
+		Post\Media::deleteByURIId($item['uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_HTML, PostMedia::TYPE_HLS, PostMedia::TYPE_TORRENT]);
 		$item = self::processContent($activity, $item);
 		if (empty($item)) {
 			Queue::remove($activity);

@@ -24,6 +24,7 @@ use Friendica\Network\HTTPException;
 use Friendica\Object\Api\Mastodon\TimelineOrderByTypes;
 use Friendica\Util\Profiler;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * @see https://docs.joinmastodon.org/methods/timelines/
@@ -83,7 +84,7 @@ class PublicTimeline extends BaseApi
 		if ($request['only_media']) {
 			$condition = DBA::mergeConditions($condition, [
 				"`uri-id` IN (SELECT `uri-id` FROM `post-media` WHERE `type` IN (?, ?, ?))",
-				Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO, Post\Media::HLS,
+				PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO, PostMedia::TYPE_HLS,
 			]);
 		}
 

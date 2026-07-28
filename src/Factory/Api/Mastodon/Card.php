@@ -10,6 +10,7 @@ namespace Friendica\Factory\Api\Mastodon;
 use Friendica\BaseFactory;
 use Friendica\Model\Post;
 use Friendica\Network\HTTPException;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Card extends BaseFactory
 {
@@ -24,7 +25,7 @@ class Card extends BaseFactory
 	 */
 	public function createFromUriId(int $uriId, array $history = []): \Friendica\Object\Api\Mastodon\Card
 	{
-		$media = Post\Media::getByURIId($uriId, [Post\Media::HTML]);
+		$media = Post\Media::getByURIId($uriId, [PostMedia::TYPE_HTML]);
 		if (empty($media) || (empty($media[0]['description']) && empty($media[0]['image']) && empty($media[0]['preview']))) {
 			return new \Friendica\Object\Api\Mastodon\Card([], $history);
 		}
