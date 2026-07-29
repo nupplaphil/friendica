@@ -16,6 +16,7 @@ use Friendica\Model\Post;
 use Friendica\Util\Images;
 use Friendica\Util\Proxy;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Attachment extends BaseFactory
 {
@@ -32,7 +33,7 @@ class Attachment extends BaseFactory
 	public function createFromUriId(int $uriId): array
 	{
 		$attachments = [];
-		foreach (Post\Media::getByURIId($uriId, [Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::IMAGE, Post\Media::HLS]) as $attachment) {
+		foreach (Post\Media::getByURIId($uriId, [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_HLS]) as $attachment) {
 			$attachments[] = $this->createFromMediaArray($attachment);
 		}
 
@@ -64,13 +65,13 @@ class Attachment extends BaseFactory
 	{
 		$filetype = !empty($attachment['mimetype']) ? strtolower(substr((string) $attachment['mimetype'], 0, strpos((string) $attachment['mimetype'], '/'))) : '';
 
-		if (($filetype == 'audio') || ($attachment['type'] == Post\Media::AUDIO)) {
+		if (($filetype == 'audio') || ($attachment['type'] == PostMedia::TYPE_AUDIO)) {
 			$type = 'audio';
-		} elseif (($filetype == 'video') || ($attachment['type'] == Post\Media::VIDEO)) {
+		} elseif (($filetype == 'video') || ($attachment['type'] == PostMedia::TYPE_VIDEO)) {
 			$type = 'video';
 		} elseif ($attachment['mimetype'] == image_type_to_mime_type(IMAGETYPE_GIF)) {
 			$type = 'gifv';
-		} elseif (($filetype == 'image') || ($attachment['type'] == Post\Media::IMAGE)) {
+		} elseif (($filetype == 'image') || ($attachment['type'] == PostMedia::TYPE_IMAGE)) {
 			$type = 'image';
 		} else {
 			$type = 'unknown';
@@ -147,7 +148,7 @@ class Attachment extends BaseFactory
 			'blurhash'    => null,
 		];
 
-		$types = [Post\Media::AUDIO => 'audio', Post\Media::VIDEO => 'video', Post\Media::IMAGE => 'image'];
+		$types = [PostMedia::TYPE_AUDIO => 'audio', PostMedia::TYPE_VIDEO => 'video', PostMedia::TYPE_IMAGE => 'image'];
 
 		$type = Post\Media::getType($media['filetype']);
 

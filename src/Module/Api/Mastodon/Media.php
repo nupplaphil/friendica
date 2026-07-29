@@ -15,6 +15,7 @@ use Friendica\Model\Post;
 use Friendica\Module\BaseApi;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Util\Strings;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * @see https://docs.joinmastodon.org/methods/statuses/media/
@@ -42,7 +43,7 @@ class Media extends BaseApi
 
 		$type = Post\Media::getType($request['file']['type']);
 
-		if (in_array($type, [Post\Media::IMAGE, Post\Media::UNKNOWN, Post\Media::APPLICATION])) {
+		if (in_array($type, [PostMedia::TYPE_IMAGE, PostMedia::TYPE_UNKNOWN, PostMedia::TYPE_APPLICATION])) {
 			$media = Photo::upload($uid, $request['file'], '', null, null, '', '', $request['description']);
 
 			if (empty($media)) {

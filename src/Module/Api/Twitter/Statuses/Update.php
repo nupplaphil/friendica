@@ -22,6 +22,7 @@ use Friendica\Protocol\Activity;
 use Friendica\Util\Images;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * Updates the user’s current status.
@@ -144,7 +145,7 @@ class Update extends BaseApi
 				$ext = Images::getExtensionByMimeType($media[0]['type']);
 
 				$attachment = [
-					'type'        => Post\Media::IMAGE,
+					'type'        => PostMedia::TYPE_IMAGE,
 					'mimetype'    => $media[0]['type'],
 					'url'         => DI::baseUrl() . '/photo/' . $media[0]['resource-id'] . '-' . $media[0]['scale'] . $ext,
 					'size'        => $media[0]['datasize'],

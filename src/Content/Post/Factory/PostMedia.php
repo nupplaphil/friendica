@@ -134,7 +134,7 @@ class PostMedia extends BaseFactory implements ICanCreateFromTableRow
 			'id'              => $id,
 			'uri-id'          => $uriId,
 			'url'             => $attachment['url'],
-			'type'            => Post\Media::HTML,
+			'type'            => PostMediaEntity::TYPE_HTML,
 			'mimetype'        => null,
 			'media-uri-id'    => null,
 			'width'           => null,

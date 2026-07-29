@@ -11,6 +11,7 @@ use Friendica\BaseFactory;
 use Friendica\Network\HTTPException;
 use Friendica\Model\Post;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Url extends BaseFactory
 {
@@ -27,7 +28,7 @@ class Url extends BaseFactory
 	public function createFromUriId(int $uriId): array
 	{
 		$attachments = [];
-		foreach (Post\Media::getByURIId($uriId, [Post\Media::HTML, Post\Media::PLAIN, Post\Media::TEXT]) as $attachment) {
+		foreach (Post\Media::getByURIId($uriId, [PostMedia::TYPE_HTML, PostMedia::TYPE_PLAIN, PostMedia::TYPE_TEXT]) as $attachment) {
 			$indices       = [];
 			$object        = new \Friendica\Object\Api\Twitter\Url($attachment, $indices);
 			$attachments[] = $object->toArray();

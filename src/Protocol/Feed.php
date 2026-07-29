@@ -36,6 +36,7 @@ use Friendica\Util\Proxy;
 use Friendica\Util\Strings;
 use Friendica\Util\XML;
 use GuzzleHttp\Exception\TransferException;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * This class contain functions to import feeds (RSS/RDF/Atom)
@@ -553,14 +554,14 @@ class Feed
 					}
 
 					if (!empty($href)) {
-						$attachment = ['uri-id' => -1, 'type' => Post\Media::UNKNOWN, 'url' => $href, 'mimetype' => $type, 'size' => $length];
+						$attachment = ['uri-id' => -1, 'type' => PostMedia::TYPE_UNKNOWN, 'url' => $href, 'mimetype' => $type, 'size' => $length];
 
 						$attachment = Post\Media::fetchAdditionalData($attachment);
 
 						// By now we separate the visible media types (audio, video, image) from the rest
 						// In the future we should try to avoid the DOCUMENT type and only use the real one - but not in the RC phase.
-						if (!in_array($attachment['type'], [Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO])) {
-							$attachment['type'] = Post\Media::DOCUMENT;
+						if (!in_array($attachment['type'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO])) {
+							$attachment['type'] = PostMedia::TYPE_DOCUMENT;
 						}
 						$attachments[] = $attachment;
 					}
@@ -1292,7 +1293,7 @@ class Feed
 		}
 
 		// Fetch information about the post
-		$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::HTML]);
+		$media = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_HTML]);
 		if (!empty($media) && !empty($media[0]['name']) && ($media[0]['name'] != $media[0]['url'])) {
 			return $media[0]['name'];
 		}
@@ -1356,7 +1357,7 @@ class Feed
 	 */
 	private static function getAttachment(DOMDocument $doc, DOMElement $root, array $item)
 	{
-		foreach (Post\Media::getByURIId($item['uri-id'], [Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO, Post\Media::DOCUMENT, Post\Media::TORRENT]) as $attachment) {
+		foreach (Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO, PostMedia::TYPE_DOCUMENT, PostMedia::TYPE_TORRENT]) as $attachment) {
 			$attributes = ['rel' => 'enclosure',
 				'href'              => $attachment['url'],
 				'type'              => $attachment['mimetype']];

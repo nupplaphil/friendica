@@ -249,7 +249,7 @@ class BBCode
 				if (!empty($media['description']) && (stripos($text, (string) $media['description']) === false)) {
 					$text .= ' ' . $media['description'];
 				}
-				if (in_array($media['type'], [Post\Media::HTML, Post\Media::ACTIVITY])) {
+				if (in_array($media['type'], [PostMedia::TYPE_HTML, PostMedia::TYPE_ACTIVITY])) {
 					foreach (['name', 'author-name', 'publisher-name'] as $key) {
 						if (!empty($media[$key] && stripos($text, (string) $media[$key]) === false)) {
 							$text .= ' ' . $media[$key];

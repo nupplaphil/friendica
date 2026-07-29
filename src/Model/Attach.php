@@ -17,6 +17,7 @@ use Friendica\Object\Image;
 use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Mimetype;
 use Friendica\Security\Security;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * Class to handle attach database table
@@ -349,7 +350,7 @@ class Attach
 					return $body;
 				}
 				$media = [
-					'type'        => Post\Media::DOCUMENT,
+					'type'        => PostMedia::TYPE_DOCUMENT,
 					'url'         => $attachment[1],
 					'size'        => $attach['filesize'],
 					'mimetype'    => $attach['filetype'],

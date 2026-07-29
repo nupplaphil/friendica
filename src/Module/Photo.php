@@ -13,7 +13,6 @@ use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Model\Photo as MPhoto;
-use Friendica\Model\Post;
 use Friendica\Core\Storage\Type\ExternalResource;
 use Friendica\Core\Storage\Type\SystemResource;
 use Friendica\Core\System;
@@ -31,6 +30,7 @@ use Friendica\Util\Images;
 use Friendica\Util\ParseUrl;
 use Friendica\Util\Proxy;
 use Friendica\Worker\UpdateContact;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * Photo Module
@@ -266,13 +266,13 @@ class Photo extends BaseApi
 				$width  = $media['preview-width'];
 				$height = $media['preview-height'];
 
-				if (empty($url) && ($media['type'] == Post\Media::IMAGE)) {
+				if (empty($url) && ($media['type'] == PostMedia::TYPE_IMAGE)) {
 					$url    = $media['url'];
 					$width  = $media['width'];
 					$height = $media['height'];
 				}
 
-				if (empty($url) && ($media['type'] == Post\Media::VIDEO) && DI::config()->get('system', 'ffmpeg_installed')) {
+				if (empty($url) && ($media['type'] == PostMedia::TYPE_VIDEO) && DI::config()->get('system', 'ffmpeg_installed')) {
 					$image = new Image('', image_type_to_mime_type(IMAGETYPE_JPEG));
 					$image->getFromVideoUrl($media['url']);
 					if ($image->isValid()) {
@@ -296,7 +296,7 @@ class Photo extends BaseApi
 
 				return MPhoto::createPhotoForExternalResource($url, (int) DI::userSession()->getLocalUserId(), $media['mimetype'] ?? '', $media['blurhash'], $width, $height);
 			case 'media':
-				$media = DBA::selectFirst('post-media', ['url', 'height', 'width', 'mimetype', 'uri-id', 'blurhash'], ['id' => $id, 'type' => Post\Media::IMAGE]);
+				$media = DBA::selectFirst('post-media', ['url', 'height', 'width', 'mimetype', 'uri-id', 'blurhash'], ['id' => $id, 'type' => PostMedia::TYPE_IMAGE]);
 				if (empty($media)) {
 					return false;
 				}

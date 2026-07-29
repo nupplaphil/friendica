@@ -21,6 +21,7 @@ use Friendica\Protocol\Activity;
 use Friendica\Protocol\ActivityPub\Receiver;
 use Friendica\Protocol\Relay;
 use Friendica\Util\DateTimeFormat;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Engagement
 {
@@ -350,15 +351,15 @@ class Engagement
 		$media = Post\Media::getByURIId($uri_id);
 		$type  = !empty($quote_uri_id) ? self::MEDIA_POST : self::MEDIA_NONE;
 		foreach ($media as $entry) {
-			if ($entry['type'] == Post\Media::IMAGE) {
+			if ($entry['type'] == PostMedia::TYPE_IMAGE) {
 				$type = $type | self::MEDIA_IMAGE;
-			} elseif (in_array($entry['type'], [Post\Media::VIDEO, Post\Media::HLS])) {
+			} elseif (in_array($entry['type'], [PostMedia::TYPE_VIDEO, PostMedia::TYPE_HLS])) {
 				$type = $type | self::MEDIA_VIDEO;
-			} elseif ($entry['type'] == Post\Media::AUDIO) {
+			} elseif ($entry['type'] == PostMedia::TYPE_AUDIO) {
 				$type = $type | self::MEDIA_AUDIO;
-			} elseif ($entry['type'] == Post\Media::HTML) {
+			} elseif ($entry['type'] == PostMedia::TYPE_HTML) {
 				$type = $type | self::MEDIA_CARD;
-			} elseif ($entry['type'] == Post\Media::ACTIVITY) {
+			} elseif ($entry['type'] == PostMedia::TYPE_ACTIVITY) {
 				$type = $type | self::MEDIA_POST;
 			}
 		}

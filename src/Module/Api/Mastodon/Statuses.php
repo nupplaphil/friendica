@@ -37,6 +37,7 @@ use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Images;
 use Friendica\Util\Profiler;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * @see https://docs.joinmastodon.org/methods/statuses/
@@ -137,7 +138,7 @@ class Statuses extends BaseApi
 		We can't do anything about this, but the probability for this is extremely low.
 		*/
 		$media_ids      = [];
-		$existing_media = array_column(Post\Media::getByURIId($post['uri-id'], [Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::IMAGE, Post\Media::HLS]), 'id');
+		$existing_media = array_column(Post\Media::getByURIId($post['uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_HLS]), 'id');
 
 		foreach ($request['media_attributes'] as $attributes) {
 			if (!empty($attributes['id']) && in_array($attributes['id'], $existing_media)) {
@@ -170,7 +171,7 @@ class Statuses extends BaseApi
 		}
 
 		// Link Preview Attachment Processing
-		Post\Media::deleteByURIId($post['uri-id'], [Post\Media::HTML]);
+		Post\Media::deleteByURIId($post['uri-id'], [PostMedia::TYPE_HTML]);
 
 		Item::update($item, ['id' => $post['id']]);
 
@@ -467,7 +468,7 @@ class Statuses extends BaseApi
 			$ext = Images::getExtensionByMimeType($media[0]['type']);
 
 			$attachment = [
-				'type'        => Post\Media::IMAGE,
+				'type'        => PostMedia::TYPE_IMAGE,
 				'mimetype'    => $media[0]['type'],
 				'url'         => DI::baseUrl() . '/photo/' . $media[0]['resource-id'] . '-' . $media[0]['scale'] . $ext,
 				'size'        => $media[0]['datasize'],

@@ -21,6 +21,7 @@ use Friendica\Util;
 use Friendica\Util\Profiler;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class ParseUrl extends BaseModule
 {
@@ -97,7 +98,7 @@ class ParseUrl extends BaseModule
 			$contentType = Util\ParseUrl::getContentType($url, HttpClientAccept::DEFAULT, 5);
 			$mediatype   = Post\Media::getType(implode('/', $contentType));
 
-			if ($mediatype === Post\Media::HTML) {
+			if ($mediatype === PostMedia::TYPE_HTML) {
 				$siteinfo = Util\ParseUrl::getSiteinfoCached($url, implode('/', $contentType));
 				$title    = $siteinfo['title'] ?? $title;
 				$embed    = isset($siteinfo['embed']);
@@ -107,15 +108,15 @@ class ParseUrl extends BaseModule
 			$ret['data']    = $siteinfo;
 			$ret['success'] = true;
 
-			if ($mediatype === Post\Media::AUDIO) {
+			if ($mediatype === PostMedia::TYPE_AUDIO) {
 				$ret['contentType'] = 'audio';
-			} elseif (in_array($mediatype, [Post\Media::VIDEO, Post\Media::HLS])) {
+			} elseif (in_array($mediatype, [PostMedia::TYPE_VIDEO, PostMedia::TYPE_HLS])) {
 				$ret['contentType'] = 'video';
-			} elseif ($mediatype === Post\Media::IMAGE) {
+			} elseif ($mediatype === PostMedia::TYPE_IMAGE) {
 				$ret['contentType'] = 'image';
-			} elseif ($mediatype === Post\Media::HTML && $embed) {
+			} elseif ($mediatype === PostMedia::TYPE_HTML && $embed) {
 				$ret['contentType'] = 'embed';
-			} elseif ($mediatype === Post\Media::HTML) {
+			} elseif ($mediatype === PostMedia::TYPE_HTML) {
 				$ret['contentType'] = 'attachment';
 			} else {
 				$ret['contentType'] = 'url';

@@ -31,6 +31,7 @@ use Friendica\Util\ACLFormatter;
 use ImagickException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Status extends BaseFactory
 {
@@ -291,7 +292,7 @@ class Status extends BaseFactory
 			return [];
 		}
 		if (empty($item['quote-uri-id'])) {
-			$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::ACTIVITY]);
+			$media = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_ACTIVITY]);
 			if (!empty($media)) {
 				if (!empty($media['media-uri-id'])) {
 					$quote_id = $media['media-uri-id'];

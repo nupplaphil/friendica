@@ -40,6 +40,7 @@ use Friendica\Worker\ContactDiscovery;
 use Friendica\Worker\ContactDiscoveryForUser;
 use Friendica\Worker\UpdateContact;
 use GuzzleHttp\Psr7\Uri;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * functions for interacting with a contact
@@ -1673,7 +1674,7 @@ class Contact
 		if ($only_media) {
 			$condition = DBA::mergeConditions($condition, [
 				"`uri-id` IN (SELECT `uri-id` FROM `post-media` WHERE `type` IN (?, ?, ?, ?))",
-				Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO, Post\Media::HLS,
+				PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO, PostMedia::TYPE_HLS,
 			]);
 		}
 

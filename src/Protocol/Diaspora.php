@@ -40,6 +40,7 @@ use Friendica\Util\Strings;
 use Friendica\Util\XML;
 use GuzzleHttp\Psr7\Uri;
 use SimpleXMLElement;
+use Friendica\Content\Post\Entity\PostMedia;
 
 /**
  * This class contains functions to communicate via the Diaspora protocol
@@ -2579,7 +2580,7 @@ class Diaspora
 		DI::logger()->debug('photo=' . $photo::class);
 		$data = [
 			'uri-id'      => $uriid,
-			'type'        => Post\Media::IMAGE,
+			'type'        => PostMedia::TYPE_IMAGE,
 			'url'         => XML::unescape($photo->remote_photo_path) . XML::unescape($photo->remote_photo_name),
 			'height'      => (int) XML::unescape($photo->height ?? 0),
 			'width'       => (int) XML::unescape($photo->width ?? 0),
@@ -3334,9 +3335,9 @@ class Diaspora
 			$native_photos = DI::config()->get('diaspora', 'native_photos');
 			if ($native_photos) {
 				$item['body'] = Post\Media::removeFromEndOfBody($item['body']);
-				$attach_media = [Post\Media::AUDIO, Post\Media::VIDEO];
+				$attach_media = [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO];
 			} else {
-				$attach_media = [Post\Media::AUDIO, Post\Media::IMAGE, Post\Media::VIDEO];
+				$attach_media = [PostMedia::TYPE_AUDIO, PostMedia::TYPE_IMAGE, PostMedia::TYPE_VIDEO];
 			}
 
 			$title = $item['title'];
@@ -3345,13 +3346,13 @@ class Diaspora
 
 			// Fetch the title from an attached link - if there is one
 			if (empty($item['title']) && DI::pConfig()->get($owner['uid'], 'system', 'attach_link_title')) {
-				$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::HTML]);
+				$media = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_HTML]);
 				if (!empty($media) && !empty($media[0]['name']) && ($media[0]['name'] != $media[0]['url'])) {
 					$title = $media[0]['name'];
 				}
 			}
 
-			$attachments = Post\Media::getByURIId($item['uri-id'], [Post\Media::DOCUMENT, Post\Media::TORRENT]);
+			$attachments = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_DOCUMENT, PostMedia::TYPE_TORRENT]);
 			if (!empty($attachments)) {
 				$body .= "\n[hr]\n";
 				foreach ($attachments as $attachment) {
@@ -3439,7 +3440,7 @@ class Diaspora
 	 */
 	private static function addPhotos(array $item, array $message): array
 	{
-		$medias = Post\Media::getByURIId($item['uri-id'], [Post\Media::IMAGE]);
+		$medias = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_IMAGE]);
 		$public = ($item['private'] == Item::PRIVATE ? 'false' : 'true');
 
 		$counter = 0;

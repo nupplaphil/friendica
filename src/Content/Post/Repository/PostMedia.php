@@ -108,7 +108,7 @@ class PostMedia extends BaseRepository
 	 */
 	public function selectByUriId(int $uriId, array $types = []): PostMediasCollection
 	{
-		$condition = ["`uri-id` = ? AND `type` != ?", $uriId, Post\Media::UNKNOWN];
+		$condition = ["`uri-id` = ? AND `type` != ?", $uriId, PostMediaEntity::TYPE_UNKNOWN];
 
 		if (!empty($types)) {
 			$condition = DBA::mergeConditions($condition, ['type' => $types]);
@@ -127,7 +127,7 @@ class PostMedia extends BaseRepository
 	 */
 	public function selectByURL(int $uriId, string $url, array $types = []): ?PostMediaEntity
 	{
-		$condition = ["`uri-id` = ? AND `url` = ? AND `type` != ?", $uriId, $url, Post\Media::UNKNOWN];
+		$condition = ["`uri-id` = ? AND `url` = ? AND `type` != ?", $uriId, $url, PostMediaEntity::TYPE_UNKNOWN];
 
 		if (!empty($types)) {
 			$condition = DBA::mergeConditions($condition, ['type' => $types]);
@@ -464,7 +464,7 @@ class PostMedia extends BaseRepository
 			}
 
 			if ($uri_id > 0) {
-				$media = $this->selectByURL($uri_id, $href, [Post\Media::HTML, Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::HLS]);
+				$media = $this->selectByURL($uri_id, $href, [PostMediaEntity::TYPE_HTML, PostMediaEntity::TYPE_AUDIO, PostMediaEntity::TYPE_VIDEO, PostMediaEntity::TYPE_HLS]);
 			}
 			if (!isset($media)) {
 				$media = $this->createFromUrl($href);
@@ -480,9 +480,9 @@ class PostMedia extends BaseRepository
 
 			if (!$local_visitor && !$this->displayMedia($media)) {
 				$player = '<span></span>';
-			} elseif ($media->type === Post\Media::AUDIO) {
+			} elseif ($media->type === PostMediaEntity::TYPE_AUDIO) {
 				$player = $this->getAudioAttachment($media);
-			} elseif (in_array($media->type, [Post\Media::VIDEO, Post\Media::HLS])) {
+			} elseif (in_array($media->type, [PostMediaEntity::TYPE_VIDEO, PostMediaEntity::TYPE_HLS])) {
 				$player = $this->getVideoAttachment($media, $uid);
 			} elseif ($allow_embed && $media->hasPlayerUrl() && $media->hasPlayerHeight()) {
 				$player = $this->getPlayerIframe($media);
@@ -538,7 +538,7 @@ class PostMedia extends BaseRepository
 			if ($this->config->get('system', 'videojs')) {
 				$template = 'content/videojs.tpl';
 			} else {
-				$template = $postMedia->type == Post\Media::HLS ? 'content/hls.tpl' : 'content/video.tpl';
+				$template = $postMedia->type == PostMediaEntity::TYPE_HLS ? 'content/hls.tpl' : 'content/video.tpl';
 			}
 			$media = Renderer::replaceMacros(Renderer::getMarkupTemplate($template), [
 				'$video' => [

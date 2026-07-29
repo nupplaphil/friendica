@@ -13,6 +13,7 @@ use Friendica\Model\Photo;
 use Friendica\Model\Post;
 use Friendica\Util\Network;
 use IntlChar;
+use Friendica\Content\Post\Entity\PostMedia;
 
 class Plaintext
 {
@@ -333,9 +334,9 @@ class Plaintext
 		// Remove any links
 		$post['text'] = Post\Media::removeFromBody($post['text']);
 
-		$images = Post\Media::getByURIId($item['uri-id'], [Post\Media::IMAGE]);
+		$images = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_IMAGE]);
 		if (!empty($item['quote-uri-id']) && ($item['quote-uri-id'] != $item['uri-id'])) {
-			$images = array_merge($images, Post\Media::getByURIId($item['quote-uri-id'], [Post\Media::IMAGE]));
+			$images = array_merge($images, Post\Media::getByURIId($item['quote-uri-id'], [PostMedia::TYPE_IMAGE]));
 		}
 		foreach ($images as $image) {
 			if ($id = Photo::getIdForName($image['url'])) {
@@ -364,22 +365,22 @@ class Plaintext
 		}
 
 		// Look for audio or video links
-		$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::AUDIO, Post\Media::VIDEO]);
+		$media = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO]);
 		if (!empty($item['quote-uri-id']) && ($item['quote-uri-id'] != $item['uri-id'])) {
-			$media = array_merge($media, Post\Media::getByURIId($item['quote-uri-id'], [Post\Media::AUDIO, Post\Media::VIDEO]));
+			$media = array_merge($media, Post\Media::getByURIId($item['quote-uri-id'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO]));
 		}
 
 		foreach ($media as $medium) {
-			if (in_array($medium['type'], [Post\Media::AUDIO, Post\Media::VIDEO])) {
+			if (in_array($medium['type'], [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO])) {
 				$post['type'] = 'link';
 				$post['url']  = $medium['url'];
 			}
 		}
 
 		// Look for an attached link
-		$page = Post\Media::getByURIId($item['uri-id'], [Post\Media::HTML]);
+		$page = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_HTML]);
 		if (!empty($item['quote-uri-id']) && empty($page)) {
-			$page = Post\Media::getByURIId($item['quote-uri-id'], [Post\Media::HTML]);
+			$page = Post\Media::getByURIId($item['quote-uri-id'], [PostMedia::TYPE_HTML]);
 		}
 		if (!empty($page)) {
 			$post['type']        = 'link';

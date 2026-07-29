@@ -2989,7 +2989,7 @@ class Item
 			$shared_links[]      = strtolower((string) $shared['post']['uri']);
 			$item['body']        = BBCode::removeSharedData($item['body']);
 		} elseif (empty($item['quote-uri-id']) && ($item['network'] != Protocol::DIASPORA)) {
-			$media = Post\Media::getByURIId($item['uri-id'], [Post\Media::ACTIVITY]);
+			$media = Post\Media::getByURIId($item['uri-id'], [PostMedia::TYPE_ACTIVITY]);
 			if (!empty($media) && ($media[0]['media-uri-id'] != $item['uri-id'])) {
 				$shared_item = Post::selectFirst($fields, ['uri-id' => $media[0]['media-uri-id'], 'uid' => [$item['uid'], 0]]);
 				if (empty($shared_item['uri-id'])) {
@@ -3212,7 +3212,7 @@ class Item
 	{
 		/** @var PostMedia $PostMedia */
 		foreach ($PostMedias as $PostMedia) {
-			if (!$PostMedia->preview || ($PostMedia->type !== Post\Media::IMAGE)) {
+			if (!$PostMedia->preview || ($PostMedia->type !== PostMedia::TYPE_IMAGE)) {
 				continue;
 			}
 
@@ -3284,7 +3284,7 @@ class Item
 
 		// Remove media links to only search in embedded content
 		// @todo Check images for image link, audio for audio links, ...
-		if (in_array($type, [Post\Media::AUDIO, Post\Media::VIDEO, Post\Media::IMAGE])) {
+		if (in_array($type, [PostMedia::TYPE_AUDIO, PostMedia::TYPE_VIDEO, PostMedia::TYPE_IMAGE])) {
 			$body = preg_replace("/\[url=[^\[\]]*\](.*)\[\/url\]/Usi", ' $1 ', $body);
 		}
 
@@ -3378,21 +3378,21 @@ class Item
 				continue;
 			}
 
-			if (in_array($PostMedia->type, [Post\Media::VIDEO, Post\Media::HLS])) {
+			if (in_array($PostMedia->type, [PostMedia::TYPE_VIDEO, PostMedia::TYPE_HLS])) {
 				$media = DI::postMediaRepository()->getVideoAttachment($PostMedia, $uid);
 				if (($item['post-type'] ?? null) == Item::PT_VIDEO) {
 					$leading .= $media;
 				} else {
 					$trailing .= $media;
 				}
-			} elseif ($PostMedia->type == Post\Media::AUDIO) {
+			} elseif ($PostMedia->type == PostMedia::TYPE_AUDIO) {
 				$media = DI::postMediaRepository()->getAudioAttachment($PostMedia);
 				if (($item['post-type'] ?? null) == Item::PT_AUDIO) {
 					$leading .= $media;
 				} else {
 					$trailing .= $media;
 				}
-			} elseif ($PostMedia->type == Post\Media::IMAGE) {
+			} elseif ($PostMedia->type == PostMedia::TYPE_IMAGE) {
 				$src_url = DI::baseUrl() . $PostMedia->getPhotoPath();
 				if (self::containsLink($item['body'], $src_url)) {
 					continue;
@@ -3491,7 +3491,7 @@ class Item
 				}
 				if (!$has_media && $preview_mode != BBCode::PREVIEW_NONE && !self::containsEmbed($body, $attachment->url)) {
 					$rendered = BBCode::convertAttachmentFromPostMedia($attachment, BBCode::INTERNAL, $uriid, $preview_mode, DI::pConfig()->get($uid, 'system', 'embed_remote_media', false), self::hideDescription($attachment, $content));
-				} elseif (!self::containsLink($content, $attachment->url, Post\Media::HTML)) {
+				} elseif (!self::containsLink($content, $attachment->url, PostMedia::TYPE_HTML)) {
 					$rendered = Renderer::replaceMacros(Renderer::getMarkupTemplate('content/link.tpl'), [
 						'$url'   => $attachment->url,
 						'$title' => $attachment->name,
@@ -3499,7 +3499,7 @@ class Item
 				} else {
 					$rendered = '';
 				}
-			} elseif (!self::containsLink($content, $attachment->url, Post\Media::HTML)) {
+			} elseif (!self::containsLink($content, $attachment->url, PostMedia::TYPE_HTML)) {
 				$rendered = Renderer::replaceMacros(Renderer::getMarkupTemplate('content/link.tpl'), [
 					'$url'   => $attachment->url,
 					'$title' => $attachment->name,
