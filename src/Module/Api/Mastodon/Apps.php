@@ -10,9 +10,7 @@ namespace Friendica\Module\Api\Mastodon;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Module\BaseApi;
-use Friendica\Module\Special\HTTPException;
 use Friendica\Util\Network;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Apps class to register new OAuth clients
@@ -20,10 +18,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Apps extends BaseApi
 {
-	public function run(HTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
-	{
-		return parent::run($httpException, $request, false);
-	}
+	/**
+	 * @internal
+	 */
+	protected function checkScope(): void {}
 
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException

@@ -53,3 +53,10 @@ parameters:
             identifier: method.notFound
             path: tests/
             count: 236
+        # Deprecated run() calls in tests are preserved for BC promise and
+        # will be replaced by handleRequest() tests in the future
+        -
+            message: '#^Call to deprecated method run\(\) of class#'
+            identifier: method.deprecated
+            path: tests/
+            count: 95

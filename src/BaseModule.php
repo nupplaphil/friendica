@@ -10,6 +10,7 @@ namespace Friendica;
 use Friendica\App\Router;
 use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\ICanCreateResponses;
+use Friendica\Capabilities\IRequestHandler;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Event\ModuleContentEvent;
@@ -19,9 +20,11 @@ use Friendica\Model\User;
 use Friendica\Module\Response;
 use Friendica\Module\Special\HTTPException as ModuleHTTPException;
 use Friendica\Network\HTTPException;
+use Friendica\Util\HTTPInputData;
 use Friendica\Util\Profiler;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -33,7 +36,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author Hypolite Petovan <hypolite@mrpetovan.com>
  */
-abstract class BaseModule implements ICanHandleRequests
+abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 {
 	/** @var array */
 	protected $parameters = [];
@@ -183,10 +186,45 @@ abstract class BaseModule implements ICanHandleRequests
 	protected function get(array $request = []) {}
 
 	/**
+	 * @internal Used by App::runFrontend() to set error responses on the module's response instance
+	 */
+	public function getResponseBuilder(): ICanCreateResponses
+	{
+		return $this->response;
+	}
+
+	/**
 	 * {@inheritDoc}
+	 *
+	 * @deprecated 2026.08 Use {@see IRequestHandler::handleRequest()} instead
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
+		$this->dispatch($request, $httpException);
+
+		return $this->response->generate();
+	}
+
+	/**
+	 * Hook for modules to perform scope or permission checks before dispatch
+	 *
+	 * @internal
+	 *
+	 * @throws HTTPException
+	 */
+	protected function checkScope(): void {}
+
+	/**
+	 * Dispatches the module CORS headers, events and method handling
+	 *
+	 * @param array                              $request The request data
+	 * @param ModuleHTTPException|null $httpException Optional exception renderer for the content phase
+	 * @return void
+	 * @throws HTTPException
+	 */
+	final protected function dispatch(array $request, ?ModuleHTTPException $httpException = null): void
+	{
+		$this->checkScope();
 		// @see https://github.com/tootsuite/mastodon/blob/c3aef491d66aec743a3a53e934a494f653745b61/config/initializers/cors.rb
 		if (str_starts_with($this->args->getQueryString(), '.well-known/')) {
 			$this->response->setHeader('*', 'Access-Control-Allow-Origin');
@@ -260,20 +298,42 @@ abstract class BaseModule implements ICanHandleRequests
 			$this->response->addContent($content);
 			$this->response->addContent($this->content($request));
 		} catch (HTTPException $e) {
-			// In case of System::externalRedirects(), we don't want to prettyprint the exception
-			// just redirect to the new location
-			if (($e instanceof HTTPException\FoundException)
-				|| ($e instanceof HTTPException\MovedPermanentlyException)
-				|| ($e instanceof HTTPException\TemporaryRedirectException)) {
+			if ($e instanceof HTTPException\FoundException
+				|| $e instanceof HTTPException\MovedPermanentlyException
+				|| $e instanceof HTTPException\TemporaryRedirectException
+			) {
 				throw $e;
 			}
 
-			$this->response->setStatus($e->getCode(), $e->getMessage());
-			$this->response->addContent($httpException->content($e));
+			if ($httpException) {
+				$this->response->setStatus($e->getCode(), $e->getMessage());
+				$this->response->addContent($httpException->content($e));
+			} else {
+				throw $e;
+			}
 		}
 
 		$this->profiler->set(microtime(true) - $timestamp, 'content');
+	}
 
+	/**
+	 * @throws HTTPException
+	 */
+	public function handleRequest(ServerRequestInterface $request): ResponseInterface
+	{
+		$httpInput  = new HTTPInputData($request->getServerParams());
+		$httpinput  = $httpInput->process();
+		$queryVars  = $request->getQueryParams();
+		$parsedBody = $request->getParsedBody();
+
+		$requestArray = array_merge(
+			$httpinput['variables'] ?? [],
+			$httpinput['files']     ?? [],
+			$queryVars,
+			is_array($parsedBody) ? $parsedBody : [],
+		);
+
+		$this->dispatch($requestArray);
 		return $this->response->generate();
 	}
 

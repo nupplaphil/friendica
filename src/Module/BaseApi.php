@@ -81,29 +81,37 @@ class BaseApi extends BaseModule
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	protected function checkScope(): void
+	{
+		switch ($this->args->getMethod()) {
+			case Router::DELETE:
+			case Router::PATCH:
+			case Router::POST:
+			case Router::PUT:
+				$this->checkAllowedScope(self::SCOPE_WRITE);
+
+				if (!self::getCurrentUserID()) {
+					throw new HTTPException\ForbiddenException($this->t('Permission denied.'));
+				}
+				break;
+		}
+	}
+
+	/**
 	 * Additionally checks, if the caller is permitted to do this action
 	 *
 	 * {@inheritDoc}
 	 *
+	 * @param bool $scopecheck Deprecated parameter kept for BC promise, scope is now checked via dispatch()
+	 *
 	 * @throws HTTPException\ForbiddenException
+	 *
+	 * @deprecated 2026.08 Use {@see IRequestHandler::handleRequest()} instead
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = [], bool $scopecheck = true): ResponseInterface
 	{
-		if ($scopecheck) {
-			switch ($this->args->getMethod()) {
-				case Router::DELETE:
-				case Router::PATCH:
-				case Router::POST:
-				case Router::PUT:
-					$this->checkAllowedScope(self::SCOPE_WRITE);
-
-					if (!self::getCurrentUserID()) {
-						throw new HTTPException\ForbiddenException($this->t('Permission denied.'));
-					}
-					break;
-			}
-		}
-
 		return parent::run($httpException, $request);
 	}
 
