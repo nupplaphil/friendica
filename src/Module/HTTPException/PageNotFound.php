@@ -56,7 +56,7 @@ class PageNotFound extends BaseModule
 	private function preProcessServerVars(array $server): void
 	{
 		$queryString = $server['QUERY_STRING'] ?? '';
-		if (!empty($queryString) && preg_match('/{[0-9]}/', $queryString) !== 0) {
+		if (!empty($queryString) && preg_match('/{[0-9]}/', (string) $queryString) !== 0) {
 			System::exit();
 		}
 

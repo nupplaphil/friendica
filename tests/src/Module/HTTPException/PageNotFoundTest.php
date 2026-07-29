@@ -50,7 +50,7 @@ class PageNotFoundTest extends FixtureTestCase
 			DI::profiler(),
 			new Response(),
 			$request,
-			$server
+			$server,
 		);
 
 		$response = $pageNotFound->run($this->httpExceptionMock);
@@ -61,8 +61,8 @@ class PageNotFoundTest extends FixtureTestCase
 	public function testJavaScriptTemplatePrefetchCallsExit(): void
 	{
 		self::markTestIncomplete(
-			'Skipping JavaScript template prefetch test because System::exit() cannot be ' .
-			'mocked with PHPUnit. See tests/src/Mod/ItemTest.php for prior art on this limitation.'
+			'Skipping JavaScript template prefetch test because System::exit() cannot be '
+			. 'mocked with PHPUnit. See tests/src/Mod/ItemTest.php for prior art on this limitation.',
 		);
 	}
 }
