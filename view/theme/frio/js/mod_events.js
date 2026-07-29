@@ -8,7 +8,8 @@
  * Initialization of the fullCalendar and format the output.
  */
 
-$(document).ready(function () {
+onPageLoad(function () {
+	console.debug("mod_events.js loaded");
 	let $body = $("body");
 
 	// start the fullCalendar

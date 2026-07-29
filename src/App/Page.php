@@ -258,6 +258,8 @@ class Page implements ArrayAccess
 			'$local_user'     => $localUID,
 			'$generator'      => 'Friendica' . ' ' . App::VERSION,
 			'$update_content' => (int) $pConfig->get($localUID, 'system', 'update_content'),
+			'$spa_mode'       => (int) $pConfig->get($localUID, 'system', 'enable_spa'),
+			'$spa_router_ts'  => file_exists('view/js/spa-router.js') ? filemtime('view/js/spa-router.js') : 0,
 			'$shortcut_icon'  => $shortcut_icon,
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),

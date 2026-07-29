@@ -144,7 +144,7 @@
 </div>
 
 <script type="text/javascript">
-	$(document).ready( function() {
+	onPageLoad( function() {
 		// disable finish date input if it isn't available
 		enableDisableFinishDate();
 		// load bbcode autocomplete for the description textarea

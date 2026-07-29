@@ -6,7 +6,7 @@
   *}}
 
 <script>
-$(document).ready(function() {
+onPageLoad(function() {
 	$("#nav-search-text").search_autocomplete(baseurl + '/search/acl');
 });
 </script>

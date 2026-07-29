@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
 	$.fancybox.defaults.smallBtn = "true";
 	$.fancybox.defaults.loop = "true";
 	$.fancybox.defaults.afterLoad = function(instance, current) {

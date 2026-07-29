@@ -21,23 +21,83 @@ if (!Element.prototype.matches) {
 }
 
 /**
- * Register a function to be called on initial page load and after SPA navigation
- * This provides a unified way to handle initialization for both traditional page loads
- * and Single Page Application (SPA) content updates.
- *
- * @param {Function} fn - The function to execute on page load and SPA navigation
- * @example
- * function initMyModule() {
- *     // Initialization code
- * }
- * onPageLoad(initMyModule);
+ * Register a function to be executed when the page loads.
+ * Handles both traditional page loads (via document.ready) and SPA navigation (via theme:reload).
+ * Prevents duplicate registrations across SPA navigations.
+ * 
+ * @param {Function} fn - The function to register
  */
 function onPageLoad(fn) {
 	if (typeof fn !== 'function') {
 		return;
 	}
-	$(document).ready(fn);
-	window.addEventListener('theme:reload', fn);
+
+	// === DUPLICATE PREVENTION ===
+	// Use a global registry to ensure each function is registered only once
+	if (!window.__onPageLoadRegistry) {
+		window.__onPageLoadRegistry = new Set();
+	}
+	
+	// Create a unique key: use path if available, otherwise first 100 chars of function code
+	const registryKey = fn._spaPath || fn.toString().substring(0, 100);
+	if (window.__onPageLoadRegistry.has(registryKey)) {
+		console.debug('[onPageLoad] Function already registered for path:', fn._spaPath || '(no path)');
+		return;
+	}
+	window.__onPageLoadRegistry.add(registryKey);
+
+	// === PATH CONTEXT SETUP ===
+	// Set up path scoping for SPA isolation (only if not already set)
+	if (!fn._spaPath) {
+		const cs = document.currentScript;
+		const isFragment = window.__spa_executing_fragment_scripts;
+		
+		if (isFragment) {
+			fn._spaPath = window.location.pathname.split('/').slice(0, 2).join('/');
+			console.debug('[onPageLoad] Scoping FRAGMENT function to path:', fn._spaPath);
+		} else if (cs && cs.src && (cs.src.includes('mod_') || cs.src.includes('/addon/'))) {
+			fn._spaPath = window.location.pathname.split('/').slice(0, 2).join('/');
+			console.debug('[onPageLoad] Scoping EXTERNAL function to path:', fn._spaPath, 'from:', cs.src);
+		}
+	}
+
+	// === REGISTRATION ===
+	const isSPALoading = window.__spa_executing_page_scripts;
+	
+	if (!isSPALoading) {
+		// Traditional page load: use jQuery ready
+		$(document).ready(fn);
+		return;
+	}
+
+	// SPA mode: register for theme:reload event
+	const isFragment = window.__spa_executing_fragment_scripts;
+	
+	if (isFragment) {
+		// Fragment scripts: execute once after all resources are ready
+		const once = function() {
+			window.removeEventListener('theme:reload', once);
+			console.debug('[onPageLoad] Executing one-time fragment function');
+			fn();
+		};
+		if (window.__spa_reinit_phase) {
+			setTimeout(once, 0);
+		} else {
+			window.addEventListener('theme:reload', once);
+		}
+	} else {
+		// External scripts: permanent listener with path matching
+		window.addEventListener('theme:reload', function() {
+			if (fn._spaPath) {
+				const currentBase = window.location.pathname.split('/').slice(0, 2).join('/');
+				if (currentBase !== fn._spaPath) {
+					return;
+				}
+			}
+			console.debug('[onPageLoad] Executing path-scoped function for:', fn._spaPath || '(no scope)');
+			fn();
+		});
+	}
 }
 
 function resizeIframe(obj) {
@@ -464,43 +524,45 @@ $(function() {
 		}
 	});
 
-	// Function to initialize infinite scroll - can be called multiple times
-	function initInfiniteScroll() {
-		console.debug('[Main] initInfiniteScroll called');
-		console.debug('[Main] typeof infinite_scroll:', typeof infinite_scroll);
-		console.debug('[Main] #scroll-loader length:', $('#scroll-loader').length);
-		
-		// Only initialize if infinite_scroll is defined
-		if (typeof infinite_scroll !== 'undefined') {
-			// Remove any existing scroll handler to prevent duplicates
-			$(window).off('scroll.infinite');
-			
-			$(window).on('scroll.infinite', function(e) {
-				if ($(document).height() != $(window).height()) {
-					// First method that is expected to work - but has problems with Chrome
-					if ($(window).scrollTop() > ($(document).height() - $(window).height() * 1.5))
-						loadScrollContent();
-				} else {
-					// This method works with Chrome - but seems to be much slower in Firefox
-					if ($(window).scrollTop() > (($("section").height() + $("header").height() + $("footer").height()) - $(window).height() * 1.5)) {
-						loadScrollContent();
-					}
-				}
-			});
-			console.debug('[Main] Infinite scroll initialized - scroll handler attached');
-		} else {
-			console.debug('[Main] Infinite scroll NOT initialized - missing infinite_scroll object');
-		}
-	}
-	
-	// Register event listener for SPA navigation - do this immediately so it's available even before DOM ready
-	if (window.addEventListener) {
-		window.addEventListener('spa:initInfiniteScroll', initInfiniteScroll);
-	}
-	
 	// Initialize infinite scroll on first page load
-	initInfiniteScroll();
+	if (typeof initInfiniteScroll === 'function') {
+		initInfiniteScroll();
+	}
 });
+
+// Function to initialize infinite scroll - can be called multiple times
+function initInfiniteScroll() {
+	console.debug('[Main] initInfiniteScroll called');
+	console.debug('[Main] typeof infinite_scroll:', typeof infinite_scroll);
+	console.debug('[Main] #scroll-loader length:', $('#scroll-loader').length);
+	
+	// Only initialize if infinite_scroll is defined
+	if (typeof infinite_scroll !== 'undefined') {
+		// Remove any existing scroll handler to prevent duplicates
+		$(window).off('scroll.infinite');
+		
+		$(window).on('scroll.infinite', function(e) {
+			if ($(document).height() != $(window).height()) {
+				// First method that is expected to work - but has problems with Chrome
+				if ($(window).scrollTop() > ($(document).height() - $(window).height() * 1.5))
+					loadScrollContent();
+			} else {
+				// This method works with Chrome - but seems to be much slower in Firefox
+				if ($(window).scrollTop() > (($("section").height() + $("header").height() + $("footer").height()) - $(window).height() * 1.5)) {
+					loadScrollContent();
+				}
+			}
+		});
+		console.debug('[Main] Infinite scroll initialized - scroll handler attached');
+	} else {
+		console.debug('[Main] Infinite scroll NOT initialized - missing infinite_scroll object');
+	}
+}
+
+// Register event listener for SPA navigation - do this immediately
+if (window.addEventListener) {
+	window.addEventListener('spa:initInfiniteScroll', initInfiniteScroll);
+}
 
 /**
  * Inserts a BBCode tag in the comment textarea identified by id

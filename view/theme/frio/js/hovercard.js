@@ -12,7 +12,7 @@
  * It is licensed under the GNU Affero General Public License <http://www.gnu.org/licenses/>
  *
  */
-$(document).ready(function () {
+onPageLoad(function () {
 	let $body = $("body");
 	// Prevents normal click action on click hovercard elements
 	$body.on("click", ".userinfo.click-card", function (e) {

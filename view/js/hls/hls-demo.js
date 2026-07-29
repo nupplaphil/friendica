@@ -24274,7 +24274,7 @@
 	  }
 	};
 	resizeHandlers.push(playerResize);
-	$(document).ready(function () {
+	onPageLoad(function () {
 	  setupConfigEditor();
 	  chart = setupTimelineChart();
 	  Object.keys(testStreams).forEach(function (key, index) {
