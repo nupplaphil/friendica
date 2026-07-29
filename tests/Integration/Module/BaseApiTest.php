@@ -19,6 +19,7 @@ use Friendica\Module\Api\ApiResponse;
 use Friendica\Module\BaseApi;
 use Friendica\Util\Profiler;
 use GuzzleHttp\Psr7\ServerRequest;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -27,8 +28,20 @@ class BaseApiTest extends TestCase
 {
 	public function testHandleRequestGetReturnsResponse(): void
 	{
-		$eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-		$eventDispatcher->method('dispatch')->willReturnArgument(0);
+		$module = $this->createModule(['getMethod' => 'GET']);
+
+		$module->method('content')->willReturn('{"status":"ok"}');
+
+		$request = new ServerRequest('GET', 'https://friendica.local/api/test');
+		$result  = $module->handleRequest($request);
+
+		$this->assertEquals(200, $result->getStatusCode());
+		$this->assertJson((string) $result->getBody());
+	}
+
+	private function createModule(array $options = []): BaseApi&MockObject
+	{
+		$httpMethod = $options['getMethod'] ?? 'GET';
 
 		$dice = new Dice();
 		$dice = $dice->addRule(EventDispatcherInterface::class, [
@@ -40,38 +53,30 @@ class BaseApiTest extends TestCase
 		$args = $this->createMock(App\Arguments::class);
 		$args->method('getQueryString')->willReturn('api/test');
 		$args->method('getModuleName')->willReturn('Test');
-		$args->method('getMethod')->willReturn('GET');
+		$args->method('getMethod')->willReturn($httpMethod);
 
 		$apiResponse = new ApiResponse(
-			$this->createMock(L10n::class),
+			$this->createStub(L10n::class),
 			$args,
-			$this->createMock(LoggerInterface::class),
-			$this->createMock(App\BaseURL::class),
-			$this->createMock(TwitterUser::class),
+			$this->createStub(LoggerInterface::class),
+			$this->createStub(App\BaseURL::class),
+			$this->createStub(TwitterUser::class),
 		);
 
-		$module = $this->getMockBuilder(BaseApi::class)
+		return $this->getMockBuilder(BaseApi::class)
 			->setConstructorArgs([
-				$this->createMock(Error::class),
-				$this->createMock(AppHelper::class),
-				$this->createMock(L10n::class),
-				$this->createMock(App\BaseURL::class),
+				$this->createStub(Error::class),
+				$this->createStub(AppHelper::class),
+				$this->createStub(L10n::class),
+				$this->createStub(App\BaseURL::class),
 				$args,
-				$this->createMock(LoggerInterface::class),
-				$this->createMock(Profiler::class),
+				$this->createStub(LoggerInterface::class),
+				$this->createStub(Profiler::class),
 				$apiResponse,
 				[],
 				[],
 			])
 			->onlyMethods(['content'])
 			->getMock();
-
-		$module->method('content')->willReturn('{"status":"ok"}');
-
-		$request = new ServerRequest('GET', 'https://friendica.local/api/test');
-		$result  = $module->handleRequest($request);
-
-		$this->assertEquals(200, $result->getStatusCode());
-		$this->assertJson((string) $result->getBody());
 	}
 }

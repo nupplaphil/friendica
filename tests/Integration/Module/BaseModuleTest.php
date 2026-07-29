@@ -14,6 +14,7 @@ use Friendica\Module\Response;
 use Friendica\Network\HTTPException\NotFoundException;
 use Friendica\Util\Profiler;
 use GuzzleHttp\Psr7\ServerRequest;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -81,7 +82,7 @@ class BaseModuleTest extends TestCase
 		$this->assertEquals(['id' => '42'], $requestContent);
 	}
 
-	private function createModule(array $options = []): BaseModule
+	private function createModule(array $options = []): BaseModule&MockObject
 	{
 		$httpMethod = $options['getMethod'] ?? 'GET';
 
