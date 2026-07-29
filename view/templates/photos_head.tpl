@@ -11,7 +11,7 @@
 	var ispublic = "{{$ispublic nofilter}}";
 
 
-	$(document).ready(function() {
+	onPageLoad(function() {
 
 		$('#contact_allow, #contact_deny, #circle_allow, #circle_deny').change(function() {
 			var selstr;

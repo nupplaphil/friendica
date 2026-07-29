@@ -485,8 +485,7 @@ function initTheme() {
 }
 
 // Register theme initialization for initial page load and SPA navigation
-$(document).ready(initTheme);
-window.addEventListener("theme:reload", initTheme);
+onPageLoad(initTheme);
 
 // Keep existing spa:navigate handler for tabmenu syncing
 window.addEventListener("spa:navigate", function () {

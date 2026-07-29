@@ -6,7 +6,7 @@
   *}}
 
 <script>
-$(document).ready(function() {
+onPageLoad(function() {
 	$("#contacts-search").contact_autocomplete(baseurl + '/search/acl', 'a', true);
 });
 </script>

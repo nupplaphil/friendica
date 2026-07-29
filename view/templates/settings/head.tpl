@@ -68,7 +68,8 @@
 		$(target).focus();
 	}
 
-	$(document).ready(function() {
+	onPageLoad(function() {
+		console.debug("settings.js loaded");
 		$('#contact_allow, #contact_deny, #circle_allow, #circle_deny').change(function() {
 			var selstr;
 			$('#contact_allow option:selected, #contact_deny option:selected, #circle_allow option:selected, #circle_deny option:selected').each( function() {
@@ -145,6 +146,7 @@
 		// add arrow buttons for touch devices that cannot drag-n-drop or keyboard sort
 		$('.network .field, .timelines-widget .field, .timelines-menu .field').not('.settings-submit-wrapper .field, .panel-footer .field').each(function(){
 			$(this).append('<div class="sorter-mvup" onclick="moveListItem(this,\'up\');" aria-hidden="true"></div><div class="sorter-mvdn" onclick="moveListItem(this,\'down\');" aria-hidden="true"></div>');
+			console.debug("added arrow buttons for "+$(this).attr('id'));
 		});
 
 		// accessible sorting with keyboard gives feedback to screenreaders
