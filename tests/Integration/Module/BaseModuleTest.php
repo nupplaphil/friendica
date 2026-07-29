@@ -95,11 +95,11 @@ class BaseModuleTest extends TestCase
 
 		return $this->getMockBuilder(BaseModule::class)
 			->setConstructorArgs([
-				$this->createMock(L10n::class),
-				$this->createMock(App\BaseURL::class),
+				$this->createStub(L10n::class),
+				$this->createStub(App\BaseURL::class),
 				$args,
-				$this->createMock(LoggerInterface::class),
-				$this->createMock(Profiler::class),
+				$this->createStub(LoggerInterface::class),
+				$this->createStub(Profiler::class),
 				new Response(),
 				[],
 				[],
