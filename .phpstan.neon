@@ -52,11 +52,11 @@ parameters:
             message: '#^Call to an undefined method Mockery[\\\\](?:ExpectationInterface(?:[|]Mockery[\\\\]HigherOrderMessage)?|LegacyMockInterface)::(?:with|once|times|twice|withAnyArgs|andReturnUsing|addRules)\(\)\.$#'
             identifier: method.notFound
             path: tests/
-            count: 236
+            count: 237
         # Deprecated run() calls in tests are preserved for BC promise and
         # will be replaced by handleRequest() tests in the future
         -
             message: '#^Call to deprecated method run\(\) of class#'
             identifier: method.deprecated
             path: tests/
-            count: 95
+            count: 96
