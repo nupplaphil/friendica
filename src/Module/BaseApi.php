@@ -532,7 +532,7 @@ class BaseApi extends BaseModule
 	 * @return never
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	protected function logAndJsonError(int $errorno, Error $error)
+	protected function logAndJsonError(int $errorno, Error $error): never
 	{
 		$this->logger->info('API Error', ['no' => $errorno, 'error' => $error->toArray(), 'method' => $this->args->getMethod(), 'command' => $this->args->getQueryString(), 'user-agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
 		$this->earlyJsonError($errorno, $error->toArray());

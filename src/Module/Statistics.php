@@ -49,7 +49,7 @@ class Statistics extends BaseModule
 		}
 	}
 
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$registration_open = Register::getPolicy() !== Register::CLOSED
 			&& !$this->config->get('config', 'invitation_only');

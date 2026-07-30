@@ -15,7 +15,7 @@ use Friendica\Module\BaseApi;
  */
 class Clear extends BaseApi
 {
-	protected function post(array $request = [])
+	protected function post(array $request = []): never
 	{
 		$this->checkAllowedScope(self::SCOPE_WRITE);
 		$uid = self::getCurrentUserID();

@@ -61,7 +61,7 @@ class InstanceV2 extends BaseApi
 	 * @throws \ImagickException
 	 * @throws Exception
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$domain               = $this->baseUrl->getHost();
 		$title                = $this->config->get('config', 'sitename');

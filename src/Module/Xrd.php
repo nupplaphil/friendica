@@ -123,7 +123,7 @@ class Xrd extends BaseModule
 		}
 	}
 
-	private function printSystemJSON(array $owner)
+	private function printSystemJSON(array $owner): never
 	{
 		$baseURL = (string) $this->baseUrl;
 		$json    = [
@@ -177,7 +177,7 @@ class Xrd extends BaseModule
 		$this->earlyJsonExit($json, 'application/jrd+json; charset=utf-8');
 	}
 
-	private function printJSON(string $alias, array $owner, array $avatar)
+	private function printJSON(string $alias, array $owner, array $avatar): never
 	{
 		$baseURL = (string) $this->baseUrl;
 
@@ -250,7 +250,7 @@ class Xrd extends BaseModule
 		$this->earlyJsonExit($json, 'application/jrd+json; charset=utf-8');
 	}
 
-	private function printXML(string $alias, array $owner, array $avatar)
+	private function printXML(string $alias, array $owner, array $avatar): never
 	{
 		$baseURL = (string) $this->baseUrl;
 

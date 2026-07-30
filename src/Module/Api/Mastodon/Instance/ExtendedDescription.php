@@ -34,7 +34,7 @@ class ExtendedDescription extends BaseApi
 	/**
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$account = User::getSystemAccount();
 

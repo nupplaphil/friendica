@@ -39,7 +39,7 @@ class RemoveTag extends BaseModule
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
-	protected function post(array $request = [])
+	protected function post(array $request = []): never
 	{
 		$type = 0;
 		$term = '';

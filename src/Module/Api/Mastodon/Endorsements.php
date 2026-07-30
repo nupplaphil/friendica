@@ -17,7 +17,7 @@ class Endorsements extends BaseApi
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$this->earlyJsonExit([]);
 	}

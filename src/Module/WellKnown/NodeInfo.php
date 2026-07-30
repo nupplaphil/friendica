@@ -16,7 +16,7 @@ use Friendica\DI;
  */
 class NodeInfo extends BaseModule
 {
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$nodeinfo = [
 			'links' => [

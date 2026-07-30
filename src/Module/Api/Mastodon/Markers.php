@@ -51,7 +51,7 @@ class Markers extends BaseApi
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function get(array $request = [])
+	protected function get(array $request = []): never
 	{
 		$this->checkAllowedScope(self::SCOPE_READ);
 		$uid         = self::getCurrentUserID();
