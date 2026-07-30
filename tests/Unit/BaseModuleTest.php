@@ -76,7 +76,31 @@ final class BaseModuleTest extends TestCase
 		}
 	}
 
-	private static function createModule(?string $exitContent = null, mixed $exitJson = null, ?array $exitError = null): BaseModule
+	public function testEarlyHttpErrorCarriesStatusCode(): void
+	{
+		$module = self::createModule(exitHttpError: [403, 'Forbidden']);
+
+		try {
+			$module->handleRequest(self::createStub(ServerRequestInterface::class));
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) {
+			self::assertSame(403, $e->getResponse()->getStatusCode());
+		}
+	}
+
+	public function testEarlyHttpErrorCarriesBody(): void
+	{
+		$module = self::createModule(exitHttpError: [404, 'Not Found', 'Custom body']);
+
+		try {
+			$module->handleRequest(self::createStub(ServerRequestInterface::class));
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) {
+			self::assertSame('Custom body', (string) $e->getResponse()->getBody());
+		}
+	}
+
+	private static function createModule(?string $exitContent = null, mixed $exitJson = null, ?array $exitError = null, ?array $exitHttpError = null): BaseModule
 	{
 		$args = self::createStub(App\Arguments::class);
 		$args->method('getMethod')->willReturn('GET');
@@ -99,6 +123,7 @@ final class BaseModuleTest extends TestCase
 			$exitContent,
 			$exitJson,
 			$exitError,
+			$exitHttpError,
 		) extends BaseModule {
 			public function __construct(
 				L10n $l10n,
@@ -113,6 +138,7 @@ final class BaseModuleTest extends TestCase
 				private readonly ?string $exitContent = null,
 				private readonly mixed $exitJson = null,
 				private ?array $exitError = null,
+				private ?array $exitHttpError = null,
 			) {
 				parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters, $eventDispatcher);
 			}
@@ -121,6 +147,8 @@ final class BaseModuleTest extends TestCase
 			{
 				if ($this->exitContent !== null) {
 					$this->earlyExit($this->exitContent);
+				} elseif ($this->exitHttpError !== null) {
+					$this->earlyHttpError($this->exitHttpError[0], $this->exitHttpError[1] ?? '', $this->exitHttpError[2] ?? '');
 				} elseif ($this->exitError !== null) {
 					$this->earlyJsonError($this->exitError[0], $this->exitError[1]);
 				} elseif ($this->exitJson !== null) {

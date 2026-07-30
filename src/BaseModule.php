@@ -633,6 +633,27 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * @internal
 	 *
+	 * Same as httpError(), but calls earlyExit() instead of httpExit().
+	 *
+	 * @param integer $httpCode HTTP status result value
+	 * @param string  $message  Error message. Optional.
+	 * @param mixed   $content  Response body. Optional.
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyHttpError(int $httpCode, string $message = '', mixed $content = ''): never
+	{
+		if ($httpCode >= 400) {
+			$this->logger->debug('Exit with error', ['code' => $httpCode, 'message' => $message, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
+		}
+
+		$this->response->setStatus($httpCode, $message);
+		$this->earlyExit($content);
+	}
+
+	/**
+	 * @internal
+	 *
 	 * Same as jsonExit(), but calls earlyExit() instead of httpExit().
 	 *
 	 * @throws HTTPException\InternalServerErrorException
