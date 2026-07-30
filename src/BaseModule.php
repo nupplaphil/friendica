@@ -545,6 +545,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * This function adds the content and a content-type HTTP header to the output.
 	 * After finishing the process is getting killed.
 	 *
+	 * @deprecated 2026.08 Use {@see earlyExit()} instead
+	 *
 	 * @param string      $content
 	 * @param string      $type
 	 * @param string|null $content_type
@@ -562,6 +564,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 
 	/**
 	 * Send HTTP status header and exit.
+	 *
+	 * @deprecated 2026.08 Use {@see earlyHttpError()} instead
 	 *
 	 * @param integer $httpCode HTTP status result value
 	 * @param string  $message  Error message. Optional.
@@ -582,6 +586,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * Display the response using JSON to encode the content
 	 *
+	 * @deprecated 2026.08 Use {@see earlyJsonExit()} instead
+	 *
 	 * @param mixed  $content
 	 * @param string $content_type
 	 * @param int    $options A combination of json_encode() binary flags
@@ -596,6 +602,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 
 	/**
 	 * Display a non-200 HTTP code response using JSON to encode the content and exit
+	 *
+	 * @deprecated 2026.08 Use {@see earlyJsonError()} instead
 	 *
 	 * @param int    $httpCode
 	 * @param mixed  $content
