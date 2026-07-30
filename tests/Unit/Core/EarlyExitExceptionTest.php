@@ -37,6 +37,6 @@ class EarlyExitExceptionTest extends TestCase
 		$response  = $this->createStub(ResponseInterface::class);
 		$exception = new EarlyExitException($response);
 
-		self::assertInstanceOf(\RuntimeException::class, $exception);
+		self::assertInstanceOf(\RuntimeException::class, $exception); // @phpstan-ignore staticMethod.alreadyNarrowedType (intentional type hierarchy documentation)
 	}
 }

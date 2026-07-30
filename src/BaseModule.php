@@ -11,6 +11,7 @@ use Friendica\App\Router;
 use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\ICanCreateResponses;
 use Friendica\Capabilities\IRequestHandler;
+use Friendica\Core\EarlyExitException;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Event\ModuleContentEvent;
@@ -221,6 +222,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * @param ModuleHTTPException|null $httpException Optional exception renderer for the content phase
 	 * @return void
 	 * @throws HTTPException
+	 * @throws EarlyExitException
 	 */
 	final protected function dispatch(array $request, ?ModuleHTTPException $httpException = null): void
 	{
@@ -604,5 +606,53 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 
 		$this->response->setStatus($httpCode);
 		$this->jsonExit($content, $content_type);
+	}
+
+	/**
+	 * @internal
+	 *
+	 * Same as httpExit(), but throws EarlyExitException instead of calling System::exit().
+	 * Use this in new code to allow interception via handleRequest() in tests.
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyExit(string $content, string $type = Response::TYPE_HTML, ?string $contentType = null): never
+	{
+		$this->response->setType($type, $contentType);
+		$this->response->addContent($content);
+
+		throw new EarlyExitException($this->response->generate());
+	}
+
+	/**
+	 * @internal
+	 *
+	 * Same as jsonExit(), but calls earlyExit() instead of httpExit().
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyJsonExit(mixed $content, string $contentType = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
+	{
+		$this->earlyExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $contentType);
+	}
+
+	/**
+	 * @internal
+	 *
+	 * Same as jsonError(), but calls earlyJsonExit() instead of jsonExit().
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyJsonError(int $httpCode, mixed $content, string $contentType = 'application/json'): never
+	{
+		if ($httpCode >= 400) {
+			$this->logger->debug('Exit with error', ['code' => $httpCode, 'content_type' => $contentType, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
+		}
+
+		$this->response->setStatus($httpCode);
+		$this->earlyJsonExit($content, $contentType);
 	}
 }
