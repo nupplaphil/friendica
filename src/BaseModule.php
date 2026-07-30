@@ -201,7 +201,12 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
-		$this->dispatch($request, $httpException);
+		try {
+			$this->dispatch($request, $httpException);
+		} catch (EarlyExitException $e) {
+			System::echoResponse($e->getResponse());
+			System::exit();
+		}
 
 		return $this->response->generate();
 	}
