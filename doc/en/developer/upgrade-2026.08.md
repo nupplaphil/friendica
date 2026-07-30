@@ -241,3 +241,57 @@ This section contains deprecation notices. This changes will become mandatory in
    $uri = DI::postUriGenerator()->newURI($guid);
    ```
 
+- `BaseModule::httpExit()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+
+   *Before*
+   ```php
+   $this->httpExit($content);
+   ```
+
+   *After*
+   ```php
+   $this->response->addContent($content);
+   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   ```
+
+- `BaseModule::jsonExit()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+
+   *Before*
+   ```php
+   $this->jsonExit($data);
+   ```
+
+   *After*
+   ```php
+   $this->response->setType(ICanCreateResponses::TYPE_JSON, 'application/json; charset=utf-8');
+   $this->response->addContent(json_encode($data));
+   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   ```
+
+- `BaseModule::jsonError()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+
+   *Before*
+   ```php
+   $this->jsonError(404, ['error' => 'not found']);
+   ```
+
+   *After*
+   ```php
+   $this->response->setStatus(404);
+   $this->response->setType(ICanCreateResponses::TYPE_JSON);
+   $this->response->addContent(json_encode(['error' => 'not found']));
+   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   ```
+
+- `BaseModule::httpError()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+
+   *Before*
+   ```php
+   $this->httpError(403, 'Forbidden');
+   ```
+
+   *After*
+   ```php
+   $this->response->setStatus(403, 'Forbidden');
+   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   ```

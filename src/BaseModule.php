@@ -555,6 +555,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function httpExit(string $content, string $type = Response::TYPE_HTML, ?string $content_type = null)
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyExit()` instead.', E_USER_DEPRECATED);
 		$this->response->setType($type, $content_type);
 		$this->response->addContent($content);
 		System::echoResponse($this->response->generate());
@@ -574,6 +575,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function httpError(int $httpCode, string $message = '', $content = '')
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyHttpError()` instead.', E_USER_DEPRECATED);
 		if ($httpCode >= 400) {
 			$this->logger->debug('Exit with error', ['code' => $httpCode, 'message' => $message, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
 		}
@@ -597,6 +599,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function jsonExit($content, string $content_type = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyJsonExit()` instead.', E_USER_DEPRECATED);
 		$this->httpExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $content_type);
 	}
 
@@ -613,6 +616,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function jsonError(int $httpCode, $content, string $content_type = 'application/json')
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyJsonError()` instead.', E_USER_DEPRECATED);
 		if ($httpCode >= 400) {
 			$this->logger->debug('Exit with error', ['code' => $httpCode, 'content_type' => $content_type, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
 		}
