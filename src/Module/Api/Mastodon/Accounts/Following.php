@@ -104,6 +104,6 @@ class Following extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($accounts);
+		$this->earlyJsonExit($accounts);
 	}
 }

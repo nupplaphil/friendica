@@ -57,6 +57,6 @@ class Unreblog extends BaseApi
 		// Issue tracking the behavior of createFromUriId: https://github.com/friendica/friendica/issues/13350
 		$isReblog = $item['uri-id'] != $this->parameters['id'];
 
-		$this->jsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid, $isReblog)->toArray());
+		$this->earlyJsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid, $isReblog)->toArray());
 	}
 }

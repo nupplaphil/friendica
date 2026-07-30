@@ -41,7 +41,7 @@ class ScheduledStatuses extends BaseApi
 
 		Post\Delayed::deleteById($this->parameters['id']);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class ScheduledStatuses extends BaseApi
 		$uid = self::getCurrentUserID();
 
 		if (isset($this->parameters['id'])) {
-			$this->jsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($this->parameters['id'], $uid)->toArray());
+			$this->earlyJsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($this->parameters['id'], $uid)->toArray());
 		}
 
 		$request = $this->getRequest([
@@ -94,6 +94,6 @@ class ScheduledStatuses extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($statuses);
+		$this->earlyJsonExit($statuses);
 	}
 }

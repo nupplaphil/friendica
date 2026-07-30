@@ -136,9 +136,9 @@ class Friendica extends BaseModule
 				$data = ActivityPub\Transmitter::getProfile(0);
 				header('Access-Control-Allow-Origin: *');
 				header('Cache-Control: max-age=23200, stale-while-revalidate=23200');
-				$this->jsonExit($data, 'application/activity+json');
+				$this->earlyJsonExit($data, 'application/activity+json');
 			} catch (HTTPException\NotFoundException) {
-				$this->jsonError(404, ['error' => 'Record not found']);
+				$this->earlyJsonError(404, ['error' => 'Record not found']);
 			}
 		}
 
@@ -194,6 +194,6 @@ class Friendica extends BaseModule
 			'no_scrape_url'    => $this->baseUrl . '/noscrape',
 		];
 
-		$this->jsonExit($data);
+		$this->earlyJsonExit($data);
 	}
 }

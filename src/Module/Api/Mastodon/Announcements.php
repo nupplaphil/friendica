@@ -22,6 +22,6 @@ class Announcements extends BaseApi
 		$this->checkAllowedScope(self::SCOPE_READ);
 
 		// @todo Possibly use the message from the pageheader addon for this
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

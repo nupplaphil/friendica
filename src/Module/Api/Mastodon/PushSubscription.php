@@ -66,7 +66,7 @@ class PushSubscription extends BaseApi
 		$this->logger->info('Subscription stored', ['ret' => $ret, 'subscription' => $subscription]);
 
 		$subscriptionObj = $this->subscriptionFac->createForApplicationIdAndUserId($application['id'], $uid);
-		$this->jsonExit($subscriptionObj->toArray());
+		$this->earlyJsonExit($subscriptionObj->toArray());
 	}
 
 	public function put(array $request = []): void
@@ -105,7 +105,7 @@ class PushSubscription extends BaseApi
 		]);
 
 		$subscriptionObj = $this->subscriptionFac->createForApplicationIdAndUserId($application['id'], $uid);
-		$this->jsonExit($subscriptionObj->toArray());
+		$this->earlyJsonExit($subscriptionObj->toArray());
 	}
 
 	private function setBoolean($input): bool
@@ -130,7 +130,7 @@ class PushSubscription extends BaseApi
 			'uid'            => $uid,
 		]);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 
 	protected function get(array $request = []): void

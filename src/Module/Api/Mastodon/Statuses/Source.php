@@ -37,6 +37,6 @@ class Source extends BaseApi
 
 		$source = DI::mstdnStatusSource()->createFromUriId($id, $uid);
 
-		$this->jsonExit($source->toArray());
+		$this->earlyJsonExit($source->toArray());
 	}
 }

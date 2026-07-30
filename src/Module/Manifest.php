@@ -119,6 +119,6 @@ class Manifest extends BaseModule
 			$manifest['theme_color'] = $theme_color;
 		}
 
-		$this->jsonExit($manifest, 'application/manifest+json');
+		$this->earlyJsonExit($manifest, 'application/manifest+json');
 	}
 }

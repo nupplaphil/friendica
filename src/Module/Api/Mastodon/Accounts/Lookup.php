@@ -37,6 +37,6 @@ class Lookup extends BaseApi
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
-		$this->jsonExit(DI::mstdnAccount()->createFromContactId($contact['id'], $uid));
+		$this->earlyJsonExit(DI::mstdnAccount()->createFromContactId($contact['id'], $uid));
 	}
 }

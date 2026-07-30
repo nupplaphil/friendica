@@ -41,6 +41,6 @@ class FavouritedBy extends BaseApi
 			$accounts[] = DI::mstdnAccount()->createFromContactId($activity['author-id'], $uid);
 		}
 
-		$this->jsonExit($accounts);
+		$this->earlyJsonExit($accounts);
 	}
 }

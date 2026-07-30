@@ -85,9 +85,9 @@ class ParseUrl extends BaseModule
 
 		if ($hook_data['text']) {
 			if ($format == 'json') {
-				$this->jsonExit($hook_data['text']);
+				$this->earlyJsonExit($hook_data['text']);
 			} else {
-				$this->httpExit($hook_data['text']);
+				$this->earlyExit($hook_data['text']);
 			}
 		}
 
@@ -122,9 +122,9 @@ class ParseUrl extends BaseModule
 				$ret['contentType'] = 'url';
 			}
 
-			$this->jsonExit($ret);
+			$this->earlyJsonExit($ret);
 		} else {
-			$this->httpExit(BBCode::embedURL($url, empty($request['noAttachment']), $title, $description, $request['tags'] ?? ''));
+			$this->earlyExit(BBCode::embedURL($url, empty($request['noAttachment']), $title, $description, $request['tags'] ?? ''));
 		}
 	}
 }

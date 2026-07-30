@@ -133,6 +133,6 @@ class Notify extends BaseModule
 			$this->logger->notice('xml_status returning non_zero: ' . $status . " message=" . $message);
 		}
 
-		$this->httpExit(XML::fromArray(['result' => $result]), Response::TYPE_XML);
+		$this->earlyExit(XML::fromArray(['result' => $result]), Response::TYPE_XML);
 	}
 }

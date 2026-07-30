@@ -26,6 +26,6 @@ class CustomEmojis extends BaseApi
 	{
 		$emojis = DI::mstdnEmoji()->createCollectionFromSmilies(Smilies::getList());
 
-		$this->jsonExit($emojis->getArrayCopy());
+		$this->earlyJsonExit($emojis->getArrayCopy());
 	}
 }

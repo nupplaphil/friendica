@@ -67,6 +67,6 @@ class Reports extends BaseApi
 			Worker::add(Worker::PRIORITY_LOW, 'ForwardReport', (int) $report->id);
 		}
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

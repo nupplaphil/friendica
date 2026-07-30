@@ -98,7 +98,7 @@ class Notification extends BaseModule
 				$success = false;
 			}
 
-			$this->jsonExit(['result' => (($success) ? 'success' : 'fail')]);
+			$this->earlyJsonExit(['result' => (($success) ? 'success' : 'fail')]);
 		}
 	}
 

@@ -38,6 +38,6 @@ class ExtendedDescription extends BaseApi
 	{
 		$account = User::getSystemAccount();
 
-		$this->jsonExit(new Mastodon\ExtendedDescription(new DateTime($account['updated']), $this->config->get('config', 'info')));
+		$this->earlyJsonExit(new Mastodon\ExtendedDescription(new DateTime($account['updated']), $this->config->get('config', 'info')));
 	}
 }

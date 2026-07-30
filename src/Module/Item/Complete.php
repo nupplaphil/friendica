@@ -41,6 +41,6 @@ final class Complete extends BaseModule
 		];
 
 		DI::logger()->debug('Complete thread executed.', ['parameters' => $this->parameters]);
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

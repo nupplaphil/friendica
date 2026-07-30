@@ -91,6 +91,6 @@ class UpdateCredentials extends BaseApi
 		}
 
 		$account = DI::mstdnAccount()->createFromContactId($ucid, $uid);
-		$this->jsonExit($account->toArray());
+		$this->earlyJsonExit($account->toArray());
 	}
 }

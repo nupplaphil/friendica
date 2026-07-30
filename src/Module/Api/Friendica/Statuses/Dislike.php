@@ -34,6 +34,6 @@ class Dislike extends BaseApi
 
 		Item::performActivity($item['id'], 'dislike', $uid);
 
-		$this->jsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid)->toArray());
+		$this->earlyJsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid)->toArray());
 	}
 }

@@ -34,6 +34,6 @@ class Followers extends BaseModule
 
 		$followers = ActivityPub\Transmitter::getContacts($owner, [Contact::FOLLOWER, Contact::FRIEND], 'followers', $page, (string) HTTPSignature::getSigner('', $_SERVER));
 
-		$this->jsonExit($followers, 'application/activity+json');
+		$this->earlyJsonExit($followers, 'application/activity+json');
 	}
 }

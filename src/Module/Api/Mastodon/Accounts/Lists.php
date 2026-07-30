@@ -45,6 +45,6 @@ class Lists extends BaseApi
 			DBA::close($circles);
 		}
 
-		$this->jsonExit($lists);
+		$this->earlyJsonExit($lists);
 	}
 }

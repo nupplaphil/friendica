@@ -21,6 +21,6 @@ class Rules extends BaseApi
 	 */
 	protected function rawContent(array $request = [])
 	{
-		$this->jsonExit(System::getRules());
+		$this->earlyJsonExit(System::getRules());
 	}
 }

@@ -123,9 +123,9 @@ class Objects extends BaseModule
 		header('Access-Control-Allow-Origin: *');
 
 		if ($item['deleted']) {
-			$this->jsonError(410, $data, 'application/activity+json');
+			$this->earlyJsonError(410, $data, 'application/activity+json');
 		} else {
-			$this->jsonExit($data, 'application/activity+json');
+			$this->earlyJsonExit($data, 'application/activity+json');
 		}
 	}
 }

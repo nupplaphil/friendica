@@ -85,6 +85,6 @@ class Owa extends BaseModule
 				}
 			}
 		}
-		$this->jsonExit($ret, 'application/x-zot+json');
+		$this->earlyJsonExit($ret, 'application/x-zot+json');
 	}
 }

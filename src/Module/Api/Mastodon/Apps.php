@@ -69,7 +69,7 @@ class Apps extends BaseApi
 		$application = DBA::selectFirst('application', ['id'], $fields);
 		if (!empty($application['id'])) {
 			$this->logger->debug('Found existing application', ['request' => $request, 'id' => $application['id']]);
-			$this->jsonExit(DI::mstdnApplication()->createFromApplicationId($application['id'])->toArray());
+			$this->earlyJsonExit(DI::mstdnApplication()->createFromApplicationId($application['id'])->toArray());
 		}
 
 		$fields['read']          = (stripos((string) $request['scopes'], self::SCOPE_READ) !== false);
@@ -84,6 +84,6 @@ class Apps extends BaseApi
 		}
 
 		$this->logger->debug('Create new application', ['request' => $request, 'id' => DBA::lastInsertId()]);
-		$this->jsonExit(DI::mstdnApplication()->createFromApplicationId(DBA::lastInsertId())->toArray());
+		$this->earlyJsonExit(DI::mstdnApplication()->createFromApplicationId(DBA::lastInsertId())->toArray());
 	}
 }

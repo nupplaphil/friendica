@@ -64,7 +64,7 @@ class FollowRequests extends BaseApi
 				throw new HTTPException\BadRequestException('Unexpected action parameter, expecting "authorize", "ignore" or "reject"');
 		}
 
-		$this->jsonExit($relationship);
+		$this->earlyJsonExit($relationship);
 	}
 
 	/**
@@ -100,6 +100,6 @@ class FollowRequests extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

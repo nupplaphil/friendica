@@ -67,6 +67,6 @@ class Ignore extends BaseModule
 			'state'   => $ignored,
 		];
 
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

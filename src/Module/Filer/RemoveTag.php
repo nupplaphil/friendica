@@ -43,7 +43,7 @@ class RemoveTag extends BaseModule
 	{
 		$type = 0;
 		$term = '';
-		$this->httpError($this->removeTag($request, $type, $term));
+		$this->earlyHttpError($this->removeTag($request, $type, $term));
 	}
 
 	protected function content(array $request = []): string

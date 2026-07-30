@@ -64,6 +64,6 @@ class AccountManagementControlDocument extends BaseModule
 			],
 		];
 
-		$this->jsonExit($output);
+		$this->earlyJsonExit($output);
 	}
 }

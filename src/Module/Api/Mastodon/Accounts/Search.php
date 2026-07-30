@@ -50,6 +50,6 @@ class Search extends BaseApi
 			}
 		}
 
-		$this->jsonExit($accounts);
+		$this->earlyJsonExit($accounts);
 	}
 }

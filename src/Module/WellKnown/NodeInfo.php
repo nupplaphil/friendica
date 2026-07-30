@@ -39,6 +39,6 @@ class NodeInfo extends BaseModule
 			],
 		];
 
-		$this->jsonExit($nodeinfo);
+		$this->earlyJsonExit($nodeinfo);
 	}
 }

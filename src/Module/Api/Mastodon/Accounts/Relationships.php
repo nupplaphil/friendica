@@ -28,7 +28,7 @@ class Relationships extends BaseApi
 		], $request);
 
 		if (empty($request['id'])) {
-			$this->jsonExit([]);
+			$this->earlyJsonExit([]);
 		}
 
 		if (!is_array($request['id'])) {
@@ -41,6 +41,6 @@ class Relationships extends BaseApi
 			$relationships[] = DI::mstdnRelationship()->createFromContactId($id, $uid);
 		}
 
-		$this->jsonExit($relationships);
+		$this->earlyJsonExit($relationships);
 	}
 }

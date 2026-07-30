@@ -19,6 +19,6 @@ class Endorsements extends BaseApi
 	 */
 	protected function rawContent(array $request = [])
 	{
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

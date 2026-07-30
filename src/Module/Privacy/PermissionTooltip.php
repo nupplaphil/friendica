@@ -143,7 +143,7 @@ class PermissionTooltip extends BaseModule
 			'$privacy'            => $privacy,
 		]);
 
-		$this->httpExit($output);
+		$this->earlyExit($output);
 	}
 
 	/**

@@ -54,7 +54,7 @@ class Inbox extends BaseApi
 		// Relaxed CORS header already authorized
 		header('Access-Control-Allow-Origin: *');
 
-		$this->jsonExit($inbox, 'application/activity+json');
+		$this->earlyJsonExit($inbox, 'application/activity+json');
 	}
 
 	protected function post(array $request = [])

@@ -31,6 +31,6 @@ class Tags extends BaseApi
 		$following = DBA::exists('search', ['uid' => $uid, 'term' => '#' . $tag]);
 
 		$hashtag = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => $tag], [], $following);
-		$this->jsonExit($hashtag->toArray());
+		$this->earlyJsonExit($hashtag->toArray());
 	}
 }

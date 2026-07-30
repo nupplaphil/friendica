@@ -54,6 +54,6 @@ class Directory extends BaseApi
 		}
 		DBA::close($contacts);
 
-		$this->jsonExit($accounts);
+		$this->earlyJsonExit($accounts);
 	}
 }

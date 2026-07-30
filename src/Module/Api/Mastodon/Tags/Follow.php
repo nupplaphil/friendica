@@ -30,6 +30,6 @@ class Follow extends BaseApi
 		}
 
 		$hashtag = new \Friendica\Object\Api\Mastodon\Tag($this->baseUrl, ['name' => ltrim((string) $this->parameters['hashtag'])], [], true);
-		$this->jsonExit($hashtag->toArray());
+		$this->earlyJsonExit($hashtag->toArray());
 	}
 }

@@ -29,6 +29,6 @@ class Filters extends BaseApi
 	{
 		$this->checkAllowedScope(self::SCOPE_READ);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

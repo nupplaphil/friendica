@@ -37,6 +37,6 @@ class Peers extends BaseApi
 		}
 		DBA::close($instances);
 
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

@@ -114,6 +114,6 @@ class Tag extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($statuses);
+		$this->earlyJsonExit($statuses);
 	}
 }

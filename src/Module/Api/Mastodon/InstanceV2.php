@@ -76,7 +76,7 @@ class InstanceV2 extends BaseApi
 		$contact              = $this->buildContactInfo();
 		$friendica_extensions = $this->buildFriendicaExtensionInfo();
 		$rules                = System::getRules();
-		$this->jsonExit(new InstanceEntity(
+		$this->earlyJsonExit(new InstanceEntity(
 			$domain,
 			$title,
 			$version,

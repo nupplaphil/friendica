@@ -40,6 +40,6 @@ class Preferences extends BaseApi
 
 		$preferences = new \Friendica\Object\Api\Mastodon\Preferences($visibility, $sensitive, $language, $media, $spoilers);
 
-		$this->jsonExit($preferences);
+		$this->earlyJsonExit($preferences);
 	}
 }

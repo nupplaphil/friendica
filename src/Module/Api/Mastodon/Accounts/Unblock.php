@@ -27,6 +27,6 @@ class Unblock extends BaseApi
 
 		Contact\User::setBlocked($this->parameters['id'], $uid, false);
 
-		$this->jsonExit(DI::mstdnRelationship()->createFromContactId($this->parameters['id'], $uid)->toArray());
+		$this->earlyJsonExit(DI::mstdnRelationship()->createFromContactId($this->parameters['id'], $uid)->toArray());
 	}
 }

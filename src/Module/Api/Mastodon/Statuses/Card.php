@@ -34,6 +34,6 @@ class Card extends BaseApi
 
 		$card = DI::mstdnCard()->createFromUriId($post['uri-id']);
 
-		$this->jsonExit($card->toArray());
+		$this->earlyJsonExit($card->toArray());
 	}
 }

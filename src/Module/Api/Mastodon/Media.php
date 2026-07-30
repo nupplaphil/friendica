@@ -51,7 +51,7 @@ class Media extends BaseApi
 			}
 
 			$this->logger->info('Uploaded photo', ['media' => $media]);
-			$this->jsonExit(DI::mstdnAttachment()->createFromPhoto($media['id']));
+			$this->earlyJsonExit(DI::mstdnAttachment()->createFromPhoto($media['id']));
 		}
 
 		$tempFileName = $request['file']['tmp_name'];
@@ -74,7 +74,7 @@ class Media extends BaseApi
 		$id = Attach::storeFile($tempFileName, self::getCurrentUserID(), $fileName, $request['file']['type'], '<' . Contact::getPublicIdByUserId(self::getCurrentUserID()) . '>');
 		@unlink($tempFileName);
 		$this->logger->info('Uploaded media', ['id' => $id]);
-		$this->jsonExit(DI::mstdnAttachment()->createFromAttach($id));
+		$this->earlyJsonExit(DI::mstdnAttachment()->createFromAttach($id));
 	}
 
 	public function put(array $request = [])
@@ -94,7 +94,7 @@ class Media extends BaseApi
 		}
 
 		if (DI::mstdnAttachment()->isAttach($this->parameters['id']) && Attach::exists(['id' => substr((string) $this->parameters['id'], 7)])) {
-			$this->jsonExit(DI::mstdnAttachment()->createFromAttach((int) substr((string) $this->parameters['id'], 7)));
+			$this->earlyJsonExit(DI::mstdnAttachment()->createFromAttach(substr((string) $this->parameters['id'], 7)));
 		}
 
 		$photo = Photo::selectFirst(['resource-id'], ['id' => $this->parameters['id'], 'uid' => $uid]);
@@ -117,12 +117,12 @@ class Media extends BaseApi
 				$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 			}
 
-			$this->jsonExit($attachment);
+			$this->earlyJsonExit($attachment);
 		}
 
 		Photo::update(['desc' => $request['description']], ['resource-id' => $photo['resource-id']]);
 
-		$this->jsonExit(DI::mstdnAttachment()->createFromPhoto($this->parameters['id']));
+		$this->earlyJsonExit(DI::mstdnAttachment()->createFromPhoto($this->parameters['id']));
 	}
 
 	/**
@@ -140,11 +140,11 @@ class Media extends BaseApi
 		$id = $this->parameters['id'];
 
 		if (Photo::exists(['id' => $id, 'uid' => $uid])) {
-			$this->jsonExit(DI::mstdnAttachment()->createFromPhoto($id));
+			$this->earlyJsonExit(DI::mstdnAttachment()->createFromPhoto($id));
 		}
 
 		if (DI::mstdnAttachment()->isAttach($id) && Attach::exists(['id' => substr((string) $id, 7)])) {
-			$this->jsonExit(DI::mstdnAttachment()->createFromAttach((int) substr((string) $id, 7)));
+			$this->earlyJsonExit(DI::mstdnAttachment()->createFromAttach(substr((string) $id, 7)));
 		}
 
 		$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());

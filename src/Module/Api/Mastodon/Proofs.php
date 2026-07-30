@@ -19,6 +19,6 @@ class Proofs extends BaseApi
 	 */
 	protected function rawContent(array $request = [])
 	{
-		$this->jsonError(404, ['error' => 'Record not found']);
+		$this->earlyJsonError(404, ['error' => 'Record not found']);
 	}
 }

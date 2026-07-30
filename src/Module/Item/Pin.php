@@ -69,6 +69,6 @@ class Pin extends BaseModule
 			'state'   => (int) $pinned,
 		];
 
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }
