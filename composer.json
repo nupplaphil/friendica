@@ -185,13 +185,22 @@
 		"lang:recreate": "bin/run_xgettext.sh",
 		"cs:check": "php-cs-fixer check --diff",
 		"cs:fix": "php-cs-fixer fix",
-		"cs:fix-develop": "TARGET_BRANCH=develop COMMAND=fix bin/dev/fix-codestyle.sh",
 		"rector:check": "@rector:run --dry-run",
 		"rector:run": "rector --config=\".rector.php\"",
+		"qa": [
+			"@phpstan",
+			"@addons:phpstan",
+			"@test:unit",
+			"@test:legacy",
+			"@rector:check",
+			"@phpmd",
+			"@cs:check"
+		],
 		"rectify": [
 			"@rector:run",
+			"@cs:fix",
 			"@lang:recreate",
-			"@cs:fix-develop"
+			"@db:update-structure"
 		],
 		"db:update-structure": "bin/console.php dbstructure dumpsql > database.sql",
 		"install:prod": "@composer install -o --no-dev"

@@ -48,7 +48,7 @@ steps:
   check:
     image: php:8.3
     commands:
-      - echo "**** Use bin/dev/fix-codestyle.sh in case of errors ****"
+      - echo "**** Run `composer run cs:fix` in case of errors ****"
       - apt-get update -q
       - DEBIAN_FRONTEND=noninteractive apt-get install -q -y git
       - if [ ! -z "$${CI_COMMIT_PULL_REQUEST}" ]; then
