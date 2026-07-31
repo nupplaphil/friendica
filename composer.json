@@ -170,8 +170,21 @@
 		"rector/rector": "^2.2"
 	},
 	"scripts": {
+		"addons:cs:check": "php-cs-fixer check --config=addon/.tests/.php-cs-fixer.dist.php",
+		"addons:cs:fix": "php-cs-fixer fix --config=addon/.tests/.php-cs-fixer.dist.php",
 		"addons:phpstan": "phpstan analyze --memory-limit 1024M --configuration addon/.tests/.phpstan.neon",
 		"addons:test": "phpunit -c addon/.tests/phpunit.xml",
+		"addons:rector:check": "@addons:rector:run --dry-run",
+		"addons:rector:run": "rector --config=\"addon/.tests/.rector.php\"",
+		"addons:qa": [
+			"@addons:phpstan",
+			"@addons:test",
+			"@addons:rector:check",
+			"@addons:cs:check"
+		],"addons:rectify": [
+			"@addons:rector:run",
+			"@addons:cs:fix"
+		],
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:unit": "phpunit -c tests/phpunit.xml --testsuite unit",
 		"test:integration": "phpunit -c tests/phpunit.xml --testsuite integration",
