@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -31,25 +31,25 @@ class Manifest extends BaseModule
 			'shortcuts'   => [
 				[
 					'name' => 'Latest posts',
-					'url'  => '/network'
+					'url'  => '/network',
 				],
 				[
 					'name' => 'Messages',
-					'url'  => '/message'
+					'url'  => '/message',
 				],
 				[
 					'name' => 'Notifications',
-					'url'  => '/notifications/system'
+					'url'  => '/notifications/system',
 				],
 				[
 					'name' => 'Contacts',
-					'url'  => '/contact'
+					'url'  => '/contact',
 				],
 				[
 					'name' => 'Calendar',
-					'url'  => '/calendar'
-				]
-			]
+					'url'  => '/calendar',
+				],
+			],
 		];
 
 		/// @TODO If the admin provides their own touch icon, the manifest will regress
@@ -57,7 +57,7 @@ class Manifest extends BaseModule
 		/// There should be a mechanism to allow the admin to provide all of the 6
 		/// different images that are required for a fully valid web app manifest.
 		$touch_icon = $config->get('system', 'touch_icon');
-		if($touch_icon) {
+		if ($touch_icon) {
 			$manifest['icons'] = [
 				[
 					'src'   => DI::baseUrl() . '/' . $touch_icon,

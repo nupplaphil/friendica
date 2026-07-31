@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -85,7 +85,7 @@ HELP;
 
 		$out = '';
 		$out .= "# FRIENDICA Distributed Social Network\n";
-		$out .= "# Copyright (C) 2010-2023, the Friendica project\n";
+		$out .= "# Copyright (C) 2010-2026, the Friendica project\n";
 		$out .= "# This file is distributed under the same license as the Friendica package.\n";
 		$out .= "# \n";
 		$out .= 'msgid ""' . "\n";

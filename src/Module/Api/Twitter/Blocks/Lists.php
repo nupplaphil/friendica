@@ -1,13 +1,12 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 namespace Friendica\Module\Api\Twitter\Blocks;
 
-use Friendica\Core\System;
 use Friendica\Database\DBA;
 use Friendica\Module\Api\Twitter\ContactEndpoint;
 use Friendica\Module\BaseApi;
@@ -37,7 +36,7 @@ class Lists extends ContactEndpoint
 
 		$condition = ['uid' => $uid, 'blocked' => true];
 
-		$total_count = (int)DBA::count('user-contact', $condition);
+		$total_count = (int) DBA::count('user-contact', $condition);
 
 		if (!empty($max_id)) {
 			$condition = DBA::mergeConditions($condition, ["`cid` < ?", $max_id]);

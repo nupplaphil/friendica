@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2024, the Friendica project
-// SPDX-FileCopyrightText: 2010-2024 the Friendica project
+// Copyright (C) 2010-2026, the Friendica project
+// SPDX-FileCopyrightText: 2010-2026 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -20,7 +20,7 @@ class ThemeDetails extends BaseModule
 	{
 		if (!empty($_REQUEST['theme'])) {
 			$theme = $_REQUEST['theme'];
-			$info = Theme::getInfo($theme);
+			$info  = Theme::getInfo($theme);
 
 			// Unfortunately there will be no translation for this string
 			$description = $info['description'] ?? '';
