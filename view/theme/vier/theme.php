@@ -16,7 +16,6 @@
  */
 
 use Friendica\App\Mode;
-use Friendica\Content\GroupManager;
 use Friendica\Core\Renderer;
 use Friendica\Core\Search;
 use Friendica\Database\DBA;
@@ -193,12 +192,6 @@ function vier_community_info(): void
 
 		$aside['$nv'] = $nv;
 	}
-
-	//Community_Pages at right_aside
-	if ($show_pages && DI::userSession()->getLocalUserId()) {
-		$aside['$page'] = GroupManager::widget(DI::userSession()->getLocalUserId());
-	}
-	// END Community Page
 
 	// helpers
 	if ($show_helpers) {

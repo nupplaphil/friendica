@@ -52,6 +52,7 @@ class Ping extends BaseModule
 		private readonly Repository\Notification $notificationRepo,
 		private readonly Introduction $introductionRepo,
 		private readonly Factory\FormattedNavNotification $formattedNavNotification,
+		private readonly GroupManager $groupManager,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -105,7 +106,7 @@ class Ping extends BaseModule
 					}
 				}
 
-				foreach (GroupManager::countUnseenItems() as $group_count) {
+				foreach ($this->groupManager->countUnseenItems() as $group_count) {
 					if ($group_count['count'] > 0) {
 						$groups_unseen[] = $group_count;
 					}

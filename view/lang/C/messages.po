@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-31 06:58+0000\n"
+"POT-Creation-Date: 2026-08-01 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1459,7 +1459,7 @@ msgstr ""
 #: src/Module/BaseProfile.php:141 src/Module/Contact.php:402
 #: src/Module/Contact.php:540 src/Module/Conversation/Channel.php:98
 #: src/Module/Conversation/Community.php:91
-#: src/Module/Conversation/Network.php:385
+#: src/Module/Conversation/Network.php:392
 #: src/Module/Moderation/BaseUsers.php:127
 msgid "More"
 msgstr ""
@@ -1685,7 +1685,7 @@ msgstr ""
 
 #: src/Content/Conversation/PostTemplateBuilder.php:920
 #: src/Content/Conversation/StatusEditor.php:149 src/Content/Nav.php:87
-#: src/Module/Post/Edit.php:141
+#: src/Content/Nav/NavRenderer.php:85 src/Module/Post/Edit.php:141
 msgid "Loading..."
 msgstr ""
 
@@ -1888,202 +1888,211 @@ msgstr ""
 msgid "Open Compose page"
 msgstr ""
 
-#: src/Content/Feature.php:105
+#: src/Content/Feature.php:106
 msgid "General Features"
 msgstr ""
 
-#: src/Content/Feature.php:107
+#: src/Content/Feature.php:108
 msgid "Display the community in the navigation"
 msgstr ""
 
-#: src/Content/Feature.php:107
+#: src/Content/Feature.php:108
 msgid "If enabled, the community can be accessed via the navigation menu. Independent from this setting, the community timelines can always be accessed via the channels."
 msgstr ""
 
-#: src/Content/Feature.php:112
+#: src/Content/Feature.php:113
 msgid "Post Composition Features"
 msgstr ""
 
-#: src/Content/Feature.php:113
+#: src/Content/Feature.php:114
 msgid "Explicit Mentions"
 msgstr ""
 
-#: src/Content/Feature.php:113
+#: src/Content/Feature.php:114
 msgid "Add explicit mentions to comment box for manual control over who gets mentioned in replies."
 msgstr ""
 
-#: src/Content/Feature.php:114
+#: src/Content/Feature.php:115
 msgid "Add an abstract from ActivityPub content warnings"
 msgstr ""
 
-#: src/Content/Feature.php:114
+#: src/Content/Feature.php:115
 msgid "Add an abstract when commenting on ActivityPub posts with a content warning. Abstracts are displayed as content warning on systems like Mastodon or Pleroma."
 msgstr ""
 
-#: src/Content/Feature.php:119
+#: src/Content/Feature.php:120
 msgid "Post/Comment Tools"
 msgstr ""
 
-#: src/Content/Feature.php:120
+#: src/Content/Feature.php:121
 msgid "Post Categories"
 msgstr ""
 
-#: src/Content/Feature.php:120
+#: src/Content/Feature.php:121
 msgid "Add categories to your posts"
 msgstr ""
 
-#: src/Content/Feature.php:121 src/Model/Profile.php:826
+#: src/Content/Feature.php:122 src/Model/Profile.php:826
 #: src/Module/Admin/Summary.php:207 src/Module/Item/Compose.php:161
 #: src/Module/Moderation/Report/Create.php:320
 #: src/Module/Moderation/Summary.php:60
 msgid "Summary"
 msgstr ""
 
-#: src/Content/Feature.php:121
+#: src/Content/Feature.php:122
 msgid "Add a summary, abstract or spoiler text to your posts"
 msgstr ""
 
-#: src/Content/Feature.php:126
+#: src/Content/Feature.php:127
 msgid "Network Widgets"
 msgstr ""
 
-#: src/Content/Feature.php:127 src/Content/Widget.php:239
+#: src/Content/Feature.php:128 src/Content/Widget.php:239
 #: src/Model/Circle.php:593 src/Module/Circle.php:138
 #: src/Module/Contact.php:392 src/Module/Welcome.php:63
 msgid "Circles"
 msgstr ""
 
-#: src/Content/Feature.php:127
+#: src/Content/Feature.php:128
 msgid "Display posts that have been created by accounts of the selected circle."
 msgstr ""
 
-#: src/Content/Feature.php:128 src/Content/GroupManager.php:132
+#: src/Content/Feature.php:129 src/Content/GroupManager.php:95
 #: src/Content/Nav.php:235 src/Content/Text/HTML.php:886
 #: src/Content/Widget.php:564 src/Model/User.php:1418
 msgid "Groups"
 msgstr ""
 
-#: src/Content/Feature.php:128
+#: src/Content/Feature.php:129
 msgid "Display posts that have been distributed by the selected group."
 msgstr ""
 
-#: src/Content/Feature.php:129 src/Content/Widget.php:533
-msgid "Archives"
-msgstr ""
-
-#: src/Content/Feature.php:129
-msgid "Display an archive where posts can be selected by month and year."
-msgstr ""
-
-#: src/Content/Feature.php:130 src/Content/Widget.php:312
-msgid "Protocols"
+#: src/Content/Feature.php:130 src/Content/PagesManager.php:95
+msgid "Pages"
 msgstr ""
 
 #: src/Content/Feature.php:130
+msgid "Display posts from Organization and News Pages."
+msgstr ""
+
+#: src/Content/Feature.php:131 src/Content/Widget.php:533
+msgid "Archives"
+msgstr ""
+
+#: src/Content/Feature.php:131
+msgid "Display an archive where posts can be selected by month and year."
+msgstr ""
+
+#: src/Content/Feature.php:132 src/Content/Widget.php:312
+msgid "Protocols"
+msgstr ""
+
+#: src/Content/Feature.php:132
 msgid "Display posts with the selected protocols."
 msgstr ""
 
-#: src/Content/Feature.php:131 src/Content/Widget.php:570
+#: src/Content/Feature.php:133 src/Content/Widget.php:570
 #: src/Module/Settings/Account.php:392
 msgid "Account Types"
 msgstr ""
 
-#: src/Content/Feature.php:131
+#: src/Content/Feature.php:133
 msgid "Display posts done by accounts with the selected account type."
 msgstr ""
 
-#: src/Content/Feature.php:132 src/Content/Widget.php:632
+#: src/Content/Feature.php:134 src/Content/Widget.php:632
 #: src/Module/Admin/Site.php:476 src/Module/BaseSettings.php:113
 #: src/Module/Settings/Channels.php:231 src/Module/Settings/Display.php:447
 msgid "Channels"
 msgstr ""
 
-#: src/Content/Feature.php:132
+#: src/Content/Feature.php:134
 msgid "Display posts in the system channels and user defined channels."
 msgstr ""
 
-#: src/Content/Feature.php:133 src/Content/Widget/SavedSearches.php:46
+#: src/Content/Feature.php:135 src/Content/Widget/SavedSearches.php:46
 msgid "Saved Searches"
 msgstr ""
 
-#: src/Content/Feature.php:133
+#: src/Content/Feature.php:135
 msgid "Display posts that contain subscribed hashtags."
 msgstr ""
 
-#: src/Content/Feature.php:134 src/Content/Widget.php:342
+#: src/Content/Feature.php:136 src/Content/Widget.php:342
 msgid "Saved Folders"
 msgstr ""
 
-#: src/Content/Feature.php:134
+#: src/Content/Feature.php:136
 msgid "Display a list of folders in which posts are stored."
 msgstr ""
 
-#: src/Content/Feature.php:135 src/Module/Conversation/Timeline.php:206
+#: src/Content/Feature.php:137 src/Module/Conversation/Timeline.php:206
 msgid "Own Contacts"
 msgstr ""
 
-#: src/Content/Feature.php:135
+#: src/Content/Feature.php:137
 msgid "Include or exclude posts from subscribed accounts. This widget is not visible on all channels."
 msgstr ""
 
-#: src/Content/Feature.php:136 src/Content/Widget/TrendingTags.php:39
+#: src/Content/Feature.php:138 src/Content/Widget/TrendingTags.php:39
 msgid "Trending Tags"
 msgstr ""
 
-#: src/Content/Feature.php:136
+#: src/Content/Feature.php:138
 msgid "Display a list of the most popular tags in recent public posts."
 msgstr ""
 
-#: src/Content/Feature.php:141
+#: src/Content/Feature.php:143
 msgid "Advanced Profile Settings"
 msgstr ""
 
-#: src/Content/Feature.php:142
+#: src/Content/Feature.php:144
 msgid "Tag Cloud"
 msgstr ""
 
-#: src/Content/Feature.php:142
+#: src/Content/Feature.php:144
 msgid "Provide a personal tag cloud on your profile page"
 msgstr ""
 
-#: src/Content/Feature.php:143
+#: src/Content/Feature.php:145
 msgid "Display Membership Date"
 msgstr ""
 
-#: src/Content/Feature.php:143
+#: src/Content/Feature.php:145
 msgid "Display membership date in profile"
 msgstr ""
 
-#: src/Content/Feature.php:148
+#: src/Content/Feature.php:150
 msgid "Advanced Calendar Settings"
 msgstr ""
 
-#: src/Content/Feature.php:149
+#: src/Content/Feature.php:151
 msgid "Allow anonymous access to your calendar"
 msgstr ""
 
-#: src/Content/Feature.php:149
+#: src/Content/Feature.php:151
 msgid "Allows anonymous visitors to consult your calendar and your public events. Contact birthday events are private to you."
 msgstr ""
 
-#: src/Content/GroupManager.php:134
+#: src/Content/GroupManager.php:97
 msgid "External link to group"
 msgstr ""
 
-#: src/Content/GroupManager.php:138 src/Content/Widget.php:539
+#: src/Content/GroupManager.php:101 src/Content/PagesManager.php:101
+#: src/Content/Widget.php:539
 msgid "show less"
 msgstr ""
 
-#: src/Content/GroupManager.php:139 src/Content/Widget.php:434
-#: src/Content/Widget.php:540
+#: src/Content/GroupManager.php:102 src/Content/PagesManager.php:102
+#: src/Content/Widget.php:434 src/Content/Widget.php:540
 msgid "show more"
 msgstr ""
 
-#: src/Content/GroupManager.php:140
+#: src/Content/GroupManager.php:103
 msgid "Create new group"
 msgstr ""
 
-#: src/Content/GroupManager.php:142
+#: src/Content/GroupManager.php:105
 msgid "Find groups to join"
 msgstr ""
 
@@ -2154,7 +2163,7 @@ msgstr ""
 
 #: src/Content/Item.php:423 src/Content/Widget.php:71
 #: src/Model/Contact.php:1299 src/Model/Contact.php:1311
-#: src/Module/Contact/Follow.php:152 view/theme/vier/theme.php:183
+#: src/Module/Contact/Follow.php:152 view/theme/vier/theme.php:182
 msgid "Connect/Follow"
 msgstr ""
 
@@ -2183,24 +2192,25 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/Content/Nav.php:86
+#: src/Content/Nav.php:86 src/Content/Nav/NavRenderer.php:84
 msgid "Nothing new here"
 msgstr ""
 
-#: src/Content/Nav.php:92 src/Content/Nav.php:263 src/Module/Help.php:68
+#: src/Content/Nav.php:92 src/Content/Nav.php:263
+#: src/Content/Nav/NavRenderer.php:90 src/Module/Help.php:68
 #: view/theme/frio/theme.php:234
 msgid "Home"
 msgstr ""
 
-#: src/Content/Nav.php:93
+#: src/Content/Nav.php:93 src/Content/Nav/NavRenderer.php:91
 msgid "Skip to main content"
 msgstr ""
 
-#: src/Content/Nav.php:94
+#: src/Content/Nav.php:94 src/Content/Nav/NavRenderer.php:92
 msgid "Clear notifications"
 msgstr ""
 
-#: src/Content/Nav.php:95
+#: src/Content/Nav.php:95 src/Content/Nav/NavRenderer.php:93
 msgid "Search: @name, !group, #tags, content"
 msgstr ""
 
@@ -2251,7 +2261,7 @@ msgstr ""
 #: src/Module/Settings/TwoFactor/AppSpecific.php:130
 #: src/Module/Settings/TwoFactor/Index.php:125
 #: src/Module/Settings/TwoFactor/Recovery.php:96
-#: src/Module/Settings/TwoFactor/Verify.php:140 view/theme/vier/theme.php:228
+#: src/Module/Settings/TwoFactor/Verify.php:140 view/theme/vier/theme.php:221
 msgid "Help"
 msgstr ""
 
@@ -2336,7 +2346,7 @@ msgstr ""
 
 #: src/Content/Nav.php:266 src/Module/BaseProfile.php:34
 #: src/Module/BaseSettings.php:86 src/Module/Contact.php:487
-#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:276
+#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:277
 #: src/Module/Welcome.php:44
 msgid "Profile"
 msgstr ""
@@ -2456,6 +2466,18 @@ msgstr ""
 msgid "last"
 msgstr ""
 
+#: src/Content/PagesManager.php:97
+msgid "External link to page"
+msgstr ""
+
+#: src/Content/PagesManager.php:103
+msgid "Create new page"
+msgstr ""
+
+#: src/Content/PagesManager.php:105
+msgid "Find pages to follow"
+msgstr ""
+
 #: src/Content/Text/BBCode.php:910
 #, php-format
 msgid "<a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a> %3$s"
@@ -2525,46 +2547,46 @@ msgid_plural "%d invitations available"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Widget.php:69 view/theme/vier/theme.php:181
+#: src/Content/Widget.php:69 view/theme/vier/theme.php:180
 msgid "Find People"
 msgstr ""
 
-#: src/Content/Widget.php:70 view/theme/vier/theme.php:182
+#: src/Content/Widget.php:70 view/theme/vier/theme.php:181
 msgid "Enter name or interest"
 msgstr ""
 
-#: src/Content/Widget.php:72 view/theme/vier/theme.php:184
+#: src/Content/Widget.php:72 view/theme/vier/theme.php:183
 msgid "Examples: Robert Morgenstein, Fishing"
 msgstr ""
 
 #: src/Content/Widget.php:73 src/Module/Contact.php:443
-#: src/Module/Directory.php:81 view/theme/vier/theme.php:185
+#: src/Module/Directory.php:81 view/theme/vier/theme.php:184
 msgid "Find"
 msgstr ""
 
 #: src/Content/Widget.php:74 src/Module/Contact/Suggestions.php:51
-#: view/theme/vier/theme.php:186
+#: view/theme/vier/theme.php:185
 msgid "Friend Suggestions"
 msgstr ""
 
-#: src/Content/Widget.php:75 view/theme/vier/theme.php:187
+#: src/Content/Widget.php:75 view/theme/vier/theme.php:186
 msgid "Similar Interests"
 msgstr ""
 
-#: src/Content/Widget.php:76 view/theme/vier/theme.php:188
+#: src/Content/Widget.php:76 view/theme/vier/theme.php:187
 msgid "Random Profile"
 msgstr ""
 
-#: src/Content/Widget.php:77 view/theme/vier/theme.php:189
+#: src/Content/Widget.php:77 view/theme/vier/theme.php:188
 msgid "Invite Friends"
 msgstr ""
 
 #: src/Content/Widget.php:78 src/Module/Directory.php:72
-#: view/theme/vier/theme.php:190
+#: view/theme/vier/theme.php:189
 msgid "Global Directory"
 msgstr ""
 
-#: src/Content/Widget.php:80 view/theme/vier/theme.php:192
+#: src/Content/Widget.php:80 view/theme/vier/theme.php:191
 msgid "Local Directory"
 msgstr ""
 
@@ -2698,12 +2720,12 @@ msgid "Mention"
 msgstr ""
 
 #: src/Content/Widget/VCard.php:121 src/Model/Profile.php:360
-#: src/Module/Contact/Profile.php:428 src/Module/Profile/Profile.php:186
+#: src/Module/Contact/Profile.php:428 src/Module/Profile/Profile.php:187
 msgid "XMPP:"
 msgstr ""
 
 #: src/Content/Widget/VCard.php:122 src/Model/Profile.php:361
-#: src/Module/Contact/Profile.php:430 src/Module/Profile/Profile.php:190
+#: src/Module/Contact/Profile.php:430 src/Module/Profile/Profile.php:191
 msgid "Matrix:"
 msgstr ""
 
@@ -2711,7 +2733,7 @@ msgstr ""
 #: src/Model/Event.php:94 src/Model/Event.php:461 src/Model/Event.php:940
 #: src/Model/Profile.php:355 src/Module/Contact/Profile.php:426
 #: src/Module/Directory.php:133 src/Module/Notifications/Introductions.php:187
-#: src/Module/Profile/Profile.php:208
+#: src/Module/Profile/Profile.php:209
 msgid "Location:"
 msgstr ""
 
@@ -2736,7 +2758,7 @@ msgstr ""
 msgid "Group posts"
 msgstr ""
 
-#: src/Core/ACL.php:152 src/Module/Profile/Profile.php:277
+#: src/Core/ACL.php:152 src/Module/Profile/Profile.php:278
 msgid "Yourself"
 msgstr ""
 
@@ -3672,7 +3694,7 @@ msgid "Change profile picture"
 msgstr ""
 
 #: src/Model/Profile.php:358 src/Module/Directory.php:138
-#: src/Module/Profile/Profile.php:196
+#: src/Module/Profile/Profile.php:197
 msgid "Homepage:"
 msgstr ""
 
@@ -3681,7 +3703,7 @@ msgstr ""
 msgid "About:"
 msgstr ""
 
-#: src/Model/Profile.php:457 src/Module/Profile/Profile.php:163
+#: src/Model/Profile.php:457 src/Module/Profile/Profile.php:164
 msgid "Joined:"
 msgstr ""
 
@@ -3693,7 +3715,7 @@ msgstr ""
 msgid "Atom feed"
 msgstr ""
 
-#: src/Model/Profile.php:492 src/Module/Profile/Profile.php:290
+#: src/Model/Profile.php:492 src/Module/Profile/Profile.php:291
 msgid "This website has been verified to belong to the same person."
 msgstr ""
 
@@ -4654,7 +4676,7 @@ msgid "Policies"
 msgstr ""
 
 #: src/Module/Admin/Site.php:467 src/Module/Calendar/Event/Form.php:265
-#: src/Module/Contact.php:530 src/Module/Profile/Profile.php:284
+#: src/Module/Contact.php:530 src/Module/Profile/Profile.php:285
 msgid "Advanced"
 msgstr ""
 
@@ -6246,7 +6268,7 @@ msgstr ""
 msgid "Share this event"
 msgstr ""
 
-#: src/Module/Calendar/Event/Form.php:264 src/Module/Profile/Profile.php:283
+#: src/Module/Calendar/Event/Form.php:264 src/Module/Profile/Profile.php:284
 msgid "Basic"
 msgstr ""
 
@@ -6690,7 +6712,7 @@ msgstr ""
 
 #: src/Module/Contact/Follow.php:156 src/Module/Contact/Profile.php:434
 #: src/Module/Notifications/Introductions.php:191
-#: src/Module/Profile/Profile.php:221
+#: src/Module/Profile/Profile.php:222
 msgid "Tags:"
 msgstr ""
 
@@ -7074,21 +7096,21 @@ msgstr ""
 msgid "Not available."
 msgstr ""
 
-#: src/Module/Conversation/Network.php:277
+#: src/Module/Conversation/Network.php:284
 msgid "No such circle"
 msgstr ""
 
-#: src/Module/Conversation/Network.php:281
+#: src/Module/Conversation/Network.php:288
 #, php-format
 msgid "Circle: %s"
 msgstr ""
 
-#: src/Module/Conversation/Network.php:301
+#: src/Module/Conversation/Network.php:308
 #, php-format
 msgid "Error %d (%s) while fetching the timeline."
 msgstr ""
 
-#: src/Module/Conversation/Network.php:397
+#: src/Module/Conversation/Network.php:404
 msgid "Network feed not available."
 msgstr ""
 
@@ -9370,11 +9392,11 @@ msgstr ""
 msgid "Show unread"
 msgstr ""
 
-#: src/Module/Notifications/Ping.php:193
+#: src/Module/Notifications/Ping.php:194
 msgid "{0} requested registration"
 msgstr ""
 
-#: src/Module/Notifications/Ping.php:202
+#: src/Module/Notifications/Ping.php:203
 #, php-format
 msgid "{0} and %d others requested registration"
 msgstr ""
@@ -9536,8 +9558,8 @@ msgstr ""
 msgid "%d more"
 msgstr ""
 
-#: src/Module/Profile/CircleExport.php:49 src/Module/Profile/Profile.php:98
-#: src/Module/Profile/Profile.php:133 src/Module/Profile/Restricted.php:33
+#: src/Module/Profile/CircleExport.php:49 src/Module/Profile/Profile.php:99
+#: src/Module/Profile/Profile.php:134 src/Module/Profile/Restricted.php:33
 msgid "Profile not found."
 msgstr ""
 
@@ -9549,19 +9571,19 @@ msgstr ""
 msgid "No contacts."
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:71 src/Module/Profile/Profile.php:356
+#: src/Module/Profile/Conversations.php:71 src/Module/Profile/Profile.php:357
 #: src/Protocol/Feed.php:1108
 #, php-format
 msgid "%s's posts"
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:72 src/Module/Profile/Profile.php:357
+#: src/Module/Profile/Conversations.php:72 src/Module/Profile/Profile.php:358
 #: src/Protocol/Feed.php:1111
 #, php-format
 msgid "%s's comments"
 msgstr ""
 
-#: src/Module/Profile/Conversations.php:73 src/Module/Profile/Profile.php:358
+#: src/Module/Profile/Conversations.php:73 src/Module/Profile/Profile.php:359
 #: src/Protocol/Feed.php:1104
 #, php-format
 msgid "%s's timeline"
@@ -9598,30 +9620,30 @@ msgstr ""
 msgid "View Album"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:124
+#: src/Module/Profile/Profile.php:125
 #, php-format
 msgid "You're currently viewing your profile as <b>%s</b> <a href=\"%s\" class=\"btn btn-sm pull-right\">Cancel</a>"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:158 src/Module/Settings/Account.php:527
+#: src/Module/Profile/Profile.php:159 src/Module/Settings/Account.php:527
 #: src/Module/Settings/Profile/Index.php:296
 msgid "Display name:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:169
+#: src/Module/Profile/Profile.php:170
 msgid "d MMMM"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:174 src/Util/Temporal.php:155
+#: src/Module/Profile/Profile.php:175 src/Util/Temporal.php:155
 msgid "Birthday:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:177 src/Module/Settings/Profile/Index.php:304
+#: src/Module/Profile/Profile.php:178 src/Module/Settings/Profile/Index.php:304
 #: src/Util/Temporal.php:157
 msgid "Age: "
 msgstr ""
 
-#: src/Module/Profile/Profile.php:177 src/Module/Settings/Profile/Index.php:304
+#: src/Module/Profile/Profile.php:178 src/Module/Settings/Profile/Index.php:304
 #: src/Util/Temporal.php:157
 #, php-format
 msgid "%d year old"
@@ -9629,27 +9651,27 @@ msgid_plural "%d years old"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Profile/Profile.php:182 src/Module/Settings/Profile/Index.php:297
+#: src/Module/Profile/Profile.php:183 src/Module/Settings/Profile/Index.php:297
 msgid "Description:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:248
+#: src/Module/Profile/Profile.php:249
 msgid "Groups:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:268
+#: src/Module/Profile/Profile.php:269
 msgid "Public circles (CSV):"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:281
+#: src/Module/Profile/Profile.php:282
 msgid "View profile as:"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:282
+#: src/Module/Profile/Profile.php:283
 msgid "View as selected profile"
 msgstr ""
 
-#: src/Module/Profile/Profile.php:293
+#: src/Module/Profile/Profile.php:294
 msgid "View as"
 msgstr ""
 
@@ -11116,7 +11138,7 @@ msgid "Enable SPA mode"
 msgstr ""
 
 #: src/Module/Settings/Display.php:470
-msgid "When enabled, supported page requests can use the single page application response."
+msgid "Warning - Experimental feature: This may lead to errors or unexpected behaviour. When enabled, supported page requests can use the single page application response."
 msgstr ""
 
 #: src/Module/Settings/Display.php:471
@@ -12932,7 +12954,7 @@ msgstr ""
 msgid "Community Pages"
 msgstr ""
 
-#: view/theme/vier/config.php:149 view/theme/vier/theme.php:136
+#: view/theme/vier/config.php:149 view/theme/vier/theme.php:135
 msgid "Community Profiles"
 msgstr ""
 
@@ -12940,7 +12962,7 @@ msgstr ""
 msgid "Help or @NewHere ?"
 msgstr ""
 
-#: view/theme/vier/config.php:151 view/theme/vier/theme.php:309
+#: view/theme/vier/config.php:151 view/theme/vier/theme.php:302
 msgid "Connect Services"
 msgstr ""
 
@@ -12948,10 +12970,10 @@ msgstr ""
 msgid "Find Friends"
 msgstr ""
 
-#: view/theme/vier/config.php:153 view/theme/vier/theme.php:163
+#: view/theme/vier/config.php:153 view/theme/vier/theme.php:162
 msgid "Last users"
 msgstr ""
 
-#: view/theme/vier/theme.php:222
+#: view/theme/vier/theme.php:215
 msgid "Quick Start"
 msgstr ""

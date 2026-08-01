@@ -446,16 +446,18 @@ pre code {
 #sidebar-widget-list .tool:hover {
 	background: #EEE;
 }
-#sidebar-circle-list .notify {
+#sidebar-circle-list .notify,
+#sidebar-pages-list .notify {
 	display: none;
 }
-#sidebar-circle-list .notify.show {
+#sidebar-circle-list .notify.show,
+#sidebar-pages-list .notify.show {
 	display: inline-block;
 }
 .tool .action {
 	float: right;
 }
-.tool a:hover, .widget a:hover, #group-widget-collapse:hover, .admin.link a:hover, aside h4 a:hover, right_aside h4 a:hover {
+.tool a:hover, .widget a:hover, #group-widget-collapse:hover, #pages-widget-collapse:hover, .admin.link a:hover, aside h4 a:hover, right_aside h4 a:hover {
 	/* text-decoration: underline; */
 	text-decoration: none;
 	color: black;
@@ -469,10 +471,10 @@ pre code {
 	opacity: 1;
 }
 
-.sidebar-circle-li:hover, #sidebar-new-circle:hover, #sidebar-edit-circles:hover, #sidebar-new-group:hover, #group-widget-collapse:hover,
-#sidebar-uncircled:hover, .side-link:hover, .nets-ul li:hover, #group-list-sidebar li:hover, #group-list-sidebar-right li:hover,
-.nets-all:hover, .saved-search-li:hover, li.tool:hover, .admin.link:hover, aside h4 a:hover, right_aside h4 a:hover, #message-new:hover,
-#sidebar-photos-albums li:hover, .photos-upload-link:hover, .textcomplete-item.active {
+.sidebar-circle-li:hover, #sidebar-new-circle:hover, #sidebar-edit-circles:hover, #sidebar-new-group:hover, #sidebar-new-pages:hover, #group-widget-collapse:hover,
+#pages-widget-collapse,#sidebar-uncircled:hover, .side-link:hover, .nets-ul li:hover, #group-list-sidebar li:hover, #group-list-sidebar-right li:hover,
+#pages-list-sidebar li:hover, #pages-list-sidebar-right li:hover, .nets-all:hover, .saved-search-li:hover, li.tool:hover, .admin.link:hover, 
+aside h4 a:hover, right_aside h4 a:hover, #message-new:hover, #sidebar-photos-albums li:hover, .photos-upload-link:hover, .textcomplete-item.active {
 	/* background-color: #ddd; */
 	/* background-color: #e5e5e5; */
 	background-color: #F5F5F5;
@@ -486,7 +488,7 @@ pre code {
 	font-weight: bold;
 }
 
-#group-widget-showmore, #sidebar-new-circle, #sidebar-edit-circles, #sidebar-new-group, #group-widget-collapse, #group-list-rsidebar-right, #sidebar-uncircled,
+#group-widget-showmore, #sidebar-new-circle, #sidebar-edit-circles, #sidebar-new-group, #sidebar-new-pages, #group-widget-collapse, #group-list-rsidebar-right, #sidebar-uncircled,
 .side-link, #peoplefind-desc, #connect-desc, .nets-all, .admin.link, #message-new {
 	padding-left: 10px;
 	padding-top: 3px;
@@ -512,10 +514,12 @@ pre code {
 	padding-right: 5px;
 }
 
+#pages-list-sidebar .notify, #pages-list-sidebar-right .notify,
 #group-list-sidebar .notify, #group-list-sidebar-right .notify {
 	display: none;
 }
 
+#pages-list-sidebar .notify.show, #pages-list-sidebar-right .notify.show,
 #group-list-sidebar .notify.show, #group-list-sidebar-right .notify.show {
 	display: inline-block;
 }
