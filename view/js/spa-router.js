@@ -503,8 +503,15 @@ function replaceContainerContent(htmlString, finalUrl = null) {
   // Collect all script and link/style elements from the whole response
   const resourceElements = newDoc.querySelectorAll('head > link, head > script, head > style, body script, body link');
   
-  // 3. Define the main containers to update
-  const containerSelectors = ['nav#topbar-first', 'div#topbar-second', 'main'];
+  // 3. Define the main containers to update with theme-agnostic fallbacks.
+  const containerSelectors = [
+    'nav#topbar-first',
+    'div#topbar-second',
+    'main',
+    'aside',
+    'right_aside',
+    'section'
+  ];
   
   // 4. PERFORM CONTENT REPLACEMENT (Main body)
   containerSelectors.forEach(selector => {

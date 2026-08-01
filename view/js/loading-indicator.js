@@ -123,7 +123,8 @@ function createLoadingIndicator() {
   var sourceElement = document.getElementById('topbar-first');
   if (sourceElement) {
     var bgColor = getComputedStyleValue(sourceElement, 'background-color');
-    var textColor = getComputedStyleValue(sourceElement, 'color');
+    var iconElement = document.querySelector('nav#topbar-first .icon');
+    var textColor = iconElement ? getComputedStyleValue(iconElement, 'color') : getComputedStyleValue(sourceElement, 'color');
 
     if (bgColor === '' || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
       var parent = sourceElement.parentElement;
