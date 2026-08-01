@@ -356,6 +356,10 @@ Karl Marx - Die ursprüngliche Akkumulation
 				['@!alice', '@bob'],
 				'@!alice @bob',
 			],
+			'private-mention-not-swallowing-trailing-exclamation' => [
+				['@!righthandle'],
+				'@!righthandle heelo! i just want to test the @!',
+			],
 		];
 	}
 

@@ -182,6 +182,10 @@ class Item
 			//get the person's name
 			$name = substr($tag, strlen($tag_prefix));
 
+			if ($name === '') {
+				return $replaced;
+			}
+
 			// Sometimes the tag detection doesn't seem to work right
 			// This is some workaround
 			$nameparts = explode(' ', $name);
@@ -485,7 +489,7 @@ class Item
 
 		// Mentions prefixed with "@!" address the contact privately
 		$private_tags = array_filter(BBCode::getTags($item['body']), function ($tag) {
-			return str_starts_with($tag, '@!');
+			return str_starts_with($tag, '@!') && (strlen($tag) > 2);
 		});
 
 		// Convert mentions in the body to a unified format
