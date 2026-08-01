@@ -70,16 +70,17 @@ docker compose -f ../.docker/compose.yaml exec -e MYSQL_DATABASE=test php \
 ### 4. Run the tests inside the PHP container
 
 ```bash
-docker compose -f ../.docker/compose.yaml exec -e MYSQL_DATABASE=test php \
+docker compose -f ../.docker/compose.yaml exec php \
   ./vendor/bin/phpunit -c tests/phpunit.xml --testsuite legacy
 ```
 
-The container already provides `MYSQL_HOST`, `MYSQL_USER` and `MYSQL_PASSWORD`; only `MYSQL_DATABASE` has to be pointed at the test database.
+The container already provides `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_TEST_DATABASE`.
+The PHPUnit bootstrap maps `MYSQL_TEST_DATABASE` to `MYSQL_DATABASE`, so tests use the separate test database without overriding the development database setting.
 
 A single test file works the same way:
 
 ```bash
-docker compose -f ../.docker/compose.yaml exec -e MYSQL_DATABASE=test php \
+docker compose -f ../.docker/compose.yaml exec php \
   ./vendor/bin/phpunit -c tests/phpunit.xml tests/src/Content/Text/BBCodeTest.php
 ```
 
@@ -131,23 +132,10 @@ The test harness (`tests/Util/Database/StaticDatabase.php`) builds its connectio
 | `MYSQL_PORT`                     | no       | Port, appended to the host if set     |
 | `MYSQL_USERNAME` or `MYSQL_USER` | yes      | Database user                         |
 | `MYSQL_PASSWORD`                 | yes      | Database password                     |
-| `MYSQL_DATABASE`                 | yes      | Database name                         |
+| `MYSQL_DATABASE`                 | yes, unless `MYSQL_TEST_DATABASE` is set for PHPUnit | Database name |
+| `MYSQL_TEST_DATABASE`            | no       | Test database name. When set, PHPUnit uses it instead of `MYSQL_DATABASE`. |
 
 If host, user or database is missing, the run aborts with `Either one of the following settings are missing: Host, User or Database`.
-
-## autotest.sh
-
-`bin/dev/autotest.sh` does the whole round trip: it drops and recreates the database, installs Friendica via `bin/console.php autoinstall` and then runs PHPUnit.
-GitHub Actions does not use it (`.github/workflows/tests.yml` calls `vendor/bin/phpunit` directly), and it shells out to a `mysql`/`mariadb` client, so it needs one **on your host** — it cannot reach the Compose stack above.
-You must pass the database type:
-
-```bash
-bin/dev/autotest.sh mariadb
-bin/dev/autotest.sh mariadb src/Util/ImagesTest.php
-```
-
-Its defaults are `test` / `friendica` / `friendica` on `localhost`, overridable via `FRIENDICA_MYSQL_DATABASE`, `FRIENDICA_MYSQL_USERNAME`, `FRIENDICA_MYSQL_PASSWORD` and `FRIENDICA_MYSQL_HOST`.
-Further switches (`NOINSTALL`, `NOCOVERAGE`, `USEDOCKER`, `TEST_SELECTION`) are documented in the script header.
 
 ## Reading the output
 
