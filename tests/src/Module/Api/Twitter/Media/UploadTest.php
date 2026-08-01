@@ -47,13 +47,13 @@ class UploadTest extends ApiTestCase
 		AuthTestConfig::$authenticated = false;
 
 		(new class (DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []) extends Upload {
-			public function jsonError(int $httpCode, $content, string $content_type = 'application/json')
+			public function earlyJsonError(int $httpCode, mixed $content, string $contentType = 'application/json'): never
 			{
 				if ($httpCode === 401) {
 					throw new UnauthorizedException(json_encode($content));
 				}
 
-				parent::jsonError($httpCode, $content, $content_type);
+				parent::earlyJsonError($httpCode, $content, $contentType);
 			}
 		})->run($this->httpExceptionMock);
 	}
