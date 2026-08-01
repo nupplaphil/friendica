@@ -21,6 +21,8 @@ use Friendica\Content\Conversation\Factory\Channel as ChannelFactory;
 use Friendica\Content\Conversation\Factory\UserDefinedChannel as UserDefinedChannelFactory;
 use Friendica\Content\Conversation\Factory\Community as CommunityFactory;
 use Friendica\Content\Conversation\Factory\Network as NetworkFactory;
+use Friendica\Content\GroupManager;
+use Friendica\Content\PagesManager;
 use Friendica\Core\Cache\Capability\ICanCache;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
@@ -52,6 +54,8 @@ class Network extends NetworkModule
 		Mode $mode,
 		ConversationRenderer $conversationRenderer,
 		StatusEditor $statusEditor,
+		private readonly GroupManager $groupManager,
+		private readonly PagesManager $pagesManager,
 		Page $page,
 		IHandleUserSessions $session,
 		Database $database,
@@ -81,6 +85,8 @@ class Network extends NetworkModule
 			$mode,
 			$conversationRenderer,
 			$statusEditor,
+			$groupManager,
+			$pagesManager,
 			$page,
 			$session,
 			$database,
