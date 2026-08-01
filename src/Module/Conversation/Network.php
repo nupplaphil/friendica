@@ -108,6 +108,8 @@ class Network extends Timeline
 		Mode $mode,
 		ConversationRenderer $conversationRenderer,
 		StatusEditor $statusEditor,
+		private readonly GroupManager $groupManager,
+		private readonly PagesManager $pagesManager,
 		Page $page,
 		IHandleUserSessions $session,
 		Database $database,
@@ -199,10 +201,10 @@ class Network extends Timeline
 						$this->page['aside'] .= Circle::sidebarWidget($module, $module . '/circle', 'standard', $this->circleId);
 						break;
 					case Feature::GROUPS:
-						$this->page['aside'] .= GroupManager::widget($this->session->getLocalUserId());
+						$this->page['aside'] .= $this->groupManager->widget($this->session->getLocalUserId());
 						break;
 					case Feature::PAGES:
-						$this->page['aside'] .= PagesManager::widget($this->session->getLocalUserId());
+						$this->page['aside'] .= $this->pagesManager->widget($this->session->getLocalUserId());
 						break;
 					case Feature::ARCHIVE:
 						$this->page['aside'] .= Widget::postedByYear($module . '/archive', $this->session->getLocalUserId(), false);

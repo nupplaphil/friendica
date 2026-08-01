@@ -7,11 +7,13 @@
 
 namespace Friendica\Content;
 
+use Friendica\App\BaseURL;
+use Friendica\Content\Contact\Repository\ContactByType;
 use Friendica\Content\Text\HTML;
-use Friendica\Core\Protocol;
+use Friendica\Core\Addon\AddonHelper;
+use Friendica\Core\L10n;
 use Friendica\Core\Renderer;
-use Friendica\Database\DBA;
-use Friendica\DI;
+use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Model\Contact;
 
 /**
@@ -19,6 +21,16 @@ use Friendica\Model\Contact;
  */
 class PagesManager
 {
+	private const CONTACT_TYPES = [Contact::TYPE_ORGANISATION, Contact::TYPE_NEWS];
+
+	public function __construct(
+		private readonly ContactByType $contacts,
+		private readonly AddonHelper $addonHelper,
+		private readonly BaseURL $baseUrl,
+		private readonly L10n $l10n,
+		private readonly IHandleUserSessions $session,
+	) {}
+
 	/**
 	 * Function to list all pages a user is connected with
 	 *
@@ -35,55 +47,9 @@ class PagesManager
 	 *    'thumb' => contact photo in format thumb
 	 * @throws \Exception
 	 */
-	public static function getList($uid, $lastitem, $showhidden = true, $showprivate = false)
+	public function getList(int $uid, bool $lastitem, bool $showhidden = true, bool $showprivate = false): array
 	{
-		if ($lastitem) {
-			$params = ['order' => ['last-item' => true]];
-		} else {
-			$params = ['order' => ['name']];
-		}
-
-		$condition = [
-			'contact-type' => [Contact::TYPE_ORGANISATION, Contact::TYPE_NEWS],
-			'network'      => [Protocol::DFRN, Protocol::ACTIVITYPUB],
-			'uid'          => $uid,
-			'blocked'      => false,
-			'pending'      => false,
-			'archive'      => false,
-		];
-
-		$condition = DBA::mergeConditions($condition, ["`platform` NOT IN (?, ?)", 'peertube', 'wordpress']);
-
-		if (!$showprivate) {
-			$condition = DBA::mergeConditions($condition, ['manually-approve' => false]);
-		}
-
-		if (!$showhidden) {
-			$condition = DBA::mergeConditions($condition, ['hidden' => false]);
-		}
-
-		$pagesList = [];
-
-		$fields   = ['id', 'url', 'alias', 'name', 'micro', 'thumb', 'avatar', 'network', 'uid'];
-		$contacts = DBA::select('account-user-view', $fields, $condition, $params);
-		if (!$contacts) {
-			return $pagesList;
-		}
-
-		while ($contact = DBA::fetch($contacts)) {
-			$pagesList[] = [
-				'url'     => $contact['url'],
-				'alias'   => $contact['alias'],
-				'name'    => $contact['name'],
-				'id'      => $contact['id'],
-				'micro'   => $contact['micro'],
-				'thumb'   => $contact['thumb'],
-				'network' => $contact['network'],
-			];
-		}
-		DBA::close($contacts);
-
-		return($pagesList);
+		return $this->contacts->selectForUser($uid, self::CONTACT_TYPES, $lastitem, $showhidden, $showprivate);
 	}
 
 
@@ -98,12 +64,12 @@ class PagesManager
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function widget(int $uid): string
+	public function widget(int $uid): string
 	{
 		//sort by last updated item
-		$contacts      = self::getList($uid, true, true, true);
-		$total         = count($contacts);
-		$visibleGroups = 10;
+		$contacts     = $this->getList($uid, true, true, true);
+		$total        = count($contacts);
+		$visiblePages = 10;
 
 		$id = 0;
 
@@ -115,7 +81,7 @@ class PagesManager
 				'external_url' => Contact::magicLinkByContact($contact),
 				'name'         => $contact['name'],
 				'cid'          => $contact['id'],
-				'micro'        => DI::baseUrl()->remove(Contact::getMicro($contact)),
+				'micro'        => $this->baseUrl->remove(Contact::getMicro($contact)),
 				'id'           => ++$id,
 			];
 			$entries[] = $entry;
@@ -123,23 +89,20 @@ class PagesManager
 
 		$tpl = Renderer::getMarkupTemplate('widget/pages_list.tpl');
 
-
-		$addonHelper = DI::addonHelper();
-
 		return Renderer::replaceMacros(
 			$tpl,
 			[
-				'$title'                        => DI::l10n()->t('Pages'),
-				'$pages'                        => $entries,
-				'$link_desc'                    => DI::l10n()->t('External link to page'),
-				'$new_page'                     => 'register/?type=page',
-				'$total'                        => $total,
-				'$visible_pages'                => $visibleGroups,
-				'$showless'                     => DI::l10n()->t('show less'),
-				'$showmore'                     => DI::l10n()->t('show more'),
-				'$create_new_page'              => DI::l10n()->t('Create new page'),
-				'$addon_page_directory_enabled' => $addonHelper->isAddonEnabled("pagedirectory"),
-				'$visit_pagedirectory'          => DI::l10n()->t('Find pages to follow'),
+				'$title'                         => $this->l10n->t('Pages'),
+				'$pages'                         => $entries,
+				'$link_desc'                     => $this->l10n->t('External link to page'),
+				'$new_page'                      => 'register/?type=page',
+				'$total'                         => $total,
+				'$visible_pages'                 => $visiblePages,
+				'$showless'                      => $this->l10n->t('show less'),
+				'$showmore'                      => $this->l10n->t('show more'),
+				'$create_new_page'               => $this->l10n->t('Create new page'),
+				'$addon_pages_directory_enabled' => $this->addonHelper->isAddonEnabled('pagedirectory'),
+				'$visit_pagesdirectory'          => $this->l10n->t('Find pages to follow'),
 			],
 		);
 	}
@@ -155,7 +118,7 @@ class PagesManager
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function profileAdvanced($uid)
+	public function profileAdvanced(int $uid): string
 	{
 		if (!Feature::isEnabled($uid, Feature::PAGES)) {
 			return '';
@@ -169,7 +132,7 @@ class PagesManager
 		//don't sort by last updated item
 		$lastitem = false;
 
-		$contacts = self::getList($uid, $lastitem, false, false);
+		$contacts = $this->getList($uid, $lastitem, false, false);
 
 		$total_shown = 0;
 		foreach ($contacts as $contact) {
@@ -194,25 +157,13 @@ class PagesManager
 	 *    'count' => counted unseen page items
 	 * @throws \Exception
 	 */
-	public static function countUnseenItems()
+	public function countUnseenItems(): array
 	{
-		$stmtContacts = DBA::p(
-			"SELECT `contact`.`id`, `contact`.`name`, COUNT(*) AS `count` FROM `post-user-view`
-				INNER JOIN `contact` ON `post-user-view`.`contact-id` = `contact`.`id`
-				WHERE `post-user-view`.`uid` = ? AND `post-user-view`.`visible` AND NOT `post-user-view`.`deleted` AND `post-user-view`.`unseen`
-				AND `contact`.`network` IN (?, ?) AND `contact`.`contact-type` = ?
-				AND NOT `contact`.`blocked` AND NOT `contact`.`hidden`
-				AND NOT `contact`.`pending` AND NOT `contact`.`archive`
-				AND `contact`.`uid` = ?
-				GROUP BY `contact`.`id`",
-			DI::userSession()->getLocalUserId(),
-			Protocol::DFRN,
-			Protocol::ACTIVITYPUB,
-			Contact::TYPE_ORGANISATION,
-			Contact::TYPE_NEWS,
-			DI::userSession()->getLocalUserId(),
-		);
+		$uid = $this->session->getLocalUserId();
+		if (!is_int($uid)) {
+			return [];
+		}
 
-		return DBA::toArray($stmtContacts);
+		return $this->contacts->countUnseenItems($uid, self::CONTACT_TYPES);
 	}
 }

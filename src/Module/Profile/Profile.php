@@ -52,6 +52,7 @@ class Profile extends BaseProfile
 		private readonly AppHelper $appHelper,
 		private readonly Database $database,
 		private readonly EventDispatcherInterface $eventDispatcher,
+		private readonly GroupManager $groupManager,
 		L10n $l10n,
 		BaseURL $baseUrl,
 		Arguments $args,
@@ -246,7 +247,7 @@ class Profile extends BaseProfile
 			$custom_fields += self::buildField(
 				'group_list',
 				$this->t('Groups:'),
-				GroupManager::profileAdvanced($profile['uid']),
+				$this->groupManager->profileAdvanced($profile['uid']),
 			);
 		}
 
