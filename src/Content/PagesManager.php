@@ -1,7 +1,7 @@
 <?php
 
-// Copyright (C) 2010-2026, the Friendica project
-// SPDX-FileCopyrightText: 2010-2026 the Friendica project
+// Copyright (C) 2010-2024, the Friendica project
+// SPDX-FileCopyrightText: 2010-2024 the Friendica project
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -17,11 +17,11 @@ use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Model\Contact;
 
 /**
- * This class handles methods related to the group functionality
+ * This class handles methods related to the page functionality
  */
-class GroupManager
+class PagesManager
 {
-	private const CONTACT_TYPES = [Contact::TYPE_COMMUNITY];
+	private const CONTACT_TYPES = [Contact::TYPE_ORGANISATION, Contact::TYPE_NEWS];
 
 	public function __construct(
 		private readonly ContactByType $contacts,
@@ -32,16 +32,16 @@ class GroupManager
 	) {}
 
 	/**
-	 * Function to list all groups a user is connected with
+	 * Function to list all pages a user is connected with
 	 *
 	 * @param int     $uid         of the profile owner
 	 * @param boolean $lastitem    Sort by lastitem
-	 * @param boolean $showhidden  Show groups which are not hidden
-	 * @param boolean $showprivate Show private groups
+	 * @param boolean $showhidden  Show pages which are not hidden
+	 * @param boolean $showprivate Show private pages
 	 *
 	 * @return array
-	 *    'url'    => group url
-	 *    'name'    => group name
+	 *    'url'   => page url
+	 *    'name'  => page name
 	 *    'id'    => number of the key from the array
 	 *    'micro' => contact photo in format micro
 	 *    'thumb' => contact photo in format thumb
@@ -54,9 +54,9 @@ class GroupManager
 
 
 	/**
-	 * Group list widget
+	 * Pages list widget
 	 *
-	 * Sidebar widget to show subscribed Friendica groups. If activated
+	 * Sidebar widget to show subscribed Friendica pages. If activated
 	 * in the settings, it appears in the network page sidebar
 	 *
 	 * @param int $uid The ID of the User
@@ -67,9 +67,9 @@ class GroupManager
 	public function widget(int $uid): string
 	{
 		//sort by last updated item
-		$contacts      = $this->getList($uid, true, true, true);
-		$total         = count($contacts);
-		$visibleGroups = 10;
+		$contacts     = $this->getList($uid, true, true, true);
+		$total        = count($contacts);
+		$visiblePages = 10;
 
 		$id = 0;
 
@@ -87,30 +87,30 @@ class GroupManager
 			$entries[] = $entry;
 		}
 
-		$tpl = Renderer::getMarkupTemplate('widget/group_list.tpl');
+		$tpl = Renderer::getMarkupTemplate('widget/pages_list.tpl');
 
 		return Renderer::replaceMacros(
 			$tpl,
 			[
-				'$title'                         => $this->l10n->t('Groups'),
-				'$groups'                        => $entries,
-				'$link_desc'                     => $this->l10n->t('External link to group'),
-				'$new_group_page'                => 'register/?type=group',
+				'$title'                         => $this->l10n->t('Pages'),
+				'$pages'                         => $entries,
+				'$link_desc'                     => $this->l10n->t('External link to page'),
+				'$new_page'                      => 'register/?type=page',
 				'$total'                         => $total,
-				'$visible_groups'                => $visibleGroups,
+				'$visible_pages'                 => $visiblePages,
 				'$showless'                      => $this->l10n->t('show less'),
 				'$showmore'                      => $this->l10n->t('show more'),
-				'$create_new_group'              => $this->l10n->t('Create new group'),
-				'$addon_group_directory_enabled' => $this->addonHelper->isAddonEnabled('groupdirectory'),
-				'$visit_groupdirectory'          => $this->l10n->t('Find groups to join'),
+				'$create_new_page'               => $this->l10n->t('Create new page'),
+				'$addon_pages_directory_enabled' => $this->addonHelper->isAddonEnabled('pagedirectory'),
+				'$visit_pagesdirectory'          => $this->l10n->t('Find pages to follow'),
 			],
 		);
 	}
 
 	/**
-	 * Format group list as contact block
+	 * Format page list as contact block
 	 *
-	 * This function is used to show the group list in
+	 * This function is used to show the page list in
 	 * the advanced profile.
 	 *
 	 * @param int $uid The ID of the User
@@ -120,7 +120,7 @@ class GroupManager
 	 */
 	public function profileAdvanced(int $uid): string
 	{
-		if (!Feature::isEnabled($uid, Feature::GROUPS)) {
+		if (!Feature::isEnabled($uid, Feature::PAGES)) {
 			return '';
 		}
 
@@ -136,7 +136,7 @@ class GroupManager
 
 		$total_shown = 0;
 		foreach ($contacts as $contact) {
-			$o .= HTML::micropro($contact, true, 'grouplist-profile-advanced');
+			$o .= HTML::micropro($contact, true, 'pagelist-profile-advanced');
 			$total_shown++;
 			if ($total_shown == $show_total) {
 				break;
@@ -147,14 +147,14 @@ class GroupManager
 	}
 
 	/**
-	 * count unread group items
+	 * count unread page items
 	 *
-	 * Count unread items of connected groups and private groups
+	 * Count unread items of connected pages
 	 *
 	 * @return array
 	 *    'id' => contact id
-	 *    'name' => contact/group name
-	 *    'count' => counted unseen group items
+	 *    'name' => contact/page name
+	 *    'count' => counted unseen page items
 	 * @throws \Exception
 	 */
 	public function countUnseenItems(): array

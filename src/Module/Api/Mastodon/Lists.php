@@ -31,7 +31,7 @@ class Lists extends BaseApi
 	/** @var Repository\UserDefinedChannel */
 	protected $userDefinedChannel;
 
-	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, ChannelFactory $channel, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
+	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, ChannelFactory $channel, private readonly GroupManager $groupManager, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
 	{
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -125,7 +125,7 @@ class Lists extends BaseApi
 				}
 			}
 
-			foreach (GroupManager::getList($uid, true, true, true) as $group) {
+			foreach ($this->groupManager->getList($uid, true, true, true) as $group) {
 				$lists[] = DI::mstdnList()->createFromGroup($group);
 			}
 		} else {
