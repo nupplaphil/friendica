@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-31 06:58+0000\n"
+"POT-Creation-Date: 2026-08-01 02:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1685,7 +1685,7 @@ msgstr ""
 
 #: src/Content/Conversation/PostTemplateBuilder.php:920
 #: src/Content/Conversation/StatusEditor.php:149 src/Content/Nav.php:87
-#: src/Module/Post/Edit.php:141
+#: src/Content/Nav/NavRenderer.php:85 src/Module/Post/Edit.php:141
 msgid "Loading..."
 msgstr ""
 
@@ -2183,24 +2183,25 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/Content/Nav.php:86
+#: src/Content/Nav.php:86 src/Content/Nav/NavRenderer.php:84
 msgid "Nothing new here"
 msgstr ""
 
-#: src/Content/Nav.php:92 src/Content/Nav.php:263 src/Module/Help.php:68
+#: src/Content/Nav.php:92 src/Content/Nav.php:263
+#: src/Content/Nav/NavRenderer.php:90 src/Module/Help.php:68
 #: view/theme/frio/theme.php:234
 msgid "Home"
 msgstr ""
 
-#: src/Content/Nav.php:93
+#: src/Content/Nav.php:93 src/Content/Nav/NavRenderer.php:91
 msgid "Skip to main content"
 msgstr ""
 
-#: src/Content/Nav.php:94
+#: src/Content/Nav.php:94 src/Content/Nav/NavRenderer.php:92
 msgid "Clear notifications"
 msgstr ""
 
-#: src/Content/Nav.php:95
+#: src/Content/Nav.php:95 src/Content/Nav/NavRenderer.php:93
 msgid "Search: @name, !group, #tags, content"
 msgstr ""
 
@@ -11116,7 +11117,7 @@ msgid "Enable SPA mode"
 msgstr ""
 
 #: src/Module/Settings/Display.php:470
-msgid "When enabled, supported page requests can use the single page application response."
+msgid "Warning - Experimental feature: This may lead to errors or unexpected behaviour. When enabled, supported page requests can use the single page application response."
 msgstr ""
 
 #: src/Module/Settings/Display.php:471
