@@ -469,36 +469,6 @@ parameters:
 			path: src/Module/Moderation/Blocklist/Contact.php
 
 		-
-			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setBlocked\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
-			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setCollapsed\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
-			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setIgnored\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
-			message: '#^Parameter \#2 \$cid of method Friendica\\Moderation\\Factory\\Report\:\:createFromForm\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
-			message: '#^Parameter \#4 \$categoryId of method Friendica\\Moderation\\Factory\\Report\:\:createFromForm\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
 			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
