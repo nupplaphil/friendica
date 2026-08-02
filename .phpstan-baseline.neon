@@ -79,36 +79,6 @@ parameters:
 			path: src/Content/Conversation/Factory/UserDefinedChannel.php
 
 		-
-			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Content/Item.php
-
-		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Content/Item.php
-
-		-
-			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Item.php
-
-		-
-			message: '#^Parameter \#1 \$session of class Friendica\\Object\\EMail\\ItemCCEMail constructor expects Friendica\\Core\\Session\\Model\\UserSession, Friendica\\Core\\Session\\Capability\\IHandleUserSessions given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Item.php
-
-		-
 			message: '#^Parameter \#2 \$simple of static method Friendica\\Model\\Event\:\:getHTML\(\) expects bool, int given\.$#'
 			identifier: argument.type
 			count: 1
