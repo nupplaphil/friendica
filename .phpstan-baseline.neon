@@ -1465,34 +1465,10 @@ parameters:
 			path: tests/Unit/Event/ModulePostRecipientEventTest.php
 
 		-
-			message: '#^Parameter \#1 \$logger of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Psr\\Log\\LoggerInterface\|null, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 6
-			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
-
-		-
-			message: '#^Parameter \#2 \$contentItem of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Friendica\\Content\\Item\|null, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
-
-		-
-			message: '#^Parameter \#3 \$userDefinedChannel of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\|null, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
-
-		-
 			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 2
 			path: tests/Unit/Util/CryptoTest.php
-
-		-
-			message: '#^Parameter \#1 \$entities of class Friendica\\BaseCollection constructor expects array\<Friendica\\BaseEntity\>, array\<int, Mockery\\MockInterface\> given\.$#'
-			identifier: argument.type
-			count: 18
-			path: tests/src/BaseCollectionTest.php
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
@@ -1555,30 +1531,6 @@ parameters:
 			path: tests/src/Core/Cache/DatabaseCacheTest.php
 
 		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcacheCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Cache/MemcacheCacheTest.php
-
-		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcachedCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Cache/MemcachedCacheTest.php
-
-		-
-			message: '#^Parameter \#1 \$config of class Friendica\\Util\\Profiler constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
-
-		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\RedisCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Cache/RedisCacheTest.php
-
-		-
 			message: '#^Parameter \#2 \$key of method Friendica\\Core\\Config\\ValueObject\\Cache\:\:get\(\) expects string\|null, int given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1615,26 +1567,20 @@ parameters:
 			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
 
 		-
-			message: '#^Parameter \#1 \$instanceRegister of method Friendica\\Core\\Hooks\\Util\\StrategiesFileManager\:\:setupStrategies\(\) expects Friendica\\Core\\Hooks\\Capability\\ICanRegisterStrategies, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
-
-		-
-			message: '#^Parameter \#2 \$configuration of class Friendica\\Core\\Hooks\\Util\\StrategiesFileManager constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 3
-			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
-
-		-
-			message: '#^Parameter \#1 \$configCache of method Friendica\\Core\\Installer\:\:setUpCache\(\) expects Friendica\\Core\\Config\\ValueObject\\Cache, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
+			message: '#^Call to an undefined method Dice\\Dice\:\:shouldReceive\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: tests/src/Core/InstallerTest.php
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Core\\InstallerTest\:\:\$dice \(Dice\\Dice&Mockery\\MockInterface\) does not accept Dice\\Dice\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Core/InstallerTest.php
 
@@ -1663,24 +1609,6 @@ parameters:
 			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
 
 		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcacheCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Lock/MemcacheCacheLockTest.php
-
-		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcachedCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Lock/MemcachedCacheLockTest.php
-
-		-
-			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\RedisCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Lock/RedisCacheLockTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1691,12 +1619,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/src/Core/Storage/DatabaseStorageTest.php
-
-		-
-			message: '#^Parameter \#1 \$config of class Friendica\\Core\\Storage\\Type\\FilesystemConfig constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
@@ -1723,12 +1645,6 @@ parameters:
 			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
 
 		-
-			message: '#^Parameter \#1 \$dice of static method Friendica\\DI\:\:init\(\) expects Dice\\Dice, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/SystemTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1739,30 +1655,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/src/Database/DatabaseTest.php
-
-		-
-			message: '#^Parameter \#1 \$logger of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
-
-		-
-			message: '#^Parameter \#2 \$database of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
-
-		-
-			message: '#^Parameter \#3 \$mstdnAccountFactory of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Factory\\Api\\Mastodon\\Account, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
-
-		-
-			message: '#^Parameter \#4 \$mstdnStatusFactory of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Factory\\Api\\Mastodon\\Status, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Factory/Api/Mastodon/ReportTest.php
 
 		-
 			message: '#^Parameter \#1 \$hour of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
@@ -1783,126 +1675,6 @@ parameters:
 			path: tests/src/Moderation/Factory/ReportTest.php
 
 		-
-			message: '#^Parameter \#1 \$l10n of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\Core\\L10n, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 12
-			path: tests/src/Module/Api/ApiResponseTest.php
-
-		-
-			message: '#^Parameter \#2 \$args of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\App\\Arguments, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 12
-			path: tests/src/Module/Api/ApiResponseTest.php
-
-		-
-			message: '#^Parameter \#3 \$logger of class Friendica\\Module\\Api\\ApiResponse constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Module/Api/ApiResponseTest.php
-
-		-
-			message: '#^Parameter \#4 \$baseUrl of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\App\\BaseURL, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 12
-			path: tests/src/Module/Api/ApiResponseTest.php
-
-		-
-			message: '#^Parameter \#5 \$twitterUser of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\Factory\\Api\\Twitter\\User, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 12
-			path: tests/src/Module/Api/ApiResponseTest.php
-
-		-
-			message: '#^Parameter \#1 \$database of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createModule\(\) expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#1 \$database of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createReportRepository\(\) expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#10 \$profiler of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Util\\Profiler, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#11 \$response of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Module\\Api\\ApiResponse, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#2 \$logger of class Friendica\\Moderation\\Repository\\Report constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#3 \$entityFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#3 \$mstdnReportFactory of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createModule\(\) expects Friendica\\Factory\\Api\\Mastodon\\Report, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#4 \$errorFactory of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Factory\\Api\\Mastodon\\Error, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#4 \$postFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report\\Post, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#5 \$appHelper of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\AppHelper, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#5 \$ruleFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report\\Rule, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#6 \$l10n of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Core\\L10n, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#7 \$baseUrl of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\App\\BaseURL, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#8 \$args of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\App\\Arguments, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
-			message: '#^Parameter \#9 \$logger of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1925,6 +1697,12 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/src/Network/ProbeTest.php
+
+		-
+			message: '#^Property Friendica\\Test\\src\\Profile\\ProfileField\\Entity\\ProfileFieldTest\:\:\$permissionSetFactory \(Friendica\\Security\\PermissionSet\\Factory\\PermissionSet&Mockery\\MockInterface\) does not accept Friendica\\Security\\PermissionSet\\Factory\\PermissionSet\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
 
 		-
 			message: '#^Parameter \#2 \$allow_cid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
@@ -1985,10 +1763,4 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/src/Util/ImagesTest.php
-
-		-
-			message: '#^Parameter \#1 \$config of class Friendica\\Util\\Profiler constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
-			identifier: argument.type
-			count: 4
-			path: tests/src/Util/ProfilerTest.php
 

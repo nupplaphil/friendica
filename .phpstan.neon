@@ -4,6 +4,7 @@
 
 includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - .phpstan-baseline.neon
@@ -47,12 +48,6 @@ parameters:
             path: src/
             count: 90
 
-        # Mockery dynamic methods in tests (kept from original baseline)
-        -
-            message: '#^Call to an undefined method Mockery[\\\\](?:ExpectationInterface(?:[|]Mockery[\\\\]HigherOrderMessage)?|LegacyMockInterface)::(?:with|once|times|twice|withAnyArgs|andReturnUsing|addRules)\(\)\.$#'
-            identifier: method.notFound
-            path: tests/
-            count: 237
         # Deprecated run() calls in tests are preserved for BC promise and
         # will be replaced by handleRequest() tests in the future
         -
