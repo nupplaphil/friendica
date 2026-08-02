@@ -301,48 +301,6 @@ parameters:
 			path: src/Module/Item/Ignore.php
 
 		-
-			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\:\:unblock\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Contact.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Users/Active.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Users/Active.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Users/Blocked.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Users/Blocked.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Moderation/Users/Index.php
-
-		-
-			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Users/Index.php
-
-		-
 			message: '#^Parameter \#2 \$update of static method Friendica\\Model\\Contact\:\:getByURL\(\) expects bool\|null, array\<int, string\> given\.$#'
 			identifier: argument.type
 			count: 1
