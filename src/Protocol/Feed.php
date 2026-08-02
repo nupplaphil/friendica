@@ -444,7 +444,7 @@ class Feed
 				}
 
 				// Don't use the GUID value directly but instead use it as a basis for the GUID
-				$item['guid'] = Item::guidFromUri($guid, $host);
+				$item['guid'] = DI::postUriGenerator()->guidFromUri($guid, $host);
 			}
 
 			if (empty($item['uri'])) {
@@ -666,7 +666,7 @@ class Feed
 
 				$data = PageInfo::queryUrl(
 					$item['plink'],
-					false,
+					'',
 					$fetch_further_information == LocalRelationship::FFI_BOTH,
 					$contact['ffi_keyword_denylist'] ?? '',
 				);
@@ -720,8 +720,8 @@ class Feed
 			// Distributed items should have a well-formatted URI.
 			// Additionally, we have to avoid conflicts with identical URI between imported feeds and these items.
 			if ($notify) {
-				$item['guid'] = Item::guidFromUri($orig_plink, DI::baseUrl()->getHost());
-				$item['uri']  = Item::newURI($item['guid']);
+				$item['guid'] = DI::postUriGenerator()->guidFromUri($orig_plink, DI::baseUrl()->getHost());
+				$item['uri']  = DI::postUriGenerator()->newURI($item['guid']);
 				unset($item['plink']);
 				unset($item['thr-parent']);
 				unset($item['parent-uri']);
@@ -733,7 +733,7 @@ class Feed
 			$condition = ['uid' => $item['uid'], 'uri' => $item['uri']];
 			if (!Post::exists($condition) && !Post\Delayed::exists($item['uri'], $item['uid'])) {
 				if (!$notify) {
-					Post\Delayed::publish($item, $notify, $taglist, $attachments);
+					Post\Delayed::publish($item, (int) $notify, $taglist, $attachments);
 				} else {
 					$postings[] = [
 						'item'    => $item, 'notify' => $notify,
