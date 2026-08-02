@@ -943,16 +943,18 @@ class Diaspora
 	{
 		preg_replace_callback(
 			"=diaspora://.*?/post/([0-9A-Za-z\-_@.:]{15,254}[0-9A-Za-z])=ism",
-			function ($match) use ($item): void {
+			function ($match) use ($item): string {
 				self::fetchGuidSub($match, $item);
+				return $match[0];
 			},
 			(string) $item['body'],
 		);
 
 		preg_replace_callback(
 			"&\[url=/?posts/([^\[\]]*)\](.*)\[\/url\]&Usi",
-			function ($match) use ($item): void {
+			function ($match) use ($item): string {
 				self::fetchGuidSub($match, $item);
+				return $match[0];
 			},
 			(string) $item['body'],
 		);
@@ -4142,6 +4144,6 @@ class Diaspora
 		// Don't trigger the addons
 		$item['api_source'] = false;
 
-		return Item::insert($item, true);
+		return Item::insert($item, Worker::PRIORITY_HIGH);
 	}
 }
