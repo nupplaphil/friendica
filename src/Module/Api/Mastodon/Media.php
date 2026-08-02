@@ -94,7 +94,7 @@ class Media extends BaseApi
 		}
 
 		if (DI::mstdnAttachment()->isAttach($this->parameters['id']) && Attach::exists(['id' => substr((string) $this->parameters['id'], 7)])) {
-			$this->jsonExit(DI::mstdnAttachment()->createFromAttach(substr((string) $this->parameters['id'], 7)));
+			$this->jsonExit(DI::mstdnAttachment()->createFromAttach((int) substr((string) $this->parameters['id'], 7)));
 		}
 
 		$photo = Photo::selectFirst(['resource-id'], ['id' => $this->parameters['id'], 'uid' => $uid]);
@@ -112,7 +112,7 @@ class Media extends BaseApi
 			Post\Media::updateById(['description' => $request['description']], $this->parameters['id']);
 
 			try {
-				$attachment = DI::mstdnAttachment()->createFromId($this->parameters['id'] . '1');
+				$attachment = DI::mstdnAttachment()->createFromId((int) ($this->parameters['id'] . '1'));
 			} catch (InternalServerErrorException) {
 				$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 			}
@@ -144,7 +144,7 @@ class Media extends BaseApi
 		}
 
 		if (DI::mstdnAttachment()->isAttach($id) && Attach::exists(['id' => substr((string) $id, 7)])) {
-			$this->jsonExit(DI::mstdnAttachment()->createFromAttach(substr((string) $id, 7)));
+			$this->jsonExit(DI::mstdnAttachment()->createFromAttach((int) substr((string) $id, 7)));
 		}
 
 		$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());

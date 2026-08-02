@@ -10,6 +10,7 @@ namespace Friendica\Module\Api\Twitter\Statuses;
 use Friendica\Content\Text\HTML;
 use Friendica\Content\Text\Markdown;
 use Friendica\Core\Protocol;
+use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
@@ -164,7 +165,7 @@ class Update extends BaseApi
 			}
 		}
 
-		$id = Item::insert($item, true);
+		$id = Item::insert($item, Worker::PRIORITY_HIGH);
 		if (!empty($id)) {
 			$item = Post::selectFirst(['uri-id'], ['id' => $id]);
 			if (!empty($item['uri-id'])) {

@@ -187,42 +187,6 @@ parameters:
 			path: src/Module/ActivityPub/Outbox.php
 
 		-
-			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Accounts/Search.php
-
-		-
-			message: '#^Parameter \#1 \$id of method Friendica\\Factory\\Api\\Mastodon\\Attachment\:\:createFromAttach\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Api/Mastodon/Media.php
-
-		-
-			message: '#^Parameter \#1 \$id of method Friendica\\Factory\\Api\\Mastodon\\Attachment\:\:createFromId\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Media.php
-
-		-
-			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses/Mute.php
-
-		-
-			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses/Unmute.php
-
-		-
-			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Twitter/Statuses/Update.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
