@@ -1934,6 +1934,8 @@ class Item
 	 */
 	public static function newURI(string $guid = ''): string
 	{
+		@trigger_error('`' . __METHOD__ . '()` is deprecated since 2026.08, use \Friendica\Post\UriGenerator::newURI() instead.', E_USER_DEPRECATED);
+
 		return DI::postUriGenerator()->newURI($guid);
 	}
 

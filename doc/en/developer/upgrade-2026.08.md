@@ -214,3 +214,30 @@ This section contains deprecation notices. This changes will become mandatory in
    Worker::add(Worker::PRIORITY_HIGH, (string) 42);
    ```
 
+- Deprecated `\Friendica\Model\Item::newURI()` will be removed in a future release. Use `\Friendica\Post\UriGenerator::newURI()` instead. Calling `\Friendica\Model\Item::newURI()` triggers a deprecation warning.
+
+   *Before*
+   ```php
+   use Friendica\Model\Item;
+
+   $uri = Item::newURI($guid);
+   ```
+
+   *After* – via constructor injection
+   ```php
+   use Friendica\Post\UriGenerator;
+
+   public function __construct(
+       private UriGenerator $postUriGenerator,
+   ) {}
+
+   $uri = $this->postUriGenerator->newURI($guid);
+   ```
+
+   *After* – via DI
+   ```php
+   use Friendica\DI;
+
+   $uri = DI::postUriGenerator()->newURI($guid);
+   ```
+
