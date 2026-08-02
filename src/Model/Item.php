@@ -1723,7 +1723,7 @@ class Item
 		}
 
 		$item['contact-id'] = self::contactId($item);
-		$distributed        = self::insert($item, $notify);
+		$distributed        = self::insert($item, (int) $notify);
 
 		if (!$distributed) {
 			DI::logger()->info("Distributed item wasn't stored", ['uri-id' => $item['uri-id'], 'user' => $uid]);
@@ -2328,7 +2328,7 @@ class Item
 				if ($x) {
 					$res   = substr($i, $x + 1);
 					$i     = substr($i, 0, $x);
-					$photo = Photo::getPhotoForUser($uid, $i, $res);
+					$photo = Photo::getPhotoForUser($uid, $i, (int) $res);
 					if (DBA::isResult($photo)) {
 						/*
 						 * Check to see if we should replace this photo link with an embedded image
@@ -2750,7 +2750,7 @@ class Item
 			}
 		}
 
-		self::insert($new_item, true);
+		self::insert($new_item, Worker::PRIORITY_HIGH);
 
 		// If the parent item isn't visible then set it to visible
 		// @todo Check if this is still needed

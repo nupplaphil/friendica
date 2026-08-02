@@ -193,24 +193,6 @@ parameters:
 			path: src/Model/Contact.php
 
 		-
-			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, bool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Parameter \#3 \$scale of static method Friendica\\Model\\Photo\:\:getPhotoForUser\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Item.php
-
-		-
 			message: '''
 				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
 				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
