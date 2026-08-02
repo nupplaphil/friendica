@@ -73,24 +73,6 @@ parameters:
 			path: src/Collection/Api/Mastodon/Fields.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Console/Relocate.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Console/Relocate.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 3
-			path: src/Console/ServerBlock.php
-
-		-
 			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:existsById\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
@@ -208,18 +190,6 @@ parameters:
 			path: src/Core/Config/Util/ConfigFileManager.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Hook.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Hook.php
-
-		-
 			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, array given\.$#'
 			identifier: argument.type
 			count: 1
@@ -232,18 +202,6 @@ parameters:
 			path: src/Core/L10n.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Search.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Search.php
-
-		-
 			message: '#^Parameter \#2 \$code of class Friendica\\Core\\Storage\\Exception\\StorageException constructor expects int, string given\.$#'
 			identifier: argument.type
 			count: 2
@@ -254,24 +212,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Core/Storage/Type/ExternalResource.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Update.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 4
-			path: src/Core/Worker/Cron.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/Worker/Cron.php
 
 		-
 			message: '#^Parameter \#5 \$port of class mysqli constructor expects int\|null, string given\.$#'
@@ -325,18 +265,6 @@ parameters:
 			path: src/Model/Contact.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 8
-			path: src/Model/Contact.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Model/Contact/User.php
-
-		-
 			message: '#^Call to deprecated function strftime\(\)\.$#'
 			identifier: function.deprecated
 			count: 4
@@ -364,12 +292,6 @@ parameters:
 			path: src/Model/Event.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Model/GServer.php
-
-		-
 			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, bool given\.$#'
 			identifier: argument.type
 			count: 1
@@ -382,21 +304,9 @@ parameters:
 			path: src/Model/Item.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 3
-			path: src/Model/Item.php
-
-		-
 			message: '#^Parameter \#3 \$scale of static method Friendica\\Model\\Photo\:\:getPhotoForUser\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Model/Item.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 3
 			path: src/Model/Item.php
 
 		-
@@ -427,58 +337,10 @@ parameters:
 			path: src/Model/Mail.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Mail.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Mail.php
-
-		-
 			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, list\<array\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Model/Post/Counts.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Post/Delayed.php
-
-		-
-			message: '#^Parameter \#8 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Post/Delayed.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Model/Profile.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Subscription.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 4
-			path: src/Model/User.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Model/User.php
 
 		-
 			message: '#^Parameter \#3 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getInbox\(\) expects int\|null, string\|null given\.$#'
@@ -499,24 +361,6 @@ parameters:
 			path: src/Module/ActivityPub/Outbox.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Admin/Site.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Friendica/Events/Create.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Friendica/Events/Create.php
-
-		-
 			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, array given\.$#'
 			identifier: argument.type
 			count: 1
@@ -533,12 +377,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Module/Api/Mastodon/Media.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Reports.php
 
 		-
 			message: '''
@@ -592,18 +430,6 @@ parameters:
 			path: src/Module/Calendar/Event/API.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Calendar/Event/API.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Calendar/Event/API.php
-
-		-
 			message: '#^Parameter \#2 \$datetime of static method DateTime\:\:createFromFormat\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 2
@@ -622,19 +448,7 @@ parameters:
 			path: src/Module/Contact/Profile.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Contact/Profile.php
-
-		-
 			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:selectById\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Conversation/Timeline.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Module/Conversation/Timeline.php
@@ -664,28 +478,10 @@ parameters:
 			path: src/Module/FollowConfirm.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/FriendSuggest.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/FriendSuggest.php
-
-		-
 			message: '#^Parameter \#3 \$length of function array_slice expects int\|null, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Module/Help.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Item/Complete.php
 
 		-
 			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
@@ -712,42 +508,6 @@ parameters:
 			path: src/Module/Moderation/Blocklist/Contact.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Contact.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Contact/Import.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, bool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Contact/Import.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Moderation/Blocklist/Server/Add.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Server/Import.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Blocklist/Server/Index.php
-
-		-
 			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setBlocked\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
@@ -772,22 +532,10 @@ parameters:
 			path: src/Module/Moderation/Report/Create.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Report/Create.php
-
-		-
 			message: '#^Parameter \#4 \$categoryId of method Friendica\\Moderation\\Factory\\Report\:\:createFromForm\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Module/Moderation/Report/Create.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Moderation/Reports.php
 
 		-
 			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
@@ -853,18 +601,6 @@ parameters:
 			path: src/Module/Post/Tag/Add.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Post/Tag/Add.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Post/Tag/Add.php
-
-		-
 			message: '#^Parameter \#10 \$baseUrl of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\App\\BaseURL, Friendica\\App\\Arguments given\.$#'
 			identifier: argument.type
 			count: 1
@@ -919,52 +655,10 @@ parameters:
 			path: src/Module/Profile/Photos.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Register.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Register.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Settings/Account.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Settings/Account.php
-
-		-
 			message: '#^Parameter \#2 \$id of method Friendica\\Module\\Settings\\Channels\:\:enableTimeline\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Module/Settings/Channels.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Settings/Channels.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Settings/Channels.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Settings/Profile/Index.php
 
 		-
 			message: '#^Parameter \#2 \$app_specific_password_id of static method Friendica\\Security\\TwoFactor\\Model\\AppSpecificPassword\:\:deleteForUser\(\) expects int, string given\.$#'
@@ -977,18 +671,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Module/Update/Contact.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/User/Import.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/User/Import.php
 
 		-
 			message: '#^Parameter \#4 \$timestamp of class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNavNotification constructor expects string, int given\.$#'
@@ -1016,54 +698,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Protocol/ActivityPub/ClientToServer.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 5
-			path: src/Protocol/ActivityPub/Processor.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Protocol/ActivityPub/Processor.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/ActivityPub/Processor.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/ActivityPub/Queue.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/ActivityPub/Queue.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Protocol/ActivityPub/Receiver.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/ActivityPub/Receiver.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/ActivityPub/Receiver.php
 
 		-
 			message: '''
@@ -1117,18 +751,6 @@ parameters:
 			path: src/Protocol/Diaspora.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/Diaspora.php
-
-		-
 			message: '#^Parameter \#3 \$section of function imap_fetchbody expects string, int\<min, \-1\>\|int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1171,22 +793,10 @@ parameters:
 			path: src/Protocol/Feed.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Security/Authentication.php
-
-		-
 			message: '#^Parameter \#3 \$value of function curl_setopt expects bool, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Security/ExAuth.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Security/OAuth.php
 
 		-
 			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, int given\.$#'
@@ -1237,160 +847,10 @@ parameters:
 			path: src/Util/XML.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/AddContact.php
-
-		-
-			message: '#^Parameter \#4 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/AddContact.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/AddContact.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/CheckDeletedContacts.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/Contact/BlockByUrl.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/ContactDiscovery.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/ContactDiscovery.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/ContactDiscoveryForUser.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 29
-			path: src/Worker/Cron.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/Directory.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Worker/Expire.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/Expire.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/FetchMissingActivity.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/FetchMissingActivity.php
-
-		-
-			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/FetchMissingActivity.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/MoveStorage.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 8
-			path: src/Worker/Notifier.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 7
-			path: src/Worker/Notifier.php
-
-		-
 			message: '#^Parameter \#3 \$reply of static method Friendica\\Protocol\\Email\:\:getMessage\(\) expects string, bool given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Worker/OnePoll.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/PollContacts.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/ProfileUpdate.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/ProfileUpdate.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/UpdateContact.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/UpdateGServer.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/UpdateGServer.php
-
-		-
-			message: '#^Parameter \#4 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, bool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/UpdateGServer.php
 
 		-
 			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
