@@ -344,6 +344,22 @@ Karl Marx - Die ursprüngliche Akkumulation
 				[],
 				'https://github.com/uBlockOrigin/uBOL-home/wiki/Frequently-asked-questions-(FAQ)#if-i-install-ubol-will-i-see-a-difference-with-ubo',
 			],
+			'private-mention-handle' => [
+				['@!alice@example.com'],
+				'@!alice@example.com',
+			],
+			'private-mention-nick' => [
+				['@!alice'],
+				'Hello @!alice',
+			],
+			'private-mention-mixed-with-regular-mention' => [
+				['@!alice', '@bob'],
+				'@!alice @bob',
+			],
+			'private-mention-not-swallowing-trailing-exclamation' => [
+				['@!righthandle'],
+				'@!righthandle heelo! i just want to test the @!',
+			],
 		];
 	}
 

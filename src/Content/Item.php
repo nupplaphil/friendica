@@ -157,7 +157,7 @@ class Item
 	 * @param string $tag         the tag to replace
 	 * @param string $network     The network of the post
 	 *
-	 * @return array|bool ['replaced' => $replaced, 'contact' => $contact] or "false" on if already replaced
+	 * @return array|bool ['replaced' => $replaced, 'contact' => $contact, 'private' => $private] or "false" on if already replaced
 	 * @throws InternalServerErrorException
 	 * @throws ImagickException
 	 */
@@ -165,17 +165,26 @@ class Item
 	{
 		$replaced = false;
 		$contact  = [];
+		$private  = false;
 
 		//is it a person tag?
 		if (Tag::isType($tag, Tag::MENTION, Tag::IMPLICIT_MENTION, Tag::EXCLUSIVE_MENTION)) {
-			$tag_type = substr($tag, 0, 1);
+			// A mention prefixed with "@!" addresses the contact privately,
+			// in the body it is expanded to a regular mention.
+			$private    = str_starts_with($tag, '@!');
+			$tag_type   = substr($tag, 0, 1);
+			$tag_prefix = $private ? '@!' : $tag_type;
 			//is it already replaced?
 			if (strpos($tag, '[url=')) {
 				return $replaced;
 			}
 
 			//get the person's name
-			$name = substr($tag, 1);
+			$name = substr($tag, strlen($tag_prefix));
+
+			if ($name === '') {
+				return $replaced;
+			}
 
 			// Sometimes the tag detection doesn't seem to work right
 			// This is some workaround
@@ -246,11 +255,11 @@ class Item
 				// create profile link
 				$profile = str_replace(',', '%2c', $profile);
 				$newtag  = $tag_type . '[url=' . $profile . ']' . $newname . '[/url]';
-				$body    = str_replace($tag_type . $name, $newtag, $body);
+				$body    = str_replace($tag_prefix . $name, $newtag, $body);
 			}
 		}
 
-		return ['replaced' => $replaced, 'contact' => $contact];
+		return ['replaced' => $replaced, 'contact' => $contact, 'private' => $private];
 	}
 
 	/**
@@ -478,8 +487,14 @@ class Item
 		$group_contact  = [];
 		$receivers      = [];
 
+		// Mentions prefixed with "@!" address the contact privately
+		$private_tags = array_filter(BBCode::getTags($item['body']), function ($tag) {
+			return str_starts_with($tag, '@!') && (strlen($tag) > 2);
+		});
+
 		// Convert mentions in the body to a unified format
-		$item['body'] = BBCode::setMentions($item['body'], $item['uid'], $item['network']);
+		$private_contacts = [];
+		$item['body']     = BBCode::setMentions($item['body'], $item['uid'], $item['network'], $private_contacts);
 
 		// Search for group mentions
 		foreach (Tag::getFromBody($item['body'], Tag::TAG_CHARACTER[Tag::MENTION] . Tag::TAG_CHARACTER[Tag::EXCLUSIVE_MENTION]) as $tag) {
@@ -543,6 +558,32 @@ class Item
 				$item['allow_cid'] = '';
 				$item['allow_gid'] = '';
 			}
+		} elseif (!empty($private_tags) && ($item['gravity'] == ItemModel::GRAVITY_PARENT)) {
+			// The post contains privately addressed mentions ("@!"), it is only sent to these contacts
+			$private_receivers = [];
+			foreach ($private_contacts as $private_contact) {
+				$private_receivers[] = $private_contact['id'];
+			}
+
+			if (empty($private_receivers)) {
+				// For security reasons a post without any resolvable private mention receiver will be a post to yourself
+				$self = Contact::selectFirst(['id'], ['uid' => $item['uid'], 'self' => true]);
+				if (!empty($self)) {
+					$private_receivers[] = $self['id'];
+				}
+			}
+
+			$item['private']   = ItemModel::PRIVATE;
+			$item['allow_cid'] = '';
+			$item['allow_gid'] = '';
+			$item['deny_cid']  = '';
+			$item['deny_gid']  = '';
+
+			foreach (array_unique($private_receivers) as $receiver) {
+				$item['allow_cid'] .= '<' . $receiver . '>';
+			}
+
+			$this->logger->info('Post with privately addressed mentions', ['receivers' => $private_receivers]);
 		} elseif ($setPermissions) {
 			if (empty($receivers)) {
 				// For security reasons direct posts without any receiver will be posts to yourself

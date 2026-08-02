@@ -2399,7 +2399,7 @@ class BBCode
 			// Match full names against @tags including the space between first and last
 			// We will look these up afterward to see if they are full names or not recognisable.
 
-			if (preg_match_all('/(@[^ \x0D\x0A,:?]+ [^ \x0D\x0A@,:?]+)([ \x0D\x0A@,:?]|$)/', (string) $string, $matches)) {
+			if (preg_match_all('/(@[^! \x0D\x0A,:?]+ [^ \x0D\x0A@,:?]+)([ \x0D\x0A@,:?]|$)/', (string) $string, $matches)) {
 				foreach ($matches[1] as $match) {
 					if (strstr($match, ']')) {
 						// we might be inside a bbcode color tag - leave it alone
@@ -2486,17 +2486,18 @@ class BBCode
 	/**
 	 * Replaces mentions in the provided message body in BBCode links for the provided user and network if any
 	 *
-	 * @param string $body HTML/BBCode
-	 * @param int $profile_uid Profile user id
-	 * @param string $network Network name
+	 * @param string     $body             HTML/BBCode
+	 * @param int        $profile_uid      Profile user id
+	 * @param string     $network          Network name
+	 * @param array|null $private_contacts Filled with the contacts of mentions prefixed with "@!" when provided
 	 * @return string HTML/BBCode with inserted images
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 * @throws \ImagickException
 	 */
-	public static function setMentions(string $body, $profile_uid = 0, $network = '')
+	public static function setMentions(string $body, $profile_uid = 0, $network = '', ?array &$private_contacts = null)
 	{
 		DI::profiler()->startRecording('rendering');
-		$body = self::performWithEscapedTags($body, ['noparse', 'pre', 'code', 'img'], function ($body) use ($profile_uid, $network) {
+		$body = self::performWithEscapedTags($body, ['noparse', 'pre', 'code', 'img'], function ($body) use ($profile_uid, $network, &$private_contacts) {
 			$tags = self::getTags($body);
 
 			$tagged = [];
@@ -2520,6 +2521,10 @@ class BBCode
 
 				if (($success = Item::replaceTag($body, $profile_uid, $tag, $network)) && $success['replaced']) {
 					$tagged[] = $tag;
+
+					if (($private_contacts !== null) && !empty($success['private'])) {
+						$private_contacts[] = $success['contact'];
+					}
 				}
 			}
 

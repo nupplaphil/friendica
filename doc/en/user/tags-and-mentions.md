@@ -32,6 +32,10 @@ If you want to post something exclusively to a group (e.g. the support group) pl
 So !helpers will be an exclusive posting to the support group if you are connected with the group.
 If you select a group from the ACL a !-mention will be added automatically to your posting.
 
+To address a contact privately, prefix the mention with an exclamation mark after the "@" character, e.g. @!mike or @!mike@macgirvin.com.
+A new post containing such a mention is automatically sent as a private post that is only visible to the privately mentioned contacts.
+Regular @-mentions in the same post will not receive the post.
+
 If you sort your contacts into circles, you cannot @-mention these circles.
 But you can select the circle in the access control when creating a new posting, to allow (or disallow) a certain circle of people to see the posting.
 See [Circles and privacy](help/user/circles-and-privacy) for more details about grouping your contacts.
