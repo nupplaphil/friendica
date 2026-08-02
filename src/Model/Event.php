@@ -38,6 +38,8 @@ class Event
 
 		$uriid = $event['uri-id'] ?? $uriid;
 
+		$simple_html = $simple ? BBCode::EXTERNAL : BBCode::INTERNAL;
+
 		$event_start = DI::l10n()->formatDateTime($event['start'], IntlDateFormatter::FULL, IntlDateFormatter::LONG);
 
 		if (!empty($event['finish'])) {
@@ -50,11 +52,11 @@ class Event
 			$o = '';
 
 			if (!empty($event['summary'])) {
-				$o .= "<h3>" . strip_tags(BBCode::convertForUriId($uriid, $event['summary'], $simple)) . "</h3>";
+				$o .= "<h3>" . strip_tags(BBCode::convertForUriId($uriid, $event['summary'], $simple_html)) . "</h3>";
 			}
 
 			if (!empty($event['desc'])) {
-				$o .= "<div>" . BBCode::convertForUriId($uriid, $event['desc'], $simple) . "</div>";
+				$o .= "<div>" . BBCode::convertForUriId($uriid, $event['desc'], $simple_html) . "</div>";
 			}
 
 			$o .= "<h4>" . DI::l10n()->t('Starts:') . "</h4><p>" . $event_start . "</p>";
@@ -64,7 +66,7 @@ class Event
 			}
 
 			if (!empty($event['location'])) {
-				$o .= "<h4>" . DI::l10n()->t('Location:') . "</h4><p>" . strip_tags(BBCode::convertForUriId($uriid, $event['location'], $simple)) . "</p>";
+				$o .= "<h4>" . DI::l10n()->t('Location:') . "</h4><p>" . strip_tags(BBCode::convertForUriId($uriid, $event['location'], $simple_html)) . "</p>";
 			}
 
 			return $o;
@@ -72,7 +74,7 @@ class Event
 
 		$o = '<div class="vevent">' . "\r\n";
 
-		$o .= '<div class="summary event-summary">' . BBCode::convertForUriId($uriid, $event['summary'], $simple) . '</div>' . "\r\n";
+		$o .= '<div class="summary event-summary">' . BBCode::convertForUriId($uriid, $event['summary'], $simple_html) . '</div>' . "\r\n";
 
 		$o .= '<div class="event-start"><span class="event-label">' . DI::l10n()->t('Starts:') . '</span><br/><span class="dtstart" title="'
 			. DateTimeFormat::local($event['start'], DateTimeFormat::ATOM)
@@ -87,12 +89,12 @@ class Event
 		}
 
 		if (!empty($event['desc'])) {
-			$o .= '<div class="description event-description">' . BBCode::convertForUriId($uriid, $event['desc'], $simple) . '</div>' . "\r\n";
+			$o .= '<div class="description event-description">' . BBCode::convertForUriId($uriid, $event['desc'], $simple_html) . '</div>' . "\r\n";
 		}
 
 		if (!empty($event['location'])) {
 			$o .= '<div class="event-location"><span class="event-label">' . DI::l10n()->t('Location:') . '</span>&nbsp;<span class="location">'
-				. strip_tags(BBCode::convertForUriId($uriid, $event['location'], $simple))
+				. strip_tags(BBCode::convertForUriId($uriid, $event['location'], $simple_html))
 				. '</span></div>' . "\r\n";
 
 			// Include a map of the location if the [map] BBCode is used.
@@ -231,7 +233,7 @@ class Event
 	public static function store(array $arr): int
 	{
 		$guid  = $arr['guid'] ?? '' ?: System::createUUID();
-		$uri   = $arr['uri']  ?? '' ?: Item::newURI($guid);
+		$uri   = $arr['uri']  ?? '' ?: DI::postUriGenerator()->newURI($guid);
 		$event = [
 			'id'        => intval($arr['id'] ?? 0),
 			'uid'       => intval($arr['uid'] ?? 0),
@@ -703,15 +705,13 @@ class Event
 				foreach ($events as $event) {
 					/// @todo The time / date entries don't include any information about the
 					/// timezone the event is scheduled in :-/
-					$tmp1        = strtotime((string) $event['start']);
-					$tmp2        = strtotime((string) $event['finish']);
-					$time_format = "%H:%M:%S";
-					$date_format = "%Y-%m-%d";
+					$tmp1 = strtotime((string) $event['start']);
+					$tmp2 = strtotime((string) $event['finish']);
 
-					$o .= '"' . $event['summary'] . '", "' . strftime($date_format, $tmp1)
-						. '", "' . strftime($time_format, $tmp1) . '", "' . $event['desc']
-						. '", "' . strftime($date_format, $tmp2)
-						. '", "' . strftime($time_format, $tmp2)
+					$o .= '"' . $event['summary'] . '", "' . date('Y-m-d', $tmp1)
+						. '", "' . date('H:i:s', $tmp1) . '", "' . $event['desc']
+						. '", "' . date('Y-m-d', $tmp2)
+						. '", "' . date('H:i:s', $tmp2)
 						. '", "' . $event['location'] . '"' . PHP_EOL;
 				}
 				break;

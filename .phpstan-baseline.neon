@@ -193,33 +193,6 @@ parameters:
 			path: src/Model/Contact.php
 
 		-
-			message: '#^Call to deprecated function strftime\(\)\.$#'
-			identifier: function.deprecated
-			count: 4
-			path: src/Model/Event.php
-
-		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/Event.php
-
-		-
-			message: '#^Parameter \#3 \$simple_html of static method Friendica\\Content\\Text\\BBCode\:\:convertForUriId\(\) expects int, false given\.$#'
-			identifier: argument.type
-			count: 3
-			path: src/Model/Event.php
-
-		-
-			message: '#^Parameter \#3 \$simple_html of static method Friendica\\Content\\Text\\BBCode\:\:convertForUriId\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 3
-			path: src/Model/Event.php
-
-		-
 			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, bool given\.$#'
 			identifier: argument.type
 			count: 1
