@@ -623,6 +623,7 @@ class Item
 			DI::activity(),
 			DI::logger(),
 			DI::dba(),
+			DI::postUriGenerator(),
 			DI::baseUrl(),
 		);
 

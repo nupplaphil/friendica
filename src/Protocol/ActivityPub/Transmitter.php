@@ -1414,7 +1414,7 @@ class Transmitter
 		}
 
 		if ($type == 'Delete') {
-			$data['id'] = Item::newURI($item['guid']) . '/' . $type;
+			$data['id'] = DI::postUriGenerator()->newURI($item['guid']) . '/' . $type;
 			;
 		} elseif (($item['gravity'] == Item::GRAVITY_ACTIVITY) && ($type != 'Undo')) {
 			$data['id'] = $item['uri'];

@@ -163,42 +163,6 @@ parameters:
 			path: src/Model/Attach.php
 
 		-
-			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/Contact.php
-
-		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/ItemHelper.php
-
-		-
-			message: '''
-				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/Mail.php
-
-		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Model/Mail.php
-
-		-
 			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, list\<array\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -391,15 +355,6 @@ parameters:
 			path: src/Module/Photo.php
 
 		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Post/Tag/Add.php
-
-		-
 			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
 			identifier: argument.type
 			count: 1
@@ -449,15 +404,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Protocol/ActivityPub/ClientToServer.php
-
-		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Protocol/ActivityPub/Transmitter.php
 
 		-
 			message: '#^Parameter \#3 \$section of function imap_fetchbody expects string, int\<min, \-1\>\|int\<1, max\> given\.$#'
