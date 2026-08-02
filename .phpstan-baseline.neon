@@ -601,54 +601,6 @@ parameters:
 			path: src/Module/Post/Tag/Add.php
 
 		-
-			message: '#^Parameter \#10 \$baseUrl of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\App\\BaseURL, Friendica\\App\\Arguments given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#11 \$args of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\App\\Arguments, Psr\\Log\\LoggerInterface given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#12 \$logger of class Friendica\\Module\\Profile\\Profile constructor expects Psr\\Log\\LoggerInterface, Friendica\\Util\\Profiler given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#13 \$profiler of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Util\\Profiler, Friendica\\Capabilities\\ICanCreateResponses given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#14 \$response of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Module\\Response, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#15 \$response of class Friendica\\Module\\Profile\\Conversations constructor expects Friendica\\Module\\Response, Friendica\\Capabilities\\ICanCreateResponses given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#8 \$groupManager of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Content\\GroupManager, Friendica\\Core\\L10n given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
-			message: '#^Parameter \#9 \$l10n of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Core\\L10n, Friendica\\App\\BaseURL given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Profile/Index.php
-
-		-
 			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
 			identifier: argument.type
 			count: 1
