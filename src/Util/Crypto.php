@@ -39,12 +39,13 @@ class Crypto
 	 * @param string $alg  algorithm
 	 * @return boolean
 	 */
-	public static function rsaVerify($data, $sig, $key, $alg = 'sha256')
+	public static function rsaVerify($data, $sig, $key, $alg = 'sha256'): bool
 	{
 		if (empty($key)) {
 			DI::logger()->warning('Empty key parameter');
+			return false;
 		}
-		return openssl_verify($data, $sig, $key, (($alg == 'sha1') ? OPENSSL_ALGO_SHA1 : $alg));
+		return openssl_verify($data, $sig, $key, (($alg == 'sha1') ? OPENSSL_ALGO_SHA1 : $alg)) === 1;
 	}
 
 	/**
