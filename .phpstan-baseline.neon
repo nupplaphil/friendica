@@ -739,24 +739,6 @@ parameters:
 			path: src/Util/Strings.php
 
 		-
-			message: '#^Parameter \#4 \$month of function mktime expects int\|null, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Util/Temporal.php
-
-		-
-			message: '#^Parameter \#5 \$day of function mktime expects int\|null, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Util/Temporal.php
-
-		-
-			message: '#^Parameter \#6 \$year of function mktime expects int\|null, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Util/Temporal.php
-
-		-
 			message: '#^Parameter \#1 \$str of static method Friendica\\Util\\XML\:\:escape\(\) expects string, object given\.$#'
 			identifier: argument.type
 			count: 1

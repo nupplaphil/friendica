@@ -333,8 +333,8 @@ class Temporal
 		$now = $clock->now()->getTimestamp();
 
 		if (!$compare_time) {
-			$now = mktime(0, 0, 0, date('m', $now), date('d', $now), date('Y', $now));
-			$abs = mktime(0, 0, 0, date('m', $abs), date('d', $abs), date('Y', $abs));
+			$now = mktime(0, 0, 0, (int) date('m', $now), (int) date('d', $now), (int) date('Y', $now));
+			$abs = mktime(0, 0, 0, (int) date('m', $abs), (int) date('d', $abs), (int) date('Y', $abs));
 		}
 
 		$isfuture = false;
