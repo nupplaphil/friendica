@@ -199,3 +199,18 @@ This section contains deprecation notices. This changes will become mandatory in
        // …
    }
    ```
+
+- `Worker::add()` will enforce `int|array $run_parameter` and `string $command` in a future release. Passing any other type is deprecated and triggers a deprecation warning.
+
+   *Before*
+   ```php
+   Worker::add('Notifier', $item_id);          // non-int|array $run_parameter
+   Worker::add(Worker::PRIORITY_HIGH, 42);     // non-string $command
+   ```
+
+   *After*
+   ```php
+   Worker::add(Worker::PRIORITY_HIGH, 'Notifier', $item_id);
+   Worker::add(Worker::PRIORITY_HIGH, (string) 42);
+   ```
+

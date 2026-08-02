@@ -1238,12 +1238,15 @@ class Worker
 	 *
 	 * @return int '0' if worker queue entry already existed or there had been an error, otherwise the ID of the worker task
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 * @note $cmd and string args are surrounded with ''
 	 */
 	public static function add($run_parameter = self::PRIORITY_MEDIUM, $command = '', ...$args): int
 	{
 		if (func_num_args() === 0) {
 			return 0;
+		}
+
+		if (!is_string($command)) {
+			@trigger_error('`' . __METHOD__ . '()`: Passing ' . get_debug_type($command) . ' as $command is deprecated since 2026.08, it will be enforced as `string` in a future release.', E_USER_DEPRECATED);
 		}
 
 		$arr = ['args' => [$run_parameter, $command, ...$args], 'run_cmd' => true];
@@ -1284,6 +1287,7 @@ class Worker
 				$force_priority = $run_parameter['force_priority'];
 			}
 		} else {
+			@trigger_error('`' . __METHOD__ . '()`: Passing ' . get_debug_type($run_parameter) . ' as $run_parameter is deprecated since 2026.08, it will be enforced as `int|array` in a future release.', E_USER_DEPRECATED);
 			throw new \InvalidArgumentException('Priority number or task parameter array expected as first argument');
 		}
 
