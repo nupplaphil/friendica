@@ -115,36 +115,6 @@ parameters:
 			path: src/Content/Text/BBCode.php
 
 		-
-			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addFormatting\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
-			count: 4
-			path: src/Content/Text/NPF.php
-
-		-
-			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addImageBlock\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Text/NPF.php
-
-		-
-			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addInlineLink\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Text/NPF.php
-
-		-
-			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addMediaBlock\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Text/NPF.php
-
-		-
-			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:routeChildren\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Text/NPF.php
-
-		-
 			message: '#^Parameter \#2 \$callback of function usort expects callable\(array\{mixed, float, 0\}, array\{mixed, float, 0\}\)\: int, Closure\(string, string\)\: int given\.$#'
 			identifier: argument.type
 			count: 1
