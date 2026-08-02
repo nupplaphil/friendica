@@ -14,6 +14,7 @@ use DOMXPath;
 use Friendica\App;
 use Friendica\Content\Text\BBCode;
 use Friendica\Core\Protocol;
+use Friendica\Core\Worker;
 use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
@@ -363,7 +364,7 @@ class DFRN
 
 		// For backward compatibility we keep this element
 		if (in_array($owner['page-flags'], [User::PAGE_FLAGS_COMMUNITY, User::PAGE_FLAGS_COMM_MAN])) {
-			XML::addElement($doc, $root, 'dfrn:community', 1);
+			XML::addElement($doc, $root, 'dfrn:community', '1');
 		}
 
 		// The former element is replaced by this one
@@ -817,7 +818,7 @@ class DFRN
 		// "comment-allow" is some old fashioned stuff for old Friendica versions.
 		// It is included in the rewritten code for completeness
 		if ($comment) {
-			XML::addElement($doc, $entry, 'dfrn:comment-allow', 1);
+			XML::addElement($doc, $entry, 'dfrn:comment-allow', '1');
 		}
 
 		if ($item['location']) {
@@ -830,8 +831,8 @@ class DFRN
 
 		if ($item['private']) {
 			// Friendica versions prior to 2020.3 can't handle "unlisted" properly. So we can only transmit public and private
-			XML::addElement($doc, $entry, 'dfrn:private', ($item['private'] == Item::PRIVATE ? Item::PRIVATE : Item::PUBLIC));
-			XML::addElement($doc, $entry, 'dfrn:unlisted', $item['private'] == Item::UNLISTED);
+			XML::addElement($doc, $entry, 'dfrn:private', ($item['private'] == Item::PRIVATE ? (string) Item::PRIVATE : (string) Item::PUBLIC));
+			XML::addElement($doc, $entry, 'dfrn:unlisted', (string) ($item['private'] == Item::UNLISTED));
 		}
 
 		if ($item['extid']) {
@@ -1217,7 +1218,7 @@ class DFRN
 				$value  = str_replace(["0000", "0001"], $bdyear, $value);
 
 				if (strtotime($value) < time()) {
-					$value = str_replace($bdyear, $bdyear + 1, $value);
+					$value = str_replace($bdyear, (string) ($bdyear + 1), $value);
 				}
 
 				$poco["bd"] = $value;
@@ -1394,7 +1395,7 @@ class DFRN
 			$suggest['cid'],
 			$suggest['body'],
 			null,
-			$cid,
+			(bool) $cid,
 		));
 
 		DI::notify()->createFromArray([
@@ -2066,7 +2067,7 @@ class DFRN
 			$notify       = Item::isRemoteSelf($importer, $item);
 			$item['wall'] = (bool) $notify;
 
-			$posted_id = Item::insert($item, $notify);
+			$posted_id = Item::insert($item, $notify ? Worker::PRIORITY_HIGH : 0);
 
 			if ($notify) {
 				$posted_id = $notify;
