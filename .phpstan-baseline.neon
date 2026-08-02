@@ -16,6 +16,12 @@ parameters:
 			path: src/App.php
 
 		-
+			message: '#^Parameter \#2 \$session of method Friendica\\App\\Page\:\:run\(\) expects Friendica\\Core\\Session\\Model\\UserSession, Friendica\\Core\\Session\\Capability\\IHandleUserSessions given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/App.php
+
+		-
 			message: '''
 				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
 				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
@@ -61,6 +67,48 @@ parameters:
 			path: src/BaseRepository.php
 
 		-
+			message: '#^Parameter \#1 \$entities of method Friendica\\BaseCollection\:\:__construct\(\) expects array\<Friendica\\BaseEntity\>, array\<Friendica\\Object\\Api\\Mastodon\\Field\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Collection/Api/Mastodon/Fields.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Console/Relocate.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Console/Relocate.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Console/ServerBlock.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:existsById\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Conversation/Factory/UserDefinedChannel.php
+
+		-
+			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Conversation/PostTemplateBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Conversation/StatusEditor.php
+
+		-
 			message: '''
 				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
 				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
@@ -77,6 +125,60 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Content/Item.php
+
+		-
+			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Item.php
+
+		-
+			message: '#^Parameter \#1 \$session of class Friendica\\Object\\EMail\\ItemCCEMail constructor expects Friendica\\Core\\Session\\Model\\UserSession, Friendica\\Core\\Session\\Capability\\IHandleUserSessions given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Item.php
+
+		-
+			message: '#^Parameter \#2 \$simple of static method Friendica\\Model\\Event\:\:getHTML\(\) expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Text/BBCode.php
+
+		-
+			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addFormatting\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addImageBlock\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addInlineLink\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:addMediaBlock\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '#^Parameter \#1 \$element of static method Friendica\\Content\\Text\\NPF\:\:routeChildren\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Text/NPF.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function usort expects callable\(array\{mixed, float, 0\}, array\{mixed, float, 0\}\)\: int, Closure\(string, string\)\: int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Content/Widget/TagCloud.php
 
 		-
 			message: '''
@@ -106,6 +208,114 @@ parameters:
 			path: src/Core/Config/Util/ConfigFileManager.php
 
 		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Hook.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Hook.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/L10n.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/L10n.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Search.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Search.php
+
+		-
+			message: '#^Parameter \#2 \$code of class Friendica\\Core\\Storage\\Exception\\StorageException constructor expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Core/Storage/Repository/StorageManager.php
+
+		-
+			message: '#^Parameter \#2 \$code of class Friendica\\Core\\Storage\\Exception\\ReferenceStorageException constructor expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Storage/Type/ExternalResource.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Update.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Core/Worker/Cron.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Core/Worker/Cron.php
+
+		-
+			message: '#^Parameter \#5 \$port of class mysqli constructor expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Database/Database.php
+
+		-
+			message: '#^Parameter \#3 \$length of function mb_substr expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Database/Definition/DbaDefinition.php
+
+		-
+			message: '#^Parameter \#3 \$length of function substr expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Database/Definition/DbaDefinition.php
+
+		-
+			message: '#^Parameter \#1 \$id of class Friendica\\Object\\Api\\Mastodon\\Conversation constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/Api/Mastodon/Conversation.php
+
+		-
+			message: '#^Parameter \#1 \$entities of class Friendica\\Collection\\Api\\Mastodon\\Emojis constructor expects array\<Friendica\\BaseEntity\>, list\<Friendica\\Object\\Api\\Mastodon\\Emoji\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/Api/Mastodon/Emoji.php
+
+		-
+			message: '#^Parameter \#1 \$id of class Friendica\\Object\\Api\\Mastodon\\ListEntity constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/Api/Mastodon/ListEntity.php
+
+		-
+			message: '#^Parameter \#1 \$id of static method Friendica\\Model\\Attach\:\:getById\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Attach.php
+
+		-
 			message: '''
 				#^Call to deprecated method guidFromUri\(\) of class Friendica\\Model\\Item\:
 				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:guidFromUri instead$#
@@ -113,6 +323,18 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Model/Contact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 8
+			path: src/Model/Contact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Model/Contact/User.php
 
 		-
 			message: '#^Call to deprecated function strftime\(\)\.$#'
@@ -128,6 +350,54 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Model/Event.php
+
+		-
+			message: '#^Parameter \#3 \$simple_html of static method Friendica\\Content\\Text\\BBCode\:\:convertForUriId\(\) expects int, false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Model/Event.php
+
+		-
+			message: '#^Parameter \#3 \$simple_html of static method Friendica\\Content\\Text\\BBCode\:\:convertForUriId\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Model/Event.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Model/GServer.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Model/Item.php
+
+		-
+			message: '#^Parameter \#3 \$scale of static method Friendica\\Model\\Photo\:\:getPhotoForUser\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Item.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Model/Item.php
 
 		-
 			message: '''
@@ -157,6 +427,120 @@ parameters:
 			path: src/Model/Mail.php
 
 		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Mail.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Mail.php
+
+		-
+			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, list\<array\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Post/Counts.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Post/Delayed.php
+
+		-
+			message: '#^Parameter \#8 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Post/Delayed.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Model/Profile.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Model/Subscription.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Model/User.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Model/User.php
+
+		-
+			message: '#^Parameter \#3 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getInbox\(\) expects int\|null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/ActivityPub/Inbox.php
+
+		-
+			message: '#^Parameter \#3 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getPublicInbox\(\) expects int\|null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/ActivityPub/Inbox.php
+
+		-
+			message: '#^Parameter \#4 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getOutbox\(\) expects int\|null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/ActivityPub/Outbox.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Admin/Site.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Friendica/Events/Create.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Friendica/Events/Create.php
+
+		-
+			message: '#^Parameter \#1 \$stmt of static method Friendica\\Database\\DBA\:\:close\(\) expects object, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Accounts/Search.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Friendica\\Factory\\Api\\Mastodon\\Attachment\:\:createFromAttach\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Api/Mastodon/Media.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Friendica\\Factory\\Api\\Mastodon\\Attachment\:\:createFromId\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Media.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Reports.php
+
+		-
 			message: '''
 				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
 				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
@@ -166,10 +550,298 @@ parameters:
 			path: src/Module/Api/Mastodon/Statuses.php
 
 		-
+			message: '#^Parameter \#1 \$id of static method Friendica\\Model\\Attach\:\:setPermissionForId\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses.php
+
+		-
+			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses/Mute.php
+
+		-
+			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Mastodon/Statuses/Unmute.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Api/Twitter/Statuses/Update.php
+
+		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Capabilities\\ICanCreateResponses of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
 			path: src/Module/BaseApi.php
+
+		-
+			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Calendar/Event/API.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Calendar/Event/API.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Calendar/Event/API.php
+
+		-
+			message: '#^Parameter \#2 \$datetime of static method DateTime\:\:createFromFormat\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Calendar/Event/Form.php
+
+		-
+			message: '#^Parameter \#2 \$event_id of static method Friendica\\Model\\Event\:\:getByIdAndUid\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Calendar/Event/Get.php
+
+		-
+			message: '#^Parameter \#1 \$current of static method Friendica\\Content\\ContactSelector\:\:pollInterval\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Contact/Profile.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Contact/Profile.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:selectById\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Conversation/Timeline.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Conversation/Timeline.php
+
+		-
+			message: '#^Parameter \#3 \$update of static method Friendica\\Model\\Contact\:\:getByURLForUser\(\) expects bool, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/DFRN/Notify.php
+
+		-
+			message: '#^Parameter \#3 \$update of static method Friendica\\Model\\Contact\:\:getByURLForUser\(\) expects bool, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Debug/Feed.php
+
+		-
+			message: '#^Parameter \#2 \$duplex of static method Friendica\\Model\\Contact\\Introduction\:\:confirm\(\) expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/FollowConfirm.php
+
+		-
+			message: '#^Parameter \#3 \$hidden of static method Friendica\\Model\\Contact\\Introduction\:\:confirm\(\) expects bool\|null, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/FollowConfirm.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/FriendSuggest.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/FriendSuggest.php
+
+		-
+			message: '#^Parameter \#3 \$length of function array_slice expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Help.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Item/Complete.php
+
+		-
+			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Item/Compose.php
+
+		-
+			message: '#^Parameter \#6 \$response of class Friendica\\Module\\Special\\DisplayNotFound constructor expects Friendica\\Module\\Response, Friendica\\Capabilities\\ICanCreateResponses given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Item/Display.php
+
+		-
+			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Item/Ignore.php
+
+		-
+			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\:\:unblock\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Contact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Contact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Contact/Import.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Contact/Import.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Moderation/Blocklist/Server/Add.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Server/Import.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Blocklist/Server/Index.php
+
+		-
+			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setBlocked\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setCollapsed\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#1 \$cid of static method Friendica\\Model\\Contact\\User\:\:setIgnored\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#2 \$cid of method Friendica\\Moderation\\Factory\\Report\:\:createFromForm\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#4 \$categoryId of method Friendica\\Moderation\\Factory\\Report\:\:createFromForm\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Report/Create.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Reports.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Users/Active.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Users/Active.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Users/Blocked.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Users/Blocked.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:block\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Moderation/Users/Index.php
+
+		-
+			message: '#^Parameter \#1 \$uid of static method Friendica\\Model\\User\:\:remove\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Moderation/Users/Index.php
+
+		-
+			message: '#^Parameter \#2 \$update of static method Friendica\\Model\\Contact\:\:getByURL\(\) expects bool\|null, array\<int, string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Notifications/Introductions.php
+
+		-
+			message: '#^Parameter \#2 \$scale of static method Friendica\\Model\\Photo\:\:getPhoto\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Photo.php
+
+		-
+			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Post/Edit.php
 
 		-
 			message: '''
@@ -181,6 +853,150 @@ parameters:
 			path: src/Module/Post/Tag/Add.php
 
 		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Post/Tag/Add.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Post/Tag/Add.php
+
+		-
+			message: '#^Parameter \#10 \$baseUrl of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\App\\BaseURL, Friendica\\App\\Arguments given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#11 \$args of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\App\\Arguments, Psr\\Log\\LoggerInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#12 \$logger of class Friendica\\Module\\Profile\\Profile constructor expects Psr\\Log\\LoggerInterface, Friendica\\Util\\Profiler given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#13 \$profiler of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Util\\Profiler, Friendica\\Capabilities\\ICanCreateResponses given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#14 \$response of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Module\\Response, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#15 \$response of class Friendica\\Module\\Profile\\Conversations constructor expects Friendica\\Module\\Response, Friendica\\Capabilities\\ICanCreateResponses given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#8 \$groupManager of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Content\\GroupManager, Friendica\\Core\\L10n given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#9 \$l10n of class Friendica\\Module\\Profile\\Profile constructor expects Friendica\\Core\\L10n, Friendica\\App\\BaseURL given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Index.php
+
+		-
+			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Profile/Photos.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Register.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Register.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/Account.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/Account.php
+
+		-
+			message: '#^Parameter \#2 \$id of method Friendica\\Module\\Settings\\Channels\:\:enableTimeline\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/Channels.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Module/Settings/Channels.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/Channels.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/Profile/Index.php
+
+		-
+			message: '#^Parameter \#2 \$app_specific_password_id of static method Friendica\\Security\\TwoFactor\\Model\\AppSpecificPassword\:\:deleteForUser\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Settings/TwoFactor/AppSpecific.php
+
+		-
+			message: '#^Parameter \#3 \$update of static method Friendica\\Model\\Contact\:\:getThreadsFromId\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/Update/Contact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/User/Import.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Module/User/Import.php
+
+		-
+			message: '#^Parameter \#4 \$timestamp of class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNavNotification constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Navigation/Notifications/Factory/FormattedNavNotification.php
+
+		-
 			message: '''
 				#^Call to deprecated method getConfig\(\) of class GuzzleHttp\\Client\:
 				ClientInterface\:\:getConfig will be removed in guzzlehttp/guzzle\:8\.0\.$#
@@ -190,6 +1006,66 @@ parameters:
 			path: src/Network/HTTPClient/Client/HttpClient.php
 
 		-
+			message: '#^Parameter \#2 \$callback of function array_filter expects \(callable\(string\)\: bool\)\|null, Closure\(string\)\: int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Network/Probe.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/ClientToServer.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 5
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/Processor.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/Queue.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/Queue.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/ActivityPub/Receiver.php
+
+		-
 			message: '''
 				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
 				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
@@ -197,6 +1073,72 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Protocol/ActivityPub/Transmitter.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^Parameter \#2 \$replace of function str_replace expects array\<string\>\|string, float\|int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^Parameter \#4 \$value of static method Friendica\\Util\\XML\:\:addElement\(\) expects string\|null, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^Parameter \#4 \$value of static method Friendica\\Util\\XML\:\:addElement\(\) expects string\|null, int given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^Parameter \#5 \$knowyou of method Friendica\\Contact\\Introduction\\Factory\\Introduction\:\:createNew\(\) expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/DFRN.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function preg_replace_callback expects callable\(array\<string\>\)\: string, Closure\(mixed\)\: void given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Diaspora.php
+
+		-
+			message: '#^Parameter \#3 \$section of function imap_fetchbody expects string, int\<min, \-1\>\|int\<1, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Email.php
+
+		-
+			message: '#^Parameter \#4 \$partno of static method Friendica\\Protocol\\Email\:\:messageGetPart\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Email.php
 
 		-
 			message: '''
@@ -215,4 +1157,838 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Protocol/Feed.php
+
+		-
+			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Post\\Delayed\:\:publish\(\) expects int, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '#^Parameter \#2 \$photo of static method Friendica\\Content\\PageInfo\:\:queryUrl\(\) expects string, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Protocol/Feed.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Security/Authentication.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Security/ExAuth.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Security/OAuth.php
+
+		-
+			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Security/PermissionSet/Repository/PermissionSet.php
+
+		-
+			message: '#^Parameter \#1 \$process_id of function posix_kill expects int, string\|true given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Util/PidFile.php
+
+		-
+			message: '#^Parameter \#1 \$length of function random_bytes expects int\<1, max\>, float given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Util/Strings.php
+
+		-
+			message: '#^Parameter \#1 \$min of function random_int expects int, float given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Util/Strings.php
+
+		-
+			message: '#^Parameter \#4 \$month of function mktime expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Util/Temporal.php
+
+		-
+			message: '#^Parameter \#5 \$day of function mktime expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Util/Temporal.php
+
+		-
+			message: '#^Parameter \#6 \$year of function mktime expects int\|null, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Util/Temporal.php
+
+		-
+			message: '#^Parameter \#1 \$str of static method Friendica\\Util\\XML\:\:escape\(\) expects string, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Util/XML.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/AddContact.php
+
+		-
+			message: '#^Parameter \#4 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/AddContact.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/AddContact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/CheckDeletedContacts.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/Contact/BlockByUrl.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/ContactDiscovery.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/ContactDiscovery.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/ContactDiscoveryForUser.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 29
+			path: src/Worker/Cron.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/Directory.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Worker/Expire.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/Expire.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/FetchMissingActivity.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/FetchMissingActivity.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/FetchMissingActivity.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/MoveStorage.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 8
+			path: src/Worker/Notifier.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 7
+			path: src/Worker/Notifier.php
+
+		-
+			message: '#^Parameter \#3 \$reply of static method Friendica\\Protocol\\Email\:\:getMessage\(\) expects string, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/OnePoll.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/PollContacts.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/ProfileUpdate.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/ProfileUpdate.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/UpdateContact.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/UpdateGServer.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/UpdateGServer.php
+
+		-
+			message: '#^Parameter \#4 \.\.\.\$args of static method Friendica\\Core\\Worker\:\:add\(\) expects array\|int, bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Worker/UpdateGServer.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/DatabaseTestCase.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/FixtureTestCase.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/FixtureTestCase.php
+
+		-
+			message: '#^Parameter \#1 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanReadFromStorage\:\:get\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/StorageTestCase.php
+
+		-
+			message: '#^Parameter \#1 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage\:\:delete\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/StorageTestCase.php
+
+		-
+			message: '#^Parameter \#2 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage\:\:put\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/StorageTestCase.php
+
+		-
+			message: '#^Parameter \#1 \$logLevel of method Friendica\\Core\\Logger\\Factory\\StreamLoggerFactory\:\:createLogger\(\) expects ''alert''\|''critical''\|''debug''\|''emergency''\|''error''\|''info''\|''notice''\|''warning'', ''unsupported\-loglevel'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/Core/Logger/Factory/StreamLoggerFactoryTest.php
+
+		-
+			message: '#^Parameter \#1 \$logLevel of method Friendica\\Core\\Logger\\Factory\\SyslogLoggerFactory\:\:createLogger\(\) expects ''alert''\|''critical''\|''debug''\|''emergency''\|''error''\|''info''\|''notice''\|''warning'', ''unsupported\-loglevel'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/Core/Logger/Factory/SyslogLoggerFactoryTest.php
+
+		-
+			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModuleContentEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: tests/Unit/Event/ModuleContentEventTest.php
+
+		-
+			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModuleInitEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: tests/Unit/Event/ModuleInitEventTest.php
+
+		-
+			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModulePostEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: tests/Unit/Event/ModulePostEventTest.php
+
+		-
+			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModulePostRecipientEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: tests/Unit/Event/ModulePostRecipientEventTest.php
+
+		-
+			message: '#^Parameter \#1 \$logger of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Psr\\Log\\LoggerInterface\|null, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 6
+			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
+
+		-
+			message: '#^Parameter \#2 \$contentItem of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Friendica\\Content\\Item\|null, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 5
+			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
+
+		-
+			message: '#^Parameter \#3 \$userDefinedChannel of method Friendica\\Test\\Unit\\Protocol\\ActivityPub\\FirehoseTest\:\:createFirehose\(\) expects Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\|null, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 5
+			path: tests/Unit/Protocol/ActivityPub/FirehoseTest.php
+
+		-
+			message: '#^Parameter \#1 \$digits of static method Friendica\\Util\\Crypto\:\:randomDigits\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/Unit/Util/CryptoTest.php
+
+		-
+			message: '#^Parameter \#1 \$entities of class Friendica\\BaseCollection constructor expects array\<Friendica\\BaseEntity\>, array\<int, Mockery\\MockInterface\> given\.$#'
+			identifier: argument.type
+			count: 18
+			path: tests/src/BaseCollectionTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Console\\AutomaticInstallation constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Parameter \#3 \$assertion of method Friendica\\Test\\src\\Console\\AutomaticInstallationConsoleTest\:\:assertConfigEntry\(\) expects array\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Parameter \#3 \$dba of class Friendica\\Console\\AutomaticInstallation constructor expects Friendica\\Database\\Database, PHPUnit\\Framework\\MockObject\\Stub given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Parameter \#4 \$installer of class Friendica\\Console\\AutomaticInstallation constructor expects Friendica\\Core\\Installer\|null, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/AutomaticInstallationConsoleTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/ServerBlockConsoleTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Console/ServerBlockConsoleTest.php
+
+		-
+			message: '#^Parameter \#2 \$uid of static method Friendica\\Core\\ACL\:\:isValidContact\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Core/ACLTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Core/Cache/DatabaseCacheTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Core/Cache/DatabaseCacheTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcacheCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Cache/MemcacheCacheTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcachedCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Cache/MemcachedCacheTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Friendica\\Util\\Profiler constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Cache/ProfilerCacheDecoratorTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\RedisCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Cache/RedisCacheTest.php
+
+		-
+			message: '#^Parameter \#2 \$key of method Friendica\\Core\\Config\\ValueObject\\Cache\:\:get\(\) expects string\|null, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Config/Cache/CacheTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 13
+			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Parameter \#1 \$fixture of method Friendica\\Test\\src\\Core\\Config\\ConfigTest\:\:loadDirectFixture\(\) expects array\<array\<string\>\>, array\<string, array\<int, array\<string, string\>\>\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Config/ConfigTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
+
+		-
+			message: '#^Parameter \#1 \$instanceRegister of method Friendica\\Core\\Hooks\\Util\\StrategiesFileManager\:\:setupStrategies\(\) expects Friendica\\Core\\Hooks\\Capability\\ICanRegisterStrategies, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
+
+		-
+			message: '#^Parameter \#2 \$configuration of class Friendica\\Core\\Hooks\\Util\\StrategiesFileManager constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 3
+			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
+
+		-
+			message: '#^Parameter \#1 \$configCache of method Friendica\\Core\\Installer\:\:setUpCache\(\) expects Friendica\\Core\\Config\\ValueObject\\Cache, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/InstallerTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcacheCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Lock/MemcacheCacheLockTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\MemcachedCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Lock/MemcachedCacheLockTest.php
+
+		-
+			message: '#^Parameter \#2 \$config of class Friendica\\Core\\Cache\\Type\\RedisCache constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Lock/RedisCacheLockTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/DatabaseStorageTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/DatabaseStorageTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Friendica\\Core\\Storage\\Type\\FilesystemConfig constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/FilesystemStorageTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
+
+		-
+			message: '#^Parameter \#1 \$dice of static method Friendica\\DI\:\:init\(\) expects Dice\\Dice, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Core/SystemTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Database/DatabaseTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Database/DatabaseTest.php
+
+		-
+			message: '#^Parameter \#1 \$logger of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^Parameter \#2 \$database of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^Parameter \#3 \$mstdnAccountFactory of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Factory\\Api\\Mastodon\\Account, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^Parameter \#4 \$mstdnStatusFactory of class Friendica\\Factory\\Api\\Mastodon\\Report constructor expects Friendica\\Factory\\Api\\Mastodon\\Status, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Factory/Api/Mastodon/ReportTest.php
+
+		-
+			message: '#^Parameter \#1 \$hour of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Moderation/Factory/ReportTest.php
+
+		-
+			message: '#^Parameter \#2 \$minute of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Moderation/Factory/ReportTest.php
+
+		-
+			message: '#^Parameter \#3 \$second of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Moderation/Factory/ReportTest.php
+
+		-
+			message: '#^Parameter \#1 \$l10n of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\Core\\L10n, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 12
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^Parameter \#2 \$args of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\App\\Arguments, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 12
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^Parameter \#3 \$logger of class Friendica\\Module\\Api\\ApiResponse constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^Parameter \#4 \$baseUrl of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\App\\BaseURL, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 12
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^Parameter \#5 \$twitterUser of class Friendica\\Module\\Api\\ApiResponse constructor expects Friendica\\Factory\\Api\\Twitter\\User, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 12
+			path: tests/src/Module/Api/ApiResponseTest.php
+
+		-
+			message: '#^Parameter \#1 \$database of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createModule\(\) expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#1 \$database of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createReportRepository\(\) expects Friendica\\Database\\Database, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#10 \$profiler of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Util\\Profiler, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#11 \$response of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Module\\Api\\ApiResponse, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#2 \$logger of class Friendica\\Moderation\\Repository\\Report constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#3 \$entityFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#3 \$mstdnReportFactory of method Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\ReportsTest\:\:createModule\(\) expects Friendica\\Factory\\Api\\Mastodon\\Report, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#4 \$errorFactory of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Factory\\Api\\Mastodon\\Error, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#4 \$postFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report\\Post, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#5 \$appHelper of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\AppHelper, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#5 \$ruleFactory of class Friendica\\Moderation\\Repository\\Report constructor expects Friendica\\Moderation\\Factory\\Report\\Rule, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#6 \$l10n of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\Core\\L10n, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#7 \$baseUrl of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\App\\BaseURL, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#8 \$args of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Friendica\\App\\Arguments, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#9 \$logger of class Friendica\\Test\\src\\Module\\Api\\Mastodon\\Admin\\TestableReports constructor expects Psr\\Log\\LoggerInterface, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Module/Api/Mastodon/Admin/ReportsTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Network/ProbeTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Network/ProbeTest.php
+
+		-
+			message: '#^Parameter \#2 \$allow_cid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 7
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Parameter \#3 \$allow_gid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Parameter \#4 \$deny_cid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Parameter \#5 \$deny_gid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 13
+			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Util/EMailerTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Util/Emailer/MailBuilderTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
+
+		-
+			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Util/ImagesTest.php
+
+		-
+			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/src/Util/ImagesTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Friendica\\Util\\Profiler constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, Mockery\\MockInterface given\.$#'
+			identifier: argument.type
+			count: 4
+			path: tests/src/Util/ProfilerTest.php
 
