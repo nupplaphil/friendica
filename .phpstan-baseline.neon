@@ -721,12 +721,6 @@ parameters:
 			path: src/Security/PermissionSet/Repository/PermissionSet.php
 
 		-
-			message: '#^Parameter \#1 \$process_id of function posix_kill expects int, string\|true given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Util/PidFile.php
-
-		-
 			message: '#^Parameter \#1 \$length of function random_bytes expects int\<1, max\>, float given\.$#'
 			identifier: argument.type
 			count: 1
