@@ -1,27 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to deprecated method getDice\(\) of class Friendica\\Core\\DiceContainer\.$#'
-			identifier: method.deprecated
-			count: 1
-			path: src/App.php
-
-		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 2
-			path: src/App.php
-
-		-
-			message: '#^Parameter \#2 \$session of method Friendica\\App\\Page\:\:run\(\) expects Friendica\\Core\\Session\\Model\\UserSession, Friendica\\Core\\Session\\Capability\\IHandleUserSessions given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/App.php
-
-		-
 			message: '''
 				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
 				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
