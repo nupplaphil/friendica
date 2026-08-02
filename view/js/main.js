@@ -32,20 +32,6 @@ function onPageLoad(fn) {
 		return;
 	}
 
-	// === DUPLICATE PREVENTION ===
-	// Use a global registry to ensure each function is registered only once
-	if (!window.__onPageLoadRegistry) {
-		window.__onPageLoadRegistry = new Set();
-	}
-	
-	// Create a unique key: use path if available, otherwise first 100 chars of function code
-	const registryKey = fn._spaPath || fn.toString().substring(0, 100);
-	if (window.__onPageLoadRegistry.has(registryKey)) {
-		console.debug('[onPageLoad] Function already registered for path:', fn._spaPath || '(no path)');
-		return;
-	}
-	window.__onPageLoadRegistry.add(registryKey);
-
 	// === PATH CONTEXT SETUP ===
 	// Set up path scoping for SPA isolation (only if not already set)
 	if (!fn._spaPath) {
@@ -70,6 +56,18 @@ function onPageLoad(fn) {
 		return;
 	}
 
+	// === DUPLICATE PREVENTION (theme:reload only) ===
+	if (!window.__onPageLoadThemeReloadRegistry) {
+		window.__onPageLoadThemeReloadRegistry = new Set();
+	}
+
+	const registryKey = (fn._spaPath || 'global') + ':' + fn.toString().substring(0, 100);
+	if (window.__onPageLoadThemeReloadRegistry.has(registryKey)) {
+		console.debug('[onPageLoad] theme:reload listener already registered for path:', fn._spaPath || '(no path)');
+		return;
+	}
+	window.__onPageLoadThemeReloadRegistry.add(registryKey);
+
 	// SPA mode: register for theme:reload event
 	const isFragment = window.__spa_executing_fragment_scripts;
 	
@@ -77,6 +75,7 @@ function onPageLoad(fn) {
 		// Fragment scripts: execute once after all resources are ready
 		const once = function() {
 			window.removeEventListener('theme:reload', once);
+			window.__onPageLoadThemeReloadRegistry.delete(registryKey);
 			console.debug('[onPageLoad] Executing one-time fragment function');
 			fn();
 		};
