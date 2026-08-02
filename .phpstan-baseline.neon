@@ -367,27 +367,6 @@ parameters:
 			path: src/Module/Api/Mastodon/Media.php
 
 		-
-			message: '''
-				#^Call to deprecated method newURI\(\) of class Friendica\\Model\\Item\:
-				2026\.08 Use \\Friendica\\Post\\UriGenerator\:\:newURI instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses.php
-
-		-
-			message: '#^Parameter \#1 \$id of static method Friendica\\Model\\Attach\:\:setPermissionForId\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses.php
-
-		-
-			message: '#^Parameter \#2 \$notify of static method Friendica\\Model\\Item\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses.php
-
-		-
 			message: '#^Parameter \#3 \$ignored of static method Friendica\\Model\\Post\\ThreadUser\:\:setIgnored\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
