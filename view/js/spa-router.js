@@ -529,7 +529,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
       const inlineScripts = newDiv.querySelectorAll('script:not([src])');
       inlineScripts.forEach(script => {
         const content = script.textContent.trim();
-        if (content) classifyScript(content, globalScripts, bodyScripts);
+        if (content) classifyScript(content, globalScripts, bodyScripts, script, 'container');
         script.parentNode.removeChild(script);
       });
 
@@ -601,7 +601,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
         // It's an inline script from head (or already processed if from body)
         // Only classify if it hasn't been removed from content already
         if (el.parentNode && el.parentNode.tagName.toLowerCase() === 'head') {
-          classifyScript(el.textContent.trim(), globalScripts, bodyScripts);
+          classifyScript(el.textContent.trim(), globalScripts, bodyScripts, el, 'head');
         }
       }
     }
@@ -650,22 +650,65 @@ function replaceContainerContent(htmlString, finalUrl = null) {
  * Classify a script as either global (definitions) or body (execution)
  * @param {string} content 
  * @param {Array} globalScripts 
- * @param {Array} bodyScripts 
+ * @param {Array} bodyScripts
+ * @param {HTMLScriptElement|null} scriptEl
+ * @param {string} source
  */
-function classifyScript(content, globalScripts, bodyScripts) {
+function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, source = '') {
   if (!content) return;
 
-  // More robust check for variable definitions/assignments that should happen early
-  // This covers var, let, const at start (after optional comments/whitespace)
-  // or assignments to common global patterns like aStr, infinite_scroll etc.
-  // Also check for common Friendica global functions/variables
-  const isGlobal = content.match(/^(\/\*[\s\S]*?\*\/|\/\/[^\n]*\n|\s)*(var|let|const|aStr|infinite_scroll|NavUpdate|onPageLoad|calendar_api|event_api)\b/);
-  
-  if (isGlobal) {
-    globalScripts.push(content);
-  } else {
-    bodyScripts.push(content);
+  // 1) Explicit override via data attribute on script tag
+  if (scriptEl) {
+    const attr = (scriptEl.getAttribute('data-spa-scope') || scriptEl.getAttribute('data-spa-script') || '').toLowerCase();
+    if (attr === 'global' || attr === 'head') {
+      globalScripts.push(content);
+      return;
+    }
+    if (attr === 'body' || attr === 'fragment') {
+      bodyScripts.push(content);
+      return;
+    }
   }
+
+  // 2) Explicit override via marker comment in script content
+  // Supported markers:
+  //   /* spa:global */
+  //   /* spa:body */
+  //   // spa:global
+  //   // spa:body
+  const markerMatch = content.match(/^\s*(?:\/\*\s*spa:(global|body)\s*\*\/|\/\/\s*spa:(global|body)\b)/i);
+  const marker = markerMatch ? (markerMatch[1] || markerMatch[2]) : null;
+  if (marker === 'global') {
+    globalScripts.push(content);
+    return;
+  }
+  if (marker === 'body') {
+    bodyScripts.push(content);
+    return;
+  }
+
+  // 3) Body-init patterns should run after DOM replacement
+  const bodyInitPattern = /(^|\n)\s*(\$\(\s*function\s*\(|\$\(\s*document\s*\)\s*\.ready\s*\(|jQuery\(\s*function\s*\(|jQuery\(\s*document\s*\)\s*\.ready\s*\(|document\.addEventListener\(\s*['\"]DOMContentLoaded['\"]\s*,|window\.addEventListener\(\s*['\"]load['\"]\s*,)/;
+  if (bodyInitPattern.test(content)) {
+    bodyScripts.push(content);
+    return;
+  }
+
+  // 4) Definitions/config that should exist before reinit
+  const definitionPattern = /^(\/\*[\s\S]*?\*\/|\/\/[^\n]*\n|\s)*(var|let|const|function|async\s+function|aStr)\b/;
+  if (definitionPattern.test(content)) {
+    globalScripts.push(content);
+    return;
+  }
+
+  // 5) Source-aware default: scripts from head are usually setup/global
+  if (source === 'head') {
+    globalScripts.push(content);
+    return;
+  }
+
+  // 6) Conservative fallback: treat as body script
+  bodyScripts.push(content);
 }
 
 /**
