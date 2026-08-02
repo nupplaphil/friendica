@@ -212,10 +212,10 @@ class API extends BaseModule
 				// Since we know from the visibility parameter the item should be private, we have to prevent the empty ACL
 				// case that would make it public. So we always append the author's contact id to the allowed contacts.
 				// See https://github.com/friendica/friendica/issues/9672
-				$strAclContactAllow .= $aclFormatter->toString($self);
+				$strAclContactAllow .= $aclFormatter->toString((string) $self);
 			}
 		} else {
-			$strAclContactAllow = $aclFormatter->toString($self);
+			$strAclContactAllow = $aclFormatter->toString((string) $self);
 			$strAclCircleAllow  = '';
 			$strContactDeny     = '';
 			$strCircleDeny      = '';

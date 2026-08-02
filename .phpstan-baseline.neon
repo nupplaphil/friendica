@@ -229,24 +229,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Parameter \#1 \$permissions of method Friendica\\Util\\ACLFormatter\:\:toString\(\) expects array\|string, bool\|int given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Calendar/Event/API.php
-
-		-
-			message: '#^Parameter \#2 \$datetime of static method DateTime\:\:createFromFormat\(\) expects string, int given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Module/Calendar/Event/Form.php
-
-		-
-			message: '#^Parameter \#2 \$event_id of static method Friendica\\Model\\Event\:\:getByIdAndUid\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Calendar/Event/Get.php
-
-		-
 			message: '#^Parameter \#1 \$current of static method Friendica\\Content\\ContactSelector\:\:pollInterval\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1

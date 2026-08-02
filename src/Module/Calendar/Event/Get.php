@@ -46,7 +46,7 @@ class Get extends \Friendica\BaseModule
 		$owner = Event::getOwnerForNickname($nickname);
 
 		if (!empty($request['id'])) {
-			$events = [Event::getByIdAndUid($owner['uid'], $request['id'])];
+			$events = [Event::getByIdAndUid($owner['uid'], (int) $request['id'])];
 		} else {
 			$events = Event::getListByDate($owner['uid'], $request['start'] ?? '', $request['end'] ?? '');
 		}
