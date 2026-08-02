@@ -298,7 +298,7 @@ class Crypto
 	/**
 	 * Creates cryptographic secure random digits
 	 *
-	 * @param string $digits The count of digits
+	 * @param int $digits The count of digits
 	 * @return string The random Digits
 	 *
 	 * @throws \Exception In case 'random_int' isn't usable
