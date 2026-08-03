@@ -59,6 +59,7 @@
 
 {{* own css files *}}
 <link rel="stylesheet" href="view/global.css?v={{$VERSION}}" type="text/css" media="all" />
+<link rel="stylesheet" href="view/settings.css?v={{$VERSION}}" type="text/css" media="all" />
 <link rel="stylesheet" href="view/theme/frio/css/hovercard.css?v={{$VERSION}}" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="view/theme/frio/css/font-awesome.custom.css?v={{$VERSION}}"
