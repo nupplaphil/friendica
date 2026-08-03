@@ -413,7 +413,7 @@ class Timeline extends BaseModule
 			if (!$cache) {
 				$condition = ["`language` = ?", User::getLanguageCode($uid)];
 			}
-		} elseif (is_numeric($this->selectedTab) && !empty($channel = $this->channelRepository->selectById($this->selectedTab, $uid))) {
+		} elseif (is_numeric($this->selectedTab) && !empty($channel = $this->channelRepository->selectById((int) $this->selectedTab, $uid))) {
 			if (!$this->config->get('system', 'channel_cache')) {
 				$condition = $this->channelRepository->getCondition($channel, $uid);
 				if (in_array($channel->circle, [EntityUserDefinedChannel::CIRCLE_CREATION, EntityUserDefinedChannel::CIRCLE_POSTS, EntityUserDefinedChannel::CIRCLE_ACTIVITY])) {

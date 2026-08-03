@@ -175,18 +175,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Parameter \#1 \$current of static method Friendica\\Content\\ContactSelector\:\:pollInterval\(\) expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Contact/Profile.php
-
-		-
-			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:selectById\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/Conversation/Timeline.php
-
-		-
 			message: '#^Parameter \#4 \$timestamp of class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNavNotification constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 1

@@ -358,7 +358,7 @@ class Profile extends BaseModule
 
 		$poll_interval = null;
 		if ((($contact['network'] == Protocol::FEED) && !$this->config->get('system', 'adjust_poll_frequency')) || ($contact['network'] == Protocol::MAIL)) {
-			$poll_interval = ContactSelector::pollInterval($localRelationship->priority, !$poll_enabled);
+			$poll_interval = ContactSelector::pollInterval((string) $localRelationship->priority, !$poll_enabled);
 		}
 
 		$contact_actions = $this->getContactActions($contact, $localRelationship);
