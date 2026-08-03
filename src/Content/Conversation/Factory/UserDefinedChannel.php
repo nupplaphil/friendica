@@ -14,7 +14,7 @@ final class UserDefinedChannel extends Timeline implements ICanCreateFromTableRo
 {
 	public function isTimeline(string $selectedTab, int $uid): bool
 	{
-		return is_numeric($selectedTab) && $uid && $this->channelRepository->existsById($selectedTab, $uid);
+		return is_numeric($selectedTab) && $uid && $this->channelRepository->existsById((int) $selectedTab, $uid);
 	}
 
 	public function createFromTableRow(array $row): Entity\UserDefinedChannel

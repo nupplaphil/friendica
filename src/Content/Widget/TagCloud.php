@@ -144,13 +144,13 @@ class TagCloud
 	/**
 	 * Compare function to sort tags/terms alphabetically.
 	 *
-	 * @param string $a
-	 * @param string $b
+	 * @param array $a
+	 * @param array $b
 	 *
 	 * @return int
 	 */
 	private static function tagsSort($a, $b)
 	{
-		return strtolower($a[0]) <=> strtolower($b[0]);
+		return strtolower((string) $a[0]) <=> strtolower((string) $b[0]);
 	}
 }

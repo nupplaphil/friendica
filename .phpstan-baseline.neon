@@ -52,24 +52,6 @@ parameters:
 			path: src/Collection/Api/Mastodon/Fields.php
 
 		-
-			message: '#^Parameter \#1 \$id of method Friendica\\Content\\Conversation\\Repository\\UserDefinedChannel\:\:existsById\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Conversation/Factory/UserDefinedChannel.php
-
-		-
-			message: '#^Parameter \#2 \$simple of static method Friendica\\Model\\Event\:\:getHTML\(\) expects bool, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Text/BBCode.php
-
-		-
-			message: '#^Parameter \#2 \$callback of function usort expects callable\(array\{mixed, float, 0\}, array\{mixed, float, 0\}\)\: int, Closure\(string, string\)\: int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Content/Widget/TagCloud.php
-
-		-
 			message: '''
 				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
 				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
