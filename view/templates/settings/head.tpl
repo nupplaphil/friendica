@@ -6,6 +6,7 @@
   *}}
 
 <script type="text/javascript" src="view/asset/es-jquery-sortable/source/js/jquery-sortable.js"></script>
+<link rel="stylesheet" href="view/settings.css" type="text/css" media="all" />
 <script>
 	var ispublic = "{{$ispublic nofilter}}";
 

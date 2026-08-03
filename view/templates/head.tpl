@@ -9,7 +9,6 @@
 <meta name="generator" content="{{$generator}}" />
 <link rel="stylesheet" href="view/asset/remixicon/fonts/remixicon.css?v={{$VERSION}}" type="text/css" media="screen" />
 <link rel="stylesheet" href="view/global.css?v={{$VERSION}}" type="text/css" media="all" />
-<link rel="stylesheet" href="view/settings.css?v={{$VERSION}}" type="text/css" media="all" />
 <link rel="stylesheet" href="view/asset/jquery-colorbox/example5/colorbox.css?v={{$VERSION}}" type="text/css" media="screen" />
 <link rel="stylesheet" href="view/asset/jgrowl/jquery.jgrowl.min.css?v={{$VERSION}}" type="text/css" media="screen" />
 <link rel="stylesheet" href="view/asset/jquery-datetimepicker/build/jquery.datetimepicker.min.css?v={{$VERSION}}" type="text/css" media="screen" />
