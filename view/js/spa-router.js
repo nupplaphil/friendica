@@ -39,7 +39,6 @@ const SPA_CONFIG = {
   enabled: true,
   excludedRoutes: [
     '/delegation',
-    '/settings/display', // The ordering of the channels currently does not work with SPA, so we exclude it for now
   ],
   scrollToTopOnNavigate: true
 };
