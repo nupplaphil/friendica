@@ -169,24 +169,6 @@ parameters:
 			path: src/Model/Post/Counts.php
 
 		-
-			message: '#^Parameter \#3 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getInbox\(\) expects int\|null, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/ActivityPub/Inbox.php
-
-		-
-			message: '#^Parameter \#3 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getPublicInbox\(\) expects int\|null, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/ActivityPub/Inbox.php
-
-		-
-			message: '#^Parameter \#4 \$max_id of static method Friendica\\Protocol\\ActivityPub\\ClientToServer\:\:getOutbox\(\) expects int\|null, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Module/ActivityPub/Outbox.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Module\\Response of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
