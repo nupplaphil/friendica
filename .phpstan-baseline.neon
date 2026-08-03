@@ -130,12 +130,6 @@ parameters:
 			path: src/Security/PermissionSet/Repository/PermissionSet.php
 
 		-
-			message: '#^Parameter \#1 \$str of static method Friendica\\Util\\XML\:\:escape\(\) expects string, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Util/XML.php
-
-		-
 			message: '#^Parameter \#3 \$reply of static method Friendica\\Protocol\\Email\:\:getMessage\(\) expects string, bool given\.$#'
 			identifier: argument.type
 			count: 1

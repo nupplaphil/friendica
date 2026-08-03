@@ -130,7 +130,7 @@ class XML
 	public static function copy(&$source, &$target, $elementname)
 	{
 		if (count($source->children()) == 0) {
-			$target->addChild($elementname, self::escape($source));
+			$target->addChild($elementname, self::escape((string) $source));
 		} else {
 			$child = $target->addChild($elementname);
 			foreach ($source->children() as $childfield => $childentry) {
