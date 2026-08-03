@@ -55,3 +55,11 @@ parameters:
             identifier: method.deprecated
             path: tests/
             count: 96
+
+        # vfsStream v1.6.12: getChild() returns vfsStreamContent, but at() expects
+        # vfsStreamContainer. vfsStreamContainer does NOT extend vfsStreamContent,
+        # so PHPStan can't narrow the type. Library is frozen, no upstream fix.
+        -
+            message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+            path: tests/
+            count: 36

@@ -112,12 +112,6 @@ parameters:
 			path: src/Security/PermissionSet/Repository/PermissionSet.php
 
 		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/FixtureTestCase.php
-
-		-
 			message: '#^Parameter \#1 \$logLevel of method Friendica\\Core\\Logger\\Factory\\StreamLoggerFactory\:\:createLogger\(\) expects ''alert''\|''critical''\|''debug''\|''emergency''\|''error''\|''info''\|''notice''\|''warning'', ''unsupported\-loglevel'' given\.$#'
 			identifier: argument.type
 			count: 1
@@ -128,12 +122,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/Unit/Core/Logger/Factory/SyslogLoggerFactoryTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
 			message: '#^Parameter \#2 \$config of class Friendica\\Console\\AutomaticInstallation constructor expects Friendica\\Core\\Config\\Capability\\IManageConfigValues, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
@@ -160,50 +148,14 @@ parameters:
 			path: tests/src/Console/AutomaticInstallationConsoleTest.php
 
 		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Console/ServerBlockConsoleTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Core/Cache/DatabaseCacheTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 13
-			path: tests/src/Core/Config/Cache/ConfigFileManagerTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Core/Config/ConfigTest.php
-
-		-
 			message: '#^Parameter \#1 \$fixture of method Friendica\\Test\\src\\Core\\Config\\ConfigTest\:\:loadDirectFixture\(\) expects array\<array\<string\>\>, array\<string, array\<int, array\<string, string\>\>\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Core/Config/ConfigTest.php
 
 		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Hooks/Util/StrategiesFileManagerTest.php
-
-		-
 			message: '#^Call to an undefined method Dice\\Dice\:\:shouldReceive\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: tests/src/Core/InstallerTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
 			count: 1
 			path: tests/src/Core/InstallerTest.php
 
@@ -214,86 +166,7 @@ parameters:
 			path: tests/src/Core/InstallerTest.php
 
 		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/DatabaseStorageTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageConfigTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/FilesystemStorageTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Database/DatabaseTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Network/ProbeTest.php
-
-		-
 			message: '#^Property Friendica\\Test\\src\\Profile\\ProfileField\\Entity\\ProfileFieldTest\:\:\$permissionSetFactory \(Friendica\\Security\\PermissionSet\\Factory\\PermissionSet&Mockery\\MockInterface\) does not accept Friendica\\Security\\PermissionSet\\Factory\\PermissionSet\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Util/EMailerTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Util/Emailer/MailBuilderTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Util/Emailer/SystemMailBuilderTest.php
-
-		-
-			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Util/ImagesTest.php
-
