@@ -127,12 +127,6 @@ parameters:
 			path: src/Factory/Api/Mastodon/ListEntity.php
 
 		-
-			message: '#^Parameter \#1 \$id of static method Friendica\\Model\\Attach\:\:getById\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Model/Attach.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Module\\Response of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1

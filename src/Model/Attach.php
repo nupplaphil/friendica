@@ -345,7 +345,7 @@ class Attach
 		preg_match_all("/\[attachment\](.*?)\[\/attachment\]/ism", $body, $matches, PREG_SET_ORDER);
 		foreach ($matches as $attachment) {
 			if (DI::baseUrl()->isLocalUrl($attachment[1]) && preg_match('|.*?/attach/(\d+)|', $attachment[1], $match)) {
-				$attach = self::getById($match[1], $uid);
+				$attach = self::getById((int) $match[1], $uid);
 				if (empty($attach)) {
 					return $body;
 				}
