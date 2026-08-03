@@ -190,18 +190,6 @@ parameters:
 			path: src/Protocol/ActivityPub/ClientToServer.php
 
 		-
-			message: '#^Parameter \#3 \$section of function imap_fetchbody expects string, int\<min, \-1\>\|int\<1, max\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/Email.php
-
-		-
-			message: '#^Parameter \#4 \$partno of static method Friendica\\Protocol\\Email\:\:messageGetPart\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Protocol/Email.php
-
-		-
 			message: '#^Parameter \#3 \$value of function curl_setopt expects bool, int given\.$#'
 			identifier: argument.type
 			count: 1

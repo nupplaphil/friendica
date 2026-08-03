@@ -210,18 +210,18 @@ class Email
 	 * @param Connection $mbox    mailbox
 	 * @param integer    $uid     user id
 	 * @param object     $p       parts
-	 * @param integer    $partno  part number
+	 * @param string|int    $partno  part number
 	 * @param string     $subtype sub type
 	 * @return string
 	 */
-	private static function messageGetPart(Connection $mbox, int $uid, $p, int $partno, string $subtype): string
+	private static function messageGetPart(Connection $mbox, int $uid, $p, string|int $partno, string $subtype): string
 	{
 		// $partno = '1', '2', '2.1', '2.1.3', etc for multipart, 0 if simple
 		global $htmlmsg,$plainmsg,$charset,$attachments;
 
 		// DECODE DATA
 		$data = ($partno)
-			? @imap_fetchbody($mbox, $uid, $partno, FT_UID | FT_PEEK)
+			? @imap_fetchbody($mbox, $uid, (string) $partno, FT_UID | FT_PEEK)
 		: @imap_body($mbox, $uid, FT_UID | FT_PEEK);
 
 		// Any part may be encoded, even plain text messages, so check everything.
