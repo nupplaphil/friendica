@@ -109,22 +109,10 @@ parameters:
 			path: src/Database/Database.php
 
 		-
-			message: '#^Parameter \#1 \$id of class Friendica\\Object\\Api\\Mastodon\\Conversation constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Factory/Api/Mastodon/Conversation.php
-
-		-
 			message: '#^Parameter \#1 \$entities of class Friendica\\Collection\\Api\\Mastodon\\Emojis constructor expects array\<Friendica\\BaseEntity\>, list\<Friendica\\Object\\Api\\Mastodon\\Emoji\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Factory/Api/Mastodon/Emoji.php
-
-		-
-			message: '#^Parameter \#1 \$id of class Friendica\\Object\\Api\\Mastodon\\ListEntity constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Factory/Api/Mastodon/ListEntity.php
 
 		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Module\\Response of overridden property Friendica\\BaseModule\:\:\$response\.$#'

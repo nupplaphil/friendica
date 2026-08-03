@@ -55,6 +55,6 @@ class Conversation extends BaseFactory
 			$accounts[] = $this->mstdnAccountFactory->createFromContactId($id, 0);
 		}
 
-		return new \Friendica\Object\Api\Mastodon\Conversation($id, $accounts, $unread, $last_status);
+		return new \Friendica\Object\Api\Mastodon\Conversation((string) $id, $accounts, $unread, $last_status);
 	}
 }
