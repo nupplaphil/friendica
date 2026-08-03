@@ -37,15 +37,6 @@ parameters:
 			path: src/BaseModule.php
 
 		-
-			message: '''
-				#^Call to deprecated method getFactory\(\) of class Friendica\\BaseRepository\:
-				2026\.08 This method will become abstract in a future release, implement it in your child class instead\.$#
-			'''
-			identifier: method.deprecated
-			count: 1
-			path: src/BaseRepository.php
-
-		-
 			message: '#^Parameter \#1 \$entities of method Friendica\\BaseCollection\:\:__construct\(\) expects array\<Friendica\\BaseEntity\>, array\<Friendica\\Object\\Api\\Mastodon\\Field\> given\.$#'
 			identifier: argument.type
 			count: 1

@@ -139,7 +139,7 @@ abstract class BaseRepository
 
 		$Entities = new BaseCollection();
 		foreach ($rows as $fields) {
-			$Entities[] = $this->getFactory()->createFromTableRow($fields);
+			$Entities[] = $this->getFactory()->createFromTableRow($fields); // @phpstan-ignore method.deprecated (BC: keep until getFactory() becomes abstract)
 		}
 
 		return $Entities;
