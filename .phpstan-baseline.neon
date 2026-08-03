@@ -85,12 +85,6 @@ parameters:
 			path: src/Core/Storage/Type/ExternalResource.php
 
 		-
-			message: '#^Parameter \#5 \$port of class mysqli constructor expects int\|null, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Database/Database.php
-
-		-
 			message: '#^Parameter \#1 \$entities of class Friendica\\Collection\\Api\\Mastodon\\Emojis constructor expects array\<Friendica\\BaseEntity\>, list\<Friendica\\Object\\Api\\Mastodon\\Emoji\> given\.$#'
 			identifier: argument.type
 			count: 1

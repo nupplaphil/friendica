@@ -181,7 +181,7 @@ class Database
 			if ($socket) {
 				$this->connection = @new mysqli(null, $user, $pass, $database, null, $socket);
 			} elseif ($port > 0) {
-				$this->connection = @new mysqli($host, $user, $pass, $database, $port);
+				$this->connection = @new mysqli($host, $user, $pass, $database, (int) $port);
 			} else {
 				$this->connection = @new mysqli($host, $user, $pass, $database);
 			}
