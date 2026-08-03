@@ -114,7 +114,7 @@ class CacheTest extends MockedTestCase
 		// incomplete dataset (key is integer ID of the array)
 		$configCache = new Cache();
 		$configCache->load(['system' => ['value']]);
-		self::assertEquals('value', $configCache->get('system', 0));
+		self::assertEquals('value', $configCache->get('system', '0'));
 	}
 
 	/**

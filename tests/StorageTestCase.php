@@ -49,7 +49,7 @@ abstract class StorageTestCase extends MockedTestCase
 
 		$instance = $this->getInstance();
 
-		$instance->delete(-1234456);
+		$instance->delete('-1234456');
 	}
 
 	/**
@@ -61,7 +61,7 @@ abstract class StorageTestCase extends MockedTestCase
 
 		$instance = $this->getInstance();
 
-		$instance->get(-123456);
+		$instance->get('-123456');
 	}
 
 	/**
@@ -87,6 +87,6 @@ abstract class StorageTestCase extends MockedTestCase
 	{
 		$instance = $this->getInstance();
 
-		self::assertEquals(-123, $instance->put('data12345', -123));
+		self::assertEquals(-123, $instance->put('data12345', '-123'));
 	}
 }

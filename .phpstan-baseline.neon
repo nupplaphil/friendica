@@ -118,24 +118,6 @@ parameters:
 			path: tests/FixtureTestCase.php
 
 		-
-			message: '#^Parameter \#1 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanReadFromStorage\:\:get\(\) expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/StorageTestCase.php
-
-		-
-			message: '#^Parameter \#1 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage\:\:delete\(\) expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/StorageTestCase.php
-
-		-
-			message: '#^Parameter \#2 \$reference of method Friendica\\Core\\Storage\\Capability\\ICanWriteToStorage\:\:put\(\) expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/StorageTestCase.php
-
-		-
 			message: '#^Parameter \#1 \$logLevel of method Friendica\\Core\\Logger\\Factory\\StreamLoggerFactory\:\:createLogger\(\) expects ''alert''\|''critical''\|''debug''\|''emergency''\|''error''\|''info''\|''notice''\|''warning'', ''unsupported\-loglevel'' given\.$#'
 			identifier: argument.type
 			count: 1
@@ -184,22 +166,10 @@ parameters:
 			path: tests/src/Console/ServerBlockConsoleTest.php
 
 		-
-			message: '#^Parameter \#2 \$uid of static method Friendica\\Core\\ACL\:\:isValidContact\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Core/ACLTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 2
 			path: tests/src/Core/Cache/DatabaseCacheTest.php
-
-		-
-			message: '#^Parameter \#2 \$key of method Friendica\\Core\\Config\\ValueObject\\Cache\:\:get\(\) expects string\|null, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Config/Cache/CacheTest.php
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
@@ -284,24 +254,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/src/Database/DatabaseTest.php
-
-		-
-			message: '#^Parameter \#1 \$hour of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Moderation/Factory/ReportTest.php
-
-		-
-			message: '#^Parameter \#2 \$minute of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Moderation/Factory/ReportTest.php
-
-		-
-			message: '#^Parameter \#3 \$second of method DateTimeImmutable\:\:setTime\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Moderation/Factory/ReportTest.php
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'

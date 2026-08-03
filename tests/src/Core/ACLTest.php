@@ -19,7 +19,7 @@ class ACLTest extends FixtureTestCase
 	 */
 	public function testCheckAclInput(): void
 	{
-		$result = ACL::isValidContact('<aclstring>', '42');
+		$result = ACL::isValidContact('<aclstring>', 42);
 		self::assertFalse($result);
 	}
 
@@ -30,7 +30,7 @@ class ACLTest extends FixtureTestCase
 	 */
 	public function testCheckAclInputWithEmptyAclString(): void
 	{
-		$result = ACL::isValidContact('', '42');
+		$result = ACL::isValidContact('', 42);
 		self::assertTrue($result);
 	}
 }
