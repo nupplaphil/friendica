@@ -86,7 +86,7 @@ class Photos extends \Friendica\Module\BaseProfile
 			// Since we know from the visibility parameter the item should be private, we have to prevent the empty ACL
 			// case that would make it public. So we always append the author's contact id to the allowed contacts.
 			// See https://github.com/friendica/friendica/issues/9672
-			$str_contact_allow .= $this->aclFormatter->toString(Contact::getPublicIdByUserId($this->owner['uid']));
+			$str_contact_allow .= $this->aclFormatter->toString((string) Contact::getPublicIdByUserId($this->owner['uid']));
 		}
 
 		$hook_data = [
