@@ -424,36 +424,6 @@ parameters:
 			path: tests/src/Profile/ProfileField/Entity/ProfileFieldTest.php
 
 		-
-			message: '#^Parameter \#2 \$allow_cid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
-			identifier: argument.type
-			count: 7
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
-			message: '#^Parameter \#3 \$allow_gid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
-			message: '#^Parameter \#4 \$deny_cid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
-			message: '#^Parameter \#5 \$deny_gid of class Friendica\\Security\\PermissionSet\\Entity\\PermissionSet constructor expects array\<string\>, array\<int, int\> given\.$#'
-			identifier: argument.type
-			count: 13
-			path: tests/src/Security/PermissionSet/Repository/PermissionSetTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 1
