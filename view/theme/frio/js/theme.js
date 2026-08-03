@@ -77,17 +77,6 @@ function initTheme() {
 		}
 	});
 
-	// scroll body to 0px on click
-	$("#back-to-top").click(function () {
-		$("body,html").animate(
-			{
-				scrollTop: 0,
-			},
-			400,
-		);
-		return false;
-	});
-
 	// add the class "active" to tabmenuli if li > a does have the class active
 	if ($("#tabmenu ul li a").hasClass("active")) {
 		$("#tabmenu ul li a.active").parent("li").addClass("active");
