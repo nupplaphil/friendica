@@ -97,12 +97,6 @@ parameters:
 			path: src/Module/BaseApi.php
 
 		-
-			message: '#^Parameter \#4 \$timestamp of class Friendica\\Navigation\\Notifications\\ValueObject\\FormattedNavNotification constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Navigation/Notifications/Factory/FormattedNavNotification.php
-
-		-
 			message: '''
 				#^Call to deprecated method getConfig\(\) of class GuzzleHttp\\Client\:
 				ClientInterface\:\:getConfig will be removed in guzzlehttp/guzzle\:8\.0\.$#

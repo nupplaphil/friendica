@@ -75,7 +75,7 @@ class FormattedNavNotification extends BaseFactory
 			$contact_name,
 			$contact_url,
 			$contact_photo,
-			$date->getTimestamp(),
+			(string) $date->getTimestamp(),
 			strip_tags($templateNotify['richtext']),
 			Renderer::replaceMacros($this->tpl, ['notify' => $templateNotify]),
 			$href,
