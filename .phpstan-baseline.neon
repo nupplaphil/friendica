@@ -154,30 +154,6 @@ parameters:
 			path: tests/Unit/Core/Logger/Factory/SyslogLoggerFactoryTest.php
 
 		-
-			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModuleContentEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
-			identifier: argument.type
-			count: 6
-			path: tests/Unit/Event/ModuleContentEventTest.php
-
-		-
-			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModuleInitEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
-			identifier: argument.type
-			count: 4
-			path: tests/Unit/Event/ModuleInitEventTest.php
-
-		-
-			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModulePostEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
-			identifier: argument.type
-			count: 6
-			path: tests/Unit/Event/ModulePostEventTest.php
-
-		-
-			message: '#^Parameter \#3 \$moduleClass of class Friendica\\Event\\ModulePostRecipientEvent constructor expects class\-string\<Friendica\\BaseModule\>, string given\.$#'
-			identifier: argument.type
-			count: 6
-			path: tests/Unit/Event/ModulePostRecipientEventTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 2

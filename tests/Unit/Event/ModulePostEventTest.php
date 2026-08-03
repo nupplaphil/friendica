@@ -11,13 +11,14 @@ namespace Friendica\Test\Unit\Event;
 
 use Friendica\Event\ModulePostEvent;
 use Friendica\Event\NamedEvent;
+use Friendica\Module\Smilies;
 use PHPUnit\Framework\TestCase;
 
 class ModulePostEventTest extends TestCase
 {
 	public function testImplementationOfInstances(): void
 	{
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, []);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, []);
 
 		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
@@ -37,37 +38,37 @@ class ModulePostEventTest extends TestCase
 
 	public function testGetNameReturnsName(): void
 	{
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, []);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, []);
 
 		$this->assertSame('test', $event->getName());
 	}
 
 	public function testGetModuleNameReturnsModuleName(): void
 	{
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, []);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, []);
 
 		$this->assertSame('moduleName', $event->getModuleName());
 	}
 
 	public function testGetModuleClassReturnsModuleClass(): void
 	{
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, []);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, []);
 
-		$this->assertSame(\stdClass::class, $event->getModuleClass());
+		$this->assertSame(Smilies::class, $event->getModuleClass());
 	}
 
 	public function testGetPostReturnsCorrectArray(): void
 	{
 		$post = ['key' => 'value'];
 
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, $post);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, $post);
 
 		$this->assertSame($post, $event->getPost());
 	}
 
 	public function testSetPostUpdatesPost(): void
 	{
-		$event = new ModulePostEvent('test', 'moduleName', \stdClass::class, ['key' => 'value']);
+		$event = new ModulePostEvent('test', 'moduleName', Smilies::class, ['key' => 'value']);
 
 		$newPost = ['key2' => 'value2'];
 

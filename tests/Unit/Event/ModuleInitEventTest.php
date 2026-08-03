@@ -11,13 +11,14 @@ namespace Friendica\Test\Unit\Event;
 
 use Friendica\Event\ModuleInitEvent;
 use Friendica\Event\NamedEvent;
+use Friendica\Module\Smilies;
 use PHPUnit\Framework\TestCase;
 
 class ModuleInitEventTest extends TestCase
 {
 	public function testImplementationOfInstances(): void
 	{
-		$event = new ModuleInitEvent('test', 'moduleName', \stdClass::class);
+		$event = new ModuleInitEvent('test', 'moduleName', Smilies::class);
 
 		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
@@ -37,22 +38,22 @@ class ModuleInitEventTest extends TestCase
 
 	public function testGetNameReturnsName(): void
 	{
-		$event = new ModuleInitEvent('test', 'moduleName', \stdClass::class);
+		$event = new ModuleInitEvent('test', 'moduleName', Smilies::class);
 
 		$this->assertSame('test', $event->getName());
 	}
 
 	public function testGetModuleNameReturnsModuleName(): void
 	{
-		$event = new ModuleInitEvent('test', 'moduleName', \stdClass::class);
+		$event = new ModuleInitEvent('test', 'moduleName', Smilies::class);
 
 		$this->assertSame('moduleName', $event->getModuleName());
 	}
 
 	public function testGetModuleClassReturnsModuleClass(): void
 	{
-		$event = new ModuleInitEvent('test', 'moduleName', \stdClass::class);
+		$event = new ModuleInitEvent('test', 'moduleName', Smilies::class);
 
-		$this->assertSame(\stdClass::class, $event->getModuleClass());
+		$this->assertSame(Smilies::class, $event->getModuleClass());
 	}
 }
