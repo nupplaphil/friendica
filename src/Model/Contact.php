@@ -437,7 +437,7 @@ class Contact
 	 *
 	 * @param string  $url    profile url
 	 * @param integer $uid    User ID of the contact
-	 * @param boolean $update true = always update, false = never update, null = update when not found or outdated
+	 * @param boolean|null $update true = always update, false = never update, null = update when not found or outdated
 	 * @param array   $fields Field list
 	 * @return array contact array
 	 */
