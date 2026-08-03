@@ -124,12 +124,6 @@ parameters:
 			path: src/Security/PermissionSet/Repository/PermissionSet.php
 
 		-
-			message: '#^Parameter \#3 \$reply of static method Friendica\\Protocol\\Email\:\:getMessage\(\) expects string, bool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Worker/OnePoll.php
-
-		-
 			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
