@@ -143,7 +143,7 @@ if ($minimal) {
 				</div><!--row-->
 			</div><!-- container -->
 
-			<button id="back-to-top" class="btn btn-primary" data-toggle="tooltip" title="<?php echo DI::l10n()->t('Back to top')?>">⇧</button>
+			<button id="back-to-top" class="btn btn-primary" data-toggle="tooltip" title="<?php echo DI::l10n()->t('Back to top')?>" onclick="$('body,html').animate({scrollTop: 0}, 400); return false;">⇧</button>
 		</main>
 
 		<footer id="page-footer">
