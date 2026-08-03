@@ -74,12 +74,12 @@ class DbaDefinition
 				// Limit the length of varchar, varbinary, char and binary fields
 				if (is_string($data[$field]) && preg_match("/char\((\d*)\)/", (string) $definition[$table]['fields'][$field]['type'], $result)) {
 					if ($charset == 'latin1') {
-						$data[$field] = substr($data[$field], 0, $result[1]);
+						$data[$field] = substr($data[$field], 0, (int) $result[1]);
 					} else {
-						$data[$field] = mb_substr($data[$field], 0, $result[1]);
+						$data[$field] = mb_substr($data[$field], 0, (int) $result[1]);
 					}
 				} elseif (is_string($data[$field]) && preg_match("/binary\((\d*)\)/", (string) $definition[$table]['fields'][$field]['type'], $result)) {
-					$data[$field] = substr($data[$field], 0, $result[1]);
+					$data[$field] = substr($data[$field], 0, (int) $result[1]);
 				} elseif (is_numeric($data[$field]) && $definition[$table]['fields'][$field]['type'] === 'int') {
 					$data[$field] = min(max((int) $data[$field], -2147483648), 2147483647);
 				} elseif (is_numeric($data[$field]) && $definition[$table]['fields'][$field]['type'] === 'int unsigned') {
