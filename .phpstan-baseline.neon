@@ -97,24 +97,6 @@ parameters:
 			path: src/Core/Config/Util/ConfigFileManager.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/L10n.php
-
-		-
-			message: '#^Parameter \#3 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Core/L10n.php
-
-		-
-			message: '#^Parameter \#2 \$code of class Friendica\\Core\\Storage\\Exception\\StorageException constructor expects int, string given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Core/Storage/Repository/StorageManager.php
-
-		-
 			message: '#^Parameter \#2 \$code of class Friendica\\Core\\Storage\\Exception\\ReferenceStorageException constructor expects int, string given\.$#'
 			identifier: argument.type
 			count: 1

@@ -300,7 +300,7 @@ class L10n
 	 * - DI::l10n()->t('Current version: %s, new version: %s', $current_version, $new_version)
 	 *
 	 * @param string $s
-	 * @param array  $vars Variables to interpolate in the translation string
+	 * @param scalar ...$vars Variables to interpolate in the translation string
 	 *
 	 * @return string
 	 */
@@ -338,7 +338,7 @@ class L10n
 	 * @param string $singular
 	 * @param string $plural
 	 * @param float  $count
-	 * @param array  $vars Variables to interpolate in the translation string
+	 * @param scalar ...$vars Variables to interpolate in the translation string
 	 *
 	 * @return string
 	 * @throws \Exception
