@@ -63,3 +63,17 @@ parameters:
             message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
             path: tests/
             count: 36
+
+        # Arguments::getModuleName() deprecated since 2022.12.
+        # Migration: replace with getModuleClass() (returns FQCN like
+        # "Friendica\Module\Photos"). Not all callers can be migrated
+        # directly — HookEventBridge needs the short name for hook events.
+        # TODO: migrate each caller individually, then remove this ignore.
+        -
+            message: '''
+                #^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+                2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+            '''
+            identifier: method.deprecated
+            path: src/
+            count: 10

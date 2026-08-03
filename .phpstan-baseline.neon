@@ -1,55 +1,10 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 1
-			path: src/App/Mode.php
-
-		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 4
-			path: src/App/Page.php
-
-		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 1
-			path: src/App/Router.php
-
-		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 3
-			path: src/BaseModule.php
-
-		-
 			message: '#^Parameter \#1 \$entities of method Friendica\\BaseCollection\:\:__construct\(\) expects array\<Friendica\\BaseEntity\>, array\<Friendica\\Object\\Api\\Mastodon\\Field\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Collection/Api/Mastodon/Fields.php
-
-		-
-			message: '''
-				#^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
-				2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
-			'''
-			identifier: method.deprecated
-			count: 1
-			path: src/Core/ACL.php
 
 		-
 			message: '''
