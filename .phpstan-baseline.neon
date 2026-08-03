@@ -118,19 +118,7 @@ parameters:
 			path: src/Security/PermissionSet/Repository/PermissionSet.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/DatabaseTestCase.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/FixtureTestCase.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/FixtureTestCase.php
@@ -226,12 +214,6 @@ parameters:
 			path: tests/src/Console/ServerBlockConsoleTest.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Console/ServerBlockConsoleTest.php
-
-		-
 			message: '#^Parameter \#2 \$uid of static method Friendica\\Core\\ACL\:\:isValidContact\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 2
@@ -239,12 +221,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/src/Core/Cache/DatabaseCacheTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 2
 			path: tests/src/Core/Cache/DatabaseCacheTest.php
@@ -269,12 +245,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$fixture of method Friendica\\Test\\src\\Core\\Config\\ConfigTest\:\:loadDirectFixture\(\) expects array\<array\<string\>\>, array\<string, array\<int, array\<string, string\>\>\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Config/ConfigTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Core/Config/ConfigTest.php
@@ -310,31 +280,13 @@ parameters:
 			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/KeyValueStorage/DBKeyValueStorageTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Lock/DatabaseLockDriverTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/DatabaseStorageTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Core/Storage/DatabaseStorageTest.php
@@ -358,19 +310,7 @@ parameters:
 			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Core/Storage/Repository/StorageManagerTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Database/DatabaseTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Database/DatabaseTest.php
@@ -400,19 +340,7 @@ parameters:
 			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
 
 		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Network/HTTPClient/Client/HTTPClientTest.php
-
-		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Network/ProbeTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Network/ProbeTest.php
@@ -443,12 +371,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/src/Util/ImagesTest.php
-
-		-
-			message: '#^Parameter \#3 \$duplicate_mode of method Friendica\\Database\\Database\:\:insert\(\) expects int, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/src/Util/ImagesTest.php
