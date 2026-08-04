@@ -6,33 +6,29 @@
 
 /**
  * SPA Router for Friendica
+ * ES Module - load with <script type="module">
  * Client-side routing implementation for /network, /display, /profile
  * Keeps footer static (for XMPP addon compatibility)
  * 
  * Uses Acorn parser (https://github.com/acornjs/acorn) for robust JavaScript
- * code analysis. Acorn is installed via Composer (npm-asset/acorn) at /view/asset/acorn/dist/acorn.js
+ * code analysis. Acorn is installed via Composer (npm-asset/acorn) at /view/asset/acorn/dist/acorn.mjs
  * 
  * To install Acorn: composer require npm-asset/acorn:^8.15.0
  */
+
+import * as acorn from '/view/asset/acorn/dist/acorn.mjs';
 
 // ============================================
 // FEATURE DETECTION
 // ============================================
 
-/**
- * Check if browser supports SPA features
- * @returns {boolean} True if History API and Fetch are supported
- */
 const supportsSPA = window.history && window.history.pushState && window.fetch;
 
 // ============================================
 // GLOBAL STATE
 // ============================================
 
-// Track the final URL after redirects for display page detection
 let lastFinalUrl = null;
-
-// Track the router version to detect updates
 const clientRouterVersion = typeof window.__spa_router_version !== 'undefined' ? window.__spa_router_version : null;
 
 // ============================================
@@ -41,9 +37,7 @@ const clientRouterVersion = typeof window.__spa_router_version !== 'undefined' ?
 
 const SPA_CONFIG = {
   enabled: true,
-  excludedRoutes: [
-    '/delegation',
-  ],
+  excludedRoutes: ['/delegation'],
   scrollToTopOnNavigate: true
 };
 
@@ -57,10 +51,7 @@ const SPA_CONFIG = {
  * @returns {boolean} True if route should use SPA
  */
 function isSPARoute(path) {
-  return !SPA_CONFIG.excludedRoutes.some(route => {
-    // Exact match or starts with route + /
-    return path === route || path.startsWith(route + '/');
-  });
+  return !SPA_CONFIG.excludedRoutes.some(route => path === route || path.startsWith(route + '/'));
 }
 
 /**
@@ -71,13 +62,7 @@ function isSPARoute(path) {
 function isInternalLink(link) {
   const href = link.getAttribute('href');
   if (!href) return false;
-
-  // Skip anchor links, javascript: and mailto:
-  if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) {
-    return false;
-  }
-  
-  // Check if same origin
+  if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) return false;
   try {
     const url = new URL(href, window.location.href);
     return url.origin === window.location.origin;
@@ -92,9 +77,7 @@ function isInternalLink(link) {
  */
 function handleLinkClick(e) {
   const link = e.target.closest('a');
-  if (!link) {
-    return;
-  }
+  if (!link) return;
   
   let href = link.getAttribute('href');
   
@@ -105,15 +88,12 @@ function handleLinkClick(e) {
   }
   
   // Ignore links that are meant to open modals (e.g., modal-open class)
-  // These are handled by separate modal JavaScript handlers
   if (link.classList.contains('modal-open')) {
     console.debug('[SPA Router] Click: Modal link, allowing default/modal behavior');
     return;
   }
 
   // Ignore links with data-fancybox attribute (for Fancybox lightbox)
-  // These are handled by Fancybox JavaScript
-  // Push a state marker so we can detect back navigation from Fancybox
   if (link.hasAttribute('data-fancybox')) {
     console.debug('[SPA Router] Click: Fancybox link, pushing marker state and allowing default/fancybox behavior');
     history.pushState({ __fancyboxMarker: true }, '', window.location.href);
@@ -121,7 +101,6 @@ function handleLinkClick(e) {
   }
 
   // Ignore links with inline event handlers (onclick, etc.)
-  // These are handled by custom JavaScript and should not use SPA
   if (link.hasAttribute("onclick") || link.onclick || link.hasAttribute("data-spa-ignore")) {
     console.debug("[SPA Router] Click: Link has event handler or data-spa-ignore, allowing default behavior");
     return;
@@ -226,9 +205,9 @@ function showTimeoutModal() {
   }
   
   // Get translated texts from PHP
-  const title = window.spaErrorTexts.timeout;
-  const message = window.spaErrorTexts.timeout_message;
-  const closeText = window.spaErrorTexts.close;
+  const title = window.spaErrorTexts?.timeout || 'Timeout';
+  const message = window.spaErrorTexts?.timeout_message || 'Request timed out';
+  const closeText = window.spaErrorTexts?.close || 'Close';
   
   // Create modal overlay
   const modal = document.createElement('div');
@@ -251,32 +230,19 @@ function showTimeoutModal() {
   const closeButton = document.createElement('button');
   closeButton.textContent = closeText;
   closeButton.className = 'btn btn-primary spa-modal-close-btn';
-  closeButton.onclick = function() {
-    dismissTimeoutModal();
-  };
+  closeButton.onclick = dismissTimeoutModal;
   
-  content.appendChild(heading);
-  content.appendChild(messageElement);
-  content.appendChild(closeButton);
-  
+  content.append(heading, messageElement, closeButton);
   modal.appendChild(content);
   
   // Close modal when clicking on overlay (outside content)
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
-      dismissTimeoutModal();
-    }
-  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) dismissTimeoutModal(); });
   
   // Add modal to body
   document.body.appendChild(modal);
   
   // Also listen for Escape key
-  const escapeHandler = function(e) {
-    if (e.key === 'Escape' || e.keyCode === 27) {
-      dismissTimeoutModal();
-    }
-  };
+  const escapeHandler = (e) => { if (e.key === 'Escape' || e.keyCode === 27) dismissTimeoutModal(); };
   document.addEventListener('keydown', escapeHandler);
   
   // Store reference to clean up
@@ -327,101 +293,96 @@ function loadContent(url) {
   let finalUrl = fetchUrl.toString();
 
   showFetching();
-  fetch(fetchUrl, {
-    headers: {
-      'Accept': 'text/html'
-    },
-    credentials: 'include' // Send cookies for same-origin requests
-  })
-  .then(async (response) => {
-    
-    console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
-    
-    // Check Content-Type header - only text/html is allowed for SPA
-    const contentType = response.headers.get('Content-Type') || response.headers.get('content-type') || '';
-    if (!contentType.includes('text/html')) {
-      console.debug('[SPA Router] LoadContent: Invalid Content-Type:', contentType, '- falling back to full reload');
-      window.location.href = url;
-      return null;
-    }
-    
-    // Get the final URL after any redirects - with automatic following, response.url contains it
-    if (response.url && response.url !== fetchUrl.toString()) {
-      finalUrl = response.url;
-      console.debug('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
-    }
-    
-    // Special handling for 401 and 504
-    if (response.status === 401) {
-      console.debug('[SPA Router] LoadContent: 401 Unauthorized - redirecting to login');
-      handleHttpError(401, url);
-      return null;
-    }
-    
-    if (response.status === 504) {
-      console.debug('[SPA Router] LoadContent: 504 Gateway Timeout - showing modal');
-      showTimeoutModal();
-      return null;
-    }
-    
-    // For all other responses (including other HTTP errors like 404, 500, etc.)
-    // load the server's error page content via SPA
-    showReceiving();
-    
-    const html = await response.text();
-    
-    console.debug('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
-    
-    showProcessing();
-    
-    // Validate that html is a string
-    if (typeof html !== 'string') {
-      console.error('[SPA Router] LoadContent: html is not a string! type:', typeof html, 'value:', html);
-      throw new Error('Response body is not a string');
-    }
-    
-    // Update history with the final URL if there were redirects
-    if (finalUrl !== fetchUrl.toString()) {
-      console.debug('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
-      history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
-    }
-    
-    // Replace content of the three main containers
-    // Pass the final URL to detect display pages after redirects
-    await replaceContainerContent(html, finalUrl);
-    hideLoading();
-    
-    console.debug('[SPA Router] LoadContent: Process completed successfully');
-    return html;
-  })
-  .catch(error => {
-    hideLoading();
-    console.error('[SPA Router] Error loading content:', error);
-    console.error('[SPA Router] Error stack:', error.stack);
-    console.error('[SPA Router] Error name:', error.name);
-    console.error('[SPA Router] Error message:', error.message);
-    console.error('[SPA Router] Error details:', {
-      url: url,
-      fetchUrl: fetchUrl.toString(),
-      finalUrl: finalUrl,
-      error: error
+  fetch(fetchUrl, { headers: { 'Accept': 'text/html' }, credentials: 'include' })
+    .then(async (response) => {
+      
+      console.debug('[SPA Router] LoadContent: Response received, status=', response.status, 'response.url=', response.url);
+      
+      // Check Content-Type header - only text/html is allowed for SPA
+      const contentType = response.headers.get('Content-Type') || response.headers.get('content-type') || '';
+      if (!contentType.includes('text/html')) {
+        console.debug('[SPA Router] LoadContent: Invalid Content-Type:', contentType, '- falling back to full reload');
+        window.location.href = url;
+        return null;
+      }
+      
+      // Get the final URL after any redirects - with automatic following, response.url contains it
+      if (response.url && response.url !== fetchUrl.toString()) {
+        finalUrl = response.url;
+        console.debug('[SPA Router] LoadContent: Final URL after redirects:', finalUrl);
+      }
+      
+      // Special handling for 401 and 504
+      if (response.status === 401) {
+        console.debug('[SPA Router] LoadContent: 401 Unauthorized - redirecting to login');
+        handleHttpError(401, url);
+        return null;
+      }
+      
+      if (response.status === 504) {
+        console.debug('[SPA Router] LoadContent: 504 Gateway Timeout - showing modal');
+        showTimeoutModal();
+        return null;
+      }
+      
+      // For all other responses (including other HTTP errors like 404, 500, etc.)
+      // load the server's error page content via SPA
+      showReceiving();
+      
+      const html = await response.text();
+      
+      console.debug('[SPA Router] LoadContent: HTML received, type:', typeof html, 'length:', html ? html.length : 0, 'finalUrl:', finalUrl);
+      
+      showProcessing();
+      
+      // Validate that html is a string
+      if (typeof html !== 'string') {
+        console.error('[SPA Router] LoadContent: html is not a string! type:', typeof html, 'value:', html);
+        throw new Error('Response body is not a string');
+      }
+      
+      // Update history with the final URL if there were redirects
+      if (finalUrl !== fetchUrl.toString()) {
+        console.debug('[SPA Router] LoadContent: Updating history to final URL:', finalUrl);
+        history.replaceState({ path: new URL(finalUrl).pathname, spa: true, __friendicaSPA: true }, '', finalUrl);
+      }
+      
+      // Replace content of the three main containers
+      // Pass the final URL to detect display pages after redirects
+      replaceContainerContent(html, finalUrl);
+      hideLoading();
+      
+      console.debug('[SPA Router] LoadContent: Process completed successfully');
+      return html;
+    })
+    .catch(error => {
+      hideLoading();
+      console.error('[SPA Router] Error loading content:', error);
+      console.error('[SPA Router] Error stack:', error.stack);
+      console.error('[SPA Router] Error name:', error.name);
+      console.error('[SPA Router] Error message:', error.message);
+      console.error('[SPA Router] Error details:', {
+        url: url,
+        fetchUrl: fetchUrl.toString(),
+        finalUrl: finalUrl,
+        error: error
+      });
+      
+      // Handle timeout errors with modal - only for server 504, not for client timeout
+      // Client timeout (AbortError) just dismisses the delay modal, does not show timeout modal
+      if (error.name === 'AbortError') {
+        console.debug('[SPA Router] LoadContent: AbortError (client timeout) - dismissing delay modal only');
+        // Don't show timeout modal for client timeout, only dismiss delay modal
+      } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        // Network error - fall back to full reload
+        console.debug('[SPA Router] LoadContent: Network error - falling back to reload');
+        window.location.href = url;
+      } else {
+        // Fallback: Full page reload for other errors
+        console.debug('[SPA Router] Falling back to full page reload for URL:', url);
+        window.location.href = url;
+      }
     });
-    
-    // Handle timeout errors with modal - only for server 504, not for client timeout
-    // Client timeout (AbortError) just dismisses the delay modal, does not show timeout modal
-    if (error.name === 'AbortError') {
-      console.debug('[SPA Router] LoadContent: AbortError (client timeout) - dismissing delay modal only');
-      // Don't show timeout modal for client timeout, only dismiss delay modal
-    } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-      // Network error - fall back to full reload
-      console.debug('[SPA Router] LoadContent: Network error - falling back to reload');
-      window.location.href = url;
-    } else {
-      // Fallback: Full page reload for other errors
-      console.debug('[SPA Router] Falling back to full page reload for URL:', url);
-      window.location.href = url;
-    }
-  });
 }
 
 // ============================================
@@ -457,12 +418,12 @@ function cleanupTooltips() {
 }
 
 /**
- * Replace content of the three main containers: nav#topbar-first, div#topbar-second, and main
+ * Replace content of the main containers: nav#topbar-first, div#topbar-second, and main
  * This approach preserves the DOM structure while updating the content
  * @param {string} htmlString - New content HTML (may be full document or fragment)
  * @param {string} finalUrl - The final URL after following redirects (optional)
  */
-async function replaceContainerContent(htmlString, finalUrl = null) {
+function replaceContainerContent(htmlString, finalUrl = null) {
   console.debug('[SPA Router] ReplaceContent: starting replacement');
   
   // Clean up any existing tooltips first to prevent ghost elements
@@ -483,9 +444,7 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
   
   // 1. Update document title
   const newTitle = newDoc.querySelector('title');
-  if (newTitle) {
-    document.title = newTitle.textContent;
-  }
+  if (newTitle) document.title = newTitle.textContent;
 
   // Check for router version update in the new content
   const newRouterVersion = newDoc.querySelector('script[data-spa-version]');
@@ -532,7 +491,7 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
       const inlineScripts = newDiv.querySelectorAll('script:not([src])');
       for (const script of inlineScripts) {
         const content = script.textContent.trim();
-        if (content) await classifyScript(content, globalScripts, bodyScripts, script, 'container');
+        if (content) classifyScript(content, globalScripts, bodyScripts, script, 'container');
         script.parentNode.removeChild(script);
       }
 
@@ -570,7 +529,7 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
       const src = el.getAttribute('src');
       if (src) {
         // Only add if not already present
-        if (!document.querySelector('script[src="' + src + '"]')) {
+        if (!document.querySelector(`script[src="${src}"]`)) {
           console.debug('[SPA Router] Adding external script:', src);
           const clone = document.createElement('script');
           
@@ -604,7 +563,7 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
         // It's an inline script from head (or already processed if from body)
         // Only classify if it hasn't been removed from content already
         if (el.parentNode && el.parentNode.tagName.toLowerCase() === 'head') {
-          await classifyScript(el.textContent.trim(), globalScripts, bodyScripts, el, 'head');
+          classifyScript(el.textContent.trim(), globalScripts, bodyScripts, el, 'head');
         }
       }
     }
@@ -617,7 +576,7 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
 
   // Execute global-like headers first (vars, aStr, etc.)
   window.__spa_executing_fragment_scripts = true;
-  await executeScripts(globalScripts, 'global-head');
+  executeScripts(globalScripts, 'global-head');
   
   // IMMEDIATELY re-initialize infinite scroll if the new page provides the config
   // (the 'infinite_scroll' object is usually in the global-head or body-scripts)
@@ -630,13 +589,12 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
   
   window.__spa_executing_fragment_scripts = false;
 
-  const runFinalAppInit = async () => {
+  const runFinalAppInit = () => {
     window.__spa_reinit_phase = true;
-    await reinitializeDynamicContent();
+    reinitializeDynamicContent();
     window.__spa_reinit_phase = false;
     window.__spa_executing_page_scripts = false;
   };
-
   if (externalScriptPromises.length > 0) {
     console.debug('[SPA Router] Waiting for', externalScriptPromises.length, 'scripts before reinit...');
     Promise.all(externalScriptPromises).then(() => {
@@ -650,27 +608,8 @@ async function replaceContainerContent(htmlString, finalUrl = null) {
 }
 
 // ============================================
-// ACORN-BASED SCRIPT PROCESSING
+// SCRIPT PROCESSING
 // ============================================
-
-/**
- * Load Acorn parser from local file
- * @returns {Promise<void>}
- */
-async function loadAcorn() {
-  if (typeof window.acorn !== 'undefined') return;
-  
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = '/view/asset/acorn/dist/acorn.js';
-    script.onload = () => {
-      console.debug('[SPA Router] Acorn parser loaded from:', script.src);
-      resolve();
-    };
-    script.onerror = () => reject(new Error('Failed to load Acorn parser from: ' + script.src));
-    document.head.appendChild(script);
-  });
-}
 
 /**
  * Check AST for DOM-ready patterns (jQuery ready, DOMContentLoaded, load events)
@@ -678,58 +617,29 @@ async function loadAcorn() {
  * @returns {boolean} - True if DOM-ready handler detected
  */
 function checkForDOMReadyPatterns(ast) {
-  // Recursive walk through AST nodes
   function walk(node) {
     if (!node || typeof node !== 'object') return false;
-
-    // 1. $(function() {...}) or jQuery(function() {...})
     if (node.type === 'CallExpression' && node.callee.type === 'Identifier') {
       if (['$', 'jQuery'].includes(node.callee.name) && node.arguments.length > 0) {
-        const firstArg = node.arguments[0];
-        if (firstArg.type === 'FunctionExpression') {
-          return true;
-        }
+        if (node.arguments[0].type === 'FunctionExpression') return true;
       }
     }
-
-    // 2. $(document).ready(function() {...}) or $(...).ready(...)
     if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression') {
-      if (node.callee.property.name === 'ready') {
-        return true;
-      }
-    }
-
-    // 3. document.addEventListener('DOMContentLoaded', ...) or window.addEventListener('load', ...)
-    if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression') {
-      if (node.callee.property.name === 'addEventListener' &&
-          node.callee.object.type === 'Identifier' &&
-          ['document', 'window'].includes(node.callee.object.name)) {
-        
+      if (node.callee.property.name === 'ready') return true;
+      if (node.callee.property.name === 'addEventListener' && node.callee.object.type === 'Identifier' && ['document', 'window'].includes(node.callee.object.name)) {
         const eventArg = node.arguments[0];
-        if (eventArg?.type === 'Literal') {
-          if (['DOMContentLoaded', 'load'].includes(eventArg.value)) {
-            return true;
-          }
-        }
+        if (eventArg?.type === 'Literal' && ['DOMContentLoaded', 'load'].includes(eventArg.value)) return true;
       }
     }
-
-    // Recursively check child nodes
     for (const key in node) {
       if (key === 'parent' || key === 'start' || key === 'end' || key === 'loc' || key === 'range') continue;
       const child = node[key];
       if (Array.isArray(child)) {
-        for (const c of child) {
-          if (walk(c)) return true;
-        }
-      } else if (walk(child)) {
-        return true;
-      }
+        for (const c of child) if (walk(c)) return true;
+      } else if (walk(child)) return true;
     }
-
     return false;
   }
-
   return walk(ast);
 }
 
@@ -737,174 +647,86 @@ function checkForDOMReadyPatterns(ast) {
  * Classify script content using AST analysis
  * @param {string} content - The script content
  * @param {string} source - Source context ('head', 'container', etc.)
- * @returns {Promise<'global'|'body'|null>}
+ * @returns {'global'|'body'|null}
  */
-async function classifyScriptContent(content, source) {
-  if (typeof window.acorn === 'undefined') {
-    await loadAcorn();
-  }
-
-  const ast = window.acorn.parse(content, { ecmaVersion: 2020, sourceType: 'script' });
-
-  // 1. Check for DOM-ready handlers (body-init patterns)
-  if (checkForDOMReadyPatterns(ast)) {
-    return 'body';
-  }
-
-  // 2. Check for definitions at the start (global patterns)
+function classifyScriptContent(content, source) {
+  const ast = acorn.parse(content, { ecmaVersion: 2020, sourceType: 'script' });
+  if (checkForDOMReadyPatterns(ast)) return 'body';
   if (ast.body.length > 0) {
     const firstNode = ast.body[0];
-    
-    // Top-level variable declarations: var, let, const
-    if (firstNode.type === 'VariableDeclaration') {
-      return 'global';
-    }
-    
-    // Top-level function declarations
-    if (firstNode.type === 'FunctionDeclaration') {
-      return 'global';
-    }
-    
-    // Top-level class declarations
-    if (firstNode.type === 'ClassDeclaration') {
-      return 'global';
-    }
-    
-    // Friendica-specific: aStr variable
-    // Check both AST and raw content (aStr might be assigned, not declared)
-    if (content.trim().startsWith('aStr')) {
-      return 'global';
-    }
+    if (firstNode.type === 'VariableDeclaration') return 'global';
+    if (firstNode.type === 'FunctionDeclaration') return 'global';
+    if (firstNode.type === 'ClassDeclaration') return 'global';
+    if (content.trim().startsWith('aStr')) return 'global';
   }
-
-  return null; // No decision from AST analysis
+  return null;
 }
 
 /**
  * Transform code to promote top-level declarations to window scope
  * @param {string} code - The JavaScript code to transform
- * @returns {Promise<string>} - Transformed code
+ * @returns {string} - Transformed code
  */
-async function promoteToGlobal(code) {
-  if (typeof window.acorn === 'undefined') {
-    await loadAcorn();
-  }
-  
-  const ast = window.acorn.parse(code, {
-    ecmaVersion: 2020,
-    sourceType: 'script',
-    locations: true,
-    ranges: true
-  });
-
-  // Build new code by transforming top-level declarations
+function promoteToGlobal(code) {
+  const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: 'script', locations: true, ranges: true });
   let newCode = '';
   let lastEnd = 0;
-
   for (const node of ast.body) {
-    // Add code between previous node and current node
-    if (node.start > lastEnd) {
-      newCode += code.slice(lastEnd, node.start);
-    }
-
-    // Handle variable declarations: const/let/var x = ...
+    if (node.start > lastEnd) newCode += code.slice(lastEnd, node.start);
     if (node.type === 'VariableDeclaration') {
       for (const declaration of node.declarations) {
         if (declaration.id.type === 'Identifier') {
           const varName = declaration.id.name;
-          if (declaration.init) {
-            // Extract the initialization expression from original code
-            const initCode = code.slice(declaration.init.start, declaration.init.end);
-            newCode += `window.${varName} = ${initCode};`;
-          } else {
-            // Variable declaration without initialization: var x;
-            newCode += `window.${varName} = undefined;`;
-          }
+          const initCode = declaration.init ? code.slice(declaration.init.start, declaration.init.end) : 'undefined';
+          newCode += `window.${varName} = ${initCode};`;
         } else {
-          // Complex patterns (destructuring, etc.) - fall back to original
           newCode += code.slice(node.start, node.end);
         }
       }
     }
-    // Handle function declarations: function foo() {} or async function foo() {}
     else if (node.type === 'FunctionDeclaration') {
-      const funcName = node.id.name;
-      const bodyCode = code.slice(node.start, node.end);
-      newCode += `window.${funcName} = ${bodyCode};`;
+      newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
     }
-    // Handle class declarations
     else if (node.type === 'ClassDeclaration') {
-      const className = node.id.name;
-      const classCode = code.slice(node.start, node.end);
-      newCode += `window.${className} = ${classCode};`;
+      newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
     }
-    // Keep other nodes as-is (expressions, etc.)
     else {
       newCode += code.slice(node.start, node.end);
     }
-
     lastEnd = node.end;
   }
-
-  // Add any remaining code after last node
-  if (lastEnd < code.length) {
-    newCode += code.slice(lastEnd);
-  }
-
+  if (lastEnd < code.length) newCode += code.slice(lastEnd);
   return newCode;
 }
 
 /**
  * Classify a script as either global (definitions) or body (execution)
- * @param {string} content 
- * @param {Array} globalScripts 
+ * @param {string} content
+ * @param {Array} globalScripts
  * @param {Array} bodyScripts
  * @param {HTMLScriptElement|null} scriptEl
  * @param {string} source
  */
-async function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, source = '') {
+function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, source = '') {
   if (!content) return;
-
-  // 1) Explicit override via data attribute on script tag
   if (scriptEl) {
     const attr = (scriptEl.getAttribute('data-spa-scope') || scriptEl.getAttribute('data-spa-script') || '').toLowerCase();
-    if (attr === 'global' || attr === 'head') {
-      globalScripts.push(content);
-      return;
-    }
-    if (attr === 'body' || attr === 'fragment') {
-      bodyScripts.push(content);
-      return;
-    }
+    if (attr === 'global' || attr === 'head') { globalScripts.push(content); return; }
+    if (attr === 'body' || attr === 'fragment') { bodyScripts.push(content); return; }
   }
-
-  // 2) Use AST-based classification
-  const classification = await classifyScriptContent(content, source);
-  if (classification === 'body') {
-    bodyScripts.push(content);
-    return;
-  }
-  if (classification === 'global') {
-    globalScripts.push(content);
-    return;
-  }
-
-  // 3) Source-aware default: scripts from head are usually setup/global
-  if (source === 'head') {
-    globalScripts.push(content);
-    return;
-  }
-
-  // 4) Conservative default: treat as body script
+  const classification = classifyScriptContent(content, source);
+  if (classification === 'body') { bodyScripts.push(content); return; }
+  if (classification === 'global') { globalScripts.push(content); return; }
+  if (source === 'head') { globalScripts.push(content); return; }
   bodyScripts.push(content);
 }
 
 /**
  * Execute a list of script contents
- * @param {Array} scripts 
- * @param {string} context 
+ * @param {Array} scripts
+ * @param {string} context
  */
-async function executeScripts(scripts, context) {
+function executeScripts(scripts, context) {
   if (!scripts || scripts.length === 0) return;
   
   console.debug('[SPA Router] executeScripts: Executing ' + scripts.length + ' ' + context + ' scripts');
@@ -914,7 +736,6 @@ async function executeScripts(scripts, context) {
   // script to use 'const' or 'let' variables defined in another script 
   // from the same page load.
   const combinedContent = scripts.join('\n\n/* --- Next Script --- */\n\n');
-
   try {
     // 1. Lexical Scoping:
     // We wrap the combined scripts in an anonymous block { ... } to prevent 
@@ -924,7 +745,7 @@ async function executeScripts(scripts, context) {
     
     // 2. Variable & Function promotion to global scope:
     // Use AST parser for robust transformation
-    const promotedContent = await promoteToGlobal(combinedContent);
+    const promotedContent = promoteToGlobal(combinedContent);
 
     // 3. Runtime Safety: 
     // We wrap the whole block in a try-catch. This is important because 
@@ -950,12 +771,12 @@ async function executeScripts(scripts, context) {
  * Re-initialize dynamic content after SPA navigation
  * This is important for elements that need event listeners
  */
-async function reinitializeDynamicContent() {
+function reinitializeDynamicContent() {
   // Execute body scripts (including widget init scripts) after DOM insertion
-  if (window.__spa_bodyScripts && window.__spa_bodyScripts.length > 0) {
+  if (window.__spa_bodyScripts?.length > 0) {
     console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_bodyScripts.length + ' body scripts');
     window.__spa_executing_fragment_scripts = true;
-    await executeScripts(window.__spa_bodyScripts, 'body-scripts');
+    executeScripts(window.__spa_bodyScripts, 'body-scripts');
     window.__spa_executing_fragment_scripts = false;
     // Clear the stored scripts after execution
     window.__spa_bodyScripts = [];
@@ -1008,7 +829,7 @@ function handleInitialLoad() {
 function handlePopState(e) {
   console.debug('[SPA Router] PopState: state=', e.state, 'hash=', window.location.hash);
   
-  if (e.state && e.state.spa && e.state.__friendicaSPA) {
+  if (e.state?.spa && e.state.__friendicaSPA) {
     console.debug('[SPA Router] PopState: SPA navigation detected, loading', window.location.href);
     
     // Dispatch event to pause live updates before popstate navigation
@@ -1050,29 +871,42 @@ function initSPARouter() {
   console.debug('[SPA Router] Initialized successfully');
 }
 
-// ============================================
-// FEATURE DETECTION & FALLBACK
-// ============================================
-
-// Check if browser supports required features
-if (!supportsSPA) {
-  console.debug('[SPA Router] Browser does not support SPA features. Using fallback.');
-} else {
-  // Initialize when DOM is ready
+if (supportsSPA) {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSPARouter);
   } else {
     initSPARouter();
   }
+} else {
+  // Check if browser supports required features
+  console.debug('[SPA Router] Browser does not support SPA features. Using fallback.');
 }
 
-// Export for testing/module use
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    initSPARouter,
-    isSPARoute,
-    isInternalLink,
-    supportsSPA,
-    SPA_CONFIG
-  };
-}
+// ============================================
+// PUBLIC API
+// ============================================
+
+export {
+  initSPARouter,
+  isSPARoute,
+  isInternalLink,
+  supportsSPA,
+  SPA_CONFIG,
+  classifyScriptContent,
+  promoteToGlobal,
+  classifyScript,
+  executeScripts,
+  replaceContainerContent,
+  loadContent,
+  handleHttpError,
+  showTimeoutModal,
+  dismissTimeoutModal,
+  cleanupTooltips,
+  scrollToTopInstant,
+  navigateTo,
+  handleLinkClick,
+  handleInitialLoad,
+  handlePopState,
+  reinitializeDynamicContent,
+  checkForDOMReadyPatterns
+};
