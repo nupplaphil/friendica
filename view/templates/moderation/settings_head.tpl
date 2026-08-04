@@ -5,7 +5,7 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <script>
-	onPageLoad(function() {
+	onDocumentReady(function() {
 		$('.settings-content-block').hide();
 		$('.settings-heading').click(function(){
 			$('.settings-content-block').hide();

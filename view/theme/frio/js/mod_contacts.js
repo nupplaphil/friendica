@@ -6,7 +6,7 @@
 
 var batchConfirmed = false;
 
-onPageLoad(function () {
+onDocumentReady(function () {
 	// Replace the drop contact link of the photo menu
 	// with a confirmation modal.
 	$("body").on("click", ".contact-photo-menu a", function (e) {

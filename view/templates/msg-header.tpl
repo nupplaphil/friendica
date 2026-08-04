@@ -9,7 +9,7 @@
 </script>
 <script type="text/javascript" src="view/js/ajaxupload.js?v={{$VERSION}}"></script>
 <script>
-	onPageLoad(function() {
+	onDocumentReady(function() {
 		var uploader = new window.AjaxUpload(
 			'prvmail-upload',
 			{ action: 'profile/{{$nickname}}/photos/upload',
