@@ -21,33 +21,44 @@ if (!Element.prototype.matches) {
 }
 
 /**
- * Register a function to be executed when the page loads.
- * Handles both traditional page loads (via document.ready) and SPA navigation (via theme:reload).
+ * Helper to register a function in a document handler registry with duplicate prevention.
+ * Returns the registry key if registered successfully, or null if already registered.
+ * 
+ * @param {string} registryName - Name of the registry in window (e.g., '__onDocumentReadyRegistry')
+ * @param {Function} fn - Function to register
+ * @param {string} debugMsg - Debug message to log if already registered
+ * @returns {string|null} The registry key if registered, null if duplicate
+ */
+function registerDocumentHandler(registryName, fn, debugMsg) {
+	if (typeof fn !== 'function') {
+		return null;
+	}
+
+	if (!window[registryName]) {
+		window[registryName] = new Set();
+	}
+
+	const registryKey = fn.toString().substring(0, 100);
+	if (window[registryName].has(registryKey)) {
+		console.debug(debugMsg);
+		return null;
+	}
+	window[registryName].add(registryKey);
+	return registryKey;
+}
+
+/**
+ * Register a function to be executed when the DOM is ready.
+ * Handles both traditional page loads (via document.ready) and SPA navigation (via spa:document:ready).
  * Prevents duplicate registrations across SPA navigations.
  * 
  * @param {Function} fn - The function to register
  */
-function onPageLoad(fn) {
+function onDocumentReady(fn) {
 	if (typeof fn !== 'function') {
 		return;
 	}
 
-	// === PATH CONTEXT SETUP ===
-	// Set up path scoping for SPA isolation (only if not already set)
-	if (!fn._spaPath) {
-		const cs = document.currentScript;
-		const isFragment = window.__spa_executing_fragment_scripts;
-		
-		if (isFragment) {
-			fn._spaPath = window.location.pathname.split('/').slice(0, 2).join('/');
-			console.debug('[onPageLoad] Scoping FRAGMENT function to path:', fn._spaPath);
-		} else if (cs && cs.src && (cs.src.includes('mod_') || cs.src.includes('/addon/'))) {
-			fn._spaPath = window.location.pathname.split('/').slice(0, 2).join('/');
-			console.debug('[onPageLoad] Scoping EXTERNAL function to path:', fn._spaPath, 'from:', cs.src);
-		}
-	}
-
-	// === REGISTRATION ===
 	const isSPALoading = window.__spa_executing_page_scripts;
 	
 	if (!isSPALoading) {
@@ -56,47 +67,67 @@ function onPageLoad(fn) {
 		return;
 	}
 
-	// === DUPLICATE PREVENTION (theme:reload only) ===
-	if (!window.__onPageLoadThemeReloadRegistry) {
-		window.__onPageLoadThemeReloadRegistry = new Set();
-	}
-
-	const registryKey = (fn._spaPath || 'global') + ':' + fn.toString().substring(0, 100);
-	if (window.__onPageLoadThemeReloadRegistry.has(registryKey)) {
-		console.debug('[onPageLoad] theme:reload listener already registered for path:', fn._spaPath || '(no path)');
+	const registryKey = registerDocumentHandler(
+		'__onDocumentReadyRegistry',
+		fn,
+		'[onDocumentReady] spa:document:ready listener already registered'
+	);
+	if (registryKey === null) {
 		return;
 	}
-	window.__onPageLoadThemeReloadRegistry.add(registryKey);
 
-	// SPA mode: register for theme:reload event
+	// SPA mode: register for spa:document:ready event
 	const isFragment = window.__spa_executing_fragment_scripts;
 	
 	if (isFragment) {
 		// Fragment scripts: execute once after all resources are ready
 		const once = function() {
-			window.removeEventListener('theme:reload', once);
-			window.__onPageLoadThemeReloadRegistry.delete(registryKey);
-			console.debug('[onPageLoad] Executing one-time fragment function');
+			window.removeEventListener('spa:document:ready', once);
+			window.__onDocumentReadyRegistry.delete(registryKey);
+			console.debug('[onDocumentReady] Executing one-time fragment function');
 			fn();
 		};
 		if (window.__spa_reinit_phase) {
 			setTimeout(once, 0);
 		} else {
-			window.addEventListener('theme:reload', once);
+			window.addEventListener('spa:document:ready', once);
 		}
 	} else {
-		// External scripts: permanent listener with path matching
-		window.addEventListener('theme:reload', function() {
-			if (fn._spaPath) {
-				const currentBase = window.location.pathname.split('/').slice(0, 2).join('/');
-				if (currentBase !== fn._spaPath) {
-					return;
-				}
-			}
-			console.debug('[onPageLoad] Executing path-scoped function for:', fn._spaPath || '(no scope)');
-			fn();
-		});
+		// External scripts: permanent listener
+		window.addEventListener('spa:document:ready', fn);
 	}
+}
+
+/**
+ * Register a function to be executed when all resources (images, etc.) are loaded.
+ * Handles both traditional page loads (via window.load) and SPA navigation (via spa:document:load event).
+ * Prevents duplicate registrations across SPA navigations.
+ * 
+ * @param {Function} fn - The function to register
+ */
+function onDocumentLoad(fn) {
+	if (typeof fn !== 'function') {
+		return;
+	}
+
+	const isSPALoading = window.__spa_executing_page_scripts;
+	
+	if (!isSPALoading) {
+		// Traditional page load: use jQuery window.load
+		$(window).load(fn);
+		return;
+	}
+
+	if (registerDocumentHandler(
+		'__onDocumentLoadRegistry',
+		fn,
+		'[onDocumentLoad] Function already registered'
+	) === null) {
+		return;
+	}
+
+	// SPA mode: register for spa:document:load event
+	window.addEventListener('spa:document:load', fn);
 }
 
 function resizeIframe(obj) {

@@ -52,4 +52,4 @@
 </div>
 {{/if}}
 
-<script type="text/javascript"> onPageLoad(function() { $("#id_{{$lname.0}}").focus();} );</script>
+<script type="text/javascript"> onDocumentReady(function() { $("#id_{{$lname.0}}").focus();} );</script>

@@ -11,7 +11,7 @@
 // Catch the intro ID from the URL
 var introID = location.pathname.split("/").pop();
 
-onPageLoad(function () {
+onDocumentReady(function () {
 	// Since only the DIV's inside the notification-list are marked
 	// with the class "unseen", we need some js to transfer this class
 	// to the parent li list-elements.
@@ -20,7 +20,7 @@ onPageLoad(function () {
 	}
 });
 
-$(window).load(function () {
+onDocumentLoad(function () {
 	// Scroll to the intro by its intro ID.
 	if (isIntroID()) {
 		scrollToItem("intro-" + introID);

@@ -15,7 +15,7 @@ window.scrollToDisplayGuid = () => scrollToItem("item-" + window.itemGuid);
 window.scrollToDisplayGuid();
 
 // 2. Try on window.load (works for non-SPA)
-$(window).load(window.scrollToDisplayGuid);
+onDocumentLoad(window.scrollToDisplayGuid);
 
 // 3. Listen for SPA navigation
 window.addEventListener('spa:navigate', (e) => {

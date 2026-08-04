@@ -76,7 +76,7 @@ EOT;
 	if (DI::mode()->isMobile() || DI::mode()->isMobile()) {
 		DI::page()['htmlhead'] .= <<< EOT
 <script>
-	onPageLoad(function() {
+	onDocumentReady(function() {
 		$(".mobile-aside-toggle a").click(function(e){
 			e.preventDefault();
 			$("aside").toggleClass("show");

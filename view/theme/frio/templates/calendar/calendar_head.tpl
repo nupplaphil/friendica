@@ -73,7 +73,7 @@
 	var calendar_api = '{{$calendar_api}}';
 	var event_api = '{{$event_api}}';
 
-	onPageLoad(function() {
+	onDocumentReady(function() {
 		$("#comment-edit-text-desc").bbco_autocomplete('bbcode');
 	});
 </script>

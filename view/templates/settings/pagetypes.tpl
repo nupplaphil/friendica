@@ -34,7 +34,7 @@
 	// to the selected account type.
 	var accountType = {{$account_type}};
 
-	onPageLoad(function(){
+	onDocumentReady(function(){
 		// Hide all DIV for page-flags except the one which belongs to the present
 		// account-type
 		showPageFlags(accountType);

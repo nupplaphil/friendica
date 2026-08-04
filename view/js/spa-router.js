@@ -790,9 +790,13 @@ function reinitializeDynamicContent() {
   });
   window.dispatchEvent(spaNavigateEvent);
   
-  // Trigger theme reinitialization for elements like #back-to-top
-  const themeReloadEvent = new CustomEvent('theme:reload');
-  window.dispatchEvent(themeReloadEvent);
+  // Trigger window loaded event for elements that need all resources (images, etc.)
+  const spaDocumentLoadEvent = new CustomEvent('spa:document:load');
+  window.dispatchEvent(spaDocumentLoadEvent);
+  
+  // Trigger DOM ready for elements that need to reinitialize after SPA navigation
+  const spaDocumentReadyEvent = new CustomEvent('spa:document:ready');
+  window.dispatchEvent(spaDocumentReadyEvent);
   
   // Trigger infinite scroll reinitialization for network pages
   const initInfiniteScrollEvent = new CustomEvent('spa:initInfiniteScroll');
@@ -809,8 +813,12 @@ function reinitializeDynamicContent() {
  * Handle initial page load
  */
 function handleInitialLoad() {
-  // Initial content is already there, just initialize
-  const event = new CustomEvent('spa:ready', {
+  // Trigger document load event
+  const windowLoadedEvent = new CustomEvent('spa:document:load');
+  window.dispatchEvent(windowLoadedEvent);
+
+  // Trigger document ready event
+  const event = new CustomEvent('spa:document:ready', {
     detail: { path: window.location.pathname }
   });
   window.dispatchEvent(event);

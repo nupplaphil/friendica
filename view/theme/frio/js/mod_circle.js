@@ -9,7 +9,7 @@
  * The javascript for the circle module
  */
 
-onPageLoad(function () {
+onDocumentReady(function () {
 	// Add an event listeners on buttons for switching the contact list view
 	$("body").on("click", ".circle-list-switcher", function () {
 		switchCircleViewMode(this);
