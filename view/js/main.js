@@ -48,6 +48,63 @@ function registerDocumentHandler(registryName, fn, debugMsg) {
 }
 
 /**
+ * Internal helper to setup document event handlers for both traditional page loads and SPA navigation.
+ * Handles duplicate prevention, fragment detection, and once-wrapper creation.
+ * 
+ * @param {Function} fn - The function to register
+ * @param {Object} config - Configuration object
+ * @param {string} config.eventName - The SPA event name (e.g., 'spa:document:ready')
+ * @param {string} config.jqueryTarget - jQuery target for traditional loads ('document' or 'window')
+ * @param {string} config.jqueryMethod - jQuery method for traditional loads ('ready' or 'load')
+ * @param {string} config.registryName - Name of the registry in window
+ * @param {string} config.debugMsg - Debug message for duplicate registration
+ * @param {string} config.onceDebugMsg - Debug message for once execution
+ */
+function _setupDocumentHandler(fn, config) {
+	if (typeof fn !== 'function') {
+		return;
+	}
+
+	const isSPALoading = window.__spa_executing_page_scripts;
+
+	if (!isSPALoading) {
+		// Traditional page load: use jQuery
+		$(config.jqueryTarget)[config.jqueryMethod](fn);
+		return;
+	}
+
+	const registryKey = registerDocumentHandler(
+		config.registryName,
+		fn,
+		config.debugMsg
+	);
+	if (registryKey === null) {
+		return;
+	}
+
+	// SPA mode: register for the SPA event
+	const isFragment = window.__spa_executing_fragment_scripts;
+
+	if (isFragment) {
+		// Fragment scripts: execute once after all resources are ready
+		const once = function() {
+			window.removeEventListener(config.eventName, once);
+			window[config.registryName].delete(registryKey);
+			console.debug(config.onceDebugMsg);
+			fn();
+		};
+		if (window.__spa_reinit_phase) {
+			setTimeout(once, 0);
+		} else {
+			window.addEventListener(config.eventName, once);
+		}
+	} else {
+		// External scripts: permanent listener
+		window.addEventListener(config.eventName, fn);
+	}
+}
+
+/**
  * Register a function to be executed when the DOM is ready.
  * Handles both traditional page loads (via document.ready) and SPA navigation (via spa:document:ready).
  * Prevents duplicate registrations across SPA navigations.
@@ -55,47 +112,14 @@ function registerDocumentHandler(registryName, fn, debugMsg) {
  * @param {Function} fn - The function to register
  */
 function onDocumentReady(fn) {
-	if (typeof fn !== 'function') {
-		return;
-	}
-
-	const isSPALoading = window.__spa_executing_page_scripts;
-	
-	if (!isSPALoading) {
-		// Traditional page load: use jQuery ready
-		$(document).ready(fn);
-		return;
-	}
-
-	const registryKey = registerDocumentHandler(
-		'__onDocumentReadyRegistry',
-		fn,
-		'[onDocumentReady] spa:document:ready listener already registered'
-	);
-	if (registryKey === null) {
-		return;
-	}
-
-	// SPA mode: register for spa:document:ready event
-	const isFragment = window.__spa_executing_fragment_scripts;
-	
-	if (isFragment) {
-		// Fragment scripts: execute once after all resources are ready
-		const once = function() {
-			window.removeEventListener('spa:document:ready', once);
-			window.__onDocumentReadyRegistry.delete(registryKey);
-			console.debug('[onDocumentReady] Executing one-time fragment function');
-			fn();
-		};
-		if (window.__spa_reinit_phase) {
-			setTimeout(once, 0);
-		} else {
-			window.addEventListener('spa:document:ready', once);
-		}
-	} else {
-		// External scripts: permanent listener
-		window.addEventListener('spa:document:ready', fn);
-	}
+	_setupDocumentHandler(fn, {
+		eventName: 'spa:document:ready',
+		jqueryTarget: 'document',
+		jqueryMethod: 'ready',
+		registryName: '__onDocumentReadyRegistry',
+		debugMsg: '[onDocumentReady] spa:document:ready listener already registered',
+		onceDebugMsg: '[onDocumentReady] Executing one-time fragment function'
+	});
 }
 
 /**
@@ -106,28 +130,14 @@ function onDocumentReady(fn) {
  * @param {Function} fn - The function to register
  */
 function onDocumentLoad(fn) {
-	if (typeof fn !== 'function') {
-		return;
-	}
-
-	const isSPALoading = window.__spa_executing_page_scripts;
-	
-	if (!isSPALoading) {
-		// Traditional page load: use jQuery window.load
-		$(window).load(fn);
-		return;
-	}
-
-	if (registerDocumentHandler(
-		'__onDocumentLoadRegistry',
-		fn,
-		'[onDocumentLoad] Function already registered'
-	) === null) {
-		return;
-	}
-
-	// SPA mode: register for spa:document:load event
-	window.addEventListener('spa:document:load', fn);
+	_setupDocumentHandler(fn, {
+		eventName: 'spa:document:load',
+		jqueryTarget: 'window',
+		jqueryMethod: 'load',
+		registryName: '__onDocumentLoadRegistry',
+		debugMsg: '[onDocumentLoad] spa:document:load listener already registered',
+		onceDebugMsg: '[onDocumentLoad] Executing one-time fragment function'
+	});
 }
 
 function resizeIframe(obj) {
