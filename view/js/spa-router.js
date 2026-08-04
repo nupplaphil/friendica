@@ -8,7 +8,11 @@
  * SPA Router for Friendica
  * Client-side routing implementation for /network, /display, /profile
  * Keeps footer static (for XMPP addon compatibility)
- * Vanilla-JS implementation - no external dependencies
+ * 
+ * Uses Acorn parser (https://github.com/acornjs/acorn) for robust JavaScript
+ * code analysis. Acorn is installed via Composer (npm-asset/acorn) at /view/asset/acorn/dist/acorn.js
+ * 
+ * To install Acorn: composer require npm-asset/acorn:^8.15.0
  */
 
 // ============================================
@@ -384,7 +388,7 @@ function loadContent(url) {
     
     // Replace content of the three main containers
     // Pass the final URL to detect display pages after redirects
-    replaceContainerContent(html, finalUrl);
+    await replaceContainerContent(html, finalUrl);
     hideLoading();
     
     console.debug('[SPA Router] LoadContent: Process completed successfully');
@@ -458,7 +462,7 @@ function cleanupTooltips() {
  * @param {string} htmlString - New content HTML (may be full document or fragment)
  * @param {string} finalUrl - The final URL after following redirects (optional)
  */
-function replaceContainerContent(htmlString, finalUrl = null) {
+async function replaceContainerContent(htmlString, finalUrl = null) {
   console.debug('[SPA Router] ReplaceContent: starting replacement');
   
   // Clean up any existing tooltips first to prevent ghost elements
@@ -526,11 +530,11 @@ function replaceContainerContent(htmlString, finalUrl = null) {
       // correctly classified as global headers even if they happen to 
       // be located inside a body container.
       const inlineScripts = newDiv.querySelectorAll('script:not([src])');
-      inlineScripts.forEach(script => {
+      for (const script of inlineScripts) {
         const content = script.textContent.trim();
-        if (content) classifyScript(content, globalScripts, bodyScripts, script, 'container');
+        if (content) await classifyScript(content, globalScripts, bodyScripts, script, 'container');
         script.parentNode.removeChild(script);
-      });
+      }
 
       // Special handling for scrolling on main container
       if (selector === 'main') {
@@ -552,7 +556,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
   }
 
   // 5. SYNC HEAD (Links, Styles, External Scripts)
-  resourceElements.forEach(el => {
+  for (const el of resourceElements) {
     const tag = el.tagName.toLowerCase();
     
     if (tag === 'link' || tag === 'style') {
@@ -600,11 +604,11 @@ function replaceContainerContent(htmlString, finalUrl = null) {
         // It's an inline script from head (or already processed if from body)
         // Only classify if it hasn't been removed from content already
         if (el.parentNode && el.parentNode.tagName.toLowerCase() === 'head') {
-          classifyScript(el.textContent.trim(), globalScripts, bodyScripts, el, 'head');
+          await classifyScript(el.textContent.trim(), globalScripts, bodyScripts, el, 'head');
         }
       }
     }
-  });
+  }
 
   // 6. EXECUTION LIFECYCLE
   window.__spa_executing_page_scripts = true;
@@ -613,7 +617,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
 
   // Execute global-like headers first (vars, aStr, etc.)
   window.__spa_executing_fragment_scripts = true;
-  executeScripts(globalScripts, 'global-head');
+  await executeScripts(globalScripts, 'global-head');
   
   // IMMEDIATELY re-initialize infinite scroll if the new page provides the config
   // (the 'infinite_scroll' object is usually in the global-head or body-scripts)
@@ -626,9 +630,9 @@ function replaceContainerContent(htmlString, finalUrl = null) {
   
   window.__spa_executing_fragment_scripts = false;
 
-  const runFinalAppInit = () => {
+  const runFinalAppInit = async () => {
     window.__spa_reinit_phase = true;
-    reinitializeDynamicContent();
+    await reinitializeDynamicContent();
     window.__spa_reinit_phase = false;
     window.__spa_executing_page_scripts = false;
   };
@@ -645,6 +649,211 @@ function replaceContainerContent(htmlString, finalUrl = null) {
   }
 }
 
+// ============================================
+// ACORN-BASED SCRIPT PROCESSING
+// ============================================
+
+/**
+ * Load Acorn parser from local file
+ * @returns {Promise<void>}
+ */
+async function loadAcorn() {
+  if (typeof window.acorn !== 'undefined') return;
+  
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = '/view/asset/acorn/dist/acorn.js';
+    script.onload = () => {
+      console.debug('[SPA Router] Acorn parser loaded from:', script.src);
+      resolve();
+    };
+    script.onerror = () => reject(new Error('Failed to load Acorn parser from: ' + script.src));
+    document.head.appendChild(script);
+  });
+}
+
+/**
+ * Check AST for DOM-ready patterns (jQuery ready, DOMContentLoaded, load events)
+ * @param {Object} ast - The parsed AST
+ * @returns {boolean} - True if DOM-ready handler detected
+ */
+function checkForDOMReadyPatterns(ast) {
+  // Recursive walk through AST nodes
+  function walk(node) {
+    if (!node || typeof node !== 'object') return false;
+
+    // 1. $(function() {...}) or jQuery(function() {...})
+    if (node.type === 'CallExpression' && node.callee.type === 'Identifier') {
+      if (['$', 'jQuery'].includes(node.callee.name) && node.arguments.length > 0) {
+        const firstArg = node.arguments[0];
+        if (firstArg.type === 'FunctionExpression') {
+          return true;
+        }
+      }
+    }
+
+    // 2. $(document).ready(function() {...}) or $(...).ready(...)
+    if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression') {
+      if (node.callee.property.name === 'ready') {
+        return true;
+      }
+    }
+
+    // 3. document.addEventListener('DOMContentLoaded', ...) or window.addEventListener('load', ...)
+    if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression') {
+      if (node.callee.property.name === 'addEventListener' &&
+          node.callee.object.type === 'Identifier' &&
+          ['document', 'window'].includes(node.callee.object.name)) {
+        
+        const eventArg = node.arguments[0];
+        if (eventArg?.type === 'Literal') {
+          if (['DOMContentLoaded', 'load'].includes(eventArg.value)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    // Recursively check child nodes
+    for (const key in node) {
+      if (key === 'parent' || key === 'start' || key === 'end' || key === 'loc' || key === 'range') continue;
+      const child = node[key];
+      if (Array.isArray(child)) {
+        for (const c of child) {
+          if (walk(c)) return true;
+        }
+      } else if (walk(child)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  return walk(ast);
+}
+
+/**
+ * Classify script content using AST analysis
+ * @param {string} content - The script content
+ * @param {string} source - Source context ('head', 'container', etc.)
+ * @returns {Promise<'global'|'body'|null>}
+ */
+async function classifyScriptContent(content, source) {
+  if (typeof window.acorn === 'undefined') {
+    await loadAcorn();
+  }
+
+  const ast = window.acorn.parse(content, { ecmaVersion: 2020, sourceType: 'script' });
+
+  // 1. Check for DOM-ready handlers (body-init patterns)
+  if (checkForDOMReadyPatterns(ast)) {
+    return 'body';
+  }
+
+  // 2. Check for definitions at the start (global patterns)
+  if (ast.body.length > 0) {
+    const firstNode = ast.body[0];
+    
+    // Top-level variable declarations: var, let, const
+    if (firstNode.type === 'VariableDeclaration') {
+      return 'global';
+    }
+    
+    // Top-level function declarations
+    if (firstNode.type === 'FunctionDeclaration') {
+      return 'global';
+    }
+    
+    // Top-level class declarations
+    if (firstNode.type === 'ClassDeclaration') {
+      return 'global';
+    }
+    
+    // Friendica-specific: aStr variable
+    // Check both AST and raw content (aStr might be assigned, not declared)
+    if (content.trim().startsWith('aStr')) {
+      return 'global';
+    }
+  }
+
+  return null; // No decision from AST analysis
+}
+
+/**
+ * Transform code to promote top-level declarations to window scope
+ * @param {string} code - The JavaScript code to transform
+ * @returns {Promise<string>} - Transformed code
+ */
+async function promoteToGlobal(code) {
+  if (typeof window.acorn === 'undefined') {
+    await loadAcorn();
+  }
+  
+  const ast = window.acorn.parse(code, {
+    ecmaVersion: 2020,
+    sourceType: 'script',
+    locations: true,
+    ranges: true
+  });
+
+  // Build new code by transforming top-level declarations
+  let newCode = '';
+  let lastEnd = 0;
+
+  for (const node of ast.body) {
+    // Add code between previous node and current node
+    if (node.start > lastEnd) {
+      newCode += code.slice(lastEnd, node.start);
+    }
+
+    // Handle variable declarations: const/let/var x = ...
+    if (node.type === 'VariableDeclaration') {
+      for (const declaration of node.declarations) {
+        if (declaration.id.type === 'Identifier') {
+          const varName = declaration.id.name;
+          if (declaration.init) {
+            // Extract the initialization expression from original code
+            const initCode = code.slice(declaration.init.start, declaration.init.end);
+            newCode += `window.${varName} = ${initCode};`;
+          } else {
+            // Variable declaration without initialization: var x;
+            newCode += `window.${varName} = undefined;`;
+          }
+        } else {
+          // Complex patterns (destructuring, etc.) - fall back to original
+          newCode += code.slice(node.start, node.end);
+        }
+      }
+    }
+    // Handle function declarations: function foo() {} or async function foo() {}
+    else if (node.type === 'FunctionDeclaration') {
+      const funcName = node.id.name;
+      const bodyCode = code.slice(node.start, node.end);
+      newCode += `window.${funcName} = ${bodyCode};`;
+    }
+    // Handle class declarations
+    else if (node.type === 'ClassDeclaration') {
+      const className = node.id.name;
+      const classCode = code.slice(node.start, node.end);
+      newCode += `window.${className} = ${classCode};`;
+    }
+    // Keep other nodes as-is (expressions, etc.)
+    else {
+      newCode += code.slice(node.start, node.end);
+    }
+
+    lastEnd = node.end;
+  }
+
+  // Add any remaining code after last node
+  if (lastEnd < code.length) {
+    newCode += code.slice(lastEnd);
+  }
+
+  return newCode;
+}
+
 /**
  * Classify a script as either global (definitions) or body (execution)
  * @param {string} content 
@@ -653,7 +862,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
  * @param {HTMLScriptElement|null} scriptEl
  * @param {string} source
  */
-function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, source = '') {
+async function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, source = '') {
   if (!content) return;
 
   // 1) Explicit override via data attribute on script tag
@@ -669,44 +878,24 @@ function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, so
     }
   }
 
-  // 2) Explicit override via marker comment in script content
-  // Supported markers:
-  //   /* spa:global */
-  //   /* spa:body */
-  //   // spa:global
-  //   // spa:body
-  const markerMatch = content.match(/^\s*(?:\/\*\s*spa:(global|body)\s*\*\/|\/\/\s*spa:(global|body)\b)/i);
-  const marker = markerMatch ? (markerMatch[1] || markerMatch[2]) : null;
-  if (marker === 'global') {
-    globalScripts.push(content);
-    return;
-  }
-  if (marker === 'body') {
+  // 2) Use AST-based classification
+  const classification = await classifyScriptContent(content, source);
+  if (classification === 'body') {
     bodyScripts.push(content);
     return;
   }
-
-  // 3) Body-init patterns should run after DOM replacement
-  const bodyInitPattern = /(^|\n)\s*(\$\(\s*function\s*\(|\$\(\s*document\s*\)\s*\.ready\s*\(|jQuery\(\s*function\s*\(|jQuery\(\s*document\s*\)\s*\.ready\s*\(|document\.addEventListener\(\s*['\"]DOMContentLoaded['\"]\s*,|window\.addEventListener\(\s*['\"]load['\"]\s*,)/;
-  if (bodyInitPattern.test(content)) {
-    bodyScripts.push(content);
-    return;
-  }
-
-  // 4) Definitions/config that should exist before reinit
-  const definitionPattern = /^(\/\*[\s\S]*?\*\/|\/\/[^\n]*\n|\s)*(var|let|const|function|async\s+function|aStr)\b/;
-  if (definitionPattern.test(content)) {
+  if (classification === 'global') {
     globalScripts.push(content);
     return;
   }
 
-  // 5) Source-aware default: scripts from head are usually setup/global
+  // 3) Source-aware default: scripts from head are usually setup/global
   if (source === 'head') {
     globalScripts.push(content);
     return;
   }
 
-  // 6) Conservative fallback: treat as body script
+  // 4) Conservative default: treat as body script
   bodyScripts.push(content);
 }
 
@@ -715,7 +904,7 @@ function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, so
  * @param {Array} scripts 
  * @param {string} context 
  */
-function executeScripts(scripts, context) {
+async function executeScripts(scripts, context) {
   if (!scripts || scripts.length === 0) return;
   
   console.debug('[SPA Router] executeScripts: Executing ' + scripts.length + ' ' + context + ' scripts');
@@ -734,20 +923,8 @@ function executeScripts(scripts, context) {
     // lexical scope for each page load.
     
     // 2. Variable & Function promotion to global scope:
-    // We transform the code to ensure that functions and variables defined 
-    // inside our block become available globally.
-    const promotedContent = combinedContent
-      // Promote variables: const/let/var name = ... -> window.name = ...
-      // We also handle 'var name = ...' to ensure it's explicitly global even 
-      // when inside our lexical block.
-      .replace(/(^|[^a-zA-Z0-9_$])(const|let|var)\s+([a-zA-Z0-9_$]+)\s*=/g, '$1window.$3 =')
-      // Promote direct assignments to window if they use var/const/let:
-      // var window.name = ... (some scripts might do this)
-      .replace(/(^|[^a-zA-Z0-9_$])(const|let|var)\s+window\.([a-zA-Z0-9_$]+)\s*=/g, '$1window.$3 =')
-      // Promote named functions to window
-      .replace(/(^|[;{}\s])(function|async\s+function)\s+([a-zA-Z0-9_$]+)\s*\(/g, (match, prefix, funcType, funcName) => {
-        return `${prefix}window.${funcName} = ${funcType} ${funcName}(`;
-      });
+    // Use AST parser for robust transformation
+    const promotedContent = await promoteToGlobal(combinedContent);
 
     // 3. Runtime Safety: 
     // We wrap the whole block in a try-catch. This is important because 
@@ -773,12 +950,12 @@ function executeScripts(scripts, context) {
  * Re-initialize dynamic content after SPA navigation
  * This is important for elements that need event listeners
  */
-function reinitializeDynamicContent() {
+async function reinitializeDynamicContent() {
   // Execute body scripts (including widget init scripts) after DOM insertion
   if (window.__spa_bodyScripts && window.__spa_bodyScripts.length > 0) {
     console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_bodyScripts.length + ' body scripts');
     window.__spa_executing_fragment_scripts = true;
-    executeScripts(window.__spa_bodyScripts, 'body-scripts');
+    await executeScripts(window.__spa_bodyScripts, 'body-scripts');
     window.__spa_executing_fragment_scripts = false;
     // Clear the stored scripts after execution
     window.__spa_bodyScripts = [];
