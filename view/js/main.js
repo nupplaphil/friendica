@@ -64,12 +64,12 @@ function _setupDocumentHandler(fn, config) {
 	if (typeof fn !== 'function') {
 		return;
 	}
+	// Always bind to jQuery for traditional page loads
+	$(config.jqueryTarget)[config.jqueryMethod](fn);
 
 	const isSPALoading = window.__spa_executing_page_scripts;
 
 	if (!isSPALoading) {
-		// Traditional page load: use jQuery
-		$(config.jqueryTarget)[config.jqueryMethod](fn);
 		return;
 	}
 
@@ -114,7 +114,7 @@ function _setupDocumentHandler(fn, config) {
 function onDocumentReady(fn) {
 	_setupDocumentHandler(fn, {
 		eventName: 'spa:document:ready',
-		jqueryTarget: 'document',
+		jqueryTarget: document,
 		jqueryMethod: 'ready',
 		registryName: '__onDocumentReadyRegistry',
 		debugMsg: '[onDocumentReady] spa:document:ready listener already registered',
@@ -124,19 +124,19 @@ function onDocumentReady(fn) {
 
 /**
  * Register a function to be executed when all resources (images, etc.) are loaded.
- * Handles both traditional page loads (via window.load) and SPA navigation (via spa:document:load event).
+ * Handles both traditional page loads (via window.load) and SPA navigation (via spa:window:load event).
  * Prevents duplicate registrations across SPA navigations.
  * 
  * @param {Function} fn - The function to register
  */
-function onDocumentLoad(fn) {
+function onWindowLoad(fn) {
 	_setupDocumentHandler(fn, {
-		eventName: 'spa:document:load',
-		jqueryTarget: 'window',
+		eventName: 'spa:window:load',
+		jqueryTarget: window,
 		jqueryMethod: 'load',
-		registryName: '__onDocumentLoadRegistry',
-		debugMsg: '[onDocumentLoad] spa:document:load listener already registered',
-		onceDebugMsg: '[onDocumentLoad] Executing one-time fragment function'
+		registryName: '__onWindowLoadRegistry',
+		debugMsg: '[onWindowLoad] spa:window:load listener already registered',
+		onceDebugMsg: '[onWindowLoad] Executing one-time fragment function'
 	});
 }
 

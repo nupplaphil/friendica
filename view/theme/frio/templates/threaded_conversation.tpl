@@ -10,20 +10,7 @@
 // Display module: Scroll to item by GUID
 window.itemGuid = window.location.pathname.split("/").pop();
 window.scrollToDisplayGuid = () => scrollToItem("item-" + window.itemGuid);
-
-// 1. Try immediately (works for SPA after content replacement)
-window.scrollToDisplayGuid();
-
-// 2. Try on window.load (works for non-SPA)
-onDocumentLoad(window.scrollToDisplayGuid);
-
-// 3. Listen for SPA navigation
-window.addEventListener('spa:navigate', (e) => {
-    if (e.detail?.path?.includes('/display/')) {
-        const newGuid = e.detail.path.split("/").pop();
-        scrollToItem("item-" + newGuid);
-    }
-});
+onWindowLoad(window.scrollToDisplayGuid);
 </script>
 {{/if}}
 {{$live_update nofilter}}

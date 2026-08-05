@@ -789,7 +789,7 @@ function reinitializeDynamicContent() {
   window.dispatchEvent(spaNavigateEvent);
   
   // Trigger window loaded event for elements that need all resources (images, etc.)
-  const spaDocumentLoadEvent = new CustomEvent('spa:document:load');
+  const spaDocumentLoadEvent = new CustomEvent('spa:window:load');
   window.dispatchEvent(spaDocumentLoadEvent);
   
   // Trigger DOM ready for elements that need to reinitialize after SPA navigation
@@ -805,21 +805,6 @@ function reinitializeDynamicContent() {
     console.debug('[SPA Router] Calling NavUpdate after navigation');
     NavUpdate();
   }
-}
-
-/**
- * Handle initial page load
- */
-function handleInitialLoad() {
-  // Trigger document load event
-  const windowLoadedEvent = new CustomEvent('spa:document:load');
-  window.dispatchEvent(windowLoadedEvent);
-
-  // Trigger document ready event
-  const event = new CustomEvent('spa:document:ready', {
-    detail: { path: window.location.pathname }
-  });
-  window.dispatchEvent(event);
 }
 
 /**
@@ -858,9 +843,6 @@ function initSPARouter() {
     console.debug('[SPA Router] Not supported or disabled');
     return;
   }
-  
-  // Initial load handler
-  window.addEventListener('DOMContentLoaded', handleInitialLoad);
   
   // Intercept link clicks (using event delegation)
   document.addEventListener('click', handleLinkClick);
@@ -905,7 +887,6 @@ export {
   scrollToTopInstant,
   navigateTo,
   handleLinkClick,
-  handleInitialLoad,
   handlePopState,
   reinitializeDynamicContent,
   checkForDOMReadyPatterns
