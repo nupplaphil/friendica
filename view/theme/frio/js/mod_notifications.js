@@ -20,7 +20,7 @@ onDocumentReady(function () {
 	}
 });
 
-onDocumentLoad(function () {
+onWindowLoad(function () {
 	// Scroll to the intro by its intro ID.
 	if (isIntroID()) {
 		scrollToItem("intro-" + introID);
