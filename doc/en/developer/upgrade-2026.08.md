@@ -4,7 +4,7 @@ Upgrade from 2026.04 to 2026.08
 All notable changes to **Friendica** will be documented in this file.
 As an *Addon or Theme maintainer* you can inform yourself about all breaking changes and deprecations.
 
-This project [promises Backward Compatibility](index#backward-compatibility).
+This project [promises Backward Compatibility](help/developer/index#backward-compatibility).
 
 > ℹ️ **Note:**
 > Friendica 2026.08 requires PHP 8.2 or higher! Support for PHP 7.4, 8.0 and 8.1 has been dropped.
