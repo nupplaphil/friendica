@@ -11,6 +11,10 @@
 	var editor = false;
 	var textlen = 0;
 	var formModified = false;
+	// Use window object to persist across SPA navigation
+	if (typeof window.jotEventsRegistered === 'undefined') {
+		window.jotEventsRegistered = false;
+	}
 
 	function initEditor(callback) {
 		if (editor == false) {
@@ -77,7 +81,13 @@
 		}
 	}
 
-	onDocumentReady(function() {
+	function initJotHeader() {
+		// Prevent duplicate event registration in SPA mode
+		if (window.jotEventsRegistered) {
+			return;
+		}
+		window.jotEventsRegistered = true;
+
 		/* enable editor on focus and click */
 		$("#profile-jot-text").focus(enableOnUser);
 		$("#profile-jot-text").click(enableOnUser);
@@ -227,7 +237,9 @@
 				});
 			}
 		});
-	});
+	}
+
+	onDocumentReady(initJotHeader);
 
 	function deleteCheckedItems() {
 		if (confirm('{{$delitems}}')) {

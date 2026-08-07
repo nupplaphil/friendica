@@ -114,6 +114,7 @@
 	<script type="text/javascript">
 		const updateContent = {{$update_content}};
 		const localUser = {{if $local_user}}{{$local_user}}{{else}}false{{/if}};
+		const spaEnabled = {{$spa_mode}};
 	</script>
 	<script type="text/javascript" src="view/js/loading-indicator.js?v={{$VERSION}}"></script>
 	<script type="text/javascript" src="view/js/main.js?v={{$VERSION}}"></script>
