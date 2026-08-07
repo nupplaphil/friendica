@@ -86,6 +86,8 @@ class Nav
 			'$emptynotifications'   => $this->l10n->t('Nothing new here'),
 			'$loadingnotifications' => $this->l10n->t('Loading...'),
 			'$userinfo'             => $nav_info['userinfo'],
+			'$profile_link'         => 'profile/' . $this->session->getLocalUserNickname() . '/profile',
+			'$profile_link_title'	=> $this->l10n->t('My Profile'),
 			'$nickname'             => $this->session->getLocalUserNickname(),
 			'$sel'                  => self::$selected,
 			'$apps'                 => $this->getAppMenu(),
@@ -262,9 +264,6 @@ class Nav
 		if ($this->session->getLocalUserNickname()) {
 			$nav['network'] = ['network', $this->l10n->t('Home'), '', $this->l10n->t('Home')];
 
-			// Only used by Vier
-			$nav['my_profile'] = ['profile/' . $this->session->getLocalUserNickname(), $this->l10n->t('Profile'), '', ''];
-
 			// Don't show notifications for public communities
 			if ($this->session->get('page_flags', '') != User::PAGE_FLAGS_COMMUNITY) {
 				$nav['introductions']         = ['notifications/intros', $this->l10n->t('Introductions'), '', $this->l10n->t('Friend Requests')];
@@ -278,11 +277,12 @@ class Nav
 			$nav['messages']['outbox'] = ['message/sent', $this->l10n->t('Outbox'), '', $this->l10n->t('Outbox')];
 			$nav['messages']['new']    = ['message/new', $this->l10n->t('New Message'), '', $this->l10n->t('New Message')];
 
-			$nav_accounts_name        = $this->l10n->t('Accounts');
 			$nav_accounts_description = $this->l10n->t('Manage other accounts, including groups and pages');
 			if (User::hasIdentities($this->session->getSubManagedUserId() ?: $this->session->getLocalUserId())) {
+				$nav_accounts_name = $this->l10n->t('Switch Accounts');
 				$nav['delegation'] = ['delegation', $nav_accounts_name, '', $nav_accounts_description];
 			} else {
+				$nav_accounts_name = $this->l10n->t('Add Account');
 				$nav['delegation'] = ['settings/delegation', $nav_accounts_name, '', $nav_accounts_description];
 			}
 
