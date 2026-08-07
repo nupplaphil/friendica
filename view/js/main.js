@@ -31,6 +31,7 @@ if (!Element.prototype.matches) {
  */
 function registerDocumentHandler(registryName, fn, debugMsg) {
 	if (typeof fn !== 'function') {
+		console.debug('[DocumentHandler] registerDocumentHandler skipped: fn is not a function');
 		return null;
 	}
 
@@ -38,14 +39,129 @@ function registerDocumentHandler(registryName, fn, debugMsg) {
 		window[registryName] = new Set();
 	}
 
-	const registryKey = fn.toString().substring(0, 100);
+	// Use function name as key for stable identification across SPA navigations
+	// This prevents duplicate registrations when fragment scripts are reloaded
+	// For anonymous functions, fall back to a hash of the function body
+	const registryKey = fn.name || fn.toString().substring(0, 100);
+	
 	if (window[registryName].has(registryKey)) {
-		console.debug(debugMsg);
+		console.debug(debugMsg + ':', {
+			registryName: registryName,
+			registryKey: registryKey,
+			registrySize: window[registryName].size
+		});
 		return null;
 	}
 	window[registryName].add(registryKey);
+	console.debug('[DocumentHandler] Registered handler key:', {
+		registryName: registryName,
+		registryKey: registryKey,
+		registrySize: window[registryName].size
+	});
 	return registryKey;
 }
+
+function normalizeScriptSource(src) {
+	if (!src) {
+		return null;
+	}
+
+	try {
+		const baseUrl = document.baseURI || (window.location.origin + '/');
+		return new URL(src, baseUrl).toString();
+	} catch (e) {
+		return src;
+	}
+}
+
+function registerSPASubscriber(config, registryKey, fn, cleanupMode, sourceScript) {
+	if (!window.__spaSubscriberRegistry) {
+		window.__spaSubscriberRegistry = [];
+	}
+
+	const normalizedSourceScript = normalizeScriptSource(sourceScript);
+
+	window.__spaSubscriberRegistry.push({
+		eventName: config.eventName,
+		callback: fn,
+		registryName: config.registryName,
+		registryKey: registryKey,
+		cleanupMode: cleanupMode,
+		sourceScript: normalizedSourceScript
+	});
+
+	console.debug('[DocumentHandler] SPA subscriber registered:', {
+		eventName: config.eventName,
+		registryName: config.registryName,
+		registryKey: registryKey,
+		cleanupMode: cleanupMode,
+		sourceScript: normalizedSourceScript,
+		totalSubscribers: window.__spaSubscriberRegistry.length
+	});
+}
+
+function clearSPASubscribers(activeScriptSources) {
+	if (!window.__spaSubscriberRegistry || !window.__spaSubscriberRegistry.length) {
+		const emptyStats = {
+			total: 0,
+			removed: 0,
+			keptPersistent: 0,
+			keptByScript: 0
+		};
+		console.debug('[DocumentHandler] SPA cleanup skipped: no subscribers', emptyStats);
+		return emptyStats;
+	}
+
+	const activeScripts = activeScriptSources instanceof Set ? activeScriptSources : null;
+	const totalBefore = window.__spaSubscriberRegistry.length;
+	let removed = 0;
+	let keptPersistent = 0;
+	let keptByScript = 0;
+
+	window.__spaSubscriberRegistry = window.__spaSubscriberRegistry.filter(function(subscriber) {
+		if (subscriber.cleanupMode === 'always') {
+			keptPersistent++;
+			return true;
+		}
+
+		if (subscriber.cleanupMode === 'script' && !activeScripts) {
+			keptByScript++;
+			return true;
+		}
+
+		if (
+			subscriber.cleanupMode === 'script'
+			&& subscriber.sourceScript
+			&& activeScripts
+			&& activeScripts.has(subscriber.sourceScript)
+		) {
+			keptByScript++;
+			return true;
+		}
+
+		window.removeEventListener(subscriber.eventName, subscriber.callback);
+
+		if (window[subscriber.registryName]) {
+			window[subscriber.registryName].delete(subscriber.registryKey);
+		}
+
+		removed++;
+
+		return false;
+	});
+
+	const stats = {
+		total: totalBefore,
+		removed: removed,
+		keptPersistent: keptPersistent,
+		keptByScript: keptByScript
+	};
+
+	console.debug('[DocumentHandler] SPA cleanup finished:', stats);
+	return stats;
+}
+
+window.clearSPASubscribers = clearSPASubscribers;
 
 /**
  * Internal helper to setup document event handlers for both traditional page loads and SPA navigation.
@@ -59,17 +175,22 @@ function registerDocumentHandler(registryName, fn, debugMsg) {
  * @param {string} config.registryName - Name of the registry in window
  * @param {string} config.debugMsg - Debug message for duplicate registration
  * @param {string} config.onceDebugMsg - Debug message for once execution
+ * @param {boolean} persistent - true=keep always, false=remove on next navigation, undefined=keep while source script exists
  */
-function _setupDocumentHandler(fn, config) {
+function _setupDocumentHandler(fn, config, persistent) {
 	if (typeof fn !== 'function') {
+		console.debug('[DocumentHandler] _setupDocumentHandler skipped: fn is not a function', {
+			eventName: config?.eventName
+		});
 		return;
 	}
-	// Always bind to jQuery for traditional page loads
-	$(config.jqueryTarget)[config.jqueryMethod](fn);
-
-	const isSPALoading = window.__spa_executing_page_scripts;
-
-	if (!isSPALoading) {
+	// Bind to jQuery for traditional page loads
+	if (!spaEnabled) {
+		console.debug('[DocumentHandler] Non-SPA mode, binding via jQuery', {
+			eventName: config.eventName,
+			jqueryMethod: config.jqueryMethod
+		});
+		$(config.jqueryTarget)[config.jqueryMethod](fn);
 		return;
 	}
 
@@ -78,7 +199,12 @@ function _setupDocumentHandler(fn, config) {
 		fn,
 		config.debugMsg
 	);
+	
 	if (registryKey === null) {
+		console.debug('[DocumentHandler] Registration skipped due to duplicate key', {
+			eventName: config.eventName,
+			registryName: config.registryName
+		});
 		return;
 	}
 
@@ -86,11 +212,22 @@ function _setupDocumentHandler(fn, config) {
 	const isFragment = window.__spa_executing_fragment_scripts;
 
 	if (isFragment) {
+		console.debug('[DocumentHandler] Registering fragment once-handler', {
+			eventName: config.eventName,
+			registryName: config.registryName,
+			registryKey: registryKey,
+			reinitPhase: !!window.__spa_reinit_phase
+		});
 		// Fragment scripts: execute once after all resources are ready
 		const once = function() {
 			window.removeEventListener(config.eventName, once);
+
 			window[config.registryName].delete(registryKey);
-			console.debug(config.onceDebugMsg);
+			console.debug('[DocumentHandler] Executing fragment once-handler', {
+				eventName: config.eventName,
+				registryName: config.registryName,
+				registryKey: registryKey
+			});
 			fn();
 		};
 		if (window.__spa_reinit_phase) {
@@ -100,7 +237,18 @@ function _setupDocumentHandler(fn, config) {
 		}
 	} else {
 		// External scripts: permanent listener
+		const cleanupMode = persistent === true ? 'always' : (persistent === false ? 'navigation' : 'script');
+		const currentScript = document.currentScript;
+		const sourceScript = currentScript && (currentScript.getAttribute('src') || currentScript.src);
 		window.addEventListener(config.eventName, fn);
+		registerSPASubscriber(config, registryKey, fn, cleanupMode, sourceScript);
+		console.debug('[DocumentHandler] Registered external SPA listener', {
+			eventName: config.eventName,
+			registryName: config.registryName,
+			registryKey: registryKey,
+			cleanupMode: cleanupMode,
+			sourceScript: normalizeScriptSource(sourceScript)
+		});
 	}
 }
 
@@ -110,8 +258,9 @@ function _setupDocumentHandler(fn, config) {
  * Prevents duplicate registrations across SPA navigations.
  * 
  * @param {Function} fn - The function to register
+ * @param {boolean} persistent - Optional flag. true=keep always, false=remove on next navigation, undefined=keep while source script exists.
  */
-function onDocumentReady(fn) {
+function onDocumentReady(fn, persistent) {
 	_setupDocumentHandler(fn, {
 		eventName: 'spa:document:ready',
 		jqueryTarget: document,
@@ -119,7 +268,7 @@ function onDocumentReady(fn) {
 		registryName: '__onDocumentReadyRegistry',
 		debugMsg: '[onDocumentReady] spa:document:ready listener already registered',
 		onceDebugMsg: '[onDocumentReady] Executing one-time fragment function'
-	});
+	}, persistent);
 }
 
 /**
@@ -128,8 +277,9 @@ function onDocumentReady(fn) {
  * Prevents duplicate registrations across SPA navigations.
  * 
  * @param {Function} fn - The function to register
+ * @param {boolean} persistent - Optional flag. true=keep always, false=remove on next navigation, undefined=keep while source script exists.
  */
-function onWindowLoad(fn) {
+function onWindowLoad(fn, persistent) {
 	_setupDocumentHandler(fn, {
 		eventName: 'spa:window:load',
 		jqueryTarget: window,
@@ -137,7 +287,7 @@ function onWindowLoad(fn) {
 		registryName: '__onWindowLoadRegistry',
 		debugMsg: '[onWindowLoad] spa:window:load listener already registered',
 		onceDebugMsg: '[onWindowLoad] Executing one-time fragment function'
-	});
+	}, persistent);
 }
 
 function resizeIframe(obj) {
@@ -261,7 +411,7 @@ var lastScrollToItemId = null;
 
 const urlRegex = /^(?:https?:\/\/|\s)[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})(?:\/+[a-z0-9_.:;-]*)*(?:\?[&%|+a-z0-9_=,.:;-]*)?(?:[&%|+&a-z0-9_=,:;.-]*)(?:[!#\/&%|+a-z0-9_=,:;.-]*)}*$/i;
 
-$(function() {
+onDocumentReady(function() {
 	$.ajaxSetup({cache: false});
 
 	/* setup comment textarea buttons */
@@ -359,11 +509,6 @@ $(function() {
 		'maxWidth' : '100%'
 	});
 
-	/* notifications template */
-	var notifications_all = unescape($('<div>').append($("#nav-notifications-see-all").clone()).html()); //outerHtml hack
-	var notifications_mark = unescape($('<div>').append($("#nav-notifications-mark-all").clone()).html()); //outerHtml hack
-	var notifications_empty = unescape($("#nav-notifications-menu").html());
-
 	/* Ensure loading is visible when notifications menu is opened (if no notifications loaded yet)*/
 	$('#nav-notifications-linkmenu, #nav-notifications-menu-btn').on('click', function() {
 		if ($("#nav-notifications-loading").length && $("#nav-notifications-empty").length) {
@@ -435,18 +580,27 @@ $(function() {
 		// Hide loading state when we receive notification data
 		$("#nav-notifications-loading").hide();
 
-		if (data.notifications.length == 0) {
+		var navNotifications = Array.isArray(data.notifications) ? data.notifications : [];
+		if (navNotifications.length == 0) {
 			$("#nav-notifications-empty").show();
 		} else {
 			$("#nav-notifications-empty").hide();
 			var nnm = $("#nav-notifications-menu");
-			// Preserve the loading and empty state elements when rebuilding the menu
+			// Preserve control/state elements from the current DOM to avoid stale template snapshots
+			var seeAllElement = nnm.find("#nav-notifications-see-all");
+			var markAllElement = nnm.find("#nav-notifications-mark-all");
 			var loadingElement = nnm.find("#nav-notifications-loading");
 			var emptyElement = nnm.find("#nav-notifications-empty");
 
-			nnm.html(notifications_all + notifications_mark);
+			nnm.empty();
+			if (seeAllElement.length > 0) {
+				nnm.append(seeAllElement);
+			}
+			if (markAllElement.length > 0) {
+				nnm.append(markAllElement);
+			}
 
-			// Re-add the loading and empty elements if they existed
+			// Re-add loading and empty state elements if they existed
 			if (loadingElement.length > 0) {
 				nnm.append(loadingElement);
 			}
@@ -459,12 +613,12 @@ $(function() {
 			var notification_id = 0;
 
 			// Insert notifs into the notifications-menu
-			$(data.notifications).each(function(key, navNotif) {
+			$(navNotifications).each(function(key, navNotif) {
 				nnm.append(navNotif.html);
 			});
 
 			// Desktop Notifications
-			$(data.notifications.reverse()).each(function(key, navNotif) {
+			$(navNotifications.slice().reverse()).each(function(key, navNotif) {
 				notification_id = parseInt(navNotif.timestamp);
 				if (notification_lastitem !== null && notification_id > notification_lastitem && Number(navNotif.seen) === 0) {
 					if (getNotificationPermission() === "granted") {
@@ -568,7 +722,7 @@ $(function() {
 	if (typeof initInfiniteScroll === 'function') {
 		initInfiniteScroll();
 	}
-});
+}, true);
 
 // Function to initialize infinite scroll - can be called multiple times
 function initInfiniteScroll() {

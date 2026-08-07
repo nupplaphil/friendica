@@ -24,6 +24,19 @@ import * as acorn from '/view/asset/acorn/dist/acorn.mjs';
 
 const supportsSPA = window.history && window.history.pushState && window.fetch;
 
+function normalizeScriptSource(src) {
+  if (!src) {
+    return null;
+  }
+
+  try {
+    const baseUrl = document.baseURI || (window.location.origin + '/');
+    return new URL(src, baseUrl).toString();
+  } catch (e) {
+    return src;
+  }
+}
+
 // ============================================
 // GLOBAL STATE
 // ============================================
@@ -514,7 +527,39 @@ function replaceContainerContent(htmlString, finalUrl = null) {
     if (scrollLoaderOld) scrollLoaderOld.innerHTML = scrollLoaderNew.innerHTML;
   }
 
+  // Collect all external scripts from the new page that we need to keep
+  const newPageScripts = new Set();
+  const newPageResourceElements = newDoc.querySelectorAll('head > script[src], body script[src]');
+  newPageResourceElements.forEach(el => {
+    const src = normalizeScriptSource(el.getAttribute('src'));
+    if (src) {
+      newPageScripts.add(src);
+    }
+  });
+
+  // Remove old Subscribers
+  if (typeof window.clearSPASubscribers === 'function') {
+      const cleanupStats = window.clearSPASubscribers(newPageScripts);
+      console.debug('[SPA Router] Subscriber cleanup stats:', cleanupStats);
+  }
+
+  // Remove scripts from current DOM that are NOT in the new page and NOT persistent
+  const currentScripts = document.querySelectorAll('script[src]');
+  console.debug('[SPA Router] Found', currentScripts.length, 'external script(s) in current DOM');
+  console.debug('[SPA Router] New page has', newPageScripts.size, 'external script(s)');
+  currentScripts.forEach(script => {
+    const src = normalizeScriptSource(script.getAttribute('src') || script.src);
+    if (newPageScripts.has(src) || script.hasAttribute('data-spa-persistent')) {
+      console.debug('[SPA Router] Keeping script (in new page or persistent):', src);
+      return;
+    }
+
+    console.debug('[SPA Router] Removing script (not in new page, not persistent):', src);
+    script.parentNode.removeChild(script);
+  });
+
   // 5. SYNC HEAD (Links, Styles, External Scripts)
+
   for (const el of resourceElements) {
     const tag = el.tagName.toLowerCase();
     
@@ -528,9 +573,10 @@ function replaceContainerContent(htmlString, finalUrl = null) {
     } else if (tag === 'script') {
       const src = el.getAttribute('src');
       if (src) {
-        // Only add if not already present
-        if (!document.querySelector(`script[src="${src}"]`)) {
-          console.debug('[SPA Router] Adding external script:', src);
+        const normalizedSrc = normalizeScriptSource(src);
+        // Only add if not already present in DOM
+        if (!document.querySelector(`script[src="${src}"]`) && !document.querySelector(`script[src="${normalizedSrc}"]`)) {
+          console.debug('[SPA Router] Adding script (not in DOM):', src);
           const clone = document.createElement('script');
           
           // Copy all attributes
@@ -543,11 +589,11 @@ function replaceContainerContent(htmlString, finalUrl = null) {
           
           const p = new Promise(resolve => {
             clone.onload = () => {
-              console.debug('[SPA Router] Script loaded successfully:', src);
+              console.debug('[SPA Router] Script loaded:', src);
               resolve();
             };
             clone.onerror = () => {
-              console.warn('[SPA Router] Script failed to load:', src);
+              console.warn('[SPA Router] Script load error:', src);
               resolve(); 
             };
             // Do NOT use a safety timeout here if we want to ensure order
@@ -555,9 +601,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
           externalScriptPromises.push(p);
           document.head.appendChild(clone);
         } else {
-          // Script is already in DOM. If it's a library like fullcalendar, 
-          // we might still need to wait for its load event if it was added 
-          // in THIS same cycle (rare but possible).
+          console.debug('[SPA Router] Script already in DOM, skipping add:', normalizedSrc || src);
         }
       } else {
         // It's an inline script from head (or already processed if from body)
@@ -571,7 +615,7 @@ function replaceContainerContent(htmlString, finalUrl = null) {
 
   // 6. EXECUTION LIFECYCLE
   window.__spa_executing_page_scripts = true;
-  window.__spa_executing_fragment_scripts = false; 
+  window.__spa_executing_fragment_scripts = false;
   window.__spa_bodyScripts = bodyScripts;
 
   // Execute global-like headers first (vars, aStr, etc.)
@@ -768,6 +812,21 @@ function executeScripts(scripts, context) {
 // ============================================
 
 /**
+ * Trigger spa:document:ready event
+ */
+function triggerSPADocumentReady() {
+  window.dispatchEvent(new CustomEvent('spa:document:ready'));
+}
+
+/**
+ * Trigger spa:window:load event
+ */
+function triggerSPAWindowLoad() {
+  console.debug('[SPA Router] triggerSPAWindowLoad: dispatching spa:window:load');
+  window.dispatchEvent(new CustomEvent('spa:window:load'));
+}
+
+/**
  * Re-initialize dynamic content after SPA navigation
  * This is important for elements that need event listeners
  */
@@ -789,6 +848,7 @@ function reinitializeDynamicContent() {
   window.dispatchEvent(spaNavigateEvent);
   
   // Trigger window loaded event for elements that need all resources (images, etc.)
+  console.debug('[SPA Router] reinitializeDynamicContent: dispatching spa:window:load');
   const spaDocumentLoadEvent = new CustomEvent('spa:window:load');
   window.dispatchEvent(spaDocumentLoadEvent);
   
@@ -837,10 +897,10 @@ function handlePopState(e) {
  * Initialize SPA Router
  */
 function initSPARouter() {
-  console.debug('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled);
+  console.debug('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled, 'spaEnabled=', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined');
   
-  if (!supportsSPA || !SPA_CONFIG.enabled) {
-    console.debug('[SPA Router] Not supported or disabled');
+  if (!supportsSPA || !SPA_CONFIG.enabled || (typeof spaEnabled !== 'undefined' && !spaEnabled)) {
+    console.debug('[SPA Router] Not supported or disabled (spaEnabled:', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined', ')');
     return;
   }
   
@@ -849,6 +909,20 @@ function initSPARouter() {
   
   // Browser navigation (back/forward)
   window.addEventListener('popstate', handlePopState);
+  
+  // Register handlers for jQuery ready and window load events
+  if (typeof $ !== 'undefined') {
+    $(document).ready(triggerSPADocumentReady);
+    $(window).load(triggerSPAWindowLoad);
+  } else {
+    // Fallback for non-jQuery environments
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', triggerSPADocumentReady);
+    } else {
+      triggerSPADocumentReady();
+    }
+    window.addEventListener('load', triggerSPAWindowLoad);
+  }
   
   console.debug('[SPA Router] Initialized successfully');
 }
@@ -889,5 +963,7 @@ export {
   handleLinkClick,
   handlePopState,
   reinitializeDynamicContent,
-  checkForDOMReadyPatterns
+  checkForDOMReadyPatterns,
+  triggerSPADocumentReady,
+  triggerSPAWindowLoad
 };
