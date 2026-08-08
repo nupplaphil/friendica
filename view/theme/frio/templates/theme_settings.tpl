@@ -207,6 +207,8 @@
 
 {{include file="field_checkbox.tpl" field=$always_open_compose}}
 {{include file="field_checkbox.tpl" field=$enable_advancedcomposer}}
+{{include file="field_checkbox.tpl" field=$show_nav_labels}}
+{{include file="field_checkbox.tpl" field=$show_action_labels}}
 
 {{if $admin_theme_settings}}
 <div class="settings-submit-wrapper pull-right">
