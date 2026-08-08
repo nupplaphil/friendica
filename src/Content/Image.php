@@ -98,10 +98,6 @@ class Image
 
 				$row_images2 = [];
 
-				if ($singleImageInRow) {
-					unset($PostMediaImages[1]);
-				}
-
 				foreach ($PostMediaImages as $i => $PostMediaImage) {
 					$row_images2[] = new MasonryImage(
 						$PostMediaImage->uriId,
