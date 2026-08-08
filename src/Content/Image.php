@@ -47,19 +47,16 @@ class Image
 	 */
 	private static function getImageGridHtml(PostMedias $images): string
 	{
-		// Image for first column (fc) and second column (sc)
-		$images_fc = [];
-		$images_sc = [];
-
-		for ($i = 0; $i < count($images); $i++) {
-			($i % 2 == 0) ? ($images_fc[] = $images[$i]) : ($images_sc[] = $images[$i]);
+		// Pair images into rows
+		$images_rows = [];
+		
+		for ($i = 0; $i < count($images); $i++){
+			$images_rows[] = [ $images[$i], $images[$i+1] ];
+			$i++;	// NOT A DOUBLE-INCREMENT BUG! Makes sure no image appears in 2 pairs
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('content/image/grid.tpl'), [
-			'columns' => [
-				'fc' => $images_fc,
-				'sc' => $images_sc,
-			],
+			'rows'   => $images_rows,
 		]);
 	}
 
@@ -77,10 +74,6 @@ class Image
 
 		$rows = array_map(
 			function (PostMedias $PostMediaImages) {
-				if ($singleImageInRow = count($PostMediaImages) == 1) {
-					$PostMediaImages[] = $PostMediaImages[0];
-				}
-
 				$widths  = [];
 				$heights = [];
 				foreach ($PostMediaImages as $PostMediaImage) {
