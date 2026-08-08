@@ -80,6 +80,12 @@ jobs:
     name: PHPStan in addons (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
 
+    # Non-blocking: friendica-addons lives on git.friendi.ca and has no CI of its own,
+    # so faulty addon code only surfaces here, after it was merged - turning this
+    # repository's pipeline red for changes that aren't ours. The job itself still
+    # reports as failed, it just doesn't fail the workflow run.
+    continue-on-error: true
+
     strategy:
       fail-fast: false
       matrix:
@@ -105,11 +111,7 @@ jobs:
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v4"
 
-      # Non-blocking: friendica-addons lives on git.friendi.ca and has no CI of its own,
-      # so faulty addon code only surfaces here, after it was merged - turning this
-      # repository's pipeline red for changes that aren't ours.
       - name: Run PHPStan in addons
-        continue-on-error: true
         run: 'composer run addons:phpstan'
 
   rector:
