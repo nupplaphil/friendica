@@ -74,7 +74,8 @@ header #banner #logo-img:hover {
 #nav-delegation-link:active {
 	background-color: rgba(0, 0, 0, $contentbg_transp);
 	color: white;
-}.dropdown-menu > li > a:focus,
+}
+.dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
 	background-image: none;
 	background-color: rgba(232, 232, 232, $contentbg_transp);
