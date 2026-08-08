@@ -18,7 +18,6 @@
  */
 
 // Global linkPreview instance for cross-module access
-// eslint-disable-next-line no-var
 var linkPreview;
 
 (function ($, window) {
@@ -95,7 +94,6 @@ var linkPreview;
 	 */
 	window.jotShow = function () {
 		var modal = $('#jot-modal').modal();
-		// eslint-disable-next-line no-var
 		var jotcache = window.jotcache || $("#jot-sections");
 
 		// Auto focus on the first enabled field in the modal
