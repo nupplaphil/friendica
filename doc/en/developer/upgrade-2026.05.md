@@ -4,7 +4,7 @@ Upgrade from 2026.01 to 2026.05
 All notable changes to **Friendica** will be documented in this file.
 As an *Addon or Theme maintainer* you can inform yourself about all breaking changes and deprecations.
 
-This project [promises Backward Compatibility](index.md#backward-compatibility).
+This project [promises Backward Compatibility](help/developer/index#backward-compatibility).
 
 Mandatory (Breaking changes)
 ----------------------------
