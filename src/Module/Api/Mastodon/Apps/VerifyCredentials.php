@@ -24,6 +24,6 @@ class VerifyCredentials extends BaseApi
 			$this->logAndJsonError(401, $this->errorFactory->Unauthorized());
 		}
 
-		$this->jsonExit(DI::mstdnApplication()->createFromApplicationId($application['id']));
+		$this->earlyJsonExit(DI::mstdnApplication()->createFromApplicationId($application['id']));
 	}
 }

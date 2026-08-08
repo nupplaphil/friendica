@@ -39,11 +39,11 @@ class RemoveTag extends BaseModule
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 	}
 
-	protected function post(array $request = [])
+	protected function post(array $request = []): never
 	{
 		$type = 0;
 		$term = '';
-		$this->httpError($this->removeTag($request, $type, $term));
+		$this->earlyHttpError($this->removeTag($request, $type, $term));
 	}
 
 	protected function content(array $request = []): string

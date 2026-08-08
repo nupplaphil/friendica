@@ -19,6 +19,7 @@ use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\IRequestHandler;
 use Friendica\Content\Nav;
 use Friendica\Core\Addon\AddonHelper;
+use Friendica\Core\EarlyExitException;
 use Friendica\Core\Config\Factory\Config;
 use Friendica\Core\Container;
 use Friendica\Core\Hooks\HookEventBridge;
@@ -610,6 +611,9 @@ class App
 				$responseBuilder->setStatus($e->getCode(), $e->getMessage());
 				$responseBuilder->addContent($httpException->content($e));
 				$response = $responseBuilder->generate();
+			} catch (EarlyExitException $e) {
+				System::echoResponse($e->getResponse());
+				System::exit();
 			}
 			$this->profiler->set(microtime(true) - $timestamp, 'content');
 

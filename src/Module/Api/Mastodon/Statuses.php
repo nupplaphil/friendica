@@ -199,7 +199,7 @@ class Statuses extends BaseApi
 
 		Item::updateDisplayCache($post['uri-id']);
 
-		$this->jsonExit(DI::mstdnStatus()->createFromUriId($post['uri-id'], $uid));
+		$this->earlyJsonExit(DI::mstdnStatus()->createFromUriId($post['uri-id'], $uid));
 	}
 
 	protected function post(array $request = [])
@@ -369,7 +369,7 @@ class Statuses extends BaseApi
 				DI::contentItem()->setAutomaticScheduledAt($uid, $scheduled_at);
 			}
 
-			$this->jsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($id, $uid)->toArray());
+			$this->earlyJsonExit(DI::mstdnScheduledStatus()->createFromDelayedPostId($id, $uid)->toArray());
 		} elseif (!empty($request['scheduled_at'])) {
 			$item['created'] = $scheduled_at;
 		}
@@ -378,7 +378,7 @@ class Statuses extends BaseApi
 		if (!empty($id)) {
 			$item = Post::selectFirst(['uri-id'], ['id' => $id]);
 			if (!empty($item['uri-id'])) {
-				$this->jsonExit(DI::mstdnStatus()->createFromUriId($item['uri-id'], $uid));
+				$this->earlyJsonExit(DI::mstdnStatus()->createFromUriId($item['uri-id'], $uid));
 			}
 		}
 
@@ -403,7 +403,7 @@ class Statuses extends BaseApi
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 
 	/**
@@ -430,7 +430,7 @@ class Statuses extends BaseApi
 			$this->item->setViewed($this->parameters['id'], $uid);
 		}
 
-		$this->jsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid, false));
+		$this->earlyJsonExit(DI::mstdnStatus()->createFromUriId($this->parameters['id'], $uid, false));
 	}
 
 	private function getApp(): string

@@ -86,6 +86,6 @@ class Whoami extends BaseApi
 		];
 
 		$data['generator'] = ActivityPub\Transmitter::getService();
-		$this->jsonExit($data, 'application/activity+json');
+		$this->earlyJsonExit($data, 'application/activity+json');
 	}
 }

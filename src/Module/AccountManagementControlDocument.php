@@ -16,7 +16,7 @@ use Friendica\BaseModule;
  */
 class AccountManagementControlDocument extends BaseModule
 {
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$output = [
 			'version'       => 1,
@@ -64,6 +64,6 @@ class AccountManagementControlDocument extends BaseModule
 			],
 		];
 
-		$this->jsonExit($output);
+		$this->earlyJsonExit($output);
 	}
 }

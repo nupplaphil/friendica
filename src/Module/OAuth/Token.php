@@ -84,7 +84,7 @@ class Token extends BaseApi
 				null,
 			);
 
-			$this->jsonExit($object->toArray());
+			$this->earlyJsonExit($object->toArray());
 		}
 
 		// now check for $grant_type === 'authorization_code'
@@ -111,6 +111,6 @@ class Token extends BaseApi
 			$owner['url'],
 		);
 
-		$this->jsonExit($object->toArray());
+		$this->earlyJsonExit($object->toArray());
 	}
 }

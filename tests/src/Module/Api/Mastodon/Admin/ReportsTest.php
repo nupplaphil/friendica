@@ -180,7 +180,7 @@ class TestableReports extends Reports
 		$this->get($request);
 	}
 
-	public function jsonExit($content, string $content_type = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
+	public function earlyJsonExit(mixed $content, string $contentType = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
 	{
 		throw new TestJsonExitException($content);
 	}

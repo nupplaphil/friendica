@@ -36,6 +36,6 @@ class Note extends BaseApi
 
 		Contact::update(['info' => $request['comment']], ['id' => $ucid]);
 
-		$this->jsonExit(DI::mstdnRelationship()->createFromContactId($this->parameters['id'], $uid)->toArray());
+		$this->earlyJsonExit(DI::mstdnRelationship()->createFromContactId($this->parameters['id'], $uid)->toArray());
 	}
 }

@@ -17,7 +17,7 @@ use Friendica\Util\XML;
  */
 class ReallySimpleDiscovery extends BaseModule
 {
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$content = XML::fromArray([
 			'rsd' => [
@@ -52,6 +52,6 @@ class ReallySimpleDiscovery extends BaseModule
 				],
 			],
 		]);
-		$this->httpExit($content, Response::TYPE_XML);
+		$this->earlyHttpExit($content, Response::TYPE_XML);
 	}
 }

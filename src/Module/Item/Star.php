@@ -76,6 +76,6 @@ class Star extends BaseModule
 			'state'   => (int) $starred,
 		];
 
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

@@ -74,6 +74,6 @@ class Activity extends BaseModule
 			'state'   => 1,
 		];
 
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

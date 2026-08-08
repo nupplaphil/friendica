@@ -27,7 +27,7 @@ class Home extends BaseModule
 		if (ActivityPub::isRequest()) {
 			DI::baseUrl()->redirect(User::getActorName());
 		} elseif (ZOT::isRequest()) {
-			$this->jsonExit(ZOT::getSiteInfo(), 'application/x-zot+json');
+			$this->earlyJsonExit(ZOT::getSiteInfo(), 'application/x-zot+json');
 		}
 	}
 

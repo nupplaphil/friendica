@@ -27,7 +27,7 @@ class ThemeDetails extends BaseModule
 			$version     = $info['version']     ?? '';
 			$credits     = $info['credits']     ?? '';
 
-			$this->jsonExit([
+			$this->earlyJsonExit([
 				'img'     => Theme::getScreenshot($theme),
 				'desc'    => $description,
 				'version' => $version,

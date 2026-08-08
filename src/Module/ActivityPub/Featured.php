@@ -31,6 +31,6 @@ class Featured extends BaseModule
 
 		$featured = ActivityPub\Transmitter::getFeatured($owner, $page);
 
-		$this->jsonExit($featured, 'application/activity+json');
+		$this->earlyJsonExit($featured, 'application/activity+json');
 	}
 }

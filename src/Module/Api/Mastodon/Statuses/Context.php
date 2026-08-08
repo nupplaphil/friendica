@@ -131,7 +131,7 @@ class Context extends BaseApi
 			}
 		}
 
-		$this->jsonExit($statuses);
+		$this->earlyJsonExit($statuses);
 	}
 
 	private static function getParents(int $id, array $parents, array $list = [])

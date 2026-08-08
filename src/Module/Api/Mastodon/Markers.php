@@ -45,19 +45,19 @@ class Markers extends BaseApi
 
 		$fields = ['last_read_id' => $last_read_id, 'version' => $version, 'updated_at' => DateTimeFormat::utcNow()];
 		DBA::update('application-marker', $fields, $condition, true);
-		$this->jsonExit($this->fetchTimelines($application['id'], $uid));
+		$this->earlyJsonExit($this->fetchTimelines($application['id'], $uid));
 	}
 
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function get(array $request = [])
+	protected function get(array $request = []): never
 	{
 		$this->checkAllowedScope(self::SCOPE_READ);
 		$uid         = self::getCurrentUserID();
 		$application = self::getCurrentApplication();
 
-		$this->jsonExit($this->fetchTimelines($application['id'], $uid));
+		$this->earlyJsonExit($this->fetchTimelines($application['id'], $uid));
 	}
 
 	private function fetchTimelines(int $application_id, int $uid): \stdClass

@@ -81,7 +81,7 @@ class Search extends BaseApi
 			$result['hashtags'] = $this->searchHashtags($request['q'], $request['exclude_unreviewed'], $limit, $request['offset'], $this->parameters['version']);
 		}
 
-		$this->jsonExit($result);
+		$this->earlyJsonExit($result);
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Search extends BaseApi
 			$item_id = Item::fetchByLink($q, $uid) ?: Item::fetchByLink($q);
 			if ($item_id && $item = Post::selectFirst(['uri-id'], ['id' => $item_id])) {
 				$result['statuses'] = [DI::mstdnStatus()->createFromUriId($item['uri-id'], $uid)];
-				$this->jsonExit($result);
+				$this->earlyJsonExit($result);
 			}
 		}
 
@@ -116,12 +116,12 @@ class Search extends BaseApi
 			$id = Contact::getIdForURL($q, 0, false);
 			if ($id) {
 				$result['accounts'] = [DI::mstdnAccount()->createFromContactId($id, $uid)];
-				$this->jsonExit($result);
+				$this->earlyJsonExit($result);
 			}
 		}
 
 		if (in_array($data['type'], [PostMedia::TYPE_HTML, PostMedia::TYPE_TEXT, PostMedia::TYPE_ACCOUNT, PostMedia::TYPE_ACTIVITY, PostMedia::TYPE_UNKNOWN])) {
-			$this->jsonExit($result);
+			$this->earlyJsonExit($result);
 		}
 	}
 

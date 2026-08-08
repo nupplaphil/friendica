@@ -241,3 +241,50 @@ This section contains deprecation notices. This changes will become mandatory in
    $uri = DI::postUriGenerator()->newURI($guid);
    ```
 
+- `BaseModule::httpExit()` is deprecated. Use `BaseModule::earlyHttpExit()` instead:
+
+   *Before*
+   ```php
+   $this->httpExit($content);
+   ```
+
+   *After*
+   ```php
+   $this->earlyHttpExit($content);
+   ```
+
+- `BaseModule::jsonExit()` is deprecated. Use `BaseModule::earlyJsonExit()` instead:
+
+   *Before*
+   ```php
+   $this->jsonExit($data);
+   ```
+
+   *After*
+   ```php
+   $this->earlyJsonExit($data);
+   ```
+
+- `BaseModule::jsonError()` is deprecated. Use `BaseModule::earlyJsonError()` instead:
+
+   *Before*
+   ```php
+   $this->jsonError(404, ['error' => 'not found']);
+   ```
+
+   *After*
+   ```php
+   $this->earlyJsonError(404, ['error' => 'not found']);
+   ```
+
+- `BaseModule::httpError()` is deprecated. Throw `BaseModule::earlyHttpError()` instead:
+
+   *Before*
+   ```php
+   $this->httpError(403, 'Forbidden');
+   ```
+
+   *After*
+   ```php
+   $this->earlyHttpError(403, 'Forbidden');
+   ```

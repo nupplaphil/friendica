@@ -32,6 +32,6 @@ class Following extends BaseModule
 
 		$following = ActivityPub\Transmitter::getContacts($owner, [Contact::SHARING, Contact::FRIEND], 'following', $page);
 
-		$this->jsonExit($following, 'application/activity+json');
+		$this->earlyJsonExit($following, 'application/activity+json');
 	}
 }

@@ -123,7 +123,7 @@ class Xrd extends BaseModule
 		}
 	}
 
-	private function printSystemJSON(array $owner)
+	private function printSystemJSON(array $owner): never
 	{
 		$baseURL = (string) $this->baseUrl;
 		$json    = [
@@ -174,10 +174,10 @@ class Xrd extends BaseModule
 			],
 		];
 		header('Access-Control-Allow-Origin: *');
-		$this->jsonExit($json, 'application/jrd+json; charset=utf-8');
+		$this->earlyJsonExit($json, 'application/jrd+json; charset=utf-8');
 	}
 
-	private function printJSON(string $alias, array $owner, array $avatar)
+	private function printJSON(string $alias, array $owner, array $avatar): never
 	{
 		$baseURL = (string) $this->baseUrl;
 
@@ -247,10 +247,10 @@ class Xrd extends BaseModule
 		];
 
 		header('Access-Control-Allow-Origin: *');
-		$this->jsonExit($json, 'application/jrd+json; charset=utf-8');
+		$this->earlyJsonExit($json, 'application/jrd+json; charset=utf-8');
 	}
 
-	private function printXML(string $alias, array $owner, array $avatar)
+	private function printXML(string $alias, array $owner, array $avatar): never
 	{
 		$baseURL = (string) $this->baseUrl;
 
@@ -345,6 +345,6 @@ class Xrd extends BaseModule
 		]);
 
 		header('Access-Control-Allow-Origin: *');
-		$this->httpExit($xmlString, Response::TYPE_XML, 'application/xrd+xml');
+		$this->earlyHttpExit($xmlString, Response::TYPE_XML, 'application/xrd+xml');
 	}
 }

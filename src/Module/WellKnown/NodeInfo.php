@@ -16,7 +16,7 @@ use Friendica\DI;
  */
 class NodeInfo extends BaseModule
 {
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$nodeinfo = [
 			'links' => [
@@ -39,6 +39,6 @@ class NodeInfo extends BaseModule
 			],
 		];
 
-		$this->jsonExit($nodeinfo);
+		$this->earlyJsonExit($nodeinfo);
 	}
 }

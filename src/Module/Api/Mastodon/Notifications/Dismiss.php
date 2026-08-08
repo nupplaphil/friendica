@@ -29,6 +29,6 @@ class Dismiss extends BaseApi
 		$Notification->setDismissed();
 		DI::notification()->save($Notification);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

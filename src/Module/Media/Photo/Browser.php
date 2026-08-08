@@ -86,7 +86,7 @@ class Browser extends BaseModule
 		]);
 
 		if (empty($request['mode'])) {
-			$this->httpExit($output);
+			$this->earlyHttpExit($output);
 		}
 
 		return $output;

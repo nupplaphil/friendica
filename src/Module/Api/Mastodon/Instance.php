@@ -49,7 +49,7 @@ class Instance extends BaseApi
 			$contact_account = $this->accountFactory->createFromUriId($adminContact['uri-id']);
 		}
 
-		$this->jsonExit(new InstanceEntity($this->config, $this->baseUrl, $this->database, $this->buildConfigurationInfo(), $contact_account ?? null, System::getRules()));
+		$this->earlyJsonExit(new InstanceEntity($this->config, $this->baseUrl, $this->database, $this->buildConfigurationInfo(), $contact_account ?? null, System::getRules()));
 	}
 
 	private function buildConfigurationInfo(): InstanceV2Entity\Configuration

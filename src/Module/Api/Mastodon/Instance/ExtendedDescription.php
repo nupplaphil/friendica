@@ -34,10 +34,10 @@ class ExtendedDescription extends BaseApi
 	/**
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$account = User::getSystemAccount();
 
-		$this->jsonExit(new Mastodon\ExtendedDescription(new DateTime($account['updated']), $this->config->get('config', 'info')));
+		$this->earlyJsonExit(new Mastodon\ExtendedDescription(new DateTime($account['updated']), $this->config->get('config', 'info')));
 	}
 }

@@ -39,6 +39,6 @@ class Suggestions extends BaseApi
 			];
 		}
 
-		$this->jsonExit($accounts);
+		$this->earlyJsonExit($accounts);
 	}
 }

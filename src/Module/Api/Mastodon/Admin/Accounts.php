@@ -128,7 +128,7 @@ class Accounts extends BaseApi
 				$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
-		$this->jsonExit($this->buildAdminAccountResponse($targetId, $localUserId));
+		$this->earlyJsonExit($this->buildAdminAccountResponse($targetId, $localUserId));
 	}
 
 	/**

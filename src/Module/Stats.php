@@ -189,7 +189,7 @@ class Stats extends BaseModule
 
 		$statistics = $this->getJobsPerPriority($statistics);
 
-		$this->jsonExit($statistics);
+		$this->earlyJsonExit($statistics);
 	}
 
 	private function isAllowed(array $request): bool

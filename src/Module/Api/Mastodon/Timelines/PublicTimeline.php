@@ -54,7 +54,7 @@ class PublicTimeline extends BaseApi
 		], $request);
 
 		if ($this->config->get('system', 'community_page_style') == Community::DISABLED) {
-			$this->jsonExit([]);
+			$this->earlyJsonExit([]);
 		}
 
 		if ($this->authRequired($request)) {
@@ -118,7 +118,7 @@ class PublicTimeline extends BaseApi
 		}
 
 		self::setLinkHeader($request['friendica_order'] != TimelineOrderByTypes::ID);
-		$this->jsonExit($statuses);
+		$this->earlyJsonExit($statuses);
 	}
 
 	private function authRequired(array $request): bool

@@ -461,7 +461,7 @@ class BaseApi extends BaseModule
 				$error             = $this->t('Too Many Requests');
 				$error_description = $this->tt("Daily posting limit of %d post reached. The post was rejected.", "Daily posting limit of %d posts reached. The post was rejected.", $throttle_day);
 				$errorobj          = new \Friendica\Object\Api\Mastodon\Error($error, $error_description);
-				$this->jsonError(429, $errorobj->toArray());
+				$this->earlyJsonError(429, $errorobj->toArray());
 			}
 		}
 
@@ -477,7 +477,7 @@ class BaseApi extends BaseModule
 				$error             = $this->t('Too Many Requests');
 				$error_description = $this->tt("Weekly posting limit of %d post reached. The post was rejected.", "Weekly posting limit of %d posts reached. The post was rejected.", $throttle_week);
 				$errorobj          = new \Friendica\Object\Api\Mastodon\Error($error, $error_description);
-				$this->jsonError(429, $errorobj->toArray());
+				$this->earlyJsonError(429, $errorobj->toArray());
 			}
 		}
 
@@ -493,7 +493,7 @@ class BaseApi extends BaseModule
 				$error             = $this->t('Too Many Requests');
 				$error_description = $this->tt('Monthly posting limit of %d post reached. The post was rejected.', 'Monthly posting limit of %d posts reached. The post was rejected.', $throttle_month);
 				$errorobj          = new \Friendica\Object\Api\Mastodon\Error($error, $error_description);
-				$this->jsonError(429, $errorobj->toArray());
+				$this->earlyJsonError(429, $errorobj->toArray());
 			}
 		}
 	}
@@ -532,9 +532,9 @@ class BaseApi extends BaseModule
 	 * @return never
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	protected function logAndJsonError(int $errorno, Error $error)
+	protected function logAndJsonError(int $errorno, Error $error): never
 	{
 		$this->logger->info('API Error', ['no' => $errorno, 'error' => $error->toArray(), 'method' => $this->args->getMethod(), 'command' => $this->args->getQueryString(), 'user-agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
-		$this->jsonError($errorno, $error->toArray());
+		$this->earlyJsonError($errorno, $error->toArray());
 	}
 }

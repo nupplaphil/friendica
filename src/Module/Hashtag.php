@@ -21,7 +21,7 @@ class Hashtag extends BaseModule
 		$result = [];
 
 		if (empty($request['t'])) {
-			$this->jsonExit($result);
+			$this->earlyJsonExit($result);
 		}
 
 		$taglist = DBA::select(
@@ -35,6 +35,6 @@ class Hashtag extends BaseModule
 		}
 		DBA::close($taglist);
 
-		$this->jsonExit($result);
+		$this->earlyJsonExit($result);
 	}
 }

@@ -49,6 +49,6 @@ class QuoteAuthorization extends BaseModule
 
 		// Relaxed CORS header for public items
 		header('Access-Control-Allow-Origin: *');
-		$this->jsonExit($data, 'application/activity+json');
+		$this->earlyJsonExit($data, 'application/activity+json');
 	}
 }

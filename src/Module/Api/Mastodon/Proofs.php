@@ -17,8 +17,8 @@ class Proofs extends BaseApi
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
-		$this->jsonError(404, ['error' => 'Record not found']);
+		$this->earlyJsonError(404, ['error' => 'Record not found']);
 	}
 }

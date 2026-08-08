@@ -62,6 +62,6 @@ class FollowedTags extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($return);
+		$this->earlyJsonExit($return);
 	}
 }

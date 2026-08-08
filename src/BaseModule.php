@@ -11,6 +11,7 @@ use Friendica\App\Router;
 use Friendica\Capabilities\ICanHandleRequests;
 use Friendica\Capabilities\ICanCreateResponses;
 use Friendica\Capabilities\IRequestHandler;
+use Friendica\Core\EarlyExitException;
 use Friendica\Core\L10n;
 use Friendica\Core\System;
 use Friendica\Event\ModuleContentEvent;
@@ -200,7 +201,12 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function run(ModuleHTTPException $httpException, array $request = []): ResponseInterface
 	{
-		$this->dispatch($request, $httpException);
+		try {
+			$this->dispatch($request, $httpException);
+		} catch (EarlyExitException $e) {
+			System::echoResponse($e->getResponse());
+			System::exit();
+		}
 
 		return $this->response->generate();
 	}
@@ -221,6 +227,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * @param ModuleHTTPException|null $httpException Optional exception renderer for the content phase
 	 * @return void
 	 * @throws HTTPException
+	 * @throws EarlyExitException
 	 */
 	final protected function dispatch(array $request, ?ModuleHTTPException $httpException = null): void
 	{
@@ -538,6 +545,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * This function adds the content and a content-type HTTP header to the output.
 	 * After finishing the process is getting killed.
 	 *
+	 * @deprecated 2026.08 Use {@see earlyHttpExit()} instead
+	 *
 	 * @param string      $content
 	 * @param string      $type
 	 * @param string|null $content_type
@@ -546,6 +555,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function httpExit(string $content, string $type = Response::TYPE_HTML, ?string $content_type = null)
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyHttpExit()` instead.', E_USER_DEPRECATED);
 		$this->response->setType($type, $content_type);
 		$this->response->addContent($content);
 		System::echoResponse($this->response->generate());
@@ -556,6 +566,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * Send HTTP status header and exit.
 	 *
+	 * @deprecated 2026.08 Use {@see earlyHttpError()} instead
+	 *
 	 * @param integer $httpCode HTTP status result value
 	 * @param string  $message  Error message. Optional.
 	 * @param mixed  $content   Response body. Optional.
@@ -563,6 +575,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function httpError(int $httpCode, string $message = '', $content = '')
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyHttpError()` instead.', E_USER_DEPRECATED);
 		if ($httpCode >= 400) {
 			$this->logger->debug('Exit with error', ['code' => $httpCode, 'message' => $message, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
 		}
@@ -575,6 +588,8 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	/**
 	 * Display the response using JSON to encode the content
 	 *
+	 * @deprecated 2026.08 Use {@see earlyJsonExit()} instead
+	 *
 	 * @param mixed  $content
 	 * @param string $content_type
 	 * @param int    $options A combination of json_encode() binary flags
@@ -584,11 +599,14 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function jsonExit($content, string $content_type = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyJsonExit()` instead.', E_USER_DEPRECATED);
 		$this->httpExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $content_type);
 	}
 
 	/**
 	 * Display a non-200 HTTP code response using JSON to encode the content and exit
+	 *
+	 * @deprecated 2026.08 Use {@see earlyJsonError()} instead
 	 *
 	 * @param int    $httpCode
 	 * @param mixed  $content
@@ -598,11 +616,72 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function jsonError(int $httpCode, $content, string $content_type = 'application/json')
 	{
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyJsonError()` instead.', E_USER_DEPRECATED);
 		if ($httpCode >= 400) {
 			$this->logger->debug('Exit with error', ['code' => $httpCode, 'content_type' => $content_type, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
 		}
 
 		$this->response->setStatus($httpCode);
 		$this->jsonExit($content, $content_type);
+	}
+
+	/**
+	 * Send content and a content-type HTTP header to the output and exit.
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyHttpExit(string $content, string $type = Response::TYPE_HTML, ?string $contentType = null): never
+	{
+		$this->response->setType($type, $contentType);
+		$this->response->addContent($content);
+
+		throw new EarlyExitException($this->response->generate());
+	}
+
+	/**
+	 * Send HTTP status header and exit.
+	 *
+	 * @param integer $httpCode HTTP status result value
+	 * @param string  $message  Error message. Optional.
+	 * @param mixed   $content  Response body. Optional.
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyHttpError(int $httpCode, string $message = '', mixed $content = ''): never
+	{
+		if ($httpCode >= 400) {
+			$this->logger->debug('Exit with error', ['code' => $httpCode, 'message' => $message, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
+		}
+
+		$this->response->setStatus($httpCode, $message);
+		$this->earlyHttpExit($content);
+	}
+
+	/**
+	 * Display the response using JSON to encode the content.
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyJsonExit(mixed $content, string $contentType = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
+	{
+		$this->earlyHttpExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $contentType);
+	}
+
+	/**
+	 * Display a non-200 HTTP code response using JSON to encode the content and exit.
+	 *
+	 * @throws HTTPException\InternalServerErrorException
+	 * @throws EarlyExitException
+	 */
+	protected function earlyJsonError(int $httpCode, mixed $content, string $contentType = 'application/json'): never
+	{
+		if ($httpCode >= 400) {
+			$this->logger->debug('Exit with error', ['code' => $httpCode, 'content_type' => $contentType, 'method' => $this->args->getMethod(), 'agent' => $this->server['HTTP_USER_AGENT'] ?? '']);
+		}
+
+		$this->response->setStatus($httpCode);
+		$this->earlyJsonExit($content, $contentType);
 	}
 }

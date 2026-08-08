@@ -25,10 +25,10 @@ class Filters extends BaseApi
 	/**
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	protected function rawContent(array $request = [])
+	protected function rawContent(array $request = []): never
 	{
 		$this->checkAllowedScope(self::SCOPE_READ);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }

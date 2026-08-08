@@ -55,7 +55,7 @@ class Reports extends BaseApi
 
 		if (!empty($this->parameters['id'])) {
 			$report = $this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById((int) $this->parameters['id']));
-			$this->jsonExit($report);
+			$this->earlyJsonExit($report);
 		}
 
 		$condition = [];
@@ -96,7 +96,7 @@ class Reports extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($reports);
+		$this->earlyJsonExit($reports);
 	}
 
 	/**
@@ -149,7 +149,7 @@ class Reports extends BaseApi
 			}
 		}
 
-		$this->jsonExit($this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById((int) $this->parameters['id'])));
+		$this->earlyJsonExit($this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById((int) $this->parameters['id'])));
 	}
 
 	/**
@@ -206,7 +206,7 @@ class Reports extends BaseApi
 				$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
-		$this->jsonExit($this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById($reportId)));
+		$this->earlyJsonExit($this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById($reportId)));
 	}
 
 	private function categoryToId(string $category): ?int

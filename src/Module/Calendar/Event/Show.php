@@ -80,6 +80,6 @@ class Show extends BaseModule
 			'$action_orig_text'      => $this->t('View related post'),
 		]);
 
-		$this->httpExit($o);
+		$this->earlyHttpExit($o);
 	}
 }

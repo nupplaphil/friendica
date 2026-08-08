@@ -29,7 +29,7 @@ class Conversations extends BaseApi
 		DBA::delete('conv', ['id' => $this->parameters['id'], 'uid' => $uid]);
 		DBA::delete('mail', ['convid' => $this->parameters['id'], 'uid' => $uid]);
 
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 
 	/**
@@ -85,6 +85,6 @@ class Conversations extends BaseApi
 		}
 
 		self::setLinkHeader();
-		$this->jsonExit($conversations);
+		$this->earlyJsonExit($conversations);
 	}
 }

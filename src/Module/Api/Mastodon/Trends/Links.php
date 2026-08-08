@@ -49,6 +49,6 @@ class Links extends BaseApi
 			self::setLinkHeaderByOffsetLimit($request['offset'], $request['limit']);
 		}
 
-		$this->jsonExit($trending);
+		$this->earlyJsonExit($trending);
 	}
 }

@@ -36,6 +36,6 @@ class Revoke extends BaseApi
 		}
 
 		DBA::delete('application-token', ['application-id' => $token['id']]);
-		$this->jsonExit([]);
+		$this->earlyJsonExit([]);
 	}
 }
