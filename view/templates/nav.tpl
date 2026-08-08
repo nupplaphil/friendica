@@ -108,7 +108,6 @@
 					{{if $nav.introductions}}<li role="menuitem"><a class="{{$nav.introductions.2}}" href="{{$nav.introductions.0}}" title="{{$nav.introductions.3}}">{{$nav.introductions.1}}<span id="intro-update-li" class="nav-notification"></span></a></li>{{/if}}
 					{{if $nav.contacts}}<li role="menuitem"><a class="{{$nav.contacts.2}}" href="{{$nav.contacts.0}}" title="{{$nav.contacts.3}}">{{$nav.contacts.1}}</a></li>{{/if}}
 					{{if $nav.messages}}<li role="menuitem"><a class="{{$nav.messages.2}}" href="{{$nav.messages.0}}" title="{{$nav.messages.3}}">{{$nav.messages.1}} <span id="mail-update-li" class="nav-notification"></span></a></li>{{/if}}
-					{{if $nav.delegation}}<li role="menuitem"><a class="{{$nav.delegation.2}}" href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">{{$nav.delegation.1}}</a></li>{{/if}}
 					{{* Links to Profile: *}}
 					{{foreach $nav.usermenu as $usermenu}}
 					<li role="menuitem"><a role="menuitem" class="{{$usermenu.2}}" href="{{$usermenu.0}}" title="{{$usermenu.3}}">{{$usermenu.1}}</a></li>
