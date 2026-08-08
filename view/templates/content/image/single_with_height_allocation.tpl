@@ -18,9 +18,9 @@
 		</a>
 		{{if $image->description}}
 			<button class="alt-text-button" type="button" aria-hidden="true">ALT
-				<div class="alt-text-block" dir="auto">
+				<span class="alt-text-block" dir="auto">
 					{{$image->description}}
-				</div>
+				</span>
 			</button>
 		{{/if}}
     {{else}}
