@@ -142,7 +142,7 @@ class NPF
 
 		foreach ($element->childNodes as $child) {
 			if (!$child instanceof DOMElement) {
-				if ($child->nodeName == '#text') {
+				if ($child->nodeName === '#text') {
 					$text .= $child->textContent;
 				}
 				continue;
