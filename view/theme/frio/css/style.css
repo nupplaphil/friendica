@@ -1824,23 +1824,9 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 }
 
 /* ALT badge for images with descriptions */
+.photo-album-image-wrapper:has(img.has-alt-description)::after,
 .photo-top-image-wrapper:has(img.has-alt-description)::after {
-	background: rgba(0, 0, 0, 0.69);
-	border-radius: 4px;
-	color: #eee;
-	content: "ALT";
-	font-size: 12px;
-	font-weight: bold;
-	padding: 4px 5px;
-	position: absolute;
-	bottom: 8px;
-	right: 8px;
-	z-index: 1;
-	pointer-events: none;
-}
-/* ...omit alt tags on images in these cases: profile description */
-.profile-header a:has(img.has-alt-description)::after {
-	display: none;
+	font-size: 8px;
 }
 
 .photo-top-image-wrapper .jg-caption,
