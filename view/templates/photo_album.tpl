@@ -24,9 +24,9 @@
 	</a>
 	{{if $photo.desc}}
 		<button class="alt-text-button" type="button" aria-hidden="true">ALT
-			<div class="alt-text-block" dir="auto">
+			<span class="alt-text-block" dir="auto">
 				{{$photo.desc}}
-			</div>
+			</span>
 		</button>
 	{{/if}}
 </div>
