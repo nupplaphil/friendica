@@ -10,6 +10,10 @@
     Author     : Hypolite Petovan <hypolite@friendica.mrpetovan.com>
 */
 
+:root {
+    color-scheme: dark;
+}
+
 a:hover, button:focus, .btn-link:focus, .btn-primary:focus,
 a:hover, button:hover, .btn-link:hover, .btn-primary:hover,
 #topbar-first li a:hover, #topbar-first li button:hover,
