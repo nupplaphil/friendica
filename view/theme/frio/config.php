@@ -40,7 +40,7 @@ function theme_post(AppHelper $appHelper): void
 			'always_open_compose',
 			'enable_advancedcomposer',
 			'show_nav_labels',
-			'sow_action_labels',
+			'show_action_labels',
 		] as $field) {
 			if (isset($_POST['frio_' . $field])) {
 				DI::pConfig()->set(DI::userSession()->getLocalUserId(), 'frio', $field, $_POST['frio_' . $field]);
