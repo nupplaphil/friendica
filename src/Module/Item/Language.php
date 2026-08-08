@@ -44,6 +44,6 @@ class Language extends BaseModule
 			throw new HTTPException\NotFoundException();
 		}
 
-		$this->earlyExit($this->item->getLanguageMessage($item));
+		$this->earlyHttpExit($this->item->getLanguageMessage($item));
 	}
 }

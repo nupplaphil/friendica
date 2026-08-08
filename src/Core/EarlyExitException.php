@@ -12,10 +12,12 @@ namespace Friendica\Core;
 use Psr\Http\Message\ResponseInterface;
 
 /**
+ * @internal
+ *
  * Carries a ResponseInterface out of the dispatch flow to be returned by handleRequest().
  * Replaces System::exit() for early-terminating modules.
  *
- * Addon modules can throw this exception to terminate request processing early
+ * Modules can throw this exception to terminate request processing early
  * and provide a response directly, instead of calling httpExit() or similar.
  * The exception is caught by App::runFrontend() and BaseModule::run().
  */

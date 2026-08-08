@@ -146,7 +146,7 @@ final class BaseModuleTest extends TestCase
 			protected function get(array $request = []): void
 			{
 				if ($this->exitContent !== null) {
-					$this->earlyExit($this->exitContent);
+					$this->earlyHttpExit($this->exitContent);
 				} elseif ($this->exitHttpError !== null) {
 					$this->earlyHttpError($this->exitHttpError[0], $this->exitHttpError[1] ?? '', $this->exitHttpError[2] ?? '');
 				} elseif ($this->exitError !== null) {

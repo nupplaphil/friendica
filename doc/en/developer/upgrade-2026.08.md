@@ -241,7 +241,7 @@ This section contains deprecation notices. This changes will become mandatory in
    $uri = DI::postUriGenerator()->newURI($guid);
    ```
 
-- `BaseModule::httpExit()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+- `BaseModule::httpExit()` is deprecated. Use `BaseModule::earlyHttpExit()` instead:
 
    *Before*
    ```php
@@ -250,11 +250,10 @@ This section contains deprecation notices. This changes will become mandatory in
 
    *After*
    ```php
-   $this->response->addContent($content);
-   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   $this->earlyHttpExit($content);
    ```
 
-- `BaseModule::jsonExit()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+- `BaseModule::jsonExit()` is deprecated. Use `BaseModule::earlyJsonExit()` instead:
 
    *Before*
    ```php
@@ -263,12 +262,10 @@ This section contains deprecation notices. This changes will become mandatory in
 
    *After*
    ```php
-   $this->response->setType(ICanCreateResponses::TYPE_JSON, 'application/json; charset=utf-8');
-   $this->response->addContent(json_encode($data));
-   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   $this->earlyJsonExit($data);
    ```
 
-- `BaseModule::jsonError()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+- `BaseModule::jsonError()` is deprecated. Use `BaseModule::earlyJsonError()` instead:
 
    *Before*
    ```php
@@ -277,13 +274,10 @@ This section contains deprecation notices. This changes will become mandatory in
 
    *After*
    ```php
-   $this->response->setStatus(404);
-   $this->response->setType(ICanCreateResponses::TYPE_JSON);
-   $this->response->addContent(json_encode(['error' => 'not found']));
-   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   $this->earlyJsonError(404, ['error' => 'not found']);
    ```
 
-- `BaseModule::httpError()` is deprecated. Throw `\Friendica\Core\EarlyExitException` instead:
+- `BaseModule::httpError()` is deprecated. Throw `BaseModule::earlyHttpError()` instead:
 
    *Before*
    ```php
@@ -292,6 +286,5 @@ This section contains deprecation notices. This changes will become mandatory in
 
    *After*
    ```php
-   $this->response->setStatus(403, 'Forbidden');
-   throw new \Friendica\Core\EarlyExitException($this->response->generate());
+   $this->earlyHttpError(403, 'Forbidden');
    ```

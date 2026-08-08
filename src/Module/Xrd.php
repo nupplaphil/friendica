@@ -345,6 +345,6 @@ class Xrd extends BaseModule
 		]);
 
 		header('Access-Control-Allow-Origin: *');
-		$this->earlyExit($xmlString, Response::TYPE_XML, 'application/xrd+xml');
+		$this->earlyHttpExit($xmlString, Response::TYPE_XML, 'application/xrd+xml');
 	}
 }

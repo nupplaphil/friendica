@@ -63,6 +63,6 @@ class Hovercard extends BaseModule
 			throw new HTTPException\NotFoundException();
 		}
 
-		$this->earlyExit($this->hovercard->getHTML($contact, $this->userSession->getLocalUserId()));
+		$this->earlyHttpExit($this->hovercard->getHTML($contact, $this->userSession->getLocalUserId()));
 	}
 }

@@ -51,6 +51,6 @@ class Share extends \Friendica\BaseModule
 			$content = '[share]' . $item['uri'] . '[/share]';
 		}
 
-		$this->earlyExit($content);
+		$this->earlyHttpExit($content);
 	}
 }

@@ -246,7 +246,7 @@ class Ping extends BaseModule
 
 		if (isset($_GET['callback'])) {
 			// JSONP support
-			$this->earlyExit($_GET['callback'] . '(' . json_encode(['result' => $data]) . ')', Response::TYPE_BLANK, 'application/javascript');
+			$this->earlyHttpExit($_GET['callback'] . '(' . json_encode(['result' => $data]) . ')', Response::TYPE_BLANK, 'application/javascript');
 		} else {
 			$this->earlyJsonExit(['result' => $data]);
 		}

@@ -545,7 +545,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 * This function adds the content and a content-type HTTP header to the output.
 	 * After finishing the process is getting killed.
 	 *
-	 * @deprecated 2026.08 Use {@see earlyExit()} instead
+	 * @deprecated 2026.08 Use {@see earlyHttpExit()} instead
 	 *
 	 * @param string      $content
 	 * @param string      $type
@@ -555,7 +555,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	 */
 	public function httpExit(string $content, string $type = Response::TYPE_HTML, ?string $content_type = null)
 	{
-		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyExit()` instead.', E_USER_DEPRECATED);
+		@trigger_error('Method `' . __METHOD__ . '` is deprecated since 2026.08, use `earlyHttpExit()` instead.', E_USER_DEPRECATED);
 		$this->response->setType($type, $content_type);
 		$this->response->addContent($content);
 		System::echoResponse($this->response->generate());
@@ -626,15 +626,12 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	}
 
 	/**
-	 * @internal
-	 *
-	 * Same as httpExit(), but throws EarlyExitException instead of calling System::exit().
-	 * Use this in new code to allow interception via handleRequest() in tests.
+	 * Send content and a content-type HTTP header to the output and exit.
 	 *
 	 * @throws HTTPException\InternalServerErrorException
 	 * @throws EarlyExitException
 	 */
-	protected function earlyExit(string $content, string $type = Response::TYPE_HTML, ?string $contentType = null): never
+	protected function earlyHttpExit(string $content, string $type = Response::TYPE_HTML, ?string $contentType = null): never
 	{
 		$this->response->setType($type, $contentType);
 		$this->response->addContent($content);
@@ -643,9 +640,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	}
 
 	/**
-	 * @internal
-	 *
-	 * Same as httpError(), but calls earlyExit() instead of httpExit().
+	 * Send HTTP status header and exit.
 	 *
 	 * @param integer $httpCode HTTP status result value
 	 * @param string  $message  Error message. Optional.
@@ -660,26 +655,22 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 		}
 
 		$this->response->setStatus($httpCode, $message);
-		$this->earlyExit($content);
+		$this->earlyHttpExit($content);
 	}
 
 	/**
-	 * @internal
-	 *
-	 * Same as jsonExit(), but calls earlyExit() instead of httpExit().
+	 * Display the response using JSON to encode the content.
 	 *
 	 * @throws HTTPException\InternalServerErrorException
 	 * @throws EarlyExitException
 	 */
 	protected function earlyJsonExit(mixed $content, string $contentType = 'application/json; charset=utf-8', int $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT): never
 	{
-		$this->earlyExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $contentType);
+		$this->earlyHttpExit(json_encode($content, $options), ICanCreateResponses::TYPE_JSON, $contentType);
 	}
 
 	/**
-	 * @internal
-	 *
-	 * Same as jsonError(), but calls earlyJsonExit() instead of jsonExit().
+	 * Display a non-200 HTTP code response using JSON to encode the content and exit.
 	 *
 	 * @throws HTTPException\InternalServerErrorException
 	 * @throws EarlyExitException
