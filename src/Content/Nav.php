@@ -87,7 +87,7 @@ class Nav
 			'$loadingnotifications' => $this->l10n->t('Loading...'),
 			'$userinfo'             => $nav_info['userinfo'],
 			'$profile_link'         => 'profile/' . $this->session->getLocalUserNickname() . '/profile',
-			'$profile_link_title'	=> $this->l10n->t('My Profile'),
+			'$profile_link_title'   => $this->l10n->t('My Profile'),
 			'$nickname'             => $this->session->getLocalUserNickname(),
 			'$sel'                  => self::$selected,
 			'$apps'                 => $this->getAppMenu(),
