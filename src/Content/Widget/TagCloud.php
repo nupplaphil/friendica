@@ -149,7 +149,7 @@ class TagCloud
 	 *
 	 * @return int
 	 */
-	private static function tagsSort($a, $b)
+	private static function tagsSort($a, $b): int
 	{
 		return strtolower((string) $a[0]) <=> strtolower((string) $b[0]);
 	}
