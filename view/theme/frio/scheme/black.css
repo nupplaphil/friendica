@@ -9,6 +9,11 @@
     Created on : 11.08.2020
     Author     : Hypolite Petovan <hypolite@friendica.mrpetovan.com>
 */
+
+:root {
+    color-scheme: dark;
+}
+
 #topbar-first {
 	background-color: $background_color;
 }
