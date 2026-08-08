@@ -570,7 +570,7 @@ final class PostTemplateBuilder
 	 *
 	 * @param array<string, mixed> $item
 	 * @param bool $writable
-	 * @return array{isevent: bool, attend: array, $attend_label: array}
+	 * @return array{isevent: bool, attend: array, attend_label: array}
 	 */
 	private function buildEventData(array $item, bool $writable): array
 	{
