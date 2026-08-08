@@ -574,8 +574,8 @@ final class PostTemplateBuilder
 	 */
 	private function buildEventData(array $item, bool $writable): array
 	{
-		$isevent = false;
-		$attend  = [];
+		$isevent      = false;
+		$attend       = [];
 		$attend_label = [];
 
 		if (($item['object-type'] ?? '') === Activity\ObjectType::EVENT
