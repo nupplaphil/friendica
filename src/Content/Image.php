@@ -51,12 +51,12 @@ class Image
 		$images_rows = [];
 
 		for ($i = 0; $i < count($images); $i++) {
-			$images_rows[] = [ $images[$i], $images[$i+1] ];
+			$images_rows[] = [ $images[$i], $images[$i +1 ] ];
 			$i++;	// NOT A DOUBLE-INCREMENT BUG! Makes sure no image appears in 2 pairs
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('content/image/grid.tpl'), [
-			'rows'   => $images_rows,
+			'rows' => $images_rows,
 		]);
 	}
 
