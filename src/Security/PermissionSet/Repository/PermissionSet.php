@@ -171,7 +171,7 @@ class PermissionSet extends BaseRepository
 
 		return $this->selectOrCreate($this->getFactory()->createFromString(
 			$uid,
-			$this->aclFormatter->toString($self_contact['id']),
+			$this->aclFormatter->toString((string) $self_contact['id']),
 		));
 	}
 

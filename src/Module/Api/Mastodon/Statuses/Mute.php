@@ -36,7 +36,7 @@ class Mute extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity($this->t('Only starting posts can be muted')));
 		}
 
-		Post\ThreadUser::setIgnored($item['uri-id'], $uid, true);
+		Post\ThreadUser::setIgnored($item['uri-id'], $uid, 1);
 
 		// @TODO Remove once mstdnStatus()->createFromUriId is fixed so that it returns posts not reshared posts if given an ID to an original post that has been reshared
 		// Introduced in this PR: https://github.com/friendica/friendica/pull/13175

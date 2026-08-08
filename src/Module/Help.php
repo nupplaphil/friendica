@@ -72,7 +72,7 @@ class Help extends BaseModule
 			foreach ($lines as &$line) {
 				$matches = [];
 				if (preg_match('#<h([1-6])>([^<]+?)</h\1>#i', $line, $matches)) {
-					$level  = $matches[1];
+					$level  = (int) $matches[1];
 					$anchor = strtolower(urlencode($matches[2]));
 					if ($level < $lastLevel) {
 						for ($k = $level; $k < $lastLevel; $k++) {

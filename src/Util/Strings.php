@@ -26,7 +26,7 @@ class Strings
 	 */
 	public static function getRandomHex(int $size = 64): string
 	{
-		$byte_size = ceil($size / 2);
+		$byte_size = (int) ceil($size / 2);
 
 		$bytes = random_bytes($byte_size);
 
@@ -482,7 +482,7 @@ class Strings
 	public static function performWithEscapedBlocks(string $text, string $regex, callable $callback): string
 	{
 		// Enables nested use
-		$executionId = random_int(PHP_INT_MAX / 10, PHP_INT_MAX);
+		$executionId = random_int((int) (PHP_INT_MAX / 10), PHP_INT_MAX);
 
 		$blocks = [];
 

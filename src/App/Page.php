@@ -17,7 +17,7 @@ use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
 use Friendica\Core\Renderer;
-use Friendica\Core\Session\Model\UserSession;
+use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Core\System;
 use Friendica\Core\Theme;
 use Friendica\DI;
@@ -326,7 +326,7 @@ class Page implements ArrayAccess
 	 *
 	 * @throws HTTPException\InternalServerErrorException
 	 */
-	private function initFooter(UserSession $session, Mode $mode, L10n $l10n)
+	private function initFooter(IHandleUserSessions $session, Mode $mode, L10n $l10n)
 	{
 		// If you're just visiting, let javascript take you home
 		if (!empty($_SESSION['visitor_home'])) {
@@ -427,7 +427,7 @@ class Page implements ArrayAccess
 	 */
 	public function run(
 		AppHelper $appHelper,
-		UserSession $session,
+		IHandleUserSessions $session,
 		BaseURL $baseURL,
 		Arguments $args,
 		Mode $mode,

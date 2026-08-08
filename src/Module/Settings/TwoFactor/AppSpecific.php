@@ -104,7 +104,7 @@ class AppSpecific extends BaseSettings
 		if (!empty($request['revoke_id'])) {
 			self::checkFormSecurityTokenRedirectOnError('settings/2fa/app_specific', 'settings_2fa_app_specific');
 
-			if (AppSpecificPassword::deleteForUser($this->session->getLocalUserId(), $request['revoke_id'])) {
+			if (AppSpecificPassword::deleteForUser($this->session->getLocalUserId(), (int) $request['revoke_id'])) {
 				$this->systemMessages->addInfo($this->t('App-specific password successfully revoked.'));
 			}
 

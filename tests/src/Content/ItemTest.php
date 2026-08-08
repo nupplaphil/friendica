@@ -17,6 +17,7 @@ use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Content\Post\Factory\PostMedia as PostMediaFactory;
 use Friendica\Content\Post\Repository\PostMedia as PostMediaRepository;
 use Friendica\Content\Text\BBCode\Video;
+use Friendica\Post\UriGenerator;
 use Friendica\Test\MockedTestCase;
 use Friendica\Util\ACLFormatter;
 use Friendica\Util\Emailer;
@@ -159,6 +160,7 @@ class ItemTest extends MockedTestCase
 			$this->createStub(EventDispatcherInterface::class),
 			$this->createStub(PostMediaRepository::class),
 			$this->createStub(PostMediaFactory::class),
+			new UriGenerator($this->createStub(BaseURL::class), $this->createStub(LoggerInterface::class)),
 		);
 	}
 }

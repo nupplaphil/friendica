@@ -24,7 +24,7 @@ class Active extends BaseUsers
 
 		if (!empty($request['page_users_block'])) {
 			foreach ($users as $uid) {
-				User::block($uid);
+				User::block((int) $uid);
 			}
 			$this->systemMessages->addInfo($this->tt('%s user blocked', '%s users blocked', count($users)));
 		}
@@ -32,7 +32,7 @@ class Active extends BaseUsers
 		if (!empty($request['page_users_delete'])) {
 			foreach ($users as $uid) {
 				if ($this->session->getLocalUserId() != $uid) {
-					User::remove($uid);
+					User::remove((int) $uid);
 				} else {
 					$this->systemMessages->addNotice($this->t('You can\'t remove yourself'));
 				}

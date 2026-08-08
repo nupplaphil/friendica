@@ -129,7 +129,7 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [43], [], [44], []),
+							new PermissionSet(42, ['43'], [], ['44'], []),
 							new PermissionSet(42, [], [], [], []),
 						]),
 					],
@@ -140,7 +140,7 @@ class PermissionSetTest extends FixtureTestCase
 						],
 						'output' => new PermissionSets([
 							new PermissionSet(42, [], [], [], []),
-							new PermissionSet(42, [44], [], [], []),
+							new PermissionSet(42, ['44'], [], [], []),
 						]),
 					],
 					[
@@ -285,7 +285,7 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [], [], [], [2]),
+							new PermissionSet(42, [], [], [], ['2']),
 						]),
 					],
 					[
@@ -294,9 +294,9 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [43], [3], [44, 46], []),
-							new PermissionSet(42, [], [], [], [2]),
-							new PermissionSet(42, [], [], [], [1]),
+							new PermissionSet(42, ['43'], ['3'], ['44', '46'], []),
+							new PermissionSet(42, [], [], [], ['2']),
+							new PermissionSet(42, [], [], [], ['1']),
 						]),
 					],
 					[
@@ -305,10 +305,10 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [], [], [], [2]),
-							new PermissionSet(42, [44], [], [], []),
-							new PermissionSet(42, [], [], [], [1]),
-							new PermissionSet(42, [45], [], [], [1, 2]),
+							new PermissionSet(42, [], [], [], ['2']),
+							new PermissionSet(42, ['44'], [], [], []),
+							new PermissionSet(42, [], [], [], ['1']),
+							new PermissionSet(42, ['45'], [], [], ['1', '2']),
 						]),
 					],
 					[
@@ -317,10 +317,10 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [], [], [], [2]),
-							new PermissionSet(42, [44], [], [], []),
-							new PermissionSet(42, [], [], [], [1]),
-							new PermissionSet(42, [45], [], [], [1, 2]),
+							new PermissionSet(42, [], [], [], ['2']),
+							new PermissionSet(42, ['44'], [], [], []),
+							new PermissionSet(42, [], [], [], ['1']),
+							new PermissionSet(42, ['45'], [], [], ['1', '2']),
 						]),
 					],
 					[
@@ -329,8 +329,8 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [], [], [], [2]),
-							new PermissionSet(42, [], [], [], [1]),
+							new PermissionSet(42, [], [], [], ['2']),
+							new PermissionSet(42, [], [], [], ['1']),
 						]),
 					],
 					[
@@ -339,8 +339,8 @@ class PermissionSetTest extends FixtureTestCase
 							'uid' => 42,
 						],
 						'output' => new PermissionSets([
-							new PermissionSet(42, [], [], [], [2]),
-							new PermissionSet(42, [], [], [], [1]),
+							new PermissionSet(42, [], [], [], ['2']),
+							new PermissionSet(42, [], [], [], ['1']),
 						]),
 					],
 				],
@@ -355,11 +355,11 @@ class PermissionSetTest extends FixtureTestCase
 		$db = $this->dice->create(Database::class);
 
 		foreach ($group_member as $gmember) {
-			$db->insert('group_member', $gmember, true);
+			$db->insert('group_member', $gmember, Database::INSERT_UPDATE);
 		}
 
 		foreach ($permissionSets as $inputPermissionSet) {
-			$db->insert('permissionset', $inputPermissionSet, true);
+			$db->insert('permissionset', $inputPermissionSet, Database::INSERT_UPDATE);
 		}
 
 		foreach ($assertions as $assertion) {

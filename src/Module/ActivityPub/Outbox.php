@@ -36,7 +36,7 @@ class Outbox extends BaseApi
 			$page = 1;
 		}
 
-		$outbox = ActivityPub\ClientToServer::getOutbox($owner, $uid, $page, $request['max_id'] ?? null, HTTPSignature::getSigner('', $_SERVER));
+		$outbox = ActivityPub\ClientToServer::getOutbox($owner, $uid, $page, !empty($request['max_id']) ? (int) $request['max_id'] : null, HTTPSignature::getSigner('', $_SERVER));
 
 		$this->jsonExit($outbox, 'application/activity+json');
 	}

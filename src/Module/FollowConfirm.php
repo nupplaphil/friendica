@@ -26,8 +26,8 @@ class FollowConfirm extends BaseModule
 		}
 
 		$intro_id = intval($_POST['intro_id'] ?? 0);
-		$duplex   = intval($_POST['duplex'] ?? 0);
-		$hidden   = intval($_POST['hidden'] ?? 0);
+		$duplex   = (bool) intval($_POST['duplex'] ?? 0);
+		$hidden   = (bool) intval($_POST['hidden'] ?? 0);
 
 		$intro = DI::intro()->selectOneById($intro_id, DI::userSession()->getLocalUserId());
 

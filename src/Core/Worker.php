@@ -1229,23 +1229,27 @@ class Worker
 	/**
 	 * Adds tasks to the worker queue
 	 *
-	 * @param integer|array $args priority or parameter array, strings are deprecated and are ignored
+	 * @param int|array $run_parameter priority number or task parameter array
+	 * @param string    $command       command to execute
+	 * @param mixed     ...$args       command parameters (JSON-encodable)
 	 *
-	 * next args are passed as $cmd command line
 	 * or: Worker::add(Worker::PRIORITY_HIGH, 'Notifier', Delivery::DELETION, $drop_id);
 	 * or: Worker::add(array('priority' => Worker::PRIORITY_HIGH, 'dont_fork' => true), 'Delivery', $post_id);
 	 *
 	 * @return int '0' if worker queue entry already existed or there had been an error, otherwise the ID of the worker task
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
-	 * @note $cmd and string args are surrounded with ''
 	 */
-	public static function add(...$args)
+	public static function add($run_parameter = self::PRIORITY_MEDIUM, $command = '', ...$args): int
 	{
-		if (!count($args)) {
+		if (func_num_args() === 0) {
 			return 0;
 		}
 
-		$arr = ['args' => $args, 'run_cmd' => true];
+		if (!is_string($command)) {
+			@trigger_error('`' . __METHOD__ . '()`: Passing ' . get_debug_type($command) . ' as $command is deprecated since 2026.08, it will be enforced as `string` in a future release.', E_USER_DEPRECATED);
+		}
+
+		$arr = ['args' => [$run_parameter, $command, ...$args], 'run_cmd' => true];
 
 		$eventDispatcher = DI::eventDispatcher();
 
@@ -1253,7 +1257,7 @@ class Worker
 			new ArrayFilterEvent(ArrayFilterEvent::ADD_WORKER_TASK, $arr),
 		)->getArray();
 
-		if (!$arr['run_cmd'] || !count($args)) {
+		if (!$arr['run_cmd']) {
 			return 1;
 		}
 
@@ -1263,8 +1267,6 @@ class Worker
 		$created        = DateTimeFormat::utcNow();
 		$delayed        = DBA::NULL_DATETIME;
 		$force_priority = false;
-
-		$run_parameter = array_shift($args);
 
 		if (is_int($run_parameter)) {
 			$priority = $run_parameter;
@@ -1285,10 +1287,10 @@ class Worker
 				$force_priority = $run_parameter['force_priority'];
 			}
 		} else {
+			@trigger_error('`' . __METHOD__ . '()`: Passing ' . get_debug_type($run_parameter) . ' as $run_parameter is deprecated since 2026.08, it will be enforced as `int|array` in a future release.', E_USER_DEPRECATED);
 			throw new \InvalidArgumentException('Priority number or task parameter array expected as first argument');
 		}
 
-		$command    = array_shift($args);
 		$parameters = json_encode($args);
 		$queue      = DBA::selectFirst('workerqueue', ['id', 'priority'], ['command' => $command, 'parameter' => $parameters, 'done' => false]);
 		$added      = 0;

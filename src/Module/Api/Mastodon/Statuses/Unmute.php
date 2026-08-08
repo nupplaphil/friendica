@@ -36,7 +36,7 @@ class Unmute extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity($this->t('Only starting posts can be unmuted')));
 		}
 
-		Post\ThreadUser::setIgnored($item['uri-id'], $uid, false);
+		Post\ThreadUser::setIgnored($item['uri-id'], $uid, 0);
 
 		// @TODO Remove once mstdnStatus()->createFromUriId is fixed so that it returns posts not reshared posts if given an ID to an original post that has been reshared
 		// Introduced in this PR: https://github.com/friendica/friendica/pull/13175

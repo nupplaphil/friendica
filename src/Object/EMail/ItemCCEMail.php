@@ -10,7 +10,7 @@ namespace Friendica\Object\EMail;
 use Friendica\App\BaseURL;
 use Friendica\Content\Text\HTML;
 use Friendica\Core\L10n;
-use Friendica\Core\Session\Model\UserSession;
+use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Model\Item;
 use Friendica\Model\User;
 use Friendica\Object\Email;
@@ -20,7 +20,7 @@ use Friendica\Object\Email;
  */
 class ItemCCEMail extends Email
 {
-	public function __construct(UserSession $session, L10n $l10n, BaseURL $baseUrl, array $item, string $toAddress, string $authorThumb)
+	public function __construct(IHandleUserSessions $session, L10n $l10n, BaseURL $baseUrl, array $item, string $toAddress, string $authorThumb)
 	{
 		$user = User::getById($session->getLocalUserId());
 

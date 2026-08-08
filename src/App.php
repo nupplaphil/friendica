@@ -317,7 +317,7 @@ class App
 	private function setupLegacyServiceLocator(): void
 	{
 		if ($this->container instanceof DiceContainer) {
-			DI::init($this->container->getDice());
+			DI::init($this->container->getDice()); // @phpstan-ignore method.deprecated
 		}
 	}
 
@@ -455,8 +455,8 @@ class App
 		$this->profiler->set($start_time, 'start');
 		$this->profiler->set(microtime(true), 'classinit');
 
-		$moduleName = $this->args->getModuleName();
-		$page->setLogging($this->args->getMethod(), $this->args->getModuleName(), $this->args->getCommand());
+		$moduleName = $this->args->getModuleName(); // @phpstan-ignore method.deprecated
+		$page->setLogging($this->args->getMethod(), $this->args->getModuleName(), $this->args->getCommand()); // @phpstan-ignore method.deprecated
 
 		try {
 			// Missing DB connection: ERROR

@@ -83,7 +83,7 @@ class Channels extends BaseSettings
 			]);
 			$saved = $this->channel->save($channel);
 			$this->logger->debug('New channel added', ['saved' => $saved]);
-			$this->enableTimeline($uid, $saved->code);
+			$this->enableTimeline($uid, (int) $saved->code);
 			if ($this->config->get('system', 'channel_cache')) {
 				Worker::add(Worker::PRIORITY_MEDIUM, 'UpdateChannelPosts', $saved->code, $uid);
 			}

@@ -32,6 +32,7 @@ use Friendica\Module\BaseApi;
 use Friendica\Navigation\Notifications\Repository\Notification;
 use Friendica\Navigation\Notifications\Repository\Notify;
 use Friendica\Network\HTTPException;
+use Friendica\Post\UriGenerator;
 use Friendica\Protocol\Activity;
 use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Images;
@@ -51,8 +52,22 @@ class Statuses extends BaseApi
 	/** @var ContentItem */
 	protected $item;
 
-	public function __construct(ContentItem $item, Notify $notify, Notification $notification, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
-	{
+	public function __construct(
+		ContentItem $item,
+		Notify $notify,
+		Notification $notification,
+		private readonly UriGenerator $postUriGenerator,
+		\Friendica\Factory\Api\Mastodon\Error $errorFactory,
+		AppHelper $appHelper,
+		L10n $l10n,
+		BaseURL $baseUrl,
+		Arguments $args,
+		LoggerInterface $logger,
+		Profiler $profiler,
+		ApiResponse $response,
+		array $server,
+		array $parameters = [],
+	) {
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 		$this->notification = $notification;
 		$this->notify       = $notify;
@@ -343,7 +358,7 @@ class Statuses extends BaseApi
 
 		if ($scheduled_at > DateTimeFormat::utcNow()) {
 			$item['guid'] = $this->item->guid($item, true);
-			$item['uri']  = Item::newURI($item['guid']);
+			$item['uri']  = $this->postUriGenerator->newURI($item['guid']);
 
 			$id = Post\Delayed::add($item['uri'], $item, Worker::PRIORITY_HIGH, Post\Delayed::PREPARED, $scheduled_at);
 			if (empty($id)) {
@@ -359,7 +374,7 @@ class Statuses extends BaseApi
 			$item['created'] = $scheduled_at;
 		}
 
-		$id = Item::insert($item, true);
+		$id = Item::insert($item, Worker::PRIORITY_HIGH);
 		if (!empty($id)) {
 			$item = Post::selectFirst(['uri-id'], ['id' => $id]);
 			if (!empty($item['uri-id'])) {
@@ -451,7 +466,7 @@ class Statuses extends BaseApi
 					'name'     => $attach['filename'],
 				];
 				$item['attachments'][] = $attachment;
-				Attach::setPermissionForId(substr((string) $id, 7), $item['uid'], $item['allow_cid'], $item['allow_gid'], $item['deny_cid'], $item['deny_gid']);
+				Attach::setPermissionForId((int) substr((string) $id, 7), $item['uid'], $item['allow_cid'], $item['allow_gid'], $item['deny_cid'], $item['deny_gid']);
 				continue;
 			}
 

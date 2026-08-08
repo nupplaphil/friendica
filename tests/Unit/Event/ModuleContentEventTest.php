@@ -11,13 +11,14 @@ namespace Friendica\Test\Unit\Event;
 
 use Friendica\Event\ModuleContentEvent;
 use Friendica\Event\NamedEvent;
+use Friendica\Module\Smilies;
 use PHPUnit\Framework\TestCase;
 
 class ModuleContentEventTest extends TestCase
 {
 	public function testImplementationOfInstances(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'content');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'content');
 
 		$this->assertInstanceOf(NamedEvent::class, $event); // @phpstan-ignore method.alreadyNarrowedType
 	}
@@ -37,35 +38,35 @@ class ModuleContentEventTest extends TestCase
 
 	public function testGetNameReturnsName(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'content');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'content');
 
 		$this->assertSame('test', $event->getName());
 	}
 
 	public function testGetModuleNameReturnsModuleName(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'content');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'content');
 
 		$this->assertSame('moduleName', $event->getModuleName());
 	}
 
 	public function testGetModuleClassReturnsModuleClass(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'content');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'content');
 
-		$this->assertSame(\stdClass::class, $event->getModuleClass());
+		$this->assertSame(Smilies::class, $event->getModuleClass());
 	}
 
 	public function testGetContentReturnsCorrectString(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'myContent');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'myContent');
 
 		$this->assertSame('myContent', $event->getContent());
 	}
 
 	public function testSetContentUpdatesContent(): void
 	{
-		$event = new ModuleContentEvent('test', 'moduleName', \stdClass::class, 'oldContent');
+		$event = new ModuleContentEvent('test', 'moduleName', Smilies::class, 'oldContent');
 
 		$event->setContent('newContent');
 

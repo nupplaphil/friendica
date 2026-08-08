@@ -24,9 +24,9 @@ class ReportTest extends MockedTestCase
 
 		// We need to strip the microseconds part to match database stored timestamps
 		$nowSeconds = $clock->now()->setTime(
-			$clock->now()->format('H'),
-			$clock->now()->format('i'),
-			$clock->now()->format('s'),
+			(int) $clock->now()->format('H'),
+			(int) $clock->now()->format('i'),
+			(int) $clock->now()->format('s'),
 		);
 
 		return [

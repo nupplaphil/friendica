@@ -291,7 +291,7 @@ class Photo extends BaseApi
 				}
 
 				if (DI::baseUrl()->isLocalUrl($url) && preg_match('|.*?/photo/(.*[a-fA-F0-9])\-(.*[0-9])\..*[\w]|', (string) $url, $matches)) {
-					return MPhoto::getPhoto($matches[1], $matches[2], self::getCurrentUserID());
+					return MPhoto::getPhoto($matches[1], (int) $matches[2], self::getCurrentUserID());
 				}
 
 				return MPhoto::createPhotoForExternalResource($url, (int) DI::userSession()->getLocalUserId(), $media['mimetype'] ?? '', $media['blurhash'], $width, $height);
@@ -302,7 +302,7 @@ class Photo extends BaseApi
 				}
 
 				if (DI::baseUrl()->isLocalUrl($media['url']) && preg_match('|.*?/photo/(.*[a-fA-F0-9])\-(.*[0-9])\..*[\w]|', (string) $media['url'], $matches)) {
-					return MPhoto::getPhoto($matches[1], $matches[2], self::getCurrentUserID());
+					return MPhoto::getPhoto($matches[1], (int) $matches[2], self::getCurrentUserID());
 				}
 
 				return MPhoto::createPhotoForExternalResource($media['url'], (int) DI::userSession()->getLocalUserId(), $media['mimetype'] ?? '', $media['blurhash'], $media['width'], $media['height']);

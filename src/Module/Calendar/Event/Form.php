@@ -212,7 +212,7 @@ class Form extends BaseModule
 			'$s_text' => $this->t('Starts') . ' <span class="required" title="' . $this->t('Required') . '">*</span>',
 			'$s_dsel' => Temporal::getDateTimeField(
 				new \DateTime(),
-				\DateTime::createFromFormat('Y', intval($syear) + 5),
+				\DateTime::createFromFormat('Y', (string) (intval($syear) + 5)),
 				\DateTime::createFromFormat('Y-m-d H:i', "$syear-$smonth-$sday $shour:$sminute"),
 				$this->t('Starts'),
 				'start_text',
@@ -232,7 +232,7 @@ class Form extends BaseModule
 			'$f_text'             => $ends_text,
 			'$f_dsel'             => Temporal::getDateTimeField(
 				new \DateTime(),
-				\DateTime::createFromFormat('Y', intval($fyear) + 5),
+				\DateTime::createFromFormat('Y', (string) (intval($fyear) + 5)),
 				\DateTime::createFromFormat('Y-m-d H:i', "$fyear-$fmonth-$fday $fhour:$fminute"),
 				$ends_text,
 				'finish_text',

@@ -71,7 +71,7 @@ class Contact extends BaseModeration
 
 		if (!empty($request['page_contactblock_unblock'])) {
 			foreach ($contacts as $uid) {
-				Model\Contact::unblock($uid);
+				Model\Contact::unblock((int) $uid);
 			}
 			$this->systemMessages->addInfo($this->tt('%s contact unblocked', '%s contacts unblocked', count($contacts)));
 		}

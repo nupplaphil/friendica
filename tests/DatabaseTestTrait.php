@@ -58,7 +58,7 @@ trait DatabaseTestTrait
 
 			foreach ($rows as $row) {
 				if (is_array($row)) {
-					$dba->insert($tableName, $row, true);
+					$dba->insert($tableName, $row, Database::INSERT_UPDATE);
 				} else {
 					throw new \Exception('row isn\'t an array');
 				}

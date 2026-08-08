@@ -4,12 +4,13 @@
 
 includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - .phpstan-baseline.neon
 
 parameters:
-    level: 4
+    level: 5
 
     phpVersion: 80200 # PHP 8.2
 
@@ -47,12 +48,6 @@ parameters:
             path: src/
             count: 90
 
-        # Mockery dynamic methods in tests (kept from original baseline)
-        -
-            message: '#^Call to an undefined method Mockery[\\\\](?:ExpectationInterface(?:[|]Mockery[\\\\]HigherOrderMessage)?|LegacyMockInterface)::(?:with|once|times|twice|withAnyArgs|andReturnUsing|addRules)\(\)\.$#'
-            identifier: method.notFound
-            path: tests/
-            count: 237
         # Deprecated run() calls in tests are preserved for BC promise and
         # will be replaced by handleRequest() tests in the future
         -
@@ -60,3 +55,25 @@ parameters:
             identifier: method.deprecated
             path: tests/
             count: 96
+
+        # vfsStream v1.6.12: getChild() returns vfsStreamContent, but at() expects
+        # vfsStreamContainer. vfsStreamContainer does NOT extend vfsStreamContent,
+        # so PHPStan can't narrow the type. Library is frozen, no upstream fix.
+        -
+            message: '#^Parameter \#1 \$container of method org\\bovigo\\vfs\\vfsStreamAbstractContent\:\:at\(\) expects org\\bovigo\\vfs\\vfsStreamContainer, org\\bovigo\\vfs\\vfsStreamContent given\.$#'
+            path: tests/
+            count: 36
+
+        # Arguments::getModuleName() deprecated since 2022.12.
+        # Migration: replace with getModuleClass() (returns FQCN like
+        # "Friendica\Module\Photos"). Not all callers can be migrated
+        # directly — HookEventBridge needs the short name for hook events.
+        # TODO: migrate each caller individually, then remove this ignore.
+        -
+            message: '''
+                #^Call to deprecated method getModuleName\(\) of class Friendica\\App\\Arguments\:
+                2022\.12 \- With the new \(sub\-\)routes, it's not trustworthy anymore, use the ModuleClass instead$#
+            '''
+            identifier: method.deprecated
+            path: src/
+            count: 10

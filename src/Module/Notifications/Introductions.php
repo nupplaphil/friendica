@@ -170,7 +170,7 @@ class Introductions extends BaseNotifications
 						$discard = '';
 					}
 
-					$contact = Contact::getByURL($Introduction->getUrl(), ['alias']);
+					$contact = Contact::getByURL($Introduction->getUrl(), null, ['alias']);
 
 					$notificationContent[] = Renderer::replaceMacros($notificationTemplate, [
 						'$type'                  => $Introduction->getLabel(),

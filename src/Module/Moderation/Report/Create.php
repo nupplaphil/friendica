@@ -92,9 +92,9 @@ class Create extends BaseModule
 		if (isset($request['report_create'])) {
 			$report = $this->factory->createFromForm(
 				System::getRules(true),
-				$request['cid'],
+				(int) $request['cid'],
 				$this->session->getLocalUserId(),
-				$request['category'],
+				(int) $request['category'],
 				!empty($request['rule-ids']) ? explode(',', $request['rule-ids']) : [],
 				$this->session->get('report_comment') ?? '',
 				!empty($request['uri-ids']) ? explode(',', $request['uri-ids']) : [],
@@ -108,13 +108,13 @@ class Create extends BaseModule
 
 			switch ($request['contact_action'] ?? 0) {
 				case self::CONTACT_ACTION_COLLAPSE:
-					Contact\User::setCollapsed($request['cid'], $this->session->getLocalUserId(), true);
+					Contact\User::setCollapsed((int) $request['cid'], $this->session->getLocalUserId(), true);
 					break;
 				case self::CONTACT_ACTION_IGNORE:
-					Contact\User::setIgnored($request['cid'], $this->session->getLocalUserId(), true);
+					Contact\User::setIgnored((int) $request['cid'], $this->session->getLocalUserId(), true);
 					break;
 				case self::CONTACT_ACTION_BLOCK:
-					Contact\User::setBlocked($request['cid'], $this->session->getLocalUserId(), true);
+					Contact\User::setBlocked((int) $request['cid'], $this->session->getLocalUserId(), true);
 					break;
 			}
 

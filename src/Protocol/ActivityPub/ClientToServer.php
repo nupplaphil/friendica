@@ -15,6 +15,7 @@ use Friendica\Model\APContact;
 use Friendica\Model\Contact;
 use Friendica\Model\Circle;
 use Friendica\Model\Item;
+use Friendica\Core\Worker;
 use Friendica\Model\Post;
 use Friendica\Model\User;
 use Friendica\Protocol\Activity;
@@ -106,7 +107,7 @@ class ClientToServer
 		$item        = ClientToServer::processContent($object_data, $application, $uid);
 		DI::logger()->debug('Got data', ['item' => $item, 'object' => $object_data]);
 
-		$id = Item::insert($item, true);
+		$id = Item::insert($item, Worker::PRIORITY_HIGH);
 		if (!empty($id)) {
 			$item = Post::selectFirst(['uri-id'], ['id' => $id]);
 			if (!empty($item['uri-id'])) {

@@ -164,6 +164,7 @@
 		"phpmd/phpmd": "^2.15",
 		"phpstan/phpstan": "^2.1.39",
 		"phpstan/phpstan-deprecation-rules": "^2.0",
+		"phpstan/phpstan-mockery": "^2.0",
 		"phpstan/phpstan-phpunit": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0.10",
 		"phpunit/phpunit": "^11.5",

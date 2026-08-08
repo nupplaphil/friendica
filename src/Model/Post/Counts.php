@@ -107,7 +107,7 @@ class Counts
 			}
 			$counts[] = $count;
 		}
-		DBA::close($counts);
+		DBA::close($countquery);
 		return $counts;
 	}
 }

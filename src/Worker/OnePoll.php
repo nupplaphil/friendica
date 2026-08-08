@@ -418,7 +418,7 @@ class OnePoll
 						$datarray['allow_cid'] = '<' . $contact['id'] . '>';
 					}
 
-					$datarray = Email::getMessage($mbox, $msg_uid, $reply, $datarray);
+					$datarray = Email::getMessage($mbox, $msg_uid, (string) $reply, $datarray);
 					if (empty($datarray['body'])) {
 						DI::logger()->warning('Cannot fetch mail', ['msg-id' => $msg_uid, 'uid' => $mailconf['user']]);
 						continue;

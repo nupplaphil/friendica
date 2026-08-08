@@ -7,7 +7,6 @@
 
 namespace Friendica\Module\Api\Mastodon\Accounts;
 
-use Friendica\Database\DBA;
 use Friendica\DI;
 use Friendica\Model\Contact;
 use Friendica\Module\BaseApi;
@@ -49,7 +48,6 @@ class Search extends BaseApi
 			foreach ($contacts as $contact) {
 				$accounts[] = DI::mstdnAccount()->createFromContactId($contact['id'], $uid);
 			}
-			DBA::close($contacts);
 		}
 
 		$this->jsonExit($accounts);

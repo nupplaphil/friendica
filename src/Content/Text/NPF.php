@@ -47,6 +47,9 @@ class NPF
 		self::setHeadingSubStyles($doc);
 
 		$element = $doc->getElementsByTagName('body')->item(0);
+		if (!$element instanceof DOMElement) {
+			return [];
+		}
 
 		[$npf, $text, $formatting] = self::routeChildren($element, $uri_id, true, []);
 
@@ -138,6 +141,13 @@ class NPF
 		$level       = self::getLevelByCallstack($callstack);
 
 		foreach ($element->childNodes as $child) {
+			if (!$child instanceof DOMElement) {
+				if ($child->nodeName === '#text') {
+					$text .= $child->textContent;
+				}
+				continue;
+			}
+
 			switch ($child->nodeName) {
 				case 'b':
 				case 'strong':
@@ -163,10 +173,6 @@ class NPF
 					if (!empty($text)) {
 						$text .= "\n";
 					}
-					break;
-
-				case '#text':
-					$text .= $child->textContent;
 					break;
 
 				case 'table':

@@ -52,7 +52,7 @@ abstract class BaseModule implements ICanHandleRequests, IRequestHandler
 	protected $profiler;
 	/** @var array */
 	protected $server;
-	/** @var ICanCreateResponses */
+	/** @var Response */
 	protected $response;
 	private readonly EventDispatcherInterface $eventDispatcher;
 

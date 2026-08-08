@@ -34,6 +34,7 @@ use Friendica\Model\User;
 use Friendica\Network\HTTPException;
 use Friendica\Network\HTTPException\InternalServerErrorException;
 use Friendica\Object\EMail\ItemCCEMail;
+use Friendica\Post\UriGenerator;
 use Friendica\Protocol\Activity;
 use Friendica\Util\ACLFormatter;
 use Friendica\Util\DateTimeFormat;
@@ -60,8 +61,23 @@ class Item
 	/** @var PostMediaFactory */
 	protected $postMediaFactory;
 
-	public function __construct(LoggerInterface $logger, private readonly Profiler $profiler, private readonly Activity $activity, private readonly L10n $l10n, private readonly IHandleUserSessions $userSession, private readonly Video $bbCodeVideo, private readonly ACLFormatter $aclFormatter, private readonly IManagePersonalConfigValues $pConfig, private readonly IManageConfigValues $config, private readonly BaseURL $baseURL, private readonly Emailer $emailer, private readonly EventDispatcherInterface $eventDispatcher, PostMediaRepository $postMediaRepository, PostMediaFactory $postMediaFactory)
-	{
+	public function __construct(
+		LoggerInterface $logger,
+		private readonly Profiler $profiler,
+		private readonly Activity $activity,
+		private readonly L10n $l10n,
+		private readonly IHandleUserSessions $userSession,
+		private readonly Video $bbCodeVideo,
+		private readonly ACLFormatter $aclFormatter,
+		private readonly IManagePersonalConfigValues $pConfig,
+		private readonly IManageConfigValues $config,
+		private readonly BaseURL $baseURL,
+		private readonly Emailer $emailer,
+		private readonly EventDispatcherInterface $eventDispatcher,
+		PostMediaRepository $postMediaRepository,
+		PostMediaFactory $postMediaFactory,
+		private readonly UriGenerator $postUriGenerator,
+	) {
 		$this->logger              = $logger;
 		$this->postMediaRepository = $postMediaRepository;
 		$this->postMediaFactory    = $postMediaFactory;
@@ -909,7 +925,7 @@ class Item
 			// Since we know from the visibility parameter the item should be private, we have to prevent the empty ACL
 			// case that would make it public. So we always append the author's contact id to the allowed contacts.
 			// See https://github.com/friendica/friendica/issues/9672
-			$post['allow_cid'] .= $this->aclFormatter->toString(Contact::getPublicIdByUserId($post['uid']));
+			$post['allow_cid'] .= $this->aclFormatter->toString((string) Contact::getPublicIdByUserId($post['uid']));
 		}
 
 		if ($post['allow_gid'] || $post['allow_cid'] || $post['deny_gid'] || $post['deny_cid']) {
@@ -955,7 +971,7 @@ class Item
 		$post['wall'] ??= true;
 		$post['guid'] ??= System::createUUID();
 		$post['verb'] ??= Activity::POST;
-		$post['uri'] ??= ItemModel::newURI($post['guid']);
+		$post['uri'] ??= $this->postUriGenerator->newURI($post['guid']);
 		$post['thr-parent'] ??= $post['uri'];
 
 		if (empty($post['gravity'])) {
@@ -1239,9 +1255,9 @@ class Item
 		}
 
 		if (!empty($item['plink'])) {
-			$guid = ItemModel::guidFromUri($item['plink'], $prefix_host);
+			$guid = $this->postUriGenerator->guidFromUri($item['plink'], $prefix_host);
 		} elseif (!empty($item['uri'])) {
-			$guid = ItemModel::guidFromUri($item['uri'], $prefix_host);
+			$guid = $this->postUriGenerator->guidFromUri($item['uri'], $prefix_host);
 		} else {
 			$guid = System::createUUID(hash('crc32', $prefix_host));
 		}

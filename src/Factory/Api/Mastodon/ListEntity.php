@@ -26,7 +26,7 @@ class ListEntity extends BaseFactory
 	public function createFromCircleId(int $id): \Friendica\Object\Api\Mastodon\ListEntity
 	{
 		$circle = $this->dba->selectFirst('group', ['name'], ['id' => $id, 'deleted' => false]);
-		return new \Friendica\Object\Api\Mastodon\ListEntity($id, $circle['name'] ?? '', 'list');
+		return new \Friendica\Object\Api\Mastodon\ListEntity((string) $id, $circle['name'] ?? '', 'list');
 	}
 
 	public function createFromChannel(Timeline $channel): \Friendica\Object\Api\Mastodon\ListEntity

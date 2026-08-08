@@ -42,7 +42,7 @@ class Ignore extends BaseModule
 		$ignored = !Post\ThreadUser::getIgnored($thread['uri-id'], DI::userSession()->getLocalUserId());
 
 		if (in_array($thread['uid'], [0, DI::userSession()->getLocalUserId()])) {
-			Post\ThreadUser::setIgnored($thread['uri-id'], DI::userSession()->getLocalUserId(), $ignored);
+			Post\ThreadUser::setIgnored($thread['uri-id'], DI::userSession()->getLocalUserId(), (int) $ignored);
 		} else {
 			throw new HTTPException\BadRequestException();
 		}

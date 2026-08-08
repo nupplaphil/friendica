@@ -11,6 +11,7 @@ use Friendica\App\BaseURL;
 use Friendica\Content\Item as ItemContent;
 use Friendica\Core\Protocol;
 use Friendica\Database\Database;
+use Friendica\Post\UriGenerator;
 use Friendica\Protocol\Activity;
 use Friendica\Util\DateTimeFormat;
 use Psr\Log\LoggerInterface;
@@ -31,6 +32,7 @@ final readonly class ItemHelper
 		private Activity $activity,
 		private LoggerInterface $logger,
 		private Database $database,
+		private UriGenerator $postUriGenerator,
 		BaseURL $baseURL,
 	) {
 		$this->baseUrl = $baseURL->__toString();
@@ -47,7 +49,7 @@ final readonly class ItemHelper
 	public function prepareItemData(array $item, bool $notify): array
 	{
 		$item['guid'] = $this->itemContent->guid($item, $notify);
-		$item['uri']  = substr(trim($item['uri'] ?? '') ?: Item::newURI($item['guid']), 0, 255);
+		$item['uri']  = substr(trim($item['uri'] ?? '') ?: $this->postUriGenerator->newURI($item['guid']), 0, 255);
 
 		// Store URI data
 		$item['uri-id'] = ItemURI::insert(['uri' => $item['uri'], 'guid' => $item['guid']]);

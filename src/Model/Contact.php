@@ -437,7 +437,7 @@ class Contact
 	 *
 	 * @param string  $url    profile url
 	 * @param integer $uid    User ID of the contact
-	 * @param boolean $update true = always update, false = never update, null = update when not found or outdated
+	 * @param boolean|null $update true = always update, false = never update, null = update when not found or outdated
 	 * @param array   $fields Field list
 	 * @return array contact array
 	 */
@@ -2963,7 +2963,7 @@ class Contact
 		}
 
 		$update = false;
-		$guid   = ($ret['guid'] ?? '') ?: Item::guidFromUri($ret['url'], $ret['baseurl'] ?? $ret['alias'] ?? '');
+		$guid   = ($ret['guid'] ?? '') ?: DI::postUriGenerator()->guidFromUri($ret['url'], $ret['baseurl'] ?? $ret['alias'] ?? '');
 
 		// make sure to not overwrite existing values with blank entries except some technical fields
 		$keep = ['batch', 'notify', 'poll', 'request', 'confirm', 'poco', 'baseurl'];
