@@ -949,7 +949,6 @@ ul.menu-popup .empty {
 
 .acpopup, .acpopup-mce {
 	background-color: #ffffff;
-	border: 1px solid #MenuBorder;
 	overflow: auto;
 	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
 }
@@ -1995,7 +1994,6 @@ profile-jot-form #jot-title, #profile-jot-form #jot-category {
 	margin: 0px;
 	padding: 0px;
 	height: 40px;
-	overflow: none;
 	width: 783px;
 	background-color: #0e232e;
 	border-bottom: 2px solid #9eabb0;
@@ -2888,7 +2886,6 @@ a.mail-list-link {
 	padding: 10px;
 	width: 120px;
 	height: 120px;
-	scroll: auto;
 }
 #profile-match-wrapper-end {
 	clear: both;
@@ -3083,8 +3080,6 @@ img.photo-album-photo {
 	max-height: 350px;
 	overflow: auto;
 	display: block;
-	background-position: initial initial;
-	background-repeat: initial initial;
 }
 .mail-list-wrapper {
 	background-color: #f6f7f8;

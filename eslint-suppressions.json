@@ -29,28 +29,25 @@
   },
   "view/js/main.js": {
     "eqeqeq": {
-      "count": 19
+      "count": 16
     },
     "no-empty": {
       "count": 1
-    },
-    "no-redeclare": {
-      "count": 6
     },
     "no-self-assign": {
       "count": 2
     },
     "no-undef": {
-      "count": 64
+      "count": 53
     },
     "no-unused-vars": {
-      "count": 4
+      "count": 3
     },
     "no-use-before-define": {
       "count": 1
     },
     "no-useless-assignment": {
-      "count": 3
+      "count": 1
     },
     "no-useless-escape": {
       "count": 2
