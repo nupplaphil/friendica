@@ -281,9 +281,9 @@ final class PostTemplateBuilder
 		$ago          = $temporalData['ago'];
 
 		// process action responses - e.g. like/dislike/attend/agree/whatever
-		$eventData = $this->buildEventData($item, $writable);
-		$isevent   = $eventData['isevent'];
-		$attend    = $eventData['attend'];
+		$eventData    = $this->buildEventData($item, $writable);
+		$isevent      = $eventData['isevent'];
+		$attend       = $eventData['attend'];
 		$attend_label = $eventData['attend_label'];
 
 		$reactionData = $this->buildReactionData($item, $convResponses);
