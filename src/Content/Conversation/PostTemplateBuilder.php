@@ -591,7 +591,7 @@ final class PostTemplateBuilder
 					$this->l10n->t('Going'),
 					$this->l10n->t('Can\'t Go'),
 					$this->l10n->t('Maybe'),
-				]
+				];
 			}
 		}
 
