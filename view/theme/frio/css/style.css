@@ -299,7 +299,7 @@ ul#nav-user-menu {
 	border-radius: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: #333;
+	background-color: $nav_bg;
 	transform: translateX(100%);
 	transition: 0.4s ease-in-out;
 	display: block;
