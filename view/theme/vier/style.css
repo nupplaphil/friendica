@@ -1151,13 +1151,13 @@ nav#topbar-first .acpopup {
 .textcomplete-item a {
 	color: #737373;
 }
-.textcomplete-item a:hover {
-	color: #000;
-	padding: 3px 20px;
-}
 .textcomplete-item a:hover,
 .textcomplete-item a:focus,
 .textcomplete-item a:active {
+	color: #000;
+	padding: 3px 20px;
+}
+.textcomplete-item a .group, .group .acpopup-sub-text {
 	color: #36C;
 	opacity: 0.8;
 }
