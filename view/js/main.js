@@ -1400,7 +1400,7 @@ function preview_post_img(index){
 		// get images with alt text
 		$(parentElement+" img.has-alt-description").each(function(index, element){
 			var $alt_text = $(element).attr("alt");
-			$(element).parent().parent().append('<button class="alt-text-button" type="button" aria-hidden="true">ALT<div class="alt-text-block" dir="auto">'+$alt_text+'</div></button>');
+			$(element).parent().parent().append('<button class="alt-text-button" type="button" aria-hidden="true">ALT<span class="alt-text-block" dir="auto">'+$alt_text+'</span></button>');
 		});
 		// if we have multiple images do masonry layout
 		if ($images.length > 1 && gallery === true){
