@@ -51,7 +51,8 @@
 #nav-delegation-link:active {
 	background-color: rgba(0, 0, 0, $contentbg_transp);
 	color: white;
-}.dropdown-menu,
+}
+.dropdown-menu,
 .account .dropdown-menu {
 	background-color: $background_color;
 }
