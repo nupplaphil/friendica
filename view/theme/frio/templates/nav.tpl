@@ -192,14 +192,6 @@
 											<li role="menuitem" class="nav-sitename list-group-item">{{$nav.sitename}}</li>
 										{{/if}}
 									{{/if}}
-									<!--// marcusxss edit
-									<li class="profile-link">
-										<a href="{{$userinfo.link}}">
-											<img src="{{$userinfo.icon}}" alt="{{$userinfo.name}}">&nbsp;
-											{{$userinfo.name}}{{if $nav.remote}} ({{$nav.remote}}){{/if}}
-										</a>
-									</li>
-									end marcusxss //-->
 									<li>
 										<a role="menuitem" id="nav-profile-link" href="{{$userinfo.link.0}}" title="{{$userinfo.link.3}}">
 										<img src="{{$userinfo.icon}}" alt="{{$userinfo.name}}"
