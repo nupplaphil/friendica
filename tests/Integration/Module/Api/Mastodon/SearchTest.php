@@ -105,6 +105,65 @@ final class SearchTest extends ApiTestCase
 		}
 	}
 
+	public function testApiSearchWithMaxIdReturnsOlderStatuses(): void
+	{
+		$this->insertSearchIndexEntries();
+
+		$module = $this->createModule();
+
+		$request = (new ServerRequest('GET', 'https://friendica.local/api/v2/search'))
+			->withQueryParams(['q' => 'reply', 'max_id' => '7']);
+
+		try {
+			$module->handleRequest($request);
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) { // @phpstan-ignore catch.neverThrown
+			$json = $this->toJson($e->getResponse());
+
+			self::assertCount(1, $json->statuses);
+			self::assertEquals('6', $json->statuses[0]->id);
+		}
+	}
+
+	public function testApiSearchWithMinIdReturnsNewerStatuses(): void
+	{
+		$this->insertSearchIndexEntries();
+
+		$module = $this->createModule();
+
+		$request = (new ServerRequest('GET', 'https://friendica.local/api/v2/search'))
+			->withQueryParams(['q' => 'reply', 'min_id' => '6']);
+
+		try {
+			$module->handleRequest($request);
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) { // @phpstan-ignore catch.neverThrown
+			$json = $this->toJson($e->getResponse());
+
+			self::assertCount(1, $json->statuses);
+			self::assertEquals('7', $json->statuses[0]->id);
+		}
+	}
+
+	public function testApiSearchWithLimitReturnsLimitedStatuses(): void
+	{
+		$this->insertSearchIndexEntries();
+
+		$module = $this->createModule();
+
+		$request = (new ServerRequest('GET', 'https://friendica.local/api/v2/search'))
+			->withQueryParams(['q' => 'reply', 'limit' => '1']);
+
+		try {
+			$module->handleRequest($request);
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) { // @phpstan-ignore catch.neverThrown
+			$json = $this->toJson($e->getResponse());
+
+			self::assertCount(1, $json->statuses);
+		}
+	}
+
 	public function testApiSearchWithoutQueryReturnsUnprocessableEntity(): void
 	{
 		$module = $this->createModule();
@@ -134,6 +193,20 @@ final class SearchTest extends ApiTestCase
 		} catch (EarlyExitException $e) { // @phpstan-ignore catch.neverThrown
 			self::assertEquals(401, $e->getResponse()->getStatusCode());
 		}
+	}
+
+	private function insertSearchIndexEntries(): void
+	{
+		DBA::insert('post-searchindex', [
+			'uri-id'     => 6,
+			'owner-id'   => 43,
+			'searchtext' => 'This is also a reply',
+		]);
+		DBA::insert('post-searchindex', [
+			'uri-id'     => 7,
+			'owner-id'   => 43,
+			'searchtext' => 'This is a reply',
+		]);
 	}
 
 	private function createModule(): Search
