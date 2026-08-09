@@ -95,7 +95,7 @@ class Reports extends BaseApi
 			$reports[] = $this->mstdnReportFactory->createFromReportEntity($this->reportRepository->selectOneById((int) $row['id']));
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		$this->earlyJsonExit($reports);
 	}
 

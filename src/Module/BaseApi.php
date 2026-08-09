@@ -357,7 +357,7 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Set the "link" header with "next" and "prev" links
 	 *
-	 * @deprecated 2026.08 Use $this->setPaginationLinkHeader() instead
+	 * @deprecated 2026.08 Use $this->setPaginationLinkHeaderByOffsetLimit() instead
 	 * @return void
 	 */
 	protected static function setLinkHeaderByOffsetLimit(int $offset, int $limit)

@@ -217,7 +217,7 @@ class Search extends BaseApi
 			$statuses = array_reverse($statuses);
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		return $statuses;
 	}
 

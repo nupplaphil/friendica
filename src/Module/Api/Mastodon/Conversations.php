@@ -84,7 +84,7 @@ class Conversations extends BaseApi
 			$conversations = array_reverse($conversations);
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		$this->earlyJsonExit($conversations);
 	}
 }

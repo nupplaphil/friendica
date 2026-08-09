@@ -99,7 +99,7 @@ class FollowRequests extends BaseApi
 			}
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		$this->earlyJsonExit($return);
 	}
 }

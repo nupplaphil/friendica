@@ -38,197 +38,8 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Accounts/Followers.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Accounts/Following.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Accounts/Statuses.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Admin/Reports.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Blocks.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Bookmarks.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Conversations.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Favourited.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/FollowRequests.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/FollowedTags.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Lists/Accounts.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Mutes.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Notifications.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/ScheduledStatuses.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Search.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Statuses/Context.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Timelines/Direct.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Timelines/Home.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Timelines/ListTimeline.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Timelines/PublicTimeline.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Timelines/Tag.php
-
-		-
-			message: '''
 				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
+				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
@@ -237,7 +48,7 @@ parameters:
 		-
 			message: '''
 				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
+				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
@@ -246,47 +57,11 @@ parameters:
 		-
 			message: '''
 				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
+				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Module/Api/Mastodon/Trends/Tags.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Blocks/Ids.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Blocks/Lists.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/DirectMessagesEndpoint.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Followers/Ids.php
 
 		-
 			message: '''
@@ -296,15 +71,6 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 1
 			path: src/Module/Api/Twitter/Followers/Lists.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeader\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Friends/Ids.php
 
 		-
 			message: '''
