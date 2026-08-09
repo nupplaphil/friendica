@@ -38,33 +38,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Trends/Links.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Trends/Statuses.php
-
-		-
-			message: '''
-				#^Call to deprecated method setLinkHeaderByOffsetLimit\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>setPaginationLinkHeaderByOffsetLimit\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Mastodon/Trends/Tags.php
-
-		-
-			message: '''
 				#^Call to deprecated method getLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
 				2026\.08 Use \$this\-\>getPaginationLinkHeaderValue\(\) instead$#
 			'''
