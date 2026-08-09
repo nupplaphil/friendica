@@ -275,11 +275,12 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Get the "link" header with "next" and "prev" links
 	 *
-	 * @deprecated 2026.08 Use $this->getPaginationLinkHeaderValue() instead
+	 * @deprecated 2026.08 Use {@see self::getPaginationLinkHeaderValue()} instead
 	 * @return string
 	 */
 	protected static function getLinkHeader(bool $asDate = false): string
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::getPaginationLinkHeaderValue()` instead.', E_USER_DEPRECATED);
 		if (empty(self::$boundaries)) {
 			return '';
 		}
@@ -313,11 +314,12 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Get the "link" header with "next" and "prev" links for an offset/limit type call
 	 *
-	 * @deprecated 2026.08 Use $this->getOffsetAndLimitPaginationLinkHeaderValue() instead
+	 * @deprecated 2026.08 Use {@see self::getOffsetAndLimitPaginationLinkHeaderValue()} instead
 	 * @return string
 	 */
 	protected static function getOffsetAndLimitLinkHeader(int $offset, int $limit): string
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::getOffsetAndLimitPaginationLinkHeaderValue()` instead.', E_USER_DEPRECATED);
 		$request = self::$request;
 
 		unset($request['offset']);
@@ -343,11 +345,12 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Set the "link" header with "next" and "prev" links
 	 *
-	 * @deprecated 2026.08 Use $this->setPaginationLinkHeader() instead
+	 * @deprecated 2026.08 Use {@see self::setPaginationLinkHeader()} instead
 	 * @return void
 	 */
 	protected static function setLinkHeader(bool $asDate = false)
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::setPaginationLinkHeader()` instead.', E_USER_DEPRECATED);
 		$header = self::getLinkHeader($asDate);
 		if (!empty($header)) {
 			header($header);
@@ -357,11 +360,12 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Set the "link" header with "next" and "prev" links
 	 *
-	 * @deprecated 2026.08 Use $this->setPaginationLinkHeaderByOffsetLimit() instead
+	 * @deprecated 2026.08 Use {@see self::setPaginationLinkHeaderByOffsetLimit()} instead
 	 * @return void
 	 */
 	protected static function setLinkHeaderByOffsetLimit(int $offset, int $limit)
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::setPaginationLinkHeaderByOffsetLimit()` instead.', E_USER_DEPRECATED);
 		$header = self::getOffsetAndLimitLinkHeader($offset, $limit);
 		if (!empty($header)) {
 			header($header);
