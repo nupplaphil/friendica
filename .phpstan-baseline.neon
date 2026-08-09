@@ -37,33 +37,6 @@ parameters:
 			path: src/Factory/Api/Mastodon/Emoji.php
 
 		-
-			message: '''
-				#^Call to deprecated method getLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>getPaginationLinkHeaderValue\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Followers/Lists.php
-
-		-
-			message: '''
-				#^Call to deprecated method getLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>getPaginationLinkHeaderValue\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Friends/Lists.php
-
-		-
-			message: '''
-				#^Call to deprecated method getLinkHeader\(\) of class Friendica\\Module\\BaseApi\:
-				2026\.08 Use \$this\-\>getPaginationLinkHeaderValue\(\) instead$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Module/Api/Twitter/Friendships/Incoming.php
-
-		-
 			message: '#^PHPDoc type Friendica\\Module\\Api\\ApiResponse of property Friendica\\Module\\BaseApi\:\:\$response is not the same as PHPDoc type Friendica\\Module\\Response of overridden property Friendica\\BaseModule\:\:\$response\.$#'
 			identifier: property.phpDocType
 			count: 1
