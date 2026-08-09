@@ -375,7 +375,6 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Get the pagination "link" header value with "next" and "prev" links
 	 *
-	 * @internal
 	 * @return string
 	 */
 	protected function getPaginationLinkHeaderValue(bool $asDate = false): string
@@ -413,7 +412,6 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Get the pagination "link" header value with "next" and "prev" links for an offset/limit type call
 	 *
-	 * @internal
 	 * @return string
 	 */
 	protected function getOffsetAndLimitPaginationLinkHeaderValue(int $offset, int $limit): string
@@ -443,7 +441,6 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Set the pagination "link" header with "next" and "prev" links
 	 *
-	 * @internal
 	 * @return void
 	 */
 	protected function setPaginationLinkHeader(bool $asDate = false): void
@@ -457,7 +454,6 @@ abstract class BaseApi extends BaseModule
 	/**
 	 * Set the pagination "link" header with "next" and "prev" links for an offset/limit type call
 	 *
-	 * @internal
 	 * @return void
 	 */
 	protected function setPaginationLinkHeaderByOffsetLimit(int $offset, int $limit): void
