@@ -16,10 +16,13 @@ use Friendica\Model\Tag;
 use Friendica\Module\Api\Mastodon\Search;
 use Friendica\Test\ApiTestCase;
 use Friendica\Test\Util\AuthTestConfig;
+use Friendica\Test\Util\Database\StaticDatabaseWithFullTextSearch;
 use GuzzleHttp\Psr7\ServerRequest;
 
 final class SearchTest extends ApiTestCase
 {
+	protected string $databaseClass = StaticDatabaseWithFullTextSearch::class;
+
 	public function testApiSearchReturnsAccounts(): void
 	{
 		$gserver = DBA::selectFirst('gserver', ['id'], ['nurl' => 'http://friendica.local']);
@@ -64,6 +67,31 @@ final class SearchTest extends ApiTestCase
 
 		$request = (new ServerRequest('GET', 'https://friendica.local/api/v2/search'))
 			->withQueryParams(['q' => '#reply']);
+
+		try {
+			$module->handleRequest($request);
+			self::fail('Expected EarlyExitException');
+		} catch (EarlyExitException $e) { // @phpstan-ignore catch.neverThrown
+			$json = $this->toJson($e->getResponse());
+
+			self::assertNotEmpty($json->statuses);
+			self::assertCount(1, $json->statuses);
+			self::assertEquals('7', $json->statuses[0]->id);
+		}
+	}
+
+	public function testApiSearchReturnsStatusesFromFullTextSearch(): void
+	{
+		DBA::insert('post-searchindex', [
+			'uri-id'     => 7,
+			'owner-id'   => 43,
+			'searchtext' => 'This is a reply',
+		]);
+
+		$module = $this->createModule();
+
+		$request = (new ServerRequest('GET', 'https://friendica.local/api/v2/search'))
+			->withQueryParams(['q' => 'reply']);
 
 		try {
 			$module->handleRequest($request);
