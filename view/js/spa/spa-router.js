@@ -7,13 +7,7 @@
 /**
  * SPA Router for Friendica
  * ES Module - load with <script type="module">
- * Client-side routing implementation for /network, /display, /profile
- * Keeps footer static (for XMPP addon compatibility)
- * 
- * Uses Acorn parser (https://github.com/acornjs/acorn) for robust JavaScript
- * code analysis. Acorn is installed via Composer (npm-asset/acorn) at /view/asset/acorn/dist/acorn.mjs
- * 
- * To install Acorn: composer require npm-asset/acorn:^8.15.0
+ * Composition root for SPA navigation, content loading and lifecycle modules.
  */
 
 import {
@@ -22,20 +16,21 @@ import {
   promoteToGlobal,
   classifyScript,
   executeScripts
-} from '/view/js/spa-script-runtime.js';
+} from '/view/js/spa/spa-script-runtime.js';
 import {
   showTimeoutModal,
   dismissTimeoutModal,
   cleanupTooltips
-} from '/view/js/spa-ui-helpers.js';
-import { createNavigationAdapter } from '/view/js/spa-navigation-adapter.js';
+} from '/view/js/spa/spa-ui-helpers.js';
+import { createNavigationAdapter } from '/view/js/spa/spa-navigation-adapter.js';
 import {
   triggerSPADocumentReady,
   triggerSPAWindowLoad,
   reinitializeDynamicContent
-} from '/view/js/spa-lifecycle.js';
-import { createDomSwapPipeline } from '/view/js/spa-dom-swap.js';
-import { createContentLoader } from '/view/js/spa-content-loader.js';
+} from '/view/js/spa/spa-lifecycle.js';
+import { createDomSwapPipeline } from '/view/js/spa/spa-dom-swap.js';
+import { createContentLoader } from '/view/js/spa/spa-content-loader.js';
+import { createHtmxAdapter, isHtmxEnabled } from '/view/js/spa/spa-htmx-adapter.js';
 
 // ============================================
 // FEATURE DETECTION
@@ -62,9 +57,8 @@ const SPA_CONFIG = {
     'div#topbar-second',
     'main'
   ],
-  // Keep extended container syncing enabled for compatibility while refactoring.
-  // This can be disabled later after integration testing.
-  enableExtendedContainerSync: true,
+  // Extended container syncing is opt-in to avoid broad, often unnecessary DOM replacements.
+  enableExtendedContainerSync: false,
   extendedContainerSelectors: [
     'aside',
     'section'
@@ -102,6 +96,11 @@ const domSwapPipeline = createDomSwapPipeline({
 const contentLoader = createContentLoader({
   showTimeoutModal,
   replaceContainerContent
+});
+
+const htmxAdapter = createHtmxAdapter({
+  reinitializeDynamicContent,
+  showTimeoutModal
 });
 
 /**
@@ -208,12 +207,33 @@ function handlePopState(e) {
 /**
  * Initialize SPA Router
  */
-function initSPARouter() {
+async function initSPARouter() {
   console.debug('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled, 'spaEnabled=', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined');
   
   if (!supportsSPA || !SPA_CONFIG.enabled || (typeof spaEnabled !== 'undefined' && !spaEnabled)) {
     console.debug('[SPA Router] Not supported or disabled (spaEnabled:', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined', ')');
     return;
+  }
+
+  if (isHtmxEnabled()) {
+    console.debug('[SPA Router] HTMX mode enabled, attempting HTMX adapter');
+    const htmxInitialized = await htmxAdapter.init();
+    if (htmxInitialized) {
+      if (typeof $ !== 'undefined') {
+        $(document).ready(triggerSPADocumentReady);
+        $(window).load(triggerSPAWindowLoad);
+      } else {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', triggerSPADocumentReady);
+        } else {
+          triggerSPADocumentReady();
+        }
+        window.addEventListener('load', triggerSPAWindowLoad);
+      }
+      console.debug('[SPA Router] Initialized with HTMX adapter');
+      return;
+    }
+    console.debug('[SPA Router] HTMX adapter unavailable, falling back to router mode');
   }
   
   navigationAdapter.bindNavigationEvents();

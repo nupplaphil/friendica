@@ -79,7 +79,7 @@ window.onload = function(){
 <script type="text/javascript" src="view/js/loading-indicator.js?v={{$VERSION}}"></script>
 <script type="text/javascript" src="view/js/main.js?v={{$VERSION}}"></script>
 {{if $spa_mode}}
-	<script type="module" src="view/js/spa-router.js?v={{$VERSION}}"></script>
+	<script type="module" src="view/js/spa/spa-router.js?v={{$VERSION}}"></script>
 	<script data-spa-version="{{$spa_router_ts}}">window.__spa_router_version = "{{$spa_router_ts}}";</script>
 {{/if}}
 <script>

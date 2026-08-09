@@ -1954,6 +1954,18 @@
             ]
         },
         {
+            "name": "npm-asset/htmx.org",
+            "version": "2.0.10",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/htmx.org/-/htmx.org-2.0.10.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "0BSD"
+            ]
+        },
+        {
             "name": "npm-asset/imagesloaded",
             "version": "4.1.4",
             "dist": {
