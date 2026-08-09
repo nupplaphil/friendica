@@ -361,6 +361,102 @@ abstract class BaseApi extends BaseModule
 	}
 
 	/**
+	 * Get the pagination "link" header value with "next" and "prev" links
+	 *
+	 * @internal
+	 * @return string
+	 */
+	protected function getPaginationLinkHeaderValue(bool $asDate = false): string
+	{
+		if (empty(self::$boundaries)) {
+			return '';
+		}
+
+		$request = self::$request;
+
+		unset($request['min_id']);
+		unset($request['max_id']);
+		unset($request['since_id']);
+
+		$prev_request = $next_request = $request;
+
+		if ($asDate) {
+			$max_date               = self::$boundaries['max'];
+			$min_date               = self::$boundaries['min'];
+			$prev_request['min_id'] = $max_date->format(DateTimeFormat::JSON);
+			$next_request['max_id'] = $min_date->format(DateTimeFormat::JSON);
+		} else {
+			$prev_request['min_id'] = self::$boundaries['max'];
+			$next_request['max_id'] = self::$boundaries['min'];
+		}
+
+		$command = (string) $this->baseUrl . '/' . $this->args->getCommand();
+
+		$prev = $command . '?' . http_build_query($prev_request);
+		$next = $command . '?' . http_build_query($next_request);
+
+		return '<' . $next . '>; rel="next", <' . $prev . '>; rel="prev"';
+	}
+
+	/**
+	 * Get the pagination "link" header value with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @internal
+	 * @return string
+	 */
+	protected function getOffsetAndLimitPaginationLinkHeaderValue(int $offset, int $limit): string
+	{
+		$request = self::$request;
+
+		unset($request['offset']);
+		$request['limit'] = $limit;
+
+		$prev_request = $next_request = $request;
+
+		$prev_request['offset'] = $offset - $limit;
+		$next_request['offset'] = $offset + $limit;
+
+		$command = (string) $this->baseUrl . '/' . $this->args->getCommand();
+
+		$prev = $command . '?' . http_build_query($prev_request);
+		$next = $command . '?' . http_build_query($next_request);
+
+		if ($prev_request['offset'] >= 0) {
+			return '<' . $next . '>; rel="next", <' . $prev . '>; rel="prev"';
+		} else {
+			return '<' . $next . '>; rel="next"';
+		}
+	}
+
+	/**
+	 * Set the pagination "link" header with "next" and "prev" links
+	 *
+	 * @internal
+	 * @return void
+	 */
+	protected function setPaginationLinkHeader(bool $asDate = false): void
+	{
+		$header = $this->getPaginationLinkHeaderValue($asDate);
+		if (!empty($header)) {
+			$this->response->setHeader($header, 'Link');
+		}
+	}
+
+	/**
+	 * Set the pagination "link" header with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @internal
+	 * @return void
+	 */
+	protected function setPaginationLinkHeaderByOffsetLimit(int $offset, int $limit): void
+	{
+		$header = $this->getOffsetAndLimitPaginationLinkHeaderValue($offset, $limit);
+		if (!empty($header)) {
+			$this->response->setHeader($header, 'Link');
+		}
+	}
+
+	/**
 	 * Get current application token
 	 *
 	 * @return array token
