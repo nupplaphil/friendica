@@ -211,7 +211,6 @@
 											</a>
 										</li>
 									{{/if}}
-									</li>
 									{{foreach $nav.usermenu as $usermenu}}
 										<li>
 											<a role="menuitem" class="{{$usermenu.2}}" href="{{$usermenu.0}}"
@@ -283,7 +282,8 @@
 												title="{{$nav.admin.3}}"><i class="ri ri-medal-2-fill ri-fw" aria-hidden="true"></i>
 												{{$nav.admin.1}}
 											</a>
-										</li>									{{/if}}
+										</li>
+									{{/if}}
 									{{if $nav.moderation}}
 										<li>
 											<a accesskey="m" role="menuitem" id="nav-moderation-link"
@@ -326,10 +326,9 @@
 											</a>
 										</li>
 									{{/if}}
-								</ul>
-							</li>{{* End of userinfo dropdown menu *}}
+								</ul>{{* End of userinfo dropdown menu *}}
+							</li>
 						{{/if}}
-
 					</ul>
 				</div>{{* End of right navbar *}}
 
