@@ -274,6 +274,8 @@ abstract class BaseApi extends BaseModule
 
 	/**
 	 * Get the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use $this->getPaginationLinkHeaderValue() instead
 	 * @return string
 	 */
 	protected static function getLinkHeader(bool $asDate = false): string
@@ -310,6 +312,8 @@ abstract class BaseApi extends BaseModule
 
 	/**
 	 * Get the "link" header with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @deprecated 2026.08 Use $this->getOffsetAndLimitPaginationLinkHeaderValue() instead
 	 * @return string
 	 */
 	protected static function getOffsetAndLimitLinkHeader(int $offset, int $limit): string
@@ -338,6 +342,8 @@ abstract class BaseApi extends BaseModule
 
 	/**
 	 * Set the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use $this->setPaginationLinkHeader() instead
 	 * @return void
 	 */
 	protected static function setLinkHeader(bool $asDate = false)
@@ -350,6 +356,8 @@ abstract class BaseApi extends BaseModule
 
 	/**
 	 * Set the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use $this->setPaginationLinkHeader() instead
 	 * @return void
 	 */
 	protected static function setLinkHeaderByOffsetLimit(int $offset, int $limit)
