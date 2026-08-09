@@ -38,12 +38,8 @@ function reinitializeDynamicContent(executeScriptsFn) {
   });
   window.dispatchEvent(spaNavigateEvent);
 
-  console.debug('[SPA Router] reinitializeDynamicContent: dispatching spa:window:load');
-  const spaDocumentLoadEvent = new CustomEvent('spa:window:load');
-  window.dispatchEvent(spaDocumentLoadEvent);
-
-  const spaDocumentReadyEvent = new CustomEvent('spa:document:ready');
-  window.dispatchEvent(spaDocumentReadyEvent);
+  triggerSPAWindowLoad();
+  triggerSPADocumentReady();
 
   const initInfiniteScrollEvent = new CustomEvent('spa:initInfiniteScroll');
   window.dispatchEvent(initInfiniteScrollEvent);

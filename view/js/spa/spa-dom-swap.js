@@ -15,8 +15,6 @@ function createDomSwapPipeline(options) {
     scrollToTopInstant
   } = options;
 
-  let lastFinalUrl = null;
-
   function getContainerSelectors() {
     const coreSelectors = Array.isArray(spaConfig.containerSelectorsCore) && spaConfig.containerSelectorsCore.length > 0
       ? spaConfig.containerSelectorsCore
@@ -58,7 +56,7 @@ function createDomSwapPipeline(options) {
       return;
     }
 
-    lastFinalUrl = finalUrl || window.location.href;
+    const effectiveFinalUrl = finalUrl || window.location.href;
 
     const parser = new DOMParser();
     const newDoc = parser.parseFromString(htmlString, 'text/html');
@@ -81,6 +79,7 @@ function createDomSwapPipeline(options) {
     const externalScriptPromises = [];
 
     const resourceElements = newDoc.querySelectorAll('head > link, head > script, head > style, body script, body link');
+    const effectivePath = new URL(effectiveFinalUrl, window.location.href).pathname;
 
     const containerSelectors = getContainerSelectors();
 
@@ -99,7 +98,6 @@ function createDomSwapPipeline(options) {
         }
 
         if (selector === 'main') {
-          const effectivePath = lastFinalUrl ? new URL(lastFinalUrl).pathname : window.location.pathname;
           if (spaConfig.scrollToTopOnNavigate && !effectivePath.includes('/display/')) {
             scrollToTopInstant();
           }
