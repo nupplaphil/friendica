@@ -567,7 +567,15 @@ as the value of $top_child_total (this is done at the end of this file)
 		</div><!--./wall-item-actions-->
 
 		<div class="wall-item-links"></div>
-
+		<div class="wall-emoji-responses">
+				{{foreach $item.reactions as $emoji}}
+					{{if $emoji.icon.fa}}
+						<span class="wall-item-emoji" title="{{$emoji.title}}"><i class="ri {{$emoji.icon.fa}}" aria-hidden="true"></i> {{$emoji.total}}</span>
+					{{else}}
+						<span class="wall-item-emoji" title="{{$emoji.title}}">{{$emoji.emoji}} {{$emoji.total}}</span>
+					{{/if}}
+				{{/foreach}}		
+		</div>
 		{{* Display likes, dislike and attendance stats *}}
 		{{if $item.legacy_activities}}
 			<div class="wall-item-responses">
