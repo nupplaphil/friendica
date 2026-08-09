@@ -33,7 +33,7 @@ use Friendica\Util\Profiler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class BaseApi extends BaseModule
+abstract class BaseApi extends BaseModule
 {
 	public const LOG_PREFIX = 'API {action} - ';
 
