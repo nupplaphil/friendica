@@ -61,7 +61,7 @@ function initWidget(name) {
 	const widget = document.getElementById(name)
 	const list = widget.querySelector(".sidebar-widget-list");
 	const btn = widget.querySelector(".widget-btn");
-	if (!btn){ return; } // there are contexts in which not btn will be found
+	if (!btn || !list){ return; } // there are contexts in which not btn will be found
 	if (localStorage.getItem(window.location.pathname.split("/")[1] + ":" + name) != "block") {
 		list.style.display = "none";
 		btn.setAttribute("aria-expanded", false)
