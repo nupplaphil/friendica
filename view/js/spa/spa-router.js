@@ -62,6 +62,12 @@ const SPA_CONFIG = {
   extendedContainerSelectors: [
     'aside',
     'section'
+  ],
+  htmxAuxiliarySelectors: [
+    'nav#topbar-first',
+    'div#topbar-second',
+    'aside',
+    'right_aside'
   ]
 };
 
@@ -99,6 +105,11 @@ const contentLoader = createContentLoader({
 });
 
 const htmxAdapter = createHtmxAdapter({
+  isSPARoute,
+  auxiliarySelectors: SPA_CONFIG.htmxAuxiliarySelectors,
+  scrollToTopOnNavigate: SPA_CONFIG.scrollToTopOnNavigate,
+  scrollToTopInstant,
+  cleanupTooltips,
   reinitializeDynamicContent,
   showTimeoutModal
 });
