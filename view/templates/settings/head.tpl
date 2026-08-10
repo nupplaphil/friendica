@@ -143,12 +143,12 @@
 		indexList('#menu_timelineorder','.timelines-menu','.field');
 
 		// add arrow buttons for touch devices that cannot drag-n-drop or keyboard sort
-		$('.network .field, .timelines-widget .field, .timelines-menu .field').each(function(){
+		$('.network .field, .timelines-widget .field, .timelines-menu .field').not('.settings-submit-wrapper .field, .panel-footer .field').each(function(){
 			$(this).append('<div class="sorter-mvup" onclick="moveListItem(this,\'up\');" aria-hidden="true"></div><div class="sorter-mvdn" onclick="moveListItem(this,\'down\');" aria-hidden="true"></div>');
 		});
 
 		// accessible sorting with keyboard gives feedback to screenreaders
-		$('.network .field, .timelines-widget .field, .timelines-menu .field').bind('keydown', function(event){
+		$('.network .field, .timelines-widget .field, .timelines-menu .field').not('.settings-submit-wrapper .field, .panel-footer .field').bind('keydown', function(event){
 			if(event.which == 38){
 				moveListItem(this,'up');
 			}
