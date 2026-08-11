@@ -87,6 +87,7 @@ class HttpClient extends BaseFactory
 			// by default, we will allow self-signed certs,
 			// but it can be overridden
 			RequestOptions::VERIFY  => (bool) $this->config->get('system', 'verifyssl'),
+			RequestOptions::VERSION => 2.0,
 			RequestOptions::PROXY   => $proxy,
 			RequestOptions::HEADERS => [],
 			'handler'               => $handlerStack ?? HandlerStack::create(),
