@@ -16,7 +16,7 @@
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<details class="panel">
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="content-settings-title">{{$general_settings}}</summary>
-				<div id="content-settings-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="content-settings-title">
+				<div id="content-settings-content" role="tabpanel" aria-labelledby="content-settings-title">
 					<div class="panel-body">
 						{{include file="field_select.tpl" field=$accept_only_sharer}}
 
@@ -47,7 +47,7 @@
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<details class="panel">
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="mail-settings-title"><i class="ri ri-mail-line"></i> {{$h_mail}}</summary>
-				<div id="mail-settings-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mail-settings-title">
+				<div id="mail-settings-content" role="tabpanel" aria-labelledby="mail-settings-title">
 					<div class="panel-body">
 				{{if $mail_disabled}}
 						<p>{{$mail_disabled}}</p>
