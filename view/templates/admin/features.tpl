@@ -22,7 +22,7 @@
 		{{/foreach}}
 
 		<div class="settings-submit-wrapper">
-			<input type="submit" name="submit" class="settings-features-submit" value="{{$submit}}" />
+			<input type="submit" name="submit" class="settings-features-submit btn btn-default" value="{{$submit}}" />
 		</div>
 	</div>
 	</details>
