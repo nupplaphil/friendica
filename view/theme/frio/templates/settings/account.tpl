@@ -20,7 +20,7 @@
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'password'}} open{{/if}}>
 					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_pass}}</summary>
-					<div id="password-settings role="tabpanel" aria-labelledby="password-settings">
+					<div id="password-settings" role="tabpanel" aria-labelledby="password-settings">
 						<div class="panel-body">
 							{{include file="field_password.tpl" field=$password1}}
 							{{include file="field_password.tpl" field=$password2}}
