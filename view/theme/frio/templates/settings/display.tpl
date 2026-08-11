@@ -36,9 +36,9 @@
 				</div>
 			</details>
 
-			<details class="panel">
+			<details class="panel"{{if !$theme && !mobile_theme && !theme_config}} open{{/if}}>
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="content-settings-title">{{$d_cset}}</summary>
-				<div id="content-settings-content" class="panel-collapse collapse{{if !$theme && !$mobile_theme && !$theme_config}} in{{/if}}" role="tabpanel" aria-labelledby="content-settings">
+				<div id="content-settings-content" role="tabpanel" aria-labelledby="content-settings">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$itemspage_network}}
 						{{include file="field_input.tpl" field=$itemspage_mobile_network}}
@@ -66,9 +66,9 @@
 				</div>
 			</details>
 
-			<details class="panel">
+			<details class="panel"{{if !$theme && !$mobile_theme && !$theme_config}} open{{/if}}>
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="timeline-settings-title">{{$timeline_title}}</summary>
-				<div id="timeline-settings-content" class="panel-collapse collapse{{if !$theme && !$mobile_theme && !$theme_config}} in{{/if}}" role="tabpanel" aria-labelledby="timeline-settings">
+				<div id="timeline-settings-content" role="tabpanel" aria-labelledby="timeline-settings">
 						<p tabindex="0">{{$timeline_explanation}} {{$sortable}}</p>
 						<h3 tabindex="0">{{$timeline_enable}}</h3>
 					<div class="panel-body timelines-widget sortable">
@@ -94,9 +94,9 @@
 				</div>
 			</details>
 
-			<details class="panel">
+			<details class="panel"{{if !$theme && !$mobile_theme && !$theme_config}} open{{/if}}>
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="channel-settings-title">{{$channel_title}}</summary>
-				<div id="channel-settings-content" class="panel-collapse collapse{{if !$theme && !$mobile_theme && !$theme_config}} in{{/if}}" role="tabpanel" aria-labelledby="channel-settings">
+				<div id="channel-settings-content" role="tabpanel" aria-labelledby="channel-settings">
 					<div class="panel-body">
 						{{include file="field_select.tpl" field=$channel_languages}}
 					</div>
@@ -116,9 +116,9 @@
 				</div>
 			</details>
 
-			<details class="panel">
+			<details class="panel"{{if !$theme && !$mobile_theme && !$theme_config}} open{{/if}}>
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="calendar-settings-title">{{$calendar_title}}</summary>
-				<div id="calendar-settings-content" class="panel-collapse collapse{{if !$theme && !$mobile_theme && !$theme_config}} in{{/if}}" role="tabpanel" aria-labelledby="calendar-settings">
+				<div id="calendar-settings-content" role="tabpanel" aria-labelledby="calendar-settings">
 					<div class="panel-body">
 						{{include file="field_select.tpl" field=$first_day_of_week}}
 						{{include file="field_select.tpl" field=$calendar_default_view}}
