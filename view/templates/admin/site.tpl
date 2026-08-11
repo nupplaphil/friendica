@@ -17,8 +17,8 @@
 
 	<form action="{{$baseurl}}/admin/site" method="post">
 		<input type='hidden' name='form_security_token' value='{{$form_security_token}}'>
-
-		<h2>{{$general_info}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$general_info}}</summary>
 		{{include file="field_input.tpl" field=$sitename}}
 		{{include file="field_input.tpl" field=$sender_email}}
 		{{include file="field_input.tpl" field=$system_actor_name}}
@@ -33,9 +33,11 @@
 		{{include file="field_checkbox.tpl" field=$force_ssl}}
 		{{include file="field_checkbox.tpl" field=$show_help}}
 		{{include file="field_select.tpl" field=$singleuser}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$registration}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$registration}}</summary>
 		{{include file="field_textarea.tpl" field=$register_text}}
 		{{include file="field_select.tpl" field=$register_policy}}
 		{{include file="field_input.tpl" field=$max_registered_users}}
@@ -47,16 +49,20 @@
 		{{include file="field_textarea.tpl" field=$allowed_email}}
 		{{include file="field_textarea.tpl" field=$disallowed_email}}
 		{{include file="field_textarea.tpl" field=$forbidden_nicknames}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$upload}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$upload}}</summary>
 		{{include file="field_input.tpl" field=$maximagesize}}
 		{{include file="field_input.tpl" field=$maximagelength}}
 		{{include file="field_input.tpl" field=$jpegimagequality}}
 		{{include file="field_input.tpl" field=$maxfilesize}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$corporate}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$corporate}}</summary>
 		{{include file="field_input.tpl" field=$allowed_sites}}
 		{{include file="field_checkbox.tpl" field=$block_public}}
 		{{include file="field_checkbox.tpl" field=$force_publish}}
@@ -84,7 +90,7 @@
 			</div>
 		{{/if}}
 		{{include file="field_input.tpl" field=$global_directory}}
-		<div class="submit"><input type="submit" name="republish_directory" value="{{$republish}}"/></div>
+		<div class="settings-submit=wrapper"><input type="submit" class="settings-submit btn btn-default" name="republish_directory" value="{{$republish}}"/></div>
 		{{include file="field_checkbox.tpl" field=$newuser_private}}
 		{{include file="field_checkbox.tpl" field=$enotify_no_content}}
 		{{include file="field_checkbox.tpl" field=$private_addons}}
@@ -95,9 +101,11 @@
 		{{include file="field_checkbox.tpl" field=$explicit_content}}
 		{{include file="field_checkbox.tpl" field=$local_search}}
 		{{include file="field_input.tpl" field=$blocked_tags}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$advanced}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$advanced}}</summary>
 		{{include file="field_checkbox.tpl" field=$verifyssl}}
 		{{include file="field_input.tpl" field=$proxy}}
 		{{include file="field_input.tpl" field=$proxyuser}}
@@ -107,9 +115,11 @@
 		{{include file="field_checkbox.tpl" field=$suppress_tags}}
 		{{include file="field_checkbox.tpl" field=$nodeinfo}}
 		{{include file="field_select.tpl" field=$check_new_version_url}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$portable_contacts}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$portable_contacts}}</summary>
 		{{include file="field_select.tpl" field=$contact_discovery}}
 		{{include file="field_checkbox.tpl" field=$update_active_contacts}}
 		{{include file="field_checkbox.tpl" field=$update_known_contacts}}
@@ -117,9 +127,11 @@
 		{{include file="field_checkbox.tpl" field=$poco_discovery}}
 		{{include file="field_input.tpl" field=$poco_requery_days}}
 		{{include file="field_checkbox.tpl" field=$poco_local_search}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$performance}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$performance}}</summary>
 		{{include file="field_checkbox.tpl" field=$compute_circle_counts}}
 		{{include file="field_checkbox.tpl" field=$only_tag_search}}
 		{{include file="field_checkbox.tpl" field=$limited_search_scope}}
@@ -138,9 +150,11 @@
 		{{include file="field_input.tpl" field=$cron_interval}}
 		{{include file="field_checkbox.tpl" field=$process_view}}
 		{{include file="field_input.tpl" field=$archival_days}}
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$worker_title}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$worker_title}}</summary>
 		{{include file="field_input.tpl" field=$maxloadavg}}
 		{{include file="field_input.tpl" field=$min_memory}}
 		{{include file="field_input.tpl" field=$worker_queues}}
@@ -151,9 +165,11 @@
 		{{include file="field_input.tpl" field=$worker_defer_limit}}
 		{{include file="field_input.tpl" field=$worker_fetch_limit}}
 
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
-		<h2>{{$relay_title}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$relay_title}}</summary>
 		{{if $relay_list}}
 			<p>{{$relay_list_title}}</p>
 			<ul id="relay-list">
@@ -183,14 +199,17 @@
 		{{include file="field_input.tpl" field=$max_posts_per_author}}
 		{{include file="field_input.tpl" field=$sharer_interaction_days}}
 
-		<div class="submit"><input type="submit" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="setting-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		</details>
 
 	</form>
 
 	<div>
-		<h2>{{$relocate}}</h2>
+		<details class="settings-section">
+		<summary class="settings-heading">{{$relocate}}</summary>
 		<p>{{$relocate_msg}}</p>
 		<p><code>{{$relocate_cmd}}</code></p>
+		</details>
 	</div>
 
 </div>
