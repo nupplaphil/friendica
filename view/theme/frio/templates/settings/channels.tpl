@@ -11,7 +11,7 @@
 		<form class="panel" action="{{$baseurl}}/settings/channels" method="post">
 		<details class="panel"{{if $open}} open{{/if}}>
 			<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="add-settings-title">{{$l10n.addtitle}}</summary>
-			<div id="add-settings-content" class="panel-collapse collapse{{if $open}} in{{/if}}" role="tabpanel" aria-labelledby="add-settings-title">
+			<div id="add-settings-content" role="tabpanel" aria-labelledby="add-settings-title">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				{{include file="field_input.tpl" field=$label}}
 				{{include file="field_input.tpl" field=$description}}
@@ -38,7 +38,7 @@
 				<form class="panel" action="{{$baseurl}}/settings/channels" method="post">
 					<details class="panel"{{if $e.open}} open{{/if}}>
 						<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id={{$e.id}}-settings-title">{{$e.label.2}}</summary>
-						<div id="{{$e.id}}-settings-content" class="panel-collapse collapse{{if $e.open}} in{{/if}}" role="tabpanel" aria-labelledby="{{$e.id}}-settings-title">
+						<div id="{{$e.id}}-settings-content" role="tabpanel" aria-labelledby="{{$e.id}}-settings-title">
 							<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 							<input type="hidden" name="id" value="{{$e.id}}">
 							{{include file="field_input.tpl" field=$e.label}}
