@@ -76,7 +76,9 @@
 {{foreach $connector_settings_forms as $addon => $connector_settings_form}}
 		<form action="settings/connectors/{{$addon}}" method="post" autocomplete="off" class="panel">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
-			{{$connector_settings_form nofilter}}
+			<details class="panel"{{if $open}} open{{/if}}>
+				{{$connector_settings_form nofilter}}
+			</details>
 		</form>
 {{/foreach}}
 	</div>
