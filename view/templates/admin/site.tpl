@@ -211,7 +211,7 @@
 		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
 		</details>
 
-		<details class="settings-section>
+		<details class="settings-section">
 		<summary class="settings-heading">{{$channel_title}}</summary>
 		<div id="admin-settings-channel">
 			{{include file="field_input.tpl" field=$engagement_hours}}
