@@ -4,14 +4,8 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
-	<div class="section-subtitle-wrapper panel-heading" role="tab" id="{{$connector}}-settings-title">
-		<h2>
-			<button class="btn-link accordion-toggle{{if !$open}} collapsed{{/if}}" data-toggle="collapse" data-parent="#settings-connectors" href="#{{$connector}}-settings-content" aria-expanded="false" aria-controls="{{$connector}}-settings-content">
-				<img class="connector{{if !$enabled}}-disabled{{/if}}" src="{{$image}}" /> {{$title}}
-			</button>
-		</h2>
-	</div>
-	<div id="{{$connector}}-settings-content" class="panel-collapse collapse{{if $open}} in{{/if}}" role="tabpanel" aria-labelledby="{{$connector}}-settings-title">
+	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$connector}}-settings-title"><img class="connector{{if !$enabled}}-disabled{{/if}}" src="{{$image}}" /> {{$title}}</summary>
+	<div id="{{$connector}}-settings-content" role="tabpanel" aria-labelledby="{{$connector}}-settings-title">
 		<div class="panel-body">
 			{{$html nofilter}}
 		</div>
