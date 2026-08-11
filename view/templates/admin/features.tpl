@@ -11,7 +11,8 @@
 	<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 
 	{{foreach $features as $g => $f}}
-	<h2 class="settings-heading"><a href="javascript:;">{{$f.0}}</a></h2>
+	<details class="settings-section">
+	<summary class="settings-heading">{{$f.0}}</summary>
 
 	<div class="settings-content-block">
 		{{foreach $f.1 as $fcat}}
@@ -24,6 +25,7 @@
 			<input type="submit" name="submit" class="settings-features-submit" value="{{$submit}}" />
 		</div>
 	</div>
+	</details>
 	{{/foreach}}
 
 	</form>
