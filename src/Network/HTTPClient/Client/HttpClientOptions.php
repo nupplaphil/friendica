@@ -45,8 +45,11 @@ class HttpClientOptions
 	/**
 	 * verify: (bool|string, default=true) Describes the SSL certificate
 	 */
-	public const VERIFY = 'verify';
-
+	public const VERIFY = RequestOptions::VERIFY;
+	/**
+	 * version: (string|int|float) Specifies the HTTP protocol version to attempt to use.
+	 */
+	public const VERSION = RequestOptions::VERSION;
 	/**
 	 * body: (string) Setting the body for sending data
 	 */
