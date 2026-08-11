@@ -231,7 +231,7 @@
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel">
 					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="relocate-settings">{{$relocate}}</summary>
-					<div id="relocate-settings-collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="relocate-settings">
+					<div id="relocate-settings-collapse" role="tabpanel" aria-labelledby="relocate-settings">
 						<div class="panel-body">
 							<div id="settings-relocate-desc">{{$relocate_text}}</div>
 						</div>
