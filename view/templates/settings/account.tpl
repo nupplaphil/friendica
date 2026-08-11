@@ -14,7 +14,7 @@
 <div id="settings-form">
 	<details class="settings-section" open="true">
 		<summary class="settings-heading">{{$h_pass}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="password-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_password.tpl" field=$password1}}
 			{{include file="field_password.tpl" field=$password2}}
@@ -28,7 +28,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">{{$h_basic}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="basic-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_input.tpl" field=$username}}
 			{{include file="field_input.tpl" field=$email}}
@@ -52,7 +52,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">{{$h_prv}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="privacy-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_input.tpl" field=$maxreq}}
 
@@ -86,7 +86,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">{{$expire.label}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="expire-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<div id="settings-expiry">
 				{{include file="field_input.tpl" field=$expire.days}}
@@ -104,7 +104,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">{{$h_not}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="notification-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<div id="settings-notifications">
 
@@ -181,7 +181,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">>{{$h_advn}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="advanced-account-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<p id="settings-advanced-desc">{{$h_descadvn}}</p>
 
@@ -195,7 +195,7 @@
 
 	<details class="settings-section">
 		<summary class="settings-heading">{{$relocate}}</summary>
-		<form class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form id="relocate-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<p id="settings-pagetype-desc">{{$relocate_text}}</p>
 
