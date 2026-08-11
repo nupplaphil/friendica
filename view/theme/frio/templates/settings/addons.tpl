@@ -12,7 +12,9 @@
 {{foreach $addon_settings_forms as $addon => $addon_settings_form}}
 		<form action="settings/addons/{{$addon}}" method="post" autocomplete="off" class="panel">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
-			{{$addon_settings_form nofilter}}
+			<details class="panel">
+				{{$addon_settings_form nofilter}}
+			</details>
 		</form>
 {{foreachelse}}
 		{{$no_addon_settings_configured}}
