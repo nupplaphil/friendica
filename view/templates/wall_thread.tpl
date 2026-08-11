@@ -4,6 +4,17 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
+{{* pengy added Frio count logic to Vier *}}
+{{if $item.thread_level==1}}
+	{{assign var="top_child_total" value=count($item.children)}}
+	{{assign var="top_child_nr" value=0}}
+{{/if}}
+{{if $item.thread_level==2}}
+	{{assign var="top_child_nr" value=$top_child_nr+1 scope=parent}}
+{{/if}}
+{{if $item.thread_level==2 && $top_child_nr==1}}
+<div class="comment-container {{if !$item.not_smart_threaded}} smart-threaded{{/if}}"> <!--top-child-begin-->
+{{/if}}
 {{if $mode == display}}
 {{else}}
 {{if $item.comment_firstcollapsed}}
@@ -262,3 +273,7 @@
 				<div class="wall-item-comment-wrapper" id="item-comments-{{$item.id}}" style="display: none;">{{$item.comment_html nofilter}}</div>
             {{/if}}
         {{/if}}
+{{* close the comment-container div if no more thread_level = 2 children are left *}}
+{{if $item.thread_level==2 && $top_child_nr==$top_child_total}}
+</div><!--./comment-container-->
+{{/if}}
