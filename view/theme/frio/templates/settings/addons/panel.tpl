@@ -4,14 +4,8 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
-	<div class="section-subtitle-wrapper panel-heading" role="tab" id="{{$addon}}-settings-title">
-		<h2>
-			<button class="btn-link accordion-toggle{{if !$open}} collapsed{{/if}}" data-toggle="collapse" data-parent="#settings-addons" href="#{{$addon}}-settings-content" aria-expanded="false" aria-controls="{{$addon}}-settings-content">
-				{{$title}}
-			</button>
-		</h2>
-	</div>
-	<div id="{{$addon}}-settings-content" class="panel-collapse collapse{{if $open}} in{{/if}}" role="tabpanel" aria-labelledby="{{$addon}}-settings-title">
+	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$addon}}-settings-title">{{$title}}</summary>
+	<div id="{{$addon}}-settings-content" role="tabpanel" aria-labelledby="{{$addon}}-settings-title">
 		<div class="panel-body">
             {{$html nofilter}}
 		</div>
