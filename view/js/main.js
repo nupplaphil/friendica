@@ -1474,8 +1474,21 @@ function preview_masonry_rows(index) {
 			var heights = [];
 			var maxHeight = 0;
 			for(let i=0; i < couples[c].length; i++){
-				widths.push( $(couples[c][i]).find('img').first().width() );
-				heights.push( $(couples[c][i]).find('img').first().height() );
+				let this_width = 0;
+				let this_height = 0;
+				let this_image = $(couples[c][i]).find('img').first();
+				if ( $(this_image).width() == 0){
+					this_width = 640;
+				} else {
+					this_width = $(this_image).width();
+				}
+				if ( $(this_image).height() == 0){
+					this_height = 480;
+				} else {
+					this_height = $(this_image).height();
+				}
+				widths.push( this_width );
+				heights.push( this_height );
 			}
 			var maxHeight = Math.max(...heights);
 			// corrected width preserving aspect ratio when all images on a row are the same height
