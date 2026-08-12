@@ -9,13 +9,10 @@
  * Displays a modal dialog that can be clicked away.
  */
 function showTimeoutModal() {
-  console.debug('[SPA Router] showTimeoutModal: Displaying timeout overlay');
-
   hideLoading();
 
   // Check if modal already exists
   if (document.getElementById('spa-timeout-modal')) {
-    console.debug('[SPA Router] showTimeoutModal: Modal already exists');
     return;
   }
 
@@ -74,7 +71,6 @@ function dismissTimeoutModal() {
       document.removeEventListener('keydown', modal._escapeHandler);
     }
     modal.remove();
-    console.debug('[SPA Router] dismissTimeoutModal: Modal removed');
   }
 }
 
@@ -98,7 +94,6 @@ function cleanupTooltips() {
     const elements = document.querySelectorAll(selector);
     const elementsArray = Array.prototype.slice.call(elements);
     elementsArray.forEach(el => {
-      console.debug('[SPA Router] Cleanup: Removing tooltip element:', selector);
       el.remove();
     });
   });

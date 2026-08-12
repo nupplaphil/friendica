@@ -47,12 +47,9 @@ function createDomSwapPipeline(options) {
    * @param {string} finalUrl - The final URL after following redirects (optional)
    */
   function replaceContainerContent(htmlString, finalUrl = null) {
-    console.debug('[SPA Router] ReplaceContent: starting replacement');
-
     cleanupTooltips();
 
     if (typeof htmlString !== 'string') {
-      console.error('[SPA Router] ReplaceContent: htmlString is not a string!');
       return;
     }
 
@@ -68,7 +65,6 @@ function createDomSwapPipeline(options) {
     if (newRouterVersion) {
       const serverVersion = newRouterVersion.getAttribute('data-spa-version');
       if (clientRouterVersion && serverVersion && serverVersion !== clientRouterVersion) {
-        console.debug('[SPA Router] Version mismatch detected (Client:', clientRouterVersion, 'Server:', serverVersion, ') - triggering full reload');
         window.location.reload();
         return;
       }
@@ -88,8 +84,6 @@ function createDomSwapPipeline(options) {
       const oldDiv = document.querySelector(selector);
 
       if (newDiv && oldDiv) {
-        console.debug('[SPA Router] ReplaceContent: Updating container', selector);
-
         const inlineScripts = newDiv.querySelectorAll('script:not([src])');
         for (const script of inlineScripts) {
           const content = script.textContent.trim();
@@ -123,21 +117,16 @@ function createDomSwapPipeline(options) {
     });
 
     if (typeof window.clearSPASubscribers === 'function') {
-      const cleanupStats = window.clearSPASubscribers(newPageScripts);
-      console.debug('[SPA Router] Subscriber cleanup stats:', cleanupStats);
+      window.clearSPASubscribers(newPageScripts);
     }
 
     const currentScripts = document.querySelectorAll('script[src]');
-    console.debug('[SPA Router] Found', currentScripts.length, 'external script(s) in current DOM');
-    console.debug('[SPA Router] New page has', newPageScripts.size, 'external script(s)');
     currentScripts.forEach(script => {
       const src = normalizeScriptSource(script.getAttribute('src') || script.src);
       if (newPageScripts.has(src) || script.hasAttribute('data-spa-persistent')) {
-        console.debug('[SPA Router] Keeping script (in new page or persistent):', src);
         return;
       }
 
-      console.debug('[SPA Router] Removing script (not in new page, not persistent):', src);
       script.parentNode.removeChild(script);
     });
 
@@ -148,7 +137,6 @@ function createDomSwapPipeline(options) {
         const href = el.getAttribute('href');
         const selector = tag + (href ? `[href="${href}"]` : '');
         if (!document.head.querySelector(selector)) {
-          console.debug('[SPA Router] Adding style/link:', selector);
           document.head.appendChild(el.cloneNode(true));
         }
       } else if (tag === 'script') {
@@ -156,7 +144,6 @@ function createDomSwapPipeline(options) {
         if (src) {
           const normalizedSrc = normalizeScriptSource(src);
           if (!document.querySelector(`script[src="${src}"]`) && !document.querySelector(`script[src="${normalizedSrc}"]`)) {
-            console.debug('[SPA Router] Adding script (not in DOM):', src);
             const clone = document.createElement('script');
 
             Array.from(el.attributes).forEach(attr => {
@@ -167,18 +154,14 @@ function createDomSwapPipeline(options) {
 
             const p = new Promise(resolve => {
               clone.onload = () => {
-                console.debug('[SPA Router] Script loaded:', src);
                 resolve();
               };
               clone.onerror = () => {
-                console.warn('[SPA Router] Script load error:', src);
                 resolve();
               };
             });
             externalScriptPromises.push(p);
             document.head.appendChild(clone);
-          } else {
-            console.debug('[SPA Router] Script already in DOM, skipping add:', normalizedSrc || src);
           }
         } else {
           if (el.parentNode && el.parentNode.tagName.toLowerCase() === 'head') {
@@ -208,7 +191,6 @@ function createDomSwapPipeline(options) {
       window.__spa_executing_page_scripts = false;
     };
     if (externalScriptPromises.length > 0) {
-      console.debug('[SPA Router] Waiting for', externalScriptPromises.length, 'scripts before reinit...');
       Promise.all(externalScriptPromises).then(() => {
         setTimeout(runFinalAppInit, 10);
       });

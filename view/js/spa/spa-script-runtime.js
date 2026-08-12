@@ -124,8 +124,6 @@ function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, so
 function executeScripts(scripts, context) {
   if (!scripts || scripts.length === 0) return;
 
-  console.debug('[SPA Router] executeScripts: Executing ' + scripts.length + ' ' + context + ' scripts');
-
   // We combine all scripts of the same category (global or body) into a single
   // execution block. This ensures they share a lexical scope, allowing one
   // script to use 'const' or 'let' variables defined in another script
@@ -147,14 +145,14 @@ function executeScripts(scripts, context) {
     // assignments to global variables that were previously defined as 'const'
     // during the initial page load will throw a TypeError. We want to catch
     // these gracefully so other scripts can continue.
-    const wrappedContent = 'try {\n{\n' + promotedContent + '\n}\n} catch (e) { console.debug("[SPA Router] Handled error in scripts:", e.message); }';
+    const wrappedContent = 'try {\n{\n' + promotedContent + '\n}\n} catch (e) { }';
 
     const scriptEl = document.createElement('script');
     scriptEl.textContent = wrappedContent;
     document.head.appendChild(scriptEl);
     document.head.removeChild(scriptEl);
   } catch (e) {
-    console.error('[SPA Router] Error executing combined ' + context + ' scripts:', e);
+    // Error executing scripts - silently ignored for production
   }
 }
 
