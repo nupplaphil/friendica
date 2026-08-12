@@ -282,7 +282,7 @@
 	text-overflow: ellipsis;
 }
 
-.hover-card-actions, .hover-card-actions-connection {
+.hover-card-actions {
 	display: flex;
 	gap: 5px;
 	flex-wrap: wrap;
@@ -293,6 +293,10 @@
 }
 
 .hovercard .hovercard-content .hover-card-actions a.btn {
+	display: inline-block;
+}
+
+body.show-action-labels .hovercard-actions a .action-label {
 	display: inline-block;
 }
 
