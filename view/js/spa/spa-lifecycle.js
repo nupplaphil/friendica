@@ -15,7 +15,6 @@ function triggerSPADocumentReady() {
  * Trigger spa:window:load event.
  */
 function triggerSPAWindowLoad() {
-  console.debug('[SPA Router] triggerSPAWindowLoad: dispatching spa:window:load');
   window.dispatchEvent(new CustomEvent('spa:window:load'));
 }
 
@@ -26,7 +25,6 @@ function triggerSPAWindowLoad() {
  */
 function reinitializeDynamicContent(executeScriptsFn) {
   if (window.__spa_bodyScripts?.length > 0) {
-    console.debug('[SPA Router] reinitializeDynamicContent: Executing ' + window.__spa_bodyScripts.length + ' body scripts');
     window.__spa_executing_fragment_scripts = true;
     executeScriptsFn(window.__spa_bodyScripts, 'body-scripts');
     window.__spa_executing_fragment_scripts = false;
@@ -45,7 +43,6 @@ function reinitializeDynamicContent(executeScriptsFn) {
   window.dispatchEvent(initInfiniteScrollEvent);
 
   if (typeof NavUpdate === 'function') {
-    console.debug('[SPA Router] Calling NavUpdate after navigation');
     NavUpdate();
   }
 }

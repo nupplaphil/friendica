@@ -30,7 +30,6 @@ import {
 } from '/view/js/spa/spa-lifecycle.js';
 import { createDomSwapPipeline } from '/view/js/spa/spa-dom-swap.js';
 import { createContentLoader } from '/view/js/spa/spa-content-loader.js';
-import { createHtmxAdapter, isHtmxEnabled } from '/view/js/spa/spa-htmx-adapter.js';
 
 // ============================================
 // FEATURE DETECTION
@@ -62,12 +61,6 @@ const SPA_CONFIG = {
   extendedContainerSelectors: [
     'aside',
     'section'
-  ],
-  htmxAuxiliarySelectors: [
-    'nav#topbar-first',
-    'div#topbar-second',
-    'aside',
-    'right_aside'
   ]
 };
 
@@ -104,16 +97,6 @@ const contentLoader = createContentLoader({
   replaceContainerContent
 });
 
-const htmxAdapter = createHtmxAdapter({
-  isSPARoute,
-  auxiliarySelectors: SPA_CONFIG.htmxAuxiliarySelectors,
-  scrollToTopOnNavigate: SPA_CONFIG.scrollToTopOnNavigate,
-  scrollToTopInstant,
-  cleanupTooltips,
-  reinitializeDynamicContent,
-  showTimeoutModal
-});
-
 /**
  * Check if a link is an internal link (same origin)
  * @param {HTMLAnchorElement} link - The anchor element
@@ -137,7 +120,6 @@ function handleLinkClick(e) {
  * This is better for screen readers and keyboard navigation
  */
 function scrollToTopInstant() {
-  console.debug('[SPA Router] scrollToTopInstant: focusing on content element for accessibility');
   const contentElement = document.getElementById('content');
   
   // Save previous scroll behavior
@@ -219,32 +201,8 @@ function handlePopState(e) {
  * Initialize SPA Router
  */
 async function initSPARouter() {
-  console.debug('[SPA Router] Initializing... supportsSPA=', supportsSPA, 'enabled=', SPA_CONFIG.enabled, 'spaEnabled=', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined');
-  
   if (!supportsSPA || !SPA_CONFIG.enabled || (typeof spaEnabled !== 'undefined' && !spaEnabled)) {
-    console.debug('[SPA Router] Not supported or disabled (spaEnabled:', typeof spaEnabled !== 'undefined' ? spaEnabled : 'undefined', ')');
     return;
-  }
-
-  if (isHtmxEnabled()) {
-    console.debug('[SPA Router] HTMX mode enabled, attempting HTMX adapter');
-    const htmxInitialized = await htmxAdapter.init();
-    if (htmxInitialized) {
-      if (typeof $ !== 'undefined') {
-        $(document).ready(triggerSPADocumentReady);
-        $(window).load(triggerSPAWindowLoad);
-      } else {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', triggerSPADocumentReady);
-        } else {
-          triggerSPADocumentReady();
-        }
-        window.addEventListener('load', triggerSPAWindowLoad);
-      }
-      console.debug('[SPA Router] Initialized with HTMX adapter');
-      return;
-    }
-    console.debug('[SPA Router] HTMX adapter unavailable, falling back to router mode');
   }
   
   navigationAdapter.bindNavigationEvents();
@@ -262,8 +220,6 @@ async function initSPARouter() {
     }
     window.addEventListener('load', triggerSPAWindowLoad);
   }
-  
-  console.debug('[SPA Router] Initialized successfully');
 }
 
 if (supportsSPA) {
@@ -272,9 +228,6 @@ if (supportsSPA) {
   } else {
     initSPARouter();
   }
-} else {
-  // Check if browser supports required features
-  console.debug('[SPA Router] Browser does not support SPA features. Using fallback.');
 }
 
 // ============================================
