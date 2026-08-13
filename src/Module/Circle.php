@@ -129,7 +129,7 @@ class Circle extends BaseModule
 			$this->earlyJsonExit(['status' => 'OK', 'message' => $message]);
 		} catch (\Exception $e) {
 			DI::sysmsg()->addNotice($e->getMessage());
-			$this->earlyJsonError($e->getCode(), ['status' => 'error', 'message' => $e->getMessage()]);
+			$this->earlyJsonError(500, ['status' => 'error', 'message' => $e->getMessage()]);
 		}
 	}
 
