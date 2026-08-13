@@ -77,6 +77,12 @@ class Nav
 
 		$nav_info = $this->getInfo();
 
+		if ($this->session->getLocalUserNickname()) {
+			$profile_link = $this->session->getLocalUserNickname() . '/profile';
+		} else {
+			$profile_link = false;
+		}
+
 		$tpl = Renderer::getMarkupTemplate('nav.tpl');
 
 		$nav .= Renderer::replaceMacros($tpl, [
@@ -86,7 +92,7 @@ class Nav
 			'$emptynotifications'   => $this->l10n->t('Nothing new here'),
 			'$loadingnotifications' => $this->l10n->t('Loading...'),
 			'$userinfo'             => $nav_info['userinfo'],
-			'$profile_link'         => 'profile/' . $this->session->getLocalUserNickname() . '/profile',
+			'$profile_link'         => $profile_link,
 			'$profile_link_title'   => $this->l10n->t('My Profile'),
 			'$nickname'             => $this->session->getLocalUserNickname(),
 			'$sel'                  => self::$selected,
