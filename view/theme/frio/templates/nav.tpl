@@ -64,7 +64,7 @@
 							<li class="nav-segment">
 								<a accesskey="b" class="nav-menu" href="{{$nav.back.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 										aria-label="{{$nav.back.3}}" title="{{$nav.back.3}}"><i class="ri ri-xl ri-arrow-go-back-line ri-fw"
-										aria-hidden="true"></i> <span class="d-none">{{$nav.back.1}}</span></a>
+										aria-hidden="true"></i> <span class="nav-label">{{$nav.back.1}}</span></a>
 							</li>
 						{{/if}}
 
