@@ -7,16 +7,6 @@
       "count": 1
     }
   },
-  "poc/spa-htmx-spike/adapter.js": {
-    "no-undef": {
-      "count": 6
-    }
-  },
-  "poc/spa-htmx-spike/log.js": {
-    "no-undef": {
-      "count": 4
-    }
-  },
   "view/js/dropzone-factory.js": {
     "no-undef": {
       "count": 1

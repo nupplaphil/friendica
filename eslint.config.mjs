@@ -92,7 +92,7 @@ export default [
 	},
 	js.configs.recommended,
 	{
-		files: ["view/**/*.js", "mods/**/*.js", "poc/**/*.js"],
+		files: ["view/**/*.js", "mods/**/*.js"],
 		languageOptions: {
 			ecmaVersion: 2022,
 			sourceType: "script",
