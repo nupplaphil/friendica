@@ -323,6 +323,16 @@ as the value of $top_child_total (this is done at the end of this file)
 						<span class="total" title="{{$item.responses.comment.title}}">{{$item.responses.comment.total}}</span>
 						<span class="action-label">{{$item.switchcomment}}</span>
 					</button>
+				{{elseif $item.remote_comment}}
+					<a href="{{$item.remote_comment.2}}" class="btn button-comments" title="{{$item.remote_comment.0}}">
+						<i class="ri ri-chat-3-line" aria-hidden="true"></i>
+						<span class="action-label">{{$item.switchcomment}}</span>
+					</a>
+				{{else}}
+					<button type="button" class="btn button-comments" id="comment-{{$item.id}}" title="{{$item.switchcomment}}" disabled>
+						<i class="ri ri-chat-3-line" aria-hidden="true"></i>
+						<span class="action-label">{{$item.switchcomment}}</span>
+					</button>
 				{{/if}}
 
 				{{if $item.vote.announce OR $item.vote.share}}
