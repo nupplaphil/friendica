@@ -55,8 +55,7 @@ function createDomSwapPipeline(options) {
 
     const effectiveFinalUrl = finalUrl || window.location.href;
 
-    const parser = new DOMParser();
-    const newDoc = parser.parseFromString(htmlString, 'text/html');
+    const newDoc = new DOMParser().parseFromString(htmlString, 'text/html');
 
     const newTitle = newDoc.querySelector('title');
     if (newTitle) document.title = newTitle.textContent;
@@ -84,10 +83,13 @@ function createDomSwapPipeline(options) {
       const oldDiv = document.querySelector(selector);
 
       if (newDiv && oldDiv) {
-        const inlineScripts = newDiv.querySelectorAll('script:not([src])');
-        for (const script of inlineScripts) {
+        for (const script of newDiv.querySelectorAll('script:not([src])')) {
           const content = script.textContent.trim();
           if (content) classifyScript(content, globalScripts, bodyScripts, script, 'container');
+          script.parentNode.removeChild(script);
+        }
+
+        for (const script of newDiv.querySelectorAll('script[src]')) {
           script.parentNode.removeChild(script);
         }
 
@@ -108,22 +110,15 @@ function createDomSwapPipeline(options) {
     }
 
     const newPageScripts = new Set();
-    const newPageResourceElements = newDoc.querySelectorAll('head > script[src], body script[src]');
-    newPageResourceElements.forEach(el => {
+    newDoc.querySelectorAll('head > script[src], body script[src]').forEach(el => {
       const src = normalizeScriptSource(el.getAttribute('src'));
       if (src) {
         newPageScripts.add(src);
       }
     });
 
-    if (typeof window.clearSPASubscribers === 'function') {
-      window.clearSPASubscribers(newPageScripts);
-    }
-
-    const currentScripts = document.querySelectorAll('script[src]');
-    currentScripts.forEach(script => {
-      const src = normalizeScriptSource(script.getAttribute('src') || script.src);
-      if (newPageScripts.has(src) || script.hasAttribute('data-spa-persistent')) {
+    document.querySelectorAll('script[src]').forEach(script => {
+      if (newPageScripts.has(normalizeScriptSource(script.getAttribute('src') || script.src)) || script.hasAttribute('data-spa-persistent')) {
         return;
       }
 
@@ -142,8 +137,7 @@ function createDomSwapPipeline(options) {
       } else if (tag === 'script') {
         const src = el.getAttribute('src');
         if (src) {
-          const normalizedSrc = normalizeScriptSource(src);
-          if (!document.querySelector(`script[src="${src}"]`) && !document.querySelector(`script[src="${normalizedSrc}"]`)) {
+          if (!document.querySelector(`script[src="${src}"]`) && !document.querySelector(`script[src="${normalizeScriptSource(src)}"]`)) {
             const clone = document.createElement('script');
 
             Array.from(el.attributes).forEach(attr => {
@@ -152,15 +146,14 @@ function createDomSwapPipeline(options) {
 
             clone.async = false;
 
-            const p = new Promise(resolve => {
+            externalScriptPromises.push(new Promise(resolve => {
               clone.onload = () => {
                 resolve();
               };
               clone.onerror = () => {
                 resolve();
               };
-            });
-            externalScriptPromises.push(p);
+            }));
             document.head.appendChild(clone);
           }
         } else {

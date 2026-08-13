@@ -31,16 +31,14 @@ function reinitializeDynamicContent(executeScriptsFn) {
     window.__spa_bodyScripts = [];
   }
 
-  const spaNavigateEvent = new CustomEvent('spa:navigate', {
+  window.dispatchEvent(new CustomEvent('spa:navigate', {
     detail: { path: window.location.pathname }
-  });
-  window.dispatchEvent(spaNavigateEvent);
+  }));
 
   triggerSPAWindowLoad();
   triggerSPADocumentReady();
 
-  const initInfiniteScrollEvent = new CustomEvent('spa:initInfiniteScroll');
-  window.dispatchEvent(initInfiniteScrollEvent);
+  window.dispatchEvent(new CustomEvent('spa:initInfiniteScroll'));
 
   if (typeof NavUpdate === 'function') {
     NavUpdate();

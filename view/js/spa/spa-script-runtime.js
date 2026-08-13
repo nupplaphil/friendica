@@ -71,9 +71,7 @@ function promoteToGlobal(code) {
     if (node.type === 'VariableDeclaration') {
       for (const declaration of node.declarations) {
         if (declaration.id.type === 'Identifier') {
-          const varName = declaration.id.name;
-          const initCode = declaration.init ? code.slice(declaration.init.start, declaration.init.end) : 'undefined';
-          newCode += `window.${varName} = ${initCode};`;
+          newCode += `window.${declaration.id.name} = ${declaration.init ? code.slice(declaration.init.start, declaration.init.end) : 'undefined'};`;
         } else {
           newCode += code.slice(node.start, node.end);
         }
@@ -124,31 +122,28 @@ function classifyScript(content, globalScripts, bodyScripts, scriptEl = null, so
 function executeScripts(scripts, context) {
   if (!scripts || scripts.length === 0) return;
 
-  // We combine all scripts of the same category (global or body) into a single
-  // execution block. This ensures they share a lexical scope, allowing one
-  // script to use 'const' or 'let' variables defined in another script
-  // from the same page load.
-  const combinedContent = scripts.join('\n\n/* --- Next Script --- */\n\n');
   try {
+    // We combine all scripts of the same category (global or body) into a single
+    // execution block. This ensures they share a lexical scope, allowing one
+    // script to use 'const' or 'let' variables defined in another script
+    // from the same page load.
+    //
     // 1. Lexical Scoping:
     // We wrap the combined scripts in an anonymous block { ... } to prevent
     // "redeclaration" errors (TypeError: redeclaration of const) when
     // navigating between pages in SPA mode. This block creates a new
     // lexical scope for each page load.
-
+    //
     // 2. Variable & Function promotion to global scope:
     // Use AST parser for robust transformation
-    const promotedContent = promoteToGlobal(combinedContent);
-
+    //
     // 3. Runtime Safety:
     // We wrap the whole block in a try-catch. This is important because
     // assignments to global variables that were previously defined as 'const'
     // during the initial page load will throw a TypeError. We want to catch
     // these gracefully so other scripts can continue.
-    const wrappedContent = 'try {\n{\n' + promotedContent + '\n}\n} catch (e) { }';
-
     const scriptEl = document.createElement('script');
-    scriptEl.textContent = wrappedContent;
+    scriptEl.textContent = 'try {\n{\n' + promoteToGlobal(scripts.join('\n\n/* --- Next Script --- */\n\n')) + '\n}\n} catch (e) { }';
     document.head.appendChild(scriptEl);
     document.head.removeChild(scriptEl);
   } catch (e) {

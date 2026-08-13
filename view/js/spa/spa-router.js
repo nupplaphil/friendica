@@ -30,6 +30,7 @@ import {
 } from '/view/js/spa/spa-lifecycle.js';
 import { createDomSwapPipeline } from '/view/js/spa/spa-dom-swap.js';
 import { createContentLoader } from '/view/js/spa/spa-content-loader.js';
+import { initUnpolyEnhancements, bindUnpolyBridgeEvents } from '/view/js/spa/spa-unpoly-bridge.js';
 
 // ============================================
 // FEATURE DETECTION
@@ -206,6 +207,8 @@ async function initSPARouter() {
   }
   
   navigationAdapter.bindNavigationEvents();
+  bindUnpolyBridgeEvents();
+  initUnpolyEnhancements();
   
   // Register handlers for jQuery ready and window load events
   if (typeof $ !== 'undefined') {

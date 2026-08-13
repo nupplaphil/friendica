@@ -474,7 +474,7 @@ function initTheme() {
 }
 
 // Register theme initialization for initial page load and SPA navigation
-onDocumentReady(initTheme);
+window.registerModuleLifecycle('body', initTheme, null, 'document');
 
 // Keep existing spa:navigate handler for tabmenu syncing
 window.addEventListener("spa:navigate", function () {

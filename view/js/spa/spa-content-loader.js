@@ -32,8 +32,7 @@ function createContentLoader(options) {
     showFetching();
     fetch(fetchUrl, { headers: { 'Accept': 'text/html' }, credentials: 'include' })
       .then(async (response) => {
-        const contentType = response.headers.get('Content-Type') || response.headers.get('content-type') || '';
-        if (!contentType.includes('text/html')) {
+        if (!(response.headers.get('Content-Type') || response.headers.get('content-type') || '').includes('text/html')) {
           window.location.href = url;
           return null;
         }

@@ -51,4 +51,4 @@
 	{{$paginate nofilter}}
 </div>
 
-<script type="text/javascript">onDocumentReady(function() { loadingPage = false; justifyPhotos(); });</script>
+<script type="text/javascript">window.registerModuleLifecycle('body', function() { loadingPage = false; justifyPhotos(); }, null, 'document');</script>

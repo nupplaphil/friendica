@@ -69,7 +69,7 @@
 		$(target).focus();
 	}
 
-	onDocumentReady(function() {
+	window.registerModuleLifecycle('body', function() {
 		$('#contact_allow, #contact_deny, #circle_allow, #circle_deny').change(function() {
 			var selstr;
 			$('#contact_allow option:selected, #contact_deny option:selected, #circle_allow option:selected, #circle_deny option:selected').each( function() {
