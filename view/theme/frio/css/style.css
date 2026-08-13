@@ -214,7 +214,7 @@ ul#nav-user-menu {
 	border-radius: 4px;
 }
 #nav-delegation-link {										
-	background-color: white;
+	background-color: $nav_bg;
 	color: $link_color;
 	margin: 10px;
 	width: calc(100% - 20px);
