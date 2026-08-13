@@ -72,7 +72,7 @@
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-									 class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.network.1}}</span><span id="net-update"
+									 class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="nav-label">{{$nav.network.1}}</span><span id="net-update"
 										class="nav-network-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
@@ -81,7 +81,7 @@
 							<li class="nav-segment">
 								<a accesskey="c" class="nav-menu {{$sel.community}}" href="{{$nav.community.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.community.3}}" title="{{$nav.community.3}}"><i
-									  class="ri ri-xl ri-earth-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.community.1}}</span></a>
+									  class="ri ri-xl ri-earth-{{if $sel.community}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="nav-label">{{$nav.community.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -89,7 +89,7 @@
 							<li class="nav-segment">
 								<a accesskey="e" id="nav-calendar-link" href="{{$nav.calendar.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.calendar.1}}" title="{{$nav.calendar.3}}" class="nav-menu {{$sel.calendar}}"><i
-									class="ri ri-xl ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="d-none">{{$nav.calendar.1}}</span></a>
+									class="ri ri-xl ri-calendar-2-{{if $sel.calendar}}fill{{else}}line{{/if}} ri-fw"></i> <span class="nav-label">{{$nav.calendar.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -98,7 +98,7 @@
 							<li class="nav-segment">
 								<a accesskey="l" class="nav-menu {{$sel.channel}}" href="{{$nav.channel.0}}"
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.channel.3}}" title="{{$nav.channel.3}}"><i
-										class="ri ri-xl ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="d-none">{{$nav.channel.1}}</span></a>
+										class="ri ri-xl ri-newspaper-{{if $sel.channel}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="nav-label">{{$nav.channel.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -114,7 +114,7 @@
 								<a accesskey="k" id="nav-contacts-link" href="{{$nav.contacts.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.contacts.1}}" title="{{$nav.contacts.1}}"
 									class="nav-menu {{$sel.contacts}} {{$nav.contacts.2}}"><i
-										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i> <span class="d-none">{{$nav.contacts.1}}</span></a>
+										class="ri ri-contacts-{{if $sel.contacts}}fill{{else}}line{{/if}} ri-lg ri-fw"></i> <span class="nav-label">{{$nav.contacts.1}}</span></a>
 							</li>
 						{{/if}}
 
@@ -123,7 +123,7 @@
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
 									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw"
-										aria-hidden="true"></i> <span class="d-none">{{$nav.messages.1}}</span><span id="mail-update"
+										aria-hidden="true"></i> <span class="nav-label">{{$nav.messages.1}}</span><span id="mail-update"
 										class="nav-mail-badge badge nav-notification"></span></a>
 							</li>
 						{{/if}}
@@ -135,7 +135,7 @@
 									type="button" aria-haspopup="true" aria-expanded="false"
 									aria-controls="nav-notifications-menu">
 									<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
-									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>  <span class="d-none">{{$nav.notifications.1}}</span>
+									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>  <span class="nav-label">{{$nav.notifications.1}}</span>
 								</button>
 								{{* The notifications dropdown menu. There are two parts of menu. The second is at the bottom of this file. It is loaded via js. Look at nav-notifications-template *}}
 								<ul id="nav-notifications-menu" class="dropdown-menu menu-popup" role="menu"
