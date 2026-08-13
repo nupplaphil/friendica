@@ -371,14 +371,7 @@
 		}
 	}
 
-	// Initialize on DOM ready and SPA document-ready events.
-	if (typeof window.onDocumentReady === "function") {
-		window.onDocumentReady(init);
-	} else {
-		$(function () {
-			init();
-		});
-	}
+	window.registerModuleLifecycle("body", init, null, "document");
 
 	// Expose public API
 	window.updateLocationButtonDisplay = updateLocationButtonDisplay;

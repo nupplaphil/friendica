@@ -65,7 +65,7 @@
 {{if $login_bg_color}}{{include file="field_colorinput.tpl" field=$login_bg_color}}{{/if}}
 
 <script type="text/javascript">
-	onDocumentReady(function() {
+	window.registerModuleLifecycle('body', function() {
 
 		function GenerateShareString() {
 			var theme = {};
@@ -202,7 +202,7 @@
 				$("#frio_bg_image_options").show();
 			}
 		}
-	});
+	}, null, 'document');
 </script>
 
 {{include file="field_checkbox.tpl" field=$always_open_compose}}

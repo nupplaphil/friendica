@@ -5,11 +5,11 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <script>
-	onDocumentReady(function() {
+	window.registerModuleLifecycle('body', function() {
 		$('.settings-content-block').hide();
 		$('.settings-heading').click(function(){
 			$('.settings-content-block').hide();
 			$(this).next('.settings-content-block').toggle();
 		});
-	});
+	}, null, 'document');
 </script>

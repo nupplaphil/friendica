@@ -9,8 +9,10 @@
 <script type="text/javascript">
 // Display module: Scroll to item by GUID
 window.itemGuid = window.location.pathname.split("/").pop();
-window.scrollToDisplayGuid = () => scrollToItem("item-" + window.itemGuid);
-onWindowLoad(window.scrollToDisplayGuid);
+window.scrollToDisplayGuid = function scrollToDisplayGuid() {
+  scrollToItem("item-" + window.itemGuid);
+};
+window.registerModuleLifecycle('#conversation-end', window.scrollToDisplayGuid, null, 'window');
 </script>
 {{/if}}
 {{$live_update nofilter}}

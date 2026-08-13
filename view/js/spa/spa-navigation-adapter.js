@@ -15,10 +15,9 @@ function createNavigationAdapter(options) {
   const { isSPARoute, loadContent } = options;
 
   function dispatchBeforeNavigate(path, url) {
-    const beforeEvent = new CustomEvent('spa:beforeNavigate', {
+    window.dispatchEvent(new CustomEvent('spa:beforeNavigate', {
       detail: { path: path, url: url }
-    });
-    window.dispatchEvent(beforeEvent);
+    }));
   }
 
   /**
@@ -31,8 +30,7 @@ function createNavigationAdapter(options) {
     if (!href) return false;
     if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) return false;
     try {
-      const url = new URL(href, window.location.href);
-      return url.origin === window.location.origin;
+      return new URL(href, window.location.href).origin === window.location.origin;
     } catch (e) {
       return false;
     }

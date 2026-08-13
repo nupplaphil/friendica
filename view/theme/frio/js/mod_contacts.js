@@ -6,10 +6,10 @@
 
 var batchConfirmed = false;
 
-onDocumentReady(function () {
+window.registerModuleLifecycle('body', function () {
 	// Replace the drop contact link of the photo menu
 	// with a confirmation modal.
-	$("body").on("click", ".contact-photo-menu a", function (e) {
+	$("body").off(".friendicaContacts").on("click.friendicaContacts", ".contact-photo-menu a", function (e) {
 		var photoMenuLink = $(this).attr("href");
 		if (typeof photoMenuLink !== "undefined" && photoMenuLink.indexOf("/drop?confirm=1") !== -1) {
 			e.preventDefault();
@@ -17,7 +17,7 @@ onDocumentReady(function () {
 			return false;
 		}
 	});
-});
+}, null, 'document');
 
 /**
  * This function submits the form with the batch action values.

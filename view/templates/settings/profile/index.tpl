@@ -5,7 +5,7 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <script>
-	onDocumentReady(function () {
+	window.registerModuleLifecycle('body', function () {
 		//$('.toggle-section-content + .toggle-section-content').hide();
 		$('.js-section-toggler').click(function () {
 			$('.toggle-section-content').hide();

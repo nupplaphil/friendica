@@ -20,275 +20,193 @@ if (!Element.prototype.matches) {
 		};
 }
 
-/**
- * Helper to register a function in a document handler registry with duplicate prevention.
- * Returns the registry key if registered successfully, or null if already registered.
- * 
- * @param {string} registryName - Name of the registry in window (e.g., '__onDocumentReadyRegistry')
- * @param {Function} fn - Function to register
- * @param {string} debugMsg - Debug message to log if already registered
- * @returns {string|null} The registry key if registered, null if duplicate
- */
-function registerDocumentHandler(registryName, fn, debugMsg) {
-	if (typeof fn !== 'function') {
-		console.debug('[DocumentHandler] registerDocumentHandler skipped: fn is not a function');
-		return null;
+function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
+	if (typeof window.registerUnpolyLifecycle === 'function') {
+		return window.registerUnpolyLifecycle(selector, initialize, cleanup, fallbackMode);
 	}
 
-	if (!window[registryName]) {
-		window[registryName] = new Set();
-	}
-
-	// Use function name as key for stable identification across SPA navigations
-	// This prevents duplicate registrations when fragment scripts are reloaded
-	// For anonymous functions, fall back to a hash of the function body
-	const registryKey = fn.name || fn.toString().substring(0, 100);
-	
-	if (window[registryName].has(registryKey)) {
-		console.debug(debugMsg + ':', {
-			registryName: registryName,
-			registryKey: registryKey,
-			registrySize: window[registryName].size
-		});
-		return null;
-	}
-	window[registryName].add(registryKey);
-	console.debug('[DocumentHandler] Registered handler key:', {
-		registryName: registryName,
-		registryKey: registryKey,
-		registrySize: window[registryName].size
-	});
-	return registryKey;
-}
-
-function normalizeScriptSource(src) {
-	if (!src) {
-		return null;
-	}
-
-	try {
-		const baseUrl = document.baseURI || (window.location.origin + '/');
-		return new URL(src, baseUrl).toString();
-	} catch (e) {
-		return src;
-	}
-}
-
-function registerSPASubscriber(config, registryKey, fn, cleanupMode, sourceScript) {
-	if (!window.__spaSubscriberRegistry) {
-		window.__spaSubscriberRegistry = [];
-	}
-
-	const normalizedSourceScript = normalizeScriptSource(sourceScript);
-
-	window.__spaSubscriberRegistry.push({
-		eventName: config.eventName,
-		callback: fn,
-		registryName: config.registryName,
-		registryKey: registryKey,
-		cleanupMode: cleanupMode,
-		sourceScript: normalizedSourceScript
-	});
-
-	console.debug('[DocumentHandler] SPA subscriber registered:', {
-		eventName: config.eventName,
-		registryName: config.registryName,
-		registryKey: registryKey,
-		cleanupMode: cleanupMode,
-		sourceScript: normalizedSourceScript,
-		totalSubscribers: window.__spaSubscriberRegistry.length
-	});
-}
-
-function clearSPASubscribers(activeScriptSources) {
-	if (!window.__spaSubscriberRegistry || !window.__spaSubscriberRegistry.length) {
-		const emptyStats = {
-			total: 0,
-			removed: 0,
-			keptPersistent: 0,
-			keptByScript: 0
-		};
-		console.debug('[DocumentHandler] SPA cleanup skipped: no subscribers', emptyStats);
-		return emptyStats;
-	}
-
-	const activeScripts = activeScriptSources instanceof Set ? activeScriptSources : null;
-	const totalBefore = window.__spaSubscriberRegistry.length;
-	let removed = 0;
-	let keptPersistent = 0;
-	let keptByScript = 0;
-
-	window.__spaSubscriberRegistry = window.__spaSubscriberRegistry.filter(function(subscriber) {
-		if (subscriber.cleanupMode === 'always') {
-			keptPersistent++;
-			return true;
+	const fallbackTarget = function () {
+		if (typeof selector === 'string') {
+			return document.querySelector(selector);
 		}
-
-		if (subscriber.cleanupMode === 'script' && !activeScripts) {
-			keptByScript++;
-			return true;
-		}
-
-		if (
-			subscriber.cleanupMode === 'script'
-			&& subscriber.sourceScript
-			&& activeScripts
-			&& activeScripts.has(subscriber.sourceScript)
-		) {
-			keptByScript++;
-			return true;
-		}
-
-		window.removeEventListener(subscriber.eventName, subscriber.callback);
-
-		if (window[subscriber.registryName]) {
-			window[subscriber.registryName].delete(subscriber.registryKey);
-		}
-
-		removed++;
-
-		return false;
-	});
-
-	const stats = {
-		total: totalBefore,
-		removed: removed,
-		keptPersistent: keptPersistent,
-		keptByScript: keptByScript
+		return selector;
 	};
 
-	console.debug('[DocumentHandler] SPA cleanup finished:', stats);
-	return stats;
-}
-
-window.clearSPASubscribers = clearSPASubscribers;
-
-/**
- * Internal helper to setup document event handlers for both traditional page loads and SPA navigation.
- * Handles duplicate prevention, fragment detection, and once-wrapper creation.
- * 
- * @param {Function} fn - The function to register
- * @param {Object} config - Configuration object
- * @param {string} config.eventName - The SPA event name (e.g., 'spa:document:ready')
- * @param {string} config.jqueryTarget - jQuery target for traditional loads ('document' or 'window')
- * @param {string} config.jqueryMethod - jQuery method for traditional loads ('ready' or 'load')
- * @param {string} config.registryName - Name of the registry in window
- * @param {string} config.debugMsg - Debug message for duplicate registration
- * @param {string} config.onceDebugMsg - Debug message for once execution
- * @param {boolean} persistent - true=keep always, false=remove on next navigation, undefined=keep while source script exists
- */
-function _setupDocumentHandler(fn, config, persistent) {
-	if (typeof fn !== 'function') {
-		console.debug('[DocumentHandler] _setupDocumentHandler skipped: fn is not a function', {
-			eventName: config?.eventName
-		});
-		return;
-	}
-	// Bind to jQuery for traditional page loads
-	if (!spaEnabled) {
-		console.debug('[DocumentHandler] Non-SPA mode, binding via jQuery', {
-			eventName: config.eventName,
-			jqueryMethod: config.jqueryMethod
-		});
-		$(config.jqueryTarget)[config.jqueryMethod](fn);
-		return;
-	}
-
-	const registryKey = registerDocumentHandler(
-		config.registryName,
-		fn,
-		config.debugMsg
-	);
-	
-	if (registryKey === null) {
-		console.debug('[DocumentHandler] Registration skipped due to duplicate key', {
-			eventName: config.eventName,
-			registryName: config.registryName
-		});
-		return;
-	}
-
-	// SPA mode: register for the SPA event
-	const isFragment = window.__spa_executing_fragment_scripts;
-
-	if (isFragment) {
-		console.debug('[DocumentHandler] Registering fragment once-handler', {
-			eventName: config.eventName,
-			registryName: config.registryName,
-			registryKey: registryKey,
-			reinitPhase: !!window.__spa_reinit_phase
-		});
-		// Fragment scripts: execute once after all resources are ready
-		const once = function() {
-			window.removeEventListener(config.eventName, once);
-
-			window[config.registryName].delete(registryKey);
-			console.debug('[DocumentHandler] Executing fragment once-handler', {
-				eventName: config.eventName,
-				registryName: config.registryName,
-				registryKey: registryKey
-			});
-			fn();
-		};
-		if (window.__spa_reinit_phase) {
-			setTimeout(once, 0);
-		} else {
-			window.addEventListener(config.eventName, once);
+	const fallback = function () {
+		const target = fallbackTarget();
+		if (!target || typeof initialize !== 'function') {
+			return null;
 		}
-	} else {
-		// External scripts: permanent listener
-		const cleanupMode = persistent === true ? 'always' : (persistent === false ? 'navigation' : 'script');
-		const currentScript = document.currentScript;
-		const sourceScript = currentScript && (currentScript.getAttribute('src') || currentScript.src);
-		window.addEventListener(config.eventName, fn);
-		registerSPASubscriber(config, registryKey, fn, cleanupMode, sourceScript);
-		console.debug('[DocumentHandler] Registered external SPA listener', {
-			eventName: config.eventName,
-			registryName: config.registryName,
-			registryKey: registryKey,
-			cleanupMode: cleanupMode,
-			sourceScript: normalizeScriptSource(sourceScript)
-		});
+		return initialize(target);
+	};
+
+	if (fallbackMode === 'window') {
+		if (typeof window.addEventListener === 'function') {
+			if (document.readyState === 'complete' || document.readyState === 'interactive') {
+				return fallback();
+			}
+			const onLoad = function () {
+				fallback();
+			};
+			window.addEventListener('load', onLoad, { once: true });
+			return null;
+		}
+		return fallback();
 	}
+
+	if (typeof document.addEventListener === 'function') {
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', function () {
+				fallback();
+			}, { once: true });
+			return null;
+		}
+		return fallback();
+	}
+
+	return fallback();
 }
 
-/**
- * Register a function to be executed when the DOM is ready.
- * Handles both traditional page loads (via document.ready) and SPA navigation (via spa:document:ready).
- * Prevents duplicate registrations across SPA navigations.
- * 
- * @param {Function} fn - The function to register
- * @param {boolean} persistent - Optional flag. true=keep always, false=remove on next navigation, undefined=keep while source script exists.
- */
-function onDocumentReady(fn, persistent) {
-	_setupDocumentHandler(fn, {
-		eventName: 'spa:document:ready',
-		jqueryTarget: document,
-		jqueryMethod: 'ready',
-		registryName: '__onDocumentReadyRegistry',
-		debugMsg: '[onDocumentReady] spa:document:ready listener already registered',
-		onceDebugMsg: '[onDocumentReady] Executing one-time fragment function'
-	}, persistent);
+window.registerModuleLifecycle = registerModuleLifecycle;
+
+function registerUnpolyLifecycle(selector, initialize, cleanup, fallbackMode) {
+	if (typeof selector === 'undefined' || selector === null) {
+		return null;
+	}
+
+	if (!window.__friendica_unpoly_lifecycle_registry) {
+		window.__friendica_unpoly_lifecycle_registry = new Map();
+	}
+
+	const initializerFingerprint = (function () {
+		if (typeof initialize !== 'function') {
+			return 'init';
+		}
+
+		if (initialize.name) {
+			return initialize.name;
+		}
+
+		try {
+			return initialize.toString().replace(/\s+/g, ' ').trim().substring(0, 240);
+		} catch (error) {
+			return 'anonymous';
+		}
+	})();
+
+	const registryKey = String(selector) + '::' + initializerFingerprint + '::' + String(fallbackMode || 'document');
+	if (window.__friendica_unpoly_lifecycle_registry.has(registryKey)) {
+		return window.__friendica_unpoly_lifecycle_registry.get(registryKey);
+	}
+
+	const normalizeElement = function (element) {
+		if (!element) {
+			return null;
+		}
+		if (typeof jQuery !== 'undefined' && element instanceof jQuery) {
+			return element.get(0);
+		}
+		if (element && typeof element.get === 'function' && element.jquery) {
+			return element.get(0);
+		}
+		return element;
+	};
+
+	const runInitialize = function (element) {
+		const normalized = normalizeElement(element);
+		if (!normalized || typeof initialize !== 'function') {
+			return null;
+		}
+		return initialize(normalized);
+	};
+
+	const refresh = function () {
+		const target = typeof selector === 'string' ? document.querySelector(selector) : normalizeElement(selector);
+		if (!target) {
+			return null;
+		}
+		return runInitialize(target);
+	};
+
+	if (window.up && typeof window.up.compiler === 'function') {
+		if (window.addEventListener) {
+			['spa:document:ready', 'spa:navigate', 'spa:window:load', 'load'].forEach(function (eventName) {
+				window.addEventListener(eventName, refresh, { passive: true });
+			});
+		}
+
+		const initialTarget = typeof selector === 'string' ? document.querySelector(selector) : normalizeElement(selector);
+		if (initialTarget) {
+			runInitialize(initialTarget);
+		}
+
+		const compilerResult = window.up.compiler(selector, function (element) {
+			const result = runInitialize(element);
+			if (typeof result === 'function') {
+				return result;
+			}
+			if (typeof cleanup === 'function') {
+				return function () {
+					cleanup(normalizeElement(element));
+				};
+			}
+			return undefined;
+		});
+
+		if (typeof window.up.hello === 'function') {
+			try {
+				window.up.hello(document.documentElement);
+			} catch (error) {
+				console.warn('[Unpoly lifecycle] up.hello failed:', error);
+			}
+		}
+
+		window.__friendica_unpoly_lifecycle_registry.set(registryKey, compilerResult);
+		return compilerResult;
+	}
+
+	const fallback = function () {
+		return refresh();
+	};
+
+	if (fallbackMode === 'window') {
+		if (typeof window.addEventListener === 'function') {
+			if (document.readyState === 'complete' || document.readyState === 'interactive') {
+				const result = fallback();
+				window.__friendica_unpoly_lifecycle_registry.set(registryKey, result);
+				return result;
+			}
+			const onLoad = function () {
+				fallback();
+			};
+			window.addEventListener('load', onLoad, { once: true });
+			window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
+			return null;
+		}
+		const fallbackResult = fallback();
+		window.__friendica_unpoly_lifecycle_registry.set(registryKey, fallbackResult);
+		return fallbackResult;
+	}
+
+	if (typeof document.addEventListener === 'function') {
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', function () {
+				fallback();
+			}, { once: true });
+			window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
+			return null;
+		}
+		const result = fallback();
+		window.__friendica_unpoly_lifecycle_registry.set(registryKey, result);
+		return result;
+	}
+
+	const fallbackResult = fallback();
+	window.__friendica_unpoly_lifecycle_registry.set(registryKey, fallbackResult);
+	return fallbackResult;
 }
 
-/**
- * Register a function to be executed when all resources (images, etc.) are loaded.
- * Handles both traditional page loads (via window.load) and SPA navigation (via spa:window:load event).
- * Prevents duplicate registrations across SPA navigations.
- * 
- * @param {Function} fn - The function to register
- * @param {boolean} persistent - Optional flag. true=keep always, false=remove on next navigation, undefined=keep while source script exists.
- */
-function onWindowLoad(fn, persistent) {
-	_setupDocumentHandler(fn, {
-		eventName: 'spa:window:load',
-		jqueryTarget: window,
-		jqueryMethod: 'load',
-		registryName: '__onWindowLoadRegistry',
-		debugMsg: '[onWindowLoad] spa:window:load listener already registered',
-		onceDebugMsg: '[onWindowLoad] Executing one-time fragment function'
-	}, persistent);
-}
+window.registerUnpolyLifecycle = registerUnpolyLifecycle;
 
 function resizeIframe(obj) {
 	_resizeIframe(obj, 0);
@@ -411,7 +329,7 @@ var lastScrollToItemId = null;
 
 const urlRegex = /^(?:https?:\/\/|\s)[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})(?:\/+[a-z0-9_.:;-]*)*(?:\?[&%|+a-z0-9_=,.:;-]*)?(?:[&%|+&a-z0-9_=,:;.-]*)(?:[!#\/&%|+a-z0-9_=,:;.-]*)}*$/i;
 
-onDocumentReady(function() {
+window.registerModuleLifecycle('body', function() {
 	$.ajaxSetup({cache: false});
 
 	/* setup comment textarea buttons */
@@ -722,7 +640,7 @@ onDocumentReady(function() {
 	if (typeof initInfiniteScroll === 'function') {
 		initInfiniteScroll();
 	}
-}, true);
+}, null, 'document');
 
 // Function to initialize infinite scroll - can be called multiple times
 function initInfiniteScroll() {

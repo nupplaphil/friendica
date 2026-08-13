@@ -54,6 +54,7 @@
 		"npm-asset/acorn": "^8.11.3",
 		"npm-asset/chart.js": "^2.8",
 		"npm-asset/cropperjs": "1.2.2",
+		"npm-asset/unpoly": "^3.14.0",
 		"npm-asset/dompurify": "^1.0",
 		"npm-asset/es-jquery-sortable": "^0.9.13",
 		"npm-asset/fullcalendar": "^3.10",
