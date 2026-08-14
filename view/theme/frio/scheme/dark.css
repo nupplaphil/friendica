@@ -44,7 +44,7 @@ a:hover, button:hover, .btn-link:hover, .btn-primary:hover,
 	border-color: $link_color;
 }
 #topbar-second ul.tabs li {
-	border_color: $link_color;
+	border-color: $link_color;
 }
 header #banner #logo-img:focus,
 header #banner #logo-img:hover {

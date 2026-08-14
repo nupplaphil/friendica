@@ -105,3 +105,6 @@ tests/.phpunit.result.cache
 
 #ignore daemon.pid file
 daemon.pid
+
+#ignore npm dependencies for the JS/CSS linters
+/node_modules

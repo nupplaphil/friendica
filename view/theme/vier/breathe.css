@@ -106,7 +106,7 @@ ul.tabs a {
 }
 
 ul.tabs li .active {
-  border-bottom: 3x solid #737373;
+  border-bottom: 3px solid #737373;
 }
 
 #birthday-notice, #event-notice {
