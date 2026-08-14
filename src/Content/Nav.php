@@ -78,7 +78,7 @@ class Nav
 		$nav_info = $this->getInfo();
 
 		if ($this->session->getLocalUserNickname()) {
-			$profile_link = $this->session->getLocalUserNickname() . '/profile';
+			$profile_link = 'profile/' . $this->session->getLocalUserNickname() . '/profile';
 		} else {
 			$profile_link = false;
 		}
