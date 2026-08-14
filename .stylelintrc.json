@@ -7,6 +7,7 @@
 		"view/asset/**",
 		"view/theme/frio/frameworks/**",
 		"**/*.min.css",
+		"**/*.min.*.css",
 		"view/fonts/**",
 		"view/js/fancybox/**",
 		"view/js/friendica-tagsinput/**",
@@ -24,12 +25,24 @@
 			}
 		}],
 
+		"selector-type-no-unknown": [true, {
+			"ignoreTypes": ["right_aside"],
+			"severity": "warning"
+		}],
+
+		"font-family-no-missing-generic-family-keyword": [true, {
+			"ignoreFontFamilies": ["remixicon"],
+			"severity": "warning"
+		}],
+
+		"declaration-block-no-duplicate-properties": [true, {
+			"ignore": ["consecutive-duplicates-with-different-values"],
+			"severity": "warning"
+		}],
+
 		"no-duplicate-selectors": [true, { "severity": "warning" }],
-		"selector-type-no-unknown": [true, { "severity": "warning" }],
-		"font-family-no-missing-generic-family-keyword": [true, { "severity": "warning" }],
 		"declaration-property-value-keyword-no-deprecated": [true, { "severity": "warning" }],
 		"property-no-deprecated": [true, { "severity": "warning" }],
-		"declaration-block-no-duplicate-properties": [true, { "severity": "warning" }],
 		"block-no-empty": [true, { "severity": "warning" }]
 	},
 	"overrides": [
