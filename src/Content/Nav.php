@@ -212,7 +212,7 @@ class Nav
 			$userinfo = [
 				'icon' => Contact::getMicro($contact),
 				'name' => $contact['name'],
-				'link' => 'profile/' . $this->session->getLocalUserNickname(),
+				'link' => ['profile/' . $this->session->getLocalUserNickname() . '/profile', $this->l10n->t('Profile'), '', $this->l10n->t('My profile')],
 			];
 		}
 
