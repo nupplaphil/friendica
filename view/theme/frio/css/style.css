@@ -1077,6 +1077,7 @@ nav.navbar .nav > li > button:focus {
 }
 body.show-nav-labels .nav-label {
 	display: block;			/* could be block or inline-block, container is flex */
+	font-size: 12px;
 }
 /* second topbar */
 #topbar-second {
