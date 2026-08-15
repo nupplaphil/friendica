@@ -25,6 +25,15 @@ use PHPUnit\Framework\TestCase;
 
 class HookEventBridgeTest extends TestCase
 {
+	protected function tearDown(): void
+	{
+		// Reset the mocked Hook call to prevent it from leaking into other tests
+		$reflectionProperty = new \ReflectionProperty(HookEventBridge::class, 'mockedCallHook');
+		$reflectionProperty->setValue(null, null);
+
+		parent::tearDown();
+	}
+
 	public function testGetStaticSubscribedEventsReturnsStaticMethods(): void
 	{
 		$expected = [
