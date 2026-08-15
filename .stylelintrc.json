@@ -41,6 +41,11 @@
 		}],
 
 		"no-duplicate-selectors": [true, { "severity": "warning" }],
+		"selector-type-no-unknown": [true, {
+			"severity": "warning",
+			"ignoreTypes": ["right_aside"]
+		}],
+		"font-family-no-missing-generic-family-keyword": [true, { "severity": "warning" }],
 		"declaration-property-value-keyword-no-deprecated": [true, { "severity": "warning" }],
 		"property-no-deprecated": [true, { "severity": "warning" }],
 		"block-no-empty": [true, { "severity": "warning" }]
