@@ -52,7 +52,7 @@ class Browser extends BaseBrowser
 			sprintf('%s/attach/%s', $this->baseUrl, $record['id']),
 			(string) $record['filename'],
 			sprintf('%s/images/icons/%s.png', $this->baseUrl, $filetype),
-			// Attachments carry no description; the template falls back to the file name.
+			// Attachments carry no description, so the thumbnail stays decorative.
 			'',
 		];
 	}

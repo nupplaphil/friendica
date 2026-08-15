@@ -59,18 +59,18 @@ class TemplateRenderTest extends TemplateTestCase
 	}
 
 	/**
-	 * Attachments have no description at all (see Module\Media\Attachment\Browser), so
-	 * without the fallback every attachment would ship an empty alt text.
+	 * The file name is printed right below the thumbnail, so a picture without a
+	 * description is redundant to its own caption - and a file name is not a description.
 	 */
 	#[DataProvider('themeProvider')]
-	public function testMediaBrowserFallsBackToTheFileNameWithoutDescription(string $theme): void
+	public function testMediaBrowserLeavesTheAltTextEmptyWithoutDescription(string $theme): void
 	{
 		$html = $this->renderTemplate('media/browser.tpl', self::browserVars(), $theme);
 
 		$images = $this->elements($html, '//div[@class="photo-album-image-wrapper"]//img');
 
-		self::assertSame('A cat on a keyboard', $images[0]->getAttribute('alt'), 'description wins when there is one');
-		self::assertSame('plain.jpg', $images[1]->getAttribute('alt'), 'file name is the fallback');
+		self::assertSame('A cat on a keyboard', $images[0]->getAttribute('alt'), 'the description is the alt text');
+		self::assertSame('', $images[1]->getAttribute('alt'), 'no description means decorative, not the file name');
 	}
 
 	/**
