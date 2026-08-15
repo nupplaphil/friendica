@@ -22,13 +22,6 @@
 	<a href="{{$photo.link}}" class="photo-album-photo-link" id="photo-album-photo-link-{{$photo.id}}" title="{{$photo.title}}">
 		<img src="{{$photo.src}}" alt="{{if $photo.album.name}}{{$photo.album.name}}{{elseif $photo.desc}}{{$photo.desc}}{{elseif $photo.alt}}{{$photo.alt}}{{else}}{{$photo.unknown}}{{/if}}" title="{{$photo.title}}" class="photo-album-photo lframe resize{{$photo.twist}}" id="photo-album-photo-{{$photo.id}}" />
 	</a>
-	{{if $photo.desc}}
-		<button class="alt-text-button" type="button" aria-hidden="true">ALT
-			<span class="alt-text-block" dir="auto">
-				{{$photo.desc}}
-			</span>
-		</button>
-	{{/if}}
 </div>
 <div class="photo-album-image-wrapper-end"></div>
 {{/foreach}}
