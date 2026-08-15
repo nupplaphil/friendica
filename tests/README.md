@@ -35,12 +35,12 @@ sudo apt install php-mysql php-curl php-gd php-xml php-intl php-gmp php-mbstring
 
 ## Create Local Database
 
-The default database name is `test`, username `friendica`, password
-`friendica`.  These can be overridden using environment variables
-`DATABASE_NAME`, `DATABASE_USER`, `DATABASE_HOST`, and
-`DATABASE_PASSWORD`.  Whatever settings you choose, you must give the
-corresponding user the necessary privileges to create and destroy the
-chosen database.
+The test harness reads its connection from the environment variables
+`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_DATABASE`
+(optional `MYSQL_PORT`). There is no built-in default — they must be set,
+otherwise the harness aborts with "Host, User or Database missing".
+Whatever settings you choose, you must give the corresponding user the
+necessary privileges to create and destroy the chosen database.
 
 ```
 GRANT ALL PRIVILEGES ON test.* TO 'friendica'@'localhost' IDENTIFIED BY 'friendica' WITH GRANT OPTION;

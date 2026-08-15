@@ -25,7 +25,7 @@ docker compose exec php bin/console autoinstall -av -f .docker/autoinstall.confi
 ```bash
 docker compose logs -f php
 docker compose logs -f nginx
-docker compose logs -f mariadb
+docker compose logs -f db
 ```
 
 ### Stop environment:
@@ -38,13 +38,13 @@ docker compose down
 - **Friendica application**: http://localhost:8080
 - **MySQL/MariaDB**: localhost:3306
   - User: `friendica`
-  - Password: `friendica_`
+  - Password: `friendica`
   - Database: `friendica`
 
 ## Database access via CLI
 
 ```bash
-docker compose exec mariadb mysql -u friendica -p friendica friendica
+docker compose exec db mariadb -ufriendica -pfriendica friendica
 ```
 
 ## Container names
