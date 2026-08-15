@@ -798,8 +798,8 @@ function photos_content()
 				'$album'       => ['albname', DI::l10n()->t('New album name'), $album_e, ''],
 				'$caption'     => ['desc', DI::l10n()->t('Caption'), $caption_e, ''],
 				'$rotate_none' => ['rotate', DI::l10n()->t('Do not rotate'), 0, '', true],
-				'$rotate_cw'   => ['rotate', DI::l10n()->t("Rotate CW \x28right\x29"), 1, ''],
-				'$rotate_ccw'  => ['rotate', DI::l10n()->t("Rotate CCW \x28left\x29"), 2, ''],
+				'$rotate_cw'   => ['rotate', DI::l10n()->t("Rotate CW (right)"), 1, ''],
+				'$rotate_ccw'  => ['rotate', DI::l10n()->t("Rotate CCW (left)"), 2, ''],
 
 				'$nickname'    => $user['nickname'],
 				'$resource_id' => $ph[0]['resource-id'],

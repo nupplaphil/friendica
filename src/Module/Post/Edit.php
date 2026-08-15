@@ -169,7 +169,7 @@ class Edit extends BaseModule
 			'$summary'             => $item['content-warning'],
 			'$placeholdersummary'  => (Feature::isEnabled($this->session->getLocalUserId(), Feature::SUMMARY) ? $this->t('Set summary, abstract or spoiler text') : ''),
 			'$category'            => Post\Category::getCSVByURIId($item['uri-id'], $this->session->getLocalUserId(), Post\Category::CATEGORY),
-			'$placeholdercategory' => (Feature::isEnabled($this->session->getLocalUserId(), Feature::CATEGORIES) ? $this->t("Categories \x28comma-separated list\x29") : ''),
+			'$placeholdercategory' => (Feature::isEnabled($this->session->getLocalUserId(), Feature::CATEGORIES) ? $this->t("Categories (comma-separated list)") : ''),
 			'$emtitle'             => $this->t('Example: bob@example.com, mary@example.com'),
 			'$lockstate'           => $lockstate,
 			'$acl'                 => '',

@@ -3202,7 +3202,7 @@ class Contact
 
 		// do we have enough information?
 		if (empty($protocol) || ($protocol == Protocol::PHANTOM) || (empty($ret['url']) && empty($ret['addr']))) {
-			$result['message'] .= DI::l10n()->t('The profile address specified does not provide adequate information.') . '<br />';
+			$result['message'] .= DI::l10n()->t('The handle specified does not provide adequate information.') . '<br />';
 			if (empty($ret['poll'])) {
 				$result['message'] .= DI::l10n()->t('No compatible communication protocols or feeds were discovered.') . '<br />';
 			}

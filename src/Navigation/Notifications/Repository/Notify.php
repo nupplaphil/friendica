@@ -478,7 +478,7 @@ class Notify extends BaseRepository
 						);
 
 						$body = $l10n->t(
-							"Display Name:	%s\nSite Location:	%s\nLogin Name:	%s (%s)",
+							"Display Name: %s\nURL: %s\nUsername: %s (%s)",
 							$params['source_name'],
 							$siteurl,
 							$params['source_mail'],
@@ -502,7 +502,7 @@ class Notify extends BaseRepository
 						);
 
 						$body = $l10n->t(
-							"Display Name:	%s\nSite Location:	%s\nLogin Name:	%s (%s)",
+							"Display name: %s\nURL: %s\nUsername: %s (%s)",
 							$params['source_name'],
 							$siteurl,
 							$params['source_mail'],

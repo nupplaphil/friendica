@@ -106,7 +106,7 @@ final class StatusEditor
 			'$term'          => $this->l10n->t('Tag term:'),
 			'$fileas'        => $this->l10n->t('Save to Folder'),
 			'$whereareu'     => $this->l10n->t('Where are you right now?'),
-			'$delitems'      => $this->l10n->t("Delete item\x28s\x29?"),
+			'$delitems'      => $this->l10n->t("Delete item(s)?"),
 			'$postPublished' => $this->l10n->t('Post published.'),
 			'$goToPost'      => $this->l10n->t('Go to post'),
 			'$is_mobile'     => $this->mode->isMobile(),
@@ -169,7 +169,7 @@ final class StatusEditor
 			'$summary'             => $formData['summary'] ?? '',
 			'$placeholdersummary'  => Feature::isEnabled($this->session->getLocalUserId(), Feature::SUMMARY) ? $this->l10n->t('Set summary, abstract or spoiler text') : '',
 			'$category'            => $formData['category'] ?? '',
-			'$placeholdercategory' => Feature::isEnabled($this->session->getLocalUserId(), Feature::CATEGORIES) ? $this->l10n->t("Categories \x28comma-separated list\x29") : '',
+			'$placeholdercategory' => Feature::isEnabled($this->session->getLocalUserId(), Feature::CATEGORIES) ? $this->l10n->t("Categories (comma-separated list)") : '',
 			'$sensitive'           => ['sensitive', $this->l10n->t('Sensitive post'), $formData['sensitive'] ?? false],
 			'$scheduled_at'        => Temporal::getDateTimeField(
 				new \DateTime(),
