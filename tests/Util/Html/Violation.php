@@ -12,13 +12,13 @@ namespace Friendica\Test\Util\Html;
 /**
  * A single markup problem found by {@see Invariants}.
  */
-final class Violation
+final readonly class Violation
 {
 	public function __construct(
-		public readonly string $rule,
-		public readonly string $location,
-		public readonly int $line,
-		public readonly string $snippet,
+		public string $rule,
+		public string $location,
+		public int $line,
+		public string $snippet,
 	) {}
 
 	public function where(): string

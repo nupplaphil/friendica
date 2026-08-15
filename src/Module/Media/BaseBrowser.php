@@ -31,15 +31,9 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseBrowser extends BaseModule
 {
-	protected IHandleUserSessions $session;
-	protected AppHelper $appHelper;
-
-	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, IHandleUserSessions $session, AppHelper $appHelper, array $server, array $parameters = [])
+	public function __construct(L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, Response $response, protected IHandleUserSessions $session, protected AppHelper $appHelper, array $server, array $parameters = [])
 	{
 		parent::__construct($l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
-
-		$this->session   = $session;
-		$this->appHelper = $appHelper;
 	}
 
 	/**
@@ -49,9 +43,9 @@ abstract class BaseBrowser extends BaseModule
 	 * four of them - use an empty string where a browser has nothing to offer:
 	 *
 	 *   0 => link to the item's own page
-	 *   1 => file name, used as the visible caption and as alt text fallback
+	 *   1 => file name, printed as the visible caption below the thumbnail
 	 *   2 => image source for the thumbnail
-	 *   3 => description, used as alt text; empty string when there is none
+	 *   3 => description, used as alt text; empty string marks the thumbnail decorative
 	 *
 	 * @param array $record
 	 *
