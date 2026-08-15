@@ -1324,7 +1324,7 @@ function masonry_or_not(parentElement){
 				});
 				// if this element has a next sibling and it has an image in it
 				if ( $(element).parent().parent().next().length > 0 ){
-					if ( $(element).parent().parent().next().prop('tagName') == 'P' ){
+					if ( $(element).parent().parent().next().prop('tagName') === 'P' ){
 						// has to check <p> so it does not confuse with link preview <div>
 						if ( $(element).parent().parent().next('p:has(img)').length > 0 ){
 							// next sibling contains image so this is a gallery
@@ -1352,7 +1352,7 @@ function masonry_or_not(parentElement){
 				// if this element has a next sibling and it has an image in it
 				if ( $(element).parent().next().length > 0 ){
 					// there IS a next sibling
-					if( $(element).parent().next().prop('tagName') == 'P' ){
+					if( $(element).parent().next().prop('tagName') === 'P' ){
 						if ( $(element).parent().next('p:has(img)').length > 0 ){
 							// next sibling contains an image
 						} else {
@@ -1377,11 +1377,12 @@ function masonry_or_not(parentElement){
 
 
 function preview_post_img(index){
-	if (!index){ 
+	var parentElement;
+	if (!index){
 		index = 0;
-		var parentElement = '#jot-preview-content';
+		parentElement = '#jot-preview-content';
 	} else {
-		var parentElement = '#comment-edit-preview-'+index;
+		parentElement = '#comment-edit-preview-'+index;
 	}
 	var $images = $(parentElement+" img.empty-description, "+parentElement+" img.has-alt-description");
 	if ($images.length === 0){
@@ -1393,7 +1394,7 @@ function preview_post_img(index){
 		if ($images.length > 1 && ($images.parent().next(':has(img)') || $images.parent().parent('p').next(':has(img)')) ){
 			// this appears to be a sequence of images
 		} else {
-			var gallery = false;
+			gallery = false;
 		}
 		// wrap attached images like they would be in feed
 		$images.parent().wrap('<div></div>').wrap('<figure></figure>');
@@ -1433,13 +1434,13 @@ function preview_post_img(index){
 function preview_masonry_rows(index) {
 	// first determine if there are multiple images (by this point they should all be wrapped in <figure> tags)
 	// and we do not want to accidentally scoop up jot and comment ones together
+	var parentElement;
 	if (!index){
-		index = 0;
-		var parentElement = "#jot-preview-content";
+		parentElement = "#jot-preview-content";
 	} else {
-		var parentElement = "#comment-edit-preview-"+index;
+		parentElement = "#comment-edit-preview-"+index;
 	}
-	$images = $(parentElement+" .wall-item-content").find("figure");
+	var $images = $(parentElement+" .wall-item-content").find("figure");
 	// if called by preview_post_image we should never have zero or one image but catch them anyway...
 	if ($images.length === 0){
 		$(parentElement+" .wall-item-decor img").hide();
@@ -1453,36 +1454,35 @@ function preview_masonry_rows(index) {
 		$(parentElement+" .wall-item-body").removeClass('img-processing');
 		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
 		return; // no need to do masonry layout
-	} else { // do masonry layout	
-		const column_size = 2;
-		
+	} else { // do masonry layout
 		var rows = [];
-		
+
 		var couples = [];
 		for(let i=0; i < $images.length; i++){
-			if (typeof($images[i+1]) == "undefined"){
-				var entry = [$images[i]];
+			let entry;
+			if (typeof($images[i+1]) === "undefined"){
+				entry = [$images[i]];
 			} else {
-				var entry = [$images[i], $images[i+1]];
+				entry = [$images[i], $images[i+1]];
 			}
 			couples.push(entry);
 			i++;				// NOT a double increment bug! This pairs images
-		};
-		
+		}
+
+
 		for(let c=0; c < couples.length; c++){
 			var widths = [];
 			var heights = [];
-			var maxHeight = 0;
 			for(let i=0; i < couples[c].length; i++){
-				let this_width = 0;
-				let this_height = 0;
+				let this_width;
+				let this_height;
 				let this_image = $(couples[c][i]).find('img').first();
-				if ( $(this_image).width() == 0){
+				if ( $(this_image).width() === 0){
 					this_width = 640;
 				} else {
 					this_width = $(this_image).width();
 				}
-				if ( $(this_image).height() == 0){
+				if ( $(this_image).height() === 0){
 					this_height = 480;
 				} else {
 					this_height = $(this_image).height();
@@ -1507,10 +1507,11 @@ function preview_masonry_rows(index) {
 			
 			var first_image = [couples[c][0], (100 * correctedWidths[0]/totalWidth), (100 * maxHeight/correctedWidths[0])];
 			
-			if (couples[c].length == 1){ // single image
-				var second_image = [];
+			var second_image;
+			if (couples[c].length === 1){ // single image
+				second_image = [];
 			} else {
-				var second_image = [couples[c][1], (100 * correctedWidths[1]/totalWidth), (100 * maxHeight/correctedWidths[1])];
+				second_image = [couples[c][1], (100 * correctedWidths[1]/totalWidth), (100 * maxHeight/correctedWidths[1])];
 			}
 			// push them onto a row
 			rows.push([widths, heights, maxHeight, totalWidth, commonHeightRatio, first_image, second_image]);
