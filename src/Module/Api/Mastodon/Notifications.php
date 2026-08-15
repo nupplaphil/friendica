@@ -138,7 +138,7 @@ class Notifications extends BaseApi
 				}
 			}
 
-			self::setLinkHeader();
+			$this->setPaginationLinkHeader();
 			$this->earlyJsonExit($mstdnNotifications);
 		}
 	}

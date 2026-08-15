@@ -86,7 +86,7 @@ class Context extends BaseApi
 			}
 			DBA::close($posts);
 
-			self::setLinkHeader();
+			$this->setPaginationLinkHeader();
 		} else {
 			$parent = DBA::selectFirst('mail', ['parent-uri-id'], ['uri-id' => $id, 'uid' => $uid]);
 			if (DBA::isResult($parent)) {

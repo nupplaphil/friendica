@@ -288,3 +288,51 @@ This section contains deprecation notices. This changes will become mandatory in
    ```php
    $this->earlyHttpError(403, 'Forbidden');
    ```
+
+- `BaseApi::getLinkHeader()` is deprecated. Use `BaseApi::getPaginationLinkHeaderValue()` instead:
+
+   *Before*
+   ```php
+   $linkHeader = self::getLinkHeader($asDate);
+   ```
+
+   *After*
+   ```php
+   $linkHeader = $this->getPaginationLinkHeaderValue($asDate);
+   ```
+
+- `BaseApi::getOffsetAndLimitLinkHeader()` is deprecated. Use `BaseApi::getOffsetAndLimitPaginationLinkHeaderValue()` instead:
+
+   *Before*
+   ```php
+   $linkHeader = self::getOffsetAndLimitLinkHeader($offset, $limit);
+   ```
+
+   *After*
+   ```php
+   $linkHeader = $this->getOffsetAndLimitPaginationLinkHeaderValue($offset, $limit);
+   ```
+
+- `BaseApi::setLinkHeader()` is deprecated. Use `BaseApi::setPaginationLinkHeader()` instead:
+
+   *Before*
+   ```php
+   self::setLinkHeader($asDate);
+   ```
+
+   *After*
+   ```php
+   $this->setPaginationLinkHeader($asDate);
+   ```
+
+- `BaseApi::setLinkHeaderByOffsetLimit()` is deprecated. Use `BaseApi::setPaginationLinkHeaderByOffsetLimit()` instead:
+
+   *Before*
+   ```php
+   self::setLinkHeaderByOffsetLimit($offset, $limit);
+   ```
+
+   *After*
+   ```php
+   $this->setPaginationLinkHeaderByOffsetLimit($offset, $limit);
+   ```

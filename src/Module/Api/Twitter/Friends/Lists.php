@@ -98,7 +98,7 @@ class Lists extends ContactEndpoint
 
 		$return = self::list($ids, $total_count, $uid, $cursor, $count, $skip_status, $include_user_entities);
 
-		$this->response->setHeader(self::getLinkHeader());
+		$this->setPaginationLinkHeader();
 
 		$this->response->addFormattedContent('lists', ['lists' => $return]);
 	}

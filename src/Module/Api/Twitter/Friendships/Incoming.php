@@ -66,7 +66,7 @@ class Incoming extends ContactEndpoint
 
 		$return = self::ids($ids, $total_count, $cursor, $count, $stringify_ids);
 
-		$this->response->setHeader(self::getLinkHeader());
+		$this->setPaginationLinkHeader();
 
 		$this->response->addFormattedContent('incoming', ['incoming' => $return]);
 	}

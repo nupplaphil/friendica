@@ -97,7 +97,7 @@ class Ids extends ContactEndpoint
 
 		$return = self::ids($ids, $total_count, $cursor, $count, $stringify_ids);
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 
 		$this->earlyJsonExit($return);
 	}

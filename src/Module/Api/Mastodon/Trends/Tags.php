@@ -42,7 +42,7 @@ class Tags extends BaseApi
 		}
 
 		if (!empty($trending)) {
-			self::setLinkHeaderByOffsetLimit($request['offset'], $request['limit']);
+			$this->setPaginationLinkHeaderByOffsetLimit($request['offset'], $request['limit']);
 		}
 
 		$this->earlyJsonExit($trending);
