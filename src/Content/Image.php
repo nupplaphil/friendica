@@ -50,13 +50,13 @@ class Image
 		// Pair images into rows
 		$images_rows = [];
 
-		for ($i = 0; $i < count($images); $i++) {
-			$images_rows[] = [ $images[$i], $images[$i + 1 ] ];
-			$i++;	// NOT A DOUBLE-INCREMENT BUG! Makes sure no image appears in 2 pairs
+		// Two images per row, the last row may hold a single image
+		for ($i = 0; $i < count($images); $i += 2) {
+			$images_rows[] = isset($images[$i + 1]) ? [$images[$i], $images[$i + 1]] : [$images[$i]];
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('content/image/grid.tpl'), [
-			'rows' => $images_rows,
+			'$rows' => $images_rows,
 		]);
 	}
 

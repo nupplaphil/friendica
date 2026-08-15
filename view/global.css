@@ -780,7 +780,8 @@ figure.img-allocated-height img{
 **/
 .wall-item-content .img-allocated-max-width:has(+ .img-allocated-max-width) {
 	width: 50%;
-	float: left; /* fallback for old browsers */
+	/* stylelint-disable-next-line declaration-block-no-duplicate-properties -- left is the fallback for browsers without logical float values */
+	float: left;
 	float: inline-start;
 	margin: 0;
 	padding: 0 5px 5px 5px;
@@ -788,7 +789,8 @@ figure.img-allocated-height img{
 	box-sizing: border-box;
 }
 	.wall-item-content .img-allocated-max-width:has(+ .img-allocated-max-width):nth-of-type(even) {
-		float: right; /* fallback for old browsers */
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties -- right is the fallback for browsers without logical float values */
+		float: right;
 		float: inline-end;
 	}
 /* in any group of 3 image container if the LAST one is not followed by a like-kind container clear float

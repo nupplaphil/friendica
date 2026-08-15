@@ -1739,28 +1739,29 @@ section.minimal {
 }
 .mail-list-wrapper a,
 .wall-item-container .wall-item-bottom a,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions a,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-links a,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions .fakelink {
+.wall-item-container .wall-item-links,
+.wall-item-container .wall-item-actions a,
+.wall-item-container .wall-item-links a,
+.wall-item-container .wall-item-actions .fakelink {
 	color: #999;
 }
 .mail-list-wrapper a:hover,
 .wall-item-container .wall-item-bottom a:hover,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions a:hover,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-links a:hover,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions .fakelink:hover,
+.wall-item-container .wall-item-actions a:hover,
+.wall-item-container .wall-item-links a:hover,
+.wall-item-container .wall-item-actions .fakelink:hover,
 
 .mail-list-wrapper a:focus,
 .wall-item-container .wall-item-bottom a:focus,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions a:focus,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-links a:focus,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions .fakelink:focus,
+.wall-item-container .wall-item-actions a:focus,
+.wall-item-container .wall-item-links a:focus,
+.wall-item-container .wall-item-actions .fakelink:focus,
 
 .mail-list-wrapper a:active,
 .wall-item-container .wall-item-bottom a:active,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions a:active,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-links a:active,
-.wall-item-container .wall-item-links, .wall-item-container .wall-item-actions .fakelink:active {
+.wall-item-container .wall-item-actions a:active,
+.wall-item-container .wall-item-links a:active,
+.wall-item-container .wall-item-actions .fakelink:active {
 	color: #000;
 	text-decoration: none;
 }
@@ -3397,7 +3398,8 @@ a.btn#contact-edit-actions-button {
 			}
 				.fbrowser .folders ul li a::before {
 					content: '\f3ca';
-					font-family: remixicon;
+					/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
+					font-family: 'remixicon';
 					margin-right: 5px;
 				}
 				.fbrowser .folders ul li a:hover,
@@ -3434,10 +3436,12 @@ a.btn#contact-edit-actions-button {
 		#upload-photo::before,
 		#upload-attachment::before {
 		  content: '\f4b1';
-		  font-family: remixicon;
+		  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
+		  font-family: 'remixicon';
 		}
 		.fbrowser.attachment a[data-img]::before{
 		content: '\eceb';
+		/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
 		font-family: 'remixicon';
 		font-size: 72px;
 		position: relative;
@@ -3495,7 +3499,7 @@ a.btn#contact-edit-actions-button {
 		right: 0;
 		text-align: center;
 		white-space: wrap;
-		word-break: break-word;
+		overflow-wrap: break-word;
 	}
 
 .photo-top-album-name {
