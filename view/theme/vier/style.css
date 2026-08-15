@@ -2562,7 +2562,6 @@ span.pager_prev a:hover,
 span.pager_next a:hover,
 ul.tabs a:hover,
 
-span.pager_current,
 span.pager_n a:focus,
 span.pager_first a:focus,
 span.pager_last a:focus,
@@ -2570,7 +2569,6 @@ span.pager_prev a:focus,
 span.pager_next a:focus,
 ul.tabs a:focus,
 
-span.pager_current,
 span.pager_n a:active,
 span.pager_first a:active,
 span.pager_last a:active,
@@ -3398,7 +3396,6 @@ a.btn#contact-edit-actions-button {
 			}
 				.fbrowser .folders ul li a::before {
 					content: '\f3ca';
-					/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
 					font-family: 'remixicon';
 					margin-right: 5px;
 				}
@@ -3436,12 +3433,10 @@ a.btn#contact-edit-actions-button {
 		#upload-photo::before,
 		#upload-attachment::before {
 		  content: '\f4b1';
-		  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
 		  font-family: 'remixicon';
 		}
 		.fbrowser.attachment a[data-img]::before{
 		content: '\eceb';
-		/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font, no generic fallback possible */
 		font-family: 'remixicon';
 		font-size: 72px;
 		position: relative;

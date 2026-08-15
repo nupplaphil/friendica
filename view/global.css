@@ -780,7 +780,6 @@ figure.img-allocated-height img{
 **/
 .wall-item-content .img-allocated-max-width:has(+ .img-allocated-max-width) {
 	width: 50%;
-	/* stylelint-disable-next-line declaration-block-no-duplicate-properties -- left is the fallback for browsers without logical float values */
 	float: left;
 	float: inline-start;
 	margin: 0;
@@ -789,7 +788,6 @@ figure.img-allocated-height img{
 	box-sizing: border-box;
 }
 	.wall-item-content .img-allocated-max-width:has(+ .img-allocated-max-width):nth-of-type(even) {
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties -- right is the fallback for browsers without logical float values */
 		float: right;
 		float: inline-end;
 	}
