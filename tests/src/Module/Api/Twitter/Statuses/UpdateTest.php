@@ -40,6 +40,7 @@ class UpdateTest extends ApiTestCase
 			],
 		];
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'status'                => 'Status content #friendica',
@@ -62,6 +63,7 @@ class UpdateTest extends ApiTestCase
 	 */
 	public function testApiStatusesUpdateWithHtml(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Update(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'htmlstatus' => '<b>Status content</b>',
@@ -70,48 +72,5 @@ class UpdateTest extends ApiTestCase
 		$json = $this->toJson($response);
 
 		self::assertStatus($json);
-	}
-
-	/**
-	 * Test the api_statuses_update() function without an authenticated user.
-	 *
-	 */
-	public function testApiStatusesUpdateWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		/*
-		$this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		BasicAuth::setCurrentUserID();
-		$_SESSION['authenticated'] = false;
-		api_statuses_update('json');
-		*/
-	}
-
-	/**
-	 * Test the api_statuses_update() function with a parent status.
-	 *
-	 */
-	public function testApiStatusesUpdateWithParent(): void
-	{
-		$this->markTestIncomplete('This triggers an exit() somewhere and kills PHPUnit.');
-	}
-
-	/**
-	 * Test the api_statuses_update() function with a media_ids parameter.
-	 *
-	 */
-	public function testApiStatusesUpdateWithMediaIds(): void
-	{
-		$this->markTestIncomplete();
-	}
-
-	/**
-	 * Test the api_statuses_update() function with the throttle limit reached.
-	 *
-	 */
-	public function testApiStatusesUpdateWithDayThrottleReached(): void
-	{
-		$this->markTestIncomplete();
 	}
 }
