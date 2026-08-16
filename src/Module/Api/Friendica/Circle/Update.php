@@ -43,7 +43,7 @@ class Update extends BaseApi
 			throw new BadRequestException('gid not available');
 		}
 
-		$json = json_decode($this->getRequestValue($request, 'json', ''), true);
+		$json = json_decode((string) $this->getRequestValue($request, 'json', ''), true);
 		if (!is_array($json) || !isset($json['user']) || !is_array($json['user'])) {
 			throw new BadRequestException('no valid user list submitted');
 		}
