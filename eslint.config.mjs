@@ -33,7 +33,7 @@ const injectedGlobals = {
 	localUser: "readonly",
 	netargs: "writable",
 	profile_uid: "readonly",
-	spaEnabled: "readonly", // emitted by view/templates/head.tpl
+	spaEnabled: "readonly", // view/templates/head.tpl, view/theme/frio/templates/head.tpl
 	theme: "writable", // reassigned by previewTheme() in view/js/main.js
 };
 
@@ -49,6 +49,7 @@ const friendicaGlobals = {
 	commentCloseUI: "readonly",
 	hideLoading: "readonly",
 	htmlToText: "readonly",
+	initInfiniteScroll: "readonly", // view/js/main.js
 	insertBBCodeInTextarea: "readonly",
 	jotShow: "readonly",
 	NavUpdate: "readonly",
@@ -69,6 +70,7 @@ export default [
 	{
 		ignores: [
 			"addon/**",
+			"local/**",
 			"node_modules/**",
 			"vendor/**",
 			"**/.venv/**",
@@ -93,7 +95,7 @@ export default [
 	},
 	js.configs.recommended,
 	{
-		files: ["view/**/*.js", "mods/**/*.js"],
+		files: ["view/**/*.js", "view/**/*.mjs", "mods/**/*.js"],
 		languageOptions: {
 			ecmaVersion: 2022,
 			sourceType: "script",
@@ -136,18 +138,11 @@ export default [
 		},
 	},
 	{
-		// The end-to-end suite is modern ESM running under Node, but the bodies of
-		// page.evaluate() callbacks are serialised and executed in the browser, so
-		// both sets of globals are legitimate here.
-		files: ["tests/e2e/**/*.mjs"],
+		// The SPA scripts are native ES modules (.mjs), unlike the rest of
+		// view/**/*.js which are classic scripts sharing a global namespace.
+		files: ["view/js/spa/**/*.mjs"],
 		languageOptions: {
-			ecmaVersion: "latest",
 			sourceType: "module",
-			globals: {
-				...globals.node,
-				...globals.browser,
-				...injectedGlobals,
-			},
 		},
 	},
 ];
