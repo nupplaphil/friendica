@@ -15,6 +15,7 @@ use Friendica\DI;
 use Friendica\Content\Conversation\Factory\Channel as ChannelFactory;
 use Friendica\Content\Conversation\Repository;
 use Friendica\Content\GroupManager;
+use Friendica\Database\Database;
 use Friendica\Module\BaseApi;
 use Friendica\Model\Circle;
 use Friendica\Module\Api\ApiResponse;
@@ -31,7 +32,7 @@ class Lists extends BaseApi
 	/** @var Repository\UserDefinedChannel */
 	protected $userDefinedChannel;
 
-	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, ChannelFactory $channel, private readonly GroupManager $groupManager, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, array $server, array $parameters = [])
+	public function __construct(Repository\UserDefinedChannel $userDefinedChannel, ChannelFactory $channel, private readonly GroupManager $groupManager, \Friendica\Factory\Api\Mastodon\Error $errorFactory, AppHelper $appHelper, L10n $l10n, BaseURL $baseUrl, Arguments $args, LoggerInterface $logger, Profiler $profiler, ApiResponse $response, private readonly Database $database, array $server, array $parameters = [])
 	{
 		parent::__construct($errorFactory, $appHelper, $l10n, $baseUrl, $args, $logger, $profiler, $response, $server, $parameters);
 
@@ -84,6 +85,9 @@ class Lists extends BaseApi
 
 	public function put(array $request = [])
 	{
+		$this->checkAllowedScope(self::SCOPE_WRITE);
+		$uid = self::getCurrentUserID();
+
 		$request = $this->getRequest([
 			'title'          => '', // The title of the list to be updated.
 			'replies_policy' => '', // One of: "followed", "list", or "none".
@@ -91,6 +95,10 @@ class Lists extends BaseApi
 
 		if (empty($request['title']) || empty($this->parameters['id'])) {
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
+		}
+
+		if (!$this->database->exists('group', ['id' => $this->parameters['id'], 'uid' => $uid])) {
+			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
 		Circle::update($this->parameters['id'], $request['title']);
