@@ -283,7 +283,7 @@ class Page implements ArrayAccess
 		]) . $this->page['htmlhead'];
 
 		if ($pConfig->get($localUID, 'accessibility', 'hide_empty_descriptions')) {
-			$this->page['htmlhead'] .= "<style>.empty-description {display: none;}</style>\n";
+			$this->page['htmlhead'] .= "<style>a[data-alt='']{display:none;} a:has(.empty-description){display:none;} .empty-description {display: none;}</style>\n";
 		}
 		if ($pConfig->get($localUID, 'accessibility', 'hide_custom_emojis')) {
 			$this->page['htmlhead'] .= "<style>span.emoji.mastodon img {display: none;}</style>\n";

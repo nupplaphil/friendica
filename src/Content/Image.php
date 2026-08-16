@@ -47,19 +47,16 @@ class Image
 	 */
 	private static function getImageGridHtml(PostMedias $images): string
 	{
-		// Image for first column (fc) and second column (sc)
-		$images_fc = [];
-		$images_sc = [];
+		// Pair images into rows
+		$images_rows = [];
 
-		for ($i = 0; $i < count($images); $i++) {
-			($i % 2 == 0) ? ($images_fc[] = $images[$i]) : ($images_sc[] = $images[$i]);
+		// Two images per row, the last row may hold a single image
+		for ($i = 0; $i < count($images); $i += 2) {
+			$images_rows[] = isset($images[$i + 1]) ? [$images[$i], $images[$i + 1]] : [$images[$i]];
 		}
 
 		return Renderer::replaceMacros(Renderer::getMarkupTemplate('content/image/grid.tpl'), [
-			'columns' => [
-				'fc' => $images_fc,
-				'sc' => $images_sc,
-			],
+			'$rows' => $images_rows,
 		]);
 	}
 
@@ -77,10 +74,6 @@ class Image
 
 		$rows = array_map(
 			function (PostMedias $PostMediaImages) {
-				if ($singleImageInRow = count($PostMediaImages) == 1) {
-					$PostMediaImages[] = $PostMediaImages[0];
-				}
-
 				$widths  = [];
 				$heights = [];
 				foreach ($PostMediaImages as $PostMediaImage) {
@@ -104,10 +97,6 @@ class Image
 				$totalWidth = array_sum($correctedWidths);
 
 				$row_images2 = [];
-
-				if ($singleImageInRow) {
-					unset($PostMediaImages[1]);
-				}
 
 				foreach ($PostMediaImages as $i => $PostMediaImage) {
 					$row_images2[] = new MasonryImage(

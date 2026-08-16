@@ -59,9 +59,9 @@ function _resizeIframe(obj, desth) {
 
 function initWidget(name) {
 	const widget = document.getElementById(name)
-	const list = widget.getElementsByClassName("sidebar-widget-list")[0];
-	const btn = widget.getElementsByClassName("widget-btn")[0]
-
+	const list = widget.querySelector(".sidebar-widget-list");
+	const btn = widget.querySelector(".widget-btn");
+	if (!btn || !list){ return; } // there are contexts in which not btn will be found
 	if (localStorage.getItem(window.location.pathname.split("/")[1] + ":" + name) != "block") {
 		list.style.display = "none";
 		btn.setAttribute("aria-expanded", false)
@@ -1156,6 +1156,7 @@ function preview_comment(id) {
 		.always(function() {
 		hideLoading();
 	});
+	fix_preview_img_wrap(id);
 	return true;
 }
 
@@ -1252,9 +1253,293 @@ function preview_post() {
 		.always(function() {
 		hideLoading();
 	});
+	fix_preview_img_wrap();
 	return true;
 }
+function fix_preview_img_wrap(index){
+	/* We don't know how long it will take the server to do the ajax request
+	   so we need to monitor the preview pane for a DOM mutation.
+	   
+	   We also do not want to attach the mutation observer unless previewing
+	   and we do not need this on pages without the jot composer. This might
+	   be in feed, in modal, or on a separate page so check for parent obj.	   
+	   
+	   We only want ot use a Mutation Observer if the browser supports it
+	   (and most do) but just in case there is a fallback to a timeOut method.
+	*/
 
+	if ("MutationObserver" in window){
+		const targetElement = (!index && $('#jot-preview-content .tread-wrapper')) ? $('#jot-preview-content .tread-wrapper') : $('#comment-edit-preview-'+index+' .tread-wrapper');
+		const parentToWatch = (!index && document.getElementById('jot-preview-content')) ? document.getElementById('jot-preview-content') : document.getElementById('comment-edit-preview-'+index);	/* jQuery obj will not work! */
+		
+		const observer = new MutationObserver((mutationList, observer) => {
+			for (const mutation of mutationList) {
+				if (mutation.type === "childList") {
+					const newElement = targetElement;
+					if (newElement){
+						preview_post_img(index);
+						observer.disconnect();
+						break;
+					}
+				}
+			}
+		});
+		// attach the mutation observer IF we have a valid parent obj
+		if (parentToWatch){
+			observer.observe(parentToWatch, { childList: true, subtree: true });
+		}
+	} else {
+		// fallback if MutationObserver is not available
+		setTimeout(function(){preview_post_img(index);},3000);
+	}
+}
+
+
+function masonry_or_not(parentElement){
+	/* This convoluted function grabs the preview contents as rendered by Friendica
+	   and then tries to determine if it is one of the scenarios in which masonry
+	   layout will not be shown and returns boolean true|false to the caller.
+	   
+	   Normally the masonry layout is only shown if:
+	   * There are multiple images in the post
+	   * The images are consecutive
+	   * There are no other elements in between them.
+	   * There are no raw text nodes immediately before or after any of them.
+	   * There is no paragraph after the last one (a DIV is okay though)
+	   
+	   This function assumes a masonry layout could be shown, unless it should find
+	   one of the above conditions is not met.
+	*/
+
+	var gallery = true;
+	$(parentElement+" .wall-item-body").find('img.empty-description, img.has-alt-description').each(function(index, element){
+			if ( $(element).parent('a').length > 0 ){
+				// check if img has other stuff in with it
+				$(element).parent().parent().contents().filter(function(){
+					if (this.nodeType === 3){
+						// there is a text node in here with it, this is NOT a gallery
+						gallery = false;
+						return;
+					}
+				});
+				// if this element has a next sibling and it has an image in it
+				if ( $(element).parent().parent().next().length > 0 ){
+					if ( $(element).parent().parent().next().prop('tagName') === 'P' ){
+						// has to check <p> so it does not confuse with link preview <div>
+						if ( $(element).parent().parent().next('p:has(img)').length > 0 ){
+							// next sibling contains image so this is a gallery
+						} else {
+							// next sibling does NOT contain an image, this is not a gallery
+							gallery = false;
+							return;
+						}
+					} else {
+						// next sibling is some other kind of element
+					}
+				} else {
+					// there is no next sibling
+				}
+					
+			} else if( $(element).parent('p').length > 0 ){
+				// check if img has other stuff in with it
+				$(element).parent().contents().filter(function(){
+					if (this.nodeType === 3){
+						// there is a text node in it, this is NOT a gallery
+						gallery = false;
+						return;
+					}
+				});	
+				// if this element has a next sibling and it has an image in it
+				if ( $(element).parent().next().length > 0 ){
+					// there IS a next sibling
+					if( $(element).parent().next().prop('tagName') === 'P' ){
+						if ( $(element).parent().next('p:has(img)').length > 0 ){
+							// next sibling contains an image
+						} else {
+							// next sibling does NOT contain an image, NOT a gallery
+							gallery = false;
+							return;
+						}
+					} else {
+						// next sibling is some other kind of element
+					}
+				} else {
+					// there is no next sibling
+				}			
+			} else {
+				// no clue what element this is inside of so NOT a gallery
+				gallery = false;
+				return;
+			}
+		});
+		return gallery;
+}
+
+
+function preview_post_img(index){
+	var parentElement;
+	if (!index){
+		index = 0;
+		parentElement = '#jot-preview-content';
+	} else {
+		parentElement = '#comment-edit-preview-'+index;
+	}
+	var $images = $(parentElement+" img.empty-description, "+parentElement+" img.has-alt-description");
+	if ($images.length === 0){
+		// no images to process
+		return;
+	} else {
+		// before we manipulate the DOM check if this could use masonry layout
+		var gallery = masonry_or_not(parentElement);
+		if ($images.length > 1 && ($images.parent().next(':has(img)') || $images.parent().parent('p').next(':has(img)')) ){
+			// this appears to be a sequence of images
+		} else {
+			gallery = false;
+		}
+		// wrap attached images like they would be in feed
+		$images.parent().wrap('<div></div>').wrap('<figure></figure>');
+		// get images with alt text
+		$(parentElement+" img.has-alt-description").each(function(index, element){
+			var $alt_text = $(element).attr("alt");
+			$(element).parent().parent().append('<button class="alt-text-button" type="button" aria-hidden="true">ALT<span class="alt-text-block" dir="auto">'+$alt_text+'</span></button>');
+		});
+		// if we have multiple images do masonry layout
+		if ($images.length > 1 && gallery === true){
+			// if processing takes too long pulse the container background
+			$(parentElement+" .wall-item-body").addClass('img-processing');
+			// show process spinner (if there is one)
+			$(parentElement+" .wall-item-decor img").show();
+			// hide container content during processing...
+			$(parentElement+" .wall-item-body").css({visibility: 'hidden'});
+
+
+			/* only setInterval or setTimeout work to trigger masonry function!
+			   jQuery promise().done() or count tracking or MutationObserver
+			   all cause infinite loops. The ONLY way to know if the above is
+			   done manipulating the DOM is to compare the number of FIGURE
+			   tags to the original IMAGE count. If they match, it's done.			
+			*/ 
+			var condition = setInterval(function(){
+				if( $(parentElement+" figure").length === $images.length ){
+					clearInterval(condition);
+					preview_masonry_rows(index);
+				}
+			}, 100);
+		} else {
+			$images.parent().wrap('<div class="body-attach"></div>');
+		}
+	}
+}
+
+function preview_masonry_rows(index) {
+	// first determine if there are multiple images (by this point they should all be wrapped in <figure> tags)
+	// and we do not want to accidentally scoop up jot and comment ones together
+	var parentElement;
+	if (!index){
+		parentElement = "#jot-preview-content";
+	} else {
+		parentElement = "#comment-edit-preview-"+index;
+	}
+	var $images = $(parentElement+" .wall-item-content").find("figure");
+	// if called by preview_post_image we should never have zero or one image but catch them anyway...
+	if ($images.length === 0){
+		$(parentElement+" .wall-item-decor img").hide();
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
+		return;
+	}
+	else if ($images.length === 1){ 
+		$images.parent().wrap('<div class="body-attach"></div>');
+		$(parentElement+" .wall-item-decor img").hide();
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
+		return; // no need to do masonry layout
+	} else { // do masonry layout
+		var rows = [];
+
+		var couples = [];
+		for(let i=0; i < $images.length; i++){
+			let entry;
+			if (typeof($images[i+1]) === "undefined"){
+				entry = [$images[i]];
+			} else {
+				entry = [$images[i], $images[i+1]];
+			}
+			couples.push(entry);
+			i++;				// NOT a double increment bug! This pairs images
+		}
+
+
+		for(let c=0; c < couples.length; c++){
+			var widths = [];
+			var heights = [];
+			for(let i=0; i < couples[c].length; i++){
+				let this_width;
+				let this_height;
+				let this_image = $(couples[c][i]).find('img').first();
+				if ( $(this_image).width() === 0){
+					this_width = 640;
+				} else {
+					this_width = $(this_image).width();
+				}
+				if ( $(this_image).height() === 0){
+					this_height = 480;
+				} else {
+					this_height = $(this_image).height();
+				}
+				widths.push( this_width );
+				heights.push( this_height );
+			}
+			var maxHeight = Math.max(...heights);
+			// corrected width preserving aspect ratio when all images on a row are the same height
+			var correctedWidths = [];
+			for(let w=0; w < widths.length; w++){
+				correctedWidths.push( (widths[w] * maxHeight / heights[w]) );
+			}
+			var totalWidth = 0;
+			// total sum of all widths
+			for(let t=0; t < correctedWidths.length; t++){
+				totalWidth += correctedWidths[t];
+			}
+			// This magic value will stay constant for each image of any given row and is ultimately
+			// used to determine the height of the row container relative to the available width
+			var commonHeightRatio = (100 * correctedWidths[0] / totalWidth / (widths[0] / heights[0]));
+			
+			var first_image = [couples[c][0], (100 * correctedWidths[0]/totalWidth), (100 * maxHeight/correctedWidths[0])];
+			
+			var second_image;
+			if (couples[c].length === 1){ // single image
+				second_image = [];
+			} else {
+				second_image = [couples[c][1], (100 * correctedWidths[1]/totalWidth), (100 * maxHeight/correctedWidths[1])];
+			}
+			// push them onto a row
+			rows.push([widths, heights, maxHeight, totalWidth, commonHeightRatio, first_image, second_image]);
+		}
+		var $attachbox = $('<div></div>');
+			$attachbox.addClass('body-attach');
+
+		for(let r=0; r < rows.length; r++){
+			var $newRow = $('<div></div>');
+				$newRow.addClass('masonry-row');
+				$newRow.css('height', rows[r][4]+'%');
+				rows[r][5][0].setAttribute('style','width: '+rows[r][5][1]+'%; padding-bottom: calc('+(rows[r][5][1] * rows[r][5][2] / 100)+'% - 5px / 2)');
+				rows[r][5][0].className = "img-allocated-height";
+				$newRow.append(rows[r][5][0]);
+			if (rows[r][6].length > 0){ // do not assume a matching image
+				rows[r][6][0].setAttribute('style','width: '+rows[r][6][1]+'%; padding-bottom: calc('+(rows[r][6][1] * rows[r][6][2] / 100)+'% - 5px / 2)');
+				rows[r][6][0].className = "img-allocated-height";
+				$newRow.append(rows[r][6][0]);
+			}
+			$attachbox.append($newRow);
+		}
+		$(parentElement+" .wall-item-body div:empty").remove();				// clean up now empty divs that used to wrap images
+		$(parentElement+" .wall-item-body").append($attachbox);				
+		$(parentElement+" .wall-item-decor img").hide();						// hide spinner
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});	// make container visible
+	}
+}
 function unpause() {
 	// unpause auto reloads if they are currently stopped
 	totStopped = false;

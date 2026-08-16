@@ -16,6 +16,13 @@
 		<a data-fancybox="uri-id-{{$image->uriId}}" href="{{$image->url}}">
 			<img src="{{$image->preview}}" alt="{{$image->description}}" title="{{$image->description}}" {{if $image->description}}class="has-alt-description"{{else}}class="empty-description"{{/if}} loading="lazy">
 		</a>
+		{{if $image->description}}
+			<button class="alt-text-button" type="button" aria-hidden="true">ALT
+				<span class="alt-text-block" dir="auto">
+					{{$image->description}}
+				</span>
+			</button>
+		{{/if}}
     {{else}}
 		<img src="{{$image->url}}" alt="{{$image->description}}" title="{{$image->description}}" {{if $image->description}}class="has-alt-description"{{else}}class="empty-description"{{/if}} loading="lazy">
         {{if $image->description}}
