@@ -8,11 +8,12 @@
 {{if $mode == display}}
 <script type="text/javascript">
 // Display module: Scroll to item by GUID
-window.itemGuid = window.location.pathname.split("/").pop();
 window.scrollToDisplayGuid = function scrollToDisplayGuid() {
-  scrollToItem("item-" + window.itemGuid);
+  var itemGuid = window.location.pathname.split("/").pop();
+  console.debug('[Threaded Conversation] Scrolling to item with GUID:', itemGuid);
+  scrollToItem("item-" + itemGuid);
 };
-window.registerModuleLifecycle('#conversation-end', window.scrollToDisplayGuid, null, 'window');
+window.registerModuleLifecycle('#live-display', window.scrollToDisplayGuid, null, 'window');
 </script>
 {{/if}}
 {{$live_update nofilter}}
