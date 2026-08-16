@@ -121,8 +121,8 @@
 	{{if $spa_mode}}
 		<link rel="stylesheet" href="view/asset/unpoly/unpoly.min.css?v={{$VERSION}}" type="text/css" media="all" />
 		<script type="text/javascript" src="view/asset/unpoly/unpoly.min.js?v={{$VERSION}}"></script>
-		<script type="module" src="view/js/spa/spa-router.js?v={{$VERSION}}"></script>
-		<script type="module" src="view/js/spa/spa-unpoly-bridge.js?v={{$VERSION}}"></script>
+		<script type="module" src="view/js/spa/spa-router.mjs?v={{$VERSION}}"></script>
+		<script type="module" src="view/js/spa/spa-unpoly-bridge.mjs?v={{$VERSION}}"></script>
 		<script data-spa-version="{{$spa_router_ts}}">window.__spa_router_version = "{{$spa_router_ts}}";</script>
 	{{/if}}
 	<script>

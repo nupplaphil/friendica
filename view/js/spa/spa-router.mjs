@@ -4,6 +4,8 @@
 
 // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPLv3-or-later
 
+// @type {module}
+
 /**
  * SPA Router for Friendica
  * ES Module - load with <script type="module">
@@ -16,21 +18,21 @@ import {
   promoteToGlobal,
   classifyScript,
   executeScripts
-} from '/view/js/spa/spa-script-runtime.js';
+} from '/view/js/spa/spa-script-runtime.mjs';
 import {
   showTimeoutModal,
   dismissTimeoutModal,
   cleanupTooltips
-} from '/view/js/spa/spa-ui-helpers.js';
-import { createNavigationAdapter } from '/view/js/spa/spa-navigation-adapter.js';
+} from '/view/js/spa/spa-ui-helpers.mjs';
+import { createNavigationAdapter } from '/view/js/spa/spa-navigation-adapter.mjs';
 import {
   triggerSPADocumentReady,
   triggerSPAWindowLoad,
   reinitializeDynamicContent
-} from '/view/js/spa/spa-lifecycle.js';
-import { createDomSwapPipeline } from '/view/js/spa/spa-dom-swap.js';
-import { createContentLoader } from '/view/js/spa/spa-content-loader.js';
-import { initUnpolyEnhancements, bindUnpolyBridgeEvents } from '/view/js/spa/spa-unpoly-bridge.js';
+} from '/view/js/spa/spa-lifecycle.mjs';
+import { createDomSwapPipeline } from '/view/js/spa/spa-dom-swap.mjs';
+import { createContentLoader } from '/view/js/spa/spa-content-loader.mjs';
+import { initUnpolyEnhancements, bindUnpolyBridgeEvents } from '/view/js/spa/spa-unpoly-bridge.mjs';
 
 // ============================================
 // FEATURE DETECTION
