@@ -25,10 +25,8 @@ class Update extends BaseApi
 		$uid = BaseApi::getCurrentUserID();
 
 		// params
-		$gid   = $this->getRequestValue($request, 'gid', 0);
-		$name  = $this->getRequestValue($request, 'name', '');
-		$json  = json_decode($request['json'], true);
-		$users = $json['user'];
+		$gid  = $this->getRequestValue($request, 'gid', 0);
+		$name = $this->getRequestValue($request, 'name', '');
 
 		// error if no name specified
 		if (!$name) {
@@ -40,14 +38,30 @@ class Update extends BaseApi
 			throw new BadRequestException('gid not specified');
 		}
 
+		// error message if specified gid is not in database
+		if (!DBA::exists('group', ['uid' => $uid, 'id' => $gid])) {
+			throw new BadRequestException('gid not available');
+		}
+
+		$json = json_decode($this->getRequestValue($request, 'json', ''), true);
+		if (!is_array($json) || !isset($json['user']) || !is_array($json['user'])) {
+			throw new BadRequestException('no valid user list submitted');
+		}
+
+		$users = $json['user'];
+
 		// remove members
 		$members = Contact\Circle::getById($gid);
 		foreach ($members as $member) {
-			$cid = $member['id'];
+			$cid   = $member['id'];
+			$found = false;
 			foreach ($users as $user) {
-				$found = $user['cid'] == $cid;
+				if (($user['cid'] ?? null) == $cid) {
+					$found = true;
+					break;
+				}
 			}
-			if (!isset($found) || !$found) {
+			if (!$found) {
 				$gid = Circle::getIdByName($uid, $name);
 				Circle::removeMember($gid, $cid);
 			}
@@ -57,7 +71,7 @@ class Update extends BaseApi
 		$erroraddinguser = false;
 		$errorusers      = [];
 		foreach ($users as $user) {
-			$cid = $user['cid'];
+			$cid = $user['cid'] ?? 0;
 
 			if (DBA::exists('contact', ['id' => $cid, 'uid' => $uid])) {
 				Circle::addMember($gid, $cid);
