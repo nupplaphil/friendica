@@ -34,17 +34,17 @@ class Localtime extends BaseModule
 
 		$output = '<h3>' . DI::l10n()->t('Time Conversion') . '</h3>';
 		$output .= '<p>' . DI::l10n()->t('Friendica provides this service for sharing events with other networks and friends in unknown timezones.') . '</p>';
-		$output .= '<p>' . DI::l10n()->t('UTC time: %s', $time) . '</p>';
+		$output .= '<p>' . DI::l10n()->t('UTC time: %s', htmlspecialchars($time, ENT_QUOTES)) . '</p>';
 
 		if (!empty($_REQUEST['timezone'])) {
-			$output .= '<p>' . DI::l10n()->t('Current timezone: %s', $_REQUEST['timezone']) . '</p>';
+			$output .= '<p>' . DI::l10n()->t('Current timezone: %s', htmlspecialchars($_REQUEST['timezone'], ENT_QUOTES)) . '</p>';
 		}
 
 		if (!empty(self::$mod_localtime)) {
-			$output .= '<p>' . DI::l10n()->t('Converted localtime: %s', self::$mod_localtime) . '</p>';
+			$output .= '<p>' . DI::l10n()->t('Converted localtime: %s', htmlspecialchars(self::$mod_localtime, ENT_QUOTES)) . '</p>';
 		}
 
-		$output .= '<form action ="localtime?time=' . $time . '" method="post">';
+		$output .= '<form action ="localtime?time=' . urlencode($time) . '" method="post">';
 		$output .= '<p>' . DI::l10n()->t('Please select your timezone:') . '</p>';
 		$output .= Temporal::getTimezoneSelect(($_REQUEST['timezone'] ?? '') ?: Installer::DEFAULT_TZ);
 		$output .= '<input type="submit" name="submit" value="' . DI::l10n()->t('Submit') . '" /></form>';
