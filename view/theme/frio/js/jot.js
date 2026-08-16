@@ -18,7 +18,7 @@
  */
 
 // Global linkPreview instance for cross-module access
-var linkPreview;
+var linkPreview = null;
 
 (function ($, window) {
 	"use strict";
