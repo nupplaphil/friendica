@@ -26,7 +26,7 @@ as the value of $top_child_total (this is done at the end of this file)
 {{/if}}
 
 {{if $item.thread_level==2 && $top_child_nr==1}}
-<div class="comment-container{{if $item.smart_threading} smart-threaded{{/if}}"> <!--top-child-begin-->
+<div class="comment-container{{if $item.smart_threading}} smart-threaded{{/if}}"> <!--top-child-begin-->
 {{/if}}
 {{* end of hacky part to count children *}}
 
