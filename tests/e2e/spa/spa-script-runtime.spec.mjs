@@ -22,7 +22,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 
 	test("B1 - function declarations stay hoisted within a script", async ({ page }) => {
 		const result = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 			const source = "e2eHoistOne(); function e2eHoistOne(){ window.__e2eHoistOne = true; }";
 
 			window.__e2eHoistOne = false;
@@ -40,7 +40,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 
 	test("B1 - a script may call a function declared by a later script of the same page", async ({ page }) => {
 		const ran = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 
 			window.__e2eHoistTwo = false;
 			runtime.executeScripts([
@@ -61,7 +61,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 
 	test("B2 - a throwing script does not abort the scripts after it", async ({ page }) => {
 		const result = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 
 			window.__e2eBatch = [];
 			runtime.executeScripts([
@@ -88,7 +88,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 		});
 
 		await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 			runtime.executeScripts(["e2eAlsoDoesNotExist();"], "e2e");
 		});
 		await page.waitForTimeout(250);
@@ -102,7 +102,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 
 	test("B1 - variable promotion does not duplicate mixed declarators", async ({ page }) => {
 		const promoted = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 			return runtime.promoteToGlobal("var e2eA = sideEffect(), { e2eB } = source;");
 		});
 
@@ -114,7 +114,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 
 	test("B1 - an initialiser-less var does not clobber an existing value", async ({ page }) => {
 		const value = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.js");
+			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 
 			window.e2eKeepMe = "previous value";
 			runtime.executeScripts(["var e2eKeepMe;"], "e2e");

@@ -77,8 +77,8 @@ export async function skipUnlessSpa(page) {
  */
 const ROUTER_URL_EXPRESSION = `
 	(function () {
-		const tag = document.querySelector('script[type=module][src*="spa/spa-router.js"]');
-		return tag ? tag.src : "/view/js/spa/spa-router.js";
+		const tag = document.querySelector('script[type=module][src*="spa/spa-router."]');
+		return tag ? tag.src : "/view/js/spa/spa-router.mjs";
 	})()
 `;
 

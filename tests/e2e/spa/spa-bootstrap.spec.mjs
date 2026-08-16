@@ -38,7 +38,7 @@ test.describe("B0 - SPA bootstrap", () => {
 	test("page initialisers run even when the SPA router fails to load", async ({ page }) => {
 		// Simulate any failure of the router module graph - a MIME misconfiguration,
 		// a 404 after a partial deploy, a CSP rule. The page must still come up.
-		await page.route("**/view/js/spa/spa-router.js*", (route) => route.abort());
+		await page.route("**/view/js/spa/spa-router.*js*", (route) => route.abort());
 
 		await page.goto(`${BASE_URL}/network`);
 		await page.waitForLoadState("networkidle");
@@ -46,17 +46,16 @@ test.describe("B0 - SPA bootstrap", () => {
 		await page.waitForTimeout(1000);
 
 		const state = await page.evaluate(() => ({
-			registered: window.__onDocumentReadyRegistry ? window.__onDocumentReadyRegistry.size : 0,
 			ajaxSetupApplied: !!(window.$ && window.$.ajaxSettings && window.$.ajaxSettings.cache === false),
+			delegatedHandlers: (window.$._data(document.body, "events")?.click || []).length,
 		}));
 
-		expect(state.registered, "handlers should have been registered").toBeGreaterThan(0);
 		expect(
 			state.ajaxSetupApplied,
-			"The main.js init block never ran. With the router unavailable nothing dispatches " +
-			"spa:document:ready, so every onDocumentReady() handler is stranded and the page has no " +
-			"theme init, no autocomplete and no editor. onDocumentReady() needs to fall back to " +
-			"$(document).ready when the router is not actually up.",
+			"The main.js init block never ran, so the page has no autocomplete, no editor and no " +
+			"theme init. Registering a page initialiser must not depend on the SPA module graph " +
+			"being loadable.",
 		).toBe(true);
+		expect(state.delegatedHandlers, "no delegated handler was bound at all").toBeGreaterThan(0);
 	});
 });

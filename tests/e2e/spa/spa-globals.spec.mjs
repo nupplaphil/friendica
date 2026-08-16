@@ -24,7 +24,7 @@ test.describe("B3 - server-provided globals", () => {
 	for (const name of ["spaEnabled", "localUser", "updateContent"]) {
 		test(`${name} reflects the value delivered by the current page`, async ({ page }) => {
 			const result = await page.evaluate(async (globalName) => {
-				const runtime = await import("/view/js/spa/spa-script-runtime.js");
+				const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
 
 				// Exactly what head.tpl ships on the next page, with a changed value.
 				runtime.executeScripts([`const ${globalName} = 4242;`], "e2e");

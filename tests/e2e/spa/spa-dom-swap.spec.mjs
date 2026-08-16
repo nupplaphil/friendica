@@ -21,7 +21,7 @@ test.describe("B7 - DOM swap cleanup", () => {
 		await requireSpaRouter(page);
 
 		const result = await page.evaluate(async () => {
-			const helpers = await import("/view/js/spa/spa-ui-helpers.js");
+			const helpers = await import("/view/js/spa/spa-ui-helpers.mjs");
 			const count = () => ({
 				panels: document.querySelectorAll(".panel").length,
 				forms: document.querySelectorAll("form.panel").length,
