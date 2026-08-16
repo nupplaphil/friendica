@@ -143,4 +143,19 @@ export default [
 			sourceType: "module",
 		},
 	},
+	{
+		// The end-to-end suite is modern ESM running under Node, but the bodies of
+		// page.evaluate() callbacks are serialised and executed in the browser, so
+		// both sets of globals are legitimate here.
+		files: ["tests/e2e/**/*.mjs"],
+		languageOptions: {
+			ecmaVersion: "latest",
+			sourceType: "module",
+			globals: {
+				...globals.node,
+				...globals.browser,
+				...injectedGlobals,
+			},
+		},
+	},
 ];
