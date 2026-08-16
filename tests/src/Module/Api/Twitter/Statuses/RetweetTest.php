@@ -32,22 +32,9 @@ class RetweetTest extends ApiTestCase
 	{
 		$this->expectException(BadRequestException::class);
 
+		// @phpstan-ignore method.deprecated
 		(new Retweet(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);
-	}
-
-	/**
-	 * Test the api_statuses_repeat() function without an authenticated user.
-	 *
-	 */
-	public function testApiStatusesRepeatWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		// $this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		// BasicAuth::setCurrentUserID();
-		// $_SESSION['authenticated'] = false;
-		// api_statuses_repeat('json');
 	}
 
 	/**
@@ -57,6 +44,7 @@ class RetweetTest extends ApiTestCase
 	 */
 	public function testApiStatusesRepeatWithId(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Retweet(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'id' => 1,
@@ -77,6 +65,7 @@ class RetweetTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Retweet(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'id' => 5,
