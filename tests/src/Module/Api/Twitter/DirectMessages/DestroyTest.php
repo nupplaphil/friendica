@@ -31,6 +31,7 @@ class DestroyTest extends ApiTestCase
 	{
 		$this->expectException(\Friendica\Network\HTTPException\BadRequestException::class);
 
+		// @phpstan-ignore method.deprecated
 		(new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
 	}
@@ -42,6 +43,7 @@ class DestroyTest extends ApiTestCase
 	 */
 	public function testApiDirectMessagesDestroyWithVerbose(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'friendica_verbose' => true,
@@ -54,22 +56,6 @@ class DestroyTest extends ApiTestCase
 	}
 
 	/**
-	 * Test the api_direct_messages_destroy() function without an authenticated user.
-	 *
-	 */
-	public function testApiDirectMessagesDestroyWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		/*
-		$this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		BasicAuth::setCurrentUserID();
-		$_SESSION['authenticated'] = false;
-		api_direct_messages_destroy('json');
-		*/
-	}
-
-	/**
 	 * Test the api_direct_messages_destroy() function with a non-zero ID.
 	 *
 	 * @return void
@@ -77,6 +63,8 @@ class DestroyTest extends ApiTestCase
 	public function testApiDirectMessagesDestroyWithId(): void
 	{
 		$this->expectException(\Friendica\Network\HTTPException\BadRequestException::class);
+
+		// @phpstan-ignore method.deprecated
 		(new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'id' => 1,
@@ -90,6 +78,7 @@ class DestroyTest extends ApiTestCase
 	 */
 	public function testApiDirectMessagesDestroyWithIdAndVerbose(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'id'                  => 1,
@@ -114,6 +103,7 @@ class DestroyTest extends ApiTestCase
 		$ids = DBA::selectToArray('mail', ['id']);
 		$id  = $ids[0]['id'];
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Destroy(DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'id'                => $id,

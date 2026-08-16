@@ -16,30 +16,6 @@ use Friendica\Util\Temporal;
 
 class NotificationTest extends ApiTestCase
 {
-	public function testEmpty(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		/*
-		$this->expectException(BadRequestException::class);
-		DI::session()->set('uid', '');
-
-		Notification::rawContent();
-		*/
-	}
-
-	public function testWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		/*
-		$this->expectException(BadRequestException::class);
-		DI::session()->set('uid', 41);
-
-		Notification::rawContent();
-		*/
-	}
-
 	public function testWithXmlResult(): void
 	{
 		$date    = DateTimeFormat::local('2020-01-01 12:12:02');
@@ -52,6 +28,7 @@ class NotificationTest extends ApiTestCase
 </notes>
 XML;
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Notification(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'xml']))
 			->run($this->httpExceptionMock);
 
@@ -64,6 +41,7 @@ XML;
 
 	public function testWithJsonResult(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Notification(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
 

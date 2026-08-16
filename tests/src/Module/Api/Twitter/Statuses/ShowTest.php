@@ -24,7 +24,7 @@ class ShowTest extends ApiTestCase
 	{
 		$this->expectException(BadRequestException::class);
 
-
+		// @phpstan-ignore method.deprecated
 		(new Show(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);
 	}
@@ -36,6 +36,7 @@ class ShowTest extends ApiTestCase
 	 */
 	public function testApiStatusesShowWithId(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new Show(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'id' => 1,
@@ -57,6 +58,7 @@ class ShowTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Show(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'id'           => 1,
@@ -71,18 +73,5 @@ class ShowTest extends ApiTestCase
 			self::assertIsInt($status->id);
 			self::assertIsString($status->text);
 		}
-	}
-
-	/**
-	 * Test the api_statuses_show() function with an unallowed user.
-	 *
-	 */
-	public function testApiStatusesShowWithUnallowedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		// $this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		// BasicAuth::setCurrentUserID();
-		// api_statuses_show('json');
 	}
 }

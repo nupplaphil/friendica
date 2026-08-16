@@ -22,6 +22,7 @@ class UserTimelineTest extends ApiTestCase
 	 */
 	public function testApiStatusesUserTimeline(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new UserTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'user_id'         => 43, // Public contact id
@@ -50,6 +51,7 @@ class UserTimelineTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new UserTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'user_id' => 43, // Public contact id
@@ -73,6 +75,7 @@ class UserTimelineTest extends ApiTestCase
 	 */
 	public function testApiStatusesUserTimelineWithRss(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new UserTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], [
 			'extension' => ICanCreateResponses::TYPE_RSS,
 		]))->run($this->httpExceptionMock);
@@ -80,18 +83,5 @@ class UserTimelineTest extends ApiTestCase
 		self::assertEquals(ICanCreateResponses::TYPE_RSS, $response->getHeaderLine(ICanCreateResponses::X_HEADER));
 
 		self::assertXml((string) $response->getBody(), 'statuses');
-	}
-
-	/**
-	 * Test the api_statuses_user_timeline() function with an unallowed user.
-	 *
-	 */
-	public function testApiStatusesUserTimelineWithUnallowedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		// $this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		// BasicAuth::setCurrentUserID();
-		// api_statuses_user_timeline('json');
 	}
 }

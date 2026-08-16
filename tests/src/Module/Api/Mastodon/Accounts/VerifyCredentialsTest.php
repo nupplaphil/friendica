@@ -20,6 +20,7 @@ class VerifyCredentialsTest extends ApiTestCase
 	 */
 	public function testApiAccountVerifyCredentials(): void
 	{
+		// @phpstan-ignore method.deprecated
 		$response = (new VerifyCredentials(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock);
 
@@ -28,19 +29,5 @@ class VerifyCredentialsTest extends ApiTestCase
 		self::assertEquals(48, $json->id);
 		self::assertIsArray($json->emojis);
 		self::assertIsArray($json->fields);
-	}
-
-	/**
-	 * Test the api_account_verify_credentials() function without an authenticated user.
-	 *
-	 */
-	public function testApiAccountVerifyCredentialsWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs dynamic BasicAuth first');
-
-		// $this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		// BasicAuth::setCurrentUserID();
-		// $_SESSION['authenticated'] = false;
-		// api_account_verify_credentials('json');
 	}
 }

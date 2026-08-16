@@ -25,6 +25,7 @@ class NetworkPublicTimelineTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NetworkPublicTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'max_id' => 10,
@@ -50,6 +51,7 @@ class NetworkPublicTimelineTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NetworkPublicTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), []))
 			->run($this->httpExceptionMock, [
 				'page' => -2,
@@ -66,19 +68,6 @@ class NetworkPublicTimelineTest extends ApiTestCase
 	}
 
 	/**
-	 * Test the api_statuses_networkpublic_timeline() function with an unallowed user.
-	 *
-	 */
-	public function testApiStatusesNetworkpublicTimelineWithUnallowedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		// $this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		// BasicAuth::setCurrentUserID();
-		// api_statuses_networkpublic_timeline('json');
-	}
-
-	/**
 	 * Test the api_statuses_networkpublic_timeline() function with an RSS result.
 	 *
 	 * @return void
@@ -88,6 +77,7 @@ class NetworkPublicTimelineTest extends ApiTestCase
 		// @todo: This call is needed for this test
 		Renderer::registerTemplateEngine(\Friendica\Render\FriendicaSmartyEngine::class);
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NetworkPublicTimeline(DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], [
 			'extension' => ICanCreateResponses::TYPE_RSS,
 		]))->run($this->httpExceptionMock, [

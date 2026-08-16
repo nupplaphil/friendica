@@ -31,26 +31,11 @@ class NewDMTest extends ApiTestCase
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock);
 
 		self::assertEmpty((string) $response->getBody());
-	}
-
-	/**
-	 * Test the api_direct_messages_new() function without an authenticated user.
-	 *
-	 */
-	public function testApiDirectMessagesNewWithoutAuthenticatedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		/*
-		$this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		BasicAuth::setCurrentUserID();
-		$_SESSION['authenticated'] = false;
-		api_direct_messages_new('json');
-		*/
 	}
 
 	/**
@@ -62,6 +47,7 @@ class NewDMTest extends ApiTestCase
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',
@@ -84,6 +70,7 @@ class NewDMTest extends ApiTestCase
 
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',
@@ -108,6 +95,7 @@ class NewDMTest extends ApiTestCase
 
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',
@@ -134,6 +122,7 @@ class NewDMTest extends ApiTestCase
 
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new NewDM($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'rss']))
 			->run($this->httpExceptionMock, [
 				'text'    => 'message_text',

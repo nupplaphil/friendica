@@ -23,6 +23,7 @@ class SentTest extends ApiTestCase
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Sent($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'json']))
 			->run($this->httpExceptionMock, [
 				'friendica_verbose' => true,
@@ -43,22 +44,10 @@ class SentTest extends ApiTestCase
 	{
 		$directMessage = new DirectMessage(DI::logger(), DI::dba(), DI::twitterUser());
 
+		// @phpstan-ignore method.deprecated
 		$response = (new Sent($directMessage, DI::dba(), DI::mstdnError(), DI::appHelper(), DI::l10n(), DI::baseUrl(), DI::args(), DI::logger(), DI::profiler(), DI::apiResponse(), [], ['extension' => 'rss']))
 			->run($this->httpExceptionMock);
 
 		self::assertXml((string) $response->getBody(), 'direct-messages');
-	}
-
-	/**
-	 * Test the api_direct_messages_box() function without an authenticated user.
-	 *
-	 */
-	public function testApiDirectMessagesBoxWithUnallowedUser(): void
-	{
-		self::markTestIncomplete('Needs BasicAuth as dynamic method for overriding first');
-
-		//$this->expectException(\Friendica\Network\HTTPException\UnauthorizedException::class);
-		//BasicAuth::setCurrentUserID();
-		//api_direct_messages_box('json', 'sentbox', 'false');
 	}
 }
