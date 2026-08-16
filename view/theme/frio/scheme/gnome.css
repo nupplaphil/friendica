@@ -410,7 +410,7 @@ aside {
     color: var(--text-primary) !important;
 
     &:hover {
-      background: var(--bg-tertiary)
+      background: var(--bg-tertiary) !important;
     }
   }
 

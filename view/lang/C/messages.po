@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 23:35+0200\n"
+"POT-Creation-Date: 2026-08-17 00:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,12 +81,12 @@ msgstr ""
 msgid "Permission denied."
 msgstr ""
 
-#: mod/message.php:28 mod/message.php:124 src/Content/Nav.php:276
+#: mod/message.php:28 mod/message.php:124 src/Content/Nav.php:281
 #: view/theme/frio/theme.php:236
 msgid "Messages"
 msgstr ""
 
-#: mod/message.php:35 mod/message.php:117 src/Content/Nav.php:279
+#: mod/message.php:35 mod/message.php:117 src/Content/Nav.php:284
 msgid "New Message"
 msgstr ""
 
@@ -160,7 +160,7 @@ msgstr ""
 
 #: mod/message.php:191 mod/message.php:349 src/App/Page.php:277
 #: src/Content/Conversation/ConversationRenderer.php:539
-#: src/Content/Conversation/PostTemplateBuilder.php:391
+#: src/Content/Conversation/PostTemplateBuilder.php:393
 #: src/Content/Conversation/StatusEditor.php:182
 #: src/Module/Item/Compose.php:181 src/Module/Post/Edit.php:156
 msgid "Please wait"
@@ -1157,7 +1157,7 @@ msgid "Delete Selected Items"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:467
-#: src/Content/Conversation/PostTemplateBuilder.php:524
+#: src/Content/Conversation/PostTemplateBuilder.php:526
 msgid "Select"
 msgstr ""
 
@@ -1166,24 +1166,24 @@ msgid "Pinned item"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:501
-#: src/Content/Conversation/PostTemplateBuilder.php:322
-#: src/Content/Conversation/PostTemplateBuilder.php:323
+#: src/Content/Conversation/PostTemplateBuilder.php:324
+#: src/Content/Conversation/PostTemplateBuilder.php:325
 #, php-format
 msgid "View %s's profile @ %s"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:514
-#: src/Content/Conversation/PostTemplateBuilder.php:310
+#: src/Content/Conversation/PostTemplateBuilder.php:311
 msgid "Categories:"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:515
-#: src/Content/Conversation/PostTemplateBuilder.php:311
+#: src/Content/Conversation/PostTemplateBuilder.php:312
 msgid "Filed under:"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:522
-#: src/Content/Conversation/PostTemplateBuilder.php:338
+#: src/Content/Conversation/PostTemplateBuilder.php:340
 #, php-format
 msgid "%s from %s"
 msgstr ""
@@ -1193,7 +1193,7 @@ msgid "View in context"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:540
-#: src/Content/Conversation/PostTemplateBuilder.php:392
+#: src/Content/Conversation/PostTemplateBuilder.php:394
 msgid "Loading ..."
 msgstr ""
 
@@ -1422,44 +1422,44 @@ msgstr ""
 msgid "Remote comment"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:324
+#: src/Content/Conversation/PostTemplateBuilder.php:326
 msgid "to"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:325
+#: src/Content/Conversation/PostTemplateBuilder.php:327
 #: src/Module/Profile/Schedule.php:101
 msgid "via"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:326
+#: src/Content/Conversation/PostTemplateBuilder.php:328
 msgid "Wall-to-Wall"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:327
+#: src/Content/Conversation/PostTemplateBuilder.php:329
 msgid "via Wall-To-Wall:"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:365
+#: src/Content/Conversation/PostTemplateBuilder.php:367
 #: src/Content/Item.php:443
 msgid "Raw content"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:380
+#: src/Content/Conversation/PostTemplateBuilder.php:382
 msgid "Load more comments"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:385
-#: src/Content/Conversation/PostTemplateBuilder.php:918
+#: src/Content/Conversation/PostTemplateBuilder.php:387
+#: src/Content/Conversation/PostTemplateBuilder.php:926
 #: src/Module/Moderation/Reports.php:242
 msgid "Comment"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:386
+#: src/Content/Conversation/PostTemplateBuilder.php:388
 #, php-format
 msgid "Reply to %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:389
+#: src/Content/Conversation/PostTemplateBuilder.php:391
 #: src/Module/BaseProfile.php:141 src/Module/Contact.php:402
 #: src/Module/Contact.php:540 src/Module/Conversation/Channel.php:98
 #: src/Module/Conversation/Community.php:91
@@ -1468,286 +1468,298 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:409
+#: src/Content/Conversation/PostTemplateBuilder.php:411
 msgid "Notifier task is pending"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:410
+#: src/Content/Conversation/PostTemplateBuilder.php:412
 msgid "Delivery to remote servers is pending"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:411
+#: src/Content/Conversation/PostTemplateBuilder.php:413
 msgid "Delivery to remote servers is underway"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:412
+#: src/Content/Conversation/PostTemplateBuilder.php:414
 msgid "Delivery to remote servers is mostly done"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:413
+#: src/Content/Conversation/PostTemplateBuilder.php:415
 msgid "Delivery to remote servers is done"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:421
+#: src/Content/Conversation/PostTemplateBuilder.php:423
 #, php-format
 msgid "in reply to %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:423
+#: src/Content/Conversation/PostTemplateBuilder.php:425
 msgid "Parent is probably private or not federated."
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:424
+#: src/Content/Conversation/PostTemplateBuilder.php:426
 msgid "Show comments"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:425
+#: src/Content/Conversation/PostTemplateBuilder.php:427
 msgid "Close comments"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:447
+#: src/Content/Conversation/PostTemplateBuilder.php:449
 #, php-format
 msgid "%d comment"
 msgid_plural "%d comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:448
+#: src/Content/Conversation/PostTemplateBuilder.php:450
 msgid "Show more"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:449
+#: src/Content/Conversation/PostTemplateBuilder.php:451
 msgid "Show fewer"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:525
+#: src/Content/Conversation/PostTemplateBuilder.php:527
 msgid "Delete globally"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:525
+#: src/Content/Conversation/PostTemplateBuilder.php:527
 msgid "Remove locally"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:532
+#: src/Content/Conversation/PostTemplateBuilder.php:534
 #, php-format
 msgid "Block %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:537
+#: src/Content/Conversation/PostTemplateBuilder.php:539
 #, php-format
 msgid "Ignore %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:542
+#: src/Content/Conversation/PostTemplateBuilder.php:544
 #, php-format
 msgid "Collapse %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:546
+#: src/Content/Conversation/PostTemplateBuilder.php:548
 msgid "Report this post"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:557
+#: src/Content/Conversation/PostTemplateBuilder.php:559
 #: src/Content/Item.php:436
 #, php-format
 msgid "Ignore %s server"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:582
+#: src/Content/Conversation/PostTemplateBuilder.php:585
 msgid "I will attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:583
+#: src/Content/Conversation/PostTemplateBuilder.php:586
 msgid "I will not attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:584
+#: src/Content/Conversation/PostTemplateBuilder.php:587
 msgid "I might attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:608
+#: src/Content/Conversation/PostTemplateBuilder.php:590
+msgid "Going"
+msgstr ""
+
+#: src/Content/Conversation/PostTemplateBuilder.php:591
+msgid "Can't Go"
+msgstr ""
+
+#: src/Content/Conversation/PostTemplateBuilder.php:592
+msgid "Maybe"
+msgstr ""
+
+#: src/Content/Conversation/PostTemplateBuilder.php:616
 #, php-format
 msgid "%s (Received %s)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:696
+#: src/Content/Conversation/PostTemplateBuilder.php:704
 msgid "I like this (toggle)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:696
+#: src/Content/Conversation/PostTemplateBuilder.php:704
 msgid "Like"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:697
+#: src/Content/Conversation/PostTemplateBuilder.php:705
 msgid "I don't like this (toggle)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:697
+#: src/Content/Conversation/PostTemplateBuilder.php:705
 msgid "Dislike"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:700
+#: src/Content/Conversation/PostTemplateBuilder.php:708
 msgid "Quote share this"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:700
+#: src/Content/Conversation/PostTemplateBuilder.php:708
 msgid "Quote Share"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:703
+#: src/Content/Conversation/PostTemplateBuilder.php:711
 msgid "Reshare this"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:703
+#: src/Content/Conversation/PostTemplateBuilder.php:711
 msgid "Reshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:704
+#: src/Content/Conversation/PostTemplateBuilder.php:712
 msgid "Cancel your Reshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:704
+#: src/Content/Conversation/PostTemplateBuilder.php:712
 msgid "Unshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:737
+#: src/Content/Conversation/PostTemplateBuilder.php:745
 #: src/Module/Profile/Schedule.php:93
 msgid "Private Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:738
+#: src/Content/Conversation/PostTemplateBuilder.php:746
 msgid "Public Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:739
+#: src/Content/Conversation/PostTemplateBuilder.php:747
 msgid "Unlisted Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:762
+#: src/Content/Conversation/PostTemplateBuilder.php:770
 #, php-format
 msgid "Reshared by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:767
+#: src/Content/Conversation/PostTemplateBuilder.php:775
 #, php-format
 msgid "Viewed by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:772
+#: src/Content/Conversation/PostTemplateBuilder.php:780
 #, php-format
 msgid "Read by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:777
+#: src/Content/Conversation/PostTemplateBuilder.php:785
 #, php-format
 msgid "Liked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:782
+#: src/Content/Conversation/PostTemplateBuilder.php:790
 #, php-format
 msgid "Disliked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:787
+#: src/Content/Conversation/PostTemplateBuilder.php:795
 #, php-format
 msgid "Attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:792
+#: src/Content/Conversation/PostTemplateBuilder.php:800
 #, php-format
 msgid "Maybe attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:797
+#: src/Content/Conversation/PostTemplateBuilder.php:805
 #, php-format
 msgid "Not attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:802
+#: src/Content/Conversation/PostTemplateBuilder.php:810
 #, php-format
 msgid "Commented by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:807
+#: src/Content/Conversation/PostTemplateBuilder.php:815
 #, php-format
 msgid "Reacted with %s by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:830
+#: src/Content/Conversation/PostTemplateBuilder.php:838
 #, php-format
 msgid "Quote shared by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:916
+#: src/Content/Conversation/PostTemplateBuilder.php:924
 #: src/Module/Contact.php:607 src/Module/Item/Compose.php:163
 msgid "This is you"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:919
+#: src/Content/Conversation/PostTemplateBuilder.php:927
 msgid "Post comment"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:920
-#: src/Content/Conversation/StatusEditor.php:149 src/Content/Nav.php:87
+#: src/Content/Conversation/PostTemplateBuilder.php:928
+#: src/Content/Conversation/StatusEditor.php:149 src/Content/Nav.php:93
 #: src/Module/Post/Edit.php:141
 msgid "Loading..."
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:921
+#: src/Content/Conversation/PostTemplateBuilder.php:929
 #: src/Content/Conversation/StatusEditor.php:152
 #: src/Module/Item/Compose.php:165 src/Module/Post/Edit.php:184
 #: src/Module/Settings/Profile/Index.php:247
 msgid "Bold"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:922
+#: src/Content/Conversation/PostTemplateBuilder.php:930
 #: src/Content/Conversation/StatusEditor.php:153
 #: src/Module/Item/Compose.php:166 src/Module/Post/Edit.php:185
 #: src/Module/Settings/Profile/Index.php:248
 msgid "Italic"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:923
+#: src/Content/Conversation/PostTemplateBuilder.php:931
 #: src/Content/Conversation/StatusEditor.php:154
 #: src/Module/Item/Compose.php:167 src/Module/Post/Edit.php:186
 #: src/Module/Settings/Profile/Index.php:249
 msgid "Underline"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:924
+#: src/Content/Conversation/PostTemplateBuilder.php:932
 #: src/Content/Conversation/StatusEditor.php:157
 #: src/Module/Item/Compose.php:170
 msgid "Content Warning"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:925
+#: src/Content/Conversation/PostTemplateBuilder.php:933
 #: src/Content/Conversation/StatusEditor.php:155
 #: src/Module/Item/Compose.php:168 src/Module/Post/Edit.php:187
 #: src/Module/Settings/Profile/Index.php:250
 msgid "Quote"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:926
+#: src/Content/Conversation/PostTemplateBuilder.php:934
 #: src/Content/Conversation/StatusEditor.php:156
 #: src/Module/Item/Compose.php:169 src/Module/Post/Edit.php:188
 #: src/Module/Settings/Profile/Index.php:251
 msgid "Add emojis"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:927
+#: src/Content/Conversation/PostTemplateBuilder.php:935
 #: src/Content/Conversation/StatusEditor.php:158
 #: src/Module/Item/Compose.php:171 src/Module/Post/Edit.php:189
 #: src/Module/Settings/Profile/Index.php:252
 msgid "Code"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:928
+#: src/Content/Conversation/PostTemplateBuilder.php:936
 #: src/Module/Item/Compose.php:172 src/Module/Settings/Profile/Index.php:253
 #: src/Module/Settings/Profile/Index.php:254
 msgid "Image"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:929
+#: src/Content/Conversation/PostTemplateBuilder.php:937
 #: src/Content/Conversation/StatusEditor.php:159
 #: src/Content/Conversation/StatusEditor.php:163
 #: src/Module/Item/Compose.php:173 src/Module/Post/Edit.php:190
@@ -1755,20 +1767,20 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:930
+#: src/Content/Conversation/PostTemplateBuilder.php:938
 #: src/Content/Conversation/StatusEditor.php:160
 #: src/Module/Item/Compose.php:174 src/Module/Post/Edit.php:191
 #: src/Module/Settings/Profile/Index.php:256
 msgid "Link or Media"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:931
+#: src/Content/Conversation/PostTemplateBuilder.php:939
 #: src/Content/Conversation/StatusEditor.php:103
 #: src/Module/Item/Compose.php:175
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:932
+#: src/Content/Conversation/PostTemplateBuilder.php:940
 #: src/Content/Conversation/StatusEditor.php:194
 #: src/Module/Calendar/Event/Form.php:261 src/Module/Item/Compose.php:176
 #: src/Module/Item/Compose.php:307 src/Module/Post/Edit.php:178
@@ -1962,7 +1974,7 @@ msgid "Display posts that have been created by accounts of the selected circle."
 msgstr ""
 
 #: src/Content/Feature.php:129 src/Content/GroupManager.php:95
-#: src/Content/Nav.php:235 src/Content/Text/HTML.php:886
+#: src/Content/Nav.php:243 src/Content/Text/HTML.php:886
 #: src/Content/Widget.php:564 src/Model/User.php:1418
 msgid "Groups"
 msgstr ""
@@ -2196,71 +2208,86 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/Content/Nav.php:86
+#: src/Content/Nav.php:92
 msgid "Nothing new here"
 msgstr ""
 
-#: src/Content/Nav.php:92 src/Content/Nav.php:263 src/Module/Help.php:68
+#: src/Content/Nav.php:96
+msgid "My Profile"
+msgstr ""
+
+#: src/Content/Nav.php:100 src/Content/Nav.php:271 src/Module/Help.php:68
 #: view/theme/frio/theme.php:234
 msgid "Home"
 msgstr ""
 
-#: src/Content/Nav.php:93
+#: src/Content/Nav.php:101
 msgid "Skip to main content"
 msgstr ""
 
-#: src/Content/Nav.php:94
+#: src/Content/Nav.php:102
 msgid "Clear notifications"
 msgstr ""
 
-#: src/Content/Nav.php:95
+#: src/Content/Nav.php:103
 msgid "Search: @name, !group, #tags, content"
 msgstr ""
 
-#: src/Content/Nav.php:192 src/Module/Security/Login.php:159
+#: src/Content/Nav.php:200 src/Module/Security/Login.php:159
 #: src/Module/Security/TwoFactor/SignOut.php:114
 msgid "Sign out"
 msgstr ""
 
-#: src/Content/Nav.php:192
+#: src/Content/Nav.php:200
 msgid "End this session"
 msgstr ""
 
-#: src/Content/Nav.php:194 src/Module/Bookmarklet.php:30
+#: src/Content/Nav.php:202 src/Module/Bookmarklet.php:30
 #: src/Module/Security/Login.php:160
 msgid "Sign in"
 msgstr ""
 
-#: src/Content/Nav.php:199 src/Module/BaseProfile.php:50
+#: src/Content/Nav.php:207 src/Module/BaseProfile.php:50
 #: src/Module/Media/Attachment/Browser.php:67
 #: src/Module/Media/Photo/Browser.php:62 src/Module/Media/Photo/Browser.php:79
 #: view/theme/frio/theme.php:228
 msgid "Photos"
 msgstr ""
 
-#: src/Content/Nav.php:199 view/theme/frio/theme.php:228
+#: src/Content/Nav.php:207 view/theme/frio/theme.php:228
 msgid "My photos"
 msgstr ""
 
-#: src/Content/Nav.php:200 src/Module/BaseProfile.php:93
+#: src/Content/Nav.php:208 src/Module/BaseProfile.php:93
 #: src/Module/Profile/Notes.php:82
 msgid "Personal notes"
 msgstr ""
 
-#: src/Content/Nav.php:200 src/Module/BaseProfile.php:96
+#: src/Content/Nav.php:208 src/Module/BaseProfile.php:96
 msgid "Only you can see these"
 msgstr ""
 
-#: src/Content/Nav.php:212 src/Module/Security/Login.php:124
+#: src/Content/Nav.php:215 src/Module/BaseProfile.php:34
+#: src/Module/BaseSettings.php:86 src/Module/Contact.php:487
+#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:277
+#: src/Module/Welcome.php:44 view/theme/frio/theme.php:222
+msgid "Profile"
+msgstr ""
+
+#: src/Content/Nav.php:215 view/theme/frio/theme.php:222
+msgid "My profile"
+msgstr ""
+
+#: src/Content/Nav.php:220 src/Module/Security/Login.php:124
 msgid "Register"
 msgstr ""
 
-#: src/Content/Nav.php:212 src/Module/Register.php:219
+#: src/Content/Nav.php:220 src/Module/Register.php:219
 #: src/Module/Security/Login.php:123
 msgid "Create an account"
 msgstr ""
 
-#: src/Content/Nav.php:218 src/Module/Help.php:54
+#: src/Content/Nav.php:226 src/Module/Help.php:54
 #: src/Module/Settings/TwoFactor/AppSpecific.php:130
 #: src/Module/Settings/TwoFactor/Index.php:125
 #: src/Module/Settings/TwoFactor/Recovery.php:96
@@ -2268,39 +2295,39 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/Content/Nav.php:218
+#: src/Content/Nav.php:226
 msgid "Help and documentation"
 msgstr ""
 
-#: src/Content/Nav.php:222
+#: src/Content/Nav.php:230
 msgid "Apps"
 msgstr ""
 
-#: src/Content/Nav.php:222
+#: src/Content/Nav.php:230
 msgid "Addon applications, utilities, games"
 msgstr ""
 
-#: src/Content/Nav.php:226 src/Content/Text/HTML.php:871
+#: src/Content/Nav.php:234 src/Content/Text/HTML.php:871
 #: src/Module/Moderation/Blocklist/Contact.php:112
 #: src/Module/Moderation/Blocklist/Server/Index.php:103
 #: src/Module/Search/Index.php:99
 msgid "Search"
 msgstr ""
 
-#: src/Content/Nav.php:226
+#: src/Content/Nav.php:234
 msgid "Search site content"
 msgstr ""
 
-#: src/Content/Nav.php:229 src/Content/Text/HTML.php:880
+#: src/Content/Nav.php:237 src/Content/Text/HTML.php:880
 msgid "Full Text"
 msgstr ""
 
-#: src/Content/Nav.php:230 src/Content/Text/HTML.php:881
+#: src/Content/Nav.php:238 src/Content/Text/HTML.php:881
 #: src/Content/Widget/TagCloud.php:54
 msgid "Tags"
 msgstr ""
 
-#: src/Content/Nav.php:231 src/Content/Nav.php:291
+#: src/Content/Nav.php:239 src/Content/Nav.php:297
 #: src/Content/Text/HTML.php:882 src/Module/BaseProfile.php:112
 #: src/Module/BaseProfile.php:115 src/Module/Contact.php:191
 #: src/Module/Contact.php:409 src/Module/Contact.php:519
@@ -2308,11 +2335,11 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
-#: src/Content/Nav.php:246
+#: src/Content/Nav.php:254
 msgid "Community"
 msgstr ""
 
-#: src/Content/Nav.php:250 src/Module/BaseProfile.php:70
+#: src/Content/Nav.php:258 src/Module/BaseProfile.php:70
 #: src/Module/BaseProfile.php:73 src/Module/BaseProfile.php:81
 #: src/Module/BaseProfile.php:84 src/Module/Calendar/Show.php:113
 #: src/Module/Settings/Display.php:448 view/theme/frio/theme.php:229
@@ -2320,110 +2347,107 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: src/Content/Nav.php:253
+#: src/Content/Nav.php:261
 msgid "Directory"
 msgstr ""
 
-#: src/Content/Nav.php:253
+#: src/Content/Nav.php:261
 msgid "People directory"
 msgstr ""
 
-#: src/Content/Nav.php:255 src/Module/BaseAdmin.php:70
+#: src/Content/Nav.php:263 src/Module/BaseAdmin.php:70
 #: src/Module/BaseModeration.php:97
 msgid "Information"
 msgstr ""
 
-#: src/Content/Nav.php:255
+#: src/Content/Nav.php:263
 msgid "Information about this friendica instance"
 msgstr ""
 
-#: src/Content/Nav.php:258 src/Module/Admin/Tos.php:64
+#: src/Content/Nav.php:266 src/Module/Admin/Tos.php:64
 #: src/Module/BaseAdmin.php:81 src/Module/Register.php:243
 #: src/Module/Tos.php:87
 msgid "Terms of Service"
 msgstr ""
 
-#: src/Content/Nav.php:258
+#: src/Content/Nav.php:266
 msgid "Terms of Service of this Friendica instance"
 msgstr ""
 
-#: src/Content/Nav.php:266 src/Module/BaseProfile.php:34
-#: src/Module/BaseSettings.php:86 src/Module/Contact.php:487
-#: src/Module/Contact/Profile.php:439 src/Module/Profile/Profile.php:277
-#: src/Module/Welcome.php:44
-msgid "Profile"
-msgstr ""
-
-#: src/Content/Nav.php:270
+#: src/Content/Nav.php:275
 msgid "Introductions"
 msgstr ""
 
-#: src/Content/Nav.php:270
+#: src/Content/Nav.php:275
 msgid "Friend Requests"
 msgstr ""
 
-#: src/Content/Nav.php:271 src/Module/BaseNotifications.php:134
+#: src/Content/Nav.php:276 src/Module/BaseNotifications.php:134
 #: src/Module/Notifications/Introductions.php:63
 #: src/Module/Settings/Account.php:560
 msgid "Notifications"
 msgstr ""
 
-#: src/Content/Nav.php:272
+#: src/Content/Nav.php:277
 msgid "View all"
 msgstr ""
 
-#: src/Content/Nav.php:273 src/Module/Settings/Connectors.php:232
+#: src/Content/Nav.php:278 src/Module/Settings/Connectors.php:232
 msgid "Mark as read"
 msgstr ""
 
-#: src/Content/Nav.php:273
+#: src/Content/Nav.php:278
 msgid "Mark all system notifications as seen"
 msgstr ""
 
-#: src/Content/Nav.php:276
+#: src/Content/Nav.php:281
 msgid "Private mail"
 msgstr ""
 
-#: src/Content/Nav.php:277
+#: src/Content/Nav.php:282
 msgid "Inbox"
 msgstr ""
 
-#: src/Content/Nav.php:278
+#: src/Content/Nav.php:283
 msgid "Outbox"
 msgstr ""
 
-#: src/Content/Nav.php:281
-msgid "Accounts"
-msgstr ""
-
-#: src/Content/Nav.php:282
+#: src/Content/Nav.php:286
 msgid "Manage other accounts, including groups and pages"
 msgstr ""
 
-#: src/Content/Nav.php:289 src/Module/Admin/Addons/Details.php:140
+#: src/Content/Nav.php:288
+msgid "Switch Accounts"
+msgstr ""
+
+#: src/Content/Nav.php:291
+msgid "Add Account"
+msgstr ""
+
+#: src/Content/Nav.php:295 src/Module/Admin/Addons/Details.php:140
 #: src/Module/Admin/Themes/Details.php:85 src/Module/BaseAdmin.php:89
 #: src/Module/BaseSettings.php:177 src/Module/Welcome.php:39
 #: view/theme/frio/theme.php:237
 msgid "Settings"
 msgstr ""
 
-#: src/Content/Nav.php:289
+#: src/Content/Nav.php:295
 msgid "Account settings"
 msgstr ""
 
-#: src/Content/Nav.php:291 view/theme/frio/theme.php:238
+#: src/Content/Nav.php:297 view/theme/frio/theme.php:238
 msgid "Manage/edit friends and contacts"
 msgstr ""
 
-#: src/Content/Nav.php:296 src/Module/BaseAdmin.php:115
+#: src/Content/Nav.php:302 src/Module/BaseAdmin.php:115
 msgid "Admin"
 msgstr ""
 
-#: src/Content/Nav.php:296
+#: src/Content/Nav.php:302
 msgid "Site setup and configuration"
 msgstr ""
 
-#: src/Content/Nav.php:300 src/Module/BaseModeration.php:117
+#: src/Content/Nav.php:306 src/Module/BaseModeration.php:117
 #: src/Module/Moderation/Blocklist/Contact.php:99
 #: src/Module/Moderation/Blocklist/Contact/Import.php:101
 #: src/Module/Moderation/Blocklist/Server/Add.php:105
@@ -2441,15 +2465,15 @@ msgstr ""
 msgid "Moderation"
 msgstr ""
 
-#: src/Content/Nav.php:300
+#: src/Content/Nav.php:306
 msgid "Content and user moderation"
 msgstr ""
 
-#: src/Content/Nav.php:303
+#: src/Content/Nav.php:309
 msgid "Navigation"
 msgstr ""
 
-#: src/Content/Nav.php:303
+#: src/Content/Nav.php:309
 msgid "Site map"
 msgstr ""
 
@@ -5987,26 +6011,26 @@ msgstr ""
 msgid "User registrations waiting for confirmation"
 msgstr ""
 
-#: src/Module/BaseApi.php:461 src/Module/BaseApi.php:477
-#: src/Module/BaseApi.php:493
+#: src/Module/BaseApi.php:565 src/Module/BaseApi.php:581
+#: src/Module/BaseApi.php:597
 msgid "Too Many Requests"
 msgstr ""
 
-#: src/Module/BaseApi.php:462
+#: src/Module/BaseApi.php:566
 #, php-format
 msgid "Daily posting limit of %d post reached. The post was rejected."
 msgid_plural "Daily posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:478
+#: src/Module/BaseApi.php:582
 #, php-format
 msgid "Weekly posting limit of %d post reached. The post was rejected."
 msgid_plural "Weekly posting limit of %d posts reached. The post was rejected."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/BaseApi.php:494
+#: src/Module/BaseApi.php:598
 #, php-format
 msgid "Monthly posting limit of %d post reached. The post was rejected."
 msgid_plural "Monthly posting limit of %d posts reached. The post was rejected."
@@ -10299,7 +10323,7 @@ msgstr ""
 msgid "Your Identity Address is <strong>'%s'</strong> or '%s'."
 msgstr ""
 
-#: src/Module/Settings/Account.php:512 view/theme/frio/config.php:162
+#: src/Module/Settings/Account.php:512 view/theme/frio/config.php:170
 msgid "Save settings"
 msgstr ""
 
@@ -11072,7 +11096,7 @@ msgstr ""
 msgid "Content Settings"
 msgstr ""
 
-#: src/Module/Settings/Display.php:442 view/theme/frio/config.php:163
+#: src/Module/Settings/Display.php:442 view/theme/frio/config.php:171
 #: view/theme/vier/config.php:146
 msgid "Theme settings"
 msgstr ""
@@ -12800,83 +12824,99 @@ msgstr ""
 msgid "Empty Post"
 msgstr ""
 
-#: view/theme/frio/config.php:157
+#: view/theme/frio/config.php:165
 msgid "Note"
 msgstr ""
 
-#: view/theme/frio/config.php:157
+#: view/theme/frio/config.php:165
 msgid "Ensure that the image has the correct permissions, allowing all users to view it."
 msgstr ""
 
-#: view/theme/frio/config.php:164
+#: view/theme/frio/config.php:172
 msgid "Appearance"
 msgstr ""
 
-#: view/theme/frio/config.php:165
+#: view/theme/frio/config.php:173
 msgid "Accent color"
 msgstr ""
 
-#: view/theme/frio/config.php:166
+#: view/theme/frio/config.php:174
 msgid "Copy or paste theme settings"
 msgstr ""
 
-#: view/theme/frio/config.php:166
+#: view/theme/frio/config.php:174
 msgid "You can copy this text to share your theme settings with others. Pasting here updates the theme settings below. Afterwards, if you want, click the save button below to use the new settings."
 msgstr ""
 
-#: view/theme/frio/config.php:167
+#: view/theme/frio/config.php:175
 msgid "Navigation bar background color"
 msgstr ""
 
-#: view/theme/frio/config.php:168
+#: view/theme/frio/config.php:176
 msgid "Navigation bar icon color "
 msgstr ""
 
-#: view/theme/frio/config.php:169
+#: view/theme/frio/config.php:177
 msgid "Link color"
 msgstr ""
 
-#: view/theme/frio/config.php:170
+#: view/theme/frio/config.php:178
 msgid "Set the background color"
 msgstr ""
 
-#: view/theme/frio/config.php:171
+#: view/theme/frio/config.php:179
 msgid "Content background opacity"
 msgstr ""
 
-#: view/theme/frio/config.php:172
+#: view/theme/frio/config.php:180
 msgid "Set the background image"
 msgstr ""
 
-#: view/theme/frio/config.php:173
+#: view/theme/frio/config.php:181
 msgid "Background image style"
 msgstr ""
 
-#: view/theme/frio/config.php:176
+#: view/theme/frio/config.php:184
 msgid "Always open Compose page"
 msgstr ""
 
-#: view/theme/frio/config.php:176
+#: view/theme/frio/config.php:184
 msgid "If enabled, the button to make a new post always opens a dedicated page (the <a href=\"/compose\">Compose page</a>) instead of a small window on top of the current page. When disabled, the \"Compose page\" can be accessed with a middle click on the button to make a new post, or via a button in the small window."
 msgstr ""
 
-#: view/theme/frio/config.php:177
+#: view/theme/frio/config.php:185
 msgid "Enable Advanced Composer"
 msgstr ""
 
-#: view/theme/frio/config.php:177
+#: view/theme/frio/config.php:185
 msgid "When enabled, the Advanced Composer writing assistant will be available in the compose view."
 msgstr ""
 
-#: view/theme/frio/config.php:181
+#: view/theme/frio/config.php:186
+msgid "Show Navbar Button Labels"
+msgstr ""
+
+#: view/theme/frio/config.php:186
+msgid "Shows or hides the button labels under the main navigation bar buttons."
+msgstr ""
+
+#: view/theme/frio/config.php:187
+msgid "Show Action Button Labels"
+msgstr ""
+
+#: view/theme/frio/config.php:187
+msgid "Shows or hides the button labels under posts and replies."
+msgstr ""
+
+#: view/theme/frio/config.php:191
 msgid "Login page background image"
 msgstr ""
 
-#: view/theme/frio/config.php:185
+#: view/theme/frio/config.php:195
 msgid "Login page background color"
 msgstr ""
 
-#: view/theme/frio/config.php:185
+#: view/theme/frio/config.php:195
 msgid "Leave background image and color empty to use theme defaults."
 msgstr ""
 
@@ -12912,7 +12952,7 @@ msgstr ""
 msgid "Repeat image to fill the screen."
 msgstr ""
 
-#: view/theme/frio/php/default.php:146
+#: view/theme/frio/php/default.php:148
 msgid "Back to top"
 msgstr ""
 
