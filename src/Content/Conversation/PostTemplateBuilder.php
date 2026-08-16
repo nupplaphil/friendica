@@ -423,6 +423,7 @@ final class PostTemplateBuilder
 			'isunknown_label'    => $this->l10n->t('Parent is probably private or not federated.'),
 			'show_text'          => $this->l10n->t('Show comments'),
 			'hide_text'          => $this->l10n->t('Close comments'),
+			'smart_threading'    => $this->uid ? !$this->pConfig->get($this->uid, 'system', 'no_smart_threading', false) : false,
 		];
 
 		$arr    = ['item' => $item, 'output' => $tmpItem];
