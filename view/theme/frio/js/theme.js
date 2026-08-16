@@ -444,7 +444,6 @@ function initTheme() {
 							clearTimeout(timer);
 						}
 						timer = setTimeout(NavUpdate, 10);
-						console.debug('[Theme] Comment form: Calling triggerLiveUpdates with guid:', data.guid ?? null);
 						updateItem(id, data.guid ?? null);
 					}
 					if (data.reload) {
@@ -616,10 +615,6 @@ function cleanContactUrl(url) {
 	if ("path" in parts) {
 		newUrl += parts["path"];
 	}
-
-	//	if(url != newUrl) {
-	//		console.log("Cleaned contact url " + url + " to " + newUrl);
-	//	}
 
 	return newUrl;
 }
