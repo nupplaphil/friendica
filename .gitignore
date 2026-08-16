@@ -108,3 +108,8 @@ daemon.pid
 
 #ignore npm dependencies for the JS/CSS linters
 /node_modules
+
+#ignore artifacts of the Playwright end-to-end suite
+/test-results
+/playwright-report
+/blob-report

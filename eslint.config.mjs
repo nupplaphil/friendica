@@ -33,6 +33,7 @@ const injectedGlobals = {
 	localUser: "readonly",
 	netargs: "writable",
 	profile_uid: "readonly",
+	spaEnabled: "readonly", // emitted by view/templates/head.tpl
 	theme: "writable", // reassigned by previewTheme() in view/js/main.js
 };
 
@@ -132,6 +133,21 @@ export default [
 			"no-unreachable-loop": "error",
 			"no-use-before-define": ["error", { functions: false, classes: false }],
 			"require-atomic-updates": "error",
+		},
+	},
+	{
+		// The end-to-end suite is modern ESM running under Node, but the bodies of
+		// page.evaluate() callbacks are serialised and executed in the browser, so
+		// both sets of globals are legitimate here.
+		files: ["tests/e2e/**/*.mjs"],
+		languageOptions: {
+			ecmaVersion: "latest",
+			sourceType: "module",
+			globals: {
+				...globals.node,
+				...globals.browser,
+				...injectedGlobals,
+			},
 		},
 	},
 ];

@@ -10,17 +10,21 @@
 	"scripts": {
 		"lint": "npm run lint:js && npm run lint:css",
 		"lint:fix": "npm run lint:js:fix && npm run lint:css:fix",
-
 		"lint:js": "eslint --pass-on-unpruned-suppressions",
 		"lint:js:fix": "eslint --fix --pass-on-unpruned-suppressions",
 		"lint:js:prune": "eslint --prune-suppressions",
-
 		"lint:css": "stylelint \"view/**/*.css\" --max-warnings 107",
 		"lint:css:fix": "stylelint \"view/**/*.css\" --fix --max-warnings 107",
-		"lint:css:errors": "stylelint \"view/**/*.css\" --quiet"
+		"lint:css:errors": "stylelint \"view/**/*.css\" --quiet",
+
+		"test:e2e": "playwright test --config tests/e2e/playwright.config.mjs",
+		"test:e2e:smoke": "playwright test --config tests/e2e/playwright.config.mjs smoke/",
+		"test:e2e:spa": "playwright test --config tests/e2e/playwright.config.mjs spa/",
+		"test:e2e:install": "playwright install --with-deps chromium"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@playwright/test": "^1.62.1",
 		"eslint": "^10.8.1",
 		"globals": "^17.9.0",
 		"stylelint": "^17.14.1",
