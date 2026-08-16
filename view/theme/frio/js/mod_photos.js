@@ -56,7 +56,6 @@ window.registerModuleLifecycle('#photo-photo', function () {
 	var pheight = $("#photo-photo img").attr("height") || $("#photo-photo img").height();
 	var pwidth = $("#photo-photo img").attr("width") || $("#photo-photo img").width();
 
-	console.debug("Photo dimensions: " + pwidth + "x" + pheight);
 	// Append the dimensions of the picture to the css of the photo-photo div
 	// we do this to make it possible to have overlay navigation buttons for the photo
 	$("#photo-photo").css({

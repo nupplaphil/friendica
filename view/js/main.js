@@ -644,9 +644,6 @@ window.registerModuleLifecycle('body', function() {
 
 // Function to initialize infinite scroll - can be called multiple times
 function initInfiniteScroll() {
-	console.debug('[Main] initInfiniteScroll called');
-	console.debug('[Main] typeof infinite_scroll:', typeof infinite_scroll);
-	console.debug('[Main] #scroll-loader length:', $('#scroll-loader').length);
 	
 	// Only initialize if infinite_scroll is defined
 	if (typeof infinite_scroll !== 'undefined') {
@@ -665,9 +662,6 @@ function initInfiniteScroll() {
 				}
 			}
 		});
-		console.debug('[Main] Infinite scroll initialized - scroll handler attached');
-	} else {
-		console.debug('[Main] Infinite scroll NOT initialized - missing infinite_scroll object');
 	}
 }
 
@@ -738,11 +732,8 @@ function triggerLiveUpdates(force, guid) {
 		showProcessing();
 	}
 	force_update = force;
-	console.debug('[Main] triggerLiveUpdates called with force:', force, 'guid:', guid);
 	['network', 'profile', 'channel', 'community', 'notes', 'display', 'contact'].forEach(function (src) {
-		console.debug('[Main] Checking live-' + src + ', exists=' + $('#live-' + src).length + ', force=' + force + ', updateContent=' + updateContent + ', isDisplay=' + $('#live-display').length);
 		if ($('#live-' + src).length && (force || (updateContent && src !== 'display'))) {
-			console.debug('[Main] Triggering liveUpdate for: ' + src + ', guid=' + guid);
 			liveUpdate(src, force, guid);
 		}
 	});
@@ -766,7 +757,6 @@ function scrollToItem(elementId) {
 	
 	// Prevent multiple calls for the same element
 	if (scrollToItemInProgress && lastScrollToItemId === elementId) {
-		console.debug('[Main] scrollToItem: Already in progress for ' + elementId + ', skipping duplicate call');
 		return false;
 	}
 	
@@ -829,14 +819,11 @@ function NavUpdate() {
 					}
 
 					// start live update
-					console.debug('[Main] Starting live updates for sources: network, profile, channel, community, notes, display, contact');
 					triggerLiveUpdates(force_update);
 
 					if ($('#live-network').length && !$('#live-display').length) {
-						console.debug('[Main] Triggering networkUpdate');
 						networkUpdate(force_update);
 					} else if (!$('#live-display').length) {
-						console.debug('[Main] No live-network element or on display page, using ping_network fallback');
 						var update_url = 'ping_network?ping=1';
 						if (force_update) {
 							showFetching();
@@ -873,7 +860,6 @@ function NavUpdate() {
 }
 
 function updateConvItems(data, guid) {
-	console.debug('[Main] updateConvItems called, guid:', guid);
 	// add a new thread
 	$('.toplevel_item',data).each(function() {
 		var ident = $(this).attr('id');
@@ -918,13 +904,11 @@ function updateConvItems(data, guid) {
 
 function getUpdateUrl(src)
 {
-	console.debug('[Main] getUpdateUrl called for src=' + src + ', profile_uid=' + (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined') + ', netargs=' + netargs + ', update_item=' + update_item);
 	let force = force_update || $(document).scrollTop() === 0;
 
 	var udargs = ((netargs.length) ? '/' + netargs : '');
 
 	var update_url = src + udargs + '&p=' + profile_uid + '&force=' + (force ? 1 : 0) + '&item=' + update_item;
-	console.debug('[Main] getUpdateUrl: generated url=' + update_url);
 
 	if (getUrlParameter('page')) {
 		update_url += '&page=' + getUrlParameter('page');
@@ -959,14 +943,11 @@ function getUpdateUrl(src)
 }
 
 function liveUpdate(src, force, guid) {
-	console.debug('[Main] liveUpdate called for src:', src, 'guid:', guid, 'stopped:', stopped, 'profile_uid:', (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined'), 'in_progress:', in_progress);
 	if ((src == null) || stopped || !profile_uid) {
-		console.debug('[Main] liveUpdate skipped: src=null or stopped or no profile_uid');
 		$('.like-rotator').hide(); return;
 	}
 
 	if (($('.comment-edit-text-full').length) || in_progress) {
-		console.debug('[Main] liveUpdate delayed: comment edit in progress or in_progress=true');
 		if (livetime) {
 			clearTimeout(livetime);
 		}
@@ -984,7 +965,6 @@ function liveUpdate(src, force, guid) {
 	var orgHeight = $("section").height();
 
 	var update_url = getUpdateUrl(src);
-	console.debug('[Main] liveUpdate: calling getUpdateUrl for src=' + src + ', result url=' + update_url);
 
 	if (force_update) {
 		force_update = false;
@@ -1265,17 +1245,13 @@ function lockview(event, type, id) {
 }
 
 function post_comment(id) {
-	console.debug('[Main] post_comment called for item id:', id);
-	console.debug('[Main] commentBusy before:', commentBusy);
 	
 	if (commentBusy) {
-		console.debug('[Main] post_comment: Already busy, ignoring duplicate call');
 		return false;
 	}
 	
 	unpause();
 	commentBusy = true;
-	console.debug('[Main] post_comment: Setting commentBusy=true, starting post');
 	showPosting();
 	$('body').css('cursor', 'wait');
 	$.post(
@@ -1284,9 +1260,7 @@ function post_comment(id) {
 	)
 		.done(function(data) {
 			showProcessing();
-			console.debug('[Main] post_comment: AJAX response received for id:', id);
 			if (data.success) {
-				console.debug('[Main] post_comment: Comment posted successfully');
 				$("#comment-edit-wrapper-" + id).hide();
 				$("#comment-edit-text-" + id).val('');
 				var textarea = document.getElementById("comment-edit-text-" + id);
@@ -1296,16 +1270,13 @@ function post_comment(id) {
 				if (timer) {
 					clearTimeout(timer);
 				}
-				console.debug('[Main] post_comment: Calling triggerLiveUpdates with guid:', data.guid ?? null);
 				updateItem(id, data.guid ?? null);
 			}
 			if (data.reload) {
-				console.debug('[Main] post_comment: Server requested reload');
 				window.location.href=data.reload;
 			}
 		})
 		.always(function() {
-		console.debug('[Main] post_comment: AJAX completed, setting commentBusy=false');
 		hideLoading();
 		commentBusy = false;
 		$('body').css('cursor', 'auto');
@@ -1729,7 +1700,6 @@ function loadScrollContent() {
 	
 	// Guard: Check if scroll-loader element and infinite_scroll are available
 	if ($('#scroll-loader').length === 0 || typeof infinite_scroll === 'undefined' || typeof infinite_scroll.reload_uri === 'undefined') {
-		console.debug('[Main] loadScrollContent: missing requirements (scroll-loader or infinite_scroll)');
 		lockLoadContent = false;
 		return;
 	}
