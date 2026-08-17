@@ -81,14 +81,9 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 
 	if (window.up && typeof window.up.compiler === 'function') {
 		if (window.addEventListener) {
-			['spa:document:ready', 'spa:navigate', 'spa:window:load', 'load'].forEach(function (eventName) {
+			['spa:navigate'].forEach(function (eventName) {
 				window.addEventListener(eventName, refresh, { passive: true });
 			});
-		}
-
-		const initialTarget = typeof selector === 'string' ? document.querySelector(selector) : normalizeElement(selector);
-		if (initialTarget) {
-			runInitialize(initialTarget);
 		}
 
 		const compilerResult = window.up.compiler(selector, function (element) {
@@ -156,8 +151,6 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 	window.__friendica_unpoly_lifecycle_registry.set(registryKey, fallbackResult);
 	return fallbackResult;
 }
-
-window.registerUnpolyLifecycle = registerUnpolyLifecycle;
 
 function resizeIframe(obj) {
 	_resizeIframe(obj, 0);

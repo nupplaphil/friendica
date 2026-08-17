@@ -10,7 +10,7 @@
 // Display module: Scroll to item by GUID
 window.scrollToDisplayGuid = function scrollToDisplayGuid() {
   var itemGuid = window.location.pathname.split("/").pop();
-  console.debug('[Threaded Conversation] Scrolling to item with GUID:', itemGuid);
+  console.trace('[Threaded Conversation] Scrolling to item with GUID:', itemGuid);
   scrollToItem("item-" + itemGuid);
 };
 window.registerModuleLifecycle('#live-display', window.scrollToDisplayGuid, null, 'window');
