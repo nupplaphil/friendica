@@ -35,8 +35,6 @@ function reinitializeDynamicContent(executeScriptsFn) {
     detail: { path: window.location.pathname }
   }));
 
-  triggerSPAWindowLoad();
-  triggerSPADocumentReady();
 
   window.dispatchEvent(new CustomEvent('spa:initInfiniteScroll'));
 
