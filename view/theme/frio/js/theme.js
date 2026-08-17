@@ -96,7 +96,7 @@ function initTheme() {
 	let $body = $("body");
 
 	// show bulk deletion button at network page if checkbox is checked
-	$body.change("input.item-select", function () {
+	$body.off("change.frio-theme", "input.item-select").on("change.frio-theme", "input.item-select", function () {
 		var checked = false;
 
 		// We need to get all checked items, so it would close the delete button
@@ -120,7 +120,7 @@ function initTheme() {
 	});
 
 	// initialize the Bootstrap tooltips
-	$body.tooltip({
+	$body.off("mouseenter.frio-theme mouseleave.frio-theme").tooltip({
 		selector: '[data-toggle="tooltip"]',
 		container: "body",
 		animation: true,
@@ -137,7 +137,7 @@ function initTheme() {
 	});
 
 	// initialize the bootstrap-select
-	$(".selectpicker").selectpicker();
+	$(".selectpicker").off("change.frio-theme").selectpicker();
 
 	// add search-heading to the second navbar
 	if ($(".search-heading").length) {
@@ -244,12 +244,12 @@ function initTheme() {
 
 	// Dropdown menus with the class "dropdown-head" will display the active tab
 	// as button text
-	$body.on("click", ".dropdown-head .dropdown-menu li a, .dropdown-head .dropdown-menu li button", function () {
+	$body.off("click.frio-theme").on("click.frio-theme", ".dropdown-head .dropdown-menu li a, .dropdown-head .dropdown-menu li button", function () {
 		toggleDropdownText(this);
 	});
 
 	// Change the css class while clicking on the switcher elements
-	$(".toggle label, .toggle .toggle-handle").click(function (event) {
+	$(".toggle label, .toggle .toggle-handle").off("click.frio-theme").on("click.frio-theme", function (event) {
 		event.preventDefault();
 		// Get the value of the input element
 		var input = $(this).siblings("input");
@@ -280,7 +280,7 @@ function initTheme() {
 	// to the input element where the padding value would be at least the width
 	// of the button. Otherwise long user input would be invisible because it is
 	// behind the button.
-	$body.on("click", ".form-group-search > input", function () {
+	$body.off("click.frio-theme").on("click.frio-theme", ".form-group-search > input", function () {
 		// Get the width of the button (if the button isn't available
 		// buttonWidth will be null
 		var buttonWidth = $(this).next(".form-button-search").outerWidth();
@@ -301,7 +301,7 @@ function initTheme() {
 	 * We are making an exception for buttons because of a race condition with the
 	 * comment opening button that results in an already closed comment UI.
 	 */
-	$(document).on("mousedown", function (event) {
+	$(document).off("mousedown.frio-theme").on("mousedown.frio-theme", function (event) {
 		if (event.target.type === "button") {
 			return true;
 		}
@@ -326,7 +326,7 @@ function initTheme() {
 	// Customize some elements when the app is used in standalone mode on Android
 	if (window.matchMedia("(display-mode: standalone)").matches) {
 		// Open links to source outside of the webview
-		$("body").on("click", ".plink", function (e) {
+		$("body").off("click.frio-theme").on("click.frio-theme", ".plink", function (e) {
 			$(e.target).attr("target", "_blank");
 		});
 	}
@@ -335,7 +335,7 @@ function initTheme() {
 	 * This event listeners ensures that the textarea size is updated event if the
 	 * value is changed externally (textcomplete, insertFormatting, fbrowser...)
 	 */
-	$(document).on("change", "textarea", function (event) {
+	$(document).off("change.frio-theme").on("change.frio-theme", "textarea", function (event) {
 		autosize.update(event.target);
 	});
 
@@ -357,7 +357,7 @@ function initTheme() {
 		});
 		// recalculate sticky aside on clicks on <a> elements
 		// this handle height changes on expanding submenus
-		$("aside").on("click", "a", function () {
+		$("aside").off("click.frio-theme", "a").on("click.frio-theme", "a", function () {
 			$(document.body).trigger("sticky_kit:recalc");
 		});
 	}
@@ -369,10 +369,11 @@ function initTheme() {
 	 * is shown.
 	 */
 	$("aside")
-		.on("shown.bs.offcanvas", function () {
+		.off("shown.bs.offcanvas.frio-theme hidden.bs.offcanvas.frio-theme")
+		.on("shown.bs.offcanvas.frio-theme", function () {
 			$body.addClass("aside-out");
 		})
-		.on("hidden.bs.offcanvas", function () {
+		.on("hidden.bs.offcanvas.frio-theme", function () {
 			$body.removeClass("aside-out");
 		});
 
@@ -380,13 +381,13 @@ function initTheme() {
 	let $offcanvas_right_toggle = $(".offcanvas-right-toggle");
 	let $offcanvas_right_container = $("#offcanvasUsermenu"); // Use ID for faster lookup, class is .offcanvas-right
 
-	$offcanvas_right_toggle.on("click", function (event) {
+	$offcanvas_right_toggle.off("click.frio-theme").on("click.frio-theme", function (event) {
 		event.preventDefault();
 		$("body").toggleClass("offcanvas-right-active");
 	});
 
 	// Close the right offcanvas menu when clicking somewhere
-	$(document).on("mouseup touchend", function (event) {
+	$(document).off("mouseup.frio-theme touchend.frio-theme").on("mouseup.frio-theme touchend.frio-theme", function (event) {
 		if (
 			// Clicked element is not inside the menu
 			!$offcanvas_right_container.is(event.target) &&
@@ -400,7 +401,7 @@ function initTheme() {
 	});
 
 	// Event listener for 'Show & hide event map' button in the network stream.
-	$body.on("click", ".event-map-btn", function () {
+	$body.off("click.frio-theme").on("click.frio-theme", ".event-map-btn", function () {
 		showHideEventMap(this);
 	});
 

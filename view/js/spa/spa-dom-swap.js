@@ -167,17 +167,13 @@ function createDomSwapPipeline(options) {
     }
 
     window.__spa_executing_page_scripts = true;
-    window.__spa_executing_fragment_scripts = false;
     window.__spa_bodyScripts = bodyScripts;
 
-    window.__spa_executing_fragment_scripts = true;
     executeScripts(globalScripts, 'global-head');
 
     if (typeof initInfiniteScroll === 'function') {
       initInfiniteScroll();
     }
-
-    window.__spa_executing_fragment_scripts = false;
 
     const runFinalAppInit = () => {
       window.__spa_reinit_phase = true;

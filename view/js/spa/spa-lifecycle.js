@@ -27,9 +27,7 @@ function triggerSPAWindowLoad() {
  */
 function reinitializeDynamicContent(executeScriptsFn) {
   if (window.__spa_bodyScripts?.length > 0) {
-    window.__spa_executing_fragment_scripts = true;
     executeScriptsFn(window.__spa_bodyScripts, 'body-scripts');
-    window.__spa_executing_fragment_scripts = false;
     window.__spa_bodyScripts = [];
   }
 
