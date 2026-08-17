@@ -21,7 +21,7 @@ class DbaDefinitionTest extends TestCase
 	{
 		$config = $this->createMock(IManageConfigValues::class);
 		$config->method('get')->willReturnCallback(
-			fn (string $cat, string $key) => ($cat === 'database' && $key === 'charset') ? $charset : null,
+			fn (string $cat, string $key): ?string => ($cat === 'database' && $key === 'charset') ? $charset : null,
 		);
 
 		$dice = $this->createMock(Dice::class);
@@ -52,7 +52,7 @@ class DbaDefinitionTest extends TestCase
 		// "Artist" is a varchar(255)
 		$fields = $this->definition()->truncateFieldsForTable('post-media-exif', ['Artist' => str_repeat('ä', 300)]);
 
-		self::assertSame(255, mb_strlen($fields['Artist']));
+		self::assertSame(255, mb_strlen((string) $fields['Artist']));
 	}
 
 	/**
@@ -64,7 +64,7 @@ class DbaDefinitionTest extends TestCase
 		// "raw-data" is a text column, which holds 65535 bytes
 		$fields = $this->definition()->truncateFieldsForTable('post-media-exif', ['raw-data' => str_repeat('a', 70000)]);
 
-		self::assertSame(65535, strlen($fields['raw-data']));
+		self::assertSame(65535, strlen((string) $fields['raw-data']));
 	}
 
 	public function testTextFieldsAreNotCutInTheMiddleOfAMultiByteCharacter(): void
@@ -72,7 +72,7 @@ class DbaDefinitionTest extends TestCase
 		// The 65535th byte falls into the middle of a 2 byte character
 		$fields = $this->definition()->truncateFieldsForTable('post-media-exif', ['raw-data' => str_repeat('ä', 40000)]);
 
-		self::assertSame(65534, strlen($fields['raw-data']));
+		self::assertSame(65534, strlen((string) $fields['raw-data']));
 		self::assertSame($fields['raw-data'], mb_convert_encoding($fields['raw-data'], 'UTF-8', 'UTF-8'));
 	}
 
