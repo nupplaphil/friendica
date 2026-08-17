@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// @license magnet:?xt=urn:btih:0b31508aeb063b4b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPLv3-or-later
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPLv3-or-later
 
 // @type {module}
 
@@ -27,9 +27,10 @@ function initUnpolyEnhancements() {
       return;
     }
 
+    // These data attributes are checked for future compatibility
+    // Currently no elements in view/ or src/ use these attributes, but they are
+    // reserved for future use when modules need to initialize elements via Unpoly
     const candidateNames = [
-      element.getAttribute('data-spa-init'),
-      element.getAttribute('data-unpoly-init'),
       element.getAttribute('data-init')
     ].filter(Boolean);
 
@@ -47,9 +48,8 @@ function initUnpolyEnhancements() {
     }
   };
 
+  // Compilers for data-init attribute (reserved for future use)
   const selectors = [
-    '[data-spa-init]',
-    '[data-unpoly-init]',
     '[data-init]'
   ];
 

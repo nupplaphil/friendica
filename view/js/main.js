@@ -21,55 +21,6 @@ if (!Element.prototype.matches) {
 }
 
 function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
-	if (typeof window.registerUnpolyLifecycle === 'function') {
-		return window.registerUnpolyLifecycle(selector, initialize, cleanup, fallbackMode);
-	}
-
-	const fallbackTarget = function () {
-		if (typeof selector === 'string') {
-			return document.querySelector(selector);
-		}
-		return selector;
-	};
-
-	const fallback = function () {
-		const target = fallbackTarget();
-		if (!target || typeof initialize !== 'function') {
-			return null;
-		}
-		return initialize(target);
-	};
-
-	if (fallbackMode === 'window') {
-		if (typeof window.addEventListener === 'function') {
-			if (document.readyState === 'complete' || document.readyState === 'interactive') {
-				return fallback();
-			}
-			const onLoad = function () {
-				fallback();
-			};
-			window.addEventListener('load', onLoad, { once: true });
-			return null;
-		}
-		return fallback();
-	}
-
-	if (typeof document.addEventListener === 'function') {
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', function () {
-				fallback();
-			}, { once: true });
-			return null;
-		}
-		return fallback();
-	}
-
-	return fallback();
-}
-
-window.registerModuleLifecycle = registerModuleLifecycle;
-
-function registerUnpolyLifecycle(selector, initialize, cleanup, fallbackMode) {
 	if (typeof selector === 'undefined' || selector === null) {
 		return null;
 	}

@@ -47,16 +47,24 @@ function checkForDOMReadyPatterns(ast) {
  * @returns {'global'|'body'|null}
  */
 function classifyScriptContent(content, source) {
-  const ast = acorn.parse(content, { ecmaVersion: 2020, sourceType: 'script' });
-  if (checkForDOMReadyPatterns(ast)) return 'body';
-  if (ast.body.length > 0) {
-    const firstNode = ast.body[0];
-    if (firstNode.type === 'VariableDeclaration') return 'global';
-    if (firstNode.type === 'FunctionDeclaration') return 'global';
-    if (firstNode.type === 'ClassDeclaration') return 'global';
+  try {
+    const ast = acorn.parse(content, { ecmaVersion: 'latest', sourceType: 'script' });
+    if (checkForDOMReadyPatterns(ast)) return 'body';
+    if (ast.body.length > 0) {
+      const firstNode = ast.body[0];
+      if (firstNode.type === 'VariableDeclaration') return 'global';
+      if (firstNode.type === 'FunctionDeclaration') return 'global';
+      if (firstNode.type === 'ClassDeclaration') return 'global';
+      if (content.trim().startsWith('aStr')) return 'global';
+    }
+    return null;
+  } catch (e) {
+    // Fallback to old classification if parsing fails
+    if (content.includes('$(document).ready(') || content.includes('$(function(') || content.includes('DOMContentLoaded') || content.includes('window.addEventListener')) return 'body';
+    if (content.trim().startsWith('var ') || content.trim().startsWith('let ') || content.trim().startsWith('const ') || content.trim().startsWith('function ') || content.trim().startsWith('class ')) return 'global';
     if (content.trim().startsWith('aStr')) return 'global';
+    return null;
   }
-  return null;
 }
 
 /**
@@ -65,22 +73,35 @@ function classifyScriptContent(content, source) {
  * @returns {string} - Transformed code
  */
 function promoteToGlobal(code) {
-  const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: 'script', locations: true, ranges: true });
+  const ast = acorn.parse(code, { ecmaVersion: 'latest', sourceType: 'script', locations: true, ranges: true });
   let newCode = '';
   let lastEnd = 0;
   for (const node of ast.body) {
     if (node.start > lastEnd) newCode += code.slice(lastEnd, node.start);
     if (node.type === 'VariableDeclaration') {
-      for (const declaration of node.declarations) {
-        if (declaration.id.type === 'Identifier') {
-          newCode += `window.${declaration.id.name} = ${declaration.init ? code.slice(declaration.init.start, declaration.init.end) : 'undefined'};`;
-        } else {
-          newCode += code.slice(node.start, node.end);
+      // Check if all declarations are simple Identifiers with initializers
+      const allSimple = node.declarations.every(d => d.id.type === 'Identifier');
+      if (allSimple && node.declarations.length === 1) {
+        // Single simple declaration: handle per-declaration
+        const declaration = node.declarations[0];
+        if (declaration.init) {
+          newCode += `window.${declaration.id.name} = ${code.slice(declaration.init.start, declaration.init.end)};`;
+        }
+        // Skip declarations without initializers to avoid resetting existing values
+      } else {
+        // Multiple or complex declarations: output the whole statement once
+        newCode += code.slice(node.start, node.end);
+        // Then promote the simple identifier declarations to window scope
+        for (const declaration of node.declarations) {
+          if (declaration.id.type === 'Identifier' && declaration.init) {
+            newCode += `\nwindow.${declaration.id.name} = ${declaration.id.name};`;
+          }
         }
       }
     }
     else if (node.type === 'FunctionDeclaration') {
-      newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
+      // Preserve hoisting by outputting the function declaration first, then assigning to window
+      newCode += `${code.slice(node.start, node.end)}\nwindow.${node.id.name} = ${node.id.name};`;
     }
     else if (node.type === 'ClassDeclaration') {
       newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
@@ -140,16 +161,20 @@ function executeScripts(scripts, context) {
     // Use AST parser for robust transformation
     //
     // 3. Runtime Safety:
-    // We wrap the whole block in a try-catch. This is important because
-    // assignments to global variables that were previously defined as 'const'
-    // during the initial page load will throw a TypeError. We want to catch
-    // these gracefully so other scripts can continue.
+    // Each script gets its own try-catch block to prevent one failing script
+    // from blocking all subsequent scripts. Errors are logged to console.
+    const scriptParts = scripts.map(script => {
+      const transformed = promoteToGlobal(script);
+      return `try {\n${transformed}\n} catch (e) { console.error('Error executing script:', e); }`;
+    });
+    
     const scriptEl = document.createElement('script');
-    scriptEl.textContent = 'try {\n{\n' + promoteToGlobal(scripts.join('\n\n/* --- Next Script --- */\n\n')) + '\n}\n} catch (e) { }';
+    scriptEl.textContent = '{\n' + scriptParts.join('\n\n/* --- Next Script --- */\n\n') + '\n}';
     document.head.appendChild(scriptEl);
     document.head.removeChild(scriptEl);
   } catch (e) {
     // Error executing scripts - silently ignored for production
+    console.error('Error in executeScripts:', e);
   }
 }
 
