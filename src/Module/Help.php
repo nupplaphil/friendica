@@ -45,6 +45,13 @@ class Help extends BaseModule
 			$filename           = $path;
 			$text               = self::loadDocFile($path . '.md', $lang);
 			DI::page()['title'] = DI::l10n()->t('Help:') . ' ' . str_replace('-', ' ', $title);
+
+			// A document was requested explicitly. Falling back to the help home page
+			// would answer every made up path with "200 OK" and the home page contents,
+			// which lets crawlers walk an endless URL space.
+			if ($path !== '' && !strlen((string) $text)) {
+				throw new HTTPException\NotFoundException();
+			}
 		}
 
 		$home = self::loadDocFile('home.md', $lang);
@@ -90,7 +97,7 @@ class Help extends BaseModule
 
 					$idNum[$level]++;
 
-					$href = "help/{$filename}#{$anchor}";
+					$href = "/help/{$filename}#{$anchor}";
 					$toc .= "<li><a href=\"{$href}\">" . strip_tags($line) . "</a></li>";
 					$id   = implode("_", array_slice($idNum, 1, $level));
 					$line = "<a name=\"{$id}\"></a>" . $line;
