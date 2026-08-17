@@ -259,7 +259,7 @@ class Page implements ArrayAccess
 			'$generator'      => 'Friendica' . ' ' . App::VERSION,
 			'$update_content' => (int) $pConfig->get($localUID, 'system', 'update_content'),
 			'$spa_mode'       => (int) $pConfig->get($localUID, 'system', 'enable_spa'),
-			'$spa_router_ts'  => file_exists('view/js/spa/spa-router.mjs') ? filemtime('view/js/spa/spa-router.mjs') : 0,
+			'$spa_router_ts'  => file_exists('view/js/spa/spa-router.js') ? filemtime('view/js/spa/spa-router.js') : 0,
 			'$shortcut_icon'  => $shortcut_icon,
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),
