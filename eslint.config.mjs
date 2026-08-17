@@ -138,9 +138,7 @@ export default [
 		},
 	},
 	{
-		// The SPA scripts are native ES modules (.mjs), unlike the rest of
-		// view/**/*.js which are classic scripts sharing a global namespace.
-		files: ["view/js/spa/**/*.mjs"],
+		files: ["view/js/spa/**/*.js"],
 		languageOptions: {
 			sourceType: "module",
 		},
