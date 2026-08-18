@@ -88,8 +88,7 @@ function cleanupTooltips() {
     '[role="tooltip"]',
     '.fancybox-wrap',
     '.colorbox',
-    '.jGrowl',
-    '.panel'
+    '.jGrowl'
   ];
 
   tooltipSelectors.forEach(selector => {

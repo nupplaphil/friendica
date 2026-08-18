@@ -61,7 +61,7 @@ function initTheme() {
 	//fade in/out based on scrollTop value
 	var scrollStart;
 
-	$(window).scroll(function () {
+	$(window).off("scroll.frio-theme").on("scroll.frio-theme", function () {
 		let currentScroll = $(this).scrollTop();
 
 		// Top of the page or going up = hide the button
@@ -409,7 +409,7 @@ function initTheme() {
 	if (typeof frioCommentFormHandlerRegistered === 'undefined') {
 		frioCommentFormHandlerRegistered = true;
 		console.log('[Theme] Registering comment form submit handler (once)');
-		$body.on("submit", ".comment-edit-form", function (e) {
+		$body.off("submit.frio-theme", ".comment-edit-form").on("submit.frio-theme", ".comment-edit-form", function (e) {
 			console.log('[Theme] Comment form submit handler triggered for form with data-item-id:', $(this).data("item-id"));
 			let $form = $(this);
 			let id = $form.data("item-id");

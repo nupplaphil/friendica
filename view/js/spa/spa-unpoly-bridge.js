@@ -61,14 +61,6 @@ function initUnpolyEnhancements() {
 
   window.__friendica_unpoly_initialized = true;
 
-  if (typeof window.up.hello === 'function') {
-    try {
-      window.up.hello(document.documentElement);
-    } catch (error) {
-      console.warn('[Unpoly bridge] up.hello failed:', error);
-    }
-  }
-
   return true;
 }
 
@@ -87,8 +79,6 @@ function bindUnpolyBridgeEvents() {
     }
   };
 
-  window.addEventListener('spa:document:ready', refresh);
-  window.addEventListener('spa:navigate', refresh);
   window.addEventListener('load', refresh);
   window.__friendica_unpoly_bridge_bound = true;
 }

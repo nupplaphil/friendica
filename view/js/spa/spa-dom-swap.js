@@ -49,8 +49,6 @@ function createDomSwapPipeline(options) {
    * @param {string} finalUrl - The final URL after following redirects (optional)
    */
   function replaceContainerContent(htmlString, finalUrl = null) {
-    cleanupTooltips();
-
     if (typeof htmlString !== 'string') {
       return;
     }
@@ -58,6 +56,9 @@ function createDomSwapPipeline(options) {
     const effectiveFinalUrl = finalUrl || window.location.href;
 
     const newDoc = new DOMParser().parseFromString(htmlString, 'text/html');
+
+    // Cleanup tooltips only after we have parsed the new document
+    cleanupTooltips();
 
     const newTitle = newDoc.querySelector('title');
     if (newTitle) document.title = newTitle.textContent;
@@ -86,6 +87,15 @@ function createDomSwapPipeline(options) {
 
       if (newDiv && oldDiv) {
         for (const script of newDiv.querySelectorAll('script:not([src])')) {
+          const type = script.getAttribute('type') || '';
+          if (type && 
+              type !== 'text/javascript' && 
+              type !== 'application/javascript' &&
+              type !== 'module' &&
+              type !== 'application/ecmascript' &&
+              type !== 'text/ecmascript') {
+            continue;
+          }
           const content = script.textContent.trim();
           if (content) classifyScript(content, globalScripts, bodyScripts, script, 'container');
           script.parentNode.removeChild(script);
@@ -132,9 +142,21 @@ function createDomSwapPipeline(options) {
 
       if (tag === 'link' || tag === 'style') {
         const href = el.getAttribute('href');
-        const selector = tag + (href ? `[href="${href}"]` : '');
-        if (!document.head.querySelector(selector)) {
-          document.head.appendChild(el.cloneNode(true));
+        // For style elements without href, use a different approach
+        if (tag === 'style' && !href) {
+          // Use text content as part of selector to avoid matching existing styles
+          const contentHash = el.textContent.trim().substring(0, 32);
+          const selector = 'style[data-spa-style-hash="' + contentHash + '"]';
+          if (!document.head.querySelector(selector)) {
+            const clone = el.cloneNode(true);
+            clone.setAttribute('data-spa-style-hash', contentHash);
+            document.head.appendChild(clone);
+          }
+        } else {
+          const selector = tag + (href ? `[href="${CSS.escape ? CSS.escape(href) : href}"]` : '');
+          if (!document.head.querySelector(selector)) {
+            document.head.appendChild(el.cloneNode(true));
+          }
         }
       } else if (tag === 'script') {
         const src = el.getAttribute('src');
