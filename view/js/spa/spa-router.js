@@ -213,18 +213,8 @@ async function initSPARouter() {
   initUnpolyEnhancements();
   
   // Register handlers for jQuery ready and window load events
-  if (typeof $ !== 'undefined') {
-    $(document).ready(triggerSPADocumentReady);
-    $(window).load(triggerSPAWindowLoad);
-  } else {
-    // Fallback for non-jQuery environments
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', triggerSPADocumentReady);
-    } else {
-      triggerSPADocumentReady();
-    }
-    window.addEventListener('load', triggerSPAWindowLoad);
-  }
+  $(document).ready(triggerSPADocumentReady);
+  $(window).load(triggerSPAWindowLoad);
 }
 
 if (supportsSPA) {

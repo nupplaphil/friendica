@@ -79,77 +79,30 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 		return runInitialize(target);
 	};
 
-	if (window.up && typeof window.up.compiler === 'function') {
-		if (window.addEventListener) {
-			['spa:navigate'].forEach(function (eventName) {
-				window.addEventListener(eventName, refresh, { passive: true });
-			});
-		}
-
-		const compilerResult = window.up.compiler(selector, function (element) {
-			const result = runInitialize(element);
-			if (typeof result === 'function') {
-				return result;
+	if (window.addEventListener) {
+		window.addEventListener('spa:navigate', refresh, { passive: true });
+		
+		if (fallbackMode === 'document') {
+			if (spaEnabled) {
+				window.addEventListener('spa:document:ready', refresh, { passive: true });
+			} else {
+				$(document).ready(refresh);
 			}
-			if (typeof cleanup === 'function') {
-				return function () {
-					cleanup(normalizeElement(element));
-				};
-			}
-			return undefined;
-		});
-
-		if (typeof window.up.hello === 'function') {
-			try {
-				window.up.hello(document.documentElement);
-			} catch (error) {
-				console.warn('[Unpoly lifecycle] up.hello failed:', error);
+		} else {
+			if (spaEnabled) {
+				window.addEventListener('spa:window:load', refresh, { passive: true });
+			} else {
+				$(window).load(refresh);
 			}
 		}
-
-		window.__friendica_unpoly_lifecycle_registry.set(registryKey, compilerResult);
-		return compilerResult;
+		
+		if ((document.readyState === 'complete' || document.readyState === 'interactive') && !window.__spa_reinit_phase) {
+			setTimeout(refresh, 0);
+		}
 	}
 
-	const fallback = function () {
-		return refresh();
-	};
-
-	if (fallbackMode === 'window') {
-		if (typeof window.addEventListener === 'function') {
-			if (document.readyState === 'complete' || document.readyState === 'interactive') {
-				const result = fallback();
-				window.__friendica_unpoly_lifecycle_registry.set(registryKey, result);
-				return result;
-			}
-			const onLoad = function () {
-				fallback();
-			};
-			window.addEventListener('load', onLoad, { once: true });
-			window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
-			return null;
-		}
-		const fallbackResult = fallback();
-		window.__friendica_unpoly_lifecycle_registry.set(registryKey, fallbackResult);
-		return fallbackResult;
-	}
-
-	if (typeof document.addEventListener === 'function') {
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', function () {
-				fallback();
-			}, { once: true });
-			window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
-			return null;
-		}
-		const result = fallback();
-		window.__friendica_unpoly_lifecycle_registry.set(registryKey, result);
-		return result;
-	}
-
-	const fallbackResult = fallback();
-	window.__friendica_unpoly_lifecycle_registry.set(registryKey, fallbackResult);
-	return fallbackResult;
+	window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
+	return null;
 }
 
 function resizeIframe(obj) {

@@ -27,12 +27,23 @@ function createContentLoader(options) {
    * Load content via AJAX.
    * @param {string} url - The URL to load
    */
+  // Module-level variable to track the current request
+  let currentAbortController = null;
+
   function loadContent(url) {
     const fetchUrl = new URL(url, window.location.href);
     let finalUrl = fetchUrl.toString();
 
+    // Abort any in-flight request
+    if (currentAbortController) {
+      currentAbortController.abort();
+    }
+
+    // Create new AbortController for this request
+    currentAbortController = new AbortController();
+
     showFetching();
-    fetch(fetchUrl, { headers: { 'Accept': 'text/html' }, credentials: 'include' })
+    fetch(fetchUrl, { headers: { 'Accept': 'text/html' }, credentials: 'include', signal: currentAbortController.signal })
       .then(async (response) => {
         if (!(response.headers.get('Content-Type') || response.headers.get('content-type') || '').includes('text/html')) {
           window.location.href = url;
@@ -68,14 +79,21 @@ function createContentLoader(options) {
 
         replaceContainerContent(html, finalUrl);
         hideLoading();
+        
+        // Reset abort controller after successful completion
+        currentAbortController = null;
 
         return html;
       })
       .catch(error => {
+        // Reset abort controller
+        currentAbortController = null;
+        
         hideLoading();
 
         if (error.name === 'AbortError') {
-          // Client timeout - dismissing delay modal only
+          // Request was aborted by a newer navigation - ignore silently
+          return;
         } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
           window.location.href = url;
         } else {
