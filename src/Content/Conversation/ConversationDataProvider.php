@@ -802,7 +802,9 @@ final readonly class ConversationDataProvider
 				continue;
 			}
 
-			if (($mode !== ConversationRenderer::MODE_CONTACTS) && !$row['origin']) {
+			// Only the author's own copy of a post carries the "origin" flag, so visitors would
+			// never see a pinned post as pinned on the pages that list a single author's posts.
+			if (!in_array($mode, [ConversationRenderer::MODE_CONTACTS, ConversationRenderer::MODE_PROFILE]) && !$row['origin']) {
 				$row['featured'] = false;
 			}
 
