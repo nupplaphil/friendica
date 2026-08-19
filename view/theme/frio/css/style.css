@@ -290,7 +290,7 @@ ul#nav-user-menu {
 #nav-user-menu {
 	width: clamp(200px, 50vw, 275px);
 	position: fixed;
-	right: 0px;
+	right: -10px;
 	top: 50px;
 	bottom: 0px;
 	height: 100%;
@@ -300,6 +300,8 @@ ul#nav-user-menu {
 	overflow-x: hidden;
 	overflow-y: auto;
 	background-color: $nav_bg;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 	transform: translateX(100%);
 	transition: 0.4s ease-in-out;
 	display: block;
@@ -307,6 +309,8 @@ ul#nav-user-menu {
 }
 #nav-user-linkmenu.open #nav-user-menu {
 	transform: translateX(0);
+	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 #nav-user-linkmenu::after {
 	content: '';						
