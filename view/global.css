@@ -962,6 +962,7 @@ summary.wall-item-summary {
 	pointer-events: none;
 }
 /* ...omit alt tags on images in these cases: profile description */
+.attachment .photo-album-image-wrapper::after,
 .profile-header a:has(img.has-alt-description)::after {
 	display: none;
 }
