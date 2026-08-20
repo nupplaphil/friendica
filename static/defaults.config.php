@@ -91,6 +91,11 @@ return [
 		// Days of inactivity after which an admin is considered inactive. "0" means that there will be no check for inactivity.
 		'admin_inactivity_limit' => 30,
 
+		// allowed_internal_hosts (Array)
+		// Internal hosts that server-side requests may reach. Wildcards are allowed.
+		// See block_private_addresses.
+		'allowed_internal_hosts' => [],
+
 		// allowed_link_protocols (Array)
 		// Allowed protocols in links URLs, add at your own risk. http(s) is always allowed.
 		'allowed_link_protocols' => ['ftp://', 'ftps://', 'mailto:', 'cid:', 'gopher://'],
@@ -138,6 +143,11 @@ return [
 		// bulk_delivery (Boolean)
 		// Delivers AP messages in a bulk (experimental)
 		'bulk_delivery' => false,
+
+		// block_private_addresses (Boolean)
+		// Refuse server-side requests to non-public IP addresses, including redirects.
+		// The node's base URL and allowed_internal_hosts are exempt.
+		'block_private_addresses' => true,
 
 		// block_local_dir (Boolean)
 		// Deny public access to the local user directory.
