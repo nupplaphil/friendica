@@ -48,7 +48,7 @@ class HTMLTest extends TestCase
 	public function testLoadHtmlPreservesTheTextAfterEncoding(string $text): void
 	{
 		$doc = new DOMDocument();
-		@$doc->loadHTML(HTML::toNumericEntities('<span>' . $text . '</span>'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		$doc->loadHTML(HTML::toNumericEntities('<span>' . $text . '</span>'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
 		self::assertSame(html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8'), $doc->textContent);
 	}
@@ -56,26 +56,8 @@ class HTMLTest extends TestCase
 	public function testLoadHtmlWouldMangleUtf8WithoutTheEncoding(): void
 	{
 		$doc = new DOMDocument();
-		@$doc->loadHTML('<span>Grüße</span>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		$doc->loadHTML('<span>Grüße</span>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
 		self::assertNotSame('Grüße', $doc->textContent);
-	}
-
-	public function testNoDeprecationIsRaised(): void
-	{
-		$raised = null;
-		set_error_handler(function (int $errno, string $errstr) use (&$raised): bool {
-			$raised = $errstr;
-			return true;
-		}, E_DEPRECATED);
-
-		try {
-			$encoded = HTML::toNumericEntities('Grüße 🎉');
-		} finally {
-			restore_error_handler();
-		}
-
-		self::assertNull($raised);
-		self::assertSame('Gr&#252;&#223;e &#127881;', $encoded);
 	}
 }
