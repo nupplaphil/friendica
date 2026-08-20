@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 00:45+0200\n"
+"POT-Creation-Date: 2026-08-20 11:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1157,7 +1157,7 @@ msgid "Delete Selected Items"
 msgstr ""
 
 #: src/Content/Conversation/ConversationRenderer.php:467
-#: src/Content/Conversation/PostTemplateBuilder.php:526
+#: src/Content/Conversation/PostTemplateBuilder.php:527
 msgid "Select"
 msgstr ""
 
@@ -1449,8 +1449,8 @@ msgid "Load more comments"
 msgstr ""
 
 #: src/Content/Conversation/PostTemplateBuilder.php:387
-#: src/Content/Conversation/PostTemplateBuilder.php:926
-#: src/Module/Moderation/Reports.php:242
+#: src/Content/Conversation/PostTemplateBuilder.php:927
+#: src/Module/Moderation/Reports.php:245
 msgid "Comment"
 msgstr ""
 
@@ -1505,261 +1505,261 @@ msgstr ""
 msgid "Close comments"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:449
+#: src/Content/Conversation/PostTemplateBuilder.php:450
 #, php-format
 msgid "%d comment"
 msgid_plural "%d comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:450
+#: src/Content/Conversation/PostTemplateBuilder.php:451
 msgid "Show more"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:451
+#: src/Content/Conversation/PostTemplateBuilder.php:452
 msgid "Show fewer"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:527
+#: src/Content/Conversation/PostTemplateBuilder.php:528
 msgid "Delete globally"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:527
+#: src/Content/Conversation/PostTemplateBuilder.php:528
 msgid "Remove locally"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:534
+#: src/Content/Conversation/PostTemplateBuilder.php:535
 #, php-format
 msgid "Block %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:539
+#: src/Content/Conversation/PostTemplateBuilder.php:540
 #, php-format
 msgid "Ignore %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:544
+#: src/Content/Conversation/PostTemplateBuilder.php:545
 #, php-format
 msgid "Collapse %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:548
+#: src/Content/Conversation/PostTemplateBuilder.php:549
 msgid "Report this post"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:559
+#: src/Content/Conversation/PostTemplateBuilder.php:560
 #: src/Content/Item.php:436
 #, php-format
 msgid "Ignore %s server"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:585
+#: src/Content/Conversation/PostTemplateBuilder.php:586
 msgid "I will attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:586
+#: src/Content/Conversation/PostTemplateBuilder.php:587
 msgid "I will not attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:587
+#: src/Content/Conversation/PostTemplateBuilder.php:588
 msgid "I might attend"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:590
+#: src/Content/Conversation/PostTemplateBuilder.php:591
 msgid "Going"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:591
+#: src/Content/Conversation/PostTemplateBuilder.php:592
 msgid "Can't Go"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:592
+#: src/Content/Conversation/PostTemplateBuilder.php:593
 msgid "Maybe"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:616
+#: src/Content/Conversation/PostTemplateBuilder.php:617
 #, php-format
 msgid "%s (Received %s)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:704
+#: src/Content/Conversation/PostTemplateBuilder.php:705
 msgid "I like this (toggle)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:704
+#: src/Content/Conversation/PostTemplateBuilder.php:705
 msgid "Like"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:705
+#: src/Content/Conversation/PostTemplateBuilder.php:706
 msgid "I don't like this (toggle)"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:705
+#: src/Content/Conversation/PostTemplateBuilder.php:706
 msgid "Dislike"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:708
+#: src/Content/Conversation/PostTemplateBuilder.php:709
 msgid "Quote share this"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:708
+#: src/Content/Conversation/PostTemplateBuilder.php:709
 msgid "Quote Share"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:711
+#: src/Content/Conversation/PostTemplateBuilder.php:712
 msgid "Reshare this"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:711
+#: src/Content/Conversation/PostTemplateBuilder.php:712
 msgid "Reshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:712
+#: src/Content/Conversation/PostTemplateBuilder.php:713
 msgid "Cancel your Reshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:712
+#: src/Content/Conversation/PostTemplateBuilder.php:713
 msgid "Unshare"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:745
+#: src/Content/Conversation/PostTemplateBuilder.php:746
 #: src/Module/Profile/Schedule.php:93
 msgid "Private Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:746
+#: src/Content/Conversation/PostTemplateBuilder.php:747
 msgid "Public Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:747
+#: src/Content/Conversation/PostTemplateBuilder.php:748
 msgid "Unlisted Message"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:770
+#: src/Content/Conversation/PostTemplateBuilder.php:771
 #, php-format
 msgid "Reshared by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:775
+#: src/Content/Conversation/PostTemplateBuilder.php:776
 #, php-format
 msgid "Viewed by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:780
+#: src/Content/Conversation/PostTemplateBuilder.php:781
 #, php-format
 msgid "Read by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:785
+#: src/Content/Conversation/PostTemplateBuilder.php:786
 #, php-format
 msgid "Liked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:790
+#: src/Content/Conversation/PostTemplateBuilder.php:791
 #, php-format
 msgid "Disliked by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:795
+#: src/Content/Conversation/PostTemplateBuilder.php:796
 #, php-format
 msgid "Attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:800
+#: src/Content/Conversation/PostTemplateBuilder.php:801
 #, php-format
 msgid "Maybe attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:805
+#: src/Content/Conversation/PostTemplateBuilder.php:806
 #, php-format
 msgid "Not attended by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:810
+#: src/Content/Conversation/PostTemplateBuilder.php:811
 #, php-format
 msgid "Commented by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:815
+#: src/Content/Conversation/PostTemplateBuilder.php:816
 #, php-format
 msgid "Reacted with %s by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:838
+#: src/Content/Conversation/PostTemplateBuilder.php:839
 #, php-format
 msgid "Quote shared by: %s"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:924
+#: src/Content/Conversation/PostTemplateBuilder.php:925
 #: src/Module/Contact.php:607 src/Module/Item/Compose.php:163
 msgid "This is you"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:927
+#: src/Content/Conversation/PostTemplateBuilder.php:928
 msgid "Post comment"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:928
+#: src/Content/Conversation/PostTemplateBuilder.php:929
 #: src/Content/Conversation/StatusEditor.php:149 src/Content/Nav.php:93
 #: src/Module/Post/Edit.php:141
 msgid "Loading..."
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:929
+#: src/Content/Conversation/PostTemplateBuilder.php:930
 #: src/Content/Conversation/StatusEditor.php:152
 #: src/Module/Item/Compose.php:165 src/Module/Post/Edit.php:184
 #: src/Module/Settings/Profile/Index.php:247
 msgid "Bold"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:930
+#: src/Content/Conversation/PostTemplateBuilder.php:931
 #: src/Content/Conversation/StatusEditor.php:153
 #: src/Module/Item/Compose.php:166 src/Module/Post/Edit.php:185
 #: src/Module/Settings/Profile/Index.php:248
 msgid "Italic"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:931
+#: src/Content/Conversation/PostTemplateBuilder.php:932
 #: src/Content/Conversation/StatusEditor.php:154
 #: src/Module/Item/Compose.php:167 src/Module/Post/Edit.php:186
 #: src/Module/Settings/Profile/Index.php:249
 msgid "Underline"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:932
+#: src/Content/Conversation/PostTemplateBuilder.php:933
 #: src/Content/Conversation/StatusEditor.php:157
 #: src/Module/Item/Compose.php:170
 msgid "Content Warning"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:933
+#: src/Content/Conversation/PostTemplateBuilder.php:934
 #: src/Content/Conversation/StatusEditor.php:155
 #: src/Module/Item/Compose.php:168 src/Module/Post/Edit.php:187
 #: src/Module/Settings/Profile/Index.php:250
 msgid "Quote"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:934
+#: src/Content/Conversation/PostTemplateBuilder.php:935
 #: src/Content/Conversation/StatusEditor.php:156
 #: src/Module/Item/Compose.php:169 src/Module/Post/Edit.php:188
 #: src/Module/Settings/Profile/Index.php:251
 msgid "Add emojis"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:935
+#: src/Content/Conversation/PostTemplateBuilder.php:936
 #: src/Content/Conversation/StatusEditor.php:158
 #: src/Module/Item/Compose.php:171 src/Module/Post/Edit.php:189
 #: src/Module/Settings/Profile/Index.php:252
 msgid "Code"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:936
+#: src/Content/Conversation/PostTemplateBuilder.php:937
 #: src/Module/Item/Compose.php:172 src/Module/Settings/Profile/Index.php:253
 #: src/Module/Settings/Profile/Index.php:254
 msgid "Image"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:937
+#: src/Content/Conversation/PostTemplateBuilder.php:938
 #: src/Content/Conversation/StatusEditor.php:159
 #: src/Content/Conversation/StatusEditor.php:163
 #: src/Module/Item/Compose.php:173 src/Module/Post/Edit.php:190
@@ -1767,20 +1767,20 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:938
+#: src/Content/Conversation/PostTemplateBuilder.php:939
 #: src/Content/Conversation/StatusEditor.php:160
 #: src/Module/Item/Compose.php:174 src/Module/Post/Edit.php:191
 #: src/Module/Settings/Profile/Index.php:256
 msgid "Link or Media"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:939
+#: src/Content/Conversation/PostTemplateBuilder.php:940
 #: src/Content/Conversation/StatusEditor.php:103
 #: src/Module/Item/Compose.php:175
 msgid "Please enter a image/video/audio/webpage URL:"
 msgstr ""
 
-#: src/Content/Conversation/PostTemplateBuilder.php:940
+#: src/Content/Conversation/PostTemplateBuilder.php:941
 #: src/Content/Conversation/StatusEditor.php:194
 #: src/Module/Calendar/Event/Form.php:261 src/Module/Item/Compose.php:176
 #: src/Module/Item/Compose.php:307 src/Module/Post/Edit.php:178
@@ -2117,7 +2117,7 @@ msgid "event"
 msgstr ""
 
 #: src/Content/Item.php:329 src/Content/Item.php:339
-#: src/Module/Moderation/Reports.php:340
+#: src/Module/Moderation/Reports.php:345
 msgid "status"
 msgstr ""
 
@@ -2455,7 +2455,7 @@ msgstr ""
 #: src/Module/Moderation/Blocklist/Server/Index.php:84
 #: src/Module/Moderation/Item/Delete.php:47
 #: src/Module/Moderation/Item/Source.php:66
-#: src/Module/Moderation/Reports.php:236 src/Module/Moderation/Reports.php:325
+#: src/Module/Moderation/Reports.php:239 src/Module/Moderation/Reports.php:329
 #: src/Module/Moderation/Summary.php:59
 #: src/Module/Moderation/Users/Active.php:89
 #: src/Module/Moderation/Users/Blocked.php:89
@@ -2852,275 +2852,275 @@ msgstr ""
 msgid "Please see the file \"doc/INSTALL.md\"."
 msgstr ""
 
-#: src/Core/Installer.php:235
+#: src/Core/Installer.php:261
 msgid "Could not find a command line version of PHP in the web server PATH."
 msgstr ""
 
-#: src/Core/Installer.php:236
+#: src/Core/Installer.php:262
 msgid "If you don't have a command line version of PHP installed on your server, you will not be able to run the background processing. See <a href='https://github.com/friendica/friendica/blob/stable/doc/Install.md#set-up-the-worker'>'Setup the worker'</a>"
 msgstr ""
 
-#: src/Core/Installer.php:241
+#: src/Core/Installer.php:267
 msgid "PHP executable path"
 msgstr ""
 
-#: src/Core/Installer.php:241
+#: src/Core/Installer.php:267
 msgid "Enter full path to php executable. You can leave this blank to continue the installation."
 msgstr ""
 
-#: src/Core/Installer.php:246
+#: src/Core/Installer.php:272
 msgid "Command line PHP"
 msgstr ""
 
-#: src/Core/Installer.php:255
+#: src/Core/Installer.php:281
 msgid "PHP executable is not the php cli binary (could be cgi-fgci version)"
 msgstr ""
 
-#: src/Core/Installer.php:256
+#: src/Core/Installer.php:282
 msgid "Found PHP version: "
 msgstr ""
 
-#: src/Core/Installer.php:258
+#: src/Core/Installer.php:284
 msgid "PHP cli binary"
 msgstr ""
 
-#: src/Core/Installer.php:271
+#: src/Core/Installer.php:297
 msgid "The command line version of PHP on your system does not have \"register_argc_argv\" enabled."
 msgstr ""
 
-#: src/Core/Installer.php:272
+#: src/Core/Installer.php:298
 msgid "This is required for message delivery to work."
 msgstr ""
 
-#: src/Core/Installer.php:277
+#: src/Core/Installer.php:303
 msgid "PHP register_argc_argv"
 msgstr ""
 
-#: src/Core/Installer.php:309
+#: src/Core/Installer.php:335
 msgid "Error: the \"openssl_pkey_new\" function on this system is not able to generate encryption keys"
 msgstr ""
 
-#: src/Core/Installer.php:310
+#: src/Core/Installer.php:336
 msgid "If running under Windows, please see \"http://www.php.net/manual/en/openssl.installation.php\"."
 msgstr ""
 
-#: src/Core/Installer.php:313
+#: src/Core/Installer.php:339
 msgid "Generate encryption keys"
 msgstr ""
 
-#: src/Core/Installer.php:364
+#: src/Core/Installer.php:390
 msgid "Error: Apache webserver mod-rewrite module is required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:368
+#: src/Core/Installer.php:394
 msgid "Apache mod_rewrite module"
 msgstr ""
 
-#: src/Core/Installer.php:374
+#: src/Core/Installer.php:400
 msgid "Error: PDO or MySQLi PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:378
+#: src/Core/Installer.php:404
 msgid "Error: The MySQL driver for PDO is not installed."
 msgstr ""
 
-#: src/Core/Installer.php:381
+#: src/Core/Installer.php:407
 msgid "PDO or MySQLi PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:387
+#: src/Core/Installer.php:413
 msgid "Error: The IntlChar module is not installed."
 msgstr ""
 
-#: src/Core/Installer.php:390
+#: src/Core/Installer.php:416
 msgid "IntlChar PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:398
+#: src/Core/Installer.php:424
 msgid "Error, XML PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:402
+#: src/Core/Installer.php:428
 msgid "XML PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:406
+#: src/Core/Installer.php:432
 msgid "libCurl PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:407
+#: src/Core/Installer.php:433
 msgid "Error: libCURL PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:414
+#: src/Core/Installer.php:440
 msgid "GD graphics PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:415
+#: src/Core/Installer.php:441
 msgid "Error: GD graphics PHP module with JPEG support required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:422
+#: src/Core/Installer.php:448
 msgid "OpenSSL PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:423
+#: src/Core/Installer.php:449
 msgid "Error: openssl PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:430
+#: src/Core/Installer.php:456
 msgid "mb_string PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:431
+#: src/Core/Installer.php:457
 msgid "Error: mb_string PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:438
+#: src/Core/Installer.php:464
 msgid "iconv PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:439
+#: src/Core/Installer.php:465
 msgid "Error: iconv PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:446
+#: src/Core/Installer.php:472
 msgid "POSIX PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:447
+#: src/Core/Installer.php:473
 msgid "Error: POSIX PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:454
+#: src/Core/Installer.php:480
 msgid "Program execution functions"
 msgstr ""
 
-#: src/Core/Installer.php:455
+#: src/Core/Installer.php:481
 msgid "Error: Program execution functions (proc_open) required but not enabled."
 msgstr ""
 
-#: src/Core/Installer.php:462
+#: src/Core/Installer.php:488
 msgid "JSON PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:463
+#: src/Core/Installer.php:489
 msgid "Error: JSON PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:470
+#: src/Core/Installer.php:496
 msgid "File Information PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:471
+#: src/Core/Installer.php:497
 msgid "Error: File Information PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:478
+#: src/Core/Installer.php:504
 msgid "GNU Multiple Precision PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:479
+#: src/Core/Installer.php:505
 msgid "Error: GNU Multiple Precision PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:486
+#: src/Core/Installer.php:512
 msgid "IDN Functions PHP module"
 msgstr ""
 
-#: src/Core/Installer.php:487
+#: src/Core/Installer.php:513
 msgid "Error: IDN Functions PHP module required but not installed."
 msgstr ""
 
-#: src/Core/Installer.php:510
+#: src/Core/Installer.php:536
 msgid "The web installer needs to be able to create a file called \"local.config.php\" in the \"config\" folder of your web server and it is unable to do so."
 msgstr ""
 
-#: src/Core/Installer.php:511
+#: src/Core/Installer.php:537
 msgid "This is most often a permission setting, as the web server may not be able to write files in your folder - even if you can."
 msgstr ""
 
-#: src/Core/Installer.php:512
+#: src/Core/Installer.php:538
 msgid "At the end of this procedure, we will give you a text to save in a file named local.config.php in your Friendica \"config\" folder."
 msgstr ""
 
-#: src/Core/Installer.php:513
+#: src/Core/Installer.php:539
 msgid "You can alternatively skip this procedure and perform a manual installation. Please see the file \"doc/INSTALL.md\" for instructions."
 msgstr ""
 
-#: src/Core/Installer.php:516
+#: src/Core/Installer.php:542
 msgid "config/local.config.php is writable"
 msgstr ""
 
-#: src/Core/Installer.php:536
+#: src/Core/Installer.php:562
 msgid "Friendica uses the Smarty3 template engine to render its web views. Smarty3 compiles templates to PHP to speed up rendering."
 msgstr ""
 
-#: src/Core/Installer.php:537
+#: src/Core/Installer.php:563
 msgid "In order to store these compiled templates, the web server needs to have write access to the directory view/smarty3/ under the Friendica top level folder."
 msgstr ""
 
-#: src/Core/Installer.php:538
+#: src/Core/Installer.php:564
 msgid "Please ensure that the user that your web server runs as (e.g. www-data) has write access to this folder."
 msgstr ""
 
-#: src/Core/Installer.php:539
+#: src/Core/Installer.php:565
 msgid "Note: as a security measure, you should give the web server write access to view/smarty3/ only--not the template files (.tpl) that it contains."
 msgstr ""
 
-#: src/Core/Installer.php:542
+#: src/Core/Installer.php:568
 msgid "view/smarty3 is writable"
 msgstr ""
 
-#: src/Core/Installer.php:570
+#: src/Core/Installer.php:596
 msgid "Url rewrite in .htaccess seems not working. Make sure you copied .htaccess-dist to .htaccess."
 msgstr ""
 
-#: src/Core/Installer.php:571
+#: src/Core/Installer.php:597
 msgid "In some circumstances (like running inside containers), you can skip this error."
 msgstr ""
 
-#: src/Core/Installer.php:573
+#: src/Core/Installer.php:599
 msgid "Error message from Curl when fetching"
 msgstr ""
 
-#: src/Core/Installer.php:579
+#: src/Core/Installer.php:605
 msgid "Url rewrite is working"
 msgstr ""
 
-#: src/Core/Installer.php:608
+#: src/Core/Installer.php:634
 msgid "The detection of TLS to secure the communication between the browser and the new Friendica server failed."
 msgstr ""
 
-#: src/Core/Installer.php:609
+#: src/Core/Installer.php:635
 msgid "It is highly encouraged to use Friendica only over a secure connection as sensitive information like passwords will be transmitted."
 msgstr ""
 
-#: src/Core/Installer.php:610
+#: src/Core/Installer.php:636
 msgid "Please ensure that the connection to the server is secure."
 msgstr ""
 
-#: src/Core/Installer.php:611
+#: src/Core/Installer.php:637
 msgid "No TLS detected"
 msgstr ""
 
-#: src/Core/Installer.php:613
+#: src/Core/Installer.php:639
 msgid "TLS detected"
 msgstr ""
 
-#: src/Core/Installer.php:630
+#: src/Core/Installer.php:656
 msgid "ImageMagick PHP extension is not installed"
 msgstr ""
 
-#: src/Core/Installer.php:632
+#: src/Core/Installer.php:658
 msgid "ImageMagick PHP extension is installed"
 msgstr ""
 
-#: src/Core/Installer.php:653
+#: src/Core/Installer.php:679
 msgid "Database already in use."
 msgstr ""
 
-#: src/Core/Installer.php:658
+#: src/Core/Installer.php:684
 msgid "Could not connect to database."
 msgstr ""
 
@@ -4253,7 +4253,7 @@ msgstr ""
 
 #: src/Module/Admin/Federation.php:70
 #: src/Module/Moderation/Report/Create.php:220
-#: src/Module/Moderation/Reports.php:579 src/Module/Moderation/Reports.php:590
+#: src/Module/Moderation/Reports.php:584 src/Module/Moderation/Reports.php:595
 #: src/Module/Moderation/Utils/ReportUtil.php:25
 msgid "Other"
 msgstr ""
@@ -4490,7 +4490,7 @@ msgstr ""
 msgid "Job Parameters"
 msgstr ""
 
-#: src/Module/Admin/Queue.php:70 src/Module/Moderation/Reports.php:242
+#: src/Module/Admin/Queue.php:70 src/Module/Moderation/Reports.php:245
 #: src/Module/Settings/OAuth.php:58
 msgid "Created"
 msgstr ""
@@ -4544,7 +4544,7 @@ msgid "User"
 msgstr ""
 
 #: src/Module/Admin/Roles.php:138 src/Module/Contact/Profile.php:435
-#: src/Module/Moderation/Reports.php:342
+#: src/Module/Moderation/Reports.php:347
 #: src/Module/Settings/TwoFactor/Index.php:146
 msgid "Actions"
 msgstr ""
@@ -4640,8 +4640,8 @@ msgstr ""
 msgid "Multi user instance"
 msgstr ""
 
-#: src/Module/Admin/Site.php:436 src/Module/Moderation/Reports.php:212
-#: src/Module/Moderation/Reports.php:285
+#: src/Module/Admin/Site.php:436 src/Module/Moderation/Reports.php:215
+#: src/Module/Moderation/Reports.php:289
 msgid "Closed"
 msgstr ""
 
@@ -4649,8 +4649,8 @@ msgstr ""
 msgid "Requires approval"
 msgstr ""
 
-#: src/Module/Admin/Site.php:438 src/Module/Moderation/Reports.php:212
-#: src/Module/Moderation/Reports.php:285
+#: src/Module/Admin/Site.php:438 src/Module/Moderation/Reports.php:215
+#: src/Module/Moderation/Reports.php:289
 msgid "Open"
 msgstr ""
 
@@ -6045,7 +6045,7 @@ msgstr ""
 msgid "Submanaged account can't access the moderation pages. Please log back in as the main account."
 msgstr ""
 
-#: src/Module/BaseModeration.php:99 src/Module/Moderation/Reports.php:241
+#: src/Module/BaseModeration.php:99 src/Module/Moderation/Reports.php:244
 msgid "Reports"
 msgstr ""
 
@@ -6612,7 +6612,7 @@ msgstr ""
 
 #: src/Module/Contact/Advanced.php:120
 #: src/Module/Moderation/Blocklist/Contact.php:118
-#: src/Module/Moderation/Reports.php:242
+#: src/Module/Moderation/Reports.php:245
 #: src/Module/Moderation/Users/Active.php:82
 #: src/Module/Moderation/Users/Blocked.php:82
 #: src/Module/Moderation/Users/Deleted.php:69
@@ -6731,7 +6731,7 @@ msgstr ""
 #: src/Module/Contact/Follow.php:155 src/Module/Contact/Profile.php:422
 #: src/Module/Contact/Unfollow.php:110
 #: src/Module/Moderation/Blocklist/Contact.php:128
-#: src/Module/Moderation/Reports.php:260
+#: src/Module/Moderation/Reports.php:263
 #: src/Module/Notifications/Introductions.php:125
 #: src/Module/Notifications/Introductions.php:198
 msgid "Profile URL"
@@ -6974,7 +6974,7 @@ msgstr ""
 msgid "Comma separated list of keywords that should not be converted to hashtags, when \"Fetch information and keywords\" is selected"
 msgstr ""
 
-#: src/Module/Contact/Profile.php:437 src/Module/Moderation/Reports.php:242
+#: src/Module/Contact/Profile.php:437 src/Module/Moderation/Reports.php:245
 #: src/Module/Settings/TwoFactor/Index.php:126
 msgid "Status"
 msgstr ""
@@ -8273,7 +8273,7 @@ msgid "Block New Remote Contact"
 msgstr ""
 
 #: src/Module/Moderation/Blocklist/Contact.php:118
-#: src/Module/Moderation/Reports.php:242
+#: src/Module/Moderation/Reports.php:245
 msgid "Photo"
 msgstr ""
 
@@ -8621,7 +8621,7 @@ msgid "You need to know the GUID of the item. You can find it e.g. by looking at
 msgstr ""
 
 #: src/Module/Moderation/Item/Delete.php:53
-#: src/Module/Moderation/Reports.php:341
+#: src/Module/Moderation/Reports.php:346
 msgid "GUID"
 msgstr ""
 
@@ -8721,7 +8721,7 @@ msgid "Please pick below the category of your report."
 msgstr ""
 
 #: src/Module/Moderation/Report/Create.php:215
-#: src/Module/Moderation/Reports.php:576 src/Module/Moderation/Reports.php:587
+#: src/Module/Moderation/Reports.php:581 src/Module/Moderation/Reports.php:592
 #: src/Module/Moderation/Utils/ReportUtil.php:20
 msgid "Spam"
 msgstr ""
@@ -8731,7 +8731,7 @@ msgid "This contact is publishing many repeated/overly long posts/replies or adv
 msgstr ""
 
 #: src/Module/Moderation/Report/Create.php:216
-#: src/Module/Moderation/Reports.php:577 src/Module/Moderation/Reports.php:588
+#: src/Module/Moderation/Reports.php:582 src/Module/Moderation/Reports.php:593
 #: src/Module/Moderation/Utils/ReportUtil.php:21
 msgid "Illegal Content"
 msgstr ""
@@ -8759,7 +8759,7 @@ msgid "This contact has repeatedly published content irrelevant to the node's th
 msgstr ""
 
 #: src/Module/Moderation/Report/Create.php:219
-#: src/Module/Moderation/Reports.php:578 src/Module/Moderation/Reports.php:589
+#: src/Module/Moderation/Reports.php:583 src/Module/Moderation/Reports.php:594
 #: src/Module/Moderation/Utils/ReportUtil.php:24
 msgid "Rules Violation"
 msgstr ""
@@ -8864,262 +8864,262 @@ msgstr ""
 msgid "3. Pick posts"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:237
+#: src/Module/Moderation/Reports.php:240
 msgid "List of reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:238
+#: src/Module/Moderation/Reports.php:241
 msgid "This page display reports created by our or remote users."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:239
+#: src/Module/Moderation/Reports.php:242
 msgid "No report exists at this node."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:242 src/Module/Moderation/Reports.php:336
+#: src/Module/Moderation/Reports.php:245 src/Module/Moderation/Reports.php:341
 msgid "Category"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:243
+#: src/Module/Moderation/Reports.php:246
 msgid "Select all"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:244
+#: src/Module/Moderation/Reports.php:247
 msgid "Close selected reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:245
+#: src/Module/Moderation/Reports.php:248
 msgid "Open reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:246
+#: src/Module/Moderation/Reports.php:249
 msgid "Closed reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:247
+#: src/Module/Moderation/Reports.php:250
 msgid "All reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:253 src/Module/Moderation/Reports.php:586
+#: src/Module/Moderation/Reports.php:256 src/Module/Moderation/Reports.php:591
 msgid "All categories"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:257
+#: src/Module/Moderation/Reports.php:260
 #, php-format
 msgid "%s total report"
 msgid_plural "%s total reports"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Reports.php:260
+#: src/Module/Moderation/Reports.php:263
 msgid "URL of the reported contact."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:326
+#: src/Module/Moderation/Reports.php:330
 msgid "Report details"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:327
+#: src/Module/Moderation/Reports.php:331
 msgid "Back to reports"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:329
+#: src/Module/Moderation/Reports.php:334
 msgid "Forwarded"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:330
+#: src/Module/Moderation/Reports.php:335
 msgid "Not forwarded"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:331
+#: src/Module/Moderation/Reports.php:336
 msgid "Assigned user id:"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:332 src/Module/Moderation/Reports.php:605
+#: src/Module/Moderation/Reports.php:337 src/Module/Moderation/Reports.php:610
 msgid "Unassigned"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:333
+#: src/Module/Moderation/Reports.php:338
 msgid "Reporter:"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:334
+#: src/Module/Moderation/Reports.php:339
 msgid "Target:"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:335
+#: src/Module/Moderation/Reports.php:340
 msgid "Category and rules"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:337
+#: src/Module/Moderation/Reports.php:342
 msgid "Node rules"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:338
+#: src/Module/Moderation/Reports.php:343
 msgid "Attached posts"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:339
+#: src/Module/Moderation/Reports.php:344
 msgid "URI-ID"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:343
+#: src/Module/Moderation/Reports.php:348
 msgid "Public remarks"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:344
+#: src/Module/Moderation/Reports.php:349
 msgid "Private remarks"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:345
+#: src/Module/Moderation/Reports.php:350
 msgid "This report is finalized and read-only."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:346
+#: src/Module/Moderation/Reports.php:351
 msgid "Save remarks"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:347
+#: src/Module/Moderation/Reports.php:352
 msgid "Assign to me"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:348
+#: src/Module/Moderation/Reports.php:353
 msgid "Unassign"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:349
+#: src/Module/Moderation/Reports.php:354
 msgid "Mark resolved"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:350
+#: src/Module/Moderation/Reports.php:355
 msgid "Save category and rules"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:351
+#: src/Module/Moderation/Reports.php:356
 msgid "Delete all reported posts"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:352
+#: src/Module/Moderation/Reports.php:357
 msgid "Block local user"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:353
+#: src/Module/Moderation/Reports.php:358
 msgid "Block remote contact"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:354
+#: src/Module/Moderation/Reports.php:359
 msgid "Block remote contact and purge content"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:355
+#: src/Module/Moderation/Reports.php:360
 msgid "Delete this reported post"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:356
+#: src/Module/Moderation/Reports.php:361
 msgid "Warn user"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:357
+#: src/Module/Moderation/Reports.php:362
 msgid "Warning message"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:358
+#: src/Module/Moderation/Reports.php:363
 msgid "Silence local user (future posts unlisted)"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:377
+#: src/Module/Moderation/Reports.php:382
 #, php-format
 msgid "%s reported post marked for deletion"
 msgid_plural "%s reported posts marked for deletion"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Module/Moderation/Reports.php:379
+#: src/Module/Moderation/Reports.php:384
 msgid "This report has no attached posts."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:386
+#: src/Module/Moderation/Reports.php:391
 msgid "Invalid reported post id."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:400
+#: src/Module/Moderation/Reports.php:405
 msgid "This post is not attached to the report."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:407
+#: src/Module/Moderation/Reports.php:412
 msgid "Reported post marked for deletion."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:416
+#: src/Module/Moderation/Reports.php:421
 msgid "Reported target contact not found."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:424
+#: src/Module/Moderation/Reports.php:429
 msgid "The local user has been blocked."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:429
+#: src/Module/Moderation/Reports.php:434
 msgid "Could not map the reported local contact to a user account."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:434
+#: src/Module/Moderation/Reports.php:439
 msgid "Failed to block the remote contact."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:447
+#: src/Module/Moderation/Reports.php:452
 msgid "The remote contact has been blocked and related content will be purged."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:449
+#: src/Module/Moderation/Reports.php:454
 msgid "The remote contact has been blocked."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:457
+#: src/Module/Moderation/Reports.php:462
 msgid "Please provide a warning message."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:469
+#: src/Module/Moderation/Reports.php:474
 msgid "Moderator warning:"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:474
+#: src/Module/Moderation/Reports.php:479
 msgid "Warning text has been saved, but automatic delivery is only available for local users."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:480
+#: src/Module/Moderation/Reports.php:485
 msgid "Warning text has been saved, but the local user has no deliverable email address."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:488
+#: src/Module/Moderation/Reports.php:493
 #, php-format
 msgid "Moderation warning from %s"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:489
+#: src/Module/Moderation/Reports.php:494
 msgid "Your recent activity was reported to the moderation team. Please review this warning message."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:498
+#: src/Module/Moderation/Reports.php:503
 msgid "Warning sent to the local user and stored in public remarks."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:501 src/Module/Moderation/Reports.php:505
+#: src/Module/Moderation/Reports.php:506 src/Module/Moderation/Reports.php:510
 msgid "Warning text was stored, but sending the email failed."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:516
+#: src/Module/Moderation/Reports.php:521
 msgid "This action is only available for local users."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:528
+#: src/Module/Moderation/Reports.php:533
 msgid "Local user silenced: future posts will be unlisted, and public community visibility is reduced."
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:603
+#: src/Module/Moderation/Reports.php:608
 msgid "All assignments"
 msgstr ""
 
-#: src/Module/Moderation/Reports.php:604
+#: src/Module/Moderation/Reports.php:609
 msgid "Assigned to me"
 msgstr ""
 
@@ -9178,7 +9178,7 @@ msgstr ""
 #: src/Module/Moderation/Users/Deleted.php:69
 #: src/Module/Moderation/Users/Index.php:89
 #: src/Module/Moderation/Users/Index.php:110
-msgid "Last login"
+msgid "Last activity"
 msgstr ""
 
 #: src/Module/Moderation/Users/Active.php:82
