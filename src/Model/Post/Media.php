@@ -133,6 +133,12 @@ class Media
 		if (array_diff_assoc($media, $stored)) {
 			$result = DBA::insert('post-media', $media, Database::INSERT_UPDATE);
 			$id     = $media['id'] ?? DBA::lastInsertId();
+			if (empty($id)) {
+				// When the entry had already existed, the insert turned into an update
+				// and no insert id is provided. So we fetch the id via the unique key.
+				$existing = DBA::selectFirst('post-media', ['id'], ['uri-id' => $media['uri-id'], 'url' => $media['url']]);
+				$id       = $existing['id'] ?? null;
+			}
 			DI::logger()->info('Updated media', ['result' => $result, 'id' => $id, 'media' => $media]);
 		} else {
 			$id = null;
