@@ -478,7 +478,7 @@ final readonly class ConversationDataProvider
 			}
 		}
 
-		$items = $this->sortConversationItems($items, $order, $uid);
+		$items = $this->sortConversationItems($items, $order, $uid, $compactTimeline);
 
 		return $items;
 	}
@@ -1077,9 +1077,10 @@ final readonly class ConversationDataProvider
 	 * @param array<int, array> $itemList The items to sort
 	 * @param string $order One of ConversationRenderer::ORDER_*
 	 * @param int $uid The user ID of the viewer
+	 * @param bool $compactTimeline Whether the compact conversation view is active
 	 * @return array<int, array> The sorted conversation items
 	 */
-	private function sortConversationItems(array $itemList, string $order, int $uid): array
+	private function sortConversationItems(array $itemList, string $order, int $uid, bool $compactTimeline = false): array
 	{
 		$parents = [];
 		if (count($itemList) === 0) {
@@ -1121,7 +1122,9 @@ final readonly class ConversationDataProvider
 			$parents[$index]['children'] = $this->sortItemChildren($parents[$index]['children']);
 		}
 
-		if (!$this->pConfig->get($uid, 'system', 'no_smart_threading', 0)) {
+		// The compact view already removed comments from the thread. Smart threading would
+		// then flatten the remaining replies as well, hiding what they are a reply to.
+		if (!$compactTimeline && !$this->pConfig->get($uid, 'system', 'no_smart_threading', 0)) {
 			foreach ($parents as $index => $parent) {
 				$parents[$index] = $this->smartFlattenConversation($parent);
 			}
