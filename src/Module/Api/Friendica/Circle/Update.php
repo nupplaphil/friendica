@@ -30,22 +30,22 @@ class Update extends BaseApi
 
 		// error if no name specified
 		if (!$name) {
-			throw new BadRequestException('circle name not specified');
+			throw new BadRequestException($this->t('circle name not specified'));
 		}
 
 		// error if no gid specified
 		if (!$gid) {
-			throw new BadRequestException('gid not specified');
+			throw new BadRequestException($this->t('gid not specified'));
 		}
 
 		// error message if specified gid is not in database
-		if (!DBA::exists('group', ['uid' => $uid, 'id' => $gid])) {
-			throw new BadRequestException('gid not available');
+		if (!Circle::exists((int) $gid, $uid)) {
+			throw new BadRequestException($this->t('gid not available'));
 		}
 
 		$json = json_decode((string) $this->getRequestValue($request, 'json', ''), true);
 		if (!is_array($json) || !isset($json['user']) || !is_array($json['user'])) {
-			throw new BadRequestException('no valid user list submitted');
+			throw new BadRequestException($this->t('no valid user list submitted'));
 		}
 
 		$users = $json['user'];
