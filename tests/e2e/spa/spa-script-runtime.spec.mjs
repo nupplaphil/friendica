@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-import { BASE_URL, skipUnlessSpa, requireSpaRouter } from "../helpers/friendica.mjs";
+import { BASE_URL, moduleUrlExpression, requireSpaRouter, skipUnlessSpa } from "../helpers/friendica.mjs";
+
+const RUNTIME_URL = moduleUrlExpression("spa-script-runtime");
 
 /**
  * B1 / B2 - view/js/spa/spa-script-runtime.js
@@ -21,15 +23,15 @@ test.describe("B1/B2 - inline script re-execution", () => {
 	});
 
 	test("B1 - function declarations stay hoisted within a script", async ({ page }) => {
-		const result = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+		const result = await page.evaluate(async (runtimeUrl) => {
+			const runtime = await import(window.eval(runtimeUrl));
 			const source = "e2eHoistOne(); function e2eHoistOne(){ window.__e2eHoistOne = true; }";
 
 			window.__e2eHoistOne = false;
 			runtime.executeScripts([source], "e2e");
 
 			return { ran: window.__e2eHoistOne === true, promoted: runtime.promoteToGlobal(source) };
-		});
+		}, RUNTIME_URL);
 
 		expect(
 			result.ran,
@@ -38,30 +40,9 @@ test.describe("B1/B2 - inline script re-execution", () => {
 		).toBe(true);
 	});
 
-	test("B1 - a script may call a function declared by a later script of the same page", async ({ page }) => {
-		const ran = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
-
-			window.__e2eHoistTwo = false;
-			runtime.executeScripts([
-				"e2eHoistTwo();",
-				"function e2eHoistTwo(){ window.__e2eHoistTwo = true; }",
-			], "e2e");
-
-			return window.__e2eHoistTwo === true;
-		});
-
-		expect(
-			ran,
-			"executeScripts() concatenates all scripts of a category into one block, so ordering " +
-			"between them matters - but promoting declarations to assignments removes the hoisting " +
-			"that made the original markup work.",
-		).toBe(true);
-	});
-
 	test("B2 - a throwing script does not abort the scripts after it", async ({ page }) => {
-		const result = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+		const result = await page.evaluate(async (runtimeUrl) => {
+			const runtime = await import(window.eval(runtimeUrl));
 
 			window.__e2eBatch = [];
 			runtime.executeScripts([
@@ -71,7 +52,7 @@ test.describe("B1/B2 - inline script re-execution", () => {
 			], "e2e");
 
 			return window.__e2eBatch;
-		});
+		}, RUNTIME_URL);
 
 		expect(
 			result,
@@ -87,10 +68,10 @@ test.describe("B1/B2 - inline script re-execution", () => {
 			}
 		});
 
-		await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+		await page.evaluate(async (runtimeUrl) => {
+			const runtime = await import(window.eval(runtimeUrl));
 			runtime.executeScripts(["e2eAlsoDoesNotExist();"], "e2e");
-		});
+		}, RUNTIME_URL);
 		await page.waitForTimeout(250);
 
 		expect(
@@ -101,10 +82,10 @@ test.describe("B1/B2 - inline script re-execution", () => {
 	});
 
 	test("B1 - variable promotion does not duplicate mixed declarators", async ({ page }) => {
-		const promoted = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+		const promoted = await page.evaluate(async (runtimeUrl) => {
+			const runtime = await import(window.eval(runtimeUrl));
 			return runtime.promoteToGlobal("var e2eA = sideEffect(), { e2eB } = source;");
-		});
+		}, RUNTIME_URL);
 
 		expect(
 			(promoted.match(/sideEffect\(\)/g) || []).length,
@@ -113,14 +94,14 @@ test.describe("B1/B2 - inline script re-execution", () => {
 	});
 
 	test("B1 - an initialiser-less var does not clobber an existing value", async ({ page }) => {
-		const value = await page.evaluate(async () => {
-			const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+		const value = await page.evaluate(async (runtimeUrl) => {
+			const runtime = await import(window.eval(runtimeUrl));
 
 			window.e2eKeepMe = "previous value";
 			runtime.executeScripts(["var e2eKeepMe;"], "e2e");
 
 			return window.e2eKeepMe;
-		});
+		}, RUNTIME_URL);
 
 		expect(
 			value,

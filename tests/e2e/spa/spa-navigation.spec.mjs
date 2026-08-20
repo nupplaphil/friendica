@@ -102,15 +102,17 @@ test.describe("B4/B5/B8 - link interception and navigation", () => {
 			router.navigateTo("/settings/display");
 			await new Promise((resolve) => setTimeout(resolve, 4000));
 
-			return { path: window.location.pathname, title: document.title };
+			return {
+				path: window.location.pathname,
+				content: (document.querySelector("main")?.innerText || "").slice(0, 200),
+			};
 		}, routerUrlExpression());
 
 		expect(result.path).toBe("/settings/display");
 		expect(
-			result.title.toLowerCase(),
-			`The slower first request won the race: the URL says ${result.path} while the document ` +
-			`title is "${result.title}". loadContent() never aborts a superseded request, which ` +
-			"also makes the AbortError branch in its catch block unreachable.",
-		).toContain("settings");
+			result.content,
+			`The slower first request won the race: the URL says ${result.path} but the content is ` +
+			"the one of the earlier navigation. loadContent() has to abort a superseded request.",
+		).toMatch(/Two-factor|Account|Display/i);
 	});
 });

@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-import { BASE_URL, skipUnlessSpa, requireSpaRouter, spaNavigate } from "../helpers/friendica.mjs";
+import { BASE_URL, moduleUrlExpression, requireSpaRouter, skipUnlessSpa, spaNavigate } from "../helpers/friendica.mjs";
+
+const RUNTIME_URL = moduleUrlExpression("spa-script-runtime");
 
 /**
  * B3 - server-provided globals must survive an SPA navigation.
@@ -23,8 +25,8 @@ test.describe("B3 - server-provided globals", () => {
 
 	for (const name of ["spaEnabled", "localUser", "updateContent"]) {
 		test(`${name} reflects the value delivered by the current page`, async ({ page }) => {
-			const result = await page.evaluate(async (globalName) => {
-				const runtime = await import("/view/js/spa/spa-script-runtime.mjs");
+			const result = await page.evaluate(async ([globalName, runtimeUrl]) => {
+				const runtime = await import(window.eval(runtimeUrl));
 
 				// Exactly what head.tpl ships on the next page, with a changed value.
 				runtime.executeScripts([`const ${globalName} = 4242;`], "e2e");
@@ -34,7 +36,7 @@ test.describe("B3 - server-provided globals", () => {
 					onWindow: window[globalName],
 					hasOwn: Object.prototype.hasOwnProperty.call(window, globalName),
 				};
-			}, name);
+			}, [name, RUNTIME_URL]);
 
 			expect(result.hasOwn, `window.${name} should have been written`).toBe(true);
 			expect(

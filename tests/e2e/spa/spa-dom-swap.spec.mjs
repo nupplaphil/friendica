@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-import { BASE_URL, skipUnlessSpa, requireSpaRouter, routerUrlExpression } from "../helpers/friendica.mjs";
+import { BASE_URL, moduleUrlExpression, requireSpaRouter, routerUrlExpression, skipUnlessSpa } from "../helpers/friendica.mjs";
+
+const HELPERS_URL = moduleUrlExpression("spa-ui-helpers");
 
 /**
  * B7 - view/js/spa/spa-ui-helpers.js cleanupTooltips()
@@ -20,8 +22,8 @@ test.describe("B7 - DOM swap cleanup", () => {
 		await skipUnlessSpa(page);
 		await requireSpaRouter(page);
 
-		const result = await page.evaluate(async () => {
-			const helpers = await import("/view/js/spa/spa-ui-helpers.mjs");
+		const result = await page.evaluate(async (helpersUrl) => {
+			const helpers = await import(window.eval(helpersUrl));
 			const count = () => ({
 				panels: document.querySelectorAll(".panel").length,
 				forms: document.querySelectorAll("form.panel").length,
@@ -30,7 +32,7 @@ test.describe("B7 - DOM swap cleanup", () => {
 			const before = count();
 			helpers.cleanupTooltips();
 			return { before, after: count() };
-		});
+		}, HELPERS_URL);
 
 		expect(result.before.panels, "sanity: the settings page uses .panel markup").toBeGreaterThan(0);
 		expect(

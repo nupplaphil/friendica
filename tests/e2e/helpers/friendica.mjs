@@ -67,20 +67,30 @@ export async function skipUnlessSpa(page) {
 }
 
 /**
- * Snippet shared by every helper that needs the router module.
+ * Build a browser expression that resolves an SPA module by its base name.
  *
- * The page loads the router as `spa-router.js?v=<version>`. Importing the bare
- * path would be a *different* module specifier, so the browser would fetch and
- * evaluate a second, independent copy - which re-runs initSPARouter() and
- * double-binds its listeners. Resolving the URL from the DOM keeps us on the
- * instance the page is actually using.
+ * The page loads the router as `spa-router.js?v=<version>`; importing a bare
+ * path would be a *different* module specifier, so the browser would evaluate a
+ * second, independent copy - which re-runs initSPARouter() and double-binds its
+ * listeners. Resolving against the tag in the DOM also keeps the specs working
+ * whichever file extension the modules currently use.
+ *
+ * @param {string} name module base name, e.g. "spa-dom-swap"
  */
-const ROUTER_URL_EXPRESSION = `
+export function moduleUrlExpression(name) {
+	return `
 	(function () {
 		const tag = document.querySelector('script[type=module][src*="spa/spa-router."]');
-		return tag ? tag.src : "/view/js/spa/spa-router.mjs";
+		if (!tag) {
+			return "/view/js/spa/${name}.js";
+		}
+		return tag.src.replace(/spa-router\\./, "${name}.");
 	})()
-`;
+	`;
+}
+
+/** The router module as the page itself loaded it. */
+const ROUTER_URL_EXPRESSION = moduleUrlExpression("spa-router");
 
 /**
  * Assert that the SPA router module graph actually loaded.

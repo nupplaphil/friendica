@@ -38,7 +38,7 @@ test.describe("B0 - SPA bootstrap", () => {
 	test("page initialisers run even when the SPA router fails to load", async ({ page }) => {
 		// Simulate any failure of the router module graph - a MIME misconfiguration,
 		// a 404 after a partial deploy, a CSP rule. The page must still come up.
-		await page.route("**/view/js/spa/spa-router.*js*", (route) => route.abort());
+		await page.route("**/view/js/spa/spa-router.*", (route) => route.abort());
 
 		await page.goto(`${BASE_URL}/network`);
 		await page.waitForLoadState("networkidle");
