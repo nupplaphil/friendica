@@ -8,19 +8,13 @@
 namespace Friendica\Test\Unit\View;
 
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
 use Friendica\Render\FriendicaSmarty;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Regression tests for the private message form.
- *
- * The reply form used to concatenate the counterpart's contact name and the
- * conversation's parent-uri into raw HTML which was then rendered with
- * `nofilter`. Both values are controlled by the remote side, so a federated
- * peer could store JavaScript in the victim's conversation view.
- */
+/** Tests escaping in the private message form. */
 class PrvMessageTemplateTest extends TestCase
 {
 	private const XSS_NAME    = '<img src=x onerror=alert(1)>';
@@ -32,7 +26,7 @@ class PrvMessageTemplateTest extends TestCase
 	{
 		parent::setUp();
 
-		// The template dirs of FriendicaSmarty are relative to the project root
+		// FriendicaSmarty resolves template directories from the project root.
 		chdir(dirname(__DIR__, 3));
 
 		$this->workDir = sys_get_temp_dir() . '/friendica-tpl-test-' . getmypid();
@@ -47,9 +41,7 @@ class PrvMessageTemplateTest extends TestCase
 		parent::tearDown();
 	}
 
-	/**
-	 * frio ships its own prv_message.tpl, vier falls back to the base template
-	 */
+	/** @return array<string, array{string}> */
 	public static function themeProvider(): array
 	{
 		return [
@@ -69,29 +61,107 @@ class PrvMessageTemplateTest extends TestCase
 
 		$xpath = $this->xpath($html);
 
-		// The payload must not have become markup. The base template legitimately
-		// contains a rotator <img>, so pin the payload itself instead of all images.
+		// Ignore unrelated images in the base template.
 		self::assertSame(0, $xpath->query('//img[@src="x"]')->length, 'contact name was rendered as markup');
 		self::assertSame(0, $xpath->query('//*[@onerror]')->length, 'an event handler attribute was injected');
 
-		// ... but it must still be visible as text to the user
 		self::assertStringContainsString(htmlspecialchars(self::XSS_NAME, ENT_QUOTES), $html);
 
-		// The recipient id is still submitted
-		$recipient = $xpath->query('//input[@name="recipient"]');
-		self::assertSame(1, $recipient->length);
-		self::assertSame('52', $recipient->item(0)->getAttribute('value'));
+		self::assertSame(1, $xpath->query('//input[@name="recipient"]')->length);
+		self::assertSame('52', $this->element($xpath, '//input[@name="recipient"]')->getAttribute('value'));
 
-		// The parent uri survives the escaping round trip unchanged
-		$replyto = $xpath->query('//input[@name="replyto"]');
-		self::assertSame(1, $replyto->length);
-		self::assertSame(self::XSS_REPLYTO, $replyto->item(0)->getAttribute('value'));
+		self::assertSame(1, $xpath->query('//input[@name="replyto"]')->length);
+		self::assertSame(self::XSS_REPLYTO, $this->element($xpath, '//input[@name="replyto"]')->getAttribute('value'));
 	}
 
-	/**
-	 * The "new message" form passes a pre-rendered recipient widget, which must
-	 * stay raw HTML - otherwise the contact selector breaks.
-	 */
+	/** @return array<string, array{string}> */
+	public static function displayNameProvider(): array
+	{
+		return [
+			'plain'             => ['Tobias'],
+			'two words'         => ['Michael Vogel'],
+			'apostrophe'        => ["Sean O'Brien"],
+			'ampersand'         => ['Alice & Bob'],
+			'double quotes'     => ['Jean-Luc "Q" Picard'],
+			'angle bracket art' => ['<3 friendica'],
+			'diacritics'        => ['Ana María Ñúñez'],
+			'german umlauts'    => ['Jürgen Schrödinger'],
+			'cyrillic'          => ['Пользователь Сети'],
+			'greek'             => ['Δημήτριος'],
+			'cjk'               => ['日本語のユーザー'],
+			'korean'            => ['프렌디카 사용자'],
+			'rtl arabic'        => ['مستخدم فرينديكا'],
+			'rtl hebrew'        => ['משתמש פרנדיקה'],
+			'emoji'             => ['🦣 Mastodon Fan 🐘'],
+			'anarchy symbol'    => ['Ⓐ anarchist'],
+			'zero width joiner' => ['Family 👨‍👩‍👧‍👦'],
+			'handle as name'    => ['gargron@mastodon.social'],
+			'url as name'       => ['https://friendi.ca/'],
+			'bot suffix'        => ['News Bot [bot]'],
+			'pronouns in name'  => ['Sam (they/them)'],
+			'custom emoji code' => [':verified: Alice'],
+			'math symbols'      => ['∀x ∈ fediverse'],
+			'long name'         => [str_repeat('Very Long Display Name ', 10)],
+			'whitespace padded' => ['  spaced out  '],
+		];
+	}
+
+	#[DataProvider('displayNameProvider')]
+	public function testDisplayNamesSurviveEscaping(string $name): void
+	{
+		foreach (array_keys(self::themeProvider()) as $theme) {
+			$html = $this->render($theme, [
+				'recipient' => ['name' => $name, 'id' => 52],
+				'replyto'   => 'https://friendica.example/objects/1a2b3c4d-5e6f-7890-abcd-ef1234567890',
+				'select'    => '',
+			]);
+
+			$label = $this->xpath($html)->query('//div[@id="prvmail-to-label"]')->item(0);
+			self::assertNotNull($label, $theme . ': recipient label is missing');
+			self::assertStringContainsString($name, $label->textContent, $theme . ': display name was altered');
+		}
+	}
+
+	/** @return array<string, array{string}> */
+	public static function parentUriProvider(): array
+	{
+		return [
+			'friendica object'   => ['https://friendica.example/objects/1a2b3c4d-5e6f-7890-abcd-ef1234567890'],
+			'diaspora handle'    => ['alice@diaspora.example:5f4dcc3b5aa765d61d83'],
+			'conversation uri'   => ['bob@friendica.example:1a2b3c4d-5e6f-7890-abcd-ef1234567890'],
+			'mastodon status'    => ['https://mastodon.social/users/Gargron/statuses/109252195269200000'],
+			'diaspora scheme'    => ['diaspora://alice@diaspora.example/conversation/5f4dcc3b5aa765d61d83'],
+			'urn uuid'           => ['urn:uuid:1a2b3c4d-5e6f-7890-abcd-ef1234567890'],
+			'tag uri'            => ['tag:friendica.example,2026-08:objectId=1:objectType=Mail'],
+			'with query string'  => ['https://example.org/objects/abc?context=1&reply=2'],
+			'with fragment'      => ['https://example.org/objects/abc#part-2'],
+			'explicit port'      => ['https://example.org:8443/objects/abc'],
+			'unicode path'       => ['https://präsenz.example/objects/josé'],
+			'percent encoded'    => ['https://example.org/objects/%C3%BCber'],
+			'apostrophe in path' => ["https://example.org/objects/o'brien"],
+		];
+	}
+
+	#[DataProvider('parentUriProvider')]
+	public function testParentUriRoundTripsUnchanged(string $uri): void
+	{
+		foreach (array_keys(self::themeProvider()) as $theme) {
+			$html = $this->render($theme, [
+				'recipient' => ['name' => 'Alice', 'id' => 52],
+				'replyto'   => $uri,
+				'select'    => '',
+			]);
+
+			$xpath = $this->xpath($html);
+			self::assertSame(1, $xpath->query('//input[@name="replyto"]')->length, $theme . ': reply-to field is missing');
+			self::assertSame(
+				$uri,
+				$this->element($xpath, '//input[@name="replyto"]')->getAttribute('value'),
+				$theme . ': parent uri was altered',
+			);
+		}
+	}
+
 	#[DataProvider('themeProvider')]
 	public function testNewMessageFormKeepsRenderedRecipientWidget(string $theme): void
 	{
@@ -104,7 +174,6 @@ class PrvMessageTemplateTest extends TestCase
 		$xpath = $this->xpath($html);
 
 		self::assertSame(1, $xpath->query('//select[@name="recipient"]')->length);
-		// No stray reply-to field on a brand new conversation
 		self::assertSame(0, $xpath->query('//input[@name="replyto"]')->length);
 	}
 
@@ -119,10 +188,23 @@ class PrvMessageTemplateTest extends TestCase
 		return $smarty->fetch('file:prv_message.tpl');
 	}
 
+	private function element(DOMXPath $xpath, string $query): DOMElement
+	{
+		$node = $xpath->query($query)->item(0);
+		if (!$node instanceof DOMElement) {
+			self::fail($query . ' did not match an element');
+		}
+
+		return $node;
+	}
+
 	private function xpath(string $html): DOMXPath
 	{
 		$doc = new DOMDocument();
-		self::assertTrue(@$doc->loadHTML('<!DOCTYPE html><html><body>' . $html . '</body></html>'));
+		// Prevent DOMDocument from treating non-ASCII names as ISO-8859-1.
+		self::assertTrue(@$doc->loadHTML(
+			'<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' . $html . '</body></html>',
+		));
 
 		return new DOMXPath($doc);
 	}
