@@ -51,17 +51,31 @@ function classifyScriptContent(content, source) {
     const ast = acorn.parse(content, { ecmaVersion: 'latest', sourceType: 'script' });
     if (checkForDOMReadyPatterns(ast)) return 'body';
     if (ast.body.length > 0) {
-      const firstNode = ast.body[0];
-      if (firstNode.type === 'VariableDeclaration') return 'global';
-      if (firstNode.type === 'FunctionDeclaration') return 'global';
-      if (firstNode.type === 'ClassDeclaration') return 'global';
+      const declarationNodeTypes = new Set([
+        'VariableDeclaration',
+        'FunctionDeclaration',
+        'ClassDeclaration',
+        'EmptyStatement'
+      ]);
+      const hasExecutableStatements = ast.body.some(node => !declarationNodeTypes.has(node.type));
+
+      // Declaration-only scripts can be safely promoted and executed early.
+      // Scripts with executable top-level statements need to run later so that
+      // their external dependencies have a chance to load first.
+      if (!hasExecutableStatements) return 'global';
       if (content.trim().startsWith('aStr')) return 'global';
     }
     return null;
   } catch (e) {
     // Fallback to old classification if parsing fails
     if (content.includes('$(document).ready(') || content.includes('$(function(') || content.includes('DOMContentLoaded') || content.includes('window.addEventListener')) return 'body';
-    if (content.trim().startsWith('var ') || content.trim().startsWith('let ') || content.trim().startsWith('const ') || content.trim().startsWith('function ') || content.trim().startsWith('class ')) return 'global';
+    const startsWithDeclaration = content.trim().startsWith('var ') ||
+      content.trim().startsWith('let ') ||
+      content.trim().startsWith('const ') ||
+      content.trim().startsWith('function ') ||
+      content.trim().startsWith('class ');
+    const hasControlFlow = /(^|\n)\s*(if|for|while|switch|try)\s*\(/.test(content);
+    if (startsWithDeclaration && !hasControlFlow) return 'global';
     if (content.trim().startsWith('aStr')) return 'global';
     return null;
   }
