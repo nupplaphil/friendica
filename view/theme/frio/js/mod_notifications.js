@@ -11,21 +11,21 @@
 // Catch the intro ID from the URL
 var introID = location.pathname.split("/").pop();
 
-$(document).ready(function () {
+window.registerModuleLifecycle('body', function () {
 	// Since only the DIV's inside the notification-list are marked
 	// with the class "unseen", we need some js to transfer this class
 	// to the parent li list-elements.
 	if ($(".notif-item").hasClass("unseen")) {
 		$(".notif-item.unseen").parent("li").addClass("unseen");
 	}
-});
+}, null, 'document');
 
-$(window).load(function () {
+window.registerModuleLifecycle('.notif-network-wrapper', function () {
 	// Scroll to the intro by its intro ID.
 	if (isIntroID()) {
 		scrollToItem("intro-" + introID);
 	}
-});
+}, null, 'window');
 
 // Check if it is a real introduction ID.
 function isIntroID() {
