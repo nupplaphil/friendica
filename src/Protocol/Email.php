@@ -13,9 +13,7 @@ use Friendica\Content\Text\HTML;
 use Friendica\Core\Protocol;
 use Friendica\DI;
 use Friendica\Model\Item;
-use Friendica\Util\Network;
 use Friendica\Util\Strings;
-use GuzzleHttp\Psr7\Uri;
 use IMAP\Connection;
 
 /**
@@ -36,11 +34,6 @@ class Email
 			return false;
 		}
 
-		if (self::isPrivateMailbox($mailbox)) {
-			DI::logger()->notice('Mail server is not on the public internet.', ['mailbox' => $mailbox]);
-			return false;
-		}
-
 		$mbox = @imap_open($mailbox, $username, $password);
 
 		$errors = imap_errors();
@@ -57,22 +50,6 @@ class Email
 			Item::incrementInbound(Protocol::MAIL);
 		}
 		return $mbox;
-	}
-
-	/** Checks whether an IMAP mailbox targets the internal network. */
-	private static function isPrivateMailbox(string $mailbox): bool
-	{
-		// The host may be a bracketed IPv6 address.
-		if (!preg_match('#^\{(\[[^\]]+\]|[^:/}]+)#', $mailbox, $matches)) {
-			return false;
-		}
-
-		try {
-			return Network::isPrivateTarget(new Uri('imap://' . $matches[1]));
-		} catch (\Throwable) {
-			DI::logger()->notice('Invalid mail server', ['mailbox' => $mailbox]);
-			return true;
-		}
 	}
 
 	/**
