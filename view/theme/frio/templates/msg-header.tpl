@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$("#comment-edit-text-input").editor_autocomplete(baseurl + '/search/acl');
 
-	$(document).ready(function() {
+	window.registerModuleLifecycle('body', function() {
 		$("#comment-edit-text-input").bbco_autocomplete('bbcode');
 		$('#mail-conversation').perfectScrollbar();
 		$('#message-preview').perfectScrollbar();
@@ -27,5 +27,5 @@
 		// Check on page load and on input
 		validateMessageForm();
 		$('#comment-edit-text-input').on('input keyup', validateMessageForm);
-	});
+	}, null, 'document');
 </script>

@@ -160,7 +160,7 @@ class Login extends BaseModule
 				'$login'    => DI::l10n()->t('Sign in'),
 				'$new'      => DI::l10n()->t('New here?'),
 
-				'$lname'     => ['username', DI::l10n()->t('Nickname or email'), '', $username_desc, '', 'autofocus', '', DI::l10n()->t('Nickname or email')],
+				'$lname'     => ['username', DI::l10n()->t('Username or email'), '', $username_desc, '', 'autofocus', '', DI::l10n()->t('Username or email')],
 				'$lpassword' => ['password', DI::l10n()->t('Password'), '', '', '', '', '', DI::l10n()->t('Password')],
 				'$lremember' => ['remember', DI::l10n()->t('Remember me'), 0,  ''],
 

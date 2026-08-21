@@ -8,9 +8,9 @@ People are tagged by preceding their name with the @ character.
 
 You can tag **persons who are in your social circle** by adding the "@"-sign in front of the name.
 
-* @mike - indicates a known contact in your social circle whose nickname is "mike"
+* @mike - indicates a known contact in your social circle whose username is "mike"
 * @mike_macgirvin - indicates a known contact in your social circle whose  full name is "Mike Macgirvin". Note that spaces cannot be used inside tags.
-* @mike+151 - this form is used by the drop-down tag completion tool. It indicates the contact whose nickname is mike and whose contact identifier number is 151. The drop-down tool may be used to resolve people with duplicate nicknames.
+* @mike+151 - this form is used by the drop-down tag completion tool. It indicates the contact whose username is mike and whose contact identifier number is 151. The drop-down tool may be used to resolve people with duplicate usernames.
 
 You can tag a person on a different network or one that is **not in your social circle** by using the following notation:
 

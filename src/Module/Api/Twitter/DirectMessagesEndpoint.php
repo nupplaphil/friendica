@@ -93,7 +93,7 @@ abstract class DirectMessagesEndpoint extends BaseApi
 			$ret[] = $this->directMessage->createFromMailId($id, $uid, $this->getRequestValue($request, 'getText', ''));
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 
 		$this->response->addFormattedContent('direct-messages', ['direct_message' => $ret], $this->parameters['extension'] ?? null, Contact::getPublicIdByUserId($uid));
 	}

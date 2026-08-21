@@ -76,7 +76,7 @@ EOT;
 	if (DI::mode()->isMobile() || DI::mode()->isMobile()) {
 		DI::page()['htmlhead'] .= <<< EOT
 <script>
-	$(document).ready(function() {
+	window.registerModuleLifecycle('body', function() {
 		$(".mobile-aside-toggle a").click(function(e){
 			e.preventDefault();
 			$("aside").toggleClass("show");
@@ -84,7 +84,7 @@ EOT;
 		$(".tabs").click(function(e){
 			$(this).toggleClass("show");
 		});
-	});
+	}, null, 'document');
 </script>
 EOT;
 	}

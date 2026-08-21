@@ -61,7 +61,7 @@ class Mutes extends BaseApi
 			$accounts = array_reverse($accounts);
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		$this->earlyJsonExit($accounts);
 	}
 }

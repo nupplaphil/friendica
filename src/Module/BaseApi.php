@@ -33,7 +33,7 @@ use Friendica\Util\Profiler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class BaseApi extends BaseModule
+abstract class BaseApi extends BaseModule
 {
 	public const LOG_PREFIX = 'API {action} - ';
 
@@ -274,10 +274,13 @@ class BaseApi extends BaseModule
 
 	/**
 	 * Get the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use {@see self::getPaginationLinkHeaderValue()} instead
 	 * @return string
 	 */
 	protected static function getLinkHeader(bool $asDate = false): string
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::getPaginationLinkHeaderValue()` instead.', E_USER_DEPRECATED);
 		if (empty(self::$boundaries)) {
 			return '';
 		}
@@ -310,10 +313,13 @@ class BaseApi extends BaseModule
 
 	/**
 	 * Get the "link" header with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @deprecated 2026.08 Use {@see self::getOffsetAndLimitPaginationLinkHeaderValue()} instead
 	 * @return string
 	 */
 	protected static function getOffsetAndLimitLinkHeader(int $offset, int $limit): string
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::getOffsetAndLimitPaginationLinkHeaderValue()` instead.', E_USER_DEPRECATED);
 		$request = self::$request;
 
 		unset($request['offset']);
@@ -338,10 +344,13 @@ class BaseApi extends BaseModule
 
 	/**
 	 * Set the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use {@see self::setPaginationLinkHeader()} instead
 	 * @return void
 	 */
 	protected static function setLinkHeader(bool $asDate = false)
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::setPaginationLinkHeader()` instead.', E_USER_DEPRECATED);
 		$header = self::getLinkHeader($asDate);
 		if (!empty($header)) {
 			header($header);
@@ -350,13 +359,108 @@ class BaseApi extends BaseModule
 
 	/**
 	 * Set the "link" header with "next" and "prev" links
+	 *
+	 * @deprecated 2026.08 Use {@see self::setPaginationLinkHeaderByOffsetLimit()} instead
 	 * @return void
 	 */
 	protected static function setLinkHeaderByOffsetLimit(int $offset, int $limit)
 	{
+		@trigger_error('Method `' . __METHOD__ . '()` is deprecated since 2026.08 and will be removed after 5 months, use `BaseApi::setPaginationLinkHeaderByOffsetLimit()` instead.', E_USER_DEPRECATED);
 		$header = self::getOffsetAndLimitLinkHeader($offset, $limit);
 		if (!empty($header)) {
 			header($header);
+		}
+	}
+
+	/**
+	 * Get the pagination "link" header value with "next" and "prev" links
+	 *
+	 * @return string
+	 */
+	protected function getPaginationLinkHeaderValue(bool $asDate = false): string
+	{
+		if (empty(self::$boundaries)) {
+			return '';
+		}
+
+		$request = self::$request;
+
+		unset($request['min_id']);
+		unset($request['max_id']);
+		unset($request['since_id']);
+
+		$prev_request = $next_request = $request;
+
+		if ($asDate) {
+			$max_date               = self::$boundaries['max'];
+			$min_date               = self::$boundaries['min'];
+			$prev_request['min_id'] = $max_date->format(DateTimeFormat::JSON);
+			$next_request['max_id'] = $min_date->format(DateTimeFormat::JSON);
+		} else {
+			$prev_request['min_id'] = self::$boundaries['max'];
+			$next_request['max_id'] = self::$boundaries['min'];
+		}
+
+		$command = (string) $this->baseUrl . '/' . $this->args->getCommand();
+
+		$prev = $command . '?' . http_build_query($prev_request);
+		$next = $command . '?' . http_build_query($next_request);
+
+		return '<' . $next . '>; rel="next", <' . $prev . '>; rel="prev"';
+	}
+
+	/**
+	 * Get the pagination "link" header value with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @return string
+	 */
+	protected function getOffsetAndLimitPaginationLinkHeaderValue(int $offset, int $limit): string
+	{
+		$request = self::$request;
+
+		unset($request['offset']);
+		$request['limit'] = $limit;
+
+		$prev_request = $next_request = $request;
+
+		$prev_request['offset'] = $offset - $limit;
+		$next_request['offset'] = $offset + $limit;
+
+		$command = (string) $this->baseUrl . '/' . $this->args->getCommand();
+
+		$prev = $command . '?' . http_build_query($prev_request);
+		$next = $command . '?' . http_build_query($next_request);
+
+		if ($prev_request['offset'] >= 0) {
+			return '<' . $next . '>; rel="next", <' . $prev . '>; rel="prev"';
+		} else {
+			return '<' . $next . '>; rel="next"';
+		}
+	}
+
+	/**
+	 * Set the pagination "link" header with "next" and "prev" links
+	 *
+	 * @return void
+	 */
+	protected function setPaginationLinkHeader(bool $asDate = false): void
+	{
+		$header = $this->getPaginationLinkHeaderValue($asDate);
+		if (!empty($header)) {
+			$this->response->setHeader($header, 'Link');
+		}
+	}
+
+	/**
+	 * Set the pagination "link" header with "next" and "prev" links for an offset/limit type call
+	 *
+	 * @return void
+	 */
+	protected function setPaginationLinkHeaderByOffsetLimit(int $offset, int $limit): void
+	{
+		$header = $this->getOffsetAndLimitPaginationLinkHeaderValue($offset, $limit);
+		if (!empty($header)) {
+			$this->response->setHeader($header, 'Link');
 		}
 	}
 

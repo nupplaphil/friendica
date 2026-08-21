@@ -20,24 +20,89 @@ if (!Element.prototype.matches) {
 		};
 }
 
-/**
- * Register a function to be called on initial page load and after SPA navigation
- * This provides a unified way to handle initialization for both traditional page loads
- * and Single Page Application (SPA) content updates.
- *
- * @param {Function} fn - The function to execute on page load and SPA navigation
- * @example
- * function initMyModule() {
- *     // Initialization code
- * }
- * onPageLoad(initMyModule);
- */
-function onPageLoad(fn) {
-	if (typeof fn !== 'function') {
-		return;
+function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
+	if (typeof selector === 'undefined' || selector === null) {
+		return null;
 	}
-	$(document).ready(fn);
-	window.addEventListener('theme:reload', fn);
+
+	if (!window.__friendica_unpoly_lifecycle_registry) {
+		window.__friendica_unpoly_lifecycle_registry = new Map();
+	}
+
+	const initializerFingerprint = (function () {
+		if (typeof initialize !== 'function') {
+			return 'init';
+		}
+
+		if (initialize.name) {
+			return initialize.name;
+		}
+
+		try {
+			return initialize.toString().replace(/\s+/g, ' ').trim().substring(0, 240);
+		} catch (error) {
+			return 'anonymous';
+		}
+	})();
+
+	const registryKey = String(selector) + '::' + initializerFingerprint + '::' + String(fallbackMode || 'document');
+	if (window.__friendica_unpoly_lifecycle_registry.has(registryKey)) {
+		return window.__friendica_unpoly_lifecycle_registry.get(registryKey);
+	}
+
+	const normalizeElement = function (element) {
+		if (!element) {
+			return null;
+		}
+		if (typeof jQuery !== 'undefined' && element instanceof jQuery) {
+			return element.get(0);
+		}
+		if (element && typeof element.get === 'function' && element.jquery) {
+			return element.get(0);
+		}
+		return element;
+	};
+
+	const runInitialize = function (element) {
+		const normalized = normalizeElement(element);
+		if (!normalized || typeof initialize !== 'function') {
+			return null;
+		}
+		return initialize(normalized);
+	};
+
+	const refresh = function () {
+		const target = typeof selector === 'string' ? document.querySelector(selector) : normalizeElement(selector);
+		if (!target) {
+			return null;
+		}
+		return runInitialize(target);
+	};
+
+	if (window.addEventListener) {
+		window.addEventListener('spa:navigate', refresh, { passive: true });
+		
+		if (fallbackMode === 'document') {
+			if (spaEnabled) {
+				window.addEventListener('spa:document:ready', refresh, { passive: true });
+			} else {
+				$(document).ready(refresh);
+			}
+		} else {
+			if (spaEnabled) {
+				window.addEventListener('spa:window:load', refresh, { passive: true });
+			} else {
+				$(window).load(refresh);
+			}
+		}
+		
+		if ((document.readyState === 'complete' || document.readyState === 'interactive') && !window.__spa_reinit_phase) {
+			setTimeout(refresh, 0);
+		}
+	}
+
+	window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
+	return null;
 }
 
 function resizeIframe(obj) {
@@ -59,9 +124,9 @@ function _resizeIframe(obj, desth) {
 
 function initWidget(name) {
 	const widget = document.getElementById(name)
-	const list = widget.getElementsByClassName("sidebar-widget-list")[0];
-	const btn = widget.getElementsByClassName("widget-btn")[0]
-
+	const list = widget.querySelector(".sidebar-widget-list");
+	const btn = widget.querySelector(".widget-btn");
+	if (!btn || !list){ return; } // there are contexts in which not btn will be found
 	if (localStorage.getItem(window.location.pathname.split("/")[1] + ":" + name) != "block") {
 		list.style.display = "none";
 		btn.setAttribute("aria-expanded", false)
@@ -155,13 +220,20 @@ var last_popup_button = null;
 var lockLoadContent = false;
 var originalTitle = document.title;
 
+// Update original title on SPA navigation to prevent ping handler from resetting to stale title
+if (window.addEventListener) {
+	window.addEventListener('spa:navigate', function () {
+		originalTitle = document.title;
+	});
+}
+
 // Scroll to item deduplication flags
 var scrollToItemInProgress = false;
 var lastScrollToItemId = null;
 
 const urlRegex = /^(?:https?:\/\/|\s)[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})(?:\/+[a-z0-9_.:;-]*)*(?:\?[&%|+a-z0-9_=,.:;-]*)?(?:[&%|+&a-z0-9_=,:;.-]*)(?:[!#\/&%|+a-z0-9_=,:;.-]*)}*$/i;
 
-$(function() {
+window.registerModuleLifecycle('body', function() {
 	$.ajaxSetup({cache: false});
 
 	/* setup comment textarea buttons */
@@ -170,7 +242,7 @@ $(function() {
 	 * 		data-bbcode="<string>" : name of the bbcode element to insert. insertFormatting() will insert it as "[name][/name]"
 	 * 		data-id="<string>" : id of the comment, used to find other comment-related element, like the textarea
 	 * */
-	$('body').on('click','[data-role="insert-formatting"]', function(e) {
+	$('body').off('click.friendica-main', '[data-role="insert-formatting"]').on('click.friendica-main', '[data-role="insert-formatting"]', function(e) {
 		e.preventDefault();
 		var o = $(this);
 		var bbcode = o.data('bbcode');
@@ -259,11 +331,6 @@ $(function() {
 		'maxWidth' : '100%'
 	});
 
-	/* notifications template */
-	var notifications_all = unescape($('<div>').append($("#nav-notifications-see-all").clone()).html()); //outerHtml hack
-	var notifications_mark = unescape($('<div>').append($("#nav-notifications-mark-all").clone()).html()); //outerHtml hack
-	var notifications_empty = unescape($("#nav-notifications-menu").html());
-
 	/* Ensure loading is visible when notifications menu is opened (if no notifications loaded yet)*/
 	$('#nav-notifications-linkmenu, #nav-notifications-menu-btn').on('click', function() {
 		if ($("#nav-notifications-loading").length && $("#nav-notifications-empty").length) {
@@ -335,18 +402,27 @@ $(function() {
 		// Hide loading state when we receive notification data
 		$("#nav-notifications-loading").hide();
 
-		if (data.notifications.length == 0) {
+		var navNotifications = Array.isArray(data.notifications) ? data.notifications : [];
+		if (navNotifications.length == 0) {
 			$("#nav-notifications-empty").show();
 		} else {
 			$("#nav-notifications-empty").hide();
 			var nnm = $("#nav-notifications-menu");
-			// Preserve the loading and empty state elements when rebuilding the menu
+			// Preserve control/state elements from the current DOM to avoid stale template snapshots
+			var seeAllElement = nnm.find("#nav-notifications-see-all");
+			var markAllElement = nnm.find("#nav-notifications-mark-all");
 			var loadingElement = nnm.find("#nav-notifications-loading");
 			var emptyElement = nnm.find("#nav-notifications-empty");
 
-			nnm.html(notifications_all + notifications_mark);
+			nnm.empty();
+			if (seeAllElement.length > 0) {
+				nnm.append(seeAllElement);
+			}
+			if (markAllElement.length > 0) {
+				nnm.append(markAllElement);
+			}
 
-			// Re-add the loading and empty elements if they existed
+			// Re-add loading and empty state elements if they existed
 			if (loadingElement.length > 0) {
 				nnm.append(loadingElement);
 			}
@@ -359,12 +435,12 @@ $(function() {
 			var notification_id = 0;
 
 			// Insert notifs into the notifications-menu
-			$(data.notifications).each(function(key, navNotif) {
+			$(navNotifications).each(function(key, navNotif) {
 				nnm.append(navNotif.html);
 			});
 
 			// Desktop Notifications
-			$(data.notifications.reverse()).each(function(key, navNotif) {
+			$(navNotifications.slice().reverse()).each(function(key, navNotif) {
 				notification_id = parseInt(navNotif.timestamp);
 				if (notification_lastitem !== null && notification_id > notification_lastitem && Number(navNotif.seen) === 0) {
 					if (getNotificationPermission() === "granted") {
@@ -414,15 +490,19 @@ $(function() {
 	});
 
 	// Asynchronous calls are deferred until the very end of the page load to ease on slower connections
-	window.addEventListener("load", function(){
-		NavUpdate();
-		if (typeof acl !== 'undefined') {
-			acl.get(0, 100);
-		}
-	});
+	// Only register once, not on every SPA navigation
+	if (typeof window.__friendica_main_load_handler === 'undefined') {
+		window.__friendica_main_load_handler = true;
+		window.addEventListener("load", function(){
+			NavUpdate();
+			if (typeof acl !== 'undefined') {
+				acl.get(0, 100);
+			}
+		});
+	}
 
 	// Allow folks to stop the ajax page updates with the pause/break key
-	$(document).keydown(function(event) {
+	$(document).off('keydown.friendica-main-pause').on('keydown.friendica-main-pause', function(event) {
 		// Pause/Break or Ctrl + Space
 		if (event.which === 19 || (!event.metaKey && !event.shiftKey && !event.altKey && event.ctrlKey && event.which === 32)) {
 			event.preventDefault();
@@ -441,7 +521,7 @@ $(function() {
 	});
 
 	// Scroll to the next/previous thread when pressing J and K
-	$(document).keydown(function (event) {
+	$(document).off('keydown.friendica-main-nav').on('keydown.friendica-main-nav', function (event) {
 		var threads = $('.thread_level_1');
 		if ((event.keyCode === 74 || event.keyCode === 75) && !$(event.target).is('textarea, input')) {
 			var scrollTop = $(window).scrollTop();
@@ -464,43 +544,39 @@ $(function() {
 		}
 	});
 
-	// Function to initialize infinite scroll - can be called multiple times
-	function initInfiniteScroll() {
-		console.debug('[Main] initInfiniteScroll called');
-		console.debug('[Main] typeof infinite_scroll:', typeof infinite_scroll);
-		console.debug('[Main] #scroll-loader length:', $('#scroll-loader').length);
-		
-		// Only initialize if infinite_scroll is defined
-		if (typeof infinite_scroll !== 'undefined') {
-			// Remove any existing scroll handler to prevent duplicates
-			$(window).off('scroll.infinite');
-			
-			$(window).on('scroll.infinite', function(e) {
-				if ($(document).height() != $(window).height()) {
-					// First method that is expected to work - but has problems with Chrome
-					if ($(window).scrollTop() > ($(document).height() - $(window).height() * 1.5))
-						loadScrollContent();
-				} else {
-					// This method works with Chrome - but seems to be much slower in Firefox
-					if ($(window).scrollTop() > (($("section").height() + $("header").height() + $("footer").height()) - $(window).height() * 1.5)) {
-						loadScrollContent();
-					}
-				}
-			});
-			console.debug('[Main] Infinite scroll initialized - scroll handler attached');
-		} else {
-			console.debug('[Main] Infinite scroll NOT initialized - missing infinite_scroll object');
-		}
-	}
-	
-	// Register event listener for SPA navigation - do this immediately so it's available even before DOM ready
-	if (window.addEventListener) {
-		window.addEventListener('spa:initInfiniteScroll', initInfiniteScroll);
-	}
-	
 	// Initialize infinite scroll on first page load
-	initInfiniteScroll();
-});
+	if (typeof initInfiniteScroll === 'function') {
+		initInfiniteScroll();
+	}
+}, null, 'document');
+
+// Function to initialize infinite scroll - can be called multiple times
+function initInfiniteScroll() {
+	
+	// Only initialize if infinite_scroll is defined
+	if (typeof infinite_scroll !== 'undefined') {
+		// Remove any existing scroll handler to prevent duplicates
+		$(window).off('scroll.infinite');
+		
+		$(window).on('scroll.infinite', function(e) {
+			if ($(document).height() != $(window).height()) {
+				// First method that is expected to work - but has problems with Chrome
+				if ($(window).scrollTop() > ($(document).height() - $(window).height() * 1.5))
+					loadScrollContent();
+			} else {
+				// This method works with Chrome - but seems to be much slower in Firefox
+				if ($(window).scrollTop() > (($("section").height() + $("header").height() + $("footer").height()) - $(window).height() * 1.5)) {
+					loadScrollContent();
+				}
+			}
+		});
+	}
+}
+
+// Register event listener for SPA navigation - do this immediately
+if (window.addEventListener) {
+	window.addEventListener('spa:initInfiniteScroll', initInfiniteScroll);
+}
 
 /**
  * Inserts a BBCode tag in the comment textarea identified by id
@@ -564,11 +640,8 @@ function triggerLiveUpdates(force, guid) {
 		showProcessing();
 	}
 	force_update = force;
-	console.debug('[Main] triggerLiveUpdates called with force:', force, 'guid:', guid);
 	['network', 'profile', 'channel', 'community', 'notes', 'display', 'contact'].forEach(function (src) {
-		console.debug('[Main] Checking live-' + src + ', exists=' + $('#live-' + src).length + ', force=' + force + ', updateContent=' + updateContent + ', isDisplay=' + $('#live-display').length);
 		if ($('#live-' + src).length && (force || (updateContent && src !== 'display'))) {
-			console.debug('[Main] Triggering liveUpdate for: ' + src + ', guid=' + guid);
 			liveUpdate(src, force, guid);
 		}
 	});
@@ -592,7 +665,6 @@ function scrollToItem(elementId) {
 	
 	// Prevent multiple calls for the same element
 	if (scrollToItemInProgress && lastScrollToItemId === elementId) {
-		console.debug('[Main] scrollToItem: Already in progress for ' + elementId + ', skipping duplicate call');
 		return false;
 	}
 	
@@ -655,14 +727,11 @@ function NavUpdate() {
 					}
 
 					// start live update
-					console.debug('[Main] Starting live updates for sources: network, profile, channel, community, notes, display, contact');
 					triggerLiveUpdates(force_update);
 
 					if ($('#live-network').length && !$('#live-display').length) {
-						console.debug('[Main] Triggering networkUpdate');
 						networkUpdate(force_update);
 					} else if (!$('#live-display').length) {
-						console.debug('[Main] No live-network element or on display page, using ping_network fallback');
 						var update_url = 'ping_network?ping=1';
 						if (force_update) {
 							showFetching();
@@ -699,7 +768,6 @@ function NavUpdate() {
 }
 
 function updateConvItems(data, guid) {
-	console.debug('[Main] updateConvItems called, guid:', guid);
 	// add a new thread
 	$('.toplevel_item',data).each(function() {
 		var ident = $(this).attr('id');
@@ -744,13 +812,11 @@ function updateConvItems(data, guid) {
 
 function getUpdateUrl(src)
 {
-	console.debug('[Main] getUpdateUrl called for src=' + src + ', profile_uid=' + (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined') + ', netargs=' + netargs + ', update_item=' + update_item);
 	let force = force_update || $(document).scrollTop() === 0;
 
 	var udargs = ((netargs.length) ? '/' + netargs : '');
 
 	var update_url = src + udargs + '&p=' + profile_uid + '&force=' + (force ? 1 : 0) + '&item=' + update_item;
-	console.debug('[Main] getUpdateUrl: generated url=' + update_url);
 
 	if (getUrlParameter('page')) {
 		update_url += '&page=' + getUrlParameter('page');
@@ -785,14 +851,11 @@ function getUpdateUrl(src)
 }
 
 function liveUpdate(src, force, guid) {
-	console.debug('[Main] liveUpdate called for src:', src, 'guid:', guid, 'stopped:', stopped, 'profile_uid:', (typeof profile_uid !== 'undefined' ? profile_uid : 'undefined'), 'in_progress:', in_progress);
 	if ((src == null) || stopped || !profile_uid) {
-		console.debug('[Main] liveUpdate skipped: src=null or stopped or no profile_uid');
 		$('.like-rotator').hide(); return;
 	}
 
 	if (($('.comment-edit-text-full').length) || in_progress) {
-		console.debug('[Main] liveUpdate delayed: comment edit in progress or in_progress=true');
 		if (livetime) {
 			clearTimeout(livetime);
 		}
@@ -810,7 +873,6 @@ function liveUpdate(src, force, guid) {
 	var orgHeight = $("section").height();
 
 	var update_url = getUpdateUrl(src);
-	console.debug('[Main] liveUpdate: calling getUpdateUrl for src=' + src + ', result url=' + update_url);
 
 	if (force_update) {
 		force_update = false;
@@ -1091,17 +1153,13 @@ function lockview(event, type, id) {
 }
 
 function post_comment(id) {
-	console.debug('[Main] post_comment called for item id:', id);
-	console.debug('[Main] commentBusy before:', commentBusy);
 	
 	if (commentBusy) {
-		console.debug('[Main] post_comment: Already busy, ignoring duplicate call');
 		return false;
 	}
 	
 	unpause();
 	commentBusy = true;
-	console.debug('[Main] post_comment: Setting commentBusy=true, starting post');
 	showPosting();
 	$('body').css('cursor', 'wait');
 	$.post(
@@ -1110,9 +1168,7 @@ function post_comment(id) {
 	)
 		.done(function(data) {
 			showProcessing();
-			console.debug('[Main] post_comment: AJAX response received for id:', id);
 			if (data.success) {
-				console.debug('[Main] post_comment: Comment posted successfully');
 				$("#comment-edit-wrapper-" + id).hide();
 				$("#comment-edit-text-" + id).val('');
 				var textarea = document.getElementById("comment-edit-text-" + id);
@@ -1122,16 +1178,13 @@ function post_comment(id) {
 				if (timer) {
 					clearTimeout(timer);
 				}
-				console.debug('[Main] post_comment: Calling triggerLiveUpdates with guid:', data.guid ?? null);
 				updateItem(id, data.guid ?? null);
 			}
 			if (data.reload) {
-				console.debug('[Main] post_comment: Server requested reload');
 				window.location.href=data.reload;
 			}
 		})
 		.always(function() {
-		console.debug('[Main] post_comment: AJAX completed, setting commentBusy=false');
 		hideLoading();
 		commentBusy = false;
 		$('body').css('cursor', 'auto');
@@ -1156,6 +1209,7 @@ function preview_comment(id) {
 		.always(function() {
 		hideLoading();
 	});
+	fix_preview_img_wrap(id);
 	return true;
 }
 
@@ -1252,9 +1306,293 @@ function preview_post() {
 		.always(function() {
 		hideLoading();
 	});
+	fix_preview_img_wrap();
 	return true;
 }
+function fix_preview_img_wrap(index){
+	/* We don't know how long it will take the server to do the ajax request
+	   so we need to monitor the preview pane for a DOM mutation.
+	   
+	   We also do not want to attach the mutation observer unless previewing
+	   and we do not need this on pages without the jot composer. This might
+	   be in feed, in modal, or on a separate page so check for parent obj.	   
+	   
+	   We only want ot use a Mutation Observer if the browser supports it
+	   (and most do) but just in case there is a fallback to a timeOut method.
+	*/
 
+	if ("MutationObserver" in window){
+		const targetElement = (!index && $('#jot-preview-content .tread-wrapper')) ? $('#jot-preview-content .tread-wrapper') : $('#comment-edit-preview-'+index+' .tread-wrapper');
+		const parentToWatch = (!index && document.getElementById('jot-preview-content')) ? document.getElementById('jot-preview-content') : document.getElementById('comment-edit-preview-'+index);	/* jQuery obj will not work! */
+		
+		const observer = new MutationObserver((mutationList, observer) => {
+			for (const mutation of mutationList) {
+				if (mutation.type === "childList") {
+					const newElement = targetElement;
+					if (newElement){
+						preview_post_img(index);
+						observer.disconnect();
+						break;
+					}
+				}
+			}
+		});
+		// attach the mutation observer IF we have a valid parent obj
+		if (parentToWatch){
+			observer.observe(parentToWatch, { childList: true, subtree: true });
+		}
+	} else {
+		// fallback if MutationObserver is not available
+		setTimeout(function(){preview_post_img(index);},3000);
+	}
+}
+
+
+function masonry_or_not(parentElement){
+	/* This convoluted function grabs the preview contents as rendered by Friendica
+	   and then tries to determine if it is one of the scenarios in which masonry
+	   layout will not be shown and returns boolean true|false to the caller.
+	   
+	   Normally the masonry layout is only shown if:
+	   * There are multiple images in the post
+	   * The images are consecutive
+	   * There are no other elements in between them.
+	   * There are no raw text nodes immediately before or after any of them.
+	   * There is no paragraph after the last one (a DIV is okay though)
+	   
+	   This function assumes a masonry layout could be shown, unless it should find
+	   one of the above conditions is not met.
+	*/
+
+	var gallery = true;
+	$(parentElement+" .wall-item-body").find('img.empty-description, img.has-alt-description').each(function(index, element){
+			if ( $(element).parent('a').length > 0 ){
+				// check if img has other stuff in with it
+				$(element).parent().parent().contents().filter(function(){
+					if (this.nodeType === 3){
+						// there is a text node in here with it, this is NOT a gallery
+						gallery = false;
+						return;
+					}
+				});
+				// if this element has a next sibling and it has an image in it
+				if ( $(element).parent().parent().next().length > 0 ){
+					if ( $(element).parent().parent().next().prop('tagName') === 'P' ){
+						// has to check <p> so it does not confuse with link preview <div>
+						if ( $(element).parent().parent().next('p:has(img)').length > 0 ){
+							// next sibling contains image so this is a gallery
+						} else {
+							// next sibling does NOT contain an image, this is not a gallery
+							gallery = false;
+							return;
+						}
+					} else {
+						// next sibling is some other kind of element
+					}
+				} else {
+					// there is no next sibling
+				}
+					
+			} else if( $(element).parent('p').length > 0 ){
+				// check if img has other stuff in with it
+				$(element).parent().contents().filter(function(){
+					if (this.nodeType === 3){
+						// there is a text node in it, this is NOT a gallery
+						gallery = false;
+						return;
+					}
+				});	
+				// if this element has a next sibling and it has an image in it
+				if ( $(element).parent().next().length > 0 ){
+					// there IS a next sibling
+					if( $(element).parent().next().prop('tagName') === 'P' ){
+						if ( $(element).parent().next('p:has(img)').length > 0 ){
+							// next sibling contains an image
+						} else {
+							// next sibling does NOT contain an image, NOT a gallery
+							gallery = false;
+							return;
+						}
+					} else {
+						// next sibling is some other kind of element
+					}
+				} else {
+					// there is no next sibling
+				}			
+			} else {
+				// no clue what element this is inside of so NOT a gallery
+				gallery = false;
+				return;
+			}
+		});
+		return gallery;
+}
+
+
+function preview_post_img(index){
+	var parentElement;
+	if (!index){
+		index = 0;
+		parentElement = '#jot-preview-content';
+	} else {
+		parentElement = '#comment-edit-preview-'+index;
+	}
+	var $images = $(parentElement+" img.empty-description, "+parentElement+" img.has-alt-description");
+	if ($images.length === 0){
+		// no images to process
+		return;
+	} else {
+		// before we manipulate the DOM check if this could use masonry layout
+		var gallery = masonry_or_not(parentElement);
+		if ($images.length > 1 && ($images.parent().next(':has(img)') || $images.parent().parent('p').next(':has(img)')) ){
+			// this appears to be a sequence of images
+		} else {
+			gallery = false;
+		}
+		// wrap attached images like they would be in feed
+		$images.parent().wrap('<div></div>').wrap('<figure></figure>');
+		// get images with alt text
+		$(parentElement+" img.has-alt-description").each(function(index, element){
+			var $alt_text = $(element).attr("alt");
+			$(element).parent().parent().append('<button class="alt-text-button" type="button" aria-hidden="true">ALT<span class="alt-text-block" dir="auto">'+$alt_text+'</span></button>');
+		});
+		// if we have multiple images do masonry layout
+		if ($images.length > 1 && gallery === true){
+			// if processing takes too long pulse the container background
+			$(parentElement+" .wall-item-body").addClass('img-processing');
+			// show process spinner (if there is one)
+			$(parentElement+" .wall-item-decor img").show();
+			// hide container content during processing...
+			$(parentElement+" .wall-item-body").css({visibility: 'hidden'});
+
+
+			/* only setInterval or setTimeout work to trigger masonry function!
+			   jQuery promise().done() or count tracking or MutationObserver
+			   all cause infinite loops. The ONLY way to know if the above is
+			   done manipulating the DOM is to compare the number of FIGURE
+			   tags to the original IMAGE count. If they match, it's done.			
+			*/ 
+			var condition = setInterval(function(){
+				if( $(parentElement+" figure").length === $images.length ){
+					clearInterval(condition);
+					preview_masonry_rows(index);
+				}
+			}, 100);
+		} else {
+			$images.parent().wrap('<div class="body-attach"></div>');
+		}
+	}
+}
+
+function preview_masonry_rows(index) {
+	// first determine if there are multiple images (by this point they should all be wrapped in <figure> tags)
+	// and we do not want to accidentally scoop up jot and comment ones together
+	var parentElement;
+	if (!index){
+		parentElement = "#jot-preview-content";
+	} else {
+		parentElement = "#comment-edit-preview-"+index;
+	}
+	var $images = $(parentElement+" .wall-item-content").find("figure");
+	// if called by preview_post_image we should never have zero or one image but catch them anyway...
+	if ($images.length === 0){
+		$(parentElement+" .wall-item-decor img").hide();
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
+		return;
+	}
+	else if ($images.length === 1){ 
+		$images.parent().wrap('<div class="body-attach"></div>');
+		$(parentElement+" .wall-item-decor img").hide();
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
+		return; // no need to do masonry layout
+	} else { // do masonry layout
+		var rows = [];
+
+		var couples = [];
+		for(let i=0; i < $images.length; i++){
+			let entry;
+			if (typeof($images[i+1]) === "undefined"){
+				entry = [$images[i]];
+			} else {
+				entry = [$images[i], $images[i+1]];
+			}
+			couples.push(entry);
+			i++;				// NOT a double increment bug! This pairs images
+		}
+
+
+		for(let c=0; c < couples.length; c++){
+			var widths = [];
+			var heights = [];
+			for(let i=0; i < couples[c].length; i++){
+				let this_width;
+				let this_height;
+				let this_image = $(couples[c][i]).find('img').first();
+				if ( $(this_image).width() === 0){
+					this_width = 640;
+				} else {
+					this_width = $(this_image).width();
+				}
+				if ( $(this_image).height() === 0){
+					this_height = 480;
+				} else {
+					this_height = $(this_image).height();
+				}
+				widths.push( this_width );
+				heights.push( this_height );
+			}
+			var maxHeight = Math.max(...heights);
+			// corrected width preserving aspect ratio when all images on a row are the same height
+			var correctedWidths = [];
+			for(let w=0; w < widths.length; w++){
+				correctedWidths.push( (widths[w] * maxHeight / heights[w]) );
+			}
+			var totalWidth = 0;
+			// total sum of all widths
+			for(let t=0; t < correctedWidths.length; t++){
+				totalWidth += correctedWidths[t];
+			}
+			// This magic value will stay constant for each image of any given row and is ultimately
+			// used to determine the height of the row container relative to the available width
+			var commonHeightRatio = (100 * correctedWidths[0] / totalWidth / (widths[0] / heights[0]));
+			
+			var first_image = [couples[c][0], (100 * correctedWidths[0]/totalWidth), (100 * maxHeight/correctedWidths[0])];
+			
+			var second_image;
+			if (couples[c].length === 1){ // single image
+				second_image = [];
+			} else {
+				second_image = [couples[c][1], (100 * correctedWidths[1]/totalWidth), (100 * maxHeight/correctedWidths[1])];
+			}
+			// push them onto a row
+			rows.push([widths, heights, maxHeight, totalWidth, commonHeightRatio, first_image, second_image]);
+		}
+		var $attachbox = $('<div></div>');
+			$attachbox.addClass('body-attach');
+
+		for(let r=0; r < rows.length; r++){
+			var $newRow = $('<div></div>');
+				$newRow.addClass('masonry-row');
+				$newRow.css('height', rows[r][4]+'%');
+				rows[r][5][0].setAttribute('style','width: '+rows[r][5][1]+'%; padding-bottom: calc('+(rows[r][5][1] * rows[r][5][2] / 100)+'% - 5px / 2)');
+				rows[r][5][0].className = "img-allocated-height";
+				$newRow.append(rows[r][5][0]);
+			if (rows[r][6].length > 0){ // do not assume a matching image
+				rows[r][6][0].setAttribute('style','width: '+rows[r][6][1]+'%; padding-bottom: calc('+(rows[r][6][1] * rows[r][6][2] / 100)+'% - 5px / 2)');
+				rows[r][6][0].className = "img-allocated-height";
+				$newRow.append(rows[r][6][0]);
+			}
+			$attachbox.append($newRow);
+		}
+		$(parentElement+" .wall-item-body div:empty").remove();				// clean up now empty divs that used to wrap images
+		$(parentElement+" .wall-item-body").append($attachbox);				
+		$(parentElement+" .wall-item-decor img").hide();						// hide spinner
+		$(parentElement+" .wall-item-body").removeClass('img-processing');
+		$(parentElement+" .wall-item-body").css({visibility: 'visible'});	// make container visible
+	}
+}
 function unpause() {
 	// unpause auto reloads if they are currently stopped
 	totStopped = false;
@@ -1270,7 +1608,6 @@ function loadScrollContent() {
 	
 	// Guard: Check if scroll-loader element and infinite_scroll are available
 	if ($('#scroll-loader').length === 0 || typeof infinite_scroll === 'undefined' || typeof infinite_scroll.reload_uri === 'undefined') {
-		console.debug('[Main] loadScrollContent: missing requirements (scroll-loader or infinite_scroll)');
 		lockLoadContent = false;
 		return;
 	}

@@ -104,8 +104,8 @@ final class LostPass extends BaseModule
 
 			The login details are as follows:
 
-			Site Location:	%2$s
-			Login Name:	%3$s', $resetlink, $this->baseUrl, $user['nickname']));
+			URL: %2$s
+			Username: %3$s', $resetlink, $this->baseUrl, $user['nickname']));
 
 		$email = $this->emailer->newSystemMail()
 			->withMessage($this->l10n->t('Password reset requested at %s', $sitename), $preamble, $body)
@@ -130,7 +130,7 @@ final class LostPass extends BaseModule
 
 			$user = DBA::selectFirst('user', ['uid', 'username', 'nickname', 'email', 'pwdreset_time', 'language'], ['pwdreset' => hash('sha256', $pwdreset_token)]);
 			if (!DBA::isResult($user)) {
-				$this->sysMessages->addNotice($this->l10n->t("Request could not be verified. \x28You may have previously submitted it.\x29 Password reset failed."));
+				$this->sysMessages->addNotice($this->l10n->t("Request could not be verified. (You may have previously submitted it.) Password reset failed."));
 
 				return $this->form();
 			}
@@ -165,7 +165,7 @@ final class LostPass extends BaseModule
 		$o   = Renderer::replaceMacros($tpl, [
 			'$title'  => $this->l10n->t('Forgot your Password?'),
 			'$desc'   => $this->l10n->t('Enter your email address and submit to have your password reset. Then check your email for further instructions.'),
-			'$name'   => $this->l10n->t('Nickname or email'),
+			'$name'   => $this->l10n->t('Username or email'),
 			'$submit' => $this->l10n->t('Reset my password'),
 		]);
 
@@ -202,15 +202,14 @@ final class LostPass extends BaseModule
 			$preamble = Strings::deindent($this->l10n->t('
 				Dear %1$s,
 					Your password has been changed as requested. Please retain this
-				information for your records ' . "\x28" . 'or change your password immediately to
-				something that you will remember' . "\x29" . '.
-			', $user['username']));
+				information for your records (or change your password immediately to
+				something that you will remember).', $user['username']));
 			$body = Strings::deindent($this->l10n->t('
 				Your login details are as follows:
 
-				Site Location:	%1$s
-				Login Name:	%2$s
-				Password:	%3$s
+				URL: %1$s
+				Username: %2$s
+				Password: %3$s
 
 				You may change that password from your account settings page after logging in.
 			', $this->baseUrl, $user['nickname'], $new_password));

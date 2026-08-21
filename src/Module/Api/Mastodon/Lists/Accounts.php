@@ -22,6 +22,7 @@ class Accounts extends BaseApi
 	protected function delete(array $request = [])
 	{
 		$this->checkAllowedScope(self::SCOPE_WRITE);
+		$uid = self::getCurrentUserID();
 
 		$request = $this->getRequest([
 			'account_ids' => [], // Array of account IDs to remove from the list
@@ -31,12 +32,17 @@ class Accounts extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
+		if (!DBA::exists('group', ['id' => $this->parameters['id'], 'uid' => $uid])) {
+			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
+		}
+
 		Circle::removeMembers($this->parameters['id'], $request['account_ids']);
 	}
 
 	protected function post(array $request = [])
 	{
 		$this->checkAllowedScope(self::SCOPE_WRITE);
+		$uid = self::getCurrentUserID();
 
 		$request = $this->getRequest([
 			'account_ids' => [], // Array of account IDs to add to the list
@@ -44,6 +50,10 @@ class Accounts extends BaseApi
 
 		if (empty($request['account_ids']) || empty($this->parameters['id'])) {
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
+		}
+
+		if (!DBA::exists('group', ['id' => $this->parameters['id'], 'uid' => $uid])) {
+			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
 		Circle::addMembers($this->parameters['id'], $request['account_ids']);
@@ -111,7 +121,7 @@ class Accounts extends BaseApi
 			$accounts = array_reverse($accounts);
 		}
 
-		self::setLinkHeader();
+		$this->setPaginationLinkHeader();
 		$this->earlyJsonExit($accounts);
 	}
 }

@@ -73,7 +73,7 @@
 	var calendar_api = '{{$calendar_api}}';
 	var event_api = '{{$event_api}}';
 
-	$(document).ready(function() {
+	window.registerModuleLifecycle('body', function() {
 		$("#comment-edit-text-desc").bbco_autocomplete('bbcode');
-	});
+	}, null, 'document');
 </script>

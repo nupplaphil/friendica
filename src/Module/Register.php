@@ -228,8 +228,8 @@ class Register extends BaseModule
 			'$ask_password'          => $ask_password,
 			'$password1'             => ['password1', DI::l10n()->t('New Password:'), '', DI::l10n()->t('Leave empty for an auto generated password.')],
 			'$password2'             => ['confirm', DI::l10n()->t('Confirm:'), '', ''],
-			'$nickdesc'              => DI::l10n()->t('Choose a profile nickname. This must begin with a text character. Your profile address on this site will then be "<strong>nickname@%s</strong>".', DI::baseUrl()->getHost()),
-			'$nicklabel'             => DI::l10n()->t('Choose a nickname: '),
+			'$nickdesc'              => DI::l10n()->t('Usernames must begin with a text character. Your handle on this site will then be "<strong>username@%s</strong>".', DI::baseUrl()->getHost()),
+			'$nicklabel'             => DI::l10n()->t('Choose a username: '),
 			'$photo'                 => $photo,
 			'$publish'               => $profile_publish,
 			'$regbutt'               => $regbutton_label,
@@ -358,9 +358,9 @@ class Register extends BaseModule
 		//Check if nickname contains only US-ASCII and do not start with a digit
 		if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]*$/', (string) $post['nickname'])) {
 			if (is_numeric(substr((string) $post['nickname'], 0, 1))) {
-				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname cannot start with a digit."));
+				DI::sysmsg()->addNotice(DI::l10n()->t("Username cannot start with a digit."));
 			} else {
-				DI::sysmsg()->addNotice(DI::l10n()->t("Nickname can only contain US-ASCII characters."));
+				DI::sysmsg()->addNotice(DI::l10n()->t("Usernames can only contain US-ASCII characters."));
 			}
 
 			DI::baseUrl()->redirect('register?' . http_build_query($regdata));

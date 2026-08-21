@@ -89,6 +89,7 @@ class Browser extends BaseModule
 			sprintf('%s/attach/%s', $this->baseUrl, $record['id']),
 			$record['filename'],
 			sprintf('%s/images/icons/%s.png', $this->baseUrl, $filetype),
+			$filetype,
 		];
 	}
 }

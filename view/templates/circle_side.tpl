@@ -7,7 +7,7 @@
 <!-- NOTE: Place "sidebar-widget-list" only on one element: The one that should be expanded/collapsed -->
 {{* Overridden by Frio *}}
 <nav id="circle-sidebar" class="widget">
-	<button class="widget-btn, fakelink" onclick="openCloseWidget('circle-sidebar');" aria-expanded="false">
+	<button class="widget-btn fakelink" onclick="openCloseWidget('circle-sidebar');" aria-expanded="false">
 		<h3>
 			<i class="ri ri-bubble-chart-line" aria-hidden="true"></i>
 			{{$title}}

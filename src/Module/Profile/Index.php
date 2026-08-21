@@ -31,11 +31,11 @@ use Psr\Log\LoggerInterface;
 /**
  * Profile index router
  *
- * The default profile path (https://domain.tld/profile/nickname) has to serve the profile data when queried as an
+ * The default profile path (https://domain.tld/profile/username) has to serve the profile data when queried as an
  * ActivityPub endpoint, but it should show statuses to web users.
  *
  * Both these view have dedicated sub-paths,
- * respectively https://domain.tld/profile/nickname/profile and https://domain.tld/profile/nickname/conversations
+ * respectively https://domain.tld/profile/username/profile and https://domain.tld/profile/username/conversations
  */
 class Index extends BaseModule
 {
@@ -67,9 +67,7 @@ class Index extends BaseModule
 
 	protected function rawContent(array $request = [])
 	{
-		/** @var Response $response */
-		$response = $this->response;
-		(new Profile($this->profileField, $this->page, $this->config, $this->session, $this->appHelper, $this->database, $this->eventDispatcher, $this->groupManager, $this->l10n, $this->baseUrl, $this->args, $this->logger, $this->profiler, $response, $this->server, $this->parameters))->rawContent();
+		(new Profile($this->profileField, $this->page, $this->config, $this->session, $this->appHelper, $this->database, $this->eventDispatcher, $this->groupManager, $this->l10n, $this->baseUrl, $this->args, $this->logger, $this->profiler, $this->response, $this->server, $this->parameters))->rawContent();
 	}
 
 	protected function content(array $request = []): string

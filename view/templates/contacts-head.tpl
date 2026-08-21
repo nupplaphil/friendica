@@ -6,8 +6,8 @@
   *}}
 
 <script>
-$(document).ready(function() {
+window.registerModuleLifecycle('body', function() {
 	$("#contacts-search").contact_autocomplete(baseurl + '/search/acl', 'a', true);
-});
+}, null, 'document');
 </script>
 

@@ -118,7 +118,7 @@ class Advanced extends BaseModule
 			'$lbl_submit' => $this->t('Submit'),
 
 			'$name' => ['name', $this->t('Name'), $contact['name'], '', '', $readonly],
-			'$nick' => ['nick', $this->t('Account Nickname'), $contact['nick'], '', '', 'readonly'],
+			'$nick' => ['nick', $this->t('Account username'), $contact['nick'], '', '', 'readonly'],
 			'$url'  => ['url', $this->t('Account URL'), $contact['url'], '', '', 'readonly'],
 			'poll'  => ['poll', $this->t('Poll/Feed URL'), $contact['poll'], '', '', ($contact['network'] == Protocol::FEED) ? '' : 'readonly'],
 			'photo' => ['photo', $this->t('New photo from this URL'), '', '', '', $readonly],
