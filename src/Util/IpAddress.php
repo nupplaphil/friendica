@@ -46,12 +46,6 @@ final class IpAddress
 		'2002::/16'     => 2,  // 6to4 (RFC 3056)
 	];
 
-	/** Checks whether an address is publicly routable. */
-	public static function isPublic(string $address): bool
-	{
-		return !self::isNonPublic($address);
-	}
-
 	/** Checks whether an address is invalid or non-public. */
 	public static function isNonPublic(string $address): bool
 	{

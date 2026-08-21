@@ -62,7 +62,6 @@ class IpAddressTest extends TestCase
 	public function testNonPublicAddressesAreRejected(string $address): void
 	{
 		self::assertTrue(IpAddress::isNonPublic($address), $address . ' should not be reachable');
-		self::assertFalse(IpAddress::isPublic($address));
 	}
 
 	/** Ensures public addresses remain reachable. */
@@ -98,7 +97,6 @@ class IpAddressTest extends TestCase
 	#[DataProvider('publicProvider')]
 	public function testPublicAddressesAreAccepted(string $address): void
 	{
-		self::assertTrue(IpAddress::isPublic($address), $address . ' should be reachable');
-		self::assertFalse(IpAddress::isNonPublic($address));
+		self::assertFalse(IpAddress::isNonPublic($address), $address . ' should be reachable');
 	}
 }
