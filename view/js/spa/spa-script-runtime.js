@@ -73,46 +73,51 @@ function classifyScriptContent(content, source) {
  * @returns {string} - Transformed code
  */
 function promoteToGlobal(code) {
-  const ast = acorn.parse(code, { ecmaVersion: 'latest', sourceType: 'script', locations: true, ranges: true });
-  let newCode = '';
-  let lastEnd = 0;
-  for (const node of ast.body) {
-    if (node.start > lastEnd) newCode += code.slice(lastEnd, node.start);
-    if (node.type === 'VariableDeclaration') {
-      // Check if all declarations are simple Identifiers with initializers
-      const allSimple = node.declarations.every(d => d.id.type === 'Identifier');
-      if (allSimple && node.declarations.length === 1) {
-        // Single simple declaration: handle per-declaration
-        const declaration = node.declarations[0];
-        if (declaration.init) {
-          newCode += `window.${declaration.id.name} = ${code.slice(declaration.init.start, declaration.init.end)};`;
-        }
-        // Skip declarations without initializers to avoid resetting existing values
-      } else {
-        // Multiple or complex declarations: output the whole statement once
-        newCode += code.slice(node.start, node.end);
-        // Then promote the simple identifier declarations to window scope
-        for (const declaration of node.declarations) {
-          if (declaration.id.type === 'Identifier' && declaration.init) {
-            newCode += `\nwindow.${declaration.id.name} = ${declaration.id.name};`;
+  try {
+    const ast = acorn.parse(code, { ecmaVersion: 'latest', sourceType: 'script', locations: true, ranges: true });
+    let newCode = '';
+    let lastEnd = 0;
+    for (const node of ast.body) {
+      if (node.start > lastEnd) newCode += code.slice(lastEnd, node.start);
+      if (node.type === 'VariableDeclaration') {
+        // Check if all declarations are simple Identifiers with initializers
+        const allSimple = node.declarations.every(d => d.id.type === 'Identifier');
+        if (allSimple && node.declarations.length === 1) {
+          // Single simple declaration: handle per-declaration
+          const declaration = node.declarations[0];
+          if (declaration.init) {
+            newCode += `window.${declaration.id.name} = ${code.slice(declaration.init.start, declaration.init.end)};`;
+          }
+          // Skip declarations without initializers to avoid resetting existing values
+        } else {
+          // Multiple or complex declarations: output the whole statement once
+          newCode += code.slice(node.start, node.end);
+          // Then promote the simple identifier declarations to window scope
+          for (const declaration of node.declarations) {
+            if (declaration.id.type === 'Identifier' && declaration.init) {
+              newCode += `\nwindow.${declaration.id.name} = ${declaration.id.name};`;
+            }
           }
         }
       }
+      else if (node.type === 'FunctionDeclaration') {
+        // Preserve hoisting by outputting the function declaration first, then assigning to window
+        newCode += `${code.slice(node.start, node.end)}\nwindow.${node.id.name} = ${node.id.name};`;
+      }
+      else if (node.type === 'ClassDeclaration') {
+        newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
+      }
+      else {
+        newCode += code.slice(node.start, node.end);
+      }
+      lastEnd = node.end;
     }
-    else if (node.type === 'FunctionDeclaration') {
-      // Preserve hoisting by outputting the function declaration first, then assigning to window
-      newCode += `${code.slice(node.start, node.end)}\nwindow.${node.id.name} = ${node.id.name};`;
-    }
-    else if (node.type === 'ClassDeclaration') {
-      newCode += `window.${node.id.name} = ${code.slice(node.start, node.end)};`;
-    }
-    else {
-      newCode += code.slice(node.start, node.end);
-    }
-    lastEnd = node.end;
+    if (lastEnd < code.length) newCode += code.slice(lastEnd);
+    return newCode;
+  } catch (e) {
+    // Fallback: return code unmodified if parsing fails
+    return code;
   }
-  if (lastEnd < code.length) newCode += code.slice(lastEnd);
-  return newCode;
 }
 
 /**

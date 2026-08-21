@@ -34,13 +34,14 @@ function createContentLoader(options) {
     const fetchUrl = new URL(url, window.location.href);
     let finalUrl = fetchUrl.toString();
 
+    // Create new AbortController for this request
+    const controller = new AbortController();
+
     // Abort any in-flight request
     if (currentAbortController) {
       currentAbortController.abort();
     }
-
-    // Create new AbortController for this request
-    currentAbortController = new AbortController();
+    currentAbortController = controller;
 
     showFetching();
     fetch(fetchUrl, { headers: { 'Accept': 'text/html' }, credentials: 'include', signal: currentAbortController.signal })
@@ -81,13 +82,17 @@ function createContentLoader(options) {
         hideLoading();
         
         // Reset abort controller after successful completion
-        currentAbortController = null;
+        if (currentAbortController === controller) {
+          currentAbortController = null;
+        }
 
         return html;
       })
       .catch(error => {
         // Reset abort controller
-        currentAbortController = null;
+        if (currentAbortController === controller) {
+          currentAbortController = null;
+        }
         
         hideLoading();
 

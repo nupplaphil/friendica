@@ -81,14 +81,14 @@ function dismissTimeoutModal() {
  */
 function cleanupTooltips() {
   const tooltipSelectors = [
-    '.tooltip',
-    '[class*="tooltip"]',
-    '.ui-tooltip',
-    '.popover',
-    '[role="tooltip"]',
-    '.fancybox-wrap',
-    '.colorbox',
-    '.jGrowl'
+    'body > .tooltip',
+    'body > [class*="tooltip"]',
+    'body > .ui-tooltip',
+    'body > .popover',
+    'body > [role="tooltip"]',
+    'body > .fancybox-wrap',
+    'body > .colorbox',
+    'body > .jGrowl'
   ];
 
   tooltipSelectors.forEach(selector => {

@@ -57,9 +57,6 @@ function createDomSwapPipeline(options) {
 
     const newDoc = new DOMParser().parseFromString(htmlString, 'text/html');
 
-    // Cleanup tooltips only after we have parsed the new document
-    cleanupTooltips();
-
     const newTitle = newDoc.querySelector('title');
     if (newTitle) document.title = newTitle.textContent;
 
@@ -80,12 +77,14 @@ function createDomSwapPipeline(options) {
     const effectivePath = new URL(effectiveFinalUrl, window.location.href).pathname;
 
     const containerSelectors = getContainerSelectors();
+    let containerReplaced = false;
 
     containerSelectors.forEach(selector => {
       const newDiv = newDoc.querySelector(selector);
       const oldDiv = document.querySelector(selector);
 
       if (newDiv && oldDiv) {
+        containerReplaced = true;
         for (const script of newDiv.querySelectorAll('script:not([src])')) {
           const type = script.getAttribute('type') || '';
           if (type && 
@@ -114,6 +113,12 @@ function createDomSwapPipeline(options) {
         oldDiv.innerHTML = newDiv.innerHTML;
       }
     });
+
+    // Only cleanup tooltips if we successfully replaced at least one container
+    // This prevents blank pages when error pages or redirects don't have the expected containers
+    if (containerReplaced) {
+      cleanupTooltips();
+    }
 
     const scrollLoaderNew = newDoc.querySelector('#scroll-loader');
     if (scrollLoaderNew) {

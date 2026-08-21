@@ -244,7 +244,7 @@ function initTheme() {
 
 	// Dropdown menus with the class "dropdown-head" will display the active tab
 	// as button text
-	$body.off("click.frio-theme").on("click.frio-theme", ".dropdown-head .dropdown-menu li a, .dropdown-head .dropdown-menu li button", function () {
+	$body.off("click.frio-theme", ".dropdown-head .dropdown-menu li a, .dropdown-head .dropdown-menu li button").on("click.frio-theme", ".dropdown-head .dropdown-menu li a, .dropdown-head .dropdown-menu li button", function () {
 		toggleDropdownText(this);
 	});
 
@@ -280,7 +280,7 @@ function initTheme() {
 	// to the input element where the padding value would be at least the width
 	// of the button. Otherwise long user input would be invisible because it is
 	// behind the button.
-	$body.off("click.frio-theme").on("click.frio-theme", ".form-group-search > input", function () {
+	$body.off("click.frio-theme", ".form-group-search > input").on("click.frio-theme", ".form-group-search > input", function () {
 		// Get the width of the button (if the button isn't available
 		// buttonWidth will be null
 		var buttonWidth = $(this).next(".form-button-search").outerWidth();
@@ -326,7 +326,7 @@ function initTheme() {
 	// Customize some elements when the app is used in standalone mode on Android
 	if (window.matchMedia("(display-mode: standalone)").matches) {
 		// Open links to source outside of the webview
-		$("body").off("click.frio-theme").on("click.frio-theme", ".plink", function (e) {
+		$("body").off("click.frio-theme", ".plink").on("click.frio-theme", ".plink", function (e) {
 			$(e.target).attr("target", "_blank");
 		});
 	}
@@ -401,7 +401,7 @@ function initTheme() {
 	});
 
 	// Event listener for 'Show & hide event map' button in the network stream.
-	$body.off("click.frio-theme").on("click.frio-theme", ".event-map-btn", function () {
+	$body.off("click.frio-theme", ".event-map-btn").on("click.frio-theme", ".event-map-btn", function () {
 		showHideEventMap(this);
 	});
 

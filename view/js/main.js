@@ -220,6 +220,13 @@ var last_popup_button = null;
 var lockLoadContent = false;
 var originalTitle = document.title;
 
+// Update original title on SPA navigation to prevent ping handler from resetting to stale title
+if (window.addEventListener) {
+	window.addEventListener('spa:navigate', function () {
+		originalTitle = document.title;
+	});
+}
+
 // Scroll to item deduplication flags
 var scrollToItemInProgress = false;
 var lastScrollToItemId = null;
@@ -235,7 +242,7 @@ window.registerModuleLifecycle('body', function() {
 	 * 		data-bbcode="<string>" : name of the bbcode element to insert. insertFormatting() will insert it as "[name][/name]"
 	 * 		data-id="<string>" : id of the comment, used to find other comment-related element, like the textarea
 	 * */
-	$('body').on('click','[data-role="insert-formatting"]', function(e) {
+	$('body').off('click.friendica-main', '[data-role="insert-formatting"]').on('click.friendica-main', '[data-role="insert-formatting"]', function(e) {
 		e.preventDefault();
 		var o = $(this);
 		var bbcode = o.data('bbcode');
@@ -483,15 +490,19 @@ window.registerModuleLifecycle('body', function() {
 	});
 
 	// Asynchronous calls are deferred until the very end of the page load to ease on slower connections
-	window.addEventListener("load", function(){
-		NavUpdate();
-		if (typeof acl !== 'undefined') {
-			acl.get(0, 100);
-		}
-	});
+	// Only register once, not on every SPA navigation
+	if (typeof window.__friendica_main_load_handler === 'undefined') {
+		window.__friendica_main_load_handler = true;
+		window.addEventListener("load", function(){
+			NavUpdate();
+			if (typeof acl !== 'undefined') {
+				acl.get(0, 100);
+			}
+		});
+	}
 
 	// Allow folks to stop the ajax page updates with the pause/break key
-	$(document).keydown(function(event) {
+	$(document).off('keydown.friendica-main-pause').on('keydown.friendica-main-pause', function(event) {
 		// Pause/Break or Ctrl + Space
 		if (event.which === 19 || (!event.metaKey && !event.shiftKey && !event.altKey && event.ctrlKey && event.which === 32)) {
 			event.preventDefault();
@@ -510,7 +521,7 @@ window.registerModuleLifecycle('body', function() {
 	});
 
 	// Scroll to the next/previous thread when pressing J and K
-	$(document).keydown(function (event) {
+	$(document).off('keydown.friendica-main-nav').on('keydown.friendica-main-nav', function (event) {
 		var threads = $('.thread_level_1');
 		if ((event.keyCode === 74 || event.keyCode === 75) && !$(event.target).is('textarea, input')) {
 			var scrollTop = $(window).scrollTop();

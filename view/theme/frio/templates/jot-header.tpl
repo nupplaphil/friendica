@@ -79,9 +79,6 @@
 	}
 
 	function initJotHeader() {
-		console.log("initJotHeader called");
-		$("body").off('.friendicaJotHeader');
-
 		/* enable editor on focus and click */
 		$("#profile-jot-text").focus(enableOnUser);
 		$("#profile-jot-text").click(enableOnUser);
