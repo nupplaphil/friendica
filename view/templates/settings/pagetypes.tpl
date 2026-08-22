@@ -34,7 +34,7 @@
 	// to the selected account type.
 	var accountType = {{$account_type}};
 
-	window.registerModuleLifecycle('body', function(){
+	window.onDocumentReady('body', function(){
 		// Hide all DIV for page-flags except the one which belongs to the present
 		// account-type
 		showPageFlags(accountType);

@@ -13,7 +13,7 @@ window.scrollToDisplayGuid = function scrollToDisplayGuid() {
   console.trace('[Threaded Conversation] Scrolling to item with GUID:', itemGuid);
   scrollToItem("item-" + itemGuid);
 };
-window.registerModuleLifecycle('#live-display', window.scrollToDisplayGuid, null, 'window');
+window.onWindowLoad('#live-display', window.scrollToDisplayGuid);
 </script>
 {{/if}}
 {{$live_update nofilter}}

@@ -20,8 +20,13 @@ if (!Element.prototype.matches) {
 		};
 }
 
-function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
-	if (typeof selector === 'undefined' || selector === null) {
+window.ModuleLifecycleReadyEvent = Object.freeze({
+	DOCUMENT: 'document',
+	WINDOW: 'window'
+});
+
+function registerModuleLifecycle(target, initialize, readyEvent) {
+	if (typeof target === 'undefined' || target === null) {
 		return null;
 	}
 
@@ -45,7 +50,7 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 		}
 	})();
 
-	const registryKey = String(selector) + '::' + initializerFingerprint + '::' + String(fallbackMode || 'document');
+	const registryKey = String(target) + '::' + initializerFingerprint + '::' + String(readyEvent || window.ModuleLifecycleReadyEvent.DOCUMENT);
 	if (window.__friendica_unpoly_lifecycle_registry.has(registryKey)) {
 		return window.__friendica_unpoly_lifecycle_registry.get(registryKey);
 	}
@@ -72,17 +77,17 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 	};
 
 	const refresh = function () {
-		const target = typeof selector === 'string' ? document.querySelector(selector) : normalizeElement(selector);
-		if (!target) {
+		const targetElement = typeof target === 'string' ? document.querySelector(target) : normalizeElement(target);
+		if (!targetElement) {
 			return null;
 		}
-		return runInitialize(target);
+		return runInitialize(targetElement);
 	};
 
 	if (window.addEventListener) {
 		window.addEventListener('spa:navigate', refresh, { passive: true });
 		
-		if (fallbackMode === 'document') {
+		if (readyEvent === window.ModuleLifecycleReadyEvent.DOCUMENT || typeof readyEvent === 'undefined') {
 			if (spaEnabled) {
 				window.addEventListener('spa:document:ready', refresh, { passive: true });
 			} else {
@@ -104,6 +109,14 @@ function registerModuleLifecycle(selector, initialize, cleanup, fallbackMode) {
 	window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
 	return null;
 }
+
+window.onDocumentReady = function (target, initialize) {
+	return registerModuleLifecycle(target, initialize, window.ModuleLifecycleReadyEvent.DOCUMENT);
+};
+
+window.onWindowLoad = function (target, initialize) {
+	return registerModuleLifecycle(target, initialize, window.ModuleLifecycleReadyEvent.WINDOW);
+};
 
 function resizeIframe(obj) {
 	_resizeIframe(obj, 0);
@@ -233,7 +246,7 @@ var lastScrollToItemId = null;
 
 const urlRegex = /^(?:https?:\/\/|\s)[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})(?:\/+[a-z0-9_.:;-]*)*(?:\?[&%|+a-z0-9_=,.:;-]*)?(?:[&%|+&a-z0-9_=,:;.-]*)(?:[!#\/&%|+a-z0-9_=,:;.-]*)}*$/i;
 
-window.registerModuleLifecycle('body', function() {
+window.onDocumentReady('body', function() {
 	$.ajaxSetup({cache: false});
 
 	/* setup comment textarea buttons */
@@ -548,7 +561,7 @@ window.registerModuleLifecycle('body', function() {
 	if (typeof initInfiniteScroll === 'function') {
 		initInfiniteScroll();
 	}
-}, null, 'document');
+});
 
 // Function to initialize infinite scroll - can be called multiple times
 function initInfiniteScroll() {

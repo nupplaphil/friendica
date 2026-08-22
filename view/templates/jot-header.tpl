@@ -56,7 +56,7 @@ function enableOnUser(){
 	var ispublic = '{{$ispublic nofilter}}';
 
 
-	window.registerModuleLifecycle('body', function() {
+	window.onDocumentReady('body', function() {
 
 		/* enable editor on focus and click */
 		$("#profile-jot-text").focus(enableOnUser);

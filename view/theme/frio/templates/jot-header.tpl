@@ -227,7 +227,7 @@
 		});
 	}
 
-	window.registerModuleLifecycle('body', initJotHeader, null, 'document');
+	window.onDocumentReady('body', initJotHeader);
 
 	function deleteCheckedItems() {
 		if (confirm('{{$delitems}}')) {

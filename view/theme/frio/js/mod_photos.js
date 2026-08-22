@@ -4,7 +4,7 @@
 
 // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPLv3-or-later
 
-window.registerModuleLifecycle('body', function () {
+window.onDocumentReady('body', function () {
 	$("#contact_allow, #contact_deny, #circle_allow, #circle_deny")
 		.off(".friendicaPhotos")
 		.on("change.friendicaPhotos", function () {
@@ -49,9 +49,9 @@ window.registerModuleLifecycle('body', function () {
 			addToModal(modalUrl);
 		}
 	});
-}, null, 'document');
+});
 
-window.registerModuleLifecycle('#photo-photo', function () {
+window.onWindowLoad('#photo-photo', function () {
 	// Get picture dimensions
 	var pheight = $("#photo-photo img").attr("height") || $("#photo-photo img").height();
 	var pwidth = $("#photo-photo img").attr("width") || $("#photo-photo img").width();
@@ -62,5 +62,5 @@ window.registerModuleLifecycle('#photo-photo', function () {
 		width: pwidth,
 		height: pheight,
 	});
-}, null, 'window');
+});
 // @license-end

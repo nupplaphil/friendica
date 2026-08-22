@@ -6,7 +6,7 @@
 
 var batchConfirmed = false;
 
-window.registerModuleLifecycle('body', function () {
+window.onDocumentReady('body', function () {
 	// Replace the drop contact link of the photo menu
 	// with a confirmation modal.
 	$("body").off(".friendicaContacts").on("click.friendicaContacts", ".contact-photo-menu a", function (e) {
@@ -17,7 +17,7 @@ window.registerModuleLifecycle('body', function () {
 			return false;
 		}
 	});
-}, null, 'document');
+});
 
 /**
  * This function submits the form with the batch action values.

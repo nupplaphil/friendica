@@ -12,7 +12,7 @@
  * It is licensed under the GNU Affero General Public License <http://www.gnu.org/licenses/>
  *
  */
-window.registerModuleLifecycle('body', function () {
+window.onDocumentReady('body', function () {
 	let $body = $("body");
 	$body.off(".friendicaHovercard");
 
@@ -104,7 +104,7 @@ window.registerModuleLifecycle('body', function () {
 		$(this).removeClass("dont-remove-card");
 		$(this).popover("hide");
 	});
-}, null, 'document');
+});
 
 // removes all hover cards
 function removeAllHovercards(event, priorTo) {

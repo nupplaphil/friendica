@@ -53,7 +53,7 @@
 {{/if}}
 
 <script type="text/javascript">
-	window.registerModuleLifecycle('body', function () {
+	window.onDocumentReady('body', function () {
 		$("#id_{{$lname.0}}").focus();
-	}, null, 'document');
+	});
 </script>

@@ -253,15 +253,11 @@
 		return initializeCalendarWidget($calendar);
 	}
 
-	window.registerModuleLifecycle(
+	window.onDocumentReady(
 		'#events-calendar',
 		function (element) {
 			return startCalendarInitialization($(element));
 		},
-		function (element) {
-			destroyCalendarWidget($(element));
-		},
-		'document'
 	);
 })();
 

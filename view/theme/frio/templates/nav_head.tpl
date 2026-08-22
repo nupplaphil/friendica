@@ -6,7 +6,7 @@
   *}}
 
 <script type="text/javascript">
-window.registerModuleLifecycle('body', function() {
+window.onDocumentReady('body', function() {
 	$("#nav-search-input-field").search_autocomplete(baseurl + '/search/acl');
-}, null, 'document');
+});
 </script>
