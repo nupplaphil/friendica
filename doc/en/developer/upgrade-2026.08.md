@@ -14,6 +14,12 @@ Mandatory (Breaking changes)
 
 This section contains backward compatibility breaks, make sure your code is compatible with these entries before upgrading.
 
+- Outbound requests to non-public IP addresses are blocked by default.
+
+   This can affect internal feed servers, mail servers, media proxies and other services using private network addresses.
+   Add required hostnames to `system.allowed_internal_hosts`.
+   The protection can be disabled with `system.block_private_addresses`, but this is not recommended on public nodes.
+
 - The icon library has been changed from Font Awesome to Remix Icons. Theme developers must replace `fa-*` CSS classes with their `ri-*` equivalents.
 
    The Font Awesome dependency has been removed. Any theme or addon that relies on Font Awesome must either include it themselves or migrate to Remix Icons.
