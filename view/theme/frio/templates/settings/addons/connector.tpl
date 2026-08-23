@@ -4,6 +4,7 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
+<details class="panel"{{if $open}} open{{/if}}>
 	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$connector}}-settings-title"><img class="connector{{if !$enabled}}-disabled{{/if}}" src="{{$image}}" /> {{$title}}</summary>
 	<div id="{{$connector}}-settings-content" role="tabpanel" aria-labelledby="{{$connector}}-settings-title">
 		<div class="panel-body">
@@ -34,3 +35,4 @@
 {{/if}}
 		</div>
 	</div>
+</details>
