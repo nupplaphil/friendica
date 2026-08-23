@@ -84,11 +84,6 @@
 
 		}).trigger('change');
 
-		$('.settings-content-block').hide();
-		$('.settings-heading').click(function(){
-			$('.settings-content-block').hide();
-			$(this).next('.settings-content-block').toggle();
-		});
 		$( function() {
 			// check if primary input is touch
 			if(window.matchMedia("(hover: none) and (pointer: coarse)").matches){
