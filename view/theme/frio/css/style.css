@@ -3578,10 +3578,17 @@ details.profile-jot-net[open] summary::before,
 	content: "\ea4e";
 	padding-right: 5px;
 }
-details.panel summary.accordion-toggle::before,
+details.profile-jot-net[open] summary::before,
+details[open].panel summary.accordion-toggle::before,
+.panel .section-subtitle-wrapper .accordion-toggle::before {
+	font-family: remixicon, sans-serif;
+	content: "\ea4e";
+	padding-right: 5px;
+}
 details.profile-jot-net summary::before,
+details.panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle.collapsed::before {
-	font-family: remixicon;
+	font-family: remixicon, sans-serif;
 	content: "\ea6e";
 	padding-right: 5px;
 }
