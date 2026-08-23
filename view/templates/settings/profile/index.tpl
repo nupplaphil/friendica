@@ -35,7 +35,8 @@
 					<h3>{{$l10n.profpic_existing_header}}</h3>
 					<div class="spacer"></div>
 					<div>
-					<a class="btn btn-primary" href="{{$profpiclink}}">{{$l10n.yourphotos}}</a>
+						<a class="btn btn-primary" href="{{$profpiclink}}">{{$l10n.yourphotos}}</a>
+					</div>
 				</div>
 			</div>
 	</details>
