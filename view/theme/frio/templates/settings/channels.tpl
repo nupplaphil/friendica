@@ -37,7 +37,7 @@
 			{{foreach $entries as $e}}
 				<form class="panel" action="{{$baseurl}}/settings/channels" method="post">
 					<details class="panel"{{if $e.open}} open{{/if}}>
-						<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id={{$e.id}}-settings-title">{{$e.label.2}}</summary>
+						<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$e.id}}-settings-title">{{$e.label.2}}</summary>
 						<div id="{{$e.id}}-settings-content" role="tabpanel" aria-labelledby="{{$e.id}}-settings-title">
 							<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 							<input type="hidden" name="id" value="{{$e.id}}">
