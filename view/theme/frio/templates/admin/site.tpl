@@ -231,7 +231,7 @@
 			 */ -->
 			<details class="panel">
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$worker_title}}</summary>
-				<div id="admin-settings-worker-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="admin-settings-worker">
+				<div id="admin-settings-worker" role="tabpanel" aria-labelledby="admin-settings-worker">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$maxloadavg}}
 						{{include file="field_input.tpl" field=$min_memory}}
