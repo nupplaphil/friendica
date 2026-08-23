@@ -14,21 +14,18 @@
 	<details class="settings-section">
 		<summary class="settings-heading">{{$general_settings}}</summary>
 
-		<div id="settings_general_expanded" class="settings-block" style="display: none;">
+		{{include file="field_select.tpl" field=$accept_only_sharer}}
+		{{include file="field_checkbox.tpl" field=$enable_cw}}
+		{{include file="field_checkbox.tpl" field=$enable_smart_shortening}}
+		{{include file="field_checkbox.tpl" field=$simple_shortening}}
+		{{include file="field_checkbox.tpl" field=$attach_link_title}}
+		{{include file="field_checkbox.tpl" field=$api_spoiler_title}}
+		{{include file="field_checkbox.tpl" field=$api_auto_attach}}
+		{{include file="field_select.tpl" field=$article_mode}}
+		{{include file="field_input.tpl" field=$minimum_posting_interval}}
 
-			{{include file="field_select.tpl" field=$accept_only_sharer}}
-			{{include file="field_checkbox.tpl" field=$enable_cw}}
-			{{include file="field_checkbox.tpl" field=$enable_smart_shortening}}
-			{{include file="field_checkbox.tpl" field=$simple_shortening}}
-			{{include file="field_checkbox.tpl" field=$attach_link_title}}
-			{{include file="field_checkbox.tpl" field=$api_spoiler_title}}
-			{{include file="field_checkbox.tpl" field=$api_auto_attach}}
-			{{include file="field_select.tpl" field=$article_mode}}
-			{{include file="field_input.tpl" field=$minimum_posting_interval}}
-
-			<div class="settings-submit-wrapper">
-				<input type="submit" id="general-submit" name="general-submit" class="settings-submit btn btn-default" value="{{$submit}}"/>
-			</div>
+		<div class="settings-submit-wrapper">
+			<input type="submit" id="general-submit" name="general-submit" class="settings-submit btn btn-default" value="{{$submit}}"/>
 		</div>
 	</details>
 </form>
