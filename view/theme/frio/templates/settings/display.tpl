@@ -36,7 +36,7 @@
 				</div>
 			</details>
 
-			<details class="panel"{{if !$theme && !mobile_theme && !theme_config}} open{{/if}}>
+			<details class="panel"{{if !$theme && !$mobile_theme && !$theme_config}} open{{/if}}>
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="content-settings-title">{{$d_cset}}</summary>
 				<div id="content-settings-content" role="tabpanel" aria-labelledby="content-settings">
 					<div class="panel-body">
