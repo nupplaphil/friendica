@@ -86,7 +86,8 @@
 					<div class="panel-body timelines-menu sortable">
 						{{foreach $timelines as $t}}
 							{{include file="field_checkbox.tpl" field=$t.bookmark}}
-						{{/foreach}}						
+						{{/foreach}}
+					</div>
 					<div class="panel-footer">
 						{{include file="field_checkbox.tpl" field=$reset_menu}}
 						<button type="submit" name="submit" class="btn btn-primary" value="{{$submit}}">{{$submit}}</button>
