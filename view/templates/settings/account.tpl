@@ -12,7 +12,7 @@
 <div id="settings-nick-end"></div>
 
 <div id="settings-form">
-	<details class="settings-section" open="true">
+	<details class="settings-section" open>
 		<summary class="settings-heading">{{$h_pass}}</summary>
 		<form id="password-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
