@@ -4,6 +4,7 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
+<details class="panel"{{if $open}} open{{/if}}>
 	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$addon}}-settings-title">{{$title}}</summary>
 	<div id="{{$addon}}-settings-content" role="tabpanel" aria-labelledby="{{$addon}}-settings-title">
 		<div class="panel-body">
@@ -34,3 +35,4 @@
 {{/if}}
 		</div>
 	</div>
+</details>
