@@ -3571,13 +3571,6 @@ details[open].panel::details-content {
 	padding-bottom: 10px;
 }
 
-details[open].panel summary.accordion-toggle::before,
-details.profile-jot-net[open] summary::before,
-.panel .section-subtitle-wrapper .accordion-toggle::before {
-	font-family: remixicon;
-	content: "\ea4e";
-	padding-right: 5px;
-}
 details.profile-jot-net[open] summary::before,
 details[open].panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle::before {
@@ -3591,17 +3584,6 @@ details.panel summary.accordion-toggle::before,
 	font-family: remixicon, sans-serif;
 	content: "\ea6e";
 	padding-right: 5px;
-}
-details.profile-jot-net[open] summary:before,
-.panel .section-subtitle-wrapper .accordion-toggle:before {
-	font-family: remixicon;
-	content: "\ea4e";
-	padding-right: 5px;
-}
-details.profile-jot-net summary:before,
-.panel .section-subtitle-wrapper .accordion-toggle.collapsed:before {
-	font-family: remixicon;
-	content: "\ea6e";
 }
 details.profile-jot-net summary:before {
 	padding-right: 5px;
