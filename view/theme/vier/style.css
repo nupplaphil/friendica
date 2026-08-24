@@ -3187,7 +3187,54 @@ a.mail-list-link {
 	margin-bottom: 10px;
 	margin-top: 20px;
 }
-
+.settings-section,
+.settings-subsection {
+	background-color: #fff;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	padding: 10px;
+}
+	details[open].settings-section,
+	.settings-section:open {
+		padding-bottom: 20px;
+	}
+.settings-heading {
+	font-size: 24.5px;
+	list-style: none;
+}
+.settings-subheading {
+	font-size: 20.5px;
+	list-style: none;
+}
+	details[open].settings-section > summary,
+	details[open].settings-subsection > summary {
+		margin-bottom: 10px;
+	}
+	details.settings-section > summary::before,
+	details.settings-subsection > summary::before {
+		font-family: remixicon;
+		content: "\ea6e";
+		padding-right: 5px;
+	}
+	details[open].settings-section > summary::before,
+	details[open].settings-subsection > summary::before {
+		font-family: remixicon;
+		content: "\ea4e";
+		padding-right: 5px;
+	}
+	details[open].settings-section::details-content,
+	details[open].settings-subsection::details-content {
+		animation: sweep .5s ease-in-out;
+		padding-bottom: 10px;
+	}
+.settings-submit-wrapper {
+	padding-top: 10px;
+	clear: both;
+}
+@keyframes sweep {
+	0% {opacity: 0; margin-left: -10px}
+	100% {opacity: 1; margin-left: 0px}
+}
 .settings-block {
 	border-bottom: 1px solid #898989;
 	/* border: 1px solid #AAA; */
