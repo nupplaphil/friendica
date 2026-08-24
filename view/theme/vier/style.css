@@ -2655,6 +2655,10 @@ ul.tabs li .active, span.pager_current a {
 .field.radio .field_help {
 	margin-left: 0px;
 }
+.settings-section,
+.settings-subsection {
+	background-color: #ededed;
+}
 .settings-section .field.custom label,
 .settings-subsection .field.custom label,
 .settings-section .field.select label,
@@ -3744,6 +3748,7 @@ img.photo-album-photo {
 
 #profile-edit-wrapper {
 	line-height: 30px;
+	margin-bottom: 15px;
 }
 #profile-edit-wrapper .field {
 	margin-bottom:0;
@@ -3756,10 +3761,6 @@ img.photo-album-photo {
 #profile-edit-wrapper #profile-edit-dob select {
 	width:auto;
 }
-#profile-edit-wrapper,
-#profile-edit-wrapper .toggle-section-content {
-	margin-bottom:15px;
-}
 .profile-edit-submit-wrapper {
 	margin-top:15px;
 }
@@ -3768,10 +3769,6 @@ img.photo-album-photo {
 	padding:15px;
 	width:auto;
 	border:1px solid #511919;
-}
-#profile-edit-wrapper .toggle-section-content {
-	background:#ededed;
-	padding:5px;
 }
 
 .btn {

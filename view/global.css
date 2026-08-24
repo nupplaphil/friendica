@@ -535,9 +535,6 @@ summary.settings-subheading > h3 {
   margin: 0;
 }
 
-.settings-heading a:after{
-  content: ' »';
-}
 .settings-widget {
 	line-height: 2.2;
 }
