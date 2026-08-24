@@ -25,7 +25,7 @@
 		{{/if}}
 
 		{{if $storage.form}}
-		<input type="submit" name="submit_save" value="{{$save}}"/>
+		<input type="submit" class="settings-submit btn btn-default" name="submit_save" value="{{$save}}"/>
         {{if $is_writable}}
 				{{if $storage.active}}
 		<input type="submit" class="settings-submit btn btn-default" name="submit_save_set" value="{{$save_reload}}"/>

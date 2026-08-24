@@ -97,7 +97,7 @@
 				</div>
 			{{/if}}
 			{{include file="field_input.tpl" field=$global_directory}}
-			<div class="settings-submit=wrapper"><input type="submit" class="settings-submit btn btn-default" name="republish_directory" value="{{$republish}}"/></div>
+			<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="republish_directory" value="{{$republish}}"/></div>
 			{{include file="field_checkbox.tpl" field=$newuser_private}}
 			{{include file="field_checkbox.tpl" field=$enotify_no_content}}
 			{{include file="field_checkbox.tpl" field=$private_addons}}
@@ -220,7 +220,7 @@
 			{{include file="field_input.tpl" field=$max_posts_per_author}}
 			{{include file="field_input.tpl" field=$sharer_interaction_days}}
 		</div>
-		<div class="settings-submit-wrapper"><input type="submit" class="setting-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
+		<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_site" value="{{$submit}}"/></div>
 		</details>
 
 	</form>

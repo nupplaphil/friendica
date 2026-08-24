@@ -180,7 +180,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">>{{$h_advn}}</summary>
+		<summary class="settings-heading">{{$h_advn}}</summary>
 		<form id="advanced-account-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<p id="settings-advanced-desc">{{$h_descadvn}}</p>

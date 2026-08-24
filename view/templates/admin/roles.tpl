@@ -85,7 +85,7 @@
 				{{/foreach}}
 			</select>
 
-			<div class="settings-submit-wrapper"><input type="submit" class="settings-submit bt btn-default" name="page_roles" value="{{$assign_button}}"></div>
+			<div class="settings-submit-wrapper"><input type="submit" class="settings-submit btn btn-default" name="page_roles" value="{{$assign_button}}"></div>
 		</form>
 	{{else}}
 		<p>{{$no_assignable_users}}</p>
