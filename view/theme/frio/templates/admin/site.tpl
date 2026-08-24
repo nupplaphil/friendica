@@ -19,7 +19,6 @@
 	<div class="panel-group panel-group-settings" id="admin-settings" role="tablist" aria-multiselectable="true">
 		<form action="{{$baseurl}}/admin/site" method="post">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
-			<input type="hidden" name="active_panel" value="">
 			{{* General Information *}}
 			<details class="panel">
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$general_info}}</h2></summary>
