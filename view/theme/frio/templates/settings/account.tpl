@@ -19,8 +19,8 @@
 			<form action="settings/account/password" method="post" autocomplete="off" class="panel" >
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'password'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_pass}}</summary>
-					<div id="password-settings" role="tabpanel" aria-labelledby="password-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$h_pass}}</h2></summary>
+					<div id="password-settings">
 						<div class="panel-body">
 							{{include file="field_password.tpl" field=$password1}}
 							{{include file="field_password.tpl" field=$password2}}
@@ -37,8 +37,8 @@
 			<form action="settings/account/basic" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'basic'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_basic}}</summary>
-					<div id="basic-settings" role="tabpanel" aria-labelledby="basic-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$h_basic}}</h2></summary>
+					<div id="basic-settings">
 						<div class="panel-body">
 							{{include file="field_input.tpl" field=$username}}
 							{{include file="field_input.tpl" field=$email}}
@@ -65,8 +65,8 @@
 			<form action="settings/account/privacy" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'privacy'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_prv}}</summary>
-					<div id="privacy-settings" role="tabpanel" aria-labelledby="privacy-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$h_prv}}</h2></summary>
+					<div id="privacy-settings">
 						<div class="panel-body">
 							{{include file="field_input.tpl" field=$maxreq}}
 
@@ -105,8 +105,8 @@
 			<form action="settings/account/expire" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'expire'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$expire.label}}</summary>
-					<div id="expire-settings" role="tabpanel" aria-labelledby="expire-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$expire.label}}</h2></summary>
+					<div id="expire-settings">
 						<div class="panel-body">
 							{{include file="field_input.tpl" field=$expire.days}}
 
@@ -126,8 +126,8 @@
 			<form action="settings/account/notification" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'notification'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_not}}</summary>
-					<div id="notification-settings" role="tabpanel" aria-labelledby="notification-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$h_not}}</h2></summary>
+					<div id="notification-settings">
 						<div id="settings-notifications" class="panel-body">
 
 							<div id="settings-notification-desc">{{$lbl_not}}</div>
@@ -211,8 +211,8 @@
 			<form action="settings/account/advanced" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel"{{if $open == 'advanced'}} open{{/if}}>
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$h_advn}}</summary>
-					<div id="advanced-account-settings" role="tabpanel" aria-labelledby="advanced-account-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$h_advn}}</h2></summary>
+					<div id="advanced-account-settings">
 						<div class="panel-body">
 							<div id="settings-pagetype-desc">{{$h_descadvn}}</div>
 
@@ -229,8 +229,8 @@
 			<form action="settings/account/relocate" method="post" autocomplete="off" class="panel">
 				<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 				<details class="panel">
-					<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$relocate}}</summary>
-					<div id="relocate-settings" role="tabpanel" aria-labelledby="relocate-settings">
+					<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$relocate}}</h2></summary>
+					<div id="relocate-settings">
 						<div class="panel-body">
 							<div id="settings-relocate-desc">{{$relocate_text}}</div>
 						</div>

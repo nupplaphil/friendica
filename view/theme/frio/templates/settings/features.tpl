@@ -12,8 +12,8 @@
 		<div class="panel-group panel-group-settings" id="settings" role="tablist" aria-multiselectable="true">
 			{{foreach $features as $g => $f}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab"  id="{{$g}}-settings-title">{{$f.0}}</summary>
-				<div id="{{$g}}-settings-content" role="tabpanel" aria-labelledby="{{$g}}-settings-title">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"  id="{{$g}}-settings-title"><h2>{{$f.0}}</h2></summary>
+				<div id="{{$g}}-settings-content">
 					<div class="panel-body {{if $g == $network_mode}}network sortable{{/if}}">
 						{{if $g == $network_mode}}
 						<input type="hidden" id="feature_widgetorder" name="feature_widgetorder" value=""/>

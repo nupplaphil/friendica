@@ -16,7 +16,7 @@
 <div id="profile-edit-wrapper">
 	<!-- Profile picture -->
 	<details class="settings-section" {{if $change_profile_picture}}open{{/if}}>
-		<summary class="settings-heading">{{$l10n.picture_section}}</summary>
+		<summary class="settings-heading"><h2>{{$l10n.picture_section}}</h2></summary>
 			<p id="profpic-intro-description">{{$l10n.profpic_intro}}</p>
 			<div class="settings-row">
 				<div id="profpic-left">
@@ -46,7 +46,7 @@
 
 		<!-- Basic information -->
 		<details class="settings-section">
-			<summary class="settings-heading">{{$l10n.personal_section}}</summary>
+			<summary class="settings-heading"><h2>{{$l10n.personal_section}}</h2></summary>
             {{include file="field_input.tpl" field=$username}}
 
             {{include file="field_textarea.tpl" field=$about}}
@@ -75,7 +75,7 @@
 		</details>
 		<!-- About you -->
 		<details class="settings-section">
-			<summary class="settings-heading">{{$l10n.location_section}}</summary>
+			<summary class="settings-heading"><h2>{{$l10n.location_section}}</h2></summary>
             {{include file="field_input.tpl" field=$address}}
 
             {{include file="field_input.tpl" field=$locality}}
@@ -105,7 +105,7 @@
 		</details>
 		<!-- Interests -->
 		<details class="settings-section">
-			<summary class="settings-heading">{{$l10n.custom_fields_section}}</summary>
+			<summary class="settings-heading"><h2>{{$l10n.custom_fields_section}}</h2></summary>
             {{$custom_fields_description nofilter}}
 			<div id="profile-custom-fields">
                 {{foreach $custom_fields as $custom_field}}

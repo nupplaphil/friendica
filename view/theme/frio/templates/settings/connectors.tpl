@@ -15,8 +15,8 @@
 		<form action="settings/connectors" method="post" autocomplete="off" class="panel">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="content-settings-title">{{$general_settings}}</summary>
-				<div id="content-settings-content" role="tabpanel" aria-labelledby="content-settings-title">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="content-settings-title"><h2>{{$general_settings}}</h2></summary>
+				<div id="content-settings-content">
 					<div class="panel-body">
 						{{include file="field_select.tpl" field=$accept_only_sharer}}
 
@@ -46,8 +46,8 @@
 		<form action="settings/connectors" method="post" autocomplete="off" class="panel">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="mail-settings-title"><i class="ri ri-mail-line"></i> {{$h_mail}}</summary>
-				<div id="mail-settings-content" role="tabpanel" aria-labelledby="mail-settings-title">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="mail-settings-title"><h2><i class="ri ri-mail-line"></i> {{$h_mail}}</h2></summary>
+				<div id="mail-settings-content">
 					<div class="panel-body">
 				{{if $mail_disabled}}
 						<p>{{$mail_disabled}}</p>

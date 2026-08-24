@@ -13,7 +13,7 @@
 
 <div id="settings-form">
 	<details class="settings-section" open>
-		<summary class="settings-heading">{{$h_pass}}</summary>
+		<summary class="settings-heading"><h2>{{$h_pass}}</h2></summary>
 		<form id="password-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_password.tpl" field=$password1}}
@@ -27,7 +27,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$h_basic}}</summary>
+		<summary class="settings-heading"><h2>{{$h_basic}}</h2></summary>
 		<form id="basic-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_input.tpl" field=$username}}
@@ -51,7 +51,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$h_prv}}</summary>
+		<summary class="settings-heading"><h2>{{$h_prv}}</h2></summary>
 		<form id="privacy-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_input.tpl" field=$maxreq}}
@@ -85,7 +85,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$expire.label}}</summary>
+		<summary class="settings-heading"><h2>{{$expire.label}}</h2></summary>
 		<form id="expire-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<div id="settings-expiry">
@@ -103,7 +103,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$h_not}}</summary>
+		<summary class="settings-heading"><h2>{{$h_not}}</h2></summary>
 		<form id="notification-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<div id="settings-notifications">
@@ -180,7 +180,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$h_advn}}</summary>
+		<summary class="settings-heading"><h2>{{$h_advn}}</h2></summary>
 		<form id="advanced-account-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<p id="settings-advanced-desc">{{$h_descadvn}}</p>
@@ -194,7 +194,7 @@
 	</details>
 
 	<details class="settings-section">
-		<summary class="settings-heading">{{$relocate}}</summary>
+		<summary class="settings-heading"><h2>{{$relocate}}</h2></summary>
 		<form id="relocate-settings" class="settings-content-block" action="settings" method="post" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			<p id="settings-pagetype-desc">{{$relocate_text}}</p>

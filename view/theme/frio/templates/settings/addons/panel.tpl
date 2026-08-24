@@ -5,8 +5,8 @@
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
 <details class="panel"{{if $open}} open{{/if}}>
-	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="{{$addon}}-settings-title">{{$title}}</summary>
-	<div id="{{$addon}}-settings-content" role="tabpanel" aria-labelledby="{{$addon}}-settings-title">
+	<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="{{$addon}}-settings-title"><h2>{{$title}}</h2></summary>
+	<div id="{{$addon}}-settings-content">
 		<div class="panel-body">
             {{$html nofilter}}
 		</div>

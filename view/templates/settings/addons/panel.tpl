@@ -4,7 +4,7 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
-<summary class="settings-heading">{{$title}}</summary>
+<summary class="settings-heading"><h2>{{$title}}</h2></summary>
 	{{$html nofilter}}
 {{if $submit}}
 	<div class="settings-submit-wrapper panel-footer">

@@ -8,7 +8,7 @@
 	<h1>{{$l10n.title}}</h1>
 	<p>{{$l10n.intro}}</p>
 	<details class="settings-section">
-		<summary class="settings-heading">{{$l10n.addtitle}}</summary>
+		<summary class="settings-heading"><h2>{{$l10n.addtitle}}</h2></summary>
 		<form action="{{$baseurl}}/settings/channels" method="post">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{include file="field_input.tpl" field=$label}}
@@ -32,7 +32,7 @@
 
 	{{if $entries}}
 	<details class="settings-section">
-		<summary class="settings-heading">{{$l10n.currenttitle}}</summary>
+		<summary class="settings-heading"><h2>{{$l10n.currenttitle}}</h2></summary>
 		<form action="{{$baseurl}}/settings/channels" method="post">
 			<input type="hidden" name="form_security_token" value="{{$form_security_token}}">
 			{{foreach $entries as $e}}

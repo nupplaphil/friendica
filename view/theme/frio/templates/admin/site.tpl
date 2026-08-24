@@ -22,8 +22,8 @@
 			<input type="hidden" name="active_panel" value="">
 			{{* General Information *}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$general_info}}</summary>
-				<div id="admin-settings-general" role="tabpanel" aria-labelledby="admin-settings-general">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$general_info}}</h2></summary>
+				<div id="admin-settings-general">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$sitename}}
 						{{include file="field_input.tpl" field=$sender_email}}
@@ -49,8 +49,8 @@
 			 *    Registration
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$registration}}</summary>
-				<div id="admin-settings-registration" role="tabpanel" aria-labelledby="admin-settings-registration">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$registration}}</h2></summary>
+				<div id="admin-settings-registration">
 					<div class="panel-body">
 						{{include file="field_textarea.tpl" field=$register_text}}
 						{{include file="field_select.tpl" field=$register_policy}}
@@ -77,8 +77,8 @@
 				 *    File upload
 				 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$upload}}</summary>
-				<div id="admin-settings-upload" role="tabpanel" aria-labelledby="admin-settings-upload">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$upload}}</h2></summary>
+				<div id="admin-settings-upload">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$maximagesize}}
 						{{include file="field_input.tpl" field=$maximagelength}}
@@ -97,8 +97,8 @@
 			 *    Corporate
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$corporate}}</summary>
-				<div id="admin-settings-corporate" role="tabpanel" aria-labelledby="admin-settings-corporate">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$corporate}}</h2></summary>
+				<div id="admin-settings-corporate">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$allowed_sites}}
 						{{include file="field_checkbox.tpl" field=$block_public}}
@@ -151,8 +151,8 @@
 			 *    Corporate
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$advanced}}</summary>
-				<div id="admin-settings-advanced" role="tabpanel" aria-labelledby="admin-settings-advanced">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$advanced}}</h2></summary>
+				<div id="admin-settings-advanced">
 					<div class="panel-body">
 						{{include file="field_checkbox.tpl" field=$verifyssl}}
 						{{include file="field_input.tpl" field=$proxy}}
@@ -175,8 +175,8 @@
 			 *    Contact Directory
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$portable_contacts}}</summary>
-				<div id="admin-settings-contacts" role="tabpanel" aria-labelledby="admin-settings-cocontactsrporate">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$portable_contacts}}</h2></summary>
+				<div id="admin-settings-contacts">
 					<div class="panel-body">
 						{{include file="field_select.tpl" field=$contact_discovery}}
 						{{include file="field_checkbox.tpl" field=$update_active_contacts}}
@@ -197,8 +197,8 @@
 			 *    Performance
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$performance}}</summary>
-				<div id="admin-settings-performance" role="tabpanel" aria-labelledby="admin-settings-performance">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$performance}}</h2></summary>
+				<div id="admin-settings-performance">
 					<div class="panel-body">
 						{{include file="field_checkbox.tpl" field=$compute_circle_counts}}
 						{{include file="field_checkbox.tpl" field=$only_tag_search}}
@@ -230,8 +230,8 @@
 			 *    Worker
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$worker_title}}</summary>
-				<div id="admin-settings-worker" role="tabpanel" aria-labelledby="admin-settings-worker">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$worker_title}}</h2></summary>
+				<div id="admin-settings-worker">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$maxloadavg}}
 						{{include file="field_input.tpl" field=$min_memory}}
@@ -254,8 +254,8 @@
 			 *    Relay
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$relay_title}}</summary>
-				<div id="admin-settings-relay" role="tabpanel" aria-labelledby="admin-settings-relay">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$relay_title}}</h2></summary>
+				<div id="admin-settings-relay">
 					<div class="panel-body">
 						{{if $relay_list}}
 							<p>{{$relay_list_title}}</p>
@@ -289,8 +289,8 @@
 			 *    Channel
 			 */ -->
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$channel_title}}</summary>
-				<div id="admin-settings-channel-collapse" role="tabpanel" aria-labelledby="admin-settings-channel">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$channel_title}}</h2></summary>
+				<div id="admin-settings-channel-collapse">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$engagement_hours}}
 						{{include file="field_input.tpl" field=$engagement_post_limit}}
@@ -306,8 +306,8 @@
 		</form>
 
 		<details class="panel">
-			<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$relocate}}</summary>
-			<div id="admin-settings-relocate" role="tabpanel" aria-labelledby="admin-settings-relocate">
+			<summary class="section-subtitle-wrapper panel-heading accordion-toggle"><h2>{{$relocate}}</h2></summary>
+			<div id="admin-settings-relocate">
 				<div class="panel-body">
 					<p>
 						{{$relocate_msg}}

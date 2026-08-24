@@ -12,7 +12,7 @@
 
 	{{foreach $features as $g => $f}}
 	<details class="settings-section">
-	<summary class="settings-heading">{{$f.0}}</summary>
+	<summary class="settings-heading"><h2>{{$f.0}}</h2></summary>
 
 	<div class="settings-content-block">
 		{{foreach $f.1 as $fcat}}

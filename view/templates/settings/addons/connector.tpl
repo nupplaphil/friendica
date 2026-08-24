@@ -4,7 +4,7 @@
   *
   * SPDX-License-Identifier: AGPL-3.0-or-later
   *}}
-<summary class="settings-heading"><img class="connector{{if !$enabled}}-disabled{{/if}}" src="{{$image}}" /><span class="connector">{{$title}}</span></summary>
+<summary class="settings-heading"><h2><img class="connector{{if !$enabled}}-disabled{{/if}}" src="{{$image}}" /><span class="connector">{{$title}}</span></h2></summary>
 	{{$html nofilter}}
 	<div class="clear"></div>
 {{if $submit}}

@@ -3566,6 +3566,13 @@ summary.accordion-toggle {
 	margin-top: -10px;
 	list-style: none;
 }
+summary.accordion-toggle > h2,
+summary.accordion-toggle > h3 {
+	display: inline;
+	font-size: inherit;
+	font-weight: inherit;
+	margin: 0;
+}
 details[open].panel::details-content {
 	animation: sweep .5s ease-in-out;
 	padding-bottom: 10px;

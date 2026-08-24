@@ -28,8 +28,8 @@
 	<div class="panel-group panel-group-settings" id="profile-photo-edit-wrapper" role="tablist" aria-multiselectable="false">
 		{{* Change profile picture *}}
 		<details class="panel"{{if $change_profile_picture}} open{{/if}}>
-			<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="photo-upload">{{$l10n.profpic_header}}</summary>
-			<div id="photo-upload-collapse" role="tabpanel" aria-labelledby="photo-upload">
+			<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="photo-upload"><h2>{{$l10n.profpic_header}}</h2></summary>
+			<div id="photo-upload-collapse">
 				<div class="panel-body">
 					<p id="profpic-intro-description">{{$l10n.profpic_intro}}</p>
 					<div class="row">
@@ -64,9 +64,9 @@
 		<div class="panel-group panel-group-settings" id="profile-edit-wrapper" role="tablist" aria-multiselectable="false">
 			{{* The personal settings *}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="personal">{{$l10n.personal_section}}</summary>
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="personal"><h2>{{$l10n.personal_section}}</h2></summary>
 				{{* for the $detailed_profile we use bootstraps collapsable panel-groups to have expandable groups *}}
-				<div id="personal-collapse" role="tabpanel" aria-labelledby="personal">
+				<div id="personal-collapse">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$username}}
 
@@ -84,8 +84,8 @@
 
 			{{* The location settings *}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="location">{{$l10n.location_section}}</summary>
-				<div id="location-collapse" role="tabpanel" aria-labelledby="location">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="location"><h2>{{$l10n.location_section}}</h2></summary>
+				<div id="location-collapse">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$address}}
 
@@ -118,8 +118,8 @@
 
 			{{* The miscellaneous other settings *}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="miscellaneous">{{$l10n.miscellaneous_section}}</summary>
-				<div id="miscellaneous-collapse" role="tabpanel" aria-labelledby="miscellaneous">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="miscellaneous"><h2>{{$l10n.miscellaneous_section}}</h2></summary>
+				<div id="miscellaneous-collapse">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$homepage}}
 
@@ -139,8 +139,8 @@
 
 			{{* The miscellaneous other settings *}}
 			<details class="panel">
-				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab" id="custom-fields">{{$l10n.custom_fields_section}}</summary>
-				<div id="custom-fields-collapse" role="tabpanel" aria-labelledby="custom-fields">
+				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" id="custom-fields"><h2>{{$l10n.custom_fields_section}}</h2></summary>
+				<div id="custom-fields-collapse">
 					<div class="panel-body">
 						{{$custom_fields_description nofilter}}
 						<div id="profile-custom-fields">

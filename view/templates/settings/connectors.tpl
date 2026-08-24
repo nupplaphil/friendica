@@ -12,7 +12,7 @@
 <form action="settings/connectors" method="post" autocomplete="off">
 	<input type='hidden' name='form_security_token' value='{{$form_security_token}}'>
 	<details class="settings-section">
-		<summary class="settings-heading">{{$general_settings}}</summary>
+		<summary class="settings-heading"><h2>{{$general_settings}}</h2></summary>
 
 		{{include file="field_select.tpl" field=$accept_only_sharer}}
 		{{include file="field_checkbox.tpl" field=$enable_cw}}
@@ -34,7 +34,7 @@
 <form action="settings/connectors" method="post" autocomplete="off">
 	<input type='hidden' name='form_security_token' value='{{$form_security_token}}'>
 	<details class="settings-section">
-		<summary class="settings-heading"><i class="ri ri-mail-line"></i> {{$h_mail}}</summary>
+		<summary class="settings-heading"><h2><i class="ri ri-mail-line"></i> {{$h_mail}}</h2></summary>
 
     	{{if $mail_disabled}}
 			<p>{{$mail_disabled}}</p>

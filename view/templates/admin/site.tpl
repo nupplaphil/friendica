@@ -18,7 +18,7 @@
 	<form action="{{$baseurl}}/admin/site" method="post">
 		<input type='hidden' name='form_security_token' value='{{$form_security_token}}'>
 		<details class="settings-section">
-		<summary class="settings-heading">{{$general_info}}</summary>
+		<summary class="settings-heading"><h2>{{$general_info}}</h2></summary>
 		<div id="admin-settings-general">
 			{{include file="field_input.tpl" field=$sitename}}
 			{{include file="field_input.tpl" field=$sender_email}}
@@ -39,7 +39,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$registration}}</summary>
+		<summary class="settings-heading"><h2>{{$registration}}</h2></summary>
 		<div id="admin-settings-registration">
 			{{include file="field_textarea.tpl" field=$register_text}}
 			{{include file="field_select.tpl" field=$register_policy}}
@@ -57,7 +57,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$upload}}</summary>
+		<summary class="settings-heading"><h2>{{$upload}}</h2></summary>
 		<div id="admin-settings-upload">
 			{{include file="field_input.tpl" field=$maximagesize}}
 			{{include file="field_input.tpl" field=$maximagelength}}
@@ -68,7 +68,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$corporate}}</summary>
+		<summary class="settings-heading"><h2>{{$corporate}}</h2></summary>
 		<div id="admin-settings-corporate">
 			{{include file="field_input.tpl" field=$allowed_sites}}
 			{{include file="field_checkbox.tpl" field=$block_public}}
@@ -113,7 +113,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$advanced}}</summary>
+		<summary class="settings-heading"><h2>{{$advanced}}</h2></summary>
 		<div id="admin-settings-advanced">
 			{{include file="field_checkbox.tpl" field=$verifyssl}}
 			{{include file="field_input.tpl" field=$proxy}}
@@ -129,7 +129,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$portable_contacts}}</summary>
+		<summary class="settings-heading"><h2>{{$portable_contacts}}</h2></summary>
 		<div id="admin-settings-contacts">
 			{{include file="field_select.tpl" field=$contact_discovery}}
 			{{include file="field_checkbox.tpl" field=$update_active_contacts}}
@@ -143,7 +143,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$performance}}</summary>
+		<summary class="settings-heading"><h2>{{$performance}}</h2></summary>
 		<div id="admin-settings-performance">
 			{{include file="field_checkbox.tpl" field=$compute_circle_counts}}
 			{{include file="field_checkbox.tpl" field=$only_tag_search}}
@@ -168,7 +168,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$worker_title}}</summary>
+		<summary class="settings-heading"><h2>{{$worker_title}}</h2></summary>
 		<div id="admin-settings-worker">
 			{{include file="field_input.tpl" field=$maxloadavg}}
 			{{include file="field_input.tpl" field=$min_memory}}
@@ -184,7 +184,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$relay_title}}</summary>
+		<summary class="settings-heading"><h2>{{$relay_title}}</h2></summary>
 		<div id="admin-settings-relay">
 			{{if $relay_list}}
 			<p>{{$relay_list_title}}</p>
@@ -212,7 +212,7 @@
 		</details>
 
 		<details class="settings-section">
-		<summary class="settings-heading">{{$channel_title}}</summary>
+		<summary class="settings-heading"><h2>{{$channel_title}}</h2></summary>
 		<div id="admin-settings-channel">
 			{{include file="field_input.tpl" field=$engagement_hours}}
 			{{include file="field_input.tpl" field=$engagement_post_limit}}
@@ -227,7 +227,7 @@
 
 	<div>
 		<details class="settings-section">
-		<summary class="settings-heading">{{$relocate}}</summary>
+		<summary class="settings-heading"><h2>{{$relocate}}</h2></summary>
 		<div id="admin-settings-relocate">
 			<p>{{$relocate_msg}}</p>
 			<p><code>{{$relocate_cmd}}</code></p>
