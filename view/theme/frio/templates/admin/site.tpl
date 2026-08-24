@@ -290,7 +290,7 @@
 			 */ -->
 			<details class="panel">
 				<summary class="section-subtitle-wrapper panel-heading accordion-toggle" role="tab">{{$channel_title}}</summary>
-				<div id="admin-settings-channel-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="admin-settings-channel">
+				<div id="admin-settings-channel-collapse" role="tabpanel" aria-labelledby="admin-settings-channel">
 					<div class="panel-body">
 						{{include file="field_input.tpl" field=$engagement_hours}}
 						{{include file="field_input.tpl" field=$engagement_post_limit}}

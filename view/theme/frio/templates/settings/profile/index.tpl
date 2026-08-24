@@ -135,7 +135,7 @@
 						<button type="submit" name="submit" class="btn btn-primary">{{$l10n.submit}}</button>
 					</div>
 				</div>
-			</div>
+			</details>
 
 			{{* The miscellaneous other settings *}}
 			<details class="panel">
