@@ -20,13 +20,13 @@ if (!Element.prototype.matches) {
 		};
 }
 
-window.ModuleLifecycleReadyEvent = Object.freeze({
+const ModuleLifecycleReadyEvent = Object.freeze({
 	DOCUMENT: 'document',
 	WINDOW: 'window'
 });
 
-function registerModuleLifecycle(target, initialize, readyEvent) {
-	if (typeof target === 'undefined' || target === null) {
+const registerModuleLifecycle = function (target, initialize, readyEvent) {
+	if (typeof target !== 'string' || target === '') {
 		return null;
 	}
 
@@ -50,57 +50,36 @@ function registerModuleLifecycle(target, initialize, readyEvent) {
 		}
 	})();
 
-	const registryKey = String(target) + '::' + initializerFingerprint + '::' + String(readyEvent || window.ModuleLifecycleReadyEvent.DOCUMENT);
+	const registryKey = target + '::' + initializerFingerprint + '::' + readyEvent;
 	if (window.__friendica_unpoly_lifecycle_registry.has(registryKey)) {
 		return window.__friendica_unpoly_lifecycle_registry.get(registryKey);
 	}
 
-	const normalizeElement = function (element) {
-		if (!element) {
-			return null;
-		}
-		if (typeof jQuery !== 'undefined' && element instanceof jQuery) {
-			return element.get(0);
-		}
-		if (element && typeof element.get === 'function' && element.jquery) {
-			return element.get(0);
-		}
-		return element;
-	};
-
-	const runInitialize = function (element) {
-		const normalized = normalizeElement(element);
-		if (!normalized || typeof initialize !== 'function') {
-			return null;
-		}
-		return initialize(normalized);
-	};
-
 	const refresh = function () {
-		const targetElement = typeof target === 'string' ? document.querySelector(target) : normalizeElement(target);
-		if (!targetElement) {
+		const targetElement = document.querySelector(target);
+		if (!targetElement || typeof initialize !== 'function') {
 			return null;
 		}
-		return runInitialize(targetElement);
+		return initialize(targetElement);
 	};
 
 	if (window.addEventListener) {
 		window.addEventListener('spa:navigate', refresh, { passive: true });
-		
-		if (readyEvent === window.ModuleLifecycleReadyEvent.DOCUMENT || typeof readyEvent === 'undefined') {
-			if (spaEnabled) {
-				window.addEventListener('spa:document:ready', refresh, { passive: true });
-			} else {
-				$(document).ready(refresh);
-			}
-		} else {
+
+		if (readyEvent === ModuleLifecycleReadyEvent.WINDOW) {
 			if (spaEnabled) {
 				window.addEventListener('spa:window:load', refresh, { passive: true });
 			} else {
 				$(window).load(refresh);
 			}
+		} else {
+			if (spaEnabled) {
+				window.addEventListener('spa:document:ready', refresh, { passive: true });
+			} else {
+				$(document).ready(refresh);
+			}
 		}
-		
+
 		if ((document.readyState === 'complete' || document.readyState === 'interactive') && !window.__spa_reinit_phase) {
 			setTimeout(refresh, 0);
 		}
@@ -108,14 +87,14 @@ function registerModuleLifecycle(target, initialize, readyEvent) {
 
 	window.__friendica_unpoly_lifecycle_registry.set(registryKey, null);
 	return null;
-}
+};
 
 window.onDocumentReady = function (target, initialize) {
-	return registerModuleLifecycle(target, initialize, window.ModuleLifecycleReadyEvent.DOCUMENT);
+	return registerModuleLifecycle(target, initialize, ModuleLifecycleReadyEvent.DOCUMENT);
 };
 
 window.onWindowLoad = function (target, initialize) {
-	return registerModuleLifecycle(target, initialize, window.ModuleLifecycleReadyEvent.WINDOW);
+	return registerModuleLifecycle(target, initialize, ModuleLifecycleReadyEvent.WINDOW);
 };
 
 function resizeIframe(obj) {

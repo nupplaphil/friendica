@@ -253,12 +253,9 @@
 		return initializeCalendarWidget($calendar);
 	}
 
-	window.onDocumentReady(
-		'#events-calendar',
-		function (element) {
-			return startCalendarInitialization($(element));
-		},
-	);
+	window.onDocumentReady('#events-calendar', function (element) {
+		return startCalendarInitialization($(element));
+	});
 })();
 
 // loads the event into a modal
