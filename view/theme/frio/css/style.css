@@ -217,7 +217,7 @@ ul#nav-user-menu {
 	#nav-profile-link:focus {
 		background-color: $nav_icon_hover_color;
 	}
-#nav-delegation-link {										
+#nav-delegation-link {
 	background-color: $nav_bg;
 	color: $nav_icon_color;
 	margin: 10px;
@@ -233,7 +233,7 @@ ul#nav-user-menu {
 	#nav-delegation-link:focus {
 		background-color: $background_color;
 		color: $font_color;
-	}	
+	}
 	/* prevent XMPP chat add-on button appearing in modals and iframes */
 	body.minimal #toggle-controlbox {
 		display: none;
@@ -317,7 +317,7 @@ ul#nav-user-menu {
   	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 #nav-user-linkmenu::after {
-	content: '';						
+	content: '';
 	position: fixed;
 	right: 0;
 	top: 50px;
@@ -823,6 +823,10 @@ nav.navbar .nav > li > button:focus {
 	text-decoration: none;
 	text-align: center;
 	max-height: 50px;
+}
+#topbar-first .topbar-nav .nav-segment > a {
+  padding-left: 35px;
+  padding-right: 35px;
 }
 #topbar-first .nav-segment .nav-notification {
 	position: absolute;
@@ -2368,9 +2372,9 @@ body.show-action-labels .action-label {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr min-content;	/* collapse column if checkbox is hidden */
 	grid-auto-rows: 1fr min-height;							/* collapse row if not an event */
-	 grid-template-areas: 
+	 grid-template-areas:
 		"comments shares likes dislikes more delete"
-		"attend . decline . maybe ."; 
+		"attend . decline . maybe .";
 	/* grid bug fix */
 	width: 100%;
 	min-width: 0;
@@ -2828,7 +2832,7 @@ input[type="range"].form-control {
 }
 body.show-nav-labels #search-box {
 	padding-right: 0;
-	
+
 	@media(width < 792px) {
 		& #nav-search-input-field {
 			width: 100px !important;
@@ -4638,6 +4642,12 @@ div.login-form, .login-content-wrapper,
 		left: 24px;
 	}
 
+	#topbar-first .topbar-nav .nav-segment > a {
+		padding-left: 5px;
+		padding-right: 5px;
+		min-width: 50px;
+	}
+
 	/*
 		Prevent automatic zoom on input focus on iOS
 		see https://stackoverflow.com/a/16255670
@@ -4717,5 +4727,5 @@ div.login-form, .login-content-wrapper,
 	body.show-nav-labels .nav-label,
 	body.show-action-labels .action-label {
 	  	font-size: 8px; /* alternatively display:none; this is really small! */
-	}	
+	}
 }
