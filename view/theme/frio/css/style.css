@@ -231,8 +231,7 @@ ul#nav-user-menu {
 	}
 	#nav-delegation-link:hover,
 	#nav-delegation-link:focus {
-		background-color: $background_color;
-		color: $font_color;
+		background-color: $nav_icon_hover_color;
 	}
 	/* prevent XMPP chat add-on button appearing in modals and iframes */
 	body.minimal #toggle-controlbox {
