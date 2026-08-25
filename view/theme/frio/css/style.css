@@ -611,7 +611,7 @@ header #banner {
 header #banner #logo-img,
 .navbar-brand #logo-img {
 	font-size: 36px;
-	color: White;
+	color: $nav_icon_color;
 }
 
 #navbrand-container {
