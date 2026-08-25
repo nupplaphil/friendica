@@ -408,15 +408,12 @@ function initTheme() {
 	// Comment form submit - only register once to prevent duplicate submissions
 	if (typeof frioCommentFormHandlerRegistered === 'undefined') {
 		frioCommentFormHandlerRegistered = true;
-		console.log('[Theme] Registering comment form submit handler (once)');
 		$body.off("submit.frio-theme", ".comment-edit-form").on("submit.frio-theme", ".comment-edit-form", function (e) {
-			console.log('[Theme] Comment form submit handler triggered for form with data-item-id:', $(this).data("item-id"));
 			let $form = $(this);
 			let id = $form.data("item-id");
 
 			// Compose page form exception: id is always 0 and form must not be submitted asynchronously
 			if (id === 0) {
-				console.log('[Theme] Comment form: Compose page (id=0), skipping async submit');
 				return;
 			}
 
@@ -426,15 +423,12 @@ function initTheme() {
 
 			unpause();
 			commentBusy = true;
-			console.log('[Theme] Comment form: Starting AJAX post for id:', id);
 			showPosting();
 
 			$.post("item", $form.serialize(), "json")
 				.done(function (data) {
 					showProcessing();
-					console.log('[Theme] Comment form: AJAX response received for id:', id);
 					if (data.success) {
-						console.log('[Theme] Comment form: Comment posted successfully');
 						$("#comment-edit-wrapper-" + id).hide();
 						let $textarea = $("#comment-edit-text-" + id);
 						$textarea.val("");
@@ -448,19 +442,15 @@ function initTheme() {
 						updateItem(id, data.guid ?? null);
 					}
 					if (data.reload) {
-						console.log('[Theme] Comment form: Server requested reload');
 						window.location.href = data.reload;
 					}
 				})
 				.always(function () {
-					console.log('[Theme] Comment form: AJAX completed, resetting button and commentBusy');
 					hideLoading();
 					commentBusy = false;
 					$commentSubmit.button("reset");
 				});
 		});
-	} else {
-		console.log('[Theme] Comment form submit handler already registered, skipping duplicate registration');
 	}
 
 	try {
@@ -939,7 +929,6 @@ function hasClass(elem, cls) {
 // submit: the id of the submitbutton
 function sendOnCtrlEnter(e, submit) {
 	if ((e.ctrlKey || e.metaKey) && (e.keyCode == 13 || e.keyCode == 10)) {
-		console.log("Ctrl + Enter");
 		showPosting();
 		$("#" + submit).trigger('click');
 		hideLoading();
