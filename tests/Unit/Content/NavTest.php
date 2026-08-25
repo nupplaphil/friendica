@@ -191,17 +191,6 @@ class NavTest extends TestCase
 		self::assertSame('calendar', $nav['calendar'][0]);
 	}
 
-	/**
-	 * The link vier renders in its navigation - the one #15529 removed.
-	 */
-	public function testLoggedInHasProfileLink(): void
-	{
-		$nav = $this->getInfo(authenticated: true)['nav'];
-
-		self::assertArrayHasKey('my_profile', $nav, 'vier renders its profile link from this entry');
-		self::assertSame('profile/' . self::NICK, $nav['my_profile'][0]);
-	}
-
 	public function testLoggedInUsermenuStartsWithPhotos(): void
 	{
 		$nav = $this->getInfo(authenticated: true)['nav'];
@@ -210,13 +199,17 @@ class NavTest extends TestCase
 		self::assertSame('profile/' . self::NICK . '/photos', $nav['usermenu'][0][0]);
 	}
 
+	/**
+	 * Both themes render their profile link from this entry - the one #15529 removed.
+	 */
 	public function testLoggedInUserinfoHasNameAndProfileLink(): void
 	{
 		$userinfo = $this->getInfo(authenticated: true)['userinfo'];
 
 		self::assertNotNull($userinfo);
 		self::assertSame('Test User', $userinfo['name']);
-		self::assertSame('profile/' . self::NICK, $userinfo['link']);
+		self::assertSame('profile/' . self::NICK . '/profile', $userinfo['link'][0], 'the profile link');
+		self::assertNotEmpty($userinfo['link'][1], 'the label shown in the menu');
 	}
 
 	// --- admin and moderator ---
