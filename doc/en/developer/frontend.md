@@ -656,19 +656,17 @@ The rule checklist lives at the top ([At a glance](#at-a-glance)); this section 
 composer run lint
 composer run phpstan
 
-# Template markup: missing alt texts, nested interactive elements,
-# flow content in buttons, duplicate ids (no database needed)
+# Template markup: missing alt texts, nested interactive elements, flow content in buttons, duplicate ids (no database needed)
 composer run test:templates
 
 # JavaScript and CSS
 npm run lint
 
-# Note: none of these check colour contrast, keyboard operation or
-# browser behaviour. Those still require manual testing.
+# Note: none of these check colour contrast, keyboard operation or browser behaviour. Those still require manual testing.
 ```
 
-A `test:templates` failure names the file, the line and the fix. Existing violations are
-grandfathered, so it only reports what you touched → [Tests](tests#template-tests).
+A `test:templates` failure names the file, the line and the fix.
+Existing violations are grandfathered, so it only reports what you touched → [Tests](tests#template-tests).
 
 **Manual checks:**
 
