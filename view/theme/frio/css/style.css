@@ -3550,16 +3550,47 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 	width: 100%;
     text-align: left;
 }
-details.profile-jot-net[open] summary:before,
-.panel .section-subtitle-wrapper .accordion-toggle:before {
-	font-family: remixicon;
+@keyframes sweep {
+	0% {opacity: 0; margin-left: -10px}
+	100% {opacity: 1; margin-left: 0px}
+}
+
+details.panel {
+	margin-bottom: 5px;
+}
+summary.accordion-toggle {
+	font-size: 18px;
+	color: var(--link-color);
+	font-weight: normal;
+	padding: 10px 5px;
+	margin-top: -10px;
+	list-style: none;
+}
+summary.accordion-toggle > h2,
+summary.accordion-toggle > h3 {
+	display: inline;
+	font-size: inherit;
+	font-weight: inherit;
+	margin: 0;
+}
+details[open].panel::details-content {
+	animation: sweep .5s ease-in-out;
+	padding-bottom: 10px;
+}
+
+details.profile-jot-net[open] summary::before,
+details[open].panel summary.accordion-toggle::before,
+.panel .section-subtitle-wrapper .accordion-toggle::before {
+	font-family: remixicon, sans-serif;
 	content: "\ea4e";
 	padding-right: 5px;
 }
-details.profile-jot-net summary:before,
-.panel .section-subtitle-wrapper .accordion-toggle.collapsed:before {
-	font-family: remixicon;
+details.profile-jot-net summary::before,
+details.panel summary.accordion-toggle::before,
+.panel .section-subtitle-wrapper .accordion-toggle.collapsed::before {
+	font-family: remixicon, sans-serif;
 	content: "\ea6e";
+	padding-right: 5px;
 }
 details.profile-jot-net summary:before {
 	padding-right: 5px;
