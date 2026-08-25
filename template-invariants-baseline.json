@@ -21,8 +21,7 @@
         "view/templates/notifications/posts_item.tpl": 1,
         "view/templates/photo_view.tpl": 1,
         "view/templates/scroll_loader.tpl": 1,
-        "view/templates/settings/addons/connector.tpl": 2,
-        "view/templates/settings/connectors.tpl": 2,
+        "view/templates/settings/addons/connector.tpl": 1,
         "view/templates/settings/delegation.tpl": 2,
         "view/templates/special/displaynotfound.tpl": 1,
         "view/templates/threaded_conversation.tpl": 1,
@@ -33,7 +32,6 @@
         "view/theme/frio/templates/moderation/users/index.tpl": 1,
         "view/theme/frio/templates/search_item.tpl": 1,
         "view/theme/frio/templates/settings/addons/connector.tpl": 1,
-        "view/theme/frio/templates/settings/connectors.tpl": 1,
         "view/theme/frio/templates/wall_thread.tpl": 1,
         "view/theme/frio/templates/widget/vcard.tpl": 1
     },
@@ -49,7 +47,7 @@
         "view/templates/widget/trending_tags.tpl": 1,
         "view/theme/frio/templates/circle_side.tpl": 1,
         "view/theme/frio/templates/contact/entry.tpl": 2,
-        "view/theme/frio/templates/nav.tpl": 1,
+        "view/theme/frio/templates/nav.tpl": 3,
         "view/theme/frio/templates/widget/saved_searches.tpl": 1
     }
 }
