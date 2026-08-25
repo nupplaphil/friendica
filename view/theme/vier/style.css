@@ -2655,10 +2655,6 @@ ul.tabs li .active, span.pager_current a {
 .field.radio .field_help {
 	margin-left: 0px;
 }
-.settings-section,
-.settings-subsection {
-	background-color: #ededed;
-}
 .settings-section .field.custom label,
 .settings-subsection .field.custom label,
 .settings-section .field.select label,
