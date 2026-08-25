@@ -144,10 +144,10 @@
 </div>
 
 <script type="text/javascript">
-	window.registerModuleLifecycle('body', function() {
+	window.onDocumentReady('body', function() {
 		// disable finish date input if it isn't available
 		enableDisableFinishDate();
 		// load bbcode autocomplete for the description textarea
 		$('#comment-edit-text-desc').bbco_autocomplete('bbcode');
-	}, null, 'document');
+	});
 </script>

@@ -9,11 +9,11 @@
  * The javascript for the circle module
  */
 
-window.registerModuleLifecycle('body', function () {
+window.onDocumentReady('body', function () {
 	$("body").off(".friendicaCircle").on("click.friendicaCircle", ".circle-list-switcher", function () {
 		switchCircleViewMode(this);
 	});
-}, null, 'document');
+});
 
 /**
  * Change the circle membership of the contacts and fetch the new grup list

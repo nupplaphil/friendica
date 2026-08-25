@@ -35,7 +35,7 @@
 			$('#id_finish_text').prop("disabled", false);
 	}
 
-	window.registerModuleLifecycle('#events-calendar', function() {
+	window.onDocumentReady('#events-calendar', function() {
 		$('#events-calendar').fullCalendar({
 			defaultView: '{{$i18n.defaultView|escape:'quotes'}}',
 			firstDay: '{{$i18n.firstDay|escape:'quotes'}}',
@@ -142,11 +142,11 @@
 		// show event popup
 		let hash = location.hash.split("-");
 		if (hash.length === 2 && hash[0] === "#link") showEvent(hash[1]);
-	}, null, 'document');
+	});
 </script>
 
 <script language="javascript" type="text/javascript">
-	window.registerModuleLifecycle('body', function() {
+	window.onDocumentReady('body', function() {
 		$("#comment-edit-text-desc").bbco_autocomplete('bbcode');
 
 		$('#id_share').change(function() {
@@ -174,6 +174,6 @@
 		$('#id_nofinish').change(function() {
 			enableDisableFinishDate()
 		}).trigger('change');
-	}, null, 'document');
+	});
 </script>
 

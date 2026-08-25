@@ -253,16 +253,9 @@
 		return initializeCalendarWidget($calendar);
 	}
 
-	window.registerModuleLifecycle(
-		'#events-calendar',
-		function (element) {
-			return startCalendarInitialization($(element));
-		},
-		function (element) {
-			destroyCalendarWidget($(element));
-		},
-		'document'
-	);
+	window.onDocumentReady('#events-calendar', function (element) {
+		return startCalendarInitialization($(element));
+	});
 })();
 
 // loads the event into a modal

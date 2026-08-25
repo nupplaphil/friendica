@@ -9,7 +9,7 @@
 </script>
 <script type="text/javascript" src="view/js/ajaxupload.js?v={{$VERSION}}"></script>
 <script>
-	window.registerModuleLifecycle('body', function() {
+	window.onDocumentReady('body', function() {
 		var uploader = new window.AjaxUpload(
 			'prvmail-upload',
 			{ action: 'profile/{{$nickname}}/photos/upload',
@@ -33,7 +33,7 @@
 		// Check on page load and on input
 		validateMessageForm();
 		$('#prvmail-text').on('input keyup', validateMessageForm);
-	}, null, 'document');
+	});
 
 	function jotGetLink() {
 		reply = prompt("{{$linkurl}}");

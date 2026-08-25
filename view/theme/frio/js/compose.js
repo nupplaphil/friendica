@@ -371,7 +371,7 @@
 		}
 	}
 
-	window.registerModuleLifecycle("body", init, null, "document");
+	window.onDocumentReady("body", init);
 
 	// Expose public API
 	window.updateLocationButtonDisplay = updateLocationButtonDisplay;

@@ -35,7 +35,7 @@
  </div>
 </form>
 <script>
- window.registerModuleLifecycle('body', function() {
+ window.onDocumentReady('body', function() {
   // javascript dialog to batch actions
   $(".batch-action").click(function(e){
     if (confirm($(this).attr('value')+" ?")) {
@@ -45,7 +45,7 @@
      return false;
     }
   });
- }, null, 'document');
+ });
  </script>
 
 {{$paginate nofilter}}
