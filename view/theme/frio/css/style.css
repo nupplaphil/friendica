@@ -1566,7 +1566,7 @@ div.sidebar-widget-list {
 	transition: all 0.1s ease-in-out;
 }
 .faded-icon:hover {
-	color: $font_color_darker;
+	color: $link_color;
 	opacity: 1;
 }
 .icon-padding {
