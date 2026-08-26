@@ -258,6 +258,8 @@ class Page implements ArrayAccess
 			'$local_user'     => $localUID,
 			'$generator'      => 'Friendica' . ' ' . App::VERSION,
 			'$update_content' => (int) $pConfig->get($localUID, 'system', 'update_content'),
+			'$spa_mode'       => (int) $pConfig->get($localUID, 'system', 'enable_spa'),
+			'$spa_router_ts'  => $this->getSpaModuleTimestamp(),
 			'$shortcut_icon'  => $shortcut_icon,
 			'$touch_icon'     => $touch_icon,
 			'$block_public'   => intval($config->get('system', 'block_public')),
@@ -406,6 +408,18 @@ class Page implements ArrayAccess
 		$url = str_replace($this->basePath . DIRECTORY_SEPARATOR, '', $path);
 
 		$this->footerScripts[] = trim($url, '/');
+	}
+
+	/**
+	 * Get the directory modification timestamp combined with the application version.
+	 * This ensures that changes to any SPA module file (which affects directory timestamp)
+	 * or version changes trigger a reload.
+	 *
+	 * @return string
+	 */
+	private function getSpaModuleTimestamp(): string
+	{
+		return (filemtime($this->basePath . '/view/js/spa') ?: 0) . '-' . App::VERSION;
 	}
 
 	/**

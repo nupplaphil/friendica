@@ -65,7 +65,7 @@
 {{if $login_bg_color}}{{include file="field_colorinput.tpl" field=$login_bg_color}}{{/if}}
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	window.onDocumentReady('body', function() {
 
 		function GenerateShareString() {
 			var theme = {};
