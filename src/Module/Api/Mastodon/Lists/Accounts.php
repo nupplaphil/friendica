@@ -32,7 +32,7 @@ class Accounts extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
-		if (!DBA::exists('group', ['id' => $this->parameters['id'], 'uid' => $uid])) {
+		if (!Circle::exists((int) $this->parameters['id'], $uid)) {
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
@@ -52,7 +52,7 @@ class Accounts extends BaseApi
 			$this->logAndJsonError(422, $this->errorFactory->UnprocessableEntity());
 		}
 
-		if (!DBA::exists('group', ['id' => $this->parameters['id'], 'uid' => $uid])) {
+		if (!Circle::exists((int) $this->parameters['id'], $uid)) {
 			$this->logAndJsonError(404, $this->errorFactory->RecordNotFound());
 		}
 
