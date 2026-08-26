@@ -461,8 +461,8 @@ final class ATProtocol
 	/**
 	 * Checks whether a PDS endpoint taken from a DID document is safe to send requests to.
 	 *
-	 * The endpoint is stored per user and gets the bearer token attached on every API call,
-	 * so it has to be a plain https origin.
+	 * The endpoint is stored per user and gets the bearer token attached on every API call.
+	 * It therefore has to be a plain https origin.
 	 * A query or fragment would swallow the '/xrpc/...' path that is appended to it.
 	 *
 	 * @param mixed $endpoint The serviceEndpoint value of the DID document
