@@ -168,7 +168,7 @@ final readonly class ConversationDataProvider
 
 		$convResponses = $this->buildConversationResponses($uid);
 
-		$pcid = Contact::getPublicIdByUserId($uid);
+		$pcid = $uid !== 0 ? (int) Contact::getPublicIdByUserId($uid) : 0;
 
 		$writable = $uid !== 0;
 
