@@ -475,7 +475,6 @@ ul#nav-user-menu {
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
 	background: $btn_primary_hover_color;
-	border-color: none;
 }
 
 .btn-link {
@@ -2355,7 +2354,6 @@ body.show-action-labels .action-label {
 .wall-item-actions-row {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr min-content;	/* collapse column if checkbox is hidden */
-	grid-auto-rows: 1fr min-height;							/* collapse row if not an event */
 	 grid-template-areas:
 		"comments shares likes dislikes more delete"
 		"attend . decline . maybe .";
@@ -3170,7 +3168,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 #mail-conversation {
 	overflow-y: auto;
 	max-height: calc(100vh - 400px);
-	max-height: auto;
 	margin-bottom: 0px;
 	padding: 0 15px;
 }
@@ -4458,7 +4455,6 @@ div.login-form, .login-content-wrapper,
 	}
 	.mod-home.is-not-singleuser .login-form > #login-extra-links {
 		padding-bottom: 0;
-		padding-top: 1em 0;
 	}
 
 	.mod-home.is-not-singleuser .login-form > #login-form label,

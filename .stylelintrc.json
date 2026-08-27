@@ -20,14 +20,8 @@
 		"no-descending-specificity": null,
 
 		"declaration-block-no-duplicate-properties": [true, {
-			"ignore": ["consecutive-duplicates-with-different-values"],
-			"severity": "warning"
-		}],
-
-		"no-duplicate-selectors": [true, { "severity": "warning" }],
-		"declaration-property-value-keyword-no-deprecated": [true, { "severity": "warning" }],
-		"property-no-deprecated": [true, { "severity": "warning" }],
-		"block-no-empty": [true, { "severity": "warning" }]
+			"ignore": ["consecutive-duplicates-with-different-values"]
+		}]
 	},
 	"overrides": [
 		{
@@ -36,7 +30,9 @@
 				"view/theme/frio/scheme/*.css"
 			],
 			"rules": {
-				"declaration-property-value-no-unknown": null
+				"declaration-property-value-no-unknown": [true, {
+					"ignoreProperties": { "/.*/": ["/\\$[a-z_]+/"] }
+				}]
 			}
 		}
 	]
