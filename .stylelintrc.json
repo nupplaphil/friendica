@@ -30,11 +30,6 @@
 			"severity": "warning"
 		}],
 
-		"font-family-no-missing-generic-family-keyword": [true, {
-			"ignoreFontFamilies": ["remixicon"],
-			"severity": "warning"
-		}],
-
 		"declaration-block-no-duplicate-properties": [true, {
 			"ignore": ["consecutive-duplicates-with-different-values"],
 			"severity": "warning"

@@ -63,14 +63,14 @@ nav#topbar-first a:hover,
 .delegation-notify {
   background-color: #CB4437;
   border-radius: 10px;
-  font: bold 11px/16px Arial;
+  font: bold 11px/16px Arial, sans-serif;
 }
 
 nav#topbar-first .nav-notification {
   background-color: #CB4437;
   top: -3px;
   right: -4px;
-  font: bold 11px/16px Arial;
+  font: bold 11px/16px Arial, sans-serif;
   padding: 1px;
   border-radius: 10px;
 }
