@@ -476,7 +476,7 @@ pre code {
 #pages-widget-collapse:hover,
 .admin.link a:hover,
 aside h4 a:hover,
-right_aside h4 a:hover,
+#right_aside h4 a:hover,
 
 .tool a:focus,
 .widget a:focus,
@@ -484,7 +484,7 @@ right_aside h4 a:hover,
 #pages-widget-collapse:focus,
 .admin.link a:focus,
 aside h4 a:focus,
-right_aside h4 a:focus,
+#right_aside h4 a:focus,
 
 .tool a:active,
 .widget a:active,
@@ -492,7 +492,7 @@ right_aside h4 a:focus,
 #pages-widget-collapse:active,
 .admin.link a:active,
 aside h4 a:active,
-right_aside h4 a:active,
+#right_aside h4 a:active,
 
 .tool a:focus-within,
 .widget a:focus-within,
@@ -528,7 +528,7 @@ right_aside h4 a:active,
 li.tool:hover,
 .admin.link:hover,
 aside h4 a:hover,
-right_aside h4 a:hover,
+#right_aside h4 a:hover,
 #message-new:hover,
 #sidebar-photos-albums li:hover,
 .photos-upload-link:hover,
@@ -551,7 +551,7 @@ right_aside h4 a:hover,
 li.tool:focus,
 .admin.link:focus,
 aside h4 a:focus,
-right_aside h4 a:focus,
+#right_aside h4 a:focus,
 #message-new:focus,
 #sidebar-photos-albums li:focus,
 .photos-upload-link:focus,
@@ -574,7 +574,7 @@ right_aside h4 a:focus,
 li.tool:active,
 .admin.link:active,
 aside h4 a:active,
-right_aside h4 a:active,
+#right_aside h4 a:active,
 #message-new:active,
 #sidebar-photos-albums li:active,
 .photos-upload-link:active,
@@ -598,7 +598,7 @@ right_aside h4 a:active,
 li.tool:focus-within,
 .admin.link:focus-within,
 aside h4 a:focus-within,
-right_aside h4 a:focus-within,
+#right_aside h4 a:focus-within,
 #message-new:focus-within,
 #sidebar-photos-albums li:focus-within,
 .photos-upload-link:focus-within {
@@ -651,7 +651,7 @@ right_aside h4 a:focus-within,
 	display: inline-block;
 }
 
-a.nets-link, .side-link a, #sidebar-new-circle a, #sidebar-edit-circles a, #sidebar-new-group a, a.savedsearchterm,a.fileas-link, aside h4 a, right_aside h4 a {
+a.nets-link, .side-link a, #sidebar-new-circle a, #sidebar-edit-circles a, #sidebar-new-group a, a.savedsearchterm,a.fileas-link, aside h4 a, #right_aside h4 a {
 	display: block;
 	color: #737373;
 }
@@ -1239,7 +1239,7 @@ img.acpopup-img {
 	overflow: hidden;
 }
 
-right_aside {
+#right_aside {
 	display: none;
 	vertical-align: top;
 	width: 185px;
@@ -1375,7 +1375,7 @@ aside #profiles-menu {
 aside #search-text,
 aside #side-follow-url,
 aside #side-peoplefind-url,
-right_aside #side-peoplefind-url {
+#right_aside #side-peoplefind-url {
 	width: 65%;
 	float: left;
 	padding-left: 10px;
@@ -1390,7 +1390,7 @@ right_aside #side-peoplefind-url {
 }
 
 aside #side-peoplefind-submit,
-right_aside #side-peoplefind-submit {
+#right_aside #side-peoplefind-submit {
 	float: left;
 }
 
@@ -1398,7 +1398,7 @@ right_aside #side-peoplefind-submit {
 	clear: both;
 }
 
-aside h4, right_aside h4 {
+aside h4, #right_aside h4 {
 	margin-bottom: 0px;
 	margin-top: 0px;
 	font-size: 1.17em;
@@ -2096,7 +2096,7 @@ section.minimal {
 	margin-top: 3px;
 	color: #9c9c9c;
 }
-profile-jot-form #jot-title, #profile-jot-form #jot-category {
+#profile-jot-form #jot-title, #profile-jot-form #jot-category {
 	border-radius: 5px 5px 5px 5px;
 	font-weight: bold;
 	height: 20px;
@@ -3876,7 +3876,7 @@ img.photo-album-photo {
 }
 
 /* upload/select popup */
-fbrowser.photo .photo-album-image-wrapper { margin-left: 10px; }
+.fbrowser.photo .photo-album-image-wrapper { margin-left: 10px; }
 #message-preview { margin-top: 15px; }
 #message-preview span { width: 100%; }
 #message-preview .mail-count, #message-preview .mail-delete { display:none; }

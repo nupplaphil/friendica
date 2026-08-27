@@ -19,11 +19,6 @@
 	"rules": {
 		"no-descending-specificity": null,
 
-		"selector-type-no-unknown": [true, {
-			"ignoreTypes": ["right_aside"],
-			"severity": "warning"
-		}],
-
 		"declaration-block-no-duplicate-properties": [true, {
 			"ignore": ["consecutive-duplicates-with-different-values"],
 			"severity": "warning"
