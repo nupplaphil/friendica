@@ -13,6 +13,7 @@ use DOMXPath;
 use Friendica\App;
 use Friendica\AppHelper;
 use Friendica\Content\Nav;
+use Friendica\Content\Text\HTML;
 use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\PConfig\Capability\IManagePersonalConfigValues;
@@ -513,7 +514,7 @@ class Page implements ArrayAccess
 			$target = new DOMDocument();
 			$target->loadXML("<root></root>");
 
-			$content = mb_convert_encoding($this->page["content"], 'HTML-ENTITIES', "UTF-8");
+			$content = HTML::toNumericEntities($this->page["content"]);
 
 			/// @TODO one day, kill those error-suppressing @ stuff, or PHP should ban it
 			@$doc->loadHTML($content);
