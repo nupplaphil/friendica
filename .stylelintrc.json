@@ -12,9 +12,7 @@
 		"view/js/fancybox/**",
 		"view/js/friendica-tagsinput/**",
 		"view/js/videojs/**",
-		"view/theme/frio/css/font-awesome.custom.css",
-		"view/theme/frio/font/**",
-		"view/theme/vier/css/remixicon-vier.css"
+		"view/theme/frio/font/**"
 	],
 	"rules": {
 		"no-descending-specificity": null,
