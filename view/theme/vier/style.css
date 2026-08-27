@@ -172,11 +172,6 @@ img {
 	color: #000;
 }
 
-.icon a:hover,
-.icon a:focus,
-.icon a:active {
-}
-
 .icon.text {
 	text-indent: 0px;
 }
@@ -274,9 +269,6 @@ div.pager {
 	border-bottom: 1px solid #D2D2D2;
 	width: 100%;
 	height: 10px;
-}
-
-.pager a {
 }
 
 .pager a.pager_older {
