@@ -114,9 +114,8 @@
 	left: 50%;
 	margin-left: -11px;
 	border-top-width: 0;
-	border-bottom-color: #999999;
-	border-bottom-color: rgba(0, 0, 0, 0.25);
 	top: -11px;
+	border-color: rgba(0, 0, 0, 0.05);
 }
 
 .hovercard.bottom > .arrow:after {
@@ -240,10 +239,6 @@
 	text-decoration: none;
 }
 
-.hovercard.bottom > .arrow {
-	border-color: rgba(0, 0, 0, 0.05);
-}
-
 .hover-card-header, .hover-card-details, .hover-card-content {
 	width: 100%;
 }
@@ -286,9 +281,6 @@
 	gap: 5px;
 	flex-wrap: wrap;
 	justify-content: flex-end;
-}
-
-.hover-card-actions {
 	margin-bottom: 5px;
 }
 

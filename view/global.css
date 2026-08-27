@@ -248,6 +248,7 @@ h3 {
 
 h4 {
   font-size: 18px;
+  margin: 0px 0px 0px 0px;
 }
 
 h5 {
@@ -256,10 +257,6 @@ h5 {
 
 h6 {
   font-size: 14.95px;
-}
-
-h4 {
-  margin: 0px 0px 0px 0px;
 }
 
 code {

@@ -799,10 +799,6 @@ nav#topbar-first a:active {
 	padding-top: 8px;
 }
 
-nav#topbar-first ul {
-	margin: 0px;
-	padding: 0px 10px;
-}
 nav#topbar-first ul li {
 	list-style: none;
 	margin: 0px;
@@ -931,7 +927,6 @@ nav#topbar-first #nav-help-link,
 nav#topbar-first #nav-search-link,
 nav#topbar-first #nav-directory-link,
 nav#topbar-first #nav-apps-link,
-nav#topbar-first #nav-apps-link,
 nav#topbar-first #nav-login-link,
 nav#topbar-first #nav-logout-link,
 nav#topbar-first #nav-messages-linkmenu,
@@ -1019,6 +1014,8 @@ nav#topbar-first #nav-notifications-linkmenu.on .icon-bell:before {
 
 /* nav#topbar-first #nav-community-link {*/
 nav#topbar-first ul {
+	margin: 0px;
+	padding: 0px 10px;
 	margin-left: 210px;
 }
 
@@ -1611,6 +1608,8 @@ section.minimal {
 	display: table;
 	width: 745px;
 	width: calc(100% - 10px);
+	/* padding-right: 30px; */
+	padding-right: 0px;
 }
 
 .wall-item-content hr {
@@ -1667,10 +1666,6 @@ section.minimal {
 	vertical-align: top;
 	text-align: left;
 	width: 80px;
-}
-.wall-item-container {
-	/* padding-right: 30px; */
-	padding-right: 0px;
 }
 .wall-item-container .wall-item-ago {
 	overflow-wrap: break-word;
@@ -1913,6 +1908,8 @@ section.minimal {
 	width: 665px;
 	width: calc(100% - 90px);
 	border-bottom: 1px solid hsl(198, 21%, 79%);
+	top: 15px !important;
+	left: 15px !important;
 }
 .wall-item-container.thread_level_2 {
 	margin-left: 80px;
@@ -1973,10 +1970,6 @@ section.minimal {
 	margin-left: 16px;
 	/* background: url(../../../images/icons/22/user.png) no-repeat center center; */
 
-}
-.wall-item-container.comment {
-	top: 15px !important;
-	left: 15px !important;
 }
 .wall-item-container.comment .wall-item-links {
 	padding-left: 12px;
@@ -2218,26 +2211,6 @@ section.minimal {
 .contact-wrapper .contact-photo img {
 	width: 80px;
 	height: 80px;
-}
-.contact-wrapper {
-	left: 0px;
-	top: 63px;
-}
-.contact-photo {
-	width: 48px;
-	height: 48px;
-}
-.contact-photo img {
-	width: 48px;
-	height: 48px;
-}
-.contact-name {
-	/* text-align: center; */
-	/*font-weight: bold;*/
-	font-size: 12px;
-}
-.contact-details {
-	color: #999999;
 }
 /* editor */
 .jothidden {
@@ -2515,9 +2488,6 @@ ul.tabs a {
 .comment-edit-submit-wrapper .fakelink {
 	padding: 2px 7px 2px 7px;
 	color: black;
-}
-
-.comment-edit-submit-wrapper .fakelink {
 	/* border: 1px solid lightgray; */
 	background: #F2F2F2;
 	margin-top: 2px;
@@ -2874,12 +2844,6 @@ aside #id_password {
 	height: 80px;
 }
 /* profile match wrapper */
-.profile-match-wrapper {
-	float: left;
-	width: 90px;
-	height: 90px;
-	margin-bottom: 20px;
-}
 .profile-match-wrapper .contact-photo {
 	width: 80px;
 	height: 80px;
@@ -2888,11 +2852,6 @@ aside #id_password {
 	width: 80px;
 	height: 80px;
 }
-.profile-match-wrapper {
-	left: 0px;
-	top: 63px;
-}
-
 .contact-photo-menu-button {
 	position: relative;
 	background-image: url("../../../images/icons/16/menu.png");
@@ -2902,7 +2861,8 @@ aside #id_password {
 	padding: 0px;
 	width: 16px;
 	height: 16px;
-	top: -20px; left:0px;
+	top: -20px;
+	left: -2px;
 	overflow: hidden;
 	text-indent: 40px;
 	display: none;
@@ -3030,59 +2990,6 @@ a.mail-list-link {
 *	color: #F5F6FB;
 *}
 */
-
-.mail-list-outside-wrapper-end {
-	clear: both;
-}
-
-.mail-list-outside-wrapper {
-	margin-top: 30px;
-}
-
-.mail-list-delete-wrapper {
-	float: right;
-	margin-right: 30px;
-	margin-top: 15px;
-}
-
-.mail-list-delete-icon {
-	border: none;
-}
-
-.mail-conv-sender,
-.mail-conv-detail {
-	float: left;
-}
-.mail-conv-detail {
-	margin-left: 20px;
-	width: 500px;
-}
-
-.mail-conv-subject {
-	font-size: 1.4em;
-	margin: 10px 0;
-}
-
-.mail-conv-outside-wrapper-end {
-	clear: both;
-}
-
-.mail-conv-outside-wrapper {
-	margin-top: 30px;
-}
-
-.mail-conv-delete-wrapper {
-	float: right;
-	margin-right: 30px;
-	margin-top: 15px;
-}
-.mail-conv-break {
-	clear: both;
-}
-
-.mail-conv-delete-icon {
-	border: none;
-}
 
 
 /* ========== */
@@ -3281,6 +3188,7 @@ a.mail-list-link {
 	padding: 10px;
 	width: 120px;
 	height: 120px;
+	margin-bottom: 20px;
 }
 #profile-match-wrapper-end {
 	clear: both;
@@ -3290,40 +3198,6 @@ a.mail-list-link {
 /* = Directory = */
 /* ============= */
 /* contacts menu */
-.contact-photo-wrapper {
-	position: relative;
-}
-.contact-photo {
-	width: 48px;
-	height: 48px;
-	overflow: hidden;
-	display: block;
-}
-.contact-photo img {
-	width: 48px;
-	height: 48px;
-}
-.contact-photo-menu-button {
-	display: none;
-	/* position: absolute; */
-	/* position: absolute; */
-	left: -2px;
-	top: -20px;
-}
-.contact-wrapper {
-	float: left;
-	width: 90px;
-	height: 90px;
-	margin-bottom: 15px;
-}
-.contact-wrapper .contact-photo {
-	width: 80px;
-	height: 80px;
-}
-.contact-wrapper .contact-photo img {
-	width: 80px;
-	height: 80px;
-}
 .contact-wrapper .contact-photo-menu-button {
 	left: 0px;
 	top: 63px;

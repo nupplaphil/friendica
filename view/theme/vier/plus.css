@@ -100,9 +100,7 @@ div.jGrowl div.info {
   background: #fff url("../../../images/icons/48/info.png") no-repeat 5px center;
 }
 
-div.jGrowl div.notice {
-  color: #737373;
-}
+div.jGrowl div.notice,
 div.jGrowl div.info {
   color: #737373;
 }

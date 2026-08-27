@@ -1009,7 +1009,6 @@ nav.navbar .nav > li > button:focus {
 
 #offcanvasUsermenu ul,
 #offcanvasUsermenu ul li:first-child,
-#offcanvasUsermenu ul,
 #offcanvasUsermenu ul li:last-child {
 	border-radius: 0;
 }
@@ -1133,14 +1132,6 @@ body.show-nav-labels .nav-label {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
-}
-.intro-actions {
-	font-size: 2em;
-	padding: 0.5em;
-}
-.intro-wrapper button.intro-action-link {
-	padding-left: 10px;
-	padding-right: 10px;
 }
 ul li .intro-wrapper button.intro-action-link {
 	opacity: 0.7;
@@ -2129,8 +2120,6 @@ blockquote.shared_content {
 }
 .media .contact-info-comment {
 	display: table-cell;
-}
-.media .contact-info-comment {
 	margin: 0 0 5px;
 }
 .media-heading {
@@ -2266,6 +2255,8 @@ code > .hl-main {
 	font-size: 12.5px;
 	font-weight: normal;
 	padding: 0; /* The padding should be on the link instead, so it's clickable */
+	filter: grayscale(0.2);
+	opacity: 0.8;
 }
 
 .hovercard .tag {
@@ -2313,10 +2304,6 @@ code > .hl-main {
 }
 
 /* Tags and mentions hover effect */
-.tag {
-    filter: grayscale(0.2);
-    opacity: 0.8;
-}
 .wall-item-container:hover .tag, .tags .tag {
     filter: grayscale(0);
     opacity: 1;
@@ -3344,6 +3331,7 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 }
 .vevent .event-summary {
 	font-size: 16px;
+	display: none;
 }
 .vevent .event-description {
 	padding: 10px 0;
@@ -3351,9 +3339,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 .vevent .event-location .location {
 	font-size: inherit;
 	color: inherit;
-}
-.vevent .event-summary {
-	display: none;
 }
 #event-preview .vevent .event-summary {
 	display: block;
@@ -3735,6 +3720,8 @@ ul.notif-network-list > li {
 	border-radius: 4px;
 }
 .intro-actions {
+	font-size: 2em;
+	padding: 0.5em;
 	display: flex;
 }
 .intro-enty-name h4 {
@@ -3960,8 +3947,7 @@ li.addon {
 #adminpage .table td,
 .adminpage .table td,
 #adminpage.table > tbody > tr > td,
-.adminpage.table > tbody > tr > td,
-.table#adminpage > tbody > tr > td {
+.adminpage.table > tbody > tr > td {
 	word-break: break-all !important;
 	white-space: normal !important;
 	vertical-align: top !important;
