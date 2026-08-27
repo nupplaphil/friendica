@@ -5884,6 +5884,22 @@ msgstr ""
 msgid "API endpoint %s %s is not implemented but might be in the future."
 msgstr ""
 
+#: src/Module/Api/Friendica/Circle/Update.php:33
+msgid "circle name not specified"
+msgstr ""
+
+#: src/Module/Api/Friendica/Circle/Update.php:38
+msgid "gid not specified"
+msgstr ""
+
+#: src/Module/Api/Friendica/Circle/Update.php:43
+msgid "gid not available"
+msgstr ""
+
+#: src/Module/Api/Friendica/Circle/Update.php:48
+msgid "no valid user list submitted"
+msgstr ""
+
 #: src/Module/Api/Mastodon/Apps.php:56
 msgid "Missing parameters"
 msgstr ""
