@@ -374,7 +374,6 @@ button.fakelink {
 }
 pre code {
 	font-family: Courier, monospace;
-	white-space: pre;
 	display: block;
 	overflow: auto;
 	border: 1px solid #444;
@@ -1054,7 +1053,6 @@ nav#topbar-first ul.menu-popup,
 ul.menu-popup {
 	visibility:hidden;
 	opacity:0;
-	z-index:1;
 	transition:all 0.2s ease-in-out;
 	/* display: none; */
 	position: absolute;
@@ -2166,11 +2164,8 @@ section.minimal {
 	height: 25px;
 	background: #FFFFFF;
 	border: 2px solid #364e59;
-	height: 25px;
-	width: 25px;
 	overflow: hidden;
 	padding: 1px;
-	position: absolute !important;
 	top: 40px;
 	left: 30px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
@@ -2344,7 +2339,6 @@ section.minimal {
 }
 /* #jot */
 #jot-title {
-	border: 0px;
 	margin: 0px;
 	height: 20px;
 	width: 700px;
