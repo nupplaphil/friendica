@@ -9178,7 +9178,7 @@ msgstr ""
 #: src/Module/Moderation/Users/Deleted.php:69
 #: src/Module/Moderation/Users/Index.php:89
 #: src/Module/Moderation/Users/Index.php:110
-msgid "Last login"
+msgid "Last activity"
 msgstr ""
 
 #: src/Module/Moderation/Users/Active.php:82
