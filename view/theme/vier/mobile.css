@@ -234,22 +234,8 @@ aside.show {
 #acl-wrapper { width: 100%; float: none; }
 /* flexbox for ACL window */
 #acl-wrapper {
-  display: -ms-Flexbox !important;
-  -ms-box-orient: vertical;
-
-  display: -webkit-flex !important;
-  display: -moz-flex !important;
-  display: -ms-flex !important;
   display: flex !important;
-
-  -webkit-flex-flow: column;
-  -moz-flex-flow: column;
-  -ms-flex-flow: column;
   flex-flow: column;
-
-  -webkit-flex: 1 100%;
-  -moz-flex: 1 100%;
-  -ms-flex: 1 100%;
   flex: 1 100%;
 }
 

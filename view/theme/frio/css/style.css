@@ -943,7 +943,7 @@ nav.navbar .nav > li > button:focus {
 #topbar-first #nav-notifications-menu a {
 	color: $font_color_darker;
 	padding: 0;
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #topbar-first #nav-notifications-menu li.notif-entry {
 	color: $font_color_darker;
@@ -1035,7 +1035,7 @@ nav.navbar .nav > li > button:focus {
 	padding-left: 20px;
 	padding-right: 20px;
 	font-weight: bold;
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #topbar-first .dropdown.account li#nav-sitename:hover {
 	border: none;
@@ -1455,7 +1455,7 @@ aside .vcard .fn {
 aside .vcard .p-addr {
 	font-style: italic;
 	padding-bottom: 7px;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 aside .vcard .title {
 	margin-top: 10px;
@@ -1772,7 +1772,6 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 }
 .modal .wall-item-container.preview {
 	overflow-y: auto;
-	overflow-y: overlay;
 }
 #profile-jot-plugin-wrapper,
 .jotplugins {
@@ -1953,11 +1952,11 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 	padding: 15px;
 }
 .panel .panel-body {
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 .tread-wrapper .media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 aside .panel-body {
 	padding: 0px;
@@ -2196,7 +2195,7 @@ blockquote.shared_content {
 
 /* wall items content */
 .wall-item-content {
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 .wall-item-content img {
 	object-fit: contain;
@@ -2647,7 +2646,7 @@ img.acpopup-img {
 	color: #444;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 10px;
+	gap: 10px;
 	margin-bottom: 15px;
 	padding: 10px;
 }
@@ -2995,7 +2994,7 @@ ul.viewcontact_wrapper > li {
 }
 .contact-wrapper.media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	margin-top: 0;
 }
 /* bootstrap hack for .media */
@@ -3729,7 +3728,7 @@ ul.notif-network-list > li {
 }
 .intro-wrapper.media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	margin-top: 0;
 }
 .intro-photo-wrapper img.intro-photo {
@@ -3941,7 +3940,7 @@ li.addon {
 	align-items: center;
 }
 #adminpage .table-logs td {
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #adminpage .table-logs th.log-message, #adminpage .table-logs td.log-message {
 	width: 40%;

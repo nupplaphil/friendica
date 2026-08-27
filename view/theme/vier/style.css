@@ -118,7 +118,7 @@ img {
 #adminpage table#users tr { box-shadow: 0 0 1px rgb(128,128,128); }
 #adminpage table#users td.acct-type-col {
 	white-space: normal !important;
-	word-break: break-word !important;
+	overflow-wrap: break-word !important;
 }
 #adminpage table#users span.acct-type {
 	display: block;
@@ -1300,7 +1300,7 @@ aside .vcard .title {
 aside .vcard dl {
 	height: auto;
 	overflow: auto;
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 aside .vcard .account-type {
 	margin-bottom: 13px;
@@ -1675,7 +1675,7 @@ section.minimal {
 	padding-right: 0px;
 }
 .wall-item-container .wall-item-ago {
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	width: 50px;
 	margin-left: 10px;
 	color: #999;
@@ -1707,8 +1707,7 @@ section.minimal {
 .wall-item-container .wall-item-content {
 	/* font-size: 14px; */
 	max-width: 660px;
-	word-wrap: break-word;
-	word-break: break-word;
+	overflow-wrap: break-word;
 	/* line-height: 1.36; */
 	padding-bottom: 6px;
 }
@@ -1835,7 +1834,7 @@ section.minimal {
 	transition: all 0.2s ease-in-out;
 	/* color: darkblue; */
 	/* color: #3E3E8C; */
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 .toplevel_item:hover .fakelink,

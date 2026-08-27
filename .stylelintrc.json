@@ -19,12 +19,6 @@
 	"rules": {
 		"no-descending-specificity": null,
 
-		"declaration-property-value-no-unknown": [true, {
-			"ignoreProperties": {
-				"display": ["/^-(ms|moz|webkit)-/"]
-			}
-		}],
-
 		"selector-type-no-unknown": [true, {
 			"ignoreTypes": ["right_aside"],
 			"severity": "warning"

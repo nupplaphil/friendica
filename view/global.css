@@ -360,7 +360,7 @@ a {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip-path: inset(50%);
   border: 0;
 }
 
@@ -563,7 +563,7 @@ img.invalid-src:after { vertical-align: top;}
 
 /* Tag cloud */
 .tagblock .tag-cloud {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .tagblock .tag-cloud .tag {
 	display: flex;
@@ -712,7 +712,6 @@ img {
  * Image grid settings START
  **/
 .imagegrid-row {
-	display: -ms-flexbox; /* IE10 */
 	display: flex;
 	margin-top: 1em;
 	column-gap: 5px;
@@ -765,7 +764,6 @@ figure.img-allocated-height img{
  * Horizontal masonry settings START
  **/
 .masonry-row {
-	display: -ms-flexbox; /* IE10 */
 	display: flex;
 	/* Both the following values should be the same to ensure consistent margins between images in the grid */
 	column-gap: 5px;
@@ -1038,7 +1036,6 @@ summary.wall-item-summary {
 /* Profile page custom fields - prevent long links from overflowing */
 #profile-page .profile-entry {
 	overflow-wrap: break-word;
-	word-break: break-word;
 }
 
 #profile-page .profile-entry a {
