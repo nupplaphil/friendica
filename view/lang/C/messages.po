@@ -7904,10 +7904,6 @@ msgstr ""
 msgid "For posts longer than 300 characters, checks whether at least one paragraph break exists. Screen readers and cognitive-accessibility tools benefit greatly from structured text. Short posts are always rated neutral."
 msgstr ""
 
-#: src/Module/Item/Compose.php:337
-msgid "\\u00d7"
-msgstr ""
-
 #: src/Module/Item/Compose.php:338
 msgid "Image description"
 msgstr ""
