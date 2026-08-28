@@ -411,7 +411,7 @@ if ($script !== '') {
 
 This applies to page-specific and addon scripts.
 The SPA core itself (`view/js/spa/spa-unpoly-nav.js` and `spa-ui-helpers.js`) is the one deliberate exception: it's loaded via `<script type="module" src="...">` (see `head.tpl`/frio's `head.tpl`) and uses real `import`/`export`.
-Don't follow that example for page-specific code — it exists only because that one loader needed to `import` a vendored parser (`acorn`) cleanly.
+Don't follow that example for page-specific code — it exists only because the SPA core is split across those two files, which share code through `import`/`export`.
 
 ### 6.3 SPA lifecycle initialization
 
@@ -500,7 +500,7 @@ Keep the following details in mind when adding or changing frontend code:
     Page-specific scripts registered via a `*_head.tpl` include or `App\Page::registerFooterScript()` (e.g. a page-specific library like FullCalendar) are synced separately by `spa-unpoly-nav.js`'s `syncOutOfBandScripts()`/`syncStylesheets()` so they still load when navigating to that page via SPA for the first time in a session.
     External `<script src>` files and stylesheets are deduplicated by URL: one already present is left alone, one that's missing is added.
     If a later navigation lands on a page that does *not* include a previously-loaded one, it is removed — and reloaded (re-executed) if the user navigates back to a page that has it again.
-    Mark the tag `data-spa-persistent` (see `addon/xmpp/templates/xmpp.tpl`) to opt out of that removal for state that must survive regardless of the current page, such as a persistent chat widget holding an open connection — removing and re-adding its `<script>` would otherwise tear that connection down and rebuild it from scratch.
+    Mark the tag `data-spa-persistent` to opt out of that removal for state that must survive regardless of the current page, such as a persistent chat widget holding an open connection — removing and re-adding its `<script>` would otherwise tear that connection down and rebuild it from scratch.
     Inline `<script>` blocks may run again on a later navigation to the same kind of page, so avoid a **top-level** (not nested in a function) `const`, `let`, or `class` declaration in them: classic `<script>` tags share one lexical scope, and redeclaring one throws a `SyntaxError`.
     `let`/`const` inside a function body are fine, since each call gets a fresh scope.
     `var` and function declarations are always safe to repeat.

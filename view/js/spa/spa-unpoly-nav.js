@@ -23,7 +23,6 @@
  */
 
 import { showTimeoutModal, cleanupTooltips } from './spa-ui-helpers.js';
-import * as acorn from '../../asset/acorn/dist/acorn.mjs';
 
 const MAIN_TARGETS = [
   'nav#topbar-first',
@@ -35,13 +34,17 @@ const MAIN_TARGETS = [
 ];
 
 // Every target normally must exist or Unpoly falls back to a full page load.
-// The theme-specific ones are marked ":maybe" so a container missing on the
-// current theme doesn't block swapping the ones that do exist.
+// nav#topbar-first is left as the one required target on purpose: a response
+// without it isn't a normal page (error page, redirect, minimal layout), so a
+// full load is the right fallback. The theme-specific ones are marked ":maybe"
+// so a container missing on the current theme doesn't block swapping the ones
+// that do exist.
 const NAVIGATE_TARGET =
   'nav#topbar-first, div#topbar-second:maybe, main:maybe, ' +
   '#content-section:maybe, #aside-section:maybe, #right-aside-section:maybe';
 
-let pendingScriptSync = Promise.resolve();
+const pendingScriptSyncs = new Map();
+let lastScriptSync = Promise.resolve();
 
 /**
  * Configure Unpoly's link matching and fragment targets to match the
@@ -88,27 +91,14 @@ function configureUnpoly() {
   up.link.config.followSelectors.push('a[href]');
   up.form.config.submitSelectors.push('form[method="get" i]');
 
+  // Links Unpoly must not intercept. Fancybox and onclick links carry their
+  // own behavior; anything else needing an exception uses up-follow="false"
+  // on the link itself (e.g. the delegation links in Nav.php's templates).
   up.link.config.noFollowSelectors.push(
     '.modal-open',
     '[data-fancybox]',
-    '[onclick]',
-    'a[href="delegation"]',
-    'a[href="settings/delegation"]'
+    '[onclick]'
   );
-}
-
-/**
- * Fancybox binds its own click handler to [data-fancybox] links, which are
- * excluded from Unpoly's navigation above. Push a dummy history entry so the
- * browser back button closes the lightbox instead of navigating away.
- */
-function bindFancyboxHistoryMarker() {
-  document.addEventListener('click', function (e) {
-    const link = e.target.closest('a[data-fancybox]');
-    if (link) {
-      history.pushState({ __fancyboxMarker: true }, '', window.location.href);
-    }
-  });
 }
 
 /**
@@ -125,7 +115,7 @@ function bindResponseHooks() {
 
     if (response.status === 401) {
       event.skip();
-      window.location.href = '/login?return_path=' + encodeURIComponent(response.url);
+      window.location.href = (window.baseurl || '') + '/login?return_path=' + encodeURIComponent(response.url);
       return;
     }
 
@@ -146,7 +136,14 @@ function bindResponseHooks() {
 
     syncHeadState(newDoc);
     syncStylesheets(newDoc);
-    pendingScriptSync = syncOutOfBandScripts(newDoc);
+
+    // Superseded navigations never get consumed in bindNavigationCompleted(),
+    // so drop stale entries before they accumulate.
+    if (pendingScriptSyncs.size > 8) {
+      pendingScriptSyncs.clear();
+    }
+    lastScriptSync = syncOutOfBandScripts(newDoc);
+    pendingScriptSyncs.set(response.url, lastScriptSync);
 
     if (typeof showProcessing === 'function') {
       showProcessing();
@@ -166,17 +163,21 @@ function resolveUrl(url) {
  * resources living outside Unpoly's swapped fragments and so have to manage
  * them by hand.
  *
- * `currentElements` must already be scoped to the elements this call is
- * allowed to touch (e.g. excluding ones inside Unpoly's swapped containers).
- * `addClone(newElement)` is called for each URL missing from the document;
- * its return value is collected and returned, letting callers await any
- * load promises it produces.
+ * `currentElements` is the full set to match against, so a URL already
+ * present anywhere isn't added a second time. `removableElements` (defaults
+ * to `currentElements`) is the subset this call may delete - callers pass a
+ * narrower list to keep it away from elements Unpoly manages inside its
+ * swapped containers. `addClone(newElement)` is called for each URL missing
+ * from the document; its return value is collected and returned, letting
+ * callers await any load promises it produces.
  */
-function syncExternalResources(currentElements, urlAttr, newElements, addClone) {
-  const currentByUrl = new Map(
+function syncExternalResources(currentElements, urlAttr, newElements, addClone, removableElements) {
+  removableElements = removableElements || currentElements;
+
+  const currentUrls = new Set(
     currentElements
       .filter((el) => el.getAttribute(urlAttr))
-      .map((el) => [resolveUrl(el.getAttribute(urlAttr)), el])
+      .map((el) => resolveUrl(el.getAttribute(urlAttr)))
   );
 
   const newUrls = new Set();
@@ -191,13 +192,17 @@ function syncExternalResources(currentElements, urlAttr, newElements, addClone) 
     const absoluteUrl = resolveUrl(url);
     newUrls.add(absoluteUrl);
 
-    if (!currentByUrl.has(absoluteUrl)) {
+    if (!currentUrls.has(absoluteUrl)) {
       addResults.push(addClone(el));
     }
   });
 
-  currentByUrl.forEach((el, absoluteUrl) => {
-    if (!newUrls.has(absoluteUrl) && !el.hasAttribute('data-spa-persistent')) {
+  removableElements.forEach((el) => {
+    const url = el.getAttribute(urlAttr);
+    if (!url || el.hasAttribute('data-spa-persistent')) {
+      return;
+    }
+    if (!newUrls.has(resolveUrl(url))) {
       el.remove();
     }
   });
@@ -226,29 +231,6 @@ function syncStylesheets(newDoc) {
     Array.from(link.attributes).forEach((attr) => clone.setAttribute(attr.name, attr.value));
     document.head.appendChild(clone);
   });
-}
-
-/**
- * A script-level (not nested in a function) `const`/`let`/`class` throws a
- * "redeclaration" error if the same script text runs again in a later
- * navigation - classic <script> tags share one lexical environment for
- * those. `let`/`const` nested inside a function body are fine to repeat, so
- * this only looks at the top level. syncOutOfBandScripts wraps flagged
- * content in a block so it still runs, just without redeclaring at the
- * shared top level.
- */
-function hasTopLevelRedeclarationRisk(content) {
-  try {
-    const ast = acorn.parse(content, { ecmaVersion: 'latest', sourceType: 'script' });
-    return ast.body.some(
-      (node) =>
-        (node.type === 'VariableDeclaration' && (node.kind === 'let' || node.kind === 'const')) ||
-        node.type === 'ClassDeclaration'
-    );
-  } catch (e) {
-    console.warn('[spa-unpoly-nav] Could not parse an out-of-band script to check for redeclarations - wrapping it defensively:', e);
-    return true;
-  }
 }
 
 /**
@@ -286,13 +268,13 @@ function syncOutOfBandScripts(newDoc) {
     }
 
     const content = script.textContent.trim();
-    if (!content) {
-      return;
+    if (content) {
+      inlineScripts.push(content);
     }
-    inlineScripts.push(hasTopLevelRedeclarationRisk(content) ? `{\n${content}\n}` : content);
   });
 
-  const currentScripts = Array.from(document.querySelectorAll('script[src]')).filter(
+  const currentScripts = Array.from(document.querySelectorAll('script[src]'));
+  const outOfBandScripts = currentScripts.filter(
     (script) => !script.closest(MAIN_TARGETS.join(', '))
   );
 
@@ -309,18 +291,21 @@ function syncOutOfBandScripts(newDoc) {
     });
     document.head.appendChild(clone);
     return loadPromise;
-  });
+  }, outOfBandScripts);
 
+  // One <script> element per source block. A SyntaxError is a parse error of
+  // the whole element, so concatenating would let one malformed block stop
+  // every other one from running, with nothing logged. The `try` wrapper also
+  // gives each block its own scope, so a top-level `let`/`const`/`class` does
+  // not clash with the same declaration from an earlier navigation (`var` and
+  // function declarations hoist out and stay safe to repeat).
   const runInlineScripts = () => {
-    if (inlineScripts.length === 0) {
-      return;
-    }
-    const scriptEl = document.createElement('script');
-    scriptEl.textContent = inlineScripts
-      .map((script) => `try {\n${script}\n} catch (e) { console.error('Error executing head script:', e); }`)
-      .join('\n');
-    document.head.appendChild(scriptEl);
-    document.head.removeChild(scriptEl);
+    inlineScripts.forEach((content) => {
+      const scriptEl = document.createElement('script');
+      scriptEl.textContent = `try {\n${content}\n} catch (e) { console.error('Error executing out-of-band script:', e); }`;
+      document.head.appendChild(scriptEl);
+      document.head.removeChild(scriptEl);
+    });
   };
 
   return Promise.all(externalLoadPromises).then(runInlineScripts);
@@ -329,40 +314,25 @@ function syncOutOfBandScripts(newDoc) {
 /**
  * `updateContent` and `localUser` are only rendered into <head>, which
  * Unpoly does not touch on navigation, but their values can differ per page
- * (e.g. whether polling is active). Pull the current values out of the new
- * page's <head> scripts so code relying on `window.updateContent`/
- * `window.localUser` keeps seeing the right ones after a navigation.
- *
- * Matched against the concatenated text of <head> inline scripts only, not
- * the full response body - matching the whole page risks a post/comment
- * that happens to contain matching text being picked up instead of the
- * real declaration.
+ * (e.g. whether polling is active). The synced marker element in head.tpl
+ * carries them as data attributes; read those so code relying on
+ * `window.updateContent`/`window.localUser` keeps seeing the right ones
+ * after a navigation.
  */
 function syncHeadState(newDoc) {
-  if (!newDoc.head) {
+  const marker = newDoc.querySelector('[data-spa-version]');
+  if (!marker) {
     return;
   }
 
-  const headScriptsText = Array.from(newDoc.head.querySelectorAll('script:not([src])'))
-    .map((script) => script.textContent)
-    .join('\n');
-
-  const updateContentMatch = headScriptsText.match(/const updateContent = ([^;]*);/);
-  if (updateContentMatch) {
-    try {
-      window.updateContent = JSON.parse(updateContentMatch[1]);
-    } catch (e) {
-      console.warn('[spa-unpoly-nav] Could not parse updateContent from the new page - leaving the previous value in place:', e);
-    }
+  const updateContent = marker.getAttribute('data-update-content');
+  if (updateContent !== null) {
+    window.updateContent = JSON.parse(updateContent);
   }
 
-  const localUserMatch = headScriptsText.match(/const localUser = ([^;]*);/);
-  if (localUserMatch) {
-    try {
-      window.localUser = JSON.parse(localUserMatch[1]);
-    } catch (e) {
-      console.warn('[spa-unpoly-nav] Could not parse localUser from the new page - leaving the previous value in place:', e);
-    }
+  const localUser = marker.getAttribute('data-local-user');
+  if (localUser !== null) {
+    window.localUser = JSON.parse(localUser);
   }
 }
 
@@ -415,7 +385,7 @@ function bindNavigationCompleted() {
     }
     microtaskScheduled = true;
     const path = window.location.pathname;
-    const scriptSyncPromise = pendingScriptSync;
+    const url = window.location.href;
 
     queueMicrotask(() => {
       microtaskScheduled = false;
@@ -424,6 +394,9 @@ function bindNavigationCompleted() {
         isFirstBurst = false;
         return;
       }
+
+      const scriptSyncPromise = pendingScriptSyncs.get(url) || lastScriptSync;
+      pendingScriptSyncs.delete(url);
 
       runCompletion(path, scriptSyncPromise);
     });
@@ -485,7 +458,6 @@ function initSPANavigation() {
   window.__friendica_unpoly_nav_initialized = true;
 
   configureUnpoly();
-  bindFancyboxHistoryMarker();
   bindResponseHooks();
   bindNavigationCompleted();
   bindLoadingIndicatorHooks();
