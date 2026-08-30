@@ -1975,9 +1975,13 @@ class Item
 
 		if ($update) {
 			// The "self" contact id is used (for example in the connectors) when the contact is unknown
-			// So we have to ensure to only update the last item when it had been our own post,
+			// So we have to ensure to only update the last item when it had been our own content,
 			// or it had been done by a "regular" contact.
-			if (!empty($arr['wall'])) {
+			// Our own content is a post or activity we created for a federated network, but not a technical activity like "view".
+			$own_content = !empty($arr['origin'])
+				&& in_array($arr['network'], Protocol::FEDERATED)
+				&& !in_array($arr['verb'], Activity::TECHNICAL_ACTIVITIES);
+			if ($own_content) {
 				$condition = ['id' => $arr['contact-id']];
 			} else {
 				$condition = ['id' => $arr['contact-id'], 'self' => false];
