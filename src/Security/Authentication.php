@@ -126,6 +126,8 @@ class Authentication
 					if ($this->config->get('system', 'paranoia')) {
 						$this->session->set('addr', $this->cookie->get('ip'));
 					}
+				} else {
+					User::updateLastActivity($user, false);
 				}
 			}
 		}
