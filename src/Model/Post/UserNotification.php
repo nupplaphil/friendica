@@ -577,6 +577,7 @@ class UserNotification
 	private static function checkActivityParticipation(array $item, array $contacts): bool
 	{
 		$condition = ['parent' => $item['parent'], 'author-id' => $contacts, 'deleted' => false, 'gravity' => Item::GRAVITY_ACTIVITY];
+		$condition = DBA::mergeConditions($condition, ["NOT `verb` IN (?, ?, ?)", Activity::FOLLOW, Activity::VIEW, Activity::READ]);
 		return Post::exists($condition);
 	}
 
