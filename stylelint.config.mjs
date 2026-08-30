@@ -32,6 +32,15 @@ export default {
 		"no-descending-specificity": null,
 
 		/**
+		 * remixicon is an icon font: its glyphs live in the private use area,
+		 * so a generic fallback would render tofu boxes instead of an icon.
+		 * Leaving the fallback out is deliberate, every other family needs one.
+		 */
+		"font-family-no-missing-generic-family-keyword": [true, {
+			ignoreFontFamilies: ["remixicon"],
+		}],
+
+		/**
 		 * Consecutive duplicates with different values are the usual
 		 * fallback-then-override pattern, not a mistake.
 		 */

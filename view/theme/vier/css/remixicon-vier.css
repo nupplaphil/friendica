@@ -7,7 +7,7 @@
 /* Compatibility layer for legacy Vier icon class names using Remix Icon */
 [class^="icon-"],
 [class*=" icon-"] {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: inherit;
@@ -20,7 +20,7 @@
 [class*=" icon-"]::before,
 .small-pencil::before,
 .savedsearchdrop::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: inherit;
@@ -30,7 +30,7 @@
 }
 
 .icon::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: inherit;

@@ -55,7 +55,7 @@
 	}
 		.sorter-mvup::before {
 			content: '\ea78';
-			font-family: "remixicon", sans-serif;
+			font-family: "remixicon";
 			font-size: 14px;
 			line-height: 24px;
 		}
@@ -64,7 +64,7 @@
 	}
 		.sorter-mvdn::before {
 			content: '\ea4e';
-			font-family: "remixicon", sans-serif;
+			font-family: "remixicon";
 			font-size: 14px;
 			line-height: 24px;
 		}

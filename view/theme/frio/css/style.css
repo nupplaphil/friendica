@@ -1367,12 +1367,12 @@ aside .widget li.selected a {
 
 /* Widget caret expand/collapse symbols */
 .widget .fakelink[aria-expanded="false"] h3::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\EA6E";
 }
 
 .widget .fakelink[aria-expanded="true"] h3::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\EA4E";
 }
 
@@ -1778,11 +1778,11 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 }
 /* ACL */
 .ri.lock:before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\eece";
 }
 .ri.unlock:before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\eed2";
 }
 
@@ -3564,14 +3564,14 @@ details[open].panel::details-content {
 details.profile-jot-net[open] summary::before,
 details[open].panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\ea4e";
 	padding-right: 5px;
 }
 details.profile-jot-net summary::before,
 details.panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle.collapsed::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\ea6e";
 	padding-right: 5px;
 }
@@ -3613,7 +3613,7 @@ details.profile-jot-net[open] summary:before {
 #frio-accents input[type="radio"]:checked + label::before {
 	content: '\eb7b';
 	color: white;
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	font-weight: normal;
 	font-size: 18px;
 }
@@ -3896,7 +3896,7 @@ li.addon {
 	transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 #adminpage li .icon.on:after {
-	font-family: "remixicon", sans-serif;
+	font-family: "remixicon";
 	content: "\eb7b";
 	display: inline-block;
 	position: absolute;

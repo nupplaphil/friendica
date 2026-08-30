@@ -194,7 +194,7 @@ aside.show {
 .tabs .tab { display: none;}
 .tabs .tab.active { display: block; }
 .tabs::after {
-  font-family: remixicon, sans-serif;
+  font-family: remixicon;
 	text-align: right;
   content: "\ea4e";
 	display: block;

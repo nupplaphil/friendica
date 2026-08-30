@@ -2991,13 +2991,13 @@ a.mail-list-link {
 	}
 	details.settings-section > summary::before,
 	details.settings-subsection > summary::before {
-		font-family: remixicon, sans-serif;
+		font-family: remixicon;
 		content: "\ea6e";
 		padding-right: 5px;
 	}
 	details[open].settings-section > summary::before,
 	details[open].settings-subsection > summary::before {
-		font-family: remixicon, sans-serif;
+		font-family: remixicon;
 		content: "\ea4e";
 		padding-right: 5px;
 	}
@@ -3227,7 +3227,7 @@ a.btn#contact-edit-actions-button {
 			}
 				.fbrowser .folders ul li a::before {
 					content: '\f3ca';
-					font-family: 'remixicon', sans-serif;
+					font-family: 'remixicon';
 					margin-right: 5px;
 				}
 				.fbrowser .folders ul li a:hover,
@@ -3264,11 +3264,11 @@ a.btn#contact-edit-actions-button {
 		#upload-photo::before,
 		#upload-attachment::before {
 		  content: '\f4b1';
-		  font-family: 'remixicon', sans-serif;
+		  font-family: 'remixicon';
 		}
 		.fbrowser.attachment a[data-img]::before{
 		content: '\eceb';
-		font-family: 'remixicon', sans-serif;
+		font-family: 'remixicon';
 		font-size: 72px;
 		position: relative;
 		top: 0;
