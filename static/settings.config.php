@@ -167,7 +167,8 @@ return [
 
 		// logfile (String)
 		// The logfile for storing logs.
-		// Can be a full path or a relative path to the Friendica home directory
+		// Can be a full path, a relative path to the Friendica home directory,
+		// or a stream wrapper URL like 'php://stdout' to log to the process' output.
 		'logfile' => 'log/friendica.log',
 
 		// loglevel (String)
