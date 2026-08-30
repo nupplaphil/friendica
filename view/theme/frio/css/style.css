@@ -2808,8 +2808,8 @@ p.wall-item-announce,
 	color: #636363;
 }
 
-/* Darker text color for help-blocks in settings because they're more prevalent and important there */
-.settings-content-wrapper .help-block {
+/* Higher text contrast for help-blocks in settings because they're more prevalent and important there */
+.settings-content-wrapper .help-block, .admin-content-wrapper .help-block {
 	color: $font_color_darker;
 }
 
