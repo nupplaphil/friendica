@@ -51,7 +51,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf(
 			NullLogger::class,
-			$this->captureErrorLog(fn () => $factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)),
+			$this->captureErrorLog(fn (): \Psr\Log\LoggerInterface => $factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)),
 		);
 
 		$this->assertStringContainsString(
@@ -77,7 +77,7 @@ class DelegatingLoggerFactoryTest extends TestCase
 
 		$this->assertInstanceOf(
 			NullLogger::class,
-			$this->captureErrorLog(fn () => $factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)),
+			$this->captureErrorLog(fn (): \Psr\Log\LoggerInterface => $factory->createLogger(LogLevel::DEBUG, LogChannel::DEFAULT)),
 		);
 
 		$this->assertStringContainsString(
