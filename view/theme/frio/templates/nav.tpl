@@ -22,7 +22,7 @@
 
 					<div id="site-location" aria-hidden="true">{{$sitelocation}}</div>
 					<div id="banner" class="hidden-sm hidden-xs">
-						<a href="{{$baseurl}}" aria-hidden="true">
+						<a href="{{$baseurl}}/" aria-hidden="true">
 							<i id="logo-img" aria-label="{{$home}}" class="ri ri-friendica-fill ri-fw ri-lg" aria-hidden="true"></i>
 						</a>
 					</div>
@@ -56,7 +56,7 @@
 							<button class="sr-only" onclick="document.getElementById('content').scrollIntoView(); document.getElementById('content').focus();">{{$skip}}</button>
 						</li>
 						<li class="sr-only">
-							<a class="sr-only" href="{{$baseurl}}">{{$home}}</a>
+							<a class="sr-only" href="{{$baseurl}}/">{{$home}}</a>
 						</li>
 
 						{{if $nav.back}}
