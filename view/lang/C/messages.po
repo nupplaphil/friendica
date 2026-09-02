@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-28 12:24+0000\n"
+"POT-Creation-Date: 2026-09-02 00:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Insert web link"
 msgstr ""
 
-#: mod/message.php:192 mod/message.php:348 src/App/Page.php:278
+#: mod/message.php:192 mod/message.php:348 src/App/Page.php:279
 #: src/Content/Conversation/ConversationRenderer.php:539
 #: src/Content/Conversation/PostTemplateBuilder.php:393
 #: src/Content/Conversation/StatusEditor.php:182
@@ -450,128 +450,128 @@ msgstr ""
 msgid "Apologies but the website is unavailable at the moment."
 msgstr ""
 
-#: src/App/Page.php:230
+#: src/App/Page.php:231
 msgid "Delete this item?"
 msgstr ""
 
-#: src/App/Page.php:231
+#: src/App/Page.php:232
 msgid "Block this author? They won't be able to follow you nor see your public posts, and you won't be able to see their posts and their notifications."
 msgstr ""
 
-#: src/App/Page.php:232
+#: src/App/Page.php:233
 msgid "Ignore this author? You won't be able to see their posts and their notifications."
 msgstr ""
 
-#: src/App/Page.php:233
+#: src/App/Page.php:234
 msgid "Collapse this author's posts?"
 msgstr ""
 
-#: src/App/Page.php:234
+#: src/App/Page.php:235
 msgid "Ignore this author's server?"
 msgstr ""
 
-#: src/App/Page.php:235 src/Module/Settings/Server/Action.php:36
+#: src/App/Page.php:236 src/Module/Settings/Server/Action.php:36
 #: src/Module/Settings/Server/Index.php:101
 msgid "You won't see any content from this server including reshares in your Network page, the community pages and individual conversations."
 msgstr ""
 
-#: src/App/Page.php:237
+#: src/App/Page.php:238
 msgid "Like not successful"
 msgstr ""
 
-#: src/App/Page.php:238
+#: src/App/Page.php:239
 msgid "Dislike not successful"
 msgstr ""
 
-#: src/App/Page.php:239
+#: src/App/Page.php:240
 msgid "Sharing not successful"
 msgstr ""
 
-#: src/App/Page.php:240
+#: src/App/Page.php:241
 msgid "Attendance unsuccessful"
 msgstr ""
 
-#: src/App/Page.php:241
+#: src/App/Page.php:242
 msgid "Backend error"
 msgstr ""
 
-#: src/App/Page.php:242
+#: src/App/Page.php:243
 msgid "Network error"
 msgstr ""
 
-#: src/App/Page.php:245
+#: src/App/Page.php:246
 msgid "Drop files here to upload"
 msgstr ""
 
-#: src/App/Page.php:246
+#: src/App/Page.php:247
 msgid "Your browser does not support drag and drop file uploads."
 msgstr ""
 
-#: src/App/Page.php:247
+#: src/App/Page.php:248
 msgid "Please use the fallback form below to upload your files like in the olden days."
 msgstr ""
 
-#: src/App/Page.php:248
+#: src/App/Page.php:249
 msgid "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."
 msgstr ""
 
-#: src/App/Page.php:249
+#: src/App/Page.php:250
 msgid "You can't upload files of this type."
 msgstr ""
 
-#: src/App/Page.php:250
+#: src/App/Page.php:251
 msgid "Server responded with {{statusCode}} code."
 msgstr ""
 
-#: src/App/Page.php:251
+#: src/App/Page.php:252
 msgid "Cancel upload"
 msgstr ""
 
-#: src/App/Page.php:252
+#: src/App/Page.php:253
 msgid "Upload canceled."
 msgstr ""
 
-#: src/App/Page.php:253
+#: src/App/Page.php:254
 msgid "Are you sure you want to cancel this upload?"
 msgstr ""
 
-#: src/App/Page.php:254
+#: src/App/Page.php:255
 msgid "Remove file"
 msgstr ""
 
-#: src/App/Page.php:255
+#: src/App/Page.php:256
 msgid "You can't upload any more files."
 msgstr ""
 
-#: src/App/Page.php:268
+#: src/App/Page.php:269
 msgid "Fetching..."
 msgstr ""
 
-#: src/App/Page.php:269
+#: src/App/Page.php:270
 msgid "Receiving data..."
 msgstr ""
 
-#: src/App/Page.php:270
+#: src/App/Page.php:271
 msgid "Processing..."
 msgstr ""
 
-#: src/App/Page.php:271
+#: src/App/Page.php:272
 msgid "Posting..."
 msgstr ""
 
-#: src/App/Page.php:276
+#: src/App/Page.php:277
 msgid "Timeout"
 msgstr ""
 
-#: src/App/Page.php:277
+#: src/App/Page.php:278
 msgid "The request took too long. Please try again."
 msgstr ""
 
-#: src/App/Page.php:354
+#: src/App/Page.php:355
 msgid "toggle mobile"
 msgstr ""
 
-#: src/App/Page.php:365 src/Module/Admin/Logs/View.php:91
+#: src/App/Page.php:366 src/Module/Admin/Logs/View.php:91
 #: src/Module/Item/Compose.php:336 src/Module/Media/Attachment/Browser.php:69
 #: src/Module/Media/Photo/Browser.php:81 view/theme/frio/php/minimal.php:39
 msgid "Close"
@@ -1053,100 +1053,100 @@ msgid_plural "<button type=\"button\" %2$s>%1$d people</button> reshared this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:882
 #: src/Content/Conversation/ConversationDataProvider.php:885
 #: src/Content/Conversation/ConversationDataProvider.php:888
 #: src/Content/Conversation/ConversationDataProvider.php:891
 #: src/Content/Conversation/ConversationDataProvider.php:894
+#: src/Content/Conversation/ConversationDataProvider.php:897
 #, php-format
 msgid "You had been addressed (%s)."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:897
+#: src/Content/Conversation/ConversationDataProvider.php:900
 #, php-format
 msgid "You are following %s."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:901
+#: src/Content/Conversation/ConversationDataProvider.php:904
 msgid "You subscribed to one or more tags in this post."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:901
+#: src/Content/Conversation/ConversationDataProvider.php:904
 #, php-format
 msgid "You subscribed to %s."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:919
+#: src/Content/Conversation/ConversationDataProvider.php:922
 #, php-format
 msgid "%s reshared this."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:921
+#: src/Content/Conversation/ConversationDataProvider.php:924
 msgid "Reshared"
-msgstr ""
-
-#: src/Content/Conversation/ConversationDataProvider.php:921
-#, php-format
-msgid "Reshared by %s <%s>"
 msgstr ""
 
 #: src/Content/Conversation/ConversationDataProvider.php:924
 #, php-format
-msgid "%s is participating in this thread."
+msgid "Reshared by %s <%s>"
 msgstr ""
 
 #: src/Content/Conversation/ConversationDataProvider.php:927
-msgid "Stored for general reasons"
+#, php-format
+msgid "%s is participating in this thread."
 msgstr ""
 
 #: src/Content/Conversation/ConversationDataProvider.php:930
+msgid "Stored for general reasons"
+msgstr ""
+
+#: src/Content/Conversation/ConversationDataProvider.php:933
 msgid "Global post"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:933
+#: src/Content/Conversation/ConversationDataProvider.php:936
 msgid "Sent via an relay server"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:933
+#: src/Content/Conversation/ConversationDataProvider.php:936
 #, php-format
 msgid "Sent via the relay server %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:936
+#: src/Content/Conversation/ConversationDataProvider.php:939
 msgid "Fetched"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:936
+#: src/Content/Conversation/ConversationDataProvider.php:939
 #, php-format
 msgid "Fetched because of %s <%s>"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:939
+#: src/Content/Conversation/ConversationDataProvider.php:942
 msgid "Stored because of a child post to complete this thread."
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:942
+#: src/Content/Conversation/ConversationDataProvider.php:945
 msgid "Local delivery"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:945
+#: src/Content/Conversation/ConversationDataProvider.php:948
 msgid "Stored because of your activity (like, comment, bookmark, ...)"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:948
+#: src/Content/Conversation/ConversationDataProvider.php:951
 msgid "Distributed"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:951
+#: src/Content/Conversation/ConversationDataProvider.php:954
 msgid "Pushed to us"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:956
+#: src/Content/Conversation/ConversationDataProvider.php:959
 #, php-format
 msgid "Channel \"%s\": %s"
 msgstr ""
 
-#: src/Content/Conversation/ConversationDataProvider.php:956
+#: src/Content/Conversation/ConversationDataProvider.php:959
 #, php-format
 msgid "Channel \"%s\""
 msgstr ""
@@ -1974,7 +1974,7 @@ msgid "Display posts that have been created by accounts of the selected circle."
 msgstr ""
 
 #: src/Content/Feature.php:129 src/Content/GroupManager.php:95
-#: src/Content/Nav.php:243 src/Content/Text/HTML.php:886
+#: src/Content/Nav.php:243 src/Content/Text/HTML.php:902
 #: src/Content/Widget.php:564 src/Model/User.php:1418
 msgid "Groups"
 msgstr ""
@@ -2112,7 +2112,7 @@ msgstr ""
 msgid "Find groups to join"
 msgstr ""
 
-#: src/Content/Item.php:328 src/Model/Item.php:2857
+#: src/Content/Item.php:328 src/Model/Item.php:2861
 msgid "event"
 msgstr ""
 
@@ -2121,7 +2121,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#: src/Content/Item.php:335 src/Model/Item.php:2859
+#: src/Content/Item.php:335 src/Model/Item.php:2863
 #: src/Module/Post/Tag/Add.php:117
 msgid "photo"
 msgstr ""
@@ -2159,9 +2159,12 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: src/Content/Item.php:431 src/Model/Contact.php:1298
-#: src/Model/Contact.php:1309
-msgid "View Contact"
+#: src/Content/Item.php:431 src/Content/Nav.php:295 src/Model/Contact.php:1298
+#: src/Model/Contact.php:1309 src/Module/Admin/Addons/Details.php:140
+#: src/Module/Admin/Themes/Details.php:85 src/Module/BaseAdmin.php:89
+#: src/Module/BaseSettings.php:177 src/Module/Welcome.php:39
+#: view/theme/frio/theme.php:231
+msgid "Settings"
 msgstr ""
 
 #: src/Content/Item.php:433 src/Module/Contact.php:453
@@ -2216,7 +2219,7 @@ msgstr ""
 msgid "My Profile"
 msgstr ""
 
-#: src/Content/Nav.php:100 src/Content/Nav.php:271 src/Module/Help.php:68
+#: src/Content/Nav.php:100 src/Content/Nav.php:271 src/Module/Help.php:70
 #: view/theme/frio/theme.php:228
 msgid "Home"
 msgstr ""
@@ -2287,7 +2290,7 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: src/Content/Nav.php:226 src/Module/Help.php:54
+#: src/Content/Nav.php:226 src/Module/Help.php:42
 #: src/Module/Settings/TwoFactor/AppSpecific.php:130
 #: src/Module/Settings/TwoFactor/Index.php:125
 #: src/Module/Settings/TwoFactor/Recovery.php:96
@@ -2307,7 +2310,7 @@ msgstr ""
 msgid "Addon applications, utilities, games"
 msgstr ""
 
-#: src/Content/Nav.php:234 src/Content/Text/HTML.php:871
+#: src/Content/Nav.php:234 src/Content/Text/HTML.php:887
 #: src/Module/Moderation/Blocklist/Contact.php:112
 #: src/Module/Moderation/Blocklist/Server/Index.php:103
 #: src/Module/Search/Index.php:99
@@ -2318,17 +2321,17 @@ msgstr ""
 msgid "Search site content"
 msgstr ""
 
-#: src/Content/Nav.php:237 src/Content/Text/HTML.php:880
+#: src/Content/Nav.php:237 src/Content/Text/HTML.php:896
 msgid "Full Text"
 msgstr ""
 
-#: src/Content/Nav.php:238 src/Content/Text/HTML.php:881
+#: src/Content/Nav.php:238 src/Content/Text/HTML.php:897
 #: src/Content/Widget/TagCloud.php:54
 msgid "Tags"
 msgstr ""
 
 #: src/Content/Nav.php:239 src/Content/Nav.php:297
-#: src/Content/Text/HTML.php:882 src/Module/BaseProfile.php:112
+#: src/Content/Text/HTML.php:898 src/Module/BaseProfile.php:112
 #: src/Module/BaseProfile.php:115 src/Module/Contact.php:191
 #: src/Module/Contact.php:409 src/Module/Contact.php:519
 #: view/theme/frio/theme.php:232
@@ -2424,13 +2427,6 @@ msgstr ""
 msgid "Add Account"
 msgstr ""
 
-#: src/Content/Nav.php:295 src/Module/Admin/Addons/Details.php:140
-#: src/Module/Admin/Themes/Details.php:85 src/Module/BaseAdmin.php:89
-#: src/Module/BaseSettings.php:177 src/Module/Welcome.php:39
-#: view/theme/frio/theme.php:231
-msgid "Settings"
-msgstr ""
-
 #: src/Content/Nav.php:295
 msgid "Account settings"
 msgstr ""
@@ -2510,12 +2506,12 @@ msgstr ""
 msgid "<a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a> %3$s"
 msgstr ""
 
-#: src/Content/Text/BBCode.php:938 src/Model/Item.php:3705
-#: src/Model/Item.php:3711 src/Model/Item.php:3712
+#: src/Content/Text/BBCode.php:938 src/Model/Item.php:3709
+#: src/Model/Item.php:3715 src/Model/Item.php:3716
 msgid "Link to source"
 msgstr ""
 
-#: src/Content/Text/BBCode.php:1737 src/Content/Text/HTML.php:910
+#: src/Content/Text/BBCode.php:1737 src/Content/Text/HTML.php:926
 msgid "Click to open/close"
 msgstr ""
 
@@ -2535,19 +2531,19 @@ msgstr ""
 msgid "Invalid link protocol"
 msgstr ""
 
-#: src/Content/Text/HTML.php:788
+#: src/Content/Text/HTML.php:804
 msgid "Loading more entries..."
 msgstr ""
 
-#: src/Content/Text/HTML.php:789
+#: src/Content/Text/HTML.php:805
 msgid "The end"
 msgstr ""
 
-#: src/Content/Text/HTML.php:865
+#: src/Content/Text/HTML.php:881
 msgid "Save search"
 msgstr ""
 
-#: src/Content/Text/HTML.php:873
+#: src/Content/Text/HTML.php:889
 msgid "@name, !group, #tags, content"
 msgstr ""
 
@@ -3626,84 +3622,84 @@ msgstr ""
 msgid "Happy Birthday %s"
 msgstr ""
 
-#: src/Model/Item.php:2861
+#: src/Model/Item.php:2865
 msgid "activity"
 msgstr ""
 
-#: src/Model/Item.php:2863
+#: src/Model/Item.php:2867
 msgid "comment"
 msgstr ""
 
-#: src/Model/Item.php:2866 src/Module/Post/Tag/Add.php:117
+#: src/Model/Item.php:2870 src/Module/Post/Tag/Add.php:117
 msgid "post"
-msgstr ""
-
-#: src/Model/Item.php:3058
-#, php-format
-msgid "%s is blocked"
-msgstr ""
-
-#: src/Model/Item.php:3060
-#, php-format
-msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3062
 #, php-format
-msgid "Content from %s is collapsed"
+msgid "%s is blocked"
+msgstr ""
+
+#: src/Model/Item.php:3064
+#, php-format
+msgid "%s is ignored"
 msgstr ""
 
 #: src/Model/Item.php:3066
+#, php-format
+msgid "Content from %s is collapsed"
+msgstr ""
+
+#: src/Model/Item.php:3070
 msgid "Sensitive content"
 msgstr ""
 
-#: src/Model/Item.php:3573
+#: src/Model/Item.php:3577
 msgid "bytes"
 msgstr ""
 
-#: src/Model/Item.php:3607
+#: src/Model/Item.php:3611
 #, php-format
 msgid "The media in this post is not displayed to visitors. To view it, please go to the <a href=\"%s\">original post</a>."
 msgstr ""
 
-#: src/Model/Item.php:3609
+#: src/Model/Item.php:3613
 msgid "The media in this post is not displayed to visitors. To view it, please log in."
 msgstr ""
 
-#: src/Model/Item.php:3634
+#: src/Model/Item.php:3638
 #, php-format
 msgid "%2$s (%3$d%%, %1$d vote)"
 msgid_plural "%2$s (%3$d%%, %1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3636
+#: src/Model/Item.php:3640
 #, php-format
 msgid "%2$s (%1$d vote)"
 msgid_plural "%2$s (%1$d votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3641
+#: src/Model/Item.php:3645
 #, php-format
 msgid "%d voter. Poll end: %s"
 msgid_plural "%d voters. Poll end: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3643
+#: src/Model/Item.php:3647
 #, php-format
 msgid "%d voter."
 msgid_plural "%d voters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Model/Item.php:3645
+#: src/Model/Item.php:3649
 #, php-format
 msgid "Poll end: %s"
 msgstr ""
 
-#: src/Model/Item.php:3688 src/Model/Item.php:3689
+#: src/Model/Item.php:3692 src/Model/Item.php:3693
 #: src/Module/Calendar/Event/Show.php:80
 msgid "View related post"
 msgstr ""
@@ -3895,11 +3891,11 @@ msgstr ""
 msgid "Invalid OpenID url"
 msgstr ""
 
-#: src/Model/User.php:1253 src/Security/Authentication.php:205
+#: src/Model/User.php:1253 src/Security/Authentication.php:207
 msgid "We encountered a problem while logging in with the OpenID you provided. Please check the correct spelling of the ID."
 msgstr ""
 
-#: src/Model/User.php:1253 src/Security/Authentication.php:205
+#: src/Model/User.php:1253 src/Security/Authentication.php:207
 msgid "The error message was:"
 msgstr ""
 
@@ -7388,7 +7384,7 @@ msgstr ""
 msgid "Method Not Allowed."
 msgstr ""
 
-#: src/Module/Help.php:47
+#: src/Module/Help.php:46
 msgid "Help:"
 msgstr ""
 
@@ -12712,24 +12708,24 @@ msgstr ""
 msgid "The folder %s must be writable by webserver."
 msgstr ""
 
-#: src/Security/Authentication.php:190
+#: src/Security/Authentication.php:192
 msgid "Login failed."
 msgstr ""
 
-#: src/Security/Authentication.php:235
+#: src/Security/Authentication.php:237
 msgid "Login failed. Please check your credentials."
 msgstr ""
 
-#: src/Security/Authentication.php:241
+#: src/Security/Authentication.php:243
 msgid "Login failed because your account is blocked."
 msgstr ""
 
-#: src/Security/Authentication.php:363
+#: src/Security/Authentication.php:365
 #, php-format
 msgid "Welcome %s"
 msgstr ""
 
-#: src/Security/Authentication.php:364
+#: src/Security/Authentication.php:366
 msgid "Please upload a profile photo."
 msgstr ""
 

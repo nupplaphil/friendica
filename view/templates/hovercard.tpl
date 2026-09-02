@@ -65,12 +65,6 @@
 					</a>
 				{{/if}}
 
-				{{if $profile.actions.network}}
-					<a class="btn btn-labeled btn-primary btn-sm" href="{{$profile.actions.network.1}}">
-							<i class="ri ri-{{($profile.contact_type==3) ? 'discuss-line' : 'cloud-line'}}" aria-hidden="true"></i>
-							<span class="action-label">{{$profile.actions.network.0}}</span>
-					</a>
-				{{/if}}
 				{{if $profile.actions.edit}}
 					<a class="btn btn-labeled btn-primary btn-sm" href="{{$profile.actions.edit.1}}">
 						<i class="ri ri-user-line" aria-hidden="true"></i>
