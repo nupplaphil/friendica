@@ -11,6 +11,7 @@ use FFMpeg\FFMpeg;
 use Friendica\Content\PageInfo;
 use Friendica\Content\Post\Entity\PostMedia;
 use Friendica\Content\Text\BBCode;
+use Friendica\Core\Cache\Enum\Duration;
 use Friendica\Core\Protocol;
 use Friendica\Core\System;
 use Friendica\Database\Database;
@@ -897,6 +898,38 @@ class Media
 		DI::logger()->debug('Detected HLS resolutions', ['uri-id' => $media['uri-id'], 'url' => $media['url'], 'resolution' => $resolution]);
 
 		return $media;
+	}
+
+	/**
+	 * Resolve an HLS playlist URL to the address the browser finally ends up on
+	 *
+	 * Some sites hand out a permalink that only redirects
+	 * to a CDN. A browser following that redirect fails CORS on the intermediate
+	 * response, so hls.js has to be pointed at the resolved URL directly. The
+	 * redirect target may change over time, hence this runs at render time and is
+	 * only cached for a short while.
+	 *
+	 * @param string $url Playlist URL as stored with the media
+	 * @return string Resolved URL, or the input when it can't be resolved
+	 */
+	public static function resolvePlaylistUrl(string $url): string
+	{
+		$cacheKey = 'hls-playlist-url:' . $url;
+
+		$resolved = DI::cache()->get($cacheKey);
+		if (!is_null($resolved)) {
+			return $resolved;
+		}
+
+		$curlResult = DI::httpClient()->get($url, HttpClientAccept::HLS, [HttpClientOptions::REQUEST => HttpClientRequest::MEDIAVERIFIER]);
+
+		$resolved = ($curlResult->isSuccess() && $curlResult->isRedirectUrl() && $curlResult->getRedirectUrl() !== '')
+			? $curlResult->getRedirectUrl()
+			: $url;
+
+		DI::cache()->set($cacheKey, $resolved, Duration::QUARTER_HOUR);
+
+		return $resolved;
 	}
 
 	/**

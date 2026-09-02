@@ -543,8 +543,10 @@ class PostMedia extends BaseRepository
 			}
 			$media = Renderer::replaceMacros(Renderer::getMarkupTemplate($template), [
 				'$video' => [
-					'id'          => $postMedia->id,
-					'src'         => (string) $postMedia->url,
+					'id'  => $postMedia->id,
+					'src' => $postMedia->type == PostMediaEntity::TYPE_HLS
+						? Post\Media::resolvePlaylistUrl((string) $postMedia->url)
+						: (string) $postMedia->url,
 					'name'        => $postMedia->name ?: $postMedia->url,
 					'preview'     => $preview_url,
 					'mime'        => (string) $postMedia->mimetype,
