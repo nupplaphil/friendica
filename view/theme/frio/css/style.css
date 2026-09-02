@@ -2449,6 +2449,9 @@ button[disabled] {
 	margin: 0 0 0 15px;
 	line-height: 40px;		/* align with icons */
 }
+.wall-item-actions .checkbox label::after {
+	line-height: 1;
+}
 @media screen and (max-width: 767px) {
 	.wall-item-actions .btn,
 	.wall-item-actions a,
