@@ -165,7 +165,7 @@
 				}
 
 				if (isNewPost) {
-					let alertHandler = function() {
+					let newPostHandler = function() {
 						// find our new post (has edit button)
 						let newPostElement = null;
 						$('.toplevel_item').each(function() {
@@ -175,28 +175,35 @@
 							}
 						});
 
+						const yMaxScroll = 1300;
+
 						if (newPostElement) {
-							let postId = newPostElement.attr('id');
-							let alertHtml = '<div id="post-published-alert" class="alert alert-info alert-dismissible" role="alert">' +
-								'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-								aStr.postPublished + ' ' +
-								'<a href="#' + postId + '" class="alert-link" onclick="goToElement(\'' + postId + '\'); return false;">' + aStr.goToPost + '</a>' +
-								'</div>';
+							if (window.scrollY < yMaxScroll) {
+								$('html, body').animate({ scrollTop: 0 }, 400);
+							}
+							else {
+								let postId = newPostElement.attr('id');
+								let alertHtml = '<div id="post-published-alert" class="alert alert-info alert-dismissible" role="alert">' +
+									'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+									aStr.postPublished + ' ' +
+									'<a href="#' + postId + '" class="alert-link" onclick="goToElement(\'' + postId + '\'); return false;">' + aStr.goToPost + '</a>' +
+									'</div>';
 
-							$('#post-published-alert').remove();
-							$('body').append(alertHtml);
+								$('#post-published-alert').remove();
+								$('body').append(alertHtml);
 
-							// auto-dismiss after 5 seconds
-							setTimeout(function() {
-								$('#post-published-alert').fadeOut(400, function() {
-									$(this).remove();
-								});
-							}, 5000);
+								// auto-dismiss after 5 seconds
+								setTimeout(function() {
+									$('#post-published-alert').fadeOut(400, function() {
+										$(this).remove();
+									});
+								}, 5000);
+							}
 						}
 
-						document.removeEventListener('postprocess_liveupdate', alertHandler);
+						document.removeEventListener('postprocess_liveupdate', newPostHandler);
 					};
-					document.addEventListener('postprocess_liveupdate', alertHandler);
+					document.addEventListener('postprocess_liveupdate', newPostHandler);
 				}
 
 				NavUpdate();
