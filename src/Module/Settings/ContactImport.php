@@ -120,7 +120,7 @@ class ContactImport extends BaseSettings
 			'$importcontact_text'    => $this->l10n->t('Upload a CSV file that contains the handle of your followed accounts in the first column you exported from the old account. Your contacts will be added in the background. This can take some time.'),
 			'$importcontact_button'  => $this->l10n->t('Upload File'),
 			'$importcontact_maxsize' => $this->config->get('system', 'max_csv_file_size', 30720),
-			'$legacy_contact'        => ['legacy_contact', $this->t('Your legacy ActivityPub/GNU Social account'), '', $this->t('If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format user@domain.tld), your contacts will be added in the background. This can take some time.')],
+			'$legacy_contact'        => ['legacy_contact', $this->t('Your legacy ActivityPub/GNU Social account'), '', $this->t('If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format %s), your contacts will be added in the background. This can take some time.', 'user@domain.tld')],
 		]);
 	}
 

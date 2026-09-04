@@ -102,7 +102,7 @@ class RemoteFollow extends BaseModule
 		$tpl = Renderer::getMarkupTemplate('auto_request.tpl');
 		return Renderer::replaceMacros($tpl, [
 			'$header'       => $this->t('Friend/Connection Request'),
-			'$page_desc'    => $this->t('Enter your Webfinger address (user@domain.tld) or profile URL here. If this isn\'t supported by your system, you have to subscribe to <strong>%s</strong> or <strong>%s</strong> directly on your system.', $target_addr, $target_url),
+			'$page_desc'    => $this->t('Enter your Webfinger address (%s) or profile URL here. If this isn\'t supported by your system, you have to subscribe to <strong>%s</strong> or <strong>%s</strong> directly on your system.', 'user@domain.tld', $target_addr, $target_url),
 			'$invite_desc'  => $this->t('If you are not yet a member of the free social web, <a href="%s">follow this link to find a public Friendica node and join us today</a>.', Search::getGlobalDirectory() . '/servers'),
 			'$your_address' => $this->t('Your Webfinger address or profile URL:'),
 			'$pls_answer'   => $this->t('Please answer the following:'),

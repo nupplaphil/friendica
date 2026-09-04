@@ -315,7 +315,7 @@ class ACL
 			'$allow_label'     => DI::l10n()->t('Show to:'),
 			'$deny_label'      => DI::l10n()->t('Except to:'),
 			'$emailcc'         => DI::l10n()->t('CC: email addresses'),
-			'$emtitle'         => DI::l10n()->t('Example: bob@example.com, mary@example.com'),
+			'$emtitle'         => DI::l10n()->t('Example: %s, %s', 'bob@example.com', 'mary@example.com'),
 			'$jotnets_summary' => DI::l10n()->t('Connectors'),
 			'$visibility'      => $visibility,
 			'$acl_contacts'    => json_encode($acl_contacts),

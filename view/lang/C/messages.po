@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 00:23+0200\n"
+"POT-Creation-Date: 2026-09-03 18:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2555,10 +2555,6 @@ msgstr ""
 msgid "Enter address or web location"
 msgstr ""
 
-#: src/Content/Widget.php:38
-msgid "user@x.tld, x.tld/user"
-msgstr ""
-
 #: src/Content/Widget.php:40
 msgid "Connect"
 msgstr ""
@@ -2827,8 +2823,9 @@ msgstr ""
 msgid "CC: email addresses"
 msgstr ""
 
-#: src/Core/ACL.php:318 src/Module/Post/Edit.php:173
-msgid "Example: bob@example.com, mary@example.com"
+#: src/Core/ACL.php:318
+#, php-format
+msgid "Example: %s, %s"
 msgstr ""
 
 #: src/Core/ACL.php:319
@@ -2853,7 +2850,8 @@ msgid "Could not find a command line version of PHP in the web server PATH."
 msgstr ""
 
 #: src/Core/Installer.php:262
-msgid "If you don't have a command line version of PHP installed on your server, you will not be able to run the background processing. See <a href='https://github.com/friendica/friendica/blob/stable/doc/Install.md#set-up-the-worker'>'Setup the worker'</a>"
+#, php-format
+msgid "If you don't have a command line version of PHP installed on your server, you will not be able to run the background processing. See <a href='%s'>'Setup the worker'</a>"
 msgstr ""
 
 #: src/Core/Installer.php:267
@@ -4740,7 +4738,8 @@ msgid "Relocating your node enables you to change the DNS domain of this node an
 msgstr ""
 
 #: src/Module/Admin/Site.php:477
-msgid "(Friendica directory)# bin/console relocate https://newdomain.com"
+#, php-format
+msgid "(Friendica directory)# bin/console relocate %s"
 msgstr ""
 
 #: src/Module/Admin/Site.php:480
@@ -7361,7 +7360,8 @@ msgid "This is Friendica, version %s that is running at the web location %s. The
 msgstr ""
 
 #: src/Module/Friendica.php:117
-msgid "Please visit <a href=\"https://friendi.ca\">Friendi.ca</a> to learn more about the Friendica project."
+#, php-format
+msgid "Please visit <a href=\"%s\">Friendi.ca</a> to learn more about the Friendica project."
 msgstr ""
 
 #: src/Module/Friendica.php:118
@@ -9536,6 +9536,10 @@ msgstr ""
 msgid "Public post"
 msgstr ""
 
+#: src/Module/Post/Edit.php:173
+msgid "Example: bob@example.com, mary@example.com"
+msgstr ""
+
 #: src/Module/Post/Tag/Remove.php:98
 msgid "Remove Item Tag"
 msgstr ""
@@ -9735,7 +9739,7 @@ msgstr ""
 
 #: src/Module/Profile/RemoteFollow.php:105
 #, php-format
-msgid "Enter your Webfinger address (user@domain.tld) or profile URL here. If this isn't supported by your system, you have to subscribe to <strong>%s</strong> or <strong>%s</strong> directly on your system."
+msgid "Enter your Webfinger address (%s) or profile URL here. If this isn't supported by your system, you have to subscribe to <strong>%s</strong> or <strong>%s</strong> directly on your system."
 msgstr ""
 
 #: src/Module/Profile/RemoteFollow.php:106
@@ -10987,7 +10991,8 @@ msgid "Your legacy ActivityPub/GNU Social account"
 msgstr ""
 
 #: src/Module/Settings/ContactImport.php:123
-msgid "If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format user@domain.tld), your contacts will be added in the background. This can take some time."
+#, php-format
+msgid "If you enter your old account name from an ActivityPub based system or your GNU Social/Statusnet account name here (in the format %s), your contacts will be added in the background. This can take some time."
 msgstr ""
 
 #: src/Module/Settings/Delegation.php:51

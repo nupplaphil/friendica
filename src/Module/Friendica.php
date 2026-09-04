@@ -114,7 +114,7 @@ class Friendica extends BaseModule
 				'<strong>' . $this->config->get('system', 'build') . '/' . DB_UPDATE_VERSION . '</strong>',
 				'<strong>' . $this->keyValue->get('post_update_version') . '/' . PostUpdate::VERSION . '</strong>',
 			),
-			'friendica' => $this->t('Please visit <a href="https://friendi.ca">Friendi.ca</a> to learn more about the Friendica project.'),
+			'friendica' => $this->t('Please visit <a href="%s">Friendi.ca</a> to learn more about the Friendica project.', 'https://friendi.ca'),
 			'bugs'      => $this->t('Bug reports and issues: please visit') . ' ' . '<a href="https://github.com/friendica/friendica/issues?state=open">' . $this->t('the bugtracker at github') . '</a>',
 			'info'      => $this->t('Suggestions, praise, etc. - please email "info" at "friendi - dot - ca'),
 
