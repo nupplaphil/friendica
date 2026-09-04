@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2026.08-rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 00:23+0200\n"
+"POT-Creation-Date: 2026-09-04 10:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11176,7 +11176,7 @@ msgid "Enable SPA mode"
 msgstr ""
 
 #: src/Module/Settings/Display.php:470
-msgid "Warning - Experimental feature: This may lead to errors or unexpected behaviour. When enabled, supported page requests can use the single page application response."
+msgid "Warning - Experimental feature: This may lead to errors or unexpected behaviour. When enabled, supported pages are loaded by replacing only the main content instead of reloading the whole browser page, which makes navigation faster."
 msgstr ""
 
 #: src/Module/Settings/Display.php:471
