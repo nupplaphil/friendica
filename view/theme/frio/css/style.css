@@ -238,6 +238,15 @@ ul#nav-user-menu {
 		display: none;
 	}
 
+/* Fix parts of the main nav starting to go off screen */
+@media screen and (max-width: 1050px) {
+	#topbar-first .topbar-nav .nav-segment > a {
+		padding-left: 5px;
+		padding-right: 5px;
+		min-width: 50px;
+	}
+}
+
 /**
  * mobile: Larger screens
  */
@@ -283,6 +292,7 @@ ul#nav-user-menu {
 		padding-left: 0;
 		padding-right: 0;
 	}
+
 	/* Narrower search field if navbar labels are show */
 	body.show-nav-labels #search-box #nav-search-input-field {
 		width: 150px;
@@ -683,7 +693,7 @@ header #banner #logo-img,
 
 .topbar ul.nav > li {
 	display: grid;
-	align-items: center;
+	place-items: center;
 }
 
 .topbar .dropdown-footer {
@@ -827,14 +837,15 @@ nav.navbar .nav > li > button:focus {
   padding-left: 35px;
   padding-right: 35px;
 }
-#topbar-first .nav-segment .nav-notification {
-	position: absolute;
-	top: 2px;
-	right: -6px;
-	background-color: #ff3535;
+/* Notification badges */
+#topbar-first .nav-segment .icon-badge-container {
+	position: relative;
 }
-#topbar-first .topbar-nav .nav-segment .nav-notification {
-		right: 8px;
+#topbar-first .nav-segment .icon-badge-container .badge {
+	position: absolute;
+	top: -8px;
+	right: -19px;
+	background-color: #ff3535;
 }
 #topbar-first #intro-update {
 	cursor: pointer;
@@ -874,7 +885,6 @@ nav.navbar .nav > li > button:focus {
 	height: var(--topbar-first-size);
 }
 .topbar-nav, .topbar-actions, #topbar-first ul.nav {
-		align-items: center;
 		display: flex;
 		height: 100%;
 	}
@@ -2751,11 +2761,6 @@ ul.dropdown-menu li:hover {
 
 .dropdown-menu li:first-child {
 	margin-top: 3px;
-}
-
-/* Notification badges */
-#mail-update-li.show {
-	display: inline-block !important;
 }
 
 /* Media Classes */
@@ -4642,12 +4647,6 @@ div.login-form, .login-content-wrapper,
 		padding: 0;
 		top: 24px;
 		left: 24px;
-	}
-
-	#topbar-first .topbar-nav .nav-segment > a {
-		padding-left: 5px;
-		padding-right: 5px;
-		min-width: 50px;
 	}
 
 	/*
