@@ -20,10 +20,10 @@
 {{if $item.thread_level<3}}
 <button type="button" class="hide-comments-outer fakelink" onclick="showHideComments({{$item.id}});">
 			<span id="hide-comments-total-{{$item.id}}" class="hide-comments-total">
-				{{$item.num_comments}} - {{$item.show_text}}
+				{{$item.show_text}}
 			</span>
 	<span id="hide-comments-{{$item.id}}" class="hide-comments" style="display: none">
-				{{$item.num_comments}} - {{$item.hide_text}}
+				{{$item.hide_text}}
 			</span>
 </button>
 <div id="collapsed-comments-{{$item.id}}" class="collapsed-comments" style="display: none;">
@@ -234,7 +234,7 @@
                 {{if $item.missing > 0}}
 				<div class="wall-item-bottom">
 					<div class="wall-item-links"></div>
-					<a id="load-more-comments-{{$item.id}}" class="fakelink load-more-comments" href="#" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">{{$item.num_comments}} - {{$item.load_more_comments}}</a>
+					<a id="load-more-comments-{{$item.id}}" class="fakelink load-more-comments" href="#" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">{{$item.load_more_comments}}</a>
 					<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.loading}}" /></span>
 				</div>
                 {{/if}}

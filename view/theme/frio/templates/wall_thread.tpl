@@ -38,11 +38,11 @@ as the value of $top_child_total (this is done at the end of this file)
 		<button type="button" class="hide-comments-outer fakelink" onclick="showHideComments({{$item.id}});">
 			<span id="hide-comments-total-{{$item.id}}" class="hide-comments-total">
 					<i class="ri ri-arrow-right-s-line" aria-hidden="true"></i>
-					{{$item.num_comments}} - {{$item.show_text}}
+					{{$item.show_text}}
 				</span>
 				<span id="hide-comments-{{$item.id}}" class="hide-comments" style="display: none">
 					<i class="ri ri-arrow-down-s-line" aria-hidden="true"></i>
-				{{$item.num_comments}} - {{$item.hide_text}}
+					{{$item.hide_text}}
 			</span>
 		</button>
 		<div id="collapsed-comments-{{$item.id}}" class="collapsed-comments" style="display: none;">
@@ -612,7 +612,7 @@ as the value of $top_child_total (this is done at the end of this file)
 		<button type="button" id="load-more-comments-{{$item.id}}" class="btn-link fakelink load-more-comments hide-comments-outer" onclick="loadMoreComments('{{$item.uriid}}', {{$item.id}}, {{$item.existing_json}}); return false;">
 			<span>
 				<i class="ri ri-arrow-right-s-line" aria-hidden="true"></i>
-				{{$item.num_comments}} - {{$item.load_more_comments}}
+				{{$item.load_more_comments}}
 			</span>
 		</button>
 		<span id="load-more-loading-{{$item.id}}" class="loading-text" style="display: none;">{{$item.loading}} <img class="like-rotator" src="images/rotator.gif" alt="{{$item.loading}}" /></span>
