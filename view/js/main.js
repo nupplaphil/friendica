@@ -363,6 +363,7 @@ window.onDocumentReady('body', function() {
 			updateCounter(type, number);
 		});
 
+		/* NOTE: frio does not have intro-update-li or mail-update-li */
 		var intro = data['intro'];
 		if (intro == 0) {
 			intro = ''; $('#intro-update-li').removeClass('show')
@@ -548,12 +549,12 @@ window.onDocumentReady('body', function() {
 
 // Function to initialize infinite scroll - can be called multiple times
 function initInfiniteScroll() {
-	
+
 	// Only initialize if infinite_scroll is defined
 	if (typeof infinite_scroll !== 'undefined') {
 		// Remove any existing scroll handler to prevent duplicates
 		$(window).off('scroll.infinite');
-		
+
 		$(window).on('scroll.infinite', function(e) {
 			if ($(document).height() != $(window).height()) {
 				// First method that is expected to work - but has problems with Chrome
@@ -658,12 +659,12 @@ function scrollToItem(elementId) {
 	if (typeof elementId === "undefined") {
 		return false;
 	}
-	
+
 	// Prevent multiple calls for the same element
 	if (scrollToItemInProgress && lastScrollToItemId === elementId) {
 		return false;
 	}
-	
+
 	var $el = $("#" + elementId + " > .media");
 	// Test if the Item exists
 	if (!$el.length) {
@@ -693,7 +694,7 @@ function scrollToItem(elementId) {
 		.done(function () {
 			// Highlight post/comment with ID  (GUID)
 			$el.animate(colWhite, 1000).animate(colShiny).animate({ backgroundColor: "transparent" }, 600);
-			
+
 			// Reset flags after animation completes
 			setTimeout(function() {
 				scrollToItemInProgress = false;
@@ -968,9 +969,9 @@ function doActivityItem(ident, verb, un) {
 	showPosting();
 	verb = un ? 'un' + verb : verb;
 	$.post('item/' + ident.toString() + '/activity/' + verb)
-		.done(function() { 
+		.done(function() {
 			showProcessing();
-			updateItem(ident.toString()); 
+			updateItem(ident.toString());
 		})
 		.always(function() { hideLoading(); });
 	liking = 1;
@@ -981,9 +982,9 @@ function doFollowThread(ident) {
 	$('#like-rotator-' + ident.toString()).show();
 	showPosting();
 	$.post('item/' + ident.toString() + '/follow')
-		.done(function() { 
+		.done(function() {
 			showProcessing();
-			updateItem(ident.toString()); 
+			updateItem(ident.toString());
 		})
 		.always(function() { hideLoading(); });
 	liking = 1;
@@ -994,9 +995,9 @@ function doCompleteThread(ident) {
 	$('#like-rotator-' + ident.toString()).show();
 	showPosting();
 	$.post('item/' + ident.toString() + '/complete')
-		.done(function() { 
+		.done(function() {
 			showProcessing();
-			updateItem(ident.toString()); 
+			updateItem(ident.toString());
 		})
 		.always(function() { hideLoading(); });
 	liking = 1;
@@ -1149,11 +1150,11 @@ function lockview(event, type, id) {
 }
 
 function post_comment(id) {
-	
+
 	if (commentBusy) {
 		return false;
 	}
-	
+
 	unpause();
 	commentBusy = true;
 	showPosting();
@@ -1225,20 +1226,20 @@ function showHideComments(id) {
 function loadMoreComments(uriId, itemId, existing) {
 	var button = $('#load-more-comments-' + itemId);
 	var loadingText = $('#load-more-loading-' + itemId);
-	
+
 	if (button.hasClass('loading') || commentBusy) {
 		return;
 	}
-	
+
 	// Hide button, show loading text (which contains the rotator)
 	button.addClass('loading').prop('disabled', true).hide();
 	loadingText.show();
 	commentBusy = true;
 	showFetching();
-	
+
 	// Parse existing JSON string if it's a string, or use as-is if already an array
 	var existingArray = typeof existing === 'string' ? JSON.parse(existing) : existing;
-	
+
 	$.get({
 		url: 'item/' + uriId + '/comments',
 		data: {
@@ -1253,13 +1254,13 @@ function loadMoreComments(uriId, itemId, existing) {
 			var $data = $(data);
 			// Find all elements with id starting with "item-comments-" or "item-"
 			var allItems = $data.find('[id^="item-comments-"], [id^="item-"]').addBack('[id^="item-comments-"], [id^="item-"]');
-			
+
 			// Filter to only keep items that don't already exist on the page
 			var newItems = allItems.filter(function() {
 				var id = $(this).attr('id');
 				return id && $('#' + id).length === 0;
 			});
-			
+
 			if (newItems.length > 0) {
 				// Replace the button with the new comments
 				button.replaceWith(newItems);
@@ -1308,11 +1309,11 @@ function preview_post() {
 function fix_preview_img_wrap(index){
 	/* We don't know how long it will take the server to do the ajax request
 	   so we need to monitor the preview pane for a DOM mutation.
-	   
+
 	   We also do not want to attach the mutation observer unless previewing
 	   and we do not need this on pages without the jot composer. This might
-	   be in feed, in modal, or on a separate page so check for parent obj.	   
-	   
+	   be in feed, in modal, or on a separate page so check for parent obj.
+
 	   We only want ot use a Mutation Observer if the browser supports it
 	   (and most do) but just in case there is a fallback to a timeOut method.
 	*/
@@ -1320,7 +1321,7 @@ function fix_preview_img_wrap(index){
 	if ("MutationObserver" in window){
 		const targetElement = (!index && $('#jot-preview-content .tread-wrapper')) ? $('#jot-preview-content .tread-wrapper') : $('#comment-edit-preview-'+index+' .tread-wrapper');
 		const parentToWatch = (!index && document.getElementById('jot-preview-content')) ? document.getElementById('jot-preview-content') : document.getElementById('comment-edit-preview-'+index);	/* jQuery obj will not work! */
-		
+
 		const observer = new MutationObserver((mutationList, observer) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
@@ -1348,14 +1349,14 @@ function masonry_or_not(parentElement){
 	/* This convoluted function grabs the preview contents as rendered by Friendica
 	   and then tries to determine if it is one of the scenarios in which masonry
 	   layout will not be shown and returns boolean true|false to the caller.
-	   
+
 	   Normally the masonry layout is only shown if:
 	   * There are multiple images in the post
 	   * The images are consecutive
 	   * There are no other elements in between them.
 	   * There are no raw text nodes immediately before or after any of them.
 	   * There is no paragraph after the last one (a DIV is okay though)
-	   
+
 	   This function assumes a masonry layout could be shown, unless it should find
 	   one of the above conditions is not met.
 	*/
@@ -1388,7 +1389,7 @@ function masonry_or_not(parentElement){
 				} else {
 					// there is no next sibling
 				}
-					
+
 			} else if( $(element).parent('p').length > 0 ){
 				// check if img has other stuff in with it
 				$(element).parent().contents().filter(function(){
@@ -1397,7 +1398,7 @@ function masonry_or_not(parentElement){
 						gallery = false;
 						return;
 					}
-				});	
+				});
 				// if this element has a next sibling and it has an image in it
 				if ( $(element).parent().next().length > 0 ){
 					// there IS a next sibling
@@ -1414,7 +1415,7 @@ function masonry_or_not(parentElement){
 					}
 				} else {
 					// there is no next sibling
-				}			
+				}
 			} else {
 				// no clue what element this is inside of so NOT a gallery
 				gallery = false;
@@ -1466,8 +1467,8 @@ function preview_post_img(index){
 			   jQuery promise().done() or count tracking or MutationObserver
 			   all cause infinite loops. The ONLY way to know if the above is
 			   done manipulating the DOM is to compare the number of FIGURE
-			   tags to the original IMAGE count. If they match, it's done.			
-			*/ 
+			   tags to the original IMAGE count. If they match, it's done.
+			*/
 			var condition = setInterval(function(){
 				if( $(parentElement+" figure").length === $images.length ){
 					clearInterval(condition);
@@ -1497,7 +1498,7 @@ function preview_masonry_rows(index) {
 		$(parentElement+" .wall-item-body").css({visibility: 'visible'});
 		return;
 	}
-	else if ($images.length === 1){ 
+	else if ($images.length === 1){
 		$images.parent().wrap('<div class="body-attach"></div>');
 		$(parentElement+" .wall-item-decor img").hide();
 		$(parentElement+" .wall-item-body").removeClass('img-processing');
@@ -1553,9 +1554,9 @@ function preview_masonry_rows(index) {
 			// This magic value will stay constant for each image of any given row and is ultimately
 			// used to determine the height of the row container relative to the available width
 			var commonHeightRatio = (100 * correctedWidths[0] / totalWidth / (widths[0] / heights[0]));
-			
+
 			var first_image = [couples[c][0], (100 * correctedWidths[0]/totalWidth), (100 * maxHeight/correctedWidths[0])];
-			
+
 			var second_image;
 			if (couples[c].length === 1){ // single image
 				second_image = [];
@@ -1583,7 +1584,7 @@ function preview_masonry_rows(index) {
 			$attachbox.append($newRow);
 		}
 		$(parentElement+" .wall-item-body div:empty").remove();				// clean up now empty divs that used to wrap images
-		$(parentElement+" .wall-item-body").append($attachbox);				
+		$(parentElement+" .wall-item-body").append($attachbox);
 		$(parentElement+" .wall-item-decor img").hide();						// hide spinner
 		$(parentElement+" .wall-item-body").removeClass('img-processing');
 		$(parentElement+" .wall-item-body").css({visibility: 'visible'});	// make container visible
@@ -1601,13 +1602,13 @@ function loadScrollContent() {
 	if (lockLoadContent) {
 		return;
 	}
-	
+
 	// Guard: Check if scroll-loader element and infinite_scroll are available
 	if ($('#scroll-loader').length === 0 || typeof infinite_scroll === 'undefined' || typeof infinite_scroll.reload_uri === 'undefined') {
 		lockLoadContent = false;
 		return;
 	}
-	
+
 	lockLoadContent = true;
 
 	$("#scroll-loader").fadeIn('normal');
