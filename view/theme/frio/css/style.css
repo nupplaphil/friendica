@@ -484,7 +484,6 @@ ul#nav-user-menu {
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
 	background: $btn_primary_hover_color;
-	border-color: none;
 }
 
 .btn-link {
@@ -500,7 +499,7 @@ ul#nav-user-menu {
 	box-shadow: none;
 }
 .btn-eventnav,
-btn-eventnav:hover {
+.btn-eventnav:hover {
 	font-size: 16px;
 	background: none;
 	background-color: transparent;
@@ -872,7 +871,6 @@ nav.navbar .nav > li > button:focus {
 	height: 0;
 	border-color: transparent;
 	border-style: solid;
-	z-index: 1001;
 	border-width: 11px;
 	left: 50%;
 	margin-left: -18px;
@@ -952,7 +950,7 @@ nav.navbar .nav > li > button:focus {
 #topbar-first #nav-notifications-menu a {
 	color: $font_color_darker;
 	padding: 0;
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #topbar-first #nav-notifications-menu li.notif-entry {
 	color: $font_color_darker;
@@ -1019,7 +1017,6 @@ nav.navbar .nav > li > button:focus {
 
 #offcanvasUsermenu ul,
 #offcanvasUsermenu ul li:first-child,
-#offcanvasUsermenu ul,
 #offcanvasUsermenu ul li:last-child {
 	border-radius: 0;
 }
@@ -1044,7 +1041,7 @@ nav.navbar .nav > li > button:focus {
 	padding-left: 20px;
 	padding-right: 20px;
 	font-weight: bold;
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #topbar-first .dropdown.account li#nav-sitename:hover {
 	border: none;
@@ -1143,14 +1140,6 @@ body.show-nav-labels .nav-label {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
-}
-.intro-actions {
-	font-size: 2em;
-	padding: 0.5em;
-}
-.intro-wrapper button.intro-action-link {
-	padding-left: 10px;
-	padding-right: 10px;
 }
 ul li .intro-wrapper button.intro-action-link {
 	opacity: 0.7;
@@ -1372,7 +1361,6 @@ aside .widget li.selected a {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	opacity: 0.5;
-	filter: alpha(opacity=50); /* For IE8 and earlier */
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
@@ -1464,7 +1452,7 @@ aside .vcard .fn {
 aside .vcard .p-addr {
 	font-style: italic;
 	padding-bottom: 7px;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 aside .vcard .title {
 	margin-top: 10px;
@@ -1781,7 +1769,6 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 }
 .modal .wall-item-container.preview {
 	overflow-y: auto;
-	overflow-y: overlay;
 }
 #profile-jot-plugin-wrapper,
 .jotplugins {
@@ -1962,11 +1949,11 @@ textarea.comment-edit-text:focus + .comment-edit-form .preview {
 	padding: 15px;
 }
 .panel .panel-body {
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 .tread-wrapper .media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 aside .panel-body {
 	padding: 0px;
@@ -2141,8 +2128,6 @@ blockquote.shared_content {
 }
 .media .contact-info-comment {
 	display: table-cell;
-}
-.media .contact-info-comment {
 	margin: 0 0 5px;
 }
 .media-heading {
@@ -2205,7 +2190,7 @@ blockquote.shared_content {
 
 /* wall items content */
 .wall-item-content {
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 .wall-item-content img {
 	object-fit: contain;
@@ -2278,6 +2263,8 @@ code > .hl-main {
 	font-size: 12.5px;
 	font-weight: normal;
 	padding: 0; /* The padding should be on the link instead, so it's clickable */
+	filter: grayscale(0.2);
+	opacity: 0.8;
 }
 
 .hovercard .tag {
@@ -2325,10 +2312,6 @@ code > .hl-main {
 }
 
 /* Tags and mentions hover effect */
-.tag {
-    filter: grayscale(0.2);
-    opacity: 0.8;
-}
 .wall-item-container:hover .tag, .tags .tag {
     filter: grayscale(0);
     opacity: 1;
@@ -2380,7 +2363,6 @@ body.show-action-labels .action-label {
 .wall-item-actions-row {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr min-content;	/* collapse column if checkbox is hidden */
-	grid-auto-rows: 1fr min-height;							/* collapse row if not an event */
 	 grid-template-areas:
 		"comments shares likes dislikes more delete"
 		"attend . decline . maybe .";
@@ -2659,7 +2641,7 @@ img.acpopup-img {
 	color: #444;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 10px;
+	gap: 10px;
 	margin-bottom: 15px;
 	padding: 10px;
 }
@@ -3002,7 +2984,7 @@ ul.viewcontact_wrapper > li {
 }
 .contact-wrapper.media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	margin-top: 0;
 }
 /* bootstrap hack for .media */
@@ -3193,7 +3175,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 #mail-conversation {
 	overflow-y: auto;
 	max-height: calc(100vh - 400px);
-	max-height: auto;
 	margin-bottom: 0px;
 	padding: 0 15px;
 }
@@ -3354,6 +3335,7 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 }
 .vevent .event-summary {
 	font-size: 16px;
+	display: none;
 }
 .vevent .event-description {
 	padding: 10px 0;
@@ -3361,9 +3343,6 @@ ul li:hover .contact-wrapper .contact-action-link:hover {
 .vevent .event-location .location {
 	font-size: inherit;
 	color: inherit;
-}
-.vevent .event-summary {
-	display: none;
 }
 #event-preview .vevent .event-summary {
 	display: block;
@@ -3592,14 +3571,14 @@ details[open].panel::details-content {
 details.profile-jot-net[open] summary::before,
 details[open].panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\ea4e";
 	padding-right: 5px;
 }
 details.profile-jot-net summary::before,
 details.panel summary.accordion-toggle::before,
 .panel .section-subtitle-wrapper .accordion-toggle.collapsed::before {
-	font-family: remixicon, sans-serif;
+	font-family: remixicon;
 	content: "\ea6e";
 	padding-right: 5px;
 }
@@ -3736,7 +3715,7 @@ ul.notif-network-list > li {
 }
 .intro-wrapper.media {
 	overflow: visible;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	margin-top: 0;
 }
 .intro-photo-wrapper img.intro-photo {
@@ -3745,6 +3724,8 @@ ul.notif-network-list > li {
 	border-radius: 4px;
 }
 .intro-actions {
+	font-size: 2em;
+	padding: 0.5em;
 	display: flex;
 }
 .intro-enty-name h4 {
@@ -3948,7 +3929,7 @@ li.addon {
 	align-items: center;
 }
 #adminpage .table-logs td {
-	word-break: break-word;
+	overflow-wrap: break-word;
 }
 #adminpage .table-logs th.log-message, #adminpage .table-logs td.log-message {
 	width: 40%;
@@ -3970,8 +3951,7 @@ li.addon {
 #adminpage .table td,
 .adminpage .table td,
 #adminpage.table > tbody > tr > td,
-.adminpage.table > tbody > tr > td,
-.table#adminpage > tbody > tr > td {
+.adminpage.table > tbody > tr > td {
 	word-break: break-all !important;
 	white-space: normal !important;
 	vertical-align: top !important;
@@ -4314,7 +4294,6 @@ div.login-form, .login-content-wrapper,
 	font-size: 14px;
 	font-weight: 600;
 	padding: 8px 16px;
-	color: inherit;
 	width: 100% !important;
 }
 
@@ -4327,7 +4306,6 @@ div.login-form, .login-content-wrapper,
 	background-image: none;
 	text-shadow: none;
 	border-radius: 3px;
-	margin-bottom: 0;
 	font-size: 14px;
 	font-weight: 600;
 	padding: 8px 16px;
@@ -4484,7 +4462,6 @@ div.login-form, .login-content-wrapper,
 	}
 	.mod-home.is-not-singleuser .login-form > #login-extra-links {
 		padding-bottom: 0;
-		padding-top: 1em 0;
 	}
 
 	.mod-home.is-not-singleuser .login-form > #login-form label,

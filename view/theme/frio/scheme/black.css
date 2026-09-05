@@ -59,15 +59,11 @@
 .dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
 	color: $link_color;
+	background-image: none;
+	background-color: rgba(232, 232, 232, $contentbg_transp);
 }
 .account .dropdown-menu li {
 	border-color: $background_color;
-}
-
-.dropdown-menu > li > a:focus,
-.dropdown-menu > li > a:hover {
-	background-image: none;
-	background-color: rgba(232, 232, 232, $contentbg_transp);
 }
 
 .breadcrumb,
