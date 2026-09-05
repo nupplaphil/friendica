@@ -761,6 +761,7 @@ function NavUpdate() {
 				}
 			});
 	}
+	clearTimeout(timer);
 	timer = setTimeout(NavUpdate, 30000);
 }
 
@@ -867,7 +868,7 @@ function liveUpdate(src, force, guid) {
 
 	in_progress = true;
 
-	var orgHeight = $("section").height();
+	var orgHeight = $(document).height();
 
 	var update_url = getUpdateUrl(src);
 
@@ -894,6 +895,10 @@ function liveUpdate(src, force, guid) {
 				// Update the scroll position.
 				if (guid) {
 					scrollToItem("item-" + guid);
+				} else if (!force) {
+					// Keep the current reading position when new items are inserted above it.
+					var delta = $(document).height() - orgHeight;
+					$('html, body').animate({scrollTop: $(window).scrollTop() + delta}, 200);
 				}
 			})
 		})
