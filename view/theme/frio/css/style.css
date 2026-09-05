@@ -238,6 +238,15 @@ ul#nav-user-menu {
 		display: none;
 	}
 
+/* Fix parts of the main nav starting to go off screen */
+@media screen and (max-width: 1050px) {
+	#topbar-first .topbar-nav .nav-segment > a {
+		padding-left: 5px;
+		padding-right: 5px;
+		min-width: 50px;
+	}
+}
+
 /**
  * mobile: Larger screens
  */
@@ -283,6 +292,7 @@ ul#nav-user-menu {
 		padding-left: 0;
 		padding-right: 0;
 	}
+
 	/* Narrower search field if navbar labels are show */
 	body.show-nav-labels #search-box #nav-search-input-field {
 		width: 150px;
@@ -4642,12 +4652,6 @@ div.login-form, .login-content-wrapper,
 		padding: 0;
 		top: 24px;
 		left: 24px;
-	}
-
-	#topbar-first .topbar-nav .nav-segment > a {
-		padding-left: 5px;
-		padding-right: 5px;
-		min-width: 50px;
 	}
 
 	/*
