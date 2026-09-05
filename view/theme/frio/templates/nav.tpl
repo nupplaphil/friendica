@@ -74,7 +74,7 @@
 									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}">
 									<span class="icon-badge-container">
 										<i class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i>
-										<span id="net-update" class="nav-network-badge badge nav-notification"></span>
+										<span id="net-update" class="badge nav-notification"></span>
 									</span>
 									<span class="nav-label">{{$nav.network.1}}</span>
 								</a>
@@ -129,7 +129,7 @@
 									class="nav-menu {{$sel.messages}}">
 									<span class="icon-badge-container">
 										<i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw" aria-hidden="true"></i>
-										<span id="mail-update" class="nav-mail-badge badge nav-notification"></span>
+										<span id="mail-update" class="badge nav-notification"></span>
 									</span>
 									<span class="nav-label">{{$nav.messages.1}}</span>
 								</a>
@@ -144,7 +144,7 @@
 									aria-controls="nav-notifications-menu">
 									<span class="icon-badge-container">
 										<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>
-										<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
+										<span id="notification-update" class="badge nav-notification"></span>
 									</span>
 									<span class="nav-label">{{$nav.notifications.1}}</span>
 								</button>
