@@ -286,10 +286,10 @@ class Nav
 			$nav_accounts_description = $this->l10n->t('Manage other accounts, including groups and pages');
 			if (User::hasIdentities($this->session->getSubManagedUserId() ?: $this->session->getLocalUserId())) {
 				$nav_accounts_name = $this->l10n->t('Switch Accounts');
-				$nav['delegation'] = ['delegation', $nav_accounts_name, '', $nav_accounts_description];
+				$nav['delegation'] = ['delegation', $nav_accounts_name, '', $nav_accounts_description, 'switch'];
 			} else {
 				$nav_accounts_name = $this->l10n->t('Add Account');
-				$nav['delegation'] = ['settings/delegation', $nav_accounts_name, '', $nav_accounts_description];
+				$nav['delegation'] = ['settings/delegation', $nav_accounts_name, '', $nav_accounts_description, 'add'];
 			}
 
 			$nav['settings'] = ['settings', $this->l10n->t('Settings'), '', $this->l10n->t('Account settings')];

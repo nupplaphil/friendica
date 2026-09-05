@@ -215,7 +215,7 @@
 											<a role="menuitem" id="nav-delegation-link" up-follow="false"
 												class="nav-commlink {{$nav.delegation.2}} {{$sel.delegation}}"
 												href="{{$nav.delegation.0}}" title="{{$nav.delegation.3}}">
-												{{if $nav.delegation.2}}
+												{{if $nav.delegation.4 == "add" }}
 												<i class="ri ri-user-add-line ri-fw" aria-hidden="true"></i>
 												{{else}}
 												<i class="ri ri-arrow-left-right-line ri-fw" aria-hidden="true"></i>{{/if}} {{$nav.delegation.1}}
