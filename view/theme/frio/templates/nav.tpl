@@ -311,7 +311,7 @@
 									<li class="divider"><hr></li>
 									{{if $nav.logout}}
 										<li>
-											<a role="menuitem" id="nav-logout-link"
+											<a role="menuitem" id="nav-logout-link" up-follow="false"
 												class="nav-link {{$nav.logout.2}}" href="{{$nav.logout.0}}"
 												title="{{$nav.logout.3}}"><i class="ri ri-logout-box-line ri-fw" aria-hidden="true"></i>
 												{{$nav.logout.1}}
