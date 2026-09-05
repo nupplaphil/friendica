@@ -20,10 +20,10 @@
 {{if $item.thread_level<3}}
 <button type="button" class="hide-comments-outer fakelink" onclick="showHideComments({{$item.id}});">
 			<span id="hide-comments-total-{{$item.id}}" class="hide-comments-total">
-				{{$item.num_comments}} - {{$item.show_text}}
+				{{$item.show_text}}
 			</span>
 	<span id="hide-comments-{{$item.id}}" class="hide-comments" style="display: none">
-				{{$item.num_comments}} - {{$item.hide_text}}
+				{{$item.hide_text}}
 			</span>
 </button>
 <div id="collapsed-comments-{{$item.id}}" class="collapsed-comments" style="display: none;">

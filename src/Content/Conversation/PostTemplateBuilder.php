@@ -380,6 +380,7 @@ final class PostTemplateBuilder
 			'existing'               => $item['existing'] ?? [],
 			'existing_json'          => !empty($item['existing']) ? json_encode($item['existing']) : '[]',
 			'load_more_comments'     => $this->l10n->t('Load more comments'),
+			'num_comments'           => $this->l10n->tt('%d comment', '%d comments', $item['counts'] ?? 0),
 			'quoteshares'            => $this->getQuoteShares($item['quoteshares'] ?? []),
 			'reactions'              => $reactions,
 			'responses'              => $responses,
@@ -448,8 +449,8 @@ final class PostTemplateBuilder
 			if ((($nb_children > 2) || ($threadLevel > 1)) && isset($children[0])) {
 				$children[0]['comment_firstcollapsed'] = true;
 				$children[0]['num_comments']           = $this->l10n->tt('%d comment', '%d comments', $item['counts'] ?? 0);
-				$children[0]['show_text']              = $this->l10n->t('Show more');
-				$children[0]['hide_text']              = $this->l10n->t('Show fewer');
+				$children[0]['show_text']              = $this->l10n->t('Show more comments');
+				$children[0]['hide_text']              = $this->l10n->t('Show fewer comments');
 				if ($threadLevel > 1) {
 					$children[$nb_children - 1]['comment_lastcollapsed'] = true;
 				} else {
