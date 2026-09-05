@@ -71,9 +71,13 @@
 						{{if $nav.network}}
 							<li class="nav-segment">
 								<a accesskey="n" class="nav-menu {{$sel.network}}" href="{{$nav.network.0}}"
-									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}"><i
-									 class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i> <span class="nav-label">{{$nav.network.1}}</span><span id="net-update"
-										class="nav-network-badge badge nav-notification"></span></a>
+									data-toggle="tooltip" data-viewport="#topbar-first" aria-label="{{$nav.network.3}}" title="{{$nav.network.3}}">
+									<span class="icon-badge-container">
+										<i class="ri ri-xl ri-home-5-{{if $sel.network}}fill{{else}}line{{/if}} ri-fw" aria-hidden="true"></i>
+										<span id="net-update" class="nav-network-badge badge nav-notification"></span>
+									</span>
+									<span class="nav-label">{{$nav.network.1}}</span>
+								</a>
 							</li>
 						{{/if}}
 
@@ -122,9 +126,13 @@
 							<li class="nav-segment">
 								<a accesskey="m" id="nav-messages-link" href="{{$nav.messages.0}}" data-toggle="tooltip" data-viewport="#topbar-first"
 									aria-label="{{$nav.messages.1}}" title="{{$nav.messages.1}}"
-									class="nav-menu {{$sel.messages}}"><i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw"
-										aria-hidden="true"></i> <span class="nav-label">{{$nav.messages.1}}</span><span id="mail-update"
-										class="nav-mail-badge badge nav-notification"></span></a>
+									class="nav-menu {{$sel.messages}}">
+									<span class="icon-badge-container">
+										<i class="ri ri-mail-{{if $sel.messages}}fill{{else}}line{{/if}} ri-lg ri-fw" aria-hidden="true"></i>
+										<span id="mail-update" class="nav-mail-badge badge nav-notification"></span>
+									</span>
+									<span class="nav-label">{{$nav.messages.1}}</span>
+								</a>
 							</li>
 						{{/if}}
 
@@ -134,8 +142,11 @@
 								<button id="nav-notifications-menu-btn" class="btn-link dropdown-toggle" data-toggle="dropdown"
 									type="button" aria-haspopup="true" aria-expanded="false"
 									aria-controls="nav-notifications-menu">
-									<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
-									<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>  <span class="nav-label">{{$nav.notifications.1}}</span>
+									<span class="icon-badge-container">
+										<i class="ri ri-notification-line ri-lg" aria-label="{{$nav.notifications.1}}"></i>
+										<span id="notification-update" class="nav-notification-badge badge nav-notification"></span>
+									</span>
+									<span class="nav-label">{{$nav.notifications.1}}</span>
 								</button>
 								{{* The notifications dropdown menu. There are two parts of menu. The second is at the bottom of this file. It is loaded via js. Look at nav-notifications-template *}}
 								<ul id="nav-notifications-menu" class="dropdown-menu menu-popup" role="menu"

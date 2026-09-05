@@ -837,14 +837,15 @@ nav.navbar .nav > li > button:focus {
   padding-left: 35px;
   padding-right: 35px;
 }
-#topbar-first .nav-segment .nav-notification {
-	position: absolute;
-	top: 2px;
-	right: -6px;
-	background-color: #ff3535;
+/* Notification badges */
+#topbar-first .nav-segment .icon-badge-container {
+	position: relative;
 }
-#topbar-first .topbar-nav .nav-segment .nav-notification {
-		right: 8px;
+#topbar-first .nav-segment .icon-badge-container .badge {
+	position: absolute;
+	top: -8px;
+	right: -19px;
+	background-color: #ff3535;
 }
 #topbar-first #intro-update {
 	cursor: pointer;
