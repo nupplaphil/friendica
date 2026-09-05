@@ -693,7 +693,7 @@ header #banner #logo-img,
 
 .topbar ul.nav > li {
 	display: grid;
-	align-items: center;
+	place-items: center;
 }
 
 .topbar .dropdown-footer {
@@ -885,7 +885,6 @@ nav.navbar .nav > li > button:focus {
 	height: var(--topbar-first-size);
 }
 .topbar-nav, .topbar-actions, #topbar-first ul.nav {
-		align-items: center;
 		display: flex;
 		height: 100%;
 	}
