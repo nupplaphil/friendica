@@ -221,17 +221,6 @@
 										</li>
 									{{/foreach}}
 									<li class="divider visible-xs"><hr></li>
-									{{if $nav.messages}}
-										<li class="visible-xs">
-											<a role="menuitem"
-												class="nav-commlink {{$nav.messages.2}} {{$sel.messages}}"
-												href="{{$nav.messages.0}}" title="{{$nav.messages.3}}">
-												<i class="ri ri-mail-line ri-fw" aria-hidden="true"></i>
-												{{$nav.messages.1}} <span id="mail-update-li"
-													class="nav-mail-badge badge nav-notification"></span>
-											</a>
-										</li>
-									{{/if}}
 									{{if $nav.contacts}}
 										<li class="visible-xs">
 											<a role="menuitem" id="nav-menu-contacts-link"
