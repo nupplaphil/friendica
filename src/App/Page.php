@@ -515,8 +515,10 @@ class Page implements ArrayAccess
 
 			$content = HTML::toNumericEntities($this->page["content"]);
 
-			/// @TODO one day, kill those error-suppressing @ stuff, or PHP should ban it
-			@$doc->loadHTML($content);
+			if ($content !== '') {
+				/// @TODO one day, kill those error-suppressing @ stuff, or PHP should ban it
+				@$doc->loadHTML($content);
+			}
 
 			$xpath = new DOMXPath($doc);
 
