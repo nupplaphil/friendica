@@ -766,6 +766,9 @@ figure.img-allocated-height img{
 	column-gap: 5px;
 	margin-top: 5px;
 }
+.masonry-row figure a {
+	display: block !important;
+}
 /**
  * Horizontal masonry settings AND
  **/
