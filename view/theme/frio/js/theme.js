@@ -445,8 +445,10 @@ function initTheme() {
 						if (timer) {
 							clearTimeout(timer);
 						}
-						timer = setTimeout(NavUpdate, 10);
-						updateItem(id, data.guid ?? null);
+						if (!insertPostedComment(id, data)) {
+							timer = setTimeout(NavUpdate, 10);
+							updateItem(id, data.guid ?? null);
+						}
 					}
 					if (data.reload) {
 						window.location.href = data.reload;
@@ -835,7 +837,9 @@ function doActivityItemAction(ident, verb, un) {
 						$('button[id^=shareMenuOptions-' + ident.toString() + ']').addClass('active');
 					}
 				}
-				updateItem(ident.toString());
+				if (!refreshItemActivity(ident, data)) {
+					updateItem(ident.toString());
+				}
 			} else {
 				/* server-response was not ok. Database-problems or some changes in
 				 * data?

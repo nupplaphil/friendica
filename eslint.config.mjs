@@ -52,10 +52,12 @@ const friendicaGlobals = {
 	htmlToText: "readonly",
 	initInfiniteScroll: "readonly", // view/js/main.js
 	insertBBCodeInTextarea: "readonly",
+	insertPostedComment: "readonly", // view/js/main.js
 	jotShow: "readonly",
 	NavUpdate: "readonly",
 	openMenu: "readonly",
 	originalTitle: "writable",
+	refreshItemActivity: "readonly", // view/js/main.js
 	scrollToItem: "readonly",
 	showFetching: "readonly",
 	showPosting: "readonly",
