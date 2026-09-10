@@ -1359,27 +1359,21 @@ function insertPostedComment(parentItemId, data) {
 // alone. Returns false when the caller should fall back to updateItem() (e.g.
 // the base theme, which has no <article> wrapper).
 function refreshItemActivity(itemId, data) {
-	console.debug('refreshItemActivity: called', {itemId: itemId, data: data});
 	if (!data || data.status !== 'ok' || !data['uri-id']) {
-		console.debug('refreshItemActivity: no usable data, falling back');
 		return false;
 	}
 
 	// data-uri-id avoids escaping guids that aren't valid selectors
 	var item = '[data-uri-id="' + data['uri-id'] + '"]';
 	var $liveArticle = $(item + ' > article.media');
-	console.debug('refreshItemActivity: live article for ' + item, $liveArticle.length);
 	if (!$liveArticle.length) {
-		console.debug('refreshItemActivity: no live article, falling back');
 		return false;
 	}
 
 	$.get('item/' + data['uri-id'] + '/node')
 		.done(function(html) {
 			var $newArticle = $('<div>').append($.parseHTML(html)).find(item + ' > article.media').first();
-			console.debug('refreshItemActivity: fetched node, html length ' + (html || '').length + ', fresh article ' + $newArticle.length);
 			if (!$newArticle.length) {
-				console.debug('refreshItemActivity: no fresh article, falling back');
 				updateItem(itemId.toString());
 				return;
 			}
@@ -1393,20 +1387,17 @@ function refreshItemActivity(itemId, data) {
 				var $fresh = $(this);
 				var prefix = $fresh.parent().attr('id').replace(/\d+$/, '');
 				var $shown = $liveArticle.find('.wall-item-actions [id^="' + prefix + '"] > span.total').first();
-				console.debug('refreshItemActivity: counter ' + prefix, {shown: $shown.length, from: $shown.text(), to: $fresh.text()});
 				$shown.replaceWith($fresh);
 			});
 
 			var $shownEmoji = $liveArticle.find('.wall-emoji-responses').first();
 			var $freshEmoji = $newArticle.find('.wall-emoji-responses').first();
-			console.debug('refreshItemActivity: emoji responses', {shown: $shownEmoji.length, fresh: $freshEmoji.length});
 			if ($shownEmoji.length && $freshEmoji.length) {
 				$shownEmoji.replaceWith($freshEmoji);
 			}
 
 			var $shownResponses = $liveArticle.find('div.wall-item-responses').first();
 			var $freshResponses = $newArticle.find('div.wall-item-responses').first();
-			console.debug('refreshItemActivity: legacy responses', {shown: $shownResponses.length, fresh: $freshResponses.length});
 			if ($shownResponses.length && $freshResponses.length) {
 				$shownResponses.replaceWith($freshResponses);
 			}
@@ -1415,7 +1406,6 @@ function refreshItemActivity(itemId, data) {
 			timer = setTimeout(NavUpdate, 30000);
 		})
 		.fail(function(xhr) {
-			console.debug('refreshItemActivity: node request failed', xhr && xhr.status);
 			updateItem(itemId.toString());
 		});
 

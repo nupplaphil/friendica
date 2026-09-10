@@ -10,7 +10,6 @@ namespace Friendica\Module\Item;
 use Friendica\App;
 use Friendica\BaseModule;
 use Friendica\Content\Conversation\ConversationRenderer;
-use Friendica\Core\Config\Capability\IManageConfigValues;
 use Friendica\Core\L10n;
 use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Module\Response;
@@ -26,7 +25,6 @@ class Comment extends BaseModule
 {
 	public function __construct(
 		private readonly IHandleUserSessions $session,
-		private readonly IManageConfigValues $config,
 		private readonly ConversationRenderer $htmlRenderer,
 		L10n $l10n,
 		App\BaseURL $baseUrl,
@@ -42,7 +40,7 @@ class Comment extends BaseModule
 
 	protected function rawContent(array $request = []): void
 	{
-		if ($this->config->get('system', 'block_public') && !$this->session->isAuthenticated()) {
+		if (!$this->session->isAuthenticated()) {
 			throw new HTTPException\UnauthorizedException($this->t('Access denied.'));
 		}
 

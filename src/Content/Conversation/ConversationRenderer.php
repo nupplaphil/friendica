@@ -21,7 +21,6 @@ use Friendica\Core\Session\Capability\IHandleUserSessions;
 use Friendica\Event\ArrayFilterEvent;
 use Friendica\Model\Contact;
 use Friendica\Model\Item as ItemModel;
-use Friendica\Model\Post;
 use Friendica\Model\Tag;
 use Friendica\Util\DateTimeFormat;
 use Friendica\Util\Profiler;
@@ -131,8 +130,7 @@ final readonly class ConversationRenderer
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
-		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
-		$item     = Post::selectFirst($selected, ['uri-id' => $uriId, 'uid' => [0, $viewerUid]], ['order' => ['uid' => true]]);
+		$item = $this->dataProvider->fetchItemByUriId($uriId, $viewerUid);
 		if (empty($item)) {
 			$this->profiler->stopRecording();
 			return '';
@@ -178,8 +176,7 @@ final readonly class ConversationRenderer
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
-		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
-		$comment  = Post::selectFirst($selected, ['uri-id' => $commentUriId, 'uid' => [0, $viewerUid]], ['order' => ['uid' => true]]);
+		$comment = $this->dataProvider->fetchItemByUriId($commentUriId, $viewerUid);
 		if (empty($comment) || ($comment['gravity'] !== ItemModel::GRAVITY_COMMENT) || ($comment['thr-parent-id'] == $comment['parent-uri-id'])) {
 			$this->profiler->stopRecording();
 			return '';
@@ -219,8 +216,7 @@ final readonly class ConversationRenderer
 
 		$viewerUid = $this->resolveViewerUid($uid);
 
-		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
-		$item     = Post::selectFirst($selected, ['uri-id' => $uriId, 'uid' => [0, $viewerUid]], ['order' => ['uid' => true]]);
+		$item = $this->dataProvider->fetchItemByUriId($uriId, $viewerUid);
 		if (empty($item)) {
 			$this->profiler->stopRecording();
 			return '';

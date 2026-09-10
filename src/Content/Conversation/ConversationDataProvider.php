@@ -87,6 +87,22 @@ final readonly class ConversationDataProvider
 	}
 
 	/**
+	 * Load a single conversation item by its URI ID with the field list the
+	 * template builder expects.
+	 *
+	 * @param int $uriId The URI ID of the item
+	 * @param int $viewerUid The user ID of the viewer, or 0 for public view
+	 * @return array|null The item, or null when it isn't visible to the viewer
+	 */
+	public function fetchItemByUriId(int $uriId, int $viewerUid): ?array
+	{
+		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
+		$item     = Post::selectFirst($selected, ['uri-id' => $uriId, 'uid' => [0, $viewerUid]], ['order' => ['uid' => true]]);
+
+		return $item ?: null;
+	}
+
+	/**
 	 * Get the root template data for a thread from an existing item array.
 	 *
 	 * @param array $item The item array
@@ -1134,7 +1150,7 @@ final readonly class ConversationDataProvider
 		// then flatten the remaining replies as well, hiding what they are a reply to.
 		// A single-subtree re-render (see ConversationRenderer::renderCommentByUriId) also
 		// opts out, so its structure matches the surrounding, unflattened conversation.
-		if ($smartThreading && !$compactTimeline && !$this->pConfig->get($uid, 'system', 'no_smart_threading', 0)) {
+		if ($smartThreading && !$compactTimeline && !$this->pConfig->get($uid, 'system', 'no_smart_threading', false)) {
 			foreach ($parents as $index => $parent) {
 				$parents[$index] = $this->smartFlattenConversation($parent);
 			}
