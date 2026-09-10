@@ -1462,9 +1462,6 @@ aside .vcard .title {
 	margin-top: 10px;
 	text-align: left;
 }
-aside .xmpp, aside .matrix {
-	display: table;
-}
 aside .member-since {
 	padding-top: 5px;
 }
