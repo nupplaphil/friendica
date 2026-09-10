@@ -40,9 +40,9 @@
 			</div>
 
             {{if $item.thread_level<7}}
-			<div class="wall-item-container {{$item.indent}} {{$item.shiny}} {{$item.network}} thread_level_{{$item.thread_level}}" id="item-{{$item.guid}}">
+			<div class="wall-item-container {{$item.indent}} {{$item.shiny}} {{$item.network}} thread_level_{{$item.thread_level}}" id="item-{{$item.guid}}" data-uri-id="{{$item.uriid}}">
                 {{else}}
-				<div class="wall-item-container {{$item.indent}} {{$item.shiny}} {{$item.network}} thread_level_7" id="item-{{$item.guid}}">
+				<div class="wall-item-container {{$item.indent}} {{$item.shiny}} {{$item.network}} thread_level_7" id="item-{{$item.guid}}" data-uri-id="{{$item.uriid}}">
                     {{/if}}
                     {{if $item.thread_level==1}}
 						<span class="commented" style="display: none;">{{$item.commented}}</span>

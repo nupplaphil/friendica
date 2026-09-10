@@ -87,6 +87,22 @@ final readonly class ConversationDataProvider
 	}
 
 	/**
+	 * Load a single conversation item by its URI ID with the field list the
+	 * template builder expects.
+	 *
+	 * @param int $uriId The URI ID of the item
+	 * @param int $viewerUid The user ID of the viewer, or 0 for public view
+	 * @return array|null The item, or null when it isn't visible to the viewer
+	 */
+	public function fetchItemByUriId(int $uriId, int $viewerUid): ?array
+	{
+		$selected = array_merge(ItemModel::DISPLAY_FIELDLIST, ['featured', 'contact-uid', 'gravity', 'post-type', 'post-reason']);
+		$item     = Post::selectFirst($selected, ['uri-id' => $uriId, 'uid' => [0, $viewerUid]], ['order' => ['uid' => true]]);
+
+		return $item ?: null;
+	}
+
+	/**
 	 * Get the root template data for a thread from an existing item array.
 	 *
 	 * @param array $item The item array
@@ -94,10 +110,11 @@ final readonly class ConversationDataProvider
 	 * @param string $mode The rendering mode
 	 * @param array $existing Existing comment URI IDs to exclude
 	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param bool $smartThreading Whether single-reply chains may be flattened
 	 * @return array<string, mixed>|null The root template data, or null if not found
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	public function getRootTemplateDataFromItem(array $item, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, array $existing = [], bool $pagedrop = false): ?array
+	public function getRootTemplateDataFromItem(array $item, int $viewerUid, string $mode = ConversationRenderer::MODE_DISPLAY, array $existing = [], bool $pagedrop = false, bool $smartThreading = true): ?array
 	{
 		// Resolve to parent if this is a comment
 		$resolvedItem = $this->fetchParentItem($item, $viewerUid);
@@ -113,7 +130,7 @@ final readonly class ConversationDataProvider
 			$sinceDate = '';
 		}
 
-		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $viewerUid, $mode, $sinceId, $sinceDate, $existing, $pagedrop);
+		$items = $this->populateThreadWithChildren([$resolvedItem], false, ConversationRenderer::ORDER_COMMENTED, $viewerUid, $mode, $sinceId, $sinceDate, $existing, $pagedrop, $smartThreading);
 
 		return $this->buildRootTemplateData($items, (int) $resolvedItem['uid'], $viewerUid, $mode, $pagedrop);
 	}
@@ -269,10 +286,11 @@ final readonly class ConversationDataProvider
 	 * @param int $sinceId Only load comments with id > sinceId
 	 * @param array $existing Existing comment URI IDs to exclude
 	 * @param bool $pagedrop Whether to enable page drop functionality
+	 * @param bool $smartThreading Whether single-reply chains may be flattened
 	 * @return array<int, array> The items with children added
 	 * @throws \Friendica\Network\HTTPException\InternalServerErrorException
 	 */
-	private function populateThreadWithChildren(array $parents, bool $blockAuthors, string $order, int $uid, string $mode, int $sinceId = 0, string $sinceDate = '', array $existing = [], bool $pagedrop = false): array
+	private function populateThreadWithChildren(array $parents, bool $blockAuthors, string $order, int $uid, string $mode, int $sinceId = 0, string $sinceDate = '', array $existing = [], bool $pagedrop = false, bool $smartThreading = true): array
 	{
 		$userGservers = $this->userGServer->listIgnoredByUser($uid);
 		$ignoredGsids = array_map(static function (UserGServerEntity $userGServer) {
@@ -478,7 +496,7 @@ final readonly class ConversationDataProvider
 			}
 		}
 
-		$items = $this->sortConversationItems($items, $order, $uid, $compactTimeline);
+		$items = $this->sortConversationItems($items, $order, $uid, $compactTimeline, $smartThreading);
 
 		return $items;
 	}
@@ -1083,9 +1101,10 @@ final readonly class ConversationDataProvider
 	 * @param string $order One of ConversationRenderer::ORDER_*
 	 * @param int $uid The user ID of the viewer
 	 * @param bool $compactTimeline Whether the compact conversation view is active
+	 * @param bool $smartThreading Whether single-reply chains may be flattened
 	 * @return array<int, array> The sorted conversation items
 	 */
-	private function sortConversationItems(array $itemList, string $order, int $uid, bool $compactTimeline = false): array
+	private function sortConversationItems(array $itemList, string $order, int $uid, bool $compactTimeline = false, bool $smartThreading = true): array
 	{
 		$parents = [];
 		if (count($itemList) === 0) {
@@ -1129,7 +1148,9 @@ final readonly class ConversationDataProvider
 
 		// The compact view already removed comments from the thread. Smart threading would
 		// then flatten the remaining replies as well, hiding what they are a reply to.
-		if (!$compactTimeline && !$this->pConfig->get($uid, 'system', 'no_smart_threading', 0)) {
+		// A single-subtree re-render (see ConversationRenderer::renderCommentByUriId) also
+		// opts out, so its structure matches the surrounding, unflattened conversation.
+		if ($smartThreading && !$compactTimeline && !$this->pConfig->get($uid, 'system', 'no_smart_threading', false)) {
 			foreach ($parents as $index => $parent) {
 				$parents[$index] = $this->smartFlattenConversation($parent);
 			}

@@ -655,7 +655,7 @@ function triggerLiveUpdates(force, guid) {
  * @param {string} elementId The item element id
  * @returns {undefined}
  */
-function scrollToItem(elementId) {
+function scrollToItem(elementId, fallbackId) {
 	if (typeof elementId === "undefined") {
 		return false;
 	}
@@ -666,6 +666,14 @@ function scrollToItem(elementId) {
 	}
 
 	var $el = $("#" + elementId + " > .media");
+	// Themes without a .media wrapper (e.g. the base theme) still scroll to the item itself
+	if (!$el.length) {
+		$el = $("#" + elementId);
+	}
+	// Fall back to the nearest existing ancestor when the target is gone
+	if (!$el.length && fallbackId) {
+		return scrollToItem(fallbackId);
+	}
 	// Test if the Item exists
 	if (!$el.length) {
 		return false;
@@ -974,9 +982,11 @@ function doActivityItem(ident, verb, un) {
 	showPosting();
 	verb = un ? 'un' + verb : verb;
 	$.post('item/' + ident.toString() + '/activity/' + verb)
-		.done(function() {
+		.done(function(data) {
 			showProcessing();
-			updateItem(ident.toString());
+			if (!refreshItemActivity(ident, data)) {
+				updateItem(ident.toString());
+			}
 		})
 		.always(function() { hideLoading(); });
 	liking = 1;
@@ -1180,7 +1190,9 @@ function post_comment(id) {
 				if (timer) {
 					clearTimeout(timer);
 				}
-				updateItem(id, data.guid ?? null);
+				if (!insertPostedComment(id, data)) {
+					updateItem(id, data.guid ?? null);
+				}
 			}
 			if (data.reload) {
 				window.location.href=data.reload;
@@ -1288,6 +1300,116 @@ function loadMoreComments(uriId, itemId, existing) {
 	.always(function() {
 		commentBusy = false;
 	});
+}
+
+// Splice a freshly posted reply into an already loaded thread instead of
+// rebuilding it. Rebuilding drops loaded and among-strangers comments in the
+// compact conversation view, so scrollToItem would land nowhere. Returns false
+// when this can't be handled here and the caller should fall back.
+function insertPostedComment(parentItemId, data) {
+	if (!data || !data.guid || !data['comment-uri-id'] || !data['parent-uri-id']) {
+		return false;
+	}
+
+	// data-uri-id avoids escaping guids that aren't valid selectors
+	var parent = '[data-uri-id="' + data['parent-uri-id'] + '"]';
+	if (!$(parent).length) {
+		return false;
+	}
+
+	$.get('item/' + data['comment-uri-id'] + '/comment')
+		.done(function(html) {
+			// keepScripts: the comment form carries an inline <script> that wires up its dropzone
+			var $new = $('<div>').append($.parseHTML(html, document, true)).find(parent).first();
+			if (!$new.length || !$new.find('[data-uri-id="' + data['comment-uri-id'] + '"]').length) {
+				updateItem(parentItemId, data.guid);
+				return;
+			}
+
+			// The base theme wraps a comment and its children in a .children div
+			var $old     = $(parent);
+			var $oldWrap = $old.closest('.children');
+			var $newWrap = $new.closest('.children');
+
+			if ($oldWrap.length && $newWrap.length) {
+				$oldWrap.replaceWith($newWrap);
+			} else {
+				$old.replaceWith($new);
+			}
+
+			document.dispatchEvent(new Event('postprocess_liveupdate'));
+			scrollToItem('item-' + data.guid);
+
+			// Keep the notification poll going without forcing a thread rebuild now
+			clearTimeout(timer);
+			timer = setTimeout(NavUpdate, 30000);
+		})
+		.fail(function() {
+			updateItem(parentItemId, data.guid);
+		});
+
+	return true;
+}
+
+// Refresh the reaction/response counters of a single item after an activity
+// (like, dislike, announce, attendance) so the thread isn't rebuilt - and, in
+// the compact conversation view, collapsed - just to bump a number. Only the
+// counter blocks are swapped; the action buttons are already updated by the
+// caller, but not the counters on them. The post body and comment box are left
+// alone. Returns false when the caller should fall back to updateItem() (e.g.
+// the base theme, which has no <article> wrapper).
+function refreshItemActivity(itemId, data) {
+	if (!data || data.status !== 'ok' || !data['uri-id']) {
+		return false;
+	}
+
+	// data-uri-id avoids escaping guids that aren't valid selectors
+	var item = '[data-uri-id="' + data['uri-id'] + '"]';
+	var $liveArticle = $(item + ' > article.media');
+	if (!$liveArticle.length) {
+		return false;
+	}
+
+	$.get('item/' + data['uri-id'] + '/node')
+		.done(function(html) {
+			var $newArticle = $('<div>').append($.parseHTML(html)).find(item + ' > article.media').first();
+			if (!$newArticle.length) {
+				updateItem(itemId.toString());
+				return;
+			}
+
+			// Swap the per-button counters (the caller only toggled the pressed
+			// state) plus the two response blocks - but not the buttons, body or
+			// comment box, which carry state and init the fresh markup would lose.
+			// A like can promote the viewer's own copy of a public post, changing
+			// its item id, so match the buttons by their stable verb prefix.
+			$newArticle.find('.wall-item-actions [id] > span.total').each(function() {
+				var $fresh = $(this);
+				var prefix = $fresh.parent().attr('id').replace(/\d+$/, '');
+				var $shown = $liveArticle.find('.wall-item-actions [id^="' + prefix + '"] > span.total').first();
+				$shown.replaceWith($fresh);
+			});
+
+			var $shownEmoji = $liveArticle.find('.wall-emoji-responses').first();
+			var $freshEmoji = $newArticle.find('.wall-emoji-responses').first();
+			if ($shownEmoji.length && $freshEmoji.length) {
+				$shownEmoji.replaceWith($freshEmoji);
+			}
+
+			var $shownResponses = $liveArticle.find('div.wall-item-responses').first();
+			var $freshResponses = $newArticle.find('div.wall-item-responses').first();
+			if ($shownResponses.length && $freshResponses.length) {
+				$shownResponses.replaceWith($freshResponses);
+			}
+
+			clearTimeout(timer);
+			timer = setTimeout(NavUpdate, 30000);
+		})
+		.fail(function(xhr) {
+			updateItem(itemId.toString());
+		});
+
+	return true;
 }
 
 function preview_post() {
