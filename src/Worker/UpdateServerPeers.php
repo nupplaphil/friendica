@@ -86,6 +86,6 @@ class UpdateServerPeers
 	 */
 	public static function isValidPeer($peer): bool
 	{
-		return is_string($peer) && preg_match('~^[^\s/:@?#]+(?::\d{1,5})?$~u', $peer) === 1;
+		return is_string($peer) && preg_match('~^[^\s\x00-\x1f\x7f/:@?#]+(?::\d{1,5})?$~u', $peer) === 1;
 	}
 }

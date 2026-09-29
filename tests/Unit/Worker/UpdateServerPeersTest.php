@@ -41,6 +41,8 @@ class UpdateServerPeersTest extends TestCase
 			'other scheme'         => ['at:'],
 			'empty'                => [''],
 			'whitespace'           => ['exa mple.org'],
+			'control character'    => ["merveill\x04s.town"],
+			'null byte'            => ["example\x00.org"],
 			'path'                 => ['example.org/path'],
 			'userinfo'             => ['user@example.org'],
 			'integer'              => [123],
