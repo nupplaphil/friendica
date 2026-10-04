@@ -19,6 +19,11 @@ use Friendica\Util\DateTimeFormat;
  */
 class UpdateContacts
 {
+	/**
+	 * Local and blocked contacts are never updated here, this only moves them out of the selection.
+	 */
+	private const SKIPPED_NEXT_UPDATE = 'now +1 month';
+
 	public static function execute()
 	{
 		$update_limit = DI::config()->get('system', 'contact_update_limit');
@@ -44,8 +49,10 @@ class UpdateContacts
 		$condition = DBA::mergeConditions(["`next-update` < ?", DateTimeFormat::utcNow()], $condition);
 		$contacts  = DBA::select('contact', ['id', 'url', 'gsid', 'baseurl'], $condition, ['order' => ['next-update'], 'limit' => $limit]);
 		$count     = 0;
+		$skipped   = [];
 		while ($contact = DBA::fetch($contacts)) {
-			if (Contact::isLocal($contact['url'])) {
+			if (Contact::isLocal($contact['url']) || Contact::isBlocked($contact['id'])) {
+				$skipped[] = $contact['id'];
 				continue;
 			}
 
@@ -66,6 +73,10 @@ class UpdateContacts
 			Worker::coolDown();
 		}
 		DBA::close($contacts);
+
+		if (!empty($skipped)) {
+			Contact::update(['next-update' => DateTimeFormat::utc(self::SKIPPED_NEXT_UPDATE)], ['id' => $skipped]);
+		}
 
 		DI::logger()->info('Initiated update for federated contacts', ['count' => $count]);
 	}
