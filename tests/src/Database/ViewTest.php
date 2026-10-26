@@ -40,7 +40,7 @@ class ViewTest extends DatabaseTestCase
 		}
 
 		foreach (array_keys($definition) as $name) {
-			$creates = array_filter($statements, fn (string $statement) => str_starts_with($statement, sprintf('CREATE OR REPLACE VIEW `%s` ', $name)));
+			$creates = array_filter($statements, fn (string $statement): bool => str_starts_with($statement, sprintf('CREATE OR REPLACE VIEW `%s` ', $name)));
 			self::assertCount(1, $creates, $name);
 		}
 	}
